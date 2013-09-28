@@ -1,0 +1,466 @@
+Securely wipe disk
+==================
+
+Summary
+
+Wipe all traces left from (un-)encrypted data and/or prepare for block
+device encryption
+
+Related
+
+File Recovery
+
+Benchmarking disk wipes
+
+Frandom
+
+Disk Encryption#Preparing the disk
+
+dm-crypt with LUKS
+
+Wiping a disk is done by writing new data over every single bit.
+
+Note:References to "disks" in this article also apply to loopback
+devices.
+
++--------------------------------------------------------------------------+
+| Contents                                                                 |
+| --------                                                                 |
+|                                                                          |
+| -   1 Common use cases                                                   |
+|     -   1.1 Wipe all data left on the device                             |
+|     -   1.2 Preparations for block device encryption                     |
+|                                                                          |
+| -   2 Select a data source for overwriting                               |
+|     -   2.1 Unrandom data                                                |
+|         -   2.1.1 Pattern write test                                     |
+|                                                                          |
+|     -   2.2 Random data                                                  |
+|         -   2.2.1 Kernel built-in RNG                                    |
+|                                                                          |
+| -   3 Select a program                                                   |
+|     -   3.1 Coreutils                                                    |
+|         -   3.1.1 Dd                                                     |
+|             -   3.1.1.1 Checking progress of dd while running            |
+|             -   3.1.1.2 Dd spin-offs                                     |
+|                                                                          |
+|         -   3.1.2 shred                                                  |
+|                                                                          |
+|     -   3.2 Badblocks                                                    |
+|                                                                          |
+| -   4 Select a target                                                    |
+|     -   4.1 Block size                                                   |
+|                                                                          |
+| -   5 Overwrite the disk                                                 |
+| -   6 Data remanence                                                     |
+|     -   6.1 Random data                                                  |
+|     -   6.2 Hardware specific issues                                     |
+|         -   6.2.1 Flash memory                                           |
+|         -   6.2.2 Residual magnetism                                     |
+|         -   6.2.3 Old magnetic storage                                   |
+|         -   6.2.4 Operating system, programs and filesystem              |
+|                                                                          |
+| -   7 See also                                                           |
++--------------------------------------------------------------------------+
+
+Common use cases
+----------------
+
+> Wipe all data left on the device
+
+The most common usecase for completely and irrevocably wiping a device
+will be when the device it going to be given away or also maybe sold.
+There may be (unencrypted) data left on the device and you want to
+protect against simple forensic investigation that is mere child's play
+with for example File Recovery software.
+
+If you want to quickly wipe everything from the disk /dev/zero or simple
+patterns allow maximum performance while adequate randomness can be
+advantageous in some cases that should be covered up in #Data remanence.
+
+Every overwritten bit means to provide a level of data erasure not
+allowing recovery with normal system functions (like standard ATA/SCSI
+commands) and hardware interfaces. Any file recovery software mentioned
+above then would need to be specialized on proprietary storage-hardware
+features.
+
+In case of a HDD data recreation will not be possible without at least
+undocumented drive commands or fiddling about the device’s controller or
+firmware to make them read out for example reallocated sectors (bad
+blocks that S.M.A.R.T. retired from use).
+
+There are different wiping issues with different physical storage
+technologys, most notably all Flash memory based devices and older
+magnetic storage (old HDD's, floppy disks, tape).
+
+> Preparations for block device encryption
+
+If you want to prepare your drive to securely set up Disk
+Encryption#Block device encryption inside the wiped area afterwards you
+really should use #Random data generated by a trusted cryptographically
+strong random number generator (referred to as RNG in this article from
+now on).
+
+See the Wikipedia article on this subject for more information: Random
+number generation
+
+Warning:If Block device encryption is mapped on a partition that
+contains anything else than random/encrypted data, disclosure of usage
+patterns on the encrypted drive is possible and weakens the encryption
+being comparable with filesystem-level-encryption. Do never use
+/dev/zero, simple patterns (badblocks, eg.) or other unrandom data
+before setting up Block device encryption if you are serious about it!
+
+Select a data source for overwriting
+------------------------------------
+
+As just said If you want to wipe sensitive data you can use anything
+matching your needs.
+
+If you want to setup block device encryption afterwards you should
+always wipe at least with Pseudorandom data.
+
+For data that is not truly random your disk's writing speed should be
+the only limiting factor. If you need random data, the required system
+performance to generate it may extremely depend on what you choose as
+source of entropy.
+
+Note:Everything regarding Benchmarking disk wipes should get merged
+there.
+
+> Unrandom data
+
+Overwriting with /dev/zero or simple patterns is considered secure in
+most resources. In the case of current HDD's it should be sufficient for
+fast disk wipes.
+
+Warning:A drive that is abnormally fast in writing patterns or zeroing
+could be doing transparent compression. It is obviously presumable not
+all blocks get wiped this way. Some #Flash memory devices do "feature"
+that.
+
+Pattern write test
+
+#Badblocks can write simple patterns to every block of a device and then
+read and check them searching for damaged areas (just like memtest86*
+does with memory).
+
+As the pattern is written to every accesible block this effectively
+wipes the device.
+
+> Random data
+
+Note:Data that is hard to compress (random data) will get written
+slower, if the drive logic mentioned in the #Unrandom data warning tries
+compressing it. This should not lead to #Data remanence though. As
+maximum write-speed is not the performance-bottleneck it can get
+completely neglected while wiping disks with random data.
+
+Kernel built-in RNG
+
+The kernel build in RNG's /dev/(u)random are highly recommended for
+producing reliable random data providing the same security level that is
+used for the creation of cryptographic keys. The random number generator
+gathers environmental noise from device drivers and other sources into
+an entropy pool.
+
+ /dev/random
+    uses an entropy pool of 4096 bits (512 Bytes) to generate random
+    data and stops when the pool is exhausted until it get's (slowly)
+    refilled. /dev/random is absolutely not designed for wiping entire
+    HDD's, but rather to generate cryptographic keys (e.g. SSL/SSH).
+ /dev/urandom
+    reuses existing entropy pool data while the pool is replenished and
+    although not suited for the most crucial cryptographic purposes, for
+    example the generation of longterm keys, its quality should be
+    sufficient for a paranoid disk wipe, preparing for block device
+    encryption, wiping LUKS keyslots, wiping single files and many other
+    purposes.
+
+For much better performance consider using a true pseudorandom number
+generator.
+
+Select a program
+----------------
+
+/dev/<drive> is the drive to be encrypted.
+
+> Coreutils
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with             
+                           Core_Utilities.          
+                           Notes: Basic file        
+                           operations are not       
+                           specific to disk wiping! 
+                           Unrelated stuff in this  
+                           section should get       
+                           merged and then deleted  
+                           and replaced with a link 
+                           to Core Utilities. Did   
+                           you ever want to write   
+                           an article about dd and  
+                           Co? Then just go ahead.  
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+Official documentation for dd and shred is linked to under #See also.
+
+Dd
+
+See the Wikipedia article on this subject for more information:
+Dd_(Unix)
+
+Note:cp does the same as dd without any operands but is not designed for
+more versatile disk wiping procedures.
+
+Checking progress of dd while running
+
+By default, there is no output of dd until the task has finished. With
+kill and the "USR1"-Signal you can force status output without actually
+killing the program. Open up a 2nd root terminal and issue the following
+command:
+
+    # killall -USR1 dd
+
+Note:This will affect all other running dd-processes as well.
+
+Or:
+
+    # kill -USR1 <PID_OF_dd_COMMAND>
+
+For example:
+
+    # kill -USR1 $(pidof dd)
+
+This causes the terminal in which dd is running to output the progress
+at the time the command was run. For example:
+
+    605+0 records in
+    605+0 records out
+    634388480 bytes (634 MB) copied, 8.17097 s, 77.6 MB/s
+
+Dd spin-offs
+
+Other dd alike programs feature periodical status output like i.e. a
+simple progress bar.
+
+dcfldd
+
+dcfldd is an enhanced version of dd with features useful for forensics
+and security. It accepts most of dd's parameters and includes status
+output. The last stable version of dcfldd was released on December 19,
+2006.[1]
+
+ddrescue
+
+GNU ddrescue is a data recovery tool. It's capable of ignoring read
+errors what is a useless feature for disk wiping in almost any case. GNU
+ddrescue Manual
+
+shred
+
+Shred is a Unix command that can be used to securely delete files and
+devices so that they can be recovered only with great difficulty with
+specialised hardware, if at all.[2] Shred uses three passes, writing
+pseudo-random data to the device during each pass. This can be reduced
+or increased.
+
+The following command invokes shred with its default settings and
+displays the progress.
+
+    # shred -v /dev/<drive>
+
+Alternatively, shred can be instructed to do only one pass with entropy
+from, e.g. /dev/urandom.
+
+    # shred --verbose --random-source=/dev/urandom -n1 /dev/<drive>
+
+> Badblocks
+
+For letting badblocks perform a disk wipe a destructive read-write test
+has to be done.
+
+    # badblocks -c 10240 -wsv /dev/<drive>
+
+Select a target
+---------------
+
+Note:Fdisk will not work on GPT formatted devices. Use gdisk instead.
+
+Use fdisk to locate all read/write devices the user has read acess to.
+
+Check the output for lines that start with devices such as /dev/sdX.
+
+This is an example for a HDD formatted to boot a linux system:
+
+    # fdisk -l
+
+    Disk /dev/sda: 250.1 GB, 250059350016 bytes, 488397168 sectors
+    Units = sectors of 1 * 512 = 512 bytes
+    Sector size (logical/physical): 512 bytes / 512 bytes
+    I/O size (minimum/optimal): 512 bytes / 512 bytes
+    Disk identifier: 0x00ff784a
+
+       Device Boot      Start         End      Blocks   Id  System
+    /dev/sda1   *        2048      206847      102400   83  Linux
+    /dev/sda2          206848   488397167   244095160   83  Linux
+
+Or the Arch Install Medium written to a 4GB USB thumb drive:
+
+    # fdisk -l
+
+    Disk /dev/sdb: 4075 MB, 4075290624 bytes, 7959552 sectors
+    Units = sectors of 1 * 512 = 512 bytes
+    Sector size (logical/physical): 512 bytes / 512 bytes
+    I/O size (minimum/optimal): 512 bytes / 512 bytes
+    Disk identifier: 0x526e236e
+
+       Device Boot      Start         End      Blocks   Id  System
+    /dev/sdb1   *           0      802815      401408   17  Hidden HPFS/NTFS
+
+> Block size
+
+See the Wikipedia article on this subject for more information: Dd
+(Unix)#Block size
+
+If you have a Advanced Format hard drive it is recommended that you
+specify a block size larger than the default 512 bytes. To speed up the
+overwriting process choose a block size matching your drive's physical
+geometry by appending the block size option to the dd command (i.e.
+bs=4096 for 4KB).
+
+Fdisk prints physical and logical sector size for every disk.
+
+Alternatively sysfs does expose information:
+
+    /sys/block/sdX/queue/physical_block_size
+    /sys/block/sdX/queue/logical_block_size
+    /sys/block/sdX/alignment_offset
+
+Overwrite the disk
+------------------
+
+Warning:There is no confirmation regarding the sanity of this command so
+repeatedly check that the correct drive or partition has been targeted.
+Make certain that the of=... option points to the target drive and not
+to a system disk.
+
+Zero-fill the disk by writing a zero byte to every addressable location
+on the disk using the /dev/zero stream.
+
+    # dd if=/dev/zero of=/dev/sdX bs=4096
+
+or the /dev/random stream:
+
+    # dd if=/dev/urandom of=/dev/sdX bs=4096
+
+The process is finished when dd reports, No space left on device:
+
+    dd: writing to ‘/dev/sdb’: No space left on device
+    7959553+0 records in
+    7959552+0 records out
+    4075290624 bytes (4.1 GB) copied, 1247.7 s, 3.3 MB/s
+
+Data remanence
+--------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
+  ng]                      needs expansion.         ng]
+                           Reason: This section is  
+                           too dependent on links   
+                           to Wikipedia. Links to   
+                           diverse and high quality 
+                           resources should be      
+                           added. (Discuss)         
+  ------------------------ ------------------------ ------------------------
+
+See the Wikipedia article on this subject for more information: Data
+remanence
+
+The residual representation of data may remain even after attempts have
+been made to remove or erase the data.
+
+Residual data may get wiped by writing (random) data to the disk with a
+single or even more than one iteration. However, more than one iteration
+may not significantly decrease the possibility to reconstruct the data
+of hard disk drives. For more information see Secure deletion: a single
+overwrite will do it - The H Security.
+
+> Random data
+
+If the data can get exactly located on the disk and was never copied
+anywhere else, wiping with random data can be thoroughgoing and
+impressively quick as long there is enough entropy in the pool.
+
+A good example is cryptsetup using /dev/urandom for wiping the LUKS
+keyslots.
+
+> Hardware specific issues
+
+Flash memory
+
+Wikipedia:Write amplification and other characteristics make Flash
+memory a stubborn target for reliable wiping. As there is a lot of
+transparent abstraction in between data as seen by a device's controller
+chip and the operating system sight data is never overwritten in place
+and wiping particular blocks or files is not reliable.
+
+Other "features" like transparent compression (all SandForce SSD's) can
+compress your /dev/zero or pattern stream so if wiping is fast beyond
+belief this might be the case.
+
+Disassembling Flash memory devices, unsoldering the chips and analyzing
+data content without the controller in between is feasible without
+difficulty using simple hardware. Data recovery companys do it for cheap
+money.
+
+For more information see: Reliably Erasing Data From Flash-Based Solid
+State Drives.
+
+Residual magnetism
+
+Wiped hard disk drives and other magnetic storage can get disassembled
+in a cleanroom and then analyzed with equipment like a magnetic force
+microscope. This may allow the overwritten data to be reconstructed by
+analyzing the measured residual magnetics.
+
+This method of data recovery for current HDD's is largely theoretical
+and would require substantial financial resources. Nevertheless
+degaussing is still a practiced countermeasure.
+
+Old magnetic storage
+
+Securely wiping old magnetic storage (e.g. floppy disks, magnetic tape)
+is much harder due to much lower memory storage density. Many iterations
+with random data might be needed to wipe any sensitive data. To ensure
+that data has been completely erased most resources advise physical
+destruction.
+
+Operating system, programs and filesystem
+
+Note:This is not specific to any hardware obviously.
+
+The operating system, executed programs or journaling file systems may
+copy your unencrypted data throughout the block device. When writing to
+plain disks this should only be relevant in conjunction with one of the
+above.
+
+See also
+--------
+
+-   GNU Coreutils Manpage on Basic operations. Official documentation
+    for dd and shred.
+
+-   Learn the DD command. - linuxquestions.org
+
+Retrieved from
+"https://wiki.archlinux.org/index.php?title=Securely_wipe_disk&oldid=253529"
+
+Categories:
+
+-   Security
+-   File systems
