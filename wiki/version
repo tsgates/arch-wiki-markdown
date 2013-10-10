@@ -1,0 +1,22 @@
+Name           : arch-wiki-docs
+Version        : 20130505-1
+Description    : Documentation from wiki.archlinux.org
+Architecture   : any
+URL            : http://wiki.archlinux.org
+Licenses       : FDL
+Groups         : None
+Provides       : None
+Depends On     : None
+Optional Deps  : None
+Required By    : None
+Optional For   : None
+Conflicts With : None
+Replaces       : None
+Installed Size : 121689.00 KiB
+Packager       : Sergej Pupykin <pupykin.s+arch@gmail.com>
+Build Date     : Sun 05 May 2013 10:01:05 AM EDT
+Install Date   : Thu 10 Oct 2013 05:47:33 PM EDT
+Install Reason : Explicitly installed
+Install Script : No
+Validated By   : Signature
+

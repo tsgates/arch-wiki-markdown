@@ -8,6 +8,7 @@ cleanAttr :: Block -> Block
 cleanAttr (Header 3 _ xs)  = Header 3 nullAttr ([Str "> "] ++ xs)
 cleanAttr (Header n _ xs)  = Header n nullAttr xs
 cleanAttr (CodeBlock _ xs) = CodeBlock nullAttr xs
+cleanAttr (Para [Strong [Str cat]]) = Header 3 nullAttr [Str ("> " ++ cat)]
 cleanAttr x = x
   
 filterWiki html = renderTags $ (take 4 skip) ++ cont
