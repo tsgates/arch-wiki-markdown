@@ -1,0 +1,44 @@
+#!/usr/bin/bash
+
+ROOT=/usr/share/doc/arch-wiki-markdown
+LESS="vim -u /usr/share/vim/vim7*/macros/less.vim -n"
+
+if [[ $# == 0 ]]; then
+  echo "usage: $0 [-g] [-#] query"
+  echo "  -g: grep whole content of wiki files"
+  echo "      (otherwise, match just title)"
+  echo "  -#: -1 for first match, -2 for second ..."
+  echo "  see. $ROOT"
+  exit 0
+fi
+
+# grep
+if [[ $1 == "-g" ]]; then
+  shift
+  (cd $ROOT; grep --color=always -rn "$@" | less -X -F -R)
+  exit
+fi
+
+# search title
+KEY=N/A
+NTH=0
+while [ -n "$1" ]; do
+  case $1 in
+    -*) NTH=${1##-}     ;;
+    *)  KEY=$1          ;;
+  esac
+  shift
+done
+
+# trim/search
+NTH=$((NTH - 1))
+DOC=( $(ls $ROOT | grep -i $KEY) )
+
+# open document
+if [[ ${#DOC[*]} == 1 ]] || [[ $NTH != -1 ]]; then
+  $LESS -c 'set syntax=markdown' $ROOT/${DOC[$NTH]}
+else
+  for d in ${DOC[*]}; do
+    echo $d
+  done
+fi

@@ -1,15 +1,16 @@
 pkgname=arch-wiki-markdown
+pkgver=$(date +%Y%m%d)
 pkgrel=1
-pkgdesc="markdown arch wiki"
+pkgdesc="Search and read Arch Wiki offline in your terminal"
 arch=('any')
+license=('MIT')
 author="Taesoo Kim"
-
-build() {
-}
+source=("git+https://github.com/tsgates/arch-wiki-markdown")
+sha1sums=('SKIP')
 
 package() {
-  cd "$srcdir/$pkgname"
   install -d "$pkgdir/usr/share/doc/arch-wiki-markdown"
-  install -m 0644 $srcdir/../wiki/* "$pkgdir/usr/share/doc/arch-wiki-markdown"
+  install -m 0644 $srcdir/$pkgname/wiki/* "$pkgdir/usr/share/doc/arch-wiki-markdown"
+  install -Dm 0755 $srcdir/$pkgname/arch-wiki "$pkgdir/usr/bin/arch-wiki"
 }
 

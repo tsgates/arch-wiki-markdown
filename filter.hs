@@ -37,6 +37,6 @@ main = do
     html <- readFile $ src ++ file
     let path = makeValid $ dst ++ (sanitize title) ++ ".md"
     writeFile path (cleanDoc html)
-  where dst = "/tmp/y/"
-        src = "/tmp/x/root/usr/share/doc/arch-wiki/html/"
+  where dst = "wiki/"
+        src = "/usr/share/doc/arch-wiki/html/"
         sanitize = replace "/" "_"
