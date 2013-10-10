@@ -1,7 +1,7 @@
 Privoxy
 =======
 
-Summary
+> Summary
 
 This article explains how to install and configure Privoxy alongside the
 Tor network.
@@ -12,7 +12,7 @@ Tor
 
 Privoxy
 
-Related
+> Related
 
 Tor
 

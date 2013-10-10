@@ -11,7 +11,7 @@ PHC
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 Provides a guide to installing, configuring and using a PHC.
 

@@ -1,7 +1,7 @@
 Xcompmgr
 ========
 
-Summary
+> Summary
 
 Describes the installation and usage of Xcompmgr.
 

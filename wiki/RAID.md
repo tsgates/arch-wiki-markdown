@@ -1,7 +1,7 @@
 RAID
 ====
 
-Summary
+> Summary
 
 This article explains what RAID is and how to install, configure and
 maintain it.
@@ -12,7 +12,7 @@ mdadm
 
 parted
 
-Related
+> Related
 
 Software RAID and LVM
 
@@ -605,7 +605,7 @@ Additional Resources
     Nested-RAID: The Triple Lindy in Linux Magazine
 -   HowTo: Speed Up Linux Software Raid Building And Re-syncing
 
-mdadm
+> mdadm
 
 -   Debian mdadm FAQ
 -   mdadm source code

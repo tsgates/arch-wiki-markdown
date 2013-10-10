@@ -1,7 +1,7 @@
 X resources
 ===========
 
-Summary
+> Summary
 
 Describes purpose of ~/.Xresources file, and how to use it do alter
 configuration of various X applications..
@@ -99,7 +99,7 @@ To reread your .Xresources file, and keep your old resources:
 
     xrdb -merge ~/.Xresources
 
-Note:
+> Note:
 
 -   .Xresources is just a naming convention, xrdb can load any file. If
     you use xrdb manually, you can put such a file anywhere you want

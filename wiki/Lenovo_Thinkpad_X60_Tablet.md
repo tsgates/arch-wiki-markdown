@@ -1,7 +1,7 @@
 Lenovo Thinkpad X60 Tablet
 ==========================
 
-Summary
+> Summary
 
 Installation instructions for the Lenovo Thinkpad X60 Tablet
 

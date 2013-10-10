@@ -312,7 +312,7 @@ Assuming you are using alsa, open the XFCE keyboard configuragtion GUI
 'Application Shortcuts' tab. When prompted press the appropriate
 multimedia key.
 
-Mute
+> Mute
 
      amixer -q set Master toggle
 

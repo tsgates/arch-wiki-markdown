@@ -90,7 +90,7 @@ There are two methods to install plugins for Eclipse:
     version of Eclipse is Juno and the default update site for Juno is:
     http://download.eclipse.org/releases/juno
 
-Warning:
+> Warning:
 
 -   If you install plugins with Eclipse's plugin manager, you are
     advised to launch Eclipse as root: this way the plugins will be

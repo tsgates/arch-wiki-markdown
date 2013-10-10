@@ -146,7 +146,7 @@ Dependencies:
 2.  eclipse-gef
 3.  eclipse-wtp
 
-Note:
+> Note:
 
 -   as an alternative, you can install the ADT via eclipse's built in
     "add new software" command (see instructions on ADT site).

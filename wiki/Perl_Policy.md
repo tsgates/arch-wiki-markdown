@@ -192,12 +192,12 @@ Arch Linux packages in general. This is optional.
 Manual pages distributed with Perl packages must be installed into the
 standard directories:
 
-Programs
+> Programs
 
 Manual pages for programs and scripts are installed into /usr/man/man1
 with the extension .1perl.
 
-Modules
+> Modules
 
 Manual pages for modules are installed into /usr/man/man3 with the
 extension .3perl.
@@ -212,17 +212,17 @@ profile to search for binaries in the same order as perl's @INC path. In
 order to accomplish this, binaries should be installed into the
 following directories:
 
-Core
+> Core
 
 Binaries and scripts for all core packages should be installed into
 /usr/bin/core_perl.
 
-Vendor
+> Vendor
 
 Binaries and scripts for all vendor packages should be installed into
 /usr/bin/vendor_perl.
 
-Site
+> Site
 
 Binaries and scripts for all site should default to be installed into
 /usr/bin/site_perl.

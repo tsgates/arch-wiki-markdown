@@ -8,11 +8,11 @@ Pro Audio
                            irqbalance (Discuss)     
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 Information on using Arch Linux for (semi-)professional audio
 
-Related
+> Related
 
 Unofficial User Repositories
 

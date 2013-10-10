@@ -27,7 +27,7 @@ Linksys Wireless B
 Installing the Linksys Wireless "B" Version 4 NIC under Arch Linux
 ------------------------------------------------------------------
 
-pcmcia:
+> pcmcia:
 
 1.  install ndiswrapper, pacman -S ndiswrapper
 2.  Download the Windows XP Drivers for pcmcia here: [1].

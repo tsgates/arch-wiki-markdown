@@ -1,11 +1,11 @@
 SLiM
 ====
 
-Summary
+> Summary
 
 Provides an overview of the Simple Login Manager.
 
-Related
+> Related
 
 Display Manager
 

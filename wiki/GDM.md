@@ -1,12 +1,12 @@
 GDM
 ===
 
-Summary
+> Summary
 
 GDM is the GNOME Display Manager, a graphical login program. This
 article covers its installation and configuration.
 
-Related
+> Related
 
 Display Manager
 

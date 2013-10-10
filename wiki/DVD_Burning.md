@@ -1,11 +1,11 @@
 DVD Burning
 ===========
 
-Summary
+> Summary
 
 An overview of DVD writing tools and methods.
 
-Series
+> Series
 
 DVD Playing
 

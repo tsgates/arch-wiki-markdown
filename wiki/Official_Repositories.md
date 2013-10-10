@@ -1,14 +1,14 @@
 Official Repositories
 =====================
 
-Summary
+> Summary
 
 Software repositories contain software compiled and packaged by
 developers and Trusted Users, readily accessible via pacman. This
 article outlines the official repositories provided and supported by
 Arch Linux developers.
 
-Overview
+> Overview
 
 Packages in Arch Linux are built using makepkg and a custom build script
 for each package (known as a PKGBUILD). Once packaged, software can be
@@ -16,7 +16,7 @@ installed and managed with pacman. PKGBUILDs for software in the
 official repositories are available from the ABS tree; thousands more
 are available from the (unsupported) Arch User Repository.
 
-Related
+> Related
 
 Mirrors
 

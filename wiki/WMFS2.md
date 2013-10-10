@@ -10,11 +10,11 @@ WMFS2
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 An introduction to WMFS2, a dynamic tiling window manager.
 
-Related
+> Related
 
 WMFS
 

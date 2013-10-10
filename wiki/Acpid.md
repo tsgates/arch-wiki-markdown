@@ -15,7 +15,7 @@ acpid can be used by itself, or combined with a more robust system such
 as pm-utils and cpufrequtils to provide a more complete power management
 solution.
 
-Note:
+> Note:
 
 -   desktop environments, such as GNOME, systemd login manager and some
     extra key handling daemons may implement own event handling schemes,

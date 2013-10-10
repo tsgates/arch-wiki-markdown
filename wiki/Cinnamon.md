@@ -1,12 +1,12 @@
 Cinnamon
 ========
 
-Summary
+> Summary
 
 This article covers basic installation procedures and configuration
 methods in Cinnamon.
 
-Related
+> Related
 
 GNOME: GNOME is the framework that Cinnamon is based on.
 

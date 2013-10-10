@@ -1,13 +1,13 @@
 Unity
 =====
 
-Summary
+> Summary
 
 This article discusses how to install and use Unity. Unity is a shell
 interface for the GNOME desktop environment. This article covers how to
 get Unity on your system and how to configure it to fit your needs.
 
-Related
+> Related
 
 GNOME
 

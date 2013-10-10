@@ -1,11 +1,11 @@
 fdm
 ===
 
-Summary
+> Summary
 
 A guide on using fdm for the purpose of local mail delivery.
 
-Related
+> Related
 
 Alpine
 

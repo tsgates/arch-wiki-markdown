@@ -1,11 +1,11 @@
 Start X at Login
 ================
 
-Summary
+> Summary
 
 Starting X automatically at login to a virtual terminal.
 
-Related
+> Related
 
 systemd/User
 

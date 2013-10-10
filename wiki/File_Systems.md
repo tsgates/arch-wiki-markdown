@@ -1,11 +1,11 @@
 File Systems
 ============
 
-Summary
+> Summary
 
 An overview of the types of file systems available.
 
-Related
+> Related
 
 Partitioning
 

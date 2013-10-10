@@ -1,12 +1,12 @@
 initscripts/runlevels
 =====================
 
-Summary
+> Summary
 
 A general explanation of linux runlevels and how to use them to recover
 from system errors.
 
-Related
+> Related
 
 SysVinit
 

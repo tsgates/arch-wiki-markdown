@@ -1,19 +1,19 @@
 netcfg
 ======
 
-Summary
+> Summary
 
 A guide to configuring the network using netcfg and network profile
 scripts.
 
-Overview
+> Overview
 
 Arch Linux provides netcfg for network management. netcfg supports wired
 connections on desktops and servers, as well as wireless setups and
 roaming for mobile users, facilitating easy management of network
 profiles. NetworkManager and Wicd are popular third-party alternatives.
 
-Resources
+> Resources
 
 Netcfg Tips
 
@@ -104,7 +104,7 @@ Example Profile
 
 Information
 
-Wired
+> Wired
 
 Dynamic IP
 
@@ -120,7 +120,7 @@ ethernet-iproute
 
 Can be checked with ip route from the iproute2 package.
 
-Wireless
+> Wireless
 
 WPA-Personal
 

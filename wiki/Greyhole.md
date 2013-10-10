@@ -1,11 +1,11 @@
 Greyhole
 ========
 
-Summary
+> Summary
 
 Installing and configuring Greyhole
 
-Related
+> Related
 
 Samba
 

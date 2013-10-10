@@ -1,7 +1,7 @@
 GRUB EFI Examples
 =================
 
-Summary
+> Summary
 
 It is well know that different motherboard manufactures implement UEFI
 differently. The purpose of this page is to show hardware-specific

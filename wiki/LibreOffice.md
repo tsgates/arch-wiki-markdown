@@ -55,7 +55,7 @@ packages, which can be installed with the libreoffice group from the
 official repositories: pacman will display a menu prompting for which
 components to install.
 
-Note:
+> Note:
 
 -   Ensure that the fonts ttf-dejavu and artwiz-fonts are installed
     before continuing, otherwise LibreOffice will display rectangles

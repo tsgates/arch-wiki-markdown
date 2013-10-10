@@ -1,7 +1,7 @@
 Jekyll
 ======
 
-Summary
+> Summary
 
 Jekyll is a simple static site generator written in Ruby and developed
 by GitHub co-founder Tom Preston-Werner. This page provides a verbose

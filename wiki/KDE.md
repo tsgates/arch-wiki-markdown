@@ -1,7 +1,7 @@
 KDE
 ===
 
-Summary
+> Summary
 
 For users on Linux and Unix, KDE offers a full suite of user workspace
 applications which allow interaction with these operating systems in a
@@ -10,7 +10,7 @@ configuration, and troubleshooting.
 
 KDE uses the Qt toolkit.
 
-Overview
+> Overview
 
 The Xorg project provides an open source implementation of the X Window
 System – the foundation for a graphical user interface. Desktop
@@ -20,7 +20,7 @@ alternative and novel environments, and may be used standalone to
 conserve system resources. Display managers provide a graphical login
 prompt.
 
-Related
+> Related
 
 Plasma
 

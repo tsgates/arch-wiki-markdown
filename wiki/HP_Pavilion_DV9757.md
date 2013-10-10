@@ -15,7 +15,7 @@ This laptop is the one easiest computer so far I have been installing
 linux on! Nearly everuthing works out of the box or by only making a few
 easily accomplished trix.
 
-Specifications:
+> Specifications:
 
 Processor Intel C2D T7500
 

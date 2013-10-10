@@ -1,12 +1,12 @@
 Connecting your MP3 Player
 ==========================
 
-Summary
+> Summary
 
 This article discusses plugging portable audio players (also sometimes
 called "MP3 players").
 
-Related
+> Related
 
 USB_Storage_Devices
 

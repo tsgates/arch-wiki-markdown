@@ -1,11 +1,11 @@
 iptables
 ========
 
-Summary
+> Summary
 
 Information regarding the setup and configuration of iptables.
 
-Related
+> Related
 
 Firewalls
 

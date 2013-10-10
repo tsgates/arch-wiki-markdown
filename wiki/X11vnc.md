@@ -1,7 +1,7 @@
 X11vnc
 ======
 
-Summary
+> Summary
 
 x11vnc allows one to view remotely and interact with real X displays
 (i.e. a display corresponding to a physical monitor, keyboard, and

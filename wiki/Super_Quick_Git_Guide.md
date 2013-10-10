@@ -12,11 +12,11 @@ Super Quick Git Guide
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 Contributing to the pacman Git repo
 
-Related
+> Related
 
 Git
 

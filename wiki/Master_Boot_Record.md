@@ -1,12 +1,12 @@
 Master Boot Record
 ==================
 
-Summary
+> Summary
 
 An overview of the Master Boot Record; the first sector of a partitioned
 data storage device.
 
-Overview
+> Overview
 
 In order to boot Arch Linux, a Linux-capable boot loader such as
 GRUB(2), Syslinux, LILO or GRUB Legacy must be installed to the Master
@@ -14,7 +14,7 @@ Boot Record or the GUID Partition Table. The boot loader is responsible
 for loading the kernel and initial ramdisk before initiating the boot
 process.
 
-Related
+> Related
 
 GUID Partition Table
 

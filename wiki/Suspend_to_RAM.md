@@ -1,12 +1,12 @@
 Suspend to RAM
 ==============
 
-Summary
+> Summary
 
 Describes the operation of the pm-utils suspend framework and supported
 backend methods
 
-Related
+> Related
 
 Pm-utils
 

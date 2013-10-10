@@ -91,7 +91,7 @@ You will need this for iSight functionality
 
 > Partitioning
 
-TODO
+> TODO
 
 Single-boot (Arch Linux Only)
 
@@ -101,12 +101,12 @@ Triple-boot (Arch Linux + Windows + OS-X)
 
 > Install Arch Linux
 
-TODO
+> TODO
 
 System Configuration
 --------------------
 
-TODO
+> TODO
 
 > Xorg Setup
 

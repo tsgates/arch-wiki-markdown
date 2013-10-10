@@ -1,11 +1,11 @@
 Xorg
 ====
 
-Summary
+> Summary
 
 An all-inclusive overview about installing and managing Xorg
 
-Overview
+> Overview
 
 The Xorg project provides an open source implementation of the X Window
 System – the foundation for a graphical user interface. Desktop
@@ -15,7 +15,7 @@ alternative and novel environments, and may be used standalone to
 conserve system resources. Display managers provide a graphical login
 prompt.
 
-Related
+> Related
 
 Start X at Login
 
@@ -183,7 +183,7 @@ break by starting X on a different tty.
 
 For more information, see xinitrc.
 
-Note:
+> Note:
 
 -   If a problem occurs, then view the log at /var/log/Xorg.0.log. Be on
     the lookout for any lines beginning with (EE), which represent

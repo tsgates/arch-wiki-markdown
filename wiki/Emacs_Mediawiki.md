@@ -1,13 +1,13 @@
 Emacs Mediawiki
 ===============
 
-Summary
+> Summary
 
 Emacs Mediawiki Mode is an emacs major mode which is evolved from an old
 copy of mediawiki mode frome wikipedia.org. It helps to edit remote wiki
 articles on wiki sites running mediawiki in emacs editor directly.
 
-Related
+> Related
 
 Emacs
 

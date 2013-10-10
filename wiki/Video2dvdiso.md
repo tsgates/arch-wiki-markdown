@@ -4,14 +4,14 @@ Video2dvdiso
 A simple Bash script to Convert any Movie to DVD Video's ISO; which can
 be directly burn't to blank DVD using k3b iso burning.
 
-Summary
+> Summary
 
 A simple Bash script to Convert any Movie to DVD Video ISO; this
 requires ffmpeg to convert video to dvd compatible video, dvdauthor to
 create dvd video structure, mkisofs to create dvd iso, mplayer to test
 video dvd.iso, dvd+rw-tools to burn the iso
 
-Related
+> Related
 
 DVD Ripping
 

@@ -1,14 +1,14 @@
 Qt
 ==
 
-Summary
+> Summary
 
 Qt is a cross-platform application and UI framework for developers using
 C++ or QML, a CSS & JavaScript like language. This article covers the
 installation and developement with Qt and the tools used to configure
 themes, fonts and other options.
 
-Related
+> Related
 
 KDE
 

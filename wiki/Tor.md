@@ -1,7 +1,7 @@
 Tor
 ===
 
-Summary
+> Summary
 
 This article will explain how to install and configure Tor alongside
 HTTP proxies like Privoxy and Polipo.
@@ -14,7 +14,7 @@ Privoxy
 
 Polipo
 
-Related
+> Related
 
 Gnunet
 
@@ -134,13 +134,13 @@ Usage
 
 Tor runs as a daemon. To launch it, use:
 
-SysV
+> SysV
 
     /etc/rc.d/tor start
 
 (add it to the DAEMONS array to have it launch at startup)
 
-systemd
+> systemd
 
     systemctl start tor
 

@@ -1,11 +1,11 @@
 Git
 ===
 
-Summary
+> Summary
 
 Installing and using the Git VCS
 
-Related
+> Related
 
 Super Quick Git Guide: Generally about contributing to pacman, although
 it still serves as a practical Git tutorial

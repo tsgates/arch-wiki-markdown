@@ -10,12 +10,12 @@ Mathematica
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 Mathematica is a commercial program used in scientific, engineering and
 mathematical fields. Here we explain how to install it.
 
-Related
+> Related
 
 Scientific Applications
 
@@ -23,7 +23,7 @@ Sage-mathematics
 
 Matlab
 
-Resources
+> Resources
 
 Official site
 

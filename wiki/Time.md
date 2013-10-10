@@ -1,13 +1,13 @@
 Time
 ====
 
-Summary
+> Summary
 
 This article provides an introduction to the concept of keeping time on
 computers in general, and describes how clocks are configured and
 managed in Arch Linux.
 
-Related
+> Related
 
 Network Time Protocol
 

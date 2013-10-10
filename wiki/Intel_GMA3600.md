@@ -1,11 +1,11 @@
 Intel GMA3600
 =============
 
-Summary
+> Summary
 
 Information on Intel GMA3600 / GMA36500 CPU integrated graphics
 
-Related
+> Related
 
 Intel Graphics
 

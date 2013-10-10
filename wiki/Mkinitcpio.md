@@ -1,11 +1,11 @@
 mkinitcpio
 ==========
 
-Summary
+> Summary
 
 A detailed guide to the Arch initramfs creation utility.
 
-Overview
+> Overview
 
 In order to boot Arch Linux, a Linux-capable boot loader such as
 GRUB(2), Syslinux, LILO or GRUB Legacy must be installed to the Master
@@ -437,7 +437,7 @@ repositories.
 
 Kernel Parameters:
 
-ip=
+> ip=
 
 An interface spec can be either short form, which is just the name of an
 interface (eth0 or whatever), or long form. ( Kernel Documentation )
@@ -496,7 +496,7 @@ Examples:
      ip=192.168.1.1:::::eth2:none --> Enable static eth2 interface.
      ip=:::::eth0:dhcp --> Enable dhcp protocol for eth0 configuration.
 
-BOOTIF=
+> BOOTIF=
 
 If you have multiple network cards, this parameter can include the MAC
 address of the interface you are booting from. This is often useful as
@@ -507,7 +507,7 @@ Example:
 
      BOOTIF=01-A1-B2-C3-D4-E5-F6  # Note the prepended "01-" and capital letters.
 
-nfsroot=
+> nfsroot=
 
 If the nfsroot parameter is NOT given on the command line, the default
 /tftpboot/%s will be used.
@@ -541,7 +541,7 @@ Parameter explanation:
                            acdirmax        = 60
                            flags           = hard, nointr, noposix, cto, ac
 
-root=/dev/nfs
+> root=/dev/nfs
 
 If you do not use the nfsroot parameter, you need to set root=/dev/nfs
 to boot from an NFS root via automatic configuration.

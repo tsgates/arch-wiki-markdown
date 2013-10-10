@@ -1,11 +1,11 @@
 Tomb
 ====
 
-Summary
+> Summary
 
 Information on installing and configuring Tomb
 
-Related
+> Related
 
 TrueCrypt
 

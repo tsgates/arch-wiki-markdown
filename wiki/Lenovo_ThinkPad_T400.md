@@ -1,11 +1,11 @@
 Lenovo ThinkPad T400
 ====================
 
-Summary
+> Summary
 
 Installation instructions for the Lenovo ThinkPad T400
 
-Related
+> Related
 
 Lenovo ThinkPad T400s
 

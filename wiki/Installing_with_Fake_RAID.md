@@ -1,19 +1,19 @@
 Installing with Fake RAID
 =========================
 
-Summary
+> Summary
 
 Provides detailed instructions for installing Arch Linux on "fake RAID"
 volumes. This guide is intended to supplement the Official Arch Linux
 Install Guide or the Beginners' Guide.
 
-Related
+> Related
 
 Installing with Software RAID or LVM
 
 Convert a single drive system to RAID
 
-Resources
+> Resources
 
 RAID/Onboard @ Gentoo Linux Wiki
 

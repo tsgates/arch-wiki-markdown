@@ -1,11 +1,11 @@
 TeX Live
 ========
 
-Summary
+> Summary
 
 Introduce how install and use TeX Live.
 
-Related
+> Related
 
 TeX Live FAQ
 

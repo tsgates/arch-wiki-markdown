@@ -6,7 +6,7 @@ applications using existing kernel sound components like ALSA or OSS.
 Since ALSA is included in Arch Linux by default so the most common
 deployment scenarios include PulseAudio with ALSA.
 
-Summary
+> Summary
 
 PulseAudio is a general purpose sound server. For a list of features,
 see Wikipedia:PulseAudio#Features.

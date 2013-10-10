@@ -1,11 +1,11 @@
 Irssi
 =====
 
-Summary
+> Summary
 
 This article covers irssi installation and configuration.
 
-Related
+> Related
 
 IRC Channels
 
@@ -117,7 +117,7 @@ session. Therefore, it is recommended that you select a multiplexer
 
 > Commands
 
-Connection
+> Connection
 
 /server
 
@@ -139,7 +139,7 @@ between multiple servers).
 
 These close the current connection to a server.
 
-Movement
+> Movement
 
 ALT+(1-0,q-p,etc)
 
@@ -170,7 +170,7 @@ These move the current window to the first window position.
 This will save the current window positions for the next time you start
 irssi.
 
-Miscellaneous
+> Miscellaneous
 
 /set
 

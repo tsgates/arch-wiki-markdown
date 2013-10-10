@@ -1,14 +1,14 @@
 Wine
 ====
 
-Summary
+> Summary
 
 Wine is a compatibility layer capable of running Microsoft Windows
 applications on Unix-like operating systems. Programs running in Wine
 act as native programs would, without the performance/memory penalties
 of an emulator.
 
-Related
+> Related
 
 Steam
 

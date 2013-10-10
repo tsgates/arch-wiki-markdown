@@ -1,12 +1,12 @@
 makepkg
 =======
 
-Summary
+> Summary
 
 makepkg is a script used to compile and package software for use with
 pacman. This article details its configuration and usage.
 
-Overview
+> Overview
 
 Packages in Arch Linux are built using makepkg and a custom build script
 for each package (known as a PKGBUILD). Once packaged, software can be
@@ -14,11 +14,11 @@ installed and managed with pacman. PKGBUILDs for software in the
 official repositories are available from the ABS tree; thousands more
 are available from the (unsupported) Arch User Repository.
 
-Related
+> Related
 
 Creating Packages
 
-Resources
+> Resources
 
 makepkg(8) Manual Page
 

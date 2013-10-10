@@ -1,12 +1,12 @@
 Nautilus
 ========
 
-Summary
+> Summary
 
 This article covers installation, configuration, and general usage tips
 for Nautilus.
 
-Related
+> Related
 
 GNOME: Desktop Environment that encompasses Nautilus
 

@@ -1,11 +1,11 @@
 HandBrake
 =========
 
-Summary
+> Summary
 
 A short introduction to the features provided by HandBrake.
 
-Related
+> Related
 
 MEncoder
 

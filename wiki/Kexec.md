@@ -1,11 +1,11 @@
 Kexec
 =====
 
-Summary
+> Summary
 
 Covers how to install and configure kexec.
 
-Related
+> Related
 
 Systemd
 

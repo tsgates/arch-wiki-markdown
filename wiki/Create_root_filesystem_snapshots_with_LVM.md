@@ -1,7 +1,7 @@
 Create root filesystem snapshots with LVM
 =========================================
 
-Summary
+> Summary
 
 Setup root filesystem LVM snapshot creation during system start.
 
@@ -12,7 +12,7 @@ Required software
 
 lvm2, systemd
 
-Related
+> Related
 
 LVM
 

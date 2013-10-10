@@ -1,17 +1,17 @@
 ISCSI Initiator
 ===============
 
-Summary
+> Summary
 
 How to access an iSCSI Target with an initiator.
 
-Series
+> Series
 
 iSCSI Target
 
 iSCSI Initiator
 
-Related
+> Related
 
 iSCSI Boot
 

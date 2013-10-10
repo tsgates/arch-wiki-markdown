@@ -1,7 +1,7 @@
 Display Manager
 ===============
 
-Summary
+> Summary
 
 A display manager presents the user with a login screen which prompts
 for a user name and password. A session starts when the user
@@ -9,7 +9,7 @@ successfully enters a valid combination of user name and password. This
 article covers installation, configuration, and troubleshooting of
 common display managers.
 
-Overview
+> Overview
 
 The Xorg project provides an open source implementation of the X Window
 System – the foundation for a graphical user interface. Desktop
@@ -19,7 +19,7 @@ alternative and novel environments, and may be used standalone to
 conserve system resources. Display managers provide a graphical login
 prompt.
 
-Related
+> Related
 
 Start X at Login
 

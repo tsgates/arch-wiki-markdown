@@ -1,11 +1,11 @@
 NFS Troubleshooting
 ===================
 
-Summary
+> Summary
 
 Dedicated article for common problems and solutions.
 
-Related
+> Related
 
 NFS - Main NFS article.
 

@@ -1,13 +1,13 @@
 Wicd
 ====
 
-Summary
+> Summary
 
 Covers installation and configuration of Wicd – an open source wired and
 wireless network manager for Linux which aims to provide a simple
 interface to connect to networks with a wide variety of settings.
 
-Overview
+> Overview
 
 Arch Linux provides netcfg for network management. netcfg supports wired
 connections on desktops and servers, as well as wireless setups and

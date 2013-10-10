@@ -1,7 +1,7 @@
 CMYK support in The GIMP
 ========================
 
-Summary
+> Summary
 
 This article will show how to enable rudimentary CMYK support in Gimp
 using the Separate and Separate+ plug-ins, and explain how to use color

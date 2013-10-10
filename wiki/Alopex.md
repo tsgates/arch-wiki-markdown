@@ -1,11 +1,11 @@
 Alopex
 ======
 
-Summary
+> Summary
 
 Information on installing and configuring Alopex
 
-Related
+> Related
 
 dmenu
 

@@ -1,11 +1,11 @@
 TORQUE
 ======
 
-Summary
+> Summary
 
 Installation and configuration of TORQUE.
 
-Related
+> Related
 
 distcc
 

@@ -1,13 +1,13 @@
 Wordpress
 =========
 
-Summary
+> Summary
 
 Wordpress is an easy to setup and administer FLOSS content management
 system featuring a strong and vibrant community with thousands of
 plugins and themes.
 
-Related
+> Related
 
 LAMP
 

@@ -1,12 +1,12 @@
 Installing Arch Linux on ZFS
 ============================
 
-Summary
+> Summary
 
 This article describes the necassary procedures for installing Arch
 Linux onto a ZFS root filesystem.
 
-Related
+> Related
 
 ZFS
 

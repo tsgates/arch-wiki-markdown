@@ -91,7 +91,7 @@ could use the domain you use to run the application but replacing _ by .
 2.  Copy this /etc/conf.d/playapp_sample file in /etc/conf.d/{appname}
 3.  Modify variables below to fit your needs.
 
-Example:
+> Example:
 
     # appname=blog_greweb_fr
     # ln -s /etc/rc.d/skeleton_playapp /etc/rc.d/${appname}
@@ -109,7 +109,7 @@ instance.
     PLAY_ARGS= # (optional) The play args to run the play server with. 
                #            Setting to "--%prod" can be useful to override the play profile id
 
-Example:
+> Example:
 
     /etc/conf.d/blog_greweb_fr
 
@@ -124,7 +124,7 @@ the /etc/rc.conf DAEMONS variable.
 
 You could prefix the daemon name with an @ to run it in background.
 
-Example:
+> Example:
 
     /etc/rc.conf
 
@@ -138,7 +138,7 @@ You can manually stop, start or restart your application in root.
     # rc.d start ${appname}
     # rc.d restart ${appname}
 
-Example:
+> Example:
 
     # rc.d start blog_greweb_fr
 

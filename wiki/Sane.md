@@ -1,11 +1,11 @@
 Sane
 ====
 
-Summary
+> Summary
 
 Installing and configuring Sane
 
-Related
+> Related
 
 Scan print and save Script
 

@@ -1,11 +1,11 @@
 Color Bash Prompt
 =================
 
-Summary
+> Summary
 
 Discussing and improving Bash graphical customisations.
 
-Related
+> Related
 
 Environment Variables
 
@@ -1486,12 +1486,12 @@ Do not forget to comment out the old line.
 These are double-line prompts, and they should look something like
 these:
 
-user
+> user
 
 Root on myhost Sun Jan 15 12:30 PM  
 [dir.= /etc/rc.d] 1 >
 
-root
+> root
 
 Root on myhost Sun Jan 15 12:30 PM  
 [dir.= /etc/rc.d] 1 >

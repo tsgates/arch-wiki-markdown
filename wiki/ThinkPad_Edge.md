@@ -4,7 +4,7 @@ ThinkPad Edge
 Note:This article will be updated from time to time and is currently (as
 of 2010/09/5) processed by User:ProfWho
 
-Summary
+> Summary
 
 How to setup archlinux on Lenovo ThinkPad Edge 13
 
@@ -13,7 +13,7 @@ Required hardware
 Thinkpad Edge 13 (Lenovo) - This guide has been written aside the
 ThinkPad Edge AMD version with ATI-graphics.
 
-Related
+> Related
 
 [[1]]
 

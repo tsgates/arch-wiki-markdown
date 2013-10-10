@@ -1,11 +1,11 @@
 Libcanberra
 ===========
 
-Summary
+> Summary
 
 This article discusses how to install and configure libcanberra.
 
-Related
+> Related
 
 GTK+
 

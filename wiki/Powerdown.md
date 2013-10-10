@@ -1,13 +1,13 @@
 Powerdown
 =========
 
-Summary
+> Summary
 
 powerdown is a bunch of scripts by Taylorchu that combine all sorts of
 settings to make your computer consume less energy and thus save
 batterylife.
 
-Related
+> Related
 
 Pm-utils
 

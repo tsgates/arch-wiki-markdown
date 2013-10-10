@@ -1,11 +1,11 @@
 Installing VMWare vCLI
 ======================
 
-Summary
+> Summary
 
 Installing vCLI for managing vSphere environments
 
-Related
+> Related
 
 VMware
 

@@ -104,7 +104,7 @@ them to your slapd.conf)
     index   sn              pres,sub,eq
     index   dc              eq
 
-Note:
+> Note:
 
 Don't forget to run slapindex after you populate your directory. (slapd
 needs to be stopped to do this). Then change the ownership for all the

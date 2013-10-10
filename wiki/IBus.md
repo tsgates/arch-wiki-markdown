@@ -1,12 +1,12 @@
 IBus
 ====
 
-Summary
+> Summary
 
 This article discusses the installation, configuration, and
 troubleshooting steps associated with the usage of IBus.
 
-Related
+> Related
 
 Fcitx
 

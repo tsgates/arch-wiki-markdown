@@ -1,11 +1,11 @@
 Chromium
 ========
 
-Summary
+> Summary
 
 General information, installation and troubleshooting for Chromium.
 
-Related
+> Related
 
 Chromium Tips and Tweaks
 

@@ -1,7 +1,7 @@
 LXDE
 ====
 
-Summary
+> Summary
 
 LXDE is a GPL-licensed open source desktop environment for Unix and
 other POSIX-compliant platforms, such as Linux. This article covers its
@@ -9,7 +9,7 @@ installation, configuration, and troubleshooting.
 
 LXDE uses the GTK+ toolkit.
 
-Overview
+> Overview
 
 The Xorg project provides an open source implementation of the X Window
 System – the foundation for a graphical user interface. Desktop

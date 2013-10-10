@@ -1,14 +1,14 @@
 Writing Article Introductions
 =============================
 
-Summary
+> Summary
 
 This article covers the topic of writing effective and useful article
 introductions. An article introduction is usually the first heading in
 an article. This article will discuss information, writing style, and
 formatting that make up a good article introduction.
 
-Series
+> Series
 
 Writing Short Article Names
 
@@ -18,7 +18,7 @@ Writing Article Introductions
 
 Effective Use of Headers
 
-Related
+> Related
 
 Help:Editing
 

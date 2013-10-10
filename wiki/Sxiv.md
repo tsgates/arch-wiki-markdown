@@ -1,7 +1,7 @@
 sxiv
 ====
 
-Summary
+> Summary
 
 This article discusses the installation and basic configuration of sxiv.
 

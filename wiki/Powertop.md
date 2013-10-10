@@ -1,7 +1,7 @@
 Powertop
 ========
 
-Summary
+> Summary
 
 This article discusses solving common power saving tasks, with use of
 Intel "PowerTOP" utility.
@@ -14,7 +14,7 @@ Project page
 
 Wikipedia article
 
-Related
+> Related
 
 Laptop Mode Tools
 

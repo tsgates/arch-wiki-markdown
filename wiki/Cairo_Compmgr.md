@@ -1,7 +1,7 @@
 Cairo Compmgr
 =============
 
-Summary
+> Summary
 
 Describes the installation and usage of Cairo Composite Manager.
 

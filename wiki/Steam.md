@@ -1,14 +1,14 @@
 Steam
 =====
 
-Summary
+> Summary
 
 Steam is a content delivery system made by Valve Software. It is best
 known as the platform needed to play Source Engine games (e.g. Half-Life
 2, Counter-Strike). Today it offers many games from many other
 developers.
 
-Related
+> Related
 
 Wine
 

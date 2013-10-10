@@ -288,7 +288,7 @@ Language dictionaries can also be found at the Vim FTP archive. Put the
 downloaded dictionar(y/ies) into the ~/.vim/spell folder and set the
 dictionary by typing: :setlocal spell spelllang=LL
 
-Tip:
+> Tip:
 
 -   To enable spell checking for LaTeX (or TeX) documents only, add
     autocmd FileType tex setlocal spell spelllang=en_us into your

@@ -1,7 +1,7 @@
 Fbpanel
 =======
 
-Summary
+> Summary
 
 fbpanel is a lightweight NETWM compliant desktop panel. This article
 describes the installation and configuration of fbpanel.

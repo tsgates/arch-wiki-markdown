@@ -13,7 +13,7 @@ ArchHosting
 This a scratchpad for ideas on setting up a Arch Linux based weblog host.
 -------------------------------------------------------------------------
 
-Rationale:
+> Rationale:
 
 -   To provide (cheap) shell accounts, email services, etc for Arch
     Linux users who wish to host their weblogs/personal websites on
@@ -25,7 +25,7 @@ Options: There are two possibities that come to mind which are feasable.
 2.  Buy Ram/HD Space from a VM/Xen provider like
     http://rimuhosting.com/order/startorder.jsp
 
-Discussion:
+> Discussion:
 
 -   Costs of setting up service and paying per month would be via a
     money-pooling arrangement. Perhaps we can setup an adsense account +
@@ -161,7 +161,7 @@ Other Ideas:
     would like to give something back. Maybe we can open a forum thread
     for this instead of discussing things here? 655321
 
-Todo:
+> Todo:
 
 1.  Finish Brainstorming.
 2.  Establish a timeline to get it all running

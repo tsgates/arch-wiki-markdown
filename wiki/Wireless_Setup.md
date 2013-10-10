@@ -1,11 +1,11 @@
 Wireless Setup
 ==============
 
-Summary
+> Summary
 
 A complete guide to enabling and configuring wireless networking.
 
-Overview
+> Overview
 
 Arch Linux provides netcfg for network management. netcfg supports wired
 connections on desktops and servers, as well as wireless setups and

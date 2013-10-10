@@ -1,12 +1,12 @@
 Core Utilities
 ==============
 
-Summary
+> Summary
 
 Tips and tricks related to so-called "core" utilities on a GNU/Linux
 system.
 
-Related
+> Related
 
 Commandline Tools
 

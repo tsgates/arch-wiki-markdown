@@ -1,12 +1,12 @@
 Installing Arch Linux on a USB key
 ==================================
 
-Summary
+> Summary
 
 Guide to installing, configuring and using a full-featured Arch Linux
 system on a USB flash drive.
 
-Related
+> Related
 
 Beginners' Guide
 

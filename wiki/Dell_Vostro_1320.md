@@ -104,7 +104,7 @@ Graphics
 
 NVIDIA® GeForce™ 9300M GS Graphic Card
 
-working
+> working
 
 Integrated GMA X4500 HD Graphics
 
@@ -114,11 +114,11 @@ Multimedia
 
 Audio
 
-working
+> working
 
 Webcam
 
-working
+> working
 
 Biometric Fingerprint Reader
 
@@ -144,11 +144,11 @@ reported working
 
 Intel Pro Wireless WI-FI 5100 (802.11a/g/Draft-n)
 
-working
+> working
 
 Intel WiFi Link 5300 Mini-Card (802.11 a/g/n)
 
-working
+> working
 
 Bluetooth
 

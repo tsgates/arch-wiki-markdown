@@ -42,7 +42,7 @@ gnu2plan9-coreutils
 
 Below is a list of the origin of different utilities in this package.
 
-Plan9port
+> Plan9port
 
 /bin
 
@@ -72,7 +72,7 @@ the sha*sum scripts point to the perl-digest-sha. Ideally as few
 external dependencies possible would be nice. Can we use plan9port
 sha1sum for the other sums too? Ideas welcome.
 
-Heirloom
+> Heirloom
 
 ucb binaries
 
@@ -114,7 +114,7 @@ SysV binaries
        nice paste patchchk printenv printf tsort
        tty unexpand uniq users whoami yes
 
-Busybox
+> Busybox
 
 Busybox is needed for the following utilities:
 

@@ -181,7 +181,7 @@ you don't start with a fresh folder in the uclibc system, it won't work.
      ----------------------------------------------------------------------
      
 
-buildroot_my_config
+> buildroot_my_config
 
     #
      # Automatically generated make config: don't edit

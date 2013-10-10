@@ -1,11 +1,11 @@
 Disk Encryption
 ===============
 
-Summary
+> Summary
 
 Transparent encryption/decryption software
 
-Related
+> Related
 
 dm-crypt with LUKS
 

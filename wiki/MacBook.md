@@ -1,12 +1,12 @@
 MacBook
 =======
 
-Summary
+> Summary
 
 Details the installation and configuration of Arch Linux on Apple's
 MacBook and MacBook Pro lines of notebooks.
 
-Related
+> Related
 
 Official Arch Linux Install Guide
 
@@ -14,7 +14,7 @@ Beginners Guide
 
 General Recommendations
 
-MacBook
+> MacBook
 
 MacBookPro
 

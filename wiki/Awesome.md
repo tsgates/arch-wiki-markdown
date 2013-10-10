@@ -600,7 +600,7 @@ Guide taken from [1].
 
         wmname LG3D
 
-Note:
+> Note:
 
 If you use a non-reparenting window manager and Java 6, you should
 uncomment the corresponding line in /etc/profile.d/openjdk6.sh

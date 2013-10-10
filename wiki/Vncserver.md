@@ -1,14 +1,14 @@
 Vncserver
 =========
 
-Summary
+> Summary
 
 Vncserver is a remote display daemon that allows users to run totally
 parallel sessions on a machine which can be accessed from anywhere. All
 applications running under the server continue to run, even when the
 user disconnects.
 
-Related
+> Related
 
 x11vnc - Another flavor of VNC which allows connections to the root (:0)
 desktop.

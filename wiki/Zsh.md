@@ -119,7 +119,7 @@ At login, Zsh sources the following files in this order:
 At logout it sources ~/.zlogout, which is used for automatic execution
 of user's scripts.
 
-Note:
+> Note:
 
 -   The paths used in Arch's zsh package are different from the default
     ones used in the man pages.

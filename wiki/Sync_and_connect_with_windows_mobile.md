@@ -90,7 +90,7 @@ please create it manually.)
 
 Now you can use your PocketPC filesystem from /mnt/synce directory.
 
-Tip:
+> Tip:
 
 To mount PocketPC filesystem as ordinal user (non-root), you need to add
 the following to your fstab:

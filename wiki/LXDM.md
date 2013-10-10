@@ -1,13 +1,13 @@
 LXDM
 ====
 
-Summary
+> Summary
 
 LXDM is the lightweight display manager aimed to replace gdm in LXDE
 distros. The UI is implemented with GTK+. It is still in early stages of
 development.
 
-Related
+> Related
 
 Display_Manager
 

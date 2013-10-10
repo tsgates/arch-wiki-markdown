@@ -12,12 +12,12 @@ ABS FAQ
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 Very simple answers to questions about the Arch Build System and making
 your own Arch Linux packages.
 
-Related
+> Related
 
 Arch Build System
 

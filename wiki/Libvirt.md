@@ -1,12 +1,12 @@
 libvirt
 =======
 
-Summary
+> Summary
 
 This article does not try to cover everything about libvirt, just the
 things that were not intuitive at first or not well documented.
 
-Related
+> Related
 
 QEMU
 

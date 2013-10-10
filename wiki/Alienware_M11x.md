@@ -277,7 +277,7 @@ address of each of your cards to a certain interface name
     SUBSYSTEM=="net", ATTR{address}=="aa:bb:cc:dd:ee:ff", NAME="eth0"
     SUBSYSTEM=="net", ATTR{address}=="ff:ee:dd:cc:bb:aa", NAME="wlan0"
 
-Where:
+> Where:
 
 -   NAME="eth0" is the name of the interface that you want, for example
     the same name "eth0". You can use other names, for example "lan0" or

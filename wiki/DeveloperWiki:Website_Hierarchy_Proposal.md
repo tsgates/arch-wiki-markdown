@@ -11,7 +11,7 @@ the Talk page. This article is part of the DeveloperWiki
 Hierarchy of site links
 =======================
 
-Home
+> Home
 
 Unsorted (not sure what to do with these yet...maybe About should be its
 own section?)
@@ -22,13 +22,13 @@ own section?)
 Download (fancy but KISS mirror selector...should also explain
 differences between full/core and ISO/USB images)
 
-Documentation
+> Documentation
 
 -   Wiki
 -   Installation Guide (Official)
 -   Beginners Guide (Community)
 
-Community
+> Community
 
 -   Forums
 -   Mailing Lists
@@ -38,7 +38,7 @@ Community
 -   International Communities
 -   Arch-based Projects
 
-Contribute
+> Contribute
 
 -   Volunteer (new page explaining how regular users can help make arch
     better (AUR contributions, wiki writers, etc.)
@@ -47,7 +47,7 @@ Contribute
 -   Logos & Artwork
 -   Press Coverage
 
-Packages
+> Packages
 
 -   Recent Packages
 -   Core
@@ -56,7 +56,7 @@ Packages
 -   Community (AUR)
 -   Unsupported (AUR)
 
-Development
+> Development
 
 -   Bugs
 -   SVN
@@ -64,7 +64,7 @@ Development
 -   Developers
 -   Fellows Club
 
-Syndication
+> Syndication
 
 -   News
 -   Recent Packages
@@ -73,13 +73,13 @@ Syndication
 -   Wiki: Recent Changes
 -   Wiki: New Pages
 
-Legal
+> Legal
 
 -   Copyrights (?)
 -   Trademark Policy
 -   GPL Information (?)
 
-Sitemap
+> Sitemap
 
 Retrieved from
 "https://wiki.archlinux.org/index.php?title=DeveloperWiki:Website_Hierarchy_Proposal&oldid=161315"

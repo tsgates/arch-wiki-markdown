@@ -10,11 +10,11 @@ TGT iSCSI Target
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 Installation and configuration of TGT as iSCSI target
 
-Related
+> Related
 
 iSCSI Target
 

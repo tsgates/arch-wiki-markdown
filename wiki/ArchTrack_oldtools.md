@@ -41,7 +41,7 @@ ArchTrack/oldtools
 Core
 ----
 
-Legend:
+> Legend:
 
 (T) -- Text Interface
 
@@ -1136,7 +1136,7 @@ net-snmp(T)
 
 netsnmp
 
-snmpscan
+> snmpscan
 
     snmpwalk
 
@@ -1918,7 +1918,7 @@ Aircrack-ng Suite(T)(*)
 
 aircrack-ng-svn
 
-Aircrack
+> Aircrack
 
 Aircrack is an 802.11 WEP and WPA-PSK keys cracking program that can
 recover keys once enough data packets have been captured. It implements
@@ -1940,11 +1940,11 @@ Airmon-ng
 a utility to check an wifi interfaces status and placing the interface
 into monitor mode. Part of the aircrack suite.
 
-Airodump
+> Airodump
 
 802.11 packet capture program. Part of the aircrack suite.
 
-Airoscript
+> Airoscript
 
 aircrack-ng based wireless cracking script.
 

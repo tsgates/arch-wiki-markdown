@@ -1,12 +1,12 @@
 KMSCON
 ======
 
-Summary
+> Summary
 
 A guide to installing and configuring kmscon, the userspace
 linux-console replacement.
 
-Related
+> Related
 
 KMS
 

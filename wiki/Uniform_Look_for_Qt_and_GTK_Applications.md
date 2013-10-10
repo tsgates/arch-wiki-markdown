@@ -1,13 +1,13 @@
 Uniform Look for Qt and GTK Applications
 ========================================
 
-Summary
+> Summary
 
 This articles details theme configuration of GTK+ at Qt applications to
 ensure a uniform style. This article will cover configuration, theme
 engines, tricks and troubleshooting.
 
-Related
+> Related
 
 GTK+
 
@@ -469,7 +469,7 @@ problem. To solve this, first add the following to your .xinitrc file:
     export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
     ...
 
-Note:
+> Note:
 
 -   Make sure to add this line before invoking the window manager.
 -   You can add multiple paths by separating them with colons.

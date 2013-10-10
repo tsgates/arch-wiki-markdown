@@ -113,12 +113,12 @@ Thus, the user does not receive this error message anymore.
 See also
 --------
 
-Official
+> Official
 
 -   Zim homepage
 -   Zim official manual
 
-Tutorials
+> Tutorials
 
 -   A short screencast
 

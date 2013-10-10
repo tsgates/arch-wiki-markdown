@@ -1,12 +1,12 @@
 Xmodmap
 =======
 
-Summary
+> Summary
 
 A general overview of modifying keymaps and pointer mappings with
 xmodmap.
 
-Related
+> Related
 
 Xorg
 

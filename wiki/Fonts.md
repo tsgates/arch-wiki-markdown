@@ -6,15 +6,15 @@ From Wikipedia:
 A computer font (or font) is an electronic data file containing a set of
 glyphs, characters, or symbols such as dingbats.
 
-Summary
+> Summary
 
 Covers the selection and installation of fonts on Arch Linux
 
-Legal
+> Legal
 
 Certain font licenses may impose some legal limitations
 
-Related
+> Related
 
 Font Configuration: Font setup and beautification
 

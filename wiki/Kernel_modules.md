@@ -1,12 +1,12 @@
 Kernel modules
 ==============
 
-Summary
+> Summary
 
 This article covers the various methods for operating with kernel
 modules.
 
-Related
+> Related
 
 Boot Debugging
 
@@ -14,7 +14,7 @@ Kernels
 
 Kernel parameters
 
-Resources
+> Resources
 
 modprobe man page
 

@@ -1,12 +1,12 @@
 Poulsbo
 =======
 
-Summary
+> Summary
 
 The current state of Intel GMA500/Poulsbo hardware support under Arch
 Linux.
 
-Related
+> Related
 
 Intel Graphics
 
@@ -14,7 +14,7 @@ Xorg
 
 MPlayer
 
-Resources
+> Resources
 
 Poulsbo Discussion in Arch BBS
 
@@ -57,7 +57,7 @@ With kernel 2.6.39, a new psb_gfx module appeared in the kernel
 developed by Alan Cox to support Poulsbo hardware. As of kernel 3.3.rc1
 the driver has left staging and been renamed gma500_gfx. ([1])
 
-Advantages
+> Advantages
 
 -   Native resolution (1366x768) with early KMS (tested on Asus Eee
     1101HA)
@@ -65,7 +65,7 @@ Advantages
 -   2D acceleration
 -   Works out of the box
 
-Disadvantages
+> Disadvantages
 
 -   Some are unable to get native resolution (e.g 1366x768)
 -   No 3D acceleration possible

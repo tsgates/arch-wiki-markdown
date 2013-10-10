@@ -1,13 +1,13 @@
 Smart Common Input Method platform
 ==================================
 
-Summary
+> Summary
 
 This article discusses the installation, configuration, and
 troubleshooting steps associated with the usage of SCIM, the Smart
 Common Input Method.
 
-Related
+> Related
 
 IBus
 

@@ -1,11 +1,11 @@
 TeX Live FAQ
 ============
 
-Summary
+> Summary
 
 Frequently asked qustions about TeX, TeXLive.
 
-Related
+> Related
 
 TeX Live
 

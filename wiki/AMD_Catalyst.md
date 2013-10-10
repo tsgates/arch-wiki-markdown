@@ -1,17 +1,17 @@
 AMD Catalyst
 ============
 
-Summary
+> Summary
 
 An overview of AMD's proprietary Linux "Catalyst" video card driver.
 
-Related
+> Related
 
 ATI
 
 Xorg
 
-Resources
+> Resources
 
 cchtml.com - Unofficial Wiki for the ATI Linux Driver
 

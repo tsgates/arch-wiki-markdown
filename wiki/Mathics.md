@@ -1,12 +1,12 @@
 Mathics
 =======
 
-Summary
+> Summary
 
 This article contains information about the installation, configuration
 and use of Mathics.
 
-Related
+> Related
 
 Matlab
 

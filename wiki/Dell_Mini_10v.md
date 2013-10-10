@@ -1,14 +1,14 @@
 Dell Mini 10v
 =============
 
-Summary
+> Summary
 
 This articles details the installation and configuration of Arch Linux
 on the Dell Mini 10v. The Dell Mini 10v is a netbook with 10" display
 from Dell. This article covers the configuration of the graphics card,
 wireless card and touchpad.
 
-Related
+> Related
 
 Beginners' Guide
 

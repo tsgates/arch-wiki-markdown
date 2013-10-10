@@ -1,11 +1,11 @@
 dwm
 ===
 
-Summary
+> Summary
 
 Information on installing and configuring dwm
 
-Related
+> Related
 
 dmenu
 

@@ -1,12 +1,12 @@
 LAMP
 ====
 
-Summary
+> Summary
 
 This page explains the installation and configuration of a complete LAMP
 server.
 
-Related
+> Related
 
 MariaDB
 

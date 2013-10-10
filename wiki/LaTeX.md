@@ -1,11 +1,11 @@
 LaTeX
 =====
 
-Summary
+> Summary
 
 Implementations of LaTeX in Arch Linux.
 
-Related
+> Related
 
 TeX Live
 
@@ -61,7 +61,7 @@ http://kile.sourceforge.net/ || kile
 http://www.hackenberger.at/blog/ktikz-editor-for-the-tikz-language/ ||
 ktikz
 
-Other
+> Other
 
 -   Emacs — Emacs (AucTeX), together with auctex and RefTeX, provides a
     complete, powerful, and customizable LaTeX environment.

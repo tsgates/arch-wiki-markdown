@@ -1,11 +1,11 @@
 Benchmarking disk wipes
 =======================
 
-Summary
+> Summary
 
 Benchmark different methods of disk wiping.
 
-Related
+> Related
 
 Securely wipe disk
 

@@ -1,12 +1,12 @@
 Ubuntu One
 ==========
 
-Summary
+> Summary
 
 This article discusses how to install, configure and use Ubuntu One on
 your system.
 
-Related
+> Related
 
 Dropbox
 

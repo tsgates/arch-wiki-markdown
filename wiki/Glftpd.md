@@ -1,13 +1,13 @@
 Glftpd
 ======
 
-Summary
+> Summary
 
 This article discusses the installation and configuration of the
 GreyLine FTP daemon on Arch Linux systems. An extensive administrative
 example is provided at the end.
 
-Related
+> Related
 
 vsftpd
 

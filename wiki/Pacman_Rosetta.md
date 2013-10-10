@@ -18,19 +18,19 @@ of pacman. The -Qk option is new in pacman 4.1
 
 Note:The command pkgfile can be found in the pkgfile package.
 
-Action
+> Action
 
-Arch
+> Arch
 
 Red Hat/Fedora
 
-Debian/Ubuntu
+> Debian/Ubuntu
 
 (Old) SUSE
 
-openSUSE
+> openSUSE
 
-Gentoo
+> Gentoo
 
 Install a package(s) by name
 
@@ -895,19 +895,19 @@ rpm -qp
 
 dpkg-deb -I
 
-Action
+> Action
 
-Arch
+> Arch
 
 Red Hat/Fedora
 
-Debian/Ubuntu
+> Debian/Ubuntu
 
 (Old) SUSE
 
-openSUSE
+> openSUSE
 
-Gentoo
+> Gentoo
 
 Retrieved from
 "https://wiki.archlinux.org/index.php?title=Pacman_Rosetta&oldid=252921"

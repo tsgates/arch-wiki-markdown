@@ -1,11 +1,11 @@
 Diskless System
 ===============
 
-Summary
+> Summary
 
 Detailed explanation of diskless system setup.
 
-Related
+> Related
 
 NFS
 

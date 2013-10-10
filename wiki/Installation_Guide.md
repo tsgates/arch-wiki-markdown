@@ -245,7 +245,7 @@ Multilib Package
 
 Documentation
 
-AMD/ATI
+> AMD/ATI
 
 Open source
 
@@ -263,7 +263,7 @@ lib32-catalyst-utils
 
 AMD Catalyst
 
-Intel
+> Intel
 
 Open source
 
@@ -273,7 +273,7 @@ lib32-intel-dri
 
 Intel Graphics
 
-Nvidia
+> Nvidia
 
 Open source
 

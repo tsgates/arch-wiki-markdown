@@ -1,7 +1,7 @@
 Solid State Drives
 ==================
 
-Summary
+> Summary
 
 This article covers many aspects of SSDs (solid state drives) as they
 relate to Linux; however, the underlying principals and key learning
@@ -10,7 +10,7 @@ SSDs on other operating systems such as the Windows family of products
 as well as Mac OS X. Beyond the aforementioned information, Linux users
 will benefit from the tweaks/optimization presented herein.
 
-Related
+> Related
 
 SSD Benchmarking
 

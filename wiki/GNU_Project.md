@@ -1,12 +1,12 @@
 GNU Project
 ===========
 
-Summary
+> Summary
 
 This article describes the GNU Project and lists some of the essential
 tools that qualify Arch Linux as a GNU/Linux distribution.
 
-Overview
+> Overview
 
 The aim of the GNU Project is to produce a totally free operating
 system. While the GNU kernel has not reached a stable version, the
@@ -15,7 +15,7 @@ Unix-like operating systems. Arch Linux is such a system, using GNU
 software like the GRUB bootloader, Bash shell, and numerous other
 utilities and libraries.
 
-Related
+> Related
 
 Arch Linux
 

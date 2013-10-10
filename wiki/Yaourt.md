@@ -1,11 +1,11 @@
 Yaourt
 ======
 
-Summary
+> Summary
 
 How to install and use yaourt.
 
-Related
+> Related
 
 AUR Helpers
 

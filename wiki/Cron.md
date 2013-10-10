@@ -1,11 +1,11 @@
 cron
 ====
 
-Summary
+> Summary
 
 An overview of the standard task scheduling daemon on GNU/Linux systems.
 
-Resources
+> Resources
 
 Gentoo Linux Cron Guide
 

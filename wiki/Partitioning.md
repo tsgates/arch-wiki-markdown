@@ -1,12 +1,12 @@
 Partitioning
 ============
 
-Summary
+> Summary
 
 An overview of disk partitioning tools, best practices, and additional
 considerations.
 
-Related
+> Related
 
 fstab
 

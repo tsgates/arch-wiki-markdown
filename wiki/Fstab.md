@@ -1,11 +1,11 @@
 fstab
 =====
 
-Summary
+> Summary
 
 This article explains how to configure and use fstab.
 
-Related
+> Related
 
 Persistent block device naming
 

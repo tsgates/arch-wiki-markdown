@@ -1,12 +1,12 @@
 GRUB
 ====
 
-Summary
+> Summary
 
 Covers various aspects of the next generation of the GRand Unified
 Bootloader (GRUB2).
 
-Overview
+> Overview
 
 In order to boot Arch Linux, a Linux-capable boot loader such as
 GRUB(2), Syslinux, LILO or GRUB Legacy must be installed to the Master
@@ -14,7 +14,7 @@ Boot Record or the GUID Partition Table. The boot loader is responsible
 for loading the kernel and initial ramdisk before initiating the boot
 process.
 
-Related
+> Related
 
 BURG - BURG is a brand-new boot loader based on GRUB2. It can be built
 on a wider range of OS, and has a highly configurable menu system which
@@ -22,7 +22,7 @@ works in both text and graphic mode.
 
 GRUB Legacy - previous Version, now obsolete.
 
-Resources
+> Resources
 
 GRUB EFI Examples
 

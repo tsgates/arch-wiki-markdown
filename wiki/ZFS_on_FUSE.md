@@ -1,12 +1,12 @@
 ZFS on FUSE
 ===========
 
-Summary
+> Summary
 
 This page provides basic guidelines for using ZFS from user space
 through FUSE.
 
-Related
+> Related
 
 ZFS
 

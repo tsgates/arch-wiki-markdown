@@ -27,7 +27,7 @@ install it like any other program.
 
 Or you can use the AUR package packettracer:
 
-Requirements:
+> Requirements:
 
 You should have installed the package group base-devel before (pacman -S
 base-devel).

@@ -1,11 +1,11 @@
 tcplay
 ======
 
-Summary
+> Summary
 
 Setup and usage of tcplay.
 
-Related
+> Related
 
 Disk Encryption
 

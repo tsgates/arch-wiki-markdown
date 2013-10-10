@@ -1,12 +1,12 @@
 CPU Frequency Scaling
 =====================
 
-Summary
+> Summary
 
 An overview of the popular userspace tools for the kernel CPUfreq
 subsystem.
 
-Related
+> Related
 
 Laptop Mode Tools
 

@@ -264,7 +264,7 @@ follows:
 
 Source
 
-Note:
+> Note:
 
 -   Disabling atime causes troubles with mutt and other applications
     that make use of file timestamps. Consider compromising between

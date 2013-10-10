@@ -1,12 +1,12 @@
 MacBook Pro 8,1 / 8,2 / 8,3 (2011 Macbook Pro)
 ==============================================
 
-Summary
+> Summary
 
 Details the installation and configuration of Arch Linux on Apple's
 MacBook Pro 8,1/8,2/8,3
 
-Related
+> Related
 
 MacBook
 
@@ -14,7 +14,7 @@ MacBookPro
 
 MacBook_Pro_7,1
 
-MacBook_Pro_8,1_/_8,2_/_8,3_(2011_Macbook_Pro)
+> MacBook_Pro_8,1_/_8,2_/_8,3_(2011_Macbook_Pro)
 
 MacBook_Pro_9,2_(Mid-2012)
 
@@ -63,7 +63,7 @@ Warning:efibootmgr may brick your Mac firmware.
 radeon driver which only loads properly on Macs in BIOS emulation mode,
 problem description and possible solution here.
 
-8,1
+> 8,1
 
 Tested on macbook pro 8.1 . Forum thread: [1]
 
@@ -277,7 +277,7 @@ Sound
 
      $ alsamixer # unmute 'Front Speaker' and 'Surround Speaker'
 
-8,3
+> 8,3
 
 Using PulseAudio sound works out of the box. However some applications
 (e.g. Vlc) have intermittent crackling; appending 'tsched=0' to
@@ -288,7 +288,7 @@ Suspend & Hibernate
 
 Consulte Suspend and Hibernate.
 
-8,1
+> 8,1
 
 For s2ram install uswsusp-git and add to file /etc/pm/config.d/module
 following content:
@@ -299,13 +299,13 @@ following content:
 Without this, system hangs after the machine wakes up and tries to
 reconnect to the wireless network.
 
-8,2
+> 8,2
 
 BIOS Boot: using linux >= 3.6.2, supend and resume works out-of-the-box.
 
 EFI Boot: resume may not work.
 
-8,3
+> 8,3
 
 Supend and resume work out of the box, including wireless reconnection.
 

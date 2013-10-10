@@ -1,11 +1,11 @@
 CrossOver
 =========
 
-Summary
+> Summary
 
 Configuring and installing CrossOver on Archlinux.
 
-Related
+> Related
 
 Wine
 

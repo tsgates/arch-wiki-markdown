@@ -1,7 +1,7 @@
 MATE
 ====
 
-Summary
+> Summary
 
 What is MATE and how to get it.
 
@@ -9,7 +9,7 @@ Required software
 
 MATE
 
-Related
+> Related
 
 GNOME
 

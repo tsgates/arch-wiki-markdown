@@ -1,7 +1,7 @@
 Suspend and Hibernate
 =====================
 
-Summary
+> Summary
 
 Describes suspend(sleep-to-ram), hibernate(sleep-to-disk)
 

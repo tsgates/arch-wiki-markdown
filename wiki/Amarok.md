@@ -1,7 +1,7 @@
 Amarok
 ======
 
-Summary
+> Summary
 
 Provides a brief overview of the quintessential KDE music player.
 

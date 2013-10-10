@@ -1,12 +1,12 @@
 IPv6
 ====
 
-Summary
+> Summary
 
 This article covers IPv6, and basics of configuring different IPv6
 related things like static IP adresses.
 
-Related
+> Related
 
 IPv6 - Tunnel Broker Setup
 

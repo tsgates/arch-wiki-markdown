@@ -79,7 +79,7 @@ Time to wait until all active client sockets are closed:
 
 Tip:http://www.squid-cache.org/Doc/config/shutdown_lifetime
 
-Note:
+> Note:
 
 Every time you change the cache_dir path (and after fresh install), you
 need to (re)create this directory:
@@ -99,7 +99,7 @@ or if squid is already running:
 
     # /etc/rc.d/squid restart
 
-Note:
+> Note:
 
 It could be helpful to check the config file before running:
 

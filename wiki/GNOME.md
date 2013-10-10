@@ -1,12 +1,12 @@
 GNOME
 =====
 
-Summary
+> Summary
 
 GNOME 3 provides a modern desktop, rewritten from scratch, using the
 GTK3+ toolkit.
 
-Overview
+> Overview
 
 The Xorg project provides an open source implementation of the X Window
 System – the foundation for a graphical user interface. Desktop
@@ -16,7 +16,7 @@ alternative and novel environments, and may be used standalone to
 conserve system resources. Display managers provide a graphical login
 prompt.
 
-Related
+> Related
 
 GTK+
 

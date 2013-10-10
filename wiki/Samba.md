@@ -1,11 +1,11 @@
 Samba
 =====
 
-Summary
+> Summary
 
 Installing, configuring and troubleshooting Samba
 
-Related
+> Related
 
 NFS
 

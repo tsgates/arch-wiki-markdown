@@ -61,7 +61,7 @@ gnu2heirloom-coreutils
 There are 3 implementations of this replacement: SysV, Posix2001 and
 UCB.
 
-Busybox
+> Busybox
 
 Currently, the gnu2heirloom-coreutils packages need support to offer a
 drop-in replacement of GNU coreutils. This is at the moment provided by

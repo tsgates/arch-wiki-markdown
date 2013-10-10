@@ -1,12 +1,12 @@
 MacBookPro Retina
 =================
 
-Summary
+> Summary
 
 This wiki page should help you in getting your MacBook Pro with Retina
 Display to work with Arch Linux.
 
-Related
+> Related
 
 Official Arch Linux Install Guide
 

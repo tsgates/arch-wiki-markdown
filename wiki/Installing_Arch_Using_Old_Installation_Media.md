@@ -1,13 +1,13 @@
 Installing Arch Using Old Installation Media
 ============================================
 
-Summary
+> Summary
 
 This article give additional steps to the official installation guide,
 to allow installing Arch using an old media cd using the Arch Install
 Scripts instead of AIF.
 
-Related
+> Related
 
 Installation Guide: You should still follow the official guide steps.
 

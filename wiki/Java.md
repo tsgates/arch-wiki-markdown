@@ -1,11 +1,11 @@
 Java
 ====
 
-Summary
+> Summary
 
 This article explains how to install and configure JRE/JDK.
 
-Related
+> Related
 
 Java Package Guidelines
 

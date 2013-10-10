@@ -1,12 +1,12 @@
 Courier MTA
 ===========
 
-Summary
+> Summary
 
 This article focuses on the big Courier-MTA mail-server suite, which
 integrates an MTA and the POP3/IMAP mail fetching methods.
 
-Related
+> Related
 
 Simple Virtual User Mail System
 

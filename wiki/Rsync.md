@@ -1,11 +1,11 @@
 rsync
 =====
 
-Summary
+> Summary
 
 Instructions on using rsync.
 
-Related
+> Related
 
 Full System Backup with rsync
 

@@ -1,14 +1,14 @@
 Window Manager
 ==============
 
-Summary
+> Summary
 
 A window manager is system software that controls the placement and
 appearance of windows within a windowing system in a graphical user
 interface. This article provides a general overview and listing of
 popular window managers.
 
-Overview
+> Overview
 
 The Xorg project provides an open source implementation of the X Window
 System – the foundation for a graphical user interface. Desktop

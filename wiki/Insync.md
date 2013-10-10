@@ -1,12 +1,12 @@
 Insync
 ======
 
-Summary
+> Summary
 
 This article discusses how to install, configure and use insync on your
 system.
 
-Related
+> Related
 
 Dropbox
 

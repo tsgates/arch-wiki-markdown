@@ -1,15 +1,15 @@
 Logrotate
 =========
 
-Summary
+> Summary
 
 An introduction to the popular log maintenance utility.
 
-Related
+> Related
 
 Cron
 
-Resources
+> Resources
 
 Logrotate on Gentoo Linux Wiki
 

@@ -1,12 +1,12 @@
 VMware
 ======
 
-Summary
+> Summary
 
 This article will explain how to install and configure VMware
 Workstation/Player in Arch.
 
-Related
+> Related
 
 Installing Arch Linux in VMware
 

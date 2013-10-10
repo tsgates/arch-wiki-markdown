@@ -80,7 +80,7 @@ Google Chrome (using its new PPAPI).
 
 Install flashplugin from the official repositories.
 
-Note:
+> Note:
 
 -   Some versions of Epiphany have trouble recognizing the Flash plugin.
     See Epiphany#Flash for more details.

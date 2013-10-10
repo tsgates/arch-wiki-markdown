@@ -1,13 +1,13 @@
 pacman
 ======
 
-Summary
+> Summary
 
 Pacman is the Arch Linux package manager. Package managers are used to
 install, upgrade, and remove software. This article covers basic usage
 and troubleshooting tips.
 
-Overview
+> Overview
 
 Packages in Arch Linux are built using makepkg and a custom build script
 for each package (known as a PKGBUILD). Once packaged, software can be
@@ -15,7 +15,7 @@ installed and managed with pacman. PKGBUILDs for software in the
 official repositories are available from the ABS tree; thousands more
 are available from the (unsupported) Arch User Repository.
 
-Related
+> Related
 
 Downgrading Packages
 
@@ -35,7 +35,7 @@ pacman-key
 
 Pacnew and Pacsave Files
 
-Resources
+> Resources
 
 libalpm(3) Manual Page
 

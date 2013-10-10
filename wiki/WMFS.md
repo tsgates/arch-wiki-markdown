@@ -1,7 +1,7 @@
 WMFS
 ====
 
-Summary
+> Summary
 
 Information on installing and configuring WMFS
 

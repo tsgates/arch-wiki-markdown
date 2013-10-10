@@ -1,11 +1,11 @@
 AUR Trusted User Guidelines
 ===========================
 
-Summary
+> Summary
 
 Explains guidelines for the Arch User Repository's Trusted Users.
 
-Related
+> Related
 
 Arch User Repository
 

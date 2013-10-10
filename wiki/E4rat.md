@@ -1,12 +1,12 @@
 E4rat
 =====
 
-Summary
+> Summary
 
 How to drastically reduce boot and log-into-X time for ext4 file systems
 using the e4rat range of tools.
 
-Related
+> Related
 
 Improve Boot Performance
 

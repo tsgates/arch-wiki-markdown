@@ -1,12 +1,12 @@
 Firefox Tweaks
 ==============
 
-Summary
+> Summary
 
 This page contains advanced Firefox configuration options and
 performance tweaks.
 
-Related
+> Related
 
 Firefox
 

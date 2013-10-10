@@ -1,12 +1,12 @@
 Syslinux
 ========
 
-Summary
+> Summary
 
 Describes installing and configuring Syslinux, a collection of
 bootloaders.
 
-Overview
+> Overview
 
 In order to boot Arch Linux, a Linux-capable boot loader such as
 GRUB(2), Syslinux, LILO or GRUB Legacy must be installed to the Master
@@ -224,7 +224,7 @@ same directory where you installed Syslinux. In our case,
 The bootloader will look for either syslinux.cfg (preferred) or
 extlinux.conf
 
-Tip:
+> Tip:
 
 -   Instead of LINUX, the keyword KERNEL can also be used. KERNEL tries
     to detect the type of the file, while LINUX always expects a Linux

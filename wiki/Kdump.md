@@ -1,11 +1,11 @@
 Kdump
 =====
 
-Summary
+> Summary
 
 Covers how to setup kdump.
 
-Related
+> Related
 
 Kexec
 

@@ -1,11 +1,11 @@
 Opera
 =====
 
-Summary
+> Summary
 
 Installing and configuration of the Opera browser and plugins.
 
-Related
+> Related
 
 Browser Plugins
 

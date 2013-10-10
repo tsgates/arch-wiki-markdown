@@ -1,7 +1,7 @@
 CherryMusic
 ===========
 
-Summary
+> Summary
 
 Installation, configuration, tips & tricks and basic troubleshooting of
 CherryMusic - a music streaming server.

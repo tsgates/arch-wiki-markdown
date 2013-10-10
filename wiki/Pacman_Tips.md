@@ -1,11 +1,11 @@
 Pacman Tips
 ===========
 
-Summary
+> Summary
 
 This is a collection of common tips for new pacman users.
 
-Related
+> Related
 
 pacman
 

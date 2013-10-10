@@ -1,7 +1,7 @@
 LVM
 ===
 
-Summary
+> Summary
 
 This article will provide an example of how to install and configure
 Arch Linux with Logical Volume Manager (LVM).
@@ -10,7 +10,7 @@ Required software
 
 lvm2
 
-Related
+> Related
 
 Software RAID and LVM
 
@@ -346,7 +346,7 @@ the logical volume we did not accidentally cut off the end of the
 filesystem. After that we normally grow the filesystem to fill all free
 space left on logical volume. You may use lvresize instead of lvreduce.
 
-Warning:
+> Warning:
 
 -   Do not reduce the filesystem size to less than the amount of space
     occupied by data or you risk data loss.

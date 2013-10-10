@@ -1,12 +1,12 @@
 Gitlab
 ======
 
-Summary
+> Summary
 
 This page gives guidelines for the installation and configuration of
 Gitlab on Archlinux.
 
-Related
+> Related
 
 Gitolite
 

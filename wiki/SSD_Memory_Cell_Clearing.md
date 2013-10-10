@@ -1,7 +1,7 @@
 SSD Memory Cell Clearing
 ========================
 
-Summary
+> Summary
 
 This article presents a method to reset all cells on an SSD to their
 factory default state thus recovering any loss of write performance.

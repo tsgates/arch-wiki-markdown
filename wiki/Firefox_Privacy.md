@@ -1,16 +1,16 @@
 Firefox Privacy
 ===============
 
-Summary
+> Summary
 
 Configuration and installation of recommended add-ons to the Firefox
 browser to improve privacy
 
-Required
+> Required
 
 Firefox: Installing and troubleshooting the Firefox browser and plugins
 
-Related
+> Related
 
 Tor: Anonymous proxy network
 

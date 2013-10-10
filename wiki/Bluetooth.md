@@ -1,11 +1,11 @@
 Bluetooth
 =========
 
-Summary
+> Summary
 
 Covers the installation and use of Bluetooth on Arch Linux.
 
-Related
+> Related
 
 Bluetooth mouse configuration
 

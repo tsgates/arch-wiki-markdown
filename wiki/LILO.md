@@ -10,11 +10,11 @@ LILO
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 An overview of the installation and use of the LILO multi-boot loader.
 
-Overview
+> Overview
 
 In order to boot Arch Linux, a Linux-capable boot loader such as
 GRUB(2), Syslinux, LILO or GRUB Legacy must be installed to the Master

@@ -1,7 +1,7 @@
 GNUnet
 ======
 
-Summary
+> Summary
 
 This article tells about installation, configuration and basic usage of
 GNUnet.
@@ -10,7 +10,7 @@ Required software
 
 GNUnet
 
-Related
+> Related
 
 Tor
 

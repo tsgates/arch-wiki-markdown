@@ -1,12 +1,12 @@
 TuxOnIce
 ========
 
-Summary
+> Summary
 
 Describes installing, configuring and using TuxOnIce, an advanced
 suspend/hibernate framework.
 
-Related
+> Related
 
 Suspending to RAM with hibernate-script
 

@@ -1,17 +1,17 @@
 ISCSI Target
 ============
 
-Summary
+> Summary
 
 How to set up an iSCSI Target using different tools.
 
-Series
+> Series
 
 iSCSI Target
 
 iSCSI Initiator
 
-Related
+> Related
 
 iSCSI Boot
 

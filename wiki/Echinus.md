@@ -1,11 +1,11 @@
 echinus
 =======
 
-Summary
+> Summary
 
 Information on installing and configuring echinus
 
-Related
+> Related
 
 dmenu
 

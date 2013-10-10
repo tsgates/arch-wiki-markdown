@@ -74,7 +74,7 @@ Rationale
 A compromise between fully converting to ext4 and simply remaining with
 ext3 is to mount existing ext3 partitions as ext4.
 
-Pros:
+> Pros:
 
 -   Compatibility (the filesystem can continue to be mounted as ext3) –
     This allows users to still read the filesystem from other
@@ -83,7 +83,7 @@ Pros:
 -   Improved performance (though not as much as a fully-converted ext4
     partition) – See Ext4 - Linux Kernel Newbies for details
 
-Cons:
+> Cons:
 
 -   Fewer features of ext4 are used (only those that do not change the
     disk format such as multiblock allocation and delayed allocation)
@@ -105,12 +105,12 @@ Rationale
 To experience the benefits of ext4, an irreversible conversion process
 must be completed.
 
-Pros:
+> Pros:
 
 -   Improved performance and new features – See Ext4 - Linux Kernel
     Newbies for details
 
-Cons:
+> Cons:
 
 -   Read-only access from Windows can be provided by Ext2Explore, but
     there is currently no driver for writing data.

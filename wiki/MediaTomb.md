@@ -1,12 +1,12 @@
 MediaTomb
 =========
 
-Summary
+> Summary
 
 An introduction to MediaTomb, covering installation and basic
 configuration of the open source UPnP MediaServer.
 
-Related
+> Related
 
 Streaming media
 

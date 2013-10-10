@@ -1,7 +1,7 @@
 SSD Benchmarking
 ================
 
-Summary
+> Summary
 
 This article covers several Linux-native apps that benchmark I/O devices
 such as HDDs, SSDs, USB thumb drives, etc. There is also a "database"

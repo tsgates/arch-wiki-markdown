@@ -102,11 +102,11 @@ install the corresponding drivers:
 
 Dual Monitors
 
-Clone:
+> Clone:
 
     xrandr --output LVDS1 --auto --output HDMI1 --auto --same-as LVDS1
 
-Extended:
+> Extended:
 
     xrandr --output LVDS1 --auto --output HDMI1 --auto --right-of LVDS1
 

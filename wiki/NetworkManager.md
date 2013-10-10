@@ -1,12 +1,12 @@
 NetworkManager
 ==============
 
-Summary
+> Summary
 
 Covers installation and configuration of NetworkManager – a set of
 co-operative tools that make networking simple and straightforward.
 
-Overview
+> Overview
 
 Arch Linux provides netcfg for network management. netcfg supports wired
 connections on desktops and servers, as well as wireless setups and

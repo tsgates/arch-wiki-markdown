@@ -307,7 +307,7 @@ As you can see, some of the stuff Just Works and some of the stuff
 sort. I used Compiz keybindings deal with the things in the middle and
 to compensate for the things that won't ever work.
 
-Keybindings
+> Keybindings
 
 Keys
 

@@ -1,11 +1,11 @@
 Chiliproject
 ============
 
-Summary
+> Summary
 
 How to install and configure Chiliproject
 
-Related
+> Related
 
 Redmine
 

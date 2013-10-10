@@ -10,7 +10,7 @@ WeeChat
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 WeeChat is a highly extendable and feature rich IRC Client currently
 under heavy development.

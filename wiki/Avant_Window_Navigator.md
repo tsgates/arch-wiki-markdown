@@ -1,12 +1,12 @@
 Avant Window Navigator
 ======================
 
-Summary
+> Summary
 
 This article discusses how to install and use Avant Window Navigator
 (AWN).
 
-Related
+> Related
 
 GNOME
 

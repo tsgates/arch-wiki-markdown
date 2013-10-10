@@ -1,14 +1,14 @@
 Enlightenment
 =============
 
-Summary
+> Summary
 
 The Enlightenment project provides useful libraries, a graphical
 environment and other applications as well as development tools for
 creating such applications. This article covers its installation,
 configuration, and troubleshooting.
 
-Overview
+> Overview
 
 The Xorg project provides an open source implementation of the X Window
 System – the foundation for a graphical user interface. Desktop

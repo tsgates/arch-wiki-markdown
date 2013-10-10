@@ -1,11 +1,11 @@
 ATI
 ===
 
-Summary
+> Summary
 
 An overview of the open source ATI/AMD video card driver.
 
-Related
+> Related
 
 AMD Catalyst
 

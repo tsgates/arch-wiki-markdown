@@ -1,12 +1,12 @@
 Tmsu
 ====
 
-Summary
+> Summary
 
 tmsu allows to tag files and folders and to categorise these by a label
 structure rather than a hierarchical file system structure.
 
-Related
+> Related
 
 Beagle
 

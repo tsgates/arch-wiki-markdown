@@ -1,12 +1,12 @@
 Getting Involved
 ================
 
-Summary
+> Summary
 
 This article describes how both new and experienced Arch users can
 contribute to the community. Note that this is not an exhaustive list.
 
-Related
+> Related
 
 Arch User Repository
 

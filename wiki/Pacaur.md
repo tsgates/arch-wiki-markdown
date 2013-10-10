@@ -1,11 +1,11 @@
 Pacaur
 ======
 
-Summary
+> Summary
 
 How to install and use pacaur.
 
-Related
+> Related
 
 AUR Helpers
 

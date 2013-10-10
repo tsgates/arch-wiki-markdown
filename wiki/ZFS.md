@@ -1,12 +1,12 @@
 ZFS
 ===
 
-Summary
+> Summary
 
 This page provides basic guidelines for installing the native ZFS Linux
 kernel module.
 
-Related
+> Related
 
 Installing Arch Linux on ZFS
 

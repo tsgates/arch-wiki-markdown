@@ -1,7 +1,7 @@
 Software RAID and LVM
 =====================
 
-Summary
+> Summary
 
 This article will provide an example of how to install and configure
 Arch Linux with a software RAID or Logical Volume Manager (LVM).
@@ -10,7 +10,7 @@ Required software
 
 [ Software]
 
-Related
+> Related
 
 RAID
 

@@ -12,12 +12,12 @@ Classroom
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 This article gives information on using and contributing to Arch
 Classroom, an Arch User p2p knowledge sharing project.
 
-Related
+> Related
 
 Ubuntu Classroom
 

@@ -1,7 +1,7 @@
 Xfce
 ====
 
-Summary
+> Summary
 
 Xfce is a lightweight desktop environment for Unix-like operating
 systems. It aims to be fast and lightweight, while still being visually
@@ -10,7 +10,7 @@ configuration, and troubleshooting.
 
 Xfce uses the GTK+ toolkit.
 
-Overview
+> Overview
 
 The Xorg project provides an open source implementation of the X Window
 System – the foundation for a graphical user interface. Desktop
@@ -20,7 +20,7 @@ alternative and novel environments, and may be used standalone to
 conserve system resources. Display managers provide a graphical login
 prompt.
 
-Related
+> Related
 
 Thunar
 
@@ -207,7 +207,7 @@ Example:
 
     exec startxfce4
 
-Note:
+> Note:
 
 -   In case you are wondering, dbus-launch will be launched by the
     xinitrc.d code at the beginning of the file. dbus-launch starts a

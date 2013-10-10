@@ -1,12 +1,12 @@
 Openbox
 =======
 
-Summary
+> Summary
 
 A comprehensive guide on the installation and use of the Openbox window
 manager.
 
-Overview
+> Overview
 
 The Xorg project provides an open source implementation of the X Window
 System – the foundation for a graphical user interface. Desktop

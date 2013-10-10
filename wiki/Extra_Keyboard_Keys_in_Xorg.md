@@ -1,12 +1,12 @@
 Extra Keyboard Keys in Xorg
 ===========================
 
-Summary
+> Summary
 
 A general overview of how to assign actions to extra keyboard keys in
 Xorg.
 
-Related
+> Related
 
 Xorg
 

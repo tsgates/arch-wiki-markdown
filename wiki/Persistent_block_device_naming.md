@@ -1,7 +1,7 @@
 Persistent block device naming
 ==============================
 
-Summary
+> Summary
 
 An overview of persistent block device naming; the preferred method of
 referencing block devices.

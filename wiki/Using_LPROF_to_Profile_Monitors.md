@@ -13,7 +13,7 @@ Using LPROF to Profile Monitors
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 This article will explain the concept of monitor calibration and
 profiling. It explains the building of lprof color profiler from the

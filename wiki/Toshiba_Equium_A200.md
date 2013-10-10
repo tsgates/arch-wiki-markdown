@@ -107,7 +107,7 @@ If you need WLAN, this laptop is *not* recommended. Not only because
 Linux support is limited, but because the technical decision of having
 an internal USB device is very questionable.
 
-Edit:
+> Edit:
 
 This wireless card, rtl8187b, has now got native support in kernel
 2.6.27 and upwards. It works out-of-the-box! (rtl8187 driver)
@@ -130,7 +130,7 @@ even after being shut down. Some reports have indicated that this does
 not happen when the machine is shut down from Vista. Needs
 investigation.
 
-Edit:
+> Edit:
 
 This has been fixed with a kernel update (2.6.24) not 100% which kernel
 fixed it.

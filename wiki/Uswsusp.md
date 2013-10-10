@@ -1,12 +1,12 @@
 Uswsusp
 =======
 
-Summary
+> Summary
 
 Describes installing, configuring and using uswsusp, a set of userspace
 tools used for suspending to disk and/or to RAM.
 
-Related
+> Related
 
 Suspending to RAM with hibernate-script
 

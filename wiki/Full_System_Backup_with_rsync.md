@@ -1,13 +1,13 @@
 Full System Backup with rsync
 =============================
 
-Summary
+> Summary
 
 Instructions on backing up the root tree, creating a bootable copy of
 your system, or for transferring your system to a new drive or
 partition.
 
-Related
+> Related
 
 Backup Programs
 

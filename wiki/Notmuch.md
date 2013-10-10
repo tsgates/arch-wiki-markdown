@@ -1,11 +1,11 @@
 Notmuch
 =======
 
-Summary
+> Summary
 
 This article explains how to install and configure notmuch.
 
-Related
+> Related
 
 mutt
 

@@ -1,11 +1,11 @@
 Sudo
 ====
 
-Summary
+> Summary
 
 An overview of the popular privilege escalation utility.
 
-Overview
+> Overview
 
 Users and groups are used on GNU/Linux for access control. The superuser
 (root) has complete access to the operating system and its

@@ -11,13 +11,13 @@ Fan Speed Control
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 Fancontrol, part of lm_sensors, can be used to control the speed and
 sound of CPU/case fans. This article covers configuration/setup of the
 utility
 
-Related
+> Related
 
 Lm_sensors
 

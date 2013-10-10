@@ -1,11 +1,11 @@
 VirtualBox Extras
 =================
 
-Summary
+> Summary
 
 Describes some additional functionality of VirtualBox.
 
-Related
+> Related
 
 VirtualBox - Main VirtualBox article.
 

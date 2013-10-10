@@ -1,11 +1,11 @@
 Modprobed db
 ============
 
-Summary
+> Summary
 
 Describes the installation and usage of modprobe db.
 
-Related
+> Related
 
 Kernels
 

@@ -15,11 +15,11 @@ the AUR. hal-info is a dependency of hal and should be installed first.
 
 Once you have confirmed that hal is installed, start the daemon.
 
-sysvinit:
+> sysvinit:
 
     # /etc/rc.d/hal start
 
-systemd:
+> systemd:
 
     # systemctl start hal.service
 

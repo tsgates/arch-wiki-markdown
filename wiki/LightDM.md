@@ -1,11 +1,11 @@
 LightDM
 =======
 
-Summary
+> Summary
 
 Provides an overview and setup of the Light Display Manager.
 
-Related
+> Related
 
 Display Manager
 

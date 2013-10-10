@@ -1,11 +1,11 @@
 DVD Ripping
 ===========
 
-Summary
+> Summary
 
 Discusses various methods and tools used for copying DVDs.
 
-Series
+> Series
 
 DVD Playing
 
@@ -13,7 +13,7 @@ DVD Ripping
 
 DVD Burning
 
-Related
+> Related
 
 dvdbackup
 

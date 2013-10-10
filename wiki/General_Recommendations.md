@@ -1,12 +1,12 @@
 General Recommendations
 =======================
 
-Summary
+> Summary
 
 An annotated index of recommended readings. Covers a wide variety of
 subjects relevant to both new and experienced users alike.
 
-Related
+> Related
 
 FAQ
 

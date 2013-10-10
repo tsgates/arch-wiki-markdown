@@ -1,11 +1,11 @@
 Automatic login to virtual console
 ==================================
 
-Summary
+> Summary
 
 Describes how to automatically log in to a virtual console.
 
-Related
+> Related
 
 Display Manager
 

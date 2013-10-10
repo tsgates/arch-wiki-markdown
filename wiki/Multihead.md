@@ -1,12 +1,12 @@
 Multihead
 =========
 
-Summary
+> Summary
 
 This article offers some hints and tips to get the most out of Arch
 Linux on a computer with more than one attached monitor.
 
-Related
+> Related
 
 Xorg
 

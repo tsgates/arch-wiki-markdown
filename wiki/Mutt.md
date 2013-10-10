@@ -1,11 +1,11 @@
 Mutt
 ====
 
-Summary
+> Summary
 
 A guide on configuring and using Mutt.
 
-Related
+> Related
 
 fdm
 
@@ -120,7 +120,7 @@ as offlineimap and msmtp.
 
 Or (if using POP3) getmail or fdm and procmail.
 
-Note:
+> Note:
 
 -   If you just need the authentication methods LOGIN and PLAIN, these
     are satisfied with the dependency libsasl

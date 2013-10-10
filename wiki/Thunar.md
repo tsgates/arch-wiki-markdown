@@ -1,11 +1,11 @@
 Thunar
 ======
 
-Summary
+> Summary
 
 This article discusses every aspect of the file manager named Thunar.
 
-Related
+> Related
 
 Xfce: Thunar is installed with a nominal installation of xfce4.
 

@@ -1,12 +1,12 @@
 Libnotify
 =========
 
-Summary
+> Summary
 
 This article discusses how to install, configure and use libnotify for
 application development.
 
-Related
+> Related
 
 GTK+
 

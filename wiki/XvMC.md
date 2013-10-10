@@ -1,11 +1,11 @@
 XvMC
 ====
 
-Summary
+> Summary
 
 Explains XvMC support in various hardware and software components.
 
-Related
+> Related
 
 VA-API
 

@@ -1,11 +1,11 @@
 X Logical Font Description
 ==========================
 
-Summary
+> Summary
 
 A guide to the core X server font system
 
-Related
+> Related
 
 Fonts
 

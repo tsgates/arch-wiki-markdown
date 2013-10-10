@@ -1,11 +1,11 @@
 Monitorix
 =========
 
-Summary
+> Summary
 
 Installation and configuration of Monitorix.
 
-Related
+> Related
 
 Anything-sync-daemon
 

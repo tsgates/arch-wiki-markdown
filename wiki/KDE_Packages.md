@@ -1,7 +1,7 @@
 KDE Packages
 ============
 
-Summary
+> Summary
 
 An explanation of KDE package groups and meta-packages.
 

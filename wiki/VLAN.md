@@ -5,11 +5,11 @@ Virtual LANs give you the ability to sub-divide a LAN. Linux can accept
 VLAN tagged traffic and presents each VLAN ID as a different network
 interface (eg: eth0.100 for VLAN ID 100)
 
-Summary
+> Summary
 
 This article explains how to configure a VLAN using iproute2 and netcfg
 
-Related
+> Related
 
 Network
 

@@ -1,11 +1,11 @@
 Btrfs
 =====
 
-Summary
+> Summary
 
 Provides an overview and setup of Btrfs on Arch Linux.
 
-Related
+> Related
 
 Installing on Btrfs root
 

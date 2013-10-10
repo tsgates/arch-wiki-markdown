@@ -1,7 +1,7 @@
 Readline
 ========
 
-Summary
+> Summary
 
 Improving readline over its default capabilities.
 
@@ -9,7 +9,7 @@ Important pages
 
 Official site
 
-Related
+> Related
 
 Bash
 

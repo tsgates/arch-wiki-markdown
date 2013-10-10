@@ -1,11 +1,11 @@
 CUPS printer sharing
 ====================
 
-Summary
+> Summary
 
 Setting up printer sharing using CUPS
 
-Related
+> Related
 
 Samba
 

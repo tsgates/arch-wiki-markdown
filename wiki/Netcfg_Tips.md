@@ -1,11 +1,11 @@
 netcfg Tips
 ===========
 
-Summary
+> Summary
 
 Collect of tips and tricks for netcfg.
 
-Resources
+> Resources
 
 netcfg
 

@@ -1,7 +1,7 @@
 Trinity
 =======
 
-Summary
+> Summary
 
 Trinity is a fork of KDE3 that has been updated to work with current
 software and libraries. The stable release is 3.5.13. The development
@@ -11,7 +11,7 @@ Trinity unofficial repositories
 
 Visit http://archlinux.us.to
 
-Related
+> Related
 
 Creating Packages
 

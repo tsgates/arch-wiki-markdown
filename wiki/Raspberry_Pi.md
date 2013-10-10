@@ -1,12 +1,12 @@
 Raspberry Pi
 ============
 
-Summary
+> Summary
 
 Raspberry Pi is a minimalist computer built for the ARMv6 architecture.
 More information about this project and technical specification.
 
-Related
+> Related
 
 Beginners'_Guide
 

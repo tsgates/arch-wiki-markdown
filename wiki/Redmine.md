@@ -1,12 +1,12 @@
 Redmine
 =======
 
-Summary
+> Summary
 
 This page gives guidelines for the installation and configuration of
 Redmine on Archlinux.
 
-Related
+> Related
 
 Ruby on Rails
 

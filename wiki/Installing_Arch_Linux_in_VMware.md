@@ -1,11 +1,11 @@
 Installing Arch Linux in VMware
 ===============================
 
-Summary
+> Summary
 
 Installing Archlinux in VMware: open-vm-tools and configuring Xorg
 
-Related
+> Related
 
 VMware
 

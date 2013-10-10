@@ -1,7 +1,7 @@
 IBM ThinkPad X60s
 =================
 
-Summary
+> Summary
 
 Installation instructions for the IBM ThinkPad X60s
 

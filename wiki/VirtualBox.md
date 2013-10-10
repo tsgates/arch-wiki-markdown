@@ -1,7 +1,7 @@
 VirtualBox
 ==========
 
-Summary
+> Summary
 
 This article is about basic usage of VirtualBox, including running the
 VirtualBox software within an Arch host, and running an Arch guest
@@ -11,7 +11,7 @@ Required software
 
 VirtualBox
 
-Related
+> Related
 
 VirtualBox Extras
 

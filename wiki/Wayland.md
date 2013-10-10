@@ -1,11 +1,11 @@
 Wayland
 =======
 
-Summary
+> Summary
 
 A guide to installing and running the Wayland display server.
 
-Related
+> Related
 
 KMS
 

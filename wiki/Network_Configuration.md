@@ -1,18 +1,18 @@
 Network Configuration
 =====================
 
-Summary
+> Summary
 
 A simple guide for setting up and troubleshooting network.
 
-Overview
+> Overview
 
 Arch Linux provides netcfg for network management. netcfg supports wired
 connections on desktops and servers, as well as wireless setups and
 roaming for mobile users, facilitating easy management of network
 profiles. NetworkManager and Wicd are popular third-party alternatives.
 
-Related
+> Related
 
 Jumbo Frames
 
@@ -161,7 +161,7 @@ To set the hostname, do:
 
 See man 5 hostname and man 1 hostnamectl for details.
 
-Note:
+> Note:
 
 -   hostnamectl supports FQDNs
 -   You no longer need to edit /etc/hosts, systemd will provide host

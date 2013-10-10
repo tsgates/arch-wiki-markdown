@@ -106,7 +106,7 @@ Edit: works with generic kernel as well.(2.6.34 x86_64)
 
 > Video
 
-tested
+> tested
 
 Install xf86-video-intel(tested with this one) or
 xf86-video-intel-newest.
@@ -119,7 +119,7 @@ Works fine, Xorg is running.
 
 > Webcam
 
-tested
+> tested
 
 UDev loads the correct driver. Works just fine with skype. Not sure of
 brands etc here but lsmod shows it is detected
@@ -132,7 +132,7 @@ brands etc here but lsmod shows it is detected
 
 > Audio
 
-tested
+> tested
 
 Typical Intel HD Audio. Just follow ALSA. Works.
 

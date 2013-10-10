@@ -1,11 +1,11 @@
 Community
 =========
 
-Summary
+> Summary
 
 This page deals with the [community] repository.
 
-Related
+> Related
 
 AUR User Guidelines#[community]
 

@@ -1,7 +1,7 @@
 msmtp
 =====
 
-Summary
+> Summary
 
 msmtp configuration and usage hints.
 
@@ -9,7 +9,7 @@ Required software
 
 msmtp
 
-Related
+> Related
 
 mutt
 

@@ -1,11 +1,11 @@
 Kernel Mode Setting
 ===================
 
-Summary
+> Summary
 
 Information about configuring the Kernel Mode Setting method.
 
-Related
+> Related
 
 ATI
 

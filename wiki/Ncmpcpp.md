@@ -1,11 +1,11 @@
 Ncmpcpp
 =======
 
-Summary
+> Summary
 
 Covers installation and usage of ncmpcpp (ncmpc++)
 
-Related
+> Related
 
 mpd - Music Player Daemon
 

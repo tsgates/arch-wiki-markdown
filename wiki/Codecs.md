@@ -1,11 +1,11 @@
 Codecs
 ======
 
-Summary
+> Summary
 
 An overview of codec packages available for Arch Linux.
 
-Related
+> Related
 
 DVD Playing
 

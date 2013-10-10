@@ -1,12 +1,12 @@
 Midori
 ======
 
-Summary
+> Summary
 
 This article contains information about the installation and
 configuration of the Midori browser, as well as various tips and trick.
 
-Related
+> Related
 
 Browser Plugins
 

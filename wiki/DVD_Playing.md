@@ -1,11 +1,11 @@
 DVD Playing
 ===========
 
-Summary
+> Summary
 
 An introduction to playing DVD-Video.
 
-Series
+> Series
 
 DVD Playing
 
@@ -13,7 +13,7 @@ DVD Ripping
 
 DVD Burning
 
-Related
+> Related
 
 Codecs
 

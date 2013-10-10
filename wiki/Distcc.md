@@ -1,14 +1,14 @@
 Distcc
 ======
 
-Summary
+> Summary
 
 distcc is a program that distributes source code among a number of
 distcc-servers allowing many machines to compile one program and thus
 speed up the compilation process. The cool part is you can use it
 together with pacman/srcpac.
 
-Related
+> Related
 
 TORQUE
 

@@ -1,11 +1,11 @@
 systemd
 =======
 
-Summary
+> Summary
 
 Covers how to install and configure systemd.
 
-Related
+> Related
 
 systemd/User
 
@@ -1052,7 +1052,7 @@ simply use:
 
     $ systemd-analyze
 
-Tip:
+> Tip:
 
 -   If you append the timestamp hook to your HOOKS array in
     /etc/mkinitcpio.conf and rebuild your initramfs with

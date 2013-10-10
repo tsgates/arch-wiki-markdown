@@ -1,11 +1,11 @@
 PXE
 ===
 
-Summary
+> Summary
 
 Detailed guide to booting official installation media via PXE.
 
-Related
+> Related
 
 Network Installation Guide
 

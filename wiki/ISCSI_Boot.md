@@ -13,11 +13,11 @@ ISCSI Boot
 
 The actual boot will use an extra drive / usb drive or pxe boot?
 
-Summary
+> Summary
 
 How to install Arch on an iSCSI target.
 
-Related
+> Related
 
 iSCSI Target
 

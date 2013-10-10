@@ -1,11 +1,11 @@
 Laptop Mode Tools
 =================
 
-Summary
+> Summary
 
 Overview of the Laptop Mode Tools power management suite for notebooks.
 
-Related
+> Related
 
 acpid
 
@@ -17,7 +17,7 @@ Laptop
 
 Powertop
 
-Resources
+> Resources
 
 Laptop Mode Tools
 

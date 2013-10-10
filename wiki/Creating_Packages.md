@@ -1,13 +1,13 @@
 Creating Packages
 =================
 
-Summary
+> Summary
 
 This article covers technical knowledge, required to create packages for
 submission in AUR. For instructions regarding existing rules and ways to
 improve package quality see Arch Packaging Standards.
 
-Related
+> Related
 
 Arch Build System
 

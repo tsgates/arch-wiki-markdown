@@ -1,11 +1,11 @@
 Extra Keyboard Keys in Console
 ==============================
 
-Summary
+> Summary
 
 A general overview of how to assign actions to extra keyboard keys.
 
-Related
+> Related
 
 Xorg
 

@@ -1,12 +1,12 @@
 Swap
 ====
 
-Summary
+> Summary
 
 An introduction to swap space and paging on GNU/Linux. Covers creation
 and activation of swap partitions and swap files.
 
-Related
+> Related
 
 fstab
 

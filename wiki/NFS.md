@@ -1,12 +1,12 @@
 NFS
 ===
 
-Summary
+> Summary
 
 Article covers configuration of NFSv4 which is an open standard network
 file sharing protocol.
 
-Related
+> Related
 
 NFS Troubleshooting - Dedicated article for common problems and
 solutions.

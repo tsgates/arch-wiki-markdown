@@ -1,11 +1,11 @@
 netcfg Troubleshooting
 ======================
 
-Summary
+> Summary
 
 Collection of troubleshooting for netcfg.
 
-Resources
+> Resources
 
 netcfg
 

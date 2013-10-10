@@ -1,14 +1,14 @@
 Desktop Environment
 ===================
 
-Summary
+> Summary
 
 In graphical computing, a desktop environment (DE) commonly refers to a
 style of graphical user interface (GUI) derived from the desktop
 metaphor that is seen on most modern personal computers. This article
 provides a general overview of popular desktop environments.
 
-Overview
+> Overview
 
 The Xorg project provides an open source implementation of the X Window
 System – the foundation for a graphical user interface. Desktop
@@ -18,7 +18,7 @@ alternative and novel environments, and may be used standalone to
 conserve system resources. Display managers provide a graphical login
 prompt.
 
-Resources
+> Resources
 
 Wikipedia:Desktop environment
 

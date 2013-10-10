@@ -1,11 +1,11 @@
 MEncoder
 ========
 
-Summary
+> Summary
 
 An overview of the video encoding/decoding tool provided by MPlayer.
 
-Related
+> Related
 
 DVD Ripping
 

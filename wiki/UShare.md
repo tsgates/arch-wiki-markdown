@@ -1,11 +1,11 @@
 uShare
 ======
 
-Summary
+> Summary
 
 An introduction to the uShare UPnP Media Server developed by GeeXboX.
 
-Related
+> Related
 
 Streaming media
 

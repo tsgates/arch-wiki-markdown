@@ -1,7 +1,7 @@
 Lenovo ThinkPad X120e
 =====================
 
-Summary
+> Summary
 
 Installation instructions for the Lenovo ThinkPad X120e
 

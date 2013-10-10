@@ -1,12 +1,12 @@
 Kernels
 =======
 
-Summary
+> Summary
 
 This article discusses kernels in Arch, kernel patches and kernel
 compilation.
 
-Related
+> Related
 
 Kernel modules
 

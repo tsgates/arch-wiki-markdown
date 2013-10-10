@@ -12,13 +12,13 @@ Translation Status：This article is a localized version of PKGBUILD.
 Last translation date: 9 November 2012‎. Click ID this link to check
 English page changes after translation.
 
-Summary
+> Summary
 
 PKGBUILD jest skryptem który opisuje jak skompilować oprogramowanie i
 zbudować pakiet. Poniższy artykuł wyjaśnia znaczenie zmiennych PKGBUILDa
 podczas tworzenia pakietów.
 
-Przegląd
+> Przegląd
 
 Packages in Arch Linux are built using makepkg and a custom build script
 for each package (known as a PKGBUILD). Once packaged, software can be
@@ -26,7 +26,7 @@ installed and managed with pacman. PKGBUILDs for software in the
 official repositories are available from the ABS tree; thousands more
 are available from the (unsupported) Arch User Repository.
 
-Powiązane
+> Powiązane
 
 Arch Packaging Standards
 
@@ -36,7 +36,7 @@ Custom local repository
 
 pacman Tips
 
-Resources
+> Resources
 
 PKGBUILD(5) Strona Man
 

@@ -150,7 +150,7 @@ output file extenstion (.mkv):
 
     ffmpeg -i Transformers.3.Dark.of.the.Moon.VOB -acodec libvo-aacenc -ab 256k -ar 96000 -vcodec libx264 -pass 2 -preset veryslow -threads 0 -b 3000k -x264opts frameref=15:fast_pskip=0 Transformers.3.Dark.of.the.Moon.mkv
 
-Tips
+> Tips
 
 If you receive Unknown encoder 'libvo-aacenc' error (given the fact that
 your ffmpeg is compiled with libvo-aacenc enabled), you may want to try

@@ -1,11 +1,11 @@
 dvdbackup
 =========
 
-Summary
+> Summary
 
 An introduction to the dvdbackup utility, with examples.
 
-Related
+> Related
 
 DVD
 

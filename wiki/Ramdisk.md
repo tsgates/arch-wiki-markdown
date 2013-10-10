@@ -55,7 +55,7 @@ The files that have been edited are /etc/fstab, /etc/rc.local, and
 Portions of the files not relevant to the topic at hand have been
 removed to save space
 
-/etc/fstab:
+> /etc/fstab:
 
     none        /tmp         ramfs   defaults              0 0
     none        /mnt/ramdisk ramfs   defaults              0 0

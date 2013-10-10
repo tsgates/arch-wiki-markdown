@@ -1,7 +1,7 @@
 GTK+
 ====
 
-Summary
+> Summary
 
 This articles details theme configuration of GTK+ applications. GTK+
 (GIMP Toolkit) is a cross-platform widget toolkit for creating graphical
@@ -9,7 +9,7 @@ user interfaces. This article will explore the tools used to configure
 the GTK+ theme, style, icon, font and font size, and also detail manual
 configuration.
 
-Related
+> Related
 
 Uniform Look for Qt and GTK Applications
 

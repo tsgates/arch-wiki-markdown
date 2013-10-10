@@ -1,12 +1,12 @@
 NVIDIA
 ======
 
-Summary
+> Summary
 
 Information on installing, configuring and troubleshooting the
 proprietary NVIDIA Drivers.
 
-Related
+> Related
 
 Nouveau
 

@@ -1,11 +1,11 @@
 Python
 ======
 
-Summary
+> Summary
 
 This article explains how to install and configure Python.
 
-Related
+> Related
 
 Python Package Guidelines
 

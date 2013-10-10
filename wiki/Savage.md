@@ -1,12 +1,12 @@
 Savage
 ======
 
-Summary
+> Summary
 
 This article describes the installation of the Xorg 2D acceleration
 graphics driver for Savage video chipsets.
 
-Related
+> Related
 
 Xorg
 

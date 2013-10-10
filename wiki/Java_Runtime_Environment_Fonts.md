@@ -1,12 +1,12 @@
 Java Runtime Environment Fonts
 ==============================
 
-Summary
+> Summary
 
 Instructions are given to improve the display of fonts in Java
 applications when using Oracle's Java Runtime Environment
 
-Related
+> Related
 
 Fonts: Information on adding fonts and font recommendations
 

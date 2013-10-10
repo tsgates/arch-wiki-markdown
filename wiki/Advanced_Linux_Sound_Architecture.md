@@ -11,11 +11,11 @@ the kernel drivers.
 Note:For an alternative sound environment, see the Open Sound System
 page.
 
-Summary
+> Summary
 
 Using, configuring and troubleshooting ALSA.
 
-Related
+> Related
 
 Sound system
 
@@ -158,7 +158,7 @@ a channel with Space.
 
 Leave alsamixer by pressing Esc.
 
-Note:
+> Note:
 
 -   Some cards need to have digital output muted/turned off in order to
     hear analog sound. For the Soundblaster Audigy LS mute the IEC958

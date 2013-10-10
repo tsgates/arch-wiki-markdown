@@ -1,13 +1,13 @@
 Direct Modem Connection
 =======================
 
-Summary
+> Summary
 
 This article describes how one can connect directly to the Internet from
 an Arch Linux box using an internal modem or external modem in bridge
 mode.
 
-Related
+> Related
 
 Most users of external modems or those behind routers should consult the
 Configuring Network article instead.

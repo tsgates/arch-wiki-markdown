@@ -1,12 +1,12 @@
 xinitrc
 =======
 
-Summary
+> Summary
 
 An overview of the primary configuration file for the xinit (startx)
 program.
 
-Related
+> Related
 
 Display Manager
 

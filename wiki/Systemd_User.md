@@ -1,11 +1,11 @@
 systemd/User
 ============
 
-Summary
+> Summary
 
 Covers how to set up systemd user sessions.
 
-Related
+> Related
 
 systemd
 

@@ -1,12 +1,12 @@
 Polipo
 ======
 
-Summary
+> Summary
 
 Polipo is a light weight http proxy server for your small network.
 Polipo caches web data.
 
-Related
+> Related
 
 Squid
 

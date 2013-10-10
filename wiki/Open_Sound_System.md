@@ -97,7 +97,7 @@ Sound Architecture.
 -   Support for suspend.
 -   Better support for jack detection.
 
-Note:
+> Note:
 
 -   OSS has experimental output support for USB audio devices, but no
     input.

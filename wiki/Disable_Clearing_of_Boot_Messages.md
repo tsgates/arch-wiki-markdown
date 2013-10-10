@@ -1,11 +1,11 @@
 Disable Clearing of Boot Messages
 =================================
 
-Summary
+> Summary
 
 Preventing the boot sequence printout from disappearing.
 
-Related
+> Related
 
 Arch Boot Process
 

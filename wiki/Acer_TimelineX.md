@@ -306,7 +306,7 @@ of each of your network interfaces to a certain interface name:
     SUBSYSTEM=="net", ATTR{address}=="aa:bb:cc:dd:ee:ff", NAME="eth0"
     SUBSYSTEM=="net", ATTR{address}=="ff:ee:dd:cc:bb:aa", NAME="wlan0"
 
-Where:
+> Where:
 
 -   "eth0" is the name of LAN interface.
 -   "wlan0" is the name of WLAN interface.

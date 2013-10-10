@@ -1,7 +1,7 @@
 PKGBUILD
 ========
 
-Summary
+> Summary
 
 This article provides an explanation of PKGBUILD variables used when
 creating packages. A PKGBUILD is a script that describes how software is
@@ -9,7 +9,7 @@ to be compiled and packaged. Writing installation functions and general
 packaging information is covered in Creating Packages and other package
 development articles
 
-Overview
+> Overview
 
 Packages in Arch Linux are built using makepkg and a custom build script
 for each package (known as a PKGBUILD). Once packaged, software can be
@@ -17,7 +17,7 @@ installed and managed with pacman. PKGBUILDs for software in the
 official repositories are available from the ABS tree; thousands more
 are available from the (unsupported) Arch User Repository.
 
-Related
+> Related
 
 Arch Packaging Standards
 
@@ -29,7 +29,7 @@ pacman Tips
 
 PKGBUILD Templates
 
-Resources
+> Resources
 
 PKGBUILD(5) Manual Page
 

@@ -1,14 +1,14 @@
 Arch User Repository
 ====================
 
-Summary
+> Summary
 
 The Arch User Repository is a collection of user-submitted PKGBUILDs
 that supplement software available from the official repositories. This
 article describes how to build unsupported software packages from the
 AUR.
 
-Overview
+> Overview
 
 Packages in Arch Linux are built using makepkg and a custom build script
 for each package (known as a PKGBUILD). Once packaged, software can be
@@ -16,7 +16,7 @@ installed and managed with pacman. PKGBUILDs for software in the
 official repositories are available from the ABS tree; thousands more
 are available from the (unsupported) Arch User Repository.
 
-Related
+> Related
 
 AUR Helpers
 
@@ -24,7 +24,7 @@ AurJson
 
 AUR Trusted User Guidelines
 
-Resources
+> Resources
 
 AUR Web Interface
 

@@ -1,12 +1,12 @@
 iPod
 ====
 
-Summary
+> Summary
 
 The purpose of this article is to demonstrate the use of an
 iPod/idevices under Arch Linux.
 
-Related
+> Related
 
 Audiobook
 

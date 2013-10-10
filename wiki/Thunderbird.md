@@ -1,14 +1,14 @@
 Thunderbird
 ===========
 
-Summary
+> Summary
 
 This article discusses the installation and configuration of the e-mail
 client, Mozilla Thunderbird. It also provides information about several
 popular add-ons and extensions to the program, including EnigMail,
 Lightning, and WebMail.
 
-Related
+> Related
 
 Thunderbird Export URLs
 

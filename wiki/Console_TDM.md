@@ -1,7 +1,7 @@
 Console TDM
 ===========
 
-Summary
+> Summary
 
 Describes installing, configuring and using Console TDM, a tiny
 extension for Xorg-xinit.

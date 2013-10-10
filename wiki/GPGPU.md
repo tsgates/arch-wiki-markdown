@@ -10,12 +10,12 @@ GPGPU
                            little bit. (Discuss)    
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 Installation and usage of OpenCL and CUDA, the two major Linux GPGPU
 frameworks
 
-Related
+> Related
 
 Catalyst
 

@@ -1,13 +1,13 @@
 Users and Groups
 ================
 
-Summary
+> Summary
 
 This article describes how to manage user and group accounts. Whilst
 certain desktop environments provide graphical user/group management
 tools, they are not discussed here.
 
-Overview
+> Overview
 
 Users and groups are used on GNU/Linux for access control. The superuser
 (root) has complete access to the operating system and its
@@ -15,7 +15,7 @@ configuration; it is intended for administrative use only. Unprivileged
 users can use the su and sudo programs for controlled privilege
 escalation.
 
-Related
+> Related
 
 DeveloperWiki:UID / GID Database
 

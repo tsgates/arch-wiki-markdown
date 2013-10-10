@@ -1,11 +1,11 @@
 Chromium Tips and Tweaks
 ========================
 
-Summary
+> Summary
 
 Tips and Tweaks for Chromium are captured in this article.
 
-Related
+> Related
 
 Chromium
 

@@ -1,12 +1,12 @@
 Add new partitions to an existing system
 ========================================
 
-Summary
+> Summary
 
 This article discusses the process of changing partitions in an existing
 environment.
 
-Related
+> Related
 
 Partitioning Hard Disks: Basic introduction to partitioning on Arch
 Linux on the Beginner's Guide.

@@ -1,12 +1,12 @@
 Font Configuration
 ==================
 
-Summary
+> Summary
 
 An overview of font configuration options and various techniques for
 improving the readability of fonts
 
-Related
+> Related
 
 Fonts: Information on adding fonts and font recommendations
 

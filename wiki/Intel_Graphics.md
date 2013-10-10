@@ -1,11 +1,11 @@
 Intel Graphics
 ==============
 
-Summary
+> Summary
 
 Information on Intel graphics cards/chipsets and the intel video driver.
 
-Related
+> Related
 
 Intel GMA3600
 

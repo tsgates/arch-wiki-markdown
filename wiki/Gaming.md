@@ -1,12 +1,12 @@
 Gaming
 ======
 
-Summary
+> Summary
 
 Provides information about running games and related system
 configuration tips.
 
-Related
+> Related
 
 List of Applications/Games
 

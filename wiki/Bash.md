@@ -1,11 +1,11 @@
 Bash
 ====
 
-Summary
+> Summary
 
 Discussing and improving Bash's capabilities.
 
-Related
+> Related
 
 Readline
 

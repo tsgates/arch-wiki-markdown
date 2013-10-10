@@ -1,12 +1,12 @@
 Virtual Private Server
 ======================
 
-Summary
+> Summary
 
 This article discusses the use of Arch Linux on Virtual Private Servers,
 and includes some fixes and installation instructions specific to VPSes.
 
-Related
+> Related
 
 Comprehensive Server Guide
 

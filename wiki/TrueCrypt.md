@@ -1,11 +1,11 @@
 TrueCrypt
 =========
 
-Summary
+> Summary
 
 Setup and usage of TrueCrypt.
 
-Related
+> Related
 
 Disk Encryption
 

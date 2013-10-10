@@ -1,12 +1,12 @@
 MS Fonts
 ========
 
-Summary
+> Summary
 
 Installing TrueType Microsoft fonts and emulating Windows' font
 rendering
 
-Related
+> Related
 
 Fonts: Information on adding fonts and font recommendations
 

@@ -1,13 +1,13 @@
 Audiobook
 =========
 
-Summary
+> Summary
 
 The purpose of this article is to detail a process to create an iPod
 friendly audiobook from digital media using Linux native tools. It is
 arranged in goal-oriented scenarios.
 
-Related
+> Related
 
 iPod
 

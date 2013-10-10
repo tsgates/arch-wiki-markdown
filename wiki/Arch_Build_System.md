@@ -1,13 +1,13 @@
 Arch Build System
 =================
 
-Summary
+> Summary
 
 The Arch Build System is a ports-like system for building and packaging
 software from source code. This article includes a general overview of
 the ABS followed by detailed usage instructions.
 
-Overview
+> Overview
 
 Packages in Arch Linux are built using makepkg and a custom build script
 for each package (known as a PKGBUILD). Once packaged, software can be
@@ -15,7 +15,7 @@ installed and managed with pacman. PKGBUILDs for software in the
 official repositories are available from the ABS tree; thousands more
 are available from the (unsupported) Arch User Repository.
 
-Related
+> Related
 
 ABS FAQ
 

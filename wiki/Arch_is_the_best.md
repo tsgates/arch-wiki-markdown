@@ -250,7 +250,7 @@ Or using message passing between processes
 
     ." Arch is the best" cr -- kiss way
 
-Fortran95
+> Fortran95
 
     program arch
        print *,"Arch is the best!"
@@ -301,7 +301,7 @@ content.
        </body>
     </html>
 
-Io
+> Io
 
     "Arch is the best!" println
 
@@ -596,11 +596,11 @@ graphical user interfaces.
 Translations
 ------------
 
-Arabic
+> Arabic
 
     ارتش هو الأفضل
 
-Australian
+> Australian
 
     Arch is fair dinkum, mate!
 
@@ -608,15 +608,15 @@ Bahasa Indonesia
 
     Arch terbaik!
 
-Basque
+> Basque
 
     Arch onena da!
 
-Belarusian
+> Belarusian
 
     Арч - самы лепшы!
 
-Bengali
+> Bengali
 
     আর্চ সবচেয়ে ভালো!
 
@@ -624,15 +624,15 @@ Binary ASCII
 
     0100000101110010011000110110100000100000011010010111001100100000011101000110100001100101001000000110001001100101011100110111010000100001
 
-British
+> British
 
     Arch is simply spiffing.
 
-Bulgarian
+> Bulgarian
 
     Арч е най-добрият!
 
-Catalan
+> Catalan
 
     Arch és el millor!
 
@@ -648,11 +648,11 @@ Chinese (Taobao Style - 淘宝体)
 
     Arch，好评哦，亲！
 
-Czech
+> Czech
 
     Arch je nejlepší!
 
-Danish
+> Danish
 
     Arch er bedst!
 
@@ -660,7 +660,7 @@ Desrever (Reversed)
 
     !tseb eht si hcrA
 
-Dutch
+> Dutch
 
     Arch is de beste!
 
@@ -668,31 +668,31 @@ Old English
 
     Arch biþ betst!
 
-Esperanto
+> Esperanto
 
     Arch plejbonas!
 
-Estonian
+> Estonian
 
     Arch on parim!
 
-Finnish
+> Finnish
 
     Arch on paras!
 
-Filipino
+> Filipino
 
     Mabuhay ang Arch!
 
-French
+> French
 
     Arch est le meilleur!
 
-Galician
+> Galician
 
     Arch é o mellor!
 
-German
+> German
 
     Arch ist das Beste!
 
@@ -700,19 +700,19 @@ Ancient Greek
 
     Ἆρχ ἄριστον!
 
-Greek
+> Greek
 
     Το Arch είναι το καλύτερο!
 
-h4x0r
+> h4x0r
 
     Arch 15 7h3 b357!
 
-Hantec
+> Hantec
 
     Arch je nejbetélnější!
 
-Hebrew
+> Hebrew
 
     ארצ' זה הכי אחי!
 
@@ -720,51 +720,51 @@ Hexadecimal ASCII
 
     4172636820697320746865206265737421
 
-Hindi
+> Hindi
 
     आर्ख सब से अच्छा है ।
 
-Hungarian
+> Hungarian
 
     Az Arch a legjobb!
 
-Irish
+> Irish
 
     Arch é is fearr!
 
-Italian
+> Italian
 
     Arch è il migliore!
 
-Japanese
+> Japanese
 
     Archが一番ですよ！
 
-Kazakh
+> Kazakh
 
     Арч - ең жақсы!
 
-Latin
+> Latin
 
     Arch optimus est!
 
-Latvian
+> Latvian
 
     Arch ir labākais!
 
-Lithuanian
+> Lithuanian
 
     Arch yra geriausias!
 
-Marathi
+> Marathi
 
     आर्च सगळ्यात भारी आहे!
 
-Norwegian
+> Norwegian
 
     Arch er best!
 
-Persian
+> Persian
 
     طاق بزرگ است
 
@@ -772,39 +772,39 @@ Pig Latin
 
     Archway isway ethay estbay!
 
-Polish
+> Polish
 
     Arch jest najlepszy!
 
-Portuguese
+> Portuguese
 
     Arch é o melhor!
 
-Québécois
+> Québécois
 
     Arch est le plus meilleure du monde!
 
-Romanian
+> Romanian
 
     Аrch e cel mai bun!
 
-Russian
+> Russian
 
     Арч - лучший!
 
-Serbian
+> Serbian
 
     Arch je najbolji!
 
-Singaporean
+> Singaporean
 
     Arch the best lah!
 
-Slovenian
+> Slovenian
 
     Arch je najboljši!
 
-Spanish
+> Spanish
 
     ¡Arch es el mejor!
 
@@ -812,31 +812,31 @@ Spanish (Argentina) - AKA "Casteshano"
 
     Arch es una mazza!!
 
-Swedish
+> Swedish
 
     Arch är bäst!
 
-Fikonspråket
+> Fikonspråket
 
     Firch Arkon fir äkon fist bäkon
 
-Turkish
+> Turkish
 
     Arch en iyisidir!
 
-Tamil
+> Tamil
 
     ஆர்ச்சே சிறந்தது!
 
-Telugu
+> Telugu
 
     ఆర్చ్ ఉత్తమమైనది!
 
-Ukrainian
+> Ukrainian
 
     Arch є найкращий!
 
-Vietnamese
+> Vietnamese
 
     Arch là tốt nhất!
 
@@ -844,11 +844,11 @@ Morse Code
 
     ..- -... ..- -. - ..-   .. ...   - .... .   -... . ... -
 
-Braille
+> Braille
 
     ⠁⠗⠉⠓⠀⠊⠎⠀⠮⠀⠃⠑⠎⠞⠲
 
-Base64
+> Base64
 
     QXJjaCBpcyB0aGUgYmVzdCEK
 
@@ -856,7 +856,7 @@ URL Encoded
 
     Arch%20is%20the%20best!
 
-ROT13
+> ROT13
 
     Nepu vf gur orfg!
 

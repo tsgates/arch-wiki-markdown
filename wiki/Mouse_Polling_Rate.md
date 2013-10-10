@@ -72,7 +72,7 @@ Compile it with:
 
     gcc -o evhz evhz.c
 
-Note:
+> Note:
 
 If compiling fails with the following message
 

@@ -22,14 +22,14 @@ Usage
 
 First, invoke the i2prouter daemon:
 
-SysV
+> SysV
 
     /etc/rc.d/i2prouter start
 
 (add i2prouter to the DAEMONS array in your /etc/rc.conf to start at
 boot)
 
-systemd
+> systemd
 
     systemctl start i2prouter.service
 

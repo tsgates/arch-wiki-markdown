@@ -1,11 +1,11 @@
 ranger
 ======
 
-Summary
+> Summary
 
 A guide to installing and configuring ranger
 
-Related
+> Related
 
 atool
 

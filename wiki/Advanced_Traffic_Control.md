@@ -10,12 +10,12 @@ Advanced Traffic Control
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 This article gives an introduction to traffic shaping and control by
 using queueing disciplines.
 
-Related
+> Related
 
 After reading this, reading the "Linux Advanced Routing and Traffic
 Control" article is highly recommended

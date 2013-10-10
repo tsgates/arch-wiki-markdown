@@ -1,7 +1,7 @@
 Music Player Daemon
 ===================
 
-Summary
+> Summary
 
 Installation, configuration and basic troubleshooting of MPD.
 

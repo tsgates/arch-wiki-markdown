@@ -21,7 +21,7 @@ FOSDEM
 
 > Attendees
 
-Confirmed
+> Confirmed
 
 -   Dieter Plaetinck (fri,sat,sun)
 -   Roman Kyrylych (fri, sat, sun, mon)

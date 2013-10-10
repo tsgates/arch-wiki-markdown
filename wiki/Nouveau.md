@@ -1,13 +1,13 @@
 Nouveau
 =======
 
-Summary
+> Summary
 
 This article details the installation of the Nouveau Open Source 3D
 acceleration graphics driver for NVIDIA cards. The name of the project
 refers to the fact that "nouveau" means "new" in French.
 
-Related
+> Related
 
 NVIDIA
 

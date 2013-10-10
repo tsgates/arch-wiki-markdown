@@ -1,11 +1,11 @@
 Firefox
 =======
 
-Summary
+> Summary
 
 Installing and troubleshooting the Firefox browser and plugins
 
-Related
+> Related
 
 Browser Plugins
 

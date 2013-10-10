@@ -245,7 +245,7 @@ whitespaces get removed at the end).
 Using the AIF configuration file
 --------------------------------
 
-Note:
+> Note:
 
 If you want to set the current keymap:
 

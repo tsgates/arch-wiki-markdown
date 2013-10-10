@@ -1,7 +1,7 @@
 Lenovo ThinkPad R500
 ====================
 
-Summary
+> Summary
 
 Installation and cofiguration notes for Lenovo ThinkPad R500
 

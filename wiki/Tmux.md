@@ -1,11 +1,11 @@
 Tmux
 ====
 
-Summary
+> Summary
 
 This article explains how to install and configure tmux.
 
-Related
+> Related
 
 GNU Screen
 

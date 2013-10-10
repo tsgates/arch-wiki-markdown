@@ -1,12 +1,12 @@
 Arch Compared to Other Distributions
 ====================================
 
-Summary
+> Summary
 
 A brief comparison of Arch Linux with other popular GNU/Linux
 distributions and BSDs.
 
-Related
+> Related
 
 Arch Linux
 

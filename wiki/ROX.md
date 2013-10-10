@@ -11,7 +11,7 @@ ROX
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 ROX is an attempt to bring some of the good features from RISC OS to
 Unix and Linux. This article covers its installation, configuration, and
@@ -19,7 +19,7 @@ troubleshooting.
 
 ROX uses the GTK+ toolkit.
 
-Overview
+> Overview
 
 The Xorg project provides an open source implementation of the X Window
 System – the foundation for a graphical user interface. Desktop

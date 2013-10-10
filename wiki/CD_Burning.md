@@ -1,11 +1,11 @@
 CD Burning
 ==========
 
-Summary
+> Summary
 
 This document outlines various methods of burning CDs.
 
-Related
+> Related
 
 DVD Burning
 

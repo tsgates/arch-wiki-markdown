@@ -1,7 +1,7 @@
 CDM
 ===
 
-Summary
+> Summary
 
 Describes installing, configuring and using CDM, minimalistic
 replacement for login-managers.

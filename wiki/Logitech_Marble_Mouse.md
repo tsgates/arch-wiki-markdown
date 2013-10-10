@@ -69,7 +69,7 @@ these functions:
   8        Small button left     browser back
   9        Small button right    browser forward
 
-Note:
+> Note:
 
 -   Both large buttons pressed simultaneously creates a middle-click.
 -   †  The simultaneous click is enabled by a configuration directive.
@@ -89,7 +89,7 @@ Note:
   6        Roll ball left        move cursor left
   7        Roll ball right       move cursor right
 
-Note:
+> Note:
 
 -   Cursor motion occurs when no modifier is used.
 -   A modifier used in conjunction with rolling motion may create an
@@ -356,7 +356,7 @@ back event. There is no button to send browser forward.
   8        Small button left  †          wheel-click                        2
   9        Small button right  ‡         wheel-click                        2
 
-Note:
+> Note:
 
 -    Both large buttons pressed simultaneously results in browser back.
 -    Either small button, when clicked, results in middle-click.

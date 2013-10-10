@@ -86,7 +86,7 @@ correct for your system before using these scripts. They were written
 for a German Asus UL30A, with a slightly different set of hardware from
 a UL30Vt.
 
-Bluetooth
+> Bluetooth
 
     #!/bin/sh
     case "$1" in
@@ -103,7 +103,7 @@ Bluetooth
     esac
     exit 0
 
-Brightness
+> Brightness
 
     #!/bin/sh
     case "$1" in
@@ -118,7 +118,7 @@ Brightness
 
 Add acpi_backlight=vendor into your bootloader in kernel parameters.
 
-Ethernet
+> Ethernet
 
     #!/bin/bash
     case "$1" in

@@ -1,18 +1,18 @@
 MacBook Pro 7,1
 ===============
 
-Summary
+> Summary
 
 Details the installation and configuration of Arch Linux on Apple's
 MacBook Pro 7,1
 
-Related
+> Related
 
 MacBook
 
 MacBookPro
 
-MacBook_Pro_7,1
+> MacBook_Pro_7,1
 
 MacBook_Pro_8,1_/_8,2_/_8,3_(2011_Macbook_Pro)
 

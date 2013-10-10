@@ -1,11 +1,11 @@
 CUPS
 ====
 
-Summary
+> Summary
 
 Installing and configuring CUPS
 
-Related
+> Related
 
 CUPS printer sharing
 

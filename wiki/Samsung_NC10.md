@@ -126,7 +126,7 @@ Since alsa 1.0.19 distributed in archlinux extra repository, you do not
 need to manually install alsa driver. Everything is working out of the
 box: onboard microphone and speakers, audio off on earphone plugging.
 
-Troubleshooting :
+> Troubleshooting :
 
 -   If the volume is too low, or lower than in Windows run alsamixer,
     and set "front" to 100%.

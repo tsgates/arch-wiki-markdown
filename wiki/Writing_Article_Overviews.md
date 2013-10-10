@@ -1,14 +1,14 @@
 Writing Article Overviews
 =========================
 
-Summary
+> Summary
 
 This article discusses article overview writing techniques. Article
 overviews are short textual summaries that appear inside a box on the
 right. This article covers some style questions, writing tips, and
 formatting techniques.
 
-Series
+> Series
 
 Writing Short Article Names
 
@@ -18,7 +18,7 @@ Writing Article Introductions
 
 Effective Use of Headers
 
-Related
+> Related
 
 Help:Editing
 

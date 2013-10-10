@@ -11,7 +11,7 @@ with patch linux-3.1-rc3-git1 (August 24, 2011) resulted in successful
 compiling, and installing.
 (uname -a:  Linux Galicja 3.1.0-rc3-git1-ARCHMOD #1 PREEMPT Wed Aug 24 03:08:37 CEST 2011 x86_64 Genuine Intel(R) CPU 575 @ 2.00GHz GenuineIntel GNU/Linux).
 
-Procedures:
+> Procedures:
 
 -   Download the script (See link below procedures).
 

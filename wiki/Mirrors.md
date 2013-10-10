@@ -1,11 +1,11 @@
 Mirrors
 =======
 
-Summary
+> Summary
 
 Updating and managing package mirrors
 
-Related
+> Related
 
 Mirroring
 
@@ -321,7 +321,7 @@ CHINA UNICOM
 
 -   http://mirrors.sohu.com/archlinux/
 
-Cernet
+> Cernet
 
 -   http://ftp.sjtu.edu.cn/archlinux/ - Shanghai Jiaotong University
 -   ftp://ftp.sjtu.edu.cn/archlinux/

@@ -10,7 +10,7 @@ IBM ThinkPad X60
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 Installation instructions for the IBM ThinkPad X60
 

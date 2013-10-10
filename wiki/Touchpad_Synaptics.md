@@ -1,12 +1,12 @@
 Touchpad Synaptics
 ==================
 
-Summary
+> Summary
 
 This article details the installation and configuration of the Synaptics
 input driver in Arch Linux.
 
-Related
+> Related
 
 Xorg
 

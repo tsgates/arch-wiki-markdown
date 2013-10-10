@@ -1,11 +1,11 @@
 XDM
 ===
 
-Summary
+> Summary
 
 XDM is the X Display Manager.
 
-Related
+> Related
 
 Display Manager
 

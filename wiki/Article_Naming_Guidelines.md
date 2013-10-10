@@ -1,12 +1,12 @@
 Article Naming Guidelines
 =========================
 
-Summary
+> Summary
 
 This article discusses effective article naming strategies and
 considerations to ensure readability and improve navigation of the wiki.
 
-Related
+> Related
 
 Help:Editing
 

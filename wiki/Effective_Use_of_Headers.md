@@ -1,12 +1,12 @@
 Effective Use of Headers
 ========================
 
-Summary
+> Summary
 
 This article discusses the use of headers in ArchWiki articles. It gives
 you a detailed overview of techniques and formatting.
 
-Series
+> Series
 
 Writing Short Article Names
 
@@ -16,7 +16,7 @@ Writing Article Introductions
 
 Effective Use of Headers
 
-Related
+> Related
 
 Help:Editing
 

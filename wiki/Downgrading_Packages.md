@@ -1,11 +1,11 @@
 Downgrading Packages
 ====================
 
-Summary
+> Summary
 
 Covers why and how to revert to older versions of packages.
 
-Related
+> Related
 
 Arch Build System
 

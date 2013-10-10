@@ -1,12 +1,12 @@
 Securely wipe disk
 ==================
 
-Summary
+> Summary
 
 Wipe all traces left from (un-)encrypted data and/or prepare for block
 device encryption
 
-Related
+> Related
 
 File Recovery
 
@@ -247,14 +247,14 @@ Dd spin-offs
 Other dd alike programs feature periodical status output like i.e. a
 simple progress bar.
 
-dcfldd
+> dcfldd
 
 dcfldd is an enhanced version of dd with features useful for forensics
 and security. It accepts most of dd's parameters and includes status
 output. The last stable version of dcfldd was released on December 19,
 2006.[1]
 
-ddrescue
+> ddrescue
 
 GNU ddrescue is a data recovery tool. It's capable of ignoring read
 errors what is a useless feature for disk wiping in almost any case. GNU

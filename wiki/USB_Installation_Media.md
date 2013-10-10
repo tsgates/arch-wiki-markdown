@@ -1,13 +1,13 @@
 USB Installation Media
 ======================
 
-Summary
+> Summary
 
 Mutiplatform instructions on creating a bootable USB stick which can be
 used for installing Arch Linux, system maintenance or for recovery
 purposes.
 
-Related
+> Related
 
 CD Burning
 

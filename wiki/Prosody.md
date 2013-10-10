@@ -1,7 +1,7 @@
 Prosody
 =======
 
-Summary
+> Summary
 
 This article discusses how to setup and use Prosody, a lightweight XMPP
 server. It covers installation, configuration, operation, and removal of

@@ -1,11 +1,11 @@
 KDM
 ===
 
-Summary
+> Summary
 
 Provides an overview of the default display manager for the KDE.
 
-Related
+> Related
 
 Display Manager
 

@@ -1,12 +1,12 @@
 Trident
 =======
 
-Summary
+> Summary
 
 This article describes the installation of the Xorg 2D acceleration
 graphics driver and a framebuffer driver for Trident cards.
 
-Related
+> Related
 
 Xorg
 

@@ -1,12 +1,12 @@
 Cuftpd
 ======
 
-Summary
+> Summary
 
 This article discusses the installation and configuration of the cuftpd
 FTP daemon on Arch Linux systems.
 
-Related
+> Related
 
 vsftpd
 

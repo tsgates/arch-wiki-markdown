@@ -1,12 +1,12 @@
 Moving an existing install into (or out of) a virtual machine
 =============================================================
 
-Summary
+> Summary
 
 Instructions on transferring your current install in or out of a virtual
 machine.
 
-Related
+> Related
 
 VirtualBox
 

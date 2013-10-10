@@ -1,12 +1,12 @@
 GRUB Legacy
 ===========
 
-Summary
+> Summary
 
 Covers various aspects of Arch Linux's default bootloader, the GRand
 Unified Bootloader (GRUB).
 
-Overview
+> Overview
 
 In order to boot Arch Linux, a Linux-capable boot loader such as
 GRUB(2), Syslinux, LILO or GRUB Legacy must be installed to the Master
@@ -14,7 +14,7 @@ Boot Record or the GUID Partition Table. The boot loader is responsible
 for loading the kernel and initial ramdisk before initiating the boot
 process.
 
-Related
+> Related
 
 Boot Debugging
 
@@ -545,7 +545,7 @@ shown below:
 
     kernel /vmlinuz-linux root=/dev/sda1 ro vga=869
 
-Note:
+> Note:
 
 -   (8:8:8) is for 24-bit color (24bit is 32bit)
 -   (5:6:5) is for 16-bit color

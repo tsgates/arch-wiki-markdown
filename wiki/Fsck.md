@@ -1,11 +1,11 @@
 fsck
 ====
 
-Summary
+> Summary
 
 Information on how to use fsck.
 
-Related
+> Related
 
 Ext4
 

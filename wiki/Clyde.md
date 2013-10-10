@@ -1,17 +1,17 @@
 Clyde
 =====
 
-Summary
+> Summary
 
 Overview and a comprehensive FAQ for clyde, the package manager
 
-Related
+> Related
 
 pacman
 
 AUR
 
-Resources
+> Resources
 
 Github page (source code)
 

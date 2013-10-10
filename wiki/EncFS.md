@@ -1,11 +1,11 @@
 EncFS
 =====
 
-Summary
+> Summary
 
 Setup and usage of EncFS.
 
-Related
+> Related
 
 Disk Encryption
 

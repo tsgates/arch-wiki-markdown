@@ -1,12 +1,12 @@
 Connman
 =======
 
-Summary
+> Summary
 
 Covers installation and configuration of ConnMan – an alternative to
 NetworkManager.
 
-Related
+> Related
 
 Wireless Setup
 

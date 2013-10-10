@@ -1,11 +1,11 @@
 Network Debugging
 =================
 
-Summary
+> Summary
 
 Basic network debugging
 
-Related
+> Related
 
 VLAN
 

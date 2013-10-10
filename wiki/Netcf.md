@@ -10,15 +10,15 @@ Netcf
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Summary
+> Summary
 
 A guide to installing and understanding netcf abstraction
 
-Related
+> Related
 
 Network
 
-Resources
+> Resources
 
 netcf repository
 

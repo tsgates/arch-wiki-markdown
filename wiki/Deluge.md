@@ -1,12 +1,12 @@
 Deluge
 ======
 
-Summary
+> Summary
 
 A lightweight, full-featured BitTorrent application with a client/server
 model
 
-Related
+> Related
 
 rTorrent
 
