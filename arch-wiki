@@ -3,7 +3,7 @@
 ROOT=/usr/share/doc/arch-wiki-markdown
 LESS="vim -u /usr/share/vim/vim7*/macros/less.vim -n"
 
-if [[ $# == 0 ]]; then
+if [[ $# == 0 || $1 == "-h" || $1 == "--help" ]]; then
   echo "usage: $0 [-g] [-#] query"
   echo "  -g: grep whole content of wiki files"
   echo "      (otherwise, match just title)"
