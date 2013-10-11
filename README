@@ -12,3 +12,5 @@ Search and read Arch Wiki offline in your terminal.
       -#: -1 for first match, -2 for second ...
       see. /usr/share/doc/arch-wiki-markdown
 
+
+See, how it works: [http://asciinema.org/a/5872]
