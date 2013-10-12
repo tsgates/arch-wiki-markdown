@@ -3,6 +3,7 @@ pkgver=20130505
 pkgrel=1
 pkgdesc="Search and read Arch Wiki offline in your terminal"
 arch=('any')
+url="https://github.com/tsgates/arch-wiki-markdown"
 license=('MIT')
 author="Taesoo Kim"
 source=("git+https://github.com/tsgates/arch-wiki-markdown")
