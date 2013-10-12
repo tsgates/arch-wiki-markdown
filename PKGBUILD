@@ -1,5 +1,5 @@
-pkgname=arch-wiki-markdown
-pkgver=20130505
+pkgname=arch-wiki-markdown-git
+pkgver=1.0
 pkgrel=1
 pkgdesc="Search and read Arch Wiki offline in your terminal"
 arch=('any')
