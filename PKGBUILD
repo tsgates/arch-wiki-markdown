@@ -1,11 +1,12 @@
 pkgname=arch-wiki-markdown
-pkgver=$(date +%Y%m%d)
+pkgver=20130505
 pkgrel=1
 pkgdesc="Search and read Arch Wiki offline in your terminal"
 arch=('any')
 license=('MIT')
 author="Taesoo Kim"
 source=("git+https://github.com/tsgates/arch-wiki-markdown")
+depends=('bash' 'vim')
 sha1sums=('SKIP')
 
 package() {
