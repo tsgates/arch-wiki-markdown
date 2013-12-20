@@ -9,8 +9,12 @@ Search and read Arch Wiki offline in your terminal.
     usage: ./arch-wiki [-g] [-#] query
       -g: grep whole content of wiki files
           (otherwise, match just title)
+      -n: disable interactive mode
       -#: -1 for first match, -2 for second ...
       see. /usr/share/doc/arch-wiki-markdown
 
+## Update
+
+Now we have an interactive search mode. You can jump directly to one of the results.
 
 See, how it works: [http://asciinema.org/a/5872]
