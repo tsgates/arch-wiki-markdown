@@ -22,8 +22,8 @@ EOF
 
 # we require input
 if [[ $# == 0 ]]; then
-	usage
-	exit 0
+  usage
+  exit 0
 fi
 
 # parse options
@@ -31,17 +31,17 @@ AWESOME_STYLE=1
 while [[ $# > 0 ]]; do
   case $1 in
     -h|--help)
-    	usage
-    	exit
+      usage
+      exit
     ;;
     -g|--grep)
-		  shift
-		  GLOBAL_SEARCH="$1"
-		  shift
+      shift
+      GLOBAL_SEARCH="$1"
+      shift
     ;;
     -n|--normal)
-    	AWESOME_STYLE=0
-    	shift
+      AWESOME_STYLE=0
+      shift
     ;;
     -l|--list)
       find $ROOT
@@ -94,25 +94,25 @@ else
   # menu
   for ((cnt=0; cnt<${#DOC[*]}; cnt ++)); do
     if [ $AWESOME_STYLE -eq 1  ] ; then 
-   		 echo -n "[$((cnt+1))] "
-   	fi
-   	echo ${DOC[$cnt]}
+       echo -n "[$((cnt+1))] "
+    fi
+    echo ${DOC[$cnt]}
   done
 
   # now ask the user for number
   if [ $AWESOME_STYLE -eq 1 ] ; then
     upto=${#DOC[*]}
-	  echo ; # just for nice formatting
-	  while true; do
-			read -p "Please choose a number from the list [1-$upto|q]: " input
-			case $input in
-				[Qq]*) exit;;
-				[1-$upto]*) 
-					echo "Opening" ${DOC[$input-1]};
-					open $(($input-1))
-					;;
-				*) echo "Invalid option. Use q to quit.";;
-			esac
-		done
-	fi
+    echo ; # just for nice formatting
+    while true; do
+      read -p "Please choose a number from the list [1-$upto|q]: " input
+      case $input in
+        [Qq]*) exit;;
+        [1-$upto]*) 
+          echo "Opening" ${DOC[$input-1]};
+          open $(($input-1))
+          ;;
+        *) echo "Invalid option. Use q to quit.";;
+      esac
+    done
+  fi
 fi

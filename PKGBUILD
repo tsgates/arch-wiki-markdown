@@ -1,6 +1,6 @@
 # Maintainer: Taesoo Kim <tsgatesv@gmail.com>
 pkgname=arch-wiki-markdown-git
-pkgver=ef31ef7
+pkgver=344e8f8
 pkgrel=1
 pkgdesc="Search and read Arch Wiki offline in your terminal"
 arch=('any')
