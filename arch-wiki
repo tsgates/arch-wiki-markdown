@@ -3,19 +3,61 @@
 ROOT=/usr/share/doc/arch-wiki-markdown
 LESS="vim -u /usr/share/vim/vim7*/macros/less.vim -n"
 
-if [[ $# == 0 || $1 == "-h" || $1 == "--help" ]]; then
-  echo "usage: $0 [-g] [-#] query"
-  echo "  -g: grep whole content of wiki files"
-  echo "      (otherwise, match just title)"
-  echo "  -#: -1 for first match, -2 for second ..."
-  echo "  see. $ROOT"
-  exit 0
+usage()
+{
+cat << EOF
+usage: $0 options
+
+This script run the test1 or test2 over a machine.
+
+OPTIONS:
+   -h      Show this message
+   -g      Test type, can be ‘test1′ or ‘test2′
+   -#1     -1 for first match, -2 for second ...
+   -p      Plain text mode. No interactive mode.
+
+See $ROOT
+EOF
+}
+
+# we require input
+if [[ $# == 0 ]]; then
+	usage
+	exit 0
 fi
 
+
+AWESOME_STYLE=1
+
+while [[ $# > 1 ]]
+do
+key="$1"
+
+case $key in
+    -h|--help)
+    	usage
+    	exit
+    ;;
+    -g|--grep)
+		shift
+		GLOBAL_SEARCH="$1"
+		shift
+    ;;
+    -n|--normal)
+    	AWESOME_STYLE=0
+    	shift
+    ;;
+    *)
+            # unknown option
+            break
+    ;;
+esac
+done
+
 # grep
-if [[ $1 == "-g" ]]; then
-  shift
-  (cd $ROOT; grep --color=always -rn "$@" | less -X -F -R)
+if [[ -n $GLOBAL_SEARCH  ]]; then
+  echo "Searching for $GLOBAL_SEARCH"
+ (cd $ROOT; grep --color=always -rn "$GLOBAL_SEARCH" | less -X -F -R)
   exit
 fi
 
@@ -24,7 +66,7 @@ KEY=N/A
 NTH=0
 while [ -n "$1" ]; do
   case $1 in
-    -*) NTH=${1##-}     ;;
+    -*) NTH=${1##-} ; AWESOME_STYLE=0    ;;
     *)  KEY=$1          ;;
   esac
   shift
@@ -34,11 +76,41 @@ done
 NTH=$((NTH - 1))
 DOC=( $(ls $ROOT | grep -i $KEY) )
 
+
 # open document
 if [[ ${#DOC[*]} == 1 ]] || [[ $NTH != -1 ]]; then
   $LESS -c 'set syntax=markdown' $ROOT/${DOC[$NTH]}
 else
+  counter=0
   for d in ${DOC[*]}; do
-    echo $d
+    # check for interactive mode
+    if [ $AWESOME_STYLE -eq 1  ] ; then 
+   		 echo "[$counter]" $d
+		 results[$counter]=$d
+		((counter++))
+   	else
+   		 echo $d
+   	fi
   done
+
+  # now ask the user for number
+  if [ $AWESOME_STYLE -eq 1 ] ; then
+	  echo ; # just for nice formatting
+	  while true; do
+			read -p "Please choose a number from the list [1-9|q]: " input
+			case $input in
+				[Qq]* ) exit;;
+				[1-9]* ) 
+					if [ $input -le 0 ] || [ $input -lt $counter ] ; then
+							echo "Opening" ${results[$input]}; 
+							$LESS -c 'set syntax=markdown' $ROOT/${results[$input]};
+							break
+					else
+						echo "Invalid key."
+					fi
+					;;
+				* ) echo "Invalid option. Use q to quit.";;
+			esac
+		done
+	fi
 fi
