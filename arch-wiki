@@ -47,6 +47,10 @@ while [[ $# > 0 ]]; do
       find $ROOT
       exit 0
     ;;
+    -v|--version)
+      cat $ROOT/version
+      exit 0
+    ;;
     *)
       break
     ;;

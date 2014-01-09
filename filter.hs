@@ -5,6 +5,8 @@ import Text.Pandoc.Walk
 import Control.Monad
 import System.FilePath.Posix
 import Control.Concurrent
+import System.Environment
+import System.FilePath.Posix ((</>))
 
 import ArchWiki (cleanDoc)
 
@@ -38,7 +40,7 @@ fork io = do
   return mvar
 
 dstDir = "wiki/"
-srcDir = "/usr/share/doc/arch-wiki/html/"
+srcDir = "usr/share/doc/arch-wiki/html/"
 
 trimWiki :: (String, String) -> IO ()
 trimWiki (file, title) = do
@@ -50,6 +52,8 @@ trimWiki (file, title) = do
 
 main :: IO ()
 main = do
-  index <- parseIndex $ srcDir ++ "index.html"
-  mvars <- mapM (fork . trimWiki) index
-  mapM_ takeMVar mvars
+    getArgs >>= work
+  where work [root] = do
+          index <- parseIndex $ root </> srcDir </> "index.html"
+          mvars <- mapM (fork . trimWiki) index
+          mapM_ takeMVar mvars
