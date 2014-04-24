@@ -1,0 +1,52 @@
+Gamin
+=====
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with File        
+                           manager functionality.   
+                           Notes: May be too short  
+                           for a separate article.  
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+Gamin is a file and directory monitoring system defined to be a subset
+of the FAM (File Alteration Monitor) system. It is a service provided by
+a library which allows for the detection of modification to a file or
+directory.
+
+Gamin re-implements the FAM specification with inotify. It is newer and
+more actively maintained than FAM, maintains compatibility with FAM and
+can replace it in almost every case. It is a GNOME project, but does not
+have GNOME dependencies.
+
+Installation
+------------
+
+If it is installed, first disable and remove the fam package, ignoring
+dependencies:
+
+    # systemctl disable fam.service
+    # pacman -Rd fam
+
+Install the gamin package.
+
+External links
+--------------
+
+-   FAM, Gamin and inotify
+
+Retrieved from
+"https://wiki.archlinux.org/index.php?title=Gamin&oldid=300571"
+
+Category:
+
+-   File systems
+
+-   This page was last modified on 23 February 2014, at 15:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

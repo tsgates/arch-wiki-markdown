@@ -1,0 +1,204 @@
+Grsecurity/Default kernel configuration
+=======================================
+
+This is the grsecurity config that ships with the AUR package
+linux-grsec. If you do not want to use KMS graphics, you have to set
+CONFIG_GRKERNSEC_IO=n or kernel.grsecurity.disable_priv_io = 1 in
+/etc/sysctl.d/05-grsecurity.conf. Dynamic sysctl configuration is
+disabled with CONFIG_GRKERNSEC_CHROOT_SYSCTL=y or
+kernel.grsecurity.grsec_lock = 1.
+
+    #
+    # Security options
+    #
+
+    #
+    # Grsecurity
+    #
+    CONFIG_TASK_SIZE_MAX_SHIFT=47
+    CONFIG_PAX_USERCOPY_SLABS=y
+    CONFIG_GRKERNSEC=y
+    # CONFIG_GRKERNSEC_CONFIG_AUTO is not set
+    CONFIG_GRKERNSEC_CONFIG_CUSTOM=y
+    CONFIG_GRKERNSEC_PROC_GID=9998
+    CONFIG_GRKERNSEC_TPE_TRUSTED_GID=9999
+    CONFIG_GRKERNSEC_SYMLINKOWN_GID=33
+
+    #
+    # Customize Configuration
+    #
+
+    #
+    # PaX
+    #
+    CONFIG_PAX=y
+
+    #
+    # PaX Control
+    #
+    # CONFIG_PAX_SOFTMODE is not set
+    # CONFIG_PAX_EI_PAX is not set
+    CONFIG_PAX_PT_PAX_FLAGS=y
+    CONFIG_PAX_XATTR_PAX_FLAGS=y
+    # CONFIG_PAX_NO_ACL_FLAGS is not set
+    CONFIG_PAX_HAVE_ACL_FLAGS=y
+    # CONFIG_PAX_HOOK_ACL_FLAGS is not set
+
+    #
+    # Non-executable pages
+    #
+    CONFIG_PAX_NOEXEC=y
+    CONFIG_PAX_PAGEEXEC=y
+    CONFIG_PAX_EMUTRAMP=y
+    CONFIG_PAX_MPROTECT=y
+    # CONFIG_PAX_MPROTECT_COMPAT is not set
+    # CONFIG_PAX_ELFRELOCS is not set
+    CONFIG_PAX_KERNEXEC_PLUGIN_METHOD=""
+
+    #
+    # Address Space Layout Randomization
+    #
+    CONFIG_PAX_ASLR=y
+    CONFIG_PAX_RANDKSTACK=y
+    CONFIG_PAX_RANDUSTACK=y
+    CONFIG_PAX_RANDMMAP=y
+
+    #
+    # Miscellaneous hardening features
+    #
+    CONFIG_PAX_MEMORY_STACKLEAK=y
+    CONFIG_PAX_MEMORY_STRUCTLEAK=y
+    CONFIG_PAX_REFCOUNT=y
+    CONFIG_PAX_USERCOPY=y
+    # CONFIG_PAX_USERCOPY_DEBUG is not set
+    # CONFIG_PAX_SIZE_OVERFLOW is not set
+    # CONFIG_PAX_LATENT_ENTROPY is not set
+
+    #
+    # Memory Protections
+    #
+    CONFIG_GRKERNSEC_KMEM=y
+    CONFIG_GRKERNSEC_IO=y
+    CONFIG_GRKERNSEC_JIT_HARDEN=y
+    CONFIG_GRKERNSEC_PERF_HARDEN=y
+    CONFIG_GRKERNSEC_RAND_THREADSTACK=y
+    CONFIG_GRKERNSEC_PROC_MEMMAP=y
+    CONFIG_GRKERNSEC_BRUTE=y
+    CONFIG_GRKERNSEC_MODHARDEN=y
+    CONFIG_GRKERNSEC_HIDESYM=y
+    CONFIG_GRKERNSEC_KERN_LOCKOUT=y
+
+    #
+    # Role Based Access Control Options
+    #
+    # CONFIG_GRKERNSEC_NO_RBAC is not set
+    CONFIG_GRKERNSEC_ACL_HIDEKERN=y
+    CONFIG_GRKERNSEC_ACL_MAXTRIES=3
+    CONFIG_GRKERNSEC_ACL_TIMEOUT=30
+
+    #
+    # Filesystem Protections
+    #
+    CONFIG_GRKERNSEC_PROC=y
+    # CONFIG_GRKERNSEC_PROC_USER is not set
+    CONFIG_GRKERNSEC_PROC_USERGROUP=y
+    CONFIG_GRKERNSEC_PROC_ADD=y
+    CONFIG_GRKERNSEC_LINK=y
+    CONFIG_GRKERNSEC_SYMLINKOWN=y
+    CONFIG_GRKERNSEC_FIFO=y
+    # CONFIG_GRKERNSEC_SYSFS_RESTRICT is not set
+    CONFIG_GRKERNSEC_ROFS=y
+    CONFIG_GRKERNSEC_DEVICE_SIDECHANNEL=y
+    CONFIG_GRKERNSEC_CHROOT=y
+    CONFIG_GRKERNSEC_CHROOT_MOUNT=y
+    CONFIG_GRKERNSEC_CHROOT_DOUBLE=y
+    CONFIG_GRKERNSEC_CHROOT_PIVOT=y
+    CONFIG_GRKERNSEC_CHROOT_CHDIR=y
+    CONFIG_GRKERNSEC_CHROOT_CHMOD=y
+    CONFIG_GRKERNSEC_CHROOT_FCHDIR=y
+    CONFIG_GRKERNSEC_CHROOT_MKNOD=y
+    CONFIG_GRKERNSEC_CHROOT_SHMAT=y
+    CONFIG_GRKERNSEC_CHROOT_UNIX=y
+    CONFIG_GRKERNSEC_CHROOT_FINDTASK=y
+    CONFIG_GRKERNSEC_CHROOT_NICE=y
+    CONFIG_GRKERNSEC_CHROOT_SYSCTL=y
+    CONFIG_GRKERNSEC_CHROOT_CAPS=y
+    CONFIG_GRKERNSEC_CHROOT_INITRD=y
+
+    #
+    # Kernel Auditing
+    #
+    CONFIG_GRKERNSEC_AUDIT_GROUP=y
+    CONFIG_GRKERNSEC_AUDIT_GID=9994
+    CONFIG_GRKERNSEC_EXECLOG=y
+    CONFIG_GRKERNSEC_RESLOG=y
+    CONFIG_GRKERNSEC_CHROOT_EXECLOG=y
+    CONFIG_GRKERNSEC_AUDIT_PTRACE=y
+    CONFIG_GRKERNSEC_AUDIT_CHDIR=y
+    CONFIG_GRKERNSEC_AUDIT_MOUNT=y
+    CONFIG_GRKERNSEC_SIGNAL=y
+    CONFIG_GRKERNSEC_FORKFAIL=y
+    CONFIG_GRKERNSEC_TIME=y
+    CONFIG_GRKERNSEC_PROC_IPADDR=y
+    CONFIG_GRKERNSEC_RWXMAP_LOG=y
+
+    #
+    # Executable Protections
+    #
+    CONFIG_GRKERNSEC_DMESG=y
+    CONFIG_GRKERNSEC_HARDEN_PTRACE=y
+    CONFIG_GRKERNSEC_PTRACE_READEXEC=y
+    CONFIG_GRKERNSEC_SETXID=y
+    CONFIG_GRKERNSEC_HARDEN_IPC=y
+    CONFIG_GRKERNSEC_TPE=y
+    CONFIG_GRKERNSEC_TPE_ALL=y
+    CONFIG_GRKERNSEC_TPE_INVERT=y
+    CONFIG_GRKERNSEC_TPE_GID=9999
+
+    #
+    # Network Protections
+    #
+    CONFIG_GRKERNSEC_RANDNET=y
+    CONFIG_GRKERNSEC_BLACKHOLE=y
+    CONFIG_GRKERNSEC_NO_SIMULT_CONNECT=y
+    CONFIG_GRKERNSEC_SOCKET=y
+    CONFIG_GRKERNSEC_SOCKET_ALL=y
+    CONFIG_GRKERNSEC_SOCKET_ALL_GID=9995
+    CONFIG_GRKERNSEC_SOCKET_CLIENT=y
+    CONFIG_GRKERNSEC_SOCKET_CLIENT_GID=9996
+    CONFIG_GRKERNSEC_SOCKET_SERVER=y
+    CONFIG_GRKERNSEC_SOCKET_SERVER_GID=9997
+
+    #
+    # Physical Protections
+    #
+    CONFIG_GRKERNSEC_DENYUSB=y
+    # CONFIG_GRKERNSEC_DENYUSB_FORCE is not set
+
+    #
+    # Sysctl Support
+    #
+    CONFIG_GRKERNSEC_SYSCTL=y
+    CONFIG_GRKERNSEC_SYSCTL_DISTRO=y
+    CONFIG_GRKERNSEC_SYSCTL_ON=y
+
+    #
+    # Logging Options
+    #
+    CONFIG_GRKERNSEC_FLOODTIME=10
+    CONFIG_GRKERNSEC_FLOODBURST=6
+
+Retrieved from
+"https://wiki.archlinux.org/index.php?title=Grsecurity/Default_kernel_configuration&oldid=288067"
+
+Categories:
+
+-   Kernel
+-   Security
+
+-   This page was last modified on 15 December 2013, at 14:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

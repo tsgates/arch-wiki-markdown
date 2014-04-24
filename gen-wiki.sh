@@ -11,6 +11,7 @@ ZIP=$OUT/arch-wiki-docs.tar.xz
       mkdir $OUT/pkg
       uz -X $OUT/pkg $ZIP
     fi
-    runhaskell filter.hs $OUT/pkg
+    ghc filter.hs +RTS -N4
+    ./filter $OUT/pkg
     pacman -Si arch-wiki-docs > wiki/version
 })
