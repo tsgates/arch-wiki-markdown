@@ -111,9 +111,13 @@ else
       read -p "Please choose a number from the list [1-$upto|q]: " input
       case $input in
         [Qq]*) exit;;
-        [1-$upto]*) 
-          echo "Opening" ${DOC[$input-1]};
-          open $(($input-1))
+        [0-9]*) 
+          if ((1<=$input && $input<=$upto)) ; then
+			echo "Opening" ${DOC[$input-1]};
+			open $(($input-1))
+          else
+			echo "Invalid number" $input;
+		  fi
           ;;
         *) echo "Invalid option. Use q to quit.";;
       esac
