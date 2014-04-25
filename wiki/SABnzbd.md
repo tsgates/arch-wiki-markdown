@@ -10,29 +10,24 @@ SABnzbd takes over from there, where it will be automatically
 downloaded, verified, repaired, extracted and filed away with zero human
 interaction.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Global configuration                                         |
-|     -   2.2 Local configuration                                          |
-|         -   2.2.1 Running as user without systemd user instance          |
-|                                                                          |
-|     -   2.3 Initial setup                                                |
-|     -   2.4 enabling https                                               |
-|     -   2.5 using a custom port                                          |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 systemd times out when starting SABnzbd with https enabled   |
-|     -   3.2 SABnzbd redirects to localhost on remote access when only    |
-|         https is enabled                                                 |
-|     -   3.3 SABnzbd shows error 503 when trying to access the WEB        |
-|         Interface                                                        |
-|                                                                          |
-| -   4 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Global configuration
+    -   2.2 Local configuration
+        -   2.2.1 Running as user without systemd user instance
+    -   2.3 Initial setup
+    -   2.4 enabling https
+    -   2.5 using a custom port
+-   3 Troubleshooting
+    -   3.1 systemd times out when starting SABnzbd with https enabled
+    -   3.2 SABnzbd redirects to localhost on remote access when only
+        https is enabled
+    -   3.3 SABnzbd shows error 503 when trying to access the WEB
+        Interface
+-   4 External Links
 
 Installation
 ------------
@@ -283,8 +278,15 @@ External Links
 -   SABnzbd wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SABnzbd&oldid=254603"
+"https://wiki.archlinux.org/index.php?title=SABnzbd&oldid=302658"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

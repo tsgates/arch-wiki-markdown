@@ -14,18 +14,15 @@ Note:Don't let the name fool you. Despite being named after AMD's
 PowerNow! technology, it should work on any system supported by the
 cpufreq-userspace governor.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Obsolescent Note                                                   |
-| -   2 Features                                                           |
-| -   3 Installation                                                       |
-|     -   3.1 Prerequisites                                                |
-|     -   3.2 Installation of Powernowd                                    |
-|                                                                          |
-| -   4 Basic Configuration                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Obsolescent Note
+-   2 Features
+-   3 Installation
+    -   3.1 Prerequisites
+    -   3.2 Installation of Powernowd
+-   4 Basic Configuration
 
 > Obsolescent Note
 
@@ -133,3 +130,10 @@ Retrieved from
 Category:
 
 -   Power management
+
+-   This page was last modified on 16 December 2012, at 06:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

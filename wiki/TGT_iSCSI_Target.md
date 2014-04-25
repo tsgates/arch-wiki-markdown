@@ -10,7 +10,7 @@ TGT iSCSI Target
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-> Summary
+Summary help replacing me
 
 Installation and configuration of TGT as iSCSI target
 
@@ -23,17 +23,15 @@ iSCSI Boot
 The TGT SCSI framework can be used for several storage protocols. This
 document describes the usage of TGT as iSCSI target.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Why TGT                                                            |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-| -   4 Example configuration                                              |
-| -   5 Start                                                              |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Why TGT
+-   2 Installation
+-   3 Configuration
+-   4 Example configuration
+-   5 Start
+-   6 See also
 
 Why TGT
 -------
@@ -122,3 +120,10 @@ Retrieved from
 Category:
 
 -   Storage
+
+-   This page was last modified on 13 June 2012, at 16:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

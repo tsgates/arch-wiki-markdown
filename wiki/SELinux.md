@@ -1,19 +1,17 @@
 SELinux
 =======
 
+Related articles
+
+-   Security
+-   AppArmor
+
 Security-Enhanced Linux (SELinux) is a Linux feature that provides a
 variety of security policies, including U.S. Department of Defense style
 mandatory access controls (MAC), through the use of Linux Security
 Modules (LSM) in the Linux kernel. It is not a Linux distribution, but
 rather a set of modifications that can be applied to Unix-like operating
-systems, such as Linux and BSD. Its architecture strives to streamline
-the volume of software charged with security policy enforcement, which
-is closely aligned with the Trusted Computer System Evaluation Criteria
-(TCSEC, referred to as Orange Book) requirement for trusted computing
-base (TCB) minimization (applicable to evaluation classes B3 and A1) but
-is quite unrelated to the least privilege requirement (B2, B3, A1) as is
-often claimed. The germinal concepts underlying SELinux can be traced to
-several earlier projects by the U.S. National Security Agency (NSA). [1]
+systems, such as Linux and BSD.
 
 Running SELinux under a Linux distribution requires three things: An
 SELinux enabled kernel, SELinux Userspace tools and libraries, and
@@ -21,407 +19,512 @@ SELinux Policies (mostly based on the Reference Policy). Some common
 Linux programs will also need to be patched/compiled with SELinux
 features.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-| -   2 Installing needed packages                                         |
-|     -   2.1 Package description                                          |
-|         -   2.1.1 SELinux aware system utils                             |
-|         -   2.1.2 SELinux userspace                                      |
-|         -   2.1.3 SELinux policy                                         |
-|         -   2.1.4 Other SELinux tools                                    |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Changing boot loader configuration                           |
-|     -   3.2 Mounting selinuxfs                                           |
-|     -   3.3 Main SELinux configuration file                              |
-|     -   3.4 Set up PAM                                                   |
-|                                                                          |
-| -   4 Reference policy                                                   |
-|     -   4.1 Installing a precompiled refpolicy                           |
-|     -   4.2 Installing refpolicy from a source package                   |
-|                                                                          |
-| -   5 Post-installation steps                                            |
-| -   6 Useful tools                                                       |
-| -   7 References                                                         |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Prerequisites
--------------
+-   1 Current status in Arch Linux
+-   2 Concepts: Mandatory Access Controls
+-   3 Installing SELinux
+    -   3.1 Package description
+        -   3.1.1 SELinux aware system utilities
+        -   3.1.2 SELinux userspace utilities
+        -   3.1.3 SELinux policy packages
+        -   3.1.4 Other SELinux tools
+    -   3.2 Installation
+        -   3.2.1 Via Unofficial Repository
+        -   3.2.2 Via AUR
+    -   3.3 Changing boot loader configuration
+        -   3.3.1 GRUB
+        -   3.3.2 Syslinux
+    -   3.4 Checking PAM
+    -   3.5 Installing a policy
+-   4 Post-installation steps
+    -   4.1 Swapfiles
+-   5 Working with SELinux
+-   6 Troubleshooting
+    -   6.1 Useful tools
+-   7 See also
 
-Only ext2, ext3, ext4, JFS and XFS filesystems are supported to use
-SELinux.
+Current status in Arch Linux
+----------------------------
 
-Note: This is probably not needed anymore:
+Current status of those elements in Arch Linux:
 
-XFS users should use 512 byte inodes (the default is 256). SELinux uses
-extended attributes for storing security labels in files. XFS stores
-this in the inode, and if the inode is too small, an extra block has to
-be used, which wastes a lot of space and incurs performance penalties.
+  Name                                    Status                                                                Available at
+  --------------------------------------- --------------------------------------------------------------------- --------------------------------------------------------
+  SELinux enabled kernel                  Implemented                                                           Available in 3.13 official Arch kernel
+  SELinux Userspace tools and libraries   Work in progress: https://aur.archlinux.org/packages/?O=0&K=selinux   Work is done at https://github.com/Siosm/siosm-selinux
+  SELinux Policy                          Work in progress, will probably be named selinux-policy-arch          No working repository for now.
 
-     # mkfs.xfs -i size=512 /dev/sda1  (for example)
+Summary of changes in AUR as compared to official core packages:
 
-Installing needed packages
---------------------------
+  Name            Status and comments
+  --------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+  linux-selinux   Deprecated. SELinux support now comes built-in to the official kernel package
+  coreutils       Need a rebuild to link with libselinux
+  cronie          Need a rebuild with --with-selinux flag
+  findutils       Need SELinux patch, already upstream
+  openssh         Need a rebuild with --with-selinux flag
+  pam             Need a rebuild with --enable-selinux flag for Linux-PAM ; Need a patch for pam_unix2, which only removes a function already implemented in a library elsewhere
+  pambase         Configuration changes to add pam_selinux.so
+  psmisc          Need a patch, already upstream. Will be in version 22.21
+  shadow          Need a rebuild with -lselinux and --with-selinux flags
+  sudo            Need a rebuild with --enable-selinux flag
+  systemd         Need a rebuild with --enable-selinux flag
+  util-linux      Need a rebuild with --enable-selinux flag
 
-You should install at least linux-selinux, selinux-pam,
-selinux-usr-policycoreutils and selinux-refpolicy-src from the AUR.
-Installing all SELinux-related packages is recommended.
+All of the other SELinux-related packages may be included without risks.
 
-When installing from the AUR, you can use an AUR helper or download
-tarballs from the AUR manually and build with makepkg. Especially when
-installing for the first time, take extreme caution when replacing the
-pam and coreutils packages, as they are vital to your system. Having the
-Arch Linux live CD or live USB drive ready to use is strongly
-encouraged.
+Concepts: Mandatory Access Controls
+-----------------------------------
 
-Warning: Do not remove pam via sudo, as PAM is what takes care of
-authentication, and you just removed it. Instead first su to root and
-then do:
+Note:This section is meant for beginners. If you know what SELinux does
+and how it works, feel free to skip ahead to the installation.
 
-    pacman -Rdd pam
-    pacman -U selinux-pam
+Before you enable SELinux, it is worth understanding what it does.
+Simply and succinctly, SELinux enforces Mandatory Access Controls (MACs)
+on Linux. In contrast to SELinux, the traditional user/group/rwx
+permissions are a form of Discretionary Access Control (DAC). MACs are
+different from DACs because security policy and its execution are
+completely separated.
 
-Doing pacman -Rdd coreutils, pacman -U selinux-coreutils may also cause
-you troubles, so maybe the best way is to install the selinux-* packages
-from a live CD chroot to your system.
+An example would be the use of the sudo command. When DACs are enforced,
+sudo allows temporary privilege escalation to root, giving the process
+so spawned unrestricted systemwide access. However, when using MACs, if
+the security administrator deems the process to have access only to a
+certain set of files, then no matter what the kind of privilege
+escalation used, unless the security policy itself is changed, the
+process will remain constrained to simply that set of files. So if sudo
+is tried on a machine with SELinux running in order for a process to
+gain access to files its policy does not allow, it will fail.
 
-Warning: Do not install selinux-sysvinit package unless everything is
-set up, as you may end up with an unbootable system. Or, do not reboot
-unless you have everything set up.
+Another set of examples are the traditional (-rwxr-xr-x) type
+permissions given to files. When under DAC, these are user-modifiable.
+However, under MAC, a security administrator can choose to freeze the
+permissions of a certain file by which it would become impossible for
+any user to change these permissions until the policy regarding that
+file is changed.
+
+As you may imagine, this is particularly useful for processes which have
+the potential to be compromised, i.e. web servers and the like. If DACs
+are used, then there is a particularly good chance of havoc being
+wrecked by a compromised program which has access to privilege
+escalation.
+
+For further information, do visit the MAC Wikipedia page.
+
+Installing SELinux
+------------------
 
 > Package description
 
-All SELinux related packages belong to the selinux group. Group
-selinux-system-utilities is used for modified packages from the [core]
-repository. Group selinux-userspace contains packages from SELinux
-Userspace project. Security policies belong to selinux-policies group.
-Other packages are in selinux-extras group.
+All SELinux related packages belong to the selinux group in the AUR as
+well as in Siosm's unofficial repository.
 
-SELinux aware system utils
+SELinux aware system utilities
 
-linux-selinux 
-    SELinux enabled kernel. Compiling custom modules like virtualbox
-    works.
+ coreutils-selinux 
+    Modified coreutils package compiled with SELinux support enabled. It
+    replaces the coreutils package
 
-selinux-coreutils 
-    Modified coreutils package compiled with SELinux support enabled.
+ selinux-flex 
+    Flex version needed only to build checkpolicy. The normal flex
+    package causes a failure in the checkmodule command. It replaces the
+    flex package.
 
-selinux-flex 
-    Flex version needed only to build checkpolicy. Current flex has
-    error causing failure in checkmodule command.
+ pam-selinux and pambase-selinux 
+    PAM package with pam_selinux.so. and the underlying base package.
+    They replace the pam and pambase packages respectively.
 
-selinux-pam 
-    PAM package with pam_selinux.so.
+ systemd-selinux 
+    An SELinux aware version of Systemd. It replaces the systemd
+    package.
 
-selinux-sysvinit 
-    Sysvinit which loads policy at startup. Be careful; it fails if
-    SELinux policy cannot be loaded!
-
-selinux-util-linux 
+ util-linux-selinux 
     Modified util-linux package compiled with SELinux support enabled.
+    It replaces the util-linux package.
 
-selinux-udev made obsolete by selinux-sysvinit 
-    Modified udev package compiled with SELinux support enabled for
-    labeling of files in /dev to work correctly. The udev functionality
-    is now provided by selinux-sysvinit-tools [1] which is part of the
-    selinux-sysvinit splitpackage.
-
-selinux-findutils 
+ findutils-selinux 
     Patched findutils package compiled with SELinux support to make
-    searching of files with specified security context possible.
+    searching of files with specified security context possible. It
+    replaces the findutils package.
 
-selinux-sudo 
-    Modified sudo package compiled with SELinux support which sets
-    security context correctly.
+ sudo-selinux 
+    Modified sudo package compiled with SELinux support which sets the
+    security context correctly. It replaces the sudo package.
 
-selinux-procps 
-    Procps package with SELinux patch based on some Fedora patches.
-
-selinux-psmisc 
+ psmisc-selinux 
     Psmisc package compiled with SELinux support; for example, it adds
-    the -Z option to killall.
+    the -Z option to killall. It replaces the psmisc package.
 
-selinux-shadow 
+ shadow-selinux 
     Shadow package compiled with SELinux support; contains a modified
     /etc/pam.d/login file to set correct security context for user after
-    login.
+    login. It replaces the shadow package.
 
-selinux-cronie 
-    Fedora fork of Vixie cron with SELinux enabled.
+ cronie-selinux 
+    Fedora fork of Vixie cron with SELinux enabled. It replaces the
+    cronie package.
 
-selinux-logrotate 
-    Logrotate package compiled with SELinux support.
+ selinux-logrotate 
+    Logrotate package compiled with SELinux support. It replaces the
+    logrotate package.
 
-selinux-openssh 
+ openssh-selinux 
     OpenSSH package compiled with SELinux support to set security
-    context for user sessions.
+    context for user sessions. It replaces the openssh package.
 
-SELinux userspace
+SELinux userspace utilities
 
-selinux-usr-checkpolicy 
+ checkpolicy 
     Tools to build SELinux policy
 
-selinux-usr-libselinux 
+ libselinux 
     Library for security-aware applications. Python bindings needed for
     semanage and setools now included.
 
-selinux-usr-libsemanage 
+ libsemanage 
     Library for policy management. Python bindings needed for semanage
     and setools now included.
 
-selinux-usr-libsepol 
+ libsepol 
     Library for binary policy manipulation.
 
-selinux-usr-policycoreutils 
+ policycoreutils 
     SELinux core utils such as newrole, setfiles, etc.
 
-selinux-usr-sepolgen 
+ sepolgen 
     A Python library for parsing and modifying policy source.
 
-SELinux policy
+SELinux policy packages
 
-selinux-refpolicy 
+ selinux-refpolicy 
     Precompiled modular-otherways-vanilla Reference policy with headers
     and documentation but without sources.
 
-selinux-refpolicy-src 
+ selinux-refpolicy-src 
     Reference policy sources
 
-selinux-refpolicy-arch 
+ selinux-refpolicy-arch 
     Precompiled modular Reference policy with headers and documentation
     but without sources. Development Arch Linux Refpolicy patch
     included, but for now [February 2011] it only fixes some issues with
     /etc/rc.d/* labeling.
 
+Note:The selinux-refpolicy-arch package was last updated in 2011, hence
+it seems doubtful that it is useful any longer.
+
 Other SELinux tools
 
-selinux-setools 
+ setools 
     CLI and GUI tools to manage SELinux
 
-audit 
-    User space utilities for storing and searching the audit records
-    generated by the audit subsystem in the Linux kernel. SELinux (AVC)
-    will log all denials using audit. Very useful in troubleshooting
-    SELinux. Also audit2allow use log from this program.
+> Installation
+
+Only ext2, ext3, ext4, JFS, XFS and BtrFS filesystems are supported to
+use SELinux. Since the 3.13 kernel update, the options required for
+SELinux to work on any system are enabled in the default kernel
+configuration, hence there should be no problems by default. If you are
+using a custom kernel, please do make sure that Xattr (Extended
+Attributes), CONFIG_AUDIT and CONFIG_SECURITY_SELINUX are enabled in
+your config. (Source: Debian Wiki)
 
 Note:If using proprietary drivers, such as NVIDIA graphics drivers, you
 may need to rebuild them for custom kernels.
 
-Configuration
--------------
+There are two methods to install the requisite SELinux packages.
 
-After the installation of needed packages, you have to set up a few
-things so that SELinux can be used.
+Via Unofficial Repository
+
+Add the siosm-selinux repository into pacman.conf and add Siosm's key.
+
+Then install the following packages by either using the su - command or
+by logging in as root:
+
+-   pambase-selinux
+-   pam-selinux
+-   coreutils-selinux
+-   libsemanage
+-   shadow-selinux
+-   libcgroup
+-   policycoreutils
+-   cronie-selinux
+-   findutils-selinux
+-   selinux-flex
+-   selinux-logrotate
+-   openssh-selinux
+-   psmisc-selinux
+-   python2-ipy
+-   setools
+-   systemd-selinux
+
+Warning:Do not use the sudo command to install these packages. This is
+because pam, which is used for sudo authentication, is being replaced.
+
+Via AUR
+
+A lot of credit for this section must go to jamesthebard for his
+outstanding work and documentation.
+
+The first install needs to be of pambase-selinux and pam-selinux.
+However, do not use yaourt -S selinux-pam selinux-pambase or use sudo
+after building to install the package. This is because pam is what
+handles authentication. Hence, it is best if the packages are built as
+an ordinary user using makepkg and installed by root using a simple
+pacman -U <packagename>.
+
+Next, you need to build and install coreutils-selinux, libsemanage,
+shadow-selinux, libcgroup, policycoreutils, cronie-selinux,
+findutils-selinux, selinux-flex, selinux-logrotate, openssh-selinux and
+psmisc-selinux from the AUR and python2-ipy from the community
+repository.
+
+Tip:The openssh-selinux package needs to be built in a gui environment
+else it fails in the pairs.sh test during compilation.
+
+Now comes the setools package. For this, do make sure that you have the
+jdk7-openjdk package installed, in order for the JAVA_HOME variable to
+be set properly. If it still isn't even after installing the package,
+run:
+
+    $ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk
+
+Next, backup your /etc/sudoers file. Install sudo-selinux, checkpolicy,
+util-linux-selinux and systemd-selinux
 
 > Changing boot loader configuration
 
-You have to manually change GRUB's /boot/grub/menu.lst so that the
-custom kernel is booted, e.g.:
+If you've installed a new kernel, make sure that you update your
+bootloader accordingly
 
-    # (1) Arch Linux
-    title  Arch Linux (SELinux)
-    root   (hd0,4)
-    kernel /boot/vmlinuz-linux-selinux root=/dev/sda5 ro vga=775
-    initrd /boot/initramfs-linux-selinux.img
+GRUB
 
-> Mounting selinuxfs
+Run the following command:
 
-Add following to /etc/fstab:
+    # grub-mkconfig -o /boot/grub/grub.cfg
 
-    none   /selinux   selinuxfs   noauto   0   0
+Syslinux
 
-Do not forget to create the mount point:
+Change your syslinux.cfg file by adding:
 
-    mkdir /selinux
+    /boot/syslinux/syslinux.cfg
 
-> Main SELinux configuration file
+    LABEL arch-selinux
+             LINUX ../vmlinuz-linux-selinux
+             APPEND root=/dev/sda2 ro
+             INITRD ../initramfs-linux-selinux.img
 
-Main SELinux configuration file (/etc/selinux/config) is part of the
-selinux-refpolicy package currently in the AUR. It has default contents
-as follows:
+at the end. Change "linux-selinux" to whatever kernel you are using.
+
+> Checking PAM
+
+A correctly set-up PAM is important to get the proper security context
+after login. Check for the presence of the following lines in
+/etc/pam.d/system-login:
+
+    # pam_selinux.so close should be the first session rule
+    session         required        pam_selinux.so close
+
+    # pam_selinux.so open should only be followed by sessions to be executed in the user context
+    session         required        pam_selinux.so open
+
+> Installing a policy
+
+Warning:The reference policy as given by Tresys is not very good for
+Arch Linux, as almost no file is labelled correctly. However, as of
+writing, Archers have no other choice. If anyone has made any
+significant strides in addressing this problem, they are encouraged to
+share it, preferably on the AUR.
+
+Policies are the mainstay of SELinux. They are what govern its
+behaviour. The only policy currently available in the AUR is the
+Reference Policy. In order to install it, you should use the source
+files, which may be got from the package selinux-refpolicy-src. Change
+the pkgver to 20130424 and the sha256sums to
+6039ba854f244a39dc727cc7db25632f7b933bb271c803772d754d4354f5aef4 and
+build the file. Now, navigate to /etc/selinux/refpolicy/src/policy and
+run the following commands:
+
+    # make bare
+    # make conf
+    # make install
+
+to install the reference policy as it is. Those who know how to write
+SELinux policies can tweak them to their heart's content before running
+the commands written above. The command takes a while to do its job and
+taxes one core of your system completely, so don't worry. Just sit back
+and let the command run for as long as it takes.
+
+Then, make the file /etc/selinux/config with the following contents
+(Only works if you used the defaults as mentioned above. If you decided
+to change the name of the policy, you need to tweak the file):
+
+    /etc/selinux/config
 
     # This file controls the state of SELinux on the system.
     # SELINUX= can take one of these three values:
     #       enforcing - SELinux security policy is enforced.
-    #       permissive - SELinux prints warnings 
-    #                       instead of enforcing.
+    #                   Set this value once you know for sure that SELinux is configured the way you like it and that your system is ready for deployment
+    #       permissive - SELinux prints warnings instead of enforcing.
+    #                    Use this to customise your SELinux policies and booleans prior to deployment. Recommended during policy development.
     #       disabled - No SELinux policy is loaded.
+    #                  This is not a recommended setting, for it may cause problems with file labelling
     SELINUX=permissive
     # SELINUXTYPE= takes the name of SELinux policy to
     # be used. Current options are:
     #       refpolicy (vanilla reference policy)
-    #       refpolicy-arch (reference policy with 
-    #       Arch Linux patch)
+    #       <custompolicy> - Substitute <custompolicy> with the name of any custom policy you choose to load
     SELINUXTYPE=refpolicy
 
-Note:Option SELINUX=permissive is suitable only for testing. It gives no
-security. When everything is set up and working, you should change it to
-SELINUX=enforcing. Option SELINUXTYPE=refpolicy specifies the name of
-used policy. Change it if you choose another name for your policy. If
-you plan to compile policy from source, you have to create the file
-yourself.
+Now, you may reboot. After rebooting, run:
 
-> Set up PAM
+    # restorecon -r /
 
-Correctly set-up PAM is important to get a proper security context after
-login. There should be the following lines in /etc/pam.d/system-login:
+to label your filesystem.
 
-    # pam_selinux.so close should be the first session rule
-    session         required        pam_selinux.so close
-    # pam_selinux.so open should only be followed by sessions to be executed in the user context
-    session         required        pam_selinux.so open
+Now, make a file requiredmod.te with the contents:
 
-Similarly for logging in via SSH in /etc/pam.d/sshd, which is part of
-selinux-openssh package.
+    requiredmod.te
 
-If you want to use SELinux with GUI, you should add the aforementioned
-lines to other files such as /etc/pam.d/kde, /etc/pam.d/kde-np, ...
-depending on your login manager.
+    module requiredmod 1.0;
 
-Note:Running SELinux with GUI applications in Arch Linux is not much
-supported at the time being.
+    require {
+            type devpts_t;
+            type kernel_t;
+            type device_t;
+            type var_run_t;
+            type udev_t;
+            type hugetlbfs_t;
+            type udev_tbl_t;
+            type tmpfs_t;
+            class sock_file write;
+            class unix_stream_socket { read write ioctl };
+            class capability2 block_suspend;
+            class dir { write add_name };
+            class filesystem associate;
+    }
 
-Reference policy
-----------------
+    #============= devpts_t ==============
+    allow devpts_t device_t:filesystem associate;
 
-There are currently two possible ways of installing reference policy:
-From a pre-compiled package (selinux-refpolicy) or from a source package
-(selinux-refpolicy-src).
+    #============= hugetlbfs_t ==============
+    allow hugetlbfs_t device_t:filesystem associate;
 
-Note: It is possible to have both the source and the binary package
-installed. If you plan to build from source in that case, you should
-probably change the name of policy in build.conf to avoid overwriting of
-selinux-refpolicy package files.
+    #============= kernel_t ==============
+    allow kernel_t self:capability2 block_suspend;
 
-> Installing a precompiled refpolicy
+    #============= tmpfs_t ==============
+    allow tmpfs_t device_t:filesystem associate;
 
-Install selinux-refpolicy from AUR. This is a modular-otherways-vanilla
-refpolicy. This package includes policy headers (you can therefore
-compile your own modules), policy documentation and an install script
-which will load the policy for you and relabel your filesystem (which
-will likely take some time). It does not include the sources though.
+    #============= udev_t ==============
+    allow udev_t kernel_t:unix_stream_socket { read write ioctl };
+    allow udev_t udev_tbl_t:dir { write add_name };
+    allow udev_t var_run_t:sock_file write;
 
-This package also includes the main SELinux configuration file
-(/etc/selinux/config) defaulting to refpolicy and permissive SELinux
-enforcement for testing purposes.
+and run the following commands:
 
-You should verify that the policy was correctly loaded, that is if the
-file /etc/selinux/refpolicy/policy/policy.24 has non-zero size. If so
-and if you have installed selinux-sysvinit and other needed packages,
-you are ready to reboot and make sure that everything works.
+    # checkmodule -m -o requiredmod.mod requiredmod.te
+    # semodule_package -o requiredmod.pp -m requiredmod.mod
+    # semodule -i requiredmod.pp
 
-Warning: On newer kernels (eg. 3.0) policy in file
-/etc/selinux/refpolicy/policy/policy.24 has zero bytes size, because it
-is used new version of policy from file:
-/etc/selinux/refpolicy/policy/policy.26
-
-In case the policy was not correctly loaded you can as root use the
-following command inside of the /usr/share/selinux/refpolicy directory
-to do so:
-
-    /bin/ls *.pp | /bin/grep -Ev "base.pp|enableaudit.pp" | /usr/bin/xargs /usr/sbin/semodule -s refpolicy -b base.pp -i
-
-To manually relabel your filesystem you can as root use:
-
-    /sbin/restorecon -r /
-
-> Installing refpolicy from a source package
-
-Install selinux-refpolicy-src from AUR. Edit the file
-/etc/selinux/refpolicy/src/policy/build.conf to your liking.
-
-Note:Build configuration file build.conf is overwritten on every
-selinux-refpolicy-src package upgrade, so backup your configuration.
-
-To build, install and load policy from source do the following. (For
-other possibilities consult the README file located in
-/etc/selinux/refpolicy/src/policy/.)
-
-    cd /etc/selinux/refpolicy/src/policy
-    make bare
-    make conf 
-    make load
-
-Copy or link the compiled binary policy to /etc/policy.bin for sysvinit
-to find and install selinux-sysvinit:
-
-    ln -s /etc/selinux/refpolicy/policy/policy.21 /etc/policy.bin
-
-At this moment files do not have any context, so you should relabel the
-whole filesystem, which will take a while:
-
-    make relabel
-
-Create the main SELinux configuration file (/etc/selinux/config)
-according to the example in related section.
-
-Now you are ready to reboot and make sure that everything works.
+This is required to remove a few messages from /var/log/audit/audit.log
+which are a nuisance to deal with in the reference policy. This is an
+ugly hack and it should be made very clear that the policy so installed
+simply patches the reference policy in order to hide the effects of
+incorrect labelling.
 
 Post-installation steps
 -----------------------
-
-Warning: If you did not install selinux-sysvinit, then you will see
-SELinux in disabled mode, and /selinux will not be mounted.
 
 You can check that SELinux is working with sestatus. You should get
 something like:
 
     SELinux status:                 enabled
-    SELinuxfs mount:                /selinux
+    SELinuxfs mount:                /sys/fs/selinux
+    SELinux root directory:         /etc/selinux
+    Loaded policy name:             refpolicy
     Current mode:                   permissive
-    Mode from config file:          enforcing
-    Policy version:                 24
-    Policy from config file:        refpolicy
+    Mode from config file:          permissive
+    Policy MLS status:              disabled
+    Policy deny_unknown status:     allowed
+    Max kernel policy version:      28
 
 To maintain correct context, you can use restorecond:
 
-    touch /etc/rc.d/restorecond
-    chmod ugo+x /etc/rc.d/restorecond
+    # systemctl enable restorecond
 
-Which should contain:
+To switch to enforcing mode without rebooting, you can use:
 
-    #!/bin/sh
-    restorecond
+    # echo 1 > /sys/fs/selinux/enforce
 
-Note:Do not forget to add restorecond into your DAEMONS array in
-/etc/rc.conf.
+> Swapfiles
 
-To switch to enforcing mode without reboot, you can use:
+If you have a swap file instead of a swap partition, issue the following
+commands in order to set the appropriate security context:
 
-    echo 1 >/selinux/enforce
+    # semanage fcontext -a -t swapfile_t "/path/to/swapfile"
+    # restorecon /path/to/swapfile
 
-Note:If setting SELINUX=enforcing in /etc/selinux/config does not work
-for you, create /etc/rc.d/selinux-enforce containing the preceding
-command similarly as with restorecond daemon.
+Working with SELinux
+--------------------
 
-Useful tools
-------------
+SELinux defines security using a different mechanism than traditional
+Unix access controls. The best way to understand it is by example. For
+example, the SELinux security context of the apache homepage looks like
+the following:
+
+    $ls -lZ /var/www/html/index.html
+    -rw-r--r--  username username system_u:object_r:httpd_sys_content_t /var/www/html/index.html
+
+The first three and the last columns should be familiar to any (Arch)
+Linux user. The fourth column is new and has the format:
+
+    user:role:type[:level]
+
+To explain:
+
+1.  User: The SELinux user identity. This can be associated to one or
+    more roles that the SELinux user is allowed to use.
+2.  Role: The SELinux role. This can be associated to one or more types
+    the SELinux user is allowed to access.
+3.  Type: When a type is associated with a process, it defines what
+    processes (or domains) the SELinux user (the subject) can access.
+    When a type is associated with an object, it defines what access
+    permissions the SELinux user has to that object.
+4.  Level: This optional field can also be know as a range and is only
+    present if the policy supports MCS or MLS.
+
+This is important in case you wish to understand how to build your own
+policies, for these are the basic building blocks of SELinux. However,
+for most purposes, there is no need to, for the reference policy is
+sufficiently mature. However, if you are a power user or someone with
+very specific needs, then it might be ideal for you to learn how to make
+your own SELinux policies.
+
+This is a great series of articles for someone seeking to understand how
+to work with SELinux.
+
+Troubleshooting
+---------------
+
+The place to look for SELinux errors is the systemd journal. In order to
+see SELinux messages related to the label
+system_u:system_r:policykit_t:s0 (for example), you would need to run:
+
+    # journalctl _SELINUX_CONTEXT=system_u:system_r:policykit_t:s0
+
+> Useful tools
 
 There are some tools/commands that can greatly help with SELinux.
 
 restorecon
     Restores the context of a file/directory (or recursively with -R)
     based on any policy rules
-rlpkg
-    Relabels any files belonging to that Gentoo package to their proper
-    security context (if they have one)
 chcon
     Change the context on a specific file
-audit2allow
-    Reads in log messages from the AVC log file and tells you what rules
-    would fix the error. Do not just add these rules without looking at
-    them though, they cannot detect errors in other places (e.g. the
-    application is running in the wrong context in the first place), or
-    sometimes things will generate error messages but may maintain
-    functionality so it would be better to add dontaudit to just ignore
-    the access attempts.
 
-References
-----------
+See also
+--------
 
 -   Security Enhanced Linux
 -   Gentoo SELinux Handbook
@@ -431,16 +534,17 @@ References
 -   SELinux Userspace Homepage
 -   SETools Homepage
 
-See also
---------
-
--   AppArmor (Similar to SELinux, much easier to configure, less
-    features.)
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SELinux&oldid=239046"
+"https://wiki.archlinux.org/index.php?title=SELinux&oldid=305933"
 
 Categories:
 
 -   Security
 -   Kernel
+
+-   This page was last modified on 20 March 2014, at 17:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

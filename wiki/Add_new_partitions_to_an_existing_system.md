@@ -1,17 +1,10 @@
 Add new partitions to an existing system
 ========================================
 
-> Summary
+Related articles
 
-This article discusses the process of changing partitions in an existing
-environment.
-
-> Related
-
-Partitioning Hard Disks: Basic introduction to partitioning on Arch
-Linux on the Beginner's Guide.
-
-Gparted: Commonly used partitioning program.
+-   Partitioning
+-   Gparted
 
 You may find yourself in the situation where you either want to create a
 new partition to give yourself more flexibility (for example, for backup
@@ -27,19 +20,16 @@ Warning:Be sure to at least read through all the steps in this guide
 before making any real changes. There is always a risk for losing your
 data when adjusting partitions.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preamble                                                           |
-| -   2 Creating the New Partitions                                        |
-|     -   2.1 Extended Growth & Logical Partitioning                       |
-|                                                                          |
-| -   3 Moving Existing Data to the New Partition                          |
-| -   4 Remounting the New Partitions on the Filesystem                    |
-|     -   4.1 Manually remounting and checking                             |
-|     -   4.2 Permanent remounting                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Preamble
+-   2 Creating the New Partitions
+    -   2.1 Extended Growth & Logical Partitioning
+-   3 Moving Existing Data to the New Partition
+-   4 Remounting the New Partitions on the Filesystem
+    -   4.1 Manually remounting and checking
+    -   4.2 Permanent remounting
 
 Preamble
 --------
@@ -110,7 +100,7 @@ moving during this process. The safest way to accomplish the copy and
 delete is to either boot from your install cd into rescue mode and
 create mount points to hold your / filesystem and the new partitions, or
 alternatively shutdown anything that could write to or read from the
-existing directories. Fro example, for /var, syslog-ng needed to be
+existing directories. For example, for /var, syslog-ng needed to be
 shutdown. If using dmraid, issue "dmraid -ay" to activate your raid sets
 when booting from the install CD into rescue mode.
 
@@ -176,8 +166,15 @@ the logs for any permission errors. Then reboot and make sure it all
 works as expected.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Add_new_partitions_to_an_existing_system&oldid=244167"
+"https://wiki.archlinux.org/index.php?title=Add_new_partitions_to_an_existing_system&oldid=291295"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 2 January 2014, at 02:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

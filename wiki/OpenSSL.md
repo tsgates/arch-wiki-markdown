@@ -8,39 +8,32 @@ Windows. It is designed to be as flexible as possible, and is free to
 use for both personal and commercial uses. It is based on the earlier
 SSLeay library. Version 1.0.0 of OpenSSL was released on March 29, 2010.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 SSL introduction                                                   |
-|     -   1.1 Certificate authority (CA)                                   |
-|         -   1.1.1 CA private key                                         |
-|         -   1.1.2 CA certificate and public key                          |
-|                                                                          |
-|     -   1.2 End-users                                                    |
-|         -   1.2.1 End-user generated key                                 |
-|         -   1.2.2 Certificate requests                                   |
-|         -   1.2.3 End-user certificate                                   |
-|         -   1.2.4 Certificate revocation list (CRL)                      |
-|                                                                          |
-| -   2 Configuring                                                        |
-|     -   2.1 Global variables                                             |
-|     -   2.2 ca section                                                   |
-|     -   2.3 req section                                                  |
-|         -   2.3.1 CA req settings                                        |
-|         -   2.3.2 End-user req settings                                  |
-|                                                                          |
-|     -   2.4 GOST engine support                                          |
-|                                                                          |
-| -   3 Generating keys                                                    |
-| -   4 Making requests                                                    |
-| -   5 Signing certificates                                               |
-|     -   5.1 Self-signed certificate                                      |
-|     -   5.2 Certificate authority                                        |
-|         -   5.2.1 Makefile                                               |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 SSL introduction
+    -   1.1 Certificate authority (CA)
+        -   1.1.1 CA private key
+        -   1.1.2 CA certificate and public key
+    -   1.2 End-users
+        -   1.2.1 End-user generated key
+        -   1.2.2 Certificate requests
+        -   1.2.3 End-user certificate
+        -   1.2.4 Certificate revocation list (CRL)
+-   2 Configuring
+    -   2.1 Global variables
+    -   2.2 ca section
+    -   2.3 req section
+        -   2.3.1 CA req settings
+        -   2.3.2 End-user req settings
+    -   2.4 GOST engine support
+-   3 Generating keys
+-   4 Making requests
+-   5 Signing certificates
+    -   5.1 Self-signed certificate
+    -   5.2 Certificate authority
+        -   5.2.1 Makefile
+-   6 See also
 
 SSL introduction
 ----------------
@@ -108,7 +101,7 @@ provide means of identification in exchanges of information.
 
 Certificate revocation list (CRL)
 
-CRL are also signed with the CA key, but they only dictate information
+CRLs are also signed with the CA key, but they only dictate information
 regarding end-user certificates. Usually, a 30 day span is given between
 new CRL submissions.
 
@@ -123,10 +116,10 @@ essential settings.
 
 Remember that variables may be expanded in assignments, much like how
 shell scripts work. For a more thorough explanation of the configuration
-file format, see config(5). This man page is named openssl-config or
-config.5ssl in other operative systems, or it even may not be available
-through the man hierarchy at all; e.g., it may be placed in OpenSSL's
-share root, /usr/share/openssl.
+file format, see config(5). In some operating systems, this man page is
+named openssl-config or config(5ssl). Sometimes, it may not even be
+available through the man hierarchy at all, for example, it may be
+placed in the following location /usr/share/openssl.
 
 > Global variables
 
@@ -268,7 +261,7 @@ Makes a v3 request suitable for most circumstances:
     O=	localdomain
     CN=	localhost
 
-    [ v3_req ]
+    [ req_v3 ]
     basicConstraints=	CA:FALSE
     keyUsage=		nonRepudiation, digitalSignature, keyEncipherment
 
@@ -430,9 +423,16 @@ See also
 -   Step-by-step guide to create a signed SSL certificate
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=OpenSSL&oldid=215803"
+"https://wiki.archlinux.org/index.php?title=OpenSSL&oldid=287366"
 
 Categories:
 
 -   Networking
 -   Security
+
+-   This page was last modified on 9 December 2013, at 06:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

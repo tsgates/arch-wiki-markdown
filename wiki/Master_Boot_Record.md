@@ -1,43 +1,28 @@
 Master Boot Record
 ==================
 
-> Summary
+Related articles
 
-An overview of the Master Boot Record; the first sector of a partitioned
-data storage device.
-
-> Overview
-
-In order to boot Arch Linux, a Linux-capable boot loader such as
-GRUB(2), Syslinux, LILO or GRUB Legacy must be installed to the Master
-Boot Record or the GUID Partition Table. The boot loader is responsible
-for loading the kernel and initial ramdisk before initiating the boot
-process.
-
-> Related
-
-GUID Partition Table
-
-Unified Extensible Firmware Interface
-
-Arch Boot Process
+-   Arch Boot Process
+-   GUID Partition Table
+-   Partitioning
+-   Unified Extensible Firmware Interface
 
 The Master Boot Record (MBR) is the first 512 bytes of a storage device.
 The MBR is not a partition; it is reserved for the operating system's
-bootloader and the storage device's partition table. An newer
-alternative to MBR is the GUID Partition Table, which is part of the
-Unified Extensible Firmware Interface specification.
+bootloader and the storage device's partition table. A newer alternative
+to MBR is the GUID Partition Table, which is part of the Unified
+Extensible Firmware Interface specification.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Boot process                                                       |
-| -   2 History                                                            |
-| -   3 Backup and restoration                                             |
-| -   4 Restoring a Windows boot record                                    |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Boot process
+-   2 History
+-   3 Backup and restoration
+-   4 Restoring a Windows boot record
+-   5 TestDisk MBRCode
+-   6 See also
 
 Boot process
 ------------
@@ -78,21 +63,21 @@ recovered.
 
 To backup the MBR:
 
-    dd if=/dev/sda of=/path/mbr-backup bs=512 count=1
+    # dd if=/dev/sda of=/path/mbr-backup bs=512 count=1
 
 Restore the MBR:
 
-    dd if=/path/mbr-backup of=/dev/sda bs=512 count=1
+    # dd if=/path/mbr-backup of=/dev/sda bs=512 count=1
 
 Warning:Restoring the MBR with a mismatching partition table will make
 your data unreadable and nearly impossible to recover. If you simply
 need to reinstall the bootloader see GRUB or Syslinux.
 
 To erase the MBR (may be useful if you have to do a full reinstall of
-another operating system) only the first 446 bits are zeroed because the
-rest of the data contains the partition table:
+another operating system) only the first 446 bytes are zeroed because
+the rest of the data contains the partition table:
 
-    dd if=/dev/zero of=/dev/sda bs=446 count=1
+    # dd if=/dev/zero of=/dev/sda bs=446 count=1
 
 Restoring a Windows boot record
 -------------------------------
@@ -126,18 +111,25 @@ have it, such as Parted Magic.
 
 First, write the partition info (table) again by:
 
-    ms-sys --partition /dev/sda1
+    # ms-sys --partition /dev/sda1
 
 Next, write a Windows 2000/XP/2003 MBR:
 
-    ms-sys --mbr /dev/sda  # Read options for different versions
+    # ms-sys --mbr /dev/sda  # Read options for different versions
 
 Then, write the new boot sector (boot record):
 
-    ms-sys -(1-6)          # Read options to discover the correct FAT record type
+    # ms-sys -(1-6)          # Read options to discover the correct FAT record type
 
 ms-sys can also write Windows 98, ME, Vista, and 7 MBRs as well, see
 ms-sys -h.
+
+TestDisk MBRCode
+----------------
+
+testdisk from the official repositories can write the MBR with its own
+code (which should be able to boot Windows). The package is also
+included in the installation media.
 
 See also
 --------
@@ -145,10 +137,17 @@ See also
 -   What is a Master Boot Record (MBR)?
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Master_Boot_Record&oldid=245611"
+"https://wiki.archlinux.org/index.php?title=Master_Boot_Record&oldid=303261"
 
 Categories:
 
 -   Boot process
 -   Mainboards and BIOS
 -   System recovery
+
+-   This page was last modified on 5 March 2014, at 18:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -6,57 +6,51 @@ computer via spoken word. This page is designed to identify applications
 that can facilitate speech recognition and to serve as a guide in
 installing and using this software in Arch.
 
-A note to newcomers: Speech recognition is something that traditionally
+A note to newcomers: speech recognition is something that traditionally
 has not been well supported in Linux. If you become interested and
 choose to dig below the immediate surface, you can expect difficulty in
 finding documentation or help from the community.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Types of Speech Recognition                                        |
-| -   2 Development Status                                                 |
-| -   3 Text-To-Speech                                                     |
-|     -   3.1 Festival                                                     |
-|     -   3.2 eSpeak                                                       |
-|         -   3.2.1 Installing eSpeak                                      |
-|         -   3.2.2 Testing eSpeak                                         |
-|         -   3.2.3 eSpeak Usage/Configuration                             |
-|                                                                          |
-| -   4 Voiced Commands                                                    |
-|     -   4.1 Gnome-Voice-Control                                          |
-|     -   4.2 VEDICS                                                       |
-|     -   4.3 Perlbox-Voice                                                |
-|                                                                          |
-| -   5 Speech Recognition                                                 |
-|     -   5.1 Free Speech Recognition Engines                              |
-|         -   5.1.1 CMU Sphinx                                             |
-|         -   5.1.2 Simon                                                  |
-|         -   5.1.3 Julius                                                 |
-|         -   5.1.4 XVoice                                                 |
-|         -   5.1.5 ViaVoice                                               |
-|         -   5.1.6 sphinxkeys                                             |
-|         -   5.1.7 VoxForge                                               |
-|                                                                          |
-|     -   5.2 Proprietary Speech Recognition Engines                       |
-|         -   5.2.1 Dragon Naturally Speaking in Wine                      |
-|         -   5.2.2 Wizzscribe SI                                          |
-|         -   5.2.3 Verbio ASR                                             |
-|         -   5.2.4 DynaSpeak from SRI International                       |
-|         -   5.2.5 LumenVox Speech Engine                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Types of Speech Recognition
+-   1 Types of speech recognition
+-   2 Development status
+-   3 List of text to speech applications
+-   4 List of voiced commands applications
+    -   4.1 Gnome-Voice-Control
+    -   4.2 VEDICS
+    -   4.3 Perlbox-Voice
+-   5 List of speech recognition applications
+    -   5.1 Free Speech Recognition Engines
+        -   5.1.1 CMU Sphinx
+        -   5.1.2 Simon
+        -   5.1.3 Speech
+        -   5.1.4 Julius
+        -   5.1.5 XVoice
+        -   5.1.6 ViaVoice
+        -   5.1.7 sphinxkeys
+        -   5.1.8 VoxForge
+    -   5.2 Proprietary Speech Recognition Engines
+        -   5.2.1 Dragon Naturally Speaking in Wine
+        -   5.2.2 Wizzscribe SI
+        -   5.2.3 Verbio ASR
+        -   5.2.4 DynaSpeak from SRI International
+        -   5.2.5 LumenVox Speech Engine
+-   6 See also
+
+Types of speech recognition
 ---------------------------
 
 Speech recognition can mean several things:
 
 -   Text-To-Speech:
     As it sounds, Text-To-Speech (or TTS) will manipulate a string of
-    text into an audio clip. There are several programs available that
-    perform TTS, some of which are command-line based (ideal for
-    scripting) and others which provide a handy GUI.
+    text into an audio clip. It is useful for blind people to be able to
+    use computers but can also be used to simply improve computer
+    experience. There are several programs available that perform TTS,
+    some of which are command-line based (ideal for scripting) and
+    others which provide a handy GUI.
 -   Simple Voice Control/Commands:
     This is the most basic form of Speech-To-Text application. These are
     designed to recognize a small number of specific, typically one-word
@@ -72,71 +66,46 @@ Speech recognition can mean several things:
     applications need to be trained to your voice and can improve in
     accuracy the more they are used.
 
-Development Status
+Development status
 ------------------
 
 Several years ago there was a push to implement speech recognition in
 Linux. Since then, many of those projects have stagnated.
 
-Text-To-Speech
---------------
+List of text to speech applications
+-----------------------------------
 
 The two major players in text-to-speech applications are Festival and
 eSpeak. Comparison available here
 
-> Festival
+-   eSpeak — Compact open source software speech synthesizer for English
+    and other languages which currently supports more than 50 languages.
 
-Festival offers a general framework for building speech synthesis
-systems as well as including examples of various modules. As a whole it
-offers full text to speech through a number APIs: from shell level,
-though a Scheme command interpreter, as a C++ library, from Java, and an
-Emacs interface. Festival is multi-lingual (currently English (British
-and American), and Spanish) though English is the most advanced.
+http://espeak.sourceforge.net/ || espeak
 
--   Free
--   Can install several different voices/accents.
--   Available in Extra
+-   Festival — General framework for building speech synthesis systems
+    as well as including examples of various modules. As a whole it
+    offers full text to speech.
 
-Site Link
+http://www.cstr.ed.ac.uk/projects/festival/ || festival
 
-> eSpeak
+-   MBROLA — Non-free phonemes-to-audio program which supports more than
+    70 languages.
 
-eSpeak is "a compact open source software speech synthesizer for English
-and other languages, for Linux and Windows".
+http://tcts.fpms.ac.be/synthesis/mbrola.html || mbrola
 
--   Open source
--   Lightweight
--   Available in the community repository
--   Excellent language support
+-   Speech Dispatcher — Common interface to speech synthesis. It has
+    backends for eSpeak, Festival, and a few other speech synthesizers.
 
-Installing eSpeak
+http://www.freebsoft.org/speechd || speech-dispatcher
 
-To install eSpeak:
-
-     pacman -S espeak
-
-Testing eSpeak
-
-     echo "Hello.  This is a test." | espeak
-
-eSpeak Usage/Configuration
-
-The Documents page on the eSpeak website here provides an excellent
-guide for using different voices, adjusting pronunciation, etc. There
-are many different accents included in this install that are worth
-trying out.
-
-  
-
-Voiced Commands
----------------
+List of voiced commands applications
+------------------------------------
 
 > Gnome-Voice-Control
 
 Gnome-Voice-Control is a dialogue system to control the GNOME Desktop.
-It is developed on Google Summer of Code 2007.
-
-Available in AUR
+It is developed on Google Summer of Code 2007. Available in AUR
 
 > VEDICS
 
@@ -182,10 +151,8 @@ Features:
     say. For example, if you say "Good morning", the computer voice
     could say "And good morning to you".
 
-  
-
-Speech Recognition
-------------------
+List of speech recognition applications
+---------------------------------------
 
 > Free Speech Recognition Engines
 
@@ -195,15 +162,37 @@ See http://cmusphinx.sourceforge.net/ and Wikipedia.
 
 Simon
 
+http://sourceforge.net/projects/speech2text/ - Simon is a QT interface
+to Julius that will replace the mouse and keyboard with your voice.
+Works with X11 and Windows
+
+Speech
+
+Speech is a Chrome App for dictation, using Google's speech recognition
+engine.
+
 Julius
 
+Julius is a large vocabulary continuous speech recognition decoder,
+their project page is located on
+http://julius.sourceforge.jp/en_index.php
+
 XVoice
+
+Uses ViaVoice to pass text to X applications.
+http://xvoice.sourceforge.net/
 
 ViaVoice
 
 sphinxkeys
 
+http://code.google.com/p/sphinxkeys/ - You can essentially type keyboard
+keys and mouse clicks by speaking into your microphone
+
 VoxForge
+
+http://www.voxforge.org/ - a project that collects speech transcriptions
+for use in open source speech recognition engines
 
 > Proprietary Speech Recognition Engines
 
@@ -212,7 +201,7 @@ Dragon Naturally Speaking in Wine
 Dragon Naturally Speaking software by Nuance is a well-functioning and
 popular implementation of speech dictation. It is developed for Windows,
 but has been run sucsessfully in a a linux enviornment using wine. It
-can be used independantly for dictation into other wine programs such as
+can be used independently for dictation into other wine programs such as
 notepad or it can be paired with Platypus to interface with any native
 linux program. Platypus also provides a feature to control of your OS
 using voice commands, similar to the programs described in the Voiced
@@ -233,10 +222,22 @@ DynaSpeak from SRI International
 
 LumenVox Speech Engine
 
+See also
+--------
+
+Synthèse vocale en français sous Linux - KubuntuBlog (french)
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Speech_Recognition&oldid=219394"
+"https://wiki.archlinux.org/index.php?title=Speech_Recognition&oldid=297067"
 
 Categories:
 
 -   Accessibility
 -   Audio/Video
+
+-   This page was last modified on 12 February 2014, at 23:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

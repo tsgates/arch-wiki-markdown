@@ -4,22 +4,19 @@ SystemTap
 SystemTap provides free software (GPL) infrastructure to simplify the
 gathering of information about the running Linux system.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Easy and fast                                                      |
-|     -   1.1 Prepare                                                      |
-|     -   1.2 modify config                                                |
-|     -   1.3 Update checksum                                              |
-|     -   1.4 Build and Install                                            |
-|     -   1.5 SystemTap                                                    |
-|                                                                          |
-| -   2 Build custom kernel                                                |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Pass 4 fails when launching                                  |
-|     -   3.2 System.map is missing                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Easy and fast
+    -   1.1 Prepare
+    -   1.2 modify config
+    -   1.3 Update checksum
+    -   1.4 Build and Install
+    -   1.5 SystemTap
+-   2 Build custom kernel
+-   3 Troubleshooting
+    -   3.1 Pass 4 fails when launching
+    -   3.2 System.map is missing
 
 Easy and fast
 -------------
@@ -133,3 +130,10 @@ Retrieved from
 Category:
 
 -   Kernel
+
+-   This page was last modified on 20 April 2013, at 12:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

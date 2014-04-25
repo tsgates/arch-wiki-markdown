@@ -7,25 +7,38 @@ Samba Domain Controller
                            Reason: This article was 
                            not tested with Samba 4, 
                            proceed with caution!    
+                           First draft of Samba 4   
+                           Domain Controller        
+                           instructions can be      
+                           found at                 
+                           Samba_4_Active_Directory 
+                           _Domain_Controller       
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
+
+Related articles
+
+-   Samba
+-   Samba/Tips and tricks
+-   Samba/Troubleshooting
+-   Samba/Advanced file sharing with KDE4
+-   Active Directory Integration
+-   Samba 4 Active Directory Domain Controller
+-   OpenChange Server
 
 This article explains how to setup a simple Windows Domain Controller
 with user authentication and shares on a small network using samba. Note
 this Howto is currently only a rough guide and may not work properly
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 PreConfiguration                                             |
-|     -   1.2 Samba Config File                                            |
-|     -   1.3 Other Configuration                                          |
-|     -   1.4 Adding users                                                 |
-|                                                                          |
-| -   2 Finished                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 PreConfiguration
+    -   1.2 Samba Config File
+    -   1.3 Other Configuration
+    -   1.4 Adding users
+-   2 Finished
 
 Installation
 ============
@@ -74,7 +87,7 @@ Enter the following text
       # Default logon
       logon drive = H:
       logon script = scripts/logon.bat
-      logon path = \\archer\profile\%U
+      logon path = \\%L\profile\%U
 
 
       # Useradd scripts
@@ -202,8 +215,15 @@ Your samba domain controller may or may not work now that you have
 completed this untested how to.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Samba_Domain_Controller&oldid=253951"
+"https://wiki.archlinux.org/index.php?title=Samba_Domain_Controller&oldid=304106"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 12 March 2014, at 07:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

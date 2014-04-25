@@ -5,19 +5,16 @@ The Fujitsu T4310 is a small 'convertible' style laptop with many
 features not normally found in its size. These include a widescreen dual
 digitizer and a modular drive bay.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-|     -   1.1 System Specifications                                        |
-|     -   1.2 LSPCI Output                                                 |
-|                                                                          |
-| -   2 Installation                                                       |
-|     -   2.1 Hardware Modules                                             |
-|     -   2.2 Suggestions                                                  |
-|     -   2.3 What works and what does not                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+    -   1.1 System Specifications
+    -   1.2 LSPCI Output
+-   2 Installation
+    -   2.1 Hardware Modules
+    -   2.2 Suggestions
+    -   2.3 What works and what does not
 
 Overview
 --------
@@ -199,8 +196,15 @@ Modular bay works as expected... tested with 6 cell battery, modular
 drive mount, and DVD-R Drive.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fujitsu_Lifebook_T4310&oldid=196605"
+"https://wiki.archlinux.org/index.php?title=Fujitsu_Lifebook_T4310&oldid=298325"
 
 Category:
 
 -   Fujitsu
+
+-   This page was last modified on 16 February 2014, at 07:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

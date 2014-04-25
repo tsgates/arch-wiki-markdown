@@ -1,14 +1,9 @@
 Ubuntu One
 ==========
 
-> Summary
+Related articles
 
-This article discusses how to install, configure and use Ubuntu One on
-your system.
-
-> Related
-
-Dropbox
+-   Dropbox
 
 Ubuntu One is a service to store and sync files online and between
 computers, and share files and folders with others using file
@@ -17,34 +12,24 @@ synchronization. Brief description here.
 If you know what Dropbox is then you could say that Ubuntu One is an
 alternative to Dropbox.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 GUI                                                          |
-|     -   2.2 Command line                                                 |
-|                                                                          |
-| -   3 Usage                                                              |
-|     -   3.1 Nautilus                                                     |
-|     -   3.2 Déjà Dup                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 GUI
+    -   2.2 Command line
+-   3 Usage
+    -   3.1 Status icon
+    -   3.2 Déjà Dup
 
 Installation
 ------------
 
-Install ubuntuone-client, available in the official repositories. It
-contains the synchronization daemon and a command line utility for
-configuration.
-
-Additional packages are recommended for better desktop integration:
-
--   ubuntuone-control-panel is the configuration GUI for Ubuntu One: you
-    could register or log in, and manage shared folders and devices.
--   ubuntuone-client-gnome is the GNOME integration pack: it contains a
-    Nautilus extension and provides notifications if your Ubuntu One
-    account runs out of space.
+Install ubuntuone-control-panel, available in the official repositories.
+It's a GUI application to configure and monitor Ubuntu One. It pulls in
+the ubuntuone-client package, which contains the synchronization daemon
+and a command line utility for configuration.
 
 Configuration
 -------------
@@ -81,11 +66,12 @@ Usage
 There should be a directory named "Ubuntu One" in your home directory,
 everything you put there should be synced with Ubuntu One's cloud.
 
-> Nautilus
+> Status icon
 
-If ubuntuone-client-gnome installed, Nautilus file manager allows the
-option of sharing files or directories by right-clicking the
-file/directory and selecting the appropriate option.
+You can launch the control panel in status icon mode with the following
+command:
+
+    $ ubuntuone-control-panel-qt --minimized
 
 > Déjà Dup
 
@@ -97,8 +83,15 @@ selecting "Storage" -> "Backup location" -> "Ubuntu One" and enter a
 "Folder" (default: deja-dup/hostname).
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ubuntu_One&oldid=254406"
+"https://wiki.archlinux.org/index.php?title=Ubuntu_One&oldid=302671"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

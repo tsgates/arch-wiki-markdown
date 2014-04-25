@@ -58,3 +58,10 @@ Categories:
 
 -   X Server
 -   Audio/Video
+
+-   This page was last modified on 24 August 2012, at 11:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

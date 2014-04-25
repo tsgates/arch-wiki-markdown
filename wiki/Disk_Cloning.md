@@ -3,26 +3,23 @@ Disk Cloning
 
 Disk cloning is the process of making an image of a partition or an
 entire hard drive. This can be useful both for copying the drive to
-other computers and for backup/recovery purposes.
+other computers and for backup/recovery purposes. There is also a
+dedicated page File Recovery.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Using dd                                                           |
-|     -   1.1 Cloning a partition                                          |
-|     -   1.2 Cloning an entire hard disk                                  |
-|     -   1.3 Backing up the MBR                                           |
-|     -   1.4 Create disk image                                            |
-|     -   1.5 Restore system                                               |
-|                                                                          |
-| -   2 Using cp                                                           |
-| -   3 Disk cloning software                                              |
-|     -   3.1 Disk cloning in Arch                                         |
-|     -   3.2 Disk cloning outside of Arch                                 |
-|                                                                          |
-| -   4 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Using dd
+    -   1.1 Cloning a partition
+    -   1.2 Cloning an entire hard disk
+    -   1.3 Backing up the MBR
+    -   1.4 Create disk image
+    -   1.5 Restore system
+-   2 Using cp
+-   3 Disk cloning software
+    -   3.1 Disk cloning in Arch
+    -   3.2 Disk cloning outside of Arch
+-   4 External Links
 
 > Using dd
 
@@ -42,7 +39,7 @@ Cloning a partition
 From physical disk /dev/sda, partition 1, to physical disk /dev/sdb,
 partition 1.
 
-    dd if=/dev/sda1 of=/dev/sdb1 bs=4096 conv=notrunc,noerror
+    dd if=/dev/sda1 of=/dev/sdb1 bs=4096 conv=notrunc,noerror,sync
 
 If output file of (sdb1 in the example) does not exist, dd will start at
 the beginning of the disk and create it.
@@ -51,17 +48,25 @@ Cloning an entire hard disk
 
 From physical disk /dev/sda to physical disk /dev/sdb
 
-    dd if=/dev/sda of=/dev/sdb bs=4096 conv=notrunc,noerror
+    dd if=/dev/sda of=/dev/sdb bs=4096 conv=notrunc,noerror,sync
 
 This will clone the entire drive, including MBR (and therefore
-bootloader), all partitions, UUID's, and data.
+bootloader), all partitions, UUIDs, and data.
 
 -   notrunc or 'do not truncate' maintains data integrity by instructing
     dd not to truncate any data.
--   noerror instructs dd to continue operation, ignoring all input
+-   noerror instructs dd to continue operation, ignoring all read
     errors. Default behavior for dd is to halt at any error.
+-   sync writes zeroes for read errors, so data offsets stay in sync.
 -   bs=4096 sets the block size to 4k, an optimal size for hard disk
     read/write efficiency and therefore, cloning speed.
+
+Note:To regain unique UUIDs, use "tune2fs /dev/sdbX -U random" on every
+partitions.
+
+Note:Partition table changes from dd are not be registered by the
+kernel. To notify of changes without rebooting, use a utility like
+partprobe (part of GNU parted).
 
 Backing up the MBR
 
@@ -131,6 +136,11 @@ advantage to using cp is that the filesystem type of the destination
 partition(s) may be the same or different than the source. For safety,
 perform the process from a live environment.
 
+Note:This method should not be considered in the same category as disk
+cloning on the level at which dd operates. Also, it has been reported
+that even with the -a flag, some extended attributes may not be copied.
+For better results, rsync or tar should be used.
+
 The basic procedure from a live environment will be:
 
 -   Create the new destination partition(s) using fdisk, cfdisk or other
@@ -161,14 +171,14 @@ Disk cloning software
 
 > Disk cloning in Arch
 
-The ncurses program PartImage is in the community repos. The interface
-is not exceptionally intuitive but it works. There are currently no
-GTK/QT based disk cloners for Linux. Another option is to use dd, a
-small CLI image/file creation utility. The wikipedia has a list of
-various version of dd, specifically oriented to this purpose
-wikipedia:Dd_(Unix)#Recovery-oriented_variants_of_dd. dd_rescue works
-efficiently with corrupt disks copying error free areas first and later
-retrying error areas.
+-   Partclone provides utilities to save and restore used blocks on a
+    partition and supports ext2, ext3, ext4, hfs+, reiserfs, reiser4,
+    btrfs, vmfs3, vmfs5, xfs, jfs, ufs, ntfs, fat(12/16/32) and exfat.
+    Optionally, a ncurses interface can be used. Partclone is available
+    in the community repository.
+-   Partimage, an ncurses program, is available in the community repos.
+    Partimage does not currently support ext4 or btrfs filesystems. NTFS
+    is experimental.
 
 > Disk cloning outside of Arch
 
@@ -197,9 +207,16 @@ External Links
 -   Arch Linux forum thread
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Disk_Cloning&oldid=245025"
+"https://wiki.archlinux.org/index.php?title=Disk_Cloning&oldid=305345"
 
 Categories:
 
 -   Data compression and archiving
 -   System recovery
+
+-   This page was last modified on 17 March 2014, at 16:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

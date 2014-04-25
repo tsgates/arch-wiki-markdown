@@ -25,8 +25,15 @@ Packages that will remain in unsupported
   yaourt               Yet another Arch Linux package manager wrapper                                                              Automatically installs unsupported packages.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Community_repo_candidates&oldid=196008"
+"https://wiki.archlinux.org/index.php?title=Community_repo_candidates&oldid=304949"
 
 Category:
 
 -   Arch development
+
+-   This page was last modified on 16 March 2014, at 09:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

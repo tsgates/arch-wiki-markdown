@@ -7,21 +7,17 @@ versions of Red Hat Enterprise Linux, as well as many other Linux
 distributions. Many of rsyslog's benefits over syslog-ng can be found
 here.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Configure Hostname                                           |
-|     -   1.2 Activation                                                   |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Facility Levels                                              |
-|     -   2.2 Security Levels                                              |
-|                                                                          |
-| -   3 Examples                                                           |
-|     -   3.1 journald with rsyslog for kernel messages                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Configure Hostname
+    -   1.2 Activation
+-   2 Configuration
+    -   2.1 Facility Levels
+    -   2.2 Security Levels
+-   3 Examples
+    -   3.1 journald with rsyslog for kernel messages
 
 Installation
 ------------
@@ -214,9 +210,16 @@ logs from that file anymore. journald is not affected as it reads from
 /dev/kmsg which allows multiple readers.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Rsyslog&oldid=250006"
+"https://wiki.archlinux.org/index.php?title=Rsyslog&oldid=305742"
 
 Categories:
 
 -   Security
 -   Daemons and system services
+
+-   This page was last modified on 20 March 2014, at 01:51.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

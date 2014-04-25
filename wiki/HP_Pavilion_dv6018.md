@@ -1,19 +1,17 @@
 HP Pavilion dv6018
 ==================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Things you should know                                             |
-| -   2 Foreword                                                           |
-| -   3 Video                                                              |
-| -   4 Sound                                                              |
-| -   5 Ports and drives                                                   |
-| -   6 Power management                                                   |
-| -   7 Input devices                                                      |
-| -   8 Networking                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Things you should know
+-   2 Foreword
+-   3 Video
+-   4 Sound
+-   5 Ports and drives
+-   6 Power management
+-   7 Input devices
+-   8 Networking
 
 Things you should know
 ----------------------
@@ -65,9 +63,10 @@ you need to place correct mode in /etc/X11/xorg.conf:
        EndSubsection
        EndSection
 
-TV-Out works! WebCam works with recent linux-uvc driver. I tested
-linux-uvc-svn rev.110 and it worked great with resolution up to
-1280x1024
+TV-Out works!
+
+WebCam works with in kernel linux-uvc driver, see Webcam Setup for
+detail.
 
 Sound
 -----
@@ -131,8 +130,15 @@ On A similar dv6000, ndiswrapper works flawlessly with the bcm4311
 chipset.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=HP_Pavilion_dv6018&oldid=196639"
+"https://wiki.archlinux.org/index.php?title=HP_Pavilion_dv6018&oldid=296157"
 
 Category:
 
 -   HP
+
+-   This page was last modified on 4 February 2014, at 12:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

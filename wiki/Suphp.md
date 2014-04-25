@@ -10,23 +10,20 @@ Tip:With suPHP you are able, for example, to manage php applications in
 user's home directories without worry about permissions problems (when
 creating directories, files or uploads)
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Additional information                                             |
-| -   4 suPHP and mod_php                                                  |
-|     -   4.1 suPHP in user directories                                    |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Additional information
+-   4 suPHP and mod_php
+    -   4.1 suPHP in user directories
+-   5 See also
 
 > Installation
 
 In order to install suPHP, you need to install its dependencies from the
-Official Repositories:
+Official repositories:
 
     # pacman -S apache php-cgi apr-util
 
@@ -141,8 +138,15 @@ See also
 -   mod_perl - Apache + Perl
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Suphp&oldid=226533"
+"https://wiki.archlinux.org/index.php?title=Suphp&oldid=301660"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 24 February 2014, at 12:02.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

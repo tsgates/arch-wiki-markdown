@@ -1,42 +1,31 @@
 TuxOnIce
 ========
 
-> Summary
+Related articles
 
-Describes installing, configuring and using TuxOnIce, an advanced
-suspend/hibernate framework.
-
-> Related
-
-Suspending to RAM with hibernate-script
-
-Suspending to Disk with hibernate-script
-
-Pm-utils
-
-Uswsusp
+-   Suspending to RAM with hibernate-script
+-   Suspending to Disk with hibernate-script
+-   Pm-utils
+-   Uswsusp
 
 This is a quick start guide for installing TuxOnIce (formerly suspend2),
 an advanced suspend/hibernate framework which supports suspending to a
 swap-disk or a regular file with fast LZO-compression. Visit the
 TuxOnIce website for a full list of features.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preparing the kernel                                               |
-| -   2 Recreating the initramfs                                           |
-| -   3 Setting up the bootloader                                          |
-|     -   3.1 Suspend to swap partition                                    |
-|     -   3.2 Suspend to swap file                                         |
-|     -   3.3 Suspend to file                                              |
-|                                                                          |
-| -   4 Suspending and resuming                                            |
-| -   5 Additional pm-utils setup                                          |
-| -   6 userui - user interface for TuxOnIce (optional)                    |
-| -   7 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Preparing the kernel
+-   2 Recreating the initramfs
+-   3 Setting up the bootloader
+    -   3.1 Suspend to swap partition
+    -   3.2 Suspend to swap file
+    -   3.3 Suspend to file
+-   4 Suspending and resuming
+-   5 Additional pm-utils setup
+-   6 userui - user interface for TuxOnIce (optional)
+-   7 References
 
 Preparing the kernel
 --------------------
@@ -76,7 +65,7 @@ add the lzo module to the MODULES array in the same file.
 /etc/mkinitcpio.conf example:
 
     MODULES="lzo"
-    HOOKS="base udev autodetect pata scsi sata resume filesystems"
+    HOOKS="base udev autodetect block resume filesystems"
 
 (for linux-pf you also need tuxonice_compress, tuxonice_swap and
 optionally tuxonice_userui in MODULES)
@@ -112,7 +101,7 @@ Set the swap method (make sure the right partition is indicated) in
 
 > Suspend to swap file
 
-Note:Auto-detection as mentioned previously doesn't seem to work with
+Note:Auto-detection as mentioned previously does not seem to work with
 swap files, you will still need to manually set the kernel resume
 parameter.
 
@@ -182,7 +171,7 @@ pm-utils to shutdown and suspend the system, some additional setup is
 required for TuxOnIce.
 
 Configuration made in /etc/hibernate/hibernate.conf is still useful, but
-some options don't seem to be used by pm-utils. Compression, for
+some options do not seem to be used by pm-utils. Compression, for
 example, will default to lzo unless more action is taken. Editing files
 under /etc/pm/sleep.d/ is a good way to make sure wanted settings are
 used.
@@ -230,10 +219,10 @@ symlink above.
 The text interface may be good for debugging TuxOnIce, as it displays
 some messages.
 
-You won't see a user interface for the first few seconds of the resume
-process unless you add the userui hook to your mkinitcpio (before the
-resume hook) configuration and regenerate your initramfs, but this is
-also optional.
+You will not see a user interface for the first few seconds of the
+resume process unless you add the userui hook to your mkinitcpio (before
+the resume hook) configuration and regenerate your initramfs, but this
+is also optional.
 
 Generate initramfs:
 
@@ -259,8 +248,15 @@ References
 -   Another good source of information is the Gentoo wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=TuxOnIce&oldid=250302"
+"https://wiki.archlinux.org/index.php?title=TuxOnIce&oldid=289827"
 
 Category:
 
 -   Power management
+
+-   This page was last modified on 22 December 2013, at 00:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -11,21 +11,17 @@ longer developed upstream. There is a new effort on creating a Wii
 Remote driver based on the new Linux kernel Wii Remote driver. See
 XWiimote if you want to test the new Wii Remote software stack.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-| -   2 Connect the Wiimote                                                |
-| -   3 Input Device                                                       |
-|     -   3.1 Infrared Sources                                             |
-|     -   3.2 Configuration                                                |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Unable to open uinput                                        |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequisites
+-   2 Connect the Wiimote
+-   3 Input Device
+    -   3.1 Infrared Sources
+    -   3.2 Configuration
+-   4 Troubleshooting
+    -   4.1 Unable to open uinput
+-   5 See also
 
 Prerequisites
 -------------
@@ -49,8 +45,8 @@ First you need to make sure to load the uinput module:
 
     $ sudo modprobe uinput
 
-You should have a device in /dev/misc/uinput now. For permanent use you
-can add it to the modules section in your rc.conf.
+You should have a device in /dev/uinput now. For permanent use you can
+add it to the modules section in your mkinitcpio.conf.
 
 Thanks to cwiid you can scan for your Wiimote now:
 
@@ -136,8 +132,15 @@ See also
 -   XWiimote
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Wiimote&oldid=241794"
+"https://wiki.archlinux.org/index.php?title=Wiimote&oldid=291434"
 
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 3 January 2014, at 09:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

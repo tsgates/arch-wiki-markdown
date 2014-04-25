@@ -1,6 +1,11 @@
 LDAP Hosts
 ==========
 
+Related articles
+
+-   OpenLDAP
+-   LDAP Authentication
+
 This document will allow you to put your /etc/hosts into your LDAP
 server. At first make sure you have an LDAP server up and running (take
 LDAP Authentication as an introduction). Next you need to create a
@@ -97,8 +102,15 @@ LDAP server. Finally to get ping work with LDAP you need to start nscd:
     ...
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=LDAP_Hosts&oldid=198309"
+"https://wiki.archlinux.org/index.php?title=LDAP_Hosts&oldid=284177"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 23 November 2013, at 00:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

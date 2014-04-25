@@ -1,52 +1,72 @@
 Installing Arch Linux in VMware
 ===============================
 
-> Summary
+Related articles
 
-Installing Archlinux in VMware: open-vm-tools and configuring Xorg
-
-> Related
-
-VMware
-
-Installing VMWare vCLI
+-   VMware
+-   Installing VMWare vCLI
 
 This article handles installing Archlinux in a VMware-based virtual
 environment such as VMware ESX, VMware Workstation/Fusion and VMware
 Player.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 VMware Tools versus Open-VM-Tools                                  |
-| -   2 Open-VM-Tools modules                                              |
-| -   3 Open-VM-Tools utilities                                            |
-| -   4 Installing Open-VM-Tools                                           |
-| -   5 Installing the official VMware Tools                               |
-| -   6 Time synchronization                                               |
-|     -   6.1 Host machine as time source                                  |
-|     -   6.2 External server as time source                               |
-|                                                                          |
-| -   7 Xorg configuration                                                 |
-|     -   7.1 Enable 3d accleration                                        |
-|                                                                          |
-| -   8 Paravirtual SCSI-Adapter                                           |
-| -   9 VMCI                                                               |
-| -   10 DRAG AND DROP                                                     |
-| -   11 COPY AND PASTE                                                    |
-|     -   11.1 Rebuilding the vmblock module                               |
-|                                                                          |
-| -   12 Shared Folders with the Host                                      |
-|     -   12.1 Enable shared folders at boot                               |
-|     -   12.2 Prune mlocate DB                                            |
-|                                                                          |
-| -   13 Trouble shooting                                                  |
-|     -   13.1 Mouse not working as expected                               |
-|     -   13.2 Network connection not working                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-VMware Tools versus Open-VM-Tools
+-   1 Drivers included in the Linux kernel
+-   2 VMware tools versus Open-VM-Tools
+-   3 Open-VM-Tools modules
+-   4 Open-VM-Tools utilities
+-   5 Installing Open-VM-Tools
+-   6 Installing the official VMware tools
+-   7 Time synchronization
+    -   7.1 Host machine as time source
+    -   7.2 External server as time source
+-   8 Xorg configuration
+    -   8.1 Enable 3d Acceleration
+    -   8.2 Multiple Monitor Support
+-   9 Paravirtual SCSI-adapter
+-   10 VMCI
+-   11 Drag and drop
+-   12 Copy and paste
+    -   12.1 Rebuilding the vmblock module
+-   13 Shared folders with the host
+    -   13.1 Enable shared folders at boot
+    -   13.2 Prune mlocate DB
+-   14 Trouble shooting
+    -   14.1 Mouse not working as expected
+    -   14.2 Back and forward mouse buttons not working
+    -   14.3 Network connection not working
+
+Drivers included in the Linux kernel
+------------------------------------
+
+-   vmw_balloon (VMware Balloon Driver): This is VMware physical memory
+    management driver which acts like a "balloon" that can be inflated
+    to reclaim physical pages by reserving them in the guest and
+    invalidating them in the monitor, freeing up the underlying machine
+    pages so they can be allocated to other guests. The balloon can also
+    be deflated to allow the guest to use more physical memory. If this
+    driver is loaded memory which is deallocated in the virtual machine
+    can be reused in the host machine. Without this driver the memory
+    would be allocated to the guest until the guest is terminated.
+-   vmw_pvscsi (VMware PVSCSI driver support): This driver supports
+    VMware's para virtualized SCSI HBA.
+-   vmw_vmci (VMware VMCI Driver): This is VMware's Virtual Machine
+    Communication Interface. It enables high-speed communication between
+    host and guest in a virtual environment via the VMCI virtual device.
+-   vmw_vsock_vmci_transport (VMware VMCI transport for Virtual Sockets,
+    Alias: vmware_vsock): This module implements a VMCI transport for
+    Virtual Sockets. Enable this transport if your Virtual Machine runs
+    on a VMware hypervisor.
+-   vmwgfx (DRM driver for VMware Virtual GPU): Choose this option if
+    you would like to run 3D acceleration in a VMware virtual machine.
+    This is a KMS enabled DRM driver for the VMware SVGA2 virtual
+    hardware.
+-   vmxnet3 (VMware VMXNET3 ethernet driver): This driver supports
+    VMware's vmxnet3 virtual ethernet NIC.
+
+VMware tools versus Open-VM-Tools
 ---------------------------------
 
 VMware Tools for linux exists in 2 forms: the official VMware Tools and
@@ -64,7 +84,7 @@ adapter.
 Open-VM-Tools modules
 ---------------------
 
-The open-vm-tools-modules package contains the following modules:
+The open-vm-tools-dkms package contains the following modules:
 
 -   vmblock: kernel filesystem module, enables drag&drop functionality
     between the host system and the virtual machine in VMware
@@ -98,12 +118,33 @@ The open-vm-tools package comes with the following utilities:
 Installing Open-VM-Tools
 ------------------------
 
-Install the open-vm-tools and the open-vm-tools-modules package in the
-[community] repository.
+Install the open-vm-tools and the open-vm-tools-dkms package from the
+official repositories.
 
-    # pacman -S open-vm-tools open-vm-tools-modules
+Build the dkms modules as the post install message suggests. Note that
+the post install message might not display the 100% correct version.
 
-Start the service and enable it at boot:
+    dkms add open-vm-tools/2013.04.16
+    dkms install -m open-vm-tools -v 2013.04.16 -k $(uname -r)
+
+Instead of dkms install you can use the following command if you do not
+mind that only the specific version of open-vm-tools get installed:
+
+     dkms autoinstall -k $(uname -r)
+
+If you upgrade to a newer version of open-vm-tools-dkms you can
+uninstall the old version with:
+
+     dkms remove open-vm-tools/<version> --all 
+
+Note:If the build fails, you can try using the linux-lts kernel instead
+of the most recent kernel version.
+
+As of September 2013, open-vm-tools does not compile against Linux 3.11.
+
+Patches are floating around: here.
+
+Start the service and enable it at boot if you wish:
 
     # systemctl start vmtoolsd
     # systemctl enable vmtoolsd
@@ -112,26 +153,32 @@ The open-vm-tools reads the file /etc/arch-release which is empty:
 
     # cat /proc/version > /etc/arch-release
 
-Installing the official VMware Tools
+Note:There is a bug in vmtoolsd where the service is not able to
+properly shut down and hangs for 60 seconds. A quick workaround is
+described here.
+
+Installing the official VMware tools
 ------------------------------------
 
-Install the ifconfig(1) program for the installer to work properly:
+Install the ifconfig(1) program for the installer to work properly from
+net-tools.
 
-    # pacman -S net-tools
+Install Linux kernel headers (linux-headers) for the installer to work
+properly:
 
-Install Linux kernel headers for the installer to work properly:
-
-    # pacman -S linux-headers
     # cd /lib/modules/$(uname -r)/build/include/linux
     # ln -sv ../generated/uapi/linux/version.h
 
 Create bogus init directories for the installer to work properly:
 
-    # for x in `seq 0 6`; do mkdir -pv /etc/init.d/rc$x.d; done
+    # for x in {0..6}; do mkdir -pv /etc/init.d/rc$x.d; done
 
 Mount the VMware Tools virtual CDROM when offered:
 
     # mount /dev/cdrom /mnt
+
+For VMware Player, if the installation does not include the ISO then the
+same can be downloaded from this location.
 
 Extract the tarball:
 
@@ -139,10 +186,8 @@ Extract the tarball:
     # tar zxf /mnt/VMwareTools*.tar.gz
     # cd vmware-tools-distrib
 
-Make sure you have the development tools installed to build the kernel
-modules
-
-    # pacman -S base-devel
+Make sure you have the base-devel installed, which provides the
+development tools to build the kernel modules.
 
 Run the installer and use the default answers for all questions:
 
@@ -161,6 +206,17 @@ Reboot your computer:
 Log in and start the VMware Tools:
 
     # /etc/init.d/rc6.d/K99vmware-tools start
+
+Note:In case the vmci and vmhgfs modules fail to build then try the
+solutions and patches mentioned here and here.
+
+As of Dec 15 2013, I used the scripts from this github repo.
+
+Clone to a directory, copy the official VMwareTools tarball and execute
+untar-and-patch-and-compile.sh as root.
+
+There is also a pending issue here, where one line has to be patched
+before vmhgfs compiles.
 
 Time synchronization
 --------------------
@@ -199,9 +255,8 @@ Note:To use Xorg in a virtual machine, a minimum of 32MB VGA memory is
 needed, and the VMware hardware version has to be > 8, version 7 is no
 longer functioning correctly.
 
-Install the following dependencies:
-
-    pacman -S xf86-input-vmmouse xf86-video-vmware svga-dri
+Install the dependencies xf86-input-vmmouse, xf86-video-vmware, and
+svga-dri.
 
 Configure the vmwgfx module to load at boot.
 
@@ -216,21 +271,32 @@ Create the following file:
 
 Afterwards, a reboot is required.
 
-If you're booting into a graphical target you're almost done.
+If you are booting into a graphical target you are almost done.
 /etc/xdg/autostart/vmware-user.desktop will get started which will setup
 most of the things needed to work with the virtual machine.
 
-If you're booting into multi-user.target then you need to enable the
+If you are booting into multi-user.target then you need to enable the
 vmtoolsd.service:
 
      # systemctl enable vmtoolsd.service
 
-> Enable 3d accleration
+> Enable 3d Acceleration
 
-To enable 3d acceleration go to Edit virtual machine settings ->
-Hardware -> Display and enable the checkbox for Accelerate 3D graphics
+To enable 3d acceleration go to Edit virtual machine settings > Hardware
+> Display and enable the checkbox for Accelerate 3D graphics
 
-Paravirtual SCSI-Adapter
+> Multiple Monitor Support
+
+If you chose the official VMware tools like I did, make sure that the
+following is run after X startup so that you can go to "View > Cycle
+Multiple Monitors". For some reason I cannot figure out, this for me
+also automatically starts after 15 to 30 seconds after session login,
+but thankfully it auto exits if it detects the same process. Make sure
+to run it in the background otherwise it will block .xinitrc
+
+     /usr/lib/vmware-tools/sbin64/vmtoolsd -n vmusr &
+
+Paravirtual SCSI-adapter
 ------------------------
 
 Due to less overhead the paravirtual scsi-adapter can give a substantial
@@ -246,7 +312,7 @@ Afterwards, run the command:
     mkinitcpio -p linux
 
 Shutdown the virtual machine and change the scsi-adapter type to:
-VMware Paravirtual. It's safe to ignore the warning that'll pop up.
+VMware Paravirtual. It's safe to ignore the warning that will pop up.
 
 VMCI
 ----
@@ -258,7 +324,11 @@ between virtual machines themselves. This can be changed in the Virtual
 Machine settings, traffic between ESX and the Virtual Machine can not be
 disabled.
 
-DRAG AND DROP
+Note: If use the official VMware tools, you might have to backlist the
+stock kernel's vmw_vmci module in order to get vmci to load, which
+vmhgfs depends on
+
+Drag and drop
 -------------
 
 Drag and Drop from files, from VMware Workstation/Fusion into the
@@ -266,13 +336,11 @@ Virtual Machines, can be disabled by editing /etc/conf.d/open-vm-tools:
 
     VM_DRAG_AND_DROP="no"
 
-COPY AND PASTE
+Copy and paste
 --------------
 
-Install the following package (it is required for copy/paste but not
-listed as a dependency as reported here)
-
-    pacman -S gtkmm
+Install gtkmm since it is required for copy/paste but not listed as a
+dependency as reported here.
 
 Run the following command after starting X (or add it to your ~/.xinitrc
 file) to automatically synchronize your X clipboard with the host's.
@@ -282,7 +350,7 @@ the host, and vice versa.
     vmware-user-suid-wrapper
 
 If you get the following error (which, in rare cases, you might have to
-run `strace vmware-user-suid-wrapper` to see it!)
+run strace vmware-user-suid-wrapper to see it!)
 
     vmware-user: could not open /proc/fs/vmblock/dev
 
@@ -298,29 +366,29 @@ If your kernel already has the vmblock module loaded,
 
     lsmod | grep vmblock
 
-and vmware-user-suid-wrapper still doesn't work, then you'll have to
+and vmware-user-suid-wrapper still does not work, then you will have to
 build the open-vm-tools-modules package yourself from the Arch Build
 System:
 
-    sudo abs community/open-vm-tools-modules
-    cp -R /var/abs/community/open-vm-tools-modules/ .
-    cd ./open-vm-tools-modules/
-    makepkg -s
-    pacman -U open-vm-tools-modules-*.xz
+    # abs community/open-vm-tools-modules
+    $ cp -R /var/abs/community/open-vm-tools-modules/ .
+    $ cd ./open-vm-tools-modules/
+    $ makepkg -s
+    # pacman -U open-vm-tools-modules-*.xz
 
 Afterwards, restart your machine for the newly rebuilt & re-installed
 modules to take effect!
 
-Shared Folders with the Host
+Shared folders with the host
 ----------------------------
 
-Note: This functionality is only available in VMware Workstation and
+Note:This functionality is only available in VMware Workstation and
 Fusion
 
-Create a new Shared Folder by selecting VM -> Settings... in the VMware
-Workstation menu. Select the Options tab and then Shared Folder. Enable
-the Always enabled option and create a new share. For Windows XP, you
-can create a share named C with the Host Path C:\.
+Create a new Shared Folder by selecting VM > Settings... in the VMware
+Workstation menu. Select the Options tab and then ic|Shared Folder.
+Enable the Always enabled option and create a new share. For Windows XP,
+you can create a share named C with the host path C:\.
 
 Add the following rule to /etc/fstab (adjust the uid/gid where needed)
 for each shared folder:
@@ -341,7 +409,11 @@ Note: an alternative way, tested on VMware player
     .host:/ /mnt/shared vmhgfs defaults 0 0
     mount -t vmhgfs .host:/ /mnt/shared
 
-Enable shared folders at boot
+Note: If you are using the official VMware tools, you might have to
+blacklist the stock kernel's vmw_vmci from loading in order to have the
+official tools' vmci load, which vmhgfs depends on.
+
+> Enable shared folders at boot
 
 For shared folders to be working you need to have loaded the vmhgfs
 driver. Simply create the following systemd files:
@@ -394,11 +466,42 @@ Trouble shooting
 
 > Mouse not working as expected
 
-If you have the problem that mouse clicks are not registered in some
-programs you can try the following: edit
+There is an issue with mouse input when running X11 in a VMware host. If
+you experience one or more of the following:
+
+-   the automatic grab/ungrab feature of VMware will not automatically
+    grab input when the cursor enters the window
+-   mouse input lag
+-   mouse clicks are not registered in some programs
+
+You may need to disable the catch-all evdev driver in X11: edit
 /etc/X11/xorg.conf.d/10-evdev.conf and comment out the section with the
 identifier evdev pointer catchall [xf86-input-vmmouse does not work
-expected]
+expected].
+
+> Back and forward mouse buttons not working
+
+Try to add the following line to your .vmx file:
+
+     mouse.vusb.enable = "TRUE"
+
+Or try this combination for smooth mouse (1 to 1 mapping of host OS),
+forwards, backwards button working, and auto-focus grab and ungrab (at
+least on Win8.1 host):
+
+In VMware Workstation preferences:
+
+     Preferences > Input > Optimize mouse for gaming: Never
+
+evdev catchall NOT commented out in /etc/X11/xorg.conf.d/10-evdev.conf
+
+No Section "InputClass" with vmmouse driver.
+
+In the *.vmx file add or change:
+
+     usb.generic.allowHID = "TRUE"
+     mouse.vusb.enable = "TRUE"
+     mouse.vusb.useBasicMouse = "FALSE"
 
 > Network connection not working
 
@@ -410,9 +513,16 @@ More informations about the network adpater types can be found on the
 following page: Choosing a network adapter for your virtual machine
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Installing_Arch_Linux_in_VMware&oldid=253863"
+"https://wiki.archlinux.org/index.php?title=Installing_Arch_Linux_in_VMware&oldid=294827"
 
 Categories:
 
 -   Getting and installing Arch
 -   Virtualization
+
+-   This page was last modified on 29 January 2014, at 03:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

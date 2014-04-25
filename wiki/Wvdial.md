@@ -4,23 +4,19 @@ Wvdial
 WvDial is a Point-to-Point Protocol dialer: it dials a modem and starts
 pppd in order to connect to the Internet.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Configuration                                                      |
-| -   2 Using wvdial                                                       |
-|     -   2.1 Using suid                                                   |
-|     -   2.2 Using a dialout group                                        |
-|     -   2.3 Using sudo                                                   |
-|                                                                          |
-| -   3 Tips and Tricks                                                    |
-|     -   3.1 Low connection speed                                         |
-|         -   3.1.1 QoS parameter                                          |
-|         -   3.1.2 Baud parameter                                         |
-|                                                                          |
-|     -   3.2 Auto Reconnect                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Configuration
+-   2 Using wvdial
+    -   2.1 Using suid
+    -   2.2 Using a dialout group
+    -   2.3 Using sudo
+-   3 Tips and Tricks
+    -   3.1 Low connection speed
+        -   3.1.1 QoS parameter
+        -   3.1.2 Baud parameter
+    -   3.2 Auto Reconnect
 
 Configuration
 -------------
@@ -211,3 +207,10 @@ Retrieved from
 Category:
 
 -   Networking
+
+-   This page was last modified on 17 April 2013, at 12:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

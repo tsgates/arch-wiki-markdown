@@ -1,28 +1,20 @@
 Savage
 ======
 
-> Summary
+Related articles
 
-This article describes the installation of the Xorg 2D acceleration
-graphics driver for Savage video chipsets.
-
-> Related
-
-Xorg
+-   Xorg
 
 Savage is a video chipset that was manufactured by S3 and VIA. This
 driver supports Savage, ProSavage and Twister chipsets.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Xorg driver                                                        |
-|     -   1.1 Installation                                                 |
-|     -   1.2 Configuration                                                |
-|                                                                          |
-| -   2 Framebuffer handling                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Xorg driver
+    -   1.1 Installation
+    -   1.2 Configuration
+-   2 Framebuffer handling
 
 Xorg driver
 -----------
@@ -30,7 +22,7 @@ Xorg driver
 > Installation
 
 If you already have installed Xorg you only need to install
-xf86-video-savage from the Official Repositories.
+xf86-video-savage from the Official repositories.
 
 > Configuration
 
@@ -44,7 +36,7 @@ Paste following text and save the file:
     Section "Device"
             Identifier	"gfxcard"
             Driver		"savage"
-    # You will likely have to use NoAccel.  You can try EXA, but it's likely you'll end up
+    # You will likely have to use NoAccel.  You can try EXA, but it's likely you will end up
     # with a corrupted screen or a hard lockup.
             Option		"NoAccel" "True"
     # Use ShadowFB instead of acceleration.  It's unlikely that acceleration will provide
@@ -60,7 +52,7 @@ Paste following text and save the file:
     # The 1024 in UseTiming is for a Notebook with a native resolution of 1024x768 pixel.
     # If you have a native resolution of 800x600 pixel you should use "UseTiming800" instead.
     #       Option		"UseTiming1024"
-    # EXA might or might not work.  It's likely that it won't, but if you want to try it,
+    # EXA might or might not work.  It's likely that it will not, but if you want to try it,
     # uncomment the following line and comment out the "NoAccel" option:
     #       Option         "AccelMethod" "EXA"
     EndSection
@@ -91,9 +83,16 @@ parameter. For example, put vga = 0x314 at the end of your parameters
 for an 800x600 framebuffer, or vga = 0x317 for a 1024x768 framebuffer.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Savage&oldid=236688"
+"https://wiki.archlinux.org/index.php?title=Savage&oldid=301688"
 
 Categories:
 
 -   Graphics
 -   X Server
+
+-   This page was last modified on 24 February 2014, at 12:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

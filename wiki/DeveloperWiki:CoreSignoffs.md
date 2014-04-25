@@ -11,15 +11,13 @@ DeveloperWiki:CoreSignoffs
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Core Signoffs                                                      |
-|     -   1.1 Process                                                      |
-|     -   1.2 Caveats                                                      |
-|     -   1.3 List of potential signees for low-usage core packages        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Core Signoffs
+    -   1.1 Process
+    -   1.2 Caveats
+    -   1.3 List of potential signees for low-usage core packages
 
 Core Signoffs
 =============
@@ -240,3 +238,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 11 December 2011, at 17:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

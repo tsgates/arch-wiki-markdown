@@ -5,33 +5,28 @@ This article describes the installation and configuration of 64-bit Arch
 Linux on the Samsung N150 netbook. Based on the output from dmidecode,
 this material might also be useful for the N210 and N220 models.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware overview                                                  |
-| -   2 Installation                                                       |
-| -   3 Device configuration                                               |
-|     -   3.1 Ethernet (wired)                                             |
-|     -   3.2 Wireless networking                                          |
-|         -   3.2.1 Atheros AR9285                                         |
-|         -   3.2.2 Realtek 8192E                                          |
-|         -   3.2.3 Broadcom BCM4313 (Samsung N150-Plus)                   |
-|                                                                          |
-|     -   3.3 Graphics                                                     |
-|         -   3.3.1 Backlight                                              |
-|                                                                          |
-|     -   3.4 Audio                                                        |
-|     -   3.5 Suspend to RAM (S3 sleep)                                    |
-|     -   3.6 Suspend to disk (hibernate)                                  |
-|     -   3.7 Touchpad                                                     |
-|     -   3.8 CPU frequency scaling                                        |
-|                                                                          |
-| -   4 Fn keys                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware overview
+-   2 Installation
+-   3 Device configuration
+    -   3.1 Ethernet (wired)
+    -   3.2 Wireless networking
+        -   3.2.1 Atheros AR9285
+        -   3.2.2 Realtek 8192E
+        -   3.2.3 Broadcom BCM4313 (Samsung N150-Plus)
+    -   3.3 Graphics
+        -   3.3.1 Backlight
+    -   3.4 Audio
+    -   3.5 Suspend to RAM (S3 sleep)
+    -   3.6 Suspend to disk (hibernate)
+    -   3.7 Touchpad
+-   4 CPU frequency scaling
+-   5 Fn keys
 
 Hardware overview
-=================
+-----------------
 
 The Samsung N150 netbook is equipped with the Intel Atom N450
 ("Pineview") CPU with integrated Intel GMA 3100 GPU and "Pine Trail"
@@ -60,7 +55,7 @@ An integrated VGA-resolution webcam is connected to the internal USB
 controller.
 
 Installation
-============
+------------
 
 Since netbooks lack optical drives, the preferred installation mechanism
 is via a USB flash drive. Upon first boot into the 2009.08 installation
@@ -79,9 +74,10 @@ should be created using an external DVD burner prior to installing Arch.
 Upon the first installation, cfdisk will exit with an error due to the
 existing partition layout extending beyond the end of the disk (using
 Linux default geometries). The solution is to run fdisk and create a
-new, empty partition table. WARNING: This operation will destroy the
-current hard disk partitions, effectively causing all data on the hard
-disk to be lost.
+new, empty partition table.
+
+Warning:This operation will destroy the current hard disk partitions,
+effectively causing all data on the hard disk to be lost.
 
     fdisk /dev/sda << EOF
     o
@@ -92,18 +88,16 @@ After initializing the drive with an empty partition table, cfdisk will
 work properly in the Arch installer.
 
 Device configuration
-====================
+--------------------
 
-Ethernet (wired)
-----------------
+> Ethernet (wired)
 
 The Marvell 88E8040 wired 10/100 Ethernet adapter works out of the box
 with the default kernel. By installing NetworkManager and delaying
 network initialization until after the GUI is displayed, the boot
 process can be expedited.
 
-Wireless networking
--------------------
+> Wireless networking
 
 The Samsung N150 is sold with two different wireless cards: the Atheros
 AR9285 and the Realtek 8192E.
@@ -111,7 +105,7 @@ AR9285 and the Realtek 8192E.
 Note: the Samsung N150-Plus model can also be equipped with a Broadcom
 BCM4313 WiFi card.
 
-> Atheros AR9285
+Atheros AR9285
 
 This wireless adapter also works out of the box, including full WPA2-PSK
 support via NetworkManager. Power to the transmitter can be toggled if
@@ -120,12 +114,12 @@ the rfkill package is installed, if the following script is installed in
 
     #!/bin/sh
 
-    blocked=`rfkill list wlan | grep "Soft blocked: yes"`
+    blocked=$(rfkill list wlan | grep "Soft blocked: yes")
 
     if [ -z "$blocked" ]; then
-       rfkill block wlan
+            rfkill block wlan
     else
-       rfkill unblock wlan
+            rfkill unblock wlan
     fi
 
 Also, this is the script that can do same function and more:
@@ -134,62 +128,62 @@ Also, this is the script that can do same function and more:
 
     case "$1" in
     toggle)
-        $0 &> /dev/null
-        case "$2" in
-        on)
-            if [ $? -eq 1 ]; then
-                rfkill unblock wifi
-                $0 &> /dev/null
-                if [ $? -eq 0 ]; then
-                    echo "Wi-Fi toggled on"
-                else
-                    echo "Can't toggle Wi-Fi on"
-                    exit 2
-                fi
-            else
-                echo "Wi-Fi already toggled on"
-            fi
-            ;;
-        off)
-            if [ $? -eq 0 ]; then
-                rfkill block wifi
-                $0 &> /dev/null
-                if [ $? -eq 1 ]; then
-                    echo "Wi-Fi toggled off"
-                else
-                    echo "Can't toggle Wi-Fi off"
-                    exit 3
-                fi
-            else
-                echo "Wi-Fi already toggled off"
-            fi
-            ;;
-        *)
-            if [ $? -eq 1 ]; then
-                $0 toggle on
-            else
-                $0 toggle off
-            fi
-            ;;
+            $0 &> /dev/null
+            case "$2" in
+            on)
+                    if [ $? -eq 1 ]; then
+                            rfkill unblock wifi
+                            $0 &> /dev/null
+                            if [ $? -eq 0 ]; then
+                                    echo "Wi-Fi toggled on"
+                            else
+                                    echo "Can't toggle Wi-Fi on"
+                                    exit 2
+                            fi
+                    else
+                            echo "Wi-Fi already toggled on"
+                    fi
+            ;;
+            off)
+                    if [ $? -eq 0 ]; then
+                            rfkill block wifi
+                            $0 &> /dev/null
+                            if [ $? -eq 1 ]; then
+                                    echo "Wi-Fi toggled off"
+                            else
+                                    echo "Can't toggle Wi-Fi off"
+                                    exit 3
+                            fi
+                    else
+                            echo "Wi-Fi already toggled off"
+                    fi
+            ;;
+            *)
+                    if [ $? -eq 1 ]; then
+                            $0 toggle on
+                    else
+                            $0 toggle off
+                    fi
+            ;;
         esac
-        ;;
+    ;;
     *)
         rfkill list wifi | grep ': yes' &> /dev/null
         if [ $? -eq 1 ]; then
-            echo "Wi-Fi is on"
+                echo "Wi-Fi is on"
         else
-            echo "Wi-Fi is off"
-            exit 1
+                echo "Wi-Fi is off"
+                exit 1
         fi
-        ;;
+    ;;
     esac
 
-> Realtek 8192E
+Realtek 8192E
 
 The RTL8192E driver is in the Arch kernel, but firmware is required. It
 is in the linux-firmware package.
 
-> Broadcom BCM4313 (Samsung N150-Plus)
+Broadcom BCM4313 (Samsung N150-Plus)
 
 Samsung N150-Plus has a newer Broadcom BCM4313 adapter with built-in
 bluetooth. As of kernel v2.6.37, this card works out of the box thanks
@@ -200,8 +194,7 @@ Bluetooth also works fine with either driver.
 
 For more information: Broadcom wireless
 
-Graphics
---------
+> Graphics
 
 The Intel GMA 3100 GPU, embedded in the Atom 450 CPU package, works out
 of the box with Kernel Mode Setting. Early KMS initialization seems to
@@ -219,13 +212,13 @@ Once Fn keys are enabled (see below), Fn+F4 will toggle between LCD
 only, extended, and cloned modes automatically whenever an external
 screen is connected to the VGA port.
 
-> Backlight
+Backlight
 
 Like other Samsung laptops and netbooks, direct ACPI control of the
 backlight is not possible on the N150. Instead, a script can be created
 to manage backlight settings by changing the PCI configuration of the
 display adapter. For ease of use with the Fn keys section, this script
-should be located at /usr/local/sbin/backlight
+should be located at /usr/local/bin/backlight:
 
     #!/bin/bash
     # increase/decrease/set/get the backlight brightness (range 0-255)
@@ -244,46 +237,45 @@ should be located at /usr/local/sbin/backlight
     DEFAULT=64
      
     #get current brightness in hex and convert to decimal
-    var1=`setpci -s $DEVICE F4.B`
+    var1=$(setpci -s $DEVICE F4.B)
     var1d=$((0x$var1))
     case "$1" in
            up)
-                   #calculate new brightness
-                   var2=`echo "ibase=10; obase=16; a=($var1d+$AMOUNT);if (a<255) print a else print 255" | bc`
+                   # Calculate new brightness
+                   var2=$(echo "ibase=10; obase=16; a=($var1d+$AMOUNT);if (a<255) print a else print 255" | bc)
                    echo "$0: increasing brightness from 0x$var1 to 0x$var2"
                    setpci -s $DEVICE F4.B=$var2
-                   ;;
+           ;;
            down)
                    #calculate new brightness
-                   var2=`echo "ibase=10; obase=16; a=($var1d-$AMOUNT);if (a>$MIN) print a else print $MIN" | bc`
+                   var2=$(echo "ibase=10; obase=16; a=($var1d-$AMOUNT);if (a>$MIN) print a else print $MIN" | bc)
                    echo "$0: decreasing brightness from 0x$var1 to 0x$var2"
                    setpci -s $DEVICE F4.B=$var2
-                   ;;
+           ;;
            set)
                    #n.b. this does allow "set 0" i.e. backlight off
                    echo "$0: setting brightness to 0x$2"
                    setpci -s $DEVICE F4.B=$2
-                   ;;
+           ;;
            get)
                    echo "$0: current brightness is 0x$var1"
-                   ;;
+           ;;
            toggle)
-                   if [ $var1d -eq 0 ] ; then
+                   if [ $var1d -eq 0 ] ; then
                            echo "toggling up"
                            setpci -s $DEVICE F4.B=$DEFAULT
                    else
                            echo "toggling down"
                            setpci -s $DEVICE F4.B=0
                    fi
-                   ;;
+           ;;
            *)
                    echo "usage: $0 {up|down|set <val>|get|toggle}"
-                   ;;
+           ;;
     esac
     exit 0
 
-Audio
------
+> Audio
 
 Intel HD Audio works out of the box on this model, although the volume
 for the "speaker" mixer channel needs to be increased from zero. Install
@@ -296,8 +288,7 @@ You have to run the following:
     # echo 0x19 0x90A70011 > /sys/class/sound/hwC0D0/user_pin_configs
     # echo 1 > /sys/class/sound/hwC0D0/reconfig
 
-Suspend to RAM (S3 sleep)
--------------------------
+> Suspend to RAM (S3 sleep)
 
 With Gnome 2.28 and the gnome-power-manager package installed,
 suspend-to-RAM works out of the box whenever the netbook lid is closed.
@@ -322,32 +313,30 @@ following content
     # bug: https://bugzilla.kernel.org/show_bug.cgi?id=21952
 
     case "$1" in
-    hibernate|suspend)
-    echo 0 > /sys/devices/system/cpu/cpu1/online
-    ;;
-    thaw|resume)
-    echo 1 > /sys/devices/system/cpu/cpu1/online
-    ;;
-    *) exit $NA
-    ;;
+            hibernate|suspend)
+                    echo 0 > /sys/devices/system/cpu/cpu1/online
+            ;;
+            thaw|resume)
+                    echo 1 > /sys/devices/system/cpu/cpu1/online
+            ;;
+            *) exit $NA
+            ;;
     esac
 
-Suspend to disk (hibernate)
----------------------------
+> Suspend to disk (hibernate)
 
 Hibernate support with pm-utils does not work reliably. Upon resuming
 from hibernation, there are ELF header errors related to glibc,
-effectively preventing any new applications (including /sbin/shutdown)
-from starting. Moreover, even if this problem can be resolved, the
-process of resuming from the swap partition (before the errors are
-observed) is slightly longer than a cold boot.
+effectively preventing any new applications (including shutdown) from
+starting. Moreover, even if this problem can be resolved, the process of
+resuming from the swap partition (before the errors are observed) is
+slightly longer than a cold boot.
 
 With the kernel 2.6.36 series, some samsung N series machines requires
 to add the parameter intel_idle.max_cstate=0 to the kernel line for the
 hibernation/suspension to work correctly.
 
-Touchpad
---------
+> Touchpad
 
 The Synaptics touchpad works for single-finger operation with scrolling
 along the right edge out of the box. When Fn+F10 is pressed, the BIOS
@@ -355,7 +344,7 @@ automatically enables or disables the touchpad hardware. To receive
 notification of this event, it is useful to install the xosd package and
 configure a script to print a message whenever Fn+F10 is pressed (see
 below for Fn key configuration). This script should be saved in
-/usr/local/bin/report_touchpad
+/usr/local/bin/report_touchpad:
 
     #!/bin/bash
 
@@ -364,16 +353,16 @@ below for Fn key configuration). This script should be saved in
     state=Unknown
 
     case "$1" in
-       on)
-          state=Enabled
-          ;;
-       off)
-          state=Disabled
-          ;;
-       *)
-          echo "usage: $0 {on|off}"
-          exit 2
-          ;;
+            on)
+                    state=Enabled
+            ;;
+            off)
+                    state=Disabled
+            ;;
+            *)
+                    echo "usage: $0 {on|off}"
+                    exit 2
+            ;;
     esac
 
     osd_cat -A center -p middle -f $FONT -d $DELAY << EOF
@@ -423,26 +412,25 @@ CPU frequency scaling
 ---------------------
 
 To improve power management to some degree, CPU frequency scaling can be
-enabled. This mechanism requires a few modules to be loaded at boot time
-from /etc/rc.conf:
-
-    MODULES=(acpi-cpufreq cpufreq-ondemand cpufreq-powersave)
+enabled. This mechanism requires a few modules, like acpi-cpufreq,
+cpufreq-ondemand and cpufreq-powersave, to be loaded at boot time from
+/etc/modules-load.d/ as described in Kernel modules.
 
 Toggling between the performance, ondemand, and powersave governors can
 be accomplished via the following script, installed to
-/usr/local/sbin/cpufreq_toggle
+/usr/local/bin/cpufreq_toggle
 
     #!/bin/bash
 
-    current=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`
+    current=$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor)
     future=unknown
 
     if [ "$current" == "performance" ]; then
-       future="ondemand"
+            future="ondemand"
     elif [ "$current" == "ondemand" ]; then
-       future="powersave"
+            future="powersave"
     else
-       future="performance"
+            future="performance"
     fi
 
     echo "$future" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -460,15 +448,15 @@ following wrapper script can be installed as
     FONT='-adobe-helvetica-bold-*-*-*-34-*-*-*-*-*-*-*'
     DELAY=1
 
-    state=`sudo /usr/local/sbin/cpufreq_toggle`
+    state=$(sudo /usr/local/bin/cpufreq_toggle)
     message="CPU Performance State Unknown"
 
     if [ "$state" == "performance" ]; then
-       message="Performance Mode"
+            message="Performance Mode"
     elif [ "$state" == "powersave" ]; then
-       message="Low Power Mode"
+            message="Low Power Mode"
     elif [ "$state" == "ondemand" ]; then
-       message="Automatic Mode"
+            message="Automatic Mode"
     fi
 
     osd_cat -A center -p middle -f $FONT -d $DELAY << EOF
@@ -479,16 +467,25 @@ following wrapper script can be installed as
 
 By default, the system will boot with CPU frequency scaling set to use
 the performance governor. To enable the ondemand governor at the end of
-the boot process, append the following to /etc/rc.local
+the boot process, create a tmpfile:
 
-    echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-    echo "ondemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+    /etc/tmpfiles.d/cpu_scaling.conf
+
+    w /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor - - - - ondemand
+    w /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor - - - - ondemand
 
 Fn keys
-=======
+-------
 
 Samsung Tools can be installed to quickly get the Fn key combinations
-work. It is available in AUR samsung-tools
+work. It is available in AUR (samsung-tools).
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: rc.local         
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 Several of the special Fn key combinations work out of the box with the
 N150, but most do not. Unusual scancodes are reported to the kernel,
@@ -513,10 +510,10 @@ corresponding key release event. Appending the following lines to
 
 To enable hotkeys to change backlight, wireless, and system performance
 settings, it is necessary to give regular users certain permissions via
-the sudo command. Run visudo as root and add the following to the Cmnd
-alias specifications:
+the sudo command. Run # visudo and add the following to the Cmnd alias
+specifications:
 
-    Cmnd_Alias NETBOOK_CMDS = /usr/local/sbin/backlight, /usr/local/sbin/rftoggle, /usr/local/sbin/cpufreq_toggle
+    Cmnd_Alias NETBOOK_CMDS = /usr/local/bin/backlight, /usr/local/bin/rftoggle, /usr/local/bin/cpufreq_toggle
 
 Then add the following to the bottom of the file:
 
@@ -525,19 +522,26 @@ Then add the following to the bottom of the file:
 Now custom keyboard shortcuts can be added to Gnome by means of the
 "Keyboard Shortcuts" preferences.
 
-  Name                           Command                                 Key
-  ------------------------------ --------------------------------------- --------------------------------------
-  Touchpad disabled              /usr/local/bin/report_touchpad off      Press Fn+F10 while touchpad enabled
-  Touchpad enabled               /usr/local/bin/report_touchpad on       Press Fn+F10 while touchpad disabled
-  Toggle CPU frequency scaling   /usr/local/bin/cpufreq_toggle_osd       Fn+F8
-  Raise backlight                sudo /usr/local/sbin/backlight up       Fn+Up arrow
-  Lower backlight                sudo /usr/local/sbin/backlight down     Fn+Down arrow
-  Toggle wireless                sudo /usr/local/sbin/rftoggle           Fn+F9
-  Toggle backlight               sudo /usr/local/sbin/backlight toggle   Fn+F5
+  Name                           Command                                Key
+  ------------------------------ -------------------------------------- --------------------------------------
+  Touchpad disabled              /usr/local/bin/report_touchpad off     Press Fn+F10 while touchpad enabled
+  Touchpad enabled               /usr/local/bin/report_touchpad on      Press Fn+F10 while touchpad disabled
+  Toggle CPU frequency scaling   /usr/local/bin/cpufreq_toggle_osd      Fn+F8
+  Raise backlight                sudo /usr/local/bin/backlight up       Fn+Up arrow
+  Lower backlight                sudo /usr/local/bin/backlight down     Fn+Down arrow
+  Toggle wireless                sudo /usr/local/bin/rftoggle           Fn+F9
+  Toggle backlight               sudo /usr/local/bin/backlight toggle   Fn+F5
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Samsung_N150&oldid=206727"
+"https://wiki.archlinux.org/index.php?title=Samsung_N150&oldid=304873"
 
 Category:
 
 -   Samsung
+
+-   This page was last modified on 16 March 2014, at 08:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

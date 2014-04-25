@@ -5,15 +5,13 @@ SugarSync is a file sync and online backup tool similar to Dropbox.
 Unfortunately, there is no native Linux client available. However, it
 works well through wine.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Running the file manager                                           |
-| -   3 Quick start guide                                                  |
-| -   4 An update window popped up                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Running the file manager
+-   3 Quick start guide
+-   4 An update window popped up
 
 Installation
 ------------
@@ -63,8 +61,16 @@ installation, as you wish. There is nothing more to do than waiting for
 the download and update to finish.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SugarSync&oldid=228615"
+"https://wiki.archlinux.org/index.php?title=SugarSync&oldid=302661"
 
-Category:
+Categories:
 
--   Networking
+-   Internet applications
+-   Wine
+
+-   This page was last modified on 1 March 2014, at 04:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

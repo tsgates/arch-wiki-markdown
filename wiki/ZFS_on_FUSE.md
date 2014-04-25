@@ -1,16 +1,22 @@
 ZFS on FUSE
 ===========
 
-> Summary
+Related articles
 
-This page provides basic guidelines for using ZFS from user space
-through FUSE.
+-   ZFS
+-   Playing with ZFS
+-   ZFS Installation
+-   Installing Arch Linux on ZFS
 
-> Related
-
-ZFS
-
-Installing Arch Linux on ZFS
+  ------------------------ ------------------------ ------------------------
+  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
+  png]                     this article or section  png]
+                           is disputed.             
+                           Reason: Be aware that    
+                           this package is still    
+                           using systemv init       
+                           scripts. (Discuss)       
+  ------------------------ ------------------------ ------------------------
 
 ZFS on FUSE/Linux is a project bringing the ZFS file system to Linux.
 Due to incompatible license with GPL it is argued that it cannot exist
@@ -25,25 +31,19 @@ compared to original implementation (incomplete list):
     to another disk to actually be able to browse the file system (due
     to missing .zfs special directory).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Use                                                                |
-|     -   2.1 Quick Setup Guide                                            |
-|         -   2.1.1 Automatically mount pools and datasets on boot         |
-|                                                                          |
-|     -   2.2 NFS shares                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 Quick setup guide
+        -   2.1.1 Automatically mount pools and datasets on boot
+    -   2.2 NFS shares
 
 Installation
 ------------
 
-ZFS on FUSE/Linux is available in AUR as "zfs-fuse" (0.7.0 as of Feb
-2012). Install manually or with yaourt:
-
-    $ yaourt -S zfs-fuse
+Install zfs-fuse from the AUR.
 
 Read the messages after installation and be sure to edit the
 configuration files as per your needs.
@@ -59,20 +59,20 @@ Start zfs-fuse daemon:
 You will want to add "fuse" module to MODULES array in /etc/rc.conf and
 the zfs-fuse to the DAEMONS array to have it started after reboot.
 
-Use
----
+Usage
+-----
 
-> Quick Setup Guide
+> Quick setup guide
 
 Search on Google how ZFS works. Be sure, which block device you specify
 and better backup before continueing!
 
 Briefly, you will want to create a pool (as root):
 
--   [Warning: Always try to use id names instead when working with ZFS,
-    otherwise import errors will occur.]
+Warning:Always try to use id names instead when working with ZFS,
+otherwise import errors will occur.
 
-    # zpool create mypool /dev/disk/by-id/<id-to-partition>
+    # zpool create mypool /dev/disk/by-id/id-to-partition
 
 Alternatively:
 
@@ -89,7 +89,7 @@ to create snapshots independently, etc.
 
     # zfs create mypool/my1stdataset 
 
-NB that "mypool" is a reference to an existing pool, not to the mount
+Note that "mypool" is a reference to an existing pool, not to the mount
 point (which is /mypool at the moment).
 
 Automatically mount pools and datasets on boot
@@ -97,12 +97,12 @@ Automatically mount pools and datasets on boot
 Pools and datasets can be mounted during boot by adding them to the
 arrays in /etc/conf.d/zfs-fuse.
 
-If you like to have all pools and all datasets mounted you can add a
-"-a" in the array:
+If you like to have all pools and all datasets mounted you can add a -a
+in the array:
 
     ZFS_IMPORT=("-a")
 
-If you like to have all datasets mounted add "-a" in that array as well:
+If you like to have all datasets mounted add -a in that array as well:
 
     ZFS_MOUNT=("-a")
 
@@ -128,36 +128,37 @@ The exported shares and their options can be listed as follows:
 
     # cat /var/lib/nfs/etab
 
-NB:
+> Note:
 
--   It does not work to use only "zfs set sharenfs=on
-    mypool/my1stdataset" - it is not possible to mount such a share from
-    other computers.
-
+-   It does not work to use only zfs set sharenfs=on mypool/my1stdataset
+    - it is not possible to mount such a share from other computers.
 -   Only NFS version 3 seems to be supported for readonly (ro) shares
-    (use "mount servername:/mypool/my1stdataset /mnt -o vers=3,defaults"
-    to force that version)
-
+    (use
+    mount servername:/mypool/my1stdataset /mnt -o vers&#613,defaults to
+    force that version)
 -   It does not work to use "*" as shortcut for any host name. Use the
-    actual IP address / mask of NFS clients list.
-
--   Running subsequent 'zfs set sharenfs="10.1.0.3:rw"
-    mypool/my1stdataset' will add the extra host to the existing
-    exports.
-
--   To remove existing exports, run "zfs set sharenfs=off
-    mypool/my1stdataset".
-
--   To enable sharing after reboot, put "zfs share -a" to your
-    /etc/rc.local".
-
+    actual IP address/mask of NFS clients list.
+-   Running subsequent
+    zfs set sharenfs="10.1.0.3:rw" mypool/my1stdataset will add the
+    extra host to the existing exports.
+-   To remove existing exports, run
+    zfs set sharenfs=off mypool/my1stdataset.
+-   To enable sharing after reboot, put
+    zfs share -a" to your /etc/rc.local.
 -   It is possible to use also the regular way of exporting NFS shares
     via /etc/exports, however, do not set it up for the shares, which
-    are exported by zfs directly!
+    are exported by ZFS directly!
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ZFS_on_FUSE&oldid=243689"
+"https://wiki.archlinux.org/index.php?title=ZFS_on_FUSE&oldid=297456"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 14 February 2014, at 10:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

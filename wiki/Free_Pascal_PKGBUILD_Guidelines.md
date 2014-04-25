@@ -14,18 +14,16 @@ Free Pascal Compiler (FPC). There currently exists two options for
 building software of Linux, as well as a handful of options for building
 software on other targets using FPC cross compilers:
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Arch Linux                                                         |
-| -   2 Cross compilers                                                    |
-| -   3 Free Pascal                                                        |
-|     -   3.1 Package naming                                               |
-|     -   3.2 Helpful snippets                                             |
-|     -   3.3 Packaging                                                    |
-|         -   3.3.1 Cross compiling                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Arch Linux
+-   2 Cross compilers
+-   3 Free Pascal
+    -   3.1 Package naming
+    -   3.2 Helpful snippets
+    -   3.3 Packaging
+        -   3.3.1 Cross compiling
 
 Arch Linux
 
@@ -38,8 +36,10 @@ Arch Linux
 
 Cross compilers
 
+-   fpc-arm-android-rtl for ARM-based Android (beta)
 -   fpc-arm-linux-rtl for ARM-based Linux
 -   fpc-arm-wince-rtl for MS Windows CE
+-   fpc-i386-android-rtl for 32-bit Intel based Android (beta)
 -   fpc-i386-freebsd-rtl for 32-bit Intel FreeBSD
 -   fpc-i386-win32-rtl for 32-bit MS Windows
 -   fpc-powerpc-linux-rtl for 32-bit PowerPC-based Linux
@@ -60,30 +60,39 @@ fpc-cpu-system-pkgname when targetting non-Arch Linux systems.
 
 -   Determine FPC's version and the CPU and OS of the units to output:
 
-    _unittgt=`fpc -iSP`-`fpc -iSO`
-    _fpcvers=`fpc -iV`
+    _unitdir=`fpc -iSP`-`fpc -iSO`
+    _fpcver=`fpc -iV`
 
 > Packaging
 
 Please adhere to the following when making an FPC-based package:
 
--   always add fpc to makedepends
--   always put all compiled units (*.compiled, *.o, *.ppu, *.res, *.rst)
-    under /usr/lib/fpc/$_fpcvers/units/$arch-linux
+-   always add fpc to either makedepends or depends
+-   always put all compiled units (*.a, *.compiled, *.o, *.ppu, *.res,
+    *.rst) under /usr/lib/fpc/$_fpcver/units/$arch-linux
+-   add staticlibs to options if installing an import library
 
 Cross compiling
 
 -   always add the corresponding cross compiler package mentioned above
     (fpc-cpu-system-rtl or fpc-multilib for multilib) to depends
 -   always add !strip to options for non-Unix-based systems
--   always put all compiled units (*.compiled, *.o, *.ppu, *.res, *.rst)
-    under /usr/lib/fpc/$_fpcvers/units/$_unittgt (or if multilib,
-    /usr/lib/fpc/$_fpcvers/units/i386-linux)
+-   always put all compiled units (*.a, *.compiled, *.o, *.ppu, *.res,
+    *.rst) under /usr/lib/fpc/$_fpcver/units/$_unitdir (or if multilib,
+    /usr/lib/fpc/$_fpcver/units/i386-linux)
 -   always use any (x86_64 if multilib) as the architecture
+-   add staticlibs to options if installing an import library
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Free_Pascal_PKGBUILD_Guidelines&oldid=216875"
+"https://wiki.archlinux.org/index.php?title=Free_Pascal_PKGBUILD_Guidelines&oldid=281391"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 4 November 2013, at 09:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

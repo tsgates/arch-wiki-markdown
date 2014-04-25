@@ -15,16 +15,14 @@ Fluendo. It features intuitive graphical administration tools, making
 the task of setting up and manipulating audio and video streams easy for
 even novice system administrators.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Flumotion                                               |
-| -   2 Changing the Default User and Pass                                 |
-| -   3 Starting the manager                                               |
-| -   4 Starting the worker                                                |
-| -   5 Starting Config App                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing Flumotion
+-   2 Changing the Default User and Pass
+-   3 Starting the manager
+-   4 Starting the worker
+-   5 Starting Config App
 
 Installing Flumotion
 --------------------
@@ -51,7 +49,7 @@ Starting the manager
 
     flumotion-manager -d 3 /etc/flumotion/managers/default/planet.xml
 
-Note: You can specify a different PEM certificate file by passing the
+Note:You can specify a different PEM certificate file by passing the
 --certificate parameter to the manager.
 
 Starting the worker
@@ -62,13 +60,19 @@ Starting the worker
 Starting Config App
 -------------------
 
-    GUI: flumotion-admin
-
-    ncurses: flumotion-admin-text
+-   GUI: flumotion-admin
+-   ncurses: flumotion-admin-text
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Flumotion&oldid=205291"
+"https://wiki.archlinux.org/index.php?title=Flumotion&oldid=270482"
 
 Category:
 
--   Networking
+-   Streaming
+
+-   This page was last modified on 9 August 2013, at 09:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

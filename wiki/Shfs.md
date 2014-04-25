@@ -9,19 +9,16 @@ only the access is governed through the transport security of ssh.
 Note that the FUSE-based Sshfs is much more widely used, as shfs has not
 been updated since 2004.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Why SHFS?                                                          |
-| -   2 Howto SHFS                                                         |
-|     -   2.1 Installation                                                 |
-|     -   2.2 Configuration                                                |
-|     -   2.3 /etc/fstab                                                   |
-|                                                                          |
-| -   3 See Also                                                           |
-| -   4 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Why SHFS?
+-   2 Howto SHFS
+    -   2.1 Installation
+    -   2.2 Configuration
+    -   2.3 /etc/fstab
+-   3 See Also
+-   4 External Links
 
 Why SHFS?
 ---------
@@ -121,3 +118,10 @@ Categories:
 
 -   File systems
 -   Secure Shell
+
+-   This page was last modified on 4 April 2013, at 15:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

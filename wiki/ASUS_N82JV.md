@@ -20,33 +20,27 @@ ASUS N82JV
   Suspend to RAM   Working             
   ---------------- ------------------- ------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Configuration                                                      |
-|     -   2.1 CPU                                                          |
-|     -   2.2 Video                                                        |
-|         -   2.2.1 Intel                                                  |
-|         -   2.2.2 Nvidia                                                 |
-|             -   2.2.2.1 Switching / Using Nvidia card                    |
-|             -   2.2.2.2 Disabling the Nvidia card                        |
-|                 -   2.2.2.2.1 acpi_call (manual)                         |
-|                     -   2.2.2.2.1.1 Run on Startup                       |
-|                     -   2.2.2.2.1.2 Enable/Disable Scripts               |
-|                                                                          |
-|     -   2.3 Audio                                                        |
-|         -   2.3.1 HDMI                                                   |
-|                                                                          |
-|     -   2.4 Touchpad                                                     |
-|         -   2.4.1 Working 10-synaptics.conf                              |
-|                                                                          |
-|     -   2.5 Suspend to RAM                                               |
-|                                                                          |
-| -   3 Webcam                                                             |
-| -   4 Function Keys                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Configuration
+    -   2.1 CPU
+    -   2.2 Video
+        -   2.2.1 Intel
+        -   2.2.2 Nvidia
+            -   2.2.2.1 Switching / Using Nvidia card
+            -   2.2.2.2 Disabling the Nvidia card
+                -   2.2.2.2.1 acpi_call (manual)
+                    -   2.2.2.2.1.1 Run on Startup
+                    -   2.2.2.2.1.2 Enable/Disable Scripts
+    -   2.3 Audio
+        -   2.3.1 HDMI
+    -   2.4 Touchpad
+        -   2.4.1 Working 10-synaptics.conf
+    -   2.5 Suspend to RAM
+-   3 Webcam
+-   4 Function Keys
 
 Hardware
 ========
@@ -154,7 +148,7 @@ Run on Startup
 
 If you want run it on every startup add these lines to /etc/rc.local
 
-Note:Running this without a delay on Kernel 2.6.35.x has issues (Boots
+Note:Running this without a delay on Kernel 2.6.35.x has problems (Boots
 fine but X and tty do not show up; to avoid that, simply add
 sleep <time> before these lines and remember that sleep affects every
 line below it. If you mess up or decide to test it, just boot into
@@ -222,7 +216,7 @@ Open /etc/modprobe.d/sound.conf and add:
 > HDMI
 
 Sound through HDMI works, but requires that the sound profile (mixer) be
-changed manually (not really an issue).
+changed manually (not really a problem).
 
 Touchpad
 --------
@@ -255,9 +249,7 @@ configuration requires this text:
     EndSection
 
 Note:While I settled with these coordinates, they may require tuning:
-Touchpad_Synaptics#fine-tuning_with_synclient
-
-.
+Touchpad Synaptics#Synclient.
 
 > Working 10-synaptics.conf
 
@@ -295,7 +287,7 @@ but it's deactivated.
 Suspend to RAM
 --------------
 
-Note:As far as I can tell, there is a general issue with USB 3.0 and
+Note:As far as I can tell, there is a general problem with USB 3.0 and
 suspending at the kernel level.
 
 Note:This is section was written in kernel 2.6.36.2-1 and with the
@@ -318,7 +310,7 @@ to do:
 
 1.3 Add the resume hook to /etc/mkinitcpio.conf, before filesystems.
 
-    HOOKS="base udev autodetect pata scsi sata resume filesystems"
+    HOOKS="base udev autodetect block resume filesystems"
 
 1.4 Rebuild the initrd image with mkinitcpio -p linux.
 
@@ -359,8 +351,15 @@ It should be possible to have them all working by following Extra
 Keyboard Keys.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_N82JV&oldid=208447"
+"https://wiki.archlinux.org/index.php?title=ASUS_N82JV&oldid=304962"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 09:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

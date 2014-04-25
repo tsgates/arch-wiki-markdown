@@ -1,215 +1,172 @@
 FreeNX
 ======
 
-NX is an exciting new technology for remote display. It providesnear
-local speedapplication responsiveness over high latency, low bandwidth
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: nx-all is not an 
+                           officially supported     
+                           package anymore.use X2Go 
+                           instead (Discuss)        
+  ------------------------ ------------------------ ------------------------
+
+From FreeNX - the free NX:
+
+NX is an exciting new technology for remote display. It provides near
+local speed application responsiveness over high latency, low bandwidth
 links. The core libraries for NX are provided by NoMachine under the
 GPL. FreeNX is a GPL implementation of the NX Server and NX Client
 Components.
 
-— FreeNX - the free NX
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Setup                                                              |
-|     -   2.1 Server                                                       |
-|         -   2.1.1 Keys                                                   |
-|         -   2.1.2 Starting the server                                    |
-|                                                                          |
-|     -   2.2 Client                                                       |
-|         -   2.2.1 Arch Linux                                             |
-|         -   2.2.2 Windows                                                |
-|         -   2.2.3 Configuration                                          |
-|                                                                          |
-| -   3 Running                                                            |
-|     -   3.1 Keyboard shortcuts                                           |
-|     -   3.2 Leaving fullscreen                                           |
-|     -   3.3 Tips on resume                                               |
-|     -   3.4 Fix DPI settings                                             |
-|                                                                          |
-| -   4 FreeNX to existing display                                         |
-| -   5 Setting up non-KDE or Gnome desktop managers                       |
-|     -   5.1 Alternative fix                                              |
-|                                                                          |
-| -   6 Problems                                                           |
-|     -   6.1 Debug problems                                               |
-|     -   6.2 Authentication OK, but connection fails                      |
-|     -   6.3 Key changes                                                  |
-|     -   6.4 Xorg 7                                                       |
-|     -   6.5 Wrong password / No connection possible / Key-based          |
-|         authentication                                                   |
-|     -   6.6 NX Crashes on session startup                                |
-|         -   6.6.1 Missing Fonts                                          |
-|         -   6.6.2 Awesome WM                                             |
-|                                                                          |
-|     -   6.7 NX logo then blank screen                                    |
-|     -   6.8 GDM/XDM Session Menu Error with non-KDE or Gnome Desktop     |
-|         Managers (more common with non-Arch Linux users)                 |
-|     -   6.9 Cannot connect because command sessreg not found             |
-|     -   6.10 Broken resume with Cairo 1.12.x                             |
-|     -   6.11 eclipse crashes when editing a file                         |
-+--------------------------------------------------------------------------+
+-   1 Installation
+-   2 Setup
+    -   2.1 Server
+        -   2.1.1 SSHD
+        -   2.1.2 Main configuration
+        -   2.1.3 Keys
+        -   2.1.4 Starting the server
+    -   2.2 Client
+        -   2.2.1 Arch Linux
+        -   2.2.2 Windows
+        -   2.2.3 Configuration
+-   3 Running
+    -   3.1 Keyboard shortcuts
+    -   3.2 Leaving fullscreen
+    -   3.3 Tips on resume
+    -   3.4 Fix DPI settings
+-   4 FreeNX to existing display
+-   5 Setting up non-KDE or GNOME desktop managers
+    -   5.1 Alternative fix
+-   6 Problems
+    -   6.1 Keyboard Mapping problems
+    -   6.2 Debug problems
+    -   6.3 Authentication OK, but connection fails
+    -   6.4 Key changes
+    -   6.5 Xorg 7
+    -   6.6 Wrong password / No connection possible / Key-based
+        authentication
+    -   6.7 NX crashes on session startup
+        -   6.7.1 Missing fonts
+        -   6.7.2 Awesome WM
+    -   6.8 NX logo then blank screen
+    -   6.9 GDM/XDM Session Menu Error with non-KDE or GNOME Desktop
+        Managers (more common with non-Arch Linux users)
+    -   6.10 Cannot connect because command sessreg not found
+    -   6.11 Broken resume with Cairo 1.12.x
+    -   6.12 Eclipse crashes when editing a file
 
 Installation
 ------------
 
-package is split up into 2 parts:
-
--   freenx (the server)
--   nxclient (the client)
-
-If you plan using freenx to connect to a headless PC, keep in mind that
-you'll also need an X server configured, so you should install any
-relevant xorg package.
+Get FreeNX/Nomachine from nx-all. Both server and client packages are
+included in the package. The sshd daemon (available in openssh package)
+must be installed and running for it to function properly.
 
 Setup
 -----
 
 > Server
 
-The free server is the 'freenx' package.
+SSHD
 
-Get the server from pacman:
+For freenx authentication to work, sshd has to be setup properly. You
+need to allow RSAauthentication, Password Authentication, and you also
+need to include nx public keys to Authorizedkeysfile.
 
-    pacman -S freenx
-
-The sshd daemon must be installed and running for it to function
-properly.
-
-    # systemctl enable sshd
-
-For freenx to authentication to work, sshd has to be setup properly.
-Verify the following entries in /etc/ssh/sshd_config:
+If you do not want to allow password login globally, add match block at
+the end of file like below: /etc/ssh/sshd_config:
 
     RSAAuthentication yes
-    AllowUsers someuser nx
+    PubkeyAuthentication yes
+    PasswordAuthentication no
+    PermitEmptyPasswords yes
+    AuthorizedKeysfIle /usr/NX/home/nx/.ssh/authorized_keys /usr/NX/home/nx/.ssh/authorized_keys2
+    #
+    #
+    #
+    Match Address 127.0.0.1
+      PasswordAuthentication yes
 
-The main configuration file is located at:
+Main configuration
 
-    /etc/nxserver/node.conf
+The main configuration file is located at /usr/NX/node.cfg.
 
 If you are running your SSH daemon on a port other than the default port
-22, you'll need to uncomment and update:
+22, you will need to uncomment and update:SSHD_PORT=22
 
-    SSHD_PORT=22
-
-Note:As of OpenSSL 1.0.0, it is necessary to set proper md5sum command
-in /etc/nxserver/node.conf:
-
-    COMMAND_MD5SUM="md5sum"
-
-If you use KDE or Gnome desktop environments you do not need to edit
+If you use KDE or GNOME desktop environments you do not need to edit
 this file, as the defaults with the modified MD5SUM command should work
 in this case. If you use another window manager such as Fluxbox/Openbox
 or Xfce, you may need to edit this file slightly (see below).
 
-After installing the freenx package, run /usr/bin/nxsetup --help for an
-overview of the install and uninstall procedures.
+Or if you are not using CDE but Xfce you could simply edit CDE line like
+below and start cde from the client:
 
-Note:You should also install "xdialog" on the server or you will not see
-the "suspend/terminate" dialog when you try to close the window or hit
-"ctrl-alt-T":
+    CommandStartCDE = "/usr/bin/startxfce4"
 
-    pacman -S xdialog
+After installing the nx-all package, run
+sudo /usr/NX/scripts/setup/nxserver --help for an overview of the
+install and uninstall procedures.
 
-Note:Although mostly assumed that you will have it already, "xterm" is
-also necessary for some things:
+> Note:
 
-    pacman -S xterm
+-   You should also install xdialog on the server or you will not see
+    the "suspend/terminate" dialog when you try to close the window or
+    hit Ctrl+Alt+t.
+-   Although mostly assumed that you will have it already, xterm is also
+    necessary for some things.
 
 Keys
 
-Keys are used to authenticate the clients with the server. By default a
-new set of random keys are generated during the install, one for the
-server and one for the clients. You will need to copy this client key to
-each of your clients that want to connect (Windows and linux).
+Keys are used to authenticate the clients with the server by default.
+You could used the default key created duaring installation or you could
+create a new pair. If you create your own key pair, make sure you add
+the directory of the public key to authorizedkeyfiles in sshd_config and
+also SSHAuthorizedKeys in node.cfg. And Don't forget to send the private
+key to the client.
 
-The client key can be found here:
+The public key can be found here check :
 
-    /var/lib/nxserver/home/nx/.ssh/client.id_dsa.key
+    /usr/NX/home/nx/.ssh/authorized_keys2
 
-Alternatively you can use the default key that is provided by NoMachine
-with all clients. In this case you do not need to copy a custom
-generated key to each client. To get the server to accept the default
-client keys run:
+The private key can be found here:
 
-    /usr/bin/nxsetup --install --setup-nomachine-key
+    /usr/NX/share/keys/server.id_dsa.key
 
 Recreation of random keys:
 
-    /usr/bin/nxsetup --install
+    /usr/NX/bin/nxserver --keygen
 
-Transferring nx keys to another freenx server:
+You can check if the nxserver is running by:
 
--   /var/lib/nxserver/home/nx/.ssh/ contains the key files
+    /usr/NX/bin/nxserver --status 
 
-     -rw------- 1 nx root  697  9. Okt 12:55 authorized_keys
-     -rw------- 1 nx root  668  9. Okt 11:48 client.id_dsa.key
-     -rw------- 1 nx root  609  9. Okt 12:55 server.id_dsa.pub.key
+You can also check if a desired user can be logged on by:
 
--   Save those files.
--   Add those files to your new server, they need the same permissions,
-    names, group and directory!
-
-     # cp authorized_keys client.id_dsa.key server.id_dsa.pub.key /var/lib/nxserver/home/nx/.ssh/
-     # chmod 600 /var/lib/nxserver/home/nx/.ssh/*
-     # chown nx /var/lib/nxserver/home/nx/.ssh/*
-     # chgrp root /var/lib/nxserver/home/nx/.ssh/*
-
--   Recreate known_hosts file:
-
-     # echo -n 127.0.0.1 > /var/lib/nxserver/home/nx/.ssh/known_hosts
-     # cat /etc/ssh/ssh_host_rsa_key.pub >> /var/lib/nxserver/home/nx/.ssh/known_hosts
-     # chmod 633 /var/lib/nxserver/home/nx/.ssh/known_hosts
-     # chown nx /var/lib/nxserver/home/nx/.ssh/known_hosts
-     # chgrp root /var/lib/nxserver/home/nx/.ssh/known_hosts
+    /usr/NX/bin/nxserver --usercheck USERNAME
 
 Starting the server
 
-Once installed the server is effectively running and ready to go, you do
-not have to do anything manually. The only thing that must be running in
-order to connect is the sshd daemon. This is because the nxserver is
-actually started by logging into sshd as the special user 'nx'. This
-user has been set up to use the nxserver as its shell, much like a
-normal user has bash as the default shell.
+As of installation nxserver is set to start up automatically, however,
+you are likely to need to restart the server after setting up:
 
-You can specify the local addresses sshd should listen for by editing
-/etc/ssh/sshd_config and adding them in the following format:
-
-    ListenAddress host|IPv4_addr|IPv6_addr
-
-The original ListenAddress in sshd_config is 0.0.0.0. This listens to
-all addresses, however adding any address will take precedent to this
-and and accept connections from the new address only.
-
-Restart the sshd daemon to put any changes to its configuration into
-effect:
-
-    # systemctl restart sshd
-
-In actual fact, if you check the process list (ps aux) you may not see
-the nxserver running even though it is. This is because the nxserver is
-actually started by logging into sshd as the special user 'nx'. This
-user has been set up to use the nxserver as its shell, much like a
-normal user has bash as the default shell.
+    /usr/NX/bin/nxserver --restart
 
 > Client
 
 Arch Linux
 
-Get one or both of these clients from pacman:
-
-    pacman -S opennx nxclient
+Install one or both of opennx and nxclient packages.
 
 Windows
 
-Get the client from nomachine's homepage: http://www.nomachine.com
+Get the client from nomachine's homepage: http://www.nomachine.com.
 
-Tip: Nomachine tends to remove old clients from their homepage, If your
-setup works with a client save it at a safe place ;)
+Tip:Nomachine tends to remove old clients from their homepage, If your
+setup works with a client save it in a safe place.
 
 Configuration
 
@@ -217,7 +174,7 @@ As mentioned above, the client must contain the correct key to connect
 to the server. If you are using the custom keys generated during
 install, you need to copy the client key to the following locations:
 
--   Windows: <yourinstalldironwindows>/share/keys/client.id_dsa.key
+-   Windows: your_install_dir_on_windows/share/keys/client.id_dsa.key
 -   Arch Linux: /usr/lib/nx/share/keys/client.id_dsa.key
 
 After moving the keys you may have use the nxclient GUI to import the
@@ -280,10 +237,8 @@ FreeNX to existing display
 Usually, when connecting to a NX server, a new X session is created.
 Sometimes it might be useful, to connect to an existing X session, e.g.
 the root session. This is not possible with NX in default setup, but can
-be reached, using tightvnc and x11vnc. Do the following steps on the NX
-server system.
-
-    # pacman -S tightvnc x11vnc
+be reached, using tightvnc and x11vnc. Install them on the NX server
+system.
 
 x11vnc will serve the X session, we have to create a file
 $HOME/.x11vncrc to give x11vnc some options, e.g.:
@@ -292,7 +247,7 @@ $HOME/.x11vncrc to give x11vnc some options, e.g.:
     shared
     forever
     localhost
-    rfbauth /home/USER/.x11vnc/passwd
+    rfbauth /home/user/.x11vnc/passwd
 
 Create the VNC password file:
 
@@ -331,7 +286,8 @@ e.g:
     # ln -s /home/USER/shell/nxvnc.sh /usr/local/bin/nxvnc
 
 At this point, you might want to test the current configuration:
-$ /usr/local/bin/nxvnc
+
+    $ /usr/local/bin/nxvnc
 
 If the x11vnc service and a vncviewer session is started, you
 configuration works well. You are now able to connect to the current X
@@ -349,16 +305,16 @@ You are able to connect to your current X session via NX client now.
 
 — FreeNX to existing display (opensuse.org)
 
-Setting up non-KDE or Gnome desktop managers
+Setting up non-KDE or GNOME desktop managers
 --------------------------------------------
 
 Before following anything in this part, make sure the server working
 setup and accepting connections. This section only deals with problems
 once NXClient has logged on.
 
-It is quite simple (once the server is setup) to connect to Gnome and
-KDE sessions, however connecting to other window managers (fluxbox,
-xfce, whatever) is slightly different.
+It is quite simple (once the server is setup) to connect to GNOME and
+KDE sessions, however connecting to other window managers (Fluxbox,
+Xfce, whatever) is slightly different.
 
 Choosing "custom" and using a command like startx of startfluxbox will
 either result in a blank screen after the !M logo or the Client to
@@ -367,7 +323,7 @@ is open a session with the command "startx", and the another with the
 command to start your window-manager-of-choice.
 
 If you do not want to do this, you can start X by installing a login
-manager like SLIM or XDM. I would recomend using SLiM because of it's
+manager like SLIM or XDM. I would recommend using SLiM because of its
 small size.
 
 (Authors note: This is how I got fluxbox, xfce and others to work on my
@@ -376,27 +332,23 @@ the run level back to 3, and yet I can still login perfectly with
 NXClient. Possibly try this if you get your system working this way, if
 like me you have a low memory machine.)
 
--   -   The above information may not be true anymore. Once connection
-        and authentication were valid (and xterm was installed on mine),
-        startfluxbox was added to the custom command line, new window
-        was selected, and it started right up. **
+Note:The above information may not be true anymore. Once connection and
+authentication were valid (and xterm was installed on mine),
+startfluxbox was added to the custom command line, new window was
+selected, and it started right up.
 
 Alternative fix
 
 A simple fix without resorting to the above seems to involve a simple
-edit to the config file. This should work for fluxbox/openbox/xfce or
+edit to the config file. This should work for Fluxbox/Openbox/XFCE or
 any other window manager that uses the .xinitrc startup file in a call
 to startx.
 
-Simply edit the config file (as root):
-
-    /etc/nxserver/node.conf
-
-and change
+Simply edit the config file /etc/nxserver/node.conf as root and change:
 
     #USER_X_STARTUP_SCRIPT=.Xclients
 
-to
+to:
 
     USER_X_STARTUP_SCRIPT=.xinitrc
 
@@ -412,13 +364,25 @@ desktop, and click on settings:
 Problems
 --------
 
+> Keyboard Mapping problems
+
+Keyboard layout aways falls back to en_US.
+
+After login, run setxkbmap with your layout.
+
+Example:
+
+     $ setxkbmap -layout br
+
+or create the file /usr/share/X11/xkb/keymap.dir
+
+     # touch /usr/share/X11/xkb/keymap.dir
+
+Creating this file will fix the issue for the next logins.
+
 > Debug problems
 
-Edit the nxserver config file:
-
-     vi /etc/nxserver/node.conf
-
-Change:
+Edit the nxserver config file /etc/nxserver/node.conf and change:
 
      #SESSION_LOG_CLEAN=1
 
@@ -428,21 +392,18 @@ to
 
 Then you can look/debug the log files in:
 
-     $HOME/.nx/T-C-<hostname>-<display>-<session-id>
+     $HOME/.nx/T-C-hostname-display-session-id
 
 For succesfull connections and:
 
-     $HOME/.nx/F-C-<hostname>-<display>-<session-id>
+     $HOME/.nx/F-C-hostname-display-session-id
 
 For failed ones.
 
 > Authentication OK, but connection fails
 
-If you are trying to startkde
-
-     vi /etc/nxserver/node.conf
-
-And search for:
+If you are trying to start KDE edit /etc/nxserver/node.conf and search
+for:
 
      COMMAND_START_KDE=startkde
 
@@ -482,12 +443,12 @@ things can happen.
     authentication in ssh and instead are using key-based
     authentication.
 
-> NX Crashes on session startup
+> NX crashes on session startup
 
 If your NX Client shows the NX logo then disappears with a Connection
 Problem dialog afterwards.
 
-Missing Fonts
+Missing fonts
 
 Then it could be due to missing fonts. Mostly applies if you have
 installed Arch Linux base and then installed freenx after without the
@@ -513,34 +474,32 @@ If you see the NX logo (!M) then a blank screen.
 This problem can be solved by running a login manager- The problem is
 that X11 is not started, and it appears that "startx" or similar do not
 work from the freenx client. Follow these instructions to setup a login
-manager and load it at startup: Display Manager
+manager and load it at startup: Display manager
 
 Blind: If this does not resolve your issues, be aware that freenx and
 bash_completion do not play well together. I only got things to work
 after removing bash_completion from the .bashrc.
 
-> GDM/XDM Session Menu Error with non-KDE or Gnome Desktop Managers (more common with non-Arch Linux users)
+> GDM/XDM Session Menu Error with non-KDE or GNOME Desktop Managers (more common with non-Arch Linux users)
 
 Problem: A session menu comes up talking about
 "chooseSessionListWidget." A window manager never loads.
 
-Fix :
+Double check to see if .xinitrc is executable:
 
-Double check to see if ~/.xinitrc is executable.
+    stat -c "%A" ~/.xinitrc
 
-     ls -la ~/ | grep .xinitrc
-
-If the file is not executable, simply
+If the file is not executable, simply:
 
      chmod +x ~/.xinitrc
 
 Keep in mind this command should be executed along with pertinent
-instructions on this page about "Setting up non-KDE or Gnome desktop
-managers"
+instructions on this page about setting up non-KDE or GNOME desktop
+managers.
 
 > Cannot connect because command sessreg not found
 
-If you get the following error while connecting
+If you get the following error while connecting:
 
      /usr/bin/nxserver: line 941: sessreg: command not found
      NX> 280 Exiting on signal: 15
@@ -551,11 +510,11 @@ then you have to install the package xorg-server-utils.
 
 Latest cairo updates broke the render extension. After resuming a
 session all characters from before suspending won't get rendered. To fix
-this add this single line to /etc/nxserver/node.conf
+this add this single line to /etc/nxserver/node.conf.
 
      AGENT_EXTRA_OPTIONS_X="-norender"
 
-> eclipse crashes when editing a file
+> Eclipse crashes when editing a file
 
      The program 'Eclipse' received an X Window System error.
      This probably reflects a bug in the program.
@@ -568,10 +527,17 @@ https://bugs.eclipse.org/bugs/show_bug.cgi?id=386955):
      eclipse -vmargs -Dorg.eclipse.swt.internal.gtk.cairoGraphics=false
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=FreeNX&oldid=236469"
+"https://wiki.archlinux.org/index.php?title=FreeNX&oldid=305653"
 
 Categories:
 
 -   Networking
 -   Secure Shell
 -   X Server
+
+-   This page was last modified on 19 March 2014, at 19:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,53 +1,52 @@
 SLiM
 ====
 
-> Summary
+Related articles
 
-Provides an overview of the Simple Login Manager.
+-   Display manager
 
-> Related
+Warning:Currently SLiM is not fully compatible with Systemd, resulting
+in various problems on a second login. See Display
+manager#Incompatibility with systemd for an outline of these problems.
 
-Display Manager
+SLiM is an acronym for Simple Login Manager. Lightweight and easily
+configurable, SLiM requires minimal dependencies, and none from the
+GNOME or KDE desktop environments. It therefore contributes towards a
+lightweight system for users that also like to use lightweight desktops
+such as Xfce, Openbox, and Fluxbox.
 
-SLiM is an acronym for Simple Login Manager. SLiM is simple, lightweight
-and easily configurable. SLiM is used by some because it does not
-require the dependencies of GNOME or KDE and can help make a lighter
-system for users that like to use lightweight desktops like Xfce,
-Openbox, and Fluxbox.
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Enabling SLiM                                                |
-|     -   2.2 Single environments                                          |
-|     -   2.3 Autologin                                                    |
-|     -   2.4 Zsh                                                          |
-|     -   2.5 Multiple environments                                        |
-|     -   2.6 Themes                                                       |
-|         -   2.6.1 Dual screen setup                                      |
-|                                                                          |
-| -   3 Other options                                                      |
-|     -   3.1 Changing the cursor                                          |
-|     -   3.2 Match SLiM and Desktop Wallpaper                             |
-|     -   3.3 Shutdown, reboot, suspend, exit, launch terminal from SLiM   |
-|     -   3.4 SLiM init error with rc.d daemon                             |
-|     -   3.5 Power-off error with Splashy                                 |
-|     -   3.6 Power-off tray icon fails                                    |
-|     -   3.7 Login information with SLiM                                  |
-|     -   3.8 Custom SLiM Login Commands                                   |
-|     -   3.9 SLiM and Gnome Keyring                                       |
-|     -   3.10 Setting DPI with SLiM                                       |
-|     -   3.11 Use a random theme                                          |
-|     -   3.12 Move the whole session to another VT                        |
-|     -   3.13 Automatically mount your encrypted /home on login           |
-|                                                                          |
-| -   4 All Slim Options                                                   |
-| -   5 Uninstallation                                                     |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+-   1 Installation
+-   2 Configuration
+    -   2.1 .xinitrc file
+    -   2.2 Enabling SLiM
+    -   2.3 Single environments
+    -   2.4 Multiple environments
+    -   2.5 Set default username
+    -   2.6 Enable Autologin
+    -   2.7 Theming
+        -   2.7.1 Dual screen setup
+-   3 Other options
+    -   3.1 Changing the cursor
+    -   3.2 Match SLiM and Desktop Wallpaper
+    -   3.3 Shutdown, reboot, suspend, exit, launch terminal from SLiM
+    -   3.4 Power-off error with Splashy
+    -   3.5 Power-off tray icon fails
+    -   3.6 Login information with SLiM
+    -   3.7 Custom SLiM Login Commands
+    -   3.8 SLiM and Gnome Keyring
+    -   3.9 Setting DPI with SLiM
+    -   3.10 Use a random theme
+    -   3.11 Move the whole session to another VT
+    -   3.12 Automatically mount your encrypted /home on login
+    -   3.13 Change Keyboard Layout
+-   4 All Slim Options
+-   5 Uninstallation
+-   6 Known issues
+    -   6.1 Incompatibility with systemd
+-   7 See also
 
 Installation
 ------------
@@ -57,18 +56,57 @@ Install slim from the official repositories.
 Configuration
 -------------
 
+Note:SLiM no longer supports a 'default' session where multiple sessions
+have been enabled. This is most noticable where attempting to log out
+and back in again to the same session.
+
+As of version 1.3.6-2, SLiM can automatically detect installed desktop
+environments and window managers. This is achieved through the use of
+sessiondir /usr/share/xsessions/ in /etc/slim.conf. It will therefore be
+necessary for those who installed an earlier version of SLiM to amend
+/etc/slim.conf and ~/.xinitrc, accordingly.
+
+> .xinitrc file
+
+If you do not have a ~/.xinitrc file, then either create one in your
+Home folder using nano or an appropriate text editor (e.g. Leafpad or
+Geany). Alternatively, you may be able use a skeleton file as a template
+to work with:
+
+    $ cp /etc/skel/.xinitrc ~
+
+Remember to make the ~/.xinitrc file executable if not already:
+
+    chmod +x ~/.xinitrc
+
 > Enabling SLiM
 
 Note:slim no longer has ConsoleKit support, but relies on
 systemd-logind, and the system being booted with systemd.
 
-Enable the slim daemon. With systemd, it is no longer possible to start
-slim using inittab.
+Enter the following command to enable the SLiM daemon:
+ systemctl enable slim.service. This is assuming that a previously
+installed and enabled display manager had been disabled first.
+Otherwise, enter  systemctl enable slim.service -f to simultaneously
+disable the existing display manager and activate SLiM in its place.
 
 > Single environments
 
-To configure SLiM to load a particular environment, edit your ~/.xinitrc
-to load your desktop environment:
+Tip:Users that have installed a previous version of SLiM can replace
+session with a hashed sessiondir /usr/share/xsessions/
+
+To configure SLiM 1.3.6-2 (or later) to load a particular environment,
+it will be necessary to edit both /etc/slim.conf and ~/.xinitrc.
+
+First, edit /etc/slim.conf in order to hash out
+sessiondir /usr/share/xsessions/. This will consequently disable
+automatic detection of installed environments:
+
+    # Set directory that contains the xsessions.
+    # slim reads xsesion from this directory, and be able to select.
+    # sessiondir            /usr/share/xsessions/
+
+Second, edit your ~/.xinitrc to set the preferred session:
 
     #!/bin/sh
 
@@ -80,8 +118,8 @@ to load your desktop environment:
 
     exec <session-command>
 
-Replace <session-command> with the appropriate session command. Some
-examples of different desktop start commands:
+Replace <session-command> with the desired session command. Some
+examples have been provided below:
 
     exec awesome
     exec dwm
@@ -93,85 +131,78 @@ examples of different desktop start commands:
     exec startlxde
     exec startxfce4
     exec enlightenment_start
+    exec mate-session
 
-For detailed instructions on how to start the various environments,
-refer to the appropriate wiki pages.
-
-SLiM reads the local ~/.xinitrc configuration and then launches the
-desktop according to what is in that file. If you do not have a
-~/.xinitrc file, you can use the skeleton file by:
-
-    $ cp /etc/skel/.xinitrc ~
-
-Remember to make ~/.xinitrc executable:
-
-    chmod +x ~/.xinitrc
-
-> Autologin
-
-To make SLiM automatically login as a specified user (without having to
-type a password) the following lines in /etc/slim.conf should be
-changed.
-
-    # default_user        simone
-
-Uncomment this line, and change "simone" to the user to be logged into
-automatically.
-
-    # auto_login          no
-
-Uncomment this line and change the 'no' to 'yes'. This enables the auto
-login feature.
-
-> Zsh
-
-Note:If you don't know what is zsh and you did not install it - ignore
-this paragraph.
-
-The default login command will not initialize your environment correctly
-[source]. Change the login_cmd line in /etc/slim.conf to:
-
-    #login_cmd           exec /bin/sh - ~/.xinitrc %session
-    login_cmd           exec /bin/zsh -l ~/.xinitrc %session
+For detailed instructions on how to start any desktop environments or
+window managers not listed above, refer to their wiki articles.
 
 > Multiple environments
 
-To be able to choose from multiple desktop environments, SLiM can be
-setup to log you into whichever you choose.
+Note:Available sessions for selection can be cycled through by pressing
+the F1 key.
 
-Put a case statement similar to this one in your ~/.xinitrc file and
-edit the sessions variable in /etc/slim.conf to match the names that
-trigger the case statement. You can cycle through sessions at login time
-by pressing F1. Note that this feature is experimental.
+To be able to choose from multiple desktop environments. It will
+therefore be necessary to amend /etc/slim.conf and ~/.xinitrc. This
+process will also cover SLiM installations prior to 1.3.6-2.
 
-    # Adapted from: http://svn.berlios.de/svnroot/repos/slim/trunk/xinitrc.sample
+First, edit /etc/slim.conf in order to ensure that
+sessiondir /usr/share/xsessions/ is present and unhashed:
 
-    case $1 in
-    kde)
-    	exec startkde
-    	;;
-    xfce4)
-    	exec startxfce4
-    	;;
-    wmaker)
-    	exec wmaker
-    	;;
-    blackbox)
-    	exec blackbox
-    	;;
-    icewm|*)
-    	icewmbg &
-    	icewmtray &
-    	exec icewm
-    	;;
+    # Set directory that contains the xsessions.
+    # slim reads xsesion from this directory, and be able to select.
+    sessiondir            /usr/share/xsessions/
+
+Users who installed a prior version of SLiM will have to replace
+sessions with the new command.
+
+Second, edit ~/.xinitrc so that a selected session is run:
+
+    exec $1
+
+Users who installed a prior version of SLiM will have to replace
+case $1 in [...] esac, where used. To clarify, below is an example of
+the depreceated method to select multiple sessions. The entire code
+provided below would simply be replaced with exec $1:
+
+    DEFAULTSESSION=openbox-session
+
+    case "$1" in
+        openbox) exec openbox-session ;;
+         xfce) exec xfce4-session ;;
+         gnome3) exec gnome-session ;;
+         kde) exec startkde ;;
+         cinnamon) exec gnome-session-cinnamon ;;
+         razor-qt) exec razor-session ;;
+         lxde) exec lxsession ;;
+         mate) exec mate-session ;;
+         *) exec $DEFAULTSESSION ;;
     esac
 
-Note:In the latest version (1.3.5), slim does not preset any default
-session, so using a DEFAULT_SESSION variable will not work the way it
-used to. Instead put your default session as the last case and |*) to
-the statement (see above)
+> Set default username
 
-> Themes
+SLiM can be configured to automatically set a desired username, which
+will therefore aleady be completed. The password field will also already
+be focused by default. Change the following line in /etc/slim.conf:
+
+    # default_user        simone
+
+Uncomment this line, and change "simone" to the username of choice:
+
+    default_user        <your username>
+
+> Enable Autologin
+
+Note:It will be necessary to have first set SLiM to use a single desktop
+environment, as well as a default username.
+
+Warning:Do not set this for the root account.
+
+Edit /etc/slim.conf to uncomment the auto_login command and replace no
+with yes:
+
+    auto_login          yes
+
+> Theming
 
 Install the slim-themes package:
 
@@ -221,12 +252,7 @@ official documentation about slim themes for further details.
 Other options
 -------------
 
-A few things you might like to try.
-
 > Changing the cursor
-
-If you want to change the default X cursor to a newer design, the
-slim-cursor package is available.
 
 After installing, edit /etc/slim.conf and uncomment the line:
 
@@ -271,17 +297,6 @@ and the root password in the password field:
     line and, if necessary modify the suspend command itself (e.g.
     change /usr/sbin/suspend to sudo /usr/sbin/pm-suspend))
 
-> SLiM init error with rc.d daemon
-
-If you initialize SLiM with /etc/rc.conf inside the DAEMONS array and it
-fails to initialize it's most likely a lock file issue. SLiM creates a
-lock file in /var/lock on each initialization, however, in most cases
-the lock folder in /var does not exist preventing SLiM from
-initializing. Check to make sure /var/lock exists, if it does not you
-can create it by typing the following:
-
-    # mkdir /var/lock/
-
 > Power-off error with Splashy
 
 If you use Splashy and SLiM, sometimes you can't power-off or reboot
@@ -321,85 +336,11 @@ program installed)
 
 > SLiM and Gnome Keyring
 
-If you are using SLiM to launch a Gnome session and have trouble
-accessing your keyring, for example not being automatically
-authenticated on login, add the following lines to /etc/pam.d/slim (as
-discussed here).
+Note:slim 1.3.5-1 ships with /etc/pam.d/slim preconfigured to unlock
+keyring upon login. Users no longer need to modify the file.
 
-    auth       optional    pam_gnome_keyring.so
-    session    optional    pam_gnome_keyring.so    auto_start
-
-You also have to add to /etc/pam.d/passwd:
-
-    password        optional        pam_gnome_keyring.so
-
-If you use a screensaver you also have to add
-
-    auth    optional        pam_gnome_keyring.so
-
-to /etc/pam.d/gnome-screensaver for example (replace gnome-screensaver
-with slimlock, slock, whatever you use). If you don't do that, your
-keyring is locked when screen is locked by your screensaver and not
-unlocked again after logging back in.
-
-However, this fix alone no longer works since Gnome 2.30. Further
-changes are necessary as described here. Modifying the login_cmd line in
-/etc/slim.conf:
-
-    login_cmd exec dbus-launch /bin/bash -login ~/.xinitrc %session >~/.xsession-errors 2>&1
-
-As of GNOME 3.4, you need to edit /etc/pam.d/{slim,passwd} as mentioned
-above, so that /etc/pam.d/slim looks like:
-
-    #%PAM-1.0
-    auth            requisite       pam_nologin.so
-    auth            required        pam_env.so
-    auth            required        pam_unix.so
-    auth            optional        pam_gnome_keyring.so
-    account         required        pam_unix.so
-    session         required        pam_limits.so
-    session         required        pam_unix.so
-    session         optional        pam_gnome_keyring.so auto_start
-    password        required        pam_unix.so
-
-and /etc/pam.d/passwd
-
-    #%PAM-1.0
-    password	required	pam_unix.so sha512 shadow nullok
-    password	optional	pam_gnome_keyring.so
-
-As of 2012-10-13, /etc/pam.d/gnome-screensaver already contains the
-pam_gnome_keyring.so instruction.
-
-The correct positioning of the pam_gnome_keyring.so instructions were
-taken from here.
-
-After editing the above files, you need to edit /etc/inittab.
-
-The solutions mentioned here and also further information are found
-here.
-
-If you have problems keeping the keyring unlocked for longer sessions,
-there is another thing that Gnome does: Look at
-/etc/xdg/autostart/{gnome-keyring-gpg.desktop, gnome-keyring-pkcs11.desktop, gnome-keyring-secrets.desktop, gnome-keyring-ssh.desktop}.
-
-Append the following lines to .xinitrc just before you start your wm
-(example here is awesome wm):
-
-    /usr/bin/gnome-keyring-daemon --start --components=gpg
-    /usr/bin/gnome-keyring-daemon --start --components=pkcs11
-    /usr/bin/gnome-keyring-daemon --start --components=secrets
-    /usr/bin/gnome-keyring-daemon --start --components=ssh
-    /usr/bin/awesome
-
-After login check if there is only one gnome-keyring-daemon instance
-running (ps -A ). If those lines are executed too early then you have 4
-instances running which is not good.
-
-You also should notice that seahorse for example does not show any
-pkcs11 errors anymore and that your keyring is unlocked all the time and
-does not lock itself anymore. Finally gnome-keyring is fully functional
-like in Gnome. See also here.
+See GNOME Keyring#Use Without GNOME if you want to use GNOME Keyring in
+a custom session.
 
 > Setting DPI with SLiM
 
@@ -434,6 +375,21 @@ there.
 > Automatically mount your encrypted /home on login
 
 You can use pam_mount.
+
+> Change Keyboard Layout
+
+Edit /etc/X11/xorg.conf.d/10-evdev.conf, find the following section, add
+the two bolded lines, and replace dvorak with your preferred keymap:
+
+    Section  "InputClass"
+              Identifier "evdev keyboard catchall"
+              MatchIsKeyboard "on"
+              MatchDevicePath "/dev/input/event*"
+              Driver "evdev"
+           
+              # Keyboard layouts
+              Option "XkbLayout" "dvorak"
+    EndSection
 
 All Slim Options
 ----------------
@@ -473,8 +429,7 @@ login_cmd allows %session and %theme
   authfile                  /var/run/slim.auth
   shutdown_msg              The system is halting...
   reboot_msg                The system is rebooting...
-  sessions                  wmaker,blackbox,icewm
-  sessiondir                
+  sessiondir                 /usr/share/xsessions/
   hidecursor                false
   input_panel_x             50%
   input_panel_y             40%
@@ -538,6 +493,13 @@ To completely remove SLiM:
      # pacman -Rns slim
      # rm /etc/systemd/system/display-manager.service
 
+Known issues
+------------
+
+> Incompatibility with systemd
+
+See Display manager#Incompatibility with systemd
+
 See also
 --------
 
@@ -545,8 +507,15 @@ See also
 -   SLiM documentation
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SLiM&oldid=254969"
+"https://wiki.archlinux.org/index.php?title=SLiM&oldid=301284"
 
 Category:
 
 -   Display managers
+
+-   This page was last modified on 24 February 2014, at 11:26.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

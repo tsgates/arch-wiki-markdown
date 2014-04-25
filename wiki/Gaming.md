@@ -1,74 +1,58 @@
 Gaming
 ======
 
-> Summary
+Related articles
 
-Provides information about running games and related system
-configuration tips.
-
-> Related
-
-List of Applications/Games
-
-Netbook Games
-
-Xorg
-
-NVIDIA#Gaming using Twinview
+-   List of games
+-   Xorg
+-   NVIDIA#Gaming using Twinview
 
 This page only contains information about running games and related
 system configuration tips. For lists of popular games for GNU/Linux see
-List of Applications/Games and Netbook Games.
+List of games.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Game Environments                                                  |
-| -   2 Getting games                                                      |
-|     -   2.1 Native                                                       |
-|     -   2.2 Wine                                                         |
-|     -   2.3 Flash                                                        |
-|     -   2.4 Java                                                         |
-|                                                                          |
-| -   3 Running games in Arch                                              |
-|     -   3.1 Multi-screen setups                                          |
-|     -   3.2 Keyboard Grabbing                                            |
-|     -   3.3 Starting games in a separate X server                        |
-|     -   3.4 Adjusting mouse detections                                   |
-|     -   3.5 HRTF filters with OpenAL                                     |
-|     -   3.6 Tuning Pulseaudio                                            |
-|         -   3.6.1 Enabling realtime priority and negative nice level     |
-|         -   3.6.2 Using higher quality remixing for better sound         |
-|         -   3.6.3 Matching hardware buffers to Pulse's buffering         |
-|                                                                          |
-|     -   3.7 Cgroups                                                      |
-|         -   3.7.1 Option 1 - Systemd (Recommended)                       |
-|         -   3.7.2 Option 2 - Ulatencyd                                   |
-|                                                                          |
-|     -   3.8 Double check your CPU frequency scaling settings             |
-|                                                                          |
-| -   4 Improving framerates and responsiveness with scheduling policies   |
-|     -   4.1 For Wine programs                                            |
-|     -   4.2 For everything else                                          |
-|         -   4.2.1 Policies                                               |
-|         -   4.2.2 Nice levels                                            |
-|         -   4.2.3 Core affinity                                          |
-|         -   4.2.4 General case                                           |
-|         -   4.2.5 Optimus, and other helping programs                    |
-|                                                                          |
-| -   5 Using alternate kernels                                            |
-|     -   5.1 Using BFQ                                                    |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Game Environments
+-   1 Game environments
+-   2 Getting games
+    -   2.1 Native
+    -   2.2 Digital distributions
+    -   2.3 Flash
+    -   2.4 Java
+    -   2.5 Wine
+-   3 Running games
+    -   3.1 Multi-screen setups
+    -   3.2 Keyboard grabbing
+    -   3.3 Starting games in a separate X server
+    -   3.4 Adjusting mouse detections
+    -   3.5 Binaural Audio with OpenAL
+    -   3.6 Tuning Pulseaudio
+        -   3.6.1 Enabling realtime priority and negative nice level
+        -   3.6.2 Using higher quality remixing for better sound
+        -   3.6.3 Matching hardware buffers to Pulse's buffering
+    -   3.7 Cgroups
+        -   3.7.1 Option 1 - systemd (recommended)
+        -   3.7.2 Option 2 - Ulatencyd
+    -   3.8 Double check your CPU frequency scaling settings
+-   4 Improving framerates and responsiveness with scheduling policies
+    -   4.1 For Wine programs
+    -   4.2 For everything else
+        -   4.2.1 Policies
+        -   4.2.2 Nice levels
+        -   4.2.3 Core affinity
+        -   4.2.4 General case
+        -   4.2.5 Optimus, and other helping programs
+-   5 Using alternate kernels
+    -   5.1 Using BFQ
+-   6 See also
+
+Game environments
 -----------------
 
 Different environments exist to play games in Linux:
 
--   Native – Games written for Linux (usually Free & Open Source).
+-   Native – Games written for Linux (usually free and open source).
 -   Browser – you need only browser and Internet connection to play
     these types of games.
     -   Plugin-based – you need to install plugin to play.
@@ -78,16 +62,18 @@ Different environments exist to play games in Linux:
         -   Unity – specialized game plugin for browsers. Currently
             works only in Google Chrome. Most games are commercial
             and/or closed-source.
-
     -   HTML 5 games use brand new canvas and WebGL technologies and
         work in all modern browsers but can be very slow on weak
         machines.
-
 -   Specialized environments (software emulators) – – Required for
-    running software designed for other architectures or systems (Heed
-    the copyright laws of your country!)
+    running software designed for other architectures or systems, (Heed
+    the copyright laws of your country!). Check the list of emulators
+    for more details.
     -   Wine – allows running of some Windows games, as well as a large
-        amount of Windows software.
+        amount of Windows software. Wine does not slowdown most games
+        (even speeds up some), so most games with low system
+        requirements that run in Windows work in Wine too. Consult Wine
+        AppDB for game-specific compability information.
     -   Crossover Games – members of the Codeweavers team are prime
         supporters of Wine. Using Crossover Games makes the installation
         & setting up of some games easier, more reliable & even
@@ -99,7 +85,6 @@ Different environments exist to play games in Linux:
     -   DosBox – DOS emulator
     -   scummvm – emulates games based on the SCUMM game engine, which
         ran many classic adventure games.
-
 -   Hardware emulators – emulate the whole device instead of software
     environment. The same thing about Copyright here.
 
@@ -108,20 +93,36 @@ Getting games
 
 > Native
 
-A good number are available in the Official repositories or in the AUR.
-Loki provides installers for several games. Desura can be considered
-good source of games (if you don't care about security and bugs too
-much).
+A good number are available in the official repositories or in the AUR.
+Loki provides installers for several games.
 
-> Wine
+> Digital distributions
 
--   Centralized source of information about running games (and other
-    applications) in Wine is Wine AppDB.
--   See also Category:Wine.
+-   Desura — Digital distribution platform featuring indie games. It can
+    be considered good source of games (if you don't care about security
+    and bugs too much).
+
+http://www.desura.com/ || desura
+
+-   Steam — Famous digital distribution and communications platform
+    developed by Valve, featuring popular games recently ported to Linux
+    (by the company itself). It has a large library that includes Source
+    (Half-Life 2) and Goldsource (HL1) engine games, Serious Sam 3,
+    Brutal Legend, many of the games from Humble Bundles and some other
+    indie titles.
+
+http://store.steampowered.com || steam
+
+-   Steam under Linux.
+-   See linux-games catalog.
+
+-   The Humble Store
+
+-   itch.io
 
 > Flash
 
-Several huge flash games portals exists, among them are:
+Several huge Flash games portals exists, among them are:
 
 -   https://armorgames.com/
 -   https://www.kongregate.com/
@@ -134,8 +135,14 @@ Several huge flash games portals exists, among them are:
 -   https://www.pogo.com/ – biggest casual Java gaming portal
 -   The Java Game Tome - huge database of primarily casual games
 
-Running games in Arch
----------------------
+> Wine
+
+-   Centralized source of information about running games (and other
+    applications) in Wine is Wine AppDB.
+-   See also Category:Wine.
+
+Running games
+-------------
 
 Certain games or game types may need special configuration to run or to
 run as expected. For the most part, games will work right out of the box
@@ -151,40 +158,59 @@ In such a case, running a second X server is one possible solution.
 Another solution may be found in the NVIDIA article (may also apply to
 non-NVIDIA users).
 
-> Keyboard Grabbing
+> Keyboard grabbing
 
 Many games grab the keyboard, noticeably preventing you from switching
-windows (also known as alt-tabbing). Download sdl-nokeyboardgrab to gain
-the ability to use keyboard commands while in SDL games. If you wish to
-turn it up to 11, you can disable keyboard grabbing at X11 level using
+windows (also known as alt-tabbing).
+
+Some SDL games (e.g. Guacamelee) let you disable grabbing by pressing
+Ctrl-g.
+
+You can also download sdl-nokeyboardgrab to gain the ability to use
+keyboard commands while in SDL games. If you wish to turn it up to 11,
+you can disable keyboard grabbing at X11 level using
 libx11-nokeyboardgrab, or with more fine-grained control with
 libx11-ldpreloadnograb using the LD_PRELOAD environment variable to run
 applications with particular grab prevention. Wine/lib32 users should
 also look at the respective lib32 libraries.
 
-Note: SDL is known to sometimes not be able to grab the input system. In
+Note:SDL is known to sometimes not be able to grab the input system. In
 such a case, it may succeed in grabbing it after a few seconds of
 waiting.
 
 > Starting games in a separate X server
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with Running     
+                           program in separate X    
+                           display.                 
+                           Notes: same topic        
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 In some cases like those mentioned above, it may be necessary or desired
 to run a second X server. Running a second X server has multiple
 advantages such as better performance, the ability to "tab" out of your
-game by using CTRL-ALT-F7 / CTRL-ALT-F8, no crashing your primary X
+game by using Ctrl+Alt+F7/Ctrl+Alt+F8, no crashing your primary X
 session (which may have open work on) in case a game conflicts with the
-graphics driver. To start a second X server (using Nexuiz as an example)
-you can simply do:
+graphics driver. The new X server will be akin a remote access login for
+the ALSA, so your user need to be part of the audio group to be able to
+hear any sound.
 
-    xinit /usr/bin/nexuiz-glx -- :1
+To start a second X server (using Xonotic as an example) you can simply
+do:
 
-This can further be spiced up by usi ng a seperate X configuration file:
+    $ xinit /usr/bin/xonotic-glx -- :1 vt$XDG_VTNR
 
-    xinit /usr/bin/nexuiz-glx -- :1 -xf86config xorg-game.conf 
+This can further be spiced up by using a seperate X configuration file:
+
+    $ xinit /usr/bin/xonotic-glx -- :1 -xf86config xorg-game.conf vt$XDG_VTNR
 
 A good reason to provide an alternative xorg.conf here may be that your
 primary configuration makes use of NVIDIA's Twinview which would render
-your 3D games like Nexuiz in the middle of your multiscreen setup,
+your 3D games like Xonotic in the middle of your multiscreen setup,
 spanned across all screens. This is undesirable, thus starting a second
 X with an alternative config where the second screen is disabled is
 advised.
@@ -192,40 +218,50 @@ advised.
 A game starting script making use of Openbox for your home directory or
 /usr/local/bin may look like this:
 
-    $ cat ~/game.sh
+    ~/game.sh
+
     if [ $# -ge 1 ]; then
-      game="`which $1`"
-      openbox="`which openbox`"
-      tmpgame="/tmp/tmpgame.sh"
-      DISPLAY=:1.0
-      echo -e "${openbox} &\n${game}" > ${tmpgame}
-      echo "starting ${game}"
-      xinit ${tmpgame} -- :1 -xf86config xorg-game.conf || exit 1
+            game="$(which $1)"
+            openbox="$(which openbox)"
+            tmpgame="/tmp/tmpgame.sh"
+            DISPLAY=:1.0
+            echo -e "${openbox} &\n${game}" > ${tmpgame}
+            echo "starting ${game}"
+            xinit ${tmpgame} -- :1 -xf86config xorg-game.conf || exit 1
     else
-      echo "not a valid argument"
+            echo "not a valid argument"
     fi
 
 So after a chmod +x you would be able to use this script like:
 
-    $ ~/game.sh nexuiz-glx
+    $ ~/game.sh xonotic-glx
 
 > Adjusting mouse detections
 
 For games that require exceptional amount of mouse skill, adjusting the
-response rate can help improve accuracy. Read more here.
+mouse polling rate can help improve accuracy.
 
-> HRTF filters with OpenAL
+> Binaural Audio with OpenAL
 
 For games using OpenAL, if you use headphones you may get much better
-positional audio using OpenAL's HRTF filters. To enable, edit
-/etc/openal/alsoft.conf (Or copy the example configuration file if it
-doesn't exist) and change:
+positional audio using OpenAL's HRTF filters. To enable, run the
+following command:
 
-    #hrtf = false
+    echo "hrtf = true" >> ~/.alsoftrc
 
-to
+Alternatively, install openal-hrtf from the AUR, and edit the options in
+/etc/openal/alsoftrc.conf
 
-    hrtf = true
+For Source games, the ingame setting `dsp_slow_cpu` must be set to `1`
+to enable HRTF, otherwise the game will enable it's own processing
+instead. You will also either need to set up Steam to use native
+runtime, or link its copy of openal.so to your own local copy. For
+completeness, also use the following options:
+
+    dsp_slow_cpu 1 # Disable in-game spatialiazation
+    snd_spatialize_roundrobin 1 # Disable spatialization 1.0*100% of sounds
+    dsp_enhance_stereo 0 # Disable DSP sound effects. You may want to leave this on, if you find it doesn't interfere with your perception of the sound effects.
+    snd_pitchquality 1 # Use high quality sounds
 
 > Tuning Pulseaudio
 
@@ -270,7 +306,7 @@ together and prioritized in userspace, allowing for minimum latency.
 They adjust several factors, such as IO prioritization and CPU
 prioritization.
 
-Option 1 - Systemd (Recommended)
+Option 1 - systemd (recommended)
 
 Systemd is able to handle Cgroups less specifically by itself, in order
 to make the system run smoothly with any number of threads running.
@@ -288,7 +324,7 @@ Ulatencyd is a daemon which uses dynamic cgroups to give the kernel
 hints to reduce latency in the system. It comes with a number of
 configs, and is extensively helpful in prioritizing disk I/O. Installing
 it will again increase responsiveness and reduce input lag. To use,
-simply install and add to your DAEMONS in rc.conf.
+simply install it and enable the ulatencyd systemd service.
 
 In addition, Ulatencyd has it's own method for specifically reducing
 latency in games, by focusing in on that one individual process. To take
@@ -316,7 +352,7 @@ is utilizing 95% of its CPU, and then only for a very short period of
 time. This saves power and reduces heat, but has a noticeable impact on
 performance. You can instead only have the system downclock when it is
 idle, by tuning the system governor. To do so, see
-Cpufrequtils#Improving_on-demand_performance.
+Cpufrequtils#Improving on-demand performance.
 
 Improving framerates and responsiveness with scheduling policies
 ----------------------------------------------------------------
@@ -331,7 +367,7 @@ getting them to work anyway:
 
 > For Wine programs
 
-wine-rt is a patched version of WINE that implements scheduling policies
+wine-rt is a patched version of Wine that implements scheduling policies
 on a per-thread basis, using the equivalent of what the Windows
 developers had intended the threads to be run at. The default patch is
 more oriented towards professional audio users, and tends to be too
@@ -344,11 +380,10 @@ THREAD_PRIORITY_ABOVE_NORMAL threads if your system does not support it.
 > For everything else
 
 For programs which do not implement scheduling policies on their own,
-one tool known as schedtool, and it's associated daemon schedtoold
-(available on the AUR) can handle many of these tasks automatically. To
-edit what programs relieve what policies, simply edit
-/etc/schedtoold.conf and add the program followed by the schedtool
-arguments desired.
+one tool known as schedtool, and it's associated daemon schedtoold can
+handle many of these tasks automatically. To edit what programs relieve
+what policies, simply edit /etc/schedtoold.conf and add the program
+followed by the schedtool arguments desired.
 
 Policies
 
@@ -383,16 +418,19 @@ Core affinity
 There is some confusion in development as to whether the driver should
 be multithreading, or the program. In any case where they both attempt
 it, it causes drops in framerate and crashes. Examples of this include a
-number of modern games, and any WINE program which is running without
+number of modern games, and any Wine program which is running without
 GLSL disabled. To select a single core and allow only the driver to
-handle this process, simply use the -a 0x# flag:
+handle this process, simply use the -a 0x# flag, where # is the core
+number, e.g.:
 
-    bit.trip.runner -a 0x1 #Use cores 1
+    bit.trip.runner -a 0x1
 
-Some CPUs are hyperthreaded and have only 2 or 4 cores but show up as 4
-or 8, and are best accounted for:
+uses first core. Some CPUs are hyperthreaded and have only 2 or 4 cores
+but show up as 4 or 8, and are best accounted for:
 
-    bit.trip.runner -a 0x5 #Use virtual cores 0101, or 1 and 3
+    bit.trip.runner -a 0x5
+
+which use virtual cores 0101, or 1 and 3.
 
 General case
 
@@ -405,13 +443,13 @@ usage. For a general case:
     Amnesia.bin64 -I -n -4
     hl2.exe -I -n -4 -a 0x1 #Wine with GLSL enabled
 
-etc, etc.
+etc.
 
 Optimus, and other helping programs
 
 As a general rule, any other process which the game requires to operate
 should be reniced to a level above that of the game itself. Strangely,
-Wine has a problem known as 'reverse scheduling', it can often have
+Wine has a problem known as reverse scheduling, it can often have
 benefits when the more important processes are set to a higher nice
 level. Wineserver also seems unconditionally to benefit from SCHED_FIFO,
 since rarely consumes the whole CPU and needs higher prioritization when
@@ -424,7 +462,7 @@ possible.
 Using alternate kernels
 -----------------------
 
-The stock ARCH kernel provides a very good baseline for general usage.
+The stock Arch kernel provides a very good baseline for general usage.
 However, if your system has less than 16 cores and is intended for use
 primarily as a workstation, you can sacrifice a small amount of
 throughput on batch workloads and gain a significant boost to
@@ -454,13 +492,20 @@ See also
 -   FreeGameDev - Free/open source game development community
 -   SIG/Games - OS/Linux gaming news sites and lists at Fedora's wiki
 -   live.linux-gamers - Arch-based live gaming distro
--   Games on Linux - Commercial Games On Linux
--   Gaming on Linux - An active Linux gaming news and editorial source
-    and community
+-   Games on Linux - Commercial games on Linux
+-   Gaming on Linux - Active Linux gaming news and editorial source and
+    community
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Gaming&oldid=254710"
+"https://wiki.archlinux.org/index.php?title=Gaming&oldid=305830"
 
 Category:
 
 -   Gaming
+
+-   This page was last modified on 20 March 2014, at 11:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

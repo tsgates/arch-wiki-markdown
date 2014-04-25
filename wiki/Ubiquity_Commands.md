@@ -3,25 +3,21 @@ Ubiquity Commands
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Arch Specific                                                      |
-|     -   2.1 AUR Search                                                   |
-|     -   2.2 BBS Search                                                   |
-|     -   2.3 Bugtracker Search                                            |
-|     -   2.4 Wiki Search                                                  |
-|                                                                          |
-| -   3 Web Lookup                                                         |
-|     -   3.1 Man Page Search                                              |
-|     -   3.2 Whois Search                                                 |
-|     -   3.3 Websters Dictionary                                          |
-|     -   3.4 Websters Thesaurus                                           |
-|                                                                          |
-| -   4 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Arch Specific
+    -   2.1 AUR Search
+    -   2.2 BBS Search
+    -   2.3 Bugtracker Search
+    -   2.4 Wiki Search
+-   3 Web Lookup
+    -   3.1 Man Page Search
+    -   3.2 Whois Search
+    -   3.3 Websters Dictionary
+    -   3.4 Websters Thesaurus
+-   4 External links
 
 Introduction
 ============
@@ -222,8 +218,15 @@ External links
     commands
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ubiquity_Commands&oldid=238889"
+"https://wiki.archlinux.org/index.php?title=Ubiquity_Commands&oldid=302670"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

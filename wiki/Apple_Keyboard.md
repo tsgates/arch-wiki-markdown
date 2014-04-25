@@ -3,20 +3,17 @@ Apple Keyboard
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 More Information                                                   |
-| -   2 Function keys do not work                                          |
-|     -   2.1 If the above doesn't work for your wireless keyboard         |
-|                                                                          |
-| -   3 < and > have changed place with § and ½                            |
-| -   4 < and > have changed place with ^ and °                            |
-| -   5 Media Keys                                                         |
-| -   6 PrintScreen and SysRq                                              |
-| -   7 Treating Apple Keyboards Like Regular Keyboards                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 More Information
+-   2 Function keys do not work
+    -   2.1 If the above doesn't work for your wireless keyboard
+-   3 < and > have changed place with § and ½
+-   4 < and > have changed place with ^ and °
+-   5 Media Keys
+-   6 PrintScreen and SysRq
+-   7 Treating Apple Keyboards Like Regular Keyboards
 
 More Information
 ----------------
@@ -222,8 +219,15 @@ mkinitcpio.conf. Otherwise if you boot your computer with the Apple
 keyboard plugged in, the F keys will not be the default.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Apple_Keyboard&oldid=247747"
+"https://wiki.archlinux.org/index.php?title=Apple_Keyboard&oldid=302202"
 
 Category:
 
 -   Keyboards
+
+-   This page was last modified on 26 February 2014, at 11:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -10,18 +10,15 @@ Mod perl
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Enabling Perl + Apache                                             |
-|     -   1.1 Allow perl to execute scripts for certain directories        |
-|         -   1.1.1 Alternative 1: Using virtual hosts                     |
-|         -   1.1.2 Alternative 2: Just enable for a certain subdirectory  |
-|                                                                          |
-|     -   1.2 Turn on perl for directory listings                          |
-|     -   1.3 Try it out                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Enabling Perl + Apache
+    -   1.1 Allow perl to execute scripts for certain directories
+        -   1.1.1 Alternative 1: Using virtual hosts
+        -   1.1.2 Alternative 2: Just enable for a certain subdirectory
+    -   1.2 Turn on perl for directory listings
+    -   1.3 Try it out
 
 Enabling Perl + Apache
 ----------------------
@@ -122,8 +119,15 @@ Then visit http://perlwebtest (if you created a virtual host) or
 http://localhost/perlwebtest (if you only enabled one directory).
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mod_perl&oldid=220485"
+"https://wiki.archlinux.org/index.php?title=Mod_perl&oldid=305774"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 20 March 2014, at 02:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

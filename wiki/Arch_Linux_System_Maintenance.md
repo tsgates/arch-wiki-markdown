@@ -1,17 +1,28 @@
 Arch Linux System Maintenance
 =============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Read the News                                                      |
-| -   2 Update the system                                                  |
-| -   3 Packages                                                           |
-| -   4 Hardware                                                           |
-| -   5 Bad Practices                                                      |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with             
+                           Enhancing_Arch_Linux_Sta 
+                           bility#Maintaining_Arch. 
+                           Notes: please use the    
+                           second argument of the   
+                           template to provide more 
+                           detailed indications.    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+Contents
+--------
+
+-   1 Read the News
+-   2 Update the system
+-   3 Packages
+-   4 Hardware
+-   5 Bad Practices
+-   6 See also
 
 Read the News
 -------------
@@ -67,7 +78,9 @@ Packages
     updated packages.
 
 -   Use pacman -Qdt to find orphaned packages, and pacman -Qo <file> to
-    find out which package owns that particular file.
+    find out which package owns that particular file. Alternatively you
+    can use the pkg-list_true_orphans command from pkg_scripts to find
+    only real orphans.
 
 -   Search for .pac* files and merge them with configuration files (see
     Pacnew and Pacsave Files).
@@ -76,7 +89,7 @@ Packages
     Sometimes these can cause problems when you update.
 
 -   Check the size of /var and clear pacman's cache once in a while. A
-    useful tool to assist in this process is cacheclean.
+    useful tool to assist in this process is pkgcacheclean.
 
 Hardware
 --------
@@ -105,12 +118,19 @@ Bad Practices
 See also
 --------
 
--   General Recommendations#System administration
+-   General recommendations#System administration
 -   Category:System administration
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_Linux_System_Maintenance&oldid=246232"
+"https://wiki.archlinux.org/index.php?title=Arch_Linux_System_Maintenance&oldid=306039"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 20 March 2014, at 17:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

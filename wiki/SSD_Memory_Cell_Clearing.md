@@ -1,7 +1,7 @@
 SSD Memory Cell Clearing
 ========================
 
-> Summary
+Summary help replacing me
 
 This article presents a method to reset all cells on an SSD to their
 factory default state thus recovering any loss of write performance.
@@ -11,21 +11,6 @@ Related Articles
 Solid State Drives
 
 Securely Wipe HDD
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 tl; dr                                                             |
-| -   3 Step 1 - Make sure the drive security is not frozen                |
-| -   4 Step 2 - Enable security by setting a user password                |
-| -   5 Step 3 - Issue the ATA Secure Erase command                        |
-| -   6 Tips                                                               |
-+--------------------------------------------------------------------------+
-
-Introduction
-------------
 
 On occasion, users may wish to completely reset an SSD's cells to the
 same virgin state they were manufactured, thus restoring it to its
@@ -42,14 +27,26 @@ Warning:Do not proceed with this if your drive isn't connected directly
 to a SATA interface. Issuing the Secure Erase command on a drive
 connected via USB or a SAS/RAID card could potentially brick the drive!
 
+Contents
+--------
+
+-   1 tl; dr
+-   2 Step 1 - Make sure the drive security is not frozen
+-   3 Step 2 - Enable security by setting a user password
+-   4 Step 3 - Issue the ATA Secure Erase command
+-   5 Tips
+
 tl; dr
 ------
 
 Warning:It is recommended that you read the rest of the article BEFORE
-you try this!
+you try this! This section literally shows the minimum to wipe out an
+entire SSD for those not wanting to scroll though the text.
 
-    hdparm --user-master u --security-set-pass Eins /dev/sdX
-    hdparm --user-master u --security-erase Eins /dev/sdX
+    hdparm --user-master u --security-set-pass PasSWorD /dev/sdX
+    hdparm --user-master u --security-erase PasSWorD /dev/sdX
+
+  
 
 Step 1 - Make sure the drive security is not frozen
 ---------------------------------------------------
@@ -59,38 +56,16 @@ Issue the following command:
     # hdparm -I /dev/sdX
 
 If the command output shows "frozen" one cannot continue to the next
-step. Most BIOSes block the ATA Secure Erase command by issuing a
+step. Some BIOSes block the ATA Secure Erase command by issuing a
 "SECURITY FREEZE" command to "freeze" the drive before booting an
 operating system.
 
-A possible solution for SATA drives is hot-(re)plug the data cable
-(which might crash the kernel). If hot-(re)plugging the SATA data cable
-crashes the kernel try letting the operating system fully boot up, then
-quickly hot-(re)plug both the SATA power and data cables.
-
--   It has been reported that hooking up the drive to an eSATA SIIG
-    ExpressCard/54 with an eSATA enclosure will leave the drive security
-    state to "not frozen".
--   Placing the target system into "sleep" (Clevo M865TU notebook,
-    Fujitsu T2010 notebook, Dell XPS M1330, Lenovo ThinkPad x220/x230,
-    Samsung NC10) and waking it up again has been reported to work as
-    well; this may reset drives to "not frozen". In case you are booting
-    from USB, you need a distribution, that runs entirely in RAM, like
-    Grml, see the grml2ram option. Run echo -n mem > /sys/power/state to
-    set the computer to sleep.
--   Hooking up the drive to a USB 2/3 port does NOT work, as you need to
-    issue IDE commands, which is only possible via IDE/SATA connection.
--   Make sure drive security is disabled in BIOS, so no password is set:
-
-    Security: 
-            Master password revision code = 65534
-                    supported
-            not     enabled
-            not     locked
-            not     frozen
-            not     expired: security count
-                    supported: enhanced erase
-            2min for SECURITY ERASE UNIT. 2min for ENHANCED SECURITY ERASE UNIT.
+A possible solution is to simply suspend the system. Upon waking up, it
+is likely that the freeze will be lifts. If unsuccessful, one can try
+hot-(re)plug the data cable (which might crash the kernel). If
+hot-(re)plugging the SATA data cable crashes the kernel try letting the
+operating system fully boot up, then quickly hot-(re)plug both the SATA
+power and data cables.
 
 Step 2 - Enable security by setting a user password
 ---------------------------------------------------
@@ -101,12 +76,12 @@ password.
 
 Any password will do, as this should only be temporary. After the secure
 erase the password will be set back to NULL. In this example, the
-password is "Eins" as shown:
+password is "PasSWorD" as shown:
 
-    # hdparm --user-master u --security-set-pass Eins /dev/sdX
-    security_password="Eins"
+    # hdparm --user-master u --security-set-pass PasSWorD /dev/sdX
+    security_password="PasSWorD"
     /dev/sdX:
-    Issuing SECURITY_SET_PASS command, password="Eins", user=user, mode=high
+    Issuing SECURITY_SET_PASS command, password="PasSWorD", user=user, mode=high
 
 As a sanity check, issue the following command
 
@@ -132,14 +107,14 @@ Warning:Triple check that the correct drive designation is used. THERE
 IS NO TURNING BACK ONCE THE ENTER KEY HAS BEEN PRESSED! You have been
 warned.
 
-    # hdparm --user-master u --security-erase Eins /dev/sdX
+    # hdparm --user-master u --security-erase PasSWorD /dev/sdX
 
 Wait until the command completes. This example output shows it took
 about 40 seconds for an Intel X25-M 80GB SSD.
 
-    security_password="Eins"
+    security_password="PasSWorD"
     /dev/sdX:
-    Issuing SECURITY_ERASE command, password="Eins", user=user
+    Issuing SECURITY_ERASE command, password="PasSWorD", user=user
     0.000u 0.000s 0:39.71 0.0%      0+0k 0+0io 0pf+0w
 
 The drive is now erased. After a successful erasure the drive security
@@ -167,8 +142,15 @@ See the GRUB_EFI_Examples for hardware-specific instructions to get GRUB
 EFI working following a wipe.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SSD_Memory_Cell_Clearing&oldid=252505"
+"https://wiki.archlinux.org/index.php?title=SSD_Memory_Cell_Clearing&oldid=291699"
 
 Category:
 
 -   Storage
+
+-   This page was last modified on 5 January 2014, at 14:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

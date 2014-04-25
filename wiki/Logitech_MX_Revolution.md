@@ -105,7 +105,7 @@ Lastly, add xbindkeys to your startup and you should be good to go.
 
   
  The best way to map the search button to middle click is to add the
-following two lines to /etc/sysctl.conf:
+following two lines to /etc/sysctl.d/50-mouse.conf:
 
     # Enable mouse button emulation
     dev.mac_hid.mouse_button_emulation = 1
@@ -126,8 +126,15 @@ free spinning.
 More Info can be found here
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Logitech_MX_Revolution&oldid=247907"
+"https://wiki.archlinux.org/index.php?title=Logitech_MX_Revolution&oldid=282633"
 
 Category:
 
 -   Mice
+
+-   This page was last modified on 13 November 2013, at 12:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

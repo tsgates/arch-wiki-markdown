@@ -6,34 +6,29 @@ in general, just like his big brother Dell XPS M1530. Here you can find
 (or put !) information to configure your laptop and become a mobile
 Archer.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Sound                                                              |
-| -   2 Touchpad Synaptics                                                 |
-| -   3 Fingerprint reader                                                 |
-| -   4 Network                                                            |
-|     -   4.1 Ethernet Setup                                               |
-|     -   4.2 Wireless Setup                                               |
-|     -   4.3 Bluetooth                                                    |
-|                                                                          |
-| -   5 nVidia Graphics                                                    |
-|     -   5.1 Compiz Fusion                                                |
-|     -   5.2 GPU Temperature                                              |
-|                                                                          |
-| -   6 Suspend                                                            |
-| -   7 Hard Drive                                                         |
-| -   8 SD Card Reader                                                     |
-| -   9 Webcam                                                             |
-| -   10 Sensors / Hardware info                                           |
-| -   11 Extra media keys                                                  |
-| -   12 BIOS                                                              |
-|     -   12.1 History of BIOS Revisions                                   |
-|                                                                          |
-| -   13 Battery Usage                                                     |
-| -   14 External Resources                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Sound
+-   2 Touchpad Synaptics
+-   3 Fingerprint reader
+-   4 Network
+    -   4.1 Ethernet Setup
+    -   4.2 Wireless Setup
+    -   4.3 Bluetooth
+-   5 nVidia Graphics
+    -   5.1 Compiz Fusion
+    -   5.2 GPU Temperature
+-   6 Suspend
+-   7 Hard Drive
+-   8 SD Card Reader
+-   9 Webcam
+-   10 Sensors / Hardware info
+-   11 Extra media keys
+-   12 BIOS
+    -   12.1 History of BIOS Revisions
+-   13 Battery Usage
+-   14 External Resources
 
 Sound
 -----
@@ -61,26 +56,7 @@ Fingerprint reader
 As of today, the device manufacturer is SGS Thomson Microelectronics
 (you can check with a lsusb). Install it using ThinkFinger.
 
-If you can't get thinkfinger going, try fprint
-
-Install fprint.
-
-Add yourself to the scanner group
-
-     # gpasswd -a username scanner
-
-Enroll your finger print
-
-     $ sudo pam_fprint_enroll
-
-If you want to use your fingerprint with sudo, edit the PAM config file
-for sudo, /etc/pam.d/sudo, as follows:
-
-    auth    sufficient    pam_fprint.so
-    auth    required    pam_unix.so try_first_pass nullok_secure 
-    auth    required    pam_nologin.so
-
-When you do something with sudo, it should ask you to swipe your finger
+If you can't get thinkfinger going, try fprint.
 
 Network
 -------
@@ -88,8 +64,8 @@ Network
 Ethernet Setup
 
 the ethernet card is recognized by the kernel, simply load the network
-module to use it, or use a connection manager (see Wireless Setup for a
-list of programs)
+module to use it, or use a connection manager (see Wireless network
+configuration for a list of programs)
 
 Wireless Setup
 
@@ -287,6 +263,7 @@ Webcam
 
 Note: The uvc modules are now compiled as part of the kernel (as of
 2.6.26), so it should no longer be necessary to install uvc separately.
+See Webcam Setup for detail.
 
 Note: Some m1330's come without a webcam, or the camera cable may be
 damaged or have become detached internally. If in doubt (and before
@@ -299,18 +276,6 @@ LCD cable not detected."
 
 If this is the case, you can try to fix / replace / install the needed
 hardware according the following: [1], [2], [3]
-
-For kernels prior to 2.6.26,you have to install linux-uvc drivers to
-have a working webcam (works for both VGA webcam from LED display and HD
-webcam from CCFL display apparently). You can find them in the AUR.
-
-Then you have to load corresponding modules:
-
-    # modprobe usbvision
-    # modprobe uvcvideo
-
-If you want them to be loaded at startup, put usbvision and uvcvideo in
-the MODULES section of /etc/rc.conf.
 
 Sensors / Hardware info
 -----------------------
@@ -516,8 +481,15 @@ the hardware in the XPS M1330 work.
 French speaking people can also refer to these articles.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_XPS_M1330&oldid=238192"
+"https://wiki.archlinux.org/index.php?title=Dell_XPS_M1330&oldid=297831"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 15 February 2014, at 15:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

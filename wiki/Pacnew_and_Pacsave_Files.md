@@ -1,23 +1,19 @@
 Pacnew and Pacsave Files
 ========================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Getting Started                                                    |
-| -   2 Package backup files                                               |
-| -   3 Types Explained                                                    |
-|     -   3.1 .pacnew                                                      |
-|     -   3.2 .pacsave                                                     |
-|     -   3.3 .pacorig                                                     |
-|                                                                          |
-| -   4 Locating .pac* Files                                               |
-| -   5 Managing .pacnew Files                                             |
-|     -   5.1 Using Meld to Update Differences                             |
-|                                                                          |
-| -   6 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Getting Started
+-   2 Package backup files
+-   3 Types Explained
+    -   3.1 .pacnew
+    -   3.2 .pacsave
+    -   3.3 .pacorig
+-   4 Locating .pac* Files
+-   5 Managing .pacnew Files
+    -   5.1 Using a graphics diff. editor
+-   6 Resources
 
 Getting Started
 ---------------
@@ -181,6 +177,23 @@ the filesystem nor of which files have already been removed.
 Managing .pacnew Files
 ----------------------
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
+  g]                       is poorly written.       g]
+                           Reason: There's a lot of 
+                           redundant content here:  
+                           applications mentioned   
+                           multiple times,          
+                           descriptions already     
+                           provided elsewhere.      
+                           Replace content with     
+                           links to other lists of  
+                           useful packages where    
+                           possible, e.g. List of   
+                           Applications#Merge       
+                           tools. (Discuss)         
+  ------------------------ ------------------------ ------------------------
+
 There are various tools to help resolve .pacnew and .pacsave file
 issues. The standard diff utility (alternatively, colordiff) provides an
 easy way to compare the files. Finally, the pacnews bash script provides
@@ -189,8 +202,9 @@ and edit .pacnew and .pacsave files.
 
 Once all existing .pacnew files have been located, the user may handle
 them manually using common merge tools such as vimdiff, ediff (part of
-emacs), meld (a GNOME GUI tool), sdiff (part of diffutils, or Kompare (a
-KDE GUI tool), then deleting the .pacnew files afterwards.
+emacs), meld (a GNOME GUI tool), sdiff (part of diffutils), or
+kdesdk-kompare (a KDE GUI tool), then deleting the .pacnew files
+afterwards.
 
 A few third-party utilities providing various levels of automation for
 these tasks are available from the community repository and the AUR.
@@ -211,47 +225,51 @@ these tasks are available from the community repository and the AUR.
     and automatically merge trivial changes (e.g. comments.) Unlike some
     others above, this uses your preferred text editor rather than
     forcing you to learn a new one.
+-   meld - Easy-to-use program with a graphical user interface on which
+    two (or more) files can be compared and edited side-by-side. It
+    highlights the differences between the opened files in color.
 -   pacnews-git is a simple script aimed at finding all .pacnew files,
     then editing with vimdiff. It differs from the below script using
     meld.
 
-> Using Meld to Update Differences
+  
 
-Using meld in a loop can be used to update configuration files. This
-script will loop through the files one by one then prompt to delete the
-.pacnew file.
+> Using a graphics diff. editor
 
-    pacnew
+    #!/bin/sh
+    # Diff *.pacnew configuration files with their originals
 
-    #!/bin/bash
-    # Merge new *.pacnew configuration files with their originals
+    diffed="diffuse"
+    [ $(whoami) = root ] && diffed="vimdiff"
 
-    pacnew=$(find /etc -type f -name "*.pacnew")
+    # Required programs
+    req_prgs=("$diffed" vimdiff sudo)
+    for prog in ${req_prgs[@]}; do
+      if ! hash "$prog" 2>&- ; then
+        echo >&2 ""${0##*/}": requires program: "$prog""
+        error=y ;fi ; done
+    [ "$error" = y ] && exit 1
 
-    # Check if any .pacnew configurations are found
-    if [[ -z "$pacnew" ]]; then
-      echo " No configurations to update"
-    fi
+    pacnew=$(sudo find /etc -type f -name "*.pacnew")
+    if [ -z "$pacnew" ]; then
+      echo "No configurations to update"; fi
 
     for config in $pacnew; do
-      # Diff original and new configuration to merge
-      gksudo meld ${config%\.*} $config &
+      sudo "$diffed" ${config%\.*} $config &
       wait
       # Remove .pacnew file?
       while true; do
-        read -p " Delete \""$config"\"? (Y/n): " Yn
+        read -p "Delete \""$config"\"? (Y/n): " Yn
         case $Yn in
           [Yy]* ) sudo rm "$config" && \
-                  echo " Deleted \""$config"\"."
+                  echo "Deleted \""$config"\"."
                   break                         ;;
           [Nn]* ) break                         ;;
-          *     ) echo " Answer (Y)es or (n)o." ;;
-        esac
-      done
-    done
+          *     ) echo "Answer (Y)es or (n)o."  ;;
+        esac; done; done
 
-The above script uses GNOME's gksudo for graphical sudo permissions. Use
-kdesu for KDE.
+    # Alert of pacsave files
+    sudo find /etc -name "*.pacsave"
 
 Resources
 ---------
@@ -259,8 +277,15 @@ Resources
 -   Arch Linux Forums: Dealing With .pacnew Files
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pacnew_and_Pacsave_Files&oldid=252972"
+"https://wiki.archlinux.org/index.php?title=Pacnew_and_Pacsave_Files&oldid=295397"
 
 Category:
 
 -   Package management
+
+-   This page was last modified on 1 February 2014, at 18:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

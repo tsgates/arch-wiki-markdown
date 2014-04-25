@@ -13,20 +13,17 @@ Sybase
 Sybase is a multi-threaded, multi-user SQL database. For more
 information about features, see the official homepage.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install Sybase Client                                              |
-| -   2 Install command line client tool                                   |
-| -   3 Install Sybase Server =                                            |
-| -   4 Configuration                                                      |
-|     -   4.1 Enable remote access                                         |
-|                                                                          |
-| -   5 Upgrading                                                          |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 Install Sybase python binding                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Install Sybase Client
+-   2 Install command line client tool
+-   3 Install Sybase Server
+-   4 Configuration
+    -   4.1 Enable remote access
+-   5 Upgrading
+-   6 Troubleshooting
+    -   6.1 Install Sybase python binding
 
 Install Sybase Client
 ---------------------
@@ -45,25 +42,16 @@ Install command line client tool
 
 sqsh is in the AUR.
 
-Install Sybase Server =
------------------------
-
-    download from the official sybase site.
-    stub
+Install Sybase Server
+---------------------
 
 Configuration
 -------------
 
-    stub
-
 > Enable remote access
-
-    stub
 
 Upgrading
 ---------
-
-    stub
 
 Troubleshooting
 ---------------
@@ -89,8 +77,15 @@ Sample Code
     c.fetchone()
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sybase&oldid=237317"
+"https://wiki.archlinux.org/index.php?title=Sybase&oldid=277286"
 
 Category:
 
 -   Database management systems
+
+-   This page was last modified on 1 October 2013, at 21:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

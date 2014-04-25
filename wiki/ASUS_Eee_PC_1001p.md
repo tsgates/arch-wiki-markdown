@@ -10,16 +10,14 @@ ASUS Eee PC 1001p
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Issues                                                             |
-|     -   1.1 ACPI and Intel KMS                                           |
-|     -   1.2 LCD Brightness                                               |
-|     -   1.3 Network Adapter                                              |
-|     -   1.4 Touchpad                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Issues
+    -   1.1 ACPI and Intel KMS
+    -   1.2 LCD Brightness
+    -   1.3 Network Adapter
+    -   1.4 Touchpad
 
 Issues
 ------
@@ -115,3 +113,10 @@ Retrieved from
 Category:
 
 -   ASUS
+
+-   This page was last modified on 14 June 2012, at 00:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

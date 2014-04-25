@@ -6,20 +6,18 @@ which we'd like to have Arch Linux represented. The idea is that we can
 all contribute to it and coordinate on the dates, details, and who's
 going.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 FOSDEM                                                             |
-| -   2 FrOSCon                                                            |
-| -   3 Linux Bier Wanderung                                               |
-| -   4 Linux-Kongress                                                     |
-| -   5 LinuxTag                                                           |
-| -   6 SCaLE                                                              |
-| -   7 Linux World Expo 2006                                              |
-| -   8 More                                                               |
-| -   9 Notes about conference preparation                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 FOSDEM
+-   2 FrOSCon
+-   3 Linux Bier Wanderung
+-   4 Linux-Kongress
+-   5 LinuxTag
+-   6 SCALE
+-   7 Linux World Expo 2006
+-   8 More
+-   9 Notes about conference preparation
 
 FOSDEM
 ------
@@ -31,11 +29,11 @@ Source events in Europe"
 
 Site:
 
-http://www.fosdem.org/
+https://fosdem.org/
 
 Wikipedia:
 
-http://en.wikipedia.org/wiki/FOSDEM
+Wikipedia:FOSDEM
 
 Where:
 
@@ -51,15 +49,15 @@ Since:
 
 Arch presence:
 
-no booths, but in 2k10 JGC,Thomas,Roman and Dieter were there. In 2k11
-Dieter was there (both times in Arch clothing)
+no booths, but in 2010, JGC, Thomas, Roman, and Dieter were there. In
+2011, Dieter was there (both times in Arch clothing)
 
 FrOSCon
 -------
 
 Site:
 
-http://www.froscon.org/
+http://www.froscon.de/en/home/
 
 Where:
 
@@ -84,12 +82,12 @@ Linux Bier Wanderung
 Site:
 
 http://www.linuxbierwanderung.com/  
-http://lbw2008.palfreman.com/  
+http://lbw2008.palfreman.com/[dead link 2014-03-16]  
 http://compsoc.dur.ac.uk/mediawiki/index.php/Mini_LBW_2008
 
 Wikipedia:
 
-http://en.wikipedia.org/wiki/Linux_Bier_Wanderung
+Wikipedia:Linux_Bier_Wanderung
 
 Where:
 
@@ -124,7 +122,7 @@ http://www.linux-kongress.org/
 
 Wikipedia:
 
-http://en.wikipedia.org/wiki/Linux_Kongress
+Wikipedia:Linux_Kongress
 
 Where:
 
@@ -155,7 +153,7 @@ http://www.linuxtag.org/
 
 Wikipedia:
 
-http://en.wikipedia.org/wiki/LinuxTag
+Wikipedia:LinuxTag
 
 Where:
 
@@ -173,12 +171,12 @@ Arch presence:
 
 2007
 
-SCaLE
+SCALE
 -----
 
 Site:
 
-http://http://www.socallinuxexpo.org/scale10x/
+https://www.socallinuxexpo.org/scale10x/
 
 Where:
 
@@ -197,12 +195,12 @@ Arch user presence:
 Arch Linux Distribution Users, contact Systemservers re booth
 participation
 
-Linux World Expo 2006  
------------------------
+Linux World Expo 2006
+---------------------
 
 Boston, MA  
  April 3-5, 2006  
- [1]
+ http://www.linuxworldexpo.com/ [dead link 2014-03-16]
 
 More
 ----
@@ -249,8 +247,15 @@ A few notes about conference preparation:
 -   Have a donation box. You will get donations.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Linux_Conferences&oldid=223734"
+"https://wiki.archlinux.org/index.php?title=Linux_Conferences&oldid=304724"
 
 Category:
 
 -   Events
+
+-   This page was last modified on 16 March 2014, at 06:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

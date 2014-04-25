@@ -10,16 +10,13 @@ Mounting images as user
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 fuseiso                                                            |
-|     -   2.1 Using it with Nautilus                                       |
-|                                                                          |
-| -   3 MPlayer                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 fuseiso
+    -   2.1 Using it with Nautilus
+-   3 MPlayer
 
 Introduction
 ------------
@@ -32,65 +29,59 @@ fuseiso
 -------
 
 Using FUSE to mount image files is easy enough. Just install the fuseiso
-package:
-
-    pacman -S fuseiso
+package.
 
 To mount an image, just type (the mountpoint has to be writable by the
 user) :
 
-    fuseiso <imagefile> <mountpoint>
+    fuseiso imagefile mountpoint
 
 To unmount the image, use:
 
-    fusermount -u <mountpoint>
+    fusermount -u mountpoint
 
-NOTE: fuseiso currently supports images of the following types: .iso,
-.img, .bin, .mdf, .nrg
+Note:fuseiso currently supports images of the following types: .iso,
+.img, .bin, .mdf, .nrg.
 
 > Using it with Nautilus
 
-NOTE: The following is based on the scripts taken from here.
+Note:The following is based on the scripts taken from here.
 
 For users of GNOME there is an easy way of using fuseiso from the
-nautilus-context menu. First you will need the nautilus-actions package:
-
-    pacman -S nautilus-actions
-
+nautilus-context menu. First you will need the nautilus-actions package,
 Then you need to save the following scripts to an folder of your choise
-(eg. /usr/bin)
+(eg. /usr/bin):
 
-nautilus-actions-iso-mount.sh:
+    nautilus-actions-iso-mount.sh
 
-    #! /bin/bash
+     #!/bin/bash
+     
+     FILE=$(basename "$1")
+     MOUNTPOINT="$HOME/Desktop/$FILE"
+     
+     fuseiso -p "$1" "$MOUNTPOINT"
 
-    FILE=`basename "$1"`
-    MOUNTPOINT="$HOME/Desktop/$FILE"
+    nautilus-actions-iso-umount.sh
 
-    fuseiso -p "$1" "$MOUNTPOINT"
-
-nautilus-actions-iso-umount.sh:
-
-    #! /bin/bash
-
-    FILE=`basename "$1"`
-    MOUNTPOINT="$HOME/Desktop/$FILE"
-
-    fusermount -u "$MOUNTPOINT"
+     #!/bin/bash
+     
+     FILE=$(basename "$1")
+     MOUNTPOINT="$HOME/Desktop/$FILE"
+     
+     fusermount -u "$MOUNTPOINT"
 
 and make them executable:
 
-    chmod +x /<path_to_scripts>/nautilus-actions-iso-*
+    chmod +x /path_to_scripts/nautilus-actions-iso-*
 
-Now, start nautilus-actions-config (System -> Preferences -> Nautilus
+Now, start nautilus-actions-config (System > Preferences > Nautilus
 Actions Configuration).
 
-  
- Add a new action with the following settings:
+Add a new action with the following settings:
 
 -   Label: Mount ISO
 -   Icon: A symbol of your choice (eg: gtk-cdrom)
--   Path: /<path_to_scripts>/nautilus-actions-iso-mount.sh
+-   Path: /path_to_scripts/nautilus-actions-iso-mount.sh
 -   Parameters: %F
 -   Working directory: %d
 -   Basenames: *.iso ; *.nrg ; *.bin ; *.img ; *.mdf (for each add a
@@ -102,12 +93,11 @@ With this action you can mount ISO-images to your Desktop. It will
 create an folder in ~/Desktop with the name of the iso. fuseiso will
 mount the iso to this folder.
 
-  
- And a second one:
+And a second one:
 
 -   Label: Unmount ISO
 -   Icon: A symbol of your choice (eg: gtk-cdrom)
--   Path: /<path_to_scripts>/nautilus-actions-iso-umount.sh
+-   Path: /path_to_scripts/nautilus-actions-iso-umount.sh
 -   Parameters: %F
 -   Working directory: %d
 -   Basenames: *.iso ; *.nrg ; *.bin ; *.img ; *.mdf (for each add a
@@ -118,8 +108,7 @@ mount the iso to this folder.
 This second action will unmount the mounted iso and remove the folder
 from the desktop.
 
-  
- Sometimes you have to logout to be able to mount any image of the given
+Sometimes you have to logout to be able to mount any image of the given
 types simply by right clicking it in Nautilus and selecting Mount ISO.
 To unmount it again, just right click the corresponding folder on your
 desktop and select Unmount ISO.
@@ -132,8 +121,15 @@ to open a file. At the bottom change video file to the type of image
 that you have and navigate to the image.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mounting_images_as_user&oldid=197377"
+"https://wiki.archlinux.org/index.php?title=Mounting_images_as_user&oldid=264514"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 27 June 2013, at 21:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

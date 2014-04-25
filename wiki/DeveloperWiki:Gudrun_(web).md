@@ -1,24 +1,21 @@
 DeveloperWiki:Gudrun (web)
 ==========================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 General configuration guideline                                    |
-| -   2 Users                                                              |
-| -   3 Services                                                           |
-| -   4 Vhost setup                                                        |
-| -   5 Maintainer                                                         |
-|     -   5.1 www.archlinux.org                                            |
-|     -   5.2 mailman.archlinux.org                                        |
-|     -   5.3 bugs.archlinux.org                                           |
-|     -   5.4 projects.archlinux.org                                       |
-|     -   5.5 planet.archlinux.org                                         |
-|     -   5.6 repos.archlinux.org                                          |
-|                                                                          |
-| -   6 Emergency evacuation plan                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 General configuration guideline
+-   2 Users
+-   3 Services
+-   4 Vhost setup
+-   5 Maintainer
+    -   5.1 www.archlinux.org
+    -   5.2 mailman.archlinux.org
+    -   5.3 bugs.archlinux.org
+    -   5.4 projects.archlinux.org
+    -   5.5 planet.archlinux.org
+    -   5.6 repos.archlinux.org
+-   6 Emergency evacuation plan
 
 General configuration guideline
 -------------------------------
@@ -30,7 +27,6 @@ General configuration guideline
     are currently being tracked in git:
     -   /etc/httpd/conf
     -   /etc/php
-
 -   Don't forget to commit your changes ;-)
 
 Users
@@ -123,3 +119,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki:Server Configuration
+
+-   This page was last modified on 6 December 2012, at 00:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

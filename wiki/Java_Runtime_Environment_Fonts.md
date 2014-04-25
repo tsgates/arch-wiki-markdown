@@ -1,20 +1,12 @@
 Java Runtime Environment Fonts
 ==============================
 
-> Summary
+Related articles
 
-Instructions are given to improve the display of fonts in Java
-applications when using Oracle's Java Runtime Environment
-
-> Related
-
-Fonts: Information on adding fonts and font recommendations
-
-Font Configuration: Font setup and beautification
-
-MS Fonts: Adding Microsoft fonts and mimicking Windows' font settings
-
-X Logical Font Description: The core X server font system
+-   Fonts
+-   Font Configuration
+-   MS Fonts
+-   X Logical Font Description
 
 Some users may find the default Java fonts or the display mode of fonts
 in Java applications to be unpleasant. Several methods to improve the
@@ -24,15 +16,13 @@ achieve better results by combining them.
 
 TrueType fonts appear to be the best supported format for use with Java.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Anti-aliasing                                                      |
-| -   2 Font selection                                                     |
-|     -   2.1 TrueType fonts                                               |
-|     -   2.2 Default fonts                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Anti-aliasing
+-   2 Font selection
+    -   2.1 TrueType fonts
+    -   2.2 Default fonts
 
 Anti-aliasing
 -------------
@@ -43,7 +33,7 @@ this on a per user basis, add the following line to the user's
 
     export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=setting'
 
-TrueType fonts contain a grid-fitting and scan-conversion procedure
+Note:TrueType fonts contain a grid-fitting and scan-conversion procedure
 (GASP) table with the designer's recommendations for the font's display
 at different point sizes. Some sizes are recommended to be fully
 anti-aliased, others are to be hinted, and some are to be displayed as
@@ -95,6 +85,18 @@ Source ~/.bashrc as the normal user for the change to take effect.
 
 > Default fonts
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: These fontconfig 
+                           files in recent version  
+                           of JRe are obsolete. See 
+                           http://bugs.sun.com/view 
+                           _bug.do?bug_id=7013646.  
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 The Lucida fonts distributed with the Sun JRE are the default for Java
 applications that do not specify a different font's use. The Lucida
 fonts were designed for low resolution displays and printers; many users
@@ -115,8 +117,7 @@ fontconfig.properties.*.src files in /opt/java/jre/lib. Some users will
 find these files to be better sources to use for editing. In all cases
 the edited file should be saved as fontconfig.properties.
 
-  
- The Java font names in the configuration file are in the form of
+The Java font names in the configuration file are in the form of
 genericFontName.style.subset, for example, serif.plain.latin-1. These
 generic fonts are mapped to the installed fonts using X logical font
 description (XLFD) names. The %d, in the example below, is used as a
@@ -150,8 +151,15 @@ may be closed and the user should drop root privileges. Open a new
 instance of a Java application to test the changes.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Java_Runtime_Environment_Fonts&oldid=244937"
+"https://wiki.archlinux.org/index.php?title=Java_Runtime_Environment_Fonts&oldid=291301"
 
 Category:
 
 -   Fonts
+
+-   This page was last modified on 2 January 2014, at 02:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

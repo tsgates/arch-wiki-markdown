@@ -13,23 +13,19 @@ Acer Extensa 5200
 
 Basic informations about that laptop. Some parameters may be diffrent
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Kernel                                                             |
-| -   3 Networking                                                         |
-|     -   3.1 Wireless                                                     |
-|                                                                          |
-| -   4 Power Management                                                   |
-|     -   4.1 ACPI                                                         |
-|     -   4.2 CPU frequency scaling                                        |
-|     -   4.3 Hibernate                                                    |
-|                                                                          |
-| -   5 Xorg                                                               |
-| -   6 External Resources                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Kernel
+-   3 Networking
+    -   3.1 Wireless
+-   4 Power Management
+    -   4.1 ACPI
+    -   4.2 CPU frequency scaling
+    -   4.3 Hibernate
+-   5 Xorg
+-   6 External Resources
 
 Hardware
 ========
@@ -61,30 +57,7 @@ Ethernet works fine
 Wireless
 --------
 
-For my Broadcom i use Ndiswrapper. Drivers are [here].
-
-In the fact, you need only two files, bcmwl5.inf and bcmwl5.sys. You can
-download it [here] , that's LESS THEN ONE MEGABYTE!!
-
-Just install ndiswrapper
-
-    # pacman -S ndiswrapper ndiswrapper-utils
-
-Remove module from your existing kernel
-
-    # rmmod bcm43xx
-
-download and extract drivers and install them
-
-    # wget http://cave0.tl.krakow.pl/~ert16/bcmwl5.tar.bz2
-    # tar -jxf bcmwl5.tar.bz2
-    # cd bcmwl5
-    # ndiswrapper -i bcmwl5.inf
-
-you can test driver by using
-
-    # iwlist  wlan0 scan
-    wlan0     No scan results
+See Broadcom wireless.
 
 Power Management
 ================
@@ -213,8 +186,15 @@ External Resources
     Installation Guides Survey: Acer.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Extensa_5200&oldid=196484"
+"https://wiki.archlinux.org/index.php?title=Acer_Extensa_5200&oldid=281860"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 7 November 2013, at 13:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

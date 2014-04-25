@@ -4,15 +4,13 @@ LilyTerm
 Taken from the LilyTerm page: LilyTerm is a terminal emulator based off
 of libvte that aims to be fast and lightweight.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Features                                                           |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-| -   4 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Features
+-   2 Installation
+-   3 Configuration
+-   4 More Resources
 
 Features
 --------
@@ -60,3 +58,10 @@ Retrieved from
 Category:
 
 -   Terminal emulators
+
+-   This page was last modified on 9 October 2012, at 15:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

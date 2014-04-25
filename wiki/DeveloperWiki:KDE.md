@@ -1,27 +1,22 @@
 DeveloperWiki:KDE
 =================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Packagers                                                          |
-|     -   1.1 Plan                                                         |
-|     -   1.2 Packages                                                     |
-|     -   1.3 Todo / Notes                                                 |
-|         -   1.3.1 common tasks                                           |
-|         -   1.3.2 packages to be removed                                 |
-|         -   1.3.3 packages to move with KDE                              |
-|                                                                          |
-| -   2 Packaging                                                          |
-|     -   2.1 Known issues                                                 |
-|     -   2.2 Changes from 4.9                                             |
-|         -   2.2.1 New packages                                           |
-|         -   2.2.2 Removed packages                                       |
-|         -   2.2.3 soname bump                                            |
-|                                                                          |
-|     -   2.3 Broken packages which are not part of KDE SC                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Packagers
+    -   1.1 Plan
+    -   1.2 Packages
+    -   1.3 Todo / Notes
+        -   1.3.1 common tasks
+        -   1.3.2 packages to be removed
+        -   1.3.3 packages to move with KDE
+-   2 Packaging
+    -   2.1 Known issues
+    -   2.2 Changes from 4.12
+        -   2.2.1 Removed packages
+        -   2.2.2 New packages
+    -   2.3 Broken packages which are not part of KDE SC
 
 Packagers
 =========
@@ -48,9 +43,11 @@ Packages
 -   kdebindings-kross (miss falcon)
 -   kdebindings-perlkde (miss akonadi)
 -   kdebindings-smokekde (miss akonadi)
--   kdeedu-kstars (miss xplanet)
--   kdeedu-marble (miss libwlocate, it hasn't a stable release)
--   kdenetwork (miss XMSS, libmeanwhile, msilbc)
+-   kdeedu-kig (miss boost-python?)
+-   kdeedu-kstars (miss xplanet, astrometry)
+-   kdeedu-marble (miss libshp, qextserialport, libwlocate, it hasn't a
+    stable release)
+-   kdenetwork-kopete (miss XMSS, libmeanwhile)
 
 Todo / Notes
 ------------
@@ -66,16 +63,14 @@ Todo / Notes
 
 > packages to be removed
 
--   kdeadmin-system-config-printer-kde
--   kdeartwork-aurorae
--   print-manager
--   kdegames
--   kdeutils-printer-applet
+-   nepomuk-core
+-   nepomuk-widgets
+-   shared-desktop-ontologies
+-   soprano
+-   virtuoso
+-   virtuoso-base
 
 > packages to move with KDE
-
--   akonadi
--   soprano
 
 Packaging
 =========
@@ -83,47 +78,43 @@ Packaging
 Known issues
 ------------
 
--   the default screen locker shows a white wallpaper when
-    kde-wallpapers isn't installed (you can set a different wallpaper in
-    the Screen Locker menu)
-
 If any problem occurs try a new user or (re)move ~/.kde4 /tmp/kde-*
 /var/tmp/kdecache-*
 
-Changes from 4.9
-----------------
+-   Nepomuk does not work in application X: KDE SC 4.13 has been built
+    without Nepomuk support.
 
-> New packages
-
--   nepomuk-widgets
--   kdegames-picmi
--   kdeutils-print-manager
--   kdeplasma-addons-runners-dictionary
--   kdeplasma-addons-wallpapers-qmlwallpapers
--   libkdegames
--   libkmahjongg
+Changes from 4.12
+-----------------
 
 > Removed packages
 
--   kdeartwork-aurorae
--   kdegames-libkdegames
--   kdegames-libkmahjongg
+-   nepomuk-core
+-   nepomuk-widgets
 
-> soname bump
+> New packages
 
--   libkipi.so.9 -> libkipi.so.10
--   libkdcraw.so.21 -> libkdcraw.so.22
+-   kfilemetadata
+-   baloo
+-   baloo-widgets
+-   kdeedu-artikulate
+-   kqtquickcharts
 
 Broken packages which are not part of KDE SC
 --------------------------------------------
 
--   digikam (needs a rebuild)
--   kipi-plugins (needs a rebuild)
--   calligra-krita (needs a rebuild)
+-   digikam (must be rebuilt with newer kdeedu-marble)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DeveloperWiki:KDE&oldid=243096"
+"https://wiki.archlinux.org/index.php?title=DeveloperWiki:KDE&oldid=303782"
 
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 9 March 2014, at 13:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

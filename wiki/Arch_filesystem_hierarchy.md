@@ -1,64 +1,53 @@
 Arch filesystem hierarchy
 =========================
 
-  Summary
-  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Describes the standard filesystem layout (that is, the placement of files and directories) employed by many GNU/Linux distributions -- including Arch Linux. Includes Arch-specific deviations and notes.
-
 Arch Linux is among the many distributions that follow the filesystem
 hierarchy standard. In addition to explaining each directory along with
 their designations, this article also covers Arch-specific
 modifications.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Filesystem Hierarchy Standard                                      |
-|     -   1.1 Shareable and unsharable files                               |
-|                                                                          |
-| -   2 Directories                                                        |
-|     -   2.1 The root filesystem                                          |
-|     -   2.2 /bin: Essential command binaries                             |
-|     -   2.3 /boot: Static bootloader files                               |
-|     -   2.4 /dev: Device files                                           |
-|     -   2.5 /etc: Host-specific configuration                            |
-|         -   2.5.1 /etc/X11                                               |
-|             -   2.5.1.1 /etc/X11/xinit                                   |
-|             -   2.5.1.2 /etc/X11/xinit/xinitrc                           |
-|                                                                          |
-|     -   2.6 /home: User directories                                      |
-|     -   2.7 /lost+found: Filesystem-specific recoverable data            |
-|     -   2.8 /mnt: Temporary mount points                                 |
-|     -   2.9 /opt: Problematic packages                                   |
-|     -   2.10 /proc: Process information                                  |
-|     -   2.11 /root: Administrator directory                              |
-|     -   2.12 /run: Ephemeral runtime data                                |
-|     -   2.13 /sbin: System binaries                                      |
-|     -   2.14 /srv: Service data                                          |
-|     -   2.15 /tmp: Temporary files                                       |
-|     -   2.16 /usr: Shareable, read-only data                             |
-|         -   2.16.1 /usr/bin: Binaries                                    |
-|         -   2.16.2 /usr/include: Header files                            |
-|         -   2.16.3 /usr/lib: Libraries                                   |
-|         -   2.16.4 /usr/sbin: System binaries                            |
-|         -   2.16.5 /usr/share: Architecture independent data             |
-|         -   2.16.6 /usr/src: Source code                                 |
-|         -   2.16.7 /usr/local: Local hierarchy                           |
-|                                                                          |
-|     -   2.17 /var: Variable files                                        |
-|         -   2.17.1 /var/abs                                              |
-|         -   2.17.2 /var/cache/pacman/pkg                                 |
-|         -   2.17.3 /var/lib: State information                           |
-|         -   2.17.4 /var/log: Log files                                   |
-|         -   2.17.5 /var/mail: User mail                                  |
-|         -   2.17.6 /var/spool: Queues                                    |
-|             -   2.17.6.1 /var/spool/mail                                 |
-|                                                                          |
-|         -   2.17.7 /var/tmp: Preservable temporary files                 |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Filesystem Hierarchy Standard
+    -   1.1 Shareable and Unshareable files
+-   2 Directories
+    -   2.1 The root filesystem
+    -   2.2 /bin: Essential command binaries (deprecated)
+    -   2.3 /boot: Static bootloader files
+    -   2.4 /dev: Device files
+    -   2.5 /etc: Host-specific configuration
+        -   2.5.1 /etc/X11
+            -   2.5.1.1 /etc/X11/xinit
+            -   2.5.1.2 /etc/X11/xinit/xinitrc
+    -   2.6 /home: User directories
+    -   2.7 /lost+found: Filesystem-specific recoverable data
+    -   2.8 /mnt: Temporary mount points
+    -   2.9 /opt: Problematic packages
+    -   2.10 /proc: Process information
+    -   2.11 /root: Administrator directory
+    -   2.12 /run: Ephemeral runtime data
+    -   2.13 /sbin: System binaries (deprecated)
+    -   2.14 /srv: Service data
+    -   2.15 /tmp: Temporary files
+    -   2.16 /usr: Shareable, read-only data
+        -   2.16.1 /usr/bin: Binaries
+        -   2.16.2 /usr/include: Header files
+        -   2.16.3 /usr/lib: Libraries
+        -   2.16.4 /usr/sbin: System binaries (deprecated)
+        -   2.16.5 /usr/share: Architecture independent data
+        -   2.16.6 /usr/src: Source code
+        -   2.16.7 /usr/local: Local hierarchy
+    -   2.17 /var: Variable files
+        -   2.17.1 /var/abs
+        -   2.17.2 /var/cache/pacman/pkg
+        -   2.17.3 /var/lib: State information
+        -   2.17.4 /var/log: Log files
+        -   2.17.5 /var/mail: User mail
+        -   2.17.6 /var/spool: Queues
+            -   2.17.6.1 /var/spool/mail
+        -   2.17.7 /var/tmp: Preservable temporary files
+-   3 See also
 
 Filesystem Hierarchy Standard
 -----------------------------
@@ -70,7 +59,7 @@ distribution developers, package developers, and system implementors.
 However, it is primarily intended to be a reference and is not a
 tutorial on how to manage a Unix filesystem or directory hierarchy."
 
-> Shareable and unsharable files
+> Shareable and Unshareable files
 
 Shareable files are defined as those that can be stored on one host and
 used on others. Unshareable files are those that are not shareable. For
@@ -93,16 +82,16 @@ the hierarchy. All files and directories appear under the root directory
 of the root filesystem must be adequate to boot, restore, recover,
 and/or repair the system.
 
-> /bin: Essential command binaries
+> /bin: Essential command binaries (deprecated)
 
 Traditionally the place for binaries that must be available in single
 user mode and accessible by all users (e.g., cat, ls, cp). /bin/
 provides programs that must be available even if only the partition
 containing / is mounted. In practice, this is not the case on Arch as
-all the necessary libraries are in /usr/lib. In the future the Arch devs
-intend to merge /bin into /usr/bin. Unlike /sbin, the /bin directory is
-meant to contain commands that are of use to both the root user as well
-as non-root users.
+all the necessary libraries are in /usr/lib. As of June 2013, /bin was
+merged into /usr/bin. The filesystem package provides symlinks from /bin
+to /usr/bin, and all packages should be updated to explicitly install to
+/usr/bin.
 
 > /boot: Static bootloader files
 
@@ -198,13 +187,15 @@ mount-points should be avoided.
 > /opt: Problematic packages
 
 Packages and large static files that do not fit cleanly into the above
-GNU filesystem layout can be placed in /opt. A package placing files in
-the /opt/ directory creates a directory bearing the same name as the
-package. This directory in turn holds files that otherwise would be
-scattered throughout the file system. For example, the acrobat package
-has Browser, Reader, and Resource directories sitting at the same level
-as the bin directory. This doesn't fit into a normal GNU filesystem
-layout, so Arch places all the files in a subdirectory of /opt.
+GNU filesystem layout can be placed in /opt. FHS 2.3 denotes /ops as
+reserved for the installation of add-on application software packages. A
+package placing files in the /opt/ directory creates a directory bearing
+the same name as the package. This directory in turn holds files that
+otherwise would be scattered throughout the file system. For example,
+the acrobat package has Browser, Reader, and Resource directories
+sitting at the same level as the bin directory. This doesn't fit into a
+normal GNU filesystem layout, so Arch places all the files in a
+subdirectory of /opt.
 
 > /proc: Process information
 
@@ -242,19 +233,18 @@ require this directory, because /var can be implemented as a separate
 file system to be mounted at a later stage in the start-up process. It
 replaces /var/run/, which becomes a symlink of /run.
 
-> /sbin: System binaries
+> /sbin: System binaries (deprecated)
 
 Traditionally UNIX discriminates between 'normal' executables and those
 used for system maintenance and/or administrative tasks. The latter were
 supposed to reside either here or - the less important ones - in
 /usr/sbin. Programs executed after /usr is known to be mounted (when
-there are no problems) are generally placed into /usr/sbin. This
-directory contains binaries that are essential to the working of the
-system. These include system administration as well as maintenance and
-hardware configuration programs. GRUB (the command), fdisk, init, route,
-ifconfig, etc., all reside here. In practice, programs in /sbin require
-/usr to be mounted as all the necessary libraries are in /usr/lib. In
-the future the Arch devs intend to merge /sbin into /usr/bin.
+there are no problems) are generally placed into /usr/sbin. In practice,
+programs in /sbin require /usr to be mounted as all the necessary
+libraries are in /usr/lib. As of June 2013, /sbin and /usr/sbin were
+merged into /usr/bin. The filesystem package provides symlinks from
+/sbin and /usr/sbin to /usr/bin, and all packages should be updated to
+explicitly install to /usr/bin.
 
 > /srv: Service data
 
@@ -326,13 +316,12 @@ and are readily identifiable through their filename extension of *.so.
 They are essential for basic system functionality. Kernel modules
 (drivers) are in the subdirectory /lib/modules/<kernel-version>.
 
-/usr/sbin: System binaries
+/usr/sbin: System binaries (deprecated)
 
-Non-essential system binaries of use to the system administrator. This
-is where the network daemons for the system reside, along with other
-binaries that (generally) only the system administrator has access to,
-but which are not required for system maintenance and repair. The Arch
-devs plan to move all the binaries from /usr/sbin to /usr/bin.
+Non-essential system binaries of use to the system administrator. As of
+June 2013, /usr/sbin was merged into /usr/bin. The filesystem package
+provides symlinks from /usr/sbin to /usr/bin, and all packages should be
+updated to explicitly install to /usr/bin.
 
 /usr/share: Architecture independent data
 
@@ -400,7 +389,7 @@ Log files.
 
 /var/mail: User mail
 
-Shareable directory for users' mailboxes.
+Deprecated location for users' mailboxes.
 
 /var/spool: Queues
 
@@ -409,7 +398,7 @@ mail).
 
 /var/spool/mail
 
-Deprecated location for users' mailboxes.
+Shareable directory for users' mailboxes.
 
 /var/tmp: Preservable temporary files
 
@@ -419,10 +408,18 @@ See also
 --------
 
 -   wikipedia:Filesystem Hierarchy Standard
+-   Linux FHS Homepage
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_filesystem_hierarchy&oldid=251652"
+"https://wiki.archlinux.org/index.php?title=Arch_filesystem_hierarchy&oldid=291042"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 31 December 2013, at 04:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

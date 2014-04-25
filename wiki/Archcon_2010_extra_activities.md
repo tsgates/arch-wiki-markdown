@@ -7,17 +7,14 @@ to maximize your stay in the region of Archcon? This page is meant for
 people who want to stay about a week or so in the region or archcon, as
 a vacation.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Archcon 2010 brainstorm                                            |
-|     -   1.1 Other Cities                                                 |
-|     -   1.2 Toronto                                                      |
-|     -   1.3 USA                                                          |
-|                                                                          |
-| -   2 Participants                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Archcon 2010 brainstorm
+    -   1.1 Other Cities
+    -   1.2 Toronto
+    -   1.3 USA
+-   2 Participants
 
 Archcon 2010 brainstorm
 -----------------------
@@ -32,7 +29,6 @@ Ordered somewhat from North to South so it could be done as a roadtrip.
     hour drive from Toronto)
     -   Foufounes Electriques
     -   Rue St. Catherine
-
 -   Niagara Falls (region between Canada and US)
     http://en.wikipedia.org/wiki/Niagara_Falls (a MUST)
     -   Casino Niagara & International Yuk-Yuks Stand-Up Comedy ( Inside
@@ -46,10 +42,8 @@ Ordered somewhat from North to South so it could be done as a roadtrip.
 -   The Linux Caffe Toronto http://www.linuxcaffe.ca/ what's their
     program/schedule/activities?
     -   Open Mic every Thursday evening.
-
 -   Hacklab? http://hacklab.to/archives/category/unpatched-tuesdays/
     -   Open to Guests Tuesday evenings.
-
 -   Royal Ontario Museum Toronto
     http://en.wikipedia.org/wiki/Royal_Ontario_Museum the best Museum in
     Canada
@@ -106,3 +100,10 @@ Retrieved from
 Category:
 
 -   Events
+
+-   This page was last modified on 6 December 2012, at 00:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

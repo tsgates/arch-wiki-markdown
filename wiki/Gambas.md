@@ -1,24 +1,35 @@
 Gambas
 ======
 
-  Summary
+  Summary help replacing me
   ---------------------------------------------
   This article explains how to install Gambas
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: There's no       
+                           gambas2 nor gambas3 in   
+                           the official             
+                           repositories anymore,    
+                           however there's gambas3  
+                           group. Is it necessary   
+                           to install all packages  
+                           from this group?         
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 Gambas is an object-oriented dialect of the BASIC programming language
 as well as the integrated development environment that accompanies it.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Gambas 3                                                     |
-|     -   1.2 Gambas 2                                                     |
-|                                                                          |
-| -   2 Tips and tricks                                                    |
-| -   3 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Gambas 3
+    -   1.2 Gambas 2
+-   2 Tips and tricks
+-   3 External Links
 
 Installation
 ------------
@@ -55,7 +66,7 @@ has support for building Arch packages, perfect for use with the AUR.
 
 Gambas supports both the GTK+ and QT toolkits and can make use of both,
 allowing the application to fit seamlessly into most Desktop
-Environments. This also applies to applications made inside the Gambas
+environments. This also applies to applications made inside the Gambas
 IDE, assuming the gb3-gui component is used.
 
 External Links
@@ -68,8 +79,15 @@ External Links
     development.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Gambas&oldid=253050"
+"https://wiki.archlinux.org/index.php?title=Gambas&oldid=305786"
 
 Category:
 
 -   Programming language
+
+-   This page was last modified on 20 March 2014, at 02:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,71 +1,65 @@
 Unison
 ======
 
-Unison is a bidirectional file-synchronization tool for Unix and
+Unison is a bidirectional file synchronization tool that runs on
+Unix-like operating systems (including Linux, Mac OS X, and Solaris) and
 Windows. It allows two replicas of a collection of files and directories
 to be stored on different hosts (or different disks on the same host),
 modified separately, and then brought up to date by propagating the
-changes in each replica to the other.
+changes in each replica to the other. It also unrestricted in terms of
+which system can be the host.
 
-Not only can Unison sync between Windows and Unix ( OSX, Solaris, Linux
-etc.) systems, it also unrestricted in terms of which system can be the
-host.
+Contents
+--------
 
-Common uses include syncing configuration files, photos, and other
-content.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Usage                                                              |
-| -   4 Version Incompatibility                                            |
-| -   5 Tips & Tricks                                                      |
-|     -   5.1 Save human time and keystrokes                               |
-|     -   5.2 Common config sync                                           |
-|                                                                          |
-| -   6 See Also                                                           |
-+--------------------------------------------------------------------------+
+-   1 Installation
+-   2 Configuration
+    -   2.1 GUI
+    -   2.2 Manual
+-   3 Usage
+-   4 Version incompatibility
+-   5 Tips and tricks
+    -   5.1 Save human time and keystrokes
+    -   5.2 Common config sync
+-   6 See also
 
 Installation
 ------------
 
-    # pacman -S unison
-
-This provides a CLI and GTK+ 1 & 2 frontends.
-
-Offline documentation is available in the unison-doc AUR package.
+Installing unison from the official repositories, which provides CLI,
+GTK+ and GTK+ 2.0 interfaces. For offline documentation install
+unison-doc from the AUR.
 
 Configuration
 -------------
 
-In order to use Unison, you need to create a profile. You can use the
-supplied GUI tool or you can manually create a profile in ~/.unison.
+In order to use Unison, you need to create a profile.
 
-If you want to use the GUI configuration, run:
+> GUI
+
+To configure Unison with the GUI run:
 
     $ unison-gtk2
 
-Otherwise, edit the default config file:
+> Manual
 
-    # nano ~/.unison/default.prf
+Alternatively, manually create a profile in ~/.unison and add the
+following lines to the default configuration file,
+~/.unison/profilename.prf.
 
-First, define the root of what you want to sync:
+Define the root directory to be synchronized.
 
     root=/home/user/
 
-Then, define the root of where to sync it to:
+Define the remote directory where the files should be sychronized to.
 
-    root=ssh://example.com//path/to/server/storage
+    root=ssh://example.com//path/to/server/storags
 
-Optionally, you can give arguments to SSH:
+Optionally, provide arguments to SSH.
 
     sshargs=-p 4000
 
-Now you are going to define which directories and files to include in
-the sync:
+Define which directories and files should be synchronized:
 
     # dirs
     path=Documents
@@ -81,23 +75,24 @@ You can also define which files to ignore:
     ignore=Name .*~
     ignore=Name *.tmp
 
-For further references check the Unison documentation.
+Note:For more information see the Sample profiles in the User Manual and
+Reference Guide.
 
 Usage
 -----
 
 Once your profile is set up, you can start syncing:
 
-    $ unison <profilename>
+    $ unison profilename
 
 or using the GUI tool:
 
-    unison-gtk2
+    $ unison-gtk2
 
 and select the profile. Unison has a nice interface where you can view
 the progress and changes.
 
-Version Incompatibility
+Version incompatibility
 -----------------------
 
 For Unison to function properly, the same version must be installed on
@@ -109,11 +104,12 @@ across your machines.
 Due to the staggered releases with varying Linux distros, you might be
 stuck with older versions of Unison, while Arch Linux has the latest
 upstream version in the Extra repository. There are unofficial PKGBUILDs
-for versions 2.32 and 2.27 on the AUR that allow users of multiple
-distros to continue using Unison with their existing systems.
+for versions 2.32 (unison-232) and 2.27 (unison-227) on the AUR that
+allow users of multiple distros to continue using Unison with their
+existing systems.
 
-Tips & Tricks
--------------
+Tips and tricks
+---------------
 
 > Save human time and keystrokes
 
@@ -143,15 +139,28 @@ systems is deemed unnecessary; when necessary, verify each change when
 syncing. Automatic bidirectional syncs should be done with extreme
 caution.
 
-See Also
+See also
 --------
 
--   Official User Manual and Reference Guide, Section "Running Unison"
--   Useful advice
+See the Wikipedia article on this subject for more information: Unison
+(file synchronizer)
+
+-   Official website
+-   Yahoo! user group
+-   Liberation through data replication by Philip Guo
+-   Setting up Unison for your mom by Philip Guo
+-   Replication using Unison on TWiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Unison&oldid=237308"
+"https://wiki.archlinux.org/index.php?title=Unison&oldid=302672"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

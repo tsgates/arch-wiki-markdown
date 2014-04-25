@@ -16,21 +16,17 @@ packagedatabase has to be updated by the user (better said a cronjob).
 With a cronjob archup can be used to regulary check for new updates and
 get a desktop notification if there are some.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 From the AUR                                                 |
-|     -   1.2 Manually                                                     |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Hourly                                                       |
-|     -   2.2 Other intervals                                              |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 From the AUR
+    -   1.2 Manually
+-   2 Configuration
+    -   2.1 Hourly
+    -   2.2 Other intervals
+-   3 Troubleshooting
+-   4 See also
 
 Installation
 ------------
@@ -138,3 +134,10 @@ Retrieved from
 Category:
 
 -   Package management
+
+-   This page was last modified on 4 December 2012, at 15:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

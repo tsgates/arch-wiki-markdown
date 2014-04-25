@@ -1,14 +1,6 @@
 Router
 ======
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: No more rc.conf, 
-                           no more eth0,1,2         
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
-
 This article is a tutorial for turning a computer into an internet
 gateway/router. It focuses on security, since the gateway is connected
 directly to the Internet. It should not run any services available to
@@ -18,46 +10,44 @@ belong on a server in the LAN as they introduce security flaws.
 
 This article does not attempt to show how to set up a shared connection
 between 2 PCs using cross-over cables. For a simple internet sharing
-solution, see Internet Share.
+solution, see Internet sharing.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware Requirements                                              |
-| -   2 Conventions                                                        |
-| -   3 Installation                                                       |
-|     -   3.1 Partitioning                                                 |
-|     -   3.2 Post-Installation                                            |
-|                                                                          |
-| -   4 Network interface configuration                                    |
-|     -   4.1 Persistent naming                                            |
-|     -   4.2 IP configuration                                             |
-|                                                                          |
-| -   5 ADSL connection                                                    |
-|     -   5.1 Configuration: rp-pppoe                                      |
-|                                                                          |
-| -   6 DNS and DHCP                                                       |
-| -   7 Connection sharing                                                 |
-|     -   7.1 iptables                                                     |
-|     -   7.2 Shorewall                                                    |
-|         -   7.2.1 Shorewall configuration                                |
-|                                                                          |
-| -   8 Cleanup                                                            |
-| -   9 Logrotate                                                          |
-| -   10 Optional additions                                                |
-|     -   10.1 UPnP                                                        |
-|     -   10.2 Remote administration                                       |
-|     -   10.3 Caching web proxy                                           |
-|     -   10.4 Time server                                                 |
-|     -   10.5 Content filtering                                           |
-|     -   10.6 Traffic shaping                                             |
-|         -   10.6.1 Traffic shaping with shorewall                        |
-|                                                                          |
-|     -   10.7 Intrusion detection and prevention with snort               |
-|                                                                          |
-| -   11 See also                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware Requirements
+-   2 Conventions
+-   3 Installation
+    -   3.1 Partitioning
+    -   3.2 Post-Installation
+-   4 Network interface configuration
+    -   4.1 Persistent naming and Interface renaming
+    -   4.2 IP configuration
+-   5 ADSL connection/PPPoE
+    -   5.1 PPPoE configuration
+-   6 DNS and DHCP
+-   7 Connection sharing
+    -   7.1 iptables
+    -   7.2 Shorewall
+-   8 IPv6
+    -   8.1 Router Advertisement and Stateless Autoconfiguration (SLAAC)
+        -   8.1.1 Firewall tweaks
+    -   8.2 Global Unicast Addresses
+        -   8.2.1 Static WAN IPv6
+        -   8.2.2 Acquiring WAN IPv6 via DHCPv6-PD
+        -   8.2.3 PPPoE and IPv6
+-   9 Cleanup
+-   10 Logrotate
+-   11 Optional additions
+    -   11.1 UPnP
+    -   11.2 Remote administration
+    -   11.3 Caching web proxy
+    -   11.4 Time server
+    -   11.5 Content filtering
+    -   11.6 Traffic shaping
+        -   11.6.1 Traffic shaping with shorewall
+    -   11.7 Intrusion detection and prevention with snort
+-   12 See also
 
 Hardware Requirements
 ---------------------
@@ -80,15 +70,14 @@ Conventions in this guide will be to use non-realistic interface names,
 to avoid confusion about which interface is which.
 
 -   intern0: the network card connected to the LAN. On an actual
-    computer it will probably have the name eth0, eth1, etc.
+    computer it will probably have the name enp2s0, enp1s1, etc.
 -   extern1: the network card connected to the external network (or
-    WAN). It will probably have the name eth0, eth1, etc.
+    WAN). It will probably have the name enp2s0, enp1s1, etc.
 
 Installation
 ------------
 
-Note: For a full installation guide, see the Official Arch Linux Install
-Guide.
+Note: For a full installation guide, see the Installation guide.
 
 A fresh install of Arch Linux is the easiest to start from, as no
 configuration changes have been made and there is a minimal amount of
@@ -106,7 +95,7 @@ partitions.
 
 Your home and root partitions can be much smaller than a regular install
 since this is not a desktop machine. /var should be the largest
-partition - it is where databases, logs and long-term caches are stored.
+partition—it is where databases, logs and long-term caches are stored.
 If you have a lot of RAM, mounting /tmp as tmpfs is a good idea, so
 making a disk partition for it during the initial install is
 unnecessary. Note that /tmp is mounted as tmpfs by default in Arch.
@@ -119,91 +108,85 @@ and disable root login.
 Network interface configuration
 -------------------------------
 
-> Persistent naming
+> Persistent naming and Interface renaming
 
-When you let udev handle loading the modules, you will notice your NIC's
-switch names: one boot your LAN NIC is eth0, the other boot it is eth1,
-etc. (This might not be true, see PredictableNetworkInterfaceNames, and
-Network_Configuration#Device_names)
-
-To fix this problem, read Network_Configuration#Device_names.
+Systemd automatically chooses unique interface names for all your
+interfaces. These are persistent and will not change when you reboot. If
+you would like to rename interface to user friendlier names read Network
+configuration#Device_names.
 
 > IP configuration
 
 Now you will need to configure the network interfaces. The best way to
-do so is using netcfg profiles, instead of the regular network daemon.
-You will need to create two profiles.
+do so is using netctl profiles. You will need to create two profiles.
 
--   /etc/network.d/extern0-profile
+Note:If you will be connecting to the Internet only via PPPoE (you have
+one WAN port) you do not need to setup or enable the extern0-profile.
+See below for more information on configuring PPPoE.
 
-    CONNECTION='ethernet'
-    DESCRIPTION='Public Interface.'
-    INTERFACE='extern0'
+-   /etc/netctl/extern0-profile
+
+    Description='Public Interface.'
+    Interface=extern0
+    Connection=ethernet
     IP='dhcp'
 
--   /etc/network.d/intern0-profile
+-   /etc/netctl/intern0-profile
 
-    CONNECTION='ethernet'
-    DESCRIPTION='Private Interface.'
-    INTERFACE='intern0'
+    Description='Private Interface'
+    Interface=intern0
+    Connection=ethernet
     IP='static'
-    ADDR='10.0.0.1'
-    NETMASK='255.255.255.0'
-    BROADCAST='10.0.0.255'
+    Address=('10.0.0.1/24')
 
 Note:The example configuration above assumes a full subnet. If you are
 building the gateway for a small amount of people, you will want to
-change the netmask and broadcast to accommodate a smaller range.
+change the CIDR suffix to accommodate a smaller range. For example /27
+will give you 10.0.0.1 to 10.0.0.30. You can find many CIDR calculators
+online.
 
-Next up is to set up the interfaces.
+Next up is to set up the interfaces with netctl.
 
--   Define the profiles in /etc/conf.d/netcfg:
+    # netctl enable extern0-profile
+    # netctl enable intern0-profile
 
-    NETWORKS=(extern0-profile intern0-profile)
-
--   Replace the network daemon with net-profiles in /etc/rc.conf:
-
-    DAEMONS=( ... net-profiles ... )
-
--   If using systemd, net-profiles.service is a symlink to
-    netcfg.service. So you may do:
-
-    # systemctl enable net-profiles.service
-
-or if that fails:
-
-    # systemctl enable netcfg.service
-
-ADSL connection
----------------
+ADSL connection/PPPoE
+---------------------
 
 Using rp-pppoe, we can connect an ADSL modem to the extern1 of the
 firewall and have Arch manage the connection. Make sure you put the
-modem in bridged mode though, otherwise the modem will act as a router
-too.
+modem in bridged mode though (either half-bridge or RFC1483), otherwise
+the modem will act as a router too.
 
     # pacman -S rp-pppoe
 
-> Configuration: rp-pppoe
+It should be noted that if you use only PPPoE to connect to the internet
+(ie. you do not have other WAN port, except for the one that connects to
+your modem) you do not need to set up the extern0-profile as the
+external pseudo-interface will be ppp0.
 
-    /usr/sbin/pppoe-setup 
+> PPPoE configuration
 
-The questions are all documented. You can select "no firewall" because
-we will let Shorewall / iptables handle that part.
+You can use netctl to setup the pppoe connection. To get started
+
+    # cp /etc/netctl/examples/pppoe /etc/netctl/
+
+and start editing. For the interface configuration choose the interface
+that connects to the modem. If you only connect to the internet through
+PPPoE this will probably be extern0. Fill in the rest of the fields with
+your ISP information. See the pppoe section in netctl.profile man page
+for more information on the fields.
 
 DNS and DHCP
 ------------
 
 We will use dnsmasq, a DNS and DHCP daemon for the LAN. It was
-specifically designed for small sites.
+specifically designed for small sites. To get it, install dnsmasq from
+the official repositories.
 
-First, install dnsmasq:
+Dnsmasq needs to be configured to be a DHCP server. To do this:
 
-    # pacman -S dnsmasq
-
-Now, dnsmasq needs to be configured. To do this:
-
-Edit /etc/dnsmasq.conf and add the following lines
+Edit /etc/dnsmasq.conf:
 
     interface=intern0 # make dnsmasq listen for requests only on intern0 (our LAN)
     expand-hosts      # add a domain to simple hostnames in /etc/hosts
@@ -221,9 +204,7 @@ can also deny certain MAC's from obtaining an IP.
 
 Now start dnsmasq:
 
-    # /etc/rc.d/dnsmasq start
-
-and add the daemon to the DAEMONS list in /etc/rc.conf.
+    # systemctl start dnsmasq.service
 
 Connection sharing
 ------------------
@@ -238,12 +219,233 @@ NAT.
 > Shorewall
 
 Shorewall, an iptables frontend, can be used as an easier alternative.
+See Shorewall for detailed configuration.
 
-    # pacman -S shorewall
+IPv6
+----
 
-Shorewall configuration
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with IPv6.       
+                           Notes: Merge into the    
+                           main article, the topic  
+                           is not specific to       
+                           router configuration.    
+                           The wording should be    
+                           probably changed along   
+                           the way. (Discuss)       
+  ------------------------ ------------------------ ------------------------
 
-See Shorewall for Shorewall configuration.
+Useful reading: IPv6 and the Wikipedia IPv6 entry.
+
+You can use your router in IPv6 mode even if you do not have an IPv6
+address from your ISP. Unless you disable IPv6 all interfaces should
+have been assigned a unique fe80::/10 address.
+
+For internal networking the block fc00::/7 has been reserved. These
+addresses are guaranteed to be unique and non-routable from the open
+internet. Addresses that belong to the fc00::/7 block are called Unique
+Local Addresses. To get started generate a ULA /64 block to use in your
+network. For this example we will use fd00:aaaa:bbbb:cccc::/64. Firstly
+we must assign a static IPv6 on the internal interface. Modify the
+intern0-profile we created above to include the following line
+
+    IPCustom=('-6 addr add fd00:aaaa:bbbb:cccc::1/64 dev intern0')
+
+This will add the ULA to the internal interface. As far as the router
+goes, this is all you need to configure.
+
+> Router Advertisement and Stateless Autoconfiguration (SLAAC)
+
+To properly hand out IPv6s to the network clients we will need to use an
+advertising daemon. The standard tool for this job is radvd and is
+available in official repositories. Configuration of radvd is fairly
+simple. Edit /etc/radvd.conf to include
+
+    interface intern0 {
+      AdvSendAdvert on;
+      MinRtrAdvInterval 3;
+      MaxRtrAdvInterval 10;
+      prefix fd00:aaaa:bbbb:cccc::/64 {
+        AdvOnLink on;
+        AdvAutonomous on;
+        AdvRouterAddr on;
+      };
+    };
+
+The above configuration will tell clients to autoconfigure themselves
+using addresses from the specified /64 block. Addresses on the clients
+are uniquely generated using the MAC address of the connected interface
+and are optionally mangled for security reasons if privacy extensions
+are enabled (which is recommended to do). On the client side you need to
+enable IP6=stateless in your active netctl profile. If you want a static
+IP as well add
+
+    IPCustom=('-6 addr add fd00:aaaa:bbbb:cccc::2/64 dev eth0')
+
+Don't forget to enable radvd.service
+
+Firewall tweaks
+
+Stateless autoconfiguration works on the condition that IPv6 icmp
+packets are allowed throughout the network. So some firewall tweaks are
+required on both ends of the network for it to work properly. On the
+client side all you need to do is allow the ipv6-icmp protocol on the
+INPUT chain. If you are using Simple stateful firewall you only need to
+add
+
+    -A INPUT -p ipv6-icmp -j ACCEPT
+
+You can limit it to internal network using -s fd00:aaaa:bbbb:cccc::/64
+and/or -s fe80::/10 if you feel it is a security threat. Additionally
+you must add the same rules to your router firewall but extending it to
+the OUTPUT and FORWARD chains as well.
+
+    -A INPUT -p ipv6-icmp -j ACCEPT
+    -A OUTPUT -p ipv6-icmp -j ACCEPT
+    -A FORWARD -p ipv6-icmp -j ACCEPT
+
+Again, you can limit it to the internal network for the INPUT chain.
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
+  ng]                      needs expansion.         ng]
+                           Reason: More information 
+                           on IPv6 firewalls        
+                           required (Discuss)       
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
+  ng]                      needs expansion.         ng]
+                           Reason: Additional info  
+                           on running DHCPv6 server 
+                           instead of SLAAC         
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+> Global Unicast Addresses
+
+Static WAN IPv6
+
+If your ISP or WAN network can access the IPv6 Internet you can assign
+global link addresses to your router and propagate them through SLAAC to
+your internal network. If you can use a Static IPv6 all you must do is
+add it to your external profile and enable it the advertisement of the
+global unicast block in radvd.conf.
+
+In /etc/netctl/extern0-profile simply add the IPv6 and the IPv6 prefix
+(usually /64) you have been provided
+
+    IPCustom=('-6 addr add 2002:1:2:3:4:5:6:7/64 dev extern0')
+
+and edit /etc/radvd.conf to include the new advertisement block.
+
+    interface intern0 {
+      AdvSendAdvert on;
+      MinRtrAdvInterval 3;
+      MaxRtrAdvInterval 10;
+      prefix fd00:aaaa:bbbb:cccc::/64 {
+        AdvOnLink on;
+        AdvAutonomous on;
+        AdvRouterAddr on;
+      };
+      prefix 2002:1:2:3::/64 {
+        AdvOnLink on;
+        AdvAutonomous on;
+        AdvRouterAddr on;
+      };
+    };
+
+In that way your internal network clients will also get a Global IPv6
+address. This IP is routable from the open internet, so adjust your
+firewalls. Please note that global and local IPv6s can co-exist on the
+same interface without further configuration.
+
+Acquiring WAN IPv6 via DHCPv6-PD
+
+If your ISP handles out IPv6s using DHCPv6-PD you will need to use a
+DHCPv6 client to get the IP from your ISP. Common such programs are
+dibbler, wide-dhcpv6 and dhcpcd. ISC's dhclient should also work, but
+documentation on prefix delegation is scarce.
+
+For dibbler edit /etc/dibbler/client.conf
+
+    log-mode short
+    log-level 7
+    iface "extern0" {
+      ia
+      pd
+    }
+
+Tip:Read manpage dibbler-client(8) for more information.
+
+For wide-dhcpv6 edit /etc/wide-dhcpv6/dhcp6c.conf
+
+    interface extern0 {
+      send ia-pd 0;
+    };
+     
+    id-assoc pd 0 {
+      prefix-interface intern0 {
+        sla-id 1;
+        sla-len 8;
+      };
+    };
+
+To enable/start wide-dhcpv6 client use the command
+
+    # systemctl enable/start dhcp6c@extern0.service
+
+Tip:Read manpages dhcp6c(8) and dhcp6c.conf(5) for more information.
+
+For dhcpcd edit /etc/dhcpcd.conf. You might already be using dhcpcd for
+IPv4 so just update your existing configuration. If you would like to
+use it for IPv6 only uncomment the third line.
+
+    duid
+    noipv6rs
+    #ipv6only
+    interface extern0
+    ia_pd 1 intern0
+
+This configuration will ask for a prefix from WAN (interface extern0)
+and delegate it to the internal interface (intern0).
+
+Tip:Also read: manpages dhcpcd(8) and dhcpcd.conf(5).
+
+Because the IPv6 prefix is now dynamic, we need to change radvd to
+advertize any subnet instead of specific ones. With this configuration
+radvd will pick any /64 prefix available on the internal interface and
+propagate SLAAC IPv6s to the clients. Simply change /etc/radvd.conf to
+
+    interface intern0 {
+      AdvSendAdvert on;
+      MinRtrAdvInterval 3;
+      MaxRtrAdvInterval 10;
+      prefix ::/64 {
+        AdvOnLink on;
+        AdvAutonomous on;
+        AdvRouterAddr on;
+        DeprecatePrefix on;
+      };
+    };
+
+PPPoE and IPv6
+
+If your ISP provides IPv6 via PPPoE you can enable it in your pppoe
+netctl profile. Just add this to pppoe netctl profile
+
+    PPPoEIP6=yes
+
+and restart it. Also you must change any extern0 references to the
+configuration files above to ppp0 instead since IPv6 is assigned to ppp
+pseudo-interface instead of a real ethernet interface. Please note, that
+depending on your modem IPv6 might not be available through half-bridge
+so switch to full RFC1483 bridging instead.
+
+Warning:dhclient does not support DHCP6-PD via PPP
 
 Cleanup
 -------
@@ -284,8 +486,12 @@ Optional additions
 
 The above configuration of shorewall does not include UPnP support. Use
 of UPnP is discouraged as it may make the gateway vulnerable to attacks
-from within the LAN. However, some applications such as MSN require this
-to function correctly.
+from within the LAN. However, some applications require this to function
+correctly.
+
+To enable UPnP on your router, you need to install an UPnP Internet
+gateway daemon (IGD). To get it, install miniupnpd from the official
+repositories.
 
 Read the Shorewall guide on UPnP for more information
 
@@ -307,8 +513,8 @@ Then, configure shorewall or iptables to allow NTP traffic in and out.
 
 > Content filtering
 
-Install and configure DansGuardian if you need a content filtering
-solution.
+Install and configure DansGuardian or Privoxy if you need a content
+filtering solution.
 
 > Traffic shaping
 
@@ -370,12 +576,19 @@ See also
 --------
 
 -   Simple stateful firewall
--   Internet Share
+-   Internet sharing
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Router&oldid=254865"
+"https://wiki.archlinux.org/index.php?title=Router&oldid=302031"
 
 Categories:
 
 -   Networking
 -   Security
+
+-   This page was last modified on 25 February 2014, at 13:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

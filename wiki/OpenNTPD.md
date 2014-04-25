@@ -8,33 +8,36 @@ Time Protocol, and can also act as a time server itself if needed.
 Warning:OpenNTPD is not currently maintained for Linux (see this
 thread): users interested in its functions should better use NTPd.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Enable OpenNTPD through systemd                              |
-|                                                                          |
-| -   2 Making openntpd dependent upon network access                      |
-|     -   2.1 Using netcfg                                                 |
-|     -   2.2 Using NetworkManager dispatcher                              |
-|     -   2.3 Using wicd                                                   |
-|     -   2.4 Using dhclient hooks                                         |
-|     -   2.5 Using dhcpcd hooks                                           |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Error adjusting time                                         |
-|     -   3.2 Increasing time shift                                        |
-|     -   3.3 Initialization Failure                                       |
-|                                                                          |
-| -   4 See also                                                           |
-| -   5 External links                                                     |
-+--------------------------------------------------------------------------+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: rc.d references, 
+                           bad style/format.        
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Enable OpenNTPD through systemd
+-   2 Making openntpd dependent upon network access
+    -   2.1 Using netcfg
+    -   2.2 Using NetworkManager dispatcher
+    -   2.3 Using wicd
+    -   2.4 Using dhclient hooks
+    -   2.5 Using dhcpcd hooks
+-   3 Troubleshooting
+    -   3.1 Error adjusting time
+    -   3.2 Increasing time shift
+    -   3.3 Initialization Failure
+-   4 See also
+-   5 External links
 
 Installation
 ------------
 
-OpenNTPD can be installed from [community]:
+openntpd can be installed from community:
 
     # pacman -S openntpd
 
@@ -74,35 +77,10 @@ Your time server will only begin to serve time after it has synchronized
 itself to a high resolution. This may take hours, or days, depending on
 the accuracy of your system.
 
-If you would like to run OpenNTPD at boot, add openntpd the DAEMONS
-variable in your /etc/rc.conf following your network daemon.
-
-    DAEMONS=(syslog-ng network openntpd ...)
-
-If openntpd is being used to set local system time only, it may be
-safely backgrounded.
-
-    DAEMONS=(syslog-ng network @openntpd ...)
-
-To see the status of NTP syncing, visit /var/log/daemon.log and look for
-entries with "ntpd".
-
-OpenNTPD adjusts the clock by small amounts at a time. It is designed
-this way to prevent sudden, large time fluctuations in your system,
-which could adversely affect system services (e.g., cron jobs). Thus, it
-can take some time to correct the time.
-
-If your clock is off by more than 180 seconds you can try "ntpd -s -d"
-in the console. If ntpd is already running, you can simply restart it
-with sudo /etc/rc.d/openntpd restart, as the Arch openntpd package uses
-the "-s" flag by default. See man ntpd for more info. You can also set
-the system clock to as close to possible to the actual time and then let
-OpenNTPD fine tune the time.
-
 > Enable OpenNTPD through systemd
 
-If you are using systemd init instead, you must enable the service
-related to OpenNTPD as follows:
+If you are using systemd init, you must enable the service related to
+OpenNTPD as follows:
 
     # systemctl enable openntpd
 
@@ -240,8 +218,15 @@ External links
 -   http://www.openntpd.org
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=OpenNTPD&oldid=240516"
+"https://wiki.archlinux.org/index.php?title=OpenNTPD&oldid=302141"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 26 February 2014, at 01:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

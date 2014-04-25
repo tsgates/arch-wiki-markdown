@@ -28,10 +28,10 @@ Supporting binary sources
 Currently, the gnu2plan9 packages need support to offer a drop-in
 replacement of GNU coreutils. This is at the moment provided by busybox
 and the gnu2ucb Heirloom profile. Ideally, missing functionality should
-be patched up with projects more closely aligned to Plan9, like Inferno
-and Goblin. The aim is to make the different "base2foo" projects as
-independent of eachother as possible since the whole point of the
-projects is to increase choice and diversity. For the base2plan9
+be patched up with projects more closely aligned to Plan9, like
+inferno-os and goblin-git. The aim is to make the different "base2foo"
+projects as independent of eachother as possible since the whole point
+of the projects is to increase choice and diversity. For the base2plan9
 project, the first priority is to cover missing functionality and second
 priority to try to reduce (or ideally remove) the busybox dependency.
 
@@ -39,6 +39,8 @@ priority to try to reduce (or ideally remove) the busybox dependency.
 
 gnu2plan9-coreutils
 -------------------
+
+Package is available in the AUR: gnu2plan9-coreutils.
 
 Below is a list of the origin of different utilities in this package.
 
@@ -134,8 +136,15 @@ Heirloom nor Busybox.
        chcon link nproc pinky ptx runcon shuf stdbuf timeout truncate unlink
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Base2plan9&oldid=239098"
+"https://wiki.archlinux.org/index.php?title=Base2plan9&oldid=277278"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 1 October 2013, at 20:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

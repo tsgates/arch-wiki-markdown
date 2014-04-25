@@ -1,23 +1,20 @@
 DeveloperWiki:Division Proposals
 ================================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Ports Division                                                     |
-|     -   2.1 Purpose                                                      |
-|     -   2.2 Code                                                         |
-|     -   2.3 Parent                                                       |
-|     -   2.4 Members                                                      |
-|                                                                          |
-| -   3 Kernel Division                                                    |
-|     -   3.1 Purpose                                                      |
-|     -   3.2 Code                                                         |
-|     -   3.3 Parent                                                       |
-|     -   3.4 Members                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Ports Division
+    -   2.1 Purpose
+    -   2.2 Code
+    -   2.3 Parent
+    -   2.4 Members
+-   3 Kernel Division
+    -   3.1 Purpose
+    -   3.2 Code
+    -   3.3 Parent
+    -   3.4 Members
 
 Introduction
 ============
@@ -94,3 +91,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2011, at 18:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

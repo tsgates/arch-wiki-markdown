@@ -4,25 +4,22 @@ Dell Inspiron 1525
 This is an install and configuration guide for the Dell Inspiron 1525
 laptop, testing with the 2010.05 installer snapshot.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Audio                                                        |
-|     -   2.2 Video                                                        |
-|     -   2.3 Keyboard                                                     |
-|     -   2.4 Touchpad                                                     |
-|     -   2.5 Wireless                                                     |
-|         -   2.5.1 Intel PRO wireless                                     |
-|         -   2.5.2 Broadcom BCM4312                                       |
-|                                                                          |
-|     -   2.6 Modem                                                        |
-|     -   2.7 USB, SD card slot, ethernet, firewire, VGA, S-video, HDMI,   |
-|         webcam and mediakeys                                             |
-|     -   2.8 PCMCIA                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Audio
+    -   2.2 Video
+    -   2.3 Keyboard
+    -   2.4 Touchpad
+    -   2.5 Wireless
+        -   2.5.1 Intel PRO wireless
+        -   2.5.2 Broadcom BCM4312
+    -   2.6 Modem
+    -   2.7 USB, SD card slot, ethernet, firewire, VGA, S-video, HDMI,
+        webcam and mediakeys
+    -   2.8 PCMCIA
 
 Installation
 ------------
@@ -126,3 +123,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 6 December 2012, at 01:26.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

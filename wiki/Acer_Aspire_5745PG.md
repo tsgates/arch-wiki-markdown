@@ -3,19 +3,16 @@ Acer Aspire 5745PG
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Hardware                                                           |
-| -   3 General Installation Guide                                         |
-| -   4 Graphics                                                           |
-|     -   4.1 Networking                                                   |
-|                                                                          |
-| -   5 Battery issues                                                     |
-| -   6 TouchScreen                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Hardware
+-   3 General Installation Guide
+-   4 Graphics
+    -   4.1 Networking
+-   5 Battery issues
+-   6 TouchScreen
 
 Introduction
 ============
@@ -104,7 +101,7 @@ set wi-fi up. Start by loading the new atheros module:
 
     # modprobe ath9k
 
-See Wireless Setup for more info.
+See Wireless network configuration for more info.
 
 Battery issues
 ==============
@@ -159,8 +156,15 @@ up)
 If you have trouble making it work, take a look at this thread: [2]
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_5745PG&oldid=250581"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_5745PG&oldid=297889"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 15 February 2014, at 15:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

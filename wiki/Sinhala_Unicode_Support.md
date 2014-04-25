@@ -4,20 +4,17 @@ Sinhala Unicode Support
 This page explains how to get the Sinhala unicode support and sinhala
 unicode input to work using ibus (sayura-ibus) or scim (sayura-scim).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Sinhala Unicode Font                                               |
-| -   2 Guide to install Sinhala Unicode Font                              |
-| -   3 Enabling Sinhala Locale                                            |
-| -   4 Sinhala Unicode Input Support                                      |
-|     -   4.1 sayura-ibus                                                  |
-|     -   4.2 sayura-scim                                                  |
-|     -   4.3 scim configuration                                           |
-|                                                                          |
-| -   5 Further Reading and More Information                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Sinhala Unicode Font
+-   2 Guide to install Sinhala Unicode Font
+-   3 Enabling Sinhala Locale
+-   4 Sinhala Unicode Input Support
+    -   4.1 sayura-ibus
+    -   4.2 sayura-scim
+    -   4.3 scim configuration
+-   5 Further Reading and More Information
 
 Sinhala Unicode Font
 --------------------
@@ -88,3 +85,10 @@ Retrieved from
 Category:
 
 -   Internationalization
+
+-   This page was last modified on 2 April 2013, at 05:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

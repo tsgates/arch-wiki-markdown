@@ -12,20 +12,16 @@ Dell Latitude LS
 
 This page is a work in progress!
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Specifications                                                     |
-|     -   1.1 LS500                                                        |
-|                                                                          |
-| -   2 Current Problems                                                   |
-| -   3 Hardware                                                           |
-|     -   3.1 NIC                                                          |
-|                                                                          |
-| -   4 Power Management                                                   |
-| -   5 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Specifications
+    -   1.1 LS500
+-   2 Current Problems
+-   3 Hardware
+    -   3.1 NIC
+-   4 Power Management
+-   5 Links
 
 Specifications
 ==============
@@ -93,3 +89,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 23 April 2012, at 12:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

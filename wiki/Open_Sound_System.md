@@ -9,62 +9,52 @@ software. OSSv4 became free software again in 2007 when 4Front
 Technologies released its source code and provided it under the GPL
 license.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Comparisons with ALSA                                              |
-|     -   1.1 OSS Advantages (users)                                       |
-|     -   1.2 OSS Advantages (developers)                                  |
-|     -   1.3 ALSA advantages over OSS                                     |
-|                                                                          |
-| -   2 Install                                                            |
-| -   3 Testing                                                            |
-| -   4 Volume Control Mixer                                               |
-|     -   4.1 Color Definitions                                            |
-|     -   4.2 Saving Mixer Levels                                          |
-|     -   4.3 Other Mixers                                                 |
-|                                                                          |
-| -   5 Configuring Applications for OSS                                   |
-|     -   5.1 Applications that use GStreamer                              |
-|     -   5.2 Applications that use OpenAL                                 |
-|     -   5.3 Audacity                                                     |
-|     -   5.4 Gajim                                                        |
-|     -   5.5 MOC                                                          |
-|     -   5.6 MPD                                                          |
-|     -   5.7 MPlayer                                                      |
-|     -   5.8 Skype                                                        |
-|     -   5.9 VLC media player                                             |
-|     -   5.10 Wine                                                        |
-|     -   5.11 Other applications                                          |
-|                                                                          |
-| -   6 Tips and tricks                                                    |
-|     -   6.1 Using multimedia keys with OSS                               |
-|     -   6.2 Changing the Sample Rate                                     |
-|     -   6.3 A simple system tray applet                                  |
-|     -   6.4 Start ossxmix docked to the system tray on startup           |
-|         -   6.4.1 KDE                                                    |
-|         -   6.4.2 Gnome                                                  |
-|                                                                          |
-|     -   6.5 Record sound output from a program                           |
-|     -   6.6 Suspend and Hibernation                                      |
-|     -   6.7 Changing the Default Sound Output                            |
-|     -   6.8 Creative Sound Blaster X-Fi Surround 5.1 SB1090 USB          |
-|     -   6.9 ALSA emulation                                               |
-|         -   6.9.1 Instructions                                           |
-|                                                                          |
-|     -   6.10 Settings for a specific driver                              |
-|                                                                          |
-| -   7 Troubleshooting                                                    |
-|     -   7.1 Troubleshooting HD Audio devices                             |
-|         -   7.1.1 Understanding the problem                              |
-|         -   7.1.2 Solution                                               |
-|                                                                          |
-|     -   7.2 MMS sound cracking in Totem                                  |
-|     -   7.3 Microphone playing through output channels                   |
-|                                                                          |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Comparisons with ALSA
+    -   1.1 OSS Advantages (users)
+    -   1.2 OSS Advantages (developers)
+    -   1.3 ALSA advantages over OSS
+-   2 Install
+-   3 Testing
+-   4 Volume Control Mixer
+    -   4.1 Color Definitions
+    -   4.2 Saving Mixer Levels
+    -   4.3 Other Mixers
+-   5 Configuring Applications for OSS
+    -   5.1 Applications that use GStreamer
+    -   5.2 Applications that use OpenAL
+    -   5.3 Audacity
+    -   5.4 Gajim
+    -   5.5 MOC
+    -   5.6 MPD
+    -   5.7 MPlayer
+    -   5.8 Skype
+    -   5.9 VLC media player
+    -   5.10 Wine
+    -   5.11 Other applications
+-   6 Tips and tricks
+    -   6.1 Using multimedia keys with OSS
+    -   6.2 Changing the Sample Rate
+    -   6.3 A simple system tray applet
+    -   6.4 Start ossxmix docked to the system tray on startup
+        -   6.4.1 KDE
+        -   6.4.2 Gnome
+    -   6.5 Record sound output from a program
+    -   6.6 Suspend and Hibernation
+    -   6.7 Changing the Default Sound Output
+    -   6.8 Creative Sound Blaster X-Fi Surround 5.1 SB1090 USB
+    -   6.9 ALSA emulation
+        -   6.9.1 Instructions
+    -   6.10 Settings for a specific driver
+-   7 Troubleshooting
+    -   7.1 Troubleshooting HD Audio devices
+        -   7.1.1 Understanding the problem
+        -   7.1.2 Solution
+    -   7.2 MMS sound cracking in Totem
+    -   7.3 Microphone playing through output channels
+-   8 See also
 
 Comparisons with ALSA
 ---------------------
@@ -75,11 +65,6 @@ Sound Architecture.
 > OSS Advantages (users)
 
 -   Per-application volume control.
--   Lower latency due to everything running within the Linux Kernel.
-    Initial response time in audio applications is usually better.
--   OSS always has sound mixing, ALSA does not.
--   Sound mixing is of higher quality, due to OSS using more precise
-    math in its sound mixing.
 -   Some legacy cards have better support.
 
 > OSS Advantages (developers)
@@ -96,6 +81,7 @@ Sound Architecture.
 -   Better support for MIDI devices.
 -   Support for suspend.
 -   Better support for jack detection.
+-   Better support for modern hardware.
 
 > Note:
 
@@ -107,14 +93,8 @@ Sound Architecture.
 Install
 -------
 
-Install oss from the official repositories.
-
-There is also a development version of OSS available in the AUR with the
-oss-hg package.
-
-Note:oss-hg does not yet have a systemd unit file, but you can use the
-one from oss. For this you need to copy it to
-/usr/lib/systemd/system/oss4.service.
+Install oss which is available in the AUR. There is also a development
+version of OSS available in the AUR with the oss-git package.
 
 This will install the OSS, run the OSS install script (temporarily
 disabling the ALSA modules) and install the OSS kernel modules. Since
@@ -126,8 +106,8 @@ module:
 
     install soundcore /bin/false
 
-After blacklisting the module, you can enable the oss (or oss4 if using
-the development version) daemon to start at boot.
+After blacklisting the module, you can enable the oss daemon to start at
+boot.
 
 In case you are not part of the audio group, add yourself and relogin
 for the changes to take effect:
@@ -276,25 +256,18 @@ http://library.gnome.org/users/gnome-volume-control/stable/ || gnome
 
 http://www.kde.org/applications/multimedia/kmix/ || kdemultimedia-kmix
 
--   VolWheel — for LXDE.
+-   VolWheel — After the installation, set it to autostart as needed,
+    then enable OSS support by right-clicking on the system tray icon,
+    choosing Preferences and then changing:
+
+-   Driver: OSS.
+-   Default Channel: vmix0-outvol (find out what channel to use with
+    ossmix).
+-   Default Mixer: ossxmix.
+-   In the MiniMixer tab (optional), add vmix0-outvol and optionally
+    others.
 
 http://oliwer.net/b/volwheel.html || volwheel
-
-After installing VolWheel, you will need to do the following to enable
-OSS support:
-
--   add it to the LXDE autostart file:
-
-     echo "volwheel" >> ~/.config/lxsession/LXDE/autostart
-
--   right click on the system tray icon, choose the Preferences item and
-    then change:
-    -   Driver: OSS.
-    -   Default Channel: vmix0-outvol (find out what channel to use from
-        ossmix).
-    -   Default Mixer: ossxmix.
-    -   In the MiniMixer tab (optional), add vmix0-outvol and optionally
-        others.
 
 Configuring Applications for OSS
 --------------------------------
@@ -443,7 +416,11 @@ See also: Mplayer#Configuration.
 
 The skype package only includes support for ALSA, since OSS support was
 dropped in the recent versions. To get an OSS-capable Skype, install the
-skype-oss package from the Community repo.
+skype-oss package from the AUR.
+
+Or use pulseaudio with module-oss: Edit /etc/pulse/default.pa, comment
+out the line that starts with load-module module-udev-detect and add
+load-module module-oss device="/dev/dsp" sink_name=output source_name=input mmap==0.
 
 See also: Skype#Skype-OSS Sound (Pre-2.0).
 
@@ -676,12 +653,12 @@ OSS prior to suspending and reloading afterwards.
     suspend_osssound()
     {
         /usr/lib/oss/scripts/killprocs.sh
-        /usr/sbin/soundoff
+        /usr/bin/soundoff
     }
      
     resume_osssound()
     {
-        /usr/sbin/soundon
+        /usr/bin/soundon
     }
      
     case $1 in
@@ -704,7 +681,7 @@ Warning:This script is rather basic and will terminate any application
 directly accessing OSS. Save your work prior to suspending/hibernating.
 
 An alternative would be to use s2ram for suspending. Just create a
-suspend script to /sbin/suspend and make it executable.
+suspend script to /usr/bin/suspend and make it executable.
 
      #!/bin/sh
 
@@ -949,12 +926,20 @@ See also
 -   OSS Wiki
 -   OSS Forum
 -   Developer Information
--   Sourceforge Repository
+-   Git repository
+-   opensound-devel mailing list
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Open_Sound_System&oldid=253606"
+"https://wiki.archlinux.org/index.php?title=Open_Sound_System&oldid=305914"
 
 Categories:
 
 -   Sound
 -   Audio/Video
+
+-   This page was last modified on 20 March 2014, at 17:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

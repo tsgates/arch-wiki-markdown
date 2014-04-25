@@ -4,7 +4,7 @@ Cgroups
 cgroups (aka control groups) is a Linux kernel feature to limit, police
 and account the resource usage of certain processes (actually process
 groups). Compared to other approaches like the 'nice' command or
-/etc/security/limits.conf, cgroups are infinitely more flexible.
+/etc/security/limits.conf, cgroups are more flexible.
 
 Control groups can be used in multiple ways:
 
@@ -19,28 +19,35 @@ Unfortunately this feature is often underappreciated due to lack of easy
 "how-to" style documentation. This is an attempt of fixing the
 problem. :)
 
-Note: I'm only learning to use cgroups as I type this, so do not take
-everything I say here as pure gold.
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Simple usage                                                       |
-|     -   2.1 Ad-hoc groups                                                |
-|     -   2.2 Persistent group configuration                               |
-|     -   2.3 Useful examples                                              |
-|                                                                          |
-| -   3 Matlab                                                             |
-| -   4 Documentation                                                      |
-+--------------------------------------------------------------------------+
+-   1 Installing
+-   2 Managing Resource Groups with Systemd
+-   3 Simple usage
+    -   3.1 Ad-hoc groups
+    -   3.2 Persistent group configuration
+-   4 Useful examples
+    -   4.1 Matlab
+-   5 Documentation
 
 Installing
 ----------
 
 First, install the utilities for managing cgroups; you need to install
 the libcgroup package from the AUR.
+
+Managing Resource Groups with Systemd
+-------------------------------------
+
+You can enable the cgconfig service with systemd.
+
+    # systemctl enable cgconfig.service
+
+This will gives you the capability to track more easily any error in
+your cgconfig.conf file with this command:
+
+    $ systemctl status cgconfig.service
 
 Simple usage
 ------------
@@ -110,9 +117,14 @@ You can also change the cgroup of already running processes. To move all
 
 > Persistent group configuration
 
+Note:when using Systemd > = 205 to manage cgroups, you can ignore
+enterly this file.
+
 If you want your cgroups to be created at boot, you can define them in
-/etc/cgconfig.conf instead. For example, the "groupname" and
-"groupname/foo" group definitions would look like this:
+/etc/cgconfig.conf instead. For example, the "groupname" has a
+permission for $USER and users of group $GROUP to manage limits and add
+tasks. A subgroup "groupname/foo" group definitions would look like
+this.
 
     /etc/cgconfig.conf 
 
@@ -121,10 +133,12 @@ If you want your cgroups to be created at boot, you can define them in
     # who can manage limits
         admin {
           uid = $USER;
+          gid = $GROUP;
         }
     # who can add tasks to this group
         task {
           uid = $USER;
+          gid = $GROUP;
         }
       }
     # create this group in cpu and memory controllers
@@ -141,15 +155,35 @@ If you want your cgroups to be created at boot, you can define them in
       }
     }
 
-Note:Comments should begin at the start of a line! The # character for
-comments must appear as the first character of a line. Else,
-cgconfigparser will have problem parsing it but will only report cgroup
-change of group failed as the error.
+> Note:
 
-> Useful examples
+-   Comments should begin at the start of a line! The # character for
+    comments must appear as the first character of a line. Else,
+    cgconfigparser will have problem parsing it but will only report
+    cgroup change of group failed as the error, unless you started
+    cgconfig with Systemd
+-   The permissions section is optional.
+-   The /sys/fs/cgroup/ hierarchy directory containing all controllers
+    sub-directories is already created and mounted at boot as a virtual
+    file system. This gives the ability to create a new group entry with
+    the $CONTROLLER-NAME { } command. If for any reason you want to
+    create and mount hierachies in another place, you will then need to
+    write a second entry in /etc/cgconfig.conf following this way :
 
-Matlab
-------
+     mount {    
+       cpuset = /your/path/groupname;
+    }
+
+This is equivalent to these shell commands:
+
+     
+    # mkdir /your/path/groupname
+    # mount -t /your/path -o cpuset groupname /your/path/groupname
+
+Useful examples
+---------------
+
+> Matlab
 
 Matlab does not have any protection against taking all your machine's
 memory or CPU. Launching a large calculation can thus trash your system.
@@ -173,11 +207,14 @@ Here's the what I have put in /etc/cgconfig.conf to protect from this
             cpuset.mems="0";
             cpuset.cpus="0-5";
         }
-        memory {;
+        memory {
     # 5 GiB limit
             memory.limit_in_bytes = 5368709120;
         }
     }
+
+Note:Don't forget to change $USER to the actual username Matlab will be
+run by!!!
 
 This cgroup will bind Matlab to cores 0 to 5 (I have 8, so Matlab will
 only see 6) and cap its memory usage to 5 GiB. The "cpu" resource
@@ -193,17 +230,26 @@ Make sure to use the right path to the executable.
 Documentation
 -------------
 
-For information on controllers and what certain switches and tunables
-mean, refer to kernel's Documentation/cgroup (or install linux-docs and
-see /usr/src/linux/Documentation/cgroup
+-   For information on controllers and what certain switches and
+    tunables mean, refer to kernel's Documentation/cgroup (or install
+    linux-docs and see /usr/src/linux/Documentation/cgroup
+-   A detailed and complete Resource Management Guide can be found in
+    the fedora project documentation.
 
 For commands and configuration files, see relevant man pages, e.g.
 man cgcreate or man cgrules.conf
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Cgroups&oldid=243989"
+"https://wiki.archlinux.org/index.php?title=Cgroups&oldid=296758"
 
 Categories:
 
 -   Kernel
 -   Virtualization
+
+-   This page was last modified on 10 February 2014, at 12:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

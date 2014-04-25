@@ -11,34 +11,28 @@ though a Scheme command interpreter, as a C++ library, from Java, and an
 Emacs interface. Festival is multi-lingual (currently British English,
 American English, and Spanish.)
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Install another voice package                                |
-|         -   1.1.1 HTS compatibility patches                              |
-|                                                                          |
-|     -   1.2 Using with PulseAudio                                        |
-|                                                                          |
-| -   2 Configuration                                                      |
-| -   3 Usage                                                              |
-|     -   3.1 Interactive mode (testing voices etc.)                       |
-|     -   3.2 Example Script: Ping                                         |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Can't open /dev/dsp                                          |
-|     -   4.2 Alsa playing at wrong speed                                  |
-|                                                                          |
-| -   5 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 HTS compatibility patches
+    -   1.2 Using with PulseAudio
+-   2 Configuration
+-   3 Usage
+    -   3.1 Interactive mode (testing voices etc.)
+    -   3.2 Example script
+-   4 Troubleshooting
+    -   4.1 Can't open /dev/dsp
+    -   4.2 Alsa playing at wrong speed
+    -   4.3 aplay Command not found
+-   5 See also
 
 Installation
 ------------
 
-Festival is available in the [extra] repository:
-
-    # pacman -S festival festival-english
+Install festival from official repositories. You need a voice package
+like festival-english or festival-us. Further languages are available in
+official repositories and in AUR.
 
 Test festival:
 
@@ -50,24 +44,7 @@ system.
 If you do not hear anything, hear something strange, or get a message
 about /dev/dsp, see the Troubleshooting section.
 
-> Install another voice package
-
-The installation described above will install the British English voice
-and set it as the default. To change it to something else, you must
-install another voice package.
-
-American English voice:
-
-    # pacman -S festival-us
-
-British English voice :
-
-    # pacman -S festival-english
-
-Other voices are available for Festival; some of them can be found in
-the AUR.
-
-HTS compatibility patches
+> HTS compatibility patches
 
 Some say that HTS voices for Festival are the best ones freely
 available. Sadly they are not compatible with Festival >2.1 without
@@ -103,16 +80,16 @@ Usage
 
 Read a text file:
 
-    festival --tts /path/to/letter.txt
+    $ festival --tts /path/to/letter.txt
 
 Read a text file to wav:
 
-    cat letter.txt | text2wave -o letter.wav
+    $ cat letter.txt | text2wave -o letter.wav
 
 > Interactive mode (testing voices etc.)
 
 festival has an interactive prompt you can use for testing. Some
-examples (with sample output)
+examples (with sample output):
 
     $ festival 
     [...]
@@ -147,15 +124,14 @@ Quit: ctrl+d or
 
     festival> (quit)
 
-> Example Script: Ping
+> Example script
 
 One classic app that can make use of this is ping. Use this script to
 constantly ping a host, and return ping if success, fail is not:
 
     #!/bin/bash
-    while [ 1 = 1 ]; do
-         ping -c 1 $1 && (echo "Ping" | festival --tts) || (echo "Fail" | festival --tts)
-    done
+    while :; do
+        ping -c 1 $1 && (echo "Ping" 
 
 Note that this does not really work on multisynth voices, as they take a
 while to prepare before playing.
@@ -177,21 +153,31 @@ Switch to ALSA output by adding these lines to the end of your
 
 > Alsa playing at wrong speed
 
-If the solution above gives you Mr. Squeaky Voice, you might want to
-try:
+If the solution above gives you a squeaky voice, you might want to try:
 
     (Parameter.set 'Audio_Method 'Audio_Command)
     (Parameter.set 'Audio_Command "aplay -Dplug:default -f S16_LE -r $SR $FILE")
 
-External links
---------------
+> aplay Command not found
 
--   Festival manual.
+Install alsa-utils.
+
+See also
+--------
+
+-   Festival manual
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Festival&oldid=251983"
+"https://wiki.archlinux.org/index.php?title=Festival&oldid=280782"
 
 Categories:
 
 -   Accessibility
 -   Audio/Video
+
+-   This page was last modified on 1 November 2013, at 11:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

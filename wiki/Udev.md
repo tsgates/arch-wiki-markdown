@@ -3,11 +3,12 @@ udev
 
 udev replaces the functionality of both hotplug and hwdetect.
 
+From Wikipedia article:
+
 "Udev is the device manager for the Linux kernel. Primarily, it manages
 device nodes in /dev. It is the successor of devfs and hotplug, which
 means that it handles the /dev directory and all user space actions when
-adding/removing devices, including firmware load." Source: Wikipedia
-article
+adding/removing devices, including firmware load."
 
 Udev loads kernel modules by utilizing coding parallelism to provide a
 potential performance advantage versus loading these modules serially.
@@ -18,53 +19,47 @@ this may manifest itself in the form of device nodes changing
 designations randomly. For example, if the machine has two hard drives,
 /dev/sda may randomly become /dev/sdb. See below for more info on this.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 About udev rules                                                   |
-|     -   2.1 Writing udev rules                                           |
-|     -   2.2 List attributes of a device                                  |
-|     -   2.3 Testing rules before loading                                 |
-|     -   2.4 Loading new rules                                            |
-|                                                                          |
-| -   3 Udisks                                                             |
-|     -   3.1 Automounting udisks wrappers                                 |
-|     -   3.2 Udisks shell functions                                       |
-|                                                                          |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Accessing firmware programmers and USB virtual comm devices  |
-|     -   4.2 Execute on USB insert                                        |
-|     -   4.3 Detect new eSATA drives                                      |
-|     -   4.4 Mark internal SATA ports as eSATA                            |
-|     -   4.5 Setting static device names                                  |
-|         -   4.5.1 iscsi device                                           |
-|         -   4.5.2 Video devices                                          |
-|                                                                          |
-|     -   4.6 Running HAL                                                  |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Blacklisting modules                                         |
-|     -   5.2 udevd hangs at boot                                          |
-|     -   5.3 Known problems with hardware                                 |
-|         -   5.3.1 BusLogic devices can be broken and will cause a freeze |
-|             during startup                                               |
-|         -   5.3.2 Some devices, that should be treated as removable, are |
-|             not                                                          |
-|                                                                          |
-|     -   5.4 Known problems with auto-loading                             |
-|         -   5.4.1 Sound problems with some modules not loaded            |
-|             automatically                                                |
-|                                                                          |
-|     -   5.5 Known problems for custom kernel users                       |
-|         -   5.5.1 Udev doesn't start at all                              |
-|                                                                          |
-|     -   5.6 IDE CD/DVD-drive support                                     |
-|     -   5.7 Optical drives have group ID set to "disk"                   |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 About udev rules
+    -   2.1 Writing udev rules
+    -   2.2 List attributes of a device
+    -   2.3 Testing rules before loading
+    -   2.4 Loading new rules
+-   3 Udisks
+    -   3.1 Automounting udisks wrappers
+    -   3.2 Udisks shell functions
+    -   3.3 udisks2 - mount to /media
+    -   3.4 Privileged actions
+-   4 Tips and tricks
+    -   4.1 Accessing firmware programmers and USB virtual comm devices
+    -   4.2 Execute on USB insert
+    -   4.3 Detect new eSATA drives
+    -   4.4 Mark internal SATA ports as eSATA
+    -   4.5 Setting static device names
+        -   4.5.1 iscsi device
+        -   4.5.2 Video devices
+        -   4.5.3 Printers
+    -   4.6 Running HAL
+    -   4.7 Waking from suspend with USB device
+-   5 Troubleshooting
+    -   5.1 Blacklisting modules
+    -   5.2 udevd hangs at boot
+    -   5.3 Known problems with hardware
+        -   5.3.1 BusLogic devices can be broken and will cause a freeze
+            during startup
+        -   5.3.2 Some devices, that should be treated as removable, are
+            not
+    -   5.4 Known problems with auto-loading
+        -   5.4.1 Sound problems with some modules not loaded
+            automatically
+    -   5.5 Known problems for custom kernel users
+        -   5.5.1 Udev doesn't start at all
+    -   5.6 IDE CD/DVD-drive support
+    -   5.7 Optical drives have group ID set to "disk"
+-   6 See also
 
 Installation
 ------------
@@ -134,6 +129,24 @@ In the example above we create a symlink using SYMLINK+="video-cam1" but
 we could easily set user OWNER="john" or group using GROUP="video" or
 set the permissions using MODE="0660"
 
+However, if you intend to write a rule to do something when a device is
+being removed, be aware that device attributes may not be accessible. In
+this case, you will have to work with preset device environment
+variables. To monitor those environment variables, execute the following
+command while unplugging your device:
+
+    # udevadm monitor --environment --udev
+
+In this command's output, you will see value pairs such as ID_VENDOR_ID
+and ID_MODEL_ID, which match your previously used attributes "idVendor"
+and "idProduct". A rule that uses device environment variables may look
+like this:
+
+    /etc/udev/rules.d/83-webcam-removed.rules
+
+    ACTION=="remove", SUBSYSTEM=="usb", \
+            ENV{ID_VENDOR_ID}=="05a9", ENV{ID_MODEL_ID}=="4519", RUN+="/path/to/your/script"
+
 > List attributes of a device
 
 To get a list of all of the attributes of a device you can use to write
@@ -170,6 +183,10 @@ reconnected for the new rules to take effect, or at least unloading and
 reloading the ohci-hcd and ehci-hcd kernel modules and thereby reloading
 all USB drivers.
 
+If rules fail to reload automatically
+
+    # udevadm control --reload-rules
+
 To manually force udev to trigger your rules
 
     # udevadm trigger
@@ -188,7 +205,7 @@ the following version will be needed (should already be installed as a
 dependency):
 
 -   For GNOME or KDE 4.10+, install udisks2
--   For XFCE, install udisks
+-   For Xfce (Thunar), install gvfs which will in turn install udisks2
 
 There is no need for any additional rules either way. As an extra bonus
 you can remove HAL if you were only using that for auto mounting
@@ -203,10 +220,10 @@ mount things like CDs and flash drives.
 -   udevil - udevil "mounts and unmounts removable devices without a
     password, shows device info, and monitors device changes". It is
     written in C and can replace UDisks and includes devmon, which can
-    be installed separately from the AUR (devmon). It can also
-    selectively automatically start applications or execute commands
-    after mounting, ignore specified devices and volume labels, and
-    unmount removable drives.
+    be used to automatically mount devices. It also selectively
+    automatically start applications or execute commands after mounting,
+    ignore specified devices and volume labels, and unmount removable
+    drives.
 -   ldm - A lightweight daemon that mounts usb drives, cds, dvds or
     floppys automagically. [1]
 -   udiskie - Written in Python. Enables automatic mounting and
@@ -214,12 +231,10 @@ mount things like CDs and flash drives.
 -   udisksevt - Written in Haskell. Enables automatic mounting by any
     user. Designed to be integrated with traydevice.
 -   udisksvm - A GUI UDisks wrapper which uses the udisks2 dbus
-    interface. It calls a 'traydvm' script, included in the package. The
-    'traydvm' GUI utility is a script which displays a systray icon for
-    a plugged-in device, with a right-click menu to perform simple
-    actions on the device. As the automount function can be disabled,
-    this tool should work with other automounting tools, to show system
-    tray icons. It is independent of any file manager.
+    interface. It is written in python using the gobject introspection
+    approach. It is independent of any file manager. It shows system
+    tray icons with a right-click menu and notifications of action
+    results. See udisksvm community forum thread for more explanations.
 -   You can easily automount and eject removable devices with the
     combination of pmount, udisks2 and spacefm. Note you have to run
     spacefm in daemon mode with spacefm -d & in your startup scripts,
@@ -236,6 +251,21 @@ usage.
 -   udisks_functions - Written for Bash.
 -   bashmount - bashmount is a menu-driven Bash script with a
     configuration file that makes it easy to configure and extend.
+
+> udisks2 - mount to /media
+
+By default, udisks2 mounts removable drives into /run/media/$USER/
+instead of /media/. If you don't like this behaviour, use this rule:
+
+    /etc/udev/rules.d/99-udisks2.rules
+
+    ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"
+
+> Privileged actions
+
+By default, some actions (e.g. mount a filesystem on a system device)
+requires to be authenticated as administrator. See polkit article how to
+configure it and overwrite the default settings.
 
 Tips and tricks
 ---------------
@@ -278,7 +308,7 @@ If your eSATA drive isn't detected when you plug it in, there are a few
 things you can try. You can reboot with the eSATA plugged in. Or you
 could try
 
-    # for f in /sys/class/scsi_host/host*/scan; do echo "0 0 0" > $f; done
+    # echo 0 0 0 | tee /sys/class/scsi_host/host*/scan
 
 Or you could install scsiadd (from the AUR) and try
 
@@ -302,7 +332,7 @@ drive, without any root password and so on.
 
     /etc/udev/rules.d/10-esata.rules
 
-    DEVPATH=="/devices/pci0000:00/0000:00:1f.2/host4/*", ENV{UDISKS_SYSTEM_INTERNAL}="0"
+    DEVPATH=="/devices/pci0000:00/0000:00:1f.2/host4/*", ENV{UDISKS_SYSTEM}="0"
 
 Note:The DEVPATH can be found after connection the eSATA drive with the
 following commands (replace sdb accordingly):
@@ -320,7 +350,7 @@ different order. This can result in devices randomly switching names. A
 udev rule can be added to use static device names:
 
 -   See Persistent block device naming for block devices.
--   See Network_Configuration#Device_names for network devices
+-   See Network configuration#Device names for network devices
 
 iscsi device
 
@@ -350,65 +380,71 @@ the example in Writing udev rules).
 
     /etc/udev/rules.d/83-webcam.rules
 
-    KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", SUBSYSTEMS=="usb", \
-            ATTRS{idVendor}=="05a9", ATTRS{idProduct}=="4519", SYMLINK+="video-cam1"
-    KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", SUBSYSTEMS=="usb", \
-            ATTRS{idVendor}=="046d", ATTRS{idProduct}=="08f6", SYMLINK+="video-cam2"
-    KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", SUBSYSTEMS=="usb", \
-            ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0840", SYMLINK+="video-cam3"
+    KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", SUBSYSTEMS=="usb", ATTRS{idVendor}=="05a9", ATTRS{idProduct}=="4519", SYMLINK+="video-cam1"
+    KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="08f6", SYMLINK+="video-cam2"
+    KERNEL=="video[0-9]*", SUBSYSTEM=="video4linux", SUBSYSTEMS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0840", SYMLINK+="video-cam3"
 
 Note:Using names other than "/dev/video*" will break preloading of
 v4l1compat.so and perhaps v4l2convert.so.
 
+Printers
+
+If you use multiple printers, /dev/lp[0-9] devices will be assigned
+randomly on boot, which will break e.g. CUPS configuration.
+
+You can create following rule, which will create symlinks under
+/dev/lp/by-id and /dev/lp/by-path, similar to Persistent block device
+naming scheme:
+
+    /etc/udev/rules.d/60-persistent-printer.rules
+
+    ACTION=="remove", GOTO="persistent_printer_end"
+
+    # This should not be necessary
+    #KERNEL!="lp*", GOTO="persistent_printer_end"
+
+    SUBSYSTEMS=="usb", IMPORT{builtin}="usb_id"
+    ENV{ID_TYPE}!="printer", GOTO="persistent_printer_end"
+
+    ENV{ID_SERIAL}=="?*", SYMLINK+="lp/by-id/$env{ID_BUS}-$env{ID_SERIAL}"
+
+    IMPORT{builtin}="path_id"
+    ENV{ID_PATH}=="?*", SYMLINK+="lp/by-path/$env{ID_PATH}"
+
+    LABEL="persistent_printer_end"
+
 > Running HAL
 
-Some programs still require HAL (like Flash DRM content). Hal can be
-installed from hal and hal-info.
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: Content moved    
+                           into Flash DRM content,  
+                           do we still need this    
+                           section? (Discuss)       
+  ------------------------ ------------------------ ------------------------
 
-Using Systemd: one can start and stop the hal service using the
-following systemd commands:
+Some programs still require HAL (like Flash DRM content). See Flash DRM
+content for details.
 
-Start HAL: # systemctl start hal.service
+> Waking from suspend with USB device
 
-Stop HAL: # systemctl stop hal.service
+First, find vendor and product ID of your device, for example
 
-Alternatively, one can use the following script:
+    # lsusb | grep Logitech
 
-    #!/bin/bash
+    Bus 007 Device 002: ID 046d:c52b Logitech, Inc. Unifying Receiver
 
-    ## written by Mark Lee <bluerider>
-    ## using information from <https://wiki.archlinux.org/index.php/Chromium#Google_Play_.26_Flash>
+Now change the power/wakeup attribute of the device and the USB
+controller it's connected to, which is in this case
+driver/usb7/power/wakeup. Use the following rule:
 
-    ## Start and stop Hal service on command for Google Play Movie service
+    /etc/udev/rules.d/50-wake-on-device.rules
 
-    function main () {  ## run the main insertion function
-         clear-cache;  ## remove adobe cache
-         start-hal;  ## start the hal daemon
-         read -p "Press 'enter' to stop hal";  ## pause the command line with a read line
-         stop-hal;  ## stop the hal daemon
-    }
+    ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c52b", ATTR{power/wakeup}="enabled", ATTR{driver/usb7/power/wakeup}="enabled"
 
-    function clear-cache () {  ## remove adobe cache
-         cd ~/.adobe/Flash_Player;  ## go to Flash player user directory
-         rm -rf NativeCache AssetCache APSPrivateData2;  ## remove cache
-    }
-
-    function start-hal () {  ## start the hal daemon
-         sudo systemctl start hal.service && ( ## systemd : start hal daemon
-              echo "Started hal service..."
-    ) || (
-              echo "Failed to start hal service!") 
-    }
-
-    function stop-hal () {  ## stop the hal daemon
-    sudo systemctl stop hal.service && (  ## systemd : stop hal daemon
-              echo "Stopped hal service..."
-         ) || (
-              echo "Failed to stop hal service!"
-         )
-    }
-
-    main;  ## run the main insertion function
+Note:Also make sure the USB controller is enabled in /proc/acpi/wakeup.
 
 Troubleshooting
 ---------------
@@ -524,8 +560,15 @@ See also
 -   Udev mailing list information
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Udev&oldid=254071"
+"https://wiki.archlinux.org/index.php?title=Udev&oldid=297730"
 
 Category:
 
 -   Hardware detection and troubleshooting
+
+-   This page was last modified on 15 February 2014, at 12:24.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

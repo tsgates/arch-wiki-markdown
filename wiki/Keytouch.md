@@ -9,19 +9,16 @@ This HOWTO will try to explain how keytouch is used in Arch Linux. For
 further documentation, please have a look at the keytouch official
 documentation.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Keyboard File                                                      |
-|     -   2.1 Creating a Keyboard File                                     |
-|     -   2.2 Share it                                                     |
-|                                                                          |
-| -   3 Configure keytouch                                                 |
-| -   4 Starting the keytouch daemon                                       |
-| -   5 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Keyboard File
+    -   2.1 Creating a Keyboard File
+    -   2.2 Share it
+-   3 Configure keytouch
+-   4 Starting the keytouch daemon
+-   5 Troubleshooting
 
 Installation
 ------------
@@ -39,6 +36,16 @@ If your model is not included in the keytouch package you will need to
 create one for yourself.
 
 > Creating a Keyboard File
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: please use the   
+                           first argument of the    
+                           template to provide a    
+                           brief explanation.       
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 Install the keytouch-editor from the Arch User Repository. Make sure you
 have evdev loaded (you should not need to do this if you using the stock
@@ -178,6 +185,16 @@ Configure keytouch
 Starting the keytouch daemon
 ----------------------------
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: sysvinit has     
+                           been replaced by systemd 
+                           and the file rc.conf is  
+                           no longer available.see  
+                           the news (Discuss)       
+  ------------------------ ------------------------ ------------------------
+
 -   You should start the keytouch daemon at boot time (add keytouch to
     the daemons array in /etc/rc.conf)
 -   You have to load keytouchd on your session startup. There is a
@@ -235,8 +252,15 @@ For example:
 That should do the trick.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Keytouch&oldid=233617"
+"https://wiki.archlinux.org/index.php?title=Keytouch&oldid=305963"
 
 Category:
 
 -   Keyboards
+
+-   This page was last modified on 20 March 2014, at 17:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

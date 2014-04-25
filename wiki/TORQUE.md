@@ -1,7 +1,7 @@
 TORQUE
 ======
 
-> Summary
+Summary help replacing me
 
 Installation and configuration of TORQUE.
 
@@ -16,37 +16,29 @@ consists of one head node and many compute nodes. The head node runs the
 torque-server daemon and the compute nodes run the torque-client daemon.
 The head node also runs a scheduler daemon.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Pre-note                                                           |
-| -   2 Installation                                                       |
-| -   3 Must haves                                                         |
-|     -   3.1 /etc/hosts                                                   |
-|     -   3.2 Firewall configuration (if installed)                        |
-|     -   3.3 NFS                                                          |
-|                                                                          |
-| -   4 TORQUE setup                                                       |
-|     -   4.1 Server (head node) configuration                             |
-|     -   4.2 Client (compute node) configuration                          |
-|     -   4.3 Restart the server and client(s)                             |
-|                                                                          |
-| -   5 Verifying cluster status                                           |
-| -   6 Queuing jobs                                                       |
-| -   7 Checking job status                                                |
-| -   8 Links                                                              |
-+--------------------------------------------------------------------------+
-
-Pre-note
+Contents
 --------
 
-Note:Although TORQUE is a very powerful queuing system, if the goal of
-the cluster is solely to increase compilation throughout, distcc is a
-much easier and elegant solution.
+-   1 Installation
+-   2 Must haves
+    -   2.1 /etc/hosts
+    -   2.2 Firewall configuration (if installed)
+    -   2.3 NFS
+-   3 Setup
+    -   3.1 Server (head node) configuration
+    -   3.2 Client (compute node) configuration
+    -   3.3 Restart the server and client(s)
+-   4 Verifying cluster status
+-   5 Queuing jobs
+-   6 Checking job status
+-   7 See also
 
 Installation
 ------------
+
+Note:Although TORQUE is a very powerful queuing system, if the goal of
+the cluster is solely to increase compilation throughput, distcc is a
+much easier and elegant solution.
 
 Install the torque package found in the AUR.
 
@@ -55,9 +47,9 @@ Must haves
 
 > /etc/hosts
 
-Make sure that /etc/hosts on all of the boxes you plan to use in your
-cluster contains the hostnames of every PC in the cluster. Example,
-cluster consists of 3 PCs, mars, phobos, and deimos.
+Make sure that /etc/hosts on all of the boxes in the cluster contains
+the hostnames of every PC in the cluster. Example, cluster consists of 3
+PCs, mars, phobos, and deimos.
 
     192.168.0.20   mars
     192.168.0.21   phobos
@@ -74,26 +66,25 @@ if privileged ports are configured (the default).
 > NFS
 
 Technically, one does not need to use NFS but doing so simplifies the
-whole process. An NFS or NFSv4 share either on the server or another
-machine is highly recommended to simplify the process of sharing common
-build disk space.
+whole process. An NFS share either on the server or another machine is
+highly recommended to simplify the process of sharing common build disk
+space.
 
-See the NFS and NFSv4 wiki articles for setting this up.
-
-TORQUE setup
-------------
+Setup
+-----
 
 > Server (head node) configuration
 
 Follow these steps on the head node/scheduler.
 
 Edit /var/spool/torque/server_name to name the head node. It is
-recommended to match the hostname in /etc/rc.conf for simplicity's sake.
+recommended to match the hostname in /etc/hostname for simplicity's
+sake.
 
-Create and configure your torque server:
+Create and configure the torque server:
 
     # pbs_server -t create
-    PBS_Server localhost.localdomain: Create mode and server database exists, 
+    PBS_Server localhost.localdomain: Create mode and server database exists,
     do you wish to continue y/(n)?y
 
 A minimal set of options are provided here. Adjust the first line
@@ -125,13 +116,13 @@ Verify the server config with this command:
     # qmgr -c 'p s'
 
 Edit /var/spool/torque/server_priv/nodes adding all compute nodes.
-Again, it is recommended to match the hostname(s) of the machines on
-your LAN. The syntax is HOSTNAME np=x gpus=y properties
+Again, it is recommended to match the hostname(s) of the machines on the
+LAN. The syntax is HOSTNAME np=x gpus=y properties
 
 -   HOSTNAME=the hostname of the machine
 -   np=number of processors
 -   gpus=number of gpus
--   properties=comments you wish to add
+-   properties=comments
 
 Only the hostname is required, all other fields are optional.
 
@@ -141,21 +132,20 @@ Example:
     phobos np=2
     deimos np=2
 
-Note:One can run both the server and client on the same box.
+> Note:
 
-Note:Re-running pbs_server -t create may delete this nodes file.
+-   One can run both the server and client on the same box.
+-   Re-running pbs_server -t create may delete this nodes file.
 
-Restart the server and the new options are sourced:
-
-    # rc.d start torque-server
+Restart the server and the new options are sourced.
 
 > Client (compute node) configuration
 
-Follow these steps on each compute node in your cluster.
+Follow these steps on each compute node in the cluster.
 
 Note:If running both the server and client on the same box, be sure to
 complete these steps as well for that machine as well as other pure
-clients on your cluster.
+clients on the cluster.
 
 Edit /var/spool/torque/mom_priv/config to contain some basic info
 identifying the server:
@@ -165,15 +155,13 @@ identifying the server:
 
 > Restart the server and client(s)
 
-That should be it. Restart the server and client(s):
-
-    # rc.d restart torque-server
-    # rc.d start torque-node
+That should be it. Restart the server and the client: torque-server
+torque-node.
 
 Verifying cluster status
 ------------------------
 
-To check the status of your cluster, issue the following:
+To check the status of the cluster, issue the following:
 
     $ pbsnodes -a
 
@@ -183,7 +171,7 @@ down.
 
 Example output:
 
-    mars
+         mars
          state = free
          np = 4
          ntype = cluster
@@ -234,9 +222,8 @@ start it, run the scheduler:
 
     # pbs_sched
 
-Note:One can easily make a daemon for pbs_sched in /etc/rc.d - just copy
-/etc/rc.d/torque-server and change the daemon. Future releases of the
-AUR package may contain this as the default.
+One can modify the torque-server systemd daemon to activate pbs_sched at
+boot.
 
 Another usage of qsub is to name a job and queue a script:
 
@@ -247,7 +234,7 @@ form text files corresponding to the respective outputs pid.o and pid.e
 and will be written to the path from which the qsub command was issued.
 
 Another example can use a wrapper script to make and queue work en mass
-automatically. For an example, see graysky's build.functions.
+automatically.
 
 Checking job status
 -------------------
@@ -276,7 +263,7 @@ Append the -n switch to see which nodes are doing which jobs.
 
     $ qstat -n
 
-    localhost.localdomain: 
+    localhost.localdomain:
     405.localhost.lo     facade  batch    i686-generic       3035     1   0    --  01:00 C 00:12
        mars/3+mars/2+mars/1+mars/0
     406.localhost.lo     facade  batch    i686-atom          5768     1   0    --  01:00 C 00:46
@@ -304,23 +291,30 @@ Append the -n switch to see which nodes are doing which jobs.
     417.localhost.lo     facade  batch    x86_64-k10          --      1   0    --  01:00 Q   -- 
         -- 
 
-Links
------
+See also
+--------
 
 -   TORQUE short course from University of California, San Francisco -
     Good guide with templates.
--   TORQUE admin manual - great resource and easy to read.
--   Boston College's Torque User Guide - not extensive but gives a
+-   TORQUE admin manual - Great resource and easy to read.
+-   Boston College's Torque user guide - Guide not extensive but gives a
     flavor for how end-users can use a cluster. Probably overkill for
     home clusters where only one user is submitting work.
--   TORQUE Mailing Lists - The TORQUE community is very knowledgeable
+-   TORQUE mailing lists - The TORQUE community is very knowledgeable
     and a key asset.
--   TORQUE Users Mailing List Archives - Searchable archive of
+-   TORQUE users mailing list archives - Searchable archive of
     TORQUE-users.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=TORQUE&oldid=240637"
+"https://wiki.archlinux.org/index.php?title=TORQUE&oldid=287859"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 13 December 2013, at 14:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

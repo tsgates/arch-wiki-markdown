@@ -1,25 +1,20 @@
 DeveloperWiki:Removal of desktop files
 ======================================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 [community]                                                        |
-|     -   1.1 Background information                                       |
-|     -   1.2 Relevant quote                                               |
-|     -   1.3 Relevant commands                                            |
-|     -   1.4 Progress                                                     |
-|         -   1.4.1 Not Done (last updated 2012-08-07)                     |
-|         -   1.4.2 Pending (have been reported)                           |
-|         -   1.4.3 Finished (upstream rejected the .desktop file)         |
-|                                                                          |
-| -   2 Tools                                                              |
-|     -   2.1 gendesk                                                      |
-|         -   2.1.1 How to use                                             |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 [community]
+    -   1.1 Background information
+    -   1.2 Relevant quote
+    -   1.3 Relevant commands
+    -   1.4 Progress
+        -   1.4.1 Not Done (last updated 2012-08-07)
+        -   1.4.2 Pending (have been reported)
+        -   1.4.3 Finished (upstream rejected the .desktop file)
+-   2 Tools
+    -   2.1 gendesk
+-   3 See also
 
 [community]
 -----------
@@ -115,7 +110,6 @@ Not Done (last updated 2012-08-07)
 -   openarena/openarena.desktop
 -   paraview/paraview.desktop
 -   pdfedit/pdfedit.desktop
--   pingus/pingus.desktop
 -   pympc/pympc.desktop
 -   q4wine/q4wine.desktop
 -   qcad/QCad.desktop
@@ -137,11 +131,9 @@ Not Done (last updated 2012-08-07)
 -   tea/tea.desktop
 -   teeworlds/teeworlds.desktop
 -   torcs/torcs.desktop
--   tremulous/tremulous.desktop
 -   tuxcards/tuxcards.desktop
 -   tuxguitar/tuxguitar.desktop
 -   umlet/umlet.desktop
--   uqm/uqm.desktop
 -   urbanterror/urbanterror.desktop
 -   vym/vym.desktop
 -   widelands/widelands.desktop
@@ -162,8 +154,15 @@ Pending (have been reported)
     (http://sourceforge.net/tracker/?func=detail&aid=3377367&group_id=137480&atid=738666)
 -   gcolor2/gcolor2.desktop -
     https://sourceforge.net/tracker/?func=detail&aid=3404696&group_id=119919&atid=685762
+-   higan-gtk/purify.desktop (using gendesk for now, will contact
+    upstream to have it included)
+-   higan-qt/purify.desktop (using gendesk for now, will contact
+    upstream to have it included)
 -   paraview/paraview.desktop -
     http://paraview.org/Bug/view.php?id=12508
+-   pingus/pingus.desktop -
+    http://code.google.com/p/pingus/issues/detail?id=136
+-   rbutil/rbutil.desktop (http://gerrit.rockbox.org/r/#/c/573/)
 -   speed-dreams/speed-dreams.desktop
     (https://sourceforge.net/apps/trac/speed-dreams/ticket/112)
 -   sxiv/sxiv.desktop (https://github.com/muennich/sxiv/pull/50)
@@ -171,12 +170,17 @@ Pending (have been reported)
     release
 -   torcs/torcs.desktop
     (http://sourceforge.net/tracker/?func=detail&aid=3405193&group_id=3777&atid=103777)
+-   tremulous/tremulous.desktop -
+    https://bugzilla.icculus.org/show_bug.cgi?id=6027
 -   umlet/umlet.desktop - sent to upstream -
     http://code.google.com/p/umlet/issues/detail?id=23
+-   uqm/uqm.desktop - https://bugs.uqm.stack.nl/show_bug.cgi?id=788
 -   urbanterror/urbanterror.desktop
 
 Finished (upstream rejected the .desktop file)
 
+-   gens/gens.desktop (switched to gendesk, no release in 5 years,
+    pretty much dead)
 -   nexuiz/nexuiz-glx.desktop (nexuiz is effectively dead)
 -   nexuiz/nexuiz-sdl.desktop (nexuiz is effectively dead)
 -   qgit/qgit.desktop (no project activity in 3 yrs)
@@ -190,32 +194,10 @@ Tools
 
 > gendesk
 
-gendesk is a Arch Linux-specific tool for generating .desktop files from
-PKGBUILD files. Most of the information is fetched directly from the
-PKGBUILD.
-
-Icons are downloaded from fedora, if available. The source for icons can
-easily be changed in the future.
-
-How to use
-
--   Add gendesk to makedepends
-
--   Start the build() function with:
-
-    cd "$srcdir"
-    gendesk
-    # And then the rest
-
--   Add _name=('Program Name') to the PKGBUILD to choose a name for the
-    menu entry. There are other options available too, like
-    _exec=('someapp --with-ponies').
-
--   Use gendesk -n if you wish to generate a .desktop file, but not
-    download any icon
-
--   See the gendesk source for more information. (Patches and pull
-    requests are welcome).
+gendesk started as an Arch Linux-specific tool for generating .desktop
+files by fetching the needed information directly from PKGBUILD files.
+Now it is a general tool that takes command-line arguments. See Desktop
+Entries#gendesk for more information.
 
 See also
 --------
@@ -224,9 +206,16 @@ See also
 -   Desktop Entries
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Removal_of_desktop_files&oldid=229150"
+"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Removal_of_desktop_files&oldid=287051"
 
 Categories:
 
 -   Arch development
 -   DeveloperWiki
+
+-   This page was last modified on 8 December 2013, at 03:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

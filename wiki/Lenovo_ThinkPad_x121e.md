@@ -1,7 +1,7 @@
 Lenovo ThinkPad x121e
 =====================
 
-  Summary
+  Summary help replacing me
   --------------------------------------------------
   Installation notes for the Lenovo ThinkPad x121e
 
@@ -73,16 +73,14 @@ Untested:
 -   security chip thing
 -   boot from USB FDD, network boot
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Arch user blogs about the x121e                                    |
-| -   2 Power saving options for the x121e                                 |
-| -   3 Bluetooth                                                          |
-| -   4 Broadcom BCM43224 a/b/g/n wifi                                     |
-| -   5 Arch Forums x121e related threads                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Arch user blogs about the x121e
+-   2 Power saving options for the x121e
+-   3 Bluetooth
+-   4 Broadcom BCM43224 a/b/g/n wifi
+-   5 Arch Forums x121e related threads
 
 Arch user blogs about the x121e
 -------------------------------
@@ -140,21 +138,17 @@ again. (This applies to GRUB2, at least.)
 Broadcom BCM43224 a/b/g/n wifi
 ------------------------------
 
-    $ lspci -vnn | grep 14e4
+    $ lspci -vnn | grep 14e4:
     02:00.0 Network controller [0280]: Broadcom Corporation BCM43224 802.11a/b/g/n [14e4:0576] (rev 01)
 
-Wifi can be enabled using the Broadcom_wireless broadcom-wl driver. Be
-sure to rfkill-enable it and disable power saving :
-
-  
+Wifi can be enabled using the broadcom brcmsmac module. Be sure to
+rfkill-enable it and disable power saving :
 
     $ ip link set eth1 down
     $ iwconfig eth1 channel auto
     $ iwconfig eth1 power off
     $ rfkill unblock wifi
     $ ip link set eth1 up
-
-  
 
 Arch Forums x121e related threads
 ---------------------------------
@@ -196,8 +190,15 @@ changing the settings for the security chip in the BIOS as described in
 this thread.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_x121e&oldid=236324"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_x121e&oldid=263947"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 23 June 2013, at 10:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

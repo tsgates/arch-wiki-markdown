@@ -16,23 +16,27 @@ multiple storage devices.
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Data corruption                                                    |
-|     -   1.1 Repair XFS Filesystem                                        |
-|                                                                          |
-| -   2 Performance                                                        |
-|     -   2.1 Stripe Size and Width                                        |
-|     -   2.2 Disable Barrier                                              |
-|     -   2.3 Access Time                                                  |
-|     -   2.4 Defragmentation                                              |
-|         -   2.4.1 Inspect fragmentation levels                           |
-|         -   2.4.2 Perform defragmentation                                |
-|                                                                          |
-| -   3 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Data corruption
+    -   2.1 Repair XFS Filesystem
+-   3 Performance
+    -   3.1 Stripe size and width
+    -   3.2 Disable barrier
+    -   3.3 Access time
+    -   3.4 Defragmentation
+        -   3.4.1 Inspect fragmentation levels
+        -   3.4.2 Perform defragmentation
+-   4 See also
+
+Installation
+------------
+
+The tools to manage XFS partions are in the xfsprogs package from the
+official repositories, which is included in the default base
+installation.
 
 Data corruption
 ---------------
@@ -46,8 +50,7 @@ First unmount the XFS filesystem.
 
     # unmount /dev/sda3
 
-Once unmounted, run the xfs_repair tool included in the pacman package
-xfsprogs.
+Once unmounted, run the xfs_repair tool.
 
     # xfs_repair -v /dev/sda3
 
@@ -60,9 +63,9 @@ create the filesystem. Where is the journal stored?
 Warning:Disabling barriers, disabling atime, and other performance
 enhancements make data corruption and failure much more likely.
 
-For more info read: Maximizing Performance
+For more info read: Maximizing performance#XFS
 
-> Stripe Size and Width
+> Stripe size and width
 
 If this filesystem will be on a striped RAID you can gain significant
 speed improvements by specifying the stripe size to the mkfs.xfs
@@ -71,12 +74,12 @@ command.
 See How to calculate the correct sunit,swidth values for optimal
 performance
 
-> Disable Barrier
+> Disable barrier
 
 You can increase performance by disabling barrier usage for the
 filesystem by adding the nobarrier mount option to the /etc/fstab file.
 
-> Access Time
+> Access time
 
 On some filesystems you can increase performance by adding the noatime
 mount option to the /etc/fstab file. For XFS filesystems the default
@@ -112,20 +115,27 @@ To see how much fragmentation your file system currently has:
 Perform defragmentation
 
 To begin defragmentation, use the xfs_fsr command which is included with
-the "xfsprogs" package.
+the xfsprogs package.
 
     # xfs_fsr /dev/sda3
 
-External Links
---------------
+See also
+--------
 
 -   XFS FAQ
 -   Improving Metadata Performance By Reducing Journal Overhead
 -   XFS Wikipedia Entry
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=XFS&oldid=217965"
+"https://wiki.archlinux.org/index.php?title=XFS&oldid=299529"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 21 February 2014, at 22:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

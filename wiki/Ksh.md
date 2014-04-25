@@ -4,29 +4,50 @@ Ksh
 Korn Shell (ksh) is a standard/restricted command and programming
 language developed by AT&T.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Making Ksh your default login shell                                |
-| -   3 Uninstallation                                                     |
-| -   4 External Resources                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Making ksh your default login shell
+-   3 Uninstallation
+-   4 See also
 
 Installation
 ------------
 
-The version from AT&T can be found on AUR.
+First, install an implementation:
 
-The MirBSD™ Korn Shell is another free implementation of the Korn Shell.
-It can be found in the community repo. Install with pacman:
+-   MirBSD™ Korn Shell — Enhanced version of the public domain ksh.
 
-    # pacman -S mksh
+https://www.mirbsd.org/mksh.htm || mksh
 
-The Public Domain Korn Shell is in the AUR.
+-   AT&T Korn shell — Official AT&T version.
 
-Making Ksh your default login shell
+http://www.kornshell.com/ || ksh
+
+-   OpenBSDs Korn Shell — Porting of the OpenBSD version of ksh to
+    GNU/Linux.
+
+http://www.connochaetos.org/oksh/ || oksh
+
+-   Public Domain Korn Shell — Clone of the AT&T Korn shell. At the
+    moment, it has most of the ksh88 features, not much of the ksh93
+    features, and a number of its own features.
+
+http://www.cs.mun.ca/~michael/pdksh/ || pdksh
+
+More implementations are provided by:
+
+-   obase — OpenBSD userland ported to Linux, statically linked.
+
+https://github.com/chneukirchen/obase || obase-git
+
+-   obase musl — OpenBSD userland ported to Linux, statically linked to
+    musl libc.
+
+https://github.com/chneukirchen/obase || obase-musl-git
+
+Making ksh your default login shell
 -----------------------------------
 
 systemd does not implicitly make use of a shell (previously, Arch Linux
@@ -67,7 +88,7 @@ Uninstallation
 You must first change your default shell back to Bash before removing
 the Ksh package.
 
-Change the default shell for the current user to bash:
+Change the default shell for the current user to Bash:
 
     $ chsh -s /bin/bash
 
@@ -77,19 +98,15 @@ Change the default shell using usermod:
 
     # usermod -s /bin/bash username
 
-Now you can safely remove the Ksh package:
+Now you can safely remove the Ksh package.
 
-    # pacman -R pdksh
-
-Warning: Failure to follow the above will result in all kinds of
+Warning:Failure to follow the above will result in all kinds of
 problems.
 
 If you did not follow the above, you can still change the default shell
 back to Bash by editing /etc/passwd as root.
 
-For example:
-
-from:
+For example from:
 
     username:x:1000:1000:Full Name,,,:/home/username:/bin/ksh
 
@@ -97,22 +114,22 @@ to:
 
     username:x:1000:1000:Full Name,,,:/home/username:/bin/bash
 
-External Resources
-------------------
+See also
+--------
 
-pdksh official page
-
-Korn Shell at Wikipedia
-
-pdksh man page at die.net
-
-Home Page For The KornShell Command And Programming Language
-
-pdksh man page at OpenBSD
+-   pdksh man page at die.net
+-   pdksh man page at OpenBSD
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ksh&oldid=251528"
+"https://wiki.archlinux.org/index.php?title=Ksh&oldid=274814"
 
 Category:
 
 -   Command shells
+
+-   This page was last modified on 8 September 2013, at 18:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

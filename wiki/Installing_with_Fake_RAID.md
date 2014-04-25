@@ -1,23 +1,12 @@
 Installing with Fake RAID
 =========================
 
-> Summary
+Related articles
 
-Provides detailed instructions for installing Arch Linux on "fake RAID"
-volumes. This guide is intended to supplement the Official Arch Linux
-Install Guide or the Beginners' Guide.
-
-> Related
-
-Installing with Software RAID or LVM
-
-Convert a single drive system to RAID
-
-> Resources
-
-RAID/Onboard @ Gentoo Linux Wiki
-
-Related forum thread
+-   Installing with Software RAID or LVM
+-   Convert a single drive system to RAID
+-   Installation guide
+-   Beginners' guide
 
 The purpose of this guide is to enable use of a RAID set created by the
 on-board BIOS RAID controller and thereby allow dual-booting of Linux
@@ -25,40 +14,33 @@ and Windows from partitions inside the RAID set using GRUB. When using
 so-called "fake RAID" or "host RAID", the disc sets are reached from
 /dev/mapper/chipsetName_randomName and not /dev/sdX.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What is "fake RAID"                                                |
-| -   2 History                                                            |
-| -   3 Supported hardware                                                 |
-| -   4 Backup                                                             |
-| -   5 Outline                                                            |
-| -   6 Preparation                                                        |
-|     -   6.1 Configure RAID sets                                          |
-|                                                                          |
-| -   7 Boot the installer                                                 |
-| -   8 Load dmraid                                                        |
-| -   9 Perform traditional installation                                   |
-|     -   9.1 Partition the RAID set                                       |
-|     -   9.2 Mounting the filesystem                                      |
-|     -   9.3 Install and configure Arch                                   |
-|                                                                          |
-| -   10 install bootloader                                                |
-|     -   10.1 Use GRUB2                                                   |
-|     -   10.2 Use GRUB Legacy (Deprecated)                                |
-|                                                                          |
-| -   11 Troubleshooting                                                   |
-|     -   11.1 Booting with degraded array                                 |
-|     -   11.2 Error: Unable to determine major/minor number of root       |
-|         device                                                           |
-|     -   11.3 dmraid mirror fails to activate                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 What is "fake RAID"
+-   2 History
+-   3 Supported hardware
+-   4 Preparation
+    -   4.1 Configure RAID sets
+-   5 Boot the installer
+-   6 Load dmraid
+-   7 Perform traditional installation
+    -   7.1 Partition the RAID set
+    -   7.2 Mounting the filesystem
+    -   7.3 Install and configure Arch
+-   8 install bootloader
+    -   8.1 Use GRUB2
+-   9 Troubleshooting
+    -   9.1 Booting with degraded array
+    -   9.2 Error: Unable to determine major/minor number of root device
+    -   9.3 dmraid mirror fails to activate
+    -   9.4 No block devices for partitions on existing RAID array
+-   10 See also
 
 What is "fake RAID"
 -------------------
 
-From Wikipedia:
+From Wikipedia:RAID:
 
 Operating system-based RAID doesn't always protect the boot process and
 is generally impractical on desktop versions of Windows. Hardware RAID
@@ -82,17 +64,24 @@ southbridge on some motherboards). Before their introduction, a "RAID
 controller" implied that the controller did the processing, and the new
 type has become known in technically knowledgeable circles as "fake
 RAID" even though the RAID itself is implemented correctly. Adaptec
-calls them "host RAID".wikipedia:RAID
+calls them "host RAID".
 
-See Wikipedia:RAID or FakeRaidHowto @ Community Ubuntu Documentation for
-more information.
+See also FakeRaidHowto @ Community Ubuntu Documentation for more
+information.
 
 Despite the terminology, "fake RAID" via dmraid is a robust software
 RAID implementation that offers a solid system to mirror or stripe data
 across multiple disks with negligible overhead for any modern system.
 dmraid is comparable to mdraid (pure Linux software RAID) with the added
 benefit of being able to completely rebuild a drive after a failure
-before the system is ever booted.
+before the system is ever booted. However, be aware that not all BIOS
+RAID implementations support drive rebuilding. Instead they rely on
+non-linux software to perform the rebuild. If your system cannot rebuild
+a drive in the BIOS RAID setup utility, you are strongly encouraged to
+use mdraid (pure Linux Software Raid via mdadm - see RAID) instead of
+dmraid or you will find yourself unable to rebuild an array in case of a
+drive failure - or unable to retrieve information from your array in
+case of a motherboard failure without a lot of additional work.
 
 History
 -------
@@ -125,32 +114,32 @@ Supported hardware
 -   Tested with AMD Option ROM Utility using pdc_adma on 2011.12
     (x86_64)
 
-For more information on supported hardware, see RAID/Onboard @ Gentoo
-Linux Wiki
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: The installation 
+                           steps do not reflect the 
+                           current ArchLinux        
+                           installation procedure.  
+                           Need to be updated. Btw, 
+                           it appears that Intel    
+                           now recommends mdadm     
+                           instead of dmraid (see   
+                           Discussion). Update in   
+                           progress. (Discuss)      
+  ------------------------ ------------------------ ------------------------
 
-Backup
-------
+Preparation
+-----------
 
 Warning:Backup all data before playing with RAID. What you do with your
 hardware is only your own fault. Data on RAID stripes is highly
 vulnerable to disc failures. Create regular backups or consider using
 mirror sets. Consider yourself warned!
 
-Outline
--------
-
--   Preparation
--   Boot the installer
--   Load dmraid
--   Perform traditional installation
--   Install GRUB
-
-Preparation
------------
-
--   Open up any needed guides (e.g. Beginners' Guide, Official Arch
-    Linux Install Guide) on another machine. If you do not have access
-    to another machine, print it out.
+-   Open up any needed guides (e.g. Beginners' guide, Installation
+    guide) on another machine. If you do not have access to another
+    machine, print it out.
 -   Download the latest Arch Linux install image.
 -   Backup all important files since everything on the target partitions
     will be destroyed.
@@ -164,13 +153,11 @@ boot.[1]
 -   Enter your BIOS setup and enable the RAID controller.
     -   The BIOS may contain an option to configure SATA drives as
         "IDE", "AHCI", or "RAID"; ensure "RAID" is selected.
-
 -   Save and exit the BIOS setup. During boot, enter the RAID setup
     utility.
     -   The RAID utility is usually either accessible via the boot menu
         (often F8, F10 or CTRL+I) or whilst the RAID controller is
         initializing.
-
 -   Use the RAID setup utility to create preferred stripe/mirror sets.
 
 Tip:See your motherboard documentation for details. The exact procedure
@@ -179,7 +166,7 @@ may vary.
 Boot the installer
 ------------------
 
-See Official Arch Linux Install Guide#Pre-Installation for details.
+See Installation guide#Pre-Installation for details.
 
 Load dmraid
 -----------
@@ -302,25 +289,15 @@ install bootloader
 > Use GRUB2
 
 Please read GRUB2 for more information about configuring GRUB2.
-Currently, the latest version of grub-bios does not compatiable with
+Currently, the latest version of grub-bios is not compatiable with
 fake-raid. If you got an error like this when you run grub-install:
 
      $ grub-install /dev/mapper/sil_aiageicechah
      Path `/boot/grub` is not readable by GRUB on boot. Installation is impossible. Aborting.
 
-You could try an old version of grub. You could find old version package
-of grub at ARM Search. Read Downgrade for more information.
+You could try an old version of grub. Check AUR for available packages.
 
 1. download an old version package for grub
-
-      i686:
-       http://arm.konnichi.com/extra/os/i686/grub2-bios-1:1.99-6-i686.pkg.tar.xz
-       http://arm.konnichi.com/extra/os/i686/grub2-common-1:1.99-6-i686.pkg.tar.xz
-      x86_64:
-       http://arm.konnichi.com/extra/os/x86_64/grub2-bios-1:1.99-6-x86_64.pkg.tar.xz
-       http://arm.konnichi.com/extra/os/x86_64/grub2-common-1:1.99-6-x86_64.pkg.tar.xz
-
-      You could verify these packages by the .sig file if you take care.
 
 2. install these old version packages by using "pacman -U *.pkg.tar.xz"
 
@@ -336,128 +313,6 @@ IgnorePkg array, if you don't want pacman upgrade it.
 That's all, grub-mkconfig will generate the configure automatically. You
 could edit /etc/default/grub to modify the configure (timeout, color,
 etc) before grub-mkconfig.
-
-> Use GRUB Legacy (Deprecated)
-
-Warning:You can normally specify default saved instead of a number in
-menu.lst so that the default entry is the entry saved with the command
-savedefault. If you are using dmraid do not use savedefault or your
-array will de-sync and will not let you boot your system.
-
-Please read GRUB Legacy for more information about configuring GRUB
-Legacy.
-
-Note:For an unknown reason, the default menu.lst will likely be
-incorrectly populated when installing via fake RAID. Double-check the
-root lines (e.g. root (hd0,0)). Additionally, if you did not create a
-separate /boot partition, ensure the kernel/initrd paths are correct
-(e.g. /boot/vmlinuz-linux and /boot/initramfs-linux.img instead of
-/vmlinuz-linux and /initramfs-linux.img.
-
-For example, if you created logical partitions (creating the equivalent
-of sda5, sda6, sda7, etc.) that were mapped as:
-
-      /dev/mapper     |    Linux    GRUB Partition
-                      |  Partition      Number
-    nvidia_fffadgic   |
-    nvidia_fffadgic5  |    /              4
-    nvidia_fffadgic6  |    /boot          5
-    nvidia_fffadgic7  |    /home          6
-
-The correct root designation would be (hd0,5) in this example.
-
-Note:If you use more than one set of dmraid arrays or multiple Linux
-distributions installed on different dmraid arrays (for example 2 disks
-in nvidia_fdaacfde and 2 disks in nvidia_fffadgic and you are installing
-to the second dmraid array (nvidia_fffadgic)), you will need designate
-the second array's /boot partition as the GRUB root. In the example
-above, if nvidia_fffadgic was the second dmraid array you were
-installing to, your root designation would be root (hd1,5).
-
-After saving the configuration file, the GRUB installer will FAIL.
-However it will still copy files to /boot. DO NOT GIVE UP AND REBOOT --
-just follow the directions below:
-
--   Switch to tty1 and chroot into our installed system:
-
-    # mount -o bind /dev /mnt/dev
-    # mount -t proc none /mnt/proc
-    # mount -t sysfs none /mnt/sys
-    # chroot /mnt /bin/bash
-
--   Switch to tty3 and look up the geometry of the RAID set. In order
-    for cfdisk to find the array and provide the proper C H S
-    information, you may need to start cfdisk providing your raid set as
-    the first argument. (i.e. cfdisk /dev/mapper/nvidia_fffadgic):
-    -   The number of Cylinders, Heads and Sectors on the RAID set
-        should be written at the top of the screen inside cfdisk. Note:
-        cfdisk shows the information in H S C order, but grub requires
-        you to enter the geometry information in C H S order.
-
-Example: 18079 255 63 for a RAID stripe of two 74GB Raptor discs.
-
-Example: 38914 255 63 for a RAID stripe of two 160GB laptop discs.
-
--   GRUB will fail to properly read the drives; the geometry command
-    must be used to manually direct GRUB:
-    -   Switch to tty1, the chrooted environment.
-    -   Install GRUB on /dev/mapper/raidSet:
-
-    # dmsetup mknodes
-    # grub --device-map=/dev/null
-
-    grub> device (hd0) /dev/mapper/raidSet
-    grub> geometry (hd0) C H S
-
-Exchange C H S above with the proper numbers (be aware: they are not
-entered in the same order as they are read from cfdisk).
-
-If geometry is entered properly, GRUB will list partitions found on this
-RAID set. You can confirm that grub is using the correct geometry and
-verify the proper grub root device to boot from by using the grub find
-command. If you have created a separate boot partition, then search for
-/grub/stage1 with find. If you have no separate boot partition, then
-search /boot/grub/stage1 with find. Examples:
-
-    grub> find /grub/stage1       # use when you have a separate boot partition
-    grub> find /boot/grub/stage1  # use when you have no separate boot partition
-
-Grub will report the proper device to designate as the grub root below
-(i.e. (hd0,0), (hd0,4), etc...) Then, continue to install the bootloader
-into the Master Boot Record, changing "hd0" to "hd1" if required.
-
-    grub> root (hd0,0)
-    grub> setup (hd0)
-    grub> quit
-
-Note:With dmraid >= 1.0.0.rc15-8, partitions are labeled "raidSetp1,
-raidSetp2, etc. instead of raidSet1, raidSet2, etc. If the setup command
-fails with "error 22: No such partition", temporary symlinks must be
-created.[2]
-
-The problem is that GRUB still uses an older detection algorithm, and is
-looking for /dev/mapper/raidSet1 instead of /dev/mapper/raidSetp1.
-
-The solution is to create a symlink from /dev/mapper/raidSetp1 to
-/dev/mapper/raidSet1 (changing the partition number as needed). The
-simplest way to accomplish this is to:
-
-    # cd /dev/mapper
-    # for i in raidSetp*; do ln -s $i ${i/p/}; done
-
-Lastly, if you have multiple dmraid devices with multiple sets of arrays
-set up (say: nvidia_fdaacfde and nvidia_fffadgic), then create the
-/boot/grub/device.map file to help GRUB retain its sanity when working
-with the arrays. All the file does is map the dmraid device to a
-traditional hd#. Using these dmraid devices, your device.map file will
-look like this:
-
-    (hd0) /dev/mapper/nvidia_fdaacfde
-    (hd1) /dev/mapper/nvidia_fffadgic
-
-And now you are finished with the installation!
-
-    # reboot
 
 Troubleshooting
 ---------------
@@ -501,7 +356,7 @@ To work around this problem:
 -   insert the 'sleep' hook in the HOOKS line of /etc/mkinitcpio.conf
     after the 'udev' hook like this:
 
-    HOOKS="base udev sleep autodetect pata scsi sata dmraid filesystems"
+    HOOKS="base udev sleep autodetect block dmraid filesystems"
 
 -   rebuild the kernel image and reboot
 
@@ -520,10 +375,34 @@ responsible out of the way:
     # mv 64-md-raid.rules disabled/
     # reboot
 
+> No block devices for partitions on existing RAID array
+
+If your existing array, set up before attempting to install arch,
+appears in /dev/mapper/raidnamehere, but does not have any partitions
+(raidnamehere1, etc) re-check the status of your RAID partitions.
+
+Arch may not create block devices for partitions that work in another OS
+if there are certain, even minor, problems.
+
+gparted is useful to diagnose and repair most problems. Unfortunately,
+you may have to repartition from scratch.
+
+See also
+--------
+
+-   Related forum thread
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Installing_with_Fake_RAID&oldid=248403"
+"https://wiki.archlinux.org/index.php?title=Installing_with_Fake_RAID&oldid=304854"
 
 Categories:
 
 -   Getting and installing Arch
 -   File systems
+
+-   This page was last modified on 16 March 2014, at 08:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

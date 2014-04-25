@@ -1,18 +1,16 @@
 ASUS N80VN
 ==========
 
-Works really good under Arch Linux. Overall excellent laptop, once you
-get rid of Vista and other crapware.
+  ------------------------ ------------------------ ------------------------
+  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
+                           Notes: ...and the        
+                           following statement      
+                           seems contraddicted.     
+                           Poorly written, by the   
+                           way. (Discuss)           
+  ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Sound card                                                         |
-| -   2 Bluetooth                                                          |
-| -   3 Fingerprint scanner                                                |
-| -   4 Webcam                                                             |
-+--------------------------------------------------------------------------+
+Works really good under Arch Linux.
 
 Sound card
 ----------
@@ -26,14 +24,6 @@ in /etc/modprobe.d/alsa-base:
 
 No model or position_fix needed. Remove any options snd-hda-intel in
 /etc/modprobe.d/modprobe.conf and /etc/modprobe.d/sound if required.
-
-Bluetooth
----------
-
-Can't bother trying bluetooth as I do not have a bluetooth device.
-However, I do not see why it would not work, as it seems to use pretty
-standard, non-brain dead drivers under Windows. --Sebleblanc 17:12, 18
-April 2009 (EDT)
 
 Fingerprint scanner
 -------------------
@@ -52,8 +42,15 @@ Apparently, from the USB ID of the camera, it's a Syntek USB 2.0 UVC PC
 Camera ([1]) and should be supported. However, I can't make it work.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_N80VN&oldid=208342"
+"https://wiki.archlinux.org/index.php?title=ASUS_N80VN&oldid=259487"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 29 May 2013, at 13:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

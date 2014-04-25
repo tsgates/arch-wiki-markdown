@@ -6,25 +6,22 @@ or key combinations on the keyboard. Xbindkeys works with multimedia
 keys and is window manager / DE independent, so if you switch much,
 xbindkeys is very handy.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Xbindkeysrc                                                  |
-|     -   2.2 GUI method                                                   |
-|                                                                          |
-| -   3 Usage                                                              |
-| -   4 Simulating multimedia keys                                         |
-| -   5 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Xbindkeysrc
+    -   2.2 GUI method
+-   3 Usage
+-   4 Simulating multimedia keys
+-   5 Troubleshooting
 
 Installation
 ------------
 
-Xbindkeys can be installed with the package xbindkeys, available in the
-official repositories.
+Install Xbindkeys with the package xbindkeys, available in the official
+repositories.
 
 For those who prefer a GUI, there is the xbindkeys_config package in the
 AUR.
@@ -34,7 +31,11 @@ Configuration
 
 Create a file named .xbindkeysrc in your home directory:
 
-    touch ~/.xbindkeysrc
+    $ touch ~/.xbindkeysrc
+
+Alternatively, you can create a sample file by invoking
+
+    $ xbindkeys -d > ~/.xbindkeysrc
 
 Now you can either edit ~/.xbindkeysrc to set keybindings, or you can do
 that with the GUI.
@@ -44,12 +45,12 @@ that with the GUI.
 To see the format of a configuration file entry, enter the following
 command:
 
-    xbindkeys -k
+    $ xbindkeys -k
 
 A blank window will pop up. Press the key(s) to which you wish to assign
 a command and xbindkeys will output a handy snippet that can be entered
 into ~/.xbindkeysrc. For example, while the blank window is open, press
-Alt + o to get the following output (results may vary):
+Alt+o to get the following output (results may vary):
 
     "(Scheme function)"
         m:0x8 + c:32
@@ -68,8 +69,6 @@ comments.
     "pamixer --increase 5"
        XF86AudioRaiseVolume
 
-  
-
     # Decrease volume
     "pamixer --decrease 5"
        m:0x0 + c:122
@@ -86,7 +85,7 @@ keypresses. Press q to quit.
 
 If you installed the xbindkeys_config package, just run:
 
-    xbindkeys_config
+    $ xbindkeys_config
 
 Usage
 -----
@@ -100,7 +99,7 @@ before the line that starts your window manager or DE.
 Simulating multimedia keys
 --------------------------
 
-The XF86Audio* and other multimedia keys[1] are pretty-much
+The XF86Audio* and other multimedia keys [1] are pretty-much
 well-recognized by the major DEs. For keyboards without such keys, you
 can simulate their effect with other keys
 
@@ -110,7 +109,7 @@ can simulate their effect with other keys
        Mod2+Mod4 + minus
 
 However, to actually call the keys themselves you can use tools like
-xdotool[2] (its in [community]) and xmacro[3] (in the AUR).
+xdotool [2] (its in official repositories) and xmacro [3] (in the AUR).
 Unfortunately since you'd already be holding down some modifier key
 (Super or Shift, for example), X will see the result as
 Super-XF86AudioLowerVolume which won't do anything useful. Here's a
@@ -118,15 +117,12 @@ script based on xmacro and xmodmap from the xorg-server-utils package
 for doing this[4].
 
     #!/bin/sh
-    echo 'KeyStrRelease Super_L KeyStrRelease minus' | xmacroplay :0;
-    xmodmap -e 'remove Mod4 = Super_L';
-    echo 'KeyStrPress XF86AudioLowerVolume KeyStrRelease XF86AudioLowerVolume' | xmacroplay :0;
-    xmodmap -e 'add Mod4 = Super_L';
+    echo 'KeyStrRelease Super_L KeyStrRelease minus' 
 
-This works for calling XF86AudioLowerVolume once (assuming you're using
-Super-minus), but repeatedly calling it without releasing the Super key
-(like tapping on a volume button) doesn't work. If you'd like it to work
-that way, add the following line to the bottom of the script.
+This works for calling XF86AudioLowerVolume once (assuming you are using
+Super+minus), but repeatedly calling it without releasing the Super key
+(like tapping on a volume button) does not work. If you would like it to
+work that way, add the following line to the bottom of the script.
 
     echo 'KeyStrPress Super_L' | xmacroplay :0
 
@@ -146,15 +142,22 @@ Troubleshooting
 If, for any reason, a hotkey you already set in ~/.xbindkeysrc doesn't
 work, open up a terminal and type the following:
 
-    xbindkeys -n
+    $ xbindkeys -n
 
 By pressing the non-working key, you will be able to see any error
 xbindkeys encounter (e.g: mistyped command/keycode,...).
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xbindkeys&oldid=245457"
+"https://wiki.archlinux.org/index.php?title=Xbindkeys&oldid=300522"
 
 Categories:
 
 -   Keyboards
 -   X Server
+
+-   This page was last modified on 23 February 2014, at 15:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

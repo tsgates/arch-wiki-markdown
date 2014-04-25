@@ -1,35 +1,24 @@
 3D Mouse
 ========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What is a 3D Mouse?                                                |
-| -   2 3DConnexions 3D Mouse                                              |
-|     -   2.1 Proprietary drivers                                          |
-|     -   2.2 Open Source Drivers                                          |
-|         -   2.2.1 Rebuild Blender with spacenav support                  |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
-
-What is a 3D Mouse?
--------------------
-
-"Also known as bats, flying mice, or wands, these devices generally
+Also known as bats, flying mice, or wands, these devices generally
 function through ultrasound and provide at least three degrees of
 freedom. Probably the best known example would be 3DConnexion/Logitech's
-SpaceMouse from the early 1990s." - Wikipedia
+SpaceMouse from the early 1990s. - Wikipedia
 
 For more information:
 http://www.3dconnexion.com/products/what-is-a-3d-mouse.html
 
-3DConnexions 3D Mouse
----------------------
-
-NOTE: The following instructions have been tested and proven to work on
+Note:The following instructions have been tested and proven to work on
 the most basic model (Space Navigator).
+
+Contents
+--------
+
+-   1 Proprietary drivers
+-   2 Open Source Drivers
+    -   2.1 Rebuild Blender with spacenav support
+-   3 See also
 
 > Proprietary drivers
 
@@ -223,8 +212,7 @@ sudo systemctl start spacenavd.service
     [Install]
     WantedBy=multi-user.target
 
-  
- Now everything is up and running and every supported application should
+Now everything is up and running and every supported application should
 be able to use the 3D Mouse.
 
 Rebuild Blender with spacenav support
@@ -244,9 +232,6 @@ Now you can fire up blender and test your 3D Mouse.
     $> blender
     ndof: using SpaceNavigator
 
-See the Gentoo Linux Wiki article on this subject for more information:
-SpaceNavigator
-
 See also
 --------
 
@@ -257,8 +242,15 @@ See also
 -   Community Wiki about Spacemice
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=3D_Mouse&oldid=233664"
+"https://wiki.archlinux.org/index.php?title=3D_Mouse&oldid=257463"
 
 Category:
 
 -   Mice
+
+-   This page was last modified on 18 May 2013, at 02:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

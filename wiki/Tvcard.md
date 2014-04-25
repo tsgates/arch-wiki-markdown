@@ -11,17 +11,14 @@ Tvcard
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setting up Winfast 2000XP Tvcard                                   |
-|     -   1.1 Finding the right card number                                |
-|     -   1.2 Finding the right Tuner number                               |
-|                                                                          |
-| -   2 TLG2300                                                            |
-| -   3 Other External Helpful Links                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setting up Winfast 2000XP Tvcard
+    -   1.1 Finding the right card number
+    -   1.2 Finding the right Tuner number
+-   2 TLG2300
+-   3 Other External Helpful Links
 
 Setting up Winfast 2000XP Tvcard
 --------------------------------
@@ -203,3 +200,10 @@ Retrieved from
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 26 September 2012, at 17:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,7 +1,7 @@
 ISCSI Initiator
 ===============
 
-> Summary
+Summary help replacing me
 
 How to access an iSCSI Target with an initiator.
 
@@ -24,23 +24,19 @@ The preferred initiator is Open-iSCSI as of 2011. An older initiator,
 Linux-iSCSI, was merged with Open-iSCSI. Linux-iSCSI should not be
 confused with linux-iscsi.org, the website for the LIO target.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setup With Open-iSCSI                                              |
-|     -   1.1 Using the Daemon                                             |
-|                                                                          |
-| -   2 Using the Tools                                                    |
-|     -   2.1 Target discovery                                             |
-|     -   2.2 Delete obsolete targets                                      |
-|     -   2.3 Login to available targets                                   |
-|     -   2.4 Info                                                         |
-|     -   2.5 Online resize of volumes                                     |
-|                                                                          |
-| -   3 Tips                                                               |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setup With Open-iSCSI
+    -   1.1 Using the Daemon
+-   2 Using the Tools
+    -   2.1 Target discovery
+    -   2.2 Delete obsolete targets
+    -   2.3 Login to available targets
+    -   2.4 Info
+    -   2.5 Online resize of volumes
+-   3 Tips
+-   4 See also
 
 Setup With Open-iSCSI
 ---------------------
@@ -97,6 +93,11 @@ For running session
 
     # iscsiadm -m session -P 3
 
+The last line of the above command will show the name of the attached
+dev e.g
+
+    Attached scsi disk sdd State: running
+
 For the known nodes
 
     # iscsiadm -m node
@@ -132,9 +133,16 @@ See also
 -   iSCSI Boot Booting Arch Linux with / on an iSCSI target.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ISCSI_Initiator&oldid=244938"
+"https://wiki.archlinux.org/index.php?title=ISCSI_Initiator&oldid=268739"
 
 Categories:
 
 -   Storage
 -   Networking
+
+-   This page was last modified on 30 July 2013, at 00:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

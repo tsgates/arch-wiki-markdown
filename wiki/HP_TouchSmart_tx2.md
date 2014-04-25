@@ -7,35 +7,31 @@ multitouch tablet pc.
 Installed using archlinux-2009.08 x86_64. Few other tips can be seen on
 Arch's wiki page for Tablet PC
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-|     -   1.1 hwd output                                                   |
-|     -   1.2 lsusb                                                        |
-|     -   1.3 lspci                                                        |
-|     -   1.4 hwdetect                                                     |
-|                                                                          |
-| -   2 Configuration details                                              |
-|     -   2.1 Display                                                      |
-|     -   2.2 Xorg.conf                                                    |
-|     -   2.3 Bluetooth                                                    |
-|     -   2.4 Network                                                      |
-|     -   2.5 Audio                                                        |
-|     -   2.6 VGA                                                          |
-|     -   2.7 SmartCard Reader                                             |
-|     -   2.8 Webcam                                                       |
-|     -   2.9 Modem                                                        |
-|     -   2.10 Input                                                       |
-|         -   2.10.1 Keyboard                                              |
-|         -   2.10.2 Touchpad                                              |
-|         -   2.10.3 Stylus                                                |
-|         -   2.10.4 Remote                                                |
-|         -   2.10.5 Fingerprint Scanner                                   |
-|                                                                          |
-| -   3 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+    -   1.1 hwd output
+    -   1.2 lsusb
+    -   1.3 lspci
+    -   1.4 hwdetect
+-   2 Configuration details
+    -   2.1 Display
+    -   2.2 Xorg.conf
+    -   2.3 Bluetooth
+    -   2.4 Network
+    -   2.5 Audio
+    -   2.6 VGA
+    -   2.7 SmartCard Reader
+    -   2.8 Webcam
+    -   2.9 Modem
+    -   2.10 Input
+        -   2.10.1 Keyboard
+        -   2.10.2 Touchpad
+        -   2.10.3 Stylus
+        -   2.10.4 Remote
+        -   2.10.5 Fingerprint Scanner
+-   3 External Links
 
 Hardware
 ========
@@ -331,3 +327,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 23 April 2012, at 13:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

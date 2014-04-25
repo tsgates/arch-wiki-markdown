@@ -9,8 +9,8 @@ for more uncommon languages like Haskell and Ada.
 Installing and Configuring
 --------------------------
 
-Joe can be installed with the joe package from the AUR or can be built
-from source. Extra syntax highlighting files can be found here. Some are
+Joe can be installed with the joe binary package or can be built from
+source. Extra syntax highlighting files can be found here. Some are
 updated files and some are brand new ones like the Erlang syntax
 highlighting file.
 
@@ -24,11 +24,17 @@ See also
 
 -   Homepage
 -   Wikipedia entry
--   AUR page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Joe&oldid=207287"
+"https://wiki.archlinux.org/index.php?title=Joe&oldid=304527"
 
 Category:
 
 -   Text editors
+
+-   This page was last modified on 14 March 2014, at 21:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

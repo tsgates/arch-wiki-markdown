@@ -17,15 +17,13 @@ and then encapsulate your CJK in \cntext.
 
     \cntext{我的中文寫得很好。}
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Goals                                                              |
-| -   2 Prerequisites                                                      |
-| -   3 The steps                                                          |
-| -   4 Remarks                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Goals
+-   2 Prerequisites
+-   3 The steps
+-   4 Remarks
 
 Goals
 -----
@@ -123,3 +121,10 @@ Retrieved from
 Category:
 
 -   TeX
+
+-   This page was last modified on 13 June 2012, at 13:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

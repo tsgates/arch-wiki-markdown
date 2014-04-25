@@ -1,19 +1,9 @@
 X resources
 ===========
 
-> Summary
-
-Describes purpose of ~/.Xresources file, and how to use it do alter
-configuration of various X applications..
-
-Required software
-
-xorg-xrdb
-
-Xresources and Xdefaults are user-level configuration dotfiles,
-typically located at ~/.Xresources and ~/.Xdefaults. They can be used to
-set X resources, which are configuration parameters for X client
-applications.
+Xresources is a user-level configuration dotfile, typically located at
+~/.Xresources. It can be used to set X resources, which are
+configuration parameters for X client applications.
 
 They can do many operations, including:
 
@@ -28,63 +18,59 @@ They can do many operations, including:
 Note:Using ~/.Xdefaults is deprecated, so this article will only refer
 to resources loaded with xrdb
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Getting started                                                    |
-|     -   1.1 Parsing .Xresources                                          |
-|     -   1.2 Adding to xinitrc                                            |
-|     -   1.3 Default settings                                             |
-|     -   1.4 Xresources syntax                                            |
-|         -   1.4.1 The basic syntax                                       |
-|         -   1.4.2 Wildcard matching                                      |
-|         -   1.4.3 Commenting                                             |
-|                                                                          |
-| -   2 Sample usage                                                       |
-|     -   2.1 Terminal colors                                              |
-|     -   2.2 Xcursor resources                                            |
-|     -   2.3 Xft resources                                                |
-|     -   2.4 Xterm resources                                              |
-|     -   2.5 rxvt-unicode (urxvt) resources                               |
-|     -   2.6 Aterm preferences                                            |
-|     -   2.7 Xpdf resources                                               |
-|     -   2.8 Lal clock resources                                          |
-|     -   2.9 Xclock preferences                                           |
-|     -   2.10 X11-ssh-askpass resources                                   |
-|     -   2.11 XScreenSaver resources                                      |
-|     -   2.12 Xcalc resources                                             |
-|                                                                          |
-| -   3 Color scheme commands                                              |
-|     -   3.1 Display all 256 colors                                       |
-|     -   3.2 Display tput escape codes                                    |
-|     -   3.3 Enumerating colors supported by terminals                    |
-|     -   3.4 Enumerating terminal capabilities                            |
-|                                                                          |
-| -   4 Color scheme scripts                                               |
-|     -   4.1 Script #1                                                    |
-|     -   4.2 Script #2                                                    |
-|     -   4.3 Script #3                                                    |
-|     -   4.4 Script #4                                                    |
-|     -   4.5 Script #5                                                    |
-|     -   4.6 Script #6                                                    |
-|                                                                          |
-| -   5 Contributed examples                                               |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Getting started
+    -   1.1 Parsing .Xresources
+    -   1.2 Adding to xinitrc
+    -   1.3 Default settings
+    -   1.4 Xresources syntax
+        -   1.4.1 Basic syntax
+        -   1.4.2 Wildcard matching
+        -   1.4.3 Commenting
+-   2 Sample usage
+    -   2.1 Terminal colors
+    -   2.2 Xcursor resources
+    -   2.3 Xft resources
+    -   2.4 Xterm resources
+    -   2.5 rxvt-unicode (urxvt) resources
+    -   2.6 Aterm preferences
+    -   2.7 Xpdf resources
+    -   2.8 Lal clock resources
+    -   2.9 Xclock preferences
+    -   2.10 X11-ssh-askpass resources
+    -   2.11 XScreenSaver resources
+    -   2.12 Xcalc resources
+-   3 Color scheme commands
+    -   3.1 Display all 256 colors
+    -   3.2 Display tput escape codes
+    -   3.3 Enumerating colors supported by terminals
+    -   3.4 Enumerating terminal capabilities
+-   4 Color scheme scripts
+    -   4.1 Script #1
+    -   4.2 Script #2
+    -   4.3 Script #3
+    -   4.4 Script #4
+    -   4.5 Script #5
+    -   4.6 Script #6
+-   5 Contributed examples
+-   6 See also
 
 Getting started
 ---------------
+
+Make sure that xorg-xrdb is installed in your system.
 
 > Parsing .Xresources
 
 The file ~/.Xresources does not exist by default. Being a plain-text
 file, you can create and edit it with the text editor of your choice.
 Once present, it will be parsed by the xrdb (Xorg resource database)
-program automatically provided that you either:
+program automatically, provided that you either:
 
--   are using a Display Manager to log into X. Most DM will autoload the
-    ~/.Xresources file on login.
+-   are using a Display manager to log into X. Most DM will
+    automatically load the ~/.Xresources file on login.
 -   if you are using startx, you have to edit your ~/.xinitrc. See below
     for details.
 
@@ -99,18 +85,20 @@ To reread your .Xresources file, and keep your old resources:
 
     xrdb -merge ~/.Xresources
 
-> Note:
+Tip:~/.Xresources is just a naming convention; xrdb can load any file.
+If you use xrdb manually, you can put such a file anywhere you want (for
+example, ~/.config/Xresources).
 
--   .Xresources is just a naming convention, xrdb can load any file. If
-    you use xrdb manually, you can put such a file anywhere you want
-    (for example, ~/.config/Xresources).
+Note:Resources loaded with xrdb are also accessible to remote X11
+clients (such as those forwarded over SSH).
+
+> Warning:
+
 -   If you background the execution of xrdb in a chain of commands in
     ~/.xinitrc, the programs launched in the same chain might not be
     able to make use of it, so it is recommended to never background the
     xrdb command within ~/.xinitrc.
--   Resources loaded with xrdb are also accessible to remote X11 clients
-    (such as those forwarded over SSH).
--   The older (deprecated) ~/.Xdefaults file is read every time you
+-   The older and deprecated ~/.Xdefaults file is read every time you
     start an X11 program such as xterm, but only if xrdb has not ever
     been used in the current X session. [1]
 
@@ -126,9 +114,9 @@ following line to your ~/.xinitrc:
 To see the default settings for your installed X11 apps, look in
 /usr/share/X11/app-defaults/.
 
-Detailed information on program specific resources is usually provided
-in the man page for that app. Xterms manpage is a good example,
-containing a list of resources and the default value.
+Detailed information on program-specific resources is usually provided
+in the man page for the program. xterm's man page is a good example, as
+it contains a list of X resources and their default values.
 
 To see the current loaded resources:
 
@@ -136,7 +124,7 @@ To see the current loaded resources:
 
 > Xresources syntax
 
-The basic syntax
+Basic syntax
 
 The syntax of an Xresources file is as follows:
 
@@ -147,7 +135,7 @@ and here is a real world example:
     xscreensaver.Dialog.headingFont: -*-fixed-bold-r-*-*-*-100-*-*-*-*-iso8859-1
 
 name 
-    The name of the application, such xterm, xpdf, etc
+    The name of the application, such as xterm, xpdf, etc
 
 class 
     The classification used to group resources together. Class names are
@@ -165,8 +153,8 @@ value
         color (#ffffff), or a path (/usr/bin/firefox))
 
 delimiters 
-    A period (.) is used to signify each step down into the hierarchy --
-    in the above example we start at name, then descend into Class, and
+    A dot (.) is used to signify each step down into the hierarchy — in
+    the above example we start at name, then descend into Class, and
     finally into the resource itself. A colon (:) is used to separate
     the resource declaration from the actual value.
 
@@ -176,20 +164,20 @@ The asterisk can be used as a wildcard, making it easy to write a single
 rule that can be applied to many different applications or elements.
 
 Using the previous example, if you want to apply the same font to all
-programs (not just xscreensaver) that contain the class name Dialog
+programs (not just XScreenSaver) that contain the class name Dialog
 which contains the resource name headingFont, you would write:
 
     *Dialog.headingFont:     -*-fixed-bold-r-*-*-*-100-*-*-*-*-iso8859-1
 
 If you want to apply this same rule to all programs that contain the
-resource headingFont regardless of its class, you would write:
+resource headingFont, regardless of its class, you would write:
 
     *headingFont:    -*-fixed-bold-r-*-*-*-100-*-*-*-*-iso8859-1
 
 Commenting
 
 To add a comment to your Xresources file, simply prefix it with an
-exclamation point (!), for example:
+exclamation mark (!), for example:
 
     ! This is a comment placed above some Xft settings
     Xft.dpi:       96      ! this is an inline comment
@@ -382,8 +370,9 @@ Some basic xclock settings. See the xclock man page for all X resources.
 The following is a sample XScreenSaver theme. For more information,
 refer to the XScreenSaver man page.
 
-Note:If the ~/.xscreensaver file exists, it overrides any settings in
-the X resource database.
+Note:In older versions of XScreenSaver, if the ~/.xscreensaver file
+exists, it overrides any settings in the X resource database. However,
+in the latest versions, you can use both simultaneously.
 
     ! xscreensaver ---------------------------------------------------------------
 
@@ -479,8 +468,8 @@ Prints all 256 colors across the screen, very quick.
 
 > Display tput escape codes
 
-Replace 'tput op' with whatever tput you want to trace. op is the
-default foreground and background color.
+Replace tput op with whatever tput you want to trace. op is the default
+foreground and background color.
 
     $ ( strace -s5000 -e write tput op 2>&2 2>&1 ) | tee -a /dev/stderr | grep -o '"[^"]*"'
 
@@ -533,11 +522,11 @@ terminal color scheme. Handy for testing and whatnot.
 
 > Script #1
 
-    #!/bin/bash
+    #!/usr/bin/bash
     #
     #   This file echoes a bunch of color codes to the 
     #   terminal to demonstrate what's available.  Each 
-    #   line is the color code of one forground color,
+    #   line is the color code of one foreground color,
     #   out of 17 (default + 16 escapes), followed by a 
     #   test use of that color on all nine background 
     #   colors (default + 8 escapes).
@@ -562,9 +551,9 @@ terminal color scheme. Handy for testing and whatnot.
 
 > Script #2
 
-    #!/bin/bash
-    # Original: http://frexx.de/xterm-256-notes/
-    #           http://frexx.de/xterm-256-notes/data/colortable16.sh
+    #!/usr/bin/bash
+    # Original: http://frexx.de/xterm-256-notes/ [dead link 2013-11-21]
+    #           http://frexx.de/xterm-256-notes/data/colortable16.sh [dead link 2013-11-21]
     # Modified by Aaron Griffin
     # and further by Kazuo Teramoto
     FGNAMES=(' black ' '  red  ' ' green ' ' yellow' '  blue ' 'magenta' '  cyan ' ' white ')
@@ -597,9 +586,9 @@ terminal color scheme. Handy for testing and whatnot.
 
 > Script #3
 
-    #!/bin/bash
-    # Original: http://frexx.de/xterm-256-notes/
-    #           http://frexx.de/xterm-256-notes/data/colortable16.sh
+    #!/usr/bin/bash
+    # Original: http://frexx.de/xterm-256-notes/ [dead link 2013-11-21]
+    #           http://frexx.de/xterm-256-notes/data/colortable16.sh [dead link 2013-11-21]
     # Modified by Aaron Griffin
     # and further by Kazuo Teramoto
 
@@ -658,11 +647,11 @@ terminal color scheme. Handy for testing and whatnot.
 
 > Script #5
 
-    #!/bin/bash
+    #!/usr/bin/bash
     #
     # ANSI color scheme script featuring Space Invaders
     #
-    # Original: http://crunchbanglinux.org/forums/post/126921/#p126921
+    # Original: http://crunchbang.org/forums/viewtopic.php?pid=126921%23p126921#p126921
     # Modified by lolilolicon
     #
 
@@ -705,7 +694,7 @@ terminal color scheme. Handy for testing and whatnot.
      
     # ANSI color scheme script 
     # Author: Ivaylo Kuzev < Ivo >
-    # Original: http://crunchbanglinux.org/forums/post/134749/#p134749
+    # Original: http://crunchbang.org/forums/viewtopic.php?pid=134749%23p134749#p134749
     # Modified using Ruby.
      
     CL = "\e[0m"
@@ -738,9 +727,9 @@ recommended that you use ~/.Xresources because ~/.Xdefaults is
 deprecated upstream.
 
 -   http://dotfiles.org/~buttons/.Xdefaults
--   http://code.suckless.org/hg/dextra/file/513faba2591f/dolby/Xdefaults
--   http://github.com/jelly/dotfiles/tree/master/.Xdefaults
+-   https://github.com/jelly/Dotfiles/blob/master/.Xdefaults
 -   https://github.com/sunaku/home/blob/master/.Xdefaults
+-   https://paste.debian.net/14515/ .Xresources
 
 See also
 --------
@@ -756,9 +745,16 @@ See also
 -   Xcolors.net List of user-contributed terminal color themes.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=X_resources&oldid=249658"
+"https://wiki.archlinux.org/index.php?title=X_resources&oldid=301294"
 
 Categories:
 
 -   Dotfiles
 -   X Server
+
+-   This page was last modified on 24 February 2014, at 11:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

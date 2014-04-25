@@ -1,21 +1,19 @@
 Toshiba Satellite A660
 ======================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 ACPI and Power Saving                                              |
-| -   2 Networking                                                         |
-| -   3 Wireless                                                           |
-| -   4 Audio                                                              |
-| -   5 Graphics                                                           |
-| -   6 Framebuffer                                                        |
-| -   7 Modem                                                              |
-| -   8 Touchpad                                                           |
-| -   9 SD card reader                                                     |
-| -   10 DVD-RW                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 ACPI and Power Saving
+-   2 Networking
+-   3 Wireless
+-   4 Audio
+-   5 Graphics
+-   6 Framebuffer
+-   7 Modem
+-   8 Touchpad
+-   9 SD card reader
+-   10 DVD-RW
 
 ACPI and Power Saving
 ---------------------
@@ -88,3 +86,10 @@ Retrieved from
 Category:
 
 -   Toshiba
+
+-   This page was last modified on 23 April 2012, at 13:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

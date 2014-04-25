@@ -6,19 +6,17 @@ boot process. It relies on kernel mode setting (KMS) to set the native
 resolution of the display as early as possible, then provides an
 eye-candy splash screen leading all the way up to the login manager.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preparation                                                        |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-|     -   3.1 Including Plymouth in the Initcpio                           |
-|     -   3.2 The kernel command line                                      |
-|     -   3.3 Changing the Theme                                           |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Preparation
+-   2 Installation
+    -   2.1 The plymouth hook
+    -   2.2 The kernel command line
+-   3 Configuration
+    -   3.1 Smooth transition
+    -   3.2 Changing the Theme
+-   4 See also
 
 Preparation
 -----------
@@ -37,22 +35,22 @@ text-mode.
 Installation
 ------------
 
-Plymouth is not presently available in the Official Repositories, and
+Plymouth is not presently available in the official repositories, and
 will need to be installed from the AUR.
 
-The stable one is called plymouth and the git version plymouth-git.
+The stable package is plymouth and the development version is
+plymouth-git. The package we refer to in this article is plymouth-git,
+which actually is much tidier and contains several corrections and
+additions.
 
-Configuration
--------------
+> The plymouth hook
 
-> Including Plymouth in the Initcpio
-
-Add Plymouth to the HOOKS array in /etc/mkinitcpio.conf. It must be
-added after base, udev and autodetect for it to work:
+Add plymouth to the HOOKS array in /etc/mkinitcpio.conf. It must be
+added after base and udev for it to work:
 
     /etc/mkinitcpio.conf
 
-    HOOKS="base udev autodetect [...] plymouth"
+    HOOKS="base udev plymouth [...] "
 
 Warning:If you use hard drive encryption with the encrypt hook, you must
 replace the encrypt hook with plymouth-encrypt in order to get to the
@@ -70,15 +68,28 @@ intel cards) or nouveau (for nvidia cards) to the MODULES line in
     or
     MODULES="nouveau"
 
-Rebuild your initrd image (refer to the mkinitcpio article for more
-info):
-
-    # mkinitcpio -p [name of your kernel preset]
-
 > The kernel command line
 
-You now need to set quiet splash as you kernel command line parameters
+You now need to set quiet splash as your kernel command line parameter
 in your bootloader. See Kernel parameters for more info.
+
+Rebuild your initrd image (see mkinitcpio article for details), for
+example:
+
+    # mkinitcpio -p linux
+
+Configuration
+-------------
+
+> Smooth transition
+
+For smooth transition to Display Manager you have to:
+
+1.  See the Wiki Page (link in 5) to prepare your Display Manager
+2.  Disable your Display Manager Unit, e.g.
+    systemctl disable kdm.service
+3.  Enable the respective DM-plymouth Unit (GDM, KDM, LXDM units
+    provided), e.g. systemctl enable kdm-plymouth.service
 
 > Changing the Theme
 
@@ -89,47 +100,71 @@ Plymouth comes with a selection of themes:
     glowing emerging logo"
 3.  Script: "Script example plugin" (Despite the description seems to be
     a quite nice Arch logo theme)
-4.  Solar: "Space theme with violent flaring blue star" and
-5.  Spinfinity: "Simple theme that shows a rotating infinity sign in the
-    center of the screen" (default)
-6.  (Text: "Text mode theme with tricolor progress bar")
-7.  (Details: "Verbose fallback theme")
+4.  Solar: "Space theme with violent flaring blue star"
+5.  Spinner: "Simple theme with a loading spinner"
+6.  Spinfinity: "Simple theme that shows a rotating infinity sign in the
+    center of the screen"
+7.  (Text: "Text mode theme with tricolor progress bar")
+8.  (Details: "Verbose fallback theme")
 
-To show the current theme:
+By default, spinfinity theme is selected. You can change the theme by
+editing /etc/plymouth/plymouthd.conf, for example:
 
-    $ plymouth-set-default-theme
+    /etc/plymouth/plymouthd.conf
 
-    spinfinity
+    [Daemon]
+    Theme=spinfinity
 
-To list all currently installed themes:
+You will also need to rebuild your initrd image every time you change
+your theme.
+
+All currently installed themes can be listed by using this command:
 
     $ plymouth-set-default-theme -l
 
-To preview the themes without rebooting, hit Ctrl+Alt+F2 to change to
-console, log in as root and type:
+or:
 
-    # plymouthd# plymouth --show-splash
+    $ ls /usr/share/plymouth/themes
 
-To quit the preview hit Ctrl+Alt+F2 again and type:
+    details  glow    solar       spinner  tribar
+    fade-in  script  spinfinity  text
+
+Themes can be previewed without rebuilding, press Ctrl+Alt+F2 to change
+to console, log in as root and type:
+
+    # plymouthd
+    # plymouth --show-splash
+
+To quit the preview, press Ctrl+Alt+F2 again and type:
 
     # plymouth --quit
 
-To set your desired theme and rebuild your kernel image:
+every time a theme is changed, the kernel image must be rebuilt with:
 
-    # plymouth-set-default-theme -R <theme name>
+    # mkinitcpio -p <name of your kernel preset; e.g. linux>
 
-And reboot.
+To change theme and rebuild initrd image:
+
+    # plymouth-set-default-theme -R <theme>
+
+Reboot to apply the changes.
 
 See also
 --------
 
-Original Spec
-
-A related forum thread
+-   Original Spec
+-   Related forum thread
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Plymouth&oldid=242525"
+"https://wiki.archlinux.org/index.php?title=Plymouth&oldid=289088"
 
 Category:
 
 -   Bootsplash
+
+-   This page was last modified on 18 December 2013, at 03:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

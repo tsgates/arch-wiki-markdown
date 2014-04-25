@@ -1,8 +1,7 @@
 Djvu
 ====
 
-  
- From Wikipedia's DjVu Page:
+From Wikipedia's DjVu Page:
 
 DjVu is a computer file format designed primarily to store scanned
 documents, especially those containing a combination of text, line
@@ -27,17 +26,15 @@ multi-format document viewers and e-book reader software on Linux
 (Okular, Evince), Android (VuDroid), Windows (SumatraPDF), iPhone/iPad
 (Stanza), and BlackBerry OS (DjVuBB).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 How It Works                                                       |
-| -   2 Installation                                                       |
-| -   3 DjVu Manipulations                                                 |
-|     -   3.1 Convert DjVu to images                                       |
-|     -   3.2 Processing Images                                            |
-|     -   3.3 Make DjVu from Images                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 How It Works
+-   2 Installation
+-   3 DjVu Manipulations
+    -   3.1 Convert DjVu to images
+    -   3.2 Processing Images
+    -   3.3 Make DjVu from Images
 
 How It Works
 ------------
@@ -129,8 +126,15 @@ There is a useful script img2djvu-git.
 it will create 600dpi out.djvu from all files in ./out directory.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Djvu&oldid=253184"
+"https://wiki.archlinux.org/index.php?title=Djvu&oldid=266356"
 
 Category:
 
 -   Office
+
+-   This page was last modified on 15 July 2013, at 11:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

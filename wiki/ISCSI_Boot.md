@@ -1,4 +1,4 @@
-ISCSI Boot
+iSCSI Boot
 ==========
 
   ------------------------ ------------------------ ------------------------
@@ -11,9 +11,17 @@ ISCSI Boot
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-The actual boot will use an extra drive / usb drive or pxe boot?
+  ------------------------ ------------------------ ------------------------
+  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
+  png]                     this article or section  png]
+                           is disputed.             
+                           Reason: The actual boot  
+                           will use an extra drive  
+                           / usb drive or pxe boot? 
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
-> Summary
+Summary help replacing me
 
 How to install Arch on an iSCSI target.
 
@@ -26,17 +34,14 @@ iSCSI Initiator
 You can install Arch on an iSCSI Target. This howto will guide you
 through the process.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Server / Target Setup                                              |
-| -   2 Client / Initiator Setup                                           |
-|     -   2.1 Install over iSCSI                                           |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Device not found                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Server / Target Setup
+-   2 Client / Initiator Setup
+    -   2.1 Install over iSCSI
+-   3 Troubleshooting
+    -   3.1 Device not found
 
 Server / Target Setup
 ---------------------
@@ -122,7 +127,7 @@ following.
         done
 
         add_checked_modules "/drivers/net"
-        add_binary "/sbin/iscsistart"
+        add_binary "/usr/bin/iscsistart"
         add_runscript
     }
 
@@ -202,10 +207,17 @@ dhcpcd eth0 as described before.
 For more informations, please refer to [2].
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ISCSI_Boot&oldid=244295"
+"https://wiki.archlinux.org/index.php?title=ISCSI_Boot&oldid=305759"
 
 Categories:
 
 -   Getting and installing Arch
 -   Networking
 -   Storage
+
+-   This page was last modified on 20 March 2014, at 02:03.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

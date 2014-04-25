@@ -4,7 +4,7 @@ Acer Aspire One
 This page documents configuration and troubleshooting specific to the
 Acer Aspire One.
 
-Most of this information is from the Arch Forum. You can also find a lot
+Some of this information is from the Arch Forum. You can also find a lot
 of helpful information from the AspireOneUser Forum and Install Ubuntu
 Hardy Heron (8.04.1) on the Acer Aspire One.
 
@@ -14,102 +14,81 @@ Wiki article
 Also see the pages on the Acer Aspire One model AOD250-1613 (Android +
 XP version) and the Acer Aspire One model AO722-BZ454.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Before you begin                                                   |
-|     -   1.1 A list of choices to be made during installation             |
-|     -   1.2 Choosing your installation medium                            |
-|     -   1.3 Choosing an Installation Image                               |
-|     -   1.4 Preparation prior to installing Arch Linux                   |
-|                                                                          |
-| -   2 Recommended partition schemes                                      |
-|     -   2.1 File-systems                                                 |
-|     -   2.2 Choosing maximum lifetime, or data integrity                 |
-|     -   2.3 Mounting Options                                             |
-|                                                                          |
-| -   3 Hardware                                                           |
-|     -   3.1 lspci                                                        |
-|     -   3.2 Module setup                                                 |
-|         -   3.2.1 Module configuration                                   |
-|             -   3.2.1.1 Modules to blacklist                             |
-|             -   3.2.1.2 Modules to load                                  |
-|                                                                          |
-|         -   3.2.2 Tweaks                                                 |
-|                                                                          |
-|     -   3.3 Network                                                      |
-|         -   3.3.1 WLAN                                                   |
-|             -   3.3.1.1 Getting the latest ath5k driver                  |
-|             -   3.3.1.2 Testing                                          |
-|             -   3.3.1.3 ath9k and acer_wmi                               |
-|             -   3.3.1.4 Problems with Wicd Wireless                      |
-|                                                                          |
-|         -   3.3.2 LAN                                                    |
-|             -   3.3.2.1 Aspire One D250/D255e LAN                        |
-|                                                                          |
-|     -   3.4 Audio                                                        |
-|         -   3.4.1 With linux (alsa as modules)                           |
-|         -   3.4.2 With linux-one and linux-one-dev (alsa built into the  |
-|             kernel)                                                      |
-|         -   3.4.3 Audio test                                             |
-|         -   3.4.4 Pulseaudio troubleshooting                             |
-|                                                                          |
-|     -   3.5 Video                                                        |
-|         -   3.5.1 External VGA port                                      |
-|         -   3.5.2 Setting DPI                                            |
-|         -   3.5.3 Setting a proper framebuffer                           |
-|             -   3.5.3.1 Kernel mode setting (KMS)                        |
-|             -   3.5.3.2 uvesafb                                          |
-|             -   3.5.3.3 Using intelfb without an initrd                  |
-|                                                                          |
-|     -   3.6 Webcam                                                       |
-|     -   3.7 Card Reader                                                  |
-|     -   3.8 Additional function keys                                     |
-|     -   3.9 Touchpad                                                     |
-|         -   3.9.1 Two-Finger scrolling                                   |
-|                                                                          |
-| -   4 Power management                                                   |
-|     -   4.1 Enabling CPU frequency scaling                               |
-|     -   4.2 Suspend on lid, shutdown on power button                     |
-|                                                                          |
-| -   5 Example configurations                                             |
-|     -   5.1 /etc/rc.local                                                |
-|     -   5.2 /etc/modprobe.d/sound.conf                                   |
-|                                                                          |
-| -   6 Customized kernel                                                  |
-| -   7 Tuning tips                                                        |
-|     -   7.1 SD Storage Expansion                                         |
-|         -   7.1.1 Labeling Partitions                                    |
-|         -   7.1.2 Mount expansion as /home                               |
-|             -   7.1.2.1 Method 1: fstab entry                            |
-|             -   7.1.2.2 Method 2: rc.local entry                         |
-|                                                                          |
-|     -   7.2 Regulating the CPU fan                                       |
-|         -   7.2.1 acerhdf                                                |
-|                                                                          |
-|     -   7.3 Using the Super key for middle-clicking                      |
-|         -   7.3.1 Using FVWM 2                                           |
-|         -   7.3.2 Using xte                                              |
-|         -   7.3.3 Using xbindkeys                                        |
-|                                                                          |
-|     -   7.4 SSD specific tweaks                                          |
-|     -   7.5 Updating the BIOS                                            |
-|         -   7.5.1 Using FreeDOS                                          |
-|             -   7.5.1.1 AOD150                                           |
-|                                                                          |
-|         -   7.5.2 Using Flashrom                                         |
-|         -   7.5.3 Instructions by Acer for AOA110 and AOA150             |
-|                                                                          |
-|     -   7.6 Polishing the boot process                                   |
-|     -   7.7 Compiling for the Atom processor                             |
-|                                                                          |
-| -   8 Games                                                              |
-|     -   8.1 Configuration tip                                            |
-|     -   8.2 Working games                                                |
-|                                                                          |
-| -   9 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Before you begin
+    -   1.1 A list of choices to be made during installation
+    -   1.2 Choosing your installation medium
+    -   1.3 Choosing an Installation Image
+    -   1.4 Preparation prior to installing Arch Linux
+-   2 Recommended partition schemes
+    -   2.1 File-systems
+    -   2.2 Choosing maximum lifetime, or data integrity
+    -   2.3 Mounting Options
+-   3 Hardware
+    -   3.1 lspci
+    -   3.2 Module setup
+        -   3.2.1 Module configuration
+            -   3.2.1.1 Modules to blacklist
+            -   3.2.1.2 Modules to load
+        -   3.2.2 Tweaks
+    -   3.3 Network
+        -   3.3.1 WLAN
+            -   3.3.1.1 ath5k
+            -   3.3.1.2 Testing
+            -   3.3.1.3 ath9k and acer_wmi
+        -   3.3.2 LAN
+            -   3.3.2.1 Aspire One D250/D255e LAN
+    -   3.4 Audio
+        -   3.4.1 With linux (alsa as modules)
+        -   3.4.2 With linux-one and linux-one-dev (alsa built into the
+            kernel)
+        -   3.4.3 Audio test
+        -   3.4.4 Pulseaudio troubleshooting
+    -   3.5 Video
+        -   3.5.1 External VGA port
+        -   3.5.2 Setting DPI
+        -   3.5.3 Setting a proper framebuffer
+            -   3.5.3.1 Kernel mode setting (KMS)
+            -   3.5.3.2 uvesafb
+            -   3.5.3.3 Using intelfb without an initrd
+    -   3.6 Webcam
+    -   3.7 Card Reader
+    -   3.8 Additional function keys
+    -   3.9 Touchpad
+        -   3.9.1 Two-Finger scrolling
+-   4 Power management
+    -   4.1 Enabling CPU frequency scaling
+    -   4.2 Suspend on lid, shutdown on power button
+-   5 Example configurations
+    -   5.1 /etc/rc.local
+    -   5.2 /etc/modprobe.d/sound.conf
+-   6 Customized kernel
+-   7 Tuning tips
+    -   7.1 SD Storage Expansion
+        -   7.1.1 Labeling Partitions
+        -   7.1.2 Mount expansion as /home
+            -   7.1.2.1 Method 1: fstab entry
+            -   7.1.2.2 Method 2: rc.local entry
+    -   7.2 Regulating the CPU fan
+        -   7.2.1 acerhdf
+    -   7.3 Using the Super key for middle-clicking
+        -   7.3.1 Using FVWM 2
+        -   7.3.2 Using xte
+        -   7.3.3 Using xbindkeys
+    -   7.4 SSD specific tweaks
+    -   7.5 Updating the BIOS
+        -   7.5.1 Using FreeDOS
+            -   7.5.1.1 AOD150
+        -   7.5.2 Using Flashrom
+        -   7.5.3 Instructions by Acer for AOA110 and AOA150
+    -   7.6 Polishing the boot process
+    -   7.7 Compiling for the Atom processor
+-   8 Games
+    -   8.1 Configuration tip
+    -   8.2 Working games
+-   9 External links
 
 Before you begin
 ----------------
@@ -122,12 +101,10 @@ Before you begin
         (ext4 is recommended)
     -   If you want a journaled filesystem for the SD-card or not
         (highly recommended, for instance xfs or ext4)
-
 -   If you want a swap partition or not (not recommended, but meh)
     -   A swap partition may wear the disk somewhat, but it makes
         hibernation possible
     -   Regular "sleep" is still possible without a swap partition
-
 -   Which kernel to use: linux or kernel-netbook (kernel-netbook is
     recommended)
 -   Which modules and daemons you want loaded at boot in rc.conf
@@ -175,7 +152,6 @@ Recommended partition schemes
 -   /dev/mmcblk0p1 all space on the extensional left side SD(HC) card
     for /home
     -   the SD card needs a journaling file system, like ext4 or xfs
-
 -   No swap at all, unless you want hibernation. Having swap wears the
     disk somewhat more.
 
@@ -231,10 +207,16 @@ For a longer life for your disk, take care to:
 If, on the other hand, data integrity is more important, use EXT4, XFS
 or another journaled filesystem instead.
 
+A swap partition may be preferable if you use a browser, or other memory
+intensive application, that easily makes the system run out of memory.
+This will use the disk somewhat more, but may prevent crashes. Check the
+system status with an application like htop. If you find out you need
+one, it's easy to create a large file and use that as a swap partition.
+
 > Mounting Options
 
-There are some tweaks you can put into place to have better performance
-out of filesystems.
+There are some tweaks you can employ in order to get somewhat better
+performance from your file systems:
 
 -   EXT4:
 
@@ -396,7 +378,7 @@ creating a new file under /etc/pm/config.d/ named modules with:
 
      echo "SUSPEND_MODULES=\"ath5k\"" > /etc/pm/config.d/modules
 
-Getting the latest ath5k driver
+ath5k
 
 If you have problems with ath5k, you can get the latest version by
 following the instructions on this site:
@@ -405,63 +387,57 @@ http://wireless.kernel.org/en/users/Download
 Essentially, you install the latest wireless drivers into an updates/
 directory, thus leaving the stock drivers intact for possible reverting.
 
+  
+ In some cases, using the ath5k driver can lead to sporadic connection
+drops after a certain amount of data is transferred. In this case it may
+help to disable hwcrypt:
+
+    # ip link set eth0 up
+    # rmmod -r ath5k
+    # modprobe ath5k nohwcrypt=1
+    # ip link set eth0 down
+
+If this solves the problem, make the solution permanent by adding the
+following to /etc/modprobe.d/ath5k.conf
+
+    options ath5k nohwcrypt=1
+
 Testing
 
 This is one way to test if the wireless card is working:
 
-    sudo iwlist wlan0 scanning
+Use iw dev to find the name of your wireless device:
 
-To connect to an open network, just grep for ESSID in the above command.
-Then, once you found a network name, make sure dhclient is installed and
-try these. NetworkName is the ESSID you wish to use.
+    iw dev
 
-    sudo iwconfig wlan0 essid NetworkName
-    sudo dhclient wlan0
+The output may be something like this:
+
+    phy#0
+            Interface wlp3s0
+            wdev 0x1
+            addr 00:22:68:aa:bb:cc
+            type managed
+            channel 11 (2462 MHz), width: 20 MHz (no HT), center1: 2462 MHz
+
+From the output, you can see that the name of the wireless interface
+device is wlp3s0. Remember this device name!
+
+Now scan the wireless network for access points:
+
+    # iw wlp3s0 scan | grep SSID
+
+If you can see a list of SSID's, then you know your wireless device is
+working and ready to connect to one of the networks. You may prefer a
+user friendly tool like nm-applet (included in the
+network-manager-applet package) for typing in passwords and confirming
+that a connection has been made. Once the connection is set up,
+nm-applet is not needed, only the NetworkManager service.
 
 ath9k and acer_wmi
 
 Some people have reported conflicts between the ath9k and acer_wmi
 drivers, resulting in the wireless card not functioning. Blacklisting
 acer_wmi seems to resolve the issue.
-
-Problems with Wicd Wireless
-
-It seems that for some wireless networks Wicd is consistently unable to
-connect, regardless of the network's encryption methods. It has been
-reported here that it appears to be possible to fix this by reloading
-the ath5k driver that is needed for the Acer Aspire One's wireless
-chipset prior to connecting to the network in question.
-
-A "dirty" script to do this has been suggested here. It will now be
-reproduced here for simplicity.
-
-1.  Create a new file in /etc/wicd/scripts/preconnect, called for
-    example "reload_driver". This requires root privileges.
-2.  Enter the following in the new file:
-
-    /etc/wicd/scripts/preconnect/reload_driver
-
-    #!/bin/bash
-
-    WICDFIELD="`sudo cat /etc/wicd/manager-settings.conf | grep "wireless_interface"`"
-
-    WLINTERFACE="${WICDFIELD##*= }"
-
-    if [ -e "/sys/class/net/$WLINTERFACE/device/driver" ]
-    then
-        WLDRIVER="`ls -l "/sys/class/net/$WLINTERFACE/device/driver" | sed 's/^.*\/\([a-zA-Z0-9_-]*\)$/\1/'`"
-        
-    else
-        WLDRIVER=""
-    fi
-
-    if [ "$WLDRIVER" != "" ]
-    then
-        sudo modprobe -r $WLDRIVER
-        sudo modprobe $WLDRIVER   
-    fi
-
-3. Make the new file executable
 
 LAN
 
@@ -489,12 +465,10 @@ Add one of these as a line in /etc/modprobe.d/sound.conf:
 
 -   options snd-hda-intel model=acer-aspire
     -   Recommended. Everything works.
-
 -   options snd-hda-intel model=acer
     -   Everything works, except the internal microphone and turning off
         the loudspeaker when a headset is plugged in. For some people
         the internal microphone may work.
-
 -   options snd-hda-intel model=auto
     -   Both internal and external microphone does not work
 
@@ -506,12 +480,10 @@ Add one of these as a kernel option in /boot/grub/menu.lst:
 
 -   snd-hda-intel.model=acer-aspire
     -   Recommended. Everything works.
-
 -   snd-hda-intel.model=acer
     -   Everything works, except the internal microphone and turning off
         the loudspeaker when a headset is plugged in. For some people
         the internal microphone may work.
-
 -   snd-hda-intel.model=auto
     -   Both internal and external microphone does not work
 
@@ -707,6 +679,12 @@ your kernel command line (in /boot/grub/menu.lst):
 
     pcie_ports=native
 
+If this don't work, you can force a PCI rescan with this command
+(successfully tested on Acer Aspire One A110L/ZG5), solution source:
+(SOLVED) *jmicron* SD card is recognised only if inserted on boot:
+
+    # echo 1 > /sys/bus/pci/rescan
+
 As an alternative, which may possibly also enable powersaving for the
 card readers, get the jmb38x_d3e.sh script from the original Linpus
 install and install it in /usr/local/sbin. Remember to give executable
@@ -723,7 +701,8 @@ pciehp module in /etc/rc.conf if you use this script.
 
 > Additional function keys
 
-For the wifi kill switch add these keycodes in /etc/rc.local:
+For the wifi kill switch add these keycodes in /etc/rc.local
+(http://superuser.com/questions/278396/systemd-does-not-run-etc-rc-local)
 
      /usr/bin/setkeycodes e055 159
      /usr/bin/setkeycodes e056 158
@@ -868,6 +847,14 @@ Example configurations
 
 > /etc/rc.local
 
+Read this first, for how to enable /etc/rc.local:
+http://superuser.com/questions/278396/systemd-does-not-run-etc-rc-local
+
+Preferably, there should be a package that provided this, in a proper
+systemd-like way.
+
+Please update this page if you find a better method.
+
      #!/bin/bash
      #
      # /etc/rc.local: Local multi-user startup script.
@@ -926,7 +913,7 @@ config. The main differences from stock arch kernel:
     cards for example)
 
 On T.Mondary's site you can also find a precompiled kernel for AAO, in
-distribution-independant format, but suitable for ArchLinux. This
+distribution-independent format, but suitable for ArchLinux. This
 minimal kernel comes with wifi led patches, a coretemp patch, acerhdf
 and a proper framebuffer with KMS. It can now use ext2 or ext4 (mounting
 ext4 without a journal is supported since 2.6.29) for the root
@@ -1003,6 +990,9 @@ after rm.
 
 Method 2: rc.local entry
 
+For making rc.local work with systemd, see:
+http://superuser.com/questions/278396/systemd-does-not-run-etc-rc-local
+
 Mounting /home on your SD card through fstab occasionally appears to
 lead to a problem described in this forum thread, where the SD card
 gives a "FILESYSTEM CHECK FAILED" error during init on alternating
@@ -1031,7 +1021,7 @@ or
 
 > Regulating the CPU fan
 
-Letting the BIOS regulate the cpu fan results in a noisy monster of
+Letting the BIOS regulate the cpu fan results in a noisy monster of a
 netbook. You can override the default fan settings by using either
 acerhdf (recommended method) or acerfand (not recommended) based on two
 scripts.
@@ -1070,6 +1060,85 @@ Since version 0.5.19:
 
 Make sure you do not use the configuration for >=0.5.19 on <=0.5.18, as
 the computer will go warm.
+
+  
+ The next step is to activate the module after the kernel notified that
+the module is loaded.
+
+    dmesg
+
+    acerhdf: Acer Aspire One Fan driver, v.0.5.30b-linux3.8
+    acerhdf: Fan control off, to enable do:
+    acerhdf: echo -n "enabled" > /sys/class/thermal/thermal_zone0/mode
+     
+
+Create the following files
+
+    /etc/systemd/system/acerhdf.service
+
+     
+    [Unit]
+    Description=Acerhdf Enabler
+    ConditionPathExists=/sys/class/thermal/thermal_zone0/mode
+
+    [Service]
+    Type=forking
+    ExecStart=/usr/bin/acerhdf start
+    ExecStop=/usr/bin/acerhdf stop
+    TimeoutSec=0
+    StandardOutput=tty
+    RemainAfterExit=yes
+    SysVStartPriority=99
+
+    [Install]
+    WantedBy=multi-user.target
+     
+
+Helperscript for communicate with the activated kernelmodule. (also used
+to activated in rc.local, but thats deprecated) Needs execute
+permission.
+
+    /usr/bin/acerhdf
+
+    #!/bin/bash
+    #  Copyright (C) 2013-06-27 by N. Neumann - vatriani.nn@googlemail.com
+    #
+    #  This program is free software; you can redistribute it and/or modify
+    #  it under the terms of the GNU General Public License as published by
+    #  the Free Software Foundation; either version 3 of the License, or
+    #  any later version.
+    #
+    #  This program is distributed in the hope that it will be useful,
+    #  but WITHOUT ANY WARRANTY; without even the implied warranty of
+    #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    #  GNU General Public License for more details.
+    #
+    #  You should have received a copy of the GNU General Public License
+    #  along with this program; if not, write to the
+    #  Free Software Foundation, Inc.,
+    #  59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+
+    case "$1" in
+     start)
+      echo -n "enabled" > /sys/class/thermal/thermal_zone0/mode;exit 0;;
+     stop)
+      echo -n "disabled" > /sys/class/thermal/thermal_zone0/mode;exit 0;;
+     status)
+      cat /sys/class/thermal/thermal_zone0/mode;exit 0;;
+     *)
+      echo "acerhdf control"
+      echo "usage: $0 [MODE]"
+      echo ""
+      echo "[MODE]"
+      echo "start   starts acerhdf modlue"
+      echo "stop    stop acerhdf module"
+      echo "status  get actual acerhdf module status";exit 0;;
+    esac
+
+Activate the new systemd service with systemctl enable acerhdf.service.
+
+Reference: https://github.com/vatriani/acerhdf-fix
 
 > Using the Super key for middle-clicking
 
@@ -1176,7 +1245,6 @@ there is a risk you will brick your netbook. You have been warned.):
     flashit KAV10.fd /mc /all /dc
 
 -   -   You have now finished prepping your usb drive
-
 -   Reboot and configure the BIOS to boot from the USB stick before the
     SSD/HDD
 -   Start the BIOS update utility (3310.BAT)
@@ -1252,7 +1320,7 @@ most probably the same drivers it can be used as a point of reference.
 
 > Working games
 
--   Netbook Games
+-   List of Applications/Games
 
 External links
 --------------
@@ -1271,8 +1339,15 @@ External links
 -   ArchOne ArchLinux live usb designed for AAO
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_One&oldid=248955"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_One&oldid=294768"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 28 January 2014, at 13:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

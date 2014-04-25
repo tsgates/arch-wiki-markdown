@@ -1,7 +1,7 @@
 Cuftpd
 ======
 
-> Summary
+Summary help replacing me
 
 This article discusses the installation and configuration of the cuftpd
 FTP daemon on Arch Linux systems.
@@ -12,26 +12,21 @@ vsftpd
 
 Proftpd
 
-glFtpd
-
 This article describes the installation of the cuftpd FTP daemon on Arch
 Linux.
 
 cuftpd is an ftp-server written in Java
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Preparation                                                  |
-|     -   1.2 Building                                                     |
-|         -   1.2.1 Copying                                                |
-|                                                                          |
-|     -   1.3 Preparing userdb                                             |
-|     -   1.4 Generation keystore                                          |
-|     -   1.5 Start server                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Preparation
+    -   1.2 Building
+        -   1.2.1 Copying
+    -   1.3 Preparing userdb
+    -   1.4 Generation keystore
+    -   1.5 Start server
 
 Installation
 ------------
@@ -44,7 +39,7 @@ Installation
 
 > Preparation
 
-Install the requirements from the Official Repositories:
+Install the requirements from the Official repositories:
 
     $ pacman -S xinetd zip unzip openssl inetutils mercurial
 
@@ -136,8 +131,15 @@ Run server as standalone for debugging
   ------------------------ ------------------------ ------------------------
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Cuftpd&oldid=244391"
+"https://wiki.archlinux.org/index.php?title=Cuftpd&oldid=301640"
 
 Category:
 
 -   File Transfer Protocol
+
+-   This page was last modified on 24 February 2014, at 12:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

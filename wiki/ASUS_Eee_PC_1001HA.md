@@ -1,19 +1,15 @@
 ASUS Eee PC 1001HA
 ==================
 
-  
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 General Information                                                |
-| -   2 Installing the Base System                                         |
-| -   3 Configuring Xorg for Intel Graphics and Synaptics Touchpad         |
-| -   4 Keyboard and Hotkeys                                               |
-| -   5 Boot Booster                                                       |
-| -   6 Control the VGA Output                                             |
-+--------------------------------------------------------------------------+
+-   1 General Information
+-   2 Installing the Base System
+-   3 Configuring Xorg for Intel Graphics and Synaptics Touchpad
+-   4 Keyboard and Hotkeys
+-   5 Boot Booster
+-   6 Control the VGA Output
 
 General Information
 -------------------
@@ -45,9 +41,9 @@ flash drive, press the Escape key repeatedly until this menu appears.
 Installing the Base System
 --------------------------
 
-Please refer to the Beginners' Guide for a detailed step-by-step guide
+Please refer to the Beginners' guide for a detailed step-by-step guide
 for installing Arch to your Eee PC. If you are more technically
-inclined, refer to the short Installation Guide.
+inclined, refer to the short Installation guide.
 
 Configuring Xorg for Intel Graphics and Synaptics Touchpad
 ----------------------------------------------------------
@@ -143,8 +139,15 @@ To switch back to the netbook's LCD screen and turn the VGA output off:
     xrandr --output LVDS --auto --output VGA --off
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1001HA&oldid=221055"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1001HA&oldid=302793"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 1 March 2014, at 20:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

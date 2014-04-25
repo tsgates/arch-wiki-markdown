@@ -53,8 +53,15 @@ For example, to convert the video foo.rm to an mp4 file:
     ffmpeg -i foo.rm -vcodec mpeg4 -sameq -acodec libfaac -ab 94208 foo.mp4
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=RealPlayer&oldid=217839"
+"https://wiki.archlinux.org/index.php?title=RealPlayer&oldid=256777"
 
 Category:
 
 -   Player
+
+-   This page was last modified on 12 May 2013, at 09:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

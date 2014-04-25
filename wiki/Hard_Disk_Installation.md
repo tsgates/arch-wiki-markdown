@@ -16,19 +16,17 @@ your computer. This allows you to use a swap partition for the
 installation, rather than optical media. It may also be useful for
 remote installations.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Download the Installation Media                                    |
-| -   2 Disable Swap Partition                                             |
-| -   3 Determine Where the Installation Filesystem Is                     |
-| -   4 Rewrite your Partition Table                                       |
-| -   5 Copy the Installation Filesystem                                   |
-| -   6 Install Grub to Partition's Boot Sector                            |
-| -   7 Chainload Grub from your Existing Bootloader                       |
-| -   8 Reboot and Install                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Download the Installation Media
+-   2 Disable Swap Partition
+-   3 Determine Where the Installation Filesystem Is
+-   4 Rewrite your Partition Table
+-   5 Copy the Installation Filesystem
+-   6 Install Grub to Partition's Boot Sector
+-   7 Chainload Grub from your Existing Bootloader
+-   8 Reboot and Install
 
 Download the Installation Media
 -------------------------------
@@ -182,3 +180,10 @@ Retrieved from
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 13 June 2012, at 12:24.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

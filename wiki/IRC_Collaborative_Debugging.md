@@ -18,16 +18,14 @@ use collaborative debugging services (like pastebin) to give IRC users
 details about problems you are seeing or configuration files you need
 referenced.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 IRC Usage                                                          |
-| -   2 Output Errors/Messages to File                                     |
-| -   3 Programs to Upload to Pastebin Services                            |
-| -   4 pastebinit                                                         |
-| -   5 Console Installer Questions                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 IRC Usage
+-   2 Output Errors/Messages to File
+-   3 Programs to Upload to Pastebin Services
+    -   3.1 pastebinit
+-   4 Console Installer Questions
 
 IRC Usage
 ---------
@@ -68,8 +66,7 @@ Programs to Upload to Pastebin Services
 
 A number of programs exist to upload to pastebin services.
 
-pastebinit
-----------
+> pastebinit
 
 To add pastebinit:
 
@@ -79,10 +76,14 @@ And to upload a file:
 
     pastebinit ~/.bashrc
 
-pastebinit will then give a url of the uploaded file.
+Or pipe the output of a command to pastebinit:
+
+    dmesg | pastebinit
+
+pastebinit will then return a URL of the uploaded file.
 
 Console Installer Questions
-===========================
+---------------------------
 
 Occasionally you might need to actually show a picture of what your
 question is about (e.g. if you have a question about a console-based
@@ -95,8 +96,15 @@ screenshot program. To take a screenshot of the first console
 Then you can use links and a image-hosting website to upload the image.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IRC_Collaborative_Debugging&oldid=238847"
+"https://wiki.archlinux.org/index.php?title=IRC_Collaborative_Debugging&oldid=277600"
 
 Category:
 
 -   Internet Relay Chat
+
+-   This page was last modified on 5 October 2013, at 11:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

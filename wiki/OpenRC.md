@@ -4,32 +4,27 @@ OpenRC
 Note:Arch uses systemd by default. If you use OpenRC, please mention so
 while asking for help.
 
-OpenRC is an alternate init system developed by Gentoo developers.
-OpenRC is a dependency based init system that works with the system
-provided init program, normally sysvinit. It is not a replacement for
-sysvinit.
+OpenRC is an init system maintained by the Gentoo developers. OpenRC is
+a dependency based init system that works with the system provided init
+program, normally sysvinit. It is not a replacement for sysvinit.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Network                                                      |
-|     -   2.2 Logging                                                      |
-|         -   2.2.1 syslog-ng                                              |
-|         -   2.2.2 Boot logging                                           |
-|                                                                          |
-|     -   2.3 Hostname                                                     |
-|     -   2.4 Module autoloading                                           |
-|     -   2.5 Locale                                                       |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Error while unmounting /tmp                                  |
-|     -   3.2 Disabling IPv6 doesn't work                                  |
-|                                                                          |
-| -   4 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Network
+    -   2.2 Logging
+        -   2.2.1 syslog-ng
+        -   2.2.2 Boot logging
+    -   2.3 Hostname
+    -   2.4 Module autoloading
+    -   2.5 Locale
+-   3 Troubleshooting
+    -   3.1 Error while unmounting /tmp
+    -   3.2 Disabling IPv6 doesn't work
+    -   3.3 During shutdown remounting root as read-only fails
+-   4 External Links
 
 Installation
 ------------
@@ -75,10 +70,10 @@ Below is an example configuration using ip.
 The network service is added to the boot runlevel by default, so no
 further action is required.
 
-You can also use NetworkManager, Dhcpcd or netcfg by enabling the
+You can also use NetworkManager, dhcpcd or netcfg by enabling the
 respective services.
 
-Take a look at Network Configuration for a detailed look at networking
+Take a look at Network configuration for a detailed look at networking
 in general.
 
 > Logging
@@ -151,8 +146,7 @@ Note:This problem occurs only if your tmp is mounted as a tmpfs.
 
 > Disabling IPv6 doesn't work
 
-If you have OpenRC installed under the /etc/openrc sysconf directory,
-and disabling IPv6 through /etc/sysctl.conf doesn't work.
+If you have OpenRC installed under the /etc/openrc sysconf directory.
 
 One fix for this is to put
 
@@ -161,6 +155,17 @@ One fix for this is to put
 
 in a file (with a .conf extension) under /etc/openrc/sysctl.d
 
+> During shutdown remounting root as read-only fails
+
+If the above happens, edit the /etc/openrc/init.d/mount-ro file and put:
+
+    telinit u
+
+after the following line:
+
+    # Flush all pending disk writes now
+    sync; sync
+
 External Links
 --------------
 
@@ -168,8 +173,15 @@ External Links
 -   Forum thread about OpenRC in Arch
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=OpenRC&oldid=254876"
+"https://wiki.archlinux.org/index.php?title=OpenRC&oldid=298607"
 
 Category:
 
 -   Boot process
+
+-   This page was last modified on 17 February 2014, at 21:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -5,17 +5,14 @@ Logitech Racing Wheel
  This article describes how to set up a Logitech Formula Force GP Racing
 Wheel with Arch Linux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-|     -   1.1 Identifying                                                  |
-|     -   1.2 Testing                                                      |
-|                                                                          |
-| -   2 Configuration                                                      |
-| -   3 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+    -   1.1 Identifying
+    -   1.2 Testing
+-   2 Configuration
+-   3 References
 
 Installing
 ==========
@@ -133,3 +130,10 @@ Categories:
 
 -   Input devices
 -   Gaming
+
+-   This page was last modified on 13 June 2012, at 15:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

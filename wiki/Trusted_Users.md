@@ -3,20 +3,18 @@ Trusted Users
 
 The Trusted Users serve the following purposes:
 
-1.  Maintain [community] as an intermediary between Arch Linux's
-    Official Repositories and the unsupported package collection in the
-    AUR.
+1.  Maintain the community repository as an intermediary between Arch
+    Linux's official repositories and the unsupported package collection
+    in the AUR.
 2.  Maintain, manage, and watch over the operation of the AUR.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 How to become TU?                                                  |
-| -   2 Active Trusted Users                                               |
-| -   3 Inactive Trusted Users                                             |
-| -   4 Some Past Trusted Users                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 How to become TU?
+-   2 Active Trusted Users
+-   3 Inactive Trusted Users
+-   4 Some Past Trusted Users
 
 How to become TU?
 -----------------
@@ -56,8 +54,10 @@ Active Trusted Users
 
   --------------- ----------------------- ------------------------------------------------
   Nick            Name                    E-Mail
-  Alucryd         Maxime Gauduin          alucryd at gmail dot com
+  alucryd         Maxime Gauduin          alucryd at gmail dot com
+  anatolik        Anatol Pomozov          anatol dot pomozov + arch at gmail
   Atsutane        Thorsten Töpper         atsutane {0x40} freethoughts {0x2E} de
+  arcanis         Evgeniy Alekseev        arcanis DOT arch AT gmail DOT com
   Barthalion      Bartłomiej Piotrowski   spam@bpiotrowski.pl
   BlackIkeEagle   Ike Devolder            ike DOT devolder AT gmail DOT com
   Bluewind        Florian Pritz           bluewind@xinu.at
@@ -65,22 +65,24 @@ Active Trusted Users
   City-busz       György Balló            ballogyor+arch at gmail dot com
   ConnorBehan     Connor Behan            connor.behan@gmail.com
   cryptocrack     Lukas Fleischer         archlinux at cryptocrack dot de
+  Dicebot         Mihails Strasuns        public@dicebot.lv
   Dragonlord      Jaroslav Lichtblau      tu dragonlord cz
   Faidoc          Alexandre Filgueira     alexfilgueira [at] cinnarch [dot] com
   felixonmars     Felix Yan               felixonmars[at]gmail[dot]com
+  flexiondotorg   Martin Wimpress         martin+arch@flexion.org
   foutrelis       Evangelos Foutras       evangelos@foutrelis.com
   giniu           Andrzej Giniewicz       gginiu@gmail.com
   gtmanfred       Daniel Wallace          danielwallace gtmanfred com
   heftig          Jan Steffens            jan.steffens@student.kit.edu
   jelly           Jelle van der Waa       jelle vdwaa nl
   jsteel          Jonathan Steel          mail at jsteel dot org
+  keenerd         Kyle Keen               keenerd@gmail.com
   Lordheavy       Laurent Carlier         lordheavym at gmail com
   mtorromeo       Massimiliano Torromeo   massimiliano.torromeo@gmail.com
   petelewis       Peter Lewis             plewis at aur dot archlinux dot org
-  pressh          Ronald van Haren        ronald.archlinux.org
   schivmeister    Ray Rashif              schiv archlinux org
   schuay          Jakob Gruber            jakob.gruber@gmail.com
-  seblu           Sébastien Luttringer    s e b l u + a r c h # s e b lu dot n e t
+  seblu           Sébastien Luttringer    s е b l u at a r c h l і n ux dot o r g
   sergej          Sergej Pupykin          pupykin.s+arch@gmail.com
   speps           SpepS                   dreamspepser at yahoo dot it
   stativ          Lukas Jirkovsky         l.jirkovsky strange_curved_character gmail.com
@@ -95,19 +97,9 @@ Active Trusted Users
 Inactive Trusted Users
 ----------------------
 
-Nick
-
-Name
-
-E-Mail
-
-Comments/Reference
-
-Daenyth
-
-Daenyth Blank
-
-Daenyth+Arch gmail com
+  ------ ------ -------- --------------------
+  Nick   Name   E-Mail   Comments/Reference
+  ------ ------ -------- --------------------
 
 Some Past Trusted Users
 -----------------------
@@ -125,6 +117,7 @@ Some Past Trusted Users
   bjorn           Bjørn Lindeijer
   codemac         Jeff Mickey
   cmb             Chris Brannon
+  Daenyth         Daenyth Blank
   DaNiMoTh        JJ. DaNiMoTh
   dejari          Leslie P. Polzer
   dsa             Douglas Soares de Andrade
@@ -148,10 +141,12 @@ Some Past Trusted Users
   nesl247         Alex Heck
   Neverth         Mikko Seppälä
   Partition       Mateusz Herych
+  PirateJonno     Jonathan Conder
   phrakture       Aaron Griffin
   Pierre          Pierre Schmitz
   pizzapunk       Alexander Fehr
   pjmattal        Paul Mattal
+  pressh          Ronald van Haren
   Ranguvar        Devin Cofer
   Romashka        Roman Kyrylych
   shastry         Vinay S Shastry
@@ -161,6 +156,7 @@ Some Past Trusted Users
   STiAT           Georg Grabler
   swiergot        Jaroslaw Swierczynski
   tardo           Shehzad Qureshi
+  thatch45        Thomas S Hatch
   thotypous       Paulo Matias
   vegai           Vesa Kaihlavirta
   voidnull        Giovanni Scafora
@@ -172,8 +168,15 @@ Some Past Trusted Users
   --------------- ---------------------------
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Trusted_Users&oldid=255358"
+"https://wiki.archlinux.org/index.php?title=Trusted_Users&oldid=304944"
 
 Category:
 
 -   Arch development
+
+-   This page was last modified on 16 March 2014, at 09:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -2,31 +2,27 @@ Acer Aspire 6920G
 =================
 
   ------------------------ ------------------------ ------------------------
-  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
-  g]                       is poorly written.       g]
-                           Reason: please use the   
-                           first argument of the    
-                           template to provide a    
-                           brief explanation.       
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: Already covered  
+                           by Beginners' guide.     
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
 This article will describe how to set up Arch Linux on an Acer Aspire
 6920G.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Networking                                                         |
-|     -   2.1 LAN                                                          |
-|     -   2.2 Wireless                                                     |
-|                                                                          |
-| -   3 Multimedia Buttons                                                 |
-| -   4 nVidia Warnings                                                    |
-| -   5 Sound                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Networking
+    -   2.1 LAN
+    -   2.2 Wireless
+-   3 Multimedia Buttons
+-   4 nVidia Warnings
+-   5 Sound
 
 Hardware
 --------
@@ -97,8 +93,6 @@ in hardware specs.
 |                                      |     English                          |
 +--------------------------------------+--------------------------------------+
 
-  
-
 Networking
 ----------
 
@@ -109,46 +103,26 @@ The LAN card should work out of the box with the current release
 
 > Wireless
 
-To see which firmware you need to install, use
-
-    dmesg | grep -i net
-
-Then install the firmware with
-
-    # pacman -S iwlwifi-3945-ucode
-
-or
-
-    # pacman -S iwlwifi-4965-ucode
-
-For more info, see Wireless Setup
+See Wireless network configuration
 
 Multimedia Buttons
 ------------------
 
-As for Multimedia Buttons, I will explain How to make them work using
-Keytouch. I will share my config file incase you're lazy. xD .
+Multimedia buttons can be configured using Keytouch, available in the
+AUR.
 
-See Keytouch
-
-  
+For more information, see Keytouch
 
 nVidia Warnings
 ---------------
 
-If you look down, you can see and nVidia sticker wich says GeForce 9500M
-GS. Now, I've been trying every nVidia driver version, but still they
-all have one problem. When you're running X, you can't go back to the
-tty's . It will just show a black screen, pressing ctrl+alt+f7 will get
-you back to X Windows. I Tried to report this bug, but it's hard to be
-listened on those forums. They're total chaos .
+The Acer Aspire uses a Geforce 9500M GS graphics card. As of the time of
+writing, this can sometimes produce errors when returning to the TTY
+while running X. While this bug has been reported, if you have more
+information, please e-mail me at jsanchezsilvera[at]gmail[dot]com.
 
-You can still enjoy those pretty 3D graphics!. (Please if you get to fix
-this e-mail me at jsanchezsilvera[at]gmail[dot]com) .
-
-For Installing and Configuration Instructions See Keytouch
-
-  
+For information on installing and configuring nVidia drivers, visit the
+NVIDIA wiki.
 
 Sound
 -----
@@ -165,8 +139,15 @@ edit /etc/modprobe.d/modprobe.conf and add the following line.
 Reboot and enjoy your multimedia.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_6920G&oldid=196473"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_6920G&oldid=304916"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 16 March 2014, at 09:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

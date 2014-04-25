@@ -14,57 +14,50 @@ take some time.
 Until this page actualy get some contents, go to Installing Arch Linux
 on the Asus EEE PC.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Eee 700 Series and 900                                             |
-|     -   1.1 Installation                                                 |
-|     -   1.2 If you do want an optimized Pentium-M kernel                 |
-|     -   1.3 Xorg                                                         |
-|     -   1.4 Sound                                                        |
-|                                                                          |
-| -   2 Eee 900A                                                           |
-| -   3 Eee 901, 904, and 1000(H)                                          |
-|     -   3.1 Setting up the Network                                       |
-|         -   3.1.1 atl1e                                                  |
-|         -   3.1.2 eeert2860                                              |
-|                                                                          |
-|     -   3.2 Eee 901 20G lsmod and lspci                                  |
-|                                                                          |
-| -   4 Eee 904HA                                                          |
-| -   5 Eee T91MT                                                          |
-| -   6 Eee T101MT                                                         |
-| -   7 Eee 1000HA                                                         |
-| -   8 Eee 1000HE                                                         |
-| -   9 Eee 1001P                                                          |
-| -   10 Eee 1001PX                                                        |
-| -   11 Eee 1005HA                                                        |
-| -   12 Eee 1005P(E)                                                      |
-| -   13 Eee 1015B                                                         |
-|     -   13.1 Audio                                                       |
-|     -   13.2 Powersaving                                                 |
-|                                                                          |
-| -   14 Eee 1015 BX                                                       |
-| -   15 Eee 1015 PE/PEM                                                   |
-|     -   15.1 Hardware                                                    |
-|     -   15.2 Installation                                                |
-|         -   15.2.1 ACPI                                                  |
-|         -   15.2.2 Modules                                               |
-|                                                                          |
-| -   16 Eee 1015 PX                                                       |
-| -   17 Eee 1015 PN                                                       |
-| -   18 Eee 1025C                                                         |
-| -   19 Eee 1201T                                                         |
-| -   20 Eee 1201NL                                                        |
-| -   21 Eee 1215n                                                         |
-| -   22 Eee 1215P                                                         |
-| -   23 Eee 1215B                                                         |
-|     -   23.1 Installation                                                |
-|     -   23.2 Audio                                                       |
-|     -   23.3 Video                                                       |
-|     -   23.4 Power Management                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Eee 700 Series and 900
+    -   1.1 Installation
+    -   1.2 If you do want an optimized Pentium-M kernel
+    -   1.3 Xorg
+    -   1.4 Sound
+-   2 Eee 900A
+-   3 Eee 901, 904, and 1000(H)
+    -   3.1 Setting up the Network
+        -   3.1.1 atl1e
+        -   3.1.2 eeert2860
+    -   3.2 Eee 901 20G lsmod and lspci
+-   4 Eee 904HA
+-   5 Eee T91MT
+-   6 Eee T101MT
+-   7 Eee 1000HA
+-   8 Eee 1000HE
+-   9 Eee 1001P
+-   10 Eee 1001PX
+-   11 Eee 1005HA
+-   12 Eee 1005P(E)
+-   13 Eee 1015B
+    -   13.1 Audio
+    -   13.2 Powersaving
+-   14 Eee 1015 BX
+-   15 Eee 1015 PE/PEM
+    -   15.1 Hardware
+    -   15.2 Installation
+        -   15.2.1 ACPI
+        -   15.2.2 Modules
+-   16 Eee 1015 PX
+-   17 Eee 1015 PN
+-   18 Eee 1025C
+-   19 Eee 1201T
+-   20 Eee 1201NL
+-   21 Eee 1215n
+-   22 Eee 1215P
+-   23 Eee 1215B
+    -   23.1 Installation
+    -   23.2 Audio
+    -   23.3 Video
+    -   23.4 Power Management
 
 Eee 700 Series and 900
 ======================
@@ -117,15 +110,7 @@ Restart and select Arch Linux EEE kernel from the grub boot menu.
 > Xorg
 
 Xorg works without an xorg.conf on the eeepc fine with the new
-hotplugging system.
-
-    # pacman -S xorg xf86-input-keyboard xf86-input-synaptics xf86-video-intel
-
-start hal
-
-    # /etc/rc.d/hal start
-
-and add hal to the daemons line of your /etc/rc.conf file
+hotplugging system. See Xorg.
 
 > Sound
 
@@ -639,11 +624,6 @@ Things that work out of the box: Wifi, Ethernet, Video (max resolution
 available with basic Xorg and xfce packages installed), Touchpad,
 Keyboard (Fn keys not working).
 
-Note:Since kernel 3.0, you may need to blacklist the "bcma" module for
-Wifi to work! If iwconfig does not list your wireless card, this means
-you. See
-Broadcom_wireless#Wi-Fi_card_does_not_work_or_show_up_since_kernel_upgrade_.28brcmsmac.29.
-
 Things that need work: Audio, Fn keys, Power management.
 
 Installation
@@ -692,8 +672,15 @@ the SD-card reader working after resuming from hibernate. After a
 reboot, it works fine.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC&oldid=249899"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC&oldid=278712"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 15 October 2013, at 13:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -3,16 +3,14 @@ Latitude E5520
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware Details                                                   |
-| -   2 UEFI                                                               |
-| -   3 Graphics                                                           |
-| -   4 Input / Output Devices                                             |
-| -   5 SD Card Reader                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware Details
+-   2 UEFI
+-   3 Graphics
+-   4 Input / Output Devices
+-   5 SD Card Reader
 
 Hardware Details
 ----------------
@@ -143,3 +141,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 3 December 2012, at 11:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

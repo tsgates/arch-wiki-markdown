@@ -16,24 +16,22 @@ AUR that allow to mount FTP shares and interact with them just as if
 they were local file systems. It's advisable to use a ssl encrypted ftp
 connection at least for the control channel.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Packages                                                           |
-| -   2 Using curlftpfs to mount a FTP folder                              |
-|     -   2.1 Mount as root                                                |
-|     -   2.2 Mount as normal user                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Packages
+-   2 Using curlftpfs to mount a FTP folder
+    -   2.1 Mount as root
+    -   2.2 Mount as normal user
 
 Packages
 --------
 
 These are the packages that provide a way to mount FTP shares:
 
--   curlftpfs [recommended]
--   fuseftp
--   lufs [outdated]
+-   curlftpfs - Recommended, read more.
+-   fuseftp - Outdated alternative coded in Perl.
+-   lufs - Outdated alternative.
 
 All three packages are based on FUSE library.
 
@@ -93,8 +91,15 @@ then the server does not support the utf8 option. Leave it out and all
 will be fine.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mount_FTP&oldid=243109"
+"https://wiki.archlinux.org/index.php?title=Mount_FTP&oldid=282199"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 10 November 2013, at 11:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

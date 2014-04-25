@@ -1,24 +1,21 @@
 Dell Latitude D620
 ==================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Installation                                                       |
-| -   3 Wireless Networking                                                |
-|     -   3.1 Intel 3945 ABG PCI Express                                   |
-|     -   3.2 Broadcom PCI Express                                         |
-|         -   3.2.1 ndiswrapper                                            |
-|                                                                          |
-| -   4 Recommendations                                                    |
-|     -   4.1 PC Speaker                                                   |
-|     -   4.2 Synaptics Touchpad                                           |
-|     -   4.3 Volume, Mute and Super Keys                                  |
-|         -   4.3.1 In Openbox                                             |
-|         -   4.3.2 In Xmonad                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Installation
+-   3 Wireless Networking
+    -   3.1 Intel 3945 ABG PCI Express
+    -   3.2 Broadcom PCI Express
+        -   3.2.1 ndiswrapper
+-   4 Recommendations
+    -   4.1 PC Speaker
+    -   4.2 Synaptics Touchpad
+    -   4.3 Volume, Mute and Super Keys
+        -   4.3.1 In Openbox
+        -   4.3.2 In Xmonad
 
 Hardware
 --------
@@ -225,3 +222,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 5 January 2013, at 14:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

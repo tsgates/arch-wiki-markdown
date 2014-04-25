@@ -7,44 +7,56 @@ phpMyAdmin, OpenSSL, GD, Freetype2, libjpeg, libpng, gdbm, zlib, expat,
 Sablotron, libxml, Ming, Webalizer, pdf class, ncurses, mod_perl,
 FreeTDS, gettext, mcrypt, mhash, eAccelerator, SQLite and IMAP C-Client.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 AUR                                                          |
-|     -   1.2 Manual                                                       |
-|                                                                          |
-| -   2 Configuration                                                      |
-| -   3 Usage                                                              |
-| -   4 Removal                                                            |
-| -   5 Hosting files outside the htdocs directory                         |
-| -   6 Debugging and Profiling with Xdebug and Xampp                      |
-| -   7 PhpMyAdmin 403 Access Forbidden                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 AUR installation
+    -   1.2 Manual installation
+-   2 Configuration
+-   3 Usage
+-   4 Hosting files outside the htdocs directory
+-   5 Debugging and profiling with Xdebug and Xampp
+-   6 PhpMyAdmin 403 Access Forbidden
+-   7 Local test server security
 
 Installation
 ------------
 
-> AUR
+> AUR installation
 
--   Xampp package in the AUR
-
-> Manual
-
-1.  Download the latest version from here.
-2.  In the terminal run the following from the folder where the archive
-    was downloaded to:
-
-        # tar xvfz xampp-linux-*.tar.gz -C /opt
+Install xampp from AUR.
 
 Note:If you are running 64-bit arch, you must install lib32-glibc and
-gcc-libs-multilib.
+gcc-libs-multilib from the multilib repository.
 
-    # pacman -S lib32-glibc gcc-libs-multilib
+To avoid being forced to install the prerequisites, you can opt for a
+manual installation.
 
-to do this you must have activated the multilib repository in
-/etc/pacman.conf
+> Manual installation
+
+1.  Download the latest version from here.
+2.  The downloaded file is an installer script. Make it executable and
+    run it by typing:
+
+    # chmod +x xampp-linux-x64-1.8.2-1-installer.run
+    # ./xampp-linux-x64-1.8.2-1-installer.run
+
+assuming version 1.8.2-1. Otherwise adapt the correct version number
+
+Removal
+
+Be sure to stop all lampp services.
+
+    # /opt/lampp/lampp stop
+
+All the files needed by Xampp to be installed are located in the
+previous /opt/lampp folder. So, to uninstall Xampp, consider this
+command.
+
+    # rm -rf /opt/lampp
+
+Note:If you created symlinks, you may need to destroy them too.
 
 Configuration
 -------------
@@ -93,24 +105,8 @@ If you get this error when you start it:
     XAMPP: Starting ProFTPD...
     XAMPP for Linux started.
 
-Install net-tools and inetutils from [core] and you are good to go:
-
-    # pacman -S net-tools inetutils
-
-Removal
--------
-
-Be sure to stop all lampp services.
-
-    # /opt/lampp/lampp stop
-
-All the files needed by Xampp to be installed are located in the
-previous /opt/lampp folder. So, to uninstall Xampp, consider this
-command.
-
-    # rm -rf /opt/lampp
-
-NOTE:If you had create symlinks, you need to destroy them too!
+Install net-tools and inetutils from the official repositories and you
+are good to go.
 
 Hosting files outside the htdocs directory
 ------------------------------------------
@@ -121,41 +117,45 @@ All files placed in this directory will be processed by the web server.
 To host other files on your system with XAMPP, you can configure an
 alias with apache.
 
-1.  Edit apache's httpd.conf with your favorite editor.
+-   Edit apache's httpd.conf with your favorite editor.
 
-        nano /opt/lampp/etc/httpd.conf
+    # nano /opt/lampp/etc/httpd.conf
 
-2.  In the Alias section, add an alias:
+-   Find "DocumentRoot", you will see something like:
 
-    <IfModule alias_module>
-        Alias /test /home/web
-            <directory /home/web>
-                AllowOverride FileInfo Limit Options Indexes
-                Order allow,deny
-                Allow from all
-                Require all granted
-            </directory>
-
+    DocumentRoot "/opt/lampp/htdocs"
+    <Directory "/opt/lampp/htdocs">
         ...    
         ...
 
+    </Directory>
+
+-   In the next line after "</Directory>" paste this:
+
+    <Directory "/yourDirectory/">
+        Options Indexes FollowSymLinks ExecCGI Includes
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+-   Next find the "<IfModule alias_module>":
+
+    <IfModule alias_module>
+
+        #
+        # Redirect: Allows you to tell clients about documents that used to 
+        # exist in your server's namespace, but do not anymore. The client 
+        # will make a new request for the document at its new location.
+        # Example:
+        # Redirect permanent /foo http://www.example.com/bar
+      ...
     </IfModule>
 
-You also have to change the permissions. You can use your own username,
-and leave the group setting alone. In that case, any folder where you
-have access will work. Another way is to leave the user setting, and
-change the group to something else which your user is part of (for when
-you want to restrict a folder to be group-writable only). Yet another
-way is to just change both user and group to 'http', which should
-already exist. In this case, all folders you want to allow for
-processing must belong to at least the 'http' group.
+-   And before the "</IfModule>" paste this:
 
-    <IfModule !mpm_netware_module>
-    User http
-    Group http
-    </IfModule>
+    Alias /yourAlias /yourDirectory/
 
-Now do not forget to restart apache:
+-   Now do not forget to restart Apache:
 
     # /opt/lampp/lampp restart
 
@@ -163,9 +163,9 @@ This will allow you to host files from your home directory (or any other
 directory) with XAMPP.
 
 In the above example, you can access the files by pointing your web
-browser to localhost/test.
+browser to localhost/yourAlias.
 
-Debugging and Profiling with Xdebug and Xampp
+Debugging and profiling with Xdebug and Xampp
 ---------------------------------------------
 
 For detailed instructions go here.
@@ -173,9 +173,9 @@ For detailed instructions go here.
 You must first download the Xampp Development Tools from the same
 download page here.
 
-Extract this into your Xampp directory.
+Extract this into your Xampp directory:
 
-    tar xvfz xampp-linux-devel-x.x.x.tar.gz -C /opt
+    # tar xvfz xampp-linux-devel-x.x.x.tar.gz -C /opt
 
 You should be able to successfully run
 
@@ -197,9 +197,50 @@ need to edit the following settings in
     	Require all granted
     </Directory>
 
+Local test server security
+--------------------------
+
+Apache and MySQL can be configured so that they only listen to requests
+from your own computer. For most test systems this is fine and it
+greatly reduces the risk because the services are not reachable from the
+Internet.
+
+Before you start XAMPP for the first time find and edit these files:
+
+For Apache edit the files xampp\apache\conf\httpd.conf and
+xampp\apache\conf\extra\httpd-ssl.conf. Look for lines starting with
+"Listen" such as
+
+    Listen 80
+
+and replace them with
+
+    Listen 127.0.0.1:80
+
+For MySQL open the file xampp\mysql\bin\my.cnf find the section
+"[mysqld]" and add this line
+
+    bind-address=localhost
+
+After starting the services, verify the result by going to a command
+window and start and execute:
+
+    netstat -a -n
+
+For the entries marked as LISTEN in the last column, look at the Listen
+column. It should always start with 127.0.0.1 or ::1 but not with
+0.0.0.0.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xampp&oldid=243167"
+"https://wiki.archlinux.org/index.php?title=Xampp&oldid=277411"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 3 October 2013, at 06:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -78,3 +78,10 @@ Retrieved from
 Category:
 
 -   Keyboards
+
+-   This page was last modified on 21 April 2012, at 17:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

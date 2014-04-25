@@ -4,71 +4,37 @@ Dvorak
 This is a quick blurb for setting or converting your keymaps to dvorak
 instead of qwerty.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setting Dvorak On The Console                                      |
-| -   2 Setting Dvorak In X                                                |
-| -   3 Setting Dvorak International In X                                  |
-| -   4 For International Users                                            |
-|     -   4.1 Swedish                                                      |
-|     -   4.2 Spanish                                                      |
-|                                                                          |
-| -   5 Typing Tutors                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Setting Dvorak On The Console
------------------------------
+-   1 Setting dvorak layout
+-   2 For international users
+    -   2.1 Swedish
+    -   2.2 Spanish
+-   3 Typing tutors
 
-To convert to dvorak on the console, type
+Setting dvorak layout
+---------------------
 
-    loadkeys dvorak
+See Keyboard Configuration in Console or Keyboard Configuration in Xorg
+for configuration details.
 
-If you are using the left-handed dvorak layout,please type
+These variants are available in both console and Xorg:
 
-    loadkeys dvorak-l
+-   dvorak, standard dvorak layout
+-   dvorak-l, left-handed dvorak layout
+-   dvorak-r, right-handed dvorak layout
 
-or type
+Note:For console, these are standalone keymaps, but for Xorg these are
+variants of the us layout, you need to pass them to XkbVariant variable.
+See Keyboard Configuration in Xorg#Setting keyboard layout for an
+explanation.
 
-    loadkeys dvorak-r
+The following variants are available only in Xorg:
 
-if you are using the right-handed dvorak layout.
+-   dvorak-intl, international layout with dead keys
 
-To make this change permanently, set
-
-    KEYMAP="dvorak"
-
-in /etc/vconsole.conf.
-
-Setting Dvorak In X
--------------------
-
-To change to the dvorak layout in X, see Xorg#Keyboard_settings
-
-Setting Dvorak International In X
----------------------------------
-
-Setting your system to the dvorak international layout (with dead keys)
-is a simple matter of changing the XkbVariant option to dvorak-intl. It
-should look as follows:
-
-    Option "XkbVariant" "dvorak-intl"
-
-Your XkbLayout should already be set to us.
-
-In a small aside, you can test your configuration in a new X by entering
-the following into a shell:
-
-    $ xinit -- :1
-
-This will work if you have xinit installed. If you are not using a
-custom .xinitrc, this will open a terminal in the new X session. From
-that terminal you can test your setup and exit that session by typing
-exit in the terminal. If you are using your own .xinitrc, you will have
-to exit in whatever way is provided by your setup.
-
-For International Users
+For international users
 -----------------------
 
 > Swedish
@@ -79,31 +45,40 @@ not need to download any additional files from www.aoeu.info.
 
 > Spanish
 
-You can install the AUR dvorak-es-loadkeys package, and then use
-dvorak-es instead of dvorak, both in loadkeys and /etc/vconsole.conf to
-use the spanish dvorak variant.
+In console, specify dvorak-es instead of dvorak to use the Spanish
+dvorak variant.
 
-On X, you don't need to install anything, just edit
-/etc/X11/xorg.conf.d/01-keyboard-layout.conf and put:
+In Xorg, specify es as XkbLayout and dvorak as XkbVariant.
 
-    Section "InputClass"
-      Identifier "Keyboard-layout"
-      Driver "evdev"
-      MatchIsKeyboard "yes"
-      Option "XkbLayout" "es(dvorak)"
-    EndSection
-
-Typing Tutors
+Typing tutors
 -------------
 
-Console: DvorakNG
+Console
 
-GUI: kdeedu-ktouch (includes Dvorak lessons in English, French, German &
-Spanish)
+-   DvorakNG
+
+GUI
+
+-   kdeedu-ktouch (includes Dvorak lessons in English, French, German &
+    Spanish)
+-   klavaro Dvorak lessons: (BG; BR; DE_neo2; EO; FR; FR_bépo; TR; UK;
+    US; US_BR; US_ES; US_SE)
+
+WEB
+
+-   http://typeyourway.com/ - Your keyboard, Your Words, Your Rules,
+    Learn to Type Your Way
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dvorak&oldid=234361"
+"https://wiki.archlinux.org/index.php?title=Dvorak&oldid=277680"
 
 Category:
 
 -   Keyboards
+
+-   This page was last modified on 5 October 2013, at 19:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

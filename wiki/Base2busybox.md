@@ -20,23 +20,21 @@ valuable.
 
 * * * * *
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 gnu2busybox-coreutils                                              |
-| -   2 base2busybox-util-linux                                            |
-| -   3 gnu2busybox-findutils                                              |
-| -   4 gnu2busybox-diffutils                                              |
-| -   5 FUTURE PLANS                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 gnu2busybox-coreutils
+-   2 base2busybox-util-linux
+-   3 gnu2busybox-findutils
+-   4 gnu2busybox-diffutils
+-   5 FUTURE PLANS
 
 gnu2busybox-coreutils
 ---------------------
 
-Package gnu2busybox-coreutils offers a nearly pain-free drop-in
-replacement of the GNU coreutils. Some commands lack options present in
-the corresponding coreutils binaries.
+Package busybox-coreutils offers a nearly pain-free drop-in replacement
+of the GNU coreutils. Some commands lack options present in the
+corresponding coreutils binaries.
 
 Gain from replacing coreutils with busybox: GNU coreutils: 13.1 MB
 installed, symlinks to busybox: approximately 0.
@@ -80,7 +78,7 @@ Missing features that cause problems:
 base2busybox-util-linux
 -----------------------
 
-Package base2busybox-util-linux offers an alternative to util-linux.
+Package busybox-util-linux offers an alternative to util-linux.
 
 Gain from replacing util-linux with busybox: util-linux: 7.5 MB
 installed, symlinks to busybox: approximately 0.
@@ -111,7 +109,7 @@ Missing features that cause problems:
 gnu2busybox-findutils
 ---------------------
 
-Package gnu2busybox-findutils offers functionality corresponding to the
+Package busybox-findutils offers functionality corresponding to the
 binaries found in GNU findutils.
 
 Gain from replacing findutils with busybox: GNU findutils: 1.7 MB
@@ -130,7 +128,7 @@ Missing features that cause problems:
 gnu2busybox-diffutils
 ---------------------
 
-Package gnu2busybox-diffutils offers functionality corresponding to the
+Package busybox-diffutils offers functionality corresponding to the
 binaries found in GNU diffutils.
 
 Gain from replacing diffutils with busybox: GNU diffutils: 1.4 MB
@@ -153,8 +151,15 @@ FUTURE PLANS
     busybox base system.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Base2busybox&oldid=239294"
+"https://wiki.archlinux.org/index.php?title=Base2busybox&oldid=258536"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 24 May 2013, at 07:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

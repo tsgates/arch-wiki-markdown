@@ -7,39 +7,32 @@ files with any tool (copy, rename, edit with vim, etc.). Using sshfs
 instead of shfs is generally preferred as a new version of shfs hasn't
 been released since 2004.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-|     -   2.1 Mounting                                                     |
-|     -   2.2 Unmounting                                                   |
-|                                                                          |
-| -   3 Tips                                                               |
-| -   4 Chrooting                                                          |
-| -   5 Helpers                                                            |
-| -   6 Automounting                                                       |
-|     -   6.1 On demand                                                    |
-|     -   6.2 On boot                                                      |
-|                                                                          |
-| -   7 Options                                                            |
-| -   8 Troubleshooting                                                    |
-|     -   8.1 Connection reset by peer                                     |
-|     -   8.2 Remote host has disconnected                                 |
-|     -   8.3 Thunar has issues with FAM and remote file access            |
-|                                                                          |
-| -   9 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 Mounting
+    -   2.2 Unmounting
+-   3 Chrooting
+-   4 Helpers
+-   5 Automounting
+    -   5.1 On demand
+    -   5.2 On boot
+    -   5.3 Secure user access
+-   6 Options
+-   7 Troubleshooting
+    -   7.1 Connection reset by peer
+    -   7.2 Remote host has disconnected
+    -   7.3 Thunar has issues with FAM and remote file access
+    -   7.4 Shutdown hangs when sshfs is mounted
+-   8 See also
 
 Installation
 ------------
 
-To install the needed packages, do:
-
-    # pacman -S sshfs
-
-This should install fuse and sshfs, and maybe other packages.
+Install sshfs from official repositories. This should install fuse and
+sshfs, and maybe other packages.
 
 Usage
 -----
@@ -48,12 +41,20 @@ First a kernel module should be loaded, so as root, do:
 
     # modprobe fuse
 
-Check if fuse is active.
+Note:This will be done automatically when you run the sshfs command, so
+there's no need to add a modprobe conf file to make it load at boot. If
+you get an error message about needing to load the module when you run
+sshfs, you probably didn't reboot after a kernel update.
 
-    #systemctl list-units --all|grep fuse
-    sys-module-fuse.device    loaded active   plugged       /sys/module/fuse
+Check if fuse is active:
 
-  
+    systemctl list-units --all|grep fuse
+
+     sys-module-fuse.device    loaded active   plugged       /sys/module/fuse
+
+Note:You may have to execute the sshfs command first, before systemctl
+will show that fuse is active. Systemd will activate the fuse device
+once a program is run that requires it.
 
 > Mounting
 
@@ -76,6 +77,16 @@ SSH will ask for the password, if needed. If you do not want to type in
 your password 49 times a day, then read this: How to Use RSA Key
 Authentication with SSH or Using SSH Keys.
 
+Tip:To quickly mount a remote dir, do some file-management and unmount
+it, put this in a script:
+
+    sshfs USERNAME@HOSTNAME_OR_IP:/PATH LOCAL_MOUNT_POINT SSH_OPTIONS
+    mc ~ LOCAL_MOUNT_POINT
+    fusermount -u LOCAL_MOUNT_POINT
+
+This will mount the remote directory, launch MC, and unmount it when you
+exit.
+
 > Unmounting
 
 To unmount the remote system:
@@ -85,19 +96,6 @@ To unmount the remote system:
 Example:
 
     $ fusermount -u /mnt/sessy
-
-Tips
-----
-
-To quickly mount a remote dir, do some file-management and unmount it,
-put this in a script:
-
-    sshfs USERNAME@HOSTNAME_OR_IP:/PATH LOCAL_MOUNT_POINT SSH_OPTIONS
-    mc ~ LOCAL_MOUNT_POINT
-    fusermount -u LOCAL_MOUNT_POINT
-
-This will mount the remote directory, launch MC, and unmount it when you
-exit.
 
 Chrooting
 ---------
@@ -170,6 +168,27 @@ If you want to use sshfs with multiple users:
 Again, it's important to set the _netdev mount option to make sure the
 network is available before trying to mount.
 
+> Secure user access
+
+When automounting via /etc/fstab, the filesystem will generally be
+mounted by root. By default, this produces undesireable results if you
+wish access as an ordinary user and limit access to other users.
+
+An example mountpoint configuration:
+
+    USERNAME@HOSTNAME_OR_IP:/REMOTE/DIRECTORY  /LOCAL/MOUNTPOINT  fuse.sshfs noauto,x-systemd.automount,_netdev,user,idmap=user,transform_symlinks,identityfile=/home/USERNAME/.ssh/id_rsa,allow_other,default_permissions,uid=USER_ID_N,gid=USER_GID_N 0 0
+
+Summary of the relevant options:
+
+-   allow_other - Allow other users than the mounter (i.e. root) to
+    access the share.
+-   default_permissions - Allow kernel to check permissions, i.e. use
+    the actual permissions on the remote filesystem. This allows
+    prohibiting access to everybody otherwise granted by allow_other.
+-   uid, gid - set reported ownership of files to given values; uid is
+    the numeric user ID of your user, gid is the numeric group ID of
+    your user.
+
 Options
 -------
 
@@ -204,7 +223,9 @@ Troubleshooting
     'sshfs -o sshfs_debug user@server ...') can help in resolving the
     issue.
 -   If you're trying to sshfs into a router running DD-WRT or the like,
-    there is a solution here.
+    there is a solution here. (note that the
+    -osftp_server=/opt/libexec/sftp-server option can be used to the
+    sshfs command in stead of patching dropbear)
 -   Forum thread: sshfs: Connection reset by peer
 
 Note: When providing more than one option for sshfs, they must be comma
@@ -220,7 +241,7 @@ separated. Like so:
 Note:The default value for Subsystem should be
 Subsystem sftp /usr/lib/ssh/sftp-server
 
--   you can check this by typing find /  grep XXXX where XXXX is the
+-   You can check this by typing find /  grep XXXX where XXXX is the
     path of the subsystem
 
 > Thunar has issues with FAM and remote file access
@@ -229,17 +250,45 @@ If you experience remote folders not displaying, getting kicked back to
 the home directory, or other remote file access issues through Thunar,
 replace fam with gamin. Gamin is derived from fam.
 
+> Shutdown hangs when sshfs is mounted
+
+Systemd may hang on shutdown if an sshfs mount was mounted manually and
+not unmounted before shutdown. To solve this problem, create this file
+(as root):
+
+    /etc/systemd/system/killsshfs.service
+
+    [Unit]
+    After=network.target
+
+    [Service]
+    RemainAfterExit=yes
+    ExecStart=-/bin/true
+    ExecStop=-/usr/bin/pkill sshfs
+
+    [Install]
+    WantedBy=multi-user.target
+
+Then enable the service: systemctl enable killsshfs.service
+
 See also
 --------
 
--   sftpman - an sshfs helper tool
+-   sftpman - sshfs helper tool
 -   SSH
 -   How to mount chrooted SSH filesystem, with special care with owners
     and permissions questions.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sshfs&oldid=252884"
+"https://wiki.archlinux.org/index.php?title=Sshfs&oldid=285205"
 
 Category:
 
 -   Secure Shell
+
+-   This page was last modified on 29 November 2013, at 14:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

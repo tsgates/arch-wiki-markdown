@@ -7,32 +7,27 @@ This will enable you to setup virtual servers that provide different
 services as if they were on different machines, with a very little
 overhead. You can get more information about virtual servers here.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preparing the Host                                                 |
-| -   2 Paths of Interest                                                  |
-| -   3 Preparing the Guests                                               |
-|     -   3.1 Preparing the guest installation media                       |
-|         -   3.1.1 Optional: Base variables to follow along with the      |
-|             steps                                                        |
-|         -   3.1.2 Optional: Preparing the guest disk                     |
-|         -   3.1.3 Optional: Link the host and guest pacman cache         |
-|         -   3.1.4 Prepare Vserver                                        |
-|         -   3.1.5 Prepare the guest's filesystem                         |
-|         -   3.1.6 Install the base system                                |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Viewing output from vserver $GuestName start / stop          |
-|     -   4.2 SSH will not start                                           |
-|     -   4.3 SSH immediately terminates the connection                    |
-|                                                                          |
-| -   5 Tips & Trick                                                       |
-|     -   5.1 Network via dummy adapters                                   |
-|                                                                          |
-| -   6 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Preparing the Host
+-   2 Paths of Interest
+-   3 Preparing the Guests
+    -   3.1 Preparing the guest installation media
+        -   3.1.1 Optional: Base variables to follow along with the
+            steps
+        -   3.1.2 Optional: Preparing the guest disk
+        -   3.1.3 Optional: Link the host and guest pacman cache
+        -   3.1.4 Prepare Vserver
+        -   3.1.5 Prepare the guest's filesystem
+        -   3.1.6 Install the base system
+-   4 Troubleshooting
+    -   4.1 Viewing output from vserver $GuestName start / stop
+    -   4.2 SSH will not start
+    -   4.3 SSH immediately terminates the connection
+-   5 Tips & Trick
+    -   5.1 Network via dummy adapters
+-   6 More Resources
 
 Preparing the Host
 ==================
@@ -93,7 +88,7 @@ steps.
     wiki:LVM )
 2.  Create a filesystem on the lvm volume
 3.  mkdir $GuestRoot
-4.  mount /dev/$GuestDisk $GuestRoot
+4.  mount /dev/GuestDisk GuestRoot
 
 > Optional: Link the host and guest pacman cache
 
@@ -102,8 +97,8 @@ steps.
 
 > Prepare Vserver
 
-1.  vserver $GuestName -m skeleton --context $GuestContext --interface
-    $GuestNetDevice:$GuestIP --flags
+1.  vserver GuestName -m skeleton --context GuestContext --interface
+    GuestNetDevice:GuestIP --flags
     lock,virt_mem,virt_uptime,virt_cpu,virt_load,sched_hard,hide_netif
     --initstyle plain
 2.  (optional) cd /etc/vservers/$GuestName/interfaces
@@ -120,7 +115,7 @@ steps.
 
 NOTE : To save some time, it's probably a good idea to create a text
 file containing all the packages to install and call it via "pacman -S
-`cat $GuestPackages` -r $GuestRoot" instead of the following :
+`cat GuestPackages` -r GuestRoot" instead of the following :
 
 1.  pacman -S base -r $GuestRoot
 2.  Optional: If you want to chroot into the newly created guest so as
@@ -183,7 +178,7 @@ Here, you're either using the dummy module to create virtual network
 adapters or created interface aliases via /usr/sbin/ip. I went for the
 former and configured the host as such :
 
-1.  /etc/sysctl.conf : net.ipv4.ip_forward=1  
+1.  /etc/sysctl.d/99-sysctl.conf : net.ipv4.ip_forward=1  
 
 Modify or add that statement to enable routing on the host
 
@@ -205,8 +200,15 @@ Problematic Programs
  linux-verserver.org's networking tutorial  
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_VServer&oldid=253579"
+"https://wiki.archlinux.org/index.php?title=Arch_VServer&oldid=276502"
 
 Category:
 
 -   Virtualization
+
+-   This page was last modified on 24 September 2013, at 09:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

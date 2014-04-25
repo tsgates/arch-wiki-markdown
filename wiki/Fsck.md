@@ -1,17 +1,11 @@
 fsck
 ====
 
-> Summary
+Related articles
 
-Information on how to use fsck.
-
-> Related
-
-Ext4
-
-Btrfs
-
-fstab
+-   Ext4
+-   Btrfs
+-   fstab
 
 fsck stands for "file system check" and it is used to check and
 optionally repair one or more Linux file systems. Normally, the fsck
@@ -24,70 +18,50 @@ procedure for you and will check all relevant partitions on your
 drive(s) automatically on every boot. Hence, there is usually no need to
 resort to the command-line unless necessary.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Checking                                                           |
-| -   2 Tips and tricks                                                    |
-|     -   2.1 Cancelling the process                                       |
-|     -   2.2 Attempt to repair damaged blocks                             |
-|     -   2.3 Repair damaged blocks interactively                          |
-|     -   2.4 Changing the check frequency                                 |
-|     -   2.5 fstab options                                                |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Can't run fsck on a separate /usr partition                  |
-|     -   3.2 ext2fs : no external journal                                 |
-+--------------------------------------------------------------------------+
-
-Checking
+Contents
 --------
 
-The filesystem can be checked by creating a forcefsck file on the
-partition you wish to check later. For example, for the root partition
-it would be:
+-   1 Boot time checking
+    -   1.1 Mechanism
+    -   1.2 Forcing the check
+-   2 Tips and tricks
+    -   2.1 Attempt to repair damaged blocks
+    -   2.2 Repair damaged blocks interactively
+    -   2.3 Changing the check frequency
+    -   2.4 fstab options
+-   3 Troubleshooting
+    -   3.1 Can't run fsck on a separate /usr partition
+    -   3.2 ext2fs : no external journal
 
-    # touch /forcefsck
+Boot time checking
+------------------
 
-When you're ready, reboot and fsck will do the rest. And don't worry,
-this file will be removed automatically when the process is finished.
+> Mechanism
 
-Alternatively, you can also force fsck at boot time by passing, as a
-kernel parameter:
+There are two players involved:
 
-    # fsck.mode=force
+1.  mkinitcpio offers you the option to fsck your root device before
+    mounting it via the fsck hook. If you do this, you should mount root
+    read-write via the appropriate rw option on the kernel commandline.
+2.  systemd will fsck all filesystems assuming three things are true:
+    the filesystem has a fsck pass number greater than 0 (either from
+    /etc/fstab or a user-supplied unit file), the filesystem is not
+    already mounted read-write, and you've not elected to disable fsck
+    entirely via the kernel commandline option fsck.mode=skip.
 
-This will check every filesystem you have on the machine.
+Note:Option 1 is the recommended default, and what you will end up with
+if you follow the Installation Guide. If you want to go with option 2
+instead, you should remove the fsck hook from mkinitcpio.conf and use ro
+on the kernel commandline.
+
+> Forcing the check
+
+You can also force fsck at boot time by passing fsck.mode=force, as a
+kernel parameter. This will check every filesystem you have on the
+machine.
 
 Tips and tricks
 ---------------
-
-> Cancelling the process
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
-  png]                     this article or section  png]
-                           is disputed.             
-                           Reason: Doesn't work.    
-                           Tried adding             
-                           FILES="/etc/e2fsck.conf" 
-                           to mkinitcpio.conf and   
-                           rebuilding the initramfs 
-                           images, but still        
-                           nothing. --DSpider, 12   
-                           January 2013 (Discuss)   
-  ------------------------ ------------------------ ------------------------
-
-To cancel a running fsck check during boot time, create the following
-file:
-
-    /etc/e2fsck.conf
-
-    [options]
-    allow_cancellation = true
-
-Now you should be able to cancel it with Ctrl+C.
 
 > Attempt to repair damaged blocks
 
@@ -153,11 +127,7 @@ Troubleshooting
 1.  Make sure you have the required hooks in /etc/mkinitcpio.conf and
     that you remembered to re-generate your initramfs image after
     editing this file.
-2.  Make sure that the bootloader has ro on the "APPEND" line in
-    /boot/syslinux/syslinux.cfg (for Syslinux). GRUB doesn't need one;
-    it is added automatically when you generate a .cfg. For an
-    explanation as to why you need "ro", see this post.
-3.  Check your fstab! Only the root partition needs "1" at the end,
+2.  Check your fstab! Only the root partition needs "1" at the end,
     everything else should have either "2" or "0". Carefully inspect it
     for other typos, as well.
 
@@ -173,8 +143,15 @@ run the following commands:
     # fsck -p /dev/<partition>;  ## run an fsck to repair the partition
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fsck&oldid=255230"
+"https://wiki.archlinux.org/index.php?title=Fsck&oldid=290872"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 30 December 2013, at 08:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

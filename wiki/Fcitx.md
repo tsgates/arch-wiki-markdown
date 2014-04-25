@@ -6,28 +6,27 @@ aiming at providing environment independent language support for Linux.
 It supports a lot of different languages and also provides many useful
 non-CJK features.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Using FCITX to Input                                               |
-| -   3 Configuration                                                      |
-| -   4 Desktop Environment Integration                                    |
-|     -   4.1 Gnome-Shell                                                  |
-|     -   4.2 KDE                                                          |
-|                                                                          |
-| -   5 Install other components of fcitx                                  |
-|     -   5.1 Keyboard layout integration                                  |
-|     -   5.2 Chinese Input                                                |
-|     -   5.3 Japanese Input Method                                        |
-|     -   5.4 Korean Input Method                                          |
-|     -   5.5 Other language                                               |
-|                                                                          |
-| -   6 Clipboard Access                                                   |
-| -   7 Troubleshooting                                                    |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Using FCITX to Input
+-   3 Configuration
+-   4 Desktop Environment Integration
+    -   4.1 Gnome-Shell
+    -   4.2 KDE
+-   5 Install other components of fcitx
+    -   5.1 Keyboard layout integration
+    -   5.2 Chinese Input
+    -   5.3 Japanese Input Method
+    -   5.4 Korean Input Method
+    -   5.5 Vietnamese Input Method
+    -   5.6 Sinhala Input Method
+    -   5.7 Other language
+-   6 Clipboard Access
+-   7 Troubleshooting
+    -   7.1 Buildin Chinese Pinyin Default NOT ACTIVE
+-   8 See also
 
 Installation
 ------------
@@ -38,8 +37,10 @@ In order to have a better experience in gtk and qt programs (especially
 gtk programs) (e.g. better cursor following) and get rid of many
 unsolvable problems/bugs caused by xim, please install the corresponding
 input method modules for gtk and qt: fcitx-gtk2 (for gtk2 programs),
-fcitx-gtk3 (for gtk3 programs) and fcitx-qt (for qt programs). You can
-install all four of them in a bundle by issuing this command:
+fcitx-gtk3 (for gtk3 programs), fcitx-qt4 (for qt4 programs) and
+fcitx-qt5 (for qt5 programs). You can install four of them (not
+including fcitx-qt5 which is not so popular for now) in a bundle by
+issuing this command:
 
      pacman -S fcitx-im
 
@@ -60,6 +61,13 @@ environment variables. It is quite simple.
      export QT_IM_MODULE=fcitx
      export XMODIFIERS="@im=fcitx"
 
+Warning:Do NOT use .bashrc to do this. It is used for initializing an
+interactive bash session. It is not designed for non-interactive shell,
+nor for X session initialization. Moreover, setting environment
+variables in it can confuse diagnostic tools which are generally
+executed from command line so that these environment will appear as
+being set currectly for them even if they are not for the X session.
+
 Optionally, you can also choose to use xim in your gtk and/or qt
 programs, in which case you need to change the corresponding lines above
 as following:
@@ -73,6 +81,13 @@ application freeze on input method restart. For these xim related
 problems, Fcitx cannot provide any fix or support. This is the same with
 any other input method framework, so please use toolkit (gtk/qt) input
 method modules instead of xim whenever possible
+
+Note:Gtk2 uses /usr/lib/gtk-2.0/2.10.0/immodules.cache as immodule cache
+file since 2.24.20. If you have set GTM_IM_MODULE_FILE environment
+variable or do not use install script of official packages to update the
+cache, please change/clear the environment variable and use
+/usr/bin/gtk-query-immodules-2.0 --update-cache to update immodule
+cache.
 
 -   Re-login to make such environment effective.
 
@@ -109,6 +124,8 @@ Fcitx provides GUI configure tool. You can install either
 kcm-fcitx(based on kcm), fcitx-configtool(based on gtk3), or
 fcitx-configtool-gtk2(based on gtk2, unsupported) from AUR.
 
+Fcitx does not supports manual config while it is GUI.
+
 Desktop Environment Integration
 -------------------------------
 
@@ -118,12 +135,12 @@ You can install kimpanel from extensions.gnome.org or
 gnome-shell-extension-kimpanel-git package in AUR, which provides a
 similar user experience as ibus-gjs.
 
-Since gnome is trying it best to break every input method in GNOME. In
-order to use Fcitx, you need to remove all input source from
-gnome-control-center , clear all the hotkey for inputmethord and use
-this command to disable ibus integration:
+Since GNOME is trying its best to break every single input method, in
+order to use Fcitx, you will need to remove all input sources from
+gnome-control-center, clear all the hotkeys for input methods and issue
+the following command to disable iBus integration:
 
-    $gsettings set org.gnome.settings-daemon.plugins.keyboard active false
+    $ gsettings set org.gnome.settings-daemon.plugins.keyboard active false
 
 > KDE
 
@@ -168,11 +185,19 @@ fcitx-table-extra.
 
 > Japanese Input Method
 
-Install fcitx-anthy or fcitx-mozc.
+Install fcitx-anthy, fcitx-mozc or fcitx-kkc.
 
 > Korean Input Method
 
 Install fcitx-hangul.
+
+> Vietnamese Input Method
+
+Install fcitx-unikey
+
+> Sinhala Input Method
+
+Install fcitx-sayura
 
 > Other language
 
@@ -211,8 +236,6 @@ basefont(in src/xfns.c), if you do not have one matched(like
 terminus、or 75dpi things, you can look the output of `xlsfonts'), XIM
 can not be activated.
 
-  
-
 -   Input method module
 
 Warning: You may still be able to use input method in most programs
@@ -244,6 +267,22 @@ If you cannot enable fcitx in gnome-terminal under gnome and the above
 way doesn't work, try selecting Fcitx in the right click Input method
 menu.
 
+> Buildin Chinese Pinyin Default NOT ACTIVE
+
+If your locale is en_US.UTF-8, fcitx did NOT enable the buildin Chinese
+Pinyin input method by default. There is only fcitx-keyboard-us input
+method enabled. You can get a notice by fcitx-diagnose command like
+this:
+
+       ## Input Methods:
+           1.  Found 1 enabled input methods:
+                   fcitx-keyboard-us
+           2.  Default input methods:
+               **You only have one input method enabled, please add a keyboard input method as the first one and your main input method as the second one.**
+
+Then you should add Pinyin or Shuangpin input method to actived input
+methods by the GUI configure tool.
+
 See also
 --------
 
@@ -252,8 +291,15 @@ See also
 -   Fcitx Wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fcitx&oldid=255883"
+"https://wiki.archlinux.org/index.php?title=Fcitx&oldid=289510"
 
 Category:
 
 -   Internationalization
+
+-   This page was last modified on 19 December 2013, at 20:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

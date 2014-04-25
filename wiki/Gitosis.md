@@ -20,21 +20,18 @@ system account "git" which is then used for all Git access.
 Gitosis provides installation instructions in its README file. This
 guide is based on those instructions.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation and setup                                             |
-| -   2 Configuration                                                      |
-|     -   2.1 Repositories and permissions                                 |
-|     -   2.2 Adding users                                                 |
-|     -   2.3 Public access                                                |
-|     -   2.4 More tricks                                                  |
-|     -   2.5 Non-standard SSH port                                        |
-|     -   2.6 keydir                                                       |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation and setup
+-   2 Configuration
+    -   2.1 Repositories and permissions
+    -   2.2 Adding users
+    -   2.3 Public access
+    -   2.4 More tricks
+    -   2.5 Non-standard SSH port
+    -   2.6 keydir
+-   3 See also
 
 Installation and setup
 ----------------------
@@ -306,7 +303,6 @@ Or you can put this in your ~/.ssh/config file:
 -   [group] blocks are used for both:
     -   defining user groups
     -   defining repository permissions
-
 -   @ is used to define user groups.
 
 You should commit and push any changes you do in this file.
@@ -339,3 +335,10 @@ Retrieved from
 Category:
 
 -   Version Control System
+
+-   This page was last modified on 29 November 2012, at 06:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

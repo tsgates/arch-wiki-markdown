@@ -5,30 +5,26 @@ Bootchart is a handy tool used for profiling the Linux boot sequence,
 generally used for making your computer boot faster. It consists of the
 bootchartd daemon, which records and renders a chart of profiling data.
 
-Note:Bootchart is now a part of systemd. Please see the
-Systemd#Optimization page for more info
+Note:Bootchart is now a part of systemd, see Improve boot
+performance#Analyzing the boot process for details. This page covers the
+original bootchart before it was merged.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Bootchart                                               |
-| -   2 Running Bootchart2                                                 |
-|     -   2.1 Boot loader setup                                            |
-|     -   2.2 Configure Bootchart2                                         |
-|         -   2.2.1 Stop Bootchartd2 after login                           |
-|                                                                          |
-| -   3 Generating a chart                                                 |
-| -   4 Running Bootchart                                                  |
-|     -   4.1 Boot loader setup                                            |
-|                                                                          |
-| -   5 Generating a chart                                                 |
-|     -   5.1 Troubleshooting                                              |
-|     -   5.2 Example bootcharts                                           |
-|         -   5.2.1 Boot in 5 seconds                                      |
-|                                                                          |
-| -   6 Useful links                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing Bootchart
+-   2 Running Bootchart2
+    -   2.1 Boot loader setup
+    -   2.2 Configure Bootchart2
+        -   2.2.1 Stop Bootchartd2 after login
+-   3 Generating a chart
+-   4 Running Bootchart
+    -   4.1 Boot loader setup
+-   5 Generating a chart
+    -   5.1 Troubleshooting
+    -   5.2 Example bootcharts
+        -   5.2.1 Boot in 5 seconds
+-   6 Useful links
 
 Installing Bootchart
 --------------------
@@ -139,8 +135,15 @@ Useful links
 -   Bootchart home page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Bootchart&oldid=244862"
+"https://wiki.archlinux.org/index.php?title=Bootchart&oldid=299491"
 
 Category:
 
 -   Boot process
+
+-   This page was last modified on 21 February 2014, at 22:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

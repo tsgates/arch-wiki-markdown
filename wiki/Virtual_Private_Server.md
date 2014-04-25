@@ -1,14 +1,9 @@
 Virtual Private Server
 ======================
 
-> Summary
+Related articles
 
-This article discusses the use of Arch Linux on Virtual Private Servers,
-and includes some fixes and installation instructions specific to VPSes.
-
-> Related
-
-Comprehensive Server Guide
+-   Comprehensive Server Guide
 
 From Wikipedia:Virtual private server:
 
@@ -20,25 +15,32 @@ functionally equivalent to a separate physical computer, is dedicated to
 the individual customer's needs, has the privacy of a separate physical
 computer, and can be configured to run server software.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Providers that offer Arch Linux                                    |
-| -   2 Installation                                                       |
-|     -   2.1 KVM                                                          |
-|     -   2.2 OpenVZ                                                       |
-|         -   2.2.1 Getting a 2010.05 Image Up To Date                     |
-|         -   2.2.2 Moving your VPS from network configuration in rc.conf  |
-|             to netcfg (tested with OpenVZ)                               |
-|         -   2.2.3 Moving your VPS from initscripts to systemd            |
-|                                                                          |
-|     -   2.3 Xen                                                          |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 OpenVZ: kernel too old for glibc                             |
-|     -   3.2 SSH fails: PTY allocation request failed on channel 0        |
-+--------------------------------------------------------------------------+
+This article discusses the use of Arch Linux on Virtual Private Servers,
+and includes some fixes and installation instructions specific to VPSes.
+
+Warning:It appears that systemd does not support Linux 2.6.32 since
+systemd-205. Since many container-based virtualization environments rely
+on older kernels (the latest OpenVZ runs on a modified RHEL6-2.6.32 for
+example), it may be impossible to keep an Arch Linux install up to date.
+Most of the instructions regarding OpenVZ on this page were written for
+systemd-204 and earlier.
+
+Contents
+--------
+
+-   1 Providers that offer Arch Linux
+-   2 Installation
+    -   2.1 KVM
+    -   2.2 OpenVZ
+        -   2.2.1 Updating a 2010.05 installation image
+        -   2.2.2 Moving your VPS from network configuration in rc.conf
+            to netcfg (tested with OpenVZ)
+        -   2.2.3 Moving your VPS from initscripts to systemd
+    -   2.3 Xen
+    -   2.4 Converting OpenStack and Xen components to systemd
+-   3 Troubleshooting
+    -   3.1 OpenVZ: kernel too old for glibc
+    -   3.2 SSH fails: PTY allocation request failed on channel 0
 
 Providers that offer Arch Linux
 -------------------------------
@@ -60,258 +62,343 @@ Locations
 
 Notes
 
-123 Systems
+A MilesWeb VPS
 
-2010.05 i686/x86_64
+2013.10.14
 
 OpenVZ
 
-Dallas, TX
+Europe, India, US
+
+Latest Arch Linux available on OpenVZ platform. Quick setup, 24/7
+support via Live Chat, Email and Phone. VPS starts from $20 / mo
+
+123 Systems
+
+2010.05.xx
+
+OpenVZ
+
+Dallas, US-TX
 
 Arch available as a selection upon reinstall. Very old (2.6.18-308)
-kernel - See OpenVZ troubleshooting.
+kernel - See OpenVZ troubleshooting. Limited information available
+before purchase. Cannot verify Arch Linux version without purchase.
+
+AUSWEB
+
+Latest Only (clarify?)
+
+VMware ESXi
+
+Sydney, AU
+
+Latest ISO (clarify?) of Arch Available. Enterprise Service.
+
+affinity.net.nz
+
+2013.08.01
+
+KVM
+
+Auckland, New Zealand (NZ)
+
+IRC channel is #affinity on ircs.kiwicon.org
 
 Afterburst
 
-2012.12.01 i686/x86_64
+2012.12.01
 
 OpenVZ
 
-Miami (USA), Falkenstein (Germany)
+Miami, US-FL; Nuremberg, DE
 
 Formerly FanaticalVPS, kernel version depends on what node your VPS is
 on, the ones in Miami are fine (2.6.32-042stab072.10) but some of the
 ones in Germany require a custom glibc.
 
-AlienVPS
+BuyVM
 
-2010.05
+2013.07.01
 
-Xen, KVM
+KVM
 
-Los Angeles, New York
+LA, Buffalo NY
 
-Clodo.ru
+Must chose a different OS at sign up. Once accessible, choose to mount
+the latest Arch ISO and reboot to install manually.
 
-2011.??
+DigitalOcean
 
-Xen
+2013.05.xx
 
-Moscow
+KVM
 
-Can pay per hour. Lists an invalid release version of the installer.
+New York, US-NY; San Francisco, US-CA; Amsterdam, AN
+
+Uses a custom kernel. You can run your own kernel with a kexec hack.
+Every server uses SSDs by default.
 
 Edis
 
-2011.08 i686/x86_64
+2013.03.01
 
-vServer, KVM
+vServer, KVM, OpenVZ
 
-Austria, Chile, Germany, France, Hong Kong, Italy, Iceland, Poland,
-Sweden, Switzerland, Spain, UK, USA
+Multiple international locations.
 
-EOReality
-
-(?) i686/x86_64
-
-OpenVZ
-
-Chicago
-
-Need to use special glibc-vps repo for this provider . See OpenVZ
-troubleshooting for instructions. You will also need to remove heimdal.
+Also offer dedicated server options as well as an "off-shore" location
+at the Isle of Man (IM).
 
 DirectVPS
 
-2012.09 x86_64
+2014.01.xx
+
+OpenVZ
+
+Amsterdam, AN; Rotterdam, AN
+
+Dutch language site. Version verifyable by clicking through
+https://www.directvps.nl/try-1.plp?p=31
+
+Gandi
+
+2013.10.27
 
 Xen
 
-Amsterdam, Rotterdam
+Paris, FR; Baltimore, MD, US; Bissen, LU
 
-Generation-Host
-
-2012.07
-
-Xen
-
-Chicago IL, Clifton NJ and Toronto ON Canada
+Very granular scaling of system resources (e.g. RAM, disk space);
+IPv6-only option available; you can supply your own install image,
+version based on keyring package version
 
 GigaTux
 
-2011.08 x86_64
+2013.06.01
 
 Xen
 
-Chicago, Frankfurt, Israel, London, San Jose
+Chicago, US-IL; Frankfurt, DE; London, GB; San Jose, US-CA
 
 Host Virtual
 
-2011.08
+2011.08.19
 
-Xen
+KVM
 
-Amsterdam, Chennai (Madras), Chicago, Dallas, Hong Kong, London, Los
-Angeles, New York, Paris, Reston, San Jose
+Multiple International Locations
+
+Appears to use KVM virtualization. Site lists "Xen based virtualization"
+and features lists ability to install from ISO.
 
 Hostigation
 
-2010.05 i686
+2010.05 i686
 
 OpenVZ, KVM
 
-Charlotte, Los Angeles
+Charlotte, US-NC; Los Angeles, US-CA
 
 You can migrate to x86_64.
 
 IntoVPS
 
-2012.05 i686/x86_64
+2012.09.xx
 
 OpenVZ
 
-Amsterdam, Bucharest, Dallas, Fremont, London
+Amsterdam, NA; Bucharest, RO; Dallas, US-TX; Fremont, US-CA; London, GB
+
+Blog has not been updated since September, 2012 which included the Arch
+Linux update.
+
+Leapswitch Networks
+
+[2013.10.xx]
+
+OpenVZ/KVM
+
+USA, India, Portugal, Spain, Ukraine, Germany
+
+ArchLinux currently available in Control Panel for reinstall, not on
+order form.
 
 Linode.com
 
-2012.07
-
-Xen
-
-Atlanta, Dallas, Fremont, London, Newark, Tokyo
-
-Uses a custom kernel; do not install the linux package.
-
-Lylix
-
-2007.08
-
- ?
-
- ?
-
-Node Deploy
-
- ?
-
-OpenVZ, KVM
-
-LA, Germany
-
-unmanaged, solusvm server manager
-
-Netcup
-
-2011.10 x86_64/2012.11 x86_64
-
-vServer, KVM
-
-Germany
-
-OnePoundWebHosting
-
-2012.09 x86_64
-
-Xen
-
-UK
-
-OpenVZ.ca
-
-2010.05 i686/x86_64
+2013.06.xx
 
 OpenVZ
 
-Canada
+Tokyo, JP; Multiple US; London, GB
+
+To run a custom kernel, install linux-linode. (linux will break on a
+32-bit Linode.)
+
+Lylix
+
+2013.xx.xx
+
+Unlisted
+
+Unlisted
+
+Core2Duo and Woodcrest based processors.
+
+Node Deploy
+
+xxxx.xx.xx
+
+OpenVZ, KVM
+
+Germany (DE); Los Angeles, US-CA; Atlanta, US-GA; Phoenix, US-AZ
+
+"At NodeDeploy we support virtually every linux distribution." Arch
+Linux is listed under their Operating Systems. No version information.
+
+Netcup
+
+2012.11.xx
+
+KVM
+
+Germany (DE)
+
+German language site.
+
+OnePoundWebHosting
+
+2013.05.xx
+
+Xen PV, Xen HVM
+
+United Kingdom (UK)
+
+They are a registrar too. Unable to verify server locations.
 
 proPlay.de
 
-2011.10 i686/x86_64
+2012.12.xx
 
 OpenVZ, KVM
 
-Germany
+Germany (DE)
+
+German language site.
+
+QuickVZ
+
+2013.10
+
+OpenVZ, Xen
+
+Amsterdam, Netherlands (NL); Stockholm, Sweden (SE)
+
+Provide hardened Arch Linux images along with Enterprise services (e,g.
+VPN, Virtual Private LAN Service (VPLS) and Virtual Routers.
 
 Rackspace Cloud
 
-2012.08
+2013.6
 
 Xen
 
-Chicago, Dallas, London
+Multiple international locations
 
-Billed per hour.
+Billed per hour. Use their "next gen" VPSes (using the
+mycloud.rackspace.com panel); the Arch image on the first gen Rackspace
+VPSes is out of date.
 
 RamHost.us
 
-2012.12
+2013.05.01
 
 OpenVZ, KVM
 
-Atlanta, England, Germany, Los Angeles
+Los Angeles, US-CA; Great Britain (GB); Atlanta, US-GA; Germany (DE)
 
-You can request a newer iso on IRC.
+You can request a newer ISO on RamHost's IRC network.
+
+RamNode
+
+2013.07.01
+
+SSD and SSD Cached: OpenVZ, KVM
+
+Seattle, WA USA, Atlanta, GA USA
+
+You can request Host/CPU passthrough with KVM service. Customer service
+has been prompt and professional. Regular discount codes can be found
+(15-35% off). Modern hardware. Competitive pricing (before discounts).
 
 Tilaa
 
-2012.12 i686/x86_64
+2013.06.01
 
 KVM
 
-Amsterdam
+Amsterdam, NL
+
+English or Dutch language site.
 
 TransIP
 
-2013.01.04
+2013.05.01
 
 KVM
 
-Amsterdam
+Amsterdam, NL
+
+English language site. Registrar.
 
 XenVZ
 
-2009.12 x86_64
+2009.12.07
 
 OpenVZ, Xen
 
-UK?
+United Kingdom (UK), United States (US)
+
+Hardware
 
 Virpus
 
-2010.05 x86_64
+2013.05.xx
 
 OpenVZ, Xen
 
-Kansas City
+Kansas City, US-KS; Los Angeles, US-CA
 
 Vmline
 
-2012.08.04-dual.iso
+2013.09.01
 
-Xen-HVM
+KVM, OpenVZ
 
-Poland - Kraków
+Kraków, PL
 
-S-Net reseller. It's probably imposible to install i686 due to lack of
-xen_netfront and xen_blkfront modules
+S-Net reseller. Full virtualization. Polish language site.
+
+VPSBG.eu
+
+2013.10
+
+OpenVZ
+
+Sofia, Bulgaria
+
+Offshore VPS in Bulgaria - anonymous registrations and Bitcoin are
+accepted.
 
 VPS6.NET
 
-2010.05 i686/x86_64 OpenVZ, 2012.01 x86_64 Xen
+2013.01.xx 
 
-OpenVZ, Xen
+OpenVZ, Xen, HVM-ISO
 
-Germany, Romania, Turkey, USA
+Multiple US; Frankfurt, DE; Bucharest, RO; Istanbul, TR
 
-UK2.net
-
-2010.05 i686/x86_64
-
-Xen
-
-United Kingdom
-
-Appears to use a custom kernel; do not install the linux package.
+Registrar.
 
 Installation
 ------------
@@ -326,35 +413,36 @@ Installation
                            VPSes? (Discuss)         
   ------------------------ ------------------------ ------------------------
 
-See KVM#Preparing an (Arch) Linux guest.
+See QEMU#Preparing an (Arch) Linux guest.
 
 > OpenVZ
 
-Getting a 2010.05 Image Up To Date
+Updating a 2010.05 installation image
 
-These instructions you have a 2010.05 image from your VPS provider and
-you'd like to get it up to scratch. The biggest work involves preparing
-/lib for the symlink upgrade (glibc 2.16, and later filesystem 2013.01).
+These instructions assume you have a 2010.05 image from your VPS
+provider and you would like to get it updated. The biggest work involves
+preparing /lib for the symlink upgrade (glibc 2.16, and later filesystem
+2013.01).
 
 Warning:If you are on a older kernel than 2.6.32, please refer further
-down the page to get the glibc-vps repo working (just add the repo and
-you can follow these steps).
+down the page to get the glibc-vps repository working (just add the
+repository and you can follow these steps).
 
-To start, grab the latest busybox from
+To start, grab the latest BusyBox from
 http://busybox.net/downloads/binaries/latest/. This allows you to force
-glibc (losing /lib temporarily) without losing your OS (busybox comes
+glibc (losing /lib temporarily) without losing your OS (BusyBox comes
 with its own GNU tools which are statically linked).
 
-    wget http://busybox.net/downloads/binaries/latest/busybox-i686
-    chmod +x busybox-i686
+    # wget http://busybox.net/downloads/binaries/latest/busybox-i686
+    # chmod +x busybox-i686
 
-First off you can get a list of packages that own files in /lib with the
+First, you can get a list of packages that own files in /lib with the
 following command:
 
-    pacman -Qo /lib/* | cut -d' ' -f 5 | egrep -v 'glibc' | uniq | xargs
+    $ pacman -Qo /lib/* | cut -d' ' -f 5 | egrep -v 'glibc' | uniq | xargs
 
-For the current 2010.05 that comes straight off of ibiru's page, these
-are the packages that were required to be removed for me:
+For the current 2010.05 that comes from ibiru's page, these are the
+packages that were required to be removed for me:
 
     pacman -S acl attr util-linux-ng bzip2 libcap e2fsprogs libgcrypt libgpg-error udev readline ncurses pam pcre popt procps readline shadow e2fsprogs sysfsutils udev util-linux-ng sysvinit coreutils
 
@@ -363,38 +451,42 @@ You may have to remove /lib/udev/devices/loop0 (a simple rm works).
 After the upgrade finishes, you must remove any extra empty directories
 in /lib (/lib/modules is the common offender):
 
-    rm -rf /lib/modules
+    # rm -rf /lib/modules
 
-Install tzdata to fix some dependencies and remove
+Install tzdata to fix some dependencies, and remove
 /etc/profile.d/locale.sh:
 
-    pacman -S tzdata
-    rm /etc/profile.d/locale.sh
+    # pacman -S tzdata
+    # rm /etc/profile.d/locale.sh
 
 Remove /var/run (you should have nothing running that matters):
 
-    rm -rf /var/run
+    # rm -rf /var/run
 
-Force glibc (this will pull in the latest filesystem, but BREAK
-everything (other than busybox)):
+Force glibc, which will pull in the latest filesystem package, but will
+BREAK everything (other than BusyBox):
 
-    pacman -S --force glibc
+    # pacman -S --force glibc
 
-Now you will have a broken system, so first thing symlink /usr/lib to
-/lib with busybox's ln:
+Now, you will have a broken system, so symlink /usr/lib to /lib with
+BusyBox's ln program:
 
-    ./busybox-i686 ln -s /usr/lib /lib
+    # ./busybox-i686 ln -s /usr/lib /lib
 
 And you should have a fully functional system where you can now update
 pacman.
 
-    pacman -S pacman; pacman-key --init; pacman-key --populate archlinux; pacman-db-upgrade; pacman -Syy
+    # pacman -S pacman
+    # pacman-key --init
+    # pacman-key --populate archlinux
+    # pacman-db-upgrade
+    # pacman -Syy
 
-Now, update initscripts to get iproute2:
+Now, update initscripts to get the iproute2 package:
 
-    pacman -S iniscripts
+    # pacman -S initscripts
 
-Install makedev:
+Install the makedev package:
 
     pacman -S makedev
 
@@ -414,7 +506,7 @@ Comment the following lines in /etc/inittab:
 
 Finally, you should be able to upgrade the whole system:
 
-    pacman -Su
+    # pacman -Syu
 
 You may run into some issues with krb5 and heimdal, as krb5 no longer
 provides+conflicts+replaces heimdal
@@ -423,18 +515,17 @@ The old openssh depends on heimdal (and the new openssh depends on
 krb5), so force install krb5, then upgrade openssh, then remove heimdal
 and reinstall krb5.
 
-    pacman -S --force krb5
-    pacman -S openssh openssl
-    pacman -R heimdal
-    pacman -S krb5
+    # pacman -S --force krb5
+    # pacman -S openssh openssl
+    # pacman -R heimdal
+    # pacman -S krb5
 
-Fix syslog-ng (set the src to unix-dgram("/dev/log") and add --no-caps
-to both check and run args in /etc/conf.d/syslog-ng).
+Fix syslog-ng. Set the src to unix-dgram("/dev/log") and add --no-caps
+to both check and run args in /etc/conf.d/syslog-ng.
 
-Make sure your rc.conf isn't messed up with broken network definitions,
-or else be sure serial access works on your VPS before you reboot.
-
-  
+Make sure your /etc/rc.conf is not messed up with broken network
+definitions, or else be sure serial access works on your VPS before you
+reboot.
 
 Moving your VPS from network configuration in rc.conf to netcfg (tested with OpenVZ)
 
@@ -449,6 +540,8 @@ Moving your VPS from network configuration in rc.conf to netcfg (tested with Ope
     INTERFACE='venet0'
     IP='static'
     IPCFG=(
+    #default
+    'addr add 127.0.0.1/32 broadcast 0.0.0.0 dev venet0'
     #IPv4 address
     'addr add xxx.xxx.xxx.xxx/32 broadcast 0.0.0.0 dev venet0'
     #IPv4 route
@@ -590,6 +683,39 @@ Uninstall initscripts
 See Xen#Arch as Xen guest (PVHVM mode) and/or Xen#Arch as Xen guest (PV
 mode).
 
+> Converting OpenStack and Xen components to systemd
+
+There are three components that need to be enabled in systemd when using
+a VPS based on OpenStack/Xen, such as Rackspace NextGen Cloud. The
+current version of xe-guest-utilities contains two of these:
+xe-linux-distribution and xe-daemon.
+
+You will need to create a custom service file for the OpenStack
+nova-agent, as the current version 0.0.1.37 only comes with a sysvinit
+start-up script.
+
+    /etc/systemd/system/nova-agent.service
+
+    [Unit]
+    Description=nova-agent service
+    After=xe-daemon.service
+
+    [Service]
+    Environment=LD_LIBRARY_PATH=/usr/share/nova-agent/0.0.1.37/lib
+    ExecStart=usr/bin/nova-agent -n -l info /usr/share/nova-agent/nova-agent.py
+
+    [Install]
+    WantedBy=multi-user.target
+
+Once these steps are done, you can continue with converting the server
+from sysvinit to systemd.
+
+Make sure to enable the following services:
+
+    # systemctl enable xe-linux-distribution
+    # systemctl enable xe-daemon
+    # systemctl enable nova-agent
+
 Troubleshooting
 ---------------
 
@@ -608,7 +734,7 @@ glibc (because of dependencies in glibc).
 Arch Template Used:
 https://dev.archlinux.org/~ibiru/openvz/2010.05/arch-2010.05-i686-minimal.tar.gz
 
-Note:for installs that have not been updated to glibc-2.16, it will save
+Note:For installs that have not been updated to glibc-2.16, it will save
 you lots of time and prevent major breakage to do:
 
     pacman -U https://dev.archlinux.org/~ibiru/openvz/glibc-vps/i686/glibc-2.16.0-101-i686.pkg.tar.xz
@@ -617,22 +743,21 @@ or
 
     pacman -U https://dev.archlinux.org/~ibiru/openvz/glibc-vps/x86_64/glibc-2.16.0-101-x86_64.pkg.tar.xz
 
-Add a single "-d" if needed. The instructions below assume that this has
+Add a single -d if needed. The instructions below assume that this has
 been done.
 
-  
- Following similar instructions from DeveloperWiki:usrlib.
+Following similar instructions from DeveloperWiki:usrlib.
 
 Try doing the following to fix it:
 
 1) Edit /etc/pacman.conf and add the following repository ABOVE [core]:
 
-for 32-bit:
+For 32-bit:
 
     [glibc-vps]
     Server = https://dev.archlinux.org/~ibiru/openvz/glibc-vps/i686
 
-for 64-bit:
+For 64-bit:
 
     [glibc-vps]
     Server = https://dev.archlinux.org/~ibiru/openvz/glibc-vps/x86_64
@@ -650,40 +775,38 @@ following repository ABOVE [core]:
 
 5) Replace /etc/pacman.conf with /etc/pacman.conf.pacnew (run as root):
 
-    mv /etc/pacman.conf.pacnew /etc/pacman.conf
+    # mv /etc/pacman.conf.pacnew /etc/pacman.conf
 
 6) Upgrade your whole system with new packages again pacman -Syu
 
-If you get the following or similar error:
+If you get the following error or a similar error:
 
     initscripts: /etc/profile.d/locale.sh exists in filesystem
 
 Simply delete that file (e.g., rm -f /etc/profile.d/locale.sh), then run
 pacman -Syu again.
 
-  
- If you get the following or similar error:
+If you get the following error or a similar error:
 
     filesystem: /etc/mtab exists in filesystem
 
 Run pacman -S filesystem --force
 
-  
- If you get the following or similar error:
+If you get the following error or a similar error:
 
     libusb-compat: /usr/bin/libusb-config exists in filesystem
 
 Run pacman -S libusb and then pacman -S libusb-compat
 
-7) Before rebooting, you need to install the makedev package by running
-pacman -S makedev.
+7) Before rebooting, you need to install the makedev package from the
+official repositories by running pacman -S makedev.
 
 8) Add MAKEDEV to /etc/rc.local:
 
     /usr/sbin/MAKEDEV tty
     /usr/sbin/MAKEDEV pty
 
-9) Edit /etc/inittab, comment out the following lines (otherwise you
+9) Edit /etc/inittab, comment out the following lines; otherwise, you
 will see errors in /var/log/errors.log):
 
     #c1:2345:respawn:/sbin/agetty -8 -s 38400 tty1 linux
@@ -693,17 +816,19 @@ will see errors in /var/log/errors.log):
     #c5:2345:respawn:/sbin/agetty -8 -s 38400 tty5 linux
     #c6:2345:respawn:/sbin/agetty -8 -s 38400 tty6 linux
 
-10) To enable the use of the hostname command, install the package
-inetutils from the official repositories.
+10) To enable use of the hostname command, install the package inetutils
+from the official repositories.
 
-11) Remove disabling of SysRq key and setup of core dump pattern since
-this is blocked by OpenVZ and causes errors
+11) Remove disabling of the SysRq key and setup of core dump pattern
+because this is blocked by OpenVZ and causes errors.
 
-Edit /etc/sysctl.conf, comment out the following line:
+Because sysctl does not use /etc/sysctl.conf any more[1], you must
+transfer all settings to /etc/sysctl.d/99-sysctl.conf (or any other file
+in /etc/sysctl.d/; however, do not transfer the following line:
 
-    #kernel.sysrq = 0
+    kernel.sysrq = 0
 
-Edit /usr/lib/sysctl.d/coredump.conf, comment out the following line:
+Edit /usr/lib/sysctl.d/coredump.conf and comment out the following line:
 
     #kernel.core_pattern=|/usr/lib/systemd/systemd-coredump %p %u %g %s %t %e
 
@@ -713,26 +838,32 @@ Enjoy & thank ioni if you happen to be in #archlinux
 
 > SSH fails: PTY allocation request failed on channel 0
 
-Some VPSes have an outdated rc.sysinit. You may be able to login via
-serial console or with
+Some VPSes have an outdated /etc/rc.sysinit. You may be able to log in
+via serial console or with the following command:
 
-    > ssh root@broken.server '/bin/bash -i'
+    $ ssh root@broken.server '/bin/bash -i'
 
 Then run the following:
 
     # mv /etc/rc.sysinit.pacnew /etc/rc.sysinit
     # reboot
 
-Once it’s working, you should be able to comment out the udevd_modprobe
-line in rc.sysinit to save a bit of RAM the next time you reboot.
+Once it is working, you should be able to comment out the udevd_modprobe
+line in /etc/rc.sysinit to save a bit of RAM the next time you reboot.
 
-If the above doesn’t work, take a look at
-http://fsk141.com/fix-pty-allocation-request-failed-on-channel-0.
+If the above does not work, take a look at this guide.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Virtual_Private_Server&oldid=252913"
+"https://wiki.archlinux.org/index.php?title=Virtual_Private_Server&oldid=305760"
 
 Categories:
 
 -   Getting and installing Arch
 -   Virtualization
+
+-   This page was last modified on 20 March 2014, at 02:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -6,44 +6,35 @@ the Arch Linux community. Feel free to add or modify any terms, but
 please use that particular section's edit option. If you decide to add
 one, please put it in alphabetical order.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Arch Linux                                                         |
-| -   2 ABS                                                                |
-| -   3 AUR                                                                |
-| -   4 PKGBUILD                                                           |
-| -   5 TU, Trusted User                                                   |
-| -   6 TUR, Trusted User Repository (obsolete)                            |
-| -   7 bbs                                                                |
-| -   8 community/[community]                                              |
-| -   9 core/[core]                                                        |
-| -   10 custom/user repository                                            |
-| -   11 developer                                                         |
-| -   12 devfs                                                             |
-| -   13 /etc/network-profiles                                             |
-| -   14 /etc/rc.conf                                                      |
-| -   15 /etc/rc.d                                                         |
-| -   16 /etc/rc.local                                                     |
-| -   17 extra/[extra]                                                     |
-| -   18 hwd                                                               |
-| -   19 hwdetect                                                          |
-| -   20 initramfs                                                         |
-| -   21 initrd                                                            |
-| -   22 makepkg                                                           |
-| -   23 namcap                                                            |
-| -   24 package                                                           |
-| -   25 pacman                                                            |
-| -   26 pacman.conf                                                       |
-| -   27 release/[release]                                                 |
-| -   28 repository/repo                                                   |
-| -   29 RTFM                                                              |
-| -   30 taurball                                                          |
-| -   31 testing/[testing]                                                 |
-| -   32 udev                                                              |
-| -   33 wiki                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Arch Linux
+-   2 ABS
+-   3 ARM
+-   4 AUR
+-   5 PKGBUILD
+-   6 TU, Trusted User
+-   7 bbs
+-   8 community/[community]
+-   9 core/[core]
+-   10 custom/user repository
+-   11 Developer
+-   12 extra/[extra]
+-   13 initramfs
+-   14 initrd
+-   15 makepkg
+-   16 namcap
+-   17 package
+-   18 Package maintainer
+-   19 pacman
+-   20 pacman.conf
+-   21 repository/repo
+-   22 RTFM
+-   23 taurball
+-   24 testing/[testing]
+-   25 udev
+-   26 wiki
 
 Arch Linux
 ----------
@@ -73,6 +64,13 @@ The Arch Build System (ABS) is useful to:
 -   Getting kernel modules working with your custom kernel
 
 ABS is not necessary to use Arch Linux, but it is useful.
+
+ARM
+---
+
+The Arch Rollback Machine is a mirror that does not remove old versions
+of the packages and is thus very useful if you need to downgrade your
+system.
 
 AUR
 ---
@@ -107,14 +105,6 @@ majority vote by the existing TUs.
 
 Trusted users follow the AUR Trusted User Guidelines and TU by-laws
 
-TUR, Trusted User Repository (obsolete)
----------------------------------------
-
-Before the AUR and [community], TUs had their own repositories with
-applications that were not available in the official ones. Anyone can
-make a repository, but TURs were thought to be of higher quality,
-because TUs are voted for their knowledge and effort.
-
 bbs
 ---
 
@@ -148,74 +138,12 @@ repository.
 
 See Custom local repository.
 
-developer
+Developer
 ---------
 
 Half-gods working to improve Arch for no financial gain. Developers are
 outranked only by our gods, Judd Vinet and Aaron Griffin, who in turn
 are outranked by tacos.
-
-devfs
------
-
-The device file system. DevFS handles, dynamically, the creation,
-deletion and permission management of device nodes in the /dev
-directory. It was the default kernel device manager in Arch Linux until
-release 0.7. Now DevFS is deprecated and is in the process of being
-removed from the Linux kernel. DevFS has been superseded by udev.
-
-Note that Arch installation CDs prior to 0.7.1 use the devfs naming
-scheme when creating /etc/fstab entries.
-
-/etc/network-profiles
----------------------
-
-In this, you can create various network configurations.
-
-This is very useful for laptop users that switch networks very often,
-for example between a home and an office network.
-
-Additionally it can be used with wpa_supplicant that can manage all of
-you wireless networks. For each configuration, you need to make a
-configuration file. The easiest way to do this is by copying the
-template. After you are done with this, you need to enable these in
-/etc/rc.conf.
-
-After applying changes, you should restart your network by running the
-following command as root:
-
-     /etc/rc.d/network restart
-
-/etc/rc.conf
-------------
-
-/etc/rc.conf was the main system configuration file for Arch Linux. It
-allows you to set your network and daemons to run at bootup. Detailed
-description of the configuration options is given here: Rc.conf
-
-/etc/rc.d
----------
-
-/etc/rc.d is a directory that contains the scripts that handle starting
-and stopping of services. On every boot, the services that are present
-in the DAEMONS= array in /etc/rc.conf are started by running the
-corresponding scripts in /etc/rc.d.
-
-It is also possible to control the services from the command line (as
-root), e.g.,
-
-    /etc/rc.d/cupsd start
-
-would start the CUPS daemon. Typical arguments for the scripts are
-start, stop, and restart.
-
-/etc/rc.local
--------------
-
-This script is run at the end of every boot. It is intended for
-miscellaneous commands that you might want to execute before the login
-prompt. It is not recommended to add any services or settings in
-/etc/rc.local that could be started or set from /etc/rc.conf instead.
 
 extra/[extra]
 -------------
@@ -227,27 +155,6 @@ repository is constantly growing with the help of packages submitted
 from our strong community. This is where desktop environments, window
 managers and common programs are found.
 
-hwd
----
-
-Hwd; hardware detect for Arch Linux, is for both devfs and udev device
-systems and also for kernels 2.4.x and 2.6.x. Instead of running an auto
-configure script which may be expected, Hwd (/usr/bin/hwd) does not
-change existing configurations. It detects hardware and modules, and
-provides information on how to make changes manually. This allows the
-user to have control over his or her system; the basic philosophy of
-Arch Linux.
-
-hwd is available in the AUR.
-
-hwdetect
---------
-
-hwdetect is a hardware detection script primarily used to load or list
-modules for use in /etc/rc.conf or /etc/mkinitcpio.conf. The script
-makes use of information exported by the sysfs subsystem employed by the
-Linux kernel.
-
 initramfs
 ---------
 
@@ -256,17 +163,7 @@ See mkinitcpio.
 initrd
 ------
 
-The special file /dev/initrd is a read-only block device. Device
-/dev/initrd is a RAM disk that is initialized (e.g. loaded) by the boot
-loader before the kernel is started. The kernel then can use the block
-device /dev/initrd's contents for a two phased system boot-up.
-
-In the first boot-up phase, the kernel starts up and mounts an initial
-root file-system from the contents of /dev/initrd (e.g. RAM disk
-initialized by the boot loader). In the second phase, additional drivers
-or other modules are loaded from the initial root device's contents.
-After loading the additional modules, a new root file system (i.e. the
-normal root file system) is mounted from a different device.
+Obsolete. Nowadays often used as a synonym for initramfs.
 
 makepkg
 -------
@@ -309,9 +206,9 @@ A package is an archive containing
 -   (optionally) extra files to make your life easier, such as a
     start/stop script
 
-Arch's package manager pacman can install, update and remove programs
-cleanly those packages. Using packages instead of compiling and
-installing programs yourself has various benefits:
+Arch's package manager pacman can install, update, and remove those
+packages. Using packages instead of compiling and installing programs
+yourself has various benefits:
 
 -   easily updatable: pacman will update existing packages as soon as
     updates are available
@@ -324,6 +221,24 @@ installing programs yourself has various benefits:
 Note:Different GNU/Linux distributions use different packages and
 package managers, meaning that you cannot use pacman to install a Debian
 package on Arch.
+
+Package maintainer
+------------------
+
+The role of the package maintainer is to update packages as new versions
+become available upstream and to field support questions relating to
+bugs in said packages. The term may be applied to any of the following:
+
+-   A core Arch Linux developer who maintains a software package in one
+    of the official repositories (core, extra, or testing).
+-   A Trusted User of the community who maintains software packages in
+    the unsupported/unofficial community repository.
+-   A normal user who maintains a PKGBUILD and local source files in the
+    AUR.
+
+The maintainer of a package is the person currently responsible for the
+package. Previous maintainers should be listed as contributors in the
+PKGBUILD along with others who have contributed to the package.
 
 pacman
 ------
@@ -354,16 +269,6 @@ This is the configuration file of pacman. It is located in /etc. For a
 full explanation of its powers, type this at the command line:
 
     man pacman.conf
-
-release/[release]
------------------
-
-The [release] repository follows the semi-regular snapshot releases and
-does not update until the next snapshot/ISO has been released. For
-example, the [release] repository will point to all packages on the 0.5
-ISO until we release 0.6; then it will point to 0.6 packages until 0.7
-is released. This is useful if you only want to update your system when
-a new release is available.
 
 repository/repo
 ---------------
@@ -418,7 +323,7 @@ taurball
 
 The tarballed PKGBUILD and local source files that are required by
 makepkg to create an installable binary package. The name is derived
-from the practice of uploading such tarballs to the AUR, whence
+from the practice of uploading such tarballs to the AUR, hence
 "tAURball".
 
 testing/[testing]
@@ -452,8 +357,15 @@ This! A place to find documentation about Arch Linux. Anyone can add and
 modify the documentation.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_Terminology&oldid=241341"
+"https://wiki.archlinux.org/index.php?title=Arch_Terminology&oldid=305052"
 
 Category:
 
 -   About Arch
+
+-   This page was last modified on 16 March 2014, at 12:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -4,10 +4,16 @@ Xorg multiseat
   ------------------------ ------------------------ ------------------------
   [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
   ng]                      needs expansion.         ng]
-                           Reason: Is it possible   
-                           login two users without  
-                           keyin user name and      
-                           password? (Discuss)      
+                           Reason: Show how         
+                           PulseAudio can be        
+                           configured for multiple  
+                           users without running    
+                           PulseAudio system-wide.  
+                           Explain how Multiseat be 
+                           done using only one      
+                           video card (and/or X     
+                           Server) and without      
+                           Xephyr. (Discuss)        
   ------------------------ ------------------------ ------------------------
 
 Multiseat is a certain setup where multiple users work simultaneously on
@@ -18,51 +24,44 @@ two mice. The advantages are quite obvious:
 -   Less hardware to purchase
 -   All the cool kids do it
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Requirements                                                       |
-|     -   1.1 Keyboards and mice                                           |
-|     -   1.2 Graphics hardware                                            |
-|     -   1.3 Processors and memory                                        |
-|     -   1.4 Software                                                     |
-|     -   1.5 Some X knowledge                                             |
-|                                                                          |
-| -   2 Definitions                                                        |
-| -   3 Tips and tricks                                                    |
-| -   4 About evdev                                                        |
-| -   5 Setting up Xorg                                                    |
-|     -   5.1 The basics                                                   |
-|     -   5.2 Defining available input devices                             |
-|     -   5.3 Graphics card                                                |
-|     -   5.4 Screens                                                      |
-|     -   5.5 Monitors                                                     |
-|     -   5.6 Serverlayout                                                 |
-|                                                                          |
-| -   6 Testing                                                            |
-| -   7 Setting up the loginmanager                                        |
-|     -   7.1 For KDM (KDE's Display Manager)                              |
-|     -   7.2 For GDM (Gnome's Display Manager)                            |
-|     -   7.3 For XDM (X Display Manager)                                  |
-|     -   7.4 For Auto Login multiseat (without Display Manager)           |
-|                                                                          |
-| -   8 Troubleshooting                                                    |
-|     -   8.1 My Windows key doesn't work anymore                          |
-|     -   8.2 Unreliable behaviour (black picture without cursor)          |
-|     -   8.3 Little black boxes/dots on the desktop                       |
-|     -   8.4 Multimedia keys not working                                  |
-|     -   8.5 The Ctrl-Alt-Fx, Alt-Fx keys mess up with virtual terminals  |
-|                                                                          |
-| -   9 Final configuration                                                |
-|     -   9.1 /etc/X11/xorg.conf                                           |
-|     -   9.2 /opt/kde/share/config/kdm/kdmrc                              |
-|                                                                          |
-| -   10 Related problems                                                  |
-|     -   10.1 PulseAudio                                                  |
-|                                                                          |
-| -   11 See also                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Requirements
+    -   1.1 Keyboards and mice
+    -   1.2 Graphics hardware
+    -   1.3 Processors and memory
+    -   1.4 Software
+    -   1.5 Some X knowledge
+-   2 Definitions
+-   3 Tips and tricks
+-   4 About evdev
+-   5 Setting up Xorg
+    -   5.1 The basics
+    -   5.2 Defining available input devices
+    -   5.3 Graphics card
+    -   5.4 Screens
+    -   5.5 Monitors
+    -   5.6 Serverlayout
+-   6 Testing
+-   7 Setting up the loginmanager
+    -   7.1 For KDM (KDE's Display Manager)
+    -   7.2 For GDM (Gnome's Display Manager)
+    -   7.3 For XDM (X Display Manager)
+    -   7.4 For LightDM (Light Display Manager)
+    -   7.5 For Auto Login multiseat (without Display Manager)
+-   8 Troubleshooting
+    -   8.1 My Windows key doesn't work anymore
+    -   8.2 Unreliable behaviour (black picture without cursor)
+    -   8.3 Little black boxes/dots on the desktop
+    -   8.4 Multimedia keys not working
+    -   8.5 The Ctrl-Alt-Fx, Alt-Fx keys mess up with virtual terminals
+-   9 Final configuration
+    -   9.1 /etc/X11/xorg.conf
+    -   9.2 /opt/kde/share/config/kdm/kdmrc
+-   10 Related problems
+    -   10.1 PulseAudio
+-   11 See also
 
 Requirements
 ------------
@@ -397,9 +396,330 @@ every screen:
     DisplayManager._1.startup:      /etc/X11/xdm/arch-xdm/Xstartup
     DisplayManager._1.reset:        /etc/X11/xdm/arch-xdm/Xreset
 
+> For LightDM (Light Display Manager)
+
+LightDM works well with ALSA only and PulseAudio removed if you wish to
+have shared audio, an alsamixer equalizer and software mixing.
+
+In the example below LightDM and MATE with ALSA was installed with
+PulseAudio removed. PulseAudio could also be used but it requires a more
+complicated configuration to maintain high audio quality. The relevant
+hardware used is an ATI Radeon HD 5850 and an Intel Sandy Bridge
+(onboard) HD 3000. You configuration may vary.
+
+Open /etc/lightdm/lightdm.conf and follow the sample. Autologin is
+optional. This works both as multi-user multiseat and single user
+multi-seat. In the first case only the last user to login will have
+audio control and access. Specific hardware could be addressed in
+/etc/asound.conf to allocate audio to both users simultaneously if
+required. Another option enables two different users to both access
+audio with their own equalizer (described further down). The sound card
+will be shared equally among the seats using ALSA with PulseAudio
+removed - libpulse itself should be kept for various software
+dependencies however:
+
+    [LightDM]
+    greeter-user=lightdm
+    log-directory=/var/log/lightdm
+    run-directory=/run/lightdm
+
+    [SeatDefaults]
+    xserver-command=/usr/bin/X
+    greeter-session=lightdm-gtk-greeter
+    greeter-show-manual-login=true
+    user-session=mate
+    session-wrapper=/etc/lightdm/Xsession
+    pam-service=lightdm-autologin
+    exit-on-failure=true
+
+    [Seat:0]
+    xserver-command=/usr/bin/X :0 -sharevts
+    xserver-layout=Layout0
+    #autologin-user=joeblow
+    #autologin-user-timeout=-1
+    #session-setup-script=/etc/lightdm/scripts/sound_start
+    #session-cleanup-script=/etc/lightdm/scripts/sound_stop
+     
+    [Seat:1]
+    xserver-command=/usr/bin/X :1 -sharevts
+    xserver-layout=Layout1
+    #autologin-user=jillschmill
+    #autologin-user-timeout=-1
+
+Next, remove respective ~/.asoundrc files (as well as related PulseAudio
+config files if you removed that) and follow this template with
+/etc/asound.conf for sound:
+
+    defaults.pcm.rate_converter "samplerate_best"
+
+    ctl.equal {
+     type equal;
+    }
+
+    pcm.plugequal {
+      type equal;
+      # Modify the line below if you do not
+      # want to use sound card 0.
+      #slave.pcm "plughw:0,0";
+      #by default we want to play from more sources at time:
+      slave.pcm "plug:dmix";
+    }
+    #pcm.equal {
+      # If you do not want the equalizer to be your
+      # default soundcard comment the following
+      # line and uncomment the above line. (You can
+      # choose it as the output device by addressing
+      # it with specific apps,eg mpg123 -a equal 06.Back_In_Black.mp3)
+    pcm.!default {
+      type plug;
+      slave.pcm plugequal;
+    }
+
+But if you wish to share audio equally among different users, add each
+user to the audio group:
+
+Example:
+
+    usermod -a -G ftp joeblow
+    usermod -a -G ftp jillschmill
+
+Then put this in each user's respective ~/.asoundrc rather than using
+/etc/asound.conf (this option also contains various tweaks to improve
+audio quality):
+
+    defaults.pcm.rate_converter "samplerate_best"
+
+    ctl.equal {
+     type equal;
+    }
+
+    pcm.ossmix {
+        type dmix
+        ipc_key 1024 # must be unique!
+        ipc_key_add_uid false   # let multiple users share
+        ipc_perm 0666           # IPC permissions for multi-user sharing (octal, default 0600)
+        slave {
+            pcm "hw:0,0"      # you cannot use a "plug" device here, darn.
+            period_time 0
+            period_size 1024 # must be power of 2.
+            buffer_size 8192  # ditto.
+            rate 44100
+           #format "S32_LE"
+           #periods 128 # dito.
+           #rate 8000 # with rate 8000 you *will* hear,
+           # if ossmix is used :)
+        }
+        # bindings are cool. This says, that only the first
+        # two channels are to be used by dmix, which is
+        # enough for (most) oss apps and also lets 
+        # multichannel chips work much faster:
+        bindings {
+            0 0 # from 0 => to 0
+            1 1 # from 1 => to 1
+        }
+    }
+
+    pcm.plugequal {
+      type equal;
+      # Modify the line below if you do not
+      # want to use sound card 0.
+      #slave.pcm "plughw:0,0";
+      #by default we want to play from more sources at time:
+      slave.pcm "plug:ossmix";
+    }
+
+    #pcm.equal {
+      # If you do not want the equalizer to be your
+      # default soundcard comment the following
+      # line and uncomment the above line. (You can
+      # choose it as the output device by addressing
+      # it with specific apps,eg mpg123 -a equal 06.Back_In_Black.mp3)
+    pcm.!default {
+      type plug;
+      slave.pcm plugequal;
+    }
+
+Accessing the equalizer can be done with:
+
+    alsaequal -D equal
+
+In the previous case, each user has an equalizer they can configure
+separately.
+
+Make sure to turn down and mute the audio channels that you do not use,
+turn off auto-mute microphone, and make sure no channel has a gain
+higher than 0 to avoid ALSA audio bugs. This can be done via alsamixer.
+
+Finally you must set the /etc/X11/xorg.conf file. You'll notice some
+options have been commented out which could be set according to your
+needs. Here is a sample, adjust to your own system configuration after
+determing hardware information:
+
+    Section "ServerFlags"
+        Option         "DefaultServerLayout" "Layout1"
+    #    Option         "AllowMouseOpenFail"  "true"
+        Option         "AutoAddDevices"      "false"
+        Option         "AutoEnableDevices"   "false"
+        Option         "DontZap"             "false"
+        Option         "Xinerama" "0"
+        Option         "AutoAddGPU" "FALSE"
+    EndSection
+
+    Section "ServerLayout"
+        Identifier     "Layout0"
+        Screen         0  "Screen0" 0 0
+        InputDevice    "kbd_0" "CoreKeyboard"
+        InputDevice    "mouse_0" "CorePointer"
+        Option         "AllowEmptyInput"       "true"
+        Option 	   "DontVTSwitch"          "true" 
+    EndSection
+
+    Section "ServerLayout"
+        Identifier     "Layout1"
+        Screen         0  "Screen1" 0 0
+        InputDevice    "kbd_1" "CoreKeyboard"
+        InputDevice    "mouse_1" "CorePointer"
+        Option         "AllowEmptyInput"       "true"
+        Option 	   "DontVTSwitch"          "true"
+    EndSection
+
+    Section "Module"
+    #    Load 	   "dri2"
+    #    Load 	   "glamoregl"
+    EndSection
+
+    Section "InputDevice"
+        Identifier     "kbd_0"
+        Driver 	   "evdev"
+        Option         "Device"        "/dev/input/by-path/pci-0000:00:1a.0-usb-0:1.6:1.0-event-kbd"
+        Option         "GrabDevice"    "on"
+        Option 	   "XkbRules" "xorg"
+        Option 	   "XkbModel" "105"
+        Option 	   "XkbLayout" "us"
+        Option  	   "Protocol"      "Standard"
+    EndSection
+
+    Section "InputDevice"
+        Identifier     "kbd_1"
+        Driver         "evdev"
+        Option         "Device"        "/dev/input/by-path/pci-0000:04:00.0-usb-0:1:1.0-event-kbd"
+        Option         "GrabDevice"    "on"
+        Option 	   "XkbRules" "xorg"
+        Option 	   "XkbModel" "105"
+        Option 	   "XkbLayout" "us"
+        Option  	   "Protocol"      "Standard"
+    EndSection
+
+    Section "InputDevice"
+        Identifier     "mouse_0"
+        Driver         "evdev"
+        Option         "Device"        "/dev/input/by-path/pci-0000:00:1a.0-usb-0:1.5:1.0-event-mouse"
+        Option         "GrabDevice"    "on"
+    EndSection
+
+    Section "InputDevice"
+        Identifier     "mouse_1"
+        Driver         "evdev"
+        Option         "Device"        "/dev/input/by-path/pci-0000:00:1a.0-usb-0:1.3:1.0-event-mouse"
+        Option         "GrabDevice"    "on"
+    EndSection
+
+    Section "Monitor"
+        Identifier     "Monitor0"
+        Option	   "VendorName" "Unknown"
+        Option	   "ModelName" "Generic Autodetecting Monitor"
+    #    Option	   "DPMS" "true"
+    EndSection
+
+    Section "Monitor"
+        Identifier     "Monitor1"
+        Option	   "VendorName" "Unknown"
+        Option	   "ModelName" "Generic Autodetecting Monitor"
+    EndSection
+
+    Section "Device"
+        Identifier     "Device0"
+        Driver         "radeon"
+    #    Option 	   "AccelMethod" "glamor"
+        Option 	   "AccelMethod" "EXA"
+        VendorName     ""
+        BoardName      ""
+        BusID          "PCI:1:0:0"
+        Screen          0
+    #    Option         "EXAVSync"
+    EndSection
+
+    Section "Device"
+        Identifier     "Device1"
+        Driver         "intel"
+        VendorName     ""
+        BoardName      ""
+        BusID          "PCI:0:2:0"
+        Screen          0
+    #    Option         "AccelMethod" "UXA"
+    #    Option         "TearFree" "1"
+    EndSection
+
+    Section "Screen"
+        Identifier "Screen0"
+        Device     "Device0"
+        Monitor    "Monitor0"
+        DefaultDepth     24
+        SubSection "Display"
+        	Depth     24
+        EndSubSection
+    EndSection
+
+    Section "Screen"
+        Identifier     "Screen1"
+        Device         "Device1"
+        Monitor        "Monitor1"
+        DefaultDepth    24
+        SubSection     "Display"
+            Depth       24
+        EndSubSection
+    EndSection
+
+Additional Tips:
+
+-   Make sure to delete the ~/.Xauthority file in respective user
+    directories before the initial reboot.
+
+-   To avoid tearing this seems to help on nearly all configurations -
+    add this to /etc/environment:
+
+    CLUTTER_PAINT=disable-clipped-redraws:disable-culling
+    CLUTTER_VBLANK=True
+
+-   To help avoid tearing on the web and maintain site compatibility it
+    is advisable to install Pipelight for playing media online.
+
 > For Auto Login multiseat (without Display Manager)
 
 edit a script /boot/twin.sh
+
+    #!/bin/bash
+    cmd1="/bin/bash --login -c \"/usr/bin/xinit --"
+    cmd2="-nolisten tcp -keeptty -novtswitch -config xorg.multiseat.conf"
+    usr=(user1 user2)  # FIXME: assume user1, user2 is valid user id
+    declare -a pid
+    while true ; do
+      for ((i=0; i<${#usr[*]}; i++)) ; do
+        echo "usr[$i]=${usr[$i]} pid=${pid[$i]}"
+        if [ -z "${pid[$i]}" ] || [ ! -d "/proc/${pid[$i]}" ] ; then
+          # echo "pid ${pid[$i]} killed, execute again"  
+          cmd3="-layout seat$i vt0"$((7+i))"\""
+          if [ $i -gt 0 ] ; then
+            cmd3="-sharevts $cmd3"
+          fi
+          #echo "cmd3=$cmd3"
+          /bin/su ${usr[$i]} -l -c "$cmd1 :$i $cmd2 $cmd3" &
+          pid[$i]=$!
+          #echo "new pid=${pid[$i]}"
+        fi
+      done
+      sleep 5  # check process exist per 5 second
+    done
 
 Open /etc/inittab and setup as follows:
 
@@ -818,8 +1138,15 @@ See also
     pair of devices on the same session.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xorg_multiseat&oldid=247174"
+"https://wiki.archlinux.org/index.php?title=Xorg_multiseat&oldid=297667"
 
 Category:
 
 -   X Server
+
+-   This page was last modified on 15 February 2014, at 08:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

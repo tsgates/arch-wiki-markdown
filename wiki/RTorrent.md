@@ -7,39 +7,34 @@ programming library, which means it uses a text user interface. When
 combined with GNU Screen and Secure Shell, it becomes a convenient
 remote BitTorrent client.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Performance                                                  |
-|     -   2.2 Create and manage files                                      |
-|     -   2.3 Port configuration                                           |
-|     -   2.4 Additional settings                                          |
-|                                                                          |
-| -   3 Key bindings                                                       |
-|     -   3.1 Redundant mapping                                            |
-|                                                                          |
-| -   4 Additional Tips                                                    |
-|     -   4.1 systemd service file with tmux                               |
-|     -   4.2 Pre-allocation                                               |
-|     -   4.3 Manage completed files                                       |
-|         -   4.3.1 Notification with Google Mail                          |
-|                                                                          |
-|     -   4.4 Displaying active torrents                                   |
-|     -   4.5 Manually adding trackers to torrents                         |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 CA certificates                                              |
-|     -   5.2 Locked Directories                                           |
-|                                                                          |
-| -   6 Web interface                                                      |
-|     -   6.1 XMLRPC interface                                             |
-|     -   6.2 Handling magnet links                                        |
-|                                                                          |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Performance
+    -   2.2 Create and manage files
+    -   2.3 Port configuration
+    -   2.4 Additional settings
+-   3 Key bindings
+    -   3.1 Redundant mapping
+-   4 Additional tips
+    -   4.1 systemd service file with tmux
+    -   4.2 Pre-allocation
+    -   4.3 Manage completed files
+        -   4.3.1 Notification with Google Mail
+    -   4.4 Displaying active torrents
+    -   4.5 Manually adding trackers to torrents
+-   5 Troubleshooting
+    -   5.1 CA certificates
+    -   5.2 Locked directories
+    -   5.3 Event failed: bad return code
+-   6 Web interface
+    -   6.1 XMLRPC interface
+    -   6.2 Saving magnet links as torrent files in watch folder
+-   7 rtorrent-pyro
+    -   7.1 PyroScope
+-   8 See also
 
 Installation
 ------------
@@ -53,7 +48,7 @@ Configuration
 -------------
 
 Note:See the rTorrent wiki article on this subject for more information:
-Common Tasks in rTorrent for Dummies
+Common Tasks in rTorrent for Dummies.
 
 Before running rTorrent, find the example configuration file
 /usr/share/doc/rtorrent/rtorrent.rc and copy it to ~/.rtorrent.rc:
@@ -96,18 +91,18 @@ relative paths:
 
 The session option allows rTorrent to save the progess of your torrents.
 It is recommended to create a directory called .session (e.g.
-$ mkdir ~/.session).
+mkdir ~/.session).
 
-    session = /home/[user]/.session/
+    session = /home/user/.session/
 
 The schedule option has rTorrent watch a particular directory for new
 torrent files. Saving a torrent file to this directory will
 automatically start the download. Remember to create the directory that
-will be watched (e.g. $ mkdir ~/watch). Also, be careful when using this
+will be watched (e.g. mkdir ~/watch). Also, be careful when using this
 option as rTorrent will move the torrent file to your session folder and
 rename it to its hash value.
 
-    schedule = watch_directory,5,5,load_start=/home/[user]/watch/*.torrent
+    schedule = watch_directory,5,5,load_start=/home/user/watch/*.torrent
     schedule = untied_directory,5,5,stop_untied=
     schedule = tied_directory,5,5,start_tied=
 
@@ -126,7 +121,7 @@ recommended.
     port_range = 49164-49164
 
 Additionally, make sure port forwarding is enabled for the proper
-port(s) (see: Port Forward Guides).
+port(s) (see: Port Forward guides).
 
 > Additional settings
 
@@ -141,7 +136,7 @@ if you do not need the added security.
 It is also possible to force all connections to use encryption. However,
 be aware that this stricter rule will reduce your client's availability:
 
-    encryption = require,require_RC4,allow_incoming,enable_retry
+    encryption = require,require_RC4,allow_incoming,try_outgoing,enable_retry
 
 See the Wikipedia article on this subject for more information:
 BitTorrent Protocol Encryption
@@ -203,7 +198,7 @@ the aforementioned special characters (i.e. stop and start):
 To remove these mappings automatically at startup you may add the two
 preceding commands to your ~/.bashrc file.
 
-Additional Tips
+Additional tips
 ---------------
 
 > systemd service file with tmux
@@ -219,7 +214,7 @@ Additional Tips
     RemainAfterExit=yes
     KillMode=none
     User=%I
-    ExecStart=/usr/bin/tmux new-session -s rt -n rtorrent -d rtorrent 
+    ExecStart=/usr/bin/tmux new-session -s rt -n rtorrent -d rtorrent
     ExecStop=/usr/bin/tmux send-keys -t rt:rtorrent C-q
     WorkingDirectory=/home/%I/
 
@@ -244,7 +239,7 @@ Attach to rtorrent's session:
 
 Detach:
 
-    C-b d
+    Ctrl-b d
 
 > Pre-allocation
 
@@ -275,12 +270,13 @@ To enable it, add the following to your ~/rtorrent.rc:
 
 > Manage completed files
 
-Note:Currently, this part requires either the git version of
-rtorrent/libtorrent or having applied the patch to 0.8.6 that adds
-'equal'.
+> Note:
 
-Note:If you're having trouble with this tip, it's probably easier to
-follow this
+-   Currently, this part requires either the git version of
+    rtorrent/libtorrent or having applied the patch to 0.8.6 that adds
+    'equal'.
+-   If you're having trouble with this tip, it's probably easier to
+    follow this.
 
 It is possible to have rtorrent sort completed torrent data to specific
 folders based on which 'watch' folder you drop the *.torrent into while
@@ -390,12 +386,10 @@ Cell phone providers allow you to "email" your phone:
     Sasktel: 10digitphonenumber@sms.sasktel.com
     Solo: 10digitphonenumber@txt.bell.ca
 
--   Install Heirloom's mailx program which is provided by the
-    heirloom-mailx package that is found in the official repositories.
+-   Install mailx which is provided by the s-nail package that is found
+    in the official repositories.
 
 -   Clear the /etc/mail.rc file and enter:
-
-Note:Older versions of Heirloom's mailx use /etc/nail.rc.
 
     set sendmail="/usr/bin/mailx"
     set smtp=smtp.gmail.com:587
@@ -453,12 +447,10 @@ Then press 9 in your rTorrent client to see the changes in action.
 
 > Manually adding trackers to torrents
 
-1. Select torrent to edit from rtorrent console view
-
-2. Hit Ctrl-X
-
-3. If you had four trackers type following lines one at a time (always
-press ^X first) to add four more for example:
+1.  Select torrent to edit from rTorrent console view.
+2.  Hit Ctrl+x.
+3.  If you had four trackers type following lines one at a time (always
+    press Ctrl+x first) to add four more for example:
 
     d.tracker.insert="5","udp://tracker.publicbt.com:80"
     d.tracker.insert="6","udp://tracker.openbittorrent.com:80"
@@ -474,11 +466,8 @@ To use rTorrent with a tracker that uses HTTPS, do the following as
 root:
 
     # cd /etc/ssl/certs
-
     # wget --no-check-certificate https://www.geotrust.com/resources/root_certificates/certificates/Equifax_Secure_Global_eBusiness_CA-1.cer
-
     # mv Equifax_Secure_Global_eBusiness_CA-1.cer Equifax_Secure_Global_eBusiness_CA-1.pem
-
     # c_rehash
 
 And from now on run rTorrent with:
@@ -491,18 +480,24 @@ reflect this change:
     $ screen -t rtorrent rtorrent -o http_capath=/etc/ssl/certs
 
 In rTorrent 0.8.9, set network.http.ssl_verify_peer.set=0 to fix the
-problem.[1]
+problem.
 
 For more information see: rTorrent Error & CA Certificate and rTorrent
 Certificates Problem
 
-> Locked Directories
+> Locked directories
 
-Rtorrent can sometimes lock up after a crash or incorrect shutdown, and
-will complain about a lock file.  
- Per the error message, the file called "rtorrent.lock" can be found
-within the hidden folder /.rtorrentsession for your download directory
+rTorrent can sometimes lock up after a crash or incorrect shutdown, and
+will complain about a lock file.
+
+Per the error message, the file called "rtorrent.lock" can be found
+within the hidden folder .rtorrentsession for your download directory
 and manually removed.
+
+> Event failed: bad return code
+
+This is caused by there being spaces in your system.method.* lines.
+Remove the spaces and it will work.
 
 Web interface
 -------------
@@ -532,63 +527,167 @@ you need to add the following line to the configuration file:
 
 For more information see: Using XMLRPC with rtorrent
 
-> Handling magnet links
+> Saving magnet links as torrent files in watch folder
+
+Note: Rtorrent natively supports downloading torrents through magnet
+links. At the main view (reached by starting Rtorrent and pressing 1),
+press enter. At "load.normal>" paste the magnet link and press enter
+again. This will start the download.
 
 If you wish to have magnet links automatically added to your watch
 folder, here is a script that will do the trick:
 
     #!/bin/bash
     watch_folder=~/.rtorrent/watch
-    cd $watch_folder  
+    cd $watch_folder
     [[ "$1" =~ xt=urn:btih:([^&/]+) ]] || exit;
     echo "d10:magnet-uri${#1}:${1}e" > "meta-${BASH_REMATCH[1]}.torrent"
 
 (adapted from
-http://blog.gonzih.org/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/)
+http://blog.gonzih.org/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/).
 
 Save it, for instance as rtorrent-magnet, give it execution permission,
 and place it somewhere under your $PATH. Then in Firefox:
 
--   Type about:config into the Location Bar (address bar) and press
+1.  Type about:config into the Location Bar (address bar) and press
     Enter.
--   Right-click -> New -> Boolean -> Name:
-    network.protocol-handler.expose.magnet -> Value -> false
--   Next time you click a magnet link you will be asked which
+2.  Right-click: New > Boolean > Name:
+    network.protocol-handler.expose.magnet > Value > false.
+3.  Next time you click a magnet link you will be asked which
     application to open it with. Select the script we just created and
-    you'll be done
+    you'll be done.
 
-(http://kb.mozillazine.org/Register_protocol)
+If you want xdg-open to handle this, which you need if you're using
+chrome instead of firefox, (though gnome and other DE might have their
+own programs overriding xdg-open) you need to patch xdg-open according
+to this site [1]
+
+but since you do not want to open the magnet with deluge, change deluge
+for the name of your script as such adding the following at the right
+place in the xdg-open code:
+
+        elif (echo "$1" | grep -q '^magnet:'); then
+            rtorrent-magnet "$1" 
+            if [ $? -eq 0 ]; then
+                exit_success
+            fi
+
+This should be at line 652 at the time of writing, xdg-open 1.1.0 rc1
+
+rtorrent-pyro
+-------------
+
+rtorrent-pyro from the AUR comes with an extended rtorrent console
+interface. It doesn't contain the pyroscope tools yet though. If you
+also need the pyroscope tools see #PyroScope .
+
+Make sure you add following command to ~/.rtorrent.rc, which makes the
+asterisk key * to a shortcut for toggling between extended and collapsed
+view within rtorrent's interface:
+
+    schedule = bind_collapse,0,0,"ui.bind_key=download_list,*,view.collapsed.toggle="
+
+Also set "pyro.extended" to 1 to activate rTorrent-PS features.
+
+    system.method.insert = pyro.extended, value|const, 1
+
+> PyroScope
+
+We create a directory for the installation of pyroscope, then download
+and update the source code from subversion:
+
+    mkdir -p ~/.lib
+    svn checkout http://pyroscope.googlecode.com/svn/trunk/ ~/.lib/pyroscope
+    ~/.lib/pyroscope/update-to-head.sh
+
+Adding pyroscope bin's PATH to .bashrc:
+
+    export PATH=$PATH:path_to_the_bin      # Example path for pyroscope bin's: /home/user/.lib/pyroscope/bin/
+
+Creating the ~/.pyroscope/config.ini:
+
+    pyroadmin --create-config
+
+Add this to your ~/.rtorrent.rc. Don't forget to add the path of your
+pyroscope bin's dir (see below).
+
+    system.method.insert = pyro.bin_dir, string|const, write_here_path_to_your_pyroscope_bin_dir     # Example path: /home/user/.lib/pyroscope/bin/
+    system.method.insert = pyro.rc_dialect, string|const|simple, "execute_capture=bash,-c,\"test $1 = 0.8.6 && echo -n 0.8.6 || echo -n 0.8.9\",dialect,$system.client_version="
+    system.method.insert = pyro.rtorrent_rc, string|const|private, "$cat=~/.pyroscope/rtorrent-,\"$pyro.rc_dialect=\",.rc.default"
+    import = $pyro.rtorrent_rc=
+
+Optionally: TORQUE: Daemon watchdog schedule. Must be activated by
+touching the "~/.pyroscope/run/pyrotorque" file! You can also just use
+rtorrent watch dir or give pyro_watchdog a try, which comes with
+'treewatch' ability, meaning it also watches for torrents recursively
+within the given watch path. Further documentation for pyro_watchdog is
+here: [2] To enable pyro_watchdog, add this in ~/.rtorrent.rc and
+further configurations are in ~/.pyroscope/torque.ini.
+
+    schedule = pyro_watchdog,30,300,"pyro.watchdog=~/.pyroscope,-v"
+
+Following steps are important. Before using pyroscope tools you have to
+set the missing "loaded" times to that of the .torrent file. Run this in
+your terminal:
+
+    rtcontrol '!*"*' loaded=0 -q -sname -o 'echo "$(name)s"\ntest -f "$(metafile)s" && rtxmlrpc -q d.set_custom $(hash)s tm_loaded \$(\
+        ls -l --time-style "+%%s" "$(metafile)s" \
+        | cut -f6 -d" ")\nrtxmlrpc -q d.save_session $(hash)s' | bash
+
+And now set the missing "completed" times to that of the data file or
+directory:
+
+    rtcontrol '!*"*' completed=0 done=100 path=\! is_ghost=no -q -sname -o 'echo "$(name)s"\ntest -e "$(realpath)s" && rtxmlrpc -q d.set_custom $(hash)s tm_completed \$(\
+        ls -ld --time-style "+%%s" "$(realpath)s" \
+        | cut -f6 -d" ")\nrtxmlrpc -q d.save_session $(hash)s' | bash
+
+Example usage: Will print out all torrents older than 2 hours:
+
+    rtcontrol -V completed=+2h -scompleted -ocompleted
+
+Deletes all torrents older than 48 hours:
+
+    rtcontrol -V completed=+48h -scompleted -ocompleted --cull --yes
 
 See also
 --------
 
+-   Manpage for rtorrent
 -   Screen Tips
 -   Comparison of BitTorrent clients on Wikipedia
--   rTorrent Community Wiki - A public place for information on rTorrent
+-   rTorrent Community Wiki - Public place for information on rTorrent
     and any project related to rTorrent, regarding setup, configuration,
     operations, and development.
--   PyroScope - A collection of command line tools for rTorrent. It
+-   PyroScope - Collection of command line tools for rTorrent. It
     provides commands for creating and modifying torrent files, moving
     data on completion without having multiple watch folders, and
     mass-controlling download items via rTorrent's XML-RPC interface:
     searching, start/stop, deleting items with or without their data,
     etc. It also offers a documented Python API.
 -   ruTorrent with Lighttpd
--   How-to Install rTorrent and Hellanzb on CentOS 5 64-bit VPS
--   Installation Guide for rTorrent and Pryoscope on Debian - A
-    collection of tools for the BitTorrent protocol and especially the
-    rTorrent client
--   mktorrent - A command line application used to generate torrent
-    files, which is available as mktorrent in the official repositories.
+-   How-to install rTorrent and Hellanzb on CentOS 5 64-bit VPS
+-   Installation guide for rTorrent and Pryoscope on Debian - Collection
+    of tools for the BitTorrent protocol and especially the rTorrent
+    client
+-   mktorrent - Command line application used to generate torrent files,
+    which is available as mktorrent in the official repositories.
+-   Rtorrent Complete Guide - Very helpful archlinux guide for rtorrent
+    set-up and configuration.
 
-  
- Forum threads
+Forum threads
 
 -   2009-03-11 - Arch Linux - HOWTO: rTorrent stats in Conky
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=RTorrent&oldid=255717"
+"https://wiki.archlinux.org/index.php?title=RTorrent&oldid=304767"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 16 March 2014, at 07:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -3,17 +3,18 @@ DSL SpeedTouch modem
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Kernel config and ppp                                              |
-| -   3 Configuring pppd                                                   |
-| -   4 Configure Udev:                                                    |
-| -   5 Firmware                                                           |
-| -   6 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Kernel config and ppp
+-   3 The Arch Way
+    -   3.1 netcfg
+-   4 The manual way
+    -   4.1 Configuring pppd
+    -   4.2 Configure udev
+-   5 Firmware
+-   6 Troubleshooting
 
 Introduction
 ------------
@@ -46,8 +47,47 @@ Otherwise make sure that your kernel supports firmware loading:
 
 Install ppp: pacman -S ppp
 
-Configuring pppd
-----------------
+The Arch Way
+------------
+
+> netcfg
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: netcfg has been  
+                           superseded by netctl,    
+                           but there is no package  
+                           like netctl-pppoa. In    
+                           fact, this is the only   
+                           page on ArchWiki         
+                           mentioning pppoa.        
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+Install the package netcfg-pppoa.
+
+Now configure the connection. We'll put it in /etc/network.d/adsl:
+
+    CONNECTION='pppoa'
+    DESCRIPTION='ADSL connection'
+    INTERFACE='ppp0'
+    USER='username'
+    PASSWORD='password'
+    PPPOA_VPI=8
+    PPPOA_VCI=48
+
+    # This causes pppd to reconnect if the link goes down
+    LCP_ECHO_INTERVAL=15
+    LCP_ECHO_FAILURE=10
+
+You should now be able to connect by calling netcfg adsl. For more
+details, see the netcfg wiki page.
+
+The manual way
+--------------
+
+> Configuring pppd
 
     ###  /etc/ppp/peers/speedtch
 
@@ -94,29 +134,30 @@ do!) then make a symlink /etc/resolv.conf pointing to
     rm resolv.conf
     ln -s ppp/resolv.conf resolv.conf
 
-Configure Udev:
----------------
+> Configure udev
 
 Make a file /etc/udev/rules.d/99-speedtouch.rules and put something like
 the following in it:
 
-    ACTION=="add", SUBSYSTEM=="atm", KERNEL=="speedtch*", RUN="/usr/sbin/pppd call speedtch"
+    ACTION=="add", SUBSYSTEM=="atm", KERNEL=="speedtch*", RUN="/usr/bin/pppd call speedtch"
 
 With this Udev will start pppd automatically, if you do not want this
-you can simply bring up your modem using pppd call speedtch
+you can simply bring up your modem using
+
+    pppd call speedtch
 
 Firmware
 --------
 
 Now you have everything except the firmware loading. The easiest way is
-to let hotplug/udev do it. Download rev4fw.zip (note disclaimer here)
-and unzip it. It contains two files, a small one and a big one. Copy the
-small file to /lib/firmware/speedtch-1.bin and the big one to
-/lib/firmware/speedtch-2.bin
+to let udev do it. Download rev4fw.zip (note disclaimer here) and unzip
+it. It contains two files, a small one and a big one. Copy the small
+file to /usr/lib/firmware/speedtch-1.bin and the big one to
+/usr/lib/firmware/speedtch-2.bin
 
-    mkdir -p /lib/firmware
-    cp small_file /lib/firmware/speedtch-1.bin
-    cp large_file /lib/firmware/speedtch-2.bin
+    # mkdir -p /usr/lib/firmware
+    # cp small_file /usr/lib/firmware/speedtch-1.bin
+    # cp large_file /usr/lib/firmware/speedtch-2.bin
 
 If you cannot download this file then follow the instructions of the
 second link above and use the firmware extractor (or download another
@@ -163,8 +204,15 @@ For the origin of this doc, feedback or requests go to the Forum
 discussion
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DSL_SpeedTouch_modem&oldid=238340"
+"https://wiki.archlinux.org/index.php?title=DSL_SpeedTouch_modem&oldid=271452"
 
 Category:
 
 -   Modems
+
+-   This page was last modified on 17 August 2013, at 15:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

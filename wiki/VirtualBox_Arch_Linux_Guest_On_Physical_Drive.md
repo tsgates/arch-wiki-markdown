@@ -1,6 +1,18 @@
 VirtualBox Arch Linux Guest On Physical Drive
 =============================================
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: References to    
+                           initscripts (update to   
+                           systemd) and GRUB Legacy 
+                           (update to GRUB 2 and    
+                           posibly support also     
+                           other boot loaders).     
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 Lots of users run a dual boot between Arch Linux and another Operating
 System (Windows for instance). It can be tedious to switch back and
 forth if you need to work in both. Using Virtual Machines, we can
@@ -13,21 +25,17 @@ This guide will help you set up your dual boot Arch Linux/Windows system
 so you can still run your native Arch Linux while in Windows and be able
 to boot back into the same Arch Linux natively.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequirements                                                    |
-| -   2 Preliminary steps in Arch Linux                                    |
-|     -   2.1 Step 1 - Addressing using UUIDs                              |
-|         -   2.1.1 Optional sanity check                                  |
-|                                                                          |
-|     -   2.2 Step 2 - Create new mkinitpcio image                         |
-|                                                                          |
-| -   3 Setting up VirtualBox to boot Arch Linux from the Physical Drive   |
-| -   4 Enabling VirtualBox integration and Seamless mode                  |
-| -   5 Additional notes                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequirements
+-   2 Preliminary steps in Arch Linux
+    -   2.1 Step 1 - Addressing using UUIDs
+        -   2.1.1 Optional sanity check
+    -   2.2 Step 2 - Create new mkinitcpio image
+-   3 Setting up VirtualBox to boot Arch Linux from the Physical Drive
+-   4 Enabling VirtualBox integration and Seamless mode
+-   5 Additional notes
 
 Prerequirements
 ---------------
@@ -154,7 +162,7 @@ they are correct and restart Arch to see that the system will still boot
 fine using UUIDs. It is also encouraged you create a backup of both
 fstab and GRUB's menu.lst should you make a mistake somewhere.
 
-> Step 2 - Create new mkinitpcio image
+> Step 2 - Create new mkinitcpio image
 
 Next we need to generate a new mkinitcpio image that will comply with
 VirtualBox hardware configuration. Lets setup a new mkinitcpio image. Go
@@ -162,7 +170,7 @@ to mkinitcpio.d:
 
     cd /etc/mkinitcpio.d/
 
-Here mkinitpcio keeps all the presets for generating images. We want to
+Here mkinitcpio keeps all the presets for generating images. We want to
 create a new preset, stemming from the default one "linux". So lets make
 a copy and call it linux-vbox and open it in your favorite editor:
 
@@ -186,7 +194,7 @@ are the parts that need to be changed:
 Now we need to create the configuration file for the preset. I keep them
 in /etc along with the default mkinitcpio.conf but you may want to do
 differently. If so, update the preset with proper paths to
-mkinitcpio-vbox.conf. Again we are going to use the default mkinitpcio
+mkinitcpio-vbox.conf. Again we are going to use the default mkinitcpio
 as a guide:
 
     cd /etc/
@@ -274,8 +282,15 @@ this is to set GRUB to boot into runlevel 3 for VirtualBox entry so you
 end up in the console. Then you can startx with custom xorg.conf.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=VirtualBox_Arch_Linux_Guest_On_Physical_Drive&oldid=240809"
+"https://wiki.archlinux.org/index.php?title=VirtualBox_Arch_Linux_Guest_On_Physical_Drive&oldid=302407"
 
 Category:
 
 -   Virtualization
+
+-   This page was last modified on 28 February 2014, at 15:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

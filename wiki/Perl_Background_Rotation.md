@@ -187,3 +187,10 @@ Retrieved from
 Category:
 
 -   Perl Background Rotation
+
+-   This page was last modified on 4 December 2012, at 15:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

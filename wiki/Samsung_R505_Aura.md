@@ -1,16 +1,13 @@
 Samsung R505 Aura
 =================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 LCD Brightness                                                     |
-|     -   1.1 Making things more convenient: Step 1                        |
-|     -   1.2 Making things more convenient: Step 2                        |
-|                                                                          |
-| -   2 Audio Volume hotkeys                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 LCD Brightness
+    -   1.1 Making things more convenient: Step 1
+    -   1.2 Making things more convenient: Step 2
+-   2 Audio Volume hotkeys
 
 > LCD Brightness
 
@@ -242,3 +239,10 @@ Retrieved from
 Category:
 
 -   Samsung
+
+-   This page was last modified on 23 April 2012, at 13:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

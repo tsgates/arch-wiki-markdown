@@ -3,23 +3,19 @@ MSI Wind U210
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Technical specifications of MSI U210                               |
-|     -   1.1 lspci output                                                 |
-|                                                                          |
-| -   2 Network                                                            |
-|     -   2.1 Wifi                                                         |
-|     -   2.2 Ethernet                                                     |
-|                                                                          |
-| -   3 Sound                                                              |
-| -   4 Function Keys                                                      |
-| -   5 Webcam                                                             |
-| -   6 Installation                                                       |
-| -   7 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Technical specifications of MSI U210
+    -   1.1 lspci output
+-   2 Network
+    -   2.1 Wifi
+    -   2.2 Ethernet
+-   3 Sound
+-   4 Function Keys
+-   5 Webcam
+-   6 Installation
+-   7 Troubleshooting
 
 Technical specifications of MSI U210
 ------------------------------------
@@ -98,3 +94,10 @@ Retrieved from
 Category:
 
 -   MSI
+
+-   This page was last modified on 26 September 2012, at 19:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

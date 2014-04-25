@@ -11,22 +11,18 @@ complete list of all areas of pacman development (or even areas
 currently being developed...). All discussion about pacman development
 should take place on the pacman-dev mailing list.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Potential Release Schedule                                         |
-|     -   1.1 Pacman 4.2                                                   |
-|                                                                          |
-| -   2 New Feature Ideas                                                  |
-|     -   2.1 Package Signing - Polishing                                  |
-|     -   2.2 Hooks                                                        |
-|     -   2.3 Optdepend Handling                                           |
-|     -   2.4 Parallel operations                                          |
-|     -   2.5 Iterator interface for databases                             |
-|                                                                          |
-| -   3 Future Release Plans                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Potential Release Schedule
+    -   1.1 Pacman 4.2
+-   2 New Feature Ideas
+    -   2.1 Package Signing - Polishing
+    -   2.2 Hooks
+    -   2.3 Optdepend Handling
+    -   2.4 Parallel operations
+    -   2.5 Iterator interface for databases
+-   3 Future Release Plans
 
 Potential Release Schedule
 --------------------------
@@ -41,7 +37,8 @@ polished before we can push a major version out the door.
 
 Applied:
 
--   (Nothing)
+-   makepkg-template
+-   directory as symlink support removal
 
 Planned:
 
@@ -113,8 +110,15 @@ Future Release Plans
 See flyspray roadmap
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Pacman_Roadmap&oldid=253787"
+"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Pacman_Roadmap&oldid=264733"
 
 Category:
 
 -   Pacman development
+
+-   This page was last modified on 30 June 2013, at 00:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

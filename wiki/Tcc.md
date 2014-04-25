@@ -6,7 +6,7 @@ Tcc is a small and fast C compiler.
 Installation
 ------------
 
-Install tcc form the Official Repositories.
+Install tcc form the Official repositories.
 
 Usage
 -----
@@ -27,8 +27,15 @@ See also
 -   Clang
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tcc&oldid=235955"
+"https://wiki.archlinux.org/index.php?title=Tcc&oldid=301685"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 24 February 2014, at 12:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

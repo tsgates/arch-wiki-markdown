@@ -9,16 +9,14 @@ rendering and high video resolutions, while attempting to remain true to
 the original Doom in terms of play. You will need the original Doom
 data, unless you install the FreeDoom package (see below).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Use                                                                |
-| -   3 Net                                                                |
-| -   4 Music                                                              |
-| -   5 Data                                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Use
+-   3 Net
+-   4 Music
+-   5 Data
 
 Installation
 ------------
@@ -84,3 +82,10 @@ Retrieved from
 Category:
 
 -   Gaming
+
+-   This page was last modified on 27 June 2012, at 04:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

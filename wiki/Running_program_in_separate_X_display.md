@@ -1,6 +1,16 @@
 Running program in separate X display
 =====================================
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with             
+                           Gaming#Starting_games_in 
+                           _a_separate_X_server.    
+                           Notes: same topic        
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 It may often be handy to run some program in separate X display. I.e. 3D
 games for gaining performance, or making alt+tab-style switching
 possible with ctrl+alt+[F7-F12].
@@ -120,13 +130,18 @@ remove lines containing zenity, if you do not have zenity installed.
 Permission problems
 -------------------
 
-Since consolekit 0.4.3 and later no longer changes ownership of tty
-device occupied by X, fgconsole will not work from X session. To work
-around this, add yourself to tty group.
+See General Troubleshooting#Session permissions for details.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Running_program_in_separate_X_display&oldid=197756"
+"https://wiki.archlinux.org/index.php?title=Running_program_in_separate_X_display&oldid=289509"
 
 Category:
 
 -   X Server
+
+-   This page was last modified on 19 December 2013, at 20:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

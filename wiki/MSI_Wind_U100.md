@@ -3,40 +3,32 @@ MSI Wind U100
 
 This article pertains to the MSI Wind U100 netbook/sub-notebook.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-|     -   1.1 lspci                                                        |
-|                                                                          |
-| -   2 Installing                                                         |
-| -   3 CPU                                                                |
-|     -   3.1 cpufreq                                                      |
-|     -   3.2 overclock                                                    |
-|                                                                          |
-| -   4 Multimedia                                                         |
-|     -   4.1 Audio                                                        |
-|     -   4.2 Video                                                        |
-|     -   4.3 Webcam                                                       |
-|                                                                          |
-| -   5 Networking                                                         |
-|     -   5.1 Wireless                                                     |
-|         -   5.1.1 Realtek                                                |
-|         -   5.1.2 Ralink                                                 |
-|         -   5.1.3 Atheros                                                |
-|                                                                          |
-|     -   5.2 BlueTooth                                                    |
-|     -   5.3 Touchpad                                                     |
-|         -   5.3.1 Sentelic                                               |
-|         -   5.3.2 Synaptics                                              |
-|                                                                          |
-|     -   5.4 LAN                                                          |
-|                                                                          |
-| -   6 Memory stick reader                                                |
-| -   7 Power management                                                   |
-| -   8 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+    -   1.1 lspci
+-   2 Installing
+-   3 CPU
+    -   3.1 cpufreq
+    -   3.2 overclock
+-   4 Multimedia
+    -   4.1 Audio
+    -   4.2 Video
+    -   4.3 Webcam
+-   5 Networking
+    -   5.1 Wireless
+        -   5.1.1 Realtek
+        -   5.1.2 Ralink
+        -   5.1.3 Atheros
+    -   5.2 BlueTooth
+    -   5.3 Touchpad
+        -   5.3.1 Sentelic
+        -   5.3.2 Synaptics
+    -   5.4 LAN
+-   6 Memory stick reader
+-   7 Power management
+-   8 Resources
 
 Hardware
 --------
@@ -254,8 +246,15 @@ Resources
     includes forums and a wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=MSI_Wind_U100&oldid=206295"
+"https://wiki.archlinux.org/index.php?title=MSI_Wind_U100&oldid=298036"
 
 Category:
 
 -   MSI
+
+-   This page was last modified on 16 February 2014, at 07:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

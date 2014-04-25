@@ -14,47 +14,33 @@ climatology, and astrophysics. The intent of BOINC is to make it
 possible for researchers to tap into the enormous processing power of
 personal computers around the world."
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Headless Servers                                             |
-|                                                                          |
-| -   2 Using BOINC                                                        |
-|     -   2.1 BOINC via the GUI                                            |
-|         -   2.1.1 Projects using GPU                                     |
-|                                                                          |
-| -   3 Log files                                                          |
-| -   4 Considerations when choosing a project                             |
-|     -   4.1 Running on Arch64                                            |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 GPU missing                                                  |
-|     -   5.2 Laptop overheating and battery duration reduction            |
-|     -   5.3 Unable to download with World Community Grid                 |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Using BOINC
+    -   2.1 BOINC via the GUI
+        -   2.1.1 Projects using GPU
+    -   2.2 BOINC via the CLI
+-   3 Log files
+-   4 Considerations when choosing a project
+    -   4.1 Running on Arch64
+-   5 Troubleshooting
+    -   5.1 GPU missing
+    -   5.2 Laptop overheating and battery duration reduction
+    -   5.3 Unable to download with World Community Grid
+-   6 See also
 
 Installation
 ------------
 
-Install the package boinc from the Official Repositories.
+Install either boinc or boinc-nox from the Official repositories. The
+latter package omits Xorg dependencies, and is therefore suited for use
+on headless servers.
 
-The name of the daemon is boinc.service. Start it and configure to
-autostart on boot. Read Daemons for details.
-
-BOINC is installed as a daemon and for security reasons will be run
-under the newly created boinc user. We will add ourself to the boinc
-group and create a link to the password file so that we can manage it
-via the GUI.
-
-> Headless Servers
-
-If you're planning to run BOINC on a headless server, and would like to
-avoid installing wkWidgets and GTK for a GUI that you won't use anyway,
-consider installing boinc-nogui from the AUR.
+Both packages install a unit file named boinc.service. Therefore, the
+daemon can be managed using systemctl. Read Systemd#Using_units for
+details.
 
 Using BOINC
 -----------
@@ -115,6 +101,11 @@ command to accomplish this:
     xhost local:boinc
 
 You may want to add that to a startup script.
+
+> BOINC via the CLI
+
+For boinc-nox, boinccmd and boinc have help information that can be
+referenced. boinccmd is BOINC's recommended command line interface.
 
 Log files
 ---------
@@ -213,8 +204,15 @@ See also
 -   Wikipedia entry
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=BOINC&oldid=247742"
+"https://wiki.archlinux.org/index.php?title=BOINC&oldid=301520"
 
 Category:
 
 -   Mathematics and science
+
+-   This page was last modified on 24 February 2014, at 11:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

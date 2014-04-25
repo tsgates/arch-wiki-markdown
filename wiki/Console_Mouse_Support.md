@@ -4,16 +4,13 @@ Console Mouse Support
 GPM, short for General Purpose Mouse, is a daemon that provides mouse
 support for Linux virtual consoles.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-|     -   1.1 Desktop                                                      |
-|     -   1.2 Laptop                                                       |
-|                                                                          |
-| -   2 Configuring                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+    -   1.1 Desktop
+    -   1.2 Laptop
+-   2 Configuring
 
 Installing
 ----------
@@ -71,3 +68,10 @@ Retrieved from
 Category:
 
 -   Mice
+
+-   This page was last modified on 16 December 2012, at 06:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

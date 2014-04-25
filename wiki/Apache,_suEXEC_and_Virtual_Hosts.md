@@ -24,24 +24,28 @@ You should also consider using suEXEC if you intend to have several FTP
 accounts pointing to those webspaces which need write permissions while
 the files still can be read by Apache.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-| -   2 Adding the suEXEC module to Apache                                 |
-| -   3 Setting up a virtual Host to use suEXEC                            |
-| -   4 "Disabling" default DocumentRoot                                   |
-| -   5 Finishing up                                                       |
-| -   6 References                                                         |
-+--------------------------------------------------------------------------+
+Beware, though, that it is a security risk when the webserver can write
+to the php files, like when you have an FTP user website1 and the site
+runs as website1 as well. Code is often injected in PHP files such
+cases. It is far too common for self-upgradable or installable PHP
+software to require this permission model, without informing the user of
+the risk.
+
+Contents
+--------
+
+-   1 Prerequisites
+-   2 Adding the suEXEC module to Apache
+-   3 Setting up a virtual Host to use suEXEC
+-   4 "Disabling" default DocumentRoot
+-   5 Finishing up
+-   6 References
 
 Prerequisites
 -------------
 
 -   you should be familiar with basic configuration of Apache
     -   especially virtual hosts
-
 -   superuser access to the target box
 -   knowledge about adding users
 -   can work with pacman
@@ -124,8 +128,15 @@ References
     http://httpd.apache.org/docs/vhosts/index.html
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Apache,_suEXEC_and_Virtual_Hosts&oldid=235023"
+"https://wiki.archlinux.org/index.php?title=Apache,_suEXEC_and_Virtual_Hosts&oldid=286347"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 5 December 2013, at 12:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

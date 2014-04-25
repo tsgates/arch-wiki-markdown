@@ -13,24 +13,24 @@ possibly the computer soundcard. Interface hardware can be purchased
 from vendors or home-built.
 
 Warning:International treaties require that users of amateur radio
-frequencies have a government-issued license.
+frequencies have a government-issued license. This only affects you if
+you have a transmitter and an antenna, receiving amateur radio or just
+downloading amateur radio software isn't illegal.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 General information                                                |
-| -   2 Software list                                                      |
-|     -   2.1 AX.25                                                        |
-|     -   2.2 WSJT                                                         |
-|     -   2.3 WSPR                                                         |
-|     -   2.4 Xastir                                                       |
-|     -   2.5 Analysis tools                                               |
-|     -   2.6 Logging                                                      |
-|     -   2.7 Tools                                                        |
-|     -   2.8 Morse code training                                          |
-|     -   2.9 Other                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 General information
+-   2 Software list
+    -   2.1 AX.25
+    -   2.2 WSJT
+    -   2.3 WSPR
+    -   2.4 Xastir
+    -   2.5 Analysis tools
+    -   2.6 Logging
+    -   2.7 Tools
+    -   2.8 Morse code training
+    -   2.9 Other
 
 General information
 -------------------
@@ -99,13 +99,9 @@ http://james.ahlstrom.name/quisk/ || quisk
 
 http://owx.chmurka.net || owx
 
--   cwdaemon — cw keyer for serial or parallel port
-
-http://www.qsl.net/pg4i/linux/cwdaemon.html || cwdaemon
-
 -   twcw — extension for cwirc
 
-http://wa0eir.home.mchsi.com/twcw.html || twcw
+http://wa0eir.home.mchsi.com/twcw.html || not packaged? search in AUR
 
 -   fldigi — popular GUI developed by W1HKJ for a variety of digital
     communication modes
@@ -215,11 +211,7 @@ These are audio alarm recordings of a North American English speaker
 that do not require the presence of festival to render. The audio play
 command `play' in the configure menu may not work; try `aplay' instead.
 
-Note: Xastir 2.0.0 cannot be built with the current version of automake.
-There are two options: i) rollback to automake 1.11.1 or earlier; ii)
-build xastir-cvs.
-
-http://www.xastir.org || xastir-cvs
+http://www.xastir.org || xastir
 
 > Analysis tools
 
@@ -272,8 +264,15 @@ http://www.xastir.org || xastir-cvs
 -   cwirc – Send and receive Morse code messages via IRC
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Amateur_Radio&oldid=232427"
+"https://wiki.archlinux.org/index.php?title=Amateur_Radio&oldid=281242"
 
 Category:
 
 -   Telephony and Voice
+
+-   This page was last modified on 3 November 2013, at 16:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

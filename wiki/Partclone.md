@@ -4,15 +4,13 @@ Partclone
 Partclone, like the well-known Partimage, can be used to back up and
 restore a partition while considering only used blocks.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Using Partclone with an ext4-formatted partition                   |
-|     -   2.1 Without compression                                          |
-|     -   2.2 With compression                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Using Partclone with an ext4-formatted partition
+    -   2.1 Without compression
+    -   2.2 With compression
 
 Installation
 ------------
@@ -52,3 +50,10 @@ Retrieved from
 Category:
 
 -   File systems
+
+-   This page was last modified on 15 September 2012, at 23:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

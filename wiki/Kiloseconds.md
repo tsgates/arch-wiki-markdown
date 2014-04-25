@@ -9,76 +9,68 @@ since we cannot live without it.
 Please help use out by adding programming languages to our github repo
 [1]
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Awk                                                                |
-| -   2 Bash                                                               |
-|     -   2.1 Using seconds since 1970-01-01 00:00:00 UTC                  |
-|     -   2.2 Fixed invalid date bug of above ;)                           |
-|     -   2.3 Another one, using sed                                       |
-|                                                                          |
-| -   3 Befunge-93                                                         |
-| -   4 Brainf***                                                          |
-| -   5 C                                                                  |
-| -   6 C++                                                                |
-| -   7 C#                                                                 |
-| -   8 Clojure                                                            |
-| -   9 Delphi                                                             |
-| -   10 Eiffel                                                            |
-| -   11 Emacs Lisp                                                        |
-| -   12 Erlang                                                            |
-| -   13 Factor                                                            |
-| -   14 Forth                                                             |
-|     -   14.1 With floating point division                                |
-|     -   14.2 With custom printing function                               |
-|                                                                          |
-| -   15 Fortran 90/95                                                     |
-| -   16 Go                                                                |
-| -   17 Haskell                                                           |
-| -   18 IO                                                                |
-| -   19 Java                                                              |
-| -   20 Javascript                                                        |
-| -   21 Lisp                                                              |
-| -   22 LOLCODE (LOLPython)                                               |
-| -   23 Lua                                                               |
-|     -   23.1 Printing once                                               |
-|     -   23.2 Continously looping                                         |
-|                                                                          |
-| -   24 Maple                                                             |
-| -   25 Mathematica                                                       |
-| -   26 MatLab                                                            |
-|     -   26.1 Verbose code                                                |
-|     -   26.2 Oneliner                                                    |
-|                                                                          |
-| -   27 Objective-C (Cocoa)                                               |
-| -   28 OCaml                                                             |
-| -   29 Openoffice.org's BASIC                                            |
-| -   30 Perl                                                              |
-| -   31 PHP                                                               |
-| -   32 PLT Scheme                                                        |
-| -   33 Powershell                                                        |
-| -   34 Prolog (SWI-Prolog)                                               |
-| -   35 Python                                                            |
-|     -   35.1 Small example                                               |
-|     -   35.2 Big example (with Ncurses)                                  |
-|                                                                          |
-| -   36 REBOL                                                             |
-| -   37 Ruby                                                              |
-| -   38 Scala                                                             |
-| -   39 Sed                                                               |
-|     -   39.1 Large                                                       |
-|     -   39.2 Smaller                                                     |
-|                                                                          |
-| -   40 Smalltalk                                                         |
-| -   41 Standard ML                                                       |
-| -   42 Supybot                                                           |
-| -   43 TCL                                                               |
-| -   44 Weechat Plugin                                                    |
-| -   45 IRSSI Plugin                                                      |
-| -   46 Oracle SQL                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Awk
+-   2 Bash
+    -   2.1 Using seconds since 1970-01-01 00:00:00 UTC
+    -   2.2 Fixed invalid date bug of above ;)
+    -   2.3 Another one, using sed
+-   3 Befunge-93
+-   4 Brainf***
+-   5 C
+-   6 C++
+-   7 C#
+-   8 Clojure
+-   9 Delphi
+-   10 Eiffel
+-   11 Emacs Lisp
+-   12 Erlang
+-   13 Factor
+-   14 Forth
+    -   14.1 With floating point division
+    -   14.2 With custom printing function
+-   15 Fortran 90/95
+-   16 Go
+-   17 Haskell
+-   18 IO
+-   19 Java
+-   20 Javascript
+-   21 Lisp
+-   22 LOLCODE (LOLPython)
+-   23 Lua
+    -   23.1 Printing once
+    -   23.2 Continously looping
+-   24 Maple
+-   25 Mathematica
+-   26 MatLab
+    -   26.1 Verbose code
+    -   26.2 Oneliner
+-   27 Objective-C (Cocoa)
+-   28 OCaml
+-   29 Openoffice.org's BASIC
+-   30 Perl
+-   31 PHP
+-   32 PLT Scheme
+-   33 Powershell
+-   34 Prolog (SWI-Prolog)
+-   35 Python
+    -   35.1 Small example
+    -   35.2 Big example (with Ncurses)
+-   36 REBOL
+-   37 Ruby
+-   38 Scala
+-   39 Sed
+    -   39.1 Large
+    -   39.2 Smaller
+-   40 Smalltalk
+-   41 Standard ML
+-   42 Supybot
+-   43 TCL
+-   44 Weechat Plugin
+-   45 IRSSI Plugin
+-   46 Oracle SQL
 
 Awk
 ---
@@ -1069,3 +1061,10 @@ Retrieved from
 Category:
 
 -   Development
+
+-   This page was last modified on 6 December 2012, at 00:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

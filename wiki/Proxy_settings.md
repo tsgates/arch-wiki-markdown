@@ -11,21 +11,18 @@ Proxy settings
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Environment variables                                              |
-|     -   2.1 Automation with network managers                             |
-|                                                                          |
-| -   3 About libproxy                                                     |
-| -   4 Web Proxy Options                                                  |
-|     -   4.1 Simple Proxy with SSH                                        |
-|                                                                          |
-| -   5 Using a SOCKS proxy                                                |
-| -   6 Proxy settings on GNOME3                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Environment variables
+    -   2.1 Keep proxy through sudo
+    -   2.2 Automation with network managers
+-   3 About libproxy
+-   4 Web Proxy Options
+    -   4.1 Simple Proxy with SSH
+-   5 Using a SOCKS proxy
+-   6 Proxy settings on GNOME3
 
 Introduction
 ------------
@@ -119,11 +116,25 @@ name "myProxy" into something short and easy to write.
      }
      
 
+> Keep proxy through sudo
+
+If the proxy environment variables are set for the user only (say, from
+manual commands or .bashrc) they will get lost when running commands
+with sudo (or when programs like yaourt use sudo internally).
+
+A way to prevent that is to add the following line to the sudo
+configuration file (accessible with visudo) :
+
+    Defaults env_keep += "http_proxy https_proxy ftp_proxy"
+
+You may also add any other environment variable, like rsync_proxy, or
+no_proxy.
+
 > Automation with network managers
 
 -   NetworkManager cannot change the environment variables.
--   netcfg could set-up these environment variables but they would not
-    be seen by other applications as they are not child of netcfg.
+-   netctl could set-up these environment variables but they would not
+    be seen by other applications as they are not child of netctl.
 
 About libproxy
 --------------
@@ -199,8 +210,15 @@ Manager connects to specific networks , by using the package proxydriver
 from the AUR
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Proxy_settings&oldid=255589"
+"https://wiki.archlinux.org/index.php?title=Proxy_settings&oldid=281513"
 
 Category:
 
 -   Proxy servers
+
+-   This page was last modified on 5 November 2013, at 09:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

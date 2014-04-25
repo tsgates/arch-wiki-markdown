@@ -3,17 +3,15 @@ Full System Backup with tar
 
 This article will show you how to do a full system backup with tar.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Boot with LiveCD                                                   |
-| -   3 Changing Root                                                      |
-| -   4 Mount Other Partitions                                             |
-| -   5 Exclude File                                                       |
-| -   6 Backup Script                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 Boot with LiveCD
+-   3 Changing Root
+-   4 Mount Other Partitions
+-   5 Exclude File
+-   6 Backup Script
 
 Overview
 --------
@@ -146,3 +144,10 @@ Retrieved from
 Category:
 
 -   System recovery
+
+-   This page was last modified on 27 April 2013, at 18:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

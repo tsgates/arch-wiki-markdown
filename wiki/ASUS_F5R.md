@@ -1,26 +1,23 @@
 ASUS F5R
 ========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Configuration                                                      |
-|     -   2.1 CPU                                                          |
-|     -   2.2 Video                                                        |
-|     -   2.3 Audio                                                        |
-|     -   2.4 Wi-Fi                                                        |
-|     -   2.5 Webcam                                                       |
-|     -   2.6 Bluetooth                                                    |
-|     -   2.7 Pointer                                                      |
-|     -   2.8 Leds & ACPI upgrade                                          |
-|     -   2.9 OLED Display                                                 |
-|         -   2.9.1 Function Keys                                          |
-|                                                                          |
-|     -   2.10 Utilities                                                   |
-|         -   2.10.1 The Lapsus daemon & KDE applet                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Configuration
+    -   2.1 CPU
+    -   2.2 Video
+    -   2.3 Audio
+    -   2.4 Wi-Fi
+    -   2.5 Webcam
+    -   2.6 Bluetooth
+    -   2.7 Pointer
+    -   2.8 Leds & ACPI upgrade
+    -   2.9 OLED Display
+        -   2.9.1 Function Keys
+    -   2.10 Utilities
+        -   2.10.1 The Lapsus daemon & KDE applet
 
 Hardware
 --------
@@ -28,7 +25,6 @@ Hardware
 -   CPU:
     -   Intel(R) Celeron(R), M 520 (1.6GHz), 533MHz FSB, 1MB L2 Cache
     -   Intel(R) Core Duo(R), T 2130 (1.86GHz), 533MHz FSB, 1MB L2 Cache
-
 -   Chipset: ATI Radeon Xpress 1100
 -   RAM: 1024MB (1 x 1024MB) SO-DIMM DDR2 533MHz, max 2048 MB
 -   Hard Disk: SATA 120GB 5400 rpm
@@ -50,12 +46,10 @@ Hardware
     -   4 x USB 2.0 ports
     -   1 x RJ11 Modem jack for phone line
     -   1 x RJ45 LAN Jack for LAN insert
-
 -   Card Reader: MMC, SD, MS, MS-Pro
 -   Dimension and Weight:
     -   362mm * 262mm * 27mm(W x D x H)
     -   2,6 Kg (6-cell)
-
 -   Pointer: Touch pad
 
 Configuration
@@ -85,11 +79,12 @@ Follow the official documentation: ALSA
 
 > Wi-Fi
 
-To enable wireless follow the official guide: Wireless_Setup#ndiswrapper
+To enable wireless follow the official guide: Wireless network
+configuration#ndiswrapper
 
 Please note that the Asus F5R needs the bcmwl5.inf driver.
 
-Other way is to use b43 driver: Wireless_Setup#b43
+Other way is to use b43 driver: Wireless network configuration#b43
 
 NetworkManager is also a cool option.
 
@@ -199,8 +194,15 @@ daemon: /etc/rc.d/lapsusd start. You can add it into DAEMONS array in
 Finally add the lapsus applet to KDE kicker.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_F5R&oldid=208435"
+"https://wiki.archlinux.org/index.php?title=ASUS_F5R&oldid=297823"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 15 February 2014, at 15:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -3,17 +3,15 @@ Nsd
 
 Nsd is an authoritative DNS resolver.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Migration to nsd for bind users                                    |
-| -   3 Initial Setup                                                      |
-| -   4 Starting and running nsd                                           |
-| -   5 Testing nsd                                                        |
-| -   6 WAN facing dns                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Migration to nsd for bind users
+-   3 Initial Setup
+-   4 Starting and running nsd
+-   5 Testing nsd
+-   6 WAN facing dns
 
 Installation
 ------------
@@ -33,9 +31,7 @@ who currently run bind as their dns server in the file:
 Many users will wish to run nsd as their authoritative dns server
 concurrently with unbound as the validating, recursive, caching dns
 server on a single machine. It may be useful to refer to the wiki page
-for unbound at:
-
-    unbound
+for unbound.
 
 Initial Setup
 -------------
@@ -67,13 +63,11 @@ bind previously then copying the zone files that worked with bind into
 configuration files in the web page at https://calomel.org/nsd_dns.html
 but the example here is for a single master zone only.
 
-Note that nsd is not designed to do logging, despite the existence of a
-logging line in the nsd.conf example file. Attempting to uncomment the
-logging line will result in being unable to start nsd.
-
 A sample nsd.conf is given here where the forward and reverse zone files
 are presumed to be in /etc/nsd3/ and named myhomenet.com.zone and
-0.0.10.in-addr.arpa.zone:
+0.0.10.in-addr.arpa.zone (Note that in nsd version 4 the sample file has
+new features enabled, but a pre-existing nsd.conf from version 3 should
+still work, but it is best to merge changes with the new config file):
 
     ## NSD authoritative only DNS
     ## nsd.conf .:. https://calomel.org
@@ -125,13 +119,17 @@ Starting and running nsd
 Before starting up nsd you can check the zone files using the
 nsd-checkconf command with the zone file name as a parameter.
 
-In order to build the zone database that makes nsd run exceptionally
-quickly the database file must be rebuilt each time a zone or config
-file is changed, and the following command is executed as the nsd user
-(the daemon runs as nsd and that user must be able to read
+In version 3 in order to build the zone database that makes nsd run
+exceptionally quickly the database file must be rebuilt each time a zone
+or config file is changed, and the following command is executed as the
+nsd user (the daemon runs as nsd and that user must be able to read
 /var/db/nsd/nsd.db):
 
     nsdc rebuild
+
+However in nsd version 4 nsdc has been removed and a new command
+nsd-control replaces it. Refer to the doc file at
+/usr/share/doc/nsd/UPGRADING)
 
 In order to start nsd then type as root:
 
@@ -211,8 +209,15 @@ network firewall machines, to allow incoming requests to access the
 correct machine.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Nsd&oldid=254263"
+"https://wiki.archlinux.org/index.php?title=Nsd&oldid=293716"
 
 Category:
 
 -   Domain Name System
+
+-   This page was last modified on 20 January 2014, at 14:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

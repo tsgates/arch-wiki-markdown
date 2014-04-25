@@ -9,29 +9,26 @@ HP Mini 5102
                            information (Discuss)    
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Specifications                                                     |
-| -   2 Hardware                                                           |
-|     -   2.1 Kernel                                                       |
-|     -   2.2 Video                                                        |
-|     -   2.3 Webcam                                                       |
-|     -   2.4 Audio                                                        |
-|     -   2.5 Touchpad                                                     |
-|     -   2.6 Wired Network                                                |
-|         -   2.6.1 Wireless Driver                                        |
-|                                                                          |
-|     -   2.7 Built in WWAN or 3G modem                                    |
-|     -   2.8 Bluetooth                                                    |
-|     -   2.9 ACPI                                                         |
-|         -   2.9.1 Suspend on Lid                                         |
-|         -   2.9.2 Power Button                                           |
-|         -   2.9.3 Hotkeys                                                |
-|             -   2.9.3.1 Display toggle                                   |
-|             -   2.9.3.2 Mute, browser button, volume down, etc...        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Specifications
+-   2 Hardware
+    -   2.1 Kernel
+    -   2.2 Video
+    -   2.3 Webcam
+    -   2.4 Audio
+    -   2.5 Touchpad
+    -   2.6 Wired Network
+        -   2.6.1 Wireless Driver
+    -   2.7 Built in WWAN or 3G modem
+    -   2.8 Bluetooth
+    -   2.9 ACPI
+        -   2.9.1 Suspend on Lid
+        -   2.9.2 Power Button
+        -   2.9.3 Hotkeys
+            -   2.9.3.1 Display toggle
+            -   2.9.3.2 Mute, browser button, volume down, etc...
 
 Specifications
 --------------
@@ -255,8 +252,15 @@ Mute, browser button, volume down, etc...
 Extra Keyboard Keys
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=HP_Mini_5102&oldid=238393"
+"https://wiki.archlinux.org/index.php?title=HP_Mini_5102&oldid=304870"
 
 Category:
 
 -   HP
+
+-   This page was last modified on 16 March 2014, at 08:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

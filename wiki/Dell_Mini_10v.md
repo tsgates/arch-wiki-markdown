@@ -1,53 +1,44 @@
 Dell Mini 10v
 =============
 
-> Summary
+Related articles
+
+-   Beginners' guide
+-   Laptop
+-   Touchpad Synaptics
+-   Acer Aspire One
 
 This articles details the installation and configuration of Arch Linux
 on the Dell Mini 10v. The Dell Mini 10v is a netbook with 10" display
 from Dell. This article covers the configuration of the graphics card,
 wireless card and touchpad.
 
-> Related
+Contents
+--------
 
-Beginners' Guide
-
-Laptop
-
-Touchpad Synaptics
-
-Acer Aspire One
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Before you begin                                                   |
-| -   2 Xorg                                                               |
-|     -   2.1 Video Driver                                                 |
-|     -   2.2 Touchpad                                                     |
-|                                                                          |
-| -   3 Wireless                                                           |
-| -   4 Power                                                              |
-|     -   4.1 Battery status                                               |
-|     -   4.2 Suspend to RAM                                               |
-|                                                                          |
-| -   5 Extras                                                             |
-|     -   5.1 Sound and Microphone                                         |
-|     -   5.2 Webcam                                                       |
-|     -   5.3 Bluetooth                                                    |
-|     -   5.4 SD card reader                                               |
-|     -   5.5 Solid-state drive                                            |
-|     -   5.6 custom kernel installation                                   |
-|     -   5.7 Desktop installation                                         |
-+--------------------------------------------------------------------------+
+-   1 Before you begin
+-   2 Xorg
+    -   2.1 Video Driver
+    -   2.2 Touchpad
+-   3 Wireless
+-   4 Power
+    -   4.1 Battery status
+    -   4.2 Suspend to RAM
+-   5 Extras
+    -   5.1 Sound and Microphone
+    -   5.2 Webcam
+    -   5.3 Bluetooth
+    -   5.4 SD card reader
+    -   5.5 Solid-state drive
+    -   5.6 custom kernel installation
+    -   5.7 Desktop installation
 
 Before you begin
 ----------------
 
 This article is intended to assist users with the specifics of
 installing Arch Linux on the Dell Mini 10v. It is assumed that a user is
-also following an installation guide such as the Beginners' Guide.
+also following an installation guide such as the Beginners' guide.
 
 Dell Mini 10v hardware may vary, however the following list of hardware
 has been assumed in this article:
@@ -88,7 +79,7 @@ Xorg
 ----
 
 After reaching the Install X and configure ALSA section of the
-Beginners' Guide, follow these Dell Mini 10v guidelines:
+Beginners' guide, follow these Dell Mini 10v guidelines:
 
 > Video Driver
 
@@ -142,7 +133,8 @@ Wireless
 
 The Wireless NIC is supported by the b43 module and is included in
 kernel from 2.6.32 on. Firmware must be installed for this hardware, as
-outlined in the Wireless Setup article.
+outlined in the Wireless Setup article. You can find instructions for
+downloading and installing the correct firmware at this webpage: [1].
 
 If you have difficulty with connection, or have unstable connection, try
 the option
@@ -633,8 +625,15 @@ use gdm as login manager
     x:5:respawn:/usr/sbin/gdm -nodaemon
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Mini_10v&oldid=234316"
+"https://wiki.archlinux.org/index.php?title=Dell_Mini_10v&oldid=298047"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 16 February 2014, at 07:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

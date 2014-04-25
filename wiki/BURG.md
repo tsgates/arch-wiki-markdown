@@ -1,45 +1,45 @@
 BURG
 ====
 
-Burg, Brand-new Universal loadeR from GRUB, is an alternative boot
-loader forked from GRUB2. It uses a new object format which allows it to
-be built in a wider range of OS's, including
-Linux/Windows/OSX/Solaris/FreeBSD, etc. Burg features superior theming
-and has a highly configurable menu system which works at boot time in
-both text and graphical mode.
+BURG, Brand-new Universal loadeR from GRUB, is an alternative boot
+loader forked from GRUB. It uses a new object format which allows it to
+be built in a wider range of OS's, including Linux, Windows, OS X,
+Solaris, FreeBSD, etc. BURG features superior theming and has a highly
+configurable menu system which works at boot time in both text and
+graphical mode.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Compile Options                                              |
-|     -   1.2 Initial Setup                                                |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Generation of a config                                       |
-|     -   2.2 Defaults                                                     |
-|     -   2.3 burg.d scripts                                               |
-|     -   2.4 Preview and runtime configuration                            |
-|                                                                          |
-| -   3 Theming                                                            |
-| -   4 Tips & Tricks                                                      |
-|     -   4.1 Shortcuts                                                    |
-|     -   4.2 Important files                                              |
-|     -   4.3 Other OS detection                                           |
-|     -   4.4 Folding (grouping)                                           |
-|     -   4.5 Linux 3.0 detection                                          |
-|                                                                          |
-| -   5 External Links                                                     |
-+--------------------------------------------------------------------------+
+Warning:BURG seems to be no longer actively maintained as the upstream
+bzr repo at https://code.launchpad.net/~bean123ch/burg/trunk does not
+seem to be updated after October 2010. Users are recommended to switch
+to GRUB(2) or Syslinux instead.
+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Compile options
+    -   1.2 Initial setup
+-   2 Configuration
+    -   2.1 Generation of a configuration
+    -   2.2 Defaults
+    -   2.3 burg.d scripts
+    -   2.4 Preview and runtime configuration
+-   3 Theming
+-   4 Tips and tricks
+    -   4.1 Shortcuts
+    -   4.2 Important files
+    -   4.3 Other OS detection
+    -   4.4 Folding (grouping)
+    -   4.5 Linux 3.0 detection
+-   5 See also
 
 Installation
 ------------
 
-Note:Crunick's binary repository is no longer up to date and all users
+Note:Crunick's binary repository is no longer up-to-date and all users
 should use the packages from AUR.
 
-All burg packages are currently found in the AUR and can be built using
+All BURG packages are currently found in the AUR and can be built using
 normal methods.
 
 Only two packages are required:
@@ -50,7 +50,7 @@ Only two packages are required:
 Tip:When upgrading, be sure to read the changelog which is provided in
 the tarball. New features and configuration options may be listed there.
 
-> Compile Options
+> Compile options
 
 Tunables can be found at the top of the PKGBUILD for customizing the
 building process in addition to the usual options:
@@ -60,10 +60,10 @@ building process in addition to the usual options:
     need for burg-emu and wish to speed things up should probably set
     this to n.
 2.  _rm_build_dirs (default=n) - When set to y the build directories are
-    deleted saving preciousss space. This will not affect the bazaar
+    deleted saving precious space. This will not affect the Bazaar
     checkout tree or anything else in ${srcdir}.
 
-> Initial Setup
+> Initial setup
 
 The main configuration file burg.cfg is not provided by any package.
 Users must obtain one by copying an existing one, manual construction or
@@ -80,22 +80,22 @@ Substitute /dev/sda with the device name for the disk.
 Configuration
 -------------
 
-Since burg is derived from grub, its configuration is similar in most
+Since BURG is derived from GRUB, its configuration is similar in most
 respects. The main configuration file is /boot/burg/burg.cfg and is
 usually generated automatically. It is possible to create one by hand.
 However, this would be very tedious especially when adding the graphical
 features. It is more feasible to tweak and edit an existing one.
 
-Generation is configured by the file /etc/default/burg and scripts
+Generation is configured by the file /etc/default/burg and scripts are
 located in /etc/burg.d/.
 
-> Generation of a config
+> Generation of a configuration
 
-Creating a new burg.cfg is done by the command
+Creating a new burg.cfg is done by the command:
 
     # burg-mkconfig -o /boot/burg/burg.cfg
 
-Arch Linux provides a handy shortcut,
+Arch Linux provides a handy shortcut:
 
     # update-burg
 
@@ -103,10 +103,10 @@ Warning:These commands overwrite any preexisting file at that path.
 
 > Defaults
 
-The file /etc/default/burg is a bash script that is sourced by
-burg-mkconfig when generating a config file. The defaults file is meant
-to be an easy way for users to control this process. The entries are
-bash variables and arrays and are the same as those used in GRUB2.
+The file /etc/default/burg is a Bash script that is sourced by
+burg-mkconfig when generating a configuration file. The defaults file is
+meant to be an easy way for users to control this process. The entries
+are Bash variables and arrays and are the same as those used in GRUB.
 
 > burg.d scripts
 
@@ -123,26 +123,26 @@ is appended to burg.cfg verbatim.
 
 > Preview and runtime configuration
 
-When editing configuration, one does not need to reboot to see changes.
-If enabled in the PKGBUILD at compile time, the command burg-emu should
-be available. Run it as root to preview what burg would look like at
-boot. burg-emu allows the user to do most things that can be done at
-boot (except for, you know, booting).
+When editing a configuration, one does not need to reboot to see
+changes. If enabled in the PKGBUILD at compile time, the command
+burg-emu should be available. Run it as root to preview what BURG would
+look like at boot. burg-emu allows the user to do most things that can
+be done at boot (except for, you know, booting).
 
-Burg also allows runtime configuration, such as changing themes, through
-menus and burg's commandline. The settings are set as variables which
+BURG also allows runtime configuration, such as changing themes, through
+menus and BURG's commandline. The settings are set as variables which
 are saved in /boot/burg/burgenv.
 
 Theming
 -------
 
-The primary reason to use burg over other boot loaders is it's theming
-system. To add a theme to burg, copy its directory to /boot/burg/themes/
-and then update the config.
+The primary reason to use BURG over other boot loaders is its theming
+system. To add a theme to BURG, copy its directory to /boot/burg/themes/
+and then update the configuration.
 
-To change themes press T when running burg. A list of available themes
+To change themes, press T when running BURG. A list of available themes
 will be shown. Use the arrow keys to highlight the theme you want and
-press enter to make the selection. This can be done from within burg-emu
+press Enter to make the selection. This can be done from within burg-emu
 and rebooting is not required.
 
 Theme packages can be found in the AUR. Currently only four packages are
@@ -153,18 +153,15 @@ available:
 -   persia-theme-burg
 -   arch-theme-burg
 
-A call was put out requesting the creation of Arch Linux themes. Is
-there no hero in these lands who can give us what we need?
-
-Tips & Tricks
--------------
+Tips and tricks
+---------------
 
 > Shortcuts
 
      F1 / h - Help
      F2 / t - Change theme
      F3 / r - Change resolution
-     F5 / ctrl-x - Finish edit
+     F5 / Ctrl-x - Finish edit
      F6 - Next window
      F7 - Show folded items
      F8 - Toggle between text and graphic mode
@@ -181,11 +178,11 @@ Tips & Tricks
      u - Next Ubuntu item
      ESC - Exit from windows or menu
 
-For full list of keyboard shortcuts, in burg you can press F1.
+For full list of keyboard shortcuts, in BURG you can press F1.
 
 > Important files
 
-These files and directories control much of how burg is configured and
+These files and directories control much of how BURG is configured and
 run.
 
 -   /boot/burg/
@@ -196,12 +193,12 @@ run.
 
 > Other OS detection
 
-In some cases you may have other Operating Systems installed on other
-hard drives or partitions and you may want them to be listed in burg.
+In some cases, you may have other operating systems installed on other
+hard drives or partitions and you may want them to be listed in BURG.
 You can manually append their entries to /etc/burg.d/40_custom,
 something like:
 
-For windows :
+For Windows:
 
      menuentry "Windows 7" --class windows --class os {
      	insmod ntfs
@@ -210,7 +207,7 @@ For windows :
      	chainloader +1
      }
 
-For debian with plymouth enable
+For Debian with plymouth enable:
 
      menuentry 'Debian' --class debian --class gnu-linux --class gnu --class os --group group_main {
      	insmod ext2
@@ -222,29 +219,30 @@ For debian with plymouth enable
      	initrd	/boot/initrd.img-2.6.35-trunk-amd64
      }
 
-Or you can install os-prober and regenerate /boot/burg/burg.cfg
+Or you can install os-prober and regenerate /boot/burg/burg.cfg:
 
     # burg-mkconfig -o /boot/burg/burg.cfg
 
-Now burg should display icons for the other systems.
+Now BURG should display icons for the other systems.
 
 > Folding (grouping)
 
-If you want to use burg's folding feature (folding categorises the menu
-items, e.g. arch and arch fallback will be collected under one
+If you want to use BURG's folding feature (folding categorises the menu
+items, e.g. Arch and Arch Fallback will be collected under one
 category), you can press F when burg is loaded.
 
-In burg.cfg,entries which has the same group will be folded when you
+In burg.cfg, entries which has the same group will be folded when you
 enable folding.
 
-Icons of entries will be set according to entry's class. E.g. --class
-arch makes an entry arch linux and arch logo will be displayed.
+Icons of entries will be set according to an entry's class. For example,
+--class arch makes an entry Arch Linux and the Arch logo will be
+displayed.
 
 > Linux 3.0 detection
 
 burg-mkconfig might not add an initrd line for Linux 3.0 to menu
 entries. You can add the line manually by editing /boot/burg/burg.cfg,
-e.g.:
+for example:
 
      menuentry 'Arch GNU/Linux, with Linux linux' --class arch --class gnu-linux --class gnu --class os --group group_main {
      {
@@ -257,16 +255,23 @@ e.g.:
 
 Warning:Add just one of the above lines, not both!
 
-External Links
---------------
+See also
+--------
 
 -   Discussion thread on Arch BBS
--   Burg at Google Code
--   BURG - Ubuntu Community Documentation (Wiki)
+-   burg at Google Code
+-   burg - Ubuntu Community Documentation (Wiki)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=BURG&oldid=254483"
+"https://wiki.archlinux.org/index.php?title=BURG&oldid=278797"
 
 Category:
 
 -   Boot loaders
+
+-   This page was last modified on 15 October 2013, at 19:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

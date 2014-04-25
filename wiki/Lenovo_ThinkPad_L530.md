@@ -1,41 +1,37 @@
 Lenovo ThinkPad L530
 ====================
 
-  Summary
+  Summary help replacing me
   ---------------------------------------------------------------------------------
   This article covers the Arch Linux support for the Lenovo ThinkPad L530 laptop.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-|     -   1.1 lspci                                                        |
-|     -   1.2 lsusb                                                        |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Clickpad                                                     |
-|     -   2.2 Video                                                        |
-|     -   2.3 Ethernet                                                     |
-|     -   2.4 Wireless                                                     |
-|         -   2.4.1 Driver                                                 |
-|                                                                          |
-|     -   2.5 Wireless                                                     |
-|     -   2.6 Sound                                                        |
-|     -   2.7 Webcam                                                       |
-|     -   2.8 Fingerprint Reader                                           |
-|     -   2.9 Card Reader                                                  |
-|     -   2.10 Trackpoint                                                  |
-|     -   2.11 Special key                                                 |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-| -   4 Link                                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+    -   1.1 lspci
+    -   1.2 lsusb
+-   2 Configuration
+    -   2.1 Clickpad
+    -   2.2 Video
+    -   2.3 Ethernet
+    -   2.4 Wireless
+        -   2.4.1 Driver
+    -   2.5 Bluetooth
+    -   2.6 Sound
+    -   2.7 Webcam
+    -   2.8 Fingerprint Reader
+    -   2.9 Card Reader
+    -   2.10 Trackpoint
+    -   2.11 Special key
+-   3 Troubleshooting
+    -   3.1 Trackpoint
+-   4 Link
 
 Hardware
 --------
 
-Using Kernel 3.8.5
+Using kernel 3.8.5
 
   Device               Works
   -------------------- ------------
@@ -86,10 +82,7 @@ Configuration
 
 > Clickpad
 
-The clickpad works with the xf86-input-synaptic driver from extra, but
-the left/right click buttons at the bottom of the clickpad do not work.
-
-Install xf86-input-synaptics-clickpad from the AUR.
+The clickpad works with the xf86-input-synaptics driver from extra
 
 > Video
 
@@ -111,7 +104,7 @@ Driver
 rtl8192ce driver LSPCI : Network controller: Realtek Semiconductor Co.,
 Ltd. RTL8188CE 802.11b/g/n WiFi Adapter (rev 01)
 
-> Wireless
+> Bluetooth
 
 Install : bluez and blueman
 
@@ -133,9 +126,7 @@ Works out of the box. Tips : Card appears in : /dev/mmc*
 
 > Trackpoint
 
-Don't work :-(
-
-https://bugzilla.kernel.org/show_bug.cgi?id=33292
+See #Troubleshooting
 
 > Special key
 
@@ -145,7 +136,39 @@ https://bugs.launchpad.net/ubuntu/+source/linux/+bug/751471).
 Troubleshooting
 ---------------
 
-Trackpoint
+> Trackpoint
+
+There are some issues regarding the trackpoint on the ThinkPad L530 and
+L430 series. See https://bugzilla.kernel.org/show_bug.cgi?id=33292
+
+Warning:This is just a quick and dirty workaround. The following
+solution will remove the two-finger-scroll functionality of the touchpad
+
+Load the kernelmodule psmouse with the options proto=bare:
+
+    # echo "options psmouse proto=bare" | sudo tee /etc/modprobe.d/trackpoint-elantech.conf 
+
+To activate the scroll function, create the file
+/usr/share/X11/xorg.conf.d/11-trackpoint-elantech.conf:
+
+    Section "InputClass"
+        Identifier      "Elantech Trackpoint"
+        MatchProduct    "PS/2 Generic Mouse"
+        MatchDevicePath "/dev/input/event*"
+        Option          "EmulateWheel" "true"
+        Option          "EmulateWheelButton" "2"
+        Option          "EmulateWheelTimeout" "200" 
+        Option          "YAxisMapping" "4 5" # vertikales Scrollen
+        Option          "XAxisMapping" "6 7" # horizontales Scrollen
+    EndSection
+
+Reload the kernelmodule, the trackpoint should now be usable:
+
+    # sudo modprobe -rv psmouse && sudo modprobe -v psmouse 
+
+Note:For more information see:
+http://wiki.ubuntuusers.de/Trackpoint#Trackpoint-wird-nicht-erkannt-nur-ThinkPad-L430-530
+(German)
 
 Link
 ----
@@ -153,8 +176,15 @@ Link
 Experiences with thinkpad l530 on arch linux
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_L530&oldid=253666"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_L530&oldid=304794"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 16 March 2014, at 07:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

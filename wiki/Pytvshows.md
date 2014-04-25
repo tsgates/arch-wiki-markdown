@@ -5,20 +5,18 @@ Pytvshows is a python script for downloading .torrent files from
 trvrss.net or eztv.it. The configuration is very easy and pytvshows
 remembers the series you already watched.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Running pytvshows                                                  |
-| -   4 Reference                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Running pytvshows
+-   4 See also
 
 Installation
 ------------
 
-Pytvshows is in AUR
+Install pytvshows from the AUR.
 
 Configuration
 -------------
@@ -47,11 +45,11 @@ Running pytvshows
 Now you can start running pytvshows by default the output directory is
 your ~/ you can change that:
 
-    #pytvshows --output_dir=/home/<user>/torrents/
+    # pytvshows --output_dir=/home/<user>/torrents/
 
 For more options run:
 
-    #pytvshows --help
+    # pytvshows --help
 
 Let your bittorent client watch the directory where you download your
 torrents so they are automatically added.
@@ -59,11 +57,11 @@ torrents so they are automatically added.
 If you want to run pytvshows in the background, first make a bash
 script:
 
-    # #!/bin/bash
-      echo -n “tvshows.sh - “; date # log current date & time 
-      pytvshows  --output_dir=/home/<user>/torrents/ --verbose >> ~/scripts/pytvshows.log
+    #!/bin/bash
+    echo -n “tvshows.sh - “; date # log current date & time 
+    pytvshows  --output_dir=/home/<user>/torrents/ --verbose >> ~/scripts/pytvshows.log
 
-As you can see, log the output of pytvshows
+As you can see, log the output of pytvshows.
 
 Then add this script to cron:
 
@@ -73,14 +71,21 @@ Then add this script to cron:
 Please use a other time otherwise it will get to many hits at the same
 time.
 
-Reference
----------
+See also
+--------
 
 http://sourceforge.net/projects/pytvshows/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pytvshows&oldid=206308"
+"https://wiki.archlinux.org/index.php?title=Pytvshows&oldid=302653"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

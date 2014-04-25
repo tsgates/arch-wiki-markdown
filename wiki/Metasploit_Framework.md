@@ -10,16 +10,13 @@ Metasploit Framework
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Installation                                                       |
-| -   3 Updating                                                           |
-| -   4 Interfaces                                                         |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 Installation
+-   3 Interfaces
+-   4 See also
 
 Overview
 --------
@@ -33,27 +30,21 @@ impressive work environment. The MSF is far more than just a collection
 of exploits, it's an infrastructure that you can build upon and utilize
 for your custom needs. This allows you to concentrate on your unique
 environment, and not have to reinvent the wheel. Currently, metasploit
-requieres you to setup and configure postgresql on your system to work.
+requires you to setup and configure postgresql on your system to work.
 This wiki will show you how to get metasploit-git working with a
 postgresql database.
 
 Installation
 ------------
 
-Install metasploit or metasploit-svn or metasploit-git from the AUR.
-
-Updating
---------
-
-If you're using metasploit you can update the framework from within the
-msfconsole with:
+If you choose to install metasploit package, you can update the
+framework from within the msfconsole with:
 
     msf> svn update
 
 but the updates won't be tracked by pacman.
 
-A better solution is using metasploit-svn and updating via a makepkg or
-an AUR Helper.
+A better solution is using metasploit-git.
 
 Interfaces
 ----------
@@ -64,25 +55,32 @@ it, go to terminal and run:
 
     # /opt/metasploit/msfconsole
 
-or put the following alias into your .bashrc
+or put the following alias into your .bashrc:
 
     alias msfconsole='/opt/metasploit/msfconsole'
 
-Note that metasploit is installed in /opt/metasploit/* and
-metasploit-svn in /usr/src/metasploit/* so for the svn version you do
-not need the alias.
+Note that metasploit is installed in /opt/metasploit/ and metasploit-git
+in /usr/src/metasploit/ so for the git version you do not need the
+alias.
 
-Other interfaces are: msfcli and msfgui
+Other interfaces are msfcli and msfgui.
 
-See Also
+See also
 --------
 
 -   Metasploit Unleashed Free information security training.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Metasploit_Framework&oldid=248917"
+"https://wiki.archlinux.org/index.php?title=Metasploit_Framework&oldid=279934"
 
 Categories:
 
 -   Networking
 -   Security
+
+-   This page was last modified on 26 October 2013, at 21:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

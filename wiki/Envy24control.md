@@ -24,55 +24,43 @@ useful for envy24control users. This article aims to provide usage
 guidance for those using ice1712-based cards and envy24control with Arch
 Linux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Supported cards                                                    |
-|     -   2.1 Understanding your sound card                                |
-|         -   2.1.1 Read your sound card manual                            |
-|                                                                          |
-| -   3 Application overview                                               |
-|     -   3.1 Monitor Inputs                                               |
-|         -   3.1.1 Meters                                                 |
-|         -   3.1.2 Faders                                                 |
-|         -   3.1.3 Tips and tricks                                        |
-|                                                                          |
-|     -   3.2 Monitor PCMs                                                 |
-|         -   3.2.1 Tips and tricks                                        |
-|                                                                          |
-|     -   3.3 Patchbay / Router                                            |
-|         -   3.3.1 Tips and tricks                                        |
-|                                                                          |
-|     -   3.4 Hardware Settings                                            |
-|         -   3.4.1 Master Clock                                           |
-|         -   3.4.2 Rate State                                             |
-|             -   3.4.2.1 Settings combinations and their behaviors        |
-|                                                                          |
-|         -   3.4.3 Actual Rate                                            |
-|                                                                          |
-|     -   3.5 Analog Volume                                                |
-|         -   3.5.1 DAC faders                                             |
-|         -   3.5.2 ADC faders                                             |
-|         -   3.5.3 Tips and tricks                                        |
-|                                                                          |
-|     -   3.6 Profiles                                                     |
-|                                                                          |
-| -   4 Usage examples                                                     |
-|     -   4.1 Recording a single track in Ardour (Ardour does monitoring)  |
-|         -   4.1.1 envy24control settings                                 |
-|         -   4.1.2 Ardour settings                                        |
-|         -   4.1.3 JACK connections                                       |
-|                                                                          |
-|     -   4.2 Recording a single track in Ardour (Audio Hardware does      |
-|         monitoring)                                                      |
-|         -   4.2.1 envy24control settings                                 |
-|         -   4.2.2 Ardour settings                                        |
-|         -   4.2.3 JACK connections                                       |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Supported cards
+    -   2.1 Understanding your sound card
+        -   2.1.1 Read your sound card manual
+-   3 Application overview
+    -   3.1 Monitor Inputs
+        -   3.1.1 Meters
+        -   3.1.2 Faders
+        -   3.1.3 Tips and tricks
+    -   3.2 Monitor PCMs
+        -   3.2.1 Tips and tricks
+    -   3.3 Patchbay / Router
+        -   3.3.1 Tips and tricks
+    -   3.4 Hardware Settings
+        -   3.4.1 Master Clock
+        -   3.4.2 Rate State
+            -   3.4.2.1 Settings combinations and their behaviors
+        -   3.4.3 Actual Rate
+    -   3.5 Analog Volume
+        -   3.5.1 DAC faders
+        -   3.5.2 ADC faders
+        -   3.5.3 Tips and tricks
+    -   3.6 Profiles
+-   4 Usage examples
+    -   4.1 Recording a single track in Ardour (Ardour does monitoring)
+        -   4.1.1 envy24control settings
+        -   4.1.2 Ardour settings
+        -   4.1.3 JACK connections
+    -   4.2 Recording a single track in Ardour (Audio Hardware does
+        monitoring)
+        -   4.2.1 envy24control settings
+        -   4.2.2 Ardour settings
+        -   4.2.3 JACK connections
+-   5 See also
 
 Installation
 ------------
@@ -556,8 +544,15 @@ manuals for popular Delta series cards:
 -   Delta Audiophile 2496
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Envy24control&oldid=211282"
+"https://wiki.archlinux.org/index.php?title=Envy24control&oldid=304790"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 16 March 2014, at 07:24.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

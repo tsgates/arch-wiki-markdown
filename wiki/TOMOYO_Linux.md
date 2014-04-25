@@ -23,29 +23,26 @@ parity with the 1.x branch, but for those wanting an easy start the 2.x
 branch is easy to install. The TOMOYO Linux 1.x branch is for those
 wanting the greatest security, while AKARI is somewhere in between.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Branches of development                                            |
-| -   3 TOMOYO Linux 1.x                                                   |
-|     -   3.1 Initializing configuration                                   |
-|                                                                          |
-| -   4 AKARI                                                              |
-|     -   4.1 Limitations of AKARI                                         |
-|     -   4.2 Installation                                                 |
-|     -   4.3 Initializing configuration                                   |
-|                                                                          |
-| -   5 TOMOYO Linux 2.x                                                   |
-|     -   5.1 Limitations of TOMOYO Linux 2.x                              |
-|     -   5.2 Installation                                                 |
-|     -   5.3 Initializing configuration                                   |
-|                                                                          |
-| -   6 Usage                                                              |
-| -   7 References                                                         |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Branches of development
+-   3 TOMOYO Linux 1.x
+    -   3.1 Initializing configuration
+-   4 AKARI
+    -   4.1 Limitations of AKARI
+    -   4.2 Installation
+    -   4.3 Initializing configuration
+-   5 TOMOYO Linux 2.x
+    -   5.1 Limitations of TOMOYO Linux 2.x
+    -   5.2 Installation
+    -   5.3 Activation
+    -   5.4 Initializing configuration
+    -   5.5 Log daemon
+-   6 Usage
+-   7 References
+-   8 See also
 
 Introduction
 ------------
@@ -210,6 +207,8 @@ need to be installed:
 For kernel versions between 2.6.30 and 2.6.35, tomoyo-tools 2.2.x should
 be installed. A package is available on the AUR
 
+> Activation
+
 If all ok, append security=tomoyo TOMOYO_trigger=/sbin/init to parameter
 GRUB_CMDLINE_LINUX_DEFAULT in /etc/default/grub:
 
@@ -222,23 +221,40 @@ After, recompile grub.cfg:
 So, TOMOYO will load all saved policies from /etc/tomoyo/policy/current
 when /sbin/init executes.
 
+Next, check whether the activation was successful. You should have the
+following lines (or similar) in your dmesg output:
+
+     $ dmesg |grep -A 1 -B 1 TOMOYO
+     [    0.003375] Security Framework initialized
+     [    0.003387] TOMOYO Linux initialized
+     [    0.003396] AppArmor: AppArmor disabled by boot time parameter
+     --
+     [    6.829798] Calling /usr/bin/tomoyo-init to load policy. Please wait.
+     [    6.833709] TOMOYO: 2.5.0
+     [    6.833712] Mandatory Access Control activated.
+
+If this is not the case you can try to modifiy TOMOYO_trigger to the
+actual init path, or /usr/lib/systemd/systemd , or leave TOMOYO_trigger
+out completely.
+
 For first time, you may want to auto-save in-memory policies to
 filesystem when computer goes to shutdown/reboot. If yes, write
 /usr/lib/systemd/system/tomoyo-savepolicy.service script:
 
     /usr/lib/systemd/system/tomoyo-savepolicy.service
 
-    [Unit]
+    [Unit]                                                                                        
     Description=Tomoyo savepolicy
 
     [Service]
     Type=oneshot
-    ExecStart=/usr/sbin/tomoyo-savepolicy
+    ExecStart=/bin/true
+    ExecStop=/usr/sbin/tomoyo-savepolicy
     StandardInput=tty
     RemainAfterExit=yes
 
     [Install]
-    WantedBy=shutdown.target
+    WantedBy=multi-user.target
 
 You can enable/disable it with systemctl:
 
@@ -269,6 +285,20 @@ can switch profiles later using tomoyo-editpolicy in "Domain transition
 editor" by pressing S on any selected domain (domains).
 
 Now, the computer should be restarted.
+
+  
+
+> Log daemon
+
+For tomoyo exists the log-daemon /usr/sbin/tomoyo-auditd. It is usefull
+for monitoring the behaviour for example of applications like Skype (see
+Skype). The initial configuration file is well explained and can be
+found in /etc/tomoyo/tools/auditd.conf whereas the log files can be
+found in /var/log/tomoyo.
+
+To use it with systemd create the file
+/lib/systemd/system/tomoyo-auditd.service with the content described in
+chapter 4.6 in the official documentation.
 
 Usage
 -----
@@ -337,9 +367,16 @@ See also
 -   SELinux
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=TOMOYO_Linux&oldid=255101"
+"https://wiki.archlinux.org/index.php?title=TOMOYO_Linux&oldid=304972"
 
 Categories:
 
 -   Security
 -   Kernel
+
+-   This page was last modified on 16 March 2014, at 09:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

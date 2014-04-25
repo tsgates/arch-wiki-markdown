@@ -4,23 +4,20 @@ BIND
 Berkeley Internet Name Daemon (BIND) is the reference implementation of
 the Domain Name System (DNS) protocols.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 A configuration template for running a domain                      |
-|     -   2.1 1. Creating a zonefile                                       |
-|     -   2.2 2. Configuring master server                                 |
-|                                                                          |
-| -   3 BIND as simple DNS forwarder                                       |
-| -   4 Running BIND in a chrooted environment                             |
-| -   5 Configuring BIND to serve DNSSEC signed zones                      |
-| -   6 Automatically listen on new interfaces without chroot and root     |
-|     privileges                                                           |
-| -   7 See also                                                           |
-| -   8 BIND Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 A configuration template for running a domain
+    -   2.1 1. Creating a zonefile
+    -   2.2 2. Configuring master server
+-   3 BIND as simple DNS forwarder
+-   4 Running BIND in a chrooted environment
+-   5 Configuring BIND to serve DNSSEC signed zones
+-   6 Automatically listen on new interfaces without chroot and root
+    privileges
+-   7 See also
+-   8 BIND Resources
 
 Installation
 ------------
@@ -167,8 +164,15 @@ BIND Resources
 -   DNS Glossary
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=BIND&oldid=255794"
+"https://wiki.archlinux.org/index.php?title=BIND&oldid=305713"
 
 Category:
 
 -   Domain Name System
+
+-   This page was last modified on 20 March 2014, at 01:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

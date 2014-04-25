@@ -13,48 +13,35 @@ Using LPROF to Profile Monitors
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-> Summary
+Related articles
+
+-   CMYK support in The GIMP
 
 This article will explain the concept of monitor calibration and
 profiling. It explains the building of lprof color profiler from the
 provided PKGBUILD, and its use in profiling your monitor.
 
-Required software
+Contents
+--------
 
-VIGRA (v?)
-
-lcms (v1.15 ?)
-
-Related articles
-
-CMYK support in The GIMP
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Before you read                                                    |
-|     -   1.1 About LCD monitors                                           |
-|     -   1.2 When to calibrate monitors                                   |
-|     -   1.3 Prerequisites for building lprof                             |
-|                                                                          |
-| -   2 About monitor calibration                                          |
-|     -   2.1 Black point                                                  |
-|     -   2.2 Color (white) temperature                                    |
-|     -   2.3 Brightness                                                   |
-|     -   2.4 Contrast                                                     |
-|     -   2.5 Phosphors                                                    |
-|                                                                          |
-| -   3 Building lprof                                                     |
-| -   4 Calibrating the monitor                                            |
-|     -   4.1 Setting brightness/contrast                                  |
-|     -   4.2 Setting the color temperature                                |
-|     -   4.3 Profiling the monitor                                        |
-|                                                                          |
-| -   5 Where to save profiles                                             |
-| -   6 Resources                                                          |
-|     -   6.1 Monitor phosphor characteristics                             |
-+--------------------------------------------------------------------------+
+-   1 Before you read
+    -   1.1 About LCD monitors
+    -   1.2 When to calibrate monitors
+    -   1.3 Prerequisites for building lprof
+-   2 About monitor calibration
+    -   2.1 Black point
+    -   2.2 Color (white) temperature
+    -   2.3 Brightness
+    -   2.4 Contrast
+    -   2.5 Phosphors
+-   3 Building lprof
+-   4 Calibrating the monitor
+    -   4.1 Setting brightness/contrast
+    -   4.2 Setting the color temperature
+    -   4.3 Profiling the monitor
+-   5 Where to save profiles
+-   6 Monitor phosphor characteristics
+-   7 See also
 
 Before you read
 ---------------
@@ -156,34 +143,7 @@ getting this information.
 Building lprof
 --------------
 
-The PKGBUILD for lprof has been presented at the Arch Linux Forum in
-this thread.
-
-But, before you build lprof, you need to build VIGRA, which can be found
-in the AUR.
-
-Here is the lprof PKGBUILD:
-
-    pkgname=lprof
-    pkgver=1.11.4.1
-    pkgrel=1
-    pkgdesc="Imaging device calibration tool"
-    url="http://lprof.sourceforge.net/"
-    license="GPL"
-    depends=('qt>=3' 'lcms>=1.12' 'vigra>=1.3')
-    makedepends=('python>=1.53' 'scons')
-    source=(http://dl.sourceforge.net/lprof/${pkgname}-${pkgver}.tar.gz)
-    md5sums=('2177c77c24aa10db9b7681d264735ea9')
-
-    build() {
-      cd ${startdir}/src/${pkgname}-${pkgver}
-      sed -i "s/'tiff'/'tiff','png'/" SConstruct || return 1
-      python scons.py PREFIX=/usr || return 1
-      install -d ${startdir}/pkg/usr
-      python scons.py PREFIX=${startdir}/pkg/usr install
-    }
-
-Just copy the contents into a PKGBUILD file and build the package.
+Install lprof, which is available in the Arch User Repository.
 
 Calibrating the monitor
 -----------------------
@@ -297,19 +257,8 @@ None of the locations seem to be standard. It is recommended that you
 put your profiles in /usr/share/color/icc, and keep copies in a
 non-hidden directory in your home directory.
 
-Resources
----------
-
-Here are some links you may find useful:
-
--   Information on CRT (Wikipedia)
--   International Color Consortium (ICC home page)
--   A completely different view on image processing (Accurate Image
-    Manipulation)
--   About color management (Wikipedia)
--   Introduction to ICC color profile format (ICC home page)
-
-> Monitor phosphor characteristics
+Monitor phosphor characteristics
+--------------------------------
 
 make/model
 
@@ -335,9 +284,31 @@ P22
 
 0.155 / 0.07
 
+See also
+--------
+
+-   Information on CRT (Wikipedia)
+-   International Color Consortium (ICC home page)
+-   A completely different view on image processing (Accurate Image
+    Manipulation)
+-   About color management (Wikipedia)
+-   Introduction to ICC color profile format (ICC home page)
+
+Related software:
+
+-   VIGRA
+-   lcms
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Using_LPROF_to_Profile_Monitors&oldid=237856"
+"https://wiki.archlinux.org/index.php?title=Using_LPROF_to_Profile_Monitors&oldid=304948"
 
 Category:
 
 -   Graphics and desktop publishing
+
+-   This page was last modified on 16 March 2014, at 09:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

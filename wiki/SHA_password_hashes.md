@@ -1,26 +1,31 @@
 SHA password hashes
 ===================
 
-Note:With shadow 4.1.4.3-3 sha512 is the default for new passwords (see
-bug 13591 and corresponding commit).
+The Secure Hash Algorithms (SHA) are a set of hash functions often used
+to encrypt passwords. By default Arch uses SHA-512 for passwords, but
+some systems may still be using the older MD5 algorithm. This article
+describes how to increase password security.
 
-If your current password was created with shadow version prior to
-4.1.4.3-3 (2011-11-26) you are using MD5. To start using a SHA-512 hash
-you just need to change your password with passwd.
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Benefits of SHA-2 over MD5                                         |
-| -   2 Increasing Security                                                |
-| -   3 Re-Hash the Passwords                                              |
-| -   4 Known Problems                                                     |
-|     -   4.1 fgetty                                                       |
-+--------------------------------------------------------------------------+
+-   1 Benefits of SHA-2 over MD5
+-   2 Increasing Security
+-   3 Re-Hash the Passwords
+-   4 Known Problems
+    -   4.1 fgetty
 
 Benefits of SHA-2 over MD5
 --------------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
+  g]                       is poorly written.       g]
+                           Reason: This section     
+                           should perhaps be pruned 
+                           and merged with article  
+                           summary (Discuss)        
+  ------------------------ ------------------------ ------------------------
 
 In Linux distributions login passwords are commonly hashed and stored in
 the /etc/shadow file using the MD5 algorithm. The security of the MD5
@@ -37,6 +42,22 @@ hash functions with digests that are 224, 256, 384, and 512 bits.
 
 Increasing Security
 -------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
+  g]                       is poorly written.       g]
+                           Reason: The notes and    
+                           structure of this        
+                           section lack focus and   
+                           clarity (Discuss)        
+  ------------------------ ------------------------ ------------------------
+
+Note:With shadow 4.1.4.3-3 sha512 is the default for new passwords (see
+bug 13591).
+
+If your current password was created with shadow version prior to
+4.1.4.3-3 (2011-11-26) you are using MD5. To start using a SHA-512 hash
+you just need to change your password with passwd.
 
 Note:You must have root privileges to edit this file.
 
@@ -67,7 +88,7 @@ Even though you have changed the encryption settings, your passwords are
 not automatically re-hashed. To fix this, you must reset all user
 passwords so that they can be re-hashed.
 
-As root issue the following the command,
+As root issue the following command,
 
     # passwd <username>
 
@@ -91,8 +112,15 @@ fgetty will cause you to be locked out. A patched version of fgetty is
 in the AUR named fgetty-pam which adds SHA-512 support.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SHA_password_hashes&oldid=238790"
+"https://wiki.archlinux.org/index.php?title=SHA_password_hashes&oldid=279147"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 20 October 2013, at 03:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

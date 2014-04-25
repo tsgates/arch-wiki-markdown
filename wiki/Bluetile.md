@@ -1,33 +1,12 @@
 Bluetile
 ========
 
-  
- Bluetile is a tiling window manager designed to integrate with the
-GNOME desktop environment.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About                                                              |
-| -   2 Installation                                                       |
-| -   3 Running Bluetile                                                   |
-|     -   3.1 At start-up                                                  |
-|     -   3.2 Another approach                                             |
-|                                                                          |
-| -   4 BUGS                                                               |
-|     -   4.1 X11-1.4.6.1                                                  |
-|                                                                          |
-| -   5 Bluetile Resources                                                 |
-+--------------------------------------------------------------------------+
-
-About
------
-
-Why choose Bluetile? Because none of the other tiling window managers
-were built with the thought in mind that time is the most limited
-resource among the majority of users. It is good if you can configure a
-software in every respect. It is better if you do not have to.
+Bluetile is a tiling window manager designed to integrate with the GNOME
+desktop environment. Why choose Bluetile? Because none of the other
+tiling window managers were built with the thought in mind that time is
+the most limited resource among the majority of users. It is good if you
+can configure a software in every respect. It is better if you do not
+have to.
 
 The Bluetile project is really just another xmonad configuration. A
 configuration that focuses on making the tiling paradigm easily
@@ -38,15 +17,22 @@ installation, but this project exists to provide an easy installation
 path with zero configuration and without having to read (as much)
 background information.
 
+Contents
+--------
+
+-   1 Installation
+-   2 Running Bluetile
+    -   2.1 At start-up
+    -   2.2 Another approach
+-   3 Known issues
+    -   3.1 X11-1.4.6.1
+-   4 See also
+
 Installation
 ------------
 
-1. Install the following packages from the official repositories:
-
--   ghc
--   cabal-install
--   gtk2hs-buildtools
--   xmonad-contrib
+1. Install the following packages from the official repositories: ghc
+cabal-install gtk2hs-buildtools xmonad-contrib.
 
 2. Update cabal:
 
@@ -56,12 +42,12 @@ Installation
 
     # cabal install bluetile
 
-Note:See BUGS section if you get any compile errors.
+Note:See Known issues section if you get any compile errors.
 
 Running Bluetile
 ----------------
 
-After you have installed bluetile, test it:
+After you have installed Bluetile, test it:
 
     $ ~/.cabal/bin/bluetile
 
@@ -99,8 +85,8 @@ With this, GNOME will automatically use Bluetile instead of Metacity.
 Note:With this method there is no need to add bluetile to your
 gnome-session-properties.
 
-BUGS
-----
+Known issues
+------------
 
 > X11-1.4.6.1
 
@@ -126,16 +112,23 @@ Once that is finished:
 
     # cabal install bluetile
 
-Bluetile Resources
-------------------
+See also
+--------
 
-Home page: http://bluetile.org/
+http://bluetile.org/ - Project home page
 
-Wiki: http://www.haskell.org/haskellwiki/Bluetile
+http://www.haskell.org/haskellwiki/Bluetile - Wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Bluetile&oldid=197300"
+"https://wiki.archlinux.org/index.php?title=Bluetile&oldid=301206"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 24 February 2014, at 11:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -33,12 +33,12 @@ Configuration
 -   Add intel-536EP or intel-537 to daemon list
 -   Add intel536 or intel537 and ppp_generic to modules list
 
-Note: If pppd quits with an ERROR 1 just after connection, change auth
-to noauth in /etc/ppp/options or use the call option (see the pppd
-manpage).
+Note:If pppd quits with an ERROR 1 just after connection, change auth to
+noauth in /etc/ppp/options or use the call option (see the pppd man
+page).
 
-Note: If you do not want to set the permissions of your modem you "can"
-set /usr/sbin/pppd setuid but this may be a security risk, you have been
+Note:If you do not want to set the permissions of your modem you "can"
+set /usr/bin/pppd setuid but this may be a security risk, you have been
 warned!!!
 
 * * * * *
@@ -47,8 +47,15 @@ If you have comments on the package please post it here:
 https://bbs.archlinux.org/viewtopic.php?t=6123
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Intel_53x_Modem_Driver&oldid=238664"
+"https://wiki.archlinux.org/index.php?title=Intel_53x_Modem_Driver&oldid=264014"
 
 Category:
 
 -   Modems
+
+-   This page was last modified on 23 June 2013, at 21:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

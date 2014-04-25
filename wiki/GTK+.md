@@ -1,21 +1,11 @@
 GTK+
 ====
 
-> Summary
+Related articles
 
-This articles details theme configuration of GTK+ applications. GTK+
-(GIMP Toolkit) is a cross-platform widget toolkit for creating graphical
-user interfaces. This article will explore the tools used to configure
-the GTK+ theme, style, icon, font and font size, and also detail manual
-configuration.
-
-> Related
-
-Uniform Look for Qt and GTK Applications
-
-Qt
-
-GNU Project
+-   Uniform Look for Qt and GTK Applications
+-   Qt
+-   GNU Project
 
 From the GTK+ website:
 
@@ -26,40 +16,38 @@ application suites.
 
 GTK+, The GIMP Toolkit, was initially made by the GNU Project for the
 GIMP but is now a very popular toolkit with bindings for many languages.
+This article will explore the tools used to configure the GTK+ theme,
+style, icon, font and font size, and also detail manual configuration.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Configuration programs                                             |
-| -   2 Themes                                                             |
-|     -   2.1 GTK+ 1.x                                                     |
-|     -   2.2 GTK+ 2.x                                                     |
-|     -   2.3 GTK+ 3.x                                                     |
-|     -   2.4 GTK+ and Qt                                                  |
-|                                                                          |
-| -   3 Configuration file                                                 |
-|     -   3.1 Enabling Customizable Keyboard Shortcuts                     |
-|     -   3.2 Speed up your GNOME menu                                     |
-|     -   3.3 Reduce widget sizes                                          |
-|                                                                          |
-| -   4 Development                                                        |
-|     -   4.1 Write a simple message dialog app                            |
-|         -   4.1.1 Bash                                                   |
-|         -   4.1.2 Boo                                                    |
-|         -   4.1.3 C                                                      |
-|         -   4.1.4 C++                                                    |
-|         -   4.1.5 C#                                                     |
-|         -   4.1.6 Genie                                                  |
-|         -   4.1.7 Java                                                   |
-|         -   4.1.8 JavaScript                                             |
-|         -   4.1.9 Perl                                                   |
-|         -   4.1.10 Python                                                |
-|         -   4.1.11 Vala                                                  |
-|         -   4.1.12 Visual Basic .NET                                     |
-|                                                                          |
-| -   5 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Configuration programs
+-   2 Themes
+    -   2.1 GTK+ 1.x
+    -   2.2 GTK+ 2.x
+    -   2.3 GTK+ 3.x
+    -   2.4 GTK+ and Qt
+    -   2.5 GTK+ and HTML with Broadway
+-   3 Configuration file
+    -   3.1 Enabling Customizable Keyboard Shortcuts
+    -   3.2 Speed up your GNOME menu
+    -   3.3 Reduce widget sizes
+-   4 Development
+    -   4.1 Write a simple message dialog app
+        -   4.1.1 Bash
+        -   4.1.2 Boo
+        -   4.1.3 C
+        -   4.1.4 C++
+        -   4.1.5 C#
+        -   4.1.6 Genie
+        -   4.1.7 Java
+        -   4.1.8 JavaScript
+        -   4.1.9 Perl
+        -   4.1.10 Python
+        -   4.1.11 Vala
+        -   4.1.12 Visual Basic .NET
+-   5 See also
 
 Configuration programs
 ----------------------
@@ -74,10 +62,6 @@ font. They generally overwrite the ~/.gtkrc-2.0 file.
 -   gtk-theme-switch2
 -   gtk2_prefs
 
-Example install command:
-
-    # pacman -S gtk-theme-switch2
-
 See also Uniform Look for Qt and GTK Applications#Changing styles in
 each toolkit.
 
@@ -86,30 +70,21 @@ Themes
 
 > GTK+ 1.x
 
-Old GTK+ 1 apps (like xmms) often do not look very nice at first. This
-is because they use ugly themes by default. To change this, you need to:
+There are loads of GTK+ 1.x themes in the AUR: search for gtk-theme. A
+good start is gtk-smooth-engine.
 
-1.  download and install some nice themes
-2.  change the theme
+Most major desktop environments provide tools to configure the GTK+
+theme, icons, font and font size.
 
-Some nice themes are in the AUR. To install them, see gtk-smooth-engine.
-
-To change the theme you can use gtk-theme-switch2. Run it with the
-'switch' command.
+Alternatively, use gtk-theme-switch2. Run it with the switch command.
 
 > GTK+ 2.x
 
-Major desktop environments provide tools to configure the GTK+ theme,
-icons, font and font size. Alternatively, tools such as those mentioned
-above may be used.
+There are loads of GTK+ 2.x themes in the AUR: search for gtk2-theme. A
+good start is gtk-engines which includes the popular Clearlooks theme.
 
-It is recommended to install some GTK+ 2 themes as well. The popular
-Clearlooks theme is included within the gtk-engines package.
-
-Further themes can be found in the AUR:
-
--   https://aur.archlinux.org/packages.php?O=0&K=gtk2-theme&do_Search=Go
--   https://aur.archlinux.org/packages.php?O=0&K=gtk-theme&do_Search=Go
+Most major desktop environments provide tools to configure the GTK+
+theme, icons, font and font size.
 
 Alternatively, GTK+ settings can be configured manually by editing
 ~/.gtkrc-2.0. A list of GTK+ settings can be found in the GNOME library.
@@ -130,27 +105,32 @@ For example:
     gtk-theme-name = "Murrine-Gray"
     gtk-font-name = "DejaVu Sans 8"
 
-Note: The above example requires the packages ttf-dejavu,
+Note:The above example requires the packages ttf-dejavu,
 tangerine-icon-theme, gtk-engine-murrine from the official repositories,
-and murrine-themes-collection from the AUR.
+and gtk-theme-murrine-collection from the AUR.
 
 > GTK+ 3.x
 
-If you use GNOME 3, the theme can be changed with the gnome-tweak-tool.
+A good start is gnome-themes-standard which includes the popular Adwaita
+theme.
 
-If you use Xfce 4.8, both GTK+ 3.x and GTK+ 2.x themes can be managed by
-Appearance tool. Go to Settings-->Appearance. If selected style has both
-GTK+ 2.x and GTK+ 3.x themes, they will be used. If selected style has
-only GTK+ 2.x theme, it will be used for GTK+ 2.x applications and
-(ugly) defaults will be used for GTK+ 3.x applications. If selected
-style has only GTK+ 3.x theme, it will be used for GTK+ 3.x applications
-and (ugly) defaults will be used for GTK+ 2.x applications. Thus for
-uniform UI appearance and best experience one can use style that has
-both GTK+ 2.x and GTK+ 3.x themes. Search packages and AUR. One example
-of this is theme clearlooks-phenix-gtk-theme-git.
+If selected style has both GTK+ 2.x and GTK+ 3.x themes, they will be
+used. If selected style has only GTK+ 2.x theme, it will be used for
+GTK+ 2.x applications and (ugly) defaults will be used for GTK+ 3.x
+applications. If selected style has only GTK+ 3.x theme, it will be used
+for GTK+ 3.x applications and (ugly) defaults will be used for GTK+ 2.x
+applications. Thus for uniform UI appearance and best experience one can
+use style that has both GTK+ 2.x and GTK+ 3.x themes.
 
-If you prefer not to install gnome-tweak-tool, your theme can be set
-manually in $XDG_CONFIG_HOME/gtk-3.0/settings.ini (this is usually
+Most major desktop environments provide tools to configure the GTK+
+theme, icons, font and font size. If you use GNOME, use GNOME Tweak
+Tool: install gnome-tweak-tool. If you use Xfce, use the Appearance
+tool: go to Settings > Appearance.
+
+An alternative without huge dependencies is lxappearance.
+
+If you prefer not to install a theme manager at all, your theme can be
+set manually in $XDG_CONFIG_HOME/gtk-3.0/settings.ini (this is usually
 ~/.config/gtk-3.0/settings.ini). An example settings.ini file:
 
     $XDG_CONFIG_HOME/gtk-3.0/settings.ini
@@ -175,20 +155,23 @@ configuration tool. There are only a few themes which provide a uniform
 look for GTK+ 3.x and GTK+ 2.x apps. A few examples:
 
 1.  Adwaita (part of gnome-themes-standard)
-2.  Newlooks for GKT+ 3 and Clearlooks for GTK+ 2
-3.  Zukitwo
-4.  Elegant Brit
-5.  Atolm
-6.  Hope
+2.  Clearlooks-Phenix (AUR: clearlooks-phenix-gtk-theme)
+3.  Newlooks for GTK+ 3 and Clearlooks for GTK+ 2
+4.  Zukitwo
+5.  Elegant Brit
+6.  Atolm
+7.  Hope
+8.  OMG
 
-Note:Some themes may require librsvg to display correctly, but not all
-specify it as a dependency. Try installing it if the chosen theme looks
-broken.
+> Note:
 
-Note:There probably are other themes. Some of these themes are available
-in the AUR. Also, some of them are not usable as-is for displaying a
-GTK+ 2.x panel (light text over light background), so you need to use
-the provided panel background.
+-   Some themes may require librsvg to display correctly, but not all
+    specify it as a dependency. Try installing it if the chosen theme
+    looks broken.
+-   There probably are other themes. Some of these themes are available
+    in the AUR. Also, some of them are not usable as-is for displaying a
+    GTK+ 2.x panel (light text over light background), so you need to
+    use the provided panel background.
 
 You could find what themes installed on your system have both an GTK+
 2.x and GTK+ 3.x version by using this command (don't work with names
@@ -204,6 +187,34 @@ that their looks do not blend well. If you wish to make your GTK+ styles
 match your Qt styles please read Uniform Look for Qt and GTK
 Applications.
 
+> GTK+ and HTML with Broadway
+
+The GDK Broadway backend provides support for displaying GTK+
+applications in a web browser, using HTML5 and web sockets. [1]
+
+When using broadwayd, specify the display number to use, prefixed with a
+colon, similar to X. The default display number is 1.
+
+    $ display_number=:5
+
+Start it.
+
+    $ broadwayd $display_number 
+
+Port Used on default
+
+    port = 8080 + ($display_number - 1)
+
+Point your browser to http://localhost:port
+
+To Start apps
+
+    $ GDK_BACKEND=broadway BROADWAY_DISPLAY=$display_number <<app>>
+
+Alternatively can set address and port
+
+    $ broadwayd --port $port_number --address $address $display_number
+
 Configuration file
 ------------------
 
@@ -211,7 +222,12 @@ Note:See the GtkSettings properties in the GTK+ programming reference
 manual for the full list of GTK configuration options.
 
 The purpose of this section is to collect GTK+ configuration settings
-which can e.g. be used within ~/.gtkrc-2.0.
+which can e.g. be used within one's GTK+ configuration files.
+
+There are two relevant locations for GTK+ configuration files (which are
+in an ini format) : $XDG_CONFIG_HOME/gtk-3.0/ (usually
+~/.config/gtk-3.0/) and /etc/gtk-3.0/. The former is reserved for user
+wide settings, and the latter for system wide settings.
 
 > Enabling Customizable Keyboard Shortcuts
 
@@ -261,7 +277,7 @@ Development
 When writing a start-from-scratch GTK+ 3 program with C, it's necessary
 to add CFLAGS for gcc:
 
-    gcc -g -Wall `pkg-config --cflags --libs gtk+-3.0` -o base base.c
+    $ gcc -g -Wall $(pkg-config --cflags --libs gtk+-3.0) -o base base.c
 
 -g and -Wall parameters are not necessary since they are only for
 verbose debugging outputs. You may try out the official Hello World
@@ -287,7 +303,7 @@ Bash
 
 Boo
 
--   Dependency: gtk-sharp-git from AUR (boo)
+-   Dependency: gtk-sharp-3 from AUR (boo)
 -   Makedependency: boo
 -   Build with: booc hello_world.boo
 -   Run with: mono hello_world.exe (or booi hello_world.boo)
@@ -302,9 +318,9 @@ Boo
 
 C
 
--   Dependency: gtk3
+-   Dependency: gtk3 and pkg-config
 -   Build with:
-    gcc -o hello_world `pkg-config --cflags --libs gtk+-3.0` hello_world.c
+    gcc -o hello_world $(pkg-config --cflags --libs gtk+-3.0) hello_world.c
 
     hello_world.c
 
@@ -320,7 +336,7 @@ C++
 
 -   Dependency: gtkmm3
 -   Build with:
-    g++ -o hello_world `pkg-config --cflags --libs gtkmm-3.0` hello_world.cc
+    g++ -o hello_world $(pkg-config --cflags --libs gtkmm-3.0) hello_world.cc
 
     hello_world.cc
 
@@ -335,7 +351,7 @@ C++
 
 C#
 
--   Dependency: gtk-sharp-git from AUR
+-   Dependency: gtk-sharp-3 from AUR
 -   Build with: mcs -pkg:gtk-sharp-3.0 hello_world.cs
 -   Run with: mono hello_world.exe
 
@@ -451,7 +467,7 @@ Vala
 
 Visual Basic .NET
 
--   Dependency: gtk-sharp-git from AUR
+-   Dependency: gtk-sharp-3 from AUR
 -   Makedependency: mono-basic
 -   Build with:
     vbnc -r:/usr/lib/mono/gtk-sharp-3.0/gio-sharp.dll -r:/usr/lib/mono/gtk-sharp-3.0/glib-sharp.dll -r:/usr/lib/mono/gtk-sharp-3.0/gtk-sharp.dll hello_world.vb
@@ -473,8 +489,8 @@ Visual Basic .NET
     	End Sub
     End Class
 
-Resources
----------
+See also
+--------
 
 -   The official GTK+ website
 -   Wikipedia article about GTK+
@@ -484,10 +500,15 @@ Resources
 -   gtkmm Reference Manual
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GTK%2B&oldid=247172"
+"https://wiki.archlinux.org/index.php?title=GTK%2B&oldid=305931"
 
-Categories:
+Category:
 
--   Development
--   Eye candy
--   Desktop environments
+-   Widget Toolkits
+
+-   This page was last modified on 20 March 2014, at 17:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

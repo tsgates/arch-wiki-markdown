@@ -1,7 +1,7 @@
 MediaTomb
 =========
 
-> Summary
+Summary help replacing me
 
 An introduction to MediaTomb, covering installation and basic
 configuration of the open source UPnP MediaServer.
@@ -23,16 +23,16 @@ One of MediaTomb's distinguishing features is the ability to customize
 the server layout based on extracted metadata (scriptable virtual
 containers); MediaTomb is highly flexible.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Usage                                                              |
-| -   4 Hiding full paths from media players                               |
-| -   5 Systemd Integration                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Usage
+-   4 Hiding full paths from media players
+-   5 Playstation 3 Support
+-   6 Samsung TV Support
+-   7 Systemd Integration
 
 Installation
 ------------
@@ -40,10 +40,10 @@ Installation
 MediaTomb is available in the AUR via mediatomb.
 
 The latest development version is also available in the AUR via
-mediatomb-svn.
+mediatomb-git.
 
-Mediatomb can use its own database, or your local mysql server. For more
-information about the MySQL integration visit the Documentation.
+Mediatomb can use its own database, or your local MariaDB server. For
+more information about the MariaDB integration visit the Documentation.
 
 Configuration
 -------------
@@ -58,11 +58,89 @@ run
 to start MediaTomb as the current user and generate a default
 configuration in ~/.mediatomb/config.xml, or
 
-    # /etc/rc.d/mediatomb start
+    # systemctl start mediatomb
 
 to start the MediaTomb daemon and generate a default configuration in
-/var/lib/mediatomb/.mediatomb/config.xml. The following notes assume
-MediaTomb is running as a system-wide daemon.
+/var/lib/mediatomb/.mediatomb/config.xml.
+
+If you want to use the MariaDB database backend, you can alternatively
+run
+
+    # systemctl start mediatomb-mariadb
+
+which will ensure that MariaDB is up and running before MediaTomb is.
+
+  
+
+Usage
+-----
+
+The daemon listens on port 50500 by default. To access the web interface
+and begin importing media, navigate to http://127.0.0.1:50500/ in your
+favorite browser (JavaScript required).
+
+If running per-user instances of MediaTomb, the default port is 49152.
+However, it is possible that the port will change upon server restart.
+The URL for the web interface is output during startup. Users may also
+specify the port manually:
+
+    $ mediatomb -p 50500
+
+  
+
+Hiding full paths from media players
+------------------------------------
+
+By default, full directory paths will be shown on devices when they are
+browsing through folders.
+
+For example, if you add the directory
+/media/my_media/video_data/videos/movies, anyone connecting will have to
+navigate to the 'movies' directory from the root.
+
+To hide all of that and only show the directory added, you can change
+the import script.
+
+For example, this script will automatically truncate the whole directory
+structure specified in the variable video_root. Any directories added
+directly under the video root path will show up on UPnP devices starting
+from the that folder rather than /.
+
+    function addVideo(obj)
+    {
+       var video_root = "/media/main_core/Server_Core_Folder/FTP_Services/Media/";
+
+       var absolute_path = obj.location;
+
+       var relative_path = absolute_path;
+
+       if(absolute_path.indexOf(video_root) == 0)
+          relative_path = absolute_path.replace(video_root, "")
+
+      var chain = new Array();
+
+      var pathSplit = relative_path.split("/");
+
+      for(var i = 0; i < pathSplit.length - 1; i++) 
+          chain.push(pathSplit[i]);
+
+      addCdsObject(obj, createContainerChain(chain));
+    }
+
+To also hide the default PC Directory folder from UPnP device directory
+listings, add the following directly under the server node of your
+config.xml file.
+
+    <pc-directory upnp-hide="yes"/>
+
+  
+
+Playstation 3 Support
+---------------------
+
+The following notes assume MediaTomb is running as a system-wide daemon.
+For a per-user install, the locations of the configuration file will be
+different (see above).
 
 For PlayStation 3 support, users must set <protocolInfo extend="yes"/>.
 An "avi" mimetype mapping should also be uncommented for DivX support.
@@ -128,119 +206,68 @@ recognized:
 
 ... replacing eth0 with the interface you connect on.
 
-Usage
------
-
 After configuring MediaTomb to your liking, restart the server by
 running
 
-    # /etc/rc.d/mediatomb restart
+    # systemctl restart mediatomb
 
-The daemon listens on port 50500 by default. To access the web interface
-and begin importing media, navigate to http://127.0.0.1:50500/ in your
-favorite browser (JavaScript required).
+  
 
-If running per-user instances of MediaTomb, the default port is 49152.
-However, it is possible that the port will change upon server restart.
-The URL for the web interface is output during startup. Users may also
-specify the port manually:
+Samsung TV Support
+------------------
 
-    $ mediatomb -p 50500
+For Samsung TV support users should install mediatomb-samsung-tv from
+the AUR, which it's the same as the mediatomb package with a few more
+patches. Note that the TV must have DLNA support. Also the server and
+the TV should be connected to the same network.
 
-Hiding full paths from media players
-------------------------------------
+The following note assume MediaTomb is running as a system-wide daemon.
+For a per-user install, the locations of the configuration file will be
+different (see above).
 
-By default, full directory paths will be shown on devices when they are
-browsing through folders.
+Some models require changes in config.xml. Users should edit the
+<custom-http-headers> section and add two entries in the <mappings>
+section for better compatibility.
 
-For example, if you add the directory
-/media/my_media/video_data/videos/movies, anyone connecting will have to
-navigate to the 'movies' directory from the root.
+    /var/lib/mediatomb/.mediatomb/config.xml
 
-To hide all of that and only show the directory added, you can change
-the import script.
+    ...
 
-For example, this script will automatically truncate the whole directory
-structure specified in the variable video_root. Any directories added
-directly under the video root path will show up on UPnP devices starting
-from the that folder rather than /.
+    <custom-http-headers>
+       <add header="transferMode.dlna.org: Streaming"/>
+       <add header="contentFeatures.dlna.org: DLNA.ORG_OP=01;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=017000 00000000000000000000000000"/>
+    </custom-http-headers>
 
-    function addVideo(obj)
-    {
-       var video_root = "/media/main_core/Server_Core_Folder/FTP_Services/Media/";
+    ...
 
-       var absolute_path = obj.location;
+    <map from="avi" to="video/mpeg"/>
+    <map from="mkv" to="video/mpeg"/>
 
-       var relative_path = absolute_path;
-
-       if(absolute_path.indexOf(video_root) == 0)
-          relative_path = absolute_path.replace(video_root, "")
-
-      var chain = new Array();
-
-      var pathSplit = relative_path.split("/");
-
-      for(var i = 0; i < pathSplit.length - 1; i++) 
-          chain.push(pathSplit[i]);
-
-      addCdsObject(obj, createContainerChain(chain));
-    }
-
-To also hide the default PC Directory folder from UPnP device directory
-listings, add the following directly under the server node of your
-config.xml file.
-
-    <pc-directory upnp-hide="yes"/>
+    ...
 
 Systemd Integration
 -------------------
 
-Using mediatomb with systemd can be done by using the following service
-file: (Using MySQL)
+The mediatomb package comes with two systemd service files:
+mediatomb.service and mediatomb-mariadb.service. They run as 'mediatomb'
+user, which was created on install, as it isn't secure to run them as
+root.
 
-    /usr/lib/systemd/system/mediatomb.service 
-
-    [Unit]
-    Description=MediaTomb Daemon
-    After=mysql.target network.target
-
-    [Service]
-    EnvironmentFile=/etc/conf.d/mediatomb
-    ExecStart=/usr/bin/mediatomb --config $MEDIATOMB_CONFIG  --user $MEDIATOMB_USER --group $MEDIATOMB_GROUP $MEDIATOMB_OPTIONS
-    Restart=on-failure
-    RestartSec=5
-
-    [Install]
-    WantedBy=multi-user.target
-
-and the corresponding config file
-
-    /etc/conf.d/mediatomb
-
-    # See the mediatomb(1) manpage for more info.
-
-    # Run MediaTomb as this user.
-    # NOTE: For security reasons do not run MediaTomb as root.
-    MEDIATOMB_USER="mediatomb"
-
-    # Run MediaTomb as this group.
-    # NOTE: For security reasons do not run MediaTomb as root.
-    MEDIATOMB_GROUP="mediatomb"
-
-    # Path to MediaTomb config file.
-    MEDIATOMB_CONFIG="...path to config"
-
-    # Other options you want to pass to MediaTomb.
-    # Add "--interface ${MEDIATOMB_INTERFACE}" to bind to a named interface.
-    MEDIATOMB_OPTIONS=""
-
-Ensure that the specified user and group exists and has access to the
-config file and database.
+Choose which one you want to use, based on whether you want mediatomb to
+wait for mariadb to be up and running first or not. I.e. if you use a
+mariadb backend use mediatomb-mariadb.service, and use mediatomb.service
+otherwise.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=MediaTomb&oldid=247108"
+"https://wiki.archlinux.org/index.php?title=MediaTomb&oldid=305268"
 
-Categories:
+Category:
 
--   Audio/Video
--   Networking
+-   Streaming
+
+-   This page was last modified on 17 March 2014, at 02:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

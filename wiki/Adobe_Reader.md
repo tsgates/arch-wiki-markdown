@@ -256,3 +256,10 @@ Retrieved from
 Category:
 
 -   Office
+
+-   This page was last modified on 24 February 2013, at 12:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

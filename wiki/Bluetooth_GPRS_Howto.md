@@ -14,19 +14,16 @@ Bluetooth GPRS Howto
 This Howto will describe, how to set up a GPRS Internet connection using
 bluetooth device and compatible mobile phone.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Requirements                                                       |
-| -   2 Instructions                                                       |
-| -   3 Connection                                                         |
-|     -   3.1 pppd                                                         |
-|     -   3.2 wvdial                                                       |
-|                                                                          |
-| -   4 Use Blueman and NetworkManager                                     |
-| -   5 Use Bluez and NetworkManager                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Requirements
+-   2 Instructions
+-   3 Connection
+    -   3.1 pppd
+    -   3.2 wvdial
+-   4 Use Blueman and NetworkManager
+-   5 Use Bluez and NetworkManager
 
 Requirements
 ------------
@@ -421,3 +418,10 @@ Retrieved from
 Category:
 
 -   Bluetooth
+
+-   This page was last modified on 6 March 2013, at 08:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

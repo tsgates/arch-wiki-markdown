@@ -1,8 +1,7 @@
 Uvesafb
 =======
 
-  
- In contrast with other framebuffer drivers, uvesafb needs a userspace
+In contrast with other framebuffer drivers, uvesafb needs a userspace
 virtualizing daemon, called v86d. It may seem foolish to emulate x86
 code on a x86, but this is important if one wants to use the framebuffer
 code on other architectures (notably non-x86 ones). A new framebuffer
@@ -14,56 +13,43 @@ the standard vesafb, including:
 
 It should support as much hardware as vesafb.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Prepare the System                                                 |
-|     -   2.1 Bootloader Modifications                                     |
-|         -   2.1.1 GRUB                                                   |
-|         -   2.1.2 GRUB2                                                  |
-|                                                                          |
-|     -   2.2 Add a v86d HOOK                                              |
-|                                                                          |
-| -   3 Configure uvesafb                                                  |
-|     -   3.1 Define a Resolution                                          |
-|     -   3.2 Regenerate initramfs Images                                  |
-|     -   3.3 Reboot                                                       |
-|                                                                          |
-| -   4 Listing Resolutions                                                |
-| -   5 Uvesafb compiled into the kernel                                   |
-| -   6 The homepage of uvesafb                                            |
-| -   7 Uvesafb and 915resolution                                          |
-|     -   7.1 915resolution-static                                         |
-|     -   7.2 The resolution                                               |
-|     -   7.3 The HOOKS array                                              |
-|                                                                          |
-| -   8 Troubleshooting                                                    |
-|     -   8.1 Uvesafb cannot reserve memory                                |
-|     -   8.2 pci_root PNP0A08:00 address space collision + Uvesafb cannot |
-|         reserve memory                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Prepare the system
+    -   2.1 Bootloader modifications
+        -   2.1.1 GRUB2
+        -   2.1.2 GRUB legacy
+    -   2.2 Add a v86d HOOK
+-   3 Configure uvesafb
+    -   3.1 Define a resolution
+    -   3.2 Regenerate initramfs images
+    -   3.3 Reboot
+-   4 Listing resolutions
+-   5 Uvesafb compiled into the kernel
+-   6 The homepage of uvesafb
+-   7 Uvesafb and 915resolution
+    -   7.1 915resolution-static
+    -   7.2 The resolution
+    -   7.3 The HOOKS array
+-   8 Troubleshooting
+    -   8.1 Uvesafb cannot reserve memory
+    -   8.2 pci_root PNP0A08:00 address space collision + Uvesafb cannot
+        reserve memory
 
 Installation
 ------------
 
-Install the uvesafb package:
+Install v86d from the official repositories.
 
-    # pacman -S v86d
-
-Prepare the System
+Prepare the system
 ------------------
 
-> Bootloader Modifications
+> Bootloader modifications
 
 Remove any framebuffer-related kernel boot parameter from the bootloader
 configuration to disable the old vesafb framebuffter for loading.
-
-GRUB
-
-Remove all references to vga=xxx from kernel lines in
-/boot/grub/menu.lst to allow correct operation of uvesafb.
 
 GRUB2
 
@@ -80,7 +66,12 @@ leaving no option but to restart the machine with Ctrl+Alt+Del. For
 Intel cards, this is accomplished by appending i915.modeset=0 to GRUB's
 entry.
 
-Warning: disabling KMS may break Xorg.
+Warning:Disabling KMS may break X.
+
+GRUB legacy
+
+Remove all references to vga=xxx from kernel lines in
+/boot/grub/menu.lst to allow correct operation of uvesafb.
 
 > Add a v86d HOOK
 
@@ -92,10 +83,9 @@ take over at boot time.
 Configure uvesafb
 -----------------
 
-> Define a Resolution
+> Define a resolution
 
-The options for uvesafb are defined in /usr/lib/modprobe.d/uvesafb.conf
-which is the default file installed by the v86d package.
+The options for uvesafb are defined in /usr/lib/modprobe.d/uvesafb.conf:
 
     # This file sets the parameters for uvesafb module.
     # The following format should be used:
@@ -106,6 +96,9 @@ which is the default file installed by the v86d package.
     #
     options uvesafb mode_option=1280x800-32 scroll=ywrap
 
+Documentation for mode_option can be found at
+linux.git/tree/Documentation/fb/modedb.txt
+
 To prevent your customizations being overwritten when the package is
 updated, make any changes and copy this file to
 /etc/modprobe.d/uvesafb.conf and then add an entry in the FILES section
@@ -113,7 +106,7 @@ of /etc/mkinitcpio.conf pointing to your configuration file, like so:
 
     FILES="/etc/modprobe.d/uvesafb.conf"
 
-> Regenerate initramfs Images
+> Regenerate initramfs images
 
 Changes are commited via booting into the initramfs images. Thus, users
 need to regenerate the initramfs images for the kernel(s). The following
@@ -125,7 +118,7 @@ example assumes the default Arch Linux kernel:
 
 Reboot the system to see the changes.
 
-Listing Resolutions
+Listing resolutions
 -------------------
 
 A list of possible resolutions can be generated via the following
@@ -257,9 +250,15 @@ in your bootloader's configuration.
     pci=nocrs
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Uvesafb&oldid=255038"
+"https://wiki.archlinux.org/index.php?title=Uvesafb&oldid=293066"
 
-Categories:
+Category:
 
--   Laptops
 -   Eye candy
+
+-   This page was last modified on 16 January 2014, at 03:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

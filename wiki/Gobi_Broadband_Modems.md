@@ -1,30 +1,22 @@
 Gobi Broadband Modems
 =====================
 
-  
- This is a short tutorial on connecting to the internet using your gobi
+This is a short tutorial on connecting to the internet using your gobi
 modem.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Device identification                                              |
-| -   2 gobi_loader                                                        |
-| -   3 Connection                                                         |
-|     -   3.1 wvdial                                                       |
-|                                                                          |
-| -   4 Related Articles                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Device identification
+-   2 gobi_loader
+-   3 Connection
+    -   3.1 wvdial
+-   4 See also
 
 Device identification
 ---------------------
 
-Install usbutils
-
-    pacman -S usbutils
-
-and then examine the output of
+Install usbutils and then examine the output of
 
     $ lsusb
 
@@ -41,7 +33,7 @@ added product and vendor id.
 Alternatively you can add the Product and Vendor ID by writing them into
 the new_id file (best both at the same time because most Gobi modules
 switch the Product ID when the Firmware is loaded). Here the Shell
-Commands i had to use (in a root shell, sudo doesnt work in this case
+Commands i had to use (in a root shell, sudo doesn't work in this case
 for some reason): my integrated Gobi2K has the Vendor ID 04da and the
 Product IDs 250e (waiting for Firmware) and 250f (firmware loaded)
 
@@ -82,16 +74,13 @@ The general procedure is to switch the device into modem mode, make sure
 the ttyUSB device(s) are recognized by the qcserial kernel module, and
 then to run wvdial to dial, connect and start pppd.
 
-Install wvdial
+Install wvdial. The configuration file /etc/wvdial.conf will in general
+depend on (a) which device you have (b) which mobile network you are
+connecting to. A single wvdial.conf file can be defined with named
+sections to be usable with several USB modems and networks, should you
+need them.
 
-    # pacman -S wvdial
-
-The configuration file /etc/wvdial.conf will in general depend on (a)
-which device you have (b) which mobile network you are connecting to. A
-single wvdial.conf file can be defined with named sections to be usable
-with several USB modems and networks, should you need them.
-
-Run (as root)
+Run:
 
     # wvdialconf
 
@@ -139,22 +128,28 @@ should be visible in the terminal output. At that point the internet
 connection should be live, which can be easily checked with a web
 browser or by pinging an external IP address.
 
-Related Articles
-----------------
+See also
+--------
 
-USB 3G Modem  
- Huawei E220  
- Allow users to dial with wvdial  
- Idea_netsetter(Huawei_EG162G)  
- ZTE MF636  
- Internet key Momo Design  
- Dialup_without_a_dialer_HOWTO  
- 3G and GPRS modems with pppd alone  
- Huawei E1550 3G modem
+-   USB 3G Modem
+-   Huawei E220
+-   Allow users to dial with wvdial
+-   Idea_netsetter(Huawei_EG162G)
+-   ZTE MF636
+-   Dialup_without_a_dialer_HOWTO
+-   3G and GPRS modems with pppd alone
+-   Huawei E1550 3G modem
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Gobi_Broadband_Modems&oldid=254042"
+"https://wiki.archlinux.org/index.php?title=Gobi_Broadband_Modems&oldid=259604"
 
 Category:
 
 -   Modems
+
+-   This page was last modified on 30 May 2013, at 13:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -6,37 +6,30 @@ uncomfortable option to master the ugly touthpad here. As of FEB/2012
 this is still true, except that bluetooth can be enabled with a special
 procedure involving Windows
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Device Information                                                 |
-|     -   1.1 lspci model HP Probook 4320s P/N:WS904EA#ABB                 |
-|     -   1.2 items of interest form lspci                                 |
-|     -   1.3 other devices needing an attention                           |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Networking                                                   |
-|         -   2.1.1 WLAN                                                   |
-|         -   2.1.2 Bluetooth [Not Working]                                |
-|                                                                          |
-|     -   2.2 Graphics                                                     |
-|         -   2.2.1 Video card ATI                                         |
-|                                                                          |
-|     -   2.3 Input Devices                                                |
-|         -   2.3.1 Clikpad (touchpad)                                     |
-|         -   2.3.2 ClickPad with newest synaptics package                 |
-|         -   2.3.3 Working w/o aditional settings in ../xorg.d/: with the |
-|             newer Synaptics package                                      |
-|         -   2.3.4 What's needed is the real buttons work                 |
-|                                                                          |
-|     -   2.4 Power related configurations                                 |
-|         -   2.4.1 cpufreq                                                |
-|         -   2.4.2 laptop-mode                                            |
-|         -   2.4.3 lm-ensors                                              |
-|                                                                          |
-| -   3 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Device Information
+    -   1.1 lspci model HP Probook 4320s P/N:WS904EA#ABB
+    -   1.2 items of interest form lspci
+    -   1.3 other devices needing an attention
+-   2 Configuration
+    -   2.1 Networking
+        -   2.1.1 WLAN
+        -   2.1.2 Bluetooth [Working!!]
+    -   2.2 Graphics
+        -   2.2.1 Video card ATI
+    -   2.3 Input Devices
+        -   2.3.1 Clikpad (touchpad)
+        -   2.3.2 ClickPad with newest synaptics package
+        -   2.3.3 Working w/o aditional settings in ../xorg.d/: with the
+            newer Synaptics package
+        -   2.3.4 What's needed is the real buttons work
+    -   2.4 Power related configurations
+        -   2.4.1 cpufreq
+        -   2.4.2 laptop-mode
+        -   2.4.3 lm-ensors
+-   3 External links
 
 Device Information
 ==================
@@ -168,11 +161,12 @@ it with edit and edit lines: -
 Then compile as normal, install, and load the driver. I also did iwpriv
 command to supress the uneeded log spit.
 
-> Bluetooth [Not Working]
+> Bluetooth [Working!!]
 
-Note:Luckily bluetooth now WORKS, after the latest kernel upgrade
-
-Note: after some time past, the bluetooth doesn't work again
+Note:As of 2013.11.13 Bluetooth is working for RT3090. After installing
+bluez, bluez-utils and any other bluetooth related packages you may
+need, run "bccmd enabletx" as root. No need to dual boot with Windows,
+only running the command.
 
 As the half-mini wireless card RT3090 is a combo one, the bluetooth
 radio is embeded together with wifi. The bluetooth device isn't listed
@@ -316,7 +310,6 @@ came with the new version of synaptics package.
         it),
     -   scrolling inertia (also very useful),
     -   Clickpad off button in the upper-left corner.
-
 -   I have the opportunity to test all the wonders of the clickpad,
     because I double-boot my Probook with Windows7. Where all the
     features of the clickpad are available.
@@ -408,8 +401,15 @@ Another article on Arch and ProBook 4320s, with solutions to various
 usability problems (audio, clickpad, wireless...).
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=HP_ProBook_4320s&oldid=217404"
+"https://wiki.archlinux.org/index.php?title=HP_ProBook_4320s&oldid=282623"
 
 Category:
 
 -   HP
+
+-   This page was last modified on 13 November 2013, at 11:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

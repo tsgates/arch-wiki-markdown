@@ -17,6 +17,8 @@ floating on the other. Wingo can be scripted with its own command
 language, is completely themeable, and supports user defined hooks.
 Wingo is written in Go and has no runtime dependencies.
 
+The development version can be installed from the wingo-git package.
+
 See also
 --------
 
@@ -25,10 +27,17 @@ See also
 -   Bug reports – Report a bug
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Wingo&oldid=231938"
+"https://wiki.archlinux.org/index.php?title=Wingo&oldid=267694"
 
 Categories:
 
 -   Stacking WMs
 -   Tiling WMs
 -   Dynamic WMs
+
+-   This page was last modified on 23 July 2013, at 19:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

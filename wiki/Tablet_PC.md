@@ -5,29 +5,24 @@ Here are some hints for getting Arch Linux working on your tablet PC.
 These instructions contain information for getting the stylus, stylus
 rotation, and screen rotation to work properly on a tablet PC.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Stylus                                                             |
-| -   2 Rotation                                                           |
-|     -   2.1 Script for Stylus Rotation and Screen Rotation               |
-|                                                                          |
-| -   3 Tablet PC Tips                                                     |
-|     -   3.1 CellWriter                                                   |
-|     -   3.2 Easystroke                                                   |
-|         -   3.2.1 Launching CellWriter Under Pen                         |
-|         -   3.2.2 Gestures for the Alphabet                              |
-|                                                                          |
-|     -   3.3 Xournal                                                      |
-|     -   3.4 Disable gksu Grab Mode                                       |
-|     -   3.5 Gnome-screensaver                                            |
-|     -   3.6 GDM                                                          |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Wacom Drivers                                                |
-|     -   4.2 Screen Rotation                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Stylus
+-   2 Rotation
+    -   2.1 Script for Stylus Rotation and Screen Rotation
+-   3 Tablet PC Tips
+    -   3.1 CellWriter
+    -   3.2 Easystroke
+        -   3.2.1 Launching CellWriter Under Pen
+        -   3.2.2 Gestures for the Alphabet
+    -   3.3 Xournal
+    -   3.4 Disable gksu Grab Mode
+    -   3.5 Gnome-screensaver
+    -   3.6 GDM
+-   4 Troubleshooting
+    -   4.1 Wacom Drivers
+    -   4.2 Screen Rotation
 
 Stylus
 ------
@@ -444,8 +439,15 @@ supports rotation, check the output of xrandr for the list orientations:
 Note:The following driver(s) are known not to support rotation: fglrx
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tablet_PC&oldid=214094"
+"https://wiki.archlinux.org/index.php?title=Tablet_PC&oldid=286517"
 
 Category:
 
 -   Mobile devices
+
+-   This page was last modified on 6 December 2013, at 14:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

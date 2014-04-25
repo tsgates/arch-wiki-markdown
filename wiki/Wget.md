@@ -6,19 +6,16 @@ HTTPS and FTP, the most widely-used Internet protocols. It is a
 non-interactive commandline tool, so it may easily be called from
 scripts, cron jobs, terminals without X-Windows support, etc. [source]
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Configuring                                                        |
-|     -   2.1 FTP automation                                               |
-|     -   2.2 Proxy                                                        |
-|     -   2.3 pacman integration                                           |
-|                                                                          |
-| -   3 Usage                                                              |
-|     -   3.1 Archive a complete website                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Configuring
+    -   2.1 FTP automation
+    -   2.2 Proxy
+    -   2.3 pacman integration
+-   3 Usage
+    -   3.1 Archive a complete website
 
 Installing
 ----------
@@ -88,8 +85,15 @@ destinations by changing absolute links to relative links.
     $ wget -np -r -k 'http://your-url-here'
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Wget&oldid=255064"
+"https://wiki.archlinux.org/index.php?title=Wget&oldid=302673"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

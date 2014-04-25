@@ -4,22 +4,19 @@ Znc
 ZNC is an advanced IRC bouncer that is left connected so an IRC client
 can disconnect/reconnect without losing the chat session.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Webadmin Module                                              |
-|     -   2.2 Control Panel Module                                         |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Webadmin Module
+    -   2.2 Control Panel Module
+-   3 See also
 
 Installation
 ------------
 
-1. Install znc from the Official Repositories. The installation script
+1. Install znc from the Official repositories. The installation script
 will create a group and user znc. The default home directory for this
 user is /var/lib/znc.
 
@@ -72,8 +69,15 @@ See also
 -   ZNC's website
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Znc&oldid=242983"
+"https://wiki.archlinux.org/index.php?title=Znc&oldid=301618"
 
 Category:
 
 -   Internet Relay Chat
+
+-   This page was last modified on 24 February 2014, at 11:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

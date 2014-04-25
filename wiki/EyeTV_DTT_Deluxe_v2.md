@@ -4,15 +4,13 @@ EyeTV DTT Deluxe v2
 There is not much information about the EyeTV DTT Deluxe v2 on the web
 so here we go.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 lsusb                                                              |
-| -   2 Installation                                                       |
-| -   3 dmesg                                                              |
-| -   4 External Resources                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 lsusb
+-   2 Installation
+-   3 dmesg
+-   4 External Resources
 
 lsusb
 -----
@@ -64,3 +62,10 @@ Retrieved from
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 17 July 2012, at 09:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

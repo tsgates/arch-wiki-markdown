@@ -1,17 +1,12 @@
 NetworkManager
 ==============
 
-> Summary
+Related articles
 
-Covers installation and configuration of NetworkManager – a set of
-co-operative tools that make networking simple and straightforward.
-
-> Overview
-
-Arch Linux provides netcfg for network management. netcfg supports wired
-connections on desktops and servers, as well as wireless setups and
-roaming for mobile users, facilitating easy management of network
-profiles. NetworkManager and Wicd are popular third-party alternatives.
+-   Network configuration
+-   Wireless network configuration
+-   Netctl
+-   Wicd
 
 NetworkManager is a program for providing detection and configuration
 for systems to automatically connect to network. NetworkManager's
@@ -24,68 +19,68 @@ has support for modem connections and certain types of VPN.
 NetworkManager was originally developed by Red Hat and now is hosted by
 the GNOME project.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Base install                                                       |
-|     -   1.1 VPN support                                                  |
-|                                                                          |
-| -   2 Graphical front-ends                                               |
-|     -   2.1 GNOME                                                        |
-|     -   2.2 KDE                                                          |
-|     -   2.3 XFCE                                                         |
-|     -   2.4 Openbox                                                      |
-|     -   2.5 Other desktops and window managers                           |
-|     -   2.6 Command line                                                 |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Disable current network setup                                |
-|     -   3.2 Enable NetworkManager                                        |
-|     -   3.3 Enable NetworkManager Wait Online                            |
-|     -   3.4 Set up PolicyKit permissions                                 |
-|     -   3.5 Network services with NetworkManager dispatcher              |
-|         -   3.5.1 Start OpenNTPD                                         |
-|         -   3.5.2 Mount remote folder with sshfs                         |
-|         -   3.5.3 Use dispatcher to connect to a VPN after a             |
-|             network-connection is established                            |
-|                                                                          |
-|     -   3.6 Proxy settings                                               |
-|                                                                          |
-| -   4 Testing                                                            |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 No traffic via PPTP tunnel                                   |
-|     -   5.2 Network management disabled                                  |
-|     -   5.3 NetworkManager prevents DHCPCD from using resolv.conf.head   |
-|         and resolv.conf.tail                                             |
-|     -   5.4 Preserving changes to resolv.conf                            |
-|     -   5.5 DHCP problems                                                |
-|     -   5.6 Hostname problems                                            |
-|     -   5.7 Missing default route                                        |
-|     -   5.8 3G modem not detected                                        |
-|     -   5.9 Switching off WLAN on laptops                                |
-|     -   5.10 Static IP settings revert to DHCP                           |
-|     -   5.11 Cannot edit connections as normal user                      |
-|     -   5.12 Forget hidden wireless network                              |
-|     -   5.13 VPN not working in Gnome                                    |
-|                                                                          |
-| -   6 Tips and tricks                                                    |
-|     -   6.1 Sharing internet connection over wifi                        |
-|         -   6.1.1 Ad-hoc                                                 |
-|         -   6.1.2 Real AP                                                |
-|                                                                          |
-|     -   6.2 Checking if networking is up inside a cron job or script     |
-|     -   6.3 Automatically unlock keyring after login                     |
-|         -   6.3.1 GNOME                                                  |
-|         -   6.3.2 KDE                                                    |
-|         -   6.3.3 SLiM login manager                                     |
-|                                                                          |
-|     -   6.4 Ignore specific devices                                      |
-|     -   6.5 Connect faster                                               |
-|         -   6.5.1 Disabling IPv6                                         |
-|         -   6.5.2 Speed up DHCP by disabling ARP probing in DHCPCD       |
-|         -   6.5.3 Use OpenDNS servers                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Base install
+    -   1.1 VPN support
+-   2 Graphical front-ends
+    -   2.1 GNOME
+    -   2.2 KDE
+    -   2.3 Xfce
+    -   2.4 Openbox
+    -   2.5 Other desktops and window managers
+    -   2.6 Command line
+        -   2.6.1 nmcli examples
+-   3 Configuration
+    -   3.1 Enable NetworkManager
+    -   3.2 Enable NetworkManager Wait Online
+    -   3.3 Set up PolicyKit permissions
+    -   3.4 Network services with NetworkManager dispatcher
+        -   3.4.1 Avoiding the three seconds timeout
+        -   3.4.2 Start OpenNTPD
+        -   3.4.3 Mount remote folder with sshfs
+        -   3.4.4 Use dispatcher to connect to a VPN after a
+            network-connection is established
+    -   3.5 Proxy settings
+    -   3.6 Disable NetworkManager
+-   4 Testing
+-   5 Troubleshooting
+    -   5.1 Using nm-applet, wifi networks don't prompt for password and
+        just disconnect
+    -   5.2 No traffic via PPTP tunnel
+    -   5.3 Network management disabled
+    -   5.4 Customizing resolv.conf
+    -   5.5 DHCP problems with dhclient
+    -   5.6 Hostname problems
+        -   5.6.1 Option 2: Configure dhclient to push the hostname to
+            the DHCP server
+        -   5.6.2 Option 3: Configure NetworkManager to use dhcpcd
+    -   5.7 Missing default route
+    -   5.8 3G modem not detected
+    -   5.9 Switching off WLAN on laptops
+    -   5.10 Static IP settings revert to DHCP
+    -   5.11 Cannot edit connections as normal user
+    -   5.12 Forget hidden wireless network
+    -   5.13 VPN not working in Gnome
+    -   5.14 Unable to connect to visible european wireless networks
+    -   5.15 Automatically connect to VPN not working on boot
+    -   5.16 NetworkManager dispatcher does not run using systemd
+-   6 Tips and tricks
+    -   6.1 Sharing internet connection over Wi-Fi
+        -   6.1.1 Ad-hoc
+        -   6.1.2 Real AP
+    -   6.2 Checking if networking is up inside a cron job or script
+    -   6.3 Automatically unlock keyring after login
+        -   6.3.1 GNOME
+        -   6.3.2 KDE
+        -   6.3.3 SLiM login manager
+    -   6.4 KDE and OpenConnect VPN with password authentication
+    -   6.5 Ignore specific devices
+    -   6.6 Connect faster
+        -   6.6.1 Disabling IPv6
+        -   6.6.2 Use OpenDNS servers
+    -   6.7 Enable DNS Caching
 
 Base install
 ------------
@@ -93,12 +88,18 @@ Base install
 NetworkManager can be installed with the package networkmanager,
 available in the official repositories.
 
+Note:You must ensure that no other service that wants to configure the
+network is running, in fact multiple networking services will conflict.
+You can find a list of the currently running services with
+systemctl --type=service and then stop them.
+
 > VPN support
 
 Network Manager VPN support is based on a plug-in system. If you need
 VPN support via network manager you have to install one of the following
 packages from the official repositories:
 
+-   networkmanager-openconnect
 -   networkmanager-openvpn
 -   networkmanager-pptp
 -   networkmanager-vpnc
@@ -123,12 +124,10 @@ configure GNOME Keyring.
 
 > KDE
 
-The KNetworkManager front-end is a Plasma widget available in the
-official repositories as package kdeplasma-applets-networkmanagement.
-
-Note:If you are changing from another network managing tool like Wicd,
-do not forget to set the default 'Network Management Backend' in System
-Settings -> Hardware -> Information Sources
+The Plasma-nm front-end is a Plasma widget available in the official
+repositories as package kdeplasma-applets-plasma-nm. The older
+KNetworkManager front-end Plasma widget is also available as package
+kdeplasma-applets-networkmanagement from the aur.
 
 If you have both the Plasma widget and nm-applet installed and do not
 want to start nm-applet when using KDE, add the following line to
@@ -138,9 +137,9 @@ want to start nm-applet when using KDE, add the following line to
 
 See Userbase page for more info.
 
-> XFCE
+> Xfce
 
-network-manager-applet will work fine in XFCE, but in order to see
+network-manager-applet will work fine in Xfce, but in order to see
 notifications, including error messages, nm-applet needs an
 implementation of the Freedesktop desktop notifications specification
 (see the Galapago Project) to display them. To enable notifications
@@ -162,6 +161,10 @@ errors to stdout/stderr:
 
 nm-applet will still work fine, though, but without notifications.
 
+If nm-applet is not prompting for a password when connecting to new wifi
+networks, and is just disconnecting immediately, you probably need to
+install gnome-keyring.
+
 > Openbox
 
 To function properly in Openbox, the GNOME applet requires the
@@ -172,19 +175,10 @@ systray.
 If you want to store authentication details (Wireless/DSL) install and
 configure gnome-keyring.
 
-Note:If the networkmanager daemon is in rc.conf, the following settings
-are obsolete or the applet will be started twice.
-
-To have Openbox's autostart start nm-applet properly, you may need to
-delete the file /etc/xdg/autostart/nm-applet.desktop (You may need to
-delete this file again after every update to network-manager-applet).
-
-Then in autostart, start nm-applet with this line:
-
-    (sleep 3 && /usr/bin/nm-applet --sm-disable) &
-
-If you experience errors connecting, make sure you have your D-Bus user
-session started.
+nm-applet installs the autostart file at
+/etc/xdg/autostart/nm-applet.desktop. If you have issues with it (e.g.
+nm-applet is started twice or is not started at all), see
+Openbox#Autostart directory or [1] for solution.
 
 > Other desktops and window managers
 
@@ -200,10 +194,10 @@ path:
 
     nmgui
 
-     #!/bin/sh
-     nm-applet    > /dev/null 2>/dev/null &
-     stalonetray  > /dev/null 2>/dev/null
-     killall nm-applet
+    #!/bin/sh
+    nm-applet    > /dev/null 2>/dev/null &
+    stalonetray  > /dev/null 2>/dev/null
+    killall nm-applet
 
 When you close the stalonetray window, it closes nm-applet too, so no
 extra memory is used once you are done with network settings.
@@ -211,6 +205,32 @@ extra memory is used once you are done with network settings.
 > Command line
 
 The networkmanager package contains nmcli since version 0.8.1.
+
+nmcli examples
+
+To connect to a wifi network:
+
+    nmcli dev wifi connect <name> password <password>
+
+To connect to a wifi on the wlan1 wifi interface:
+
+    nmcli dev wifi connect <name> password <password> iface wlan1 [profile name]
+
+To disconnect an interface:
+
+    nmcli dev disconnect iface eth0
+
+To reconnect an interface marked as disconnected
+
+    nmcli con up uuid <uuid>
+
+To get a list of UUIDs
+
+    nmcli con list
+
+To see a list of network devices and their state
+
+    nmcli dev
 
 Configuration
 -------------
@@ -234,72 +254,31 @@ In case you have nss-myhostname turned off, the line would look like:
     127.0.0.1 my-laptop localhost
     ::1       my-laptop localhost
 
-> Disable current network setup
-
-You will want to disable your current network setup to be able to
-properly test NetworkManager
-
-First, stop the network daemon:
-
-    # systemctl stop net-auto-wireless.service
-
-Then, disable currently running network daemons.
-
-    # systemctl disable net-auto-wireless.service
-
-If you are running netctl, instead use:
-
-    # systemctl stop netctl-auto@<interface>.service
-    # systemctl disable netctl-auto@<interface>.service
-
-Finally, bring down your NIC's (Network Interface Controllers, i.e.
-network cards). For example (using the iproute2 package):
-
-    # ip link set eth0 down
-    # ip link set wlan0 down
-
-Note: you must bring your NIC's back up before you continue if you
-brought them down as shown above.
-
 > Enable NetworkManager
 
-Once the NetworkManager daemon is started, it will automatically connect
-to any available "system connections" that have already been configured.
-Any "user connections" or unconfigured connections will need nmcli or an
+NetworkManager is controlled via NetworkManager.service. Once the
+NetworkManager daemon is started, it will automatically connect to any
+available "system connections" that have already been configured. Any
+"user connections" or unconfigured connections will need nmcli or an
 applet to configure and connect.
 
-You can enable NetworkManager at startup with the following command:
-
-    # systemctl enable NetworkManager
-
-You can start the NetworkManager daemon immediately with the following
-command:
-
-    # systemctl start NetworkManager
+Note:NetworkManager will print probably meaningless warnings (FS#34971)
+to your system log, when NetworkManager-dispatcher.service and
+ModemManager.service are not enabled. To keep the log clean and suppress
+this messages, enable both, even if they are not required by your
+environment.
 
 > Enable NetworkManager Wait Online
 
 If you have services which fail if they are started before the network
 is up, you have to use NetworkManager-wait-online.service in addition to
-the NetworkManager service. This is however hardly ever necessary since
-most network daemons start up fine, even if the network has not been
+NetworkManager.service. This is however hardly ever necessary since most
+network daemons start up fine, even if the network has not been
 configured yet.
 
-You can enable NetworkManager Wait Online at startup with the following
-command:
-
-    # systemctl enable NetworkManager-wait-online
-
-In some cases the service will still fail to start sucessfully on boot:
-
-     NetworkManager-wait-online.service: main process exited, code=exited, status=1/FAILURE
-     Failed to start Network Manager Wait Online
-     Unit NetworkManger-wait-online.service entered failed state
-     Starting Network.
-     Reached target Network.
-
-This is due to the timeout setting in
-/usr/lib/systemd/system/NetworkManager-wait-online.service being to
+In some cases the service will still fail to start sucessfully on boot
+due to the timeout setting in
+/usr/lib/systemd/system/NetworkManager-wait-online.service being too
 short. Change the default timeout from 30 to a higher value.
 
 > Set up PolicyKit permissions
@@ -338,12 +317,13 @@ an active session with systemd-logind.
 > Network services with NetworkManager dispatcher
 
 There are quite a few network services that you will not want running
-until NetworkManager brings up an interface. Good examples are OpenNTPD
-and network filesystem mounts of various types (e.g. netfs).
-NetworkManager has the ability to start these services when you connect
-to a network and stop them when you disconnect.
+until NetworkManager brings up an interface. Good examples are NTPd and
+network filesystem mounts of various types (e.g. netfs). NetworkManager
+has the ability to start these services when you connect to a network
+and stop them when you disconnect. To activate the feature you need to
+start the NetworkManager-dispatcher.service.
 
-To use this feature, scripts can be added to the
+Once the feature is active, scripts can be added to the
 /etc/NetworkManager/dispatcher.d directory. These scripts will need to
 have executable, user permissions. For security, it is good practice to
 make them owned by root:root and writable only by the owner.
@@ -351,40 +331,46 @@ make them owned by root:root and writable only by the owner.
 The scripts will be run in alphabetical order at connection time, and in
 reverse alphabetical order at disconnect time. They receive two
 arguments: the name of the interface (e.g. eth0) and the status (up or
-down). To ensure what order they come up in, it is common to use
-numerical characters prior to the name of the script (e.g. 10_portmap or
-30_netfs (which ensures that the portmapper is up before NFS mounts are
+down for interfaces and vpn-up or vpn-down for vpn connections). To
+ensure what order they come up in, it is common to use numerical
+characters prior to the name of the script (e.g. 10_portmap or 30_netfs
+(which ensures that the portmapper is up before NFS mounts are
 attempted).
 
-Warning:For security reason. You should disable write access for group
-and other. For example use 755 mask. In other case it can refuse to
-execute script, with error message "nm-dispatcher.action: Script could
-not be executed: writable by group or other, or set-UID." in
-/var/log/messages.log
+> Warning:
 
-Warning:if you connect to foreign or public networks, be aware of what
-services you are starting and what servers you expect to be available
-for them to connect to. You could make a security hole by starting the
-wrong services while connected to a public network.
+-   For security reason. You should disable write access for group and
+    other. For example use 755 mask. In other case it can refuse to
+    execute script, with error message "nm-dispatcher.action: Script
+    could not be executed: writable by group or other, or set-UID." in
+    /var/log/messages.log.
+-   If you connect to foreign or public networks, be aware of what
+    services you are starting and what servers you expect to be
+    available for them to connect to. You could make a security hole by
+    starting the wrong services while connected to a public network.
+
+Avoiding the three seconds timeout
+
+If the above is working, then this section is not relevant. However,
+there is a general problem related to running dispatcher scripts which
+take longer than 3 seconds to be executed. NetworkManager uses an
+internal timeout of 3 seconds (see the Bugtracker for more information)
+and automatically kills scripts that take longer than 3 seconds to
+finish. In this case, the dispatcher service file, located in
+/usr/lib/systemd/system/NetworkManager-dispatcher.service, has to be
+modified to remain active after exit. Create the service file
+/etc/systemd/system/NetworkManager-dispatcher.service with the following
+content:
+
+    .include /usr/lib/systemd/system/NetworkManager-dispatcher.service
+    [Service]
+    RemainAfterExit=yes
+
+Now enable the modified NetworkManager-dispatcher script.
 
 Start OpenNTPD
 
-The following example starts the OpenNTPD daemon when an interface is
-brought up. Save the file as
-/etc/NetworkManager/dispatcher.d/20_openntpd and make it executable.
-
-    #!/bin/sh
-    interface=$1 status=$2
-    case $status in
-      up)
-        systemctl start openntpd
-        ;;
-      down)
-        if ! nm-tool | awk '/State:/{print $2}' | grep -qs connected; then
-          systemctl stop openntpd
-        fi
-        ;;
-    esac
+Install the networkmanager-dispatcher-openntpd package.
 
 Mount remote folder with sshfs
 
@@ -403,11 +389,11 @@ found with the command nmcli con status or nmcli con list.
     LOCAL='/local/path'
 
     interface=$1 status=$2
-    if [ "$CONNECTION_UUID" = "<uuid>" ]; then
+    if [ "$CONNECTION_UUID" = "uuid" ]; then
       case $status in
         up)
           export SSH_AUTH_SOCK=$(find /tmp -maxdepth 1 -type s -user "$USER" -name 'ssh')
-          su "$USER" -c "sshfs $LOCAL $REMOTE"
+          su "$USER" -c "sshfs $REMOTE $LOCAL"
           ;;
         down)
           fusermount -u "$LOCAL"
@@ -418,7 +404,7 @@ found with the command nmcli con status or nmcli con list.
 Use dispatcher to connect to a VPN after a network-connection is established
 
 In this example we want to connect automatically to a previously defined
-VPN connection after connecting to a specific WiFi network. First thing
+VPN connection after connecting to a specific Wi-Fi network. First thing
 to do is to create the dispatcher script that defines what to do after
 we are connected to the network.
 
@@ -456,8 +442,18 @@ are stored which brings us to step 2:
 2. Edit your VPN connection configuration file to make NetworkManager
 store the secrets by itself rather than inside a keyring that will be
 inaccessible for root: open up
-/etc/NetworkManager/system-connections/<name of your VPN connection> and
-change the password-flags and secret-flags form 1 to 0.
+/etc/NetworkManager/system-connections/name of your VPN connection and
+change the password-flags and secret-flags from 1 to 0.
+
+Alternatively put the password directly in the configuration file adding
+the section vpn-secrets:
+
+     [vpn]
+     ....
+     password-flags=0
+     
+     [vpn-secrets]
+     password=your_password
 
 Note:It may now be necessary to re-open the NetworkManager connection
 editor and re-enter the VPN passwords/secrets.
@@ -476,6 +472,14 @@ would need to execute this command, as part of the GNOME startup process
     xhost +si:localuser:your_username
 
 See: Proxy settings
+
+> Disable NetworkManager
+
+It might not be obvious, but the service automatically starts through
+dbus, to completely disable it you can mask the service with systemctl :
+
+    systemctl mask NetworkManager
+    systemctl mask NetworkManager-dispatcher
 
 Testing
 -------
@@ -507,6 +511,11 @@ Troubleshooting
 
 Some fixes to common problems.
 
+> Using nm-applet, wifi networks don't prompt for password and just disconnect
+
+This happens when no keyring package is installed. An easy solution is
+to install gnome-keyring.
+
 > No traffic via PPTP tunnel
 
 PPTP connection logins successfully, you see ppp0 interface with correct
@@ -517,6 +526,13 @@ intended.
 
 To solve the problem it should be sufficient to install ppp-mppe from
 the AUR.
+
+WPA2-Enterprise wireless networks demanding MSCHAPv2 type-2
+authentication with PEAP sometimes require ppp-mppe rather than the
+stock ppp package. netctl seems to work out of the box without ppp-mppe,
+however. In either case, usage of MSCHAPv2 is discouraged as it is
+highly vulnerable, although using another method is usually not an
+option. See this blog post.
 
 > Network management disabled
 
@@ -532,33 +548,13 @@ to have it removed upon bootup:
     nmpid=/var/lib/NetworkManager/NetworkManager.state
     [ -f $nmpid ] && rm $nmpid
 
-> NetworkManager prevents DHCPCD from using resolv.conf.head and resolv.conf.tail
+> Customizing resolv.conf
 
-Sometimes it is problematic to add static items to resolv.conf when it
-is constantly rewritten by NetworkManager and dhcpcd. A simple solution
-is using the following script:
+See the main page: resolv.conf. Also make sure that NetworkManager uses
+dhcpcd and not dhclient. If you want to use dhclient, you may try the
+networkmanager-dispatch-resolv package from the AUR.
 
-    #!/bin/bash
-    # 
-    # /etc/NetworkManager/dispatcher.d/99-resolv.conf-head_and_tail
-    # Include /etc/resolv.conf.head and /etc/resolv.conf.tail to /etc/resolv.conf
-    #
-    # scripts in the /etc/NetworkManager/dispatcher.d/ directory
-    # are called alphabetically and are passed two parameters:
-    # $1 is the interface name, and $2 is “up” or “down” as the
-    # case may be.
-
-    resolvconf='/etc/resolv.conf';
-    cat "$resolvconf"{.head,,.tail} 2>/dev/null > "$resolvconf".tmp
-    mv -f "$resolvconf".tmp "$resolvconf"
-
-This script is also available in the AUR for convenience
-
-> Preserving changes to resolv.conf
-
-See Resolv.conf.
-
-> DHCP problems
+> DHCP problems with dhclient
 
 If you have problems with getting an IP via DHCP, try to add the
 following to your /etc/dhclient.conf:
@@ -571,26 +567,65 @@ Where aa:bb:cc:dd:ee:ff is the MAC address of this NIC. The MAC address
 can be found using the ip link show eth0 command from the iproute2
 package.
 
-For some (incompliant) routers, you will not be able to connect properly
-unless you comment the line
-
-    require dhcp_server_identifier
-
-in /etc/dhcpcd.conf (note that this file is distinct from dhcpd.conf).
-This should not cause issues unless you have multiple DHCP servers on
-your network (not typical); see this page for more information.
-
 > Hostname problems
 
-Add the following line to /etc/NetworkManager/NetworkManager.conf:
+It depends on the NetworkManager plugins used, whether the hostname is
+forwarded to a router on connect. The generic "keyfile" plugin does not
+forward the hostname in default configuration. To make it forward the
+hostname, add the following to
+
+    /etc/NetworkManager/NetworkManager.conf
+
+    [keyfile]
+    hostname=your_hostname
+
+The options under [keyfile] will be applied to network connections in
+the default /etc/NetworkManager/system-connections path.
+
+Another option is to configure the DHCP client, which NetworkManager
+starts automatically, to forward it. NetworkManager utilizes dhclient in
+default and falls back to dhcpcd, if the former is not installed. To
+make dhclient forward the hostname requires to set a non-default option,
+dhcpcd forwards the hostname by default.
+
+First, check which DHCP client is used (dhclient in this example):
+
+    # journalctl -b | egrep "dhclient|dhcpcd"
+
+    ...
+    Nov 17 21:03:20 zenbook dhclient[2949]: Nov 17 21:03:20 zenbook dhclient[2949]: Bound to *:546
+    Nov 17 21:03:20 zenbook dhclient[2949]: Listening on Socket/wlan0
+    Nov 17 21:03:20 zenbook dhclient[2949]: Sending on   Socket/wlan0
+    Nov 17 21:03:20 zenbook dhclient[2949]: XMT: Info-Request on wlan0, interval 1020ms.
+    Nov 17 21:03:20 zenbook dhclient[2949]: RCV: Reply message on wlan0 from fe80::126f:3fff:fe0c:2dc.
+
+Option 2: Configure dhclient to push the hostname to the DHCP server
+
+Copy the example configuration file:
+
+    # cp /usr/share/dhclient/dhclient.conf.example /etc/dhclient.conf
+
+Take a look at the file - there will only really be one line we want to
+keep and dhclient will use it's defaults (as it has been using if you
+didn't have this file) for the other options. This is the important
+line:
+
+    /etc/dhclient.conf
+
+    send host-name = pick-first-value(gethostname(), "ISC-dhclient");
+
+Force an IP address renewal by your favorite means, and you should now
+see your hostname on your DHCP server.
+
+Option 3: Configure NetworkManager to use dhcpcd
+
+Install dhcpcd and tell NetworkManager about it:
+
+    /etc/NetworkManager/NetworkManager.conf
 
     dhcp=dhcpcd
 
-then restart.
-
-    systemctl restart NetworkManager
-
-source https://bbs.archlinux.org/viewtopic.php?id=152376
+Then restart NetworkManager.service.
 
 > Missing default route
 
@@ -601,15 +636,11 @@ selection "Use only for resources on this connection" solved the issue.
 
 > 3G modem not detected
 
-If NetworkManager (from v0.7.999) does not detect your 3G modem, but you
-still can connect using wvdial, try installing modemmanager and restart
-NetworkManager daemon with systemctl restart NetworkManager. It may also
-be necessary to replug or restart your modem. This utility provides
-support for hardware not in NetworkManager's default database.
+See USB_3G_Modem#Network_Manager.
 
 > Switching off WLAN on laptops
 
-Sometimes NetworkManager will not work when you disable your WiFi
+Sometimes NetworkManager will not work when you disable your Wi-Fi
 adapter with a switch on your laptop and try to enable it again
 afterwards. This is often a problem with rfkill. Install rfkill from the
 official repositories and use
@@ -677,30 +708,72 @@ for a while now), make the following symlink(s):
 This may need to be done for any other NM VPN plugins as well, but these
 are the two most common.
 
+> Unable to connect to visible european wireless networks
+
+Wlan chips are shipped with a default regulatory domain. If your
+AccessPoint doesn't operate within these limitations, you will not be
+able to connect to the network. Fixing this is easy:
+
+-   Install crda with pacman, see
+    Wireless_network_configuration#Regulatory_domain
+-   Uncomment the correct Country Code in '/etc/conf.d/wireless-regdom'
+-   reboot the system, because the setting is only read on boot.
+
+  
+
+> Automatically connect to VPN not working on boot
+
+The problem seems to be with the keyring as mentioned in the dispatcher
+section. You don't need to use the dispatcher to auto-connect. The
+solution is to keep the password to your VPN in plaintext.
+
+Edit /etc/NetworkManager/system-connections/VPN_NAME:
+
+     [vpn]
+     ....
+     password-flags=0
+     
+     [vpn-secrets]
+     password=your_password
+
+  
+
+> NetworkManager dispatcher does not run using systemd
+
+Check your log with the command journalctl -b -u NetworkManager, search
+for the following line:
+
+     <warn> Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
+
+if this line present, enable the dbus unit by running:
+
+     systemctl enable NetworkManager-dispatcher.service
+
 Tips and tricks
 ---------------
 
-> Sharing internet connection over wifi
+> Sharing internet connection over Wi-Fi
 
-You can share your internet connection (eg.: 3G or wired) by few clicks
-using nm. You will need supported wifi card (Cards based on Atheros
-AR9xx or at least AR5xx are probably best choice)
+You can share your internet connection (e.g.: 3G or wired) with a few
+clicks using nm. You will need a supported Wi-Fi card (Cards based on
+Atheros AR9xx or at least AR5xx are probably best choice)
 
 Ad-hoc
 
--   pacman -S dnsmasq
--   custom dnsmasq.conf may interfere with nm (not sure about this, but
-    i think so)
--   Click on nm-applet -> Create new wireless network
--   Follow wizard (if using WEP be sure to use 5 or 13 charactes long
-    password, different lengths will fail)
--   Settings will remain stored for next time you'll need it
+-   Install the dnsmasq package to be able to actually share the
+    connection.
+-   Custom dnsmasq.conf may interfere with nm (not sure about this, but
+    i think so).
+-   Click on nm-applet -> Create new wireless network.
+-   Follow wizard (if using WEP be sure to use 5 or 13 character long
+    password, different lengths will fail).
+-   Settings will remain stored for the next time you need it.
 
 Real AP
 
-Support of infrastructure mode (which is needed by Andoid phones as they
-don't intentionally support ad-hoc) is not currently supported by
-NetworkManager, but is in active development...
+Support of infrastructure mode (which is needed by Android phones as
+they intentionally do not support ad-hoc) is supported by NetworkManager
+as of late 2012.
 
 See: http://fedoraproject.org/wiki/Features/RealHotspot
 
@@ -714,10 +787,10 @@ interface is up, and fails if they are all down. This is convenient for
 laptops that might be hardwired, might be on wireless, or might be off
 the network.
 
-    if [ `nm-tool|grep State|cut -f2 -d' '` == "connected" ]; then
-           #Whatever you want to do if the network is online
+    if [ $(nm-tool|grep State|cut -f2 -d' ') == "connected" ]; then
+        #Whatever you want to do if the network is online
     else
-           #Whatever you want to do if the network is offline - note, this and the else above are optional
+        #Whatever you want to do if the network is offline - note, this and the else above are optional
     fi
 
 This useful for a cron.hourly script that runs fpupdate for the F-Prot
@@ -772,6 +845,24 @@ SLiM login manager
 
 See Slim#SLiM and Gnome Keyring.
 
+> KDE and OpenConnect VPN with password authentication
+
+kdeplasma-applets-plasma-nm does not support to configure username and
+password for OpenConnect VPN connections in its GUI. You have to type
+both values everytime you connect. kdeplasma-applets-plasma-nm 0.9.3.2-1
+and above is however capable of retrieving OpenConnect username and
+password directly from KWallet.
+
+Open "KDE Wallet Manager" and look up your OpenConnect VPN connection
+under "Network Management|Maps". Click "Show values" and enter your
+credentials in key "VpnSecrets" in this form (replace THE_USERNAME and
+THE_PASSWORD with your actual values):
+
+    form:main:username%SEP%THE_USERNAME%SEP%form:main:password%SEP%THE_PASSWORD
+
+Next time you connect, username and password should appear in the "VPN
+secrets" dialog box.
+
 > Ignore specific devices
 
 Sometimes it may be desired that NetworkManager ignores specific devices
@@ -787,6 +878,18 @@ able to configure interfaces without NetworkManager altering what you
 have set.
 
 > Connect faster
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with             
+                           Network_Configuration#Ad 
+                           ditional_settings.       
+                           Notes: This section      
+                           contains mostly          
+                           generally applicable     
+                           tips. (Discuss)          
+  ------------------------ ------------------------ ------------------------
 
 Disabling IPv6
 
@@ -807,31 +910,20 @@ network you connect to.
 -   In the "Method" dropdown, choose "Ignore/Disabled".
 -   Click on "Save".
 
-Speed up DHCP by disabling ARP probing in DHCPCD
-
-dhcpcd contains an implementation of a recommendation of the DHCP
-standard (RFC2131 section 2.2) to check via ARP if the assigned IP
-address is really not taken. This seems mostly useless in home networks,
-so you can save about 5 seconds on every connect by adding the following
-line to /etc/dhcpcd.conf:
-
-    noarp
-
-This is equivalent to passing --noarp to dhcpcd, and disables the
-described ARP probing, speeding up connections to networks with DHCP.
-
 Use OpenDNS servers
 
-Create /etc/resolv.conf.opendns with the nameservers:
+  ------------------------ ------------------------ ------------------------
+  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
+                           Notes: Very hacky        
+                           solution, what's wrong   
+                           with                     
+                           #Customizing_resolv.conf 
+                           ?                        
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
-    nameserver 208.67.222.222
-    nameserver 208.67.220.220
-
-or use Google DNS servers, because people have been getting ads via the
-OpenDNS servers lately
-
-    nameserver 8.8.8.8
-    nameserver 8.8.4.4
+Create /etc/resolv.conf.opendns with the alternative DNS server
+addresses.
 
 And have the dispatcher replace the discovered DHCP servers with the
 OpenDNS ones:
@@ -847,9 +939,45 @@ Make the script executable:
 
     # chmod +x /etc/NetworkManager/dispatcher.d/dns-servers-opendns
 
+> Enable DNS Caching
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with             
+                           dnsmasq#NetworkManager.  
+                           Notes: should be covered 
+                           only in one place        
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+DNS requests can be sped up by caching previous requests locally for
+subsequent lookup. NetworkManager has a plugin to enable DNS caching
+using dnsmasq, but it is not enabled in the default configuration. It
+is, however, easy to enable using the following instructions.
+
+Start by installing dnsmasq. Then, edit
+/etc/NetworkManager/NetworkManager.conf and add the following line under
+the [main] section:
+
+    dns=dnsmasq
+
+Now restart NetworkManager or reboot. NetworkManager will automatically
+start dnsmasq and add 127.0.0.1 to /etc/resolv.conf. The actual DNS
+servers can be found in /var/run/NetworkManager/dnsmasq.conf. You can
+verify dnsmasq is being used by doing the same DNS lookup twice with dig
+and verifying the server and query times.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=NetworkManager&oldid=256009"
+"https://wiki.archlinux.org/index.php?title=NetworkManager&oldid=305926"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 20 March 2014, at 17:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

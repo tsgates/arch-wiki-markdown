@@ -6,24 +6,23 @@ Control Protocol" (XDMCP). See the GDM documention for more information
 on the parameters:
 http://library.gnome.org/admin/gdm/3.6/configuration.html.en#xdmcpsection.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setup Graphical Logins                                             |
-|     -   1.1 XDM                                                          |
-|     -   1.2 GDM                                                          |
-|     -   1.3 KDM                                                          |
-|     -   1.4 SLiM                                                         |
-|                                                                          |
-| -   2 Accessing X from a remote Machine on your LAN                      |
-| -   3 Thin client setup                                                  |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 XDMCP fatal error: Manager unwilling Host unwilling          |
-|     -   4.2 Session declined: Maximum Number of Sessions Reached         |
-|     -   4.3 If you still cannot log in remotely                          |
-|     -   4.4 Login screen and GNOME is somehow flickering                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setup Graphical Logins
+    -   1.1 XDM
+    -   1.2 GDM
+    -   1.3 KDM
+    -   1.4 LightDM
+    -   1.5 SLiM
+-   2 Accessing X from a remote Machine on your LAN
+-   3 Thin client setup
+    -   3.1 Example GUI-based Clients
+-   4 Troubleshooting
+    -   4.1 XDMCP fatal error: Manager unwilling Host unwilling
+    -   4.2 Session declined: Maximum Number of Sessions Reached
+    -   4.3 If you still cannot log in remotely
+    -   4.4 Login screen and GNOME is somehow flickering
 
 Setup Graphical Logins
 ----------------------
@@ -72,6 +71,9 @@ Or if using the inittab method, login as root on another tty and
 
 > KDM
 
+Support for this feature seems to be very buggy. Lightdm is probably an
+easier choice.
+
 Edit kdmrc ( /opt/kde/share/config/kdm/kdmrc [KDE 3x] or
 /usr/share/config/kdm/kdmrc (KDE 4x] ) and at the end there should be
 something like this:
@@ -83,6 +85,18 @@ Then you need to restart your X server so the change you just made takes
 effect:
 
     systemctl restart kdm
+
+> LightDM
+
+Modify /etc/lightdm/lightdm.conf to include:
+
+    [XDMCPServer]
+    enabled=true
+    port=177
+
+Then restart the LightDM:
+
+    systemctl restart lightdm
 
 > SLiM
 
@@ -127,6 +141,11 @@ First of all one should setup dhcp and tftp server. Dnsmasq has both of
 them. For network boot image check thinstation project. If your network
 card does not support PXE, you can try Etherboot
 
+> Example GUI-based Clients
+
+-   community/remmina
+-   Xming for Windows
+
 Troubleshooting
 ---------------
 
@@ -154,6 +173,15 @@ Edit /etc/gdm/custom.conf and add/increase the maximum sessions.
 
 > If you still cannot log in remotely
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Arch Linux has   
+                           moved to systemd and has 
+                           no initscripts anymore.  
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 ...and you see only a black screen, try removing the -nodaemon option in
 /etc/inittab to have only
 
@@ -169,8 +197,15 @@ workaround is to disable/deinstall GNOME Shell.
      pacman -R gnome-shell
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xdmcp&oldid=252195"
+"https://wiki.archlinux.org/index.php?title=Xdmcp&oldid=271557"
 
 Category:
 
 -   X Server
+
+-   This page was last modified on 18 August 2013, at 07:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

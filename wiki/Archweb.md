@@ -25,13 +25,15 @@ https://projects.archlinux.org/archweb.git/
 -   Get merged site repository somewhere public
 -   Finish up any issues with merging of dev/pub sites
     -   <s>Ensure public can't access things they shouldn't
-    -   Developer preview site hosted somewhere?
+-   Developer preview site hosted somewhere?
 
--   Figure out deployment plan for "new" site
-    -   What do we do for HTTP vs. HTTPS
+Figure out deployment plan for "new" site
 
--   South integration (http://south.aeracode.org/)
-    -   Ismael was planning on looking at this
+-   What do we do for HTTP vs. HTTPS
+
+South integration (http://south.aeracode.org/)
+
+-   Ismael was planning on looking at this
 
 Retrieved from
 "https://wiki.archlinux.org/index.php?title=Archweb&oldid=238779"
@@ -39,3 +41,10 @@ Retrieved from
 Category:
 
 -   Arch development
+
+-   This page was last modified on 6 December 2012, at 00:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

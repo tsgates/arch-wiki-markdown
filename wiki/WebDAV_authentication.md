@@ -12,19 +12,16 @@ WebDAV authentication
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Goals                                                              |
-|     -   1.1 Required packages                                            |
-|                                                                          |
-| -   2 WebDav Configuration                                               |
-|     -   2.1 Step 1: Edit /etc/httpd/conf/httpd.conf                      |
-|     -   2.2 Step 2: Create needed directories and assign permissions     |
-|     -   2.3 Step 3: Authentication                                       |
-|     -   2.4 Step 4: Restart apache                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Goals
+    -   1.1 Required packages
+-   2 WebDav Configuration
+    -   2.1 Step 1: Edit /etc/httpd/conf/httpd.conf
+    -   2.2 Step 2: Create needed directories and assign permissions
+    -   2.3 Step 3: Authentication
+    -   2.4 Step 4: Restart apache
 
 Goals
 -----
@@ -105,3 +102,10 @@ Retrieved from
 Category:
 
 -   Networking
+
+-   This page was last modified on 13 April 2013, at 11:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

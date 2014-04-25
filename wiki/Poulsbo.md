@@ -1,22 +1,11 @@
 Poulsbo
 =======
 
-> Summary
+Related articles
 
-The current state of Intel GMA500/Poulsbo hardware support under Arch
-Linux.
-
-> Related
-
-Intel Graphics
-
-Xorg
-
-MPlayer
-
-> Resources
-
-Poulsbo Discussion in Arch BBS
+-   Intel Graphics
+-   Xorg
+-   MPlayer
 
 The Intel GMA 500 series, also known by it's codename Poulsbo or Intel
 System Controller Hub US15W, is a family of integrated video adapters
@@ -32,23 +21,20 @@ drivers do not work with this hardware.
 On this page you find comprehensive information about how to get the
 best out of your Poulsbo hardware using Arch Linux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Kernel's gma500_gfx module                                         |
-| -   2 Modesetting driver and dual monitor Setup                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Poor video performance                                       |
-|     -   3.2 Fix suspend                                                  |
-|         -   3.2.1 Old fbdev driver (default)                             |
-|         -   3.2.2 modesetting xorg driver                                |
-|                                                                          |
-|     -   3.3 Set backlight brightness                                     |
-|     -   3.4 Memory allocation optimization                               |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Kernel's gma500_gfx module
+-   2 Modesetting driver and dual monitor Setup
+-   3 Troubleshooting
+    -   3.1 Poor video performance
+    -   3.2 Fix suspend
+        -   3.2.1 Old fbdev driver (default)
+        -   3.2.2 modesetting xorg driver
+    -   3.3 Set backlight brightness
+    -   3.4 Memory allocation optimization
+    -   3.5 SDL fullscreen viewport is too large/small
+-   4 See also
 
 Kernel's gma500_gfx module
 --------------------------
@@ -116,10 +102,13 @@ these tricks:
 2.  use xf86-video-modesetting-git as indicated above.
 3.  always use mplayer or any variant/gui. VLC and others are usually
     much more slower.
-4.  substitute the normal mplayer with mplayer-minimal-svn, and compile
+4.  When possible, Use multithreaded decoding with mplayer (Many Atom
+    CPUs can) & framedropping
+    mplayer -lavdopts threads=4 -framedrop yourvideofile.avi
+5.  substitute the normal mplayer with mplayer-minimal-svn, and compile
     with aggressive optimizations:
     -march=native -fomit-frame-pointer -O3 -ffast-math'. (About makepkg)
-5.  use linux-lqx as it is a very good performance kernel. Edit PKGBUILD
+6.  use linux-lqx as it is a very good performance kernel. Edit PKGBUILD
     so you can do menuconfig and make sure you select your processor and
     remove generic optimizations for other processors. (About kernels)
 
@@ -270,31 +259,57 @@ be controlled by writing a value (0-10) to
 You can often improve performance by limiting the amount of RAM used by
 the system so that there will be more available for the videocard. If
 you have 1GB RAM use mem=896mb or if you have 2GB RAM use mem=1920mb.
-Add the following parameters to your bootloader's configuration file.
+Add them to your kernel parameters.
 
--   Grub-legacy
+> SDL fullscreen viewport is too large/small
 
-Edit /boot/grub/menu.lst
+If X segfaults before you even have a SDL app running, see FS#35187: X
+segfaults when starting a SDL app full-screen].
+
+The Shuttle XS36VL computer has a VGA, HDMI and DVI-D port. For some
+reason, xrandr sees some non-existing ports:
+
+    $ xrandr -q
+    Screen 0: minimum 320 x 200, current 1024 x 768, maximum 2048 x 2048
+    VGA-0 connected 1024x768+0+0 (normal left inverted right x axis y axis) 337mm x 270mm
+       1280x1024      60.0 +   75.0  
+       1024x768       75.1     70.1     60.0* 
+       832x624        74.6  
+       800x600        72.2     75.0     60.3     56.2  
+       640x480        72.8     75.0     66.7     60.0  
+       720x400        70.1  
+    LVDS-0 connected 1024x768+0+0 (normal left inverted right x axis y axis) 0mm x 0mm
+       1024x768       60.0*+
+       960x720        60.0  
+       928x696        60.1  
+       896x672        60.0  
+       800x600        60.0     60.3     56.2  
+       700x525        60.0  
+       640x512        60.0  
+       640x480        60.0     59.9  
+       512x384        60.0  
+       400x300        60.3     56.3  
+       320x240        60.1  
+    DVI-0 disconnected (normal left inverted right x axis y axis)
+    DisplayPort-0 disconnected (normal left inverted right x axis y axis)
+    DVI-1 disconnected (normal left inverted right x axis y axis)
+    DisplayPort-1 disconnected (normal left inverted right x axis y axis)
+
+In the xrandr output, + means Preferred mode, * means the current mode.
+In this case, only VGA-0 is really connected physically. LVDS-0 seems
+rubbish as xrandr --output LVDS-0 --mode 640x480 has no effect on the
+physical output. However, this configuration does affect the ability of
+SDL (and other?) programs to display full-screen. To allow SDL programs
+to display with a correct viewport, one has to disable the LVDS-0
+output:
+
+    $ xrandr --output LVDS-0 --off
+    ...
+    LVDS-0 connected (normal left inverted right x axis y axis)
 
     ...
-    kernel /vmlinuz-linux root=/dev/sda2 ro mem=896mb 
-    ...
 
--   Grub
-
-Edit /etc/default/grub
-
-    ...
-    GRUB_CMDLINE_LINUX="mem=896mb"
-    ...
-
--   Syslinux
-
-Edit /boot/syslinux/syslinux.cfg
-
-    ...
-    APPEND root=/dev/sda2 ro mem=896mb 
-    ...
+After doing so, qemu -full-screen works for me.
 
 See also
 --------
@@ -303,11 +318,19 @@ See also
 -   Ubuntu Wiki
 -   Ubuntu Forums
 -   Ubuntu 12.04 gma500 (poulsbo) boot options (blog post)
+-   Poulsbo Discussion in Arch BBS
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Poulsbo&oldid=243282"
+"https://wiki.archlinux.org/index.php?title=Poulsbo&oldid=290258"
 
 Categories:
 
 -   Graphics
 -   X Server
+
+-   This page was last modified on 24 December 2013, at 17:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

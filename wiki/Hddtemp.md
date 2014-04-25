@@ -5,20 +5,15 @@ hddtemp is a small utility (daemonizable) that gives you the temperature
 of your hard drive by reading S.M.A.R.T. information (for drives that
 support this feature).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-| -   3 Daemon                                                             |
-|     -   3.1 Setup with systemd                                           |
-|     -   3.2 Setup with legacy initscripts                                |
-|     -   3.3 Usage                                                        |
-|                                                                          |
-| -   4 Monitors                                                           |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+-   3 Daemon
+    -   3.1 Usage
+-   4 Monitors
+-   5 See also
 
 Installation
 ------------
@@ -43,8 +38,6 @@ Running the daemon gives you the possibility to access the temperature
 via an TCP/IP request, so you could use this in order to check the
 temperature from outside, or within some scripts.
 
-> Setup with systemd
-
 Once hddtemp has been installed, standard systemctl procedures work to
 start the daemon:
 
@@ -52,18 +45,34 @@ start the daemon:
 
 To start it on boot, enable it:
 
-    #systemctl enable hddtemp
+    # systemctl enable hddtemp
 
-> Setup with legacy initscripts
+Note:Arguments to hddtemp are directly given in
+/usr/lib/systemd/system/hddtemp.service. This is especially important if
+you have multiple disks, because in the default configuration only
+/dev/sda is monitored. Change the ExecStart overriding the
+hddtemp.service file:
 
-Start the daemon:
+-   Create the directory on /etc/systemd/system:
 
-    # rc.d start hddtemp
+    # mkdir /etc/systemd/system/hddtemp.service.d
 
-Add the daemon to the DAEMONS array in /etc/rc.conf to facilitate
-auto-start on boot:
+-   Create a customexec.conf file inside adding the drives you want to
+    monitor, e.g.:
 
-    # DAEMONS=(... hddtemp ...)
+    /etc/systemd/system/hddtemp.service.d/customexec.conf
+
+    [Service]
+    ExecStart=
+    ExecStart=/usr/bin/hddtemp -dF /dev/sda /dev/sdb /dev/sdc
+
+-   Reload systemd's unit files:
+
+    # systemctl --system daemon-reload
+
+-   Restart hddtemp service:
+
+    # systemctl restart hddtemp
 
 > Usage
 
@@ -94,8 +103,15 @@ See also
 lm sensors
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Hddtemp&oldid=243233"
+"https://wiki.archlinux.org/index.php?title=Hddtemp&oldid=301992"
 
 Category:
 
 -   Status monitoring and notification
+
+-   This page was last modified on 25 February 2014, at 08:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,27 +1,20 @@
 Connecting your MP3 Player
 ==========================
 
-> Summary
+Related articles
+
+-   USB Storage Devices
 
 This article discusses plugging portable audio players (also sometimes
 called "MP3 players").
 
-> Related
+Contents
+--------
 
-USB_Storage_Devices
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Player types                                                       |
-|     -   1.1 Players accessible with native protocols                     |
-|     -   1.2 Players accessible as USB storage                            |
-|                                                                          |
-| -   2 Accessing players                                                  |
-|     -   2.1 Manual mounting                                              |
-|     -   2.2 Using udev                                                   |
-+--------------------------------------------------------------------------+
+-   1 Player types
+    -   1.1 Players accessible with native protocols
+    -   1.2 Players accessible as USB storage
+-   2 Accessing players
 
 Player types
 ------------
@@ -72,19 +65,18 @@ Accessing players
 -----------------
 
 You should mount your player, identified as USB storage, to access its
-contents. There are multiple ways to do that:
-
-> Manual mounting
-
-See USB Storage Devices#Manual mounting
-
-> Using udev
-
-See Udev#Accessing iPod
+contents. See USB Storage Devices for details.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Connecting_your_MP3_Player&oldid=230504"
+"https://wiki.archlinux.org/index.php?title=Connecting_your_MP3_Player&oldid=290055"
 
 Category:
 
 -   Mobile devices
+
+-   This page was last modified on 23 December 2013, at 08:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

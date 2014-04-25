@@ -1,27 +1,22 @@
 Samsung R20P
 ============
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware specification                                             |
-| -   2 Extra                                                              |
-| -   3 Installation                                                       |
-| -   4 Configuration                                                      |
-|     -   4.1 Audio                                                        |
-|         -   4.1.1 Troubleshooting                                        |
-|                                                                          |
-|     -   4.2 Touchpad                                                     |
-|     -   4.3 Wireless                                                     |
-|                                                                          |
-| -   5 VGA Out                                                            |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 Yet untested                                                 |
-|                                                                          |
-| -   7 Resources                                                          |
-|     -   7.1 Output of lscpi -nn                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware specification
+-   2 Extra
+-   3 Installation
+-   4 Configuration
+    -   4.1 Audio
+        -   4.1.1 Troubleshooting
+    -   4.2 Touchpad
+    -   4.3 Wireless
+-   5 VGA Out
+-   6 Troubleshooting
+    -   6.1 Yet untested
+-   7 Resources
+    -   7.1 Output of lscpi -nn
 
 > Hardware specification
 
@@ -149,3 +144,10 @@ Retrieved from
 Category:
 
 -   Samsung
+
+-   This page was last modified on 8 March 2013, at 09:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

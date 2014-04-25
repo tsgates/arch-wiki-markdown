@@ -1,7 +1,7 @@
 Audiobook
 =========
 
-> Summary
+Summary help replacing me
 
 The purpose of this article is to detail a process to create an iPod
 friendly audiobook from digital media using Linux native tools. It is
@@ -18,40 +18,34 @@ standard. Multiple tools can be used to create these.
 
 See the Wikipedia article on this subject for more information: .m4b
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Tools                                                              |
-|     -   1.1 GUI based tools                                              |
-|     -   1.2 CLI based tools                                              |
-|                                                                          |
-| -   2 Make an m4b file from multiple audio CDs                           |
-|     -   2.1 Extract audio from CDs and making multiple tracks, one per   |
-|         chapter                                                          |
-|     -   2.2 Use m4baker to assemble the indiviual tracks into a single   |
-|         m4b file                                                         |
-|                                                                          |
-| -   3 Make an m4b file from a single mp3 file or from multiple mp3 files |
-|     -   3.1 Predominantly using m4baker                                  |
-|         -   3.1.1 Make a single mp3 file                                 |
-|         -   3.1.2 Split the file into chapters                           |
-|         -   3.1.3 Use m4baker to assemble the indiviual tracks into a    |
-|             single m4b file                                              |
-|                                                                          |
-|     -   3.2 Using only CLI tools                                         |
-|         -   3.2.1 Decode and make aac formatted file(s)                  |
-|         -   3.2.2 Optionally combine multiple aac files into a single    |
-|             file                                                         |
-|         -   3.2.3 Create metadata for chapter marks                      |
-|         -   3.2.4 Hardcode the metadata into the audio file              |
-|         -   3.2.5 Rename the merged file                                 |
-|                                                                          |
-| -   4 Add chapter marks to an existing m4b file without them             |
-| -   5 Break up an m4b file into individual files                         |
-|     -   5.1 Into equal chunks                                            |
-|     -   5.2 Based on metadata in original m4b file                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Tools
+    -   1.1 GUI based tools
+    -   1.2 CLI based tools
+-   2 Make an m4b file from multiple audio CDs
+    -   2.1 Extract audio from CDs and making multiple tracks, one per
+        chapter
+    -   2.2 Use m4baker to assemble the indiviual tracks into a single
+        m4b file
+-   3 Make an m4b file from a single mp3 file or from multiple mp3 files
+    -   3.1 Predominantly using m4baker
+        -   3.1.1 Make a single mp3 file
+        -   3.1.2 Split the file into chapters
+        -   3.1.3 Use m4baker to assemble the indiviual tracks into a
+            single m4b file
+    -   3.2 Using only CLI tools
+        -   3.2.1 Decode and make aac formatted file(s)
+        -   3.2.2 Optionally combine multiple aac files into a single
+            file
+        -   3.2.3 Create metadata for chapter marks
+        -   3.2.4 Hardcode the metadata into the audio file
+        -   3.2.5 Rename the merged file
+-   4 Add chapter marks to an existing m4b file without them
+-   5 Break up an m4b file into individual files
+    -   5.1 Into equal chunks
+    -   5.2 Based on metadata in original m4b file
 
 Tools
 -----
@@ -233,8 +227,15 @@ up the m4b file into individual "chapter" files.
 > Based on metadata in original m4b file
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Audiobook&oldid=207391"
+"https://wiki.archlinux.org/index.php?title=Audiobook&oldid=273706"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 1 September 2013, at 11:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

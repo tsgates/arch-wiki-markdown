@@ -5,32 +5,27 @@ Virtual LANs give you the ability to sub-divide a LAN. Linux can accept
 VLAN tagged traffic and presents each VLAN ID as a different network
 interface (eg: eth0.100 for VLAN ID 100)
 
-> Summary
+Summary help replacing me
 
-This article explains how to configure a VLAN using iproute2 and netcfg
+This article explains how to configure a VLAN using iproute2 and netctl
 
 > Related
 
-Network
+Network Configuration
 
-Netcfg
+Netctl
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Configuration                                                      |
-|     -   1.1 Create the VLAN device                                       |
-|     -   1.2 Add an IP                                                    |
-|     -   1.3 Turning down the device                                      |
-|     -   1.4 Removing the device                                          |
-|     -   1.5 Starting at boot                                             |
-|                                                                          |
-| -   2 Troubleshooting                                                    |
-|     -   2.1 udev renames the virtual devices                             |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Configuration
+    -   1.1 Create the VLAN device
+    -   1.2 Add an IP
+    -   1.3 Turning down the device
+    -   1.4 Removing the device
+    -   1.5 Starting at boot
+-   2 Troubleshooting
+    -   2.1 udev renames the virtual devices
 
 Configuration
 -------------
@@ -57,6 +52,13 @@ correctly else the traffic is dropped.
 Using a name like eth0.100 is just convention and not enforced; you can
 alternatively use eth0_100 or something descriptive like IPTV
 
+To see the VLAN ID on an interface, in case you used an unconventional
+name:
+
+    # ip -d link show eth0.100
+
+The -d flag shows full details on an inteface.
+
 > Add an IP
 
 Now add an IPv4 address to the just created vlan link, and activate the
@@ -79,24 +81,8 @@ Removing a VLAN interface is significantly less convoluted
 
 > Starting at boot
 
-You can use the following parameters in netcfg profiles to have VLANs
-configured automatically:
-
-    /etc/network.d/my-network
-
-    # vlan specific part:
-    CONNECTION="vlan"
-    VLAN_PHYS_DEV="eth0"
-    VLAN_ID="100"
-    INTERFACE="eth0.100"
-
-    # general IP configuration:
-    IP="static"
-    ADDR="192.168.100.1"
-    NETMASK="255.255.255.0"
-    GATEWAY="192.168.100.254"
-
-Enable the daemon netcfg@my-network. Read Daemons for more details.
+You can use netctl for this purpose, see the self-explanatory example
+profiles in /etc/netctl/examples/vlan-{dhcp,static} .
 
 Troubleshooting
 ---------------
@@ -137,14 +123,16 @@ For example, for the interface aa:bb:cc:dd:ee:ff (eth0):
 A reboot should mean that VLANs configure correctly with the names
 assigned to them.
 
-See also
---------
-
--   Post about using POST_UP and PRE_DOWN
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=VLAN&oldid=249881"
+"https://wiki.archlinux.org/index.php?title=VLAN&oldid=271627"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 18 August 2013, at 20:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

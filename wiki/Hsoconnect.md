@@ -15,19 +15,16 @@ Hsoconnect
 This article covers using Hsoconnect with Option HSDPA modems (UMTS and
 EDGE/GPRS networks).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hsoconnect Introduction                                            |
-| -   2 Installing                                                         |
-| -   3 Connecting to the Internet                                         |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Firmware                                                     |
-|     -   4.2 Permissions                                                  |
-|                                                                          |
-| -   5 External Resources                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hsoconnect Introduction
+-   2 Installing
+-   3 Connecting to the Internet
+-   4 Troubleshooting
+    -   4.1 Firmware
+    -   4.2 Permissions
+-   5 External Resources
 
 Hsoconnect Introduction
 -----------------------
@@ -100,8 +97,15 @@ External Resources
 -   Icon 225 3G specifications
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Hsoconnect&oldid=216323"
+"https://wiki.archlinux.org/index.php?title=Hsoconnect&oldid=270430"
 
 Category:
 
--   Networking
+-   Modems
+
+-   This page was last modified on 9 August 2013, at 00:03.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

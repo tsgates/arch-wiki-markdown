@@ -28,11 +28,18 @@ Linux boot screens
 -   Splashy – a graphical boot process designed to replace the aging
     Bootsplash program
 -   usplash – former bootsplash program used by Ubuntu
--   XSplash – new splash program used by Ubuntu starting from 9.10
+-   xsplash-bzr – new splash program used by Ubuntu starting from 9.10
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Bootsplash&oldid=255732"
+"https://wiki.archlinux.org/index.php?title=Bootsplash&oldid=288854"
 
 Category:
 
 -   Bootsplash
+
+-   This page was last modified on 16 December 2013, at 17:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

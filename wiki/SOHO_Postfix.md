@@ -1,6 +1,15 @@
 SOHO Postfix
 ============
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with Postfix.    
+                           Notes: both articles     
+                           cover the exact same     
+                           setup (Discuss)          
+  ------------------------ ------------------------ ------------------------
+
 This tutorial will configure Postfix using MySQL as backend,
 Courier-IMAP or Dovecot for IMAP-SSL, Postfix Admin for virtual
 domains/users management, Spamassassin for spam filtering, and
@@ -11,40 +20,34 @@ everything works with each other. If you are the curious mind, check out
 the project's documentations. I also expect you already have a good
 working Apache and MySQL servers.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Required packages                                                  |
-| -   2 Downloads                                                          |
-| -   3 What is Postfix?                                                   |
-| -   4 Installation                                                       |
-|     -   4.1 Software installation                                        |
-|     -   4.2 General configuration                                        |
-|         -   4.2.1 Setup folder to store domain e-mails                   |
-|         -   4.2.2 SSL certs                                              |
-|             -   4.2.2.1 Courier-IMAP                                     |
-|                                                                          |
-|         -   4.2.3 Webmail                                                |
-|             -   4.2.3.1 SquirrelMail                                     |
-|             -   4.2.3.2 RoundCube                                        |
-|                                                                          |
-|         -   4.2.4 Spamassassin                                           |
-|         -   4.2.5 Postfix Admin                                          |
-|         -   4.2.6 Courier-IMAP and Courier-authlib                       |
-|         -   4.2.7 Dovecot                                                |
-|         -   4.2.8 PHP                                                    |
-|         -   4.2.9 Postfix                                                |
-|         -   4.2.10 SMTP-AUTH                                             |
-|                                                                          |
-| -   5 Put into production!                                               |
-|     -   5.1 Firing up services!                                          |
-|     -   5.2 Verify working                                               |
-|     -   5.3 Post-installation                                            |
-|                                                                          |
-| -   6 Notes                                                              |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Required packages
+-   2 Downloads
+-   3 What is Postfix?
+-   4 Installation
+    -   4.1 Software installation
+    -   4.2 General configuration
+        -   4.2.1 Setup folder to store domain e-mails
+        -   4.2.2 SSL certs
+            -   4.2.2.1 Courier-IMAP
+        -   4.2.3 Webmail
+            -   4.2.3.1 SquirrelMail
+            -   4.2.3.2 RoundCube
+        -   4.2.4 Spamassassin
+        -   4.2.5 Postfix Admin
+        -   4.2.6 Courier-IMAP and Courier-authlib
+        -   4.2.7 Dovecot
+        -   4.2.8 PHP
+        -   4.2.9 Postfix
+        -   4.2.10 SMTP-AUTH
+-   5 Put into production!
+    -   5.1 Firing up services!
+    -   5.2 Verify working
+    -   5.3 Post-installation
+-   6 Notes
+-   7 See also
 
 Required packages
 -----------------
@@ -685,8 +688,15 @@ See also
 -   Postfix
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SOHO_Postfix&oldid=247297"
+"https://wiki.archlinux.org/index.php?title=SOHO_Postfix&oldid=292807"
 
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 14 January 2014, at 11:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

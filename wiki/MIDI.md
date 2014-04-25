@@ -13,23 +13,19 @@ These files usually come with the .mid extension, and were hugely
 popular in the golden days of multimedia computing to share music. In
 professional music composition/arrangement, it still plays a vital role.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 MIDI File                                                          |
-| -   2 GM Bank                                                            |
-| -   3 Playback                                                           |
-|     -   3.1 Hardware                                                     |
-|         -   3.1.1 SB Audigy 1 - Emu10k1 WaveTable                        |
-|                                                                          |
-|     -   3.2 Software                                                     |
-|         -   3.2.1 VLC                                                    |
-|         -   3.2.2 Timidity++                                             |
-|         -   3.2.3 FluidSynth                                             |
-|                                                                          |
-| -   4 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 MIDI File
+-   2 GM Bank
+-   3 Playback
+    -   3.1 Hardware
+        -   3.1.1 SB Audigy 1 - Emu10k1 WaveTable
+    -   3.2 Software
+        -   3.2.1 VLC
+        -   3.2.2 TiMidity++
+        -   3.2.3 FluidSynth
+-   4 See also
 
 MIDI File
 ---------
@@ -93,7 +89,7 @@ popular soundbank formats is that of SoundFont, particularly SF2.
     globally make use of this synthesizer.
 
 Playback
-========
+--------
 
 "Why can I play MIDI with Windows Media Player, then?"
 
@@ -101,7 +97,7 @@ Well, because Windows has a default software synthesizer which acts
 globally. Even then, it lacks the quality which should be expected of
 modern computers. If there were a way to do it on Linux, you would be
 able to play back MIDI from any player too. Perhaps a MIDI server (which
-will hold a synthesizer of choice like TiMidity++ or FluidSynth) that
+will hold a synthesizer of choice like timidity++ or fluidsynth) that
 sits within the sound server, like Phonon or PulseAudio. Nevertheless,
 nothing of this sort has been implemented and you can only play MIDI
 with a player that has a plug-in to source a synthesizer (for example
@@ -109,8 +105,7 @@ XMMS or Audacious - this is unfortunately not the case with
 GStreamer-based players yet, see the GStreamer FAQ for reference) or has
 a synthesizer itself.
 
-Hardware
---------
+> Hardware
 
 (More details on soundcards and MIDI, possibly links to SBLive MIDI
 here...)
@@ -118,8 +113,9 @@ here...)
 SB Audigy 1 - Emu10k1 WaveTable
 
 First, make sure that the Synth mixer control is not muted and that
-Audigy Analog/Digital output Jack is set to [Off].  
- To check and adjust them, use alsamixer or your mixer of choice.
+Audigy Analog/Digital output Jack is set to [Off].
+
+To check and adjust them, use alsamixer or your mixer of choice.
 
 Next, build and install the awesfx package from the AUR. Then, load a
 SoundFont file on the Emux WaveTable, like so:
@@ -129,8 +125,7 @@ SoundFont file on the Emux WaveTable, like so:
 The .SF2 file can be any SoundFont. If you have access to 2GMGSMT.SF2 on
 Windows, you can use that one.
 
-  
- You should be all set now. If you want to play your .mid files in
+You should be all set now. If you want to play your .mid files in
 Audacious, you will need to configure it as follows:
 
 -   File > Preferences > Plugins > Input > AMIDI-Plug > Preferences
@@ -143,44 +138,48 @@ Audacious, you will need to configure it as follows:
         -   Mixer settings > Soundcard > SB Audigy 1 [SB0092]
         -   Mixer control > Synth
 
-Software
---------
+> Software
 
-(Details on options available, like TiMidity++ or FluidSynth. Can be
-merged or linked if page exists, eg. there's an article for Timidity
-already.)
-
-> VLC
+VLC
 
 You can play MIDI files on VLC if you configure the location of the
 Sound Font file. Previously you need to install a sound sample, as well
 as the fluidsynth package.
 
-On VLC -> Tools -> Preferences
+On VLC:
 
-You have to show all settings. Then, go to input/codecs -> audio codecs
+    Tools > Preferences
+
+You have to show all settings. Then, go to Input/Codecs -> Audio codecs
 -> FluidSynth.
 
-And, if you installed fluidr3 as wiki says, set the location to:
+And, if you installed e.g. fluidr3 as wiki says, set the location to:
 
-/usr/share/soundfonts/fluidr3/FluidR3GM.SF2
+    /usr/share/soundfonts/fluidr3/FluidR3GM.SF2
 
-> Timidity++
+TiMidity++
 
-MIDI to WAVE converter and player.
+MIDI to WAVE converter and player. See TiMidity++.
 
-> FluidSynth
+FluidSynth
 
-MIDI player and a daemon adding MIDI support to ALSA.
+MIDI player and a daemon adding MIDI support to ALSA. See FluidSynth.
 
-External Links
-==============
+See also
+--------
 
-set up midi
+Set up midi
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=MIDI&oldid=254305"
+"https://wiki.archlinux.org/index.php?title=MIDI&oldid=274952"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 10 September 2013, at 20:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

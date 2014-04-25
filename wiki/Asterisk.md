@@ -1,8 +1,6 @@
 Asterisk
 ========
 
-  
-
   ------------------------ ------------------------ ------------------------
   [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
   g]                       is out of date.          g]
@@ -12,10 +10,6 @@ Asterisk
                            brief explanation.       
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
-
-  Summary
-  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Asterisk is a complete PBX (private branch exchange) in software. It runs on Linux, BSD, Windows and OS X and provides all of the features you would expect from a PBX.
 
 Asterisk is a complete PBX (private branch exchange) in software. It
 runs on Linux, BSD, Windows and OS X and provides all of the features
@@ -32,27 +26,23 @@ This article will show you how to configure a simple in house network
 enabling us to use a SIP soft-phone to talk to another SIP soft-phone on
 your LAN.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 SIP                                                          |
-|     -   2.2 Music On Hold                                                |
-|     -   2.3 Voicemail                                                    |
-|     -   2.4 Connecting To The PSTN                                       |
-|         -   2.4.1 General Set-up                                         |
-|             -   2.4.1.1 sip.conf                                         |
-|             -   2.4.1.2 extensions.conf                                  |
-|             -   2.4.1.3 iax.conf                                         |
-|             -   2.4.1.4 extensions.conf                                  |
-|                                                                          |
-|     -   2.5 MeetMe                                                       |
-|                                                                          |
-| -   3 Asterisk Console And Softphones                                    |
-| -   4 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 SIP
+    -   2.2 Music On Hold
+    -   2.3 Voicemail
+    -   2.4 Connecting To The PSTN
+        -   2.4.1 General Set-up
+            -   2.4.1.1 sip.conf
+            -   2.4.1.2 extensions.conf
+            -   2.4.1.3 iax.conf
+            -   2.4.1.4 extensions.conf
+    -   2.5 MeetMe
+-   3 Asterisk Console And Softphones
+-   4 Troubleshooting
 
 Installation
 ------------
@@ -335,8 +325,15 @@ If you receive a 404 Not Found error check your extensions.conf and the
 number you dialed.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Asterisk&oldid=251695"
+"https://wiki.archlinux.org/index.php?title=Asterisk&oldid=290384"
 
 Category:
 
 -   Telephony and Voice
+
+-   This page was last modified on 26 December 2013, at 02:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,6 +1,14 @@
 Fsniper
 =======
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: initscripts has  
+                           been superseded by       
+                           systemd (Discuss)        
+  ------------------------ ------------------------ ------------------------
+
 Fsniper is a directory monitor that can be used to execute predefined
 actions on files that enter the monitored directory. This can, for
 example, be used to monitor your downloads folder and sort downloaded
@@ -13,7 +21,7 @@ of the file system.
 Installation
 ------------
 
-Fsniper is available from the AUR.
+fsniper is available from the AUR.
 
 Configuration
 -------------
@@ -106,8 +114,15 @@ The daemon can then be started by typing
 or by placing fsniper in the daemons section of your /etc/rc.conf.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fsniper&oldid=246778"
+"https://wiki.archlinux.org/index.php?title=Fsniper&oldid=277279"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 1 October 2013, at 20:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

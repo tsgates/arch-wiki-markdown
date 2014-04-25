@@ -1,19 +1,16 @@
 LilyPond
 ========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Getting Started                                                    |
-|     -   1.1 Torn between two operating systems.                          |
-|     -   1.2 Installation                                                 |
-|                                                                          |
-| -   2 Tweaking                                                           |
-|     -   2.1 Which editor to use?                                         |
-|     -   2.2 Speed up writing notes                                       |
-|     -   2.3 More usefull info                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Getting Started
+    -   1.1 Torn between two operating systems.
+    -   1.2 Installation
+-   2 Tweaking
+    -   2.1 Which editor to use?
+    -   2.2 Speed up writing notes
+    -   2.3 More usefull info
 
 Getting Started
 ---------------
@@ -116,8 +113,15 @@ window placement and Alternate tool bar placement buttons.
 -   For tutorial on how to use this software visit LilyPond [4] website.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=LilyPond&oldid=250026"
+"https://wiki.archlinux.org/index.php?title=LilyPond&oldid=303795"
 
 Category:
 
 -   Applications
+
+-   This page was last modified on 9 March 2014, at 14:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

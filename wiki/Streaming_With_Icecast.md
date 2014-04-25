@@ -14,30 +14,26 @@ through a network uri, such as:
 
 This refers to a mount point called "mpd".
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setting up Icecast                                                 |
-| -   2 Icecast paths                                                      |
-|     -   2.1 Global                                                       |
-|     -   2.2 Local user                                                   |
-|                                                                          |
-| -   3 Running icecast                                                    |
-| -   4 Streaming with MPD                                                 |
-|     -   4.1 Step 1: Set Up MPD and Install a Client                      |
-|     -   4.2 Step 2: Ensure Icecast is running                            |
-|     -   4.3 Step 3: Configure MPD to be an Icecast Source                |
-|     -   4.4 Step 4: Running MPD with Icecast                             |
-|     -   4.5 Step 5: Test / use the stream                                |
-|     -   4.6 mpd                                                          |
-|     -   4.7 Sonata                                                       |
-|     -   4.8 MPlayer                                                      |
-|                                                                          |
-| -   5 Streaming with oggfwd and ffmpeg2theora                            |
-| -   6 Playing the stream                                                 |
-| -   7 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setting up Icecast
+-   2 Icecast paths
+    -   2.1 Global
+    -   2.2 Local user
+-   3 Running icecast
+-   4 Streaming with MPD
+    -   4.1 Step 1: Set Up MPD and Install a Client
+    -   4.2 Step 2: Ensure Icecast is running
+    -   4.3 Step 3: Configure MPD to be an Icecast Source
+    -   4.4 Step 4: Running MPD with Icecast
+    -   4.5 Step 5: Test / use the stream
+    -   4.6 mpd
+    -   4.7 Sonata
+    -   4.8 MPlayer
+-   5 Streaming with oggfwd and ffmpeg2theora
+-   6 Playing the stream
+-   7 References
 
 Setting up Icecast
 ------------------
@@ -58,15 +54,6 @@ Since icecast 2.3.2-4 the daemon is started as nobody user. If you edit
 IceCast configuration to start the daemon with a different user, then
 you need to edit the getPID function into the init script:
 getPID() { pgrep -u <USER_NAME> icecast 2>/dev/null }
-
-The default log path, /var/log/icecast, is not created automatically, so
-you will need to either create that folder and chown to the user in the
-changeowner lines, change the log path, or disable logging. Be aware
-that by turning changeowner on, all paths are relative to the home
-directory of that user. You will have to edit all paths manually. A good
-choice might be to create a new user "icecast" and set its home
-directory to /usr/share/icecast. Create there a directory "log" and do
-not forget to give the ownership to icecast.
 
 Icecast paths
 -------------
@@ -106,13 +93,17 @@ the -b flag.
 
 To run icecast as a system daemon:
 
-    # /etc/rc.d/icecast start
+    # systemctl start icecast
 
 -   Test it.
 
 Make sure Icecast is running by opening up http://localhost:8000/ in
 your web browser. You should be greeted by an Icecast2 Status page. This
 indicates everything is running properly.
+
+Or run
+
+    # systemctl status icecast
 
 Streaming with MPD
 ------------------
@@ -311,8 +302,15 @@ References
 -   [1] - oggfwd and ffmpeg2theora howto.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Streaming_With_Icecast&oldid=248671"
+"https://wiki.archlinux.org/index.php?title=Streaming_With_Icecast&oldid=291358"
 
 Category:
 
--   Audio/Video
+-   Streaming
+
+-   This page was last modified on 2 January 2014, at 12:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

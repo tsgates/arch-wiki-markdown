@@ -1,19 +1,16 @@
 Aurman
 ======
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Getting Involved                                                   |
-|     -   2.1 Source Code                                                  |
-|     -   2.2 Mailing List                                                 |
-|                                                                          |
-| -   3 Documentation                                                      |
-|     -   3.1 .PKGINFO                                                     |
-|     -   3.2 New AUR database schema                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 Getting Involved
+    -   2.1 Source Code
+    -   2.2 Mailing List
+-   3 Documentation
+    -   3.1 .PKGINFO
+    -   3.2 New AUR database schema
 
 Overview
 --------
@@ -188,3 +185,10 @@ Retrieved from
 Category:
 
 -   Package management
+
+-   This page was last modified on 23 April 2012, at 15:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

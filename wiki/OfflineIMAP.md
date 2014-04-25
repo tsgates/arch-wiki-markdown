@@ -1,54 +1,47 @@
 OfflineIMAP
 ===========
 
+  Related help replacing me
+  ---------------------------
+  isync
+  notmuch
+  msmtp
+
 OfflineIMAP is a Python utility to sync mail from IMAP servers. It does
 not work with the POP3 protocol or mbox, and is usually paired with a
 MUA such as Mutt.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Configuring                                                        |
-|     -   2.1 Minimal                                                      |
-|                                                                          |
-| -   3 Usage                                                              |
-| -   4 Miscellaneous                                                      |
-|     -   4.1 Running offlineimap in the background                        |
-|         -   4.1.1 systemd Service                                        |
-|         -   4.1.2 cron job                                               |
-|                                                                          |
-|     -   4.2 Automatic mutt mailbox generation                            |
-|     -   4.3 Gmail configuration                                          |
-|     -   4.4 Not having to enter the password all the time                |
-|         -   4.4.1 .netrc                                                 |
-|         -   4.4.2 Gnome Keyring                                          |
-|         -   4.4.3 python-keyring                                         |
-|         -   4.4.4 Emacs EasyPG                                           |
-|                                                                          |
-|     -   4.5 Kerberos authentication                                      |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Overriding UI and autorefresh settings                       |
-|     -   5.2 netrc authentication                                         |
-|     -   5.3 Folder could not be created                                  |
-|     -   5.4 SSL fingerprint does not match                               |
-|                                                                          |
-| -   6 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Configuring
+    -   2.1 Minimal
+-   3 Usage
+-   4 Miscellaneous
+    -   4.1 Running offlineimap in the background
+        -   4.1.1 systemd Service
+        -   4.1.2 cron job
+    -   4.2 Automatic mutt mailbox generation
+    -   4.3 Gmail configuration
+    -   4.4 Not having to enter the password all the time
+        -   4.4.1 .netrc
+        -   4.4.2 Gnome Keyring
+        -   4.4.3 python2-keyring
+        -   4.4.4 Emacs EasyPG
+        -   4.4.5 KeePass / KeePassX
+    -   4.5 Kerberos authentication
+-   5 Troubleshooting
+    -   5.1 Overriding UI and autorefresh settings
+    -   5.2 Folder could not be created
+    -   5.3 SSL fingerprint does not match
+-   6 See also
 
 Installing
 ----------
 
-Install the offlineimap package with pacman:
-
-    # pacman -S offlineimap
-
-Warning:Some users have reported sporadic issues with OfflineIMAP
-exhibiting random crashes and hangups requiring intermittent application
-restarts. Users looking for an alternative application for two-way IMAP
-synchronization, are advised to check Isync, written in C.
+Install offlineimap from the official repositories. For a development
+version, install offlineimap-git from AUR.
 
 Configuring
 -----------
@@ -109,13 +102,11 @@ Now, run the program:
 
 Mail accounts will now be synced. If anything goes wrong, take a closer
 look at the error messages. OfflineIMAP is usually very verbose about
-problems; partly because the developers didn't bother with taking away
+problems; partly because the developers did not bother with taking away
 tracebacks from the final product.
 
 Miscellaneous
 -------------
-
-Various settings and improvements
 
 > Running offlineimap in the background
 
@@ -156,11 +147,11 @@ Confusingly, they are spread thin all-over the configuration file:
 
 systemd Service
 
-Writing a systemd service for offlineimap is trivial, just be sure to
-run it as the correct user by replacing the User=UserToRunAs with your
-user. (e.g. User=wgiokas)
+1.  Configure background jobs as shown in #Running offlineimap in the
+    background.
+2.  Writing a systemd service runnable as an user.
 
-    offlineimap-user.service
+    /etc/systemd/system/offlineimap@.service
 
     [Unit]
     Description=Start offlineimap as a daemon
@@ -168,8 +159,10 @@ user. (e.g. User=wgiokas)
     After=network.target
 
     [Service]
-    User=UserToRunAs
+    User=%i
     ExecStart=/usr/bin/offlineimap
+    KillSignal=SIGUSR2
+    Restart=always
 
     [Install]
     WantedBy=multi-user.target
@@ -257,7 +250,19 @@ it syncs.
     sep = " "
     footer = "\n"
 
-Then add source ~/.mutt/mailboxes to ~/.mutt/muttrc.
+Then add the following lines to ~/.mutt/muttrc.
+
+    ~/.mutt/muttrc
+
+    # IMAP: offlineimap
+    set folder = "~/Mail"
+    source ~/.mutt/mailboxes
+    set spoolfile = "+account/INBOX"
+    set record = "+account/Sent\ Items"
+    set postponed = "+account/Drafts"
+
+account is the name you have given to your IMAP account in
+~/.offlineimaprc.
 
 > Gmail configuration
 
@@ -281,18 +286,19 @@ bandwidth costs:
     # Necessary as of OfflineIMAP 6.5.4
     sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
-Note:If you have Gmail set to another language, the folder names may
-appear translated too, e.g. "verzonden_berichten" instead of
-"sent_mail".
+> Note:
 
-Note:After version 6.3.5, offlineimap also creates remote folders to
-match your local ones. Thus you may need a nametrans rule for your local
-repository too that reverses the effects of this nametrans rule.
-
-Note:As of 1 October 2012 gmail SSL certificate fingerprint is not
-always the same. This prevents from using cert_fingerprint and makes the
-sslcacertfile way a better solution for the SSL verification (see
-OfflineIMAP#SSL fingerprint does not match).
+-   If you have Gmail set to another language, the folder names may
+    appear translated too, e.g. "verzonden_berichten" instead of
+    "sent_mail".
+-   After version 6.3.5, offlineimap also creates remote folders to
+    match your local ones. Thus you may need a nametrans rule for your
+    local repository too that reverses the effects of this nametrans
+    rule.
+-   As of 1 October 2012 gmail SSL certificate fingerprint is not always
+    the same. This prevents from using cert_fingerprint and makes the
+    sslcacertfile way a better solution for the SSL verification (see
+    OfflineIMAP#SSL fingerprint does not match).
 
 > Not having to enter the password all the time
 
@@ -300,32 +306,51 @@ OfflineIMAP#SSL fingerprint does not match).
 
 Add the following lines to your ~/.netrc:
 
-       machine hostname.tld
-       login [your username]
-       password [your password]
+    machine hostname.tld
+        login [your username]
+        password [your password]
 
-Don't forget to give the file appropriate rights like 600 or 700:
+Do not forget to give the file appropriate rights like 600 or 700:
 
-      chmod 600 ~/.netrc
+    $ chmod 600 ~/.netrc
 
 Gnome Keyring
 
 http://www.clasohm.com/blog/one-entry?entry_id=90957 gives an example of
 how to use gnome-keyring to store the password.
 
-python-keyring
+In the example, functions from a python file are imported in order to
+get passwords from gnome-keyring.
 
-There's a general solution that should work for any keyring. Install
-python-keyring from AUR, then change your ~/.offlineimaprc to say
+Alternatively, if youre using gnome-keyring-query, you can use this
+simpler python file:
+
+    #!/usb/bin/python
+    # executes gnome-keyring-query get passwd
+    # and returns the output
+
+    import locale
+    from subprocess import Popen, PIPE
+
+    encoding = locale.getdefaultlocale()[1]
+
+    def get_password(p):
+        (out, err) = Popen(["gnome-keyring-query", "get", p], stdout=PIPE).communicate()
+        return out.decode(encoding).strip()
+
+python2-keyring
+
+There is a general solution that should work for any keyring. Install
+python2-keyring from AUR, then change your ~/.offlineimaprc to say
 something like:
 
     [general]
     pythonfile = /home/user/offlineimap.py
-    …
+    ...
     [Repository RemoteEmail]
     remoteuser = username@host.net
     remotepasseval = keyring.get_password("offlineimap","username@host.net")
-    …
+    ...
 
 and somewhere in ~/offlineimap.py add import keyring. Now all you have
 to do is set your password, like so:
@@ -334,12 +359,49 @@ to do is set your password, like so:
     >>> import keyring
     >>> keyring.set_password("offlineimap","username@host.net", "MYPASSWORD")
 
-and it'll grab the password from your (kwallet/gnome-) keyring instead
+and it will grab the password from your (kwallet/gnome-) keyring instead
 of having to keep it in plaintext or enter it each time.
 
 Emacs EasyPG
 
 See http://www.emacswiki.org/emacs/OfflineIMAP#toc2
+
+KeePass / KeePassX
+
+Install python2-keepass-git from the AUR, then add the following to your
+offlineimap.py file:
+
+    #!/usr/bin/python2
+    import os, getpass
+    from keepass import kpdb
+     
+    def get_keepass_pw(dbpath, title="", username=""):
+        if os.path.isfile(dbpath):
+            db = kpdb.Database(dbpath, getpass.getpass("Master password for '" + dbpath +    "': "))
+            for entry in db.entries:
+                if (entry.title == title) and (entry.username == username):
+                    return entry.password
+        else:
+            print "Error: '" + dbpath + "' does not exist."
+            return
+
+(Credit to aki--aki: https://gist.github.com/aki--aki/5180359)
+
+Next, edit your ~/.offlineimaprc:
+
+    [general]
+    # VVV Set this path correctly VVV
+    pythonfile = /home/user/offlineimap.py
+    ...
+    [Repository RemoteEmail]
+    remoteuser = username@host.net
+    # Set the DB path as well as the title and username of the specific entry you'd like to use.
+    # This will prompt you on STDIN at runtime for the kdb master password.
+    remotepasseval = get_keepass_pw("/path/to/database.kdb", title="<entry title>", username="<entry username>")
+    ...
+
+Note that as-is, this does not support KDBs with keyfiles, only KDBs
+with password-only auth.
 
 > Kerberos authentication
 
@@ -374,26 +436,6 @@ a debug level:
 Note:More recent versions use the following for <ui>: blinkenlights,
 ttyui, basic, quiet or machineui.
 
-> netrc authentication
-
-There are some bugs in the current offlineimap which makes it impossible
-to read the authentication data from ~/.netrc if there are multiple
-Accounts per remote machine. ( see Mail Archive ) But they are fixed in
-the GIT package offlineimap-git (note that is AUR package is flagged as
-out of date; see the current GitHub external link below). Using the
-package you can collect all passwords in ~/.netrc. And do not forget to
-set it's access rights:
-
-    chmod 600 ~/.netrc
-
-An example netrc file would be
-
-    ~/.netrc
-
-    machine mail.myhost.de
-        login mr_smith
-        password secret
-
 > Folder could not be created
 
 In version 6.5.3, offlineimap gained the ability to create folders in
@@ -423,7 +465,7 @@ repository, e.g.
 
 > SSL fingerprint does not match
 
-     ERROR: Server SSL fingerprint 'keykeykey' for hostname 'example.com' does not match configured fingerprint. Please verify and set 'cert_fingerprint' accordingly if not set yet.
+    ERROR: Server SSL fingerprint 'keykeykey' for hostname 'example.com' does not match configured fingerprint. Please verify and set 'cert_fingerprint' accordingly if not set yet.
 
 To solve this, add to ~/.offlineimaprc (in the same section as
 ssl = yes) one of the following:
@@ -432,36 +474,33 @@ ssl = yes) one of the following:
     remote server. This checks whether the remote server certificate
     matches the given fingerprint.
 
-     cert_fingerprint = keykeykey
+    cert_fingerprint = keykeykey
 
 -   or add sslcacertfile with the path to the system CA certificates
     file. Needs ca-certificates installed. This validates the remote ssl
     certificate chain against the Certification Authorities in that
     file.
 
-     sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+    sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
-External links
---------------
+See also
+--------
 
 -   Official OfflineIMAP mailing list
 -   Gnus, Dovecot, OfflineIMAP, search: a HOWTO
-    -   This setup worked for me, only difference being I had to add
-        mail_location = maildir:~/Maildir to /etc/dovecot/dovecot.conf.
-        Also, I used the Gmail configuration above. --Unhammer 09:24, 22
-        October 2010 (EDT)
-
--   Mutt + Gmail + Offlineimap
-    -   An outline of brisbin's simple gmail/mutt setup using cron to
-        keep offlineimap syncing.
-
--   Current OfflineIMAP maintainer's fork on GitHub
-    -   Note that a strict build of this on current Arch will fail due
-        to python references unless they are replaced with python2
+-   Mutt + Gmail + Offlineimap - An outline of brisbin's simple
+    gmail/mutt setup using cron to keep offlineimap syncing.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=OfflineIMAP&oldid=249857"
+"https://wiki.archlinux.org/index.php?title=OfflineIMAP&oldid=294050"
 
 Category:
 
 -   Email Client
+
+-   This page was last modified on 22 January 2014, at 20:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

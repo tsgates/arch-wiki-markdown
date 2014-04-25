@@ -10,25 +10,23 @@ Locale names are defined using the following format:
 
     <lang>_<territory>.<codeset>[@<modifiers>]
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Enabling necessary locales                                         |
-|     -   1.1 US English example                                           |
-|                                                                          |
-| -   2 Setting system-wide locale                                         |
-| -   3 Setting fallback locales                                           |
-| -   4 Setting per user locale                                            |
-| -   5 Setting collation                                                  |
-| -   6 Setting the first day of the week                                  |
-| -   7 Troubleshooting                                                    |
-|     -   7.1 My terminal doesn't support UTF-8                            |
-|         -   7.1.1 Xterm doesn't support UTF-8                            |
-|         -   7.1.2 Gnome-terminal or rxvt-unicode doesn't support UTF-8   |
-|                                                                          |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Enabling necessary locales
+    -   1.1 US English example
+-   2 Setting the locale system-wide
+-   3 Setting fallback locales
+-   4 Setting per user locale
+-   5 Setting collation
+-   6 Setting the first day of the week
+-   7 Troubleshooting
+    -   7.1 My terminal doesn't support UTF-8
+        -   7.1.1 Xterm doesn't support UTF-8
+        -   7.1.2 Gnome-terminal or rxvt-unicode doesn't support UTF-8
+        -   7.1.3 Changed everything and my GNOME is still using wrong
+            language?
+-   8 See also
 
 Enabling necessary locales
 --------------------------
@@ -46,19 +44,21 @@ new locales:
 
     # locale-gen
 
-To display the locales now currently in use, use:
+To display the locales currently in use, use:
 
     $ locale
 
-Tip: Though it's most likely that just one language is used use on your
+Tip: Though it's most likely that just one language is used on your
 computer, it can be helpful or even necessary to enable other locales as
 well. If you're running a multi-user system with users that do not speak
-en_US, their individual locale should at least be supported by your
+English, their individual locale should at least be supported by your
 system.
 
 > US English example
 
 First uncomment the following locales in /etc/locale.gen:
+
+    /etc/locale.gen
 
     en_US.UTF-8 UTF-8
 
@@ -66,8 +66,8 @@ Then update the system as root:
 
     # locale-gen
 
-Setting system-wide locale
---------------------------
+Setting the locale system-wide
+------------------------------
 
 To define the system-wide locale used on the system, set LANG in
 /etc/locale.conf.
@@ -104,20 +104,9 @@ An advanced example configuration would be:
 You can set the default locale in locale.conf also using localectl, for
 example:
 
-    # localectl set-locale LANG="de_DE.utf8"
+    # localectl set-locale LANG="de_DE.UTF-8"
 
 See man 1 localectl and man 5 locale.conf for details.
-
-To use them, the locales need to be specified in locale.gen and
-generated using the locale-gen command:
-
-    /etc/locale.gen
-
-    en_AU.UTF-8 UTF-8
-    en_DK.UTF-8 UTF-8
-    en_US.UTF-8 UTF-8
-
-    # locale-gen
 
 They will take effect after rebooting the system and will be set for
 individual sessions at login.
@@ -136,7 +125,7 @@ to fall back to British rather than US spelling:
 
     export LANGUAGE="en_AU:en_GB:en"
 
-or system-wide
+or system-wide:
 
     /etc/locale.conf
 
@@ -147,16 +136,16 @@ Setting per user locale
 -----------------------
 
 As we mentioned earlier, some users might want to define a different
-locale than the system-wide locale. To do this, export the variable LANG
-with the specified locale in the ~/.bashrc file. For example, to use the
-en_AU.UTF-8 locale:
+locale than the system-wide locale.
 
-    export LANG=en_AU.UTF-8
+The script /etc/profile.d/locale.sh overrides the system-wide locale
+with the one found in ~/.config/locale.conf. This file does not exist by
+default.
 
-The locales will be updated next time ~/.bashrc is sourced. To update,
-either re-login or source it manually:
+    ~/.config/locale.conf
 
-    $ source ~/.bashrc
+    LANG="de_DE.UTF-8"
+    LANGUAGE="de_DE.UTF-8"
 
 Setting collation
 -----------------
@@ -167,6 +156,8 @@ issues, Arch used to set LC_COLLATE="C" in /etc/profile. However, this
 method is now deprecated. To enable this behavior, simply add the
 following to /etc/locale.conf:
 
+    /etc/locale.conf
+
     LC_COLLATE="C"
 
 Now the ls command will sort dotfiles first, followed by uppercase and
@@ -175,18 +166,24 @@ aware apps sort by LC_ALL or LANG, but LC_COLLATE settings will be
 overridden if LC_ALL is set. If this is a problem, ensure that LC_ALL is
 not set by adding the following to /etc/profile instead:
 
+    /etc/profile
+
     export LC_ALL=
 
-Note that LC_ALL is the only LC variable which cannot be set in
+Note that LC_ALL is the only LC_* variable, which cannot be set in
 /etc/locale.conf.
 
 Setting the first day of the week
 ---------------------------------
 
 In many countries the first day of the week is Monday. To adjust this,
-change or add the following lines in the LC_TIME section in
+change or add the following lines in
 /usr/share/i18n/locales/<your_locale>:
 
+    /usr/share/i18n/locales/<your_locale>
+
+    LC_TIME
+    ...
     week            7;19971130;5
     first_weekday   2
     first_workday   2
@@ -194,14 +191,6 @@ change or add the following lines in the LC_TIME section in
 And then update the system:
 
     # locale-gen
-
-Tip: If you experience some kind of problems with your system and would
-like to ask for help on the forum, mailing list or otherwise, please
-include the output from the misbehaving program with
-export LC_MESSAGES=C before posting. It will set the output messages
-(errors and warnings) to English, thus enabling more people to
-understand what the problem might be. This is not relevant if you are
-posting on a non-English forum.
 
 Troubleshooting
 ---------------
@@ -221,7 +210,7 @@ support for UTF-8:
 
 Xterm doesn't support UTF-8
 
-xterm only supports UTF-8 if you run it as uxterm or xterm -u8.
+xterm only supports UTF-8, if ran as uxterm or xterm -u8.
 
 Gnome-terminal or rxvt-unicode doesn't support UTF-8
 
@@ -229,6 +218,11 @@ You need to launch these applications from a UTF-8 locale or they will
 drop UTF-8 support. Enable the en_US.UTF-8 locale (or your local UTF-8
 alternative) per the instructions above and set it as the default
 locale, then reboot.
+
+Changed everything and my GNOME is still using wrong language?
+
+Some GUI tools use ~/.pam_environment as a place where environment
+variables are defined. GNOME reads this file.
 
 See also
 --------
@@ -241,8 +235,15 @@ See also
 -   Locale environment variables
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Locale&oldid=256087"
+"https://wiki.archlinux.org/index.php?title=Locale&oldid=305289"
 
 Category:
 
 -   Internationalization
+
+-   This page was last modified on 17 March 2014, at 07:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

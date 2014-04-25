@@ -1,15 +1,10 @@
 X Logical Font Description
 ==========================
 
-> Summary
+Related articles
 
-A guide to the core X server font system
-
-> Related
-
-Fonts
-
-Font Configuration
+-   Fonts
+-   Font Configuration
 
 Two different font systems are used by X11: the older or core X Logical
 Font Description, XLFD,and the newer X FreeType, Xft,systems. XLFD was
@@ -20,19 +15,15 @@ Fontconfig libraries and is more suitable when the smooth appearance of
 fonts is desired. A guide for using Fontconfig and Xft may be found at
 Font Configuration.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Font Names                                                         |
-|     -   1.1 Font name elements                                           |
-|                                                                          |
-| -   2 Font Sizes                                                         |
-| -   3 The Font Search Path                                               |
-|     -   3.1 mkfontscale and mkfontdir                                    |
-|                                                                          |
-| -   4 Aliases                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Font Names
+    -   1.1 Font name elements
+-   2 Font Sizes
+-   3 The Font Search Path
+    -   3.1 mkfontscale and mkfontdir
+-   4 Aliases
 
 Font Names
 ----------
@@ -302,8 +293,15 @@ be updated, again with
     $ xset fp rehash
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=X_Logical_Font_Description&oldid=244987"
+"https://wiki.archlinux.org/index.php?title=X_Logical_Font_Description&oldid=304793"
 
 Category:
 
 -   Fonts
+
+-   This page was last modified on 16 March 2014, at 07:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,47 +1,30 @@
 Fan Speed Control
 =================
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
-  ng]                      needs expansion.         ng]
-                           Reason: This is a        
-                           bare-bones article.      
-                           Additional details would 
-                           help new users.          
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
+Related articles
 
-> Summary
+-   Lm_sensors
 
 Fancontrol, part of lm_sensors, can be used to control the speed and
 sound of CPU/case fans. This article covers configuration/setup of the
-utility
+utility.
 
-> Related
+Contents
+--------
 
-Lm_sensors
+-   1 Sensor driver
+    -   1.1 lm-sensors
+        -   1.1.1 Increasing fan_div
+-   2 Configuration
+    -   2.1 Tweaking
+-   3 fancontrol
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preface                                                            |
-| -   2 lm-sensors                                                         |
-|     -   2.1 Increasing fan_div                                           |
-|                                                                          |
-| -   3 pwmconfig                                                          |
-|     -   3.1 Tweaking                                                     |
-|                                                                          |
-| -   4 fancontrol                                                         |
-+--------------------------------------------------------------------------+
+Sensor driver
+-------------
 
-> Preface
-
-Support for newer motherboards may not yet be in the linux kernel. Check
+Support for newer motherboards may not yet be in the Linux kernel. Check
 the official lm-sensors devices table to see if experimental drivers are
-available for such motherboards. At the time this statement was written
-for example, support for the Asus P8Z77 series of motherboards was not
-mainlined, yet nct677x-git was available in the AUR.
+available for such motherboards.
 
 It is recommended not to use lm_sensors.service to load the needed
 modules for fancontrol. Instead, manually place them in
@@ -49,7 +32,7 @@ modules for fancontrol. Instead, manually place them in
 modules are loaded dictate the order in which the needed symlinks for
 hwmon get created. In other words, using the lm_sensors.service causes
 inconsistencies boot-to-boot which will render the configuration file
-for fancontrol worthless for a consistency point of view.
+for fan control worthless for a consistency point of view.
 
 For more, see this thread:
 https://bbs.archlinux.org/viewtopic.php?pid=1251766
@@ -59,21 +42,12 @@ https://bbs.archlinux.org/viewtopic.php?pid=1251766
 Set up lm_sensors.
 
     $ sensors
+
     coretemp-isa-0000
     Adapter: ISA adapter
     Core 0:      +29.0°C  (high = +76.0°C, crit = +100.0°C)  
 
-    coretemp-isa-0001
-    Adapter: ISA adapter
-    Core 1:      +29.0°C  (high = +76.0°C, crit = +100.0°C)  
-
-    coretemp-isa-0002
-    Adapter: ISA adapter
-    Core 2:      +31.0°C  (high = +76.0°C, crit = +100.0°C)  
-
-    coretemp-isa-0003
-    Adapter: ISA adapter
-    Core 3:      +29.0°C  (high = +76.0°C, crit = +100.0°C)  
+    [...]
 
     it8718-isa-0290
     Adapter: ISA adapter
@@ -95,20 +69,21 @@ Increasing fan_div
 The first line of the sensors output is the chipset used by the
 motherboard for readings of temperatures and voltages.
 
-Edit /etc/sensors.d/sensors.conf and look up the exact chipset. A few
-chipset names are similar, so make sure the one to edit is correct. Add
-the line 'set fanX_div 4' near the start of the chipset config,
-replacing X with the number of CPU fans in the target system.
+Edit /etc/sensors3.conf and look up the exact chipset. A few chipset
+names are similar, so make sure the one to edit is correct. Add the line
+set fanX_div 4 near the start of the chipset config, replacing X with
+the number of CPU fans in the target system.
 
 Save the file, and run as root:
 
     # sensors -s
 
-which will reload the sensors.conf's set variables. Run sensors again
-and check if there is an RPM readout. If not, increase the divisor to 8,
-16 or 32. YMMV!
+which will reload the sensors3.conf file's set variables. Run sensors
+again, and check if there is an RPM readout. If not, increase the
+divisor to 8, 16, or 32. YMMV!
 
-> pwmconfig
+Configuration
+-------------
 
 Note:Advanced users may want to skip this section and write
 /etc/fancontrol on their own, which also saves them from hearing all of
@@ -119,7 +94,7 @@ speed control. Follow the instructions in pwmconfig to set up basic
 speeds. The default configuration options should create a new file,
 /etc/fancontrol.
 
-Tweaking
+> Tweaking
 
 Warning:Some of the steps outlined below describe how to tweak fan
 speeds. Before doing this be sure to have a low CPU load.
@@ -151,7 +126,7 @@ PWM device which is written to which sets the fan speed. The second
 "field" is the actual value to set. This allows monitoring and
 controlling multiple fans and temperatures.
 
--   FCTEMPS: The temperature input device to read for cpu temperature.
+-   FCTEMPS: The temperature input device to read for CPU temperature.
     The above example corresponds to
     /sys/class/hwmon/hwmon0/device/temp1_input.
 -   FCFANS: The current fan speed, which can be read (like the
@@ -182,31 +157,42 @@ work.
 -   DEVPATH: Sets the physical device. You can determine this by
     executing the command
 
-    readlink -f /sys/class/hwmon/<hwmon-device>/device | sed -e 's/^\/sys\///'
+    readlink -f /sys/class/hwmon/hwmon-device/device | sed -e 's/^\/sys\///'
 
--   DEVNAME: Sets the name of the device. Try
+-   DEVNAME: Sets the name of the device. Try:
 
-    cat /sys/class/hwmon/<hwmon-device>/device/name | sed -e 's/[[:space:]=]/_/g'
+    $ sed -e 's/[[:space:]=]/_/g' /sys/class/hwmon/hwmon-device/device/name
 
 Tip:Use MAXPWM and MINPWM options that limit fan speed range. See
-man fancontrol for details.
+fancontrol manual page for details.
 
-> fancontrol
+fancontrol
+----------
 
 Try to run fancontrol:
 
-    # /usr/sbin/fancontrol
+    # /usr/bin/fancontrol
 
 A properly configured setup will not error out and will take control of
 system fans. Users should hear system fans slowing shortly after
 executing this command.
 
-Note:For Dell Latitude/Inspiron laptops, i8kutils/i8kmon are available.
-Note that these two packages do not work on the Inspiron 1764.
+Note:For Dell Latitude/Inspiron laptops, i8kutils is available. The i8k
+kernel module is known to have issues on several models.
+
+To make fancontrol start automatically on every boot as a service enable
+it.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fan_Speed_Control&oldid=252371"
+"https://wiki.archlinux.org/index.php?title=Fan_Speed_Control&oldid=299809"
 
 Category:
 
 -   CPU
+
+-   This page was last modified on 22 February 2014, at 15:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

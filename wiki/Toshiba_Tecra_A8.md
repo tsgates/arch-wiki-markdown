@@ -1,23 +1,20 @@
 Toshiba Tecra A8
 ================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Reference Information                                              |
-| -   2 General Information                                                |
-|     -   2.1 Important information                                        |
-|     -   2.2 Technical Specifications                                     |
-|     -   2.3 lspci (on model PTA83E)                                      |
-|                                                                          |
-| -   3 Installation                                                       |
-| -   4 State of the drivers                                               |
-|     -   4.1 What works                                                   |
-|     -   4.2 What needs special hacks for getting to work                 |
-|         -   4.2.1 Audio system                                           |
-|         -   4.2.2 Synaptics Touchpad                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Reference Information
+-   2 General Information
+    -   2.1 Important information
+    -   2.2 Technical Specifications
+    -   2.3 lspci (on model PTA83E)
+-   3 Installation
+-   4 State of the drivers
+    -   4.1 What works
+    -   4.2 What needs special hacks for getting to work
+        -   4.2.1 Audio system
+        -   4.2.2 Synaptics Touchpad
 
 Reference Information
 ---------------------
@@ -39,8 +36,6 @@ Note that this requires that you run the program on windows.
 
 > Technical Specifications
 
- 
-
     Processor: Intel Core Duo 1.83 GHz T2400
     Memory: 512 MB 
     HDD: 80 GB FUJITSU MHV2080B
@@ -53,8 +48,6 @@ Note that this requires that you run the program on windows.
   
 
 > lspci (on model PTA83E)
-
- 
 
     00:00.0 Host bridge: Intel Corporation Mobile 945GM/PM/GMS, 943/940GML and 945GT Express Memory Controller Hub (rev 03)
     00:02.0 VGA compatible controller: Intel Corporation Mobile 945GM/GMS, 943/940GML Express Integrated Graphics Controller (rev 03)
@@ -89,8 +82,6 @@ State of the drivers
 
 > What works
 
- 
-
     Gigabit ethernet controller: out of the box
     USB controller and ports: out of the box
     Touchpad: requires tweaking for enabling scrolling
@@ -114,8 +105,6 @@ Synaptics Touchpad
 It works out of the box but without scrollzone.
 
 To enable scrollzone use the ideas specified in touchpad / section ALPS
-
- 
 
      Section "InputDevice"
            Identifier  "Touchpad"
@@ -153,3 +142,10 @@ Retrieved from
 Category:
 
 -   Toshiba
+
+-   This page was last modified on 26 September 2012, at 17:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

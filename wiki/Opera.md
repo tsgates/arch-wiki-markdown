@@ -1,17 +1,11 @@
 Opera
 =====
 
-> Summary
+Related articles
 
-Installing and configuration of the Opera browser and plugins.
-
-> Related
-
-Browser Plugins
-
-Firefox
-
-Chromium
+-   Browser plugins
+-   Firefox
+-   Chromium
 
 Opera is a free of charge web browser developed since 1994 by the
 Norwegian company Opera Software. It is known for being the first to
@@ -22,50 +16,42 @@ Opera continues to innovate with its integrated mail client, one-click
 bookmarking, tab stacks (a way of organizing your tabs) and very good
 support for HTML5 features.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Plugins                                                            |
-|     -   2.1 Adobe Flash                                                  |
-|     -   2.2 Java Support                                                 |
-|     -   2.3 Adblock                                                      |
-|                                                                          |
-| -   3 Performance tweaks                                                 |
-|     -   3.1 Disabling features and services                              |
-|         -   3.1.1 Disable the e-mail client                              |
-|         -   3.1.2 Disable ARGB, LIRC and mailto links                    |
-|                                                                          |
-|     -   3.2 Improving Flash performance                                  |
-|         -   3.2.1 .xinitrc example                                       |
-|         -   3.2.2 Command-line example                                   |
-|                                                                          |
-|     -   3.3 Profile in tmpfs                                             |
-|                                                                          |
-| -   4 Appearance                                                         |
-|     -   4.1 Themes                                                       |
-|     -   4.2 Tab modes                                                    |
-|     -   4.3 Fonts                                                        |
-|                                                                          |
-| -   5 Private tabs                                                       |
-| -   6 Accessibility Tips                                                 |
-|     -   6.1 Disable text selection                                       |
-|     -   6.2 Grab and scroll mode                                         |
-|     -   6.3 Long pressing a link opens it in a background tab            |
-|         (extension)                                                      |
-|     -   6.4 Virtual On-Screen keyboard (extension)                       |
-|                                                                          |
-| -   7 Troubleshooting                                                    |
-|     -   7.1 Slow scrolling on NVIDIA cards                               |
-|     -   7.2 Horizontal mouse wheel scrolling                             |
-|     -   7.3 Launching an external browser                                |
-|     -   7.4 Opera crashes when starting or closing with GTK+ 2.24.7+     |
-|     -   7.5 Unreadable input fields and address bar with dark GTK+       |
-|         themes                                                           |
-|                                                                          |
-| -   8 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Plugins
+    -   2.1 Adobe Flash
+    -   2.2 Java Support
+    -   2.3 Adblock
+-   3 Performance tweaks
+    -   3.1 Disabling features and services
+        -   3.1.1 Disable the e-mail client
+        -   3.1.2 Disable ARGB, LIRC and mailto links
+    -   3.2 Improving Flash performance
+        -   3.2.1 .xinitrc example
+        -   3.2.2 Command-line example
+    -   3.3 Profile in tmpfs
+-   4 Appearance
+    -   4.1 Themes
+    -   4.2 Title bar
+    -   4.3 Tab modes
+    -   4.4 Fonts
+-   5 Private tabs
+-   6 Accessibility Tips
+    -   6.1 Disable text selection
+    -   6.2 Grab and scroll mode
+    -   6.3 Long pressing a link opens it in a background tab
+        (extension)
+    -   6.4 Virtual On-Screen keyboard (extension)
+-   7 Troubleshooting
+    -   7.1 Slow scrolling on NVIDIA cards
+    -   7.2 Horizontal mouse wheel scrolling
+    -   7.3 Launching an external browser
+    -   7.4 Opera crashes when starting or closing with GTK+ 2.24.7+
+    -   7.5 Unreadable input fields and address bar with dark GTK+
+        themes
+-   8 See Also
 
 Installation
 ------------
@@ -73,27 +59,22 @@ Installation
 Opera can be installed with the package opera, available in the official
 repositories.
 
-Development versions can be found in the AUR:
-
--   opera-beta - a beta release version.
--   opera-next - an alpha/development version.
-
 Plugins
 -------
 
 Opera can use Netscape-based plugins that are supported by most major
 browsers, like Firefox and Chromium. For details about different plugins
-and installation instructions see Browser Plugins. In Opera, the plugin
+and installation instructions see Browser plugins. In Opera, the plugin
 path can be specified under Settings > Preferences... > Advanced >
 Content > Plug-in Options.
 
 > Adobe Flash
 
-See the main article: Browser Plugins#Flash Player
+See the main article: Browser plugins#Flash Player
 
 > Java Support
 
-See the main article: Browser Plugins#Java (IcedTea)
+See the main article: Browser plugins#Java (IcedTea)
 
 > Adblock
 
@@ -123,7 +104,7 @@ Some commonly disabled features are:
 
 To more easily find these options just write the respective path
 (without spaces) in the address bar, for example
-opera:config#UserPrefs|ShowTrayIcon or use the build-in search.
+opera:config#UserPrefs|ShowTrayIcon or use the built-in search.
 
 Disable the e-mail client
 
@@ -207,7 +188,10 @@ into various Linux desktop environments.
  GTK+
     A nice GTK+ skin that uses the Tango icon theme can be found here.
 
-  
+> Title bar
+
+The title bar can be hidden by right-clicking on the tab bar, then
+unchecking "Show Border".
 
 > Tab modes
 
@@ -410,8 +394,15 @@ See Also
 -   Opera Help
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Opera&oldid=250533"
+"https://wiki.archlinux.org/index.php?title=Opera&oldid=301949"
 
 Category:
 
 -   Web Browser
+
+-   This page was last modified on 24 February 2014, at 22:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

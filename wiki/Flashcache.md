@@ -1,27 +1,24 @@
 Flashcache
 ==========
 
-  
+Tip:A much easier approach to setting up Flashcache is using Enhanceio
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-|     -   2.1 Getting the kernel module                                    |
-|     -   2.2 Preparing the fast drive                                     |
-|     -   2.3 Creating flashcache                                          |
-|     -   2.4 Starting Drives on Boot                                      |
-|         -   2.4.1 Late Boot Start Using systemd                          |
-|         -   2.4.2 Early Boot Start with initcpio                         |
-|             -   2.4.2.1 Setting up the ramdisk                           |
-|             -   2.4.2.2 Other file changes                               |
-|                                                                          |
-| -   3 Tweaks                                                             |
-| -   4 Troubleshooting                                                    |
-| -   5 More resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+    -   2.1 Getting the kernel module
+    -   2.2 Preparing the fast drive
+    -   2.3 Creating flashcache
+    -   2.4 Starting Drives on Boot
+        -   2.4.1 Late Boot Start Using systemd
+        -   2.4.2 Early Boot Start with initcpio
+            -   2.4.2.1 Setting up the ramdisk
+            -   2.4.2.2 Other file changes
+-   3 Tweaks
+-   4 Troubleshooting
+-   5 See also
 
 Introduction
 ------------
@@ -50,7 +47,7 @@ widely different speed drives such as a fast and small SCSI drive and a
 larger SATA drive or even a slower "green" drive and a super-fast 10k
 rpm drive.
 
-Warning:I have read that this module doesn't compile properly on a
+Warning:I have read that this module does not compile properly on a
 32-bit machine, but I have not tested this.
 
 Installation
@@ -75,8 +72,8 @@ the module/utils:
     # cd facebook-flashcache-085b7ba
     # make KERNEL_TREE=<root of kernel source tree> (most likely in /usr/src)
 
-If all goes well you're ready to install the module(you need root access
-for this):
+If all goes well you are ready to install the module(you need root
+access for this):
 
     # sudo make KERNEL_TREE=<root of kernel source tree> install
 
@@ -134,14 +131,14 @@ Next, create an init script to actually do the work.
     HOMEMOUNT=$(mount | grep home | sed 's/ .*//' | sed 's#.*/##' )
 
     # Load module if not already loaded
-    if [[ ! "$(eval lsmod | grep "^flashcache")" ]]; then
+    if [[ ! "$(eval lsmod | grep "^flashcache")" ]]; then
       modprobe flashcache
     fi
 
     # Mount flashcache /home if not already mounted
-    if [[ ! "$HOMEMOUNT" == "cached_part2" ]]; then
+    if [[ ! "$HOMEMOUNT" == "cached_part2" ]]; then
       umount /home
-      if [ ! -e /dev/mapper/cached_part2 ]; then
+      if [ ! -e /dev/mapper/cached_part2 ]; then
         flashcache_load /dev/sdb2
       fi  
       mount /home
@@ -189,7 +186,7 @@ update to match your system!) /lib/initcpio/hooks/flashcache
     {
         /sbin/modprobe -q dm-mod >/dev/null 2>&1
         if [ -e "/sys/class/misc/device-mapper" ]; then
-            if [ ! -e "/dev/mapper/control" ]; then
+            if [ ! -e "/dev/mapper/control" ]; then
                 /bin/mknod "/dev/mapper/control" c $(cat /sys/class/misc/device-mapper/dev | sed 's|:| |')
             fi
 
@@ -276,7 +273,7 @@ the root partition is /dev/mapper/cached_part1 and the home directory is
     /dev/mapper/cached_part2 /home ext3 defaults,user_xattr 0 1
     ...
 
-If you're caching your root partition, reboot and press e in grub to
+If you are caching your root partition, reboot and press e in grub to
 edit the kernel command line options. Select the line with the kernel
 options and press e again. Append 'break=y' without quotes to the end
 and press enter. Press b to boot. This tells the ramdisk image to stop
@@ -286,11 +283,11 @@ Now reboot(make sure you use the flashcache ramdisk) and verify the
 mounted partitions are the newly created ones.
 
 Tweaks
-======
+------
 
 There are a lot of options for controlling the cache, check the system
 administrators guide in the documentation for flashcache for all of
-them. I added the following changes to /etc/sysctl.conf:
+them. I added the following changes to /etc/sysctl.d/90-flashcache.conf:
 
     #####################
     # flashcache settings
@@ -306,22 +303,29 @@ them. I added the following changes to /etc/sysctl.conf:
     dev.flashcache.fallow_delay = 0
 
 Troubleshooting
-===============
+---------------
 
     * If you get an error trying to create the cache 'device-mapper: reload ioctl failed: Invalid argument', you could be trying to create a cache of a mounted filesystem.
     * If boot fails, an easy way to check on the cache is to edit your kernel command line in grub to add break=y and use the ramdisk's shell to poke around.
     * /proc/flashcache_stats has interesting information and can tell you if the cache is properly working.
 
-More resources
-==============
+See also
+--------
 
 -   Original announcement -
     http://www.facebook.com/note.php?note_id=388112370932
 -   Github source - https://github.com/facebook/flashcache
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Flashcache&oldid=249474"
+"https://wiki.archlinux.org/index.php?title=Flashcache&oldid=294744"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 28 January 2014, at 08:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

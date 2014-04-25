@@ -3,16 +3,14 @@ Remastering the Install ISO
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Preparation                                                        |
-| -   3 Customizations                                                     |
-| -   4 Creating a new ISO                                                 |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Preparation
+-   3 Customizations
+-   4 Creating a new ISO
+-   5 See also
 
 Introduction
 ------------
@@ -113,18 +111,17 @@ cdrkit.
     $ genisoimage -l -r -J -V "ARCH_201209" -b isolinux/isolinux.bin -no-emul-boot -boot-load-size 4 -boot-info-table -c isolinux/boot.cat -o ~/arch-custom.iso ~/customiso
 
 There should now be a file called arch-custom.iso in the home folder of
-the user that created the iso. This can now be burned to a CD (DVD) and
-used as intended. Enjoy your very own, customized, Arch Install CD.
-Remember that the iso label must be the same as the one from the
-original ISO (in this case ARCH_201209) or otherwise the image will not
-work.
+the user that created the ISO. This can now be burned to a CD or DVD.
+Enjoy your very own, customized, Arch install CD. Remember that the ISO
+label must be the same as the one from the original ISO (in this case
+ARCH_201209) or otherwise the image will not work.
 
 If installing the image into a pen drive with unetbootin remember also
 that the label of the pen drive partition must be ARCH_201209. This can
 be changed with e2label for ext3 partitions.
 
 Note:In the most recent series of Arch ISO's, it has been reported that
-unetbootin sometimes breaks the image. Please use dd to create
+unetbootin sometimes breaks the image. Please use dd to create the
 installer.
 
 See also
@@ -136,8 +133,15 @@ See also
 -   http://xentac.net/svn/arch-jc/trunk/bin/mkiso
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Remastering_the_Install_ISO&oldid=256181"
+"https://wiki.archlinux.org/index.php?title=Remastering_the_Install_ISO&oldid=281767"
 
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 7 November 2013, at 00:24.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

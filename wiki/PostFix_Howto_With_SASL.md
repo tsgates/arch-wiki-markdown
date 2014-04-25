@@ -1,25 +1,33 @@
 PostFix Howto With SASL
 =======================
 
-The postfix package in [extra] is compiled with sasl support:
+  
+ The postfix package in [extra] is compiled with SASL support:
 
     pacman -S postfix cyrus-sasl
 
-An example line for the /etc/postfix/main.cf file to enable the SASL is
-below.
+To enable SASL for accepting mail from other users, open the "Message
+submission" port (TCP 587) in /etc/postfix/master.cf, by uncommenting
+these lines (which are there by default, just commented):
 
-    mydestination = $myhostname, localhost.$mydomain, $mydomain
-    myorigin = $mydomain
-    smtpd_sasl_auth_enable = yes
-    smtpd_sasl_security_options = noanonymous
-    smtpd_sasl_tls_security_options = $smtpd_sasl_security_options
-    smtpd_tls_auth_only = no
-    smtpd_sasl_local_domain = $mydomain
-    smtpd_recipient_restrictions = permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination,permit
-    broken_sasl_auth_clients = yes
-    relay_domains = *
+    submission inet n       -       n       -       -       smtpd
+      -o syslog_name=postfix/submission
+      -o smtpd_tls_security_level=encrypt
+      -o smtpd_sasl_auth_enable=yes
+      -o smtpd_reject_unlisted_recipient=no
+    #  -o smtpd_client_restrictions=$mua_client_restrictions
+    #  -o smtpd_helo_restrictions=$mua_helo_restrictions
+    #  -o smtpd_sender_restrictions=$mua_sender_restrictions
+      -o smtpd_recipient_restrictions=permit_sasl_authenticated,reject
+      -o milter_macro_daemon_name=ORIGINATING
 
-You might want to change various options to suit your needs though.
+Note that this also enables SSL, so if you do not have a SSL
+certificate, keep the "smtpd_tls_security_level" option commented out.
+
+The three restriction options (client, helo, sender) can also be left
+commented out, since smtpd_recipient_restrictions already handles SASL
+users.
+
 Setup Postfix as you normally would and start it. If you want to start
 it at boot time see Daemons#Starting_on_boot.
 
@@ -28,8 +36,7 @@ SASL can use different authentication methods. The default one is PAM
 have to create /usr/lib/sasl2/smtpd.conf:
 
     pwcheck_method: saslauthd
-    saslauthd_path: /var/run/saslauthd/mux
-    mech_list: plain login
+    mech_list: plain
     log_level: 7
 
 To read about other authentication methods please refer to
@@ -37,18 +44,17 @@ http://www.postfix.org/SASL_README.html
 
 To start all the daemons:
 
-    systemctl start postfix
-    systemctl start saslauthd
+    systemctl start postfix saslauthd
 
-Hopefully you should be able to telnet to your Postfix server with :
+Hopefully you should be able to telnet to your Postfix server with:
 
-telnet localhost 25
+telnet localhost 587
 
-You should then type :
+You should then type:
 
 EHLO test.com
 
-This is roughly what you should see :
+This is roughly what you should see:
 
     Trying 127.0.0.1...
 
@@ -63,12 +69,18 @@ This is roughly what you should see :
     250-VRFY
     250-ETRN
     250-AUTH PLAIN OTP DIGEST-MD5 CRAM-MD5
-    250-AUTH=PLAIN OTP DIGEST-MD5 CRAM-MD5
     250 8BITMIME
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PostFix_Howto_With_SASL&oldid=242961"
+"https://wiki.archlinux.org/index.php?title=PostFix_Howto_With_SASL&oldid=259290"
 
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 28 May 2013, at 12:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

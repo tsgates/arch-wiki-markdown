@@ -17,23 +17,20 @@ ASUS N53JN
   Suspend         Working, look bellow   
   --------------- ---------------------- ------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Configuration                                                      |
-|     -   2.1 CPU                                                          |
-|     -   2.2 Video                                                        |
-|         -   2.2.1 Intel                                                  |
-|         -   2.2.2 Nvidia                                                 |
-|             -   2.2.2.1 Switching graphic cards                          |
-|                                                                          |
-|     -   2.3 Audio                                                        |
-|     -   2.4 Touchpad                                                     |
-|     -   2.5 Webcam                                                       |
-|     -   2.6 Suspend                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Configuration
+    -   2.1 CPU
+    -   2.2 Video
+        -   2.2.1 Intel
+        -   2.2.2 Nvidia
+            -   2.2.2.1 Switching graphic cards
+    -   2.3 Audio
+    -   2.4 Touchpad
+    -   2.5 Webcam
+    -   2.6 Suspend
 
 Hardware
 --------
@@ -125,8 +122,15 @@ blacklisting nouveau. That still allows the user to power the card off
 in that laptop.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_N53JN&oldid=233235"
+"https://wiki.archlinux.org/index.php?title=ASUS_N53JN&oldid=304971"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 09:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

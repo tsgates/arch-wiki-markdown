@@ -28,15 +28,13 @@ same repository system as [core] or [extra]. The benefits and detriments
 of the proposal, along with the technical steps to complete the
 transition (if the proposal were to be passed) are discussed below.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Detriments                                                         |
-| -   2 Benefits                                                           |
-| -   3 Technical steps for the transition                                 |
-|     -   3.1 Behind the scenes                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Detriments
+-   2 Benefits
+-   3 Technical steps for the transition
+    -   3.1 Behind the scenes
 
 Detriments
 ==========
@@ -116,3 +114,10 @@ Retrieved from
 Category:
 
 -   Arch development
+
+-   This page was last modified on 3 December 2012, at 04:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

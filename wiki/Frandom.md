@@ -1,6 +1,13 @@
 Frandom
 =======
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Needs updating   
+                           to SystemD (Discuss)     
+  ------------------------ ------------------------ ------------------------
+
 frandom is a fast alternative to /dev/urandom. It can be used wherever
 fast random number generation is required, eg for randomising large hard
 drives prior to encryption.
@@ -132,9 +139,16 @@ Summary: 320 GB in approx. 2.67 hours
 Summary: 500 GB in approx. 6.85 hours (connected on USB3)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Frandom&oldid=223661"
+"https://wiki.archlinux.org/index.php?title=Frandom&oldid=302459"
 
 Categories:
 
 -   Security
 -   File systems
+
+-   This page was last modified on 28 February 2014, at 17:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

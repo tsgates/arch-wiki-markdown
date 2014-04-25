@@ -1,15 +1,13 @@
 DeveloperWiki:Patching
 ======================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Patching                                                           |
-|     -   1.1 Vanilla Packages                                             |
-|     -   1.2 When is patching acceptable?                                 |
-|     -   1.3 When is patching discouraged?                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Patching
+    -   1.1 Vanilla Packages
+    -   1.2 When is patching acceptable?
+    -   1.3 When is patching discouraged?
 
 Patching
 ========
@@ -64,3 +62,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2011, at 18:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

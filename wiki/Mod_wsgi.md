@@ -1,23 +1,21 @@
-Mod wsgi
+mod_wsgi
 ========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-|     -   2.1 Apache Module : mod_wsgi for Python 2.6                      |
-|         -   2.1.1 Install Package                                        |
-|         -   2.1.2 Configure Apache                                       |
-|         -   2.1.3 Test mod_wsgi                                          |
-|                                                                          |
-|     -   2.2 Customization                                                |
-|         -   2.2.1 Use mod_wsgi and Python 3.1                            |
-|         -   2.2.2 Compilation using ABS                                  |
-|                                                                          |
-| -   3 See Also                                                           |
-+--------------------------------------------------------------------------+
+  
+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+    -   2.1 Apache Module : mod_wsgi for Python 2.6
+        -   2.1.1 Install Package
+        -   2.1.2 Configure Apache
+        -   2.1.3 Test mod_wsgi
+    -   2.2 Customization
+        -   2.2.1 Use mod_wsgi and Python 3.1
+        -   2.2.2 Compilation using ABS
+-   3 See Also
 
 Introduction
 ------------
@@ -101,7 +99,6 @@ Test mod_wsgi
     WSGIScriptAlias /wsgi_app /home/www/wsgi-scripts/wsgi_app.py
 
     <Directory /home/www/wsgi-scripts>
-        Order allow,deny
         Require all granted
     </Directory>
 
@@ -217,8 +214,15 @@ This article is partially adapted from mod_python. Many thanks to the
 authors.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mod_wsgi&oldid=236327"
+"https://wiki.archlinux.org/index.php?title=Mod_wsgi&oldid=303865"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 10 March 2014, at 05:51.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

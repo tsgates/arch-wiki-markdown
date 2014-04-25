@@ -1,13 +1,9 @@
 AUR Trusted User Guidelines
 ===========================
 
-> Summary
+Related articles
 
-Explains guidelines for the Arch User Repository's Trusted Users.
-
-> Related
-
-Arch User Repository
+-   Arch User Repository
 
 The Trusted User (TU) is a member of the community charged with keeping
 the AUR in working order. He/she maintains popular packages
@@ -18,22 +14,20 @@ have a final say in the direction of the AUR.
 
 The TUs are governed using the TU bylaws
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 TODO list for new Trusted Users                                    |
-| -   2 The TU and [unsupported]                                           |
-| -   3 The TU and [community], Guidelines for Package Maintenance         |
-|     -   3.1 Rules for Packages Entering the [community] Repo             |
-|     -   3.2 Accessing and Updating the Repository                        |
-|     -   3.3 Disowning packages                                           |
-|     -   3.4 Moving packages from unsupported to [community]              |
-|     -   3.5 Moving packages from [community] to unsupported              |
-|     -   3.6 Moving packages from [community-testing] to [community]      |
-|     -   3.7 Deleting packages from unsupported                           |
-|     -   3.8 See also                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 TODO list for new Trusted Users
+-   2 The TU and [unsupported]
+-   3 The TU and [community], Guidelines for Package Maintenance
+    -   3.1 Rules for Packages Entering the [community] Repo
+    -   3.2 Accessing and Updating the Repository
+    -   3.3 Disowning packages
+    -   3.4 Moving packages from unsupported to [community]
+    -   3.5 Moving packages from [community] to unsupported
+    -   3.6 Moving packages from [community-testing] to [community]
+    -   3.7 Deleting packages from unsupported
+    -   3.8 See also
 
 TODO list for new Trusted Users
 -------------------------------
@@ -43,20 +37,21 @@ TODO list for new Trusted Users
 3.  Make sure your account details on the AUR are up-to-date and that
     your sponsor has given you TU status.
 4.  Add yourself to the Trusted Users page.
-5.  Remind Allan/Andrea to change your account on forums.
+5.  Remind a BBS admin to change your account on forums.
 6.  Ask some TU for the #archlinux-tu@freenode key and hang out with us
     in the channel. You do not have to do this, but it would be neat
     since this is where most dark secrets are spilled and where many new
     ideas are conceived.
 7.  If you are not upgraded to a Trusted User group on bug tracker in
-    two days, report this as a bug to Andrea Scarpino
-    (andrea@archlinux.org).
+    two days, report this as a bug to public mailing list for Arch Linux
+    development (arch-dev-public@archlinux.org).
 8.  Send Ionuț Bîru (ibiru@archlinux.org) all the information based on
     this template to have access on dev interface.
 9.  Install the devtools package.
-10. Send an email to Florian Pritz with one SSH public key attached. If
-    you do not have one, use ssh-keygen to generate one. Check the Using
-    SSH Keys wiki page for more information about SSH keys.
+10. Send a signed email to Florian Pritz with one SSH public key
+    attached. If you do not have one, use ssh-keygen to generate one.
+    Check the Using SSH Keys wiki page for more information about SSH
+    keys.
 11. Create a PGP key for package signing.
 12. Send a signed email to all Master Keys owners including your PGP key
     and the relative full key fingerprint. Your key needs to be signed
@@ -90,6 +85,14 @@ The TU and [community], Guidelines for Package Maintenance
 ----------------------------------------------------------
 
 > Rules for Packages Entering the [community] Repo
+
+-   A package must not already exist in any of the Arch Linux
+    repositories. You should take necessary precautions to ensure no
+    other packager is in the process of promoting the same package.
+    Double-check the AUR package comments, read the latest subject
+    headings in aur-general, search all projects in the bugtracker, grep
+    the Subversion log, and send a quick message to the private TU IRC
+    channel.
 
 -   Only "popular" packages may enter the repo, as defined by 1% usage
     from pkgstats or 10 votes on the AUR.
@@ -178,7 +181,6 @@ Thus the process of updating a package can be summarised as:
     -   Copy the package to nymeria.archlinux.org
         (scp pkgname-ver-rel-arch.pkg.tar.xz* nymeria.archlinux.org:staging/community/)
     -   Tag the package (archrelease community-{i686,x86_64})
-
 -   Update the repository
     (ssh nymeria.archlinux.org /community/db-update)
 
@@ -225,8 +227,15 @@ real package then all dependents will point to the correct place.
 -   DeveloperWiki#Packaging_Guidelines
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=AUR_Trusted_User_Guidelines&oldid=247293"
+"https://wiki.archlinux.org/index.php?title=AUR_Trusted_User_Guidelines&oldid=296958"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 12 February 2014, at 06:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

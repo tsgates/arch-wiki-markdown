@@ -3,17 +3,14 @@ MSI Wind U200
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 lspci output                                                 |
-|     -   1.2 lsusb output                                                 |
-|                                                                          |
-| -   2 Installation                                                       |
-| -   3 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+    -   1.1 lspci output
+    -   1.2 lsusb output
+-   2 Installation
+-   3 More Resources
 
 Introduction
 ------------
@@ -71,8 +68,15 @@ More Resources
 -   MSI Wind U100 - Arch Linux wiki on the MSI Wind U100
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=MSI_Wind_U200&oldid=206733"
+"https://wiki.archlinux.org/index.php?title=MSI_Wind_U200&oldid=298323"
 
 Category:
 
 -   MSI
+
+-   This page was last modified on 16 February 2014, at 07:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

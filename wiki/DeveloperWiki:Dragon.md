@@ -1,17 +1,15 @@
 DeveloperWiki:Dragon
 ====================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Specs                                                              |
-| -   2 Partition layout                                                   |
-| -   3 Services                                                           |
-| -   4 Maintainer                                                         |
-| -   5 Trivia                                                             |
-| -   6 History                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Specs
+-   2 Partition layout
+-   3 Services
+-   4 Maintainer
+-   5 Trivia
+-   6 History
 
 Specs
 -----
@@ -55,3 +53,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki:Server Configuration
+
+-   This page was last modified on 8 February 2012, at 20:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

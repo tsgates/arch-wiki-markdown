@@ -1,7 +1,7 @@
 CherryMusic
 ===========
 
-> Summary
+Summary help replacing me
 
 Installation, configuration, tips & tricks and basic troubleshooting of
 CherryMusic - a music streaming server.
@@ -26,30 +26,28 @@ Spotify, Grooveshark... you name it."
 
 The project is developed on GitHub.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Stable version                                               |
-|     -   1.2 Git version                                                  |
-|     -   1.3 Dependencies                                                 |
-|         -   1.3.1 Required                                               |
-|         -   1.3.2 Optional                                               |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Quick start                                                  |
-|     -   2.2 Manual setup                                                 |
-|     -   2.3 Fine tuning                                                  |
-|                                                                          |
-| -   3 Tips & Tricks                                                      |
-|     -   3.1 Symlinks in "basedir"                                        |
-|     -   3.2 Systemd service file                                         |
-|     -   3.3 Running in a GNU Screen session                              |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Deactivate flash blocker                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Stable version
+    -   1.2 Git version
+    -   1.3 Dependencies
+        -   1.3.1 Required
+        -   1.3.2 Optional
+-   2 Configuration
+    -   2.1 Quick start
+    -   2.2 Manual setup
+    -   2.3 Fine tuning
+-   3 Tips & Tricks
+    -   3.1 Symlinks in "basedir"
+    -   3.2 Systemd service file
+    -   3.3 Running in a GNU Screen session
+-   4 3rd Party Extensions
+-   5 Troubleshooting
+    -   5.1 Deactivate flash blocker
+    -   5.2 CherryMusic does not load on Android Chrome
+-   6 See also
 
 Installation
 ------------
@@ -77,15 +75,17 @@ Required
 
 Required dependencies are:
 
-python, python-cherrypy.
+python, python-cherrypy
 
 Optional
 
 Optional dependencies are:
 
-lame, vorbis-tools, flac, faad2, mpg123, ffmpeg (For live transcoding),
-python3-stagger-svn (For ID3-Tag reading), imagemagick (For automatic
-image resizing on displayed cover art)
+-   Live transcoding: lame, vorbis-tools, flac, faad2, mpg123 or ffmpeg
+    (which replaces the aforementioned codecs plus adds WMA decoding)
+-   Automatic image resizing on displayed cover art: imagemagick
+-   Special character search terms: python-unidecode
+-   GTK system tray icon: python-gobject
 
 Configuration
 -------------
@@ -176,8 +176,8 @@ as a system service and to automatically start on boot, simply do:
 Note:Replace "USER" with the user that should run CherryMusic (do not
 use root!).
 
-    $ sudo systemctl start cherrymusic@USER.service
-    $ sudo systemctl enable cherrymusic@USER.service
+     $ sudo systemctl start cherrymusic@USER.service
+     $ sudo systemctl enable cherrymusic@USER.service
 
 Note that although the CherryMusic service is now run as the user
 "USER", the service calls still have to be given as root.
@@ -226,6 +226,15 @@ and the permissions should be changed:
 
 To finally enable and start the service, see systemd service file.
 
+3rd Party Extensions
+--------------------
+
+-   CherryMusic Control - A Playback control plugin for Firefox:   
+     https://addons.mozilla.org/en-US/firefox/addon/cherrymusic-control
+      
+     Which is also developed on github:
+    https://github.com/Sets88/cherrymusicctrl
+
 Troubleshooting
 ---------------
 
@@ -235,11 +244,30 @@ An active flash blocker can interfere with the web frontend. If you have
 trouble with things like track selection or playback, try whitelisting
 the server in your browser's flash blocker/plugin manager.
 
+> CherryMusic does not load on Android Chrome
+
+This might be due to AdBlock Plus being installed in the browser. CM
+does not feature any ads, so the problem is caused by this plug-in.
+
+See also
+--------
+
+https://github.com/devsnd/cherrymusic/wiki/Setup-guide
+
+http://fomori.org/blog/?p=687
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=CherryMusic&oldid=253445"
+"https://wiki.archlinux.org/index.php?title=CherryMusic&oldid=304605"
 
 Categories:
 
 -   Web Server
 -   Player
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 15 March 2014, at 12:03.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,71 +1,56 @@
 Avahi
 =====
 
-Avahi is a free Zero Configuration Networking (Zeroconf) implementation,
-including a system for multicast DNS/DNS-SD service discovery. It allows
-programs to publish and discover services and hosts running on a local
-network with no specific configuration. For example you can plug into a
-network and instantly find printers to print to, files to look at and
-people to talk to. It is licensed under the GNU Lesser General Public
-License (LGPL). (Source: Wikipedia:Avahi (software))
+From Wikipedia:Avahi (software):
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Enable Avahi daemon under sysvinit system                    |
-|     -   1.2 Enable Avahi daemon under native systemd system              |
-|                                                                          |
-| -   2 Using Avahi                                                        |
-|     -   2.1 Obtaining IPv4LL IP address                                  |
-|     -   2.2 Hostname resolution                                          |
-|     -   2.3 File sharing                                                 |
-|         -   2.3.1 NFS                                                    |
-|         -   2.3.2 Samba                                                  |
-|         -   2.3.3 GShare                                                 |
-|         -   2.3.4 Vsftpd                                                 |
-|         -   2.3.5 Giver                                                  |
-|                                                                          |
-|     -   2.4 Link-Local (Bonjour/Zeroconf) chat                           |
-|         -   2.4.1 Gajim                                                  |
-|         -   2.4.2 Pidgin                                                 |
-|         -   2.4.3 Kopete                                                 |
-|         -   2.4.4 Telepathy                                              |
-|                                                                          |
-|     -   2.5 Airprint from Mobile Devices                                 |
-|     -   2.6 Firewall                                                     |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+"Avahi is a free Zero-configuration networking (zeroconf)
+implementation, including a system for multicast DNS/DNS-SD service
+discovery. It allows programs to publish and discover services and hosts
+running on a local network with no specific configuration. For example
+you can plug into a network and instantly find printers to print to,
+files to look at and people to talk to. It is licensed under the GNU
+Lesser General Public License (LGPL)."
+
+Contents
+--------
+
+-   1 Installation
+-   2 Using Avahi
+    -   2.1 Obtaining IPv4LL IP address
+    -   2.2 Hostname resolution
+    -   2.3 File sharing
+        -   2.3.1 NFS
+        -   2.3.2 Samba
+        -   2.3.3 GShare
+        -   2.3.4 Vsftpd
+        -   2.3.5 Giver
+    -   2.4 Link-Local (Bonjour/Zeroconf) chat
+    -   2.5 Airprint from Mobile Devices
+    -   2.6 Firewall
+-   3 See also
 
 Installation
 ------------
 
 Install avahi and nss-mdns, available in the official repositories.
 
-    # pacman -S avahi nss-mdns
-
-> Enable Avahi daemon under sysvinit system
-
-After installing Avahi you will need to restart the dbus daemon before
-you can start avahi-daemon.
-
-Note:avahi-daemon depends on dbus daemon, so it should be added after
-dbus in the DAEMONS array in rc.conf file
-
-> Enable Avahi daemon under native systemd system
-
-You can enable Avahi Daemon at startup with the following command:
-
-    # systemctl enable avahi-daemon.service
+You can manage the Avahi daemon with avahi-daemon.service using systemd.
 
 Using Avahi
 -----------
 
 > Obtaining IPv4LL IP address
 
-By default, if you are getting IP using DHCP, you are using dhcpcd
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with dhcpcd.     
+                           Notes: should be merged  
+                           into the main page       
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+By default, if you are getting IP using DHCP, you are using the dhcpcd
 package. It can attempt to obtain an IPv4LL address if it failed to get
 one via DHCP. By default this option is disabled. To enable it, comment
 noipv4ll string:
@@ -76,33 +61,34 @@ noipv4ll string:
     #noipv4ll
     ...
 
-Alternatively, run avahi-autoipd, included in avahi package:
+Alternatively, run avahi-autoipd:
 
     # avahi-autoipd -D
 
 > Hostname resolution
 
-Avahi also allows you to access computers using their hostnames. Note:
-you must install nss-mdns for this to work.
+Avahi also allows you to access computers using their hostnames.
+
+Note:you must install nss-mdns for this to work, and have
+avahi-daemon.service enabled and running.
 
 Suppose you have machines with names maple, fig and oak, all running
-avahi. Avahi can be set up so that you do not have to manage a
+Avahi. Avahi can be set up so that you do not have to manage a
 /etc/hosts file for each computer. Instead you can simply use
 maple.local to access whatever services maple has. However by default,
 .local querying is disabled in Arch Linux. To enable it edit the file
 /etc/nsswitch.conf and change the line:
 
-    hosts: files dns
+    hosts: files myhostname dns
 
-to
+to:
 
-    hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4
+    hosts: files myhostname mdns_minimal [NOTFOUND=return] dns
 
-Some users have noticed a slowdown in DNS querying; it was attributed to
-this change. (Reference: Ubuntu Bug 94940). Using the following line
-instead (omit mdns4) solves the problem.
-
-    hosts: files mdns4_minimal [NOTFOUND=return] dns
+The mdns_minimal module handles queries for the .local TLD only. In case
+you have configured Avahi to use a different TLD, you'll also need to
+add the full mdns module at the end. There also are IPv4-only and
+IPv6-only modules mdns[46](_minimal).
 
 Avahi includes several utilities which help you discover the services
 running on a network. For example, run
@@ -111,14 +97,14 @@ running on a network. For example, run
 
 to discover services in your network.
 
-The avahi-discover (Avahi Zeroconf Browser) shows the various services
+The Avahi Zeroconf Browser (avahi-discover) shows the various services
 on your network. You can also browse SSH and VNC Servers using bssh and
 bvnc respectively.
 
 There's a good list of software with Avahi support at their website:
 http://avahi.org/wiki/Avah4users
 
-Note:avahi-discover needs pygtk and python-dbus to be installed.
+Note:avahi-discover needs pygtk and python2-dbus to be installed.
 
 > File sharing
 
@@ -126,21 +112,21 @@ NFS
 
 If you have an NFS share set up, you can use Avahi to be able to
 automount them in Zeroconf-enabled browsers (such as Konqueror on KDE
-and Finder on Mac OS X). Create a .service file in /etc/avahi/services
-with the following:
+and Finder on OS X). Create a .service file in /etc/avahi/services with
+the following contents:
 
     /etc/avahi/services/nfs_Zephyrus_Music.service
 
-     <?xml version="1.0" standalone='no'?>
-     <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
-     <service-group>
-       <name replace-wildcards="yes">NFS Music Share on %h</name>
-       <service>
-         <type>_nfs._tcp</type>
-         <port>2049</port>
-         <txt-record>path=/data/shared/Music</txt-record>
-       </service>
-     </service-group>
+    <?xml version="1.0" standalone='no'?>
+    <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+    <service-group>
+      <name replace-wildcards="yes">NFS Music Share on %h</name>
+      <service>
+        <type>_nfs._tcp</type>
+        <port>2049</port>
+        <txt-record>path=/data/shared/Music</txt-record>
+      </service>
+    </service-group>
 
 The port is correct if you have insecure as an option in your
 /etc/exports; otherwise, it needs to be changed (note that insecure is
@@ -151,22 +137,7 @@ this post.
 
 Samba
 
-Note:samba package from extra repository build without an avahi suuport.
-
-    /etc/avahi/services/smb.service
-
-     <?xml version="1.0" standalone='no'?>
-     <!DOCTYPE service-group SYSTEM "avahi-service.dtd">
-     <service-group>
-        <name replace-wildcards="yes">Samba Shares on %h</name>
-        <service>
-            <type>_smb._tcp</type>
-            <port>139</port>
-        </service>
-     </service-group>
-
-Note:If you are trying to connect with OS X Lion the port needs to be
-445, not 139.
+Should work out-of-the-box.
 
 GShare
 
@@ -193,11 +164,8 @@ Create a ftp.service file in /etc/avahi/services and paste in that file
        </service>
        </service-group>
 
-When you are done, (re)start avahi-daemon and vsftpd in your /etc/rc.d
-directory.
-
-    /etc/rc.d/avahi-daemon restart
-    /etc/rc.d/vsftpd restart
+When you are done, restart the avahi-daemon.service and vsftpd.service
+services.
 
 After that you should be able to browse through the ftp server from
 another computer in your network. The steps shown in this section are
@@ -216,52 +184,17 @@ desktops when both are running Giver. All you need to do is click and
 drag the file to the name or picture of the person you wish to send the
 file to.
 
-A package is on the AUR.
+A package is on the giver.
 
 Note that this depends on gnome-sharp, which has heavy GNOME
 dependencies.
 
 > Link-Local (Bonjour/Zeroconf) chat
 
-Avahi can be used for bonjour protocol support under linux. The
-following chat clients support link-local chat.
-
-Gajim
-
-Gajim is a Jabber/XMPP instant messenger client written in PyGTK. In the
-accounts setup just enable "Local" account.
-
-Pidgin
-
-Pidgin is an instant messaging client that supports quite a few commonly
-used IM protocols. In addition to these, it supports Bonjour.
-
-Just select 'Bonjour' as the protocol type when you add an account, and
-enter a username. The first and last name you enter in the 'Advanced'
-tab will be what the other person (whom you are chatting with) sees, and
-'local alias' under 'User Options' in the 'Basic' tab will be what you
-see of your own name (you could try putting in something like I, me or
-myself).
-
-Once this is done, other Pidgin (iChat) users who are on the local
-network will see you and be able to chat with you. To implement
-file-sharing, you just send and receive files like you would do with a
-regular IM session.
-
-Kopete
-
-Kopete is the KDE equivalent of Pidgin. It supports the
-Bonjour/Link-local XMPP protocol. One need to create an account in
-Kopete, by simply entering the desired name.
-
-Telepathy
-
-Telpathy is a communication framework which supports different protocols
-using plugins. The telepathy-salut plugin provides support for
-Bonjour/Link-Local XMPP protocol. Empathy is a GNOME front-end to
-Telepathy. Officially, KDE does not support Telepathy, but work is going
-on which will eventually replace Kopete. KDE Telepathy is available in
-extra.
+Avahi can be used for bonjour protocol support under linux. Check
+Wikipedia:Comparison of instant messaging clients or List of
+Applications#Instant messaging for a list of clients supporting the
+bonjour protocol.
 
 > Airprint from Mobile Devices
 
@@ -321,7 +254,7 @@ Be sure to open UDP port 5353 if you're using iptables:
 
      # iptables -A INPUT -p udp -m udp --dport 5353 -j ACCEPT
 
-If you're following the more-than-useful Simple Stateful Firewall format
+If you're following the more-than-useful Simple stateful firewall format
 for your firewall:
 
      # iptables -A UDP -p udp -m udp --dport 5353 -j ACCEPT
@@ -335,8 +268,15 @@ See also
 -   http://www.zeroconf.org/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Avahi&oldid=254983"
+"https://wiki.archlinux.org/index.php?title=Avahi&oldid=305924"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 20 March 2014, at 17:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

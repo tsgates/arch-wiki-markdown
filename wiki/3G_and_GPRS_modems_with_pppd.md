@@ -1,9 +1,7 @@
 3G and GPRS modems with pppd
 ============================
 
-  
-
-3G and GPRS modems with pppd alone
+Note:3G and GPRS modems with pppd alone
 
 Why not to use a pppd wrapper (like wvdial or similar)?. I particularly
 switched to direct pppd because my previous software sometimes silently
@@ -14,26 +12,22 @@ You may be reading this page by the same reason it was written for: you
 may have finally concluded that the lesser the layers, the less likely
 the troubles.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites and tested hardware                                  |
-| -   2 Configuration                                                      |
-|     -   2.1 /etc/ppp/options-mobile                                      |
-|     -   2.2 /etc/ppp/peers                                               |
-|     -   2.3 /etc/ppp/chatscripts                                         |
-|                                                                          |
-| -   3 Start the pppd                                                     |
-| -   4 Patch for modem availability after booting                         |
-|     -   4.1 netcfg hook                                                  |
-|     -   4.2 network hook                                                 |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-| -   6 AT^SYSCFG Huawey command reference                                 |
-| -   7 Automatic PPP                                                      |
-| -   8 Related Articles                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequisites and tested hardware
+-   2 Configuration
+    -   2.1 /etc/ppp/options-mobile
+    -   2.2 /etc/ppp/peers
+    -   2.3 /etc/ppp/chatscripts
+-   3 Start the pppd
+-   4 Patch for modem availability after booting
+    -   4.1 netcfg hook
+    -   4.2 network hook
+-   5 Troubleshooting
+-   6 AT^SYSCFG Huawei command reference
+-   7 Automatic PPP
+-   8 Related Articles
 
 Prerequisites and tested hardware
 ---------------------------------
@@ -43,9 +37,9 @@ described supports easy switching between several carriers and 3G and
 GPRS modes. It has been tested and directly works with no modifications
 (except for the device name) with:
 
--   Huawey EM770 MiniPCIe modem (Asus Eee PC 1000H Go internal
+-   Huawei EM770 MiniPCIe modem (Asus Eee PC 1000H Go internal
     integrated modem).
--   Huawey E220 and E1552 external USB dongles.
+-   Huawei E220 and E1552 external USB dongles.
 -   Nokia N73 (USB tethering; select "PC Suite" when the phone asks).
 -   Nokia CS-15 (lsusb says 0421:0612 Nokia Mobile Phones)
 -   Alcatel x310e (carrier: Wind IT)
@@ -248,7 +242,7 @@ response (if the PIN was no longer required).
     AT
 
 The SYSCFG line in the mode.* files is device-dependent, and likely
-Huawey-specific. It does not works in Nokia phones (you may symlink mode
+Huawei-specific. It does not works in Nokia phones (you may symlink mode
 to mode.NONE, which only sends the AT command with no effect). I had to
 investigate before achieving success with both EM770 and E220 modems.
 Despite many forums reporting a "4" trailing code, it seems that the
@@ -392,7 +386,7 @@ achieved by the ordinary connection retry). While running, the EM770 is
 stable, but the E220 or the Nokia phones are far more reliable in the
 connection phase. Your mileage may vary depending on your hardware.
 
-AT^SYSCFG Huawey command reference
+AT^SYSCFG Huawei command reference
 ----------------------------------
 
 To see the supported values, you can query your own modem sending the
@@ -428,7 +422,7 @@ To see the supported values, you can query your own modem sending the
     3=Any
     4=no Change
 
-AT^SYSCFG=? command output on Huawey EM770:
+AT^SYSCFG=? command output on Huawei EM770:
 
     ^SYSCFG:(2,13,14,16),(0-3),((80000,"GSM850"),(200000,"GSM1900"),(400380,"GSM900/GSM1800/WCDMA2100"),(4a80000,"GSM850/GSM1900/WCDMA850/WCDMA1900"),(3fffffff,"All Bands")),(0-2),(0-4)
 
@@ -451,8 +445,15 @@ Dialup_without_a_dialer_HOWTO
  USB 3G Modem  
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=3G_and_GPRS_modems_with_pppd&oldid=236220"
+"https://wiki.archlinux.org/index.php?title=3G_and_GPRS_modems_with_pppd&oldid=289037"
 
 Category:
 
 -   Modems
+
+-   This page was last modified on 17 December 2013, at 21:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

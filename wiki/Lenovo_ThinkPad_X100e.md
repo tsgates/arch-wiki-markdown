@@ -3,30 +3,26 @@ Lenovo ThinkPad X100e
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Live notes & install instructions                                  |
-| -   2 Preface                                                            |
-| -   3 Configuration Notes                                                |
-| -   4 Known Issues                                                       |
-| -   5 Pre-install                                                        |
-| -   6 Installation Notes                                                 |
-|     -   6.1 Partitioning (SSD Specific Notes)                            |
-|     -   6.2 Filesystem creation (SSD Specific Notes)                     |
-|     -   6.3 Arch Setup - Prepare Hard Drives                             |
-|     -   6.4 Arch Setup - Select Packages                                 |
-|     -   6.5 Arch Setup - Configure System                                |
-|         -   6.5.1 /etc/rc.conf                                           |
-|         -   6.5.2 /etc/fstab                                             |
-|                                                                          |
-|     -   6.6 Arch Setup - Install Bootloader                              |
-|                                                                          |
-| -   7 First Boot - System update and configuration                       |
-|     -   7.1 System updates and installation                              |
-|     -   7.2 Wireless network device                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Live notes & install instructions
+-   2 Preface
+-   3 Configuration Notes
+-   4 Known Issues
+-   5 Pre-install
+-   6 Installation Notes
+    -   6.1 Partitioning (SSD Specific Notes)
+    -   6.2 Filesystem creation (SSD Specific Notes)
+    -   6.3 Arch Setup - Prepare Hard Drives
+    -   6.4 Arch Setup - Select Packages
+    -   6.5 Arch Setup - Configure System
+        -   6.5.1 /etc/rc.conf
+        -   6.5.2 /etc/fstab
+    -   6.6 Arch Setup - Install Bootloader
+-   7 First Boot - System update and configuration
+    -   7.1 System updates and installation
+    -   7.2 Wireless network device
 
 Live notes & install instructions
 ---------------------------------
@@ -126,8 +122,8 @@ For this successful installation, the net install ISO (2010.05, current
 at time of initial writeup) was used. Many of the issues that the x100e
 faced with 2.6 kernels have been addressed as of kernel 2.6.35. There is
 no optical drive in the x100e so you’ll need to use a USB key or network
-boot. See Putting installation media on a USB key or the Beginners Guide
-for more details on booting off a USB key.
+boot. See Putting installation media on a USB key or the Beginners'
+guide for more details on booting off a USB key.
 
 Installation Notes
 ------------------
@@ -268,8 +264,15 @@ formatting
 Currently able to get power usage to under 12W with wifi *on*: [1]
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_X100e&oldid=253584"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_X100e&oldid=298173"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 16 February 2014, at 07:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

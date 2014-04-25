@@ -11,21 +11,18 @@ perfectly.
 
 This tutorial is a bit work in progress so stay tuned ;)
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Wireless drivers                                                   |
-| -   3 Installing Wacom Tablet                                            |
-| -   4 Optimizing battery lifetime                                        |
-|     -   4.1 CPUFreq                                                      |
-|     -   4.2 PHC                                                          |
-|                                                                          |
-| -   5 Mapping screen-key to something that makes sense                   |
-| -   6 Script for changing orientation                                    |
-| -   7 What does not work                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Wireless drivers
+-   3 Installing Wacom Tablet
+-   4 Optimizing battery lifetime
+    -   4.1 CPUFreq
+    -   4.2 PHC
+-   5 Mapping screen-key to something that makes sense
+-   6 Script for changing orientation
+-   7 What does not work
 
 Installation
 ============
@@ -294,8 +291,15 @@ What does not work
     do not know, why
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Toshiba_Tecra_M4&oldid=238891"
+"https://wiki.archlinux.org/index.php?title=Toshiba_Tecra_M4&oldid=262380"
 
 Category:
 
 -   Toshiba
+
+-   This page was last modified on 11 June 2013, at 16:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

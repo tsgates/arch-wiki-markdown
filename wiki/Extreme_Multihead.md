@@ -10,33 +10,27 @@ Extreme Multihead
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Background                                                         |
-| -   2 Experimenting with Multiple Monitors                               |
-|     -   2.1 KDE                                                          |
-|     -   2.2 Gnome                                                        |
-|     -   2.3 LXDE                                                         |
-|     -   2.4 XFCE                                                         |
-|     -   2.5 Generic                                                      |
-|                                                                          |
-| -   3 Make Settings the Default                                          |
-|     -   3.1 05-device.conf                                               |
-|     -   3.2 10-monitor.conf                                              |
-|                                                                          |
-| -   4 Accessing a Remote GUI                                             |
-|     -   4.1 ssh/rsh                                                      |
-|     -   4.2 VNC/rdc                                                      |
-|     -   4.3 Xdmc                                                         |
-|                                                                          |
-| -   5 Extending a Desktop beyond the Local System                        |
-|     -   5.1 Synergy                                                      |
-|     -   5.2 Xdmx                                                         |
-|                                                                          |
-| -   6 Related Pages                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Background
+-   2 Experimenting with Multiple Monitors
+    -   2.1 KDE
+    -   2.2 Gnome
+    -   2.3 LXDE
+    -   2.4 XFCE
+    -   2.5 Generic
+-   3 Make Settings the Default
+    -   3.1 05-device.conf
+    -   3.2 10-monitor.conf
+-   4 Accessing a Remote GUI
+    -   4.1 ssh/rsh
+    -   4.2 VNC/rdc
+    -   4.3 Xdmc
+-   5 Extending a Desktop beyond the Local System
+    -   5.1 Synergy
+    -   5.2 Xdmx
+-   6 Related Pages
 
 Background
 ----------
@@ -356,3 +350,10 @@ Retrieved from
 Category:
 
 -   X Server
+
+-   This page was last modified on 3 February 2013, at 12:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,7 +1,7 @@
 Powerdown
 =========
 
-> Summary
+Summary help replacing me
 
 powerdown is a bunch of scripts by Taylorchu that combine all sorts of
 settings to make your computer consume less energy and thus save
@@ -22,21 +22,18 @@ Warning:Use at your own risk. It is recommended to read through all the
 tweaks in order to disable those that might not be compatible with your
 system.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-| -   3 Automatically running powerdown at power state changes             |
-| -   4 Configuration                                                      |
-| -   5 FAQ                                                                |
-|     -   5.1 I do get more spinups and clicks from my HDD. Where is this  |
-|         setting stored in powerdown?                                     |
-|                                                                          |
-| -   6 Packages that are no longer necessary after installation           |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+-   3 Automatically running powerdown at power state changes
+-   4 Configuration
+-   5 FAQ
+    -   5.1 I do get more spinups and clicks from my HDD. Where is this
+        setting stored in powerdown?
+-   6 Packages that are no longer necessary after installation
+-   7 See also
 
 Installation
 ------------
@@ -148,14 +145,20 @@ See also
 --------
 
 -   Initial thread on the forum
--   AUR page
 -   Github repository
 -   Alternative, more simple powersave script
 -   Another simple power saving system
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Powerdown&oldid=254567"
+"https://wiki.archlinux.org/index.php?title=Powerdown&oldid=304400"
 
 Category:
 
 -   Power management
+
+-   This page was last modified on 14 March 2014, at 01:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

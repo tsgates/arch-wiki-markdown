@@ -1,33 +1,27 @@
 Canon iP4300
 ============
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Requirements                                                       |
-| -   3 Methods of getting the printer working                             |
-|     -   3.1 Proprietary Drivers                                          |
-|         -   3.1.1 Install needed packages                                |
-|         -   3.1.2 Download drivers                                       |
-|             -   3.1.2.1 Canon iP4200                                     |
-|                                                                          |
-|         -   3.1.3 Move the files                                         |
-|         -   3.1.4 Install the printer with CUPS                          |
-|         -   3.1.5 Creating links for libs                                |
-|         -   3.1.6 Troubleshooting                                        |
-|                                                                          |
-|     -   3.2 Gutenprint                                                   |
-|         -   3.2.1 Install needed packages                                |
-|         -   3.2.2 install the printer with CUPS                          |
-|                                                                          |
-|     -   3.3 Turboprint                                                   |
-|         -   3.3.1 Install Turboprint                                     |
-|         -   3.3.2 Install the printer with CUPS                          |
-|                                                                          |
-|     -   3.4 Related Links/Additional Information                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Requirements
+-   3 Methods of getting the printer working
+    -   3.1 Proprietary Drivers
+        -   3.1.1 Install needed packages
+        -   3.1.2 Download drivers
+            -   3.1.2.1 Canon iP4200
+        -   3.1.3 Move the files
+        -   3.1.4 Install the printer with CUPS
+        -   3.1.5 Creating links for libs
+        -   3.1.6 Troubleshooting
+    -   3.2 Gutenprint
+        -   3.2.1 Install needed packages
+        -   3.2.2 install the printer with CUPS
+    -   3.3 Turboprint
+        -   3.3.1 Install Turboprint
+        -   3.3.2 Install the printer with CUPS
+    -   3.4 Related Links/Additional Information
 
 Introduction
 ============
@@ -52,9 +46,11 @@ Install with:
 For information about setting up cups, refer to CUPS, however all that
 is really needed for the iP4300 is to start the cups daemon with:
 
-    # /etc/rc.d/cupsd start
+    # systemctl start cupsd
 
-and to add cupsd to the daemons line in /etc/rc.conf
+and if you want to start cupsd on bootup run:
+
+    # systemctl enable cupsd
 
 Methods of getting the printer working
 ======================================
@@ -334,8 +330,15 @@ install it and in the cups section, select the printer "Canon iP2000" to
 detect it.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Canon_iP4300&oldid=196829"
+"https://wiki.archlinux.org/index.php?title=Canon_iP4300&oldid=278871"
 
 Category:
 
 -   Printers
+
+-   This page was last modified on 17 October 2013, at 14:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

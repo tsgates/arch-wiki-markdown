@@ -4,27 +4,25 @@ Cgit
 Cgit is an attempt to create a fast web interface for the git scm, using
 a builtin cache to decrease server io-pressure.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration of Web Server                                        |
-|     -   2.1 Apache                                                       |
-|     -   2.2 Lighttpd                                                     |
-|         -   2.2.1 Lighttpd sub-domain                                    |
-|                                                                          |
-| -   3 Configuration of Cgit                                              |
-|     -   3.1 Basic Configuration                                          |
-|     -   3.2 Adding repositories                                          |
-|     -   3.3 Syntax highlighting                                          |
-|                                                                          |
-| -   4 Integration                                                        |
-|     -   4.1 Gitosis                                                      |
-|     -   4.2 Gitolite                                                     |
-|                                                                          |
-| -   5 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration of Web Server
+    -   2.1 Apache
+    -   2.2 Lighttpd
+        -   2.2.1 Lighttpd sub-domain
+    -   2.3 Nginx
+-   3 Configuration of Cgit
+    -   3.1 Basic Configuration
+    -   3.2 Adding repositories
+    -   3.3 Syntax highlighting
+-   4 Integration
+    -   4.1 Gitosis
+    -   4.2 Gitolite
+-   5 Troubleshooting
+    -   5.1 snapshots does not show properly
+-   6 References
 
 Installation
 ------------
@@ -119,7 +117,51 @@ nice permalinks:
          )
        }
 
-  
+> Nginx
+
+The following configuration uses fcgiwrap and will serve Cgit on a
+subdomain like git.example.com.
+
+Install and setup fcgiwrap:
+
+    # pacman -S fcgiwrap
+    # systemctl daemon-reload
+    # systemctl enable fcgiwrap.socket
+    # systemctl start fcgiwrap.socket
+
+Configure Nginx:
+
+    /etc/nginx/nginx.conf
+
+    worker_processes          1;
+     
+    events {
+      worker_connections      1024;
+    }
+     
+    http {
+      include                 mime.types;
+      default_type            application/octet-stream;
+      sendfile                on;
+      keepalive_timeout       65;
+      gzip                    on;
+     
+      # Cgit
+      server {
+        listen                80;
+        server_name           git.example.com;
+        root                  /usr/share/webapps/cgit;
+        try_files             $uri @cgit;
+
+        location @cgit {
+          include             fastcgi_params;
+          fastcgi_param       SCRIPT_FILENAME $document_root/cgit.cgi;
+          fastcgi_param       PATH_INFO       $uri;
+          fastcgi_param       QUERY_STRING    $args;
+          fastcgi_pass        unix:/run/fcgiwrap.sock;
+        }
+      }
+    }
 
 Configuration of Cgit
 ---------------------
@@ -133,8 +175,11 @@ the basic cgit configuration file at /etc/cgitrc.
     # cgit config
     #
 
-    css=/cgit-css/cgit.css
-    logo=/cgit-css/cgit.png
+    css=/cgit.css
+    logo=/cgit.png
+    # Following lines work with the above Apache config
+    #css=/cgit-css/cgit.css
+    #logo=/cgit-css/cgit.png
 
     # if you don't want that webcrawler (like google) index your site
     robots=noindex, nofollow
@@ -213,23 +258,41 @@ permissions, so the web server can access the files.
     -   Edit ~/.gitolite.rc of your gitolite user. Change the UMASK to
         0022
     -   See also: http://gitolite.com/gitolite/external.html#umask
-
 -   Change permission for existing repositories:
     -   Run the following two commands (as root or gitolite-user):
         -   # find /path/to/the/repository/ -type d -exec chmod og+rx {} \;
         -   # find /path/to/the/repository/ -type f -exec chmod og+r {} \;
 
+Troubleshooting
+---------------
+
+> snapshots does not show properly
+
+If you have enabled scan-path as long as snapshots, the order in cgitrc
+matters. According to cgit mailing list, snapshots should be specified
+before scan-path
+
+    snapshots=tar.gz tar.bz2 zip
+    scan-path=/path/to/your/repositories
+
 References
 ----------
 
--   http://hjemli.net/git/cgit/
--   http://hjemli.net/git/cgit/about/
--   http://hjemli.net/git/cgit/tree/README
--   http://hjemli.net/git/cgit/tree/cgitrc.5.txt
+-   http://git.zx2c4.com/cgit/
+-   http://git.zx2c4.com/cgit/about/
+-   http://git.zx2c4.com/cgit/tree/README
+-   http://git.zx2c4.com/cgit/tree/cgitrc.5.txt
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Cgit&oldid=256098"
+"https://wiki.archlinux.org/index.php?title=Cgit&oldid=303299"
 
 Category:
 
 -   Version Control System
+
+-   This page was last modified on 6 March 2014, at 09:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

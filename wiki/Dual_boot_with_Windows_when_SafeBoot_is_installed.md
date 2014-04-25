@@ -31,27 +31,24 @@ Note:This author only has experience with Windows 7 and an account
 created in the Administrator group. It is unknown whether this works
 with other versions of Windows or with reduced user privileges.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Why is a solution needed?                                          |
-| -   2 Alternatives Considered                                            |
-| -   3 The Method Proposed                                                |
-| -   4 Step by Step Walkthrough                                           |
-|     -   4.1 Defragment the Windows Partition                             |
-|     -   4.2 Shrink the Windows Partition                                 |
-|     -   4.3 Edit the Partition Table                                     |
-|     -   4.4 Add an Option to Boot Linux                                  |
-|     -   4.5 Backup the SafeBoot MBR                                      |
-|     -   4.6 Install Linux                                                |
-|     -   4.7 Test Configuration                                           |
-|     -   4.8 Create a Shared TrueCrypt Volume                             |
-|                                                                          |
-| -   5 Summary                                                            |
-| -   6 Troubleshooting                                                    |
-| -   7 Additional Resources                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Why is a solution needed?
+-   2 Alternatives Considered
+-   3 The Method Proposed
+-   4 Step by Step Walkthrough
+    -   4.1 Defragment the Windows Partition
+    -   4.2 Shrink the Windows Partition
+    -   4.3 Edit the Partition Table
+    -   4.4 Add an Option to Boot Linux
+    -   4.5 Backup the SafeBoot MBR
+    -   4.6 Install Linux
+    -   4.7 Test Configuration
+    -   4.8 Create a Shared TrueCrypt Volume
+-   5 Summary
+-   6 Troubleshooting
+-   7 Additional Resources
 
 Why is a solution needed?
 -------------------------
@@ -109,7 +106,6 @@ In brief, the successful setup used by this author is as follows:
     -   Partition 2: Linux /boot
     -   Partition 3: Linux /
     -   Partition 4: TrueCrypt device for shared files
-
 -   Use Partition Wizard HomeEdition to tweak some things
 -   Use EasyBCD to add an entry for Arch Linux at boot time
 -   Install Arch using System_Encryption_with_LUKS
@@ -256,11 +252,11 @@ Now reboot and things should be as they were.
 > Install Linux
 
 With all of these steps completed, reboot into an Arch Install CD. See
-the Official_Arch_Linux_Install_Guide if you are unsure about how to
-install Arch. For an encrypted system, follow the directions covered
-aptly at System_Encryption_with_LUKS. Regardless of what method you use
-for installation, do not install the bootloader to the MBR. Once you
-finish installing and configuring files, follow these steps:
+the Installation guide if you are unsure about how to install Arch. For
+an encrypted system, follow the directions covered aptly at
+System_Encryption_with_LUKS. Regardless of what method you use for
+installation, do not install the bootloader to the MBR. Once you finish
+installing and configuring files, follow these steps:
 
 -   Mount your boot partition if it's not already mounted
 
@@ -359,19 +355,19 @@ TrueCrypt volume from Arch, formatted to FAT and then re-formatted to
 NTFS. Following using the GUI to create the volume, these steps were
 taken:
 
-    $ sudo pacman -S ntfs-3g ntfsprogs
-    $ sudo truecrypt --filesystem=none --slot=1 /dev/sda4
-    $ sudo mkfs.ntfs /dev/mapper/truecrypt1
+    # pacman -S ntfs-3g
+    # truecrypt --filesystem=none --slot=1 /dev/sda4
+    # mkfs.ntfs /dev/mapper/truecrypt1
 
 After this process completes, /dev/mapper/truecrypt1 will be properly
 formatted and can be mounted to a mountpoint for use:
 
-    $ sudo mount /dev/mapper/truecrypt1 /mnt
+    # mount /dev/mapper/truecrypt1 /mnt
 
 NTFS does not use Linux permissions and attributes, so it may be helpful
 to pass options like the following:
 
-    $ sudo mount -o ntfs-3g uid=1000,gid=100,fmask=113,noatime /dev/mapper/truecrypt1 /mnt
+    # mount -o ntfs-3g uid=1000,gid=100,fmask=113,noatime /dev/mapper/truecrypt1 /mnt
 
 See NTFS-3G for more information.
 
@@ -387,8 +383,6 @@ report exists HERE and contains a post by this author with more detail.
 Finally, reboot into Windows, install TrueCrypt, and attempt to mount
 the device. Once verified that both OSs can mount the volume, begin
 adding any files that one desires to share between OSs.
-
-  
 
 Summary
 -------
@@ -444,10 +438,17 @@ http://mbrfde.blogspot.com/2008/11/dual-boot-ubuntu-with-safeboot-fde_19.html
     -   NeoSmart EasyBCD
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dual_boot_with_Windows_when_SafeBoot_is_installed&oldid=207066"
+"https://wiki.archlinux.org/index.php?title=Dual_boot_with_Windows_when_SafeBoot_is_installed&oldid=298305"
 
 Categories:
 
 -   Security
 -   File systems
 -   Boot process
+
+-   This page was last modified on 16 February 2014, at 07:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

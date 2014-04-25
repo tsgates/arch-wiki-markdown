@@ -5,15 +5,13 @@ This page's purpose is to inform Arch users how to set up various types
 of hardware produced by Lexmark. It'll be informal so please be add what
 you feel is necessary, argue a conclusion...
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Requirements                                                       |
-| -   2 Drivers                                                            |
-| -   3 Debugging                                                          |
-| -   4 Etc.                                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Requirements
+-   2 Drivers
+-   3 Debugging
+-   4 Etc.
 
 Requirements
 ------------
@@ -123,8 +121,15 @@ Note:Does scanning software need to be added first? During scripting
 install a note described that no Sane libraries were found
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lexmark&oldid=238828"
+"https://wiki.archlinux.org/index.php?title=Lexmark&oldid=269093"
 
 Category:
 
 -   Printers
+
+-   This page was last modified on 31 July 2013, at 15:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

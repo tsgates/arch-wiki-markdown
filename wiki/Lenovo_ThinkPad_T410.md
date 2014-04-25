@@ -3,15 +3,13 @@ Lenovo ThinkPad T410
 
 The ThinkPad T410 is a laptop with little to no hardware issues.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Trackpoint                                                         |
-| -   2 Fingerprint reader                                                 |
-| -   3 Graphics                                                           |
-| -   4 Modules                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Trackpoint
+-   2 Fingerprint reader
+-   3 Graphics
+-   4 Modules
 
 Trackpoint
 ----------
@@ -81,3 +79,10 @@ Retrieved from
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 14 November 2012, at 06:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

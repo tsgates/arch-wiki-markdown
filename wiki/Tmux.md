@@ -1,13 +1,9 @@
 Tmux
 ====
 
-> Summary
+Related articles
 
-This article explains how to install and configure tmux.
-
-> Related
-
-GNU Screen
+-   GNU Screen
 
 Tmux is a "terminal multiplexer: it enables a number of terminals (or
 windows), each running a separate program, to be created, accessed, and
@@ -16,45 +12,42 @@ continue running in the background, then later reattached."
 
 Tmux is notable as a BSD-licensed alternative to GNU Screen. Although
 similar, there are many differences between the programs, as noted on
-the tmux FAQ page. Most notably, tmux is currently under active
-development, in contrast to screen, which has not had a stable release
-since August 8, 2008.
+the tmux FAQ page.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Key bindings                                                 |
-|     -   2.2 Browsing URL's                                               |
-|     -   2.3 Setting the correct term                                     |
-|     -   2.4 Other Settings                                               |
-|                                                                          |
-| -   3 Session initialization                                             |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Scrolling issues                                             |
-|     -   4.2 Shift+F6 not working in Midnight Commander                   |
-|                                                                          |
-| -   5 ICCCM Selection Integration                                        |
-| -   6 Tips and tricks                                                    |
-|     -   6.1 Start tmux in urxvt                                          |
-|     -   6.2 Start tmux on every shell login                              |
-|     -   6.3 Use tmux windows like tabs                                   |
-|     -   6.4 Clients simultaneously interacting with various windows of a |
-|         session                                                          |
-|     -   6.5 Changing the configuration with tmux started                 |
-|     -   6.6 Template script to run program in new session resp. attach   |
-|         to existing one                                                  |
-|     -   6.7 Terminal emulator window titles                              |
-|                                                                          |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Key bindings
+        -   2.1.1 Scrolling
+    -   2.2 Browsing URL's
+    -   2.3 Setting the correct term
+    -   2.4 Other Settings
+    -   2.5 Autostart with systemd
+-   3 Session initialization
+-   4 Troubleshooting
+    -   4.1 Scrolling issues
+    -   4.2 Shift+F6 not working in Midnight Commander
+-   5 ICCCM Selection Integration
+    -   5.1 Urxvt MiddleClick Solution
+-   6 Tips and tricks
+    -   6.1 Start tmux in urxvt
+    -   6.2 Start tmux on every shell login
+    -   6.3 Use tmux windows like tabs
+    -   6.4 Clients simultaneously interacting with various windows of a
+        session
+    -   6.5 Changing the configuration with tmux started
+    -   6.6 Template script to run program in new session resp. attach
+        to existing one
+    -   6.7 Terminal emulator window titles
+    -   6.8 Automatic layouting
+-   7 See also
 
 Installation
 ------------
 
-Install tmux, available in the Official Repositories.
+Install tmux, available in the official repositories.
 
 Configuration
 -------------
@@ -94,6 +87,7 @@ Ctrl-a by adding the following commands in your configuration file:
 
     unbind C-b
     set -g prefix C-a
+    bind a send-prefix
 
 Additional ways to move between windows include:
 
@@ -107,6 +101,19 @@ keybinding.
 
     Ctrl-b f <window name> (Search for window name)
     Ctrl-b w (Select from interactive list of windows)
+
+Scrolling
+
+To enter scroll mode do the either of the following:
+
+    Ctrl-b [
+
+This will put you in scroll mode and then you can use arrow keys or page
+up and page down keys.
+
+    Ctrl-b PageUp
+
+This will immediately put you in scroll mode and page up.
 
 > Browsing URL's
 
@@ -160,6 +167,41 @@ know about them. Compile the following with tic and you can use
 Set scrollback to 10000 lines with
 
     set -g history-limit 10000
+
+> Autostart with systemd
+
+There are some notable advantages to starting a tmux server at startup.
+Notably, when you start a new tmux session, having the service already
+running reduces any delays in the startup.
+
+Furthermore, any customization attached to your tmux session will be
+retained and your tmux session can be made to persist even if you have
+never logged in, if you have some reason to do that (like a heavily
+scripted tmux configuration or shared user tmux sessions).
+
+The service below starts tmux for the specified user (i.e. start with
+tmux@username.service):
+
+    /etc/systemd/system/tmux@.service
+
+    [Unit]
+    Description=Start tmux in detached session
+
+    [Service]
+    Type=forking
+    User=%I
+    ExecStart=/usr/bin/tmux new-session -s %u -d
+    ExecStop=/usr/bin/tmux kill-session -t %u
+
+    [Install]
+    WantedBy=multi-user.target
+
+Tip:You may want to add WorkingDirectory=custom_path to customize
+working directory.
+
+Alternatively, you can place this file within your systemd/User
+directory, for example ~/.config/systemd/user/tmux.service. This way the
+tmux service will start when you log in.
 
 Session initialization
 ----------------------
@@ -247,6 +289,71 @@ to this:
 
     bind C-p run "tmux save-buffer - | xclip -i -selection clipboard"
 
+If the above doesn't work for you, try using xsel:
+
+    ~/.tmux.conf
+
+    ...
+    ##CLIPBOARD selection integration
+    ##Requires prefix key before the command key
+    #Copy tmux paste buffer to CLIPBOARD
+    bind C-c run "tmux show-buffer | xsel -i -b"
+    #Copy CLIPBOARD to tmux paste buffer and paste tmux paste buffer
+    bind C-v run "tmux set-buffer -- \"$(xsel -o -b)\"; tmux paste-buffer"
+
+It seems xclip does not close STDOUT after it has read from tmux's
+buffer. As such, tmux doesn't know that the copy task has completed, and
+continues to /await xclip's termination, thereby rendering the window
+manager unresponsive. To work around this, you can execute the command
+via run-shell -b instead of run, you can redirect STDOUT of xclip to
+/dev/null, or you can use an alternative command like xsel.
+
+> Urxvt MiddleClick Solution
+
+Note:To use this, you need to enable mouse support
+
+There is an unofficial perl extension (mentioned in the official FAQ) to
+enable copying/pasting in and out of urxvt with tmux via Middle Mouse
+Clicking.
+
+First, you will need to download the perl script and place it into
+urxvts perl lib:
+
+    wget http://anti.teamidiot.de/static/nei/*/Code/urxvt/osc-xterm-clipboard
+    mv osc-xterm-clipboard /usr/lib/urxvt/perl/
+
+You will also need to enable that perl script in your .Xdefaults:
+
+    ~/.Xdefaults
+
+    ...
+    *URxvt.perl-ext-common:		osc-xterm-clipboard
+    ...
+
+Next, you want to tell tmux about the new function and enable mouse
+support (if you haven't already). The third option is optional, to
+enable scrolling and selecting inside panes with your mouse:
+
+    ~/.tmux.conf
+
+    ...
+    set-option -ga terminal-override ',rxvt-uni*:XT:Ms=\E]52;%p1%s;%p2%s\007'
+    set-window-option -g mode-mouse on
+    set-option -g mouse-select-pane on
+    ...
+
+That's it. Be sure to end all instances of tmux before trying the new
+MiddleClick functionality.
+
+While in tmux, Shift+MiddleMouseClick will paste the clipboard selection
+while just MiddleMouseClick will paste your tmux buffer. Outside of
+tmux, just use MiddleMouseClick to paste your tmux buffer and your
+standard Ctrl-c to copy.
+
+Note:The current tmux version 1.8-1 has a bug where it sometimes might
+not be possible to paste tmux buffer between different panes of tmux.
+This behaviour is fixed in the git-version (2013.10.15)
+
 Tips and tricks
 ---------------
 
@@ -262,16 +369,18 @@ with the exec command from my .ratpoisonrc file.
 Simply add the following line of bash code to your .bashrc before your
 aliases; the code for other shells is very similar:
 
-    [[ $TERM != "screen" ]] && exec tmux
+    [[ -z "$TMUX" ]] && exec tmux
 
     ~/.bashrc
 
     # If not running interactively, do not do anything
     [[ $- != *i* ]] && return
-    [[ $TERM != screen* ]] && exec tmux
+    [[ -z "$TMUX" ]] && exec tmux
 
-Note:At first you may read screen as if we were using screen and not
-tmux, but tmux also uses screen for the TERM environment variable.
+Note:This snippet ensures that tmux is not launched inside of itself
+(something tmux usually already checks for anyway). tmux sets
+TMUX to the socket it is using whenever it runs, so if TMUX isn't set or
+is length 0, we know we aren't already running tmux.
 
 And this snippet start only one session(unless you start some manually),
 on login, try attach at first, only create a session if no tmux is
@@ -482,6 +591,15 @@ For set-titles-string, #T will display user@host:~ and change
 accordingly as you connect to different hosts. You can also set many
 more options here.
 
+> Automatic layouting
+
+When creating new splits or destroying older ones the currently selected
+layout isn't applied. To fix that, add following binds which will apply
+the currently selected layout to new or remaining panes:
+
+    bind-key -n M-c kill-pane \; select-layout
+    bind-key -n M-n split-window \; select-layout
+
 See also
 --------
 
@@ -493,8 +611,8 @@ See also
 -   Tmux tutorial Part 1 & Part 2 blog posts on Hawk Host
 -   tmux.conf example with CPU bar and shortcut to search man pages and
     display them vertically
--   tmux-powerline statusbar configuration for tmux that looks like
-    vim-powerline and consist of dynamic segments.
+-   powerline provides a powerful, dynamic statusbar configuration for
+    tmux
 
 Forum threads
 
@@ -502,8 +620,15 @@ Forum threads
     Info/Tips etc. URLs I've found
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tmux&oldid=253993"
+"https://wiki.archlinux.org/index.php?title=Tmux&oldid=305990"
 
 Category:
 
 -   Terminal emulators
+
+-   This page was last modified on 20 March 2014, at 17:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

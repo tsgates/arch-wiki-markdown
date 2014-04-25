@@ -1,36 +1,30 @@
 Medion MD98300
 ==============
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Hardware information                                               |
-|     -   2.1 lspci                                                        |
-|     -   2.2 lsusb                                                        |
-|                                                                          |
-| -   3 W-LAN                                                              |
-| -   4 Soundcard                                                          |
-|     -   4.1 Compile the newest Alsa-driver                               |
-|     -   4.2 Unmute channels                                              |
-|     -   4.3 Mute your speakers and use your headset                      |
-|     -   4.4 Recording                                                    |
-|                                                                          |
-| -   5 Graphicscard                                                       |
-|     -   5.1 Nv (free driver)                                             |
-|     -   5.2 Nvidia (non-free driver)                                     |
-|         -   5.2.1 Xorg.conf                                              |
-|                                                                          |
-| -   6 Tweaks                                                             |
-|     -   6.1 Cpufrequtils                                                 |
-|     -   6.2 Disk related tweaks                                          |
-|         -   6.2.1 Disable file access time                               |
-|         -   6.2.2 Laptop mode tools                                      |
-|         -   6.2.3 Ionice                                                 |
-|                                                                          |
-|     -   6.3 Touchpad tweaks                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Hardware information
+    -   2.1 lspci
+    -   2.2 lsusb
+-   3 W-LAN
+-   4 Soundcard
+    -   4.1 Compile the newest Alsa-driver
+    -   4.2 Unmute channels
+    -   4.3 Mute your speakers and use your headset
+    -   4.4 Recording
+-   5 Graphicscard
+    -   5.1 Nv (free driver)
+    -   5.2 Nvidia (non-free driver)
+        -   5.2.1 Xorg.conf
+-   6 Tweaks
+    -   6.1 Cpufrequtils
+    -   6.2 Disk related tweaks
+        -   6.2.1 Disable file access time
+        -   6.2.2 Laptop mode tools
+        -   6.2.3 Ionice
+    -   6.3 Touchpad tweaks
 
 Introduction
 ============
@@ -362,8 +356,15 @@ Touchpad tweaks
 On this page are a few cool tweaks like circular scrolling.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Medion_MD98300&oldid=196416"
+"https://wiki.archlinux.org/index.php?title=Medion_MD98300&oldid=298147"
 
 Category:
 
 -   Laptops
+
+-   This page was last modified on 16 February 2014, at 07:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

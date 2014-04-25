@@ -1,28 +1,26 @@
 Broadcom wireless
 =================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Determine which driver you need/can use                            |
-| -   3 Getting the driver                                                 |
-|     -   3.1 brcmsmac/brcmfmac                                            |
-|     -   3.2 b43/b43legacy                                                |
-|         -   3.2.1 Loading the b43/b43legacy kernel module                |
-|                                                                          |
-|     -   3.3 broadcom-wl                                                  |
-|         -   3.3.1 Loading the wl kernel module                           |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Wi-Fi card does not work or show up after kernel upgrade     |
-|         (brcmsmac)                                                       |
-|     -   4.2 Wi-Fi card does not work/show up (broadcom-wl)               |
-|     -   4.3 Interfaces swapped (broadcom-wl)                             |
-|     -   4.4 Suppressing console messages                                 |
-|     -   4.5 Miscellaneous user notes                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Determine which driver you need/can use
+-   3 Getting the driver
+    -   3.1 brcmsmac/brcmfmac
+    -   3.2 b43/b43legacy
+        -   3.2.1 Loading the b43/b43legacy kernel module
+    -   3.3 broadcom-wl
+        -   3.3.1 Loading the wl kernel module
+-   4 Troubleshooting
+    -   4.1 Wi-Fi card does not seem to even exist
+    -   4.2 Wi-Fi card does not work or show up after kernel upgrade
+        (brcmsmac)
+    -   4.3 Wi-Fi card does not work/show up (broadcom-wl)
+    -   4.4 Interfaces swapped (broadcom-wl)
+    -   4.5 The b43 driver and Linux 3.8+
+    -   4.6 Suppressing console messages
+    -   4.7 Miscellaneous user notes
 
 Introduction
 ------------
@@ -49,9 +47,9 @@ At the time of writing, there are three choices for users with Broadcom
 Wi-Fi chipsets:
 
   Driver              Description
-  ------------------- -----------------------------------
-  brcmsmac/brcmfmac   Open source kernel driver
-  b43                 Reversed engineered kernel driver
+  ------------------- ----------------------------------
+  brcmsmac/brcmfmac   Open-source kernel driver
+  b43                 Reverse-engineered kernel driver
   broadcom-wl         Proprietary Broadcom STA driver
 
 Determine which driver you need/can use
@@ -75,13 +73,7 @@ brcmsmac for PCI cards and brcmfmac for SDIO devices.
 
 These drivers should be automatically loaded during start-up and no
 further action should be required of the user. If the driver does not
-automatically load, try the following commands:
-
-    # modprobe brcmsmac
-
-or
-
-    # modprobe brcmfmac
+load automatically, simply load it manually.
 
 Note:Since linux>=3.3.1, the brcmsmac driver depends on the bcma module;
 therefore, make sure the bcma module is not blacklisted.
@@ -120,7 +112,8 @@ the two open-source drivers support your device. Please refer to project
 b43's page for list of supported devices.
 
 For users of the broadcom-wl driver, there is a PKGBUILD available in
-the AUR named broadcom-wl.
+the AUR named broadcom-wl. There is also a newer version available
+(supporting more recent cards), see broadcom-wl-dkms.
 
 Loading the wl kernel module
 
@@ -168,6 +161,19 @@ work with blacklisting b43 and ssb.
 Troubleshooting
 ---------------
 
+> Wi-Fi card does not seem to even exist
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
+  ng]                      needs expansion.         ng]
+                           Reason: no solution      
+                           provided (Discuss)       
+  ------------------------ ------------------------ ------------------------
+
+Some users with newer cards like the Broadcom BCM43241 will experience
+an issue where lspci or lsusb will not show any trace of the card. A
+solution to this will be posted when found.
+
 > Wi-Fi card does not work or show up after kernel upgrade (brcmsmac)
 
 This is caused by the kernel using the bcma module instead of the
@@ -202,15 +208,15 @@ Check if you updated your module dependencies:
 > Interfaces swapped (broadcom-wl)
 
 Users of the broadcom-wl driver may find their Ethernet and Wi-Fi
-interfaces have been swapped. The udev page explains how to resolve
-this. Create a file named /etc/udev/rules.d/10-network.rules and bind
-the MAC address of each of your cards to a certain interface name:
+interfaces have been swapped. See Network configuration#Device_names for
+solution.
 
-    SUBSYSTEM=="net", ATTR{address}=="aa:bb:cc:dd:ee:ff", NAME="eth0"
-    SUBSYSTEM=="net", ATTR{address}=="ff:ee:dd:cc:bb:aa", NAME="eth1"
+> The b43 driver and Linux 3.8+
 
-Ensure that the interface name appears correctly in the configuration
-files that refer to it.
+The b43 driver has some major issues starting with the release of Linux
+3.8+, namely that you are unable to see / connect to some access points.
+
+Solution: Try the latest broadcom-wl driver (version 6+), see above.
 
 > Suppressing console messages
 
@@ -239,7 +245,7 @@ or something similar:
     [Service]
     Type=oneshot
     RemainAfterExit=yes
-    ExecStart=/bin/dmesg -n 3
+    ExecStart=/bin/sh -c 'dmesg -n 3'
 
     [Install]
     WantedBy=multi-user.target
@@ -249,6 +255,20 @@ Like all other systemd services, you can then enable it with
     # systemctl enable brcms_suppression
 
 > Miscellaneous user notes
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
+  g]                       is poorly written.       g]
+                           Reason: This section     
+                           must be rewritten        
+                           impersonally, very       
+                           likely as a FAQ or       
+                           Troubleshooting section  
+                           (also remove or update   
+                           out-of-date              
+                           information). See also   
+                           Help:Style. (Discuss)    
+  ------------------------ ------------------------ ------------------------
 
 -   In my Dell Inspiron Laptop, I have a Broadcom BCM4401 Ethernet card
     and a Broadcom BCM4328 wireless card. If I just remove b43, I can
@@ -291,7 +311,8 @@ Like all other systemd services, you can then enable it with
     with lib80211 and lib80211_crypt_tkip to avoid a recurring kernel
     panic.
 
---Ivanoff, 18 March 2012
+--Ivanoff, 18 March 2012 *Edit* It's all solved with the latest kernel
+versions. --Ivanoff (talk) 14:19, 14 December 2013 (UTC)
 
 -   On a similar HP DM1 netbook I found the brcmsmac driver did not work
     either. The kernel panic can also be solved by blacklisting the
@@ -324,9 +345,29 @@ Like all other systemd services, you can then enable it with
 
 --virtualeyes, 23 February 2013
 
+-   On a Lenovo G580 mounting a BCM4313 the proprietary driver module
+    kept crashing because some dependencies were unsatisfied (the same
+    problem found by Ivanoff). What worked for me was to put a file in
+    /etc/modprobe.d/ with the following content:
+
+    /etc/modprobe.d/10_wl.conf
+
+    blacklist brcmsmac
+    blacklist bcma
+    softdep wl pre: lib80211_crypt_tkip lib80211_crypt_ccmp lib80211_crypt_wep
+
+--zarel, 21 June 2013
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Broadcom_wireless&oldid=255263"
+"https://wiki.archlinux.org/index.php?title=Broadcom_wireless&oldid=304779"
 
 Category:
 
 -   Wireless Networking
+
+-   This page was last modified on 16 March 2014, at 07:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

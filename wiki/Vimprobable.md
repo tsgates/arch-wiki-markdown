@@ -1,15 +1,23 @@
 Vimprobable
 ===========
 
-  Summary
-  ------------------------------------------------------------------------------------------------------
-  A basic guide to installing and configuring Vimprobable: a lightweight, keyboard-driven web browser.
-
 Vimprobable is a WWW browser that behaves like the Vimperator plugin
 available for Mozilla Firefox. It is based on the WebKit engine (using
 GTK bindings). It is a fork of the currently abandoned vimpression.
 
-There are two versions of Vimprobable: vimprobable-git and
+Contents
+--------
+
+-   1 Install
+-   2 Configuration
+-   3 Tips
+    -   3.1 HTML5 Video
+-   4 Resources
+
+Install
+-------
+
+There are two versions of Vimprobable in the AUR: vimprobable-git and
 vimprobable2-git. Now that Vimprobable2 is at version 1.0, it is
 considered the primary branch; development of Vimprobable1 will still
 recieve bugfixes, but active development will be restricted to
@@ -19,30 +27,6 @@ The first version can only be customised by editing config.h before
 compilation. It is pretty stable and very usable. Version 2, while also
 stable, is under more active development - it aims at allowing more
 customisation, for example through :set and :map commands.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install                                                            |
-| -   2 Configuration                                                      |
-| -   3 Tips                                                               |
-|     -   3.1 HTML5 Video                                                  |
-|                                                                          |
-| -   4 Resources                                                          |
-+--------------------------------------------------------------------------+
-
-Install
--------
-
-Both versions of Vimprobable are available in the AUR.
-
-You can install either version of Vimprobable with an AUR helper, or
-elect to build it yourself. In any event, the basic programming tools
-present in base-devel are needed in order to compile and build a package
-for both versions of Vimprobable.
-
-    # pacman -S base-devel
 
 Configuration
 -------------
@@ -119,12 +103,19 @@ Vimprobable:
 
      exec vimprobable2 -e $(</tmp/tabbed.xid) "$1"
 
+With this script you can create a tabbed session if there is not alredy
+a window with tabbed, and then launch Vimprobable within it.
+
+    #!/usr/bin/env bash
+    [[ -z $((xprop -id $(</tmp/tabbed.xid)) 2>/dev/null) ]] && tabbed -d > /tmp/tabbed.xid 
+    exec vimprobable2 -e $(</tmp/tabbed.xid) $( [[  "$1"  ]] && echo "$1") &
+
 > HTML5 Video
 
 To get Vimprobable to play HTML5 Video, you will need to ensure that all
-of the gstreamer plugins are installed:
-
-    # pacman -S gstreamer0.10 gstreamer0.10-bad gstreamer0.10-base gstreamer0.10-base-plugins gstreamer0.10-ffmpeg gstreamer0.10-good
+of the gstreamer plugins are installed: gstreamer0.10 gstreamer0.10-bad
+gstreamer0.10-base gstreamer0.10-base-plugins gstreamer0.10-ffmpeg
+gstreamer0.10-good
 
 See this thread for details:
 https://bbs.archlinux.org/viewtopic.php?id=94997
@@ -137,8 +128,15 @@ Resources
 -   A screencast introduction to Vimprobable
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Vimprobable&oldid=238925"
+"https://wiki.archlinux.org/index.php?title=Vimprobable&oldid=296043"
 
 Category:
 
 -   Web Browser
+
+-   This page was last modified on 3 February 2014, at 12:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

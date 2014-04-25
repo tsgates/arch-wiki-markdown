@@ -12,38 +12,35 @@ Additional information and perspectives on free and open source software
 licenses may be found on the following pages:
 
 -   Wikipedia - Free software license
--   Software Freedom Law Center - A Legal Issues Primer for Open Source
-    and Free Software Projects
+-   - A Legal Issues Primer for Open Source and Free Software Projects
 -   GNU Project - Various Licenses and Comments about Them
 -   Debian - License information
 -   Open Source Initiative - Licenses by Name
 
 See also: Category:Licenses; Arch Packaging Standards#Licenses
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Apache                                                             |
-| -   2 CCPL - Creative Commons Licenses                                   |
-| -   3 CDDL - Common Development and Distribution License                 |
-| -   4 CPL - Common Public License                                        |
-| -   5 EPL - Eclipse Public License                                       |
-| -   6 FDL1.2 - GNU Free Documentation License, Version 1.2               |
-| -   7 FDL1.3 - GNU Free Documentation License, Version 1.3               |
-| -   8 GPL2 - GNU General Public License, Version 2.0                     |
-| -   9 GPL3 - GNU General Public License, Version 3.0                     |
-| -   10 LGPL2.1 - GNU Lesser General Public License, Version 2.1          |
-| -   11 LGPL3 - GNU Lesser General Public License, Version 3.0            |
-| -   12 LPPL - Latex Project Public License                               |
-| -   13 MPL - Mozilla Public License                                      |
-| -   14 PHP - PHP License                                                 |
-| -   15 PSF - Python Software Foundation License                          |
-| -   16 PerlArtistic - The Artitistic License                             |
-| -   17 RALINK - Ralink Technology Corporation Firmware License           |
-| -   18 RUBY - Ruby Programming Language License                          |
-| -   19 ZPL - Zope Public License                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Apache
+-   2 CCPL - Creative Commons Licenses
+-   3 CDDL - Common Development and Distribution License
+-   4 CPL - Common Public License
+-   5 EPL - Eclipse Public License
+-   6 FDL1.2 - GNU Free Documentation License, Version 1.2
+-   7 FDL1.3 - GNU Free Documentation License, Version 1.3
+-   8 GPL2 - GNU General Public License, Version 2.0
+-   9 GPL3 - GNU General Public License, Version 3.0
+-   10 LGPL2.1 - GNU Lesser General Public License, Version 2.1
+-   11 LGPL3 - GNU Lesser General Public License, Version 3.0
+-   12 LPPL - Latex Project Public License
+-   13 MPL - Mozilla Public License
+-   14 PHP - PHP License
+-   15 PSF - Python Software Foundation License
+-   16 PerlArtistic - The Artistic License
+-   17 RALINK - Ralink Technology Corporation Firmware License
+-   18 RUBY - Ruby Programming Language License
+-   19 ZPL - Zope Public License
 
 > Apache
 
@@ -120,7 +117,7 @@ See also: Category:Licenses; Arch Packaging Standards#Licenses
 -   Wikipedia - Python Software Foundation License
 -   Text of Python Software Foundation Licenses
 
-> PerlArtistic - The Artitistic License
+> PerlArtistic - The Artistic License
 
 -   Wikipedia - Artistic License
 -   Text of the Artistic License, Version 1.0
@@ -141,8 +138,15 @@ See also: Category:Licenses; Arch Packaging Standards#Licenses
 -   Text of Zope Public License, Version 2.1
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Licenses&oldid=196076"
+"https://wiki.archlinux.org/index.php?title=Licenses&oldid=304664"
 
 Category:
 
 -   Licenses
+
+-   This page was last modified on 15 March 2014, at 23:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

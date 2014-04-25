@@ -7,20 +7,18 @@ Bottle is a fast, simple and lightweight WSGI micro web-framework for
 Python. It is distributed as a single file module and has no
 dependencies other than the Python Standard Library.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Features                                                           |
-| -   2 Installing Bottle                                                  |
-| -   3 Hello World                                                        |
-| -   4 FastCGI                                                            |
-| -   5 Reloading                                                          |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 My application works, but only locally                       |
-|     -   6.2 Bottle isn't automatically reloading when I make changes to  |
-|         one of my files!                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Features
+-   2 Installing Bottle
+-   3 Hello World
+-   4 FastCGI
+-   5 Reloading
+-   6 Troubleshooting
+    -   6.1 My application works, but only locally
+    -   6.2 Bottle isn't automatically reloading when I make changes to
+        one of my files!
 
 Features
 --------
@@ -144,8 +142,15 @@ will work but not:
         return myapp.init(name)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Bottle&oldid=225562"
+"https://wiki.archlinux.org/index.php?title=Bottle&oldid=270418"
 
 Category:
 
--   Networking
+-   Web Server
+
+-   This page was last modified on 8 August 2013, at 23:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

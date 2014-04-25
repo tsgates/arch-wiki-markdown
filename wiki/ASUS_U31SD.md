@@ -1,25 +1,21 @@
 ASUS U31SD
 ==========
 
-  
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Specification                                               |
-| -   2 What DOESN'T work out of the box                                   |
-| -   3 What Works out of the Box / With default configuration             |
-| -   4 Not Tested                                                         |
-| -   5 Input / Touchpad                                                   |
-| -   6 Bluetooth                                                          |
-| -   7 Nvidia GPU (Optimus)                                               |
-| -   8 Suspend / Hibernate                                                |
-| -   9 Fn Multimedia Keys                                                 |
-| -   10 Optimize Power Consumption                                        |
-+--------------------------------------------------------------------------+
+-   1 System specification
+-   2 What does not work out of the box
+-   3 What works out of the box / with default configuration
+-   4 Not tested
+-   5 Input/touchpad
+-   6 Bluetooth
+-   7 Nvidia GPU (Optimus)
+-   8 Suspend/hibernate
+-   9 Fn multimedia keys
+-   10 Optimize power consumption
 
-System Specification
+System specification
 --------------------
 
 -   CPU: Intel(R) Core(TM) i3-2330M CPU @ 2.20GHz (Sandy Bridge)
@@ -40,14 +36,14 @@ System Specification
 Note:This page was written for the i3 model but I'm sure the i5 model
 will not be much different
 
-What DOESN'T work out of the box
---------------------------------
+What does not work out of the box
+---------------------------------
 
 -   Sleep/Hibernate (see below)
 -   Nvidia GPU (Switchable GPU, see below)
 -   Fn Volume Keys (see below)
 
-What Works out of the Box / With default configuration
+What works out of the box / with default configuration
 ------------------------------------------------------
 
 -   CPU (all cores detected)
@@ -60,13 +56,13 @@ What Works out of the Box / With default configuration
 -   Hotkeys (Brightness / Monitor on-off / wifi / sleep)
 -   USB
 
-Not Tested
+Not tested
 ----------
 
 -   HDMI
 
-Input / Touchpad
-----------------
+Input/touchpad
+--------------
 
 The keyboard and touchpad work more or less without problems using the
 xf86-input-keyboard and xf86-input-synaptics modules, respectively.
@@ -85,22 +81,15 @@ speakers not tested. (*users feel free to add to this)
 Nvidia GPU (Optimus)
 --------------------
 
-Note:Your best bet for this part is to install 'yaourt' from the AUR to
+Tip:Your best bet for this part is to install yaourt from the AUR to
 ease in installing the following packages
 
-Read the Bumblebee/optimus page. I will only outline a few things...
-
-You need to install the packages (and all of their dependencies) :
-
--   bumblebee
--   nvidia-bumblebee
--   nvidia-utils-bumblebee
--   bbswitch
+You need to install the packages bumblebee and bbswitch.
 
 In short, Bumblebee allows you to use the switchable GPU and use it only
 when you want to via the 'optirun' application.
 
-Be sure to add 'bumblebeed' to your DAEMONS array in rc.conf.
+Be sure enable bumblebeed Systemd service to start Bumblebee at boot.
 
 Once you reboot, you should start seeing huge power saving.
 
@@ -113,22 +102,22 @@ Should return nothing, this means your GPU is off.
 You can check your GPU by running glxgears with and without the
 'optirun' prefix and comparing the Frames Per Second.
 
-Suspend / Hibernate
--------------------
+Read the Bumblebee page for further informations.
+
+Suspend/hibernate
+-----------------
 
 The USB unbind hook is no longer necessary as of Linux 3.5.
 
-Note: ACPI by default doesn't call pm-suspend, if we want to customize
+Note:ACPI by default doesn't call pm-suspend, if we want to customize
 the sleep process, we need pm-suspend
 
 If you want sleep your machine when you close your lid, you need to edit
-ACPI handler script:
-
-    $ nano /etc/acpi/handler.sh
+ACPI handler script /etc/acpi/handler.sh
 
 Change line 20, to this:
 
-     SLPB|SBTN)    pm-suspend ;;
+    SLPB|SBTN)    pm-suspend ;;
 
 And Towards the bottom, make lines 58 and 59 look line like this:
 
@@ -138,11 +127,11 @@ And Towards the bottom, make lines 58 and 59 look line like this:
 So now you can use the hotkey (F1) or close your lid and your laptop
 will sleep.
 
-Fn Multimedia Keys
+Fn multimedia keys
 ------------------
 
 As with most Asus laptops/netbooks, this laptop sends its Multimedia
-events via ACPI. Using `acpi_listen`, I was able to discover the button
+events via ACPI. Using acpi_listen, I was able to discover the button
 commands the buttons sent to acpi. Add the following to your
 /etc/acpi/handler.sh file (make sure you add this after the ;; in the
 button/lid section):
@@ -160,16 +149,23 @@ button/lid section):
 You can mess with these values to move your volume at different
 intervals, 5 seemed to work well for me.
 
-Optimize Power Consumption
+Optimize power consumption
 --------------------------
 
 Add this to the kernel line of your bootloader[1]:
 
-    pcie_aspm=force i915.i915_enable_rc6=1 
+    pcie_aspm=force i915.i915_enable_rc6=1
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_U31SD&oldid=242531"
+"https://wiki.archlinux.org/index.php?title=ASUS_U31SD&oldid=273697"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 1 September 2013, at 11:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

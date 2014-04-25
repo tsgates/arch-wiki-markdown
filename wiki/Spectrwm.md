@@ -1,40 +1,35 @@
 spectrwm
 ========
 
-From spectrwm's website:
+From spectrwm website:
 
-  “spectrwm is a small dynamic tiling window manager for Xorg. It tries
-  to stay out of the way so that valuable screen real estate can be used
-  for much more important stuff. It has sane defaults and does not
-  require one to learn a language to do any configuration. It was
-  written by hackers for hackers and it strives to be small, compact and
-  fast.”
+spectrwm is a small dynamic tiling window manager for Xorg. It tries to
+stay out of the way so that valuable screen real estate can be used for
+much more important stuff. It has sane defaults and does not require one
+to learn a language to do any configuration. It was written by hackers
+for hackers and it strives to be small, compact and fast.
 
 Spectrwm is written in C and configured with a text configuration file.
 It was previously known as scrotwm.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Starting spectrwm                                                  |
-|     -   3.1 Starting spectrwm with XDM                                   |
-|     -   3.2 Starting spectrwm with KDM                                   |
-|                                                                          |
-| -   4 Multiple monitors (Xinerama)                                       |
-| -   5 Statusbar configuration                                            |
-|     -   5.1 Bash scripts                                                 |
-|     -   5.2 Conky                                                        |
-|                                                                          |
-| -   6 Alternative status bar                                             |
-| -   7 Screenshots                                                        |
-| -   8 Screen locking                                                     |
-| -   9 Using spectrwm                                                     |
-| -   10 Troubleshooting                                                   |
-| -   11 See also                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Starting spectrwm
+    -   3.1 Starting spectrwm with XDM
+    -   3.2 Starting spectrwm with KDM
+-   4 Multiple monitors (Xinerama)
+-   5 Statusbar configuration
+    -   5.1 Bash scripts
+    -   5.2 Conky
+-   6 Alternative status bar
+-   7 Screenshots
+-   8 Screen locking
+-   9 Using spectrwm
+-   10 Troubleshooting
+-   11 See also
 
 Installation
 ------------
@@ -90,14 +85,14 @@ For XDM, create ~/.xsession with the following contents:
 
 Make sure ~/.xsession is executable:
 
-    chmod a+x ~/.xsession
+    $ chmod a+x ~/.xsession
 
-Note: if you do not create ~/.xsession then ~/.xinitrc will be used, but
+Note:If you do not create ~/.xsession, then ~/.xinitrc will be used, but
 you might want different settings depending on if you use startx or XDM.
 Remember to make ~/.xinitrc executable, or XDM won't start, if you use
 that method.
 
-For a nice simple Arch themed xdm, try xdm-arch-theme.
+Tip:For a nice simple Arch themed xdm, try xdm-arch-theme.
 
 > Starting spectrwm with KDM
 
@@ -111,26 +106,26 @@ xscreensaver and set the background image, copy
 and then edit it, for example like this:
 
     case $session in
-     "")
-       exec xmessage -center -buttons OK:0 -default OK "Sorry, $DESKTOP_SESSION is no valid session."
-       ;;
-     failsafe)
-       exec xterm -geometry 80x24-0-0
-       ;;
-     custom)
-       exec $HOME/.xsession
-       ;;
-     default)
-       exec /usr/bin/startkde
-       ;;
-     /usr/bin/spectrwm|otherwm)
-       feh --bg-scale /usr/share/wallpapers/Plasmalicious/contents/images/1280x1024.jpg
-       xscreensaver -no-splash &
-       eval exec "$session"
-       ;;
-     *)
-       eval exec "$session"
-       ;;
+      "")
+        exec xmessage -center -buttons OK:0 -default OK "Sorry, $DESKTOP_SESSION is no valid session."
+        ;;
+      failsafe)
+        exec xterm -geometry 80x24-0-0
+        ;;
+      custom)
+        exec $HOME/.xsession
+        ;;
+      default)
+        exec /usr/bin/startkde
+        ;;
+      '''/usr/bin/spectrwm'''|otherwm''')'''
+        '''feh --bg-scale /usr/share/wallpapers/Plasmalicious/contents/images/1280x1024.jpg'''
+        '''xscreensaver -no-splash &'''
+        '''eval exec "$session"'''
+        ''';;'''
+      *)
+        eval exec "$session"
+        ;;
     esac
 
 Multiple monitors (Xinerama)
@@ -164,7 +159,7 @@ $PATH in your ~/.bashrc file.
     SLEEP_SEC=5  # set bar_delay = 5 in /etc/spectrwm.conf
     COUNT=0
     #loops forever outputting a line every SLEEP_SEC secs
-    while :; do
+    while :; do
     	let COUNT=$COUNT+1
             echo -e "         Hello World! $COUNT"
             sleep $SLEEP_SEC
@@ -175,12 +170,9 @@ see the output in the status bar. If you have problems at this stage,
 make sure the script is executable, test it from the command line, and
 check the path/filename you specified in bar_action.
 
-Next replace baraction.sh with the more useful file below. Note it needs
-these packages, and whatever you need for WiFi:
-
-    pacman -S bc lm_sensors
-
-You should configure lm_sensors.
+Next replace baraction.sh with the more useful file below. You need to
+have bc and lm_sensors installed, and whatever you need for WiFi. You
+should configure lm_sensors.
 
 Note:You may need to modify this script slightly for your computer. You
 may have different units in the acpi battery info, different temperature
@@ -191,7 +183,7 @@ output from sensors or a different wifi interface than wlan0.
 
     SLEEP_SEC=5
     #loops forever outputting a line every SLEEP_SEC secs
-    while :; do
+    while :; do
 
      	eval $(cat /proc/acpi/battery/BAT0/state | awk '/charging state/ {printf "BAT_CHGSTATE=%s;", $3}; /remaining capacity/ {printf "BAT_REMNG=%s;",$3}; /present rate/ {printf "BAT_RATE=%s;",$3};' -)
      	eval $(cat /proc/acpi/battery/BAT0/info | awk '/present/ {printf "BAT_PRESENT=%s;", $2}; /last full capacity/ {printf "BAT_LASTFULL=%s;",$4};' -)
@@ -262,13 +254,13 @@ output from sensors or a different wifi interface than wlan0.
 
     	echo -e "$POWER_STR  $TEMP_STR  $CPUFREQ_STR  $CPULOAD_STR  $MEM_STR  $WLAN_STR"
             #alternatively if you prefer a different date format
-            #DATE_STR=`date +"%H:%M %a %d %b"`
+            #DATE_STR=`date +"%H:%M %a %d %b"`
     	#echo -e "$DATE_STR   $POWER_STR  $TEMP_STR  $CPUFREQ_STR  $CPULOAD_STR  $MEM_STR  $WLAN_STR"
 
     	sleep $SLEEP_SEC
     done
 
-Here are some other ideas for status bar items : ethernet, email
+Here are some other ideas for status bar items: ethernet, email
 notification, disk space, mounts, now playing (mpc current).
 
 The baraction.sh script may also show the date, in which case the
@@ -342,7 +334,7 @@ spectrwm package to a location in your $PATH, for example:
 Screen locking
 --------------
 
-By default the lock keybinding (Mod+Shift+Delete) executes xlock
+By default the lock keybinding Mod+Shift+Delete executes xlock
 
     program[lock]      = xlock
 
@@ -393,8 +385,8 @@ Some of the most useful key bindings:
 
 Advanced stacking
 
-    Meta+,/. : increase/decrease the number of windows in master area (default is 1)
-    Meta+Shift+,/. : increase/decrease number of columns(rows) in stacking area in vertical(horizontal) mode (default is 1)
+    Meta+,/. : increase/decrease the number of windows in master area (default is 1)
+    Meta+Shift+,/. : increase/decrease number of columns(rows) in stacking area in vertical(horizontal) mode (default is 1)
     Meta+Shift+j/k: swap window position with next/previous window
     Meta+t: float<->tile toggle
 
@@ -417,9 +409,9 @@ Troubleshooting
 ---------------
 
 -   Q: Help, I just logged in and all I see is a blank screen.
--   A: Press Shift + WindowsKey + Return and an xterm will start. Then
-    read the manual (man spectrwm) to see the other default key
-    bindings. Also check your configuration file.
+-   A: Press Shift+WinKey+Return and an xterm will start. See
+    man spectrwm for other default key bindings. Also check your
+    configuration file.
 
 See also
 --------
@@ -433,8 +425,15 @@ See also
 -   The scrotwm thread
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Spectrwm&oldid=230175"
+"https://wiki.archlinux.org/index.php?title=Spectrwm&oldid=273574"
 
 Category:
 
 -   Dynamic WMs
+
+-   This page was last modified on 1 September 2013, at 10:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

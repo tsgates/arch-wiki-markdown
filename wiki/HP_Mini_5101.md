@@ -1,28 +1,24 @@
 HP Mini 5101
 ============
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Video                                                              |
-| -   2 Audio                                                              |
-| -   3 Network                                                            |
-|     -   3.1 Wireless Driver (Broadcom)                                   |
-|         -   3.1.1 Driver Overview                                        |
-|                                                                          |
-| -   4 Bluetooth                                                          |
-| -   5 Touchpad                                                           |
-| -   6 Webcam                                                             |
-| -   7 ACPI                                                               |
-|     -   7.1 Suspend on Lid                                               |
-|     -   7.2 Power Button                                                 |
-|     -   7.3 Hotkeys                                                      |
-|         -   7.3.1 Display toggle                                         |
-|         -   7.3.2 Mute, browser button, volume down, etc...              |
-|                                                                          |
-| -   8 Hard disk shock protection                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Video
+-   2 Audio
+-   3 Network
+    -   3.1 Wireless Driver (Broadcom)
+        -   3.1.1 Driver Overview
+-   4 Bluetooth
+-   5 Touchpad
+-   6 Webcam
+-   7 ACPI
+    -   7.1 Suspend on Lid
+    -   7.2 Power Button
+    -   7.3 Hotkeys
+        -   7.3.1 Display toggle
+        -   7.3.2 Mute, browser button, volume down, etc...
+-   8 Hard disk shock protection
 
 Video
 -----
@@ -155,3 +151,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 6 December 2012, at 00:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -3,17 +3,16 @@ Touchatag RFID Reader
 
 Touchatag is a RFID Reader
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About Touchatag                                                    |
-| -   2 Check hardware version                                             |
-| -   3 Install Touchatag                                                  |
-| -   4 Test Touchatag                                                     |
-| -   5 Optional: Test tags                                                |
-| -   6 Install tagEventor                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 About Touchatag
+-   2 Check hardware version
+-   3 Disable pn533 and nfc driver in kernel
+-   4 Install Touchatag
+-   5 Test Touchatag
+-   6 Optional: Test tags
+-   7 Install tagEventor
 
 About Touchatag
 ---------------
@@ -21,7 +20,7 @@ About Touchatag
 Touchatag is a RFID tag reader from Touchatag. It is a cheap set
 consisting of an ACR122U USB tag reader and MiFare Ultralight RFID tags.
 
-It is available here or for Europe here.
+It is available here.
 
 Remember: Always put a tag on the reader, otherwise you might encounter
 problems!
@@ -41,6 +40,16 @@ lsusb -v shows also the firmware version bcdDevice:
 
 The Version this howto is about is the above ACS ACR122U PICC firmware
 1.0.
+
+Disable pn533 and nfc driver in kernel
+--------------------------------------
+
+When the ACR122U plug in, kernel(>3.5) will automatic load the pn533
+driver. With the pn533 driver, pcscd will report "Can't claim interface"
+error. use below command to disable pn533 and nfc driver in kernel.
+
+    # echo "install nfc /bin/false" >> /etc/modprobe.d/blacklist.conf
+    # echo "install pn533 /bin/false" >> /etc/modprobe.d/blacklist.conf
 
 Install Touchatag
 -----------------
@@ -74,6 +83,8 @@ The libnfc README suggests to do this:
 
     Warning: if you use ACS CCID drivers (acsccid), configuration file is located in something like: 
     /usr/lib/pcsc/drivers/ifd-acsccid.bundle/Contents/Info.plist
+    or
+    /usr/lib/pcsc/drivers/ifd-ccid.bundle/Contents/Info.plist
 
 Optional: Test tags
 -------------------
@@ -82,7 +93,7 @@ Optional: Test tags
 
 Put a tag on the reader and try to scan your Touchatag:
 
-    # /etc/rc.d/pcscd start
+    # sudo systemctl start pcscd
     # pcsc_scan
 
 You should get something like this:
@@ -113,8 +124,6 @@ You should get something like this:
     3B BE 95 00 00 41 03 00 00 00 00 00 00 00 00 00 02 90 00
             touchatag SAM card
 
-  
-
 Install tagEventor
 ------------------
 
@@ -131,8 +140,15 @@ The scripts are located in /etc/gtagEventor. Read the tagEventor
 documentation on how to use them.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Touchatag_RFID_Reader&oldid=215777"
+"https://wiki.archlinux.org/index.php?title=Touchatag_RFID_Reader&oldid=292195"
 
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 10 January 2014, at 11:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

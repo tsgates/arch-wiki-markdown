@@ -1,16 +1,14 @@
 Gapless Audio CD Creation from MP3s
 ===================================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Setup                                                              |
-| -   3 Decode the MP3s                                                    |
-| -   4 Create a Table of Contents file                                    |
-| -   5 Burn                                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Setup
+-   3 Decode the MP3s
+-   4 Create a Table of Contents file
+-   5 Burn
 
 Introduction
 ------------
@@ -93,3 +91,10 @@ Retrieved from
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 13 June 2012, at 08:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

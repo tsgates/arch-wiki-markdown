@@ -7,24 +7,22 @@ compression advantage this will provide, especially once the files are
 larger than 100MB. The advantage can be chosen to be either size (much
 smaller than bzip2) or speed (much faster than bzip2).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Lrzip                                                   |
-| -   2 Usage                                                              |
-|     -   2.1 Compression                                                  |
-|     -   2.2 Decompression                                                |
-|                                                                          |
-| -   3 Details                                                            |
-| -   4 Benchmarks                                                         |
-| -   5 FAQ                                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Installing Lrzip
-----------------
+-   1 Installation
+-   2 Usage
+    -   2.1 Compression
+    -   2.2 Decompression
+-   3 Details
+-   4 Benchmarks
+-   5 FAQ
+-   6 Repository and issue tracker
 
-Install lrzip, available in the Official Repositories.
+Installation
+------------
+
+Install lrzip, available in the official repositories.
 
 Usage
 -----
@@ -58,11 +56,11 @@ LZO.
 
 > Decompression
 
-To completely extract an archived directory.
+To completely extract an archived directory:
 
     $ lrzuntar foo.tar.lrz
 
-To decompress "bar.lrz to "bar".
+To decompress "bar.lrz to "bar":
 
     $ lrunzip bar.lrz
 
@@ -98,11 +96,12 @@ The major disadvantages are:
 
 1.  The main lrzip application only works on single files so it requires
     the lrztar wrapper to fake a complete archiver.
-2.  It requires a lot of memory to get the best performance out of, and
-    is not really usable (for compression) with less than 256MB.
-    Decompression requires less ram and works on smaller ram machines.
-    Sometimes swap may need to be enabled on these lower ram machines
-    for the operating system to be happy.
+2.  It requires a lot of memory to get the best performance out of (as
+    much memory as the size of the data to compress; but see the sliding
+    mmap below), and is not really usable (for compression) with less
+    than 256MB. Decompression requires less ram and works on smaller ram
+    machines. Sometimes swap may need to be enabled on these lower ram
+    machines for the operating system to be happy.
 3.  STDIN/STDOUT works fine on both compression and decompression, but
     larger files compressed in this manner will end up being less
     efficiently compressed.
@@ -128,9 +127,21 @@ FAQ
 
 See the README included with the source package.
 
+Repository and issue tracker
+----------------------------
+
+On https://github.com/ckolivas/lrzip
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lrzip&oldid=207064"
+"https://wiki.archlinux.org/index.php?title=Lrzip&oldid=301000"
 
 Category:
 
 -   Data compression and archiving
+
+-   This page was last modified on 23 February 2014, at 21:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -9,10 +9,9 @@ database and stream for free. The service was recently introduced to the
 United States after previously being exclusive to Europe. The Linux
 client is only officially packaged for Debian and Fedora distributions,
 but is also available in the AUR: spotify. Officially, they recommend
-that Linux users run the windows client under Wine. The only catch to
-using this application as a free user is the inability to go mobile
-without a premium subscription. There are also the occasional voice ads
-in between songs for users who do not wish to subscribe.
+that Linux users run the windows client under Wine. There are also the
+occasional voice ads in between songs for users who do not wish to
+subscribe.
 
 Spotify also offers free users the ability to create playlist which can
 be shuffled, and set to repeat tracks. Content provided by Spotify comes
@@ -20,23 +19,29 @@ in explicit versions as well as censored.
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing The Client                                              |
-|     -   1.1 Installation of Linux Client                                 |
-|     -   1.2 Installation of Windows Client using Wine                    |
-|         -   1.2.1 Install Wine                                           |
-|         -   1.2.2 Configure Wine                                         |
-|         -   1.2.3 Run Installer                                          |
-|                                                                          |
-| -   2 Global Media Hotkeys                                               |
-|     -   2.1 Using a bash-script and xdotool                              |
-|     -   2.2 D-Bus                                                        |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing The Client
+    -   1.1 Installation of Linux Client
+    -   1.2 Installation of Windows Client using Wine
+        -   1.2.1 Install Wine
+        -   1.2.2 Configure Wine
+        -   1.2.3 Run Installer
+-   2 Global Media Hotkeys
+    -   2.1 Linux Client
+        -   2.1.1 Using a bash-script and xdotool
+        -   2.1.2 D-Bus
+    -   2.2 Windows-Client (via wine)
+-   3 Tips & Tricks
+    -   3.1 Mute Commercials
+    -   3.2 Remote Control
+        -   3.2.1 Send Commands via SSH
+        -   3.2.2 Grab the Spotify Window via SSH
+-   4 Troubleshooting
+    -   4.1 Broken radio
+    -   4.2 Spotify won't play local files
+-   5 See also
 
 Installing The Client
 ---------------------
@@ -134,7 +139,9 @@ box they only work inside Spotify. We can use for example xbindkeys to
 catch the global media keypresses, and then forward them to Spotify
 using one of the methods below.
 
-> Using a bash-script and xdotool
+> Linux Client
+
+Using a bash-script and xdotool
 
 With the help of xdotool it is possible to send your hotkeys to the
 application. The following script is an example of how to control
@@ -185,7 +192,7 @@ Openbox#Configuration for help):
       </action>
     </keybind>
 
-> D-Bus
+D-Bus
 
 An alternative to the above is D-Bus, which should be available by
 default as it is a dependency of systemd. With D-Bus we have a
@@ -195,7 +202,8 @@ Spotify. To play or pause the current song in Spotify:
     $ dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 
 In order to bind this and the other commands to the media keys you need
-to edit your .xbindkeysrc and add the following lines:
+to install Xbindkeys and edit your .xbindkeysrc and add the following
+lines:
 
     # Play/Pause
     "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
@@ -213,6 +221,97 @@ to edit your .xbindkeysrc and add the following lines:
     "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
     XF86AudioStop
 
+> Windows-Client (via wine)
+
+If you prefer the wine-version of Spotify, you can use spotifycmd to
+send actions to Spotify.
+
+Tips & Tricks
+-------------
+
+> Mute Commercials
+
+With blockify you can mute commercials (works on both the Wine version
+and the native Linux client). It is available in the AUR as blockify.
+
+> Remote Control
+
+Send Commands via SSH
+
+If you set up ssh on the server, you can send controls from a client to
+a remote Spotify instance with
+
+    $ ssh user@host 'yourcommand'
+
+where yourcommand can be spotifycmd that you installed on the server or
+a dbus script for the linux version, as described above.
+
+Grab the Spotify Window via SSH
+
+Aside from grabbing the whole desktop with TeamViewer or VNC to remotely
+control your server, you can also only grab the Spotify Window from the
+server to your client.
+
+To do that, you need to configure sshd on your server and install x11vnc
+on both server and client as well as tigervnc on the client. Then you
+can use these scripts to grab either the complete dektop or only the
+Spotify window, which essentially gets you GUI client-like behavior as
+with MPD.
+
+    #!/bin/bash
+    # vncget.sh
+
+    if [[ $1 == all ]];then
+      ssh -f -t -L 5900:localhost:5900 user@host "x11vnc -q -display :0 -auth .Xauthority"
+    else
+      ssh -f -t -L 5900:localhost:5900 user@host ".bin/vncgetspotify.sh"
+    fi
+     
+    for i in {1..4}; do
+      sleep 2
+      if vncviewer localhost:0; then break; fi
+    done
+
+    #!/bin/bash
+    # vncgetspotify.sh
+
+    export DISPLAY=:0
+
+    id=$(wmctrl -lx | awk '/spotify.exe.Wine/ {print $1}')
+    [[ -z $id ]] && id=$(wmctrl -lx | awk '/spotify.Spotify/ {print $1}')
+
+    x11vnc -sid $id -display :0 -auth .Xauthority
+
+You will need to copy the second script to ~/.bin/vncgetspotify.sh on
+the server and the first script to any place on your client.
+
+Finally, to grab the spotify window, run on the client:
+
+    $ sh vncget.sh
+
+or, for the whole desktop:
+
+    $ sh vncget.sh all
+
+  
+
+Troubleshooting
+---------------
+
+> Broken radio
+
+Spotify bug report concerning mixed locales
+
+If your radio page is broken (stuck when starting and unsresponsive to
+input) you might be using a custom locale. Try setting the environment
+variable LC_NUMERIC to en_US.utf8 before starting Spotify.
+
+  
+
+> Spotify won't play local files
+
+Try installing ffmpeg-compat, as per this forum discussion.
+
 See also
 --------
 
@@ -221,9 +320,16 @@ See also
 -   http://www.spotify.com/int/download/previews/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Spotify&oldid=254146"
+"https://wiki.archlinux.org/index.php?title=Spotify&oldid=305901"
 
 Categories:
 
 -   Audio/Video
 -   Wine
+
+-   This page was last modified on 20 March 2014, at 16:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

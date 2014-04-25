@@ -9,44 +9,36 @@ See also: DeveloperWiki:Package Signing Proposal for Pacman
 
 Pacman 4 uses GnuPG to implement package signing.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Usage                                                              |
-|     -   1.1 Arch implementation                                          |
-|     -   1.2 Signature checking                                           |
-|                                                                          |
-| -   2 Course of action for development                                   |
-|     -   2.1 Documentation                                                |
-|     -   2.2 Additional Features                                          |
-|         -   2.2.1 Package validation without root privileges             |
-|         -   2.2.2 Timeline for increasing security                       |
-|         -   2.2.3 Allan's TODO list                                      |
-|                                                                          |
-| -   3 How signing is implemented in other distributions                  |
-|     -   3.1 Frugalware                                                   |
-|     -   3.2 Gnuffy                                                       |
-|     -   3.3 Debian                                                       |
-|         -   3.3.1 Binary packages (.deb)                                 |
-|         -   3.3.2 Source packages                                        |
-|                                                                          |
-|     -   3.4 Gentoo                                                       |
-|     -   3.5 Red Hat/Fedora/CentOS                                        |
-|         -   3.5.1 Pros                                                   |
-|         -   3.5.2 Cons                                                   |
-|                                                                          |
-|     -   3.6 SUSE                                                         |
-|     -   3.7 Slackware                                                    |
-|     -   3.8 Ubuntu                                                       |
-|         -   3.8.1 Cons                                                   |
-|                                                                          |
-| -   4 Links                                                              |
-|     -   4.1 Bug reports                                                  |
-|     -   4.2 Blogs                                                        |
-|     -   4.3 Mailing list discussions and patches                         |
-|     -   4.4 Forum discussions                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Usage
+    -   1.1 Arch implementation
+    -   1.2 Signature checking
+-   2 Course of action for development
+    -   2.1 Documentation
+    -   2.2 Additional Features
+        -   2.2.1 Package validation without root privileges
+        -   2.2.2 Timeline for increasing security
+-   3 How signing is implemented in other distributions
+    -   3.1 Frugalware
+    -   3.2 Gnuffy
+    -   3.3 Debian
+        -   3.3.1 Binary packages (.deb)
+        -   3.3.2 Source packages
+    -   3.4 Gentoo
+    -   3.5 Red Hat/Fedora/CentOS
+        -   3.5.1 Pros
+        -   3.5.2 Cons
+    -   3.6 SUSE
+    -   3.7 Slackware
+    -   3.8 Ubuntu
+        -   3.8.1 Cons
+-   4 Links
+    -   4.1 Bug reports
+    -   4.2 Blogs
+    -   4.3 Mailing list discussions and patches
+    -   4.4 Forum discussions
 
 Usage
 -----
@@ -135,11 +127,6 @@ Timeline for increasing security
 A timeline for transitioning between some unsigned packages and a
 fully-signed set of packages must be made. This is the responsibility of
 the developers.
-
-Allan's TODO list
-
-Allan has a TODO list with further needed features at User:Allan/Package
-Signing.
 
 How signing is implemented in other distributions
 -------------------------------------------------
@@ -290,10 +277,17 @@ Links
 5.  pacman vulnerabilities
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Package_signing&oldid=238002"
+"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Package_signing&oldid=266917"
 
 Categories:
 
 -   Package development
 -   Pacman development
 -   Security
+
+-   This page was last modified on 18 July 2013, at 06:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

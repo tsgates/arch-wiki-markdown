@@ -7,34 +7,33 @@ example, start a text program in a terminal in X, kill X, and continue
 to interact with the program. Here are a couple of tips and tricks you
 may be interested in.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-|     -   2.1 Common Commands                                              |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Change the escape key                                        |
-|     -   3.2 Start at window 1                                            |
-|     -   3.3 Nested Screen Sessions                                       |
-|     -   3.4 Use 256 colors                                               |
-|     -   3.5 Use 256 Colors with Rxvt-Unicode (urxvt)                     |
-|     -   3.6 Informative statusbar                                        |
-|     -   3.7 Turn welcome message off                                     |
-|     -   3.8 Turn your hardstatus line into a dynamic urxvt|xterm|aterm   |
-|         window title                                                     |
-|     -   3.9 Use X scrolling mechanism                                    |
-|     -   3.10 Attatch an existing running program to screen               |
-|     -   3.11 Add a GRUB entry to boot into Screen                        |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Fix Midnight Commander hard hang when starting in screen     |
-|     -   4.2 Fix for residual editor text                                 |
-|                                                                          |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 Common Commands
+    -   2.2 Command Prompt Commands
+    -   2.3 Named sessions
+-   3 Tips and tricks
+    -   3.1 Change the escape key
+    -   3.2 Start at window 1
+    -   3.3 Nested Screen Sessions
+    -   3.4 Use 256 colors
+    -   3.5 Use 256 Colors with Rxvt-Unicode (urxvt)
+    -   3.6 Informative statusbar
+    -   3.7 Turn welcome message off
+    -   3.8 Turn your hardstatus line into a dynamic urxvt|xterm|aterm
+        window title
+    -   3.9 Use X scrolling mechanism
+    -   3.10 Attach an existing running program to screen
+    -   3.11 Add a GRUB entry to boot into Screen
+    -   3.12 Setting a different bash prompt while in screen
+    -   3.13 Turn off visual bell
+-   4 Troubleshooting
+    -   4.1 Fix Midnight Commander hard hang when starting in screen
+    -   4.2 Fix for residual editor text
+-   5 See Also
 
 Installation
 ------------
@@ -66,6 +65,27 @@ Commands are entered pressing ctrl+a and then the key binding.
 -   ctrl+a d Detach from the current screen session, and leave it
     running. Use screen -r to resume
 
+> Command Prompt Commands
+
+-   ctrl+a :quit Closes all windows and closes screen session
+-   ctrl+a :source ~/.screenrc Reloads screenrc configuration file (can
+    alternatively use /etc/screenrc)
+
+> Named sessions
+
+To create a named session, run screen with the following command:
+
+    $ screen -S session_name
+
+To prints a list of pid.tty.host strings identifying your screen
+sessions:
+
+    $ screen -list
+
+To attach to a named screen session, run this command:
+
+    $ screen -x session_name
+
 Tips and tricks
 ---------------
 
@@ -84,7 +104,7 @@ By default, the first screen window is 0. If you'd rather never have a
 window 0 and start instead with 1, add the following lines on your
 configuration:
 
-    $HOME/.screenrc
+    ~/.screenrc
 
     bind c screen 1
     bind ^c screen 1
@@ -109,13 +129,13 @@ By default, screen uses an 8-color terminal emulator. Use the following
 line to enable more colors, which is useful if you are using a
 more-capable terminal emulator:
 
-    $HOME/.screenrc
+    ~/.screenrc
 
     term screen-256color
 
 If this fails to render 256 colors in xterm, try the following instead:
 
-    $HOME/.screenrc
+    ~/.screenrc
 
     attrcolor b ".I"    # allow bold colors - necessary for some reason
     termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
@@ -127,7 +147,7 @@ If you are using rxvt-unicode from the official repositories, you may
 need to add this line in your ~/.screenrc to enable 256 colors while in
 screen.
 
-    $HOME/.screenrc
+    ~/.screenrc
 
     terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 
@@ -136,7 +156,7 @@ screen.
 The default statusbar may be a little lacking. You may find this one
 more helpful:
 
-    $HOME/.screenrc
+    ~/.screenrc
 
     hardstatus off
     hardstatus alwayslastline
@@ -144,7 +164,7 @@ more helpful:
 
 > Turn welcome message off
 
-    $HOME/.screenrc
+    ~/.screenrc
 
     startup_message off
 
@@ -153,7 +173,7 @@ more helpful:
 This one is pretty simple; just switch your current hardstatus line into
 a caption line with notification, and edit accordingly:
 
-    $HOME/.screenrc
+    ~/.screenrc
 
     backtick 1 5 5 true
     termcapinfo rxvt* 'hs:ts=\E]2;:fs=\007:ds=\E]2;\007'
@@ -171,17 +191,17 @@ The scroll buffer of GNU Screen can be accessed with ctrl+a [. However,
 this is very inconvenient. To use the scroll bar of e.g. xterm or
 konsole, add the following line:
 
-    $HOME/.screenrc
+    ~/.screenrc
 
     termcapinfo xterm* ti@:te@
 
-> Attatch an existing running program to screen
+> Attach an existing running program to screen
 
 If you started a program outside screen, but now you would like it to be
 inside, you can use reptyr to reparent the process from it's current tty
 to one inside screen.
 
-Install the package reptyr from the Official Repositories.
+Install the package reptyr from the official repositories.
 
 Get the PID of the process (you can use ps ax for that). Now just enter
 the PID as argument to reptyr inside a screen window.
@@ -222,15 +242,14 @@ runlevel 4, substituting your user name for <user>:
     scr2:4:respawn:/sbin/mingetty --autologin <user> tty1 linux
 
 The above line uses mingetty to automatically login some user to a
-virtual console on startup. You will need to install the mingetty
-package from the official repositories. The inittab line segments are
-separated by colons. The first part (scr*) is simply an id. The second
-part is the runlevel: This should only happen on runlevel 4 (which is
-not used in any default setup - 3 is by default for a tty login and 5 is
-for X). 'Respawn' causes init to repeat the command (i.e. autologin) if
-the user logs out. We will need to see that nothing else happens on
-virtual console 1 when we use runlevel 4, so remove 4 from the the first
-of the agetty lines:
+virtual console on startup. The inittab line segments are separated by
+colons. The first part (scr*) is simply an id. The second part is the
+runlevel: This should only happen on runlevel 4 (which is not used in
+any default setup - 3 is by default for a tty login and 5 is for X).
+'Respawn' causes init to repeat the command (i.e. autologin) if the user
+logs out. We will need to see that nothing else happens on virtual
+console 1 when we use runlevel 4, so remove 4 from the the first of the
+agetty lines:
 
     c1:235:respawn:/sbin/agetty -8 38400 vc/1 linux
 
@@ -257,6 +276,29 @@ This checks to see if we are on virtual console 3:
 Set inittab/mingetty to automatically log in to vc/3 on runlevel 5 and
 you are set.
 
+> Setting a different bash prompt while in screen
+
+If you want a different bash prompt when in a screen session, add the
+following to your .bashrc:
+
+    if [ -z $STY ]
+    then
+            PS1="YOUR REGULAR PROMPT"
+    else  
+            PS1="YOUR SCREEN PROMPT"
+    fi
+
+[1]
+
+> Turn off visual bell
+
+With this setting, screen will not make an ugly screen flash instead of
+a bell sound.
+
+    ~/.screenrc
+
+    vbell off
+
 Troubleshooting
 ---------------
 
@@ -271,7 +313,7 @@ kill gpm daemon before starting mc and/or disable it in /etc/rc.conf.
 When you open a text editor like nano in screen and then close it, the
 text may stay visible in your terminal. To fix this, put the following:
 
-    $HOME/.screenrc
+    ~/.screenrc
 
     altscreen on
 
@@ -288,8 +330,15 @@ See Also
     screen does for command line based programs
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GNU_Screen&oldid=244934"
+"https://wiki.archlinux.org/index.php?title=GNU_Screen&oldid=301778"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 24 February 2014, at 15:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

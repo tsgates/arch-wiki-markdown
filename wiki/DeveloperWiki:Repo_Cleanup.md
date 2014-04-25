@@ -3,17 +3,14 @@ DeveloperWiki:Repo Cleanup
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Extra package cleanup                                              |
-|     -   1.1 Goals and ideas                                              |
-|     -   1.2 Packages list                                                |
-|     -   1.3 Candidate to [community]                                     |
-|                                                                          |
-| -   2 Issues                                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Extra package cleanup
+    -   1.1 Goals and ideas
+    -   1.2 Packages list
+    -   1.3 Candidate to [community]
+-   2 Issues
 
 Extra package cleanup
 =====================
@@ -168,3 +165,10 @@ Retrieved from
 Category:
 
 -   Package development
+
+-   This page was last modified on 23 April 2012, at 11:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -6,19 +6,16 @@ installing and configuring Arch Linux on the ASUS G55VW ROG Laptop
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Bootloader                                                         |
-|     -   1.1 Boot on usb                                                  |
-|     -   1.2 Set up UEFI boot                                             |
-|                                                                          |
-| -   2 Graphics Drivers                                                   |
-| -   3 Screen Backlight                                                   |
-| -   4 Other Keys                                                         |
-|     -   4.1 keyboard backlight script                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Bootloader
+    -   1.1 Boot on usb
+    -   1.2 Set up UEFI boot
+-   2 Graphics Drivers
+-   3 Screen Backlight
+-   4 Other Keys
+    -   4.1 keyboard backlight script
 
 Bootloader
 ----------
@@ -247,8 +244,15 @@ And finally, add some convenient keyboard shortcuts by the method of
 your choice.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Asus_G55VW&oldid=215618"
+"https://wiki.archlinux.org/index.php?title=Asus_G55VW&oldid=273721"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 1 September 2013, at 11:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

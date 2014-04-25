@@ -1,13 +1,11 @@
 Yaourt
 ======
 
-> Summary
+Related articles
 
-How to install and use yaourt.
-
-> Related
-
-AUR Helpers
+-   AUR Helpers
+-   AUR
+-   Pacman
 
 Yaourt (Yet AnOther User Repository Tool; French for 'Yogurt') is a
 community-contributed wrapper for pacman which adds seamless access to
@@ -23,18 +21,20 @@ search mode, and much more.
 Warning:Yaourt is an unofficial, third-party script that is not
 supported by the Arch Linux developers.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Proxy Settings                                                     |
-| -   3 Using yaourt                                                       |
-| -   4 Examples                                                           |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Yaourt asking for password twice                             |
-|     -   5.2 Yaourt freezing / system heavy slowdown                      |
-+--------------------------------------------------------------------------+
+Note:Please report bugs at the archlinux.fr bugtracker.
+
+Contents
+--------
+
+-   1 Installation
+-   2 Proxy settings
+-   3 Using yaourt
+-   4 Examples
+-   5 Persistent local source repositories
+-   6 Troubleshooting
+    -   6.1 Yaourt asking for password twice
+    -   6.2 Yaourt freezing / system heavy slowdown
+    -   6.3 Yaourt freezing during PKBUILD download
 
 Installation
 ------------
@@ -43,16 +43,16 @@ First you need to install package-query as a dependency, and then the
 yaourt package itself. Since both those packages are available from the
 AUR, you will have to install them with the official method for
 installing unsupported packages, which is exhaustively described in the
-Arch User Repository article. Alternatively you can add the archlinuxfr
-repo as described on the yaourt homepage.
+AUR article. It is important that you understand what "unsupported
+package" really means, and you can take this as an opportunity to learn
+what are the operations that AUR helpers like yaourt make automatic. You
+might want to have the base-devel group installed as well, since some
+packages require the GNU autotools.
 
-It is important that you understand what "unsupported package" really
-means, and you can take this as an opportunity to learn what are the
-operations that AUR helpers like yaourt make automatic.
+Alternatively you can add the archlinuxfr repository as described on the
+yaourt homepage.
 
-Note:Please report bugs at the archlinux.fr bugtracker.
-
-Proxy Settings
+Proxy settings
 --------------
 
 If you access the Internet through an HTTP proxy, you may have to set
@@ -79,16 +79,22 @@ You can install packages (including AUR packages) with
 
     $ yaourt packagename
 
+or
+
+    $ yaourt -Sa packagename
+
 You can update your system including AUR packages with:
 
     $ yaourt -Syua
+
+See the yaourt manual page for more information.
 
 Examples
 --------
 
 Search and install:
 
-    $ yaourt <search pattern>
+    $ yaourt search pattern
 
 Sync database, upgrade packages, search the AUR and devel (all packages
 based on cvs, svn, git, bzr(...)-version) upgrades:
@@ -97,7 +103,7 @@ based on cvs, svn, git, bzr(...)-version) upgrades:
 
 Build package from source:
 
-    $ yaourt -Sb <package>
+    $ yaourt -Sb package
 
 Check, edit, merge or remove *.pac* files:
 
@@ -105,11 +111,11 @@ Check, edit, merge or remove *.pac* files:
 
 Get a PKGBUILD (support split package):
 
-    $ yaourt -G <package>
+    $ yaourt -G package
 
 Build and export package, its sources to a directory:
 
-    $ yaourt -Sb --export <dir> <package>
+    $ yaourt -Sb --export dir package
 
 Backup database:
 
@@ -117,9 +123,23 @@ Backup database:
 
 Query backup file:
 
-    $ yaourt -Q --backupfile <file>
+    $ yaourt -Q --backupfile file
 
 See also: Pacman and Pacman Tips.
+
+Persistent local source repositories
+------------------------------------
+
+By default, yaourt will pull remote repositories for building to /tmp.
+To avoid having to refetch whole repositories whenever AUR packages
+update, you can change this directoy by uncommenting and setting
+DEVELBUILDDIR in yaourtrc to wherever you want source repositories
+pulled to. Note this will only apply to devel packages, usually suffixed
+by -git or -svn.
+
+    /etc/yaourtrc
+
+    DEVELBUILDDIR="/var/abs/local/yaourtbuild"
 
 Troubleshooting
 ---------------
@@ -142,13 +162,30 @@ to /etc/yaourtrc or to ~/.yaourtrc
 
 Mostly a problem for systems with less RAM or a smaller swap space.
 Yaourt uses /tmp to compile in by default. By default this is all in RAM
-as it's a tmpfs. Change the location in /etc/yaourtrc (uncomment "TMPDIR
-= " line) to somewhere else to avoid clogging up your system.
+as it's a tmpfs. Change the location in /etc/yaourtrc (uncomment
+TMPDIR = line) to somewhere else to avoid clogging up your system.
+
+> Yaourt freezing during PKBUILD download
+
+If you are using IPv6 connectivity there may be some problems with
+connecting to IPv4 AUR address. To solve this, add to /etc/hosts
+following line:
+
+    78.46.78.247 aur.archlinux.org aur
+
+(as for 2013-10-14)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Yaourt&oldid=255192"
+"https://wiki.archlinux.org/index.php?title=Yaourt&oldid=305950"
 
 Categories:
 
 -   Package management
 -   Arch User Repository
+
+-   This page was last modified on 20 March 2014, at 17:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -3,23 +3,18 @@ IBM ThinkPad T21
 
 Works with no known issues. Tested on 2008.03 and 2008.06.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Configuration                                                      |
-|     -   1.1 Power Management                                             |
-|         -   1.1.1 Suspend and Hibernate                                  |
-|         -   1.1.2 Laptop Mode Tools                                      |
-|         -   1.1.3 CPU Frequency Scaling                                  |
-|                                                                          |
-|     -   1.2 Hotkeys                                                      |
-|         -   1.2.1 External VGA                                           |
-|                                                                          |
-|     -   1.3 Xorg                                                         |
-|                                                                          |
-| -   2 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Configuration
+    -   1.1 Power Management
+        -   1.1.1 Suspend and Hibernate
+        -   1.1.2 Laptop Mode Tools
+        -   1.1.3 CPU Frequency Scaling
+    -   1.2 Hotkeys
+        -   1.2.1 External VGA
+    -   1.3 Xorg
+-   2 See also
 
 Configuration
 -------------
@@ -197,3 +192,10 @@ Retrieved from
 Category:
 
 -   IBM
+
+-   This page was last modified on 23 April 2012, at 13:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

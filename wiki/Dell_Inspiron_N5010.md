@@ -1,46 +1,39 @@
 Dell Inspiron N5010
 ===================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Intro                                                              |
-|     -   1.1 Summary                                                      |
-|     -   1.2 To do                                                        |
-|                                                                          |
-| -   2 Hardware                                                           |
-|     -   2.1 Working                                                      |
-|         -   2.1.1 Ethernet                                               |
-|         -   2.1.2 DVDRW                                                  |
-|         -   2.1.3 Touchpad                                               |
-|         -   2.1.4 Wireless                                               |
-|         -   2.1.5 Bluetooth                                              |
-|         -   2.1.6 VGA                                                    |
-|         -   2.1.7 Graphic adapter                                        |
-|         -   2.1.8 Audio                                                  |
-|         -   2.1.9 Display                                                |
-|         -   2.1.10 Suspending to disk (Hibernation)                      |
-|         -   2.1.11 Suspending to ram (Sleep)                             |
-|         -   2.1.12 Sensors                                               |
-|                                                                          |
-|     -   2.2 Partially Working                                            |
-|     -   2.3 Not Working                                                  |
-|         -   2.3.1 Processor frequency control                            |
-|                                                                          |
-|     -   2.4 Unknown / Untested                                           |
-|         -   2.4.1 HDMI Video                                             |
-|         -   2.4.2 Redwood HDMI Audio 5600                                |
-|         -   2.4.3 eSata port                                             |
-|                                                                          |
-| -   3 Installation                                                       |
-|     -   3.1 Kernel                                                       |
-|     -   3.2 ATI Mobility Raedon 5600                                     |
-|     -   3.3 Troubleshoot                                                 |
-|                                                                          |
-| -   4 Links                                                              |
-|     -   4.1 General                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Intro
+    -   1.1 Summary
+    -   1.2 To do
+-   2 Hardware
+    -   2.1 Working
+        -   2.1.1 Ethernet
+        -   2.1.2 DVDRW
+        -   2.1.3 Touchpad
+        -   2.1.4 Wireless
+        -   2.1.5 Bluetooth
+        -   2.1.6 VGA
+        -   2.1.7 Graphic adapter
+        -   2.1.8 Audio
+        -   2.1.9 Display
+        -   2.1.10 Suspending to disk (Hibernation)
+        -   2.1.11 Suspending to ram (Sleep)
+        -   2.1.12 Sensors
+    -   2.2 Partially Working
+    -   2.3 Not Working
+        -   2.3.1 Processor frequency control
+    -   2.4 Unknown / Untested
+        -   2.4.1 HDMI Video
+        -   2.4.2 Redwood HDMI Audio 5600
+        -   2.4.3 eSata port
+-   3 Installation
+    -   3.1 Kernel
+    -   3.2 ATI Mobility Raedon 5600
+    -   3.3 Troubleshoot
+-   4 Links
+    -   4.1 General
 
 Intro
 -----
@@ -264,3 +257,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 3 September 2012, at 19:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

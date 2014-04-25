@@ -1,7 +1,7 @@
 GNU Project
 ===========
 
-> Summary
+Summary help replacing me
 
 This article describes the GNU Project and lists some of the essential
 tools that qualify Arch Linux as a GNU/Linux distribution.
@@ -41,18 +41,15 @@ tools are from the GNU Project. This article will give a brief
 description of the core components, as well as some other useful
 applications.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 The Base System                                                    |
-|     -   1.1 Kernel                                                       |
-|     -   1.2 Software Collection                                          |
-|                                                                          |
-| -   2 Development Tools                                                  |
-| -   3 Other Tools                                                        |
-| -   4 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 The Base System
+    -   1.1 Kernel
+    -   1.2 Software Collection
+-   2 Development Tools
+-   3 Other Tools
+-   4 Links
 
 The Base System
 ---------------
@@ -127,7 +124,7 @@ widget toolkit: GTK+
 
 desktop environment: GNOME
 
-flash player: gnash
+flash player: gnash-gtk
 
 spreadsheet: Gnumeric
 
@@ -141,9 +138,16 @@ Links
 For a list of all current GNU projects, see All GNU Packages
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GNU_Project&oldid=239505"
+"https://wiki.archlinux.org/index.php?title=GNU_Project&oldid=301786"
 
 Categories:
 
 -   Development
 -   System administration
+
+-   This page was last modified on 24 February 2014, at 15:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

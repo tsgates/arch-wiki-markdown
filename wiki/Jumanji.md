@@ -3,48 +3,34 @@ Jumanji
 
 jumanji is a web browser that provides a minimalistic and space saving
 interface as well as an easy usage that mainly focuses on keyboard
-interaction like vimperator does
+interaction like vimperator does.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Method 1: AUR (Recommended)                                  |
-|     -   1.2 Method 2: From Source                                        |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 config.h                                                     |
-|     -   2.2 rc file configuration                                        |
-|                                                                          |
-| -   3 Commands                                                           |
-|     -   3.1 Look and Feel                                                |
-|     -   3.2 Page Navigation                                              |
-|     -   3.3 Zooming                                                      |
-|     -   3.4 Searching                                                    |
-|     -   3.5 Bookmarks and History                                        |
-|     -   3.6 Link Following                                               |
-|     -   3.7 Tabs                                                         |
-|     -   3.8 Exit                                                         |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 config.h
+    -   2.2 rc file configuration
+-   3 Commands
+    -   3.1 Look and feel
+    -   3.2 Page navigation
+    -   3.3 Zooming
+    -   3.4 Searching
+    -   3.5 Bookmarks and history
+    -   3.6 Link following
+    -   3.7 Tabs
+    -   3.8 Exit
+-   4 See also
 
 Installation
 ------------
 
-> Method 1: AUR (Recommended)
+Install one of jumanji variants from the AUR:
 
-jumanji is available from the Arch User Repository.
-
-> Method 2: From Source
-
-Grab the source from git, change the config.h as desired, compile and
-install as follows:
-
-    git clone git://pwmt.org/jumanji.git
-    cd jumanji
-    make install
+-   jumanji - Stable release.
+-   jumanji-git - Development release.
+-   jumanji-git-gtk2 - Development release using old GTK+ 2 libraries.
 
 Configuration
 -------------
@@ -96,12 +82,12 @@ Commands
 
 Below are some basic commands that can be used with jumanji
 
-> Look and Feel
+> Look and feel
 
     C-m       = Toggle status bar
     C-n       = Toggle tab bar
 
-> Page Navigation
+> Page navigation
 
     o         = enter url to open in same tab
     t         = enter url to open in new tab
@@ -131,13 +117,13 @@ Below are some basic commands that can be used with jumanji
     ?        = search reverse %s
     :open    = start a search with your search engine %s (the first one in your jumanjirc is used)
 
-> Bookmarks and History
+> Bookmarks and history
 
     :bmark   = insert bookmark (bookmarks are saved in ~/.config/jumanji/bookmarks)
     o <tab>  = show bookmarks and history to open in same tab
     t <tab>  = show bookmarks and history to open in new tab
 
-> Link Following
+> Link following
 
     f        = spawn numbers next to each hyperlink. Type the number after typing f to follow the link in the same tab [1]
     F        = spawn numbers next to each hyperlink. Type the number after typing F to follow the link in a new tab
@@ -165,8 +151,15 @@ See also
 -   The current forum thread
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Jumanji&oldid=206826"
+"https://wiki.archlinux.org/index.php?title=Jumanji&oldid=275152"
 
 Category:
 
 -   Web Browser
+
+-   This page was last modified on 12 September 2013, at 11:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

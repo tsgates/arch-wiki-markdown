@@ -5,18 +5,16 @@ This page aims to provide as much information as possible to make the
 Samsung R430 laptop work. There are many variations of the hardware of
 the unit, so if you had to do something not listed here, please add it.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware Specification                                             |
-| -   2 Installation                                                       |
-| -   3 Audio                                                              |
-| -   4 Touchpad                                                           |
-| -   5 Wireless                                                           |
-| -   6 Screen brightness                                                  |
-| -   7 Enable and disable featues                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware Specification
+-   2 Installation
+-   3 Audio
+-   4 Touchpad
+-   5 Wireless
+-   6 Screen brightness
+-   7 Enable and disable featues
 
 Hardware Specification
 ----------------------
@@ -109,3 +107,10 @@ Retrieved from
 Category:
 
 -   Samsung
+
+-   This page was last modified on 23 April 2012, at 13:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

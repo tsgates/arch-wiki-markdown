@@ -15,18 +15,16 @@ ASUS Eee PC 1201T
   Multi-input touchpad   Working   
   ---------------------- --------- --------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Graphics                                                           |
-| -   3 Wireless                                                           |
-| -   4 Function keys                                                      |
-| -   5 Camera                                                             |
-| -   6 Card reader                                                        |
-| -   7 Suspend                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Graphics
+-   3 Wireless
+-   4 Function keys
+-   5 Camera
+-   6 Card reader
+-   7 Suspend
 
 Hardware
 --------
@@ -103,10 +101,10 @@ Fn+F11, etc. to see whether the function keys are detected. Then install
 acpi-eeepc-generic package from the AUR. Go to /etc/acpi/eeepc/models/
 and copy acpi-eeepc-1000HE-events.conf into
 acpi-eeepc-1201T-events.conf. You might want to modify the events
-slightly. For example, instead of EEEPC_SCREEN_OFF=$KEY_Fn_F7 (which
-toggles bluetooth for some reason) use EEEPC_BLANK=$KEY_Fn_F7 and make
-sure package xorg-xset is installed. Also, the event code for Fn_F9 is
-37, not 12, but it is supposed to toggle the touchpad anyway.
+slightly. For example, instead of
+EEEPC_SCREEN_OFF=KEY_Fn_F7 (which toggles bluetooth for some reason) use EEEPC_BLANK=KEY_Fn_F7
+and make sure package xorg-xset is installed. Also, the event code for
+Fn_F9 is 37, not 12, but it is supposed to toggle the touchpad anyway.
 
 Finally, edit /etc/conf.d/acpi-eeepc-generic.conf, following the
 directions inside. Use "r8192se_pci" for WIFI_DRIVERS, pm-suspend for
@@ -155,8 +153,15 @@ this content:
     SUSPEND_MODULES="rtl8192se"
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1201T&oldid=208403"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1201T&oldid=304853"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 08:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

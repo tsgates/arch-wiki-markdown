@@ -2,12 +2,13 @@ Netgear Fwg114p as Print Server
 ===============================
 
   ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: please use the   
-                           first argument of the    
-                           template to provide a    
-                           brief explanation.       
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: Mark out of date 
+                           long time ago. Useful    
+                           information already      
+                           covered in CUPS.         
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
@@ -29,7 +30,7 @@ Set it up
 1.  Download the packets needed (i.e. the printing-system and the
     filters needed. In my case hpijs and foomatic. That depends on what
     printer you have.)
-    -   # pacman -Sy cups, hpijs, foomatic
+    -   # pacman -Syu cups, hpijs, foomatic
 
 2.  Make sure your printer could be connected through this kind of
     printserver.
@@ -70,8 +71,15 @@ be used in linux but none can be used connected to a print-server of
 this kind (It doesn't matter if one uses windows or linux)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Netgear_Fwg114p_as_Print_Server&oldid=203057"
+"https://wiki.archlinux.org/index.php?title=Netgear_Fwg114p_as_Print_Server&oldid=302838"
 
 Category:
 
 -   Printers
+
+-   This page was last modified on 2 March 2014, at 06:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

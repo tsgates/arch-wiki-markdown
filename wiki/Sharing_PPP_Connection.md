@@ -1,23 +1,27 @@
 Sharing PPP Connection
 ======================
 
-  
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with Internet    
+                           Sharing.                 
+                           Notes: Just a specific   
+                           case of the topic        
+                           described there.         
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Requirements                                                       |
-| -   2 Installing                                                         |
-| -   3 Sharing via Wired Ethernet                                         |
-|     -   3.1 Network Bridge                                               |
-|                                                                          |
-| -   4 Sharing via WLAN                                                   |
-|     -   4.1 Instructions                                                 |
-|                                                                          |
-| -   5 Sharing Script                                                     |
-| -   6 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Requirements
+-   2 Installing
+-   3 Sharing via wired ethernet
+    -   3.1 Network bridge
+-   4 Sharing via WLAN
+-   5 Sharing script
+-   6 See also
 
 Requirements
 ------------
@@ -46,7 +50,7 @@ you also have to install:
 -   wireless: iw or wireless_tools (this article uses iw since
     wireless_tools is deprecated).
 
-Sharing via Wired Ethernet
+Sharing via wired ethernet
 --------------------------
 
 -   Set the PPP connection up.
@@ -58,9 +62,9 @@ root):
 
 -   Set the kernel to router mode. This is done by running:
 
-    # echo 1 > /proc/sys/net/ipv4/ip_forward
+    # sysctl net.ipv4.ip_forward=1
 
--   Configure dnsmasqd. Make the following changes to /etc/dnsmasq.conf
+-   Configure dnsmasq. Make the following changes to /etc/dnsmasq.conf
     (uncomment if necessary):
 
     /etc/dnsmasq.conf
@@ -86,7 +90,7 @@ Warning:The previous configuration has no security options enabled. If
 you are using a firewall, you should adapt this documentation to suit
 your needs. Same applies also to setting up keys for WLAN interface.
 
-> Network Bridge
+> Network bridge
 
 Let's assume your PPP connection is on eth0, and you want to share the
 connection on eth1 and eth2.
@@ -114,7 +118,9 @@ Now you should be able to connect to the internet using eth1 or eth2.
 Sharing via WLAN
 ----------------
 
-> Instructions
+Warning:These instructions create unencrypted ad-hoc network. See Ad-hoc
+networking#WPA supplicant for method using WPA1 encryption. For better
+security, create an access point secured by WPA2.
 
 -   Set up the PPP connection.
 -   Set up the WLAN connection: choose an SSID and select Ad-hoc as
@@ -165,7 +171,7 @@ Warning:The previous configuration has no security options enabled! If
 you are using firewall, you should adapt this documentation to suit your
 needs. Same applies also to setting up keys for wlan interface.
 
-Sharing Script
+Sharing script
 --------------
 
 A quick script for sharing eth0 over wlan0 on an ad-hoc network.
@@ -181,18 +187,25 @@ A quick script for sharing eth0 over wlan0 on an ad-hoc network.
     iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
     echo 1 > /proc/sys/net/ipv4/ip_forward
 
-See Also
+See also
 --------
 
--   Internet Share
--   Simple stateful firewall HOWTO
--   NAT'ing firewall - Share your broadband connection
--   Wireless Setup
+-   Simple stateful firewall
+-   Router
+-   Wireless network configuration
 -   USB 3G Modem
+-   Share your 3G Internet connection over wifi
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sharing_PPP_Connection&oldid=249942"
+"https://wiki.archlinux.org/index.php?title=Sharing_PPP_Connection&oldid=297855"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 15 February 2014, at 15:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

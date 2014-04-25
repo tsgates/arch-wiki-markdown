@@ -18,24 +18,20 @@ database.
 
 Like to see a running example?
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Initial Notes                                                      |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-|     -   3.1 Apache                                                       |
-|     -   3.2 lighttpd Specific Configuration                              |
-|                                                                          |
-| -   4 Post Installation                                                  |
-|     -   4.1 Cleaning Up                                                  |
-|     -   4.2 Installing Plugins                                           |
-|     -   4.3 Backing Up                                                   |
-|                                                                          |
-| -   5 Further Reading                                                    |
-| -   6 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Initial Notes
+-   2 Installation
+-   3 Configuration
+    -   3.1 Apache
+    -   3.2 lighttpd Specific Configuration
+    -   3.3 nginx
+-   4 Post Installation
+    -   4.1 Cleaning Up
+    -   4.2 Installing Plugins
+    -   4.3 Backing Up
+-   5 Further Reading
 
 Initial Notes
 -------------
@@ -48,17 +44,19 @@ It is strongly recommend to read through the appropriate sections of
 DokuWiki's security page for your web server. Most popular web servers
 are covered but there are generic instructions as well.
 
-The package in [community] unpacks DokuWiki at /srv/http/dokuwiki and
-changes ownership to the "http" user. This should work fine for most
-popular web servers as packaged for Arch.
+The package in [community] unpacks DokuWiki at
+/usr/share/webapps/dokuwiki with the configuration files in
+/etc/webapps/dokuwiki and the data files in /var/lib/dokuwiki/data. It
+also changes the ownership of the relevant files to the "http" user.
+This should work fine for most popular web servers as packaged for Arch.
 
 Installation
 ------------
 
-1.  Install your web server of choice (e.g. Apache or lighttpd) and
-    configure it for PHP. As mentioned above, DokuWiki has no need for a
-    database server so you may be able to skip those steps when setting
-    up your web server.
+1.  Install your web server of choice (e.g. Apache, nginx or lighttpd)
+    and configure it for PHP. As mentioned above, DokuWiki has no need
+    for a database server so you may be able to skip those steps when
+    setting up your web server.
 2.  Install dokuwiki from [community] with pacman.
 3.  Configure web server for dokuwiki (see section below)
 4.  With your web browser of choice, open
@@ -73,6 +71,14 @@ tarball, unpack it to your server's document root (e.g.
 
 Configuration
 -------------
+
+If you are using lighttpd or nginx you need to adjust the open_basedir
+in /etc/php/php.ini to include the dokuwiki directories (php forbids
+following symbolic links outside of the allowed scope):
+
+    /etc/php/php.ini
+
+    open_basedir = /srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/share/webapps/:/etc/webapps/dokuwiki/:/var/lib/dokuwiki/
 
 > Apache
 
@@ -110,6 +116,14 @@ in your browser.
 Edit the /etc/lighttpd/lighttpd.conf file as per the dokuwiki
 instructions (might contain updated information).
 
+Make sure the module mod_access is loaded. If not, load it by adding the
+following to /etc/lighttpd/lighttpd.conf:
+
+    server_modules += ("mod_access")
+
+mod_access provides the url.access-deny command, which we are using from
+this point.
+
 Under the line:
 
     $HTTP["url"] =~ "\.pdf$" {
@@ -139,13 +153,37 @@ These entries give some basic security to DokuWiki. lighttpd does not
 use .htaccess files like Apache. You CAN install with out this, but I
 would NEVER recommend it.
 
+  
+ Add alias somewhere in lighttpd or fastcgi conf file:
+
     alias.url += ("/dokuwiki" => "/usr/share/webapps/dokuwiki/")
 
-Add alias somewhere in lighttpd or fastcgi conf file
+The command alias.url is provided by the module mod_alias so that must
+be loaded for the above to work.
 
 Restart lighttp:
 
-     # /etc/rc.d/lighttpd restart
+     # systemctl restart lighttpd
+
+> nginx
+
+Add the following location blocks to your /etc/nginx/nginx.conf.
+
+    #Assuming that the root is set to /usr/share/webapps.
+    #You may need to adjust your location blocks accordingly.
+    location ~^/dokuwiki/(data|conf|bin|inc)/ { deny all; } # secure DokuWiki
+    location ~^/dokuwiki/\.ht { deny all; } # also secure the Apache .htaccess files
+    location ~^/dokuwiki/lib/^((?!php).)*$ { expires 30d; } # no need to serve non .php files through fastcgi, so we catch those requests here.
+    location ~^/dokuwiki/.*\.php$ {
+                include fastcgi_params;
+                fastcgi_pass unix:/run/php-fpm/php-fpm.sock;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_param PATH_INFO $uri;
+            }
+
+Restart nginx
+
+     # systemctl restart nginx
 
 Post Installation
 -----------------
@@ -183,14 +221,16 @@ Further Reading
 The DokuWiki main site has all of the information and help that you
 could possibly need.
 
-See Also
---------
-
-DokuWiki HowTo Install and Upgrade
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dokuwiki&oldid=247389"
+"https://wiki.archlinux.org/index.php?title=Dokuwiki&oldid=295079"
 
 Category:
 
 -   Office
+
+-   This page was last modified on 30 January 2014, at 21:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -10,21 +10,18 @@ sftpman offers both a command-line tool (sftpman) and a GTK frontend
 With sftpman, you first setup (define) your remote filesystems and then
 you mount/unmount them easily (with one click/command).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisite                                                       |
-| -   2 Installation                                                       |
-| -   3 Defining filesystems                                               |
-|     -   3.1 Mounting/Unmounting                                          |
-|     -   3.2 Removing defined filesystems                                 |
-|     -   3.3 Learning more                                                |
-|     -   3.4 Troubleshooting                                              |
-|                                                                          |
-| -   4 Other Resources                                                    |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequisite
+-   2 Installation
+-   3 Defining filesystems
+    -   3.1 Mounting/Unmounting
+    -   3.2 Removing defined filesystems
+    -   3.3 Learning more
+    -   3.4 Troubleshooting
+-   4 Other Resources
+-   5 See also
 
 Prerequisite
 ------------
@@ -151,8 +148,15 @@ See also
 -   sshfs
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sftpman&oldid=207112"
+"https://wiki.archlinux.org/index.php?title=Sftpman&oldid=270253"
 
 Category:
 
--   Networking
+-   Secure Shell
+
+-   This page was last modified on 7 August 2013, at 23:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

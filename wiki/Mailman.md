@@ -27,61 +27,50 @@ A caveat: you can use a Mailman installation to manage lists for several
 domains, but two lists cannot have the same name even though its domains
 are different!
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Mailman Installation                                               |
-| -   2 Mailman configuration                                              |
-|     -   2.1 Postfix integration                                          |
-|     -   2.2 Exim integration                                             |
-|                                                                          |
-| -   3 Mail Server Configuration                                          |
-|     -   3.1 Postfix                                                      |
-|     -   3.2 Exim                                                         |
-|                                                                          |
-| -   4 Web Server Configuration                                           |
-|     -   4.1 Nginx                                                        |
-|     -   4.2 Lighttpd                                                     |
-|     -   4.3 Apache                                                       |
-|                                                                          |
-| -   5 Post Configuration                                                 |
-|     -   5.1 Site-wide mailing list                                       |
-|     -   5.2 Set up cron                                                  |
-|     -   5.3 Start Mailman                                                |
-|     -   5.4 Create a password                                            |
-|                                                                          |
-| -   6 Using Mailman                                                      |
-| -   7 Troubleshooting                                                    |
-|     -   7.1 Postfix                                                      |
-|     -   7.2 UTF-8                                                        |
-|                                                                          |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Mailman Installation
+-   1 Mailman installation
+-   2 Mailman configuration
+    -   2.1 Web Server integration
+    -   2.2 MTA integration
+    -   2.3 Postfix integration
+    -   2.4 Exim integration
+-   3 Mail Server Configuration
+    -   3.1 Postfix
+    -   3.2 Exim
+-   4 Web Server Configuration
+    -   4.1 Nginx
+    -   4.2 Lighttpd
+    -   4.3 Apache
+-   5 Post configuration
+    -   5.1 Site-wide mailing list
+    -   5.2 Set up cron
+    -   5.3 Start Mailman
+    -   5.4 Create a password
+-   6 Using Mailman
+-   7 Troubleshooting
+    -   7.1 Postfix
+    -   7.2 UTF-8
+-   8 See also
+
+Mailman installation
 --------------------
 
-Install mailman from the Official Repositories.
+Install mailman from the official repositories.
 
 Mailman configuration
 ---------------------
 
-The content of /etc/mailman/mm_cfg.py varies depending on the chosen
-mail server.
-
 The full set of configuration defaults lives in the
-/usr/lib/mailman/Mailman/Defaults.py file, however you should never
-modify this file! Instead, change the mm_cfg.py file; you only need to
-add values to mm_cfg.py that are different than the defaults in
-Defaults.py. (Future Mailman upgrades are guaranteed never to touch your
-mm_cfg.py file.)
+/usr/lib/mailman/Mailman/Defaults.py file. However you should never
+modify this file! Instead, change the mm_cfg.py file,
+/etc/mailman/mm_cfg.py. You only need to add values to mm_cfg.py that
+are different than the defaults in Defaults.py. Future Mailman upgrades
+are guaranteed never to touch your mm_cfg.py file.
 
-> Postfix integration
+> Web Server integration
 
-    MTA = 'Postfix'
-
-    DEFAULT_EMAIL_HOST = 'a.org'
     DEFAULT_URL_HOST = 'lists.a.org'
 
     VIRTUAL_HOSTS.clear()
@@ -94,7 +83,21 @@ mm_cfg.py file.)
     DEFAULT_URL_PATTERN = 'http://%s/'
     PUBLIC_ARCHIVE_URL = 'http://%(hostname)s/archives/%(listname)s'
 
-Once you have edited the configuration file, run
+For Apache make this change from the above:
+
+    DEFAULT_URL_PATTERN = 'http://%s/lists/'
+
+> MTA integration
+
+The content of /etc/mailman/mm_cfg.py varies depending on the chosen
+mail server.
+
+> Postfix integration
+
+    DEFAULT_EMAIL_HOST = 'a.org'
+    MTA = 'Postfix'
+
+Once you have edited mm_cfg.py, run
 
     # /usr/lib/mailman/bin/genaliases
 
@@ -102,18 +105,8 @@ to generate an aliases file that Postfix needs.
 
 > Exim integration
 
-    MTA = None
-
     DEFAULT_EMAIL_HOST = 'a.org'
-    DEFAULT_URL_HOST = 'lists.a.org'
-
-    VIRTUAL_HOSTS.clear()
-    add_virtualhost(DEFAULT_URL_HOST, DEFAULT_EMAIL_HOST)
-    add_virtualhost('lists.b.org', 'b.org')
-    add_virtualhost('lists.c.org', 'c.org')
-
-    DEFAULT_URL_PATTERN = 'http://%s/'
-    PUBLIC_ARCHIVE_URL = 'http://%(hostname)s/archives/%(listname)s'
+    MTA = None
 
 Mail Server Configuration
 -------------------------
@@ -232,9 +225,13 @@ complain. Be sure to define the user directive in
 
 > Apache
 
-Add following line to your /etc/mailman/mm_cfg.py
+Add following line to your /etc/mailman/mm_cfg.py:
 
-    IMAGE_LOGOS = '/mailman-icons/'
+IMAGE_LOGOS = '/mailman-icons/'
+
+The example use of of creating lists.a.org implies creating a vhost.
+Consider moving the following config into a vhost definition instead of
+modifying your global httpd.conf.
 
 Modify your /etc/httpd/conf/httpd.conf with the following snippets
 added.
@@ -242,41 +239,38 @@ added.
     <IfModule alias_module>
         Alias /mailman-icons/ "/usr/lib/mailman/icons/"
         Alias /archives/ "/var/lib/mailman/archives/public/"
-        ScriptAlias /mailman/ "/usr/lib/mailman/cgi-bin/"
+        ScriptAlias /lists/ "/usr/lib/mailman/cgi-bin/"
+        ScriptAlias / "/usr/lib/mailman/cgi-bin/listinfo"
     </IfModule>
 
     <Directory "/usr/lib/mailman/cgi-bin/">
         AllowOverride None
         Options Indexes FollowSymlinks ExecCGI
-        Order allow,deny
-        Allow from all
+        Require all granted
     </Directory>
 
     <Directory "/usr/lib/mailman/icons/">
-        Order allow,deny
-        Allow from all
+        Require all granted
     </Directory>
 
     <Directory "/var/lib/mailman/archives/public/">
-        Order allow,deny
-        Allow from all
+        Require all granted
     </Directory>
 
-Restart apache:
+Restart httpd systemd service.
 
-    # systemctl restart httpd 
-
-Post Configuration
+Post configuration
 ------------------
 
 > Site-wide mailing list
 
 To create this specific list requested by Mailman for its proper
-operation (between other things, it is used for password reminders), run
+operation (between other things, it is used for password reminders),
+run:
 
     # /usr/lib/mailman/bin/newlist mailman
 
-. This will create a list called "mailman" under the default domain
+This will create a list called "mailman" under the default domain
 (mailman@a.org in the example). You do not have to do it for the other
 domains (i.e. b.org and c.org).
 
@@ -317,7 +311,7 @@ To set the general password, use this command:
 
     # /usr/lib/mailman/bin/mmsitepass <general-password>
 
-. To set the list creator password, this:
+To set the list creator password, this:
 
     # /usr/lib/mailman/bin/mmsitepass -c <list-creator-password>
 
@@ -352,7 +346,7 @@ the same program to fix them (probably the easiest solution):
 
 > Postfix
 
-Make sure that the files in /var/lib/mailman/data/
+Make sure that the files in /var/lib/mailman/data/:
 
 -   aliases.db,
 -   aliases,
@@ -368,11 +362,18 @@ http://www.divideandconquer.se/2009/08/17/convert-mailman-translation-to-utf-8.
 See also
 --------
 
--   GNU Mailman Installation Manual
+-   GNU Mailman installation manual
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mailman&oldid=255685"
+"https://wiki.archlinux.org/index.php?title=Mailman&oldid=303742"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 9 March 2014, at 10:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

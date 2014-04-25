@@ -15,23 +15,20 @@ the boot routine. (For issues regarding graphical interface problems or
 program freeze-ups, etc., save yourself some wasted effort and time, and
 please look elsewhere.)
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Definition                                                         |
-| -   2 What To Do                                                         |
-| -   3 Troubleshooting                                                    |
-| -   4 Option 1: Check bootloader configuration                           |
-| -   5 Option 2: Reinstall kernel                                         |
-|     -   5.1 Start from the installation CD                               |
-|     -   5.2 Mount your partitions                                        |
-|     -   5.3 Gather your files for later troubleshooting                  |
-|     -   5.4 Chroot to your normal root                                   |
-|     -   5.5 Roll back to previous kernel version                         |
-|                                                                          |
-| -   6 Reboot                                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Definition
+-   2 What To Do
+-   3 Troubleshooting
+-   4 Option 1: Check bootloader configuration
+-   5 Option 2: Reinstall kernel
+    -   5.1 Start from the installation CD
+    -   5.2 Mount your partitions
+    -   5.3 Gather your files for later troubleshooting
+    -   5.4 Chroot to your normal root
+    -   5.5 Roll back to previous kernel version
+-   6 Reboot
 
 Definition
 ----------
@@ -93,11 +90,9 @@ system modifications have taken place recently.
 
 > Start from the installation CD
 
-The first step is booting the installation CD. Once booted, do not
-select to login with "arch", like you would when installing arch.
-Instead, you'll first want to login with "root".
-
-    # root
+The first step is booting the installation CD. Once booted, you are
+presented with an automatically logged-in virtual console as the root
+user.
 
 > Mount your partitions
 
@@ -107,7 +102,7 @@ root disk (or partition) to /mnt.
 
     # mount /dev/sdXY /mnt
 
-If you are using legacy IDE setup, then use the command:
+If you are using legacy IDE drives, then use the command:
 
     # mount /dev/hdXY /mnt
 
@@ -120,7 +115,7 @@ If you use a separate boot partition, do not forget to mount it with:
 This is a good point to stop and gather your information onto another
 drive or partition so that it can be analyzed and/or emailed for outside
 viewing before the files change again. Simply create a separate
-directory on your main partition or mount a usb drive to contain the
+directory on your main partition or mount a USB drive to contain the
 files. Then you may copy any files you will need to keep unchanged
 during the next boot with your new kernel.
 
@@ -129,27 +124,37 @@ during the next boot with your new kernel.
 Now, you will have to chroot to the partition mounted in /mnt. Newer
 kernels use an initial ramdisk to set up the kernel environment: when
 you reinstall a kernel, that initial ramdisk will be regenerated with
-mkinitcpio. One of mkinitcpio's features is that it does autodetection
-to find out what kernel modules are required for starting up your
-computer. For this autodetection to work, /dev, /sys and /proc need to
-mounted in your chroot, make sure to read Change Root.
+mkinitcpio. One of mkinitcpio's features is that it does automatic
+detection to find out what kernel modules are required for starting up
+your computer. For this autodetection to work, /dev, /sys, and /proc
+need to mounted in your chroot; make sure to read Change Root.
+
+To chroot to your normal root mounted at /mnt, run this command:
+
+    # arch-chroot /mnt /bin/bash
+
+If you do not want to use the Bash shell, remove /bin/bash from the
+arch-chroot command.
+
+Note:You need the arch-install-scripts package in order to use
+arch-chroot.
 
 > Roll back to previous kernel version
 
 If you keep your downloaded pacman packages, you now can easily roll
-back. If you didn't keep them, you have to find a way to get a previous
+back. If you did not keep them, you have to find a way to get a previous
 kernel version on your system now.
 
-Let's suppose you kept the previous versions. We will now install the
+Let us suppose you kept the previous versions. We will now install the
 last working one.
 
-First you need to get the kernel details:
+First, you need to get the kernel details:
 
     # find /var/cache/pacman/pkg -name 'linux-3*'
 
-Now use the kernel details in the command below.
+Now, use the kernel details in the command below.
 
-    # pacman -U /var/cache/pacman/pkg/linux-3.xx-x.pkg.tar.gz
+    # pacman -U /var/cache/pacman/pkg/linux-3.xx-x.pkg.tar.xz
 
 (Of course, make sure that you adapt this line to your own kernel
 version. You can find the ones you still have in your cache by examining
@@ -171,9 +176,16 @@ open a new bug report and attach those files you saved during the
 troubleshooting step above.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Kernel_Panics&oldid=250304"
+"https://wiki.archlinux.org/index.php?title=Kernel_Panics&oldid=289666"
 
 Categories:
 
 -   System recovery
 -   Kernel
+
+-   This page was last modified on 20 December 2013, at 21:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

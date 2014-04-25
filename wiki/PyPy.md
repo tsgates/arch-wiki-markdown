@@ -7,22 +7,18 @@ stacklessness. It is compatible with Cpython with
 [http://pypy.org/compat.html some exceptions. PyPy also can be used to
 compile Rpython programs to C code.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-|     -   2.1 Interactive Interpreter                                      |
-|     -   2.2 Run Program From File                                        |
-|                                                                          |
-| -   3 EasyInstall                                                        |
-|     -   3.1 EasyInstall Installation                                     |
-|     -   3.2 Installing EasyInstall Packages                              |
-|     -   3.3 EasyInstall Package Example                                  |
-|                                                                          |
-| -   4 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 Interactive Interpreter
+    -   2.2 Run Program From File
+-   3 EasyInstall
+    -   3.1 EasyInstall Installation
+    -   3.2 Installing EasyInstall Packages
+    -   3.3 EasyInstall Package Example
+-   4 See Also
 
 Installation
 ------------
@@ -114,3 +110,10 @@ Retrieved from
 Category:
 
 -   Development
+
+-   This page was last modified on 22 December 2012, at 08:03.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

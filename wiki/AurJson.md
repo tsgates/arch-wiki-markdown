@@ -5,29 +5,25 @@ The AurJson interface is a lightweight remote interface for the AUR. It
 utilizes http GET queries as the request format, and json as the
 response data exchange format.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 API Usage                                                          |
-|     -   1.1 Query Types                                                  |
-|         -   1.1.1 search                                                 |
-|         -   1.1.2 msearch                                                |
-|         -   1.1.3 info                                                   |
-|         -   1.1.4 multiinfo                                              |
-|                                                                          |
-|     -   1.2 Return Types                                                 |
-|         -   1.2.1 error                                                  |
-|         -   1.2.2 search                                                 |
-|         -   1.2.3 msearch                                                |
-|         -   1.2.4 info                                                   |
-|         -   1.2.5 multiinfo                                              |
-|                                                                          |
-|     -   1.3 jsonp                                                        |
-|                                                                          |
-| -   2 More Examples                                                      |
-| -   3 Reference Clients                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 API Usage
+    -   1.1 Query Types
+        -   1.1.1 search
+        -   1.1.2 msearch
+        -   1.1.3 info
+        -   1.1.4 multiinfo
+    -   1.2 Return Types
+        -   1.2.1 error
+        -   1.2.2 search
+        -   1.2.3 msearch
+        -   1.2.4 info
+        -   1.2.5 multiinfo
+    -   1.3 jsonp
+-   2 More Examples
+-   3 Reference Clients
+-   4 See also
 
 API Usage
 ---------
@@ -267,9 +263,21 @@ Sometimes things are easier to understand with examples. A few reference
 implementations (jQuery, python, ruby) are available at the following
 url: https://github.com/cactus/random/tree/master/aurjson_examples
 
+See also
+--------
+
+-   Official Repositories Web Interface
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=AurJson&oldid=249664"
+"https://wiki.archlinux.org/index.php?title=AurJson&oldid=280380"
 
 Category:
 
 -   Package management
+
+-   This page was last modified on 30 October 2013, at 11:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

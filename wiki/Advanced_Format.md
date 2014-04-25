@@ -1,27 +1,22 @@
 Advanced Format
 ===============
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 More Detailed Explanation                                    |
-|     -   1.2 External Links                                               |
-|                                                                          |
-| -   2 Current HDD Models that Employ a 4k Sectors                        |
-| -   3 How to determine if HDD employ a 4k sector                         |
-| -   4 Aligning Partitions                                                |
-|     -   4.1 Check your partitions alignment                              |
-|     -   4.2 GPT (Recommended)                                            |
-|     -   4.3 MBR (Not Recommended)                                        |
-|                                                                          |
-| -   5 Special Consideration for WD Green HDDs                            |
-|     -   5.1 Disable via hdparm                                           |
-|         -   5.1.1 Is this safe?                                          |
-|                                                                          |
-|     -   5.2 Disable via changing firmware value (persistent)             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+    -   1.1 More Detailed Explanation
+    -   1.2 External Links
+-   2 Current HDD Models that Employ a 4k Sectors
+-   3 How to determine if HDD employ a 4k sector
+-   4 Aligning Partitions
+    -   4.1 Check your partitions alignment
+    -   4.2 GPT (Recommended)
+    -   4.3 MBR (Not Recommended)
+-   5 Special Consideration for WD Green HDDs
+    -   5.1 Disable via hdparm
+        -   5.1.1 Is this safe?
+    -   5.2 Disable via changing firmware value (persistent)
 
 Introduction
 ------------
@@ -94,9 +89,29 @@ Physical
 
 Western Digital
 
+WD3000F9YZ
+
+2.0 TB
+
+512
+
+4096
+
+Western Digital
+
 WD30EZRX
 
 3.0 TB
+
+512
+
+4096
+
+Western Digital
+
+WD20EZRX
+
+2.0 TB
 
 512
 
@@ -174,6 +189,16 @@ ST3000DM001
 
 4096
 
+Seagate
+
+ST4000VN000
+
+4.0 TB
+
+512
+
+4096
+
 Western Digital
 
 WD20EARS
@@ -182,7 +207,7 @@ WD20EARS
 
 512
 
-512
+4096 or 512
 
 Western Digital
 
@@ -199,6 +224,16 @@ Western Digital
 WD20EFRX
 
 2.0 TB
+
+512
+
+4096
+
+Western Digital
+
+WD30EFRX
+
+3.0 TB
 
 512
 
@@ -239,6 +274,16 @@ WD6400AARS
 640.0 GB
 
 2.5"
+
+Samsung
+
+ST1000LM024
+
+1.0 TB
+
+512
+
+4096
 
 Seagate
 
@@ -409,7 +454,7 @@ Use hdparm in /etc/systemd/system/lcc_fix.service to disable this
 
     [Service]
     Type=oneshot
-    ExecStart=/sbin/hdparm -J 300 --please-destroy-my-drive /dev/sdX
+    ExecStart=/usr/bin/hdparm -J 300 --please-destroy-my-drive /dev/sdX
     TimeoutSec=0
     StandardInput=tty
     RemainAfterExit=yes
@@ -487,8 +532,15 @@ For more options see:
      $ ./idle3ctl -h
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Advanced_Format&oldid=255118"
+"https://wiki.archlinux.org/index.php?title=Advanced_Format&oldid=295183"
 
 Category:
 
 -   Storage
+
+-   This page was last modified on 31 January 2014, at 15:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

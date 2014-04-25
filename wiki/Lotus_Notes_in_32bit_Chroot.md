@@ -1,36 +1,15 @@
 Lotus Notes in 32bit Chroot
 ===========================
 
-IBM Lotus Notes does not have a native 64bit package to date. This
-article will discuss the installation of Lotus Notes on 64 bit Arch
-Linux inside a 32bit chroot environment. This method will use the rpm
-versions of the Notes packages; .deb files are available but the author
-has not tried them.
-
 +--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Obtaining Lotus Notes and FixPacks                                 |
-|     -   2.1 Obtaining Lotus Notes                                        |
-|     -   2.2 Downloading FixPacks                                         |
-|                                                                          |
-| -   3 Create 32bit Chroot (x86_64)                                       |
-|     -   3.1 Important steps to remember                                  |
-|                                                                          |
-| -   4 Installing Dependencies                                            |
-| -   5 Installing Lotus Notes                                             |
-|     -   5.1 Creating a shortcut                                          |
-|     -   5.2 Installing on a 32bit System                                 |
-|     -   5.3 Additional Steps on 8.5[.1]                                  |
-|     -   5.4 Troubleshooting                                              |
-|                                                                          |
-| -   6 Post Install                                                       |
+| Summary help replacing me                                                |
++==========================================================================+
+| IBM Lotus Notes does not have a native 64bit package to date. This       |
+| article will discuss the installation of Lotus Notes on 64 bit Arch      |
+| Linux inside a 32bit chroot environment. This method will use the rpm    |
+| versions of the Notes packages; .deb files are available but the author  |
+| has not tried them.                                                      |
 +--------------------------------------------------------------------------+
-
-Introduction
-------------
 
 Lotus Notes is an email, calendaring, todo, notetaking, and
 collaboration application developed by IBM. It is used most commonly in
@@ -51,6 +30,22 @@ possible to use a multi-lib setup, but the author of this article has no
 experience with that method and from his reading considers the chroot
 environment to be cleaner and simpler (easier to start over or remove
 altogether if functionality is no longer needed).
+
+Contents
+--------
+
+-   1 Obtaining Lotus Notes and FixPacks
+    -   1.1 Obtaining Lotus Notes
+    -   1.2 Downloading FixPacks
+-   2 Create 32bit Chroot (x86_64)
+    -   2.1 Important steps to remember
+-   3 Installing dependencies
+-   4 Installing Lotus Notes
+    -   4.1 Creating a shortcut
+    -   4.2 Installing on a 32bit system
+    -   4.3 Additional Steps on 8.5[.1]
+    -   4.4 Troubleshooting
+-   5 Post install
 
 Obtaining Lotus Notes and FixPacks
 ----------------------------------
@@ -98,7 +93,7 @@ previous versions. The page for the 8.5.2 fixpack is here.
 Create 32bit Chroot (x86_64)
 ----------------------------
 
-If using i686, skip to #Installing Dependencies
+If using i686, skip to #Installing dependencies
 
 The Arch Wiki already has a fantastic article on creating a 32bit chroot
 environment on a 64bit system: Install_bundled_32-bit_system_in_Arch64.
@@ -144,7 +139,7 @@ to:
 
      # locale-gen
 
-Installing Dependencies
+Installing dependencies
 -----------------------
 
 IBM has published a list of System Requirements as well as a list of
@@ -201,20 +196,20 @@ environment as well.
 Now install the lotus notes RPM using the following command (Note: You
 may need to have rpm-org installed from the AUR):
 
-     # rpm -ivh --nodeps ibm_lotus_notes-8.5.2.i586.rpm
+    # rpm -ivh --nodeps ibm_lotus_notes-8.5.2.i586.rpm
 
 When that completes, you may install any fixpacks with:
 
-     # rpm --ivh --nodeps ibm_lotus_notes_fixpack-8.5.2.i586.rpm
+    # rpm --ivh --nodeps ibm_lotus_notes_fixpack-8.5.2.i586.rpm
 
 Now run Lotus Notes for the first time with:
 
-     $ /opt/ibm/lotus/notes/notes
+    $ /opt/ibm/lotus/notes/notes
 
 Note: To run the above command, you must not be root. If you installed
 as root, switch back to your user account with:
 
-     # su username
+    # su username
 
 A splash screen should appear, shortly followed by an xterm window
 asking you to accept the license agreement. Type "1" (the digit, one)
@@ -249,7 +244,7 @@ adding your username to the 'Users' segment.
 You should now be able to start notes by typing 'notes' and hitting
 enter in the terminal.
 
-> Installing on a 32bit System
+> Installing on a 32bit system
 
 I'm not sure why this is even covered because it's so simple, but just
 to have a mention of this somewhere in the Arch Wiki, just follow the
@@ -291,8 +286,8 @@ libraries is here
     /opt/ibm/lotus/notes/framework/rcp/plugin_customization.ini. The
     error was about proper permissions. I chmodded did the following:
 
-     # chmod 755 /opt/ibm/lotus/notes/framework/rcp/plugin_customization.ini
-     # chown username:users /opt/ibm/lotus/notes/framework/rcp/plugin_customization.ini
+    # chmod 755 /opt/ibm/lotus/notes/framework/rcp/plugin_customization.ini
+    # chown username:users /opt/ibm/lotus/notes/framework/rcp/plugin_customization.ini
 
 -   Typically, after the license agreement step, Lotus Notes immediately
     brings up the configuration setup process. The last time I installed
@@ -329,7 +324,7 @@ the chroot):
 Then I proceeded to install rpm-org with yaourt and repeated the steps
 above to install Lotus Notes and the fixpack.
 
-Post Install
+Post install
 ------------
 
 -   Fonts: As included above in the dependencies list, make sure you
@@ -348,10 +343,16 @@ Post Install
     MIME email" was what fixed this issue.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lotus_Notes_in_32bit_Chroot&oldid=206895"
+"https://wiki.archlinux.org/index.php?title=Lotus_Notes_in_32bit_Chroot&oldid=270463"
 
 Categories:
 
 -   Arch64
 -   Email Client
--   Internet Applications
+
+-   This page was last modified on 9 August 2013, at 08:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

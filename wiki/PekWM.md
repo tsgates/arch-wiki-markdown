@@ -8,37 +8,31 @@ window grouping (not unlike to ion3, pwm, or even fluxbox), auto
 properties, xinerama and keygrabber that supports keychains, and much
 more.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Start                                                              |
-|     -   2.1 Method 1: kdm/gdm                                            |
-|     -   2.2 Method 2: xinitrc                                            |
-|                                                                          |
-| -   3 Configuring PekWM                                                  |
-|     -   3.1 Menus                                                        |
-|         -   3.1.1 MenuMaker                                              |
-|         -   3.1.2 Manually                                               |
-|                                                                          |
-|     -   3.2 Hotkeys                                                      |
-|     -   3.3 Mouse                                                        |
-|     -   3.4 Startup Programs                                             |
-|     -   3.5 Variables                                                    |
-|     -   3.6 Autoproperties                                               |
-|                                                                          |
-| -   4 Themes                                                             |
-|     -   4.1 GTK Appearance                                               |
-|                                                                          |
-| -   5 Setting a Wallpaper                                                |
-| -   6 Common Problems                                                    |
-|     -   6.1 When using Nvidia TwinView, Windows maximize across both     |
-|         screens                                                          |
-|     -   6.2 Compositing/transparency does not work properly              |
-|                                                                          |
-| -   7 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Start
+    -   2.1 Method 1: kdm/gdm
+    -   2.2 Method 2: xinitrc
+-   3 Configuring PekWM
+    -   3.1 Menus
+        -   3.1.1 MenuMaker
+        -   3.1.2 Using pekwm-menu
+        -   3.1.3 Manually
+    -   3.2 Hotkeys
+    -   3.3 Mouse
+    -   3.4 Startup Programs
+    -   3.5 Variables
+    -   3.6 Autoproperties
+-   4 Themes
+    -   4.1 GTK Appearance
+-   5 Setting a Wallpaper
+-   6 Common Problems
+    -   6.1 When using Nvidia TwinView, Windows maximize across both
+        screens
+    -   6.2 Compositing/transparency does not work properly
+-   7 External Links
 
 Installation
 ------------
@@ -53,10 +47,10 @@ Start
 > Method 1: kdm/gdm
 
 First install and enable kdm or gdm. For instructions on how to enable
-login managers, see the Display Manager page.
+login managers, see the Display manager page.
 
-PekWM be added to the session types. Select PekWM from the session menu
-right before logging in.
+PekWM will be added to the session types. Select PekWM from the session
+menu right before logging in.
 
 > Method 2: xinitrc
 
@@ -101,6 +95,23 @@ To see a full list of options, run mmaker --help
 This will give you a pretty thorough menu. Now you can modify the menu
 file by hand, or simply regenerate the list whenever you install new
 software.
+
+Using pekwm-menu
+
+The program pekwm-menu (AUR) can create a dynamically updated
+applications menu based on the freedesktop.org xdg menu spec. Usage is
+fairly straightforward. Add a section similar to the following to your
+~/.pekwm/menu file:
+
+     Submenu = "Applications" { Icon = "ICON"
+       Entry { Actions = "Dynamic pekwm-menu MENUFILE" }
+     }
+
+Change "ICON" and "MENUFILE" to your preferred icon and menu file. The
+menu file can be supplied via gnome, xfce, lxde or a custom creation.
+Xdg menu files are normally stored in /etc/xdg/menus.
+
+To see a full list of options, run pekwm-menu --help.
 
 Manually
 
@@ -151,6 +162,10 @@ so, just separate the actions by a semicolon. Here is an example:
 When you press Ctrl+Alt+R Pekwm will display on the screen the text
 'Reconfiguring' (osdctl -s 'Reconfiguring') and reconfigure (Reload).
 (Note that this requires osdsh to be installed)
+
+The next example will bind a media key to lower the volume:
+
+    KeyPress = "XF86AudioLowerVolume" { Actions = "exec amixer set Master 5%- unmute &" }
 
 You can also do "chains" of keys, so for example the code
 
@@ -257,12 +272,13 @@ Setting a Wallpaper
 Since PekWM is just a window manager it requires you to use a separate
 program to set a desktop wallpaper. Some popular ones are:
 
+-   esetroot
+-   habak
+-   hsetroot
 -   feh
 -   Nitrogen
+-   wallpaperd
 -   xli
--   esetroot
--   hsetroot
--   habak
 
 Common Problems
 ---------------
@@ -302,8 +318,15 @@ External Links
 -   Freshmeat PekWM Themes
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PekWM&oldid=252272"
+"https://wiki.archlinux.org/index.php?title=PekWM&oldid=302380"
 
 Category:
 
 -   Stacking WMs
+
+-   This page was last modified on 28 February 2014, at 08:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -11,24 +11,18 @@ Install Arch i586
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preface                                                            |
-| -   2 Requirements                                                       |
-| -   3 Step 1. Prepare build enviroment                                   |
-| -   4 Step 2. Build packages                                             |
-| -   5 Step 3. Solve Problem during Compiling                             |
-| -   6 Step 4. Share Built Packages for i586                              |
-| -   7 Step 5. Install Arch Linux on i586 by bootable linux               |
-+--------------------------------------------------------------------------+
-
-Preface
--------
-
 This document tries to describe the process which let me successfully
 build Arch Linux under other architectures.
+
+Contents
+--------
+
+-   1 Requirements
+-   2 Step 1. Prepare build enviroment
+-   3 Step 2. Build packages
+-   4 Step 3. Solve Problem during Compiling
+-   5 Step 4. Share Built Packages for i586
+-   6 Step 5. Install Arch Linux on i586 by bootable linux
 
 Requirements
 ------------
@@ -133,9 +127,15 @@ See Install Arch from within another distro, and use your custom repos
 as package source. More soon ....
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Install_Arch_i586&oldid=205213"
+"https://wiki.archlinux.org/index.php?title=Install_Arch_i586&oldid=257521"
 
-Categories:
+Category:
 
 -   Getting and installing Arch
--   CPU
+
+-   This page was last modified on 18 May 2013, at 04:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

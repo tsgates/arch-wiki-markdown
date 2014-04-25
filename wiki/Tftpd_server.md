@@ -1,4 +1,4 @@
-Tftpd server
+tftpd server
 ============
 
 The Trivial File Transfer Protocol (TFTP) provides a minimalistic means
@@ -21,7 +21,7 @@ Configuration
 Create a copy of the tftpd.service unit, and modify ExecStart with the
 appropriate directory to use as the tftp root.
 
-    # vim /etc/systemd/system/tftpd.service
+    # vim /usr/lib/systemd/system/tftpd.service
 
     [Unit]
     Description=hpa's original TFTP daemon
@@ -32,7 +32,7 @@ appropriate directory to use as the tftp root.
     StandardOutput=inherit
     StandardError=journal
 
-Systemd#Replacing_provided_unit_files talks in more detail about
+Systemd#Editing_provided_unit_files talks in more detail about
 customizing unit files.
 
 Run
@@ -49,8 +49,15 @@ To start tftpd on boot:
 See Systemd#Using_units for more information on manipulating services.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tftpd_server&oldid=246516"
+"https://wiki.archlinux.org/index.php?title=Tftpd_server&oldid=305715"
 
 Category:
 
 -   File Transfer Protocol
+
+-   This page was last modified on 20 March 2014, at 01:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -8,16 +8,14 @@ compression.
 -   mod_spdy dev site
 -   References: 1 2 3
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Configure mod_spdy                                           |
-|     -   2.2 Configure SPDY                                               |
-|     -   2.3 Module Directives                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Configure mod_spdy
+    -   2.2 Configure SPDY
+    -   2.3 Module Directives
 
 Installation
 ------------
@@ -75,3 +73,10 @@ Retrieved from
 Category:
 
 -   Web Server
+
+-   This page was last modified on 22 August 2012, at 05:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

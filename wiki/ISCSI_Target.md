@@ -1,7 +1,7 @@
 ISCSI Target
 ============
 
-> Summary
+Summary help replacing me
 
 How to set up an iSCSI Target using different tools.
 
@@ -30,30 +30,24 @@ decision fell for LIO.
 There are packages available for LIO, STGT and IET in the AUR (see
 below).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setup with LIO Target                                              |
-|     -   1.1 Using targetcli                                              |
-|         -   1.1.1 Authentication                                         |
-|             -   1.1.1.1 Disable Authentication                           |
-|             -   1.1.1.2 Set Credentials                                  |
-|                                                                          |
-|     -   1.2 Using (plain) LIO utils                                      |
-|     -   1.3 Tips & Tricks                                                |
-|     -   1.4 Upstream Documentation                                       |
-|                                                                          |
-| -   2 Setup with SCSI Target Framework (STGT/TGT)                        |
-| -   3 Setup with iSCSI Enterprise Target (IET)                           |
-|     -   3.1 Create the Target                                            |
-|         -   3.1.1 Hard Drive Target                                      |
-|         -   3.1.2 File based Target                                      |
-|                                                                          |
-|     -   3.2 Start server services                                        |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setup with LIO Target
+    -   1.1 Using targetcli
+        -   1.1.1 Authentication
+            -   1.1.1.1 Disable Authentication
+            -   1.1.1.2 Set Credentials
+    -   1.2 Using (plain) LIO utils
+    -   1.3 Tips & Tricks
+    -   1.4 Upstream Documentation
+-   2 Setup with SCSI Target Framework (STGT/TGT)
+-   3 Setup with iSCSI Enterprise Target (IET)
+    -   3.1 Create the Target
+        -   3.1.1 Hard Drive Target
+        -   3.1.2 File based Target
+    -   3.2 Start server services
+-   4 See also
 
 Setup with LIO Target
 ---------------------
@@ -64,43 +58,48 @@ target fabric is included since linux 3.1.
 The important kernel modules are target_core_mod and iscsi_target_mod,
 which should be in the kernel and loaded automatically.
 
-/etc/rc.d/target is included in targetcli-fb when you use the free
-branch or a less clean version in lio-utils when you use the original
-targetcli or lio-utils directly.
+It is highly recommended to use the free branch versions of the
+packages: targetcli-fb, python-rtslib-fb and python-configshell-fb. The
+original targetcli is also available but has a different way of saving
+the configuration using the deprecated lio-utils and depends on epydoc.
+
+A systemd target.service is included in python3-rtslib-fb when you use
+the free branch and a /etc/rc.d/target in lio-utils when you use the
+original targetcli or lio-utils directly.
 
 You start LIO target with
 
-    # /etc/rc.d/target start
+    # systemctl start target
 
 This will load necessary modules, mount the configfs and load previously
 saved iscsi target configuration.
 
 With
 
-    # /etc/rc.d/target status
+    # targetcli status
 
-you can show some information about the running configuration.
+you can show some information about the running configuration (only with
+the free branch). You might want to enable the lio target on boot with
 
-You might want to include target in your rc.conf#Daemons.
+    # systemctl enable target
+
+.
 
 You can use targetcli to create the whole configuration or you can
 alternatively use the lio utils tcm_* and lio_* directly (deprecated).
 
 > Using targetcli
 
-It is recommended to install the free branch targetcli-fb from AUR with
-the dependencies rtslib-fb and configshell-fb.
-
-There is also the original targetcli package available, but it is
-additionally dependent on lio-utils and epydoc. The external manual is
-only available in the free branch. targetd is not in AUR yet, but this
-depends on the free branch.
+The external manual is only available in the free branch. targetd is not
+in AUR yet, but this depends on the free branch.
 
 The config shell creates most names and numbers for you automatically,
 but you can also provide your own settings. At any point in the shell
 you can type help in order to see what commands you can issue here.
 
 Tip:You can use tab-completion in this shell
+
+Tip:You can type cd in this shell to view & select paths
 
 After starting the target (see above) you enter the configuration shell
 with
@@ -125,6 +124,8 @@ targetcli from automatically creating an iqn
 
 In order to tell LIO that your block device should get used as backstore
 for the target you issue
+
+Note:Remember that you can type cd to select the path of your <iqn>/tpg1
 
     .../tpg1> cd luns.../tpg1/luns> create /backstores/block/md_block0
 
@@ -157,8 +158,7 @@ saving the configuration with:
     /> saveconfig
 
 The will the configuration in /etc/target/saveconfig.json. You can now
-safely start and stop /etc/rc.d/target without losing your
-configuration.
+safely start and stop target.service without losing your configuration.
 
 Tip:You can give a filename as a parameter to saveconfig and also clear
 a configuration with clearconfig
@@ -254,9 +254,16 @@ See also
     device for a target
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ISCSI_Target&oldid=250134"
+"https://wiki.archlinux.org/index.php?title=ISCSI_Target&oldid=304638"
 
 Categories:
 
 -   Storage
 -   Networking
+
+-   This page was last modified on 15 March 2014, at 21:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

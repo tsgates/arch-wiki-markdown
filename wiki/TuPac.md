@@ -1,6 +1,8 @@
 TuPac
 =====
 
+Note:The project is discontinued since 2011-04-05.[1]
+
 tupac (turbo pacman) is a pacman database search engine that boosts
 pacman searches. The speed advantage is achieved by caching the pacman
 database.
@@ -12,18 +14,16 @@ performed in a few seconds.
 tupac is not a pacman wrapper. Its coding is only related to pacman
 searches. For any other tasks it bypasses to yaourt.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Key features                                                       |
-| -   2 Command Line Arguments                                             |
-| -   3 What you must know                                                 |
-| -   4 Installation                                                       |
-| -   5 Design                                                             |
-| -   6 History                                                            |
-| -   7 Follow up                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Key features
+-   2 Command Line Arguments
+-   3 What you must know
+-   4 Installation
+-   5 Design
+-   6 History
+-   7 Follow up
 
 Key features
 ------------
@@ -99,8 +99,15 @@ Check this forum's topic:
 https://bbs.archlinux.org/viewtopic.php?id=38560
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=TuPac&oldid=238025"
+"https://wiki.archlinux.org/index.php?title=TuPac&oldid=284168"
 
 Category:
 
 -   Package management
+
+-   This page was last modified on 22 November 2013, at 23:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

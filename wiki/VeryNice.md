@@ -63,3 +63,10 @@ Retrieved from
 Category:
 
 -   System administration
+
+-   This page was last modified on 24 January 2013, at 09:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

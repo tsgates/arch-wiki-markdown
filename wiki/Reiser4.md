@@ -10,24 +10,20 @@ operations either entirely occur, or they entirely don't, and they do
 not corrupt due to half occurring." Benchmarks with other linux
 filesystems are also available.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Important Notes                                                    |
-| -   2 Packages                                                           |
-| -   3 Moving to Reiser4                                                  |
-|     -   3.1 Sample system                                                |
-|     -   3.2 Formatting                                                   |
-|     -   3.3 Copy system                                                  |
-|     -   3.4 /etc/fstab:                                                  |
-|                                                                          |
-| -   4 Bootloader Examples                                                |
-|     -   4.1 /boot/grub/grub.cfg:                                         |
-|     -   4.2 /etc/lilo.conf:                                              |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Important Notes
+-   2 Packages
+-   3 Moving to Reiser4
+    -   3.1 Sample system
+    -   3.2 Formatting
+    -   3.3 Copy system
+    -   3.4 /etc/fstab:
+-   4 Bootloader Examples
+    -   4.1 /boot/grub/grub.cfg:
+    -   4.2 /etc/lilo.conf:
+-   5 Troubleshooting
 
 Important Notes
 ---------------
@@ -47,9 +43,8 @@ Packages
 
 1. Install reiser4progs from AUR
 
-2. You'll need a reiser4 patched kernel. Unfortunately, it has yet not
-been ported into 3.0 kernel. You can check out here for the progress:
-http://www.kernel.org/pub/linux/kernel/people/edward/reiser4/
+2. You'll need a reiser4 patched kernel. Patches can be found here
+http://sourceforge.net/projects/reiser4/files/reiser4-for-linux-3.x/
 
 3. Bootloader (Optional, only needed if you want to format your / (root)
 as reiser4)
@@ -164,15 +159,15 @@ Bootloader Examples
 
     # (0) Arch Linux
     title  Arch Linux
-    set root='(hd0,msdos3'
-    kernel /vmlinuz-linux '''root=/dev/sda3''' ro noatime notail acl init=/sbin/bootchartd
+    set root=(hd0,msdos3)
+    kernel /vmlinuz-linux root=/dev/sda3 ro noatime notail acl init=/usr/bin/bootchartd
     initrd /initramfs-linux.img
 
     # (1) Arch Linux
     title  Arch Linux Fallback
-    set root='(hd0,msdos3'
-    kernel /vlinuz-linux '''root=/dev/sda3''' ro
-    initrd /initramfs-linux.img
+    set root=(hd0,msdos3)
+    kernel /vlinuz-linux root=/dev/sda3 ro
+    initrd /initramfs-linux-fallback.img
 
 Run grub-mkconfig to update your config:
 
@@ -220,8 +215,15 @@ Troubleshooting
     should reinstall coreutils package.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Reiser4&oldid=220073"
+"https://wiki.archlinux.org/index.php?title=Reiser4&oldid=269674"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 3 August 2013, at 21:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

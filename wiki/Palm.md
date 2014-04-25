@@ -15,21 +15,18 @@ This guide is to help Arch users with Palm(R) devices. While
 installation in Arch is easy, it can be confusing for those who are new.
 Also see Palm Evolution.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Packages                                                |
-| -   2 Finding your Device                                                |
-|     -   2.1 tty* based sync                                              |
-|     -   2.2 libusb based sync                                            |
-|                                                                          |
-| -   3 Setting up the Software                                            |
-| -   4 Hotsync over Bluetooth                                             |
-| -   5 Palm T|X                                                           |
-| -   6 Palm Centro                                                        |
-| -   7 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing Packages
+-   2 Finding your Device
+    -   2.1 tty* based sync
+    -   2.2 libusb based sync
+-   3 Setting up the Software
+-   4 Hotsync over Bluetooth
+-   5 Palm T|X
+-   6 Palm Centro
+-   7 Troubleshooting
 
 Installing Packages
 -------------------
@@ -303,3 +300,10 @@ Retrieved from
 Category:
 
 -   Mobile devices
+
+-   This page was last modified on 8 December 2012, at 13:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

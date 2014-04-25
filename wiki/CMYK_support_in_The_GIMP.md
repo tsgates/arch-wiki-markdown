@@ -1,64 +1,45 @@
 CMYK support in The GIMP
 ========================
 
-> Summary
+Related articles
+
+-   Using lprof to profile monitors
 
 This article will show how to enable rudimentary CMYK support in Gimp
 using the Separate and Separate+ plug-ins, and explain how to use color
 proof filter to soft-proof your images. It will also cover more general
 topics on CMYK colors and DTP.
 
-Required software
+Contents
+--------
 
-Gimp (v2.0 and above)
-
-lcms (v1.15)
-
-Separate plugin (v0.10 and above)
-
-Separate+ plugin (v0.5.5)
-
-Related articles
-
-Using lprof to profile monitors
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Before you read                                                    |
-| -   2 Limitations                                                        |
-|     -   2.1 What you will need                                           |
-|                                                                          |
-| -   3 About CMYK color model                                             |
-| -   4 About ICC color profiles                                           |
-| -   5 About CMYK color and Gimp                                          |
-| -   6 Getting the software                                               |
-|     -   6.1 Separate plug-in for Gimp                                    |
-|         -   6.1.1 Installing using AUR                                   |
-|         -   6.1.2 Installing Separate manually                           |
-|                                                                          |
-|     -   6.2 Separate+ plug-in                                            |
-|         -   6.2.1 Installing binary version from Painters Studio         |
-|             repository                                                   |
-|         -   6.2.2 Installing using AUR                                   |
-|         -   6.2.3 Installing manually                                    |
-|                                                                          |
-|     -   6.3 Install ICC profiles                                         |
-|         -   6.3.1 Installing from AUR                                    |
-|         -   6.3.2 Install manually                                       |
-|                                                                          |
-| -   7 Separating a RGB image                                             |
-| -   8 Working on a separated image                                       |
-| -   9 Soft-proofing with Display Filters                                 |
-|     -   9.1 Intent                                                       |
-|     -   9.2 Profile                                                      |
-|                                                                          |
-| -   10 Soft-proofing with Separate's proof function                      |
-| -   11 Soft-proofing with Separate+'s proof function                     |
-| -   12 What RGB profile to use for images?                               |
-| -   13 Resources                                                         |
-+--------------------------------------------------------------------------+
+-   1 Before you read
+-   2 Limitations
+    -   2.1 What you will need
+-   3 About CMYK color model
+-   4 About ICC color profiles
+-   5 About CMYK color and Gimp
+-   6 Getting the software
+    -   6.1 Separate plug-in for Gimp
+        -   6.1.1 Installing using AUR
+        -   6.1.2 Installing Separate manually
+    -   6.2 Separate+ plug-in
+        -   6.2.1 Installing binary version from Painters Studio
+            repository
+        -   6.2.2 Installing using AUR
+        -   6.2.3 Installing manually
+    -   6.3 Install ICC profiles
+        -   6.3.1 Installing from AUR
+        -   6.3.2 Install manually
+-   7 Separating a RGB image
+-   8 Working on a separated image
+-   9 Soft-proofing with Display Filters
+    -   9.1 Intent
+    -   9.2 Profile
+-   10 Soft-proofing with Separate's proof function
+-   11 Soft-proofing with Separate+'s proof function
+-   12 What RGB profile to use for images?
+-   13 See also
 
 Before you read
 ---------------
@@ -391,10 +372,8 @@ What RGB profile to use for images?
 Although Adobe RGB is a common profile, sRGB profiles (especially the
 new v4 version also available in the AUR) is also used often.
 
-Resources
----------
-
-Here are some links that you may find interesting:
+See also
+--------
 
 -   About CMYK color model (Wikipedia)
 -   About color in general (Wikipedia)
@@ -406,9 +385,26 @@ Here are some links that you may find interesting:
 -   Grey Component Removal (Color Rendering Intent)
 -   Undercolor Removal (Color Rendering Intent)
 
+Related software:
+
+-   Gimp (v2.0 and above)
+-   lcms (v1.15)
+-   Separate plugin (v0.10 and above)
+-   Separate+ plugin (v0.5.5)
+-   cmyktool is a standalone program for soft-proofing in CMYK which may
+    be useful if you need to send CMYK to a printer (especially where
+    you want to tweak pure black to avoid halos)
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=CMYK_support_in_The_GIMP&oldid=251625"
+"https://wiki.archlinux.org/index.php?title=CMYK_support_in_The_GIMP&oldid=290387"
 
 Category:
 
 -   Graphics and desktop publishing
+
+-   This page was last modified on 26 December 2013, at 02:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

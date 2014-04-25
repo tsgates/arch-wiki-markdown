@@ -1,42 +1,45 @@
 Lenovo Thinkpad X60 Tablet
 ==========================
 
-> Summary
-
-Installation instructions for the Lenovo Thinkpad X60 Tablet
-
 Related articles
 
-IBM ThinkPad X60
+-   IBM ThinkPad X60
+-   IBM ThinkPad X60s
 
-IBM ThinkPad X60s
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: numerous         
+                           references to            
+                           initscripts and HAL      
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Pre installation notes                                             |
-| -   2 Accessing the recovery partition with GRUB                         |
-| -   3 Configuration                                                      |
-|     -   3.1 Sound                                                        |
-|     -   3.2 Ethernet                                                     |
-|     -   3.3 WiFi                                                         |
-|     -   3.4 Firewire                                                     |
-|     -   3.5 USB                                                          |
-|     -   3.6 Bluetooth                                                    |
-|     -   3.7 SD-card reader                                               |
-|     -   3.8 Graphics card                                                |
-|     -   3.9 Stylus                                                       |
-|     -   3.10 Automatic rotation                                          |
-|     -   3.11 Trackpoint                                                  |
-|     -   3.12 ThinkFinger                                                 |
-|     -   3.13 Backlight                                                   |
-|                                                                          |
-| -   4 Hardware info                                                      |
-|     -   4.1 Specifications                                               |
-|     -   4.2 lspci                                                        |
-|     -   4.3 lsusb                                                        |
-+--------------------------------------------------------------------------+
+Installation instructions for the Lenovo Thinkpad X60 Tablet.
+
+Contents
+--------
+
+-   1 Pre installation notes
+-   2 Accessing the recovery partition with GRUB
+-   3 Configuration
+    -   3.1 Sound
+    -   3.2 Ethernet
+    -   3.3 WiFi
+    -   3.4 Firewire
+    -   3.5 USB
+    -   3.6 Bluetooth
+    -   3.7 SD-card reader
+    -   3.8 Graphics card
+    -   3.9 Stylus
+    -   3.10 Automatic rotation
+    -   3.11 Trackpoint
+    -   3.12 ThinkFinger
+    -   3.13 Backlight
+-   4 Hardware info
+    -   4.1 Specifications
+    -   4.2 lspci
+    -   4.3 lsusb
 
 Pre installation notes
 ======================
@@ -48,7 +51,7 @@ As the laptop does not have a built-in CD/DVD drive you might have to
 use a USB stick or similar device. Look in this how to install from USB
 stick for more information.
 
-Follow the Official Arch Linux Install Guide
+Follow the Installation guide
 
 Accessing the recovery partition with GRUB
 ==========================================
@@ -496,8 +499,15 @@ lsusb
     Bus 001 Device 001: ID 1d6b:0002
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_Thinkpad_X60_Tablet&oldid=232085"
+"https://wiki.archlinux.org/index.php?title=Lenovo_Thinkpad_X60_Tablet&oldid=303182"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 4 March 2014, at 22:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

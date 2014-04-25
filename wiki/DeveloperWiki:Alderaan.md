@@ -3,21 +3,18 @@ DeveloperWiki:Alderaan
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Specs                                                              |
-| -   2 Partition layout                                                   |
-| -   3 Services                                                           |
-| -   4 Maintainer                                                         |
-|     -   4.1 bbs.archlinux.org                                            |
-|     -   4.2 wiki.archlinux.org                                           |
-|     -   4.3 aur.archlinux.org                                            |
-|                                                                          |
-| -   5 Trivia                                                             |
-| -   6 History                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Specs
+-   2 Partition layout
+-   3 Services
+-   4 Maintainer
+    -   4.1 bbs.archlinux.org
+    -   4.2 wiki.archlinux.org
+    -   4.3 aur.archlinux.org
+-   5 Trivia
+-   6 History
 
 Specs
 -----
@@ -96,3 +93,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki:Server Configuration
+
+-   This page was last modified on 6 December 2012, at 00:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

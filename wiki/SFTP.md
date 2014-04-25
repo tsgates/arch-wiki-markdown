@@ -4,20 +4,16 @@ SFTP
 SFTP refers to various forms of (more or less) secure file transfer
 protocols. This article lists two examples and how to set them up.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 SSH file transfer protocol                                         |
-|     -   1.1 Setting up SSH file transfer protocol with OpenSSH           |
-|                                                                          |
-| -   2 FTP over SSH                                                       |
-|     -   2.1 Setting up FTP with pure-ftpd                                |
-|     -   2.2 Set up Certificates                                          |
-|     -   2.3 Enable TLS                                                   |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 SSH file transfer protocol
+    -   1.1 Setting up SSH file transfer protocol with OpenSSH
+-   2 FTP over SSH
+    -   2.1 Setting up FTP with pure-ftpd
+    -   2.2 Set up Certificates
+    -   2.3 Enable TLS
+-   3 See also
 
 SSH file transfer protocol
 --------------------------
@@ -32,8 +28,8 @@ To set up SFTP you only need to install and configure OpenSSH. Once you
 have this running, SFTP is running too because the default configuration
 file enables it. Follow the instructions below for older configs.
 
-1. Open /etc/ssh/sshd_config with your favorite editor and add this
-line:
+1. Open /etc/ssh/sshd_config with your favorite editor and add this line
+if it does not already exist:
 
     Subsystem sftp /usr/lib/ssh/sftp-server
 
@@ -66,12 +62,13 @@ Then you can go ahead and edit the configuration file:
 
 You can start and stop the pure-ftpd daemon by
 
-    # rc.d start pure-ftpd
-    # rc.d stop pure-ftpd
-    # rc.d restart pure-ftpd
+    # systemctl start pure-ftpd
+    # systemctl stop pure-ftpd
+    # systemctl restart pure-ftpd
 
-and you can set it to automatically start by adding it to the daemons
-list in /etc/rc.conf.
+and you can set it to automatically start with
+
+    # systemctl enable pure-ftpd
 
 > Set up Certificates
 
@@ -110,8 +107,15 @@ See also
 -   SFTP-chroot
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SFTP&oldid=248457"
+"https://wiki.archlinux.org/index.php?title=SFTP&oldid=274487"
 
 Category:
 
 -   Secure Shell
+
+-   This page was last modified on 6 September 2013, at 01:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

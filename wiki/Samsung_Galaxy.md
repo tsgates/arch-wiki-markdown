@@ -43,3 +43,10 @@ Retrieved from
 Category:
 
 -   Mobile devices
+
+-   This page was last modified on 27 February 2013, at 17:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

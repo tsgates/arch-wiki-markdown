@@ -16,32 +16,28 @@ ASUS Eee PC T101MT
   Multi-Touch     Working       
   --------------- ------------- ----------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Arch                                                    |
-|     -   1.1 Following the Beginners Guide                                |
-|     -   1.2 Camera                                                       |
-|     -   1.3 Function Keys                                                |
-|     -   1.4 Installing OpenBox                                           |
-|                                                                          |
-| -   2 Rotating the touch screen                                          |
-|     -   2.1 Xbindkeys                                                    |
-|     -   2.2 On Screen Keyboard                                           |
-|     -   2.3 Suspend2RAM                                                  |
-|     -   2.4 Hibernate                                                    |
-|     -   2.5 Multi-Touch                                                  |
-|                                                                          |
-| -   3 Brightness                                                         |
-| -   4 Hardware                                                           |
-| -   5 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing Arch
+    -   1.1 Following the Beginners Guide
+    -   1.2 Camera
+    -   1.3 Function Keys
+    -   1.4 Installing OpenBox
+-   2 Rotating the touch screen
+    -   2.1 Xbindkeys
+    -   2.2 On Screen Keyboard
+    -   2.3 Suspend2RAM
+    -   2.4 Hibernate
+    -   2.5 Multi-Touch
+-   3 Brightness
+-   4 Hardware
+-   5 More Resources
 
 Installing Arch
 ---------------
 
-This wiki page supplements these pages: Beginners Guide, the Official
+This wiki page supplements these pages: Beginners' guide, the Official
 Install Guide, and Installing Arch Linux on the Asus EEE PC. Please
 refer to those guides first before following the eeepc-specific pointers
 on this page.
@@ -220,7 +216,7 @@ rotations (bypass any menu):
        mon="$(xrandr | awk '$2~/^connected/ {print $1}')";  ## set the monitor to be the connected monitor
     fi;
     if [ "$counter" == "yes" ]; then  ## if user wants to rotate counter clockwise
-       rot=$(xrandr -q --verbose | awk "/$mon/ {print \$5}");  ## capture the current rotation
+       rot=$(xrandr -q --verbose | awk "/$mon/ {print \$6}");  ## capture the current rotation
        resolve-rotate;  ## convert the current rotation to an integer
        rot=$[$[int_rot + 1] % 4];  ## increment the rotation by one and divide by four
     fi;
@@ -459,8 +455,15 @@ More Resources
 -   Ubuntu T101MT Howto
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_T101MT&oldid=244946"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_T101MT&oldid=304963"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 09:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

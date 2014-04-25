@@ -1,16 +1,14 @@
 Seq24
 =====
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 How to setup seq24                                                 |
-| -   3 How to use seq24                                                   |
-| -   4 Setting an instrument                                              |
-| -   5 Further use                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 How to setup seq24
+-   3 How to use seq24
+-   4 Setting an instrument
+-   5 Further use
 
 Introduction
 ------------
@@ -76,3 +74,10 @@ Retrieved from
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 23 April 2012, at 16:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,7 +1,7 @@
 ArchWiki Translation Day
 ========================
 
-  Summary
+  Summary help replacing me
   -------------------------------------------------------------------------------
   Next Arch Translation Day takes place on the first saturday of the next month
 
@@ -13,17 +13,15 @@ other languages. The goal of this action is to connect arch-users and to
 translate as much pages as possible to our native languages. This allows
 those who do not speak English very well learn about Arch easier.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 When?                                                              |
-| -   2 Who?                                                               |
-| -   3 Why?                                                               |
-| -   4 How?                                                               |
-| -   5 List of priority pages                                             |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 When?
+-   2 Who?
+-   3 Why?
+-   4 How?
+-   5 List of priority pages
+-   6 See also
 
 When?
 -----
@@ -68,8 +66,15 @@ See also
 -   Arch Linux Event Calendar
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ArchWiki_Translation_Day&oldid=236269"
+"https://wiki.archlinux.org/index.php?title=ArchWiki_Translation_Day&oldid=293029"
 
 Category:
 
 -   Events
+
+-   This page was last modified on 15 January 2014, at 18:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,48 +1,36 @@
 Distcc
 ======
 
-> Summary
+Related articles
 
-distcc is a program that distributes source code among a number of
-distcc-servers allowing many machines to compile one program and thus
-speed up the compilation process. The cool part is you can use it
-together with pacman/srcpac.
-
-> Related
-
-TORQUE
+-   TORQUE
 
 Distcc is a program to distribute builds of C, C++, Objective C or
 Objective C++ code across several machines on a network. distcc should
 always generate the same results as a local build, is simple to install
-and use, and is usually much faster than a local compile.
+and use, and is usually much faster than a local compile. The cool part
+is you can use it together with pacman/srcpac.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Terms                                                              |
-| -   2 Getting started                                                    |
-| -   3 Configuration                                                      |
-|     -   3.1 Both Daemon and Server(s)                                    |
-|     -   3.2 Daemon Only                                                  |
-|                                                                          |
-| -   4 Compile                                                            |
-| -   5 Monitoring Progress                                                |
-| -   6 "Cross Compiling" with Distcc                                      |
-|     -   6.1 Chroot Method (Preferred)                                    |
-|         -   6.1.1 Add port numbers to DISTCC_HOSTS on the i686 chroot    |
-|         -   6.1.2 Invoke makepkg from the Native Environment             |
-|                                                                          |
-|     -   6.2 Multilib GCC Method (Not Recommended)                        |
-|                                                                          |
-| -   7 Tips/Tricks                                                        |
-|     -   7.1 Limit HDD/SSD usage                                          |
-|         -   7.1.1 Relocate $HOME/.distcc                                 |
-|         -   7.1.2 Adjust log level                                       |
-|                                                                          |
-| -   8 Failure work with CMake or other tools                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Terms
+-   2 Getting started
+-   3 Configuration
+    -   3.1 Both Daemon and Server(s)
+    -   3.2 Daemon Only
+-   4 Compile
+-   5 Monitoring Progress
+-   6 "Cross Compiling" with Distcc
+    -   6.1 Chroot Method (Preferred)
+        -   6.1.1 Add port numbers to DISTCC_HOSTS on the i686 chroot
+        -   6.1.2 Invoke makepkg from the Native Environment
+    -   6.2 Multilib GCC Method (Not Recommended)
+-   7 Tips/Tricks
+    -   7.1 Limit HDD/SSD usage
+        -   7.1.1 Relocate $HOME/.distcc
+        -   7.1.2 Adjust log level
+-   8 Failure work with CMake or other tools
 
 Terms
 -----
@@ -79,7 +67,7 @@ Configuration
 Edit /etc/conf.d/distccd and modify the only uncommented line with the
 correct IP address or range of your daemon or of your entire subnet:
 
-    DISTCC_ARGS="--user nobody --allow 192.168.0.0/24"
+    DISTCC_ARGS="--user nobody --allow 127.0.0.1 --allow 192.168.0.0/24"
 
 > Daemon Only
 
@@ -250,7 +238,7 @@ info as it serves up work for nodes to compile. Create a directory named
 avoid needless HDD read/writes and is particularly important for SSDs.
 
     $ mv $HOME/.distcc /tmp
-    $ ln -s $HOME/.distcc /tmp/.distcc
+    $ ln -s /tmp/.distcc $HOME/.distcc
 
 Use systemd to re-create this directory on a reboot (the soft link will
 remain until it is manually removed like any other file):
@@ -259,7 +247,7 @@ Create the following tmpfile where "X" is the letter for the SSD device.
 
      /etc/tmpfiles.d/tmpfs-create.conf 
 
-    d /tmp/.distccd 0755 facade users -
+    d /tmp/.distcc 0755 <username> users -
 
 Adjust log level
 
@@ -286,9 +274,15 @@ code. If you encounter this problem, you can path this file or use the
 distcc-rsp package in the AUR.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Distcc&oldid=240641"
+"https://wiki.archlinux.org/index.php?title=Distcc&oldid=301751"
 
-Categories:
+Category:
 
 -   Package development
--   Networking
+
+-   This page was last modified on 24 February 2014, at 15:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

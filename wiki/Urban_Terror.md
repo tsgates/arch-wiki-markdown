@@ -16,35 +16,28 @@ described as a Hollywood tactical shooter; somewhat realism based, but
 the motto is "fun over realism". This results in a very unique,
 enjoyable and addictive game." [1]
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Client                                                       |
-|         -   1.1.1 Running Urban Terror in a second X server              |
-|         -   1.1.2 Running Urban Terror in a single X server              |
-|                                                                          |
-| -   2 Mapping                                                            |
-|     -   2.1 Prepare the game files                                       |
-|         -   2.1.1 Extract your pk3s (recommended, ~1GB free disk space   |
-|             required)                                                    |
-|         -   2.1.2 Or: Give GTKRadiant write access to the game folder    |
-|             (for single user machines)                                   |
-|                                                                          |
-|     -   2.2 Install a level editor                                       |
-|         -   2.2.1 ZeroRadiant (gtkradiant-svn)                           |
-|                                                                          |
-|     -   2.3 Test your map                                                |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 cg_draw2D                                                    |
-|     -   3.2 Fix urbanterror_ui.shader                                    |
-|     -   3.3 Problems with libcurl                                        |
-|     -   3.4 no sound ??                                                  |
-|                                                                          |
-| -   4 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Client
+        -   1.1.1 Running Urban Terror in a second X server
+        -   1.1.2 Running Urban Terror in a single X server
+-   2 Mapping
+    -   2.1 Prepare the game files
+        -   2.1.1 Extract your pk3s (recommended, ~1GB free disk space
+            required)
+        -   2.1.2 Or: Give GTKRadiant write access to the game folder
+            (for single user machines)
+    -   2.2 Install a level editor
+        -   2.2.1 ZeroRadiant (gtkradiant-svn)
+    -   2.3 Test your map
+-   3 Troubleshooting
+    -   3.1 cg_draw2D
+    -   3.2 Fix urbanterror_ui.shader
+    -   3.3 Problems with libcurl
+    -   3.4 no sound ??
+-   4 External links
 
 Installation
 ------------
@@ -78,7 +71,7 @@ and all processes on that desktop will terminate as well.
 
 Running Urban Terror in a single X server
 
-If you logout from any X Sessions if already started up and execute the
+If you log out from any X sessions if already started up and execute the
 file from e.g. tty1 (Ctrl+Alt+F1) urbanterror is run on the first X
 Server (Ctrl+Alt+F7). All terminal output is printed to tty1. This works
 for mostly every game not depending on a window manager.
@@ -214,8 +207,15 @@ from this guide has no light and Urban Terror will just display black
 walls.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Urban_Terror&oldid=233688"
+"https://wiki.archlinux.org/index.php?title=Urban_Terror&oldid=305744"
 
 Category:
 
 -   Gaming
+
+-   This page was last modified on 20 March 2014, at 01:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

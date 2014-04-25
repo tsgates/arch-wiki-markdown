@@ -4,25 +4,20 @@ IRC Channel
 Warning:Do not edit this page unless you are a channel op in #archlinux.
 You are welcome to use the discussion page.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 Usage                                                        |
-|                                                                          |
-| -   2 #archlinux - The official support channel                          |
-|     -   2.1 #archlinux rules                                             |
-|     -   2.2 #archlinux guidelines                                        |
-|     -   2.3 #archlinux operators                                         |
-|                                                                          |
-| -   3 #archlinux-offtopic                                                |
-|     -   3.1 #archlinux-offtopic rules                                    |
-|     -   3.2 #archlinux-offtopic operators                                |
-|                                                                          |
-| -   4 General information                                                |
-|     -   4.1 Abbreviations and jargon                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+    -   1.1 Usage
+-   2 #archlinux - The official support channel
+    -   2.1 #archlinux rules
+    -   2.2 #archlinux guidelines
+    -   2.3 #archlinux operators
+-   3 #archlinux-offtopic
+    -   3.1 #archlinux-offtopic rules
+    -   3.2 #archlinux-offtopic operators
+-   4 General information
+    -   4.1 Abbreviations and jargon
 
 Introduction
 ------------
@@ -31,7 +26,7 @@ The official Arch Linux IRC channel is #archlinux on the Freenode
 network.
 
 There are also a number of other channels dedicated to Arch Linux
-maintained by community members. See IRC Channels for a listing.
+maintained by community members. See IRC channels for a listing.
 
 > Usage
 
@@ -39,7 +34,7 @@ To join the channels, you need an irc client. Wikipedia has a list of
 irc clients. The following commands can be used inside your IRC client
 to connect to a server and join a channel:
 
-    /connect irc.freenode.net
+    /connect chat.freenode.net
     /join #archlinux
 
 #archlinux - The official support channel
@@ -50,9 +45,8 @@ and general discussion about Arch Linux.
 
 The channel is currently +q $~a. This means that you have to register
 and identify with the NickServ service before you can talk in the
-channel. After you have connected to irc.freenode.net (or
-chat.freenode.net), use the following commands for help getting all set
-up with NickServ:
+channel. After you have connected to chat.freenode.net, use the
+following commands for help getting all set up with NickServ:
 
     /query nickserv help register
     /query nickserv help identify
@@ -72,18 +66,15 @@ Freenode channel guidelines
         operator before you do so.
     -   Auto-response in channel or in pm is not allowed (the only
         exception is 'away' responses at nick highlight in pm).
-
 -   Channelbot usage
     -   There is only one official channel bot. 'phrik
         n=archbot@archlinux/bot/phrik'
     -   Try to limit the bot usage in channel. Remember, you can '/query
         phrik' when the output is not needed in-channel.
     -   No spamming of bot commands
-
 -   Advertising
     -   Advertising is not allowed unless an op has given you permission
         to do so.
-
 -   Content/links
     -   The main topic of the channel is support for and discussion
         about Arch Linux.
@@ -117,8 +108,8 @@ Freenode channel guidelines
     contribute. The channel is a community effort to provide support,
     and depends on volunteers.
 10. Help yourself before you ask. Use wiki search, use forum search,
-    read man pages and try Google. This method will get you an answer
-    faster, and will teach you more.
+    read man pages and try Google. This method will often get you an
+    answer faster, and will teach you more.
 11. When asking for help, always reply to people that ask you for more
     information, if you do not know the answer then say so.
 12. Set a good example. Each user's behavior affects all users in the
@@ -128,20 +119,18 @@ Freenode channel guidelines
 > #archlinux operators
 
 If you for some reason need the help of an op, do not be shy to /query
-or /msg us. Here is the list of ops as of 16 May 2012:
+or /msg us. Here is the list of ops as of 11 Feb 2014:
 
--   Caleb
 -   phrakture
 -   MrElendig / Mion
 -   tigrmesh / tigr
 -   wonder / ioni
 -   brain0
--   td123
 -   falconindy
 -   vodik
--   gtmanfred
--   phrik
 -   grawity
+-   jelly1
+-   demize
 
 #archlinux-offtopic
 -------------------
@@ -159,21 +148,8 @@ Freenode channel guidelines
 
 > #archlinux-offtopic operators
 
-If you for some reason need the help of an op, do not be shy to /query
-or /msg us. Here is the list of ops as of 16 May 2012:
-
--   phrakture
--   Caleb
--   MrElendig / Mion
--   tigrmesh / tigr
--   brain0
--   td123
--   falconindy
--   wonder / ioni
--   vodik
--   gtmanfred
--   phrik
--   grawity
+Arch operators are ops in both channels, see #archlinux_operators or
+/msg phrik listops for a list.
 
 General information
 -------------------
@@ -219,9 +195,16 @@ General information
     Ban / Banned
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IRC_Channel&oldid=252681"
+"https://wiki.archlinux.org/index.php?title=IRC_Channel&oldid=301398"
 
 Categories:
 
 -   Internet Relay Chat
 -   About Arch
+
+-   This page was last modified on 24 February 2014, at 11:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -21,58 +21,54 @@ levels of complexity and completeness exist.
 
 (Source: Wikipedia:Secure Shell)
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 OpenSSH                                                            |
-|     -   1.1 Installing OpenSSH                                           |
-|     -   1.2 Configuring SSH                                              |
-|         -   1.2.1 Client                                                 |
-|         -   1.2.2 Daemon                                                 |
-|                                                                          |
-|     -   1.3 Managing the sshd daemon                                     |
-|     -   1.4 Connecting to the server                                     |
-|                                                                          |
-| -   2 Other SSH clients and servers                                      |
-|     -   2.1 Dropbear                                                     |
-|     -   2.2 SSH alternative: Mobile Shell - responsive, survives         |
-|         disconnects                                                      |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Encrypted SOCKS tunnel                                       |
-|         -   3.1.1 Step 1: start the connection                           |
-|         -   3.1.2 Step 2: configure your browser (or other programs)     |
-|                                                                          |
-|     -   3.2 X11 forwarding                                               |
-|     -   3.3 Forwarding other ports                                       |
-|     -   3.4 Speeding up SSH                                              |
-|     -   3.5 Mounting a remote filesystem with SSHFS                      |
-|     -   3.6 Keep alive                                                   |
-|     -   3.7 Saving connection data in ssh config                         |
-|     -   3.8 Autossh - automatically restarts SSH sessions and tunnels    |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Connection refused or timeout problem                        |
-|         -   4.1.1 Is your router doing port forwarding?                  |
-|         -   4.1.2 Is SSH running and listening?                          |
-|         -   4.1.3 Are there firewall rules blocking the connection?      |
-|         -   4.1.4 Is the traffic even getting to your computer?          |
-|         -   4.1.5 Your ISP or a third party blocking default port?       |
-|             -   4.1.5.1 Diagnosis via Wireshark                          |
-|             -   4.1.5.2 Possible solution                                |
-|                                                                          |
-|         -   4.1.6 Read from socket failed: connection reset by peer      |
-|                                                                          |
-|     -   4.2 "[your shell]: No such file or directory" /                  |
-|         ssh_exchange_identification problem                              |
-|     -   4.3 "Terminal unknown" or "Error opening terminal" error message |
-|         -   4.3.1 Workaround by setting the $TERM variable               |
-|         -   4.3.2 Solution using terminfo file                           |
-|                                                                          |
-| -   5 See also                                                           |
-| -   6 Links & references                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 OpenSSH
+    -   1.1 Installing OpenSSH
+    -   1.2 Configuring SSH
+        -   1.2.1 Client
+        -   1.2.2 Daemon
+    -   1.3 Managing the sshd daemon
+    -   1.4 Connecting to the server
+    -   1.5 Protecting SSH
+        -   1.5.1 Protecting against brute force attacks
+        -   1.5.2 Deny root login
+-   2 Other SSH clients and servers
+    -   2.1 Dropbear
+    -   2.2 SSH alternative: Mobile Shell - responsive, survives
+        disconnects
+-   3 Tips and tricks
+    -   3.1 Encrypted SOCKS tunnel
+        -   3.1.1 Step 1: start the connection
+        -   3.1.2 Step 2: configure your browser (or other programs)
+    -   3.2 X11 forwarding
+    -   3.3 Forwarding other ports
+    -   3.4 Speeding up SSH
+    -   3.5 Mounting a remote filesystem with SSHFS
+    -   3.6 Keep alive
+    -   3.7 Saving connection data in ssh config
+    -   3.8 Autossh - automatically restarts SSH sessions and tunnels
+        -   3.8.1 Run Autossh automatically at boot via systemd
+-   4 Changing SSH port number with socket activation (sshd.socket)
+-   5 Troubleshooting
+    -   5.1 SSH connection left hanging after poweroff/reboot
+    -   5.2 Connection refused or timeout problem
+        -   5.2.1 Is your router doing port forwarding?
+        -   5.2.2 Is SSH running and listening?
+        -   5.2.3 Are there firewall rules blocking the connection?
+        -   5.2.4 Is the traffic even getting to your computer?
+        -   5.2.5 Your ISP or a third party blocking default port?
+            -   5.2.5.1 Diagnosis via Wireshark
+            -   5.2.5.2 Possible solution
+        -   5.2.6 Read from socket failed: connection reset by peer
+    -   5.3 "[your shell]: No such file or directory" /
+        ssh_exchange_identification problem
+    -   5.4 "Terminal unknown" or "Error opening terminal" error message
+        -   5.4.1 Workaround by setting the $TERM variable
+        -   5.4.2 Solution using terminfo file
+-   6 See also
+-   7 Links & references
 
 OpenSSH
 -------
@@ -99,196 +95,23 @@ Client
 The SSH client configuration file is /etc/ssh/ssh_config or
 ~/.ssh/config.
 
-An example configuration:
-
-    /etc/ssh/ssh_config
-
-    #	$OpenBSD: ssh_config,v 1.26 2010/01/11 01:39:46 dtucker Exp $
-
-    # This is the ssh client system-wide configuration file.  See
-    # ssh_config(5) for more information.  This file provides defaults for
-    # users, and the values can be changed in per-user configuration files
-    # or on the command line.
-
-    # Configuration data is parsed as follows:
-    #  1. command line options
-    #  2. user-specific file
-    #  3. system-wide file
-    # Any configuration value is only changed the first time it is set.
-    # Thus, host-specific definitions should be at the beginning of the
-    # configuration file, and defaults at the end.
-
-    # Site-wide defaults for some commonly used options.  For a comprehensive
-    # list of available options, their meanings and defaults, please see the
-    # ssh_config(5) man page.
-
-    # Host *
-    #   ForwardAgent no
-    #   ForwardX11 no
-    #   RhostsRSAAuthentication no
-    #   RSAAuthentication yes
-    #   PasswordAuthentication yes
-    #   HostbasedAuthentication no
-    #   GSSAPIAuthentication no
-    #   GSSAPIDelegateCredentials no
-    #   BatchMode no
-    #   CheckHostIP yes
-    #   AddressFamily any
-    #   ConnectTimeout 0
-    #   StrictHostKeyChecking ask
-    #   IdentityFile ~/.ssh/identity
-    #   IdentityFile ~/.ssh/id_rsa
-    #   IdentityFile ~/.ssh/id_dsa
-    #   Port 22
-    #   Protocol 2,1
-    #   Cipher 3des
-    #   Ciphers aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc
-    #   MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160
-    #   EscapeChar ~
-    #   Tunnel no
-    #   TunnelDevice any:any
-    #   PermitLocalCommand no
-    #   VisualHostKey no
-    #   ProxyCommand ssh -q -W %h:%p gateway.example.com
-
-It is recommended to change the Protocol line into this:
-
-    Protocol 2
-
-That means that only Protocol 2 will be used, since Protocol 1 is
-considered somewhat insecure.
+It is not longer needed to explicitly set Protocol 2, it is commented
+out in the default configuration file. That means Protocol 1 will not be
+used as long as it is not explicitly enabled. (source:
+http://www.openssh.org/txt/release-5.4)
 
 Daemon
 
 The SSH daemon configuration file can be found and edited in
 /etc/ssh/sshd_config.
 
-An example configuration:
-
-    /etc/ssh/sshd_config
-
-    #	$OpenBSD: sshd_config,v 1.82 2010/09/06 17:10:19 naddy Exp $
-
-    # This is the sshd server system-wide configuration file.  See
-    # sshd_config(5) for more information.
-
-    # This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin
-
-    # The strategy used for options in the default sshd_config shipped with
-    # OpenSSH is to specify options with their default value where
-    # possible, but leave them commented.  Uncommented options change a
-    # default value.
-
-    #Port 22
-    #AddressFamily any
-    #ListenAddress 0.0.0.0
-    #ListenAddress ::
-
-    # The default requires explicit activation of protocol 1
-    #Protocol 2
-
-    # HostKey for protocol version 1
-    #HostKey /etc/ssh/ssh_host_key
-    # HostKeys for protocol version 2
-    #HostKey /etc/ssh/ssh_host_rsa_key
-    #HostKey /etc/ssh/ssh_host_dsa_key
-    #HostKey /etc/ssh/ssh_host_ecdsa_key
-
-    # Lifetime and size of ephemeral version 1 server key
-    #KeyRegenerationInterval 1h
-    #ServerKeyBits 1024
-
-    # Logging
-    # obsoletes QuietMode and FascistLogging
-    #SyslogFacility AUTH
-    #LogLevel INFO
-
-    # Authentication:
-
-    #LoginGraceTime 2m
-    #PermitRootLogin yes
-    #StrictModes yes
-    #MaxAuthTries 6
-    #MaxSessions 10
-
-    #RSAAuthentication yes
-    #PubkeyAuthentication yes
-    #AuthorizedKeysFile	.ssh/authorized_keys
-
-    # For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
-    #RhostsRSAAuthentication no
-    # similar for protocol version 2
-    #HostbasedAuthentication no
-    # Change to yes if you do not trust ~/.ssh/known_hosts for
-    # RhostsRSAAuthentication and HostbasedAuthentication
-    #IgnoreUserKnownHosts no
-    # Don't read the user's ~/.rhosts and ~/.shosts files
-    #IgnoreRhosts yes
-
-    # To disable tunneled clear text passwords, change to no here!
-    #PasswordAuthentication yes
-    #PermitEmptyPasswords no
-
-    # Change to no to disable s/key passwords
-    ChallengeResponseAuthentication no
-
-    # Kerberos options
-    #KerberosAuthentication no
-    #KerberosOrLocalPasswd yes
-    #KerberosTicketCleanup yes
-    #KerberosGetAFSToken no
-
-    # GSSAPI options
-    #GSSAPIAuthentication no
-    #GSSAPICleanupCredentials yes
-
-    # Set this to 'yes' to enable PAM authentication, account processing, 
-    # and session processing. If this is enabled, PAM authentication will 
-    # be allowed through the ChallengeResponseAuthentication and
-    # PasswordAuthentication.  Depending on your PAM configuration,
-    # PAM authentication via ChallengeResponseAuthentication may bypass
-    # the setting of "PermitRootLogin without-password".
-    # If you just want the PAM account and session checks to run without
-    # PAM authentication, then enable this but set PasswordAuthentication
-    # and ChallengeResponseAuthentication to 'no'.
-    UsePAM yes
-
-    #AllowAgentForwarding yes
-    #AllowTcpForwarding yes
-    #GatewayPorts no
-    #X11Forwarding no
-    #X11DisplayOffset 10
-    #X11UseLocalhost yes
-    #PrintMotd yes
-    #PrintLastLog yes
-    #TCPKeepAlive yes
-    #UseLogin no
-    #UsePrivilegeSeparation yes
-    #PermitUserEnvironment no
-    #Compression delayed
-    #ClientAliveInterval 0
-    #ClientAliveCountMax 3
-    #UseDNS yes
-    #PidFile /var/run/sshd.pid
-    #MaxStartups 10
-    #PermitTunnel no
-    #ChrootDirectory none
-
-    # no default banner path
-    #Banner none
-
-    # override default of no subsystems
-    Subsystem	sftp	/usr/lib/ssh/sftp-server
-
-    # Example of overriding settings on a per-user basis
-    #Match User anoncvs
-    #	X11Forwarding no
-    #	AllowTcpForwarding no
-    #	ForceCommand cvs server
-
 To allow access only for some users add this line:
 
     AllowUsers    user1 user2
+
+To allow access only for some groups:
+
+    AllowGroups   group1 group2
 
 To disable root login over SSH, change the PermitRootLogin line into
 this:
@@ -300,50 +123,121 @@ Banner line into this:
 
     Banner /etc/issue
 
-Tip: You may want to change the default port from 22 to any higher port
-(see security through obscurity).
+> Tip:
 
-Even though the port ssh is running on could be detected by using a
-port-scanner like nmap, changing it will reduce the number of log
-entries caused by automated authentication attempts. To help select a
-port review the list of TCP and UDP port numbers.
-
-Tip:Disabling password logins entirely will greatly increase security,
-see SSH Keys for more information.
+-   You may want to change the default port from 22 to any higher port
+    (see security through obscurity). Even though the port ssh is
+    running on could be detected by using a port-scanner like nmap,
+    changing it will reduce the number of log entries caused by
+    automated authentication attempts. To help select a port review the
+    list of TCP and UDP port numbers. You can also find port information
+    locally in /etc/services. Select an alternative port that is not
+    already assigned to a common service to prevent conflicts.
+-   Disabling password logins entirely will greatly increase security,
+    see SSH Keys for more information.
 
 > Managing the sshd daemon
 
-You can start the sshd daemon with the following command:
+The SSH daemon comes with different systemd unit files.
+
+You can start the daemon for immediate usage and/or enable it for next
+startup as follows:
 
     # systemctl start sshd
-
-You can enable the sshd daemon at startup with the following command:
-
     # systemctl enable sshd.service
+
+See SystemD#Using_units
 
 Warning:Systemd is an asynchronous starting process. If you bind the SSH
 daemon to a specific IP address ListenAddress 192.168.1.100 it may fail
 to load during boot since the default sshd.service unit file has no
 dependency on network interfaces being enabled. When binding to an IP
 address, you will need to add After=network.target to a custom
-sshd.service unit file. See Systemd#Replacing provided unit files.
+sshd.service unit file. See Systemd#Editing provided unit files.
 
-Or you can enable SSH Daemon socket so the daemon is started on the
-first incoming connection:
+Alternatively to the service used above, the SSH daemon supports socket
+activation. Using it implies that systemd listens on the SSH socket and
+will only start the daemon process for an incoming connection:
 
-    # systemctl enable sshd.socket
+    # systemctl start sshd.socket
+    # systemctl enable sshd.socket 
 
-If you use a different port than the default 22, you have to set
-"ListenStream" in the unit file. Copy /lib/systemd/system/sshd.socket to
-/etc/systemd/system/sshd.socket to keep your unit file from being
-overwritten on upgrades. In /etc/systemd/system/sshd.socket change
-"ListenStream" the appropriate port.
+If you use a different port than the default 22 with socket activation,
+you have to set "ListenStream" in the unit file. Copy
+/lib/systemd/system/sshd.socket to /etc/systemd/system/sshd.socket to
+keep your unit file from being overwritten on upgrades. In
+/etc/systemd/system/sshd.socket change "ListenStream" the appropriate
+port.
+
+Warning:Using sshd.socket effectively negates the ListenAddress setting,
+so using the default sshd.socket will allow connections over any
+address. To achieve the effect of setting ListenAddress, you must create
+a custom unit file and modify ListenStream (ie.
+ListenStream=192.168.1.100:22 is equivalent to
+ListenAddress 192.168.1.100). You must also add FreeBind=true under
+[Socket] or else setting the IP address will have the same drawback as
+setting ListenAddress: the socket will fail to start if the network is
+not up in time.
 
 > Connecting to the server
 
 To connect to a server, run:
 
     $ ssh -p port user@server-address
+
+> Protecting SSH
+
+Allowing remote log-on through SSH is good for administrative purposes,
+but can pose a threat to your server's security. Often the target of
+brute force attacks, SSH access needs to be limited properly to prevent
+third parties gaining access to your server.
+
+-   Use non-standard account names and passwords
+-   Only allow incoming SSH connections from trusted locations
+-   Use fail2ban or sshguard to monitor for brute force attacks, and ban
+    brute forcing IPs accordingly
+
+Protecting against brute force attacks
+
+Brute forcing is a simple concept: One continuously tries to log in to a
+webpage or server log-in prompt like SSH with a high number of random
+username and password combinations. You can protect yourself from brute
+force attacks by using an automated script that blocks anybody trying to
+brute force their way in, for example fail2ban or sshguard.
+
+Deny root login
+
+It is generally considered bad practice to allow the user root to log in
+over SSH: The root account will exist on nearly any Linux system and
+grants full access to the system, once login has been achieved. Sudo
+provides root rights for actions requiring these and is the more secure
+solution, third parties would have to find a username present on the
+system, the matching password and the matching password for sudo to get
+root rights on your system. More barriers to be breached before full
+access to the system is reached.
+
+Configure SSH to deny remote logins with the root user by editing
+/etc/ssh/sshd_config and look for this section:
+
+    # Authentication:
+
+    #LoginGraceTime 2m
+    #PermitRootLogin yes
+    #StrictModes yes
+    #MaxAuthTries 6
+    #MaxSessions 10
+
+Now simply change #PermitRootLogin yes to no, and uncomment the line:
+
+    PermitRootLogin no
+
+Next, restart the SSH daemon:
+
+    # systemctl restart sshd
+
+You will now be unable to log in through SSH under root, but will still
+be able to log in with your normal user and use su - or sudo to do
+system administration.
 
 Other SSH clients and servers
 -----------------------------
@@ -509,6 +403,10 @@ internet-domain X11 display socket"), try to either
 
 Setting it to inet may fix problems with Ubuntu clients on IPv4.
 
+For running X applications as other user on the SSH server you need to
+xauth add the authentication line taken from xauth list of the SSH
+logged in user.
+
 > Forwarding other ports
 
 In addition to SSH's built-in support for X11, it can also be used to
@@ -586,14 +484,32 @@ You can make all sessions to the same host use a single connection,
 which will greatly speed up subsequent logins, by adding these lines
 under the proper host in /etc/ssh/ssh_config:
 
-    ControlMaster auto
-    ControlPath ~/.ssh/socket-%r@%h:%p
+    Host examplehost.com
+      ControlMaster auto
+      ControlPersist yes
+      ControlPath ~/.ssh/socket-%r@%h:%p
+
+See the ssh_config(5) manual page for full description of these options.
+
+Another option to improve speed is to enable compression with the -C
+flag. A permanent solution is to add this line under the proper host in
+/etc/ssh/ssh_config:
+
+    Compression yes
+
+Login time can be shortened by using the -4 flag, which bypasses IPv6
+lookup. This can be made permanent by adding this line under the proper
+host in /etc/ssh/ssh_config:
+
+    AddressFamily inet
 
 Changing the ciphers used by SSH to less cpu-demanding ones can improve
 speed. In this aspect, the best choices are arcfour and blowfish-cbc.
-Please do not do this unless you know what you are doing; arcfour has a
-number of known weaknesses. To use them, run SSH with the "c" flag, like
-this:
+
+Warning:Please do not do this unless you know what you are doing;
+arcfour has a number of known weaknesses.
+
+To use alternative ciphers, run SSH with the -c flag:
 
     $ ssh -c arcfour,blowfish-cbc user@server-address
 
@@ -601,23 +517,6 @@ To use them permanently, add this line under the proper host in
 /etc/ssh/ssh_config:
 
     Ciphers arcfour,blowfish-cbc
-
-Another option to improve speed is to enable compression with the "C"
-flag. A permanent solution is to add this line under the proper host in
-/etc/ssh/ssh_config:
-
-    Compression yes
-
-Login time can be shorten by using the "4" flag, which bypasses IPv6
-lookup. This can be made permanent by adding this line under the proper
-host in /etc/ssh/ssh_config:
-
-    AddressFamily inet
-
-Another way of making these changes permanent is to create an alias in
-~/.bashrc:
-
-    alias ssh='ssh -C4c arcfour,blowfish-cbc'
 
 > Mounting a remote filesystem with SSHFS
 
@@ -648,11 +547,11 @@ server.
 
 Whenever you want to connect to a ssh server, you usually have to type
 at least its address and the username. To save that typing work for
-servers you regularly connect to, you can use the personal
-$HOME/.ssh/config or the global /etc/ssh/ssh_config files as shown in
-the following example:
+servers you regularly connect to, you can use the personal ~/.ssh/config
+or the global /etc/ssh/ssh_config files as shown in the following
+example:
 
-    $HOME/.ssh/config
+    ~/.ssh/config
 
     Host myserver
         HostName 123.123.123.123
@@ -675,10 +574,10 @@ website.
 
 > Autossh - automatically restarts SSH sessions and tunnels
 
-When a ssh session or tunnel cannot be kept alive, because for example
-bad network conditions cause the sshd client to disconnect, you can use
-Autossh to automatically restart them. Autossh can be installed from the
-official repositories.
+When a session or tunnel cannot be kept alive, for example due to bad
+network conditions causing client disconnections, you can use Autossh to
+automatically restart them. Autossh can be installed from the official
+repositories.
 
 Usage examples:
 
@@ -690,7 +589,7 @@ Combined with sshfs:
 
 Connecting through a SOCKS-proxy set by Proxy_settings:
 
-    $ autossh -M 0 "ServerAliveInterval 45" -o "ServerAliveCountMax 2" -NCD 8080 username@example.com 
+    $ autossh -M 0 -o "ServerAliveInterval 45" -o "ServerAliveCountMax 2" -NCD 8080 username@example.com 
 
 With the -f option autossh can be made to run as a background process.
 Running it this way however means the passprase cannot be entered
@@ -698,6 +597,8 @@ interactively.
 
 The session will end once you type exit in the session, or the autossh
 process receives a SIGTERM, SIGINT of SIGKILL signal.
+
+Run Autossh automatically at boot via systemd
 
 If you want to automatically start autossh, it is now easy to get
 systemd to manage this for you. For example, you could create a systemd
@@ -708,28 +609,73 @@ unit file like this:
     After=network.target
 
     [Service]
-    ExecStart=/usr/bin/autossh -M 0 2222:localhost:2222 foo@bar.com
+    Environment="AUTOSSH_GATETIME=0"
+    ExecStart=/usr/bin/autossh -M 0 -NL 2222:localhost:2222 -o TCPKeepAlive=yes foo@bar.com
 
-Then place this in, for example,
-/etc/systemd/system/system/autossh.service. Of course, you can make this
-unit more complex if necessary (see the systemd documentation for
-details), and obviously you can use your own options for autossh.
+    [Install]
+    WantedBy=multi-user.target
 
-You can then enable your autossh tunnels with, e.g.:
+Here AUTOSSH_GATETIME=0 is an environment variable specifying how long
+ssh must be up before autossh considers it a successful connection,
+setting it to 0 autossh also ignores the first run failure of ssh. This
+may be useful when running autossh at boot. Other environment variables
+are available on the manpage. Of course, you can make this unit more
+complex if necessary (see the systemd documentation for details), and
+obviously you can use your own options for autossh, but note that the -f
+implying AUTOSSH_GATETIME=0 does not work with systemd.
+
+Then place this in, for example, /etc/systemd/system/autossh.service.
+Afterwards, you can then enable your autossh tunnels with, e.g.:
 
     $ systemctl start autossh
 
 (or whatever you called the service file)
 
+If this works OK for you, you can make this permanent by running
+
+    $ systemctl enable autossh
+
+That way autossh will start automatically at boot.
+
 It is also easy to maintain several autossh processes, to keep several
 tunnels alive. Just create multiple .service files with different names.
+
+Changing SSH port number with socket activation (sshd.socket)
+-------------------------------------------------------------
+
+Create file /etc/systemd/system/sshd.socket.d/port.conf with:
+
+    [Socket]
+    # Disable default port
+    ListenStream=
+    # Set new port
+    ListenStream=12345
+
+Systemd will automatically listen on the new port after a reload:
+
+    systemctl daemon-reload
 
 Troubleshooting
 ---------------
 
+> SSH connection left hanging after poweroff/reboot
+
+SSH connection hangs after poweroff or reboot if systemd stop network
+before sshd. To fix that problem, comment and change the After
+statement:
+
+    /usr/lib/systemd/system/systemd-user-sessions.service
+
+    #After=remote-fs.target
+    After=network.target
+
 > Connection refused or timeout problem
 
 Is your router doing port forwarding?
+
+SKIP THIS STEP IF YOU ARE NOT BEHIND A NAT MODEM/ROUTER (eg, a VPS or
+otherwise publicly addressed host). Most home and small businesses will
+have a NAT modem/router.
 
 The first thing is to make sure that your router knows to forward any
 incoming ssh connection to your machine. Your external IP is given to
@@ -756,24 +702,16 @@ Check /var/log/messages for errors etc.
 
 Are there firewall rules blocking the connection?
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: rc.d is          
-                           deprecated with systemd  
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
+Iptables may be blocking connections on port 22. Check this with:
 
-Flush your iptables rules to make sure they are not interfering:
+    # iptables -nvL
 
-    # rc.d stop iptables
+and look for rules that might be dropping packets on the INPUT chain.
+Then, if necessary, unblock the port with a command like:
 
-or:
+    # iptables -I INPUT 1 -p tcp --dport 22 -j ACCEPT
 
-    # iptables -P INPUT ACCEPT
-    # iptables -P OUTPUT ACCEPT
-    # iptables -F INPUT
-    # iptables -F OUTPUT
+For more help configuring firewalls, see firewalls.
 
 Is the traffic even getting to your computer?
 
@@ -825,9 +763,8 @@ most likely to be blocking the traffic on that port to your server.
 
 Diagnosis via Wireshark
 
-First install Wireshark using pacman.
-
-    pacman -Sy wireshark-cli 
+Install Wireshark with the wireshark-cli package, available in the
+official repositories.
 
 And then run it using,
 
@@ -878,8 +815,7 @@ See also the discussion on the openssh bug forum.
 One possible cause for this is the need of certain SSH clients to find
 an absolute path (one returned by whereis -b [your shell], for instance)
 in $SHELL, even if the shell's binary is located in one of the $PATH
-entries. Another reason can be that the user is no member of the network
-group.
+entries.
 
 > "Terminal unknown" or "Error opening terminal" error message
 
@@ -930,6 +866,7 @@ See also
 -   sshguard
 -   Sshfs
 -   Syslog-ng : To send ssh log data to another file
+-   SFTP chroot
 
 Links & references
 ------------------
@@ -939,8 +876,15 @@ Links & references
 -   OpenSSH key management, Part 1 and Part 2 on IBM developerWorks
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Secure_Shell&oldid=253472"
+"https://wiki.archlinux.org/index.php?title=Secure_Shell&oldid=305895"
 
 Category:
 
 -   Secure Shell
+
+-   This page was last modified on 20 March 2014, at 16:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

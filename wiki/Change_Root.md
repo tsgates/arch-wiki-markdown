@@ -8,18 +8,19 @@ files and commands outside that directory. This directory is called a
 chroot jail. Changing root is commonly done for system maintenance, such
 as reinstalling the bootloader or resetting a forgotten password.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Requirements                                                       |
-| -   2 Mount the partitions                                               |
-| -   3 Change root                                                        |
-| -   4 Run graphical chrooted applications                                |
-| -   5 Perform system maintenance                                         |
-| -   6 Exit the chroot environment                                        |
-| -   7 Example                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Requirements
+-   2 Mount the partitions
+-   3 Change root
+-   4 Run graphical chrooted applications
+-   5 Perform system maintenance
+-   6 Exit the chroot environment
+-   7 Example
+-   8 An Alternative to chroot Using systemd-nspawn
+-   9 Without root privileges
+    -   9.1 Proot
 
 Requirements
 ------------
@@ -79,34 +80,29 @@ them during shutdown.
 Change root
 -----------
 
-Mount the temporary filesystems as root:
-
-Note:Using a newer (2012) Arch release, the following commands can be
-replaced with arch-chroot /mnt/arch. You must have arch-install-scripts
-installed to run arch-chroot. The following commands may still be used
-if you're using a different Linux distribution.
+Mount the temporary filesystems as root (note: newer install cds have
+the arch-chroot /mnt/arch command, or if you prefer to type it:
 
     cd /mnt/arch
     mount -t proc proc proc/
-    mount -t sysfs sys sys/
-    mount -o bind /dev dev/
-    mount -t devpts pts dev/pts/
+    mount --rbind /sys sys/
+    mount --rbind /dev dev/
 
 If you have established an internet connection and want to use it in the
-chroot environment, you may have to copy over your DNS configuration to
-be able to resolve hostnames.
+chroot environment, it may be necessary to copy over your DNS details:
 
-    cp -L /etc/resolv.conf etc/resolv.conf
+    cp /etc/resolv.conf etc/resolv.conf
 
-Now chroot into your installed system and define your shell:
+To root change and define the shell, do:
 
     chroot /mnt/arch /bin/bash
 
 Note:If you see the error
-chroot: cannot run command '/bin/bash': Exec format error, it is likely
-that the two architectures do not match.
+chroot: cannot run command '/usr/bin/bash': Exec format error, it is
+likely that the install-media and new-root program-architectures do not
+match.
 
-Note:If you see the error chroot: '/bin/bash': permission denied,
+Note:If you see the error chroot: '/usr/bin/bash': permission denied,
 remount with the exec permission: mount -o remount,exec /mnt/arch.
 
 Optionally, to source your Bash configuration (~/.bashrc and
@@ -128,7 +124,7 @@ applications from the chroot environment.
 
 To allow the chroot environment to connect to an X server, open a
 terminal inside the X server (i.e. inside the desktop of the user that
-is currently logged in), then run the following command which gives
+is currently logged in), then run the xhost command, which gives
 permission to anyone to connect to the user's X server:
 
     $ xhost +
@@ -166,7 +162,7 @@ When you're finished with system maintenance, exit the chroot:
 
 Then unmount the temporary filesystems and any mounted devices:
 
-    # umount {proc,sys,dev,boot,[...],}
+    # umount {proc,sys,dev/pts,dev,boot,[...],}
 
 Finally, attempt to unmount your root partition:
 
@@ -205,7 +201,7 @@ This may protect your system from Internet attacks during browsing:
     # mount -t proc proc myroot/proc/
     # mount -t sysfs sys myroot/sys/
     # mount -o bind /dev myroot/dev/
-    # mount -t devpts pts myroot/dev/pts/
+    # mount -o gid=5 -t devpts pts myroot/dev/pts/
     # cp -i /etc/resolv.conf myroot/etc/
     # chroot myroot
     # # inside chroot: 
@@ -245,9 +241,78 @@ This may protect your system from Internet attacks during browsing:
 
 See also: Basic Chroot
 
+An Alternative to chroot Using systemd-nspawn
+---------------------------------------------
+
+Alternatively, you can use systemd-nspawn to achieve the same thing,
+with added benefits (see the "systemd-nspawn" man page).
+
+The steps are very similar:
+
+First mount the root partition.
+
+    # mkdir /mnt/arch
+    # mount /dev/sdx3 /mnt/arch
+
+Then mount the boot and home partitions inside the root partition.
+
+    # mount /dev/sdx1 /mnt/arch/boot
+    # mount /dev/sdx4 /mnt/arch/home
+
+Then, simply cd into the root partition and run systemd-nspawn.
+
+    # cd /mnt/arch
+    # systemd-nspawn
+
+As you can see, there's no need to worry about mounting proc, sys, dev,
+or dev/pts. systemd-nspawn starts a new init process in the contained
+environment which takes care of everything. It's like booting up a
+second Linux OS on the same machine, but it's not a virtual machine.
+
+To quit, just log out or issue the poweroff command. You can then
+unmount the partitions like described above (except without having to
+worry about proc, sys, etc).
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
+  ng]                      needs expansion.         ng]
+                           Reason: Describe the     
+                           steps to run an X server 
+                           inside the               
+                           systemd-nspawn           
+                           container. (Discuss)     
+  ------------------------ ------------------------ ------------------------
+
+Related: See Arch systemd container.
+
+Without root privileges
+-----------------------
+
+Chroot requires root privileges, which may not be desirable or possible
+for the user to obtain in certain situations. There are, however,
+various ways to simulate chroot-like behavior using alternative
+implementations.
+
+> Proot
+
+Proot may be used to change the apparent root directory and use
+mount --bind without root privileges. This is useful for confining
+applications to a single directory or running programs built for a
+different CPU architecture, but it has limitations due to the fact that
+all files are owned by the user on the host system. Proot provides a
+--root-id argument that can be used as a workaround for some of these
+limitations in a similar (albeit more limited) manner to fakeroot.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Change_Root&oldid=252447"
+"https://wiki.archlinux.org/index.php?title=Change_Root&oldid=297516"
 
 Category:
 
 -   System recovery
+
+-   This page was last modified on 14 February 2014, at 16:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

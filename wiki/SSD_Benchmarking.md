@@ -1,7 +1,7 @@
 SSD Benchmarking
 ================
 
-> Summary
+Summary help replacing me
 
 This article covers several Linux-native apps that benchmark I/O devices
 such as HDDs, SSDs, USB thumb drives, etc. There is also a "database"
@@ -14,92 +14,89 @@ Solid State Drives
 
 Benchmarking
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 Using hdparm                                                 |
-|     -   1.2 Using gnome-disks                                            |
-|     -   1.3 Using systemd-analyze                                        |
-|     -   1.4 Using dd                                                     |
-|     -   1.5 Model Specific Data                                          |
-|     -   1.6 Template                                                     |
-|                                                                          |
-| -   2 Results                                                            |
-|     -   2.1 Table                                                        |
-|     -   2.2 Corsair                                                      |
-|         -   2.2.1 Corsair Force 3                                        |
-|                                                                          |
-|     -   2.3 Crucial                                                      |
-|         -   2.3.1 Crucial C300                                           |
-|         -   2.3.2 Crucial M4                                             |
-|                                                                          |
-|     -   2.4 Intel                                                        |
-|         -   2.4.1 Intel 310 Soda Creek                                   |
-|         -   2.4.2 Intel 330                                              |
-|         -   2.4.3 Intel X18-M (G2)                                       |
-|         -   2.4.4 Intel X25-M (G2)                                       |
-|         -   2.4.5 Intel X25-M (G2)                                       |
-|         -   2.4.6 Intel X25-M (G2)                                       |
-|         -   2.4.7 Intel X25-M (G2)                                       |
-|                                                                          |
-|     -   2.5 OCZ                                                          |
-|         -   2.5.1 OCZ-VERTEX 4 128 GB                                    |
-|         -   2.5.2 OCZ-VERTEX 4 128 GB                                    |
-|             -   2.5.2.1 In SATA 6.0 Gb/s Controller                      |
-|             -   2.5.2.2 In SATA 3.0 Gb/s Controller                      |
-|                                                                          |
-|         -   2.5.3 OCZ-VERTEX 60gb                                        |
-|         -   2.5.4 OCZ-VERTEX3 120                                        |
-|         -   2.5.5 OCZ-VERTEX3 120GO                                      |
-|         -   2.5.6 OCZ-VERTEX-TURBO 30gb                                  |
-|         -   2.5.7 OCZ-VERTEX2 240GB                                      |
-|         -   2.5.8 OCZ-VERTEX3 120GB                                      |
-|         -   2.5.9 OCZ-AGILITY3 120GB                                     |
-|                                                                          |
-|     -   2.6 Samsung                                                      |
-|         -   2.6.1 SAMSUNG 128GB / SATAII                                 |
-|         -   2.6.2 SAMSUNG 470 64GB                                       |
-|         -   2.6.3 SAMSUNG 830 128GB                                      |
-|         -   2.6.4 SAMSUNG 830 256GB                                      |
-|         -   2.6.5 SAMSUNG 840 250GB                                      |
-|                                                                          |
-|     -   2.7 Sandisk                                                      |
-|         -   2.7.1 Sandisk Extreme 240 GB                                 |
-|         -   2.7.2 Sandisk Extreme 120 GB                                 |
-|                                                                          |
-|     -   2.8 Kingston                                                     |
-|         -   2.8.1 Kingston HyperX 120 GB                                 |
-|         -   2.8.2 Kingston HyperX 3K 120GB                               |
-|         -   2.8.3 Kingston HyperX 3K 120GB                               |
-|         -   2.8.4 Kingston SSDNow V+100 128 GB                           |
-|         -   2.8.5 Kingston SNV425-S2BD 128GB                             |
-|                                                                          |
-|     -   2.9 Mushkin                                                      |
-|         -   2.9.1 Mushkin mSATA Atlas 128GB                              |
-|                                                                          |
-|     -   2.10 Liteon                                                      |
-|         -   2.10.1 Liteon M3S                                            |
-|                                                                          |
-| -   3 Encrypted Partitions                                               |
-|     -   3.1 dm-crypt with AES                                            |
-|         -   3.1.1 Crucial                                                |
-|             -   3.1.1.1 Crucial M4 256 Gb                                |
-|                                                                          |
-|         -   3.1.2 OCZ                                                    |
-|             -   3.1.2.1 OCZ-VERTEX2 180GB                                |
-|                                                                          |
-|         -   3.1.3 Samsung                                                |
-|             -   3.1.3.1 SAMSUNG 470 128GB                                |
-|             -   3.1.3.2 SAMSUNG 830 256GB                                |
-|             -   3.1.3.3 SAMSUNG 830 256GB                                |
-|                                                                          |
-|     -   3.2 Truecrypt                                                    |
-|                                                                          |
-| -   4 Comparison - high end SCSI RAID 0 hard drive benchmark             |
-|     -   4.1 LSI 320-2X Megaraid SCSI                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+    -   1.1 Using hdparm
+    -   1.2 Using gnome-disks
+    -   1.3 Using systemd-analyze
+    -   1.4 Using dd
+        -   1.4.1 Caveats
+    -   1.5 Model Specific Data
+    -   1.6 Template
+-   2 Results
+    -   2.1 Table
+    -   2.2 Baseline: mechanical drive over ethernet
+    -   2.3 Corsair
+        -   2.3.1 Corsair Force 3
+    -   2.4 Crucial
+        -   2.4.1 Crucial C300
+        -   2.4.2 Crucial M4
+    -   2.5 Intel
+        -   2.5.1 Intel 310 Soda Creek
+        -   2.5.2 Intel 330
+        -   2.5.3 Intel X18-M (G2)
+        -   2.5.4 Intel X25-M (G2)
+        -   2.5.5 Intel X25-M (G2)
+        -   2.5.6 Intel X25-M (G2)
+        -   2.5.7 Intel X25-M (G2)
+    -   2.6 OCZ
+        -   2.6.1 OCZ-VERTEX 4 128 GB
+        -   2.6.2 OCZ-VERTEX 4 128 GB
+            -   2.6.2.1 In SATA 6.0 Gb/s Controller
+            -   2.6.2.2 In SATA 3.0 Gb/s Controller
+        -   2.6.3 OCZ-VERTEX 60gb
+        -   2.6.4 OCZ-VERTEX3 120
+        -   2.6.5 OCZ-VERTEX3 120GO
+        -   2.6.6 OCZ-VERTEX-TURBO 30gb
+        -   2.6.7 OCZ-VERTEX2 240GB
+        -   2.6.8 OCZ-VERTEX3 120GB
+        -   2.6.9 OCZ-AGILITY3 120GB
+    -   2.7 Samsung
+        -   2.7.1 SAMSUNG 128GB / SATAII
+        -   2.7.2 SAMSUNG 470 64GB
+        -   2.7.3 SAMSUNG 830 128GB SATAII
+        -   2.7.4 SAMSUNG 830 128GB
+        -   2.7.5 SAMSUNG 830 256GB
+        -   2.7.6 SAMSUNG 840 120GB
+        -   2.7.7 SAMSUNG 840 250GB
+        -   2.7.8 SAMSUNG 840 evo 128GB
+        -   2.7.9 SAMSUNG 840 Pro 256 GB
+    -   2.8 Sandisk
+        -   2.8.1 Sandisk Extreme 240 GB
+        -   2.8.2 Sandisk Extreme 120 GB
+        -   2.8.3 Sandisk Ultra Plus 64 GB
+    -   2.9 Seagate
+        -   2.9.1 600
+    -   2.10 Kingston
+        -   2.10.1 Kingston HyperX 120 GB
+        -   2.10.2 Kingston HyperX 3K 120GB
+        -   2.10.3 Kingston HyperX 3K 120GB
+        -   2.10.4 Kingston SSDNow V+100 128 GB
+        -   2.10.5 Kingston SSDNow V300 128 GB
+        -   2.10.6 Kingston SNV425-S2BD 128GB
+    -   2.11 Mushkin
+        -   2.11.1 Mushkin mSATA Atlas 128GB
+    -   2.12 Liteon
+        -   2.12.1 Liteon M3S
+    -   2.13 IBM
+        -   2.13.1 IBM MLC 128GB
+-   3 Encrypted Partitions
+    -   3.1 dm-crypt with AES
+        -   3.1.1 Crucial
+            -   3.1.1.1 Crucial M4 256 Gb
+        -   3.1.2 OCZ
+            -   3.1.2.1 OCZ-VERTEX2 180GB
+        -   3.1.3 Samsung
+            -   3.1.3.1 SAMSUNG 470 128GB
+            -   3.1.3.2 SAMSUNG 830 256GB
+            -   3.1.3.3 SAMSUNG 830 256GB
+        -   3.1.4 Plextor
+            -   3.1.4.1 Plextor M5M 128GB
+    -   3.2 Truecrypt
+-   4 Comparison - high end SCSI RAID 0 hard drive benchmark
+    -   4.1 LSI 320-2X Megaraid SCSI
 
 Introduction
 ------------
@@ -183,6 +180,12 @@ Finally, delete the temp file
 
     $ rm tempfile
 
+Caveats
+
+Some SSD controllers have compression hardware, which may skew benchmark
+results. See
+http://www.pugetsystems.com/labs/articles/SSDs-Advertised-vs-Actual-Performance-179/
+
 > Model Specific Data
 
 Please contribute to this section using the template below to post
@@ -223,39 +226,74 @@ Results
 All values are taken from the dd benchmark. This is just an overview and
 has no scientific use.
 
-  User              Vendor     Model              Capacity [GB]   Write [MB/sec]   Read [MB/sec]   Re-Read [MB/sec]
-  ----------------- ---------- ------------------ --------------- ---------------- --------------- ------------------
-  jac               Crucial    C300               128             138              372             6500
-  lynix             Crucial    M4                 128             193              268             6800
-  wzyboy            Crucial    M4                 64              113              276             3400
-  dundee            Intel      310 Soda Creek     40              44.2             197             4200
-  bugflux           Intel      330                120             44.2             242             4500
-  Cirk              Intel      X18-M (G2)         160             103              263             2700
-  Graysky           Intel      X25-M (G2)         80              80.6             268             6300
-  fackamato         Intel      X25-M (G2)         160             98               262             3000
-  Cirk              Intel      X25-M (G2)         80              70               208             4200
-  timo.hardebusch   Intel      X25-M (G2)         120             106              265             2900
-  Musikolo          OCZ        Vertex 4 SATA 3    128             233              392             3600
-  Graysky           OCZ        Vertex 4 SATA 3    128             228              394             -
-  Graysky           OCZ        Vertex 4 SATA 2    128             251              284             -
-  Surfed            OCZ        Vertex             60              142              236             5200
-  Sputnick          OCZ        Vertex 3           120             245              225             4600
-  ScottKidder       OCZ        Vertex Turbo       30              49               115             2600
-  longint           OCZ        Vertex 2           240             852?             241             3400
-  muflone           OCZ        Vertex 3           120             377              291             10300
-  bardo             OCZ        Agility 3          120             445              455             8200
-  Cirk              Samsung    MMCQE28GFMUP-MVA   128             45               99              2300
-  skylinux          Samsung    470                64              188              204             1000
-  kevincodux        Samsung    830                128             313              525             9000
-  Earlz             Samsung    840                250             242              282             9800
-  Dani              Sandisk    Extreme            240             481              414             6000
-  kozaki            Sandisk    Extreme            120             458              403             8200
-  Artsibash         Kingston   HyperX             120             451              431             8600
-  WonderWoofy       Kingston   HyperX 3k          120             518              316             7200
-  Tuxe              Kingston   SSDNow V+100       128             110              232             3300
-  thof              Kingston   SNV425-S2BD        128             164              260             3000
-  WonderWoofy       Mushkin    Atlas (mSATA II)   128             262              242             7300
-  AleksMK           Liteon     M3S                256             336              432             4200
+  User              Vendor                Model                     Capacity [GB]   Write [MB/sec]   Read [MB/sec]   Re-Read [MB/sec]
+  ----------------- --------------------- ------------------------- --------------- ---------------- --------------- ------------------
+  jac               Crucial               C300                      128             138              372             6500
+  Fraoch            Crucial               M4                        64              114              445             3800
+  lynix             Crucial               M4                        128             193              268             6800
+  wzyboy            Crucial               M4                        64              113              276             3400
+  dundee            Intel                 310 Soda Creek            40              44.2             197             4200
+  bugflux           Intel                 330                       120             44.2             242             4500
+  Cirk              Intel                 X18-M (G2)                160             103              263             2700
+  Graysky           Intel                 X25-M (G2)                80              80.6             268             6300
+  fackamato         Intel                 X25-M (G2)                160             98               262             3000
+  Cirk              Intel                 X25-M (G2)                80              70               208             4200
+  timo.hardebusch   Intel                 X25-M (G2)                120             106              265             2900
+  Musikolo          OCZ                   Vertex 4 SATA 3           128             233              392             3600
+  Graysky           OCZ                   Vertex 4 SATA 3           128             228              394             -
+  Graysky           OCZ                   Vertex 4 SATA 2           128             251              284             -
+  Surfed            OCZ                   Vertex                    60              142              236             5200
+  Sputnick          OCZ                   Vertex 3                  120             245              225             4600
+  ScottKidder       OCZ                   Vertex Turbo              30              49               115             2600
+  longint           OCZ                   Vertex 2                  240             852?             241             3400
+  muflone           OCZ                   Vertex 3                  120             377              291             10300
+  bardo             OCZ                   Agility 3                 120             445              455             8200
+  Cirk              Samsung               MMCQE28GFMUP-MVA          128             45               99              2300
+  skylinux          Samsung               470                       64              188              204             1000
+  kevincodux        Samsung               830                       128             313              525             9000
+  Earlz             Samsung               840                       250             242              282             9800
+  Ricky             Samsung               840 evo                   128             223              281             2200
+  wzyboy            Samsung               840 Pro                   256             481              547             7100
+  Dani              Sandisk               Extreme                   240             481              414             6000
+  kozaki            Sandisk               Extreme                   120             458              403             8200
+  Roshless          Sandisk               Ultra Plus                64              150              193             1500
+  Fraoch            Seagate               600                       240             432              526             3700
+  Artsibash         Kingston              HyperX                    120             451              431             8600
+  WonderWoofy       Kingston              HyperX 3k                 120             518              316             7200
+  Tuxe              Kingston              SSDNow V+100              128             110              232             3300
+  Ricky             Kingston              SSDNow V300               128             216              234             2400
+  thof              Kingston              SNV425-S2BD               128             164              260             3000
+  WonderWoofy       Mushkin               Atlas (mSATA II)          128             262              242             7300
+  AleksMK           Liteon                M3S                       256             336              432             4200
+  AsmundEr          WD mechanical drive   over gigE network (NFS)   3000            48               117             7700
+
+> Baseline: mechanical drive over ethernet
+
+-   HDD: WD AV-GP 3TB (SATA 2)
+-   Model number: WD30EURS
+-   Firmware version: ?
+-   Capacity: 2.7 TB
+-   User: AsmundEr
+-   Kernel: 3.9.9
+-   Filesystem: ZFS (native) with mirroring onto two drives (i.e.
+    RAID-1)
+-   Notes: filesystem mounted over gigabit LAN network using NFSv4.
+
+    $ dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 22.2138 s, 48.3 MB/s
+
+    # echo 3 > /proc/sys/vm/drop_caches
+    $ dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 9.20926 s, 117 MB/s
+
+    $ dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 0.13901 s, 7.7 GB/s
 
 > Corsair
 
@@ -354,6 +392,38 @@ Crucial M4
     1024+0 records in
     1024+0 records out
     1073741824 bytes (1.1 GB) copied, 0.157567 s, 6.8 GB/s
+
+-   SSD: Crucial M4 (SATA III)
+-   Model Number: M4-CT064M4SSD2
+-   Firmware Version: 070H
+-   Capacity: 64 GB
+-   Controller: AMD SB950
+-   User: Fraoch
+-   Kernel: 3.8.0
+-   Filesystem: ext4
+
+    # hdparm -Tt /dev/sdb
+    Timing cached reads:   7532 MB in  2.00 seconds = 3767.26 MB/sec
+    Timing buffered disk reads: 1294 MB in  3.00 seconds = 431.20 MB/sec
+
+    Average Read Rate: 506.9 MB/s
+    Average Access Time: 0.08 ms
+
+    $ dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 9.44004 s, 114 MB/s
+
+    # echo 3 > /proc/sys/vm/drop_caches
+    $ dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 2.41524 s, 445 MB/s
+
+    $ dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 0.295721 s, 3.6 GB/s
 
 > Intel
 
@@ -964,6 +1034,36 @@ SAMSUNG 470 64GB
     1024+0 records out
     1073741824 bytes (1.1 GB) copied, 1.05824 s, 1.0 GB/s
 
+SAMSUNG 830 128GB SATAII
+
+-   SSD: SAMSUNG 830 128GB
+-   Model Number: MZ-7PC128D
+-   Firmware: CXM03B1Q
+-   Capacity: 128 GB
+-   User: lockheed
+-   Filesystem: ext4 defaults,noatime,commit=60
+-   Notes: SATA II, partitions aligned, with swap, C2D 2.5 GHz
+
+    # hdparm -Tt /dev/sda
+    Timing cached reads:   12616 MB in  1.99 seconds = 6334.84 MB/sec
+    Timing buffered disk reads: 802 MB in  3.01 seconds = 266.78 MB/sec
+
+    # dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 4.82496 s, 226 MB/s
+
+    # echo 3 > /proc/sys/vm/drop_caches
+    # dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 3.84014 s, 280 MB/s
+
+    # dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 0.300189 s, 3.6 GB/s
+
 SAMSUNG 830 128GB
 
 -   SSD: SAMSUNG 830 128GB
@@ -1024,6 +1124,38 @@ SAMSUNG 830 256GB
     1024+0 records out
     1073741824 bytes (1.1 GB) copied, 0.119695 s, 6.2 GB/s
 
+SAMSUNG 840 120GB
+
+-   SSD: Samsung SSD 840 Series
+-   Model Number: 840 (non Pro)
+-   Firmware Version: DXT08B0Q
+-   Capacity: 120 GB
+-   User: willybilly0101
+-   Kernel: 3.10.10-1-ARCH #1 SMP PREEMPT
+-   Filesystem: Btrfs - defaults,noatime,compress=lzo
+
+    # hdparm -Tt /dev/sda
+    /dev/sda:
+    Timing cached reads:   11346 MB in  2.00 seconds = 5677.40 MB/sec
+    Timing buffered disk reads: 1534 MB in  3.00 seconds = 511.24 MB/sec
+
+    # dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 2.05137 s, 523 MB/s
+
+    # echo 3 > /proc/sys/vm/drop_caches
+
+    # dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 1.08204 s, 992 MB/s
+
+    # dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 0.232285 s, 4.6 GB/s
+
   
 
 SAMSUNG 840 250GB
@@ -1057,6 +1189,70 @@ Notes: Firmware updating was a pain because they don't make it obvious
 you can update without using their Windows-only magician software. Go
 here for ISO images of the updates pre-made and ready to download.
 
+SAMSUNG 840 evo 128GB
+
+-   SSD: SAMSUNG 840 evo 128GB
+-   Model Number: Samsung SSD 840 EVO 120GB
+-   Firmware: EXT0BB6Q
+-   Capacity: 128 GB
+-   User: Ricky
+-   Filesystem: ext4,discard,noatime
+-   Notes: SATAII, partitions aligned, 10% over-provisioning and no swap
+
+    # hdparm -Tt /dev/sda
+    Timing cached reads:   4588 MB in  1.99 seconds = 2299.87 MB/sec
+    Timing buffered disk reads: 808 MB in  3.01 seconds = 268.80 MB/sec
+
+    # dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 4.82364 s, 223 MB/s
+
+    # echo 3 > /proc/sys/vm/drop_caches
+    # dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 3.8185 s, 281 MB/s
+
+    # dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 0.496013 s, 2.2 GB/s
+
+SAMSUNG 840 Pro 256 GB
+
+-   SSD: Samsung 840 Pro 256 GB
+-   Model Number: Samsung SSD 840 PRO Series
+-   Firmware Version: DXM05B0Q
+-   Capacity: 256 GB
+-   Controller: SATA III
+-   User: wzyboy
+-   Kernel: 3.13.5-1-ARCH
+-   Filesystem: Ext4 on aligned GPT, "discard" parameter enabled, no
+    swap
+-   Platform: ThinkPad X240s, i7-4500U, 8 GiB RAM
+
+    # hdparm -Tt /dev/sda
+      /dev/sda:
+      Timing cached reads:   19334 MB in  2.00 seconds = 9677.52 MB/sec
+      Timing buffered disk reads: 1562 MB in  3.00 seconds = 520.56 MB/sec
+
+    $ dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc
+      1024+0 Datensätze ein
+      1024+0 Datensätze aus
+      1073741824 Bytes (1,1 GB) kopiert, 2,23356 s, 481 MB/s
+
+    # echo 3 > /proc/sys/vm/drop_caches
+
+    $ dd if=tempfile of=/dev/null bs=1M count=1024
+      1024+0 Datensätze ein
+      1024+0 Datensätze aus
+      1073741824 Bytes (1,1 GB) kopiert, 1,96205 s, 547 MB/s
+    $ dd if=tempfile of=/dev/null bs=1M count=1024
+      1024+0 Datensätze ein
+      1024+0 Datensätze aus
+      1073741824 Bytes (1,1 GB) kopiert, 0,15168 s, 7,1 GB/s
+
 > Sandisk
 
 Sandisk Extreme 240 GB
@@ -1089,7 +1285,7 @@ Sandisk Extreme 240 GB
 
 Sandisk Extreme 120 GB
 
--   SSD: Sandik Extreme 120 GB (SATA 3: 6 GB/s)
+-   SSD: Sandisk Extreme 120 GB (SATA 3: 6 GB/s)
 -   Model Number: SDSSDX-120G-G25
 -   Firmware Version: R201
 -   Capacity: 120 GB
@@ -1118,7 +1314,7 @@ Sandisk Extreme 120 GB
     1024+0 records out
     1073741824 bytes (1,1 GB) copied, 0,163495 s, 6,6 GB/s
 
--   SSD: Sandik Extreme 120 GB
+-   SSD: Sandisk Extreme 120 GB
 -   Model Number: SDSSDX-120G-G25
 -   Firmware Version: R211
 -   Capacity: 120 GB
@@ -1177,6 +1373,76 @@ Sandisk Extreme 120 GB
     1024+0 records in
     1024+0 records out
     1073741824 bytes (1,1 GB) copied, 0.1312 s, 8.2 GB/sec
+
+Sandisk Ultra Plus 64 GB
+
+-   SSD: Sandisk Ultra Plus 64GB SATA3
+-   Model Number: SDSSDHP-064G-G25
+-   Capacity: 64 GB
+-   User: Roshless
+-   Kernel: 3.12.9-2-ck
+-   Filesystem: ext4 - defaults,noatime,discard
+-   Notes: deadline scheduler, Dell 0M7CYJ mobo, notebook
+
+    # hdparm -Tt /dev/sda
+    /dev/sda:
+    Timing cached reads:   2116 MB in  2.00 seconds = 1058.95 MB/sec
+    Timing buffered disk reads: 582 MB in  3.00 seconds = 193.84 MB/sec
+
+    $ dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 7.17104 s, 150 MB/s
+
+    # echo 3 > /proc/sys/vm/drop_caches
+
+    $ dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 5.5608 s, 193 MB/s
+
+    $ dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 0.707444 s, 1.5 GB/s
+
+> Seagate
+
+600
+
+-   SSD: Seagate 600
+-   Model Number: ST240HM000
+-   Firmware Version: C675
+-   Capacity: 240 GB
+-   Controller: AMD SB950
+-   User: Fraoch
+-   Kernel: 3.11.0
+-   Filesystem: ext4
+
+    # hdparm -Tt /dev/sda
+    /dev/sda:
+    Timing cached reads:   7436 MB in  2.00 seconds = 3719.76 MB/sec
+    Timing buffered disk reads: 1526 MB in  3.00 seconds = 508.66 MB/sec
+
+    Average read rate: 506.6 MB/s
+    Average write rate: 299.3 MB/s
+    Average access time: 0.13 ms
+
+    $ dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 2.48651 s, 432 MB/s
+
+    # echo 3 > /proc/sys/vm/drop_caches
+    $ dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 2.03941 s, 526 MB/s
+
+    $ dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 0.308517 s, 3.5 GB/s
 
 > Kingston
 
@@ -1302,6 +1568,35 @@ Kingston SSDNow V+100 128 GB
     1024+0 records out
     1073741824 bytes (1.1 GB) copied, 0.330142 s, 3.3 GB/s
 
+Kingston SSDNow V300 128 GB
+
+-   SSD: Kingston SSDNow V100 128 GB
+-   Model Number: SV300S37A120G
+-   Firmware: 521ABBF0
+-   Capacity: 128 GB
+-   User: Ricky
+
+    # hdparm -Tt /dev/sda
+    /dev/sda:
+    Timing cached reads:   4970 MB in  1.99 seconds = 2491.32 MB/sec
+    Timing buffered disk reads: 660 MB in  3.01 seconds = 219.53 MB/sec
+
+    # dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc
+    1024+0 records in
+    1024+0 records out 
+    1073741824 bytes (1.1 GB) copied, 4.96045 s, 216 MB/s
+
+    # echo 3 > /proc/sys/vm/drop_caches 
+    # dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out 
+    1073741824 bytes (1.1 GB) copied, 4.58932 s, 234 MB/s
+
+    # dd if=tempfile of=/dev/null bs=1M count=1024
+    1024+0 records in
+    1024+0 records out 
+    1073741824 bytes (1.1 GB) copied, 0.45147 s, 2.4 GB/s
+
 Kingston SNV425-S2BD 128GB
 
 -   SSD: Kingston SNV425-S2BD/128GB
@@ -1394,6 +1689,34 @@ Liteon M3S
     1024+0 records in
     1024+0 records out
     1073741824 bytes (1.1 GB) copied, 0.24457 s, 4.4 GB/s
+
+  
+
+> IBM
+
+IBM MLC 128GB
+
+-   User: darkol
+-   SSD: IBM 128GB SATA 2.5" MLC HS Enterprise Value SSD
+-   Model Number: 90Y8648
+-   Firmware Version:
+-   Capacity: 128 GB
+-   User: darkol
+-   Kernel:
+-   Filesystem: ext4
+-   System: IBM x3650 M4
+
+    # RAID1
+    # hdparm -Tt /dev/sda
+    /dev/sda:
+    Timing cached reads:   17260 MB in  2.00 seconds = 8642.01 MB/sec
+    Timing buffered disk reads:  1262 MB in  3.00 seconds = 420.27 MB/sec
+
+    # RAID5
+    # hdparm -Tt /dev/sdb
+    /dev/sda:
+    Timing cached reads:   17108 MB in  2.00 seconds = 8565.69 MB/sec
+    Timing buffered disk reads:  3986 MB in  3.00 seconds = 1328.38 MB/sec
 
 Encrypted Partitions
 ====================
@@ -1615,6 +1938,60 @@ SAMSUNG 830 256GB
     1024+0 records out
     1073741824 bytes (1.1 GB) copied, 3.44276 s, 312 MB/s
 
+> Plextor
+
+Plextor M5M 128GB
+
+-   User: ror191505
+-   SSD: Plextor M5M 128GB
+-   Firmware: 1.04
+-   Capacity: 128 GB
+-   System: ASUS K56CB, 8Gb RAM
+-   CPU: i7-3517U, AES-NI, Hyper-Threaded, 1.9GHz-3.0GHz
+-   Kernel: x86_64 3.13.5-1-ARCH
+-   Encryption: LVM2 on LUKS dm-crypt
+-   Cryptsetup: -h sha512 -c aes-xts-plain64 -y -s 512 luksFormat
+    --align-payload=8192
+-   Filesystem: EXT4
+
+    # cryptsetup status /dev/mapper/crypted   
+    /dev/mapper/crypted is active and is in use.
+     type:    LUKS1
+     cipher:  aes-xts-plain64
+     keysize: 256 bits
+     device:  /dev/sdb2
+     offset:  4096 sectors
+     size:    249041517 sectors
+     mode:    read/write
+
+  
+
+    % dd bs=1M count=1024 if=film.mkv  of=/dev/null conv=fdatasync
+    dd: fsync failed for '/dev/null': Invalid argument
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 2.65242 s, 405 MB/s
+
+    % dd bs=1M count=1024 if=/dev/zero of=test conv=fdatasync
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 3.69877 s, 290 MB/s
+
+    % dd bs=1M count=1024 if=/dev/zero of=test conv=fdatasync
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 3.67513 s, 292 MB/s
+
+    % dd bs=1M count=1024 if=/dev/zero of=test conv=fdatasync
+    1024+0 records in
+    1024+0 records out
+    1073741824 bytes (1.1 GB) copied, 3.68793 s, 291 MB/s
+
+    % sudo hdparm -Tt /dev/sdb
+    /dev/sdb:
+    Timing cached reads:   12774 MB in  2.00 seconds = 6394.84 MB/sec
+    Timing buffered disk reads: 1264 MB in  3.00 seconds = 420.68 MB/sec
+
 Truecrypt
 ---------
 
@@ -1658,8 +2035,15 @@ LSI 320-2X Megaraid SCSI
     1073741824 bytes (1.1 GB) copied, 0.459814 s, 2.3 GB/s
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SSD_Benchmarking&oldid=253151"
+"https://wiki.archlinux.org/index.php?title=SSD_Benchmarking&oldid=304786"
 
 Category:
 
 -   Storage
+
+-   This page was last modified on 16 March 2014, at 07:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

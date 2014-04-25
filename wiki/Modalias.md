@@ -4,16 +4,15 @@ Modalias
 This document is an intro to how the Linux kernel and modules see and
 understand hardware, and how this translates into a sysfs 'modalias'
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What is a 'modalias'                                               |
-| -   2 What is a 'modalias' file?                                         |
-| -   3 How is this information used?                                      |
-| -   4 Where does this modules.alias file come from?                      |
-| -   5 How does udev work?                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 What is a 'modalias'
+-   2 What is a 'modalias' file?
+-   3 How is this information used?
+-   4 Where does this modules.alias file come from?
+-   5 How does udev work?
+-   6 See also
 
 What is a 'modalias'
 --------------------
@@ -218,9 +217,25 @@ boot), it's insanely simple:
 Yep, that's it. It's a one-liner. This simple line, which is part of the
 default udev rules replace hotplug. Amazing, isn't it?
 
+See also
+--------
+
+This article shows others modalias templates, i.e. for usb, dmi and acpi
+subtypes
+
+-   Modalias strings - a practical way to map "stuff" to hardware by
+    Petter Reinholdtsen
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Modalias&oldid=254522"
+"https://wiki.archlinux.org/index.php?title=Modalias&oldid=303266"
 
 Category:
 
 -   Kernel
+
+-   This page was last modified on 5 March 2014, at 19:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -5,17 +5,14 @@ The following five core principles comprise what is commonly referred to
 as the Arch Way, or the Arch Philosophy, perhaps best summarized by the
 acronym KISS for Keep It Simple, Stupid.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Simplicity                                                         |
-| -   2 Code-correctness over convenience                                  |
-| -   3 User-centric                                                       |
-| -   4 Openness                                                           |
-| -   5 Freedom                                                            |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Simplicity
+-   2 Code-correctness over convenience
+-   3 User-centric
+-   4 Openness
+-   5 Freedom
 
 Simplicity
 ----------
@@ -140,14 +137,16 @@ user who chooses.
 As Judd Vinet, the founder of the Arch Linux project said: "[Arch Linux]
 is what you make it."
 
-See also
---------
-
-The Arch Way v2.0
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=The_Arch_Way&oldid=236678"
+"https://wiki.archlinux.org/index.php?title=The_Arch_Way&oldid=268537"
 
 Category:
 
 -   About Arch
+
+-   This page was last modified on 28 July 2013, at 07:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

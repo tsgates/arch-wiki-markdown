@@ -20,44 +20,36 @@ configuration or software option applicable to a certain model that
 differs from what is described in this article, please add it, with a
 note about which model the suggestion pertains to.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install Tips for the Asus Eee PC                                   |
-| -   2 Kernel Installation and configuration                              |
-| -   3 OS Configuration                                                   |
-|     -   3.1 Networking: Ethernet                                         |
-|     -   3.2 Networking: Wireless                                         |
-|     -   3.3 ACPI (Hotkeys)                                               |
-|         -   3.3.1 Option 1: Install the acpi-eeepc-generic package from  |
-|             AUR                                                          |
-|         -   3.3.2 Option 2: Configure the stock kernel ACPI features     |
-|         -   3.3.3 ASUS OSD                                               |
-|                                                                          |
-|     -   3.4 Bluetooth                                                    |
-|     -   3.5 Webcam                                                       |
-|     -   3.6 Audio                                                        |
-|     -   3.7 X                                                            |
-|         -   3.7.1 Video                                                  |
-|             -   3.7.1.1 Connecting an external Monitor                   |
-|             -   3.7.1.2 Letterboxing with XRandR                         |
-|                                                                          |
-|         -   3.7.2 Mouse and Synaptics driver                             |
-|         -   3.7.3 Miscellaneous                                          |
-|                                                                          |
-| -   4 Performance Tips                                                   |
-|     -   4.1 Speedstep                                                    |
-|     -   4.2 Boot Booster                                                 |
-|                                                                          |
-| -   5 Appendix                                                           |
-|     -   5.1 Hardware Overview for 901                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Install Tips for the Asus Eee PC
+-   1 Install tips for the Asus Eee PC
+-   2 Kernel installation and configuration
+-   3 OS configuration
+    -   3.1 Networking: ethernet
+    -   3.2 Networking: wireless
+    -   3.3 ACPI (hotkeys)
+        -   3.3.1 Option 1: acpi-eeepc-generic
+        -   3.3.2 Option 2: configure the stock kernel ACPI features
+        -   3.3.3 ASUS OSD
+    -   3.4 Bluetooth
+    -   3.5 Webcam
+    -   3.6 Audio
+    -   3.7 X
+        -   3.7.1 Video
+            -   3.7.1.1 Connecting an external monitor
+            -   3.7.1.2 Letterboxing with XRandR
+        -   3.7.2 Mouse and Synaptics driver
+        -   3.7.3 Miscellaneous
+-   4 Performance tips
+    -   4.1 Speedstep
+    -   4.2 Boot Booster
+    -   4.3 Hardware overview for 901
+
+Install tips for the Asus Eee PC
 --------------------------------
 
-This wiki page supplements these pages: Beginners Guide, the Official
+This wiki page supplements these pages: Beginners' guide, the Official
 Install Guide, and Installing Arch Linux on the Asus EEE PC. Please
 refer to those guides first before following the eeepc-specific pointers
 on this page.
@@ -66,7 +58,7 @@ Most of this information is from the Arch Forum EEE 901 thread. Consult
 this thread, and other resources on the Arch forum, for more details and
 discussion.
 
-Kernel Installation and configuration
+Kernel installation and configuration
 -------------------------------------
 
 Follow the Arch Linux installation Guide to install the latest stock
@@ -79,111 +71,109 @@ compile your own kernel, make sure that you build the following modules:
 
 Network card:
 
-     Device Drivers - Ethernet (1000Mbit) - Atheros L1E Gigabit Ethernet support
+    Device Drivers - Ethernet (1000Mbit) - Atheros L1E Gigabit Ethernet support
 
 WiFi card:
 
-     Device Drivers - Staging Drivers - Ralink 2860
+    Device Drivers - Staging Drivers - Ralink 2860
 
 Eee Hotkey stuff:
 
-     Device Drivers - X86 Platform Specific Device Drivers - EeePC Hotkey Driver
+    Device Drivers - X86 Platform Specific Device Drivers - EeePC Hotkey Driver
 
 Video Camera:
 
-     Device Drivers - Multimedia Devices -  Video Capture adapters - V4L USB devices - USB Video Class (UVC)
+    Device Drivers - Multimedia Devices - Video Capture adapters - V4L USB devices - USB Video Class (UVC)
 
 Sound Card:
 
-     Device Drivers - Sound card support - ALSA - PCI Sound devices - Intel HDA - Build Realtek HDA codec
+    Device Drivers - Sound card support - ALSA - PCI Sound devices - Intel HDA - Build Realtek HDA codec
 
 Touchpad:
 
-     Device Drivers - Input Device support - Mice - PS/2 mouse - Synaptics & Elantech PS/2 protocol ext.
+    Device Drivers - Input Device support - Mice - PS/2 mouse - Synaptics & Elantech PS/2 protocol ext.
 
 For flawless operation with the eee-control FSB frequency changing
 mechanism, you have to compile
 
-     Device Drivers - I2C support - I2C Hardware Bus support - Intel 82801 (ICH)
+    Device Drivers - I2C support - I2C Hardware Bus support - Intel 82801 (ICH)
 
 as a module.
 
 For more general information about building custom Arch Linux kernels,
 see Kernel Compilation.
 
-OS Configuration
+OS configuration
 ----------------
 
 To support the devices listed below, make sure the module eeepc_laptop
-is loaded on boot.
+is loaded on boot using modules.d directory:
 
-To automatically all the modules needed (including bluetooth, if it is
-enabled in BIOS, and the ALSA sound drivers), enable autoloading in your
-/etc/rc.conf:
+    /etc/modules-load.d/eeepc_laptop
 
-     MOD_AUTOLOAD="yes"
+    eeepc_laptop
 
-> Networking: Ethernet
+> Networking: ethernet
 
 Ethernet (wired) network access should work right out of the box with
 precompiled kernels, or with atl1e module you built from AUR.
 
-> Networking: Wireless
+> Networking: wireless
 
 From Kernel 3.0, The staging driver rt2860sta is replaced by mainline
-driver rt2800pci. See Wireless Setup#rt2860 and rt2870.
+driver rt2800pci. See Wireless network configuration#rt2860 and rt2870.
 
 After a bios-upgrade the wireless-card of the Eee PC will be disabled by
 default, so if you have any troubles with wlan check that it is enabled
 in the bios.
 
-     # enable
-     echo 1 > /sys/devices/platform/eeepc/rfkill/rfkill0/state
-     # disable
-     echo 0 > /sys/devices/platform/eeepc/rfkill/rfkill0/state
+    # enable
+    echo 1 > /sys/devices/platform/eeepc/rfkill/rfkill0/state
+    # disable
+    echo 0 > /sys/devices/platform/eeepc/rfkill/rfkill0/state
 
 Here's a working example wpa_supplicant config file:
 
-     ctrl_interface=/var/run/wpa_supplicant
-     # change ap_scan to 2 if running into problems
-     ap_scan=1
-     fast_reauth=1
-     eapol_version=1
-     
-     network={
-       key_mgmt=NONE
-     }
-     
-     network={
-       ssid="WPA"
-       scan_ssid=1
-       proto=WPA
-       key_mgmt=WPA-PSK
-       pairwise=TKIP
-       group=TKIP
-       #psk="passphrase"
-       psk=hexkey
-     }
-     
-     network={
-       ssid="WEP"
-       scan_ssid=1
-       key_mgmt=NONE
-       #wep_key0="passphrase"
-       wep_key0=hexkey
-       wep_tx_keyidx=0
-     }
+    ctrl_interface=/var/run/wpa_supplicant
+    # change ap_scan to 2 if running into problems
+    ap_scan=1
+    fast_reauth=1
+    eapol_version=1
+
+    network={
+      key_mgmt=NONE
+    }
+
+    network={
+      ssid="WPA"
+      scan_ssid=1
+      proto=WPA
+      key_mgmt=WPA-PSK
+      pairwise=TKIP
+      group=TKIP
+      #psk="passphrase"
+      psk=hexkey
+    }
+
+    network={
+      ssid="WEP"
+      scan_ssid=1
+      key_mgmt=NONE
+      #wep_key0="passphrase"
+      wep_key0=hexkey
+      wep_tx_keyidx=0
+    }
 
 Your mileage may vary, but experience seems to show that the ap_scan=1
 parameter is critical. Try tweaking the other "header" settings, too, if
 you continue to experience problems.
 
-> ACPI (Hotkeys)
+> ACPI (hotkeys)
 
-Option 1: Install the acpi-eeepc-generic package from AUR
+Option 1: acpi-eeepc-generic
 
-For this package to work, make sure the eeepc_laptop and rfkill modules
-are loaded at boot.
+Install acpi-eeepc-generic. For this package to work, make sure the
+eeepc_laptop and rfkill modules are loaded at boot.
 
 Consult the notes included with the install for instructions on
 configuring /etc/conf.d/acpi-eeepc-generic.conf.
@@ -193,14 +183,14 @@ buttons as configured in the default Xandros distribution, with some
 minor variations. Edit the /etc/conf.d/acpi-eeepc-generic.conf file to
 change or modify the behavior of the function keys.
 
-Option 2: Configure the stock kernel ACPI features
+Option 2: configure the stock kernel ACPI features
 
-Enable the ASUS_LAPTOP (Device Drivers -> Misc Devices) switch in your
-kernel config and turn off ACPI_ASUS switch (Power managment options ->
+Enable the ASUS_LAPTOP (Device Drivers > Misc Devices) switch in your
+kernel config and turn off ACPI_ASUS switch (Power managment options >
 ACPI).
 
 To enable the FN keys, the WLAN and Camera on/off toggles, etc.,
-activate the EEEPC_LAPTOP switch also (Device Drivers -> Misc Devices).
+activate the EEEPC_LAPTOP switch also (Device Drivers > Misc Devices).
 
 You can use Robertek's PKGBUILD and files for acpi-www901 at
 http://robertek.brevnov.net/files/linux/arch/acpi-eee901/ as a base to
@@ -219,19 +209,19 @@ Asus OSD is included as part of the acpi-eee901 package. Simply add the
 command asusosd & to your desktop manager startup script, or create the
 file /etc/xdg/autostart/asusosd.desktop with these contents:
 
-       [Desktop Entry]
-       Encoding=UTF-8
-       Name=ASUS OSD
-       Comment=ASUS OSD
-       Exec=/usr/bin/asusosd
-       Terminal=false
-       Type=Application
-       StartupNotify=false
-       Hidden=false
+    [Desktop Entry]
+    Encoding=UTF-8
+    Name=ASUS OSD
+    Comment=ASUS OSD
+    Exec=/usr/bin/asusosd
+    Terminal=false
+    Type=Application
+    StartupNotify=false
+    Hidden=false
 
 > Bluetooth
 
-Currently, Bluetooth is not enabled with the Fn + F2 hotkey. To
+Currently, Bluetooth is not enabled with the Fn+F2 hotkey. To
 communicate with Bluetooth devices, make sure Bluetooth has been enabled
 in the BIOS.
 
@@ -251,19 +241,17 @@ information about configuring and using Bluetooth devices.
 
 To enable/disable the camera:
 
-     # enable
-     echo 1 > /sys/devices/platform/eeepc/camera
-     # disable
-     echo 0 > /sys/devices/platform/eeepc/camera
+    # enable
+    echo 1 > /sys/devices/platform/eeepc/camera
+    # disable
+    echo 0 > /sys/devices/platform/eeepc/camera
 
-To record video and take photos, you may use cheese or the wxcam package
-(available in the edgy repository or AUR).
-
-     pacman -S wxcam
+To record video and take photos, you may use cheese or the wxcam
+package.
 
 To simply test the camera, you may use mplayer:
 
-     mplayer -fps 15 tv://
+    mplayer -fps 15 tv://
 
 The webcam is reported to work with Skype.
 
@@ -284,50 +272,53 @@ and using ALSA.
 
 > X
 
-This section is out-of-date, and needs to be cleaned up.
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: This section is  
+                           out-of-date, and needs   
+                           to be cleaned up.        
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 Video
 
-You will need the xf86-video-intel video driver:
-
-     pacman -S xf86-video-intel
+You will need the xf86-video-intel video driver.
 
 To set-up the touchpad, (including two-fingers scrolling & tapping),
-just install xf86-input-synaptics (no xorg.conf required):
-
-     pacman -S xf86-input-synaptics
+just install xf86-input-synaptics (no xorg.conf required).
 
 Some users have reported problems with vsync and the xf86-video-intel
 driver. These problems may be partially solved in the application (see
 this forum post.)
 
-Connecting an external Monitor
+Connecting an external monitor
 
 The xrandr utility (part of Xorg) can be used to switch into screen
 modes appropriate either for the EeePC's LCD or an externally connected
-monitor. Running "xrandr -q" will show you the available output devices
+monitor. Running xrandr -q will show you the available output devices
 and the supported modes. Then run the tool as follows:
 
-     xrandr --output LVDS --off  --output VGA --auto   # disable LCD, enable monitor
-     xrandr --output LVDS --auto --output VGA --auto   # enable both
-     etc.
+    xrandr --output LVDS --off  --output VGA --auto   # disable LCD, enable monitor
+    xrandr --output LVDS --auto --output VGA --auto   # enable both
+    etc.
 
 Your monitor will probably support a bigger resolution than the LCD. To
 make use of that additional screen space, tell the X server to create an
 appropriately large framebuffer by adding the "Virtual" directive to the
 Screen/Display section in /etc/X11/xorg.conf:
 
-     Section "Screen"
-       Identifier "Screen0"
-       Device     "Card0"
-       Monitor    "Monitor0"
-       DefaultDepth     24
-       SubSection "Display"
-           Viewport   0 0
-           Depth     24
-           Virtual 1600 1200   # max resolution is 1600x1200
-       EndSubSection
-     EndSection
+    Section "Screen"
+      Identifier "Screen0"
+      Device     "Card0"
+      Monitor    "Monitor0"
+      DefaultDepth     24
+      SubSection "Display"
+          Viewport   0 0
+          Depth     24
+          Virtual 1600 1200   # max resolution is 1600x1200
+      EndSubSection
+    EndSection
 
 On the LCD, the additional space will be unused, but when switching to
 the external monitor, the screen will be. Note that some window managers
@@ -350,91 +341,88 @@ Replace "800x600" with "1024x600" to go back to the native resolution.
 
 Mouse and Synaptics driver
 
-To enable the Synaptics drivers, first install the synaptics package:
+To enable the Synaptics drivers, first install the xf86-input-synaptics
+package.
 
-     pacman -S synaptics
-
-You also need the evdev driver for Xorg:
-
-     pacman -S xf86-input-evdev
+You also need the xf86-input-evdev driver for Xorg.
 
 Then make these changes to /etc/X11/xorg.conf:
 
-     Section "ServerLayout"
-       Identifier     "ArchLinux"
-       Screen      0  "Screen0"
-       InputDevice    "keyboard"
-       InputDevice    "mouse"
-       InputDevice    "synaptics"
-     EndSection
-     
-     [...]
-      
-     Section "Files"
-       #    RgbPath      "/usr/share/X11/rgb"
-       ModulePath   "/usr/lib/xorg/modules"
-       FontPath     "/usr/share/fonts/misc"
-       FontPath     "/usr/share/fonts/100dpi:unscaled"
-       FontPath     "/usr/share/fonts/75dpi:unscaled"
-       FontPath     "/usr/share/fonts/TTF"
-       FontPath     "/usr/share/fonts/Type1"
-     EndSection
-      
-     Section "Module"
-       Load  "GLcore"
-       Load  "glx"
-       Load  "record"
-       Load  "dri"
-       Load  "extmod"
-       Load  "xtrap"
-       Load  "dbe"
-       Load  "freetype"
-       Load  "synaptics"
-     EndSection
-         
-     [...]
-      
-     Section "InputDevice"
-       Identifier  "mouse"
-       Driver      "mouse"
-       Option        "Device" "/dev/input/mice"
-       Option        "Protocol" "IMPS/2"
-       Option        "Emulate3Buttons" "yes"
-       Option        "ZAxisMapping" "4 5"
-       Option        "CorePointer"
-     EndSection
-      
-     Section "InputDevice"
-       Identifier  "synaptics"
-       Driver      "synaptics"
-       Option      "Device"           "/dev/psaux"
-       Option      "Protocol"         "auto-dev"
-       Option      "PalmDetect"       "0"
-       Option      "SHMConfig"        "true"
-       Option      "SendCoreEvents"   "yes"
-       Option      "RBCornerButton"   "0"
-       Option      "RTCornerButtom"   "0"
-       Option      "TapButton1"       "1"
-       Option      "TapButton2"       "2"
-       Option      "TapButton3"       "3"
-       Option      "AccelFactor"   "0.0320"
-       Option      "MaxSpeed"      "0.72"
-       Option      "MinSpeed"      "0.6"
-       Option      "Emulate3Buttons"       "true"
-       Option      "TouchPadOff"       "0"
-       Option      "LBCornerButton"        "2"
-       Option      "LeftEdge"      "60"
-       Option      "RightEdge"     "1070"
-       Option      "TopEdge"       "90"
-       Option      "BottomEdge"    "680"
-       Option      "VertTwoFingerScroll"   "1"
-       Option      "HorizTwoFingerScroll"  "1"
-       Option      "HorizScrollDelta"  "20"
-       Option      "LockedDrags"   "1"
-       Option      "CoastingSpeed" "0.13"
-       Option      "CircularScrolling"     "1"
-       Option      "CircScrollTrigger"     "8"     # 8=Top Left Corner
-     EndSection
+    Section "ServerLayout"
+      Identifier     "ArchLinux"
+      Screen      0  "Screen0"
+      InputDevice    "keyboard"
+      InputDevice    "mouse"
+      InputDevice    "synaptics"
+    EndSection
+
+    [...]
+
+    Section "Files"
+      #    RgbPath      "/usr/share/X11/rgb"
+      ModulePath   "/usr/lib/xorg/modules"
+      FontPath     "/usr/share/fonts/misc"
+      FontPath     "/usr/share/fonts/100dpi:unscaled"
+      FontPath     "/usr/share/fonts/75dpi:unscaled"
+      FontPath     "/usr/share/fonts/TTF"
+      FontPath     "/usr/share/fonts/Type1"
+    EndSection
+
+    Section "Module"
+      Load  "GLcore"
+      Load  "glx"
+      Load  "record"
+      Load  "dri"
+      Load  "extmod"
+      Load  "xtrap"
+      Load  "dbe"
+      Load  "freetype"
+      Load  "synaptics"
+    EndSection
+
+    [...]
+
+    Section "InputDevice"
+      Identifier  "mouse"
+      Driver      "mouse"
+      Option        "Device" "/dev/input/mice"
+      Option        "Protocol" "IMPS/2"
+      Option        "Emulate3Buttons" "yes"
+      Option        "ZAxisMapping" "4 5"
+      Option        "CorePointer"
+    EndSection
+
+    Section "InputDevice"
+      Identifier  "synaptics"
+      Driver      "synaptics"
+      Option      "Device"           "/dev/psaux"
+      Option      "Protocol"         "auto-dev"
+      Option      "PalmDetect"       "0"
+      Option      "SHMConfig"        "true"
+      Option      "SendCoreEvents"   "yes"
+      Option      "RBCornerButton"   "0"
+      Option      "RTCornerButtom"   "0"
+      Option      "TapButton1"       "1"
+      Option      "TapButton2"       "2"
+      Option      "TapButton3"       "3"
+      Option      "AccelFactor"   "0.0320"
+      Option      "MaxSpeed"      "0.72"
+      Option      "MinSpeed"      "0.6"
+      Option      "Emulate3Buttons"       "true"
+      Option      "TouchPadOff"       "0"
+      Option      "LBCornerButton"        "2"
+      Option      "LeftEdge"      "60"
+      Option      "RightEdge"     "1070"
+      Option      "TopEdge"       "90"
+      Option      "BottomEdge"    "680"
+      Option      "VertTwoFingerScroll"   "1"
+      Option      "HorizTwoFingerScroll"  "1"
+      Option      "HorizScrollDelta"  "20"
+      Option      "LockedDrags"   "1"
+      Option      "CoastingSpeed" "0.13"
+      Option      "CircularScrolling"     "1"
+      Option      "CircScrollTrigger"     "8"     # 8=Top Left Corner
+    EndSection
 
 The latest version of the Elantech touchpad driver patch is available at
 http://arjan.opmeer.net/elantech/ or here mac how to You'll need to
@@ -446,15 +434,15 @@ Miscellaneous
 If you do not have an xorg.conf file, and want to configure the keyboard
 layout on the fly:
 
-     # Set keyboard to cz with qwerty
-     setxkbmap cz qwerty
+    # Set keyboard to cz with qwerty
+    setxkbmap cz qwerty
 
 To configure the mouse speed:
 
-     # Set mouse movement and acceleration (you need to tweak this to your needs)
-     xset m 2 1
+    # Set mouse movement and acceleration (you need to tweak this to your needs)
+    xset m 2 1
 
-Performance Tips
+Performance tips
 ----------------
 
 The following tweaks can be used to improve performance and/or power
@@ -464,12 +452,14 @@ consumption.
 
 Speedstep is included by default in the Linux 2.6.x kernel.
 
-The zen-eee901 kernels contain the Speedstep modules. Add acpi-cpufreq
-to your MODULES list in /etc/rc.conf to enable it on boot, or execute:
+The zen-eee901 kernels contain the Speedstep modules. Create a proper
+module file in /etc/module.d to load acpi-cpufreq at boot:
 
-     modprobe acpi-cpufreq
+    /etc/module.d/acpi-cpufreq.conf
 
-See http://rffr.de/acpi for more information.
+    acpi-cpufreq
+
+See here for more information.
 
 For more information on overclocking the Asus EEE PC line, see
 http://wiki.eeeuser.com/howto:overclockfsb
@@ -482,51 +472,55 @@ the p4-clockmod module instead.
 
 Enable Asus Boot Booster feature in BIOS to skip some tests during boot.
 
-     "Boot">"Boot Settings Configuration">"Quick Boot">[Enabled]
+    Boot > Boot Settings Configuration > Quick Boot > [Enabled]
 
-Appendix
---------
-
-> Hardware Overview for 901
+> Hardware overview for 901
 
 The following hardware is used in the Asus EEE 901:
 
-       * CPU: 1.6GHz N270 Intel Atom
-       * RAM: 1024 MB, DDR2 667
-       * ports: 3x USB, VGA
-       * LAN/ethernet: Atheros L1e 1000 Mbit
-       * WLAN: Ralink rt2860 802.11b/g/n
-       * Bluetooth, webcam 1.3 Mpix
-       * Card reader: SD, SDHC, MMC
-       * touchpad: "Multi-touch" elantech
-       * display: 1024x600 8.9"
-       * weight: 1 kg
-       * battery: Li-ion, 6600mAh
-       * HDD: 4 + 8GB, empty slot for 1,8" (remove of the 8GB module needed)
-       * Graphics:  Intel GM950 core, 945GME chipset
+    * CPU: 1.6GHz N270 Intel Atom
+    * RAM: 1024 MB, DDR2 667
+    * ports: 3x USB, VGA
+    * LAN/ethernet: Atheros L1e 1000 Mbit
+    * WLAN: Ralink rt2860 802.11b/g/n
+    * Bluetooth, webcam 1.3 Mpix
+    * Card reader: SD, SDHC, MMC
+    * touchpad: "Multi-touch" elantech
+    * display: 1024x600 8.9"
+    * weight: 1 kg
+    * battery: Li-ion, 6600mAh
+    * HDD: 4 + 8GB, empty slot for 1,8" (remove of the 8GB module needed)
+    * Graphics:  Intel GM950 core, 945GME chipset
 
-     00:00.0 Host bridge: Intel Corporation Mobile 945GME Express Memory Controller Hub (rev 03)
-     00:02.0 VGA compatible controller: Intel Corporation Mobile 945GME Express Integrated Graphics Controller (rev 03)
-     00:02.1 Display controller: Intel Corporation Mobile 945GM/GMS/GME, 943/940GML Express Integrated Graphics Controller (rev 03)
-     00:1b.0 Audio device: Intel Corporation 82801G (ICH7 Family) High Definition Audio Controller (rev 02)
-     00:1c.0 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express Port 1 (rev 02)
-     00:1c.1 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express Port 2 (rev 02)
-     00:1c.2 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express Port 3 (rev 02)
-     00:1c.3 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express Port 4 (rev 02)
-     00:1d.0 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #1 (rev 02)
-     00:1d.1 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #2 (rev 02)
-     00:1d.2 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #3 (rev 02) 
-     00:1d.3 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #4 (rev 02)
-     00:1d.7 USB Controller: Intel Corporation 82801G (ICH7 Family) USB2 EHCI Controller (rev 02)
-     00:1e.0 PCI bridge: Intel Corporation 82801 Mobile PCI Bridge (rev e2)
-     00:1f.0 ISA bridge: Intel Corporation 82801GBM (ICH7-M) LPC Interface Bridge (rev 02)
-     00:1f.2 IDE interface: Intel Corporation 82801GBM/GHM (ICH7 Family) SATA IDE Controller (rev 02)
-     00:1f.3 SMBus: Intel Corporation 82801G (ICH7 Family) SMBus Controller (rev 02)
-     01:00.0 Network controller: RaLink Device 0781
+    00:00.0 Host bridge: Intel Corporation Mobile 945GME Express Memory Controller Hub (rev 03)
+    00:02.0 VGA compatible controller: Intel Corporation Mobile 945GME Express Integrated Graphics Controller (rev 03)
+    00:02.1 Display controller: Intel Corporation Mobile 945GM/GMS/GME, 943/940GML Express Integrated Graphics Controller (rev 03)
+    00:1b.0 Audio device: Intel Corporation 82801G (ICH7 Family) High Definition Audio Controller (rev 02)
+    00:1c.0 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express Port 1 (rev 02)
+    00:1c.1 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express Port 2 (rev 02)
+    00:1c.2 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express Port 3 (rev 02)
+    00:1c.3 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express Port 4 (rev 02)
+    00:1d.0 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #1 (rev 02)
+    00:1d.1 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #2 (rev 02)
+    00:1d.2 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #3 (rev 02) 
+    00:1d.3 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #4 (rev 02)
+    00:1d.7 USB Controller: Intel Corporation 82801G (ICH7 Family) USB2 EHCI Controller (rev 02)
+    00:1e.0 PCI bridge: Intel Corporation 82801 Mobile PCI Bridge (rev e2)
+    00:1f.0 ISA bridge: Intel Corporation 82801GBM (ICH7-M) LPC Interface Bridge (rev 02)
+    00:1f.2 IDE interface: Intel Corporation 82801GBM/GHM (ICH7 Family) SATA IDE Controller (rev 02)
+    00:1f.3 SMBus: Intel Corporation 82801G (ICH7 Family) SMBus Controller (rev 02)
+    01:00.0 Network controller: RaLink Device 0781
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_901&oldid=253576"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_901&oldid=298288"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 February 2014, at 07:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

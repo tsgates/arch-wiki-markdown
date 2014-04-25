@@ -1,22 +1,20 @@
 Ion3
 ====
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-|     -   3.1 cfg_ion.lua                                                  |
-|     -   3.2 cfg_bindings.lua                                             |
-|     -   3.3 cfg_menus.lua                                                |
-|     -   3.4 cfg_ionws.lua                                                |
-|     -   3.5 look.lua                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+-   3 Configuration
+    -   3.1 cfg_ion.lua
+    -   3.2 cfg_bindings.lua
+    -   3.3 cfg_menus.lua
+    -   3.4 cfg_ionws.lua
+    -   3.5 look.lua
 
 Introduction
-============
+------------
 
 Ionis a tiling window manager with tabbed frames. It uses Lua as an
 embedded interpreter which handles all of the configuration. It mainly
@@ -24,11 +22,11 @@ uses the keyboard to access the functions but also supports the mouse
 for some things.
 
 Installation
-============
+------------
 
 Ion3 is no longer in any of the repositories as mentioned in this news
 item [1]. So you will have to install it using the PKGBUILD available
-from AUR.
+from AUR: ion-3.
 
 Copy the configurationfiles to your home directory:
 
@@ -38,16 +36,15 @@ To start Ion3 just append the following line in ~/.xinitrc :
 
     exec ion3
 
-Now you're ready to begin to configure Ion as described below.
+Now you are ready to begin to configure Ion as described below.
 
 Configuration
-=============
+-------------
 
 Note: The files below have been heavily modified from the defaults to
 better suit my needs. /xerxes2
 
-cfg_ion.lua
------------
+> cfg_ion.lua
 
 This is Ion3' main configurationfile.
 
@@ -85,7 +82,6 @@ This is Ion3' main configurationfile.
         default_ws_type="WIonWS",
     }
 
-
     --
     -- Load some modules, extensions and other configuration files
     --
@@ -117,8 +113,7 @@ The Modkeyes handles your hotkeys when you holds them in(Modkey +
 hotkey). The dopath command includes modules that Ion should load on
 startup. Just uncomment those you do not want to load.
 
-cfg_bindings.lua
-----------------
+> cfg_bindings.lua
 
 In this file you set your basic keybindings.
 
@@ -127,7 +122,6 @@ In this file you set your basic keybindings.
     -- to screens and all types of frames only. See modules' configuration 
     -- files for other bindings.
     --
-
 
     -- WScreen context bindings
     --
@@ -187,7 +181,6 @@ In this file you set your basic keybindings.
         bdoc("Display the window list menu."),
         mpress("Button2", "mod_menu.pmenu(_, _sub, 'windowlist')"),
     })
-
 
     -- WMPlex context bindings
     --
@@ -255,7 +248,6 @@ In this file you set your basic keybindings.
         bdoc("Query for a client window to go to."),
         kpress(MOD1.."G", "mod_query.query_gotoclient(_)"),
     })
-
 
     -- WFrame context bindings
     --
@@ -326,7 +318,6 @@ In this file you set your basic keybindings.
                
     })
 
-
     -- WMoveresMode context bindings
     -- 
     -- These bindings are available keyboard move/resize mode. The mode
@@ -371,15 +362,13 @@ In this file you set your basic keybindings.
         kpress(MOD1.."N",     "WMoveresMode.move(_, 0, 1)"),
     })
 
-cfg_menus.lua
--------------
+> cfg_menus.lua
 
 In this file you configure your main menu.
 
     --
     -- Ion menu definitions
     --
-
 
     -- Main menu
     defmenu("mainmenu", {
@@ -390,7 +379,6 @@ In this file you configure your main menu.
         submenu("Styles",           "stylemenu"),
         submenu("Session",          "sessionmenu"),
     })
-
 
     -- Application menu
     defmenu("appmenu", {
@@ -403,7 +391,6 @@ In this file you configure your main menu.
         menuentry("Run...", "mod_query.query_exec(_)"),
     })
 
-
     -- Session control menu
     defmenu("sessionmenu", {
         menuentry("Save",           "ioncore.snapshot()"),
@@ -412,7 +399,6 @@ In this file you configure your main menu.
         menuentry("Restart TWM",    "ioncore.restart_other('twm')"),
         menuentry("Exit",           "ioncore.shutdown()"),
     })
-
 
     -- Context menu (frame/client window actions)
     defctxmenu("WFrame", {
@@ -427,8 +413,7 @@ In this file you configure your main menu.
                                     "_sub:WClientWin"),
     })
 
-cfg_ionws.lua
--------------
+> cfg_ionws.lua
 
 In this file you configure your ion workspaces.
 
@@ -462,7 +447,6 @@ In this file you configure your ion workspaces.
             kpress("X", "WIonWS.unsplit_at(_, _sub)"),
         }),
     })
-
 
     -- Frame bindings. These work in (Ion/tiled-style) frames. Some bindings
     -- that are common to all frame types and multiplexes are defined in
@@ -504,8 +488,7 @@ In this file you configure your ion workspaces.
         })
     end
 
-look.lua
---------
+> look.lua
 
 In this file you set your theme. Your default theme is set on the
 bottom:
@@ -516,8 +499,15 @@ The themes are called look_<name>.lua and you can make your own by
 switching the name.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ion3&oldid=239011"
+"https://wiki.archlinux.org/index.php?title=Ion3&oldid=277282"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 1 October 2013, at 20:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

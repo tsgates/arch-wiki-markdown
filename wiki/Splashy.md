@@ -5,20 +5,15 @@ Splashy is a userspace implementation of a splash screen for Linux
 systems. It provides a graphical environment during system boot using
 the Linux framebuffer layer via directfb.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 /etc/rc.conf                                                 |
-|     -   2.2 Including Splashy in initramfs                               |
-|     -   2.3 The kernel command line                                      |
-|     -   2.4 Themes                                                       |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 GNOME will not shut down                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 /etc/rc.conf
+    -   2.2 Including Splashy in initramfs
+    -   2.3 The kernel command line
+    -   2.4 Themes
 
 Installation
 ------------
@@ -34,6 +29,13 @@ repository you can add with working splashy packages.
 
 Configuration
 -------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Update for       
+                           systemd. (Discuss)       
+  ------------------------ ------------------------ ------------------------
 
 > /etc/rc.conf
 
@@ -95,20 +97,16 @@ Rebuild your kernel image with:
 
 and reboot.
 
-Troubleshooting
----------------
-
-> GNOME will not shut down
-
-Problem: You are using Gnome, and starting GDM as a daemon, Splashy
-causes Gnome to not be able to properly shutdown/reboot.
-
-Fix: Remove gdm from DAEMONS in /etc/rc.conf, and set it up in
-/etc/inittab.
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Splashy&oldid=238198"
+"https://wiki.archlinux.org/index.php?title=Splashy&oldid=269232"
 
 Category:
 
 -   Bootsplash
+
+-   This page was last modified on 1 August 2013, at 13:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

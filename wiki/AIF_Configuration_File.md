@@ -13,33 +13,29 @@ The AIF configuration file contains variables that define how Arch will
 be installed. This article describes these variables, and how to make
 use of the configuration file.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 The AIF configuration file                                         |
-|     -   1.1 Optional variables                                           |
-|         -   1.1.1 SOURCE                                                 |
-|         -   1.1.2 FILE_URL                                               |
-|         -   1.1.3 SYNC_URL                                               |
-|         -   1.1.4 RUNTIME_REPOSITORIES                                   |
-|         -   1.1.5 RUNTIME_PACKAGES                                       |
-|         -   1.1.6 TARGET_GROUPS                                          |
-|         -   1.1.7 TARGET_REPOSITORIES                                    |
-|         -   1.1.8 TARGET_PACKAGES_EXCLUDE                                |
-|         -   1.1.9 TARGET_PACKAGES                                        |
-|                                                                          |
-|     -   1.2 Mandatory variables                                          |
-|         -   1.2.1 GRUB_DEVICE                                            |
-|         -   1.2.2 PARTITIONS                                             |
-|         -   1.2.3 BLOCKDATA                                              |
-|             -   1.2.3.1 Simple file systems                              |
-|             -   1.2.3.2 Advanced file systems                            |
-|                                                                          |
-| -   2 Using the AIF configuration file                                   |
-| -   3 Examples                                                           |
-| -   4 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 The AIF configuration file
+    -   1.1 Optional variables
+        -   1.1.1 SOURCE
+        -   1.1.2 FILE_URL
+        -   1.1.3 SYNC_URL
+        -   1.1.4 RUNTIME_REPOSITORIES
+        -   1.1.5 RUNTIME_PACKAGES
+        -   1.1.6 TARGET_GROUPS
+        -   1.1.7 TARGET_REPOSITORIES
+        -   1.1.8 TARGET_PACKAGES_EXCLUDE
+        -   1.1.9 TARGET_PACKAGES
+    -   1.2 Mandatory variables
+        -   1.2.1 GRUB_DEVICE
+        -   1.2.2 PARTITIONS
+        -   1.2.3 BLOCKDATA
+            -   1.2.3.1 Simple file systems
+            -   1.2.3.2 Advanced file systems
+-   2 Using the AIF configuration file
+-   3 Examples
+-   4 Links
 
 The AIF configuration file
 --------------------------
@@ -277,3 +273,10 @@ Retrieved from
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 9 April 2013, at 01:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

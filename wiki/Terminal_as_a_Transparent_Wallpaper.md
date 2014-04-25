@@ -8,22 +8,19 @@ and coolness factor. Example: for use it to view source-code or get an
 interactive process status of the system with htop. Something like
 conky, but not quite.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 The Easy Way                                                       |
-| -   2 The Professional Way                                               |
-|     -   2.1 Openbox, Compiz and alike                                    |
-|     -   2.2 Gnome                                                        |
-|         -   2.2.1 Step 1                                                 |
-|         -   2.2.2 Step 2                                                 |
-|         -   2.2.3 Step 3                                                 |
-|         -   2.2.4 Step 4                                                 |
-|         -   2.2.5 Step 5                                                 |
-|                                                                          |
-|     -   2.3 Xfce4                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 The Easy Way
+-   2 The Professional Way
+    -   2.1 Openbox, Compiz and alike
+    -   2.2 Gnome
+        -   2.2.1 Step 1
+        -   2.2.2 Step 2
+        -   2.2.3 Step 3
+        -   2.2.4 Step 4
+        -   2.2.5 Step 5
+    -   2.3 Xfce4
 
 The Easy Way
 ------------
@@ -204,9 +201,16 @@ environments which wmctrl may work with visit
 http://en.wikipedia.org/wiki/Wmctrl
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Terminal_as_a_Transparent_Wallpaper&oldid=248737"
+"https://wiki.archlinux.org/index.php?title=Terminal_as_a_Transparent_Wallpaper&oldid=286520"
 
 Categories:
 
 -   Eye candy
 -   Terminal emulators
+
+-   This page was last modified on 6 December 2013, at 14:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

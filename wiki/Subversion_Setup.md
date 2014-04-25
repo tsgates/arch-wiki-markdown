@@ -10,39 +10,34 @@ This article deals with setting up an svn-server on your machine. There
 are two popular svn-servers, the built in svnserve and the more advanced
 option, Apache with svn plugins.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Apache Subversion Setup                                            |
-|     -   1.1 Goals                                                        |
-|     -   1.2 Apache Installation                                          |
-|     -   1.3 Subversion Installation                                      |
-|     -   1.4 Subversion Configuration                                     |
-|         -   1.4.1 Edit /etc/httpd/conf/httpd.conf                        |
-|         -   1.4.2 To SSL or not to SSL?                                  |
-|         -   1.4.3 Create /home/svn/.svn-policy-file                      |
-|         -   1.4.4 Create /home/svn/.svn-auth-file                        |
-|         -   1.4.5 Create a Repository                                    |
-|         -   1.4.6 Set Permissions                                        |
-|                                                                          |
-|     -   1.5 Create a Project                                             |
-|         -   1.5.1 Directory structure for project                        |
-|         -   1.5.2 Populate Directory                                     |
-|         -   1.5.3 Import the Project                                     |
-|         -   1.5.4 Test SVN Checkout                                      |
-|                                                                          |
-| -   2 Svnserve setup                                                     |
-|     -   2.1 Install the package                                          |
-|     -   2.2 Create a repository                                          |
-|     -   2.3 Set access policies                                          |
-|     -   2.4 Start the server daemon                                      |
-|     -   2.5 svn+ssh                                                      |
-|                                                                          |
-| -   3 Subversion backup and restore                                      |
-| -   4 Subversion clients                                                 |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Apache Subversion Setup
+    -   1.1 Goals
+    -   1.2 Apache Installation
+    -   1.3 Subversion Installation
+    -   1.4 Subversion Configuration
+        -   1.4.1 Edit /etc/httpd/conf/httpd.conf
+        -   1.4.2 To SSL or not to SSL?
+        -   1.4.3 Create /home/svn/.svn-policy-file
+        -   1.4.4 Create /home/svn/.svn-auth-file
+        -   1.4.5 Create a Repository
+        -   1.4.6 Set Permissions
+    -   1.5 Create a Project
+        -   1.5.1 Directory structure for project
+        -   1.5.2 Populate Directory
+        -   1.5.3 Import the Project
+        -   1.5.4 Test SVN Checkout
+-   2 Svnserve setup
+    -   2.1 Install the package
+    -   2.2 Create a repository
+    -   2.3 Set access policies
+    -   2.4 Start the server daemon
+    -   2.5 svn+ssh
+-   3 Subversion backup and restore
+-   4 Subversion clients
+-   5 See Also
 
 Apache Subversion Setup
 -----------------------
@@ -112,7 +107,6 @@ Include the following inside of a virtual host directive:
        AuthName "SVN Repositories"
        AuthType Basic
        AuthUserFile /home/svn/.svn-auth-file
-       Satisfy Any
        Require valid-user
     </Location>
 
@@ -139,14 +133,15 @@ Create /home/svn/.svn-auth-file
 
 This is either an htpasswd, or htdigest file. I used htpasswd. Again,
 because of SSL, I do not worry as much about password sniffing. htdigest
-would provide even more security vs sniffing, but at this point, I do
+would provide even more security vs. sniffing, but at this point, I do
 not have a need for it. Run the following command
 
     # htpasswd -cs /home/svn/.svn-auth-file USER_NAME
 
-The above creates the file (-c) and uses sha1 for storing the password
-(-s). The user USER_NAME is created.   
- To add additional users, leave off the (-c) flag.
+The above creates the file (-c) and uses SHA-1 for storing the password
+(-s). The user USER_NAME is created.
+
+To add additional users, leave off the (-c) flag.
 
     # htpasswd -s /home/svn/.svn-auth-file OTHER_USER_NAME
 
@@ -232,44 +227,50 @@ barpassword, change it as you like
 
 > Start the server daemon
 
-Before you start the server, edit the config file：
+Before you start the server, edit the config file:
 
     /etc/conf.d/svnserve
 
-    SVNSERVE_ARGS="-r /path/to/repos --listen-port=4711"
-     SVNSERVE_USER="user"
+    SVNSERVE_ARGS="--root=/path/to/repos"
 
-The --listen-port flag is optional.
-
-The -r /path/to/repos option set the root of repository tree. If you
-have multiple repositories use -r /path-to/reposparent. Then access
+The --root=/path/to/repos option set the root of repository tree. If you
+have multiple repositories use --root=/path-to/reposparent. Then access
 independent repositories by passing in repository name in the URL:
 svn://host/repo1. make sure that the user has read/write access to the
 repository files)
 
-Now start the svnserve daemon.
+Optionally add a --listen-port if you want a different port, or other
+options.
+
+By default, the service runs as root. If you want to change that, add a
+drop-in:
+
+    /etc/systemd/system/svnserve.service.d/50-custom.conf
+
+    [Service]
+    User=svn
+
+Now start the svnserve.service daemon.
 
 > svn+ssh
 
-To use svn+ssh://, we have to have a wrapper written for svnserve.}}
+To use svn+ssh://, we have to have a wrapper written for svnserve.
 
 check where the svnserve binary is located:
 
      # which svnserve
     /usr/local/bin/svnserve
 
-Our wrapper is going to have to fall in PATH prior to this location..
-/sbin is a good place seeing its our 1st exec path on the system as
-root.
+Our wrapper is going to have to fall in PATH prior to this location...
 
 create wrapper:
 
-    # touch /sbin/svnserve
-    # chmod 755 /sbin/svnserve 
+    # touch /usr/bin/svnserve
+    # chmod 755 /usr/bin/svnserve 
 
 now edit it to look like so:
 
-    /sbin/svnserve 
+    /usr/bin/svnserve 
     #!/bin/sh
     # wrapper script for svnserve
     umask 007
@@ -280,7 +281,7 @@ svn+ssh://server.domain.com:/reponame instead of :/path/to/reponame.
 
 Start svnserve with new wrapper script like so:
 
-    # /sbin/svnserve -d  ( start daemon mode )
+    # /usr/bin/svnserve -d  ( start daemon mode )
 
 we can also check the perms for remote users like this:
 
@@ -326,9 +327,16 @@ See Also
 -   http://subversion.tigris.org/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Subversion_Setup&oldid=255097"
+"https://wiki.archlinux.org/index.php?title=Subversion_Setup&oldid=304225"
 
 Categories:
 
 -   Version Control System
 -   Web Server
+
+-   This page was last modified on 12 March 2014, at 22:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

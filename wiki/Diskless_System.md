@@ -1,19 +1,12 @@
 Diskless System
 ===============
 
-> Summary
+Related articles
 
-Detailed explanation of diskless system setup.
-
-> Related
-
-NFS
-
-NFS Troubleshooting
-
-PXE
-
-Mkinitcpio#Using_net
+-   NFS
+-   NFS Troubleshooting
+-   PXE
+-   Mkinitcpio#Using_net
 
 From Wikipedia:Diskless node
 
@@ -21,41 +14,30 @@ A diskless node (or diskless workstation) is a workstation or personal
 computer without disk drives, which employs network booting to load its
 operating system from a server.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Server configuration                                               |
-|     -   1.1 DHCP                                                         |
-|     -   1.2 TFTP                                                         |
-|     -   1.3 Network storage                                              |
-|         -   1.3.1 NFS                                                    |
-|             -   1.3.1.1 NFSv4                                            |
-|             -   1.3.1.2 NFSv3                                            |
-|                                                                          |
-|         -   1.3.2 NBD                                                    |
-|                                                                          |
-| -   2 Client installation                                                |
-|     -   2.1 Directory setup                                              |
-|     -   2.2 Bootstrapping installation                                   |
-|         -   2.2.1 NFSv3                                                  |
-|         -   2.2.2 NFSv4                                                  |
-|         -   2.2.3 NBD                                                    |
-|                                                                          |
-| -   3 Client configuration                                               |
-|     -   3.1 Bootloader                                                   |
-|         -   3.1.1 GRUB                                                   |
-|         -   3.1.2 Pxelinux                                               |
-|                                                                          |
-|     -   3.2 Additional mountpoints                                       |
-|         -   3.2.1 NBD root                                               |
-|         -   3.2.2 Program state directories                              |
-|                                                                          |
-| -   4 Client boot                                                        |
-|     -   4.1 NBD                                                          |
-|                                                                          |
-| -   5 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Server configuration
+    -   1.1 DHCP
+    -   1.2 TFTP
+    -   1.3 Network storage
+        -   1.3.1 NFS
+        -   1.3.2 NBD
+-   2 Client installation
+    -   2.1 Directory setup
+    -   2.2 Bootstrapping installation
+        -   2.2.1 NFS
+        -   2.2.2 NBD
+-   3 Client configuration
+    -   3.1 Bootloader
+        -   3.1.1 GRUB
+        -   3.1.2 Pxelinux
+    -   3.2 Additional mountpoints
+        -   3.2.1 NBD root
+        -   3.2.2 Program state directories
+-   4 Client boot
+    -   4.1 NBD
+-   5 See also
 
 Server configuration
 --------------------
@@ -73,13 +55,9 @@ server. For more information, see the dnsmasq article.
 
 > DHCP
 
-Install ISC dhcp.
+Install ISC dhcp and configure it:
 
-    # pacman -Syu dhcp
-
-Configure ISC DHCP.
-
-    # vim /etc/dhcpd.conf
+    /etc/dhcpd.conf
 
     allow booting;
     allow bootp;
@@ -114,9 +92,7 @@ the above configuration, if the PXE client requests an x86_64-efi binary
 the legacy binary. This allows both UEFI and legacy BIOS clients to boot
 simultaneously on the same network segment.
 
-Start ISC DHCP.
-
-    # systemctl start dhcpd4.service
+Start ISC DHCP systemd service.
 
 > TFTP
 
@@ -130,52 +106,28 @@ and configuration.
 
 The primary difference between using NFS and NBD is while with both you
 can in fact have multiple clients using the same installation, with NBD
-(by the nature of manipulating a filesystem directly) you'll need to use
-the copyonwrite mode to do so, which ends up discarding all writes on
-client disconnect. In some situations however, this might be highly
+(by the nature of manipulating a filesystem directly) you will need to
+use the copyonwrite mode to do so, which ends up discarding all writes
+on client disconnect. In some situations however, this might be highly
 desirable.
 
 NFS
 
 Install nfs-utils on the server.
 
-    # pacman -Syu nfs-utils
-
-NFSv4
-
-You'll need to add the root of your arch installation to your NFS
+You will need to add the root of your Arch installation to your NFS
 exports:
 
-    # vim /etc/exports
+    /etc/exports
 
     /srv       *(rw,fsid=0,no_root_squash,no_subtree_check)
     /srv/arch  *(rw,no_root_squash,no_subtree_check)
 
-Next, start NFS.
-
-    # systemctl start rpc-idmapd.service rpc-mountd.service
-
-NFSv3
-
-    # vim /etc/exports
-
-    /srv/arch *(rw,no_root_squash,no_subtree_check,sync)
-
-Next, start NFSv3.
-
-    # systemctl start rpc-mountd.service rpc-statd.service
-
-Note:If you're not worried about data loss in the event of network
-and/or server failure, replace sync with async--additional options can
-be found in the NFS article.
+Next, start NFS services: rpc-idmapd rpc-mountd.
 
 NBD
 
-Install nbd.
-
-    # pacman -Syu nbd
-
-Configure nbd.
+Install nbd and configure it.
 
     # vim /etc/nbd-server/config
 
@@ -190,9 +142,7 @@ Note:Set copyonwrite to true if you want to have multiple clients using
 the same NBD share simultaneously; refer to man 5 nbd-server for more
 details.
 
-Start nbd.
-
-    # systemctl start nbd.service
+Start nbd systemd service.
 
 Client installation
 -------------------
@@ -221,65 +171,39 @@ NFS and can be skipped/ignored.
 
 Install devtools and arch-install-scripts, and run mkarchroot.
 
-    # pacman -Syu devtools arch-install-scripts
-    # mkarchroot "$root" base mkinitcpio-nfs-utils nfs-utils
+    # pacstrap -d "$root" base mkinitcpio-nfs-utils nfs-utils
 
-Note:In all cases mkinitcpio-nfs-utils is still required--ipconfig used
+Note:In all cases mkinitcpio-nfs-utils is still required. ipconfig used
 in early-boot is provided only by the latter.
 
-Now the initramfs needs to be constructed. The shortest configuration,
-#NFSv3, is presented as a "base" upon which all subsequent sections
-modify as-needed.
+Now the initramfs needs to be constructed.
 
-NFSv3
-
-    # vim "$root/etc/mkinitcpio.conf"
-
-    MODULES="nfsv3"
-    HOOKS="base udev autodetect modconf block filesystems keyboard fsck net"
-    BINARIES=""
-
-Note:You'll also need to add the appropriate module for your ethernet
-controller to the MODULES array.
-
-The initramfs now needs to be rebuilt; the easiest way to do this is via
-arch-chroot.
-
-    # arch-chroot "$root" /bin/bash
-    (chroot) # mkinitcpio -p linux
-    (chroot) # exit
-
-NFSv4
+NFS
 
 Trivial modifications to the net hook are required in order for NFSv4
 mounting to work (not supported by nfsmount--the default for the net
 hook).
 
-    # sed s/nfsmount/mount.nfs4/ "$root/usr/lib/initcpio/hooks/net" | tee "$root/usr/lib/initcpio/hooks/net_nfs4"
-    # cp "$root/usr/lib/initcpio/install/{net,net_nfs4}"
+    # sed s/nfsmount/mount.nfs4/ "$root/usr/lib/initcpio/hooks/net" > "$root/usr/lib/initcpio/hooks/net_nfs4"
+    # cp $root/usr/lib/initcpio/install/net{,_nfs4}
 
 The copy of net is unfortunately needed so it does not get overwritten
 when mkinitcpio-nfs-utils is updated on the client installation.
 
-From the base mkinitcpio.conf, replace the nfsv3 module with nfsv4,
-replace net with net_nfs4, and add /sbin/mount.nfs4 to BINARIES and
-don't forget to add your network driver to MODULES like this for a
-Realtek Ethernet controller.
+Edit /etc/mkinitcpio.conf and add nfsv4 to MODULES, net_nfs4 to HOOKS,
+and /usr/bin/mount.nfs4 to BINARIES.
 
-    # vim "$root/etc/mkinitcpio.conf"
+Next, we chroot into our install and run mkinitcpio:
 
-    MODULES="nfsv4 8139cp"
-    HOOKS="base udev autodetect modconf block filesystems keyboard fsck net_nfs4"
-    BINARIES="/sbin/mount.nfs4"
-
-Note:You'll also need to add the appropriate module for your ethernet
-controller to the MODULES array.
+    # arch-chroot "$root" /bin/bash
+    # mkinitcpio -p linux
 
 NBD
 
-The mkinitcpio-nbd package needs to be installed on the client.
+The mkinitcpio-nbd package needs to be installed on the client. Build it
+with makepkg and install it:
 
-    # pacman --root "$root" --dbpath "$root/var/lib/pacman" -U mkinitcpio-nbd-0.4-1-any.pkg.tar
+    # pacman --root "$root" --dbpath "$root/var/lib/pacman" -U mkinitcpio-nbd-0.4-1-any.pkg.tar.xz
 
 You will then need to append nbd to your HOOKS array after net; net will
 configure your networking for you, but not attempt a NFS mount if
@@ -290,7 +214,7 @@ Client configuration
 
 In addition to the setup mentioned here, you should also set up your
 hostname, timezone, locale, and keymap, and follow any other relevant
-parts of the Installation Guide.
+parts of the Installation guide.
 
 > Bootloader
 
@@ -299,33 +223,25 @@ GRUB
   ------------------------ ------------------------ ------------------------
   [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
                            is a candidate for       
-                           merging with GRUB2.      
+                           merging with GRUB.       
                            Notes: (Discuss)         
   ------------------------ ------------------------ ------------------------
 
-Though poorly documented, grub also supports being loaded via PXE.
-Because of an endianness bug in grub-core/net/tftp.c not fixed until bzr
-revision 4548 (grub-bios 2.00 is revision 4542), you will need to build
-grub-bios-bzr; it makes the most sense to do this on the host
-installation. In addition, due to a bug in
-grub-core/net/drivers/efi/efinet.c not fixed until bzr revision 4751
-you'll need to build grub-efi-x86_64-bzr as well. The Arch User
-Repository article describes how to build AUR packages.
+Though poorly documented, GRUB supports being loaded via PXE.
 
-    # pacman --root "$root" --dbpath "$root/var/lib/pacman" -U grub-bios-bzr-4751-1-x86_64.pkg.tar.xz
+    # pacman --root "$root" --dbpath "$root/var/lib/pacman" -S grub
 
-Only because we want to use the grub-bios-bzr installation on the
-target, we arch-chroot the target installation so we can use its
-grub-mknetdir instead.
+Create a grub prefix on the target installation for both architectures
+using grub-mknetdir.
 
     # arch-chroot /srv/arch grub-mknetdir --net-directory=/boot --subdir=grub
 
-Next, flip to the grub-efi-x86_64-bzr package you built, and run
-grub-mknetdir exactly as above a second time.
+Luckily for us, grub-mknetdir creates prefixes for all currently
+compiled/installed targets, and the grub maintainers were nice enough to
+give us both in the same package, thus grub-mknetdir only needs to be
+run once.
 
-    # pacman --root "$root" --dbpath "$root/var/lib/pacman" -U grub-bios-bzr-4751-1-x86_64.pkg.tar.xz
-
-Now we create a trivial grub configuration:
+Now we create a trivial GRUB configuration:
 
     # vim "$root/boot/grub/grub.cfg"
 
@@ -339,66 +255,12 @@ kernel and initramfs are transferred via TFTP without any additional
 configuration, though you might want to set it explicitly if you have
 any other non-tftp menuentries.
 
-Note:Modify your kernel line as-necessary, refer to #Pxelinux for
+Note:Modify your kernel line as-necessary, refer to Pxelinux for
 NBD-related options
 
 Pxelinux
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
-                           is a candidate for       
-                           merging with Syslinux.   
-                           Notes: (Discuss)         
-  ------------------------ ------------------------ ------------------------
-
-Note:syslinux at present has no UEFI networking stack, so you'll be
-unable to use syslinux-efi-git (as is possible with #GRUB) and still
-expect to be able to tftp your kernel and initramfs; pxelinux still
-works fine for legacy PXE booting
-
-Install syslinux.
-
-    # pacman -Syu syslinux
-
-Copy the pxelinux bootloader (provided by the syslinux package) to the
-boot directory of the client.
-
-    # cp /usr/lib/syslinux/pxelinux.0 "$root/boot"
-    # mkdir "$root/boot/pxelinux.cfg"
-
-We also created the pxelinux.cfg directory, which is where pxelinux
-searches for configuration files by default. Because we don't want to
-discriminate between different host MACs, we then create the default
-configuration.
-
-    # vim "$root/boot/pxelinux.cfg/default"
-
-    default linux
-
-    label linux
-    kernel vmlinuz-linux
-    append initrd=initramfs-linux.img quiet ip=:::::eth0:dhcp nfsroot=10.0.0.1:/arch
-
-NFSv3 mountpoints are relative to the root of the server, not fsid=0. If
-you're using NFSv3, you'll need to pass 10.0.0.1:/srv/arch to nfsroot.
-
-Or if you are using NBD, use the following append line:
-
-    append ro initrd=initramfs-linux.img ip=:::::eth0:dhcp nbd_host=10.0.0.1 nbd_name=arch root=/dev/nbd0
-
-Note:You will need to change nbd_host and/or nfsroot, respectively, to
-match your network configuration (the address of the NFS/NBD server)
-
-The pxelinux configuration syntax identical to syslinux; refer to the
-upstream documentation for more information.
-
-The kernel and initramfs will be transferred via TFTP, so the paths to
-those are going to be relative to the TFTP root. Otherwise, the root
-filesystem is going to be the NFS mount itself, so those are relative to
-the root of the NFS server.
-
-To actually load pxelinux, replace filename "/grub/i386-pc/core.0"; in
-/etc/dhcpd.conf with filename "/pxelinux.0"
+Pxelinux is provided by syslinux, see here for detail.
 
 > Additional mountpoints
 
@@ -499,7 +361,7 @@ your tftp root (i.e. /srv/boot).
 
     # cp -r "$root/boot" /srv/boot
 
-You'll then need to umount $root before you start the client.
+You will then need to umount $root before you start the client.
 
     # umount "$root"
 
@@ -508,16 +370,22 @@ Note:To update the kernel in this setup, you either need to mount
 update) or mount your client filesystem after the client has
 disconnected from NBD
 
-References
-----------
+See also
+--------
 
-kernel.org: Mounting the root filesystem via NFS (nfsroot)
-
-syslinux.org: pxelinux FAQ
+-   kernel.org: Mounting the root filesystem via NFS (nfsroot)
+-   syslinux.org: pxelinux FAQ
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Diskless_System&oldid=256155"
+"https://wiki.archlinux.org/index.php?title=Diskless_System&oldid=298232"
 
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 16 February 2014, at 07:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

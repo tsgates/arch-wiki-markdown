@@ -1,25 +1,22 @@
 systemd FAQ
 ===========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 FAQ                                                                |
-|     -   1.1 Q: Why do I get log messages on my console?                  |
-|     -   1.2 Q: How do I change the number of gettys running by default?  |
-|     -   1.3 Q: How do I get more verbose output during boot?             |
-|     -   1.4 Q: How do I avoid clearing the console after boot?           |
-|     -   1.5 Q: What kernel options do I need to enable in my kernel in   |
-|         case I do not use the official Arch kernel?                      |
-|     -   1.6 Q: What other units does a unit depend on?                   |
-|     -   1.7 Q: My computer shuts down, but the power stays on            |
-|     -   1.8 Q: After migrating to systemd, why won't my fakeRAID mount?  |
-|     -   1.9 Q: How can I make a script start during the boot process?    |
-|     -   1.10 Q: Status of .service says "active (exited)" in green.      |
-|         (e.g. iptables)                                                  |
-|     -   1.11 Q: Failed to issue method call: File exists error           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 FAQ
+    -   1.1 Q: Why do I get log messages on my console?
+    -   1.2 Q: How do I change the number of gettys running by default?
+    -   1.3 Q: How do I get more verbose output during boot?
+    -   1.4 Q: How do I avoid clearing the console after boot?
+    -   1.5 Q: What kernel options are required for Systemd?
+    -   1.6 Q: What other units does a unit depend on?
+    -   1.7 Q: My computer shuts down, but the power stays on
+    -   1.8 Q: After migrating to systemd, why won't my fakeRAID mount?
+    -   1.9 Q: How can I make a script start during the boot process?
+    -   1.10 Q: Status of .service says "active (exited)" in green.
+        (e.g. iptables)
+    -   1.11 Q: Failed to issue method call: File exists error
 
 FAQ
 ---
@@ -47,16 +44,17 @@ of in the /etc/systemd/system/getty.target.wants/ directory:
     # rm /etc/systemd/system/getty.target.wants/getty@{tty5,tty6}.service
     # systemctl stop getty@tty5.service getty@tty6.service
 
-Users may also change the number of gettys by editing
-/etc/systemd/logind.conf and changing the value of NAutoVTs. By doing it
-this way, the on-demand spawning will be preserved, whereas the above
-method will simply have the gettys running from boot. systemd does not
-use the /etc/inittab file.
+systemd does not use the /etc/inittab file.
 
 Note:As of systemd 30, only one getty will be launched by default. If
 you switch to another tty, a getty will be launched there
 (socket-activation style). You can still force additional agetty
 processes to start using the above methods.
+
+Users may also change the number of gettys that may be auto-spawned by
+editing /etc/systemd/logind.conf and changing the value of NAutoVTs. By
+doing it this way, the on-demand spawning will be preserved, whereas the
+above method will simply have the gettys running from boot.
 
 Q: How do I get more verbose output during boot?
 
@@ -75,7 +73,7 @@ A: Create a custom getty@tty1.service file by copying
 /etc/systemd/system/getty@tty1.service and change TTYVTDisallocate to
 no.
 
-Q: What kernel options do I need to enable in my kernel in case I do not use the official Arch kernel?
+Q: What kernel options are required for Systemd?
 
 A: Kernels prior to 2.6.39 are unsupported.
 
@@ -85,7 +83,6 @@ more:
     General setup
      CONFIG_FHANDLE=y
      CONFIG_AUDIT=y (recommended)
-     CONFIG_AUDIT_LOGINUID_IMMUTABLE=y (not required, may break sysvinit compatibility)
      CONFIG_CGROUPS=y
      -> Namespaces support
         CONFIG_NET_NS=y (for private network)
@@ -153,16 +150,9 @@ This example assumes you want your script to start up when the target
 multi-user is launched. Also do chmod 755 to your script to enable
 execute permissions if you haven't done so already.
 
-  
- Note: In case you want to start a shell script, make sure you have
-
-    #!/bin/sh
-
-in the first line of the script. Do not write something like
-
-    ExecStart=/bin/sh /path/to/script.sh # DOES NOT WORK
-
-because that won't work.
+Note:In case you want to start a shell script, make sure you have
+#!/bin/sh in the first line of the script. Do not write something like
+ExecStart=/bin/sh /path/to/script.sh because that will not work.
 
 Q: Status of .service says "active (exited)" in green. (e.g. iptables)
 
@@ -187,9 +177,16 @@ enabling the new one, or use systemctl -f enable to overwrite an
 existing symlink.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Systemd_FAQ&oldid=245896"
+"https://wiki.archlinux.org/index.php?title=Systemd_FAQ&oldid=304644"
 
 Categories:
 
 -   Daemons and system services
 -   Boot process
+
+-   This page was last modified on 15 March 2014, at 21:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

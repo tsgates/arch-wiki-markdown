@@ -10,15 +10,13 @@ Genius Tablet
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-| -   4 Calibration                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+-   3 Configuration
+-   4 Calibration
 
 Introduction
 ------------
@@ -123,8 +121,15 @@ version mismatch. Do it by adding the following to your
 After this, reboot or restart your X server.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Genius_Tablet&oldid=195599"
+"https://wiki.archlinux.org/index.php?title=Genius_Tablet&oldid=291252"
 
 Category:
 
--   Input devices
+-   Graphics tablet
+
+-   This page was last modified on 1 January 2014, at 14:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

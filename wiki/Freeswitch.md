@@ -4,16 +4,14 @@ Freeswitch
 The FreeSWITCH telephony engine is a powerful system enabling voice,
 video, presence, chat, and other media types via a variety of protocols.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Configuring                                                        |
-| -   3 Running                                                            |
-| -   4 Testing                                                            |
-| -   5 Hints                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Configuring
+-   3 Running
+-   4 Testing
+-   5 Hints
 
 Installing
 ----------
@@ -95,3 +93,10 @@ Categories:
 
 -   Audio/Video
 -   Telephony and Voice
+
+-   This page was last modified on 13 June 2012, at 15:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

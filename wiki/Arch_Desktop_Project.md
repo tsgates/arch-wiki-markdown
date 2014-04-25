@@ -11,19 +11,16 @@ Arch Desktop Project
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What is it?                                                        |
-| -   2 What can you do?                                                   |
-| -   3 List of applications                                               |
-|     -   3.1 Missing file                                                 |
-|     -   3.2 Broken                                                       |
-|     -   3.3 Fixed                                                        |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 What is it?
+-   2 What can you do?
+-   3 List of applications
+    -   3.1 Missing file
+    -   3.2 Broken
+    -   3.3 Fixed
+-   4 See also
 
 What is it?
 -----------
@@ -93,6 +90,8 @@ List of applications
 
 > Broken
 
+-   apvlv (apvlv doesn't support postscript nor eps. the only valid mime
+    type is application/pdf)
 -   denemo
 -   ettercap (missing icon)
 -   evince (present, but doesn't show up in XFCE menu)
@@ -100,12 +99,9 @@ List of applications
     /usr/share/pixmaps/galculator/galculator_48x48.png or
     .../galculator.svg icon)
 -   gqview (doesn't validate)
--   mtpaint (lacks icon; I suggest applications-graphics or
-    gnome-graphics icon)
 -   nmapfe (lacks proper icon)
 -   opera 9.50-0.13 (lacks icon; from arch x86_64 testing repo; I found
     actual icon graphic doesn't exist) (icon is now included)
--   qsopcast (missing icon)
 -   xvkbd (missing icon)
 
 > Fixed
@@ -124,8 +120,15 @@ See also
 -   DeveloperWiki:Removal_of_desktop_files
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_Desktop_Project&oldid=254945"
+"https://wiki.archlinux.org/index.php?title=Arch_Desktop_Project&oldid=284005"
 
 Category:
 
 -   Arch development
+
+-   This page was last modified on 21 November 2013, at 23:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

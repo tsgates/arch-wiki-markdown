@@ -4,50 +4,40 @@ Alienware M11x
 This wiki page documents the configuration and troubleshooting specific
 to the Alienware M11x laptop.
 
-See the Beginners' Guide for installation instructions.
+See the Beginners' guide for installation instructions.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Specifications                                              |
-|     -   1.1 Alienware M11x R1                                            |
-|         -   1.1.1 Ports                                                  |
-|         -   1.1.2 Dimensions & Weight                                    |
-|         -   1.1.3 lspci output                                           |
-|                                                                          |
-|     -   1.2 Alienware M11x R2                                            |
-|         -   1.2.1 Ports                                                  |
-|                                                                          |
-|     -   1.3 Alienware M11x R3                                            |
-|         -   1.3.1 Ports                                                  |
-|         -   1.3.2 Dimensions & Weight                                    |
-|         -   1.3.3 lspci output                                           |
-|                                                                          |
-| -   2 Ethernet                                                           |
-| -   3 Wireless                                                           |
-| -   4 Sound                                                              |
-| -   5 Touchpad                                                           |
-| -   6 Video                                                              |
-|     -   6.1 Bumblebee                                                    |
-|         -   6.1.1 Bumblebee Usage                                        |
-|                                                                          |
-|     -   6.2 ACPI_CALL                                                    |
-|         -   6.2.1 acpi_call Usage                                        |
-|         -   6.2.2 m11rx2hack                                             |
-|         -   6.2.3 m11rx3hack                                             |
-|                                                                          |
-|     -   6.3 VGA_SWITCHEROO                                               |
-|     -   6.4 Backlight Brightness                                         |
-|         -   6.4.1 /sbin/backlight                                        |
-|                                                                          |
-| -   7 Lighting and colors                                                |
-|     -   7.1 AlienFX                                                      |
-|     -   7.2 pyalienfx                                                    |
-|     -   7.3 Other applications                                           |
-|                                                                          |
-| -   8 laptop-init-script                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 System Specifications
+    -   1.1 Alienware M11x R1
+        -   1.1.1 Ports
+        -   1.1.2 Dimensions & Weight
+        -   1.1.3 lspci output
+    -   1.2 Alienware M11x R2
+        -   1.2.1 Ports
+    -   1.3 Alienware M11x R3
+        -   1.3.1 Ports
+        -   1.3.2 Dimensions & Weight
+        -   1.3.3 lspci output
+-   2 Ethernet
+-   3 Wireless
+-   4 Sound
+-   5 Touchpad
+-   6 Video
+    -   6.1 Bumblebee
+        -   6.1.1 Bumblebee Usage
+    -   6.2 ACPI_CALL
+        -   6.2.1 acpi_call Usage
+        -   6.2.2 m11rx2hack
+        -   6.2.3 m11rx3hack
+    -   6.3 VGA_SWITCHEROO
+    -   6.4 Backlight Brightness
+        -   6.4.1 /sbin/backlight
+-   7 Lighting and colors
+    -   7.1 AlienFX
+    -   7.2 pyalienfx
+    -   7.3 Other applications
 
 System Specifications
 ---------------------
@@ -637,20 +627,16 @@ To use it:
 -   A C-program which cycles through colors, plus information about how
     to understand it, can be found at [1].
 
-laptop-init-script
-------------------
-
-laptop-init-script is small rc.d script located in
-(/etc/rc.d/laptop-init) that is quite helpful for many laptop
-optimizations, check it out if interested.
-
-You can install laptop-init-script from the AUR.
-
-...to be continued...
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Alienware_M11x&oldid=248119"
+"https://wiki.archlinux.org/index.php?title=Alienware_M11x&oldid=305993"
 
 Category:
 
 -   Alienware
+
+-   This page was last modified on 20 March 2014, at 17:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

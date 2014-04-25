@@ -8,25 +8,46 @@ HTTP and configure it to cache the contents.
 Multiple backends
 -----------------
 
-By default, varnish comes configured in /etc/conf.d/varnish to use
-localhost:8080 as the only backend:
+By default, varnish comes configured in /etc/varnish/default.vcl to use
+localhost:8080 as the only backend, default.vcl is called by the default
+systemd varnish.service file :
 
-    /etc/conf.d/varnish
+     /usr/lib/systemd/system/varnish.service 
 
-    VARNISHD_OPTS="-a 0.0.0.0:80 \
-                   -b localhost:8080 \
-                   -T localhost:6082 \
-                   -s malloc,64M
-                   -u nobody -g nobody"
+    [Unit]
+    Description=Web Application Accelerator
+    After=network.target
 
-    VARNISH_CFG="/etc/varnish/default.vcl"
+    [Service]
+    ExecStart=/usr/bin/varnishd -a 0.0.0.0:80 -f /etc/varnish/default.vcl -T localhost:6082 -s malloc,64M -u nobody -g nobody -F
+    ExecReload=/usr/bin/varnish-vcl-reload
 
-Also, the VARNISH_CFG file is not loaded on varnish instalation nor
-service startup. So in case you want multiple backends from a VCL file,
-you need to edit /etc/varnish/default.vcl with at least one backend and
-call:
+    [Install]
+    WantedBy=multi-user.target
 
-    $ /etc/rc.d/varnish reload
+systemctl enable merely makes a symlink to the default
+
+    $ systemctl enable varnish
+    ln -s '/usr/lib/systemd/system/varnish.service' '/etc/systemd/system/multi-user.target.wants/varnish.service'
+
+instead copy it and edit to increase malloc default.vcl etc:
+
+    $ cp '/usr/lib/systemd/system/varnish.service' '/etc/systemd/system/varnish.service'
+
+then enable varnish and it will use your customized .service file
+instead:
+
+    $ systemctl enable varnish
+    ln -s '/etc/systemd/system/varnish.service' '/etc/systemd/system/multi-user.target.wants/varnish.service'
+
+Also, if you change the config file /etc/varnish/default.vcl you'll need
+to reload varnish:
+
+    $ systemctl reload varnish.service
+
+or restart
+
+    $ systemctl restart varnish.service
 
 > Manual VCL load
 
@@ -50,8 +71,15 @@ file manually:
         varnish> start
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Varnish&oldid=240582"
+"https://wiki.archlinux.org/index.php?title=Varnish&oldid=262263"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 11 June 2013, at 03:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

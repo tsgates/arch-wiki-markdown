@@ -1,30 +1,37 @@
 Acer Extensa 5220
 =================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Kernel                                                             |
-| -   3 CPU                                                                |
-| -   4 Graphics                                                           |
-| -   5 Touchpad                                                           |
-| -   6 Card Reader                                                        |
-| -   7 DVD                                                                |
-| -   8 Webcam                                                             |
-| -   9 Sound                                                              |
-| -   10 Networking                                                        |
-|     -   10.1 LAN                                                         |
-|     -   10.2 WLAN                                                        |
-|                                                                          |
-| -   11 Firewire                                                          |
-| -   12 Untested                                                          |
-| -   13 Configuration Files                                               |
-|     -   13.1 xorg.conf                                                   |
-|     -   13.2 lsusb output                                                |
-|     -   13.3 lspci output                                                |
-+--------------------------------------------------------------------------+
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: Useful info      
+                           already covered by       
+                           Beginners' guide and     
+                           Laptop. (Discuss)        
+  ------------------------ ------------------------ ------------------------
+
+Contents
+--------
+
+-   1 Hardware
+-   2 Kernel
+-   3 CPU
+-   4 Graphics
+-   5 Touchpad
+-   6 Card Reader
+-   7 DVD
+-   8 Webcam
+-   9 Sound
+-   10 Networking
+    -   10.1 LAN
+    -   10.2 WLAN
+-   11 Firewire
+-   12 Untested
+-   13 Configuration Files
+    -   13.1 xorg.conf
+    -   13.2 lsusb output
+    -   13.3 lspci output
 
 Hardware
 ========
@@ -119,10 +126,7 @@ attempted to configure.
 Webcam
 ======
 
-Requires installation of linux-uvc-svn and group membership to "video"
-
-    # pacman -S linux-uvc-svn
-    # modprobe uvcvideo
+See Webcam Setup.
 
 Sound
 =====
@@ -326,8 +330,15 @@ lspci output
     0f:06.3 Generic system peripheral [0805]: Texas Instruments PCIxx12 SDA Standard Compliant SD Host Controller
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Extensa_5220&oldid=238908"
+"https://wiki.archlinux.org/index.php?title=Acer_Extensa_5220&oldid=302795"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 1 March 2014, at 20:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

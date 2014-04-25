@@ -3,20 +3,17 @@ DeveloperWiki:Systemd
 
 This page is for planning.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 TODO list                                                          |
-| -   2 Packaging notes                                                    |
-|     -   2.1 Units                                                        |
-|         -   2.1.1 Example of a simple conversion                         |
-|                                                                          |
-|     -   2.2 tmpfiles.d                                                   |
-|     -   2.3 modules-load.d                                               |
-|     -   2.4 ntp-units.d                                                  |
-|     -   2.5 sysctl.d                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 TODO list
+-   2 Packaging notes
+    -   2.1 Units
+        -   2.1.1 Example of a simple conversion
+    -   2.2 tmpfiles.d
+    -   2.3 modules-load.d
+    -   2.4 ntp-units.d
+    -   2.5 sysctl.d
 
 TODO list
 ---------
@@ -90,7 +87,6 @@ roughly preserved, and fancy behavior avoided:
     -   If the daemon in question is dbus-activated, socket-activated,
         or specifically supports Type=notify, that's a different matter,
         but currently only the case for a minority of daemons
-
 -   Arch's rc scripts do not support dependencies, but with systemd they
     should be added add where necessary
     -   The most typical case is that A requires the service B to be
@@ -186,3 +182,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 20 November 2012, at 13:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

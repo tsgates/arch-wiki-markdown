@@ -1,67 +1,43 @@
 Securely wipe disk
 ==================
 
-> Summary
+Related articles
 
-Wipe all traces left from (un-)encrypted data and/or prepare for block
-device encryption
-
-> Related
-
-File Recovery
-
-Benchmarking disk wipes
-
-Frandom
-
-Disk Encryption#Preparing the disk
-
-dm-crypt with LUKS
+-   File Recovery
+-   Benchmarking disk wipes
+-   Frandom
+-   Disk Encryption#Preparing the disk
+-   dm-crypt
 
 Wiping a disk is done by writing new data over every single bit.
 
 Note:References to "disks" in this article also apply to loopback
 devices.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Common use cases                                                   |
-|     -   1.1 Wipe all data left on the device                             |
-|     -   1.2 Preparations for block device encryption                     |
-|                                                                          |
-| -   2 Select a data source for overwriting                               |
-|     -   2.1 Unrandom data                                                |
-|         -   2.1.1 Pattern write test                                     |
-|                                                                          |
-|     -   2.2 Random data                                                  |
-|         -   2.2.1 Kernel built-in RNG                                    |
-|                                                                          |
-| -   3 Select a program                                                   |
-|     -   3.1 Coreutils                                                    |
-|         -   3.1.1 Dd                                                     |
-|             -   3.1.1.1 Checking progress of dd while running            |
-|             -   3.1.1.2 Dd spin-offs                                     |
-|                                                                          |
-|         -   3.1.2 shred                                                  |
-|                                                                          |
-|     -   3.2 Badblocks                                                    |
-|                                                                          |
-| -   4 Select a target                                                    |
-|     -   4.1 Block size                                                   |
-|                                                                          |
-| -   5 Overwrite the disk                                                 |
-| -   6 Data remanence                                                     |
-|     -   6.1 Random data                                                  |
-|     -   6.2 Hardware specific issues                                     |
-|         -   6.2.1 Flash memory                                           |
-|         -   6.2.2 Residual magnetism                                     |
-|         -   6.2.3 Old magnetic storage                                   |
-|         -   6.2.4 Operating system, programs and filesystem              |
-|                                                                          |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Common use cases
+    -   1.1 Wipe all data left on the device
+    -   1.2 Preparations for block device encryption
+-   2 Select a data source for overwriting
+    -   2.1 Unrandom data
+        -   2.1.1 Pattern write test
+    -   2.2 Random data
+-   3 Select a program
+    -   3.1 dd
+    -   3.2 shred
+    -   3.3 Badblocks
+-   4 Select a target
+    -   4.1 Block size
+-   5 Overwrite the disk
+-   6 Data remanence
+    -   6.1 Random data
+    -   6.2 Hardware specific issues
+        -   6.2.1 Flash memory
+        -   6.2.2 Residual magnetism
+        -   6.2.3 Old magnetic storage
+        -   6.2.4 Operating system, programs and filesystem
 
 Common use cases
 ----------------
@@ -150,133 +126,27 @@ wipes the device.
 
 > Random data
 
+For differences between random and pseudorandom data as source, please
+see Random number generation.
+
 Note:Data that is hard to compress (random data) will get written
 slower, if the drive logic mentioned in the #Unrandom data warning tries
 compressing it. This should not lead to #Data remanence though. As
 maximum write-speed is not the performance-bottleneck it can get
 completely neglected while wiping disks with random data.
 
-Kernel built-in RNG
-
-The kernel build in RNG's /dev/(u)random are highly recommended for
-producing reliable random data providing the same security level that is
-used for the creation of cryptographic keys. The random number generator
-gathers environmental noise from device drivers and other sources into
-an entropy pool.
-
- /dev/random
-    uses an entropy pool of 4096 bits (512 Bytes) to generate random
-    data and stops when the pool is exhausted until it get's (slowly)
-    refilled. /dev/random is absolutely not designed for wiping entire
-    HDD's, but rather to generate cryptographic keys (e.g. SSL/SSH).
- /dev/urandom
-    reuses existing entropy pool data while the pool is replenished and
-    although not suited for the most crucial cryptographic purposes, for
-    example the generation of longterm keys, its quality should be
-    sufficient for a paranoid disk wipe, preparing for block device
-    encryption, wiping LUKS keyslots, wiping single files and many other
-    purposes.
-
-For much better performance consider using a true pseudorandom number
-generator.
-
 Select a program
 ----------------
 
 /dev/<drive> is the drive to be encrypted.
 
-> Coreutils
+> dd
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
-                           is a candidate for       
-                           merging with             
-                           Core_Utilities.          
-                           Notes: Basic file        
-                           operations are not       
-                           specific to disk wiping! 
-                           Unrelated stuff in this  
-                           section should get       
-                           merged and then deleted  
-                           and replaced with a link 
-                           to Core Utilities. Did   
-                           you ever want to write   
-                           an article about dd and  
-                           Co? Then just go ahead.  
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
+See Core utilities#dd.
 
-Official documentation for dd and shred is linked to under #See also.
+> shred
 
-Dd
-
-See the Wikipedia article on this subject for more information:
-Dd_(Unix)
-
-Note:cp does the same as dd without any operands but is not designed for
-more versatile disk wiping procedures.
-
-Checking progress of dd while running
-
-By default, there is no output of dd until the task has finished. With
-kill and the "USR1"-Signal you can force status output without actually
-killing the program. Open up a 2nd root terminal and issue the following
-command:
-
-    # killall -USR1 dd
-
-Note:This will affect all other running dd-processes as well.
-
-Or:
-
-    # kill -USR1 <PID_OF_dd_COMMAND>
-
-For example:
-
-    # kill -USR1 $(pidof dd)
-
-This causes the terminal in which dd is running to output the progress
-at the time the command was run. For example:
-
-    605+0 records in
-    605+0 records out
-    634388480 bytes (634 MB) copied, 8.17097 s, 77.6 MB/s
-
-Dd spin-offs
-
-Other dd alike programs feature periodical status output like i.e. a
-simple progress bar.
-
-> dcfldd
-
-dcfldd is an enhanced version of dd with features useful for forensics
-and security. It accepts most of dd's parameters and includes status
-output. The last stable version of dcfldd was released on December 19,
-2006.[1]
-
-> ddrescue
-
-GNU ddrescue is a data recovery tool. It's capable of ignoring read
-errors what is a useless feature for disk wiping in almost any case. GNU
-ddrescue Manual
-
-shred
-
-Shred is a Unix command that can be used to securely delete files and
-devices so that they can be recovered only with great difficulty with
-specialised hardware, if at all.[2] Shred uses three passes, writing
-pseudo-random data to the device during each pass. This can be reduced
-or increased.
-
-The following command invokes shred with its default settings and
-displays the progress.
-
-    # shred -v /dev/<drive>
-
-Alternatively, shred can be instructed to do only one pass with entropy
-from, e.g. /dev/urandom.
-
-    # shred --verbose --random-source=/dev/urandom -n1 /dev/<drive>
+See Core utilities#shred.
 
 > Badblocks
 
@@ -288,7 +158,8 @@ has to be done.
 Select a target
 ---------------
 
-Note:Fdisk will not work on GPT formatted devices. Use gdisk instead.
+Note:Fdisk will not work on GPT formatted devices. Use gdisk (gptfdisk)
+instead.
 
 Use fdisk to locate all read/write devices the user has read acess to.
 
@@ -349,11 +220,12 @@ Make certain that the of=... option points to the target drive and not
 to a system disk.
 
 Zero-fill the disk by writing a zero byte to every addressable location
-on the disk using the /dev/zero stream.
+on the disk using the /dev/zero stream. iflag and oflag as below will
+try to disable buffering, which is senseless for a constant stream.
 
-    # dd if=/dev/zero of=/dev/sdX bs=4096
+    # dd if=/dev/zero of=/dev/sdX iflag=nocache oflag=direct bs=4096
 
-or the /dev/random stream:
+Or the /dev/urandom stream:
 
     # dd if=/dev/urandom of=/dev/sdX bs=4096
 
@@ -449,18 +321,17 @@ copy your unencrypted data throughout the block device. When writing to
 plain disks this should only be relevant in conjunction with one of the
 above.
 
-See also
---------
-
--   GNU Coreutils Manpage on Basic operations. Official documentation
-    for dd and shred.
-
--   Learn the DD command. - linuxquestions.org
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Securely_wipe_disk&oldid=253529"
+"https://wiki.archlinux.org/index.php?title=Securely_wipe_disk&oldid=302460"
 
 Categories:
 
 -   Security
 -   File systems
+
+-   This page was last modified on 28 February 2014, at 17:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

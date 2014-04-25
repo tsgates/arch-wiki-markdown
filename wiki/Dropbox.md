@@ -1,46 +1,46 @@
 Dropbox
 =======
 
+Related articles
+
+-   Backup Programs
+
 Dropbox is a file sharing system that recently introduced a GNU/Linux
 client. Use it to transparently sync files across computers and
 architectures. Simply drop files into your ~/Dropbox folder, and they
 will automatically sync to your centralized repository.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Optional packages                                            |
-|     -   1.2 Automatically Starting Dropbox                               |
-|                                                                          |
-| -   2 Alternative to install: use the web interface                      |
-| -   3 Run as daemon with systemd                                         |
-|     -   3.1 Run as a daemon with systemd user                            |
-|                                                                          |
-| -   4 Without Nautilus (Another Way)                                     |
-| -   5 Securing Your Dropbox                                              |
-|     -   5.1 Setup EncFS With Dropbox                                     |
-|                                                                          |
-| -   6 Multiple Dropbox Instances                                         |
-| -   7 Dropbox on Laptops                                                 |
-| -   8 Known Issues                                                       |
-|     -   8.1 Dropbox keeps saying Downloading files                       |
-|     -   8.2 Change the Dropbox location from the installation wizard     |
-|     -   8.3 Context menu entries in file manager do not work             |
-|     -   8.4 Connecting...                                                |
-|     -   8.5 Dropbox does not start - "This is usually because of a       |
-|         permission error"                                                |
-|         -   8.5.1 Check permissions                                      |
-|         -   8.5.2 Re-linking your account                                |
-|         -   8.5.3 Errors caused by running out of space                  |
-|         -   8.5.4 Locale caused errors                                   |
-|         -   8.5.5 Filesystem monitoring problem                          |
-|                                                                          |
-|     -   8.6 Proxy Settings                                               |
-|                                                                          |
-| -   9 Alternatives                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Optional packages
+    -   1.2 Automatically starting Dropbox
+-   2 Alternative to install: use the web interface
+-   3 Run as daemon with systemd
+    -   3.1 Run as a daemon with systemd user
+-   4 Securing your Dropbox
+    -   4.1 Setup EncFS with Dropbox
+-   5 Multiple Dropbox instances
+-   6 Dropbox on laptops
+    -   6.1 Using netctl
+    -   6.2 Using NetworkManager
+    -   6.3 Using wicd
+-   7 Troubleshooting
+    -   7.1 Dropbox keeps saying Downloading files
+    -   7.2 Change the Dropbox location from the installation wizard
+    -   7.3 Context menu entries in file manager do not work
+    -   7.4 Connecting...
+    -   7.5 Dropbox does not start - "This is usually because of a
+        permission error"
+        -   7.5.1 Check permissions
+        -   7.5.2 Re-linking your account
+        -   7.5.3 Errors caused by running out of space
+        -   7.5.4 Locale caused errors
+        -   7.5.5 Filesystem monitoring problem
+    -   7.6 Proxy settings
+-   8 Troubleshooting
+    -   8.1 Hack to stop Auto Update
 
 Installation
 ------------
@@ -76,7 +76,7 @@ login since the dropbox.desktop file be placed in ~/.config/autostart.
 -   For KDE users, there is a KDE client available: kfilebox from the
     AUR.
 
-> Automatically Starting Dropbox
+> Automatically starting Dropbox
 
 Dropbox can be automatically started by adding dropboxd to ~/.xinitrc
 (or ~/.config/openbox/autostart, depending on your setup).
@@ -96,12 +96,15 @@ Run as daemon with systemd
 Recent versions of Dropbox come with a systemd service file. By default
 running Dropbox as a daemon does not give you an icon in the system
 tray, but syncs your files and folders in the background. If you want to
-have tray support, then you have to copy the service file to
-/etc/systemd/system/dropbox@.service and add the environment variable.
+have tray support, create /etc/systemd/system/dropbox@.service to
+override the provided service file and specify the environment variable
+DISPLAY:
 
-    # echo ".include /usr/lib/systemd/system/dropbox@.service
+    /etc/systemd/system/dropbox@.service
+
+    .include /usr/lib/systemd/system/dropbox@.service
     [Service]
-    Environment=DISPLAY=:0" > /etc/systemd/system/dropbox@.service
+    Environment=DISPLAY=:0
 
 Finally, to enable the daemon for your user, so that it will start at
 login:
@@ -131,13 +134,13 @@ the sysadmin account:
     ExecStart=/home/your_user/.dropbox-dist/dropbox
     ExecReload=/bin/kill -HUP $MAINPID
     Environment=DISPLAY=%i
-     
+
     [Install]
     WantedBy=mystuff.target
 
-They you can start/enable it with:
+They you can start or enable it with:
 
-    systemctl --user {start|enable} dropbox@:0.service
+    $ systemctl --user {start|enable} dropbox@:0.service
 
 That way you can easily start it in your main display (likely :0) or in
 another one, without having to hard code it.
@@ -148,40 +151,7 @@ running it directly from the terminal worked fine). I believe it has to
 do that starting it that way systemd doesn't know which user is actually
 running the daemon.
 
-Without Nautilus (Another Way)
-------------------------------
-
-Another way to use Dropbox without Nautilus but with another file
-manager like Thunar or Pcmanfm is described below:
-
-1. Create a fake Nautilus script that will launch Thunar:
-
-    $ sudo touch /usr/bin/nautilus && sudo chmod +x /usr/bin/nautilus && sudo nano /usr/bin/nautilus
-
-2. Insert this text into the file, then save and exit:
-
-    #!/bin/bash
-    exec thunar $2
-    exit 0
-
-3. Launch Dropbox
-
-    $ dropboxd
-
-4. Click on the Dropbox tray icon to open your Dropbox folder in Thunar.
-
-Note:In this way there is no need to create a Dropbox daemon in
-/etc/rc.d/ and to start it at boot via /etc/rc.conf or to make it start
-via your session manager: just leave the "Start Dropbox on system
-startup" option flagged in the Preferences window.
-
-Note:If you already have Nautilus installed but do not want to use it,
-don't modify the existing file under /usr/bin, just change the /usr/bin
-for /opt/dropbox in the step 2 above, like this:
-$ sudo touch /opt/dropbox/nautilus && sudo chmod +x /opt/dropbox/nautilus && sudo nano /opt/dropbox/nautilus.
-Dropbox will look in this path first!
-
-Securing Your Dropbox
+Securing your Dropbox
 ---------------------
 
 If you want to store sensitive data in your Dropbox, you should encrypt
@@ -202,7 +172,7 @@ your Dropbox.
     input the passphrase, but note that your encrypted files are not
     secure from someone who has direct access to your computer.
 
-> Setup EncFS With Dropbox
+> Setup EncFS with Dropbox
 
 Follow the Wiki instructions to install EncFS.
 
@@ -221,10 +191,14 @@ will automatically encrypt it into ~/Dropbox/Encrypted, which will then
 be synced to your cloud storage.
 
 To mount your EncFS folder on every boot, follow the instructions in the
-EncFS wiki here:
-https://wiki.archlinux.org/index.php/EncFS#User_friendly_mounting
+EncFS wiki page.
 
-Multiple Dropbox Instances
+Tip:Consider using the ENCFS6_CONFIG variable and moving the .encfs6.xml
+file to another location (like a USB stick), to help ensure that your
+encrypted data and the means to realistically decrypt it do not exist
+together online.
+
+Multiple Dropbox instances
 --------------------------
 
 If you need to separate or distinguish your data, personal and work
@@ -243,70 +217,109 @@ For convenience, here is a script that I use to accomplish the task:
 just add a dir in the "dropboxes" list to have another instance of
 Dropbox, referring to the dir, loaded at script startup.
 
-    #!/bin/bash                                                                                              
-                                                                                                             
-     #*******************************                                                                        
-     # Multiple dropbox instances                                                                            
-     #*******************************                                                                        
-                                                                                                             
-     dropboxes=(.dropbox-personal .dropbox-work)                                                            
-                                                                                                             
-     for dropbox in ${dropboxes[@]}                                                                          
-     do                                                                                                      
-         if ! [ -d $HOME/$dropbox ];then                                                                     
-             mkdir $HOME/$dropbox                                                                            
-         fi                                                                                                  
-         HOME=$HOME/$dropbox/ /usr/bin/dropbox start -i                                                      
-     done   
+    #!/bin/bash
 
-Dropbox on Laptops
+     #*******************************
+     # Multiple dropbox instances
+     #*******************************
+
+     dropboxes=(.dropbox-personal .dropbox-work)
+                                                                                                             
+     for dropbox in ${dropboxes[@]}; do
+         if ! [ -d $HOME/$dropbox ];then
+             mkdir $HOME/$dropbox
+         fi
+         HOME=$HOME/$dropbox/ /opt/dropbox/dropbox start -i &
+     done
+
+Dropbox on laptops
 ------------------
 
 Dropbox itself is pretty good at dealing with connectivity problems. If
 you have a laptop and roam between different network environments,
-Dropbox will have problems reconnecting if you do not restart it. The
-easiest way to solve this with netcfg is to use POST_UP and PRE_DOWN.
+Dropbox will have problems reconnecting if you do not restart it. Try
+one of the methods described below first, if for some reason the problem
+remains, you may try one of these hackish solutions: [1], [2].
 
-In every network profile you use (or in the
-Netcfg#Per-interface_configuration), add the appropriate commands:
+Note:When using any of these methods, you need to prevent Dropbox from
+doing a standard autostart by unchecking Dropbox - Preferences - General
+- Start Dropbox on system startup. This prevents Dropbox from creating
+the ~/.config/autostart/dropbox.desktop file and thus from starting
+twice.
 
-    POST_UP="any other code; su -c 'DISPLAY=:0 /usr/bin/dropboxd &' your_user"
-    PRE_DOWN="any other code; killall dropbox"
+> Using netctl
 
-For netctl, use ExecUpPost and ExecDownPre respectively. Add '|| true'
+For netctl, use ExecUpPost and ExecDownPre respectively in every network
+profile you use, or for example in /etc/netctl/interfaces/wlan0 to start
+Dropbox automatically whenever profile on wlan0 is active. Add '|| true'
 to your command to make sure netctl will bring up your profile, although
 Dropbox fails to start.
 
     ExecUpPost="any other code; su -c 'DISPLAY=:0 /usr/bin/dropboxd &' your_user || true"
     ExecDownPre="any other code; killall dropbox"
 
-Obviously, your_user has to be edited and 'any other code;' can be
-omitted if you do not have any. The above will make sure that Dropbox is
-running only if there is a network profile active.
+Obviously, your_user has to be edited and any other code; can be omitted
+if you do not have any. The above will make sure that Dropbox is running
+only if there is a network profile active.
 
-If you have connectivity problem with NetworkManager, this thread on
-forum should be useful.
+> Using NetworkManager
 
-Known Issues
-------------
+If you have connectivity problem with NetworkManager, try using a
+dispatcher script: networkmanager-dispatcher-dropbox or
+networkmanager-dispatcher-dropbox-systemd.
+
+> Using wicd
+
+Create /etc/wicd/scripts/postconnect/dropbox:
+
+    #!/usr/bin/env bash
+    su -c 'DISPLAY=:0 /usr/bin/dbus-launch dropboxd &' your_username
+
+or, if you use dropbox with systemd:
+
+    #!/usr/bin/env bash
+    systemctl restart dropbox@<user>
+
+Create /etc/wicd/scripts/postdisconnect/dropbox:
+
+    #!/usr/bin/env bash
+    killall dropbox
+
+or, if you use dropbox with systemd:
+
+    #!/usr/bin/env bash
+    systemctl stop dropbox@<user>
+
+Note:If you use PCManFM as your file manager, Dropbox will use
+'xdg-open' calls pcmanfm to open the Dropbox folder.However, without a
+dbus session, you can not use Trash in PCManFM. You should refer to Dbus
+and General Troubleshooting#Session permissionsto edit your ~/.xinitrc
+based on /etc/skel/.xinitrc to start a D-Bus session before your launch
+any other program in ~/.xinitrc. Do use 'dbus-launch dropboxd' instead
+of just 'dropboxd' in wicd postconnect script. otherwise pcmanfm
+launched by clicking dropbox icon can not use the Trash.
+
+Troubleshooting
+---------------
 
 > Dropbox keeps saying Downloading files
 
 But in fact now files are synced with your box. This problem is likely
 to appear when your Dropbox folder is located on a NTFS partition whose
-mount path contains spaces. See more in the [forums]. To resolve the
-problem pay attention to your entry in /etc/fstab. Avoid spaces in the
-mount path and set write permissions:
+mount path contains spaces, or permissions are not set for that
+partition. See more in the [forums]. To resolve the problem pay
+attention to your entry in /etc/fstab. Avoid spaces in the mount path
+and set write permissions with the "default_permissions" option:
 
-    UUID=01CD2ABB65E17DE0 /run/media/username/Windows ntfs-3g uid=username,gid=users 0 0
+    UUID=01CD2ABB65E17DE0 /run/media/username/Windows ntfs-3g uid=username,gid=users,default_permissions 0 0
 
 > Change the Dropbox location from the installation wizard
 
 Some users experience the problem during setting-up Dropbox that they
 cannot select a Dropbox folder other than /home/username/Dropbox. In
-this case when the window for changing the path is shown , hit CTRL+L,
-enter the location (e.g. /mnt/data/Dropbox) and click on the 'Choose' or
-'Open' button.
+this case when the window for changing the path is shown , hit Ctrl+l,
+enter the location (e.g. /mnt/data/Dropbox) and click on the '"Choose"
+or "Open" button.
 
 > Context menu entries in file manager do not work
 
@@ -314,143 +327,29 @@ Several file managers such as Thunar, Nautilus or its fork Nemo come
 with extensions that provide context menu entries for files and folders
 inside your Dropbox. Most of them will result in a browser action such
 as opening the file or folder in dropbox.com or sharing the link. If you
-experience these entries to not working, then you are likely to have not
-set the $BROWSER variable which Dropbox requires. You can check that by
-
-    echo $BROWSER
-
-To set your $BROWSER variable open ~/.profile and replace chromium with
-your default browser:
-
-    if [ -n "$DISPLAY" ]; then
-         BROWSER=chromium
-    fi
+experience these entries not working, then it is likely you have not set
+the $BROWSER variable which Dropbox requires. See Environment variables
+for details.
 
 > Connecting...
 
-Note:It seems that this issue has been fixed in later versions of
-dropbox (sometime before 1.6.0-2). It might be reasonable to test before
-installing one of the following scripts
-
 It may happen that Dropbox cannot connect successfully because it was
-loaded before an Internet connection was established. To solve the
-problem the content of the file /opt/dropbox/dropboxd needs to be
-replaced with the following:
+loaded before an internet connection was established. This can happen on
+wireless connections, or fast loading machines on wired networks. The
+best solution to this problem, for wired and wireless connections, is
+#Dropbox on laptops which will ensure that Dropbox is started only after
+the connection is established.
 
-  
+An alternative solution, for those not using netctl or NetworkManager,
+is to delay the startup of dropbox:
 
-    #!/bin/sh
-
-    # Copyright 2008 Evenflow, Inc., 2010 Dropbox
-    #
-    # Environment script for the dropbox executable.
-
-    start_dropbox() {
-    PAR=$(dirname $(readlink -f $0))
-    OLD_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
-    LD_LIBRARY_PATH=$PAR:$LD_LIBRARY_PATH 
-
-    TMP1=`ps ax|grep dropbox|grep -v grep`
-    if [ -n "$TMP1" ]; then
-      kill -9 $(pidof dropbox) >/dev/null 2>&1
-    fi
-    exec $PAR/dropbox $@ &
-    }
-
-    do_dropbox() {
-    start_dropbox >/dev/null 2>&1
-    while [ 1 ]; do
-      sleep 5
-      ERROR="$(net_test)"
-      if [ -n "$ERROR" ]; then
-        LAST_ERROR=1
-      else
-        if [ -n "$LAST_ERROR" ]; then
-          # Connection seems to be up but last cycle was down
-          LAST_ERROR=""
-          start_dropbox >/dev/null 2>&1
-        fi
-      fi
-    done
-
-    }
-
-    net_test() {
-    TMP1="$(ip addr |grep "inet " |grep -v "127.0.0.1")"
-    [ -z "$TMP1" ] && echo "error"
-    }
-
-    do_dropbox
-
-Following is an alternative script that will check for an actual
-Internet connection by using curl to check if any entry in a list of
-hosts and IP addresses is available. If none of the specified hosts are
-available, the script will wait and try again (albeit not forever). The
-way the script increments the waiting time is quite messy, but the logic
-goes like this:
-
-Start with a wait time of 5 seconds.
-
-Multiply by 1.5.
-
-Do this as long as the wait time is less than 1500 seconds (25 minutes),
-and the check_net() function returns non-zero values (failure).
-
-    #!/bin/bash
-
-    # Copyright 2008 Evenflow, Inc., 2010 Dropbox
-    #
-    # Environment script for the dropbox executable.
-
-    WAIT_TIME=5 #initial time to wait between checking the internet connection
-    #HOSTS="www.google.com www.wikipedia.org 8.8.8.8 208.67.222.222"
-    HOSTS="www.google.com www.wikipedia.org "
-
-    PAR=$(dirname $(readlink -f $0))
-    OLD_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
-    LD_LIBRARY_PATH=$PAR${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH
-
-    #non-zero exit code iff none of the hosts could be reached
-    check_net() {
-            local ret=1
-            for i in $HOSTS; do
-                    #ping -w2 -c2 $i > /dev/null 2>&1 && ret=0 && break
-                    curl -o /dev/null $i > /dev/null 2>&1 && ret=0 && break
-            done
-            echo $ret
-    }
-
-    #if dropbox is running; kill it. Then start dropbox
-    start_dropbox() {
-    local tmp=`ps ax|grep -E "[0-9] $PAR/dropbox"|grep -v grep`
-            if [ -n "$tmp" ]; then
-                    kill -9 $(pidof dropbox) > /dev/null 2>&1
-            fi
-            exec $PAR/dropbox $@ > /dev/null 2>&1 &
-    }
-
-    #loop over: start dropbox iff check_net returns 0
-    #loop (and with it, the entire script) terminates when dropbox has been restarted,
-    #+ or the waiting time has exeeded 1500 seconds (it grows 50% with each iteration of the loop)
-    attempt_startup() {
-            while [ $WAIT_TIME -lt 1500  ] ; do
-                    if [ $(check_net) -eq 0 ]; then
-                            start_dropbox
-                            exit
-                    fi
-                    sleep $WAIT_TIME
-                    #WAIT_TIME=$(($WAIT_TIME+$WAIT_TIME/2))
-                    let "WAIT_TIME += WAIT_TIME/2"
-            done
-    }
-
-    start_dropbox
-    attempt_startup &
-
-Tip:When you update Dropbox via your preferred AUR helper, the file will
-(usually) be reverted to the default one. You can prevent this with
-chattr +i /opt/dropbox/dropboxd which will make the file immutable. To
-reverse this action simply use chattr -i /opt/dropbox/dropboxd.
+-   cp ~/.config/autostart/dropbox.desktop ~/.config/autostart/dropbox-delayed.desktop
+-   Prevent dropbox from doing a standard autostart by unchecking
+    Dropbox - Preferences - General - Start Dropbox on system startup.
+    This removes ~/.config/autostart/dropbox.desktop.
+-   Edit ~/.config/autostart/dropbox-delayed.desktop and replace
+    Exec=dropboxd with Exec=bash -c "sleep timeout && dropboxd". Tweak
+    the timeout parameter, the value of 3 is a good start.
 
 > Dropbox does not start - "This is usually because of a permission error"
 
@@ -486,6 +385,12 @@ crash on startup with the following error in its log:
 A detailed story of such an occurrence can be found in the forums. Make
 sure there is enough space available before launching Dropbox.
 
+Another case is when the root partition is full:
+
+    OperationalError: database or disk is full
+
+Check to see the available space on partitions with df.
+
 Locale caused errors
 
 Try starting dropboxd with this code:
@@ -509,9 +414,11 @@ This can be fixed easily by adding
 
     fs.inotify.max_user_watches = 100000
 
-to /etc/sysctl.conf and restarting your computer.
+to /etc/sysctl.d/99-sysctl.conf and then reload the kernel parameters
 
-> Proxy Settings
+    # sysctl --system
+
+> Proxy settings
 
 The easiest way to set Dropbox's proxy settings is by defining them
 manually in the Proxies tab of the Preferences window. Alternatively,
@@ -526,21 +433,28 @@ or
     export http_proxy=http://your.proxy.here:port
     /usr/bin/dropboxd
 
-Take note, Dropbox will only use proxy settings of the form
+Note:Dropbox will only use proxy settings of the form
 http://your.proxy.here:port, not your.proxy.here:port as some other
 applications do.
 
-Alternatives
-------------
+Troubleshooting
+---------------
 
--   Ubuntu One - ubuntuone-client
--   Spider Oak - spideroak
--   KFileBox - kfilebox
--   Wuala - wuala
+> Hack to stop Auto Update
+
+    rm -rf ~/.dropbox-dist
+    install -dm0 ~/.dropbox-dist
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dropbox&oldid=255766"
+"https://wiki.archlinux.org/index.php?title=Dropbox&oldid=304590"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 15 March 2014, at 10:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

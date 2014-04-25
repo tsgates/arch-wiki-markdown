@@ -10,25 +10,21 @@ Additions for anyone using different devices are appreciated. I have put
 in what I think will work, but as I only have the one device I can't
 test anything other than that device.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setting up Arch Linux                                              |
-|     -   1.1 Installing Evolution                                         |
-|     -   1.2 Installing the Gnome packages                                |
-|                                                                          |
-| -   2 Setting up the Hardware                                            |
-|     -   2.1 Serial Port                                                  |
-|     -   2.2 USB Port                                                     |
-|     -   2.3 Wireless Networking                                          |
-|     -   2.4 Checking the Hardware                                        |
-|                                                                          |
-| -   3 Setting up Synchronisation                                         |
-| -   4 Setting up Conduits                                                |
-| -   5 Testing                                                            |
-| -   6 Gnome Pilot Applet                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setting up Arch Linux
+    -   1.1 Installing Evolution
+    -   1.2 Installing the Gnome packages
+-   2 Setting up the Hardware
+    -   2.1 Serial Port
+    -   2.2 USB Port
+    -   2.3 Wireless Networking
+    -   2.4 Checking the Hardware
+-   3 Setting up Synchronisation
+-   4 Setting up Conduits
+-   5 Testing
+-   6 Gnome Pilot Applet
 
 Setting up Arch Linux
 =====================
@@ -201,8 +197,15 @@ arrow on it should appear. Move it to where you want it.
 Now Hotsyncing will give a progress dialog.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Palm_Evolution&oldid=249630"
+"https://wiki.archlinux.org/index.php?title=Palm_Evolution&oldid=298138"
 
 Category:
 
 -   Mobile devices
+
+-   This page was last modified on 16 February 2014, at 07:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -4,22 +4,19 @@ Upside Down Ternet
 This article explains how to create a transparent Squid proxy server
 using mogrify to flip the images upside down.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Router Setup                                                 |
-|                                                                          |
-| -   3 Starting                                                           |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Router Setup
+-   3 Starting
+-   4 See also
 
 Installation
 ------------
 
-Install the squid, apache and imagemagick packages from the official
+Install the squid, apache, and imagemagick packages from the official
 repositories.
 
 Configuration
@@ -136,8 +133,15 @@ See also
 -   Upside-Down-Ternet XKCD
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Upside_Down_Ternet&oldid=241222"
+"https://wiki.archlinux.org/index.php?title=Upside_Down_Ternet&oldid=305763"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 20 March 2014, at 02:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -13,34 +13,30 @@ around 3 hours battery life was achieved, following powersaving tweaks a
 bit over than 5 hours was achieved, this was performed with screen
 brightness at the second highest value.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Useful packages                                                    |
-|     -   2.1 System Packages                                              |
-|     -   2.2 Applications                                                 |
-|                                                                          |
-| -   3 General Tweaks                                                     |
-|     -   3.1 Scrolling with trackpoint                                    |
-|                                                                          |
-| -   4 Powersaving tweaks                                                 |
-|     -   4.1 laptop-mode (kernel)                                         |
-|     -   4.2 SATA-ALPM (pm-utils)                                         |
-|     -   4.3 Powersaving on PCI devices                                   |
-|     -   4.4 i915 RC6 powersaving                                         |
-|     -   4.5 Disable NMI watchdog                                         |
-|     -   4.6 PHC                                                          |
-|                                                                          |
-| -   5 Tablet support                                                     |
-| -   6 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Useful packages
+    -   2.1 System Packages
+    -   2.2 Applications
+-   3 General Tweaks
+    -   3.1 Scrolling with trackpoint
+-   4 Powersaving tweaks
+    -   4.1 laptop-mode (kernel)
+    -   4.2 SATA-ALPM (pm-utils)
+    -   4.3 Powersaving on PCI devices
+    -   4.4 i915 RC6 powersaving
+    -   4.5 Disable NMI watchdog
+    -   4.6 PHC
+-   5 Tablet support
+    -   5.1 Getting display keys to work
+-   6 External links
 
 Installation
 ------------
 
-Grab the .iso file from Arch Download, write this to a memory stick
+Grab the .iso file from the download page, write this to a memory stick
 
      sudo dd if=archlinux-201x.xx.xx-dual.iso of=/dev/sdX bs=4M
 
@@ -58,7 +54,8 @@ Some useful packages for your IBM/Lenovo ThinkPad X41:
 -   xf86-input-wacom - Driver supporting Wacom tablet screen.
 -   xf86-video-intel - Xorg driver for the Intel 915GM graphics chip.
 -   tp_smapi - Adds support for SMAPI functions (battery discharge
-    control, battery information, hdaps acceloremeter support).
+    control, battery information, hdaps acceloremeter support). If
+    you're using Linux-ck try tp_smapi-dkms (AUR).
 -   thinkfinger - Driver for fingerprint reader.
 
 The IBM X41 comes with a ipw2915 wireless Centrino (A, B and G) or
@@ -137,19 +134,7 @@ causes issues, this can save about 2W.
 
 > i915 RC6 powersaving
 
-The i915 chipset supports a variety of powersaving features, checkout
-modinfo i915 \| grep -i power for all options. The following are a good
-set to enable.
-
-    /etc/modprobe.d/i915.conf
-
-    options i915 i915_enable_rc6=7 i915_enable_fbc=1 lvds_downclock=1 
-
-RC6 is a powersaving protocol, 7 enables RC6, deep RC6 and deepest RC6
-(refer to Power Management#Enable RC6 Power Save Options for more
-information). i915_enable_fbc=1 enables framebuffer compression reducing
-the time taken to update the screen. lvds_downclock=1 lowers the
-clockrate of the screen.
+See Intel_Graphics#Module-based_Powersaving_Options.
 
 > Disable NMI watchdog
 
@@ -174,7 +159,7 @@ your laptop will run cooler and the fan will activate less frequently.
     $ sudo linux-phc-optimize # Repeat this each time the laptop crashes until you've got a full set of parameters, this is 9 times
 
 Once you have established stable VIDs, adding them to system startup can
-be accomplished modifying the intel-phc configuration file. If it
+be accomplished modifying the phc-intel configuration file. If it
 doesn't exist, create it
 
     /etc/phc-intel.conf
@@ -182,7 +167,7 @@ doesn't exist, create it
      VIDS="17 15 13 11 9 7 5 4 4"  
 
 You can check that this is enabled on your next reboot by
-sudo intel-phc status
+sudo phc-intel status
 
 Tablet support
 --------------
@@ -190,6 +175,13 @@ Tablet support
 The X41t utilises a Wacom digitiser for input,
 pacman -S xf86-input-wacom provides support for it. Once installed the
 driver should be activated following the next reboot.
+
+> Getting display keys to work
+
+If the display keys (Rotate, Escape, Enter, Prev, Next,...) on your X41
+tablet aren't working, add atkbd.softraw=0 as a kernel parameter in your
+boot loader configuration. Once they're producing scancodes, you can map
+them to keycodes.
 
 External links
 ==============
@@ -202,8 +194,15 @@ External links
     sheet to both the CPU and northbridge heatsinks with no ill effects.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IBM_ThinkPad_X41&oldid=255824"
+"https://wiki.archlinux.org/index.php?title=IBM_ThinkPad_X41&oldid=293347"
 
 Category:
 
 -   IBM
+
+-   This page was last modified on 17 January 2014, at 14:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

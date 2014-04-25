@@ -1,26 +1,26 @@
 Ureadahead
 ==========
 
+Note:ureadahead package is orphaned because Systemd comes with its own
+readahead implementation. See Improve boot performance#Readahead.
+
 Ureadahead (Über-readahead) is used to speed up the boot process. It
 works by reading all the files required during boot and makes pack files
 for quicker access, then during boot reads these files in advance, thus
 minimizes the access times for the harddrives. It's intended to replace
 sreadahead.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Requirements                                                       |
-| -   2 How it works                                                       |
-| -   3 Using ureadahead                                                   |
-| -   4 Configuration                                                      |
-| -   5 Questions                                                          |
-|     -   5.1 Q: Why does this take so long time tracing?                  |
-|                                                                          |
-| -   6 Helping out                                                        |
-| -   7 More resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Requirements
+-   2 How it works
+-   3 Using ureadahead
+-   4 Configuration
+-   5 Questions
+    -   5.1 Q: Why does this take so long time tracing?
+-   6 Helping out
+-   7 More resources
 
 Requirements
 ------------
@@ -127,8 +127,15 @@ More resources
 -   Nvidia driver for the patched kernel
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ureadahead&oldid=225360"
+"https://wiki.archlinux.org/index.php?title=Ureadahead&oldid=299496"
 
 Category:
 
 -   Boot process
+
+-   This page was last modified on 21 February 2014, at 22:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

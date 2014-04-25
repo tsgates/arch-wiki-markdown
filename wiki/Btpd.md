@@ -3,15 +3,13 @@ Btpd
 
 btpd is a BitTorrent client daemon.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Interaction                                                        |
-| -   4 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Interaction
+-   4 External Links
 
 Installation
 ------------
@@ -53,7 +51,7 @@ Same as above but only for active torrents:
 
     $ btcli list -a
 
-Use a custom list forma:
+Use a custom list format:
 
     $btcli list -f "btcli list -f "%n\t%#\t%p%s\t%r\n"
 
@@ -99,9 +97,15 @@ External Links
 -   GTK+ Btpd frontend in AUR
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Btpd&oldid=214414"
+"https://wiki.archlinux.org/index.php?title=Btpd&oldid=302629"
 
-Categories:
+Category:
 
--   Internet Applications
--   Networking
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

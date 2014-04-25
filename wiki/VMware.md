@@ -1,104 +1,93 @@
 VMware
 ======
 
-> Summary
+Related articles
 
-This article will explain how to install and configure VMware
-Workstation/Player in Arch.
-
-> Related
-
-Installing Arch Linux in VMware
-
-VirtualBox
-
-KVM
-
-QEMU
-
-Xen
-
-Moving an existing install into (or out of) a virtual machine
+-   Installing Arch Linux in VMware
+-   VirtualBox
+-   KVM
+-   QEMU
+-   Xen
+-   Moving an existing install into (or out of) a virtual machine
 
 This article is about installing VMware in Arch Linux; you may also be
 interested in Installing Arch Linux in VMware.
 
 Note:This article supports only the latest major VMware versions,
-meaning VMware Workstation 9 and VMware Player 5.
+meaning VMware Workstation 10 and VMware Player (Plus) 6.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Module tool paths                                            |
-|         -   2.1.1 1) A short-term solution                               |
-|         -   2.1.2 2) A long-term solution                                |
-|                                                                          |
-|     -   2.2 VMware module patches and installation                       |
-|         -   2.2.1 3.7 kernels and up                                     |
-|         -   2.2.2 3.8 / 3.9 kernels                                      |
-|         -   2.2.3 3.5 / 3.6 / 3.7 kernels                                |
-|                                                                          |
-|     -   2.3 Systemd service                                              |
-|                                                                          |
-| -   3 Launching the application                                          |
-| -   4 Tips & Tricks                                                      |
-|     -   4.1 Entering the Workstation License Key from terminal           |
-|     -   4.2 Extracting the VMware BIOS                                   |
-|         -   4.2.1 Using the modified BIOS                                |
-|                                                                          |
-|     -   4.3 Copy-On-Write (CoW)                                          |
-|     -   4.4 Using DKMS to manage the modules                             |
-|         -   4.4.1 Preparation                                            |
-|         -   4.4.2 Build configuration                                    |
-|             -   4.4.2.1 1) Using Git                                     |
-|             -   4.4.2.2 2) Manual setup                                  |
-|                                                                          |
-|         -   4.4.3 Installation                                           |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Could not open /dev/vmmon: No such file or directory.        |
-|     -   5.2 Kernel headers for version 3.x-xxxx were not found. If you   |
-|         installed them[...]                                              |
-|     -   5.3 USB devices not recognized                                   |
-|         -   5.3.1 1) The vmware-USBArbitrator script is missing          |
-|         -   5.3.2 2) The vmware-usbarbitrator binary is segfaulting      |
-|                                                                          |
-|     -   5.4 process XXXX: Attempt to remove filter function [...]        |
-|     -   5.5 The installer fails to start                                 |
-|     -   5.6 Incorrect login/password when trying to access VMware        |
-|         remotely                                                         |
-|     -   5.7 Issues with ALSA output                                      |
-|                                                                          |
-| -   6 Uninstallation                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 VMware module patches and installation
+        -   2.1.1 3.13.6 kernels
+        -   2.1.2 3.13 kernels - patch for Netfilter-enabled systems
+            (optional)
+    -   2.2 Systemd service
+-   3 Launching the application
+-   4 Tips and tricks
+    -   4.1 Entering the Workstation License Key
+        -   4.1.1 From terminal
+        -   4.1.2 From GUI
+    -   4.2 Extracting the VMware BIOS
+        -   4.2.1 Using the modified BIOS
+    -   4.3 Using DKMS to manage the modules
+        -   4.3.1 Preparation
+        -   4.3.2 Build configuration
+            -   4.3.2.1 1) Using Git
+            -   4.3.2.2 2) Manual setup
+        -   4.3.3 Installation
+-   5 Troubleshooting
+    -   5.1 /dev/vmmon not found
+    -   5.2 Kernel headers for version 3.x-xxxx were not found. If you
+        installed them[...]
+    -   5.3 USB devices not recognized
+    -   5.4 vmci/vsock modules not loading automatically
+    -   5.5 The installer fails to start
+    -   5.6 Incorrect login/password when trying to access VMware
+        remotely
+    -   5.7 Issues with ALSA output
+    -   5.8 Kernel-based Virtual Machine (KVM) is running
+-   6 Uninstallation
 
 Installation
 ------------
 
-Note: VMware Workstation/Player will not be manageable with pacman as
-the files are not installed with it.
+Note:VMware Workstation/Player (Plus) will not be manageable with pacman
+as the files are not installed with it.
 
-1. Download the latest VMware Workstation or VMware Player (you may also
-try the testing (Beta/RC) versions).
+1. Install the correct dependencies: gtkmm (for the GUI),
+linux-headers (for module compilation).
 
-2. Start the installation (--console uses terminal instead of the GUI):
+2. Download the latest VMware Workstation or VMware Player (Plus) (or a
+beta version, if available).
 
-    $ chmod +x VMware-<edition>-<version>.<release>.<architecture>.bundle
-    # ./VMware-<edition>-<version>.<release>.<architecture>.bundle --console
+3. Start the installation (--console uses terminal instead of the GUI):
 
-3. Read & accept the EULA to continue.
+    $ chmod +x VMware-edition-version.release.architecture.bundle
+    # ./VMware-edition-version.release.architecture.bundle --console
 
-4. Set System service scripts directory to /etc/init.d.
+Note:To ignore fatal errors use -I / --ignore-errors.
 
-5. (Optional) If Eclipse is installed, enter the directory path to the
-Integrated Virtual Debugger.
+4. Read and accept the main application and the OVF Tool component EULAs
+to continue.
 
-6. You will now get an error about the
-"rc*.d style init script directories" not being set. This can, however,
-be safely ignored.
+5. (optional) Enter license key.
+
+6. During installation you will get an error about
+"No rc*.d style init script directories" being given. This can be safely
+ignored, since Arch has moved to systemd.
+
+Note:VMware Player (Plus) 6 requires a directory to be entered for RC
+scripts or it will fail installing them. This will cause module
+compilation to fail because it is unable to stop its services. Just
+create an empty script called vmware in the directory given to the
+installer:
+
+    # touch /etc/init.d/vmware
+    # chmod +x /etc/init.d/vmware
 
 Configuration
 -------------
@@ -107,86 +96,48 @@ Tip:There is also a package called vmware-patch in the AUR with the
 intention of trying to automate this section (it also supports older
 VMware versions).
 
-Note:Ensure you have installed the correct headers required for building
-the modules (linux from [core] uses linux-headers).
-
-> Module tool paths
-
-7. The module tool paths of certain Workstation scripts now need to be
-pointed to /usr/bin/ instead of /sbin/. These include the service script
-in /etc/init.d/ and some other ones in /usr/bin/.
-
-1) A short-term solution
-
-A short-term solution consists of editing the files directly. You will
-need to redo this upon every update.
-
--   For Workstation:
-
-    # perl -p -i -e 's|/sbin/(?!modprobe)|/usr/bin/|g' /etc/init.d/vmware /usr/bin/vm-support /usr/bin/vmplayer /usr/bin/vmware /usr/bin/vmware-hostd /usr/bin/vmware-wssc-adminTool
-
--   For Player:
-
-    # perl -p -i -e 's|/sbin/(?!modprobe)|/usr/bin/|g' /etc/init.d/vmware /usr/bin/vm-support /usr/bin/vmplayer
-
-2) A long-term solution
-
-You could also just create symlinks with:
-
-    # ln -s /usr/bin/insmod /usr/bin/lsmod /usr/bin/modinfo /usr/bin/rmmod /sbin/
-
 > VMware module patches and installation
 
-VMware Workstation 9 and Player 5 both support kernels up to 3.9.
+VMware Workstation 10.0.1 and Player (Plus) 6.0.1 support kernels up to
+3.13.5.
 
-Note:This section is currently useful only for VMware Workstation and
-Player lower than 9.0.2 and 5.0.2, respectively.
+3.13.6 kernels
 
-Note:Due to different VMware versions, you may need to set the vmreqver
-or plreqver variable for VMware Workstation or Player respectively in
-the patch-modules_3.X.0.sh script.
-
-The following patches will also install the modules afterwards by
-executing # vmware-modconfig --console --install-all.
-
-3.7 kernels and up
-
-With the arrival of 3.7 the directory structure of the uapi sources (and
-thus the headers) has changed. The missing kernel header version.h can
-be symlinked with:
-
-    # ln -s /usr/src/linux-$(uname -r)/include/generated/uapi/linux/version.h /usr/src/linux-$(uname -r)/include/linux/
-
-You can replace "$(uname -r)" with any kernel not currently running.
-
-Note:You will need to redo this upon every kernel update.
-
-3.8 / 3.9 kernels
-
-In addition to the header symlink outlined above 3.8/3.9 kernels also
-need this (packaged together with the script in here):
+Since 3.13.6 patching vmnet and vmblock is required.
 
     $ cd /tmp
-    $ curl -O https://raw.github.com/willysr/SlackHacks/master/vmware/vmware-3.8/vmware9.0.1_kernel3.8.zip
-    $ bsdtar -xvf vmware9.0.1_kernel3.8.zip
-    # ./patch-modules_3.8.0.sh
+    $ git clone https://github.com/bawaaaaah/vmware_patch.git
+    $ cd /usr/lib/vmware/modules/source
+    # tar -xvf vmblock.tar
+    # tar -xvf vmnet.tar
+    # patch -p1 -i /tmp/vmware_patch/vmblock-patch-kernel-3.13
+    # patch -p1 -i /tmp/vmware_patch/vmnet-patch-kernel-3.13
+    # tar -cf vmblock.tar vmblock-only
+    # tar -cf vmnet.tar vmnet-only
+    # rm -r vmblock-only vmnet-only
+    # vmware-modconfig --console --install-all
 
-3.5 / 3.6 / 3.7 kernels
+3.13 kernels - patch for Netfilter-enabled systems (optional)
 
-A change in the format of the kernel exception table introduced back in
-April affecting the vmmon module is known to cause crashes in Fedora
-guests. The patch here creates a portable exception table (packaged
-together with the script in here, which will also reload the vmmon
-module):
+Systems that have enabled the network packet filtering framework
+(Netfilter or CONFIG_NETFILTER) on 3.13 kernels (found in:
+Networking Support → Networking Options) will fail to build the vmnet
+module.
 
-    $ cd /tmp
-    $ curl -O http://communities.vmware.com/servlet/JiveServlet/download/2103172-94260/vmware9_kernel35_patch.tar.bz2
-    $ tar -xvf --strip-components=1 vmware9_kernel35_patch.tar.bz2  # The "--strip-components=1" flag extracts the files only
-    # ./patch-modules_3.5.0.sh
+This isn't included in the Arch stock kernel, but for custom kernels a
+patch can be found here:
+
+    $ curl http://pastie.org/pastes/8672356/download -o /tmp/vmware-netfilter.patch
+    $ cd /usr/lib/vmware/modules/source
+    # tar -xvf vmnet.tar
+    # patch -p0 -i /tmp/vmware-netfilter.patch
+    # tar -cf vmnet.tar vmnet-only
+    # rm -r vmnet-only
+    # vmware-modconfig --console --install-all
 
 > Systemd service
 
-8. (Optional) Instead of using
+7. (Optional) Instead of using
 # /etc/init.d/vmware {start|stop|status|restart} directly to manage the
 services you may also create a .service file (or files):
 
@@ -205,28 +156,38 @@ services you may also create a .service file (or files):
     [Install]
     WantedBy=multi-user.target
 
-To start the .service on boot:
+After which you can enable it on boot, with:
 
     # systemctl enable vmware
 
 Launching the application
 -------------------------
 
-9. Now, open your VMware Workstation (vmware in the console) or VMware
-Player (vmplayer in the console) to configure & use!
+8. Now, open your VMware Workstation (vmware in the console) or VMware
+Player (Plus) (vmplayer in the console) to configure & use!
 
-Tip:To (re)build the modules, use:
+Tip:To (re)build the modules from terminal, use:
 
     # vmware-modconfig --console --install-all
 
-Tips & Tricks
--------------
+Tips and tricks
+---------------
 
-> Entering the Workstation License Key from terminal
+> Entering the Workstation License Key
+
+From terminal
 
     # /usr/lib/vmware/bin/vmware-vmx-debug --new-sn XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
 
 Where XXXXX-XXXXX-XXXXX-XXXXX-XXXXX is your license key.
+
+Note:The -debug binary informs the user of an incorrect license.
+
+From GUI
+
+If the above doesn't work, you can try:
+
+    # /usr/lib/vmware/bin/vmware-enter-serial
 
 > Extracting the VMware BIOS
 
@@ -236,28 +197,15 @@ Where XXXXX-XXXXX-XXXXX-XXXXX-XXXXX is your license key.
 Using the modified BIOS
 
 If and when you decide to modify the extracted BIOS you can make your
-virtual machine use it by moving it to ~/vmware/<Virtual machine name>:
+virtual machine use it by moving it to ~/vmware/Virtual machine name:
 
-    $ mv bios440.rom ~/vmware/<Virtual machine name>/
+    $ mv bios440.rom ~/vmware/Virtual machine name/
 
-then adding the name to the <Virtual machine name>.vmx file:
+then adding the name to the Virtual machine name.vmx file:
 
-    ~/vmware/<Virtual machine name>/<Virtual machine name>.vmx
+    ~/vmware/Virtual machine name/Virtual machine name.vmx
 
     bios440.filename = "bios440.rom"
-
-> Copy-On-Write (CoW)
-
-CoW comes with some advantages, but can negatively affect performance
-with large files that have small random writes (e.g. database files and
-virtual machine images):
-
-    $ chattr +C ~/vmware/<Virtual machine name>/<Virtual machine name>.vmx
-
-Note:From the chattr man page: "For btrfs, the C flag should be set only
-on new or empty files. If set on a file which already has data blocks,
-it is undefined when the blocks assigned to the file will be fully
-stable. If set on a directory, only new files will be affected."
 
 > Using DKMS to manage the modules
 
@@ -269,23 +217,22 @@ they are removed from the current kernel tree.
 
 Preparation
 
-First install dkms from the Community repository:
+First install dkms from the official repositories.
 
-    # pacman -S dkms
-
-then create a source directory for the Makefile and the dkms.conf:
+Then create a source directory for the Makefile and the dkms.conf:
 
     # mkdir /usr/src/vmware-modules-9/
 
 Build configuration
 
-Fetch the files from Git or use the ones below.
+Fetch the files with git or use the ones below.
 
 1) Using Git
 
     $ cd /tmp
-    $ git clone git://github.com/djod4556/dkms-workstation.git
-    # cp /tmp/dkms-workstation.git/Makefile /tmp/dkms-workstation.git/dkms.conf /usr/src/vmware-modules-9/
+    $ git clone https://github.com/bawaaaaah/dkms-workstation.git
+    $ git checkout fix.new_archlinux_headers_path
+    # cp /tmp/dkms-workstation/Makefile /tmp/dkms-workstation/dkms.conf /usr/src/vmware-modules-9/
 
 2) Manual setup
 
@@ -329,7 +276,7 @@ and now the Makefile:
     /usr/src/vmware-modules-9/Makefile
 
     KERNEL := $(KERNELRELEASE)
-    HEADERS := /usr/src/linux-$(KERNEL)/include
+    HEADERS := /usr/lib/modules/$(KERNEL)/build/include
     GCC := $(shell vmware-modconfig --console --get-gcc)
     DEST := /lib/modules/$(KERNEL)/vmware
 
@@ -338,32 +285,23 @@ and now the Makefile:
     LOCAL_MODULES := $(addsuffix .ko, $(TARGETS))
 
     all: $(LOCAL_MODULES)
-            mkdir -p modules/
-            mv *.ko modules/
-            rm -rf $(DEST)
-            depmod
+    	mkdir -p modules/
+    	mv *.ko modules/
+    	rm -rf $(DEST)
+    	depmod
 
-    /usr/src/linux-$(KERNEL)/include/linux/version.h:
-            ln -s /usr/src/linux-$(KERNEL)/include/generated/uapi/linux/version.h /usr/src/linux-$(KERNEL)/include/linux/
+    $(HEADERS)/linux/version.h:
+    	ln -s $(HEADERS)/generated/uapi/linux/version.h $(HEADERS)/linux/version.h
 
-    %.ko: /usr/src/linux-$(KERNEL)/include/linux/version.h
-            vmware-modconfig --console --build-mod -k $(KERNEL) $* $(GCC) $(HEADERS) vmware/
-            cp -f $(DEST)/$*.ko .
+    %.ko: $(HEADERS)/linux/version.h
+    	vmware-modconfig --console --build-mod -k $(KERNEL) $* $(GCC) $(HEADERS) vmware/
+    	cp -f $(DEST)/$@ .
 
-    clean:
-            rm -rf modules/
+    clean: rm -rf modules/
 
 Installation
 
-The modules can then be registered:
-
-    # dkms -m vmware-modules -v 9 -k $(uname -r) add
-
-built:
-
-    # dkms -m vmware-modules -v 9 -k $(uname -r) build
-
-and installed:
+The modules can then be installed with:
 
     # dkms -m vmware-modules -v 9 -k $(uname -r) install
 
@@ -373,7 +311,7 @@ automatically the next time the kernel changes.
 Troubleshooting
 ---------------
 
-> Could not open /dev/vmmon: No such file or directory.
+> /dev/vmmon not found
 
 The full error is:
 
@@ -381,20 +319,11 @@ The full error is:
     Please make sure that the kernel module `vmmon' is loaded.
 
 This means that at least the vmmon VMware service is not running. If
-using the .service file from step 8. all VMware services can be started
-with:
-
-    # systemctl start vmware
-
-otherwise use:
-
-    # /etc/init.d/vmware start
+using the systemd service from step 7. it should be (re)started.
 
 > Kernel headers for version 3.x-xxxx were not found. If you installed them[...]
 
-Install them with:
-
-    # pacman -S linux-headers
+Install the headers (linux-headers).
 
 Note:Upgrading the kernel and the headers will require you to boot to
 the new kernel to match the version of the headers. This is a relatively
@@ -404,51 +333,65 @@ common error.
 
 Tip:Also handled by vmware-patch.
 
-1) The vmware-USBArbitrator script is missing
-
-For some reason, some installations are missing the vmware-USBArbitrator
-script. To readd it manually see this forum post.
+If VMware services are running (see step 7. for a systemd service), your
+installation is missing the vmware-USBArbitrator script. To readd it
+manually see this forum post.
 
 You may also manually extract the VMware bundle and copy the
 vmware-USBArbitrator script from
-<destination folder>/vmware-usbarbitrator/etc/init.d/ to /etc/init.d/:
+destination folder/vmware-usbarbitrator/etc/init.d/ to /etc/init.d/:
 
-    $ ./VMware-<edition>-<version>.<release>.<architecture>.bundle --extract /tmp/vmware-bundle
+    $ ./VMware-edition-version.release.architecture.bundle --extract /tmp/vmware-bundle
     # cp /tmp/vmware-bundle/vmware-usbarbitrator/etc/init.d/vmware-USBArbitrator /etc/init.d/
 
-2) The vmware-usbarbitrator binary is segfaulting
+> vmci/vsock modules not loading automatically
 
-This could also mean that the vmware-usbarbitrator binary called in the
-script is segfaulting:
+The full error is:
 
-    # vmware-usbarbitrator
+    Failed to open device "/dev/vmci": No such file or directory
+    Please make sure that the kernel module 'vmci' is loaded.
+    Module DevicePowerOn power on failed.
+    Failed to start the virtual machine.
 
-    Pipe unexpectedly closed.	
+This is caused by an issue in the assignment of $mod in
+/etc/init.d/vmware:
 
-    # vmware-usbarbitrator --info -f
+    Starting VMware services:
+      Virtual machine monitor                                   done
+      Virtual machine communication interface                   failed
+      VM communication interface socket family                  failed
+      Blocking file system                                      done
+      Virtual ethernet                                          done
+      VMware Authentication Daemon                              done
 
-    VTHREAD initialize main thread 2 "usbArb" pid 6426
-    Segmentation fault
+This can be fixed by just not using it:
 
-This is caused by an empty /etc/arch-release (owned by filesystem). It
-is used by the service to alter its behavior based on the distribution's
-release version.
+    /etc/init.d/vmware
 
-To fix it, add a version string in the form of <year>.<month>(.<day>)
-(e.g. 2013.04.01).
+    @@ vmwareStartVmci()
+    ...
+    - vmwareLoadModule "$mod"
+    + vmwareLoadModule "$vmci"
+    [...]
 
-> process XXXX: Attempt to remove filter function [...]
+    @@ vmwareStopVmci()
+    ...
+    - vmwareUnloadModule "${mod}"
+    + vmwareUnloadModule "$vmci"
+    [...]
 
-The full error is, for example:
+    @@ vmwareStartVsock()
+    ...
+    - vmwareLoadModule "$mod"
+    + vmwareLoadModule "$vsock"
+    [...]
 
-    process 6094: Attempt to remove filter function 0xadcc96f0 user data 0xb795aba0, but no such filter has been added
-      D-Bus not built with -rdynamic so unable to print a backtrace
-    Aborted
+    @@ vmwareStopVsock()
+    ...
+    - vmwareUnloadModule "$mod"
+    + vmwareUnloadModule "$vsock"
 
-This means that the hal daemon is not running. Install hal from the AUR
-and start the daemon with:
-
-    # hald
+The vmware services can then be restarted.
 
 > The installer fails to start
 
@@ -461,7 +404,7 @@ of this article):
 
 > Incorrect login/password when trying to access VMware remotely
 
-VMware Workstation 9 provides the possibility to remotely manage Shared
+VMware Workstation 10 provides the possibility to remotely manage Shared
 VMs through the vmware-workstation-server service. However, this will
 fail with the error "incorrect username/password" due to incorrect PAM
 configuration of the vmware-authd service. To fix it, edit
@@ -475,9 +418,7 @@ configuration of the vmware-authd service. To fix it, edit
     password required       pam_permit.so
     session  required       pam_unix.so
 
-and restart VMware services with:
-
-    # systemctl restart vmware
+and restart the vmware systemd service.
 
 Now you can connect to the server with the credentials provided during
 the installation.
@@ -496,12 +437,22 @@ help with quality issues or with enabling proper HD audio output:
     look for surround51:CARD=vendor-name,DEV=num. If you are
     experiencing quality issues, look out for a line starting with
     front.
-4.  Open the <Virtual machine name>.vmx config file of the VM in a text
-    editor, located under ~/vmware/<Virtual machine name>/, and edit the
+4.  Open the Virtual machine name.vmx config file of the VM in a text
+    editor, located under ~/vmware/Virtual machine name/, and edit the
     sound.fileName field, e.g.:
     sound.fileName="surround51:CARD=Live,DEV=0". Ensure that it also
     reads sound.autodetect="FALSE".
 5.  Resume/Power on the VM.
+
+> Kernel-based Virtual Machine (KVM) is running
+
+To disable KVM on boot, you can use something like:
+
+    /etc/modprobe.d/vmware.conf
+
+    blacklist kvm
+    blacklist kvm-amd   # For AMD CPUs
+    blacklist kvm-intel # For Intel CPUs
 
 Uninstallation
 --------------
@@ -509,32 +460,30 @@ Uninstallation
 To uninstall VMware you need the product name (either vmware-workstation
 or vmware-player). To list all the installed products:
 
-    # vmware-installer -l
+    $ vmware-installer -l
 
 and uninstall with:
 
-    # vmware-installer -u <vmware-product>
+    # vmware-installer -u vmware-product
 
-Manually included symlinks have to be removed manually in /sbin/:
-
-    # rm /sbin/insmod /sbin/lsmod /sbin/modinfo /sbin/rmmod
-
-Remember to also remove the .service file:
+Remember to also disable and remove the vmware service:
 
     # systemctl disable vmware
     # rm /etc/systemd/system/vmware.service
 
-You may also want to have a look at the kernel directories in /usr for
-any leftovers. The now unnecessary #3.7 kernels and up patching step
-leaves header directories in /usr/src/ (full path:
-/usr/src/linux-[kernel name]/include/linux/version.h).
-
-The module directories are located in
-/usr/lib/modules/[kernel name]/misc/.
+You may also want to have a look at the module directories in
+/usr/lib/modules/[kernel name]/misc/ for any leftovers.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=VMware&oldid=255776"
+"https://wiki.archlinux.org/index.php?title=VMware&oldid=305882"
 
 Category:
 
 -   Virtualization
+
+-   This page was last modified on 20 March 2014, at 15:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -19,27 +19,31 @@ individual applications.
 -   Xpra is open-source (GPLv2+), multi-platform and multi-language,
     with current clients written in Python and Java.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Use                                                                |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Start at boot                                                |
-|         -   3.1.1 Server                                                 |
-|         -   3.1.2 Client                                                 |
-|             -   3.1.2.1 Method 1: .xinitrc                               |
-|             -   3.1.2.2 Method 2: systemd user session                   |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Use
+-   3 Tips and tricks
+    -   3.1 Start at boot
+        -   3.1.1 Server
+        -   3.1.2 Client
+            -   3.1.2.1 Method 1: .xinitrc
+            -   3.1.2.2 Method 2: systemd user session
+-   4 See also
 
 Installation
 ------------
 
 Install the package xpra-winswitch from the AUR, in the server and
 client(s) machines.
+
+Tip:If you intend to run Xpra locally under a existing Xorg session with
+graphic drivers such as nvidia or ATi you will need to modify the
+default xpra config. Xpra fetches -configdir from xorg-server-xvfb which
+will be /etc/X11/xorg.conf.d, there for you need to change this by
+following the three bottom steps of 1333056#p1333056 in order to run
+xpra locally.
 
 Use
 ---
@@ -130,7 +134,7 @@ example, the service would be xpra@myusername.service.
 
 Client
 
-Note:If the client is a remote machine, first at all use SSH keys to be
+Note:If the client is a remote machine, first of all use SSH keys to be
 able to connect to the server without typing a password. Read SSH Keys
 for more details.
 
@@ -192,8 +196,15 @@ See also
 -   Xpra website
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xpra&oldid=243473"
+"https://wiki.archlinux.org/index.php?title=Xpra&oldid=302789"
 
 Category:
 
--   System administration
+-   X Server
+
+-   This page was last modified on 1 March 2014, at 20:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

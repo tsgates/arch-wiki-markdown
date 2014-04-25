@@ -1,29 +1,26 @@
 Exim with Remote SMTP server
 ============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Use Exim with a remote smtp server                                 |
-|     -   1.1 Install Packages                                             |
-|     -   1.2 Edit configuration                                           |
-|     -   1.3 Update: 11-Feb-05:                                           |
-|     -   1.4 Update: 10-Feb-08:                                           |
-|     -   1.5 Using GMail as smarthost:                                    |
-|                                                                          |
-| -   2 Troubleshooting                                                    |
-|     -   2.1 451 Temporary local problem                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Use Exim with a remote smtp server
+    -   1.1 Installation
+    -   1.2 Edit configuration
+    -   1.3 Update: 11-Feb-05:
+    -   1.4 Update: 10-Feb-08:
+    -   1.5 Using GMail as smarthost:
+-   2 Troubleshooting
+    -   2.1 451 Temporary local problem
 
 > Use Exim with a remote smtp server
 
 This document describes how to set up Exim (a mail transfer agent) to
 use a remote smtp server, for example your ISP's smtp server.
 
-Install Packages
+Installation
 
-    # pacman -S exim
+Install exim from the official repositories.
 
 Edit configuration
 
@@ -197,6 +194,9 @@ should be changed to
 
 Using GMail as smarthost:
 
+Note:The following must be put in the appropriate sections of the
+configuration file, eg, after begin authenticators.
+
 Add a router before or instead of the dnslookup router:
 
     gmail_route:
@@ -239,8 +239,15 @@ you are probably sending as root. By default Exim will not allow you to
 send as root.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Exim_with_Remote_SMTP_server&oldid=233277"
+"https://wiki.archlinux.org/index.php?title=Exim_with_Remote_SMTP_server&oldid=264099"
 
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 24 June 2013, at 13:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

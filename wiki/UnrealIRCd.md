@@ -67,3 +67,10 @@ Retrieved from
 Category:
 
 -   Internet Relay Chat
+
+-   This page was last modified on 28 December 2012, at 06:24.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

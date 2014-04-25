@@ -3,18 +3,15 @@ Scanner Button Daemon
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 What is scanbd good for                                      |
-|     -   1.2 How does it work                                             |
-|                                                                          |
-| -   2 Installation                                                       |
-|     -   2.1 Sane configuration                                           |
-|     -   2.2 scanbd configuration                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+    -   1.1 What is scanbd good for
+    -   1.2 How does it work
+-   2 Installation
+    -   2.1 Sane configuration
+    -   2.2 scanbd configuration
 
 Introduction
 ------------
@@ -64,9 +61,7 @@ activation and does not require inet neither xinetd to start scanbm
 (manager mode of scanbd), though these remain as an alternative (not
 described here).
 
-There is an AUR package, which can be installed e.g. with yaourt:
-
-    $ yaourt -S scanbd
+scanbd is available from the AUR.
 
 > Sane configuration
 
@@ -80,19 +75,21 @@ sane backend to access the attached scanner.
 First, copy all config files from /etc/sane.d/ to /etc/scandb/sane.d/
 (these will be needed later):
 
-    $ sudo cp /etc/sane.d/* /etc/scanbd/sane.d/
+    # cp /etc/sane.d/* /etc/scanbd/sane.d/
 
 Modify /etc/sane.d/dll.conf so that it includes only the "net" directive
 (either delete the other directives (printers), or comment them with #
 symbol):
 
-    sudo cat /etc/sane.d/dll.conf
+    /etc/sane.d/dll.conf
+
     net
 
 Modify the net-backend configuration file (see scanbd's README.txt for
 more complicated setups):
 
-    $ sudo cat /etc/sane.d/net.conf
+    /etc/sane.d/net.conf
+
     connect_timeout = 3
     localhost # scanbm is listening on localhost
 
@@ -109,7 +106,8 @@ The last step is to modify the alternative configuration of sane in
 /etc/scandb/sane.d/dll.conf: just make sure that the "net" directive is
 commented and the corresponding scanner-backends are uncommented:
 
-    $ sudo cat /etc/scanbd/sane.d/dll.conf
+    /etc/scanbd/sane.d/dll.conf
+
     #net
     pixma
     epson2
@@ -117,13 +115,13 @@ commented and the corresponding scanner-backends are uncommented:
 
 Now it's time to enable and start the systemd units of scanbm:
 
-    $ sudo systemctl enable scanbd.service
-    $ sudo systemctl start scanbd.service
-    $ sudo systemctl start scanbm.socket
+    # systemctl enable scanbd.service
+    # systemctl start scanbd.service
+    # systemctl start scanbm.socket
 
 You can check /var/log/everything to see if the scanbd service and
 scanbm socket were started. To increase debugging verbosity, change
-"debug-level = 7" in /etc/scanbd/scanbd.conf and restart the scanbd
+debug-level = 7 in /etc/scanbd/scanbd.conf and restart the scanbd
 service.
 
 > scanbd configuration
@@ -153,7 +151,8 @@ runs script /etc/scanbd/test.script.
 /etc/scanbd/test.script does not do anything but sends a message to
 syslog:
 
-    $ cat /etc/scanbd/test.script
+    /etc/scanbd/test.script
+
     #!/bin/bash
     # look in scanbd.conf for environment variables
 
@@ -180,8 +179,15 @@ refer to preconfigured button definitions of a few printers.
     include(scanner.d/snapscan.conf)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Scanner_Button_Daemon&oldid=250989"
+"https://wiki.archlinux.org/index.php?title=Scanner_Button_Daemon&oldid=260994"
 
 Category:
 
 -   Imaging
+
+-   This page was last modified on 3 June 2013, at 21:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

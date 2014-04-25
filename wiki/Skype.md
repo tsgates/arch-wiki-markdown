@@ -1,56 +1,241 @@
 Skype
 =====
 
-  
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing and Running Skype                                       |
-| -   2 Securing Skype                                                     |
-|     -   2.1 AppArmor                                                     |
-|     -   2.2 TOMOYO                                                       |
-|     -   2.3 Use Skype with special user                                  |
-|                                                                          |
-| -   3 Skype Sound                                                        |
-|     -   3.1 Skype PulseAudio Sound (2.1+)                                |
-|     -   3.2 Skype ALSA Sound (2.0+)                                      |
-|     -   3.3 Skype-OSS Sound (Pre-2.0)                                    |
-|         -   3.3.1 A. With OSS or Kernel OSS emulation for ALSA           |
-|         -   3.3.2 B. Making ALSA + dMix work for Skype                   |
-|         -   3.3.3 C. Using OSS emulation with oss2jack                   |
-|                                                                          |
-| -   4 Skype plugin for Pidgin                                            |
-| -   5 Problems                                                           |
-|     -   5.1 Skype crashes immediately                                    |
-|     -   5.2 Skype crashes shortly after login                            |
-|     -   5.3 I can receive multiple audio streams, but I can only send    |
-|         one                                                              |
-|     -   5.4 No video with GSPCA webcams                                  |
-|     -   5.5 No video with Compiz                                         |
-|     -   5.6 Skype does not use my GTK theme, even though other QT apps   |
-|         do                                                               |
-|     -   5.7 The microphone does not work                                 |
-|     -   5.8 No incoming video stream                                     |
-|     -   5.9 Low sound in Skype, but works everywhere else                |
-|     -   5.10 Monster/low-octave "growling" distortion over mic           |
-|     -   5.11 Skype can only see pulseaudio, but not ALSA devices         |
-|     -   5.12 Crackling / Noisy sound (mainly using 64-bit OS)            |
-|     -   5.13 Problem with Audio Playback on x86_64                       |
-|     -   5.14 Skype sounds stops media player or other sound sources      |
-+--------------------------------------------------------------------------+
+-   1 Installation
+-   2 Skype sound
+    -   2.1 ALSA
+    -   2.2 PulseAudio
+    -   2.3 OSS (Pre-2.0, no longer available)
+        -   2.3.1 A. With OSS or Kernel OSS emulation for ALSA
+        -   2.3.2 B. Making ALSA + dMix work for Skype
+        -   2.3.3 C. Using OSS emulation with oss2jack
+-   3 Securing Skype
+    -   3.1 AppArmor
+    -   3.2 TOMOYO
+    -   3.3 Use Skype with special user
+        -   3.3.1 Access Pulseaudio controls when using Skype as a
+            different user
+        -   3.3.2 Open URLs in your user's browser
+        -   3.3.3 Access received files
+-   4 Skype plugin for Pidgin
+-   5 Troubleshooting
+    -   5.1 GUI does not match GTK Theme
+    -   5.2 Skype crashes immediately
+    -   5.3 Skype crashes shortly after login
+    -   5.4 I can receive multiple audio streams, but I can only send
+        one
+    -   5.5 Test call fails
+    -   5.6 No video with GSPCA webcams
+    -   5.7 No video with Compiz
+    -   5.8 Skype does not use my GTK+ theme, even though other Qt apps
+        do
+    -   5.9 The microphone does not work
+    -   5.10 No incoming video stream
+    -   5.11 Low sound in Skype, but works everywhere else
+    -   5.12 Monster/low-octave "growling" distortion over mic
+    -   5.13 Pulseaudio: Garbled/"Chipmunk" recording in Skype
+    -   5.14 Skype can only see PulseAudio, but not ALSA devices
+    -   5.15 Crackling/noisy sound (mainly using 64-bit OS)
+    -   5.16 Problem with Audio Playback on x86_64
+    -   5.17 Skype sounds stops media player or other sound sources
 
-Installing and Running Skype
-----------------------------
+Installation
+------------
 
 Install skype from the official repositories. If you have a 64-bit
 system, enable the multilib repository first as Skype is 32-bit only.
-For OSS-users, skype-oss is available.
 
 Running Skype is just as easy. Type skype into a terminal or
 double-click the Skype icon on your desktop or in your DE's application
 menu.
+
+Skype sound
+-----------
+
+Skype supports ALSA and PulseAudio. OSS is no longer supported.
+
+> ALSA
+
+Sound should work out of the box, if not you can select a sound device
+to use in Skype options. If you have problems with Skype blocking your
+sound device, you only need to add the following to your ~/.asoundrc
+
+    pcm.dmixout {
+      # Just pass this on to the system dmix
+      type plug
+      slave {
+         pcm "dmix"
+      }
+    }
+
+then you can start Skype as normal, go to the audio options and select
+dmixout as your speaker- and ringingdevice.
+
+> PulseAudio
+
+Sound should work out of the box, if not you can select another input
+using pavucontrol (you may have to install it first).
+
+If you are on x86_64 and use the multilib skype package, you also need
+lib32-libpulse.
+
+> OSS (Pre-2.0, no longer available)
+
+Option B is preferred over other options. With option B you can use
+Skype AND let other programs play sound too. With option C you can do
+that too, but option B is way easier to set up.
+
+You can install the legacy skype-oss from Comunity repo.
+
+If you need 64x-86x support then download an OSS compatible version from
+here and the PKGBUILD form here. Also install lib32-libxinerama.
+Finally, run
+
+    $ makepkg -s
+
+to create the pacman installable package.
+
+A. With OSS or Kernel OSS emulation for ALSA
+
+Start Skype and make sure no other program is using your soundcard. If
+you want to use Skype AND let another program play sound too, look at
+option B instead.
+
+B. Making ALSA + dMix work for Skype
+
+First of all, we need to install the alsa-oss package with pacman.
+
+Add the following to ~/.asoundrc. If the file does not exist yet, just
+create it! (Many thanks to Lorenzo Colitti for figuring this out!)
+
+    # .asoundrc to use skype at the same time as other audio apps like xmms
+    #
+    # Successfully tested on an IBM x40 with i810_audio using Linux 2.6.15 and
+    # Debian unstable with skype 1.2.0.18-API. No sound daemons (asound, esd, etc.)
+    # running. However, YMMV.
+    #
+    # For background, see:
+    #
+    # https://bugtrack.alsa-project.org/alsa-bug/view.php?id=1228
+    # https://bugtrack.alsa-project.org/alsa-bug/view.php?id=1224
+    #
+    # (C) 2006-06-03 Lorenzo Colitti - http://www.colitti.com/lorenzo/
+    # Licensed under the GPLv2 or later
+
+    pcm.skype {
+       type asym
+       playback.pcm "skypeout"
+       capture.pcm "skypein"
+    }
+
+    pcm.skypein {
+       # Convert from 8-bit unsigned mono (default format set by aoss when
+       # /dev/dsp is opened) to 16-bit signed stereo (expected by dsnoop)
+       #
+       # We cannot just use a "plug" plugin because although the open will
+       # succeed, the buffer sizes will be wrong and we will hear no sound at
+       # all.
+       type route
+       slave {
+          pcm "skypedsnoop"
+          format S16_LE
+       }
+       ttable {
+          0 {0 0.5}
+          1 {0 0.5}
+       }
+    }
+
+    pcm.skypeout {
+       # Just pass this on to the system dmix
+       type plug
+       slave {
+          pcm "dmix"
+       }
+    }
+
+    pcm.skypedsnoop {
+       type dsnoop
+       ipc_key 1133
+       slave {
+          # "Magic" buffer values to get skype audio to work
+          # If these are not set, opening /dev/dsp succeeds but no sound
+          # will be heard. According to the ALSA developers this is due
+          # to skype abusing the OSS API.
+          pcm "hw:0,0"
+          period_size 256
+          periods 16
+          buffer_size 16384
+       }
+       bindings {
+          0 0
+       }
+    }
+
+If you get the error message :
+
+    The dmix plugin supports only playback stream
+
+then add the following to .asoundrc:
+
+    pcm.asymed {
+            type asym
+            playback.pcm "dmix"
+            capture.pcm "dsnoop"
+    }
+
+    pcm.!default {
+            type plug
+            slave.pcm "asymed"
+    }
+
+  
+ Now run Skype in this way each time you want to use it:
+
+    ALSA_OSS_PCM_DEVICE="skype" aoss skype
+
+Optionally you can make a script to start Skype:
+
+As root, create the file: /usr/bin/askype
+
+    # Little script to run Skype correctly using the modified .asoundrc
+    # See: https://wiki.archlinux.org/index.php/Skype for more information!
+    #
+    # Questions/Remarks: profox@debianbox.be
+
+    ALSA_OSS_PCM_DEVICE="skype" aoss skype
+
+Now make sure every user is able to execute the file:
+
+    # chmod a+x /usr/bin/askype
+
+You can also fix the menu entry so you can start Skype from the your
+window manager's menu:
+
+Edit the file: /usr/share/applications/skype.desktop
+
+    [Desktop Entry]
+    Name=Skype
+    Comment=P2P software for high-quality voice communication
+    Exec=askype
+    Icon=skype.png
+    Terminal=0
+    Type=Application
+    Encoding=UTF-8
+    Categories=Network;Application;
+
+Sometimes it takes a while for Skype to start up but once it is loaded
+it should work ok!
+
+C. Using OSS emulation with oss2jack
+
+oss2jack is another way to have OSS emulation without using ALSA
+directly. Instead, oss2jack creates a OSS device that forwards
+everything to JACK (JACK Audio Connection Kit), which in turn mixes,
+then outputs to the standard ALSA device.
 
 Securing Skype
 --------------
@@ -77,9 +262,75 @@ AppArmor profiles are stored.
     # cp -ip /etc/apparmor/profiles/extras/usr.bin.skype /etc/apparmor.d/
 
 For whatever reason, the profile is not complete. You may wish to modify
-it further. Here is an example, and here is another one for Skype4. (If
-the Mozilla denials annoy you, feel free to uncomment the appropriate
-lines.)
+it further. Here is an example for Skype 4:
+
+    #include <tunables/global>
+    /usr/bin/skype {
+      #include <abstractions/audio>
+      #include <abstractions/consoles>
+      #include <abstractions/dbus-session>
+      #include <abstractions/gnome>
+      #include <abstractions/kde>
+      #include <abstractions/nameservice>
+      #include <abstractions/video>
+
+      # Executables
+      /usr/bin/skype ixmr,
+      /usr/lib{,32}/skype/skype ixmr,
+      /usr/bin/xdg-open PUxmr,
+
+      # Configuration files
+      owner @{HOME}/.Skype/ rw,
+      owner @{HOME}/.Skype/** krw,
+      owner @{HOME}/.config/Skype/ rw,
+      owner @{HOME}/.config/Skype/** krw,
+
+      # Downloads/uploads directory
+      owner @{HOME}/Public/ rw,
+      owner @{HOME}/Public/** krw,
+
+      # Libraries
+      /usr/lib{,32}/libv4l/v4l2convert.so mr,
+      /usr/share/skype/lib/libQtWebKit.so.4 mr,
+
+      # Shared data
+      /usr/share/skype/ r,
+      /usr/share/skype/** r,
+
+      # Devices
+      /dev/ r,
+      /dev/video[0-9]* mrw,
+
+      # System information
+      /etc/machine-id r,
+      @{PROC}/sys/kernel/{ostype,osrelease} r,
+      @{PROC}/sys/vm/overcommit_memory r,
+      @{PROC}/[0-9]*/net/arp r,
+      owner @{PROC}/[0-9]*/cmdline r,
+      owner @{PROC}/[0-9]*/status r,
+      owner @{PROC}/[0-9]*/task/ r,
+      owner @{PROC}/[0-9]*/task/[0-9]*/stat r,
+      /sys/devices/system/cpu/ r,
+      /sys/devices/system/cpu/cpu[0-9]*/cpufreq/scaling_{cur_freq,max_freq} r,
+      /sys/devices/pci*/*/usb[0-9]*/*/*/*/modalias r,
+      /sys/devices/pci*/*/usb[0-9]*/*/*/*/video4linux/video[0-9]*/dev r,
+      /sys/devices/pci*/*/usb[0-9]*/*/*/{idVendor,idProduct,speed} r,
+
+      # This probably should go to appropriate abstractions
+      owner @{HOME}/.config/fontconfig/fonts.conf r,
+      owner @{HOME}/.config/gtk-3.0/bookmarks r,
+      owner @{HOME}/.config/pulse/cookie krw,
+      owner @{HOME}/.icons/** r,
+      owner @{HOME}/.kde/share/config/kioslaverc r,
+
+      # Denials
+      deny owner @{HOME}/.mozilla/ r,
+      deny owner @{HOME}/.mozilla/** r,
+      deny /sys/devices/virtual/dmi/** r,
+    }
+
+Note:This example assumes that Skype is configured to save received
+files into ~/Public. Feel free to change it to any folder you like.
 
 To use the profile, first be sure securityfs is mounted,
 
@@ -290,6 +541,10 @@ restricts Skype to reading only the data of this particular user instead
 of one's main user. (The new user should not be used for any other
 thing. Skype only.)
 
+An AUR package, skype-restricted exists that will run skype as a
+separate user ("_skype") cleanly. It's heavily based on the information
+in this section.
+
 Optionally, we first add a default group for the skype user. I will call
 the new user and its default group "skype". The security advantage in
 keeping the "skype" user in its separate group is that it can be
@@ -299,14 +554,13 @@ restricted from accessing some places other users are allowed in.
 
 Then we have to add the new user:
 
-    # useradd
+    # useradd -m -g skype -G audio,video -s /bin/bash skype
 
-Enter the details for the new user (assumed login name: "skype"). If you
-created the default "skype" group and want to keep "skype" outside the
-"users" group, enter "skype" when the wizard asks for the initial group.
-As additional groups we need "audio,video,pulse-access,pulse-rt".
+Note:Maybe you need to add "skype" user to "pulse-access" and "pulse-rt"
+groups. But it works fine with "audio" and "skype" groups only.
 
-Now add the following line to /home/skype/.bashrc:
+  
+ Now add the following line to /home/skype/.bashrc:
 
     export DISPLAY=":0.0"
 
@@ -327,6 +581,9 @@ And use this alias to launch skype:
 
     alias skype='xhost +local: && sudo -u skype /usr/bin/skype'
 
+Note:If you forget the xhost command, Skype may fail with a "No protocol
+specified" error on stdout.
+
 I noticed that the newly created user is able to read some of the files
 in my home directory because the permissions were a+r, so I changed them
 manually to a-r u+r and changed umask from 022 to 066.
@@ -343,209 +600,127 @@ This way, it is ensured that only the owner (normally "root") and
 "users" can access the specified directory tree while the others,
 including "skype", will be forbidden.
 
-Skype Sound
------------
+Access Pulseaudio controls when using Skype as a different user
 
-Skype supports PulseAudio since version 2.1 and ALSA since version 2.0.
-Earlier versions support only the deprecated OSS.
+As the "main-user" copy /etc/pulse/default.pa to ~/.pulse/default.pa and
+add:
 
-> Skype PulseAudio Sound (2.1+)
+    load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
 
-Sound should work out of the box, if not you can select another input
-using pavucontrol (you may have to install it first).
+As the skype user, create ~/.pulse/client.conf and add:
 
-If you are on x86_64 and use the multilib skype package, you also need
-lib32-libpulse.
+    default-server = 127.0.0.1
 
-> Skype ALSA Sound (2.0+)
+Open URLs in your user's browser
 
-Sound should work out of the box, if not you can select a sound device
-to use in Skype options. If you have problems with Skype blocking your
-sound device, you only need to add the following to your ~/.asoundrc
+When one clicks URL in chat window, skype execute xdg-open to handle it.
+By default xdg-open uses default web browser for skype user environment.
+In order to open links in your user's browser perform next setup.
 
-    pcm.dmixout {
-      # Just pass this on to the system dmix
-      type plug
-      slave {
-         pcm "dmix"
-      }
-    }
+> Note:
 
-then you can start Skype as normal, go to the audio options and select
-dmixout as your speaker- and ringingdevice.
+-   Sudo should be installed and properly configured.
+-   Current example uses firefox as preferred browser.
+-   Do not forget to adjust your_user to proper value.
 
-> Skype-OSS Sound (Pre-2.0)
+Log in as skype user:
 
-If you have a recent version of Skype, this will not work and is not
-needed, look at the "important notes" on start of this page. Option B is
-preferred over other options. With option B you can use Skype AND let
-other programs play sound too. With option C you can do that too, but
-option B is way easier to set up.
+    $ sudo su - skype
 
-You can install the legacy skype-oss from Comunity repo.
+Create local preferences dir:
 
-If you need 64x-86x support then download an OSS compatible version from
-here and the PKGBUILD form here. Also install lib32-libxinerama.
-Finally, run
+    $ mkdir -p ~/.local/share/applications
 
-    $ makepkg -s
-
-to create the pacman installable package.
-
-A. With OSS or Kernel OSS emulation for ALSA
-
-Start Skype and make sure no other program is using your soundcard. If
-you want to use Skype AND let another program play sound too, look at
-option B instead.
-
-B. Making ALSA + dMix work for Skype
-
-First of all, we need to install the alsa-oss package with pacman:
-
-    # pacman -S alsa-oss
-
-Add the following to ~/.asoundrc. If the file does not exist yet, just
-create it! (Many thanks to Lorenzo Colitti for figuring this out!)
-
-    # .asoundrc to use skype at the same time as other audio apps like xmms
-    #
-    # Successfully tested on an IBM x40 with i810_audio using Linux 2.6.15 and
-    # Debian unstable with skype 1.2.0.18-API. No sound daemons (asound, esd, etc.)
-    # running. However, YMMV.
-    #
-    # For background, see:
-    #
-    # https://bugtrack.alsa-project.org/alsa-bug/view.php?id=1228
-    # https://bugtrack.alsa-project.org/alsa-bug/view.php?id=1224
-    #
-    # (C) 2006-06-03 Lorenzo Colitti - http://www.colitti.com/lorenzo/
-    # Licensed under the GPLv2 or later
-
-    pcm.skype {
-       type asym
-       playback.pcm "skypeout"
-       capture.pcm "skypein"
-    }
-
-    pcm.skypein {
-       # Convert from 8-bit unsigned mono (default format set by aoss when
-       # /dev/dsp is opened) to 16-bit signed stereo (expected by dsnoop)
-       #
-       # We cannot just use a "plug" plugin because although the open will
-       # succeed, the buffer sizes will be wrong and we will hear no sound at
-       # all.
-       type route
-       slave {
-          pcm "skypedsnoop"
-          format S16_LE
-       }
-       ttable {
-          0 {0 0.5}
-          1 {0 0.5}
-       }
-    }
-
-    pcm.skypeout {
-       # Just pass this on to the system dmix
-       type plug
-       slave {
-          pcm "dmix"
-       }
-    }
-
-    pcm.skypedsnoop {
-       type dsnoop
-       ipc_key 1133
-       slave {
-          # "Magic" buffer values to get skype audio to work
-          # If these are not set, opening /dev/dsp succeeds but no sound
-          # will be heard. According to the ALSA developers this is due
-          # to skype abusing the OSS API.
-          pcm "hw:0,0"
-          period_size 256
-          periods 16
-          buffer_size 16384
-       }
-       bindings {
-          0 0
-       }
-    }
-
-If you get the error message :
-
-    The dmix plugin supports only playback stream
-
-then add the following to .asoundrc:
-
-    pcm.asymed {
-            type asym
-            playback.pcm "dmix"
-            capture.pcm "dsnoop"
-    }
-
-    pcm.!default {
-            type plug
-            slave.pcm "asymed"
-    }
-
-  
- Now run Skype in this way each time you want to use it:
-
-    ALSA_OSS_PCM_DEVICE="skype" aoss skype
-
-Optionally you can make a script to start Skype:
-
-As root, create the file: /usr/bin/askype
-
-    # Little script to run Skype correctly using the modified .asoundrc
-    # See: https://wiki.archlinux.org/index.php/Skype for more information!
-    #
-    # Questions/Remarks: profox@debianbox.be
-
-    ALSA_OSS_PCM_DEVICE="skype" aoss skype
-
-Now make sure every user is able to execute the file:
-
-    # chmod a+x /usr/bin/askype
-
-You can also fix the menu entry so you can start Skype from the your
-window manager's menu:
-
-Edit the file: /usr/share/applications/skype.desktop
+Create /home/skype/.local/share/applications/firefox-sudo.desktop file:
 
     [Desktop Entry]
-    Name=Skype
-    Comment=P2P software for high-quality voice communication
-    Exec=askype
-    Icon=skype.png
-    Terminal=0
+    Name=Firefox
+    Exec=/home/skype/firefox-wrapper %u
+    Terminal=false
     Type=Application
-    Encoding=UTF-8
-    Categories=Network;Application;
+    Categories=Network;WebBrowser;
 
-Sometimes it takes a while for Skype to start up but once it is loaded
-it should work ok!
+Set firefox-sudo.desktop to manage HTTP and HTTPS URLs:
 
-C. Using OSS emulation with oss2jack
+    $ xdg-mime default firefox-sudo.desktop x-scheme-handler/http
+    $ xdg-mime default firefox-sudo.desktop x-scheme-handler/https
 
-oss2jack is another way to have OSS emulation without using ALSA
-directly. Instead, oss2jack creates a OSS device that forwards
-everything to JACK (JACK Audio Connection Kit), which in turn mixes,
-then outputs to the standard ALSA device.
+(Optionally) add FTP handler:
+
+    $ xdg-mime default firefox-sudo.desktop x-scheme-handler/ftp
+
+Create /home/skype/firefox-wrapper script (adjust your_user):
+
+    #!/bin/bash
+    DISPLAY=:0.0 HOME=/home/your_user sudo -u your_user /usr/lib/firefox/firefox -new-tab $1
+
+Make it executable:
+
+    $ chmod +x ~/firefox-wrapper
+
+Now as root user open /etc/sudoers:
+
+    # visudo
+
+And add permission for skype user to exec user's browser (adjust
+your_user):
+
+    skype ALL=(your_user) NOPASSWD: /usr/lib/firefox/firefox -new-tab http*, /usr/lib/firefox/firefox -new-tab ftp*
+
+Access received files
+
+By default skype stores received files with 600 permissions (only owner
+can access them). One may use incron to perform automatic permission fix
+upon downloading.
+
+Note:This example assumes that you configure skype to save received
+files into /home/skype/downloads
+
+Make skype home dir and download dir accessible:
+
+    # chmod 755 /home/skype /home/skype/downloads
+
+Install incron with the incron package from the official repositories,
+and enable and start incrond using systemd. Open incrontab for root
+user:
+
+    # incrontab -e
+
+Add incron job:
+
+    /home/skype/downloads IN_CREATE chmod 644 $@/$#
+
+Save changes and exit incrontab editor.
+
+To test incron in action just enter skype donwload dir and create test
+file:
+
+    # cd /home/skype/downloads
+    # install -m 600 /dev/null test.txt
+    # ls -l test.txt
+
+File permissions should be 644 or -rw-r--r--
+
+(Optionally) link skype download dir into your home dir:
+
+    $ ln -s /home/skype/downloads ~/skype_files
 
 Skype plugin for Pidgin
 -----------------------
 
 See Pidgin#Skype plugin.
 
-Problems
---------
+Troubleshooting
+---------------
+
+> GUI does not match GTK Theme
+
+See Uniform Look for Qt and GTK Applications for information about
+theming Qt based applications like Virtualbox or Skype.
 
 > Skype crashes immediately
 
-Try creating the directory
-
-    ~/.Skype/Logs
+Try creating the directory ~/.Skype/Logs.
 
 > Skype crashes shortly after login
 
@@ -566,6 +741,14 @@ from other applications, but I cannot record my microphone with other
 applications. That is because Skype or aoss blocks the audio input for
 itself.
 
+> Test call fails
+
+Call to Echo Test Service can fail with error "call failed" when the
+user profiles are usually corrupt. Solution is to remove the profile and
+file and re-add your account in Skype as seen in Ubuntu Forums.
+
+     # rm ~/.Skype/ -rf
+
 > No video with GSPCA webcams
 
 For i686, install v4l-utils, userspace tools and conversion library for
@@ -585,15 +768,15 @@ can add alias (e.g. in ~/.bashrc):
 
     alias skype='LD_PRELOAD=/usr/libxx/libv4l/v4l1compat.so skype'
 
-where `libxx' should be edited as appropriate.
+where libxx should be edited as appropriate.
 
 > No video with Compiz
 
-Try this
+Try launching Skype setting an environment variable like this:
 
     $ XLIB_SKIP_ARGB_VISUALS=1 skype
 
-> Skype does not use my GTK theme, even though other QT apps do
+> Skype does not use my GTK+ theme, even though other Qt apps do
 
 Recent versions of Skype allow you to change the theme via the Options
 menu. However, selecting the GTK+ option may not work properly. This is
@@ -605,7 +788,7 @@ packages, so the best would be to find and install only the needed
 package.
 
 Note:You may not have to install lib32-gtk-engines. First try if the
-following steps work for you if you only install lib32-gtk2 and a gtk2
+following steps work for you if you only install lib32-gtk2 and a GTK+2
 theme respectively. See also the forums.
 
 Once installed, it will still not work unless you have a 32-bit version
@@ -613,9 +796,9 @@ of GConf installed. You could build and install lib32-gconf if desired,
 but there is an easier workaround. First, create or edit ~/.gtkrc-2.0 so
 that it contains the following line:
 
-    $ gtk-theme-name = "My Theme"
+    $ gtk-theme-name = "My theme"
 
-Replace My Theme by the name of your theme, but leave the quotes.
+Replace My theme by the name of your theme, but leave the quotes.
 Second, run Skype like this:
 
     $ export GTK2_RC_FILES="/etc/gtk-2.0/gtkrc:$HOME/.gtkrc-2.0"
@@ -631,7 +814,7 @@ following command:
 
     $ /usr/bin/skype --disable-cleanlooks -style GTK
 
-If you wish menus within desktop environments to load Skype with a GTK
+If you wish menus within desktop environments to load Skype with a GTK+
 theme by default then modify the 'Exec' line of
 /usr/share/applications/skype.desktop so that it reads:
 
@@ -642,7 +825,7 @@ Similarly if you have set Skype to autostart then modify
 
 > The microphone does not work
 
-Run amixer,
+Run amixer:
 
     $ amixer
 
@@ -680,23 +863,29 @@ You may want to save your mixer settings with:
 
     # alsactl -f /var/lib/alsa/asound.state store
 
+  
+
 > No incoming video stream
 
 If skype shows a black square for the video preview, but something else
 (like xawtv -c /dev/video0) shows video correctly, you might need to
-start skype with:
+start Skype with:
 
     export XLIB_SKIP_ARGB_VISUALS=1 && skype
 
-Another possible workaround is to preload v4l1compat.so
+Another possible workaround is to preload v4l1compat.so:
 
     LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so skype
 
+For my machine this doesn't seem to work; instead I do
+
+    cd /usr/lib/lib32/libv4l &&  LD_PRELOAD=v4l1compat.so skype;
+
 > Low sound in Skype, but works everywhere else
 
-If you are sure your microphone is configured correct in ALSA (try
-recording with a 3rd-party-utility to determent whether it is an ALSA,
-or Skype problem), it is most likely because Skype is controlling your
+If you are sure your microphone is configured correctly in ALSA (try
+recording with a 3rd-party-utility to determine whether it is an ALSA or
+Skype problem), it is most likely because Skype is controlling your
 volume levels. Simply disable this feature in the voice settings page in
 the Skype configuration window.
 
@@ -712,13 +901,36 @@ fixed by creating a dummy ALSA device or by removing
 https://bbs.archlinux.org/viewtopic.php?pid=819500#p819500 for more
 information.
 
-> Skype can only see pulseaudio, but not ALSA devices
+> Pulseaudio: Garbled/"Chipmunk" recording in Skype
 
-    Turn PulseAudio autospawn off, normally: $ echo "autospawn = no" > ~/.pulse/client.conf
-    Kill PulseAudio: $ killall pulseaudio
-    Shut down and restart Skype
+Some users of Skype with PulseAudio find that the microphone seems
+distorted and sounds like it's in "fast forward" (historically known as
+a "chipmunk" bug). This is a known issue between newer versions of
+PulseAudio and Skype (see
+http://arunraghavan.net/2013/08/pulseaudio-4-0-and-skype/) and the
+developers seem to be working towards a fix. Meantime there is a
+workaround (see
+https://bbs.archlinux.org/viewtopic.php?pid=1389951#p1389951).
 
-> Crackling / Noisy sound (mainly using 64-bit OS)
+With root privileges, edit the /usr/bin/skype script to remove the
+PULSE_LATENCY_MSEC variable, changing this line:
+
+    PULSE_LATENCY_MSEC=30 exec "$LIBDIR/skype/skype" "$@"
+
+to this:
+
+    exec "$LIBDIR/skype/skype" "$@"
+
+> Skype can only see PulseAudio, but not ALSA devices
+
+Turn PulseAudio autospawn off and kill PulseAudio:
+
+    $ echo "autospawn = no" > ~/.pulse/client.conf
+    $ killall pulseaudio
+
+And restart Skype.
+
+> Crackling/noisy sound (mainly using 64-bit OS)
 
 Edit /etc/pulse/default.pa and change the following line
 
@@ -728,7 +940,7 @@ to
 
     load-module module-udev-detect tsched=0
 
-See also: PulseAudio#Glitches.2C_skips_or_crackling.
+See also: PulseAudio#Glitches, skips or crackling.
 
 > Problem with Audio Playback on x86_64
 
@@ -740,18 +952,28 @@ PulseAudio.
 You can try commenting out the following modules in
 /etc/pulse/default.pa
 
-    #module-cork-music-on-phone
-    #module-role-cork
+    #load-module module-role-cork
 
 If that does not help, you can try changing flat-volumes to no in
 /etc/pulse/daemon.conf.
 
     flat-volumes = no
 
+If that still does not work, you can manually unload the module:
+
+    $ pactl unload-module module-role-cork
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Skype&oldid=254700"
+"https://wiki.archlinux.org/index.php?title=Skype&oldid=305011"
 
 Categories:
 
 -   Audio/Video
 -   Telephony and Voice
+
+-   This page was last modified on 16 March 2014, at 10:24.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

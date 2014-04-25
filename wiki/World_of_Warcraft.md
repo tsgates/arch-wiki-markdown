@@ -2,17 +2,6 @@ World of Warcraft
 =================
 
   ------------------------ ------------------------ ------------------------
-  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
-  ng]                      is being considered for  ng]
-                           deletion.                
-                           Reason: please use the   
-                           first argument of the    
-                           template to provide a    
-                           brief explanation.       
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
-
-  ------------------------ ------------------------ ------------------------
   [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
   g]                       is out of date.          g]
                            Reason: please use the   
@@ -35,40 +24,37 @@ Some of this information was provided by
 http://www.wowwiki.com/Linux/Wine which is the best general source of
 information on WoW on Wine.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Wine                                                    |
-| -   2 Installing the Game                                                |
-|     -   2.1 Downloading and installing via Blizzard's client             |
-|         -   2.1.1 Downloading the Client                                 |
-|         -   2.1.2 Installing the Game                                    |
-|         -   2.1.3 Troubleshooting                                        |
-|             -   2.1.3.1 Not able to agree to terms                       |
-|             -   2.1.3.2 Wine crashes while reading terms                 |
-|                                                                          |
-|     -   2.2 Copying the CDs to a folder                                  |
-|     -   2.3 Copying an Existing Installation                             |
-|     -   2.4 New Installation from CD                                     |
-|     -   2.5 New Installation from DVD                                    |
-|                                                                          |
-| -   3 Installing Patches                                                 |
-| -   4 Configuration                                                      |
-|     -   4.1 Using OpenGL                                                 |
-|     -   4.2 Resolution and Colour depth                                  |
-|     -   4.3 Windowing                                                    |
-|     -   4.4 Black textures issue                                         |
-|     -   4.5 Sound Issues                                                 |
-|         -   4.5.1 Configuring the Buffer                                 |
-|         -   4.5.2 Stuttering or Static Sound                             |
-|                                                                          |
-| -   5 Performance Tweaks                                                 |
-|     -   5.1 For NVIDIA users                                             |
-|         -   5.1.1 NVIDIA users and Direct3D mode                         |
-|                                                                          |
-| -   6 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing Wine
+-   2 Installing the Game
+    -   2.1 Downloading and installing via Blizzard's client
+        -   2.1.1 Downloading the Client
+        -   2.1.2 Installing the Game
+        -   2.1.3 Troubleshooting
+            -   2.1.3.1 Not able to agree to terms
+            -   2.1.3.2 Wine crashes while reading terms
+    -   2.2 Copying the CDs to a folder
+    -   2.3 Copying an Existing Installation
+    -   2.4 New Installation from CD
+    -   2.5 New Installation from DVD
+-   3 Installing Patches
+-   4 Configuration
+    -   4.1 Using OpenGL
+    -   4.2 Resolution and Colour depth
+    -   4.3 Windowing
+    -   4.4 Black textures issue
+    -   4.5 Sound Issues
+        -   4.5.1 Configuring the Buffer
+        -   4.5.2 Stuttering or Static Sound
+-   5 Performance Tweaks
+    -   5.1 For NVIDIA users
+        -   5.1.1 NVIDIA users and Direct3D mode
+        -   5.1.2 GLXUnsupportedPrivateRequest Problem
+    -   5.2 AMD CPU users=
+    -   5.3 CPU/I-O Schedulers=
+-   6 Links
 
 Installing Wine
 ---------------
@@ -103,11 +89,7 @@ Installing the Game
 
 Once the client is downloaded run the file with Wine:
 
-    wine InstallWoW.exe
-
-A window will pop up asking you which product to install. If you choose
-the latest expansion, it will install the base game and any previous
-expansions as well.
+    wine World-of-Warcraft-Setup-enGB.exe
 
 Troubleshooting
 
@@ -122,8 +104,8 @@ To install it (on 64 bit enable [multilib])
 
 In some versions of Wine, you can not agree to the terms even though you
 scrolled down. Try to compile the latest Wine from source. Or use a
-version of Wine it is known to work with, i.e. 1.1.39 (please add more
-here).
+version of Wine it is known to work with, i.e. 1.1.39, 1.7.10 (please
+add more here).
 
 Wine crashes while reading terms
 
@@ -388,6 +370,47 @@ NOTE: You MUST turn off Wine's debugging to benefit from this
 
     WINEDEBUG=-all __GL_THREADED_OPTIMIZATIONS=1 wine Wow.exe
 
+GLXUnsupportedPrivateRequest Problem
+
+On 64 bit systesm, if you're using bumblebee and using optirun to run
+game with Nvidia Graphic card on your system, you will encounter this
+error:
+
+    X Error of failed request:  GLXUnsupportedPrivateRequest
+
+In most cases installing lib32-virtualgl will solve this problem. bbs
+
+> AMD CPU users=
+
+As WoW significant benefits from L3-Cache you should check if your
+Processor/Bios has a L3-allocation Option available, BSP-Only allocation
+is what worked for me pretty well. By switching from all-cores
+allocation to BSP-only the FPS on my system did jump from ~70 outdoors
+to over 120+. This was done on a II X4 640 with Nvidia Graphics
+Card(proprietary driver) using -opengl and the thread optimization.
+
+> CPU/I-O Schedulers=
+
+You can greatly increase World of Warcraft performance by choosing the
+right schedulers for your machine. Currently, the most-recent version of
+wine in the official repositories is not configured to fully take
+advantage of the linux-ck kernel. Instead, it is recommended that wine
+gamers use the CFS scheduler. Also, World of Warcraft runs better with
+the deadline I/O scheduler (as opposed to noop, cfq, bfq, etc). You can
+check if you will benefit from switching I/O schedulers first by
+determining which I/O scheduler you are using on your drive:
+
+    # fdisk -l *to determine the hard drive arch is installed on*
+    # cat /sys/block/sdX/queue/scheduler *Where X is the letter of the drive fdisk reports*
+    # echo deadline > /sys/block/sdX/queue/scheduler
+
+  
+ This is a temporary fix (it does not set deadline permanently), but you
+may gain an additional 5-30fps, by enabling deadline as the I/O
+scheduler. Moreover, feel free to play around with other schedulers to
+pick the one which runs best on your machine, especially if you have an
+SSD
+
 Links
 -----
 
@@ -396,9 +419,16 @@ Links
 -   Patch Mirrors
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=World_of_Warcraft&oldid=248874"
+"https://wiki.archlinux.org/index.php?title=World_of_Warcraft&oldid=297929"
 
 Categories:
 
 -   Gaming
 -   Wine
+
+-   This page was last modified on 15 February 2014, at 21:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

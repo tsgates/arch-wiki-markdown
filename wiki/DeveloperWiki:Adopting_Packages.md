@@ -42,3 +42,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 24 March 2012, at 17:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

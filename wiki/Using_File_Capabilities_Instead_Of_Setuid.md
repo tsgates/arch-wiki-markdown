@@ -6,56 +6,54 @@ binaries that require certain root-privileges. In this way, it
 eliminates the need for "all or nothing", using a fine grained control
 with POSIX 1003.1e capabilities.
 
-Use with caution, some programs do not know about file capabilities. It
-apparently works correctly, but have some unexpected side effects (see
-for example #util-linux-ng)
+Warning:Use with caution, some programs do not know about file
+capabilities. It apparently works correctly, but have some unexpected
+side effects (see for example util-linux-ng).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-| -   2 Setuid-root files by package                                       |
-|     -   2.1 coreutils                                                    |
-|     -   2.2 dcron                                                        |
-|     -   2.3 inetutils                                                    |
-|     -   2.4 iputils                                                      |
-|     -   2.5 pam                                                          |
-|     -   2.6 pmount                                                       |
-|     -   2.7 pulseaudio                                                   |
-|     -   2.8 screen                                                       |
-|     -   2.9 shadow                                                       |
-|     -   2.10 sudo                                                        |
-|     -   2.11 util-linux-ng                                               |
-|     -   2.12 xorg-xserver                                                |
-|                                                                          |
-| -   3 Other programs that benefit from capabilities                      |
-|     -   3.1 beep                                                         |
-|     -   3.2 chvt                                                         |
-|     -   3.3 iftop                                                        |
-|     -   3.4 mii-tool                                                     |
-|                                                                          |
-| -   4 Useful commands                                                    |
-| -   5 Additional Resources                                               |
-+--------------------------------------------------------------------------+
+Warning:Many capabilities enable trivial privilege escalation. For
+examples and explanations see Brad Spengler's post False Boundaries and
+Arbitrary Code Execution.
+
+Contents
+--------
+
+-   1 Prerequisites
+-   2 Setuid-root files by package
+    -   2.1 coreutils
+    -   2.2 dcron
+    -   2.3 inetutils
+    -   2.4 iputils
+    -   2.5 pam
+    -   2.6 pmount
+    -   2.7 pulseaudio
+    -   2.8 screen
+    -   2.9 shadow
+    -   2.10 sudo
+    -   2.11 util-linux-ng
+    -   2.12 xorg-xserver
+-   3 Other programs that benefit from capabilities
+    -   3.1 beep
+    -   3.2 chvt
+    -   3.3 iftop
+    -   3.4 mii-tool
+-   4 Useful commands
+-   5 See also
 
 Prerequisites
 -------------
 
-You need libcap, for setting file capabalities that are extended
-attributes, with the utility setcap.
-
-    # pacman -S libcap
+You need to install libcap, for setting file capabalities that are
+extended attributes, with the utility setcap.
 
 Setuid-root files by package
 ----------------------------
 
 > coreutils
 
-Note:Warning: Do not use it, because su will return incorrect password.
+Warning:Do not use it, because su will return incorrect password.
 
-    # chmod u-s /bin/su
-    # setcap cap_setgid,cap_setuid+ep /bin/su
+    # chmod u-s /usr/bin/su
+    # setcap cap_setgid,cap_setuid+ep /usr/bin/su
 
 > dcron
 
@@ -75,22 +73,22 @@ Note:Warning: Do not use it, because su will return incorrect password.
 
 > iputils
 
-    # chmod u-s /bin/ping
-    # setcap cap_net_raw+ep /bin/ping
+    # chmod u-s /usr/bin/ping
+    # setcap cap_net_raw+ep /usr/bin/ping
 
-    # chmod u-s /bin/ping6
-    # setcap cap_net_raw+ep /bin/ping6
+    # chmod u-s /usr/bin/ping6
+    # setcap cap_net_raw+ep /usr/bin/ping6
 
-    # chmod u-s /bin/traceroute
-    # setcap cap_net_raw+ep /bin/traceroute
+    # chmod u-s /usr/bin/traceroute
+    # setcap cap_net_raw+ep /usr/bin/traceroute
 
-    # chmod u-s /bin/traceroute6
-    # setcap cap_net_raw+ep /bin/traceroute6
+    # chmod u-s /usr/bin/traceroute6
+    # setcap cap_net_raw+ep /usr/bin/traceroute6
 
 > pam
 
-    # chmod u-s /sbin/unix_chkpwd
-    # setcap cap_dac_read_search+ep /sbin/unix_chkpwd
+    # chmod u-s /usr/bin/unix_chkpwd
+    # setcap cap_dac_read_search+ep /usr/bin/unix_chkpwd
 
 > pmount
 
@@ -103,8 +101,8 @@ Does not work without setuid.
 
 > screen
 
-Needs setuid for multiuser sessions, but if you don't need that feature,
-you can safely turn off setuid.
+Needs setuid for multiuser sessions, but if you do not need that
+feature, you can safely turn off setuid.
 
 > shadow
 
@@ -135,15 +133,14 @@ Sudo does not work without setuid.
 
 > util-linux-ng
 
-Note:Warning: Do not use it, because mount and umount can not do some
-checks, then users can mount/umount filesystems that do not have
-permission.
+Warning:Do not use it, because mount and umount can not do some checks,
+then users can mount/umount filesystems that do not have permission.
 
-    # chmod u-s /bin/mount
-    # setcap cap_dac_override,cap_sys_admin+ep /bin/mount
+    # chmod u-s /usr/bin/mount
+    # setcap cap_dac_override,cap_sys_admin+ep /usr/bin/mount
 
-    # chmod u-s /bin/umount
-    # setcap cap_dac_override,cap_sys_admin+ep /bin/umount
+    # chmod u-s /usr/bin/umount
+    # setcap cap_dac_override,cap_sys_admin+ep /usr/bin/umount
 
 > xorg-xserver
 
@@ -167,31 +164,38 @@ users can use the program without privilege elevation.
 
 > iftop
 
-    # setcap cap_net_raw+ep /usr/sbin/iftop
+    # setcap cap_net_raw+ep /usr/bin/iftop
 
 > mii-tool
 
-    # setcap cap_net_admin+ep /sbin/mii-tool
+    # setcap cap_net_admin+ep /usr/bin/mii-tool
 
 Useful commands
 ---------------
 
-Find setuid-root files
+Find setuid-root files:
 
-    $ find /bin /sbin /lib /usr/bin /usr/sbin /usr/lib -perm /4000 -user root
+    $ find /usr/bin /usr/lib -perm /4000 -user root
 
-Find setgid-root files
+Find setgid-root files:
 
-    $ find /bin /sbin /lib /usr/bin /usr/sbin /usr/lib -perm /2000 -group root
+    $ find /usr/bin /usr/lib -perm /2000 -group root
 
-Additional Resources
---------------------
+See also
+--------
 
 -   Man Page capabilities(7) setcap(8) getcap(8)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Using_File_Capabilities_Instead_Of_Setuid&oldid=223502"
+"https://wiki.archlinux.org/index.php?title=Using_File_Capabilities_Instead_Of_Setuid&oldid=283661"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 19 November 2013, at 13:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

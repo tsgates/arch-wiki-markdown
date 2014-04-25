@@ -1,6 +1,19 @@
 Ganeti
 ======
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Described        
+                           package ganeti is        
+                           outdated, the            
+                           #Installing From Source  
+                           part should be merged    
+                           into the PKGBUILD.       
+                           Further, rc.conf is      
+                           mentioned. (Discuss)     
+  ------------------------ ------------------------ ------------------------
+
 From Ganeti project page:
 
 Ganeti is a cluster virtual server management software tool built on top
@@ -10,15 +23,13 @@ Open Source software.
 Warning:This is a very rough draft. Following the directions may or may
 not cause your entire server cluster to erupt into flames.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing From Source                                             |
-| -   2 KVM                                                                |
-| -   3 Xen                                                                |
-| -   4 LXC                                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing From Source
+-   2 KVM
+-   3 Xen
+-   4 LXC
 
 Installing From Source
 ----------------------
@@ -182,8 +193,15 @@ LXC
   ------------------------ ------------------------ ------------------------
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ganeti&oldid=207388"
+"https://wiki.archlinux.org/index.php?title=Ganeti&oldid=269933"
 
 Category:
 
 -   Virtualization
+
+-   This page was last modified on 5 August 2013, at 10:03.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

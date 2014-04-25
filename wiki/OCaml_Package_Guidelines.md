@@ -9,22 +9,19 @@ CLR – Cross – Eclipse – Free Pascal – GNOME – Go – Haskell – Java 
 – Kernel – Lisp – MinGW – Nonfree – OCaml – Perl – Python – Ruby – VCS –
 Web – Wine
 
-Writing PKGBUILDs for sowtware written in OCaml.
+Writing PKGBUILDs for software written in OCaml.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Package Naming                                                     |
-| -   2 File placement                                                     |
-|     -   2.1 Libraries                                                    |
-|     -   2.2 OASIS                                                        |
-|                                                                          |
-| -   3 OCaml Bytecode and Levels                                          |
-| -   4 Example PKGBUILD                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Package Naming
+-   1 Package naming
+-   2 File placement
+    -   2.1 Libraries
+    -   2.2 OASIS
+-   3 OCaml bytecode and levels
+-   4 Example PKGBUILD
+
+Package naming
 --------------
 
 For libraries, use ocaml-modulename. For applications, use the program
@@ -67,7 +64,7 @@ DESTDIR-like functionality is to run the configure script with the
         # build commands
     }
 
-OCaml Bytecode and Levels
+OCaml bytecode and levels
 -------------------------
 
 OCaml can run code on multiple "levels", the top level interprets OCaml
@@ -141,8 +138,15 @@ the'!strip'option and change the architecture if the package does not
 produce bytecode.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=OCaml_Package_Guidelines&oldid=206946"
+"https://wiki.archlinux.org/index.php?title=OCaml_Package_Guidelines&oldid=298446"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 16 February 2014, at 23:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

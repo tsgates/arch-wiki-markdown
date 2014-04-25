@@ -1,36 +1,31 @@
 Android Tethering
 =================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What is Tethering                                                  |
-| -   2 Wi-Fi access point                                                 |
-| -   3 USB tethering                                                      |
-|     -   3.1 Tools Needed                                                 |
-|     -   3.2 Procedure                                                    |
-|     -   3.3 Netcfg                                                       |
-|                                                                          |
-| -   4 USB tethering with OpenVPN                                         |
-|     -   4.1 Tools Needed                                                 |
-|         -   4.1.1 Configuring the phone connection in Arch Linux         |
-|                                                                          |
-|     -   4.2 Procedure                                                    |
-|                                                                          |
-| -   5 Tethering with proxy                                               |
-|     -   5.1 Tools Needed                                                 |
-|     -   5.2 Instructions                                                 |
-+--------------------------------------------------------------------------+
-
-What is Tethering
------------------
-
-Tethering is a way to have Internet access on your PC through your
-smartphone using its network connection. USB and Wi-Fi access point
-tethering is natively supported from Android Froyo ( 2.2 ). Older
-versions of the Android OS, mostly unofficial roms have this option
+Tethering is a way to have internet access on your PC through your
+smartphone using its network connection. USB tethering and Wi-Fi access
+point tethering are natively supported since Android Froyo (2.2). In
+older versions of the Android OS, most unofficial ROMs have this option
 enabled.
+
+Contents
+--------
+
+-   1 Wi-Fi access point
+-   2 USB tethering
+    -   2.1 Tools Needed
+    -   2.2 Procedure
+-   3 USB tethering with OpenVPN
+    -   3.1 Tools Needed
+        -   3.1.1 Configuring the phone connection in Arch Linux
+    -   3.2 Procedure
+    -   3.3 Troubleshooting
+        -   3.3.1 DNS
+        -   3.3.2 NetworkManager
+-   4 Tethering with SOCKS proxy
+    -   4.1 Tools Needed
+    -   4.2 Instructions
+        -   4.2.1 Tetherbot
+        -   4.2.2 Proxoid
 
 Wi-Fi access point
 ------------------
@@ -52,11 +47,11 @@ USB tethering
 
 > Procedure
 
--   Enable USB Debugging. This is usually done from Settings -->
-    Applications --> Development --> USB debugging. Reboot the phone
-    after checking this option to make sure USB debugging is enabled (if
-    there is no such option, this step probably does not apply to your
-    version of Android)
+-   Enable USB Debugging on your phone or device. This is usually done
+    from Settings --> Applications --> Development --> USB debugging.
+    Reboot the phone after checking this option to make sure USB
+    debugging is enabled (if there is no such option, this step probably
+    does not apply to your version of Android)
 -   Disconnect your computer from any wireless or wired networks
 -   Connect the phone to your computer using the USB cable (the USB
     connection mode -- Phone Portal, Memory Card or Charge only -- is
@@ -65,94 +60,54 @@ USB tethering
 -   Enable the tethering option from your phone. This is usually done
     from Settings --> Wireless & Networks --> Internet tethering (or
     Tethering & portable hotspot, for more recent versions)
-
-(The following step may not be needed. usbnet module may not be
-necessary, do it only if you do not see a usb0 interface in the ifconfig
-step)
-
--   Load the usbnet module(if it's not already loaded). You will need
-    root access to do that
-
-    modprobe usbnet
-
 -   Make sure that the USB interface is recognized by the system by
     using the following command:
 
-    ifconfig -a
+    $ ip link
 
-you should be able to see a usb0 device listed like this (notice the
-usb0 device):
+You should be able to see a usb0 or enp?s??u? device listed like this
+(notice the enp0s20u3 device).
 
-    # ifconfig -a
+    # ip link
 
-    eth0      Link encap:Ethernet  HWaddr 00:16:36:FA:3E:31  
-              UP BROADCAST MULTICAST  MTU:1500  Metric:1
-              RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-              TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-              collisions:0 txqueuelen:1000 
-              RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default 
+        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    2: enp4s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP mode DEFAULT group default qlen 1000
+        link/ether ##:##:##:##:##:## brd ff:ff:ff:ff:ff:ff
+    3: wlp2s0: <BROADCAST,MULTICAST> mtu 1500 qdisc mq state DOWN mode DEFAULT group default qlen 1000
+        link/ether ##:##:##:##:##:## brd ff:ff:ff:ff:ff:ff
+    5: enp0s20u3: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000
+        link/ether ##:##:##:##:##:## brd ff:ff:ff:ff:ff:ff
 
-    lo        Link encap:Local Loopback  
-              inet addr:127.0.0.1  Mask:255.0.0.0
-              inet6 addr: ::1/128 Scope:Host
-              UP LOOPBACK RUNNING  MTU:16436  Metric:1
-              RX packets:316435 errors:0 dropped:0 overruns:0 frame:0
-              TX packets:316435 errors:0 dropped:0 overruns:0 carrier:0
-              collisions:0 txqueuelen:0 
-              RX bytes:22875193 (21.8 Mb)  TX bytes:22875193 (21.8 Mb)
+Note:Take care to use the device name from your own system in the
+following commands.
 
-    usb0      Link encap:Ethernet  HWaddr C2:5A:11:8D:43:F5  
-              BROADCAST MULTICAST  MTU:1500  Metric:1
-              RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-              TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-              collisions:0 txqueuelen:1000 
-              RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+Warning:The name may change depending on the usb port you use. You may
+want to change the device name to create a unique name for your device
+regardless of the usb port.
 
--   Configure the new network device via DHCP using the following
-    command:
-
-    ifconfig usb0 up && dhcpcd usb0
-
-To configure the new network device using the iproute toolkit, issue the
-following as root:
-
-    ip link set usb0 up && dhcpcd usb0
-
-To stop the network sharing, issue the command:
-
-    dhcpcd -x usb0
-
-> Netcfg
-
-To use Netcfg to configure USB tethering, just add a static ethernet
-configuration like:
-
-    /etc/network.d/usb-tether
-
-    CONNECTION='ethernet'
-    DESCRIPTION='A basic dhcp ethernet connection using iproute'
-    INTERFACE='usb0'
-    IP='dhcp'
+-   The final step is to configure a network connection on this
+    interface.
 
 USB tethering with OpenVPN
 --------------------------
 
-This method works for any old Android version and does not requires root
+This method works for any old Android version and requires neither root
 access nor modifications in the phone (it is also suitable for Android
 2.2 and later, but no longer required).
 
-It does not requires changes to your browser; in fact transparently
-handles all network traffic for any PC application (except ICMP pings).
-It is somewhat CPU intensive in the phone at high usage rates (a 500
-kbyte/sec data transfer rate may take more than 50% of phone CPU on a
-powerful Acer Liquid).
+It does not require changes to your browser. In fact, all network
+traffic is transparently handled for any PC application (except ICMP
+pings). It is somewhat CPU intensive on the phone at high usage rates (a
+500 kBytes/sec data transfer rate may take more than 50% of phone CPU on
+a powerful Acer Liquid).
 
 > Tools Needed
 
-In Arch, you need to install the openvpn package. Is is also required
-the Android SDK installed (which can be obtained here). In the phone,
-the azilink application, a Java-based NAT that will communicate with
-OpenVPN in your computer.
+For Arch, you need to install the openvpn package. It is also required
+to have the Android SDK installed (which can be obtained here or from
+the AUR). On the phone, you need the azilink application, which is a
+Java-based NAT that will communicate with OpenVPN on your computer.
 
 Configuring the phone connection in Arch Linux
 
@@ -175,9 +130,10 @@ name, and 0502 by the vendor ID of your own phone:
     SUBSYSTEM=="usb", ATTR(idVendor)=="0502", MODE="0666" OWNER="ciri"
 
 As root run the udevadm control restart command (or reboot your
-computer) to make the change effective. Now run in your linux PC the adb
-shell command from the Android SDK as plain (non root) user: you should
-get a unix prompt in your phone.
+computer) to make the change effective.
+
+Now run in your linux PC the adb shell command from the Android SDK as
+plain (non root) user: you should get a unix prompt in your phone.
 
 > Procedure
 
@@ -191,9 +147,10 @@ bottom to receive instructions, which basically are:
 3.  Run AziLink and make sure that the Service active option at the top
     is checked.
 4.  Run the following commands in your Linux PC:
-    1.  As plain user: adb forward tcp:41927 tcp:41927 (requires Android
-        SDK installed)
-    2.  As root: openvpn AziLink.ovpn
+
+    $ adb forward tcp:41927 tcp:41927
+
+    # openvpn AziLink.ovpn
 
     AziLink.ovpn
 
@@ -204,10 +161,25 @@ bottom to receive instructions, which basically are:
     route 128.0.0.0 128.0.0.0
     socket-flags TCP_NODELAY
     keepalive 10 30
-    dhcp-option DNS 192.168.56.1 
+    dhcp-option DNS 192.168.56.1
 
-Tethering with proxy
---------------------
+> Troubleshooting
+
+DNS
+
+You may need to manually update the contents of resolv.conf to
+
+    /etc/resolv.conf
+
+    nameserver 192.168.56.1
+
+NetworkManager
+
+If you're running NetworkManager, you may need to stop it before running
+OpenVPN.
+
+Tethering with SOCKS proxy
+--------------------------
 
 With this method tethering is achieved by port forwarding from the phone
 to the PC. This is suitable only for browsing. For Firefox, you should
@@ -216,18 +188,32 @@ set network.proxy.socks_remote_dns to true in about:config ( address bar
 
 > Tools Needed
 
--   Root access to the PC
--   Android SDK which can be obtained here
+-   android-sdk, android-sdk-platform-tools, and android-udev packages
+    from AUR
 -   USB connection cable from your phone to PC
--   Proxoid application(free download from the Android market)
+-   Either Tetherbot or Proxoid
 
 > Instructions
+
+Tetherbot
+
+Follow the instructions under Using the Socks Proxy on [1].
+
+Proxoid
 
 Follow the instructions demonstrated in the following link
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Android_Tethering&oldid=198248"
+"https://wiki.archlinux.org/index.php?title=Android_Tethering&oldid=303038"
 
-Category:
+Categories:
 
 -   Networking
+-   Mobile devices
+
+-   This page was last modified on 3 March 2014, at 16:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

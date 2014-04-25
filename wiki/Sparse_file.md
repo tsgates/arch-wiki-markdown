@@ -4,35 +4,29 @@ Sparse file
 This article contains information regarding sparse files, their
 creation, maintenance, and expansion.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Sparse Files                                                       |
-|     -   1.1 What is a sparse file?                                       |
-|     -   1.2 Advantages                                                   |
-|     -   1.3 Disadvantages                                                |
-|                                                                          |
-| -   2 Creating sparse files                                              |
-|     -   2.1 Formatting the file with a filesystem                        |
-|     -   2.2 Mounting the file at boot                                    |
-|                                                                          |
-| -   3 Copying the sparse file                                            |
-|     -   3.1 Copying with `cp'                                            |
-|     -   3.2 Archiving with `tar'                                         |
-|                                                                          |
-| -   4 Resizing the sparse file                                           |
-|     -   4.1 Growing the file                                             |
-|                                                                          |
-| -   5 Sources                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Sparse Files
+    -   1.1 What is a sparse file?
+    -   1.2 Advantages
+    -   1.3 Disadvantages
+-   2 Creating sparse files
+    -   2.1 Formatting the file with a filesystem
+    -   2.2 Mounting the file at boot
+-   3 Copying the sparse file
+    -   3.1 Copying with `cp'
+    -   3.2 Archiving with `tar'
+-   4 Resizing the sparse file
+    -   4.1 Growing the file
+-   5 Sources
 
 Sparse Files
 ------------
 
 > What is a sparse file?
 
-According to Wikipedia,in computer science, a sparse file is a type of
+According to Wikipedia, in computer science, a sparse file is a type of
 computer file that attempts to use file system space more efficiently
 when blocks allocated to the file are mostly empty. This is achieved by
 writing brief information (metadata) representing the empty blocks to
@@ -266,8 +260,15 @@ Sources
 - http://www.apl.jhu.edu/Misc/Unix-info/tar/tar_85.html
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sparse_file&oldid=206453"
+"https://wiki.archlinux.org/index.php?title=Sparse_file&oldid=293674"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 20 January 2014, at 06:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

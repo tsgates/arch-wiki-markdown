@@ -6,19 +6,16 @@ devices. The Net-SNMP package is one implementation of SNMP that is
 available for Arch Linux. This article discusses the configuration and
 testing of the snmpd daemon that ships with Arch's net-snmp package.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Daemon                                                       |
-|     -   2.2 SNMP 1 and 2c                                                |
-|     -   2.3 SNMP 3                                                       |
-|     -   2.4 Start Daemon                                                 |
-|                                                                          |
-| -   3 Testing                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Daemon
+    -   2.2 SNMP 1 and 2c
+    -   2.3 SNMP 3
+    -   2.4 Start Daemon
+-   3 Testing
 
 Installation
 ------------
@@ -81,11 +78,6 @@ After configuring the daemon, start it
 Testing
 -------
 
-The above configuration will suffice for a basic installation. To begin
-testing, start the snmpd service:
-
-    # rc.d start snmpd
-
 If using SNMP 1 or 2c, use one of the following commands to test
 configuration:
 
@@ -106,8 +98,15 @@ Either way, you should see several lines of data looking something like:
     ...SNIP...
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Snmpd&oldid=240588"
+"https://wiki.archlinux.org/index.php?title=Snmpd&oldid=282596"
 
 Category:
 
 -   Status monitoring and notification
+
+-   This page was last modified on 13 November 2013, at 10:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

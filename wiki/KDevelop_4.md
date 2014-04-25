@@ -7,53 +7,44 @@ a feature-full, plugin extensible IDE for C/C++ and other programming
 languages. It is based on KDevPlatform, and the KDE and Qt libraries and
 is under development since 1998."
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Building Additional Plugins                                        |
-|     -   2.1 First: Install Dependency                                    |
-|     -   2.2 PHP                                                          |
-|     -   2.3 Other Plugins                                                |
-|                                                                          |
-| -   3 List of Available Plugins                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Building additional plugins
+    -   2.1 First: install dependency
+    -   2.2 PHP
+    -   2.3 Other plugins
+-   3 List of available plugins
 
 Installation
 ------------
 
-KDevelop is available in the Extra repository:
+Install kdevelop from the official repositories.
 
-    # pacman -S kdevelop
-
-Building Additional Plugins
+Building additional plugins
 ---------------------------
 
-> First: Install Dependency
+> First: install dependency
 
-The KDevelop Parser Generator in Extra (kdevelop-pg-qt) is required to
-build additional plugins. Plugins will not compile if this package is
-not installed beforehand.
-
-    # pacman -S kdevelop-pg-qt
+The KDevelop Parser Generator in the official repositories
+(kdevelop-pg-qt) is required to build additional plugins. Plugins will
+not compile if this package is not installed beforehand.
 
 > PHP
 
-The PHP plugin (kdevelop-php) from Extra provides autocompletion and
-other PHP-specific features.
-
-    # pacman -S kdevelop-php
+The PHP plugin (kdevelop-php) from the official repositories provides
+autocompletion and other PHP-specific features.
 
 Restart KDevelop 4 and you should now have improved PHP support,
 including autocomplete for both the PHP functions as well as for your
 project's functions and classes.
 
-> Other Plugins
+> Other plugins
 
 Other plugins are available from AUR: kdevelop-extra-plugins
 
-List of Available Plugins
+List of available plugins
 -------------------------
 
 As of June 18 2009, the following plugins are available from KDE's svn
@@ -80,12 +71,19 @@ repository.
 -   teamwork
 -   xdebug
 
-Note: As of June 17 2009, do not install the php-docs plugin because it
-causes the php plugin to stop working.
+Warning:As of June 17 2009, do not install the php-docs plugin because
+it causes the php plugin to stop working.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=KDevelop_4&oldid=206474"
+"https://wiki.archlinux.org/index.php?title=KDevelop_4&oldid=284980"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 27 November 2013, at 23:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

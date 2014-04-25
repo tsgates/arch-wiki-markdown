@@ -1,60 +1,53 @@
 ranger
 ======
 
-> Summary
+Related articles
 
-A guide to installing and configuring ranger
-
-> Related
-
-atool
+-   vifm
 
 ranger is a text-based file manager written in Python with vi-style key
-bindings. It has an extensive set of features , and you can accomplish
+bindings. It has an extensive set of features, and you can accomplish
 file management tasks with a few keystrokes with no need for the mouse.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Running                                                            |
-| -   3 Comparison with other File Managers                                |
-| -   4 Documentation                                                      |
-| -   5 Customization                                                      |
-|     -   5.1 Binding keys                                                 |
-|     -   5.2 Defining commands                                            |
-|     -   5.3 Opening files with a given application                       |
-|                                                                          |
-| -   6 Useful commands                                                    |
-|     -   6.1 External Drives                                              |
-|     -   6.2 Network Drives                                               |
-|     -   6.3 Archive Related                                              |
-|         -   6.3.1 Extraction                                             |
-|         -   6.3.2 Compression                                            |
-|                                                                          |
-|     -   6.4 Image Mounting                                               |
-|                                                                          |
-| -   7 Web Resources                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Running
+-   3 Comparison with other file managers
+-   4 Documentation
+-   5 Customization
+    -   5.1 Binding keys
+    -   5.2 Defining commands
+    -   5.3 Change Colorscheme
+    -   5.4 Opening files with a given application
+    -   5.5 Syncing path with shell
+        -   5.5.1 Starting ranger from a shell or an X session
+        -   5.5.2 Starting a shell from ranger
+    -   5.6 New tab in current folder
+-   6 Useful commands
+    -   6.1 External Drives
+    -   6.2 Network drives
+    -   6.3 Archive related
+        -   6.3.1 Extraction
+        -   6.3.2 Compression
+    -   6.4 Image mounting
+-   7 See also
 
 Installing
 ----------
 
-ranger can be installed from the official repositories with pacman:
-
-    # pacman -S ranger
-
-There is also ranger-git in AUR.
+ranger can be installed from the official repositories. There is also
+ranger-git in AUR.
 
 Optional, for file previews with "scope.sh":
 
--   libcaca (img2txt) for previewing images
+-   libcaca (img2txt) for previewing images as ASCII-art
 -   highlight for syntax highlighting of code
 -   atool for previews of archives
 -   lynx, w3m or elinks for previews of html pages
 -   poppler (pdftotext) for pdf previews
--   transmission-show for viewing bit-torrent information
+-   transmission-cli for viewing bit-torrent information
 -   mediainfo or perl-image-exiftool for viewing information about media
     files
 
@@ -66,7 +59,7 @@ ranger. Or, you can use the command
 
     xterm -e ranger
 
-Comparison with other File Managers
+Comparison with other file managers
 -----------------------------------
 
 Compared to graphical mouse-based file managers, ranger is much more
@@ -148,6 +141,18 @@ Warning:Note that [^.] is an essential part of the above command.
 Otherwise, it will remove all files and directories of the form ..*,
 thereby wiping out everything in your home directory.
 
+> Change Colorscheme
+
+You can add your own color schemes by creating the colorschemes
+subfolder in .config/ranger/colorschemes
+
+    mkdir .config/ranger/colorschemes
+
+then copy your new newscheme.py into that folder. Then you alter the
+default coloscheme in .config/ranger/rc.conf file:
+
+    set colorscheme newscheme
+
 > Opening files with a given application
 
 Modify ~/.config/ranger/rifle.conf. Since the beginning lines are
@@ -157,25 +162,107 @@ kile.
 
     ext tex = kile "$@"
 
+> Syncing path with shell
+
+Starting ranger from a shell or an X session
+
+ranger provides a shell function
+/usr/share/doc/ranger/examples/bash_automatic_cd.sh you can source or
+copy into your shell configuration file. Now running rangercd instead of
+ranger will sync the paths, i.e. when quitting ranger the shell will
+automatically cd to the last browsed folder.
+
+If you launch ranger from a graphical launcher (e.g. using
+$TERMCMD -e ranger, TERMCMD being an X terminal), you cannot use
+rangercd here because it is a shell function. The trick is to create an
+executable script:
+
+    ranger-launcher.sh
+
+    #!/bin/sh
+    export RANGERCD=true
+    $TERMCMD
+
+and add this at the very end of your shell configuration:
+
+    shellrc
+
+    $RANGERCD && unset RANGERCD && rangercd
+
+Note that it is important to unset the variable, otherwise launching a
+subshell from this terminal will automatically re-launch ranger.
+
+Starting a shell from ranger
+
+With the previous method you can switch to a shell in last browsed path
+simply by leaving ranger. However you may not want to quit ranger for
+several reasons (numerous opened tabs, copy in progress, etc.). You can
+start a shell from ranger (S by default) without losing your ranger
+session. Unfortunately, the shell will not switch to the current folder
+automatically. Again, this can be solved with an executable script:
+
+    shellcd
+
+    #!/bin/sh
+    export AUTOCD="$(realpath "$1")"
+
+    $SHELL
+
+and - as before - add this to at the very end of your shell
+configuration:
+
+    shellrc
+
+    cd "$AUTOCD"
+
+Now you can change your shell binding for ranger:
+
+    rc.conf
+
+    map S shell shellcd %d
+
+Alternatively, you can make use of your shell history file if it has
+any. For instance, you could do this for zsh:
+
+    shellcd
+
+    ## Prepend argument to zsh dirstack.
+    BUF="$(realpath "$1")
+    $(grep -v "$(realpath "$1")" "$ZDIRS")"
+    echo "$BUF" > "$ZDIRS"
+
+    zsh
+
+Change ZDIRS for you dirstack.
+
+> New tab in current folder
+
+You may have noticed there are two shortcuts for opening a new tab in
+home (gn and Ctrl+n). Let us rebind Ctrl+n:
+
+    rc.conf
+
+    map <c-n>  eval fm.tab_new('%d')
+
 Useful commands
 ---------------
 
 > External Drives
 
-External drives can be automatically mounted with an Udev rule or with
+External drives can be automatically mounted with a udev rule or with
 the help of an automounting Udev wrapper. Drives mounted under /media
 can be easily accessed by pressing gm (go, media).
 
-> Network Drives
+> Network drives
 
-> Archive Related
+> Archive related
 
 These commands use atool to perform archive operations.
 
 Extraction
 
 The following command implements archive extraction by copying (yy) one
-or more archive files and then executing ":extracthere" on the desired
+or more archive files and then executing :extracthere on the desired
 directory.
 
     import os
@@ -215,9 +302,11 @@ directory.
 Compression
 
 The following command allows the user to compress several files on the
-current directory by marking them and then calling ":compress <package
-name>". It supports name suggestions by getting the basename of the
-current directory and appending several possibilities for the extension.
+current directory by marking them and then calling
+:compress package name. It supports name suggestions by getting the
+basename of the current directory and appending several possibilities
+for the extension. You need to have atool installed. Otherwise you will
+see an error message when you create the archive.
 
     import os
     from ranger.core.loader import CommandLoader
@@ -252,11 +341,11 @@ current directory and appending several possibilities for the extension.
             extension = ['.zip', '.tar.gz', '.rar', '.7z']
             return ['compress ' + os.path.basename(self.fm.env.cwd.path) + ext for ext in extension]
 
-> Image Mounting
+> Image mounting
 
 The following command assumes you are using cdemu as your image mounter
 and some kind of system like autofs which mounts the virtual drive to a
-specified location ('/media/virtualrom' in this case). Don't forget to
+specified location ('/media/virtualrom' in this case). Do not forget to
 change mountpath to reflect your system settings.
 
 To mount an image (or images) to a cdemud virtual drive from ranger you
@@ -316,19 +405,27 @@ background in tab 9.
             obj.signal_bind('after', mount_finished)
             self.fm.loader.add(obj)
 
-Web Resources
--------------
+See also
+--------
 
 -   ranger web page.
 -   ranger mailing list
--   Arch Linux forum thread.
+-   Arch Linux Forum thread.
 -   GitHub-page
 -   DotShare.it configurations.
+-   Ranger Tutorial
+-   Some colorschemes
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ranger&oldid=256008"
+"https://wiki.archlinux.org/index.php?title=Ranger&oldid=294643"
 
-Categories:
+Category:
 
 -   File managers
--   File systems
+
+-   This page was last modified on 27 January 2014, at 14:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,17 +1,10 @@
 su
 ==
 
-> Summary
+Related articles
 
-An overview of the standard user substitution utility.
-
-> Overview
-
-Users and groups are used on GNU/Linux for access control. The superuser
-(root) has complete access to the operating system and its
-configuration; it is intended for administrative use only. Unprivileged
-users can use the su and sudo programs for controlled privilege
-escalation.
+-   Users and groups
+-   sudo
 
 The su command (substitute user) is used to assume the identity of
 another user on the system, normally root. This saves having to logout
@@ -19,17 +12,15 @@ and log back in as the user you want to be. Instead, you may login as
 another user during your session by starting a sort of "sub-session",
 and then logout back to your own session when done.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-| -   3 Security                                                           |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Login shell                                                  |
-|     -   4.2 su and wheel                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+-   3 Security
+-   4 Tips and tricks
+    -   4.1 Login shell
+    -   4.2 su and wheel
 
 Installation
 ------------
@@ -138,8 +129,15 @@ in /etc/pam.d/su:
     auth required pam_wheel.so use_uid
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Su&oldid=241926"
+"https://wiki.archlinux.org/index.php?title=Su&oldid=301822"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 24 February 2014, at 15:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

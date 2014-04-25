@@ -59,9 +59,15 @@ name= property to make it human readable.
     done
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Remmina&oldid=245596"
+"https://wiki.archlinux.org/index.php?title=Remmina&oldid=282549"
 
-Categories:
+Category:
 
--   Virtual Network Computing
--   Remote Desktop Protocol
+-   Remote Desktop
+
+-   This page was last modified on 13 November 2013, at 07:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -15,23 +15,21 @@ where the user space is no more functional.
 Documentation is available in the Linux kernel tree under
 Documentation/networking/netconsole.txt
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Build-in Configuration                                             |
-| -   3 Dynamic configuration                                              |
-| -   4 Receiver                                                           |
-| -   5 Starting at Boot                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Built-in Configuration
+-   3 Dynamic configuration
+-   4 Receiver
+-   5 Starting at Boot
 
 Installation
 ------------
 
 Install gnu-netcat from the official repositories.
 
-Build-in Configuration
+Built-in Configuration
 ----------------------
 
 Netconsole and other modules' Kernel parameters can be passed from a
@@ -42,6 +40,9 @@ netconsole Out Port & IP, and 2nd address is your PC's netconsole In
 Port & IP & adapter MAC:
 
     fw_setenv usb_custom_params 'loglevel=7 netconsole=6666@192.168.1.28/eth0,6666@192.168.1.19/00:13:32:20:r9:a5'
+
+Note: MAC address is optional. You can drop it, but the slash needs to
+stay: '...,6666@192.168.1.19/'
 
 Logging is done by your ArchLinux set logger like syslog-ng, so
 available loglevels (output details) are defined in that logger docs,
@@ -56,11 +57,17 @@ in Dynamic Configuration:
 
     netconsole=6666@192.168.1.28/eth0,6666@192.168.1.19/00:13:32:20:r9:a5
 
+    {{Note| MAC address is optional.}}
+
     nc -l -u -p 6666 &
     nc -u 192.168.1.28 6666
 
 One may need to switch off PC and router firewall, and setup proper
-router port forwarding to monitor and input data in Netconsole.
+router port forwarding to monitor and input data in Netconsole. A more
+flexible configuration can be achieved if netconsole is setup on a
+different subnet so that if the device is moved to a different network
+IP's won't clash, however it may require a more complex setup on the
+receiver with aliased ethernet interface.
 
 Dynamic configuration
 ---------------------
@@ -125,9 +132,16 @@ Examples:
 From: Net Console for Boot Debugging.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Netconsole&oldid=249877"
+"https://wiki.archlinux.org/index.php?title=Netconsole&oldid=293899"
 
 Categories:
 
 -   Kernel
 -   Networking
+
+-   This page was last modified on 22 January 2014, at 08:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

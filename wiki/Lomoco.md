@@ -7,18 +7,16 @@ resolution and other settings.
 Note:Not all Logitech mice need lomoco, some of them already have the
 right settings out-of-the-box and other are still not supported!
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Finding mouse information                                    |
-|     -   2.2 Testing the configuration                                    |
-|     -   2.3 Making the configuration persistent, the clean way           |
-|         (recommended)                                                    |
-|     -   2.4 Making the configuration persistent, the dirty way           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Finding mouse information
+    -   2.2 Testing the configuration
+    -   2.3 Making the configuration persistent, the clean way
+        (recommended)
+    -   2.4 Making the configuration persistent, the dirty way
 
 Installation
 ------------
@@ -109,3 +107,10 @@ Retrieved from
 Category:
 
 -   Mice
+
+-   This page was last modified on 30 July 2012, at 04:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

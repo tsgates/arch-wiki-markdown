@@ -19,17 +19,14 @@ system temperature and adjust fan trigger temperatures.
 Warning: This program may damage your notebook. The author does not take
 any responsibility for damages caused by the use of this program.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 tpfand                                                       |
-|     -   1.2 tpfanco                                                      |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Running                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 tpfand
+    -   1.2 tpfanco
+-   2 Configuration
+    -   2.1 Running
 
 Installation
 ------------
@@ -81,3 +78,10 @@ Retrieved from
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 20 February 2013, at 07:03.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

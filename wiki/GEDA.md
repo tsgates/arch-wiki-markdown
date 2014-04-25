@@ -27,21 +27,18 @@ sure the tools run on other platforms as well.
 
 (Source: gEDA homepage)
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 First PCB                                                          |
-|     -   3.1 Create schematic symbol                                      |
-|         -   3.1.1 Schematic Search Path                                  |
-|                                                                          |
-|     -   3.2 Create PCB footprint                                         |
-|     -   3.3 Create schematic                                             |
-|     -   3.4 Create and route PCB                                         |
-|     -   3.5 Export to gerber                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 First PCB
+    -   3.1 Create schematic symbol
+        -   3.1.1 Schematic Search Path
+    -   3.2 Create PCB footprint
+    -   3.3 Create schematic
+    -   3.4 Create and route PCB
+    -   3.5 Export to gerber
 
 Installation
 ------------
@@ -146,3 +143,10 @@ Retrieved from
 Category:
 
 -   Mathematics and science
+
+-   This page was last modified on 8 February 2013, at 20:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

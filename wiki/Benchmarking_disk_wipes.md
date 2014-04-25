@@ -1,7 +1,7 @@
 Benchmarking disk wipes
 =======================
 
-> Summary
+Summary help replacing me
 
 Benchmark different methods of disk wiping.
 
@@ -13,21 +13,18 @@ Frandom
 
 Benchmarking
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Frequently asked Questions                                         |
-|     -   1.1 Q: How do I wipe a disk?                                     |
-|     -   1.2 Q: Are there other way's to benchmark a disk?                |
-|     -   1.3 Q: How do I get the HDD model with hdparm?                   |
-|     -   1.4 Q: How do I check progress of dd while running?              |
-|     -   1.5 Benchmarking with dcfldd                                     |
-|                                                                          |
-| -   2 Data                                                               |
-|     -   2.1 /dev/frandom                                                 |
-|     -   2.2 /dev/zero                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Frequently asked Questions
+    -   1.1 Q: How do I wipe a disk?
+    -   1.2 Q: Are there other way's to benchmark a disk?
+    -   1.3 Q: How do I get the HDD model with hdparm?
+    -   1.4 Q: How do I check progress of dd while running?
+    -   1.5 Benchmarking with dcfldd
+-   2 Data
+    -   2.1 /dev/frandom
+    -   2.2 /dev/zero
 
 Frequently asked Questions
 --------------------------
@@ -99,9 +96,16 @@ table was moved from it can only be assumed all wipes were done with
   Western Digital   WD20EARS          5900              SATA2       2000            5.91         94
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Benchmarking_disk_wipes&oldid=225616"
+"https://wiki.archlinux.org/index.php?title=Benchmarking_disk_wipes&oldid=304827"
 
 Categories:
 
 -   Security
 -   Hardware
+
+-   This page was last modified on 16 March 2014, at 07:51.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

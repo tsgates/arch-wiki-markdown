@@ -11,35 +11,19 @@ When building packages for Arch Linux, adhere to the package guidelines
 below, especially if the intention is to contribute a new package to
 Arch Linux. You should also see the PKGBUILD and makepkg manpages.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 PKGBUILD prototype                                                 |
-| -   2 Package etiquette                                                  |
-| -   3 Package naming                                                     |
-| -   4 Directories                                                        |
-| -   5 Makepkg duties                                                     |
-| -   6 Architectures                                                      |
-| -   7 Licenses                                                           |
-| -   8 Submitting packages to the AUR                                     |
-| -   9 Additional guidelines                                              |
-|     -   9.1 VCS (SVN, GIT, HG, etc) packages                             |
-|     -   9.2 Eclipse plugin packages                                      |
-|     -   9.3 GNOME packages                                               |
-|     -   9.4 Go packages                                                  |
-|     -   9.5 Haskell packages                                             |
-|     -   9.6 Java packages                                                |
-|     -   9.7 KDE packages                                                 |
-|     -   9.8 Kernel module packages                                       |
-|     -   9.9 Lisp packages                                                |
-|     -   9.10 OCaml packages                                              |
-|     -   9.11 Perl packages                                               |
-|     -   9.12 Python packages                                             |
-|     -   9.13 Ruby Gem packages                                           |
-|     -   9.14 Wine packages                                               |
-|     -   9.15 MinGW packages                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 PKGBUILD prototype
+-   2 Package etiquette
+-   3 Package naming
+-   4 Package naming
+-   5 Directories
+-   6 Makepkg duties
+-   7 Architectures
+-   8 Licenses
+-   9 Submitting packages to the AUR
+-   10 Additional guidelines
 
 PKGBUILD prototype
 ------------------
@@ -65,17 +49,17 @@ PKGBUILD prototype
     changelog=
     source=($pkgname-$pkgver.tar.gz)
     noextract=()
-    md5sums=() #generate with 'makepkg -g'
+    md5sums=() #autofill using updpkgsums
 
     build() {
-      cd "$srcdir/$pkgname-$pkgver"
+      cd $pkgname-$pkgver
 
       ./configure --prefix=/usr
       make
     }
 
     package() {
-      cd "$srcdir/$pkgname-$pkgver"
+      cd $pkgname-$pkgver
 
       make DESTDIR="$pkgdir/" install
     }
@@ -143,8 +127,26 @@ Package etiquette
 Package naming
 --------------
 
+Package naming
+--------------
+
 -   Package names should consist of alphanumeric characters only; all
     letters should be lowercase.
+-   Package names should NOT be suffixed with the upstream major release
+    version number (e.g. we don't want libfoo2 if upstream calls it
+    libfoo v2.3.4) in case the library and its dependencies are expected
+    to be able to keep using the most recent library version with each
+    respective upstream release. However, for some software or
+    dependencies, this can not be assumed. In the past this has been
+    especially true for widget toolkits such as GTK and Qt. Software
+    that depends on such toolkits can usually not be trivially ported to
+    a new major version. As such, in cases where software can not
+    trivially keep rolling alongside its dependencies, package names
+    should carry the major version suffix (e.g. gtk2, gtk3, qt4, qt5).
+    For cases where most dependencies can keep rolling along the newest
+    release but some can't (for instance closed source that needs
+    libpng12 or similar), a deprecated version of that package might be
+    called libfoo1 while the current version is just libfoo.
 -   Package versions should be the same as the version released by the
     author. Versions can include letters if need be (eg, nmap's version
     is 2.54BETA32). Version tags may not include hyphens! Letters,
@@ -166,8 +168,25 @@ Directories
     subdirectory in order to keep the /etc area as clean as possible.
     Use /etc/{pkgname}/ where {pkgname} is the name of the package (or a
     suitable alternative, eg, apache uses /etc/httpd/).
+
 -   Package files should follow these general directory guidelines:
--   Package should not contain following directories:
+
+  ---------------------- --------------------------------------------------
+  /etc                   System-essential configuration files
+  /usr/bin               Binaries
+  /usr/lib               Libraries
+  /usr/include           Header files
+  /usr/lib/{pkg}         Modules, plugins, etc.
+  /usr/share/doc/{pkg}   Application documentation
+  /usr/share/info        GNU Info system files
+  /usr/share/man         Manpages
+  /usr/share/{pkg}       Application data
+  /var/lib/{pkg}         Persistent application storage
+  /etc/{pkg}             Configuration files for {pkg}
+  /opt/{pkg}             Large self-contained packages such as Java, etc.
+  ---------------------- --------------------------------------------------
+
+-   Packages should not contain any of the following directories:
     -   /dev
     -   /home
     -   /srv
@@ -179,6 +198,7 @@ Directories
     -   /sys
     -   /tmp
     -   /var/tmp
+    -   /run
 
 Makepkg duties
 --------------
@@ -276,7 +296,7 @@ Note the following before submitting any packages to the AUR:
     conflicts with the official package.
 2.  To ensure the security of pkgs submitted to the AUR please ensure
     that you have correctly filled the md5sum field. The md5sum's can be
-    generated using the makepkg -g command.
+    generated using the updpkgsums command.
 3.  Please add a comment line to the top of the PKGBUILD file that
     follows this format. Remember to disguise your email to protect
     against spam:
@@ -339,71 +359,26 @@ on this page that will not be repeated in the following guideline pages.
 These specific guidelines are intended as an addition to the standards
 listed on this page.
 
-> VCS (SVN, GIT, HG, etc) packages
+Package creation guidelines
 
-Please see the Arch VCS PKGBUILD guidelines
+* * * * *
 
-> Eclipse plugin packages
-
-Please see the Eclipse plugin package guidelines
-
-> GNOME packages
-
-Please see the GNOME Package Guidelines
-
-> Go packages
-
-Please see the Go Package Guidelines
-
-> Haskell packages
-
-Please see the Haskell package guidelines
-
-> Java packages
-
-Please see the Java Package Guidelines
-
-> KDE packages
-
-Please see the KDE Package Guidelines
-
-> Kernel module packages
-
-Please see the Kernel Module Package Guidelines
-
-> Lisp packages
-
-Please see the Lisp Package Guidelines
-
-> OCaml packages
-
-Please see the OCaml_Package_Guidelines
-
-> Perl packages
-
-Please see the Perl Package Guidelines
-
-> Python packages
-
-Please see the Python Package Guidelines
-
-> Ruby Gem packages
-
-Please see the Ruby Gem Package Guidelines
-
-> Wine packages
-
-Please see the Arch wine PKGBUILD guidelines
-
-> MinGW packages
-
-Please see the MinGW PKGBUILD guidelines
+CLR – Cross – Eclipse – Free Pascal – GNOME – Go – Haskell – Java – KDE
+– Kernel – Lisp – MinGW – Nonfree – OCaml – Perl – Python – Ruby – VCS –
+Web – Wine
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_Packaging_Standards&oldid=237808"
+"https://wiki.archlinux.org/index.php?title=Arch_Packaging_Standards&oldid=289532"
 
 Categories:
 
 -   About Arch
 -   Package management
 -   Package development
+
+-   This page was last modified on 20 December 2013, at 02:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

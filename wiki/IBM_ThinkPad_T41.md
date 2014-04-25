@@ -18,39 +18,32 @@ spec is a 1.6GHz Pentium M, 512MB RAM, 32MB ATI Radeon graphics adapter
 and a 40GB hard drive. It is possible to get most if not all of the
 hardware to work in Arch.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preparation and Installation                                       |
-| -   2 ACPI                                                               |
-|     -   2.1 Hibernation and Sleep                                        |
-|     -   2.2 CPU Frequency Scaling                                        |
-|     -   2.3 ACPI Events                                                  |
-|     -   2.4 Special Modules                                              |
-|                                                                          |
-| -   3 APM                                                                |
-|     -   3.1 Hibernation                                                  |
-|     -   3.2 Speedstep                                                    |
-|                                                                          |
-| -   4 Fn+FX Function Keys and Special Buttons                            |
-|     -   4.1 Volume, Brightness, Thinklight & Lid                         |
-|     -   4.2 Back and Forward                                             |
-|     -   4.3 Other Keys and Buttons                                       |
-|     -   4.4 tpb                                                          |
-|                                                                          |
-| -   5 UltraPad and TrackPoint                                            |
-| -   6 Networking                                                         |
-|     -   6.1 Wired                                                        |
-|     -   6.2 Wireless                                                     |
-|         -   6.2.1 Atheros Cards                                          |
-|         -   6.2.2 Cisco Cards                                            |
-|         -   6.2.3 Intel Cards                                            |
-|                                                                          |
-| -   7 Display                                                            |
-| -   8 Hard drive Active Protection                                       |
-| -   9 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Preparation and Installation
+-   2 ACPI
+    -   2.1 Hibernation and Sleep
+    -   2.2 CPU Frequency Scaling
+    -   2.3 ACPI Events
+    -   2.4 Special Modules
+-   3 APM
+    -   3.1 Hibernation
+    -   3.2 Speedstep
+-   4 Fn+FX Function Keys and Special Buttons
+    -   4.1 Volume, Brightness, Thinklight & Lid
+    -   4.2 Back and Forward
+    -   4.3 Other Keys and Buttons
+    -   4.4 tpb
+-   5 UltraPad and TrackPoint
+-   6 Networking
+    -   6.1 Wireless
+        -   6.1.1 Atheros Cards
+        -   6.1.2 Cisco Cards
+        -   6.1.3 Intel Cards
+-   7 Display
+-   8 Hard drive Active Protection
+-   9 See also
 
 Preparation and Installation
 ----------------------------
@@ -267,7 +260,7 @@ and by the synaptics package, which provides more functionality, such as
 scrolling using the edges of the pad. The below code will give you
 windows like functionality. It'll let you scroll with the middle mouse
 button, and also use it as a third mouse button for pasting and such.
-There are more details on how to configure more options on Thinkwiki  
+There are more details on how to configure more options on Thinkwiki
 
     Section "InputDevice"
           Identifier  "Configured Mouse"
@@ -288,12 +281,6 @@ There are more details on how to configure more options on Thinkwiki
 Networking
 ----------
 
-> Wired
-
-Wired ethernet should be working out of the box, with the e1000 module.
-To get gigabit speeds you may need to add this module to the MODULES
-array in /etc/rc.conf if it is not autodetected.
-
 > Wireless
 
 The T41 comes with three diffrent wireless cards:
@@ -308,7 +295,7 @@ You can check which you have with:
     lspci | grep Ethernet
 
 All of which should work under linux, and more details can be found on
-the Wireless Setup page.
+the Wireless network configuration page.
 
 Atheros Cards
 
@@ -323,24 +310,7 @@ source mpi350 module from cisco.
 
 Intel Cards
 
-First install the wireless_tools package if you haven't selected it
-during the installation. It contains the ipw2100 dirver:
-
-    pacman -S wireless_tools
-
-  
- All you need to do now is install the firmware:
-
-    pacman -S ipw2100-fw
-
-Your wireless device should now show up if you do:
-
-    iwconfig
-
-For network management the combination of netcfg and archassistant works
-well.
-
-  
+See Wireless network configuration#ipw2100 and ipw2200.
 
 Display
 -------
@@ -369,8 +339,15 @@ See also
 -   Thinkpad T41 Hardware Maintenance Manual
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IBM_ThinkPad_T41&oldid=254494"
+"https://wiki.archlinux.org/index.php?title=IBM_ThinkPad_T41&oldid=303181"
 
 Category:
 
 -   IBM
+
+-   This page was last modified on 4 March 2014, at 22:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

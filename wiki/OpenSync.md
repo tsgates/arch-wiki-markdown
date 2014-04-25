@@ -20,7 +20,7 @@ Generally a mixture of different version numbers should be avoided
 especially between the stable and experimental releases. A version 0.22
 plugin insists on a version 0.22 libopensync and a version 0.39 plugin
 should joined with the corresponding unstable library version. Since not
-every version step provides all available plugins, your choosen version
+every version step provides all available plugins, your chosen version
 of libopensync may depend on your plugin needs.
 
 branch
@@ -66,11 +66,11 @@ see http://opensync.org/download/releases/
 
 cli interface
 
-msynctool 0.22
+msynctool-stable
 
 msynctool with corresponding version (?)
 
-osynctool 0.39
+osynctool
 
 gui
 
@@ -78,15 +78,14 @@ multisync-gui
 
 n.a.
 
-  
- The kdepim plugin in the stable branch is useless in KDE 4, since PIM
+The kdepim plugin in the stable branch is useless in KDE 4, since PIM
 data is managed by akonadi. A suitable plugin is proposed as a part of
 the oncoming version 0.40. A user who wants to synchronize a
 syncml-capable mobile phone with evolution might be satisfied with the
 latest unstable version. Other users might prefer the old but stable
-branch. Since the community repo provides the latest unstable version of
-libopensync a manual downgrading is necessary. For i686 there is a
-unofficial user repository:
+branch. Since the community repository provides the latest unstable
+version of libopensync a manual downgrading is necessary. For i686,
+there is a unofficial user repository:
 
     [kpiche]
     # Stable OpenSync packages.
@@ -98,8 +97,15 @@ Configuration
 Examples for 0.22 release: http://www.opensync.org/wiki/releases/0.2x
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=OpenSync&oldid=206645"
+"https://wiki.archlinux.org/index.php?title=OpenSync&oldid=304879"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 16 March 2014, at 08:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

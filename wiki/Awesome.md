@@ -1,10 +1,6 @@
 awesome
 =======
 
-  Summary
-  ----------------------------------------------------------------------------------
-  A guide on how to install, use, configure, and customize awesome window manager.
-
 From the awesome website:
 
 "awesome is a highly configurable, next generation framework window
@@ -15,59 +11,58 @@ It is primarly targeted at power users, developers and any people
 dealing with every day computing tasks and who want to have fine-grained
 control on its graphical environment."
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Run awesome                                                        |
-|     -   2.1 Without login manager                                        |
-|     -   2.2 With login manager                                           |
-|         -   2.2.1 KDM                                                    |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Creating the configuration file                              |
-|     -   3.2 More configuration resources                                 |
-|     -   3.3 Debugging rc.lua                                             |
-|     -   3.4 Changing Keyboard Layout                                     |
-|                                                                          |
-| -   4 Themes                                                             |
-|     -   4.1 Setting up your wallpaper                                    |
-|         -   4.1.1 Random Background Image                                |
-|                                                                          |
-| -   5 Tips & Tricks                                                      |
-|     -   5.1 Use awesome as GNOME's window manager                        |
-|     -   5.2 Expose effect like compiz                                    |
-|     -   5.3 Hide / show wibox in awesome 3                               |
-|     -   5.4 Enable printscreens                                          |
-|     -   5.5 Dynamic tagging                                              |
-|     -   5.6 Space Invaders                                               |
-|     -   5.7 Naughty for popup notification                               |
-|     -   5.8 Popup Menus                                                  |
-|     -   5.9 More Widgets in awesome                                      |
-|     -   5.10 Transparency                                                |
-|         -   5.10.1 ImageMagick                                           |
-|                                                                          |
-|     -   5.11 Autorun programs                                            |
-|     -   5.12 Passing content to widgets with awesome-client              |
-|     -   5.13 Using a different panel with awesome                        |
-|     -   5.14 Fix Java (GUI appears gray only)                            |
-|     -   5.15 Prevent Nautilus from displaying the desktop (Gnome3)       |
-|     -   5.16 Transitioning away from Gnome3                              |
-|     -   5.17 Prevent the mouse scroll wheel from changing tags           |
-|                                                                          |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 LibreOffice                                                  |
-|     -   6.2 Mod4 key                                                     |
-|         -   6.2.1 Mod4 key vs. IBM ThinkPad users                        |
-|                                                                          |
-|     -   6.3 Eclipse: cannot resize/move main window                      |
-|     -   6.4 YouTube: fullscreen appears in background                    |
-|     -   6.5 Starting console clients on specific tags                    |
-|     -   6.6 Redirecting console output to a file                         |
-|                                                                          |
-| -   7 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Run awesome
+    -   2.1 Without login manager
+    -   2.2 With login manager
+        -   2.2.1 GDM, LightDM, others using /usr/share/xsessions/
+        -   2.2.2 KDM
+-   3 Configuration
+    -   3.1 Creating the configuration file
+    -   3.2 More configuration resources
+    -   3.3 Debugging rc.lua
+        -   3.3.1 Using Xephyr
+        -   3.3.2 Using awmtt
+    -   3.4 Changing Keyboard Layout
+-   4 Themes
+    -   4.1 Setting up your wallpaper
+        -   4.1.1 version <3.5 (out of date)
+        -   4.1.2 version >= 3.5
+        -   4.1.3 Random Background Image
+-   5 Tips & Tricks
+    -   5.1 Use awesome as GNOME's window manager
+    -   5.2 Expose effect like compiz
+    -   5.3 Hide / show wibox in awesome 3
+    -   5.4 Enable printscreens
+    -   5.5 Dynamic tagging
+    -   5.6 Space Invaders
+    -   5.7 Naughty for popup notification
+    -   5.8 Popup Menus
+    -   5.9 More Widgets in awesome
+    -   5.10 Transparency
+        -   5.10.1 ImageMagick
+    -   5.11 Autorun programs
+    -   5.12 Passing content to widgets with awesome-client
+    -   5.13 Using a different panel with awesome
+    -   5.14 Fix Java (GUI appears gray only)
+    -   5.15 Prevent Nautilus from displaying the desktop (Gnome3)
+    -   5.16 Transitioning away from Gnome3
+    -   5.17 Prevent the mouse scroll wheel from changing tags
+    -   5.18 Application directories in menubar
+    -   5.19 Applications menu
+-   6 Troubleshooting
+    -   6.1 Grey Java GUIs
+    -   6.2 LibreOffice
+    -   6.3 Mod4 key
+        -   6.3.1 Mod4 key vs. IBM ThinkPad users
+    -   6.4 Eclipse: cannot resize/move main window
+    -   6.5 YouTube: fullscreen appears in background
+    -   6.6 Starting console clients on specific tags
+    -   6.7 Redirecting console output to a file
+-   7 External Links
 
 Installation
 ------------
@@ -86,8 +81,7 @@ Run awesome
 To run awesome without a login manager, simply add exec awesome to the
 startup script of your choice (e.g. ~/.xinitrc.)
 
-See xinitrc for details, such as preserving the logind (and/or
-consolekit) session.
+See xinitrc for details, such as preserving the logind session.
 
 You can also start awesome as preferred user without even logging in.
 See Start X at Login.
@@ -95,6 +89,11 @@ See Start X at Login.
 > With login manager
 
 To start awesome from a login manager, see this article.
+
+GDM, LightDM, others using /usr/share/xsessions/
+
+Awesome automatically installs a config file for these display managers.
+You don't need to do anything special to see awesome offered at login.
 
 KDM
 
@@ -157,6 +156,8 @@ Some good examples of rc.lua would be as follows:
 
 > Debugging rc.lua
 
+Using Xephyr
+
 Xephyr allows you to run X nested in another X's client window. This
 allows you to debug rc.lua without breaking your current desktop. Start
 by copying rc.lua into a new file (e.g. rc.lua.new), and modify it as
@@ -171,8 +172,23 @@ break your current awesome desktop, potentially crashing X apps and
 losing work. Once you are happy with the new configuration, copy
 rc.lua.new to rc.lua and restart awesome.
 
-An alternative to Xepher is awmtt which provides the above functionality
-and more.
+Using awmtt
+
+awmtt (Awesome WM Testing Tool) is an easy to use wrapper script around
+Xephyr. By default, it will use ~/.config/awesome/rc.lua.test. If it
+can't find that test file, it will use your actual rc.lua. You can also
+specify the location of the configuration file you want to test:
+
+    $ awmtt start --config=~/.config/awesome/rc.lua.new
+
+When you are done testing, close the window with:
+
+    $ awmtt stop
+
+Or immediately see the changes you're doing to the configuration file by
+issuing:
+
+    $ awmtt restart
 
 > Changing Keyboard Layout
 
@@ -198,22 +214,14 @@ A few sample themes
 
 > Setting up your wallpaper
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: With version 3.5 
-                           Awesome no longer        
-                           provides a awsetbg       
-                           command, instead it has  
-                           a gears module. You can  
-                           find how to use it in    
-                           default config (Discuss) 
-  ------------------------ ------------------------ ------------------------
-
 Beautiful can handle your wallpaper, thus you do not need to set it up
 in your .xinitrc or .xsession files. This allows you to have a specific
-wallpaper for each theme. If you take a look at the default theme file
-you'll see a wallpaper_cmd key, the given command is executed when
+wallpaper for each theme.
+
+version <3.5 (out of date)
+
+If you take a look at the default theme file you'll see a wallpaper_cmd
+key, the given command is executed when
 beautiful.init("path_to_theme_file") is run. You can put here you own
 command or remove/comment the key if you do not want Beautiful to
 interfere with your wallpaper business.
@@ -225,6 +233,20 @@ the theme.lua page that you just selected:
 
 Note:For awsetbg to work you need to have a program that can manage
 desktop backgrounds installed. For example Feh.
+
+version >= 3.5
+
+With version 3.5 Awesome no longer provides a awsetbg command, instead
+it has a gears module. You can set your wallpaper inside theme.lua with
+
+    theme.wallpaper = "~/.config/awesome/themes/awesome-wallpaper.png" 
+
+To load the wallpaper, make sure your rc.lua contains
+
+    beautiful.init("~/.config/awesome/themes/default/theme.lua")
+    for s = 1, screen.count() do
+    	gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+    end
 
 Random Background Image
 
@@ -240,8 +262,63 @@ add this to your rc.lua(for awesome >= 3.5 ):
     wp_timer = timer { timeout = wp_timeout }
     wp_timer:connect_signal("timeout", function()
      
-      -- set wallpaper to current index
-      gears.wallpaper.maximized( wp_path .. wp_files[wp_index] , s, true)
+      -- set wallpaper to current index for all screens
+      for s = 1, screen.count() do
+        gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, true)
+      end
+     
+      -- stop the timer (we don't need multiple instances running at the same time)
+      wp_timer:stop()
+     
+      -- get next random index
+      wp_index = math.random( 1, #wp_files)
+     
+      --restart the timer
+      wp_timer.timeout = wp_timeout
+      wp_timer:start()
+    end)
+     
+    -- initial start when rc.lua is first run
+    wp_timer:start()
+
+to automatically fetch images from a given directory you might want
+instead to add this to your rc.lua(for awesome >= 3.5 ):
+
+    -- {{{ Function definitions
+
+    -- scan directory, and optionally filter outputs
+    function scandir(directory, filter)
+        local i, t, popen = 0, {}, io.popen
+        if not filter then
+            filter = function(s) return true end
+        end
+        print(filter)
+        for filename in popen('ls -a "'..directory..'"'):lines() do
+            if filter(filename) then
+                i = i + 1
+                t[i] = filename
+            end
+        end
+        return t
+    end
+
+    -- }}}
+
+    -- configuration - edit to your liking
+    wp_index = 1
+    wp_timeout  = 10
+    wp_path = "/path/to/wallpapers/"
+    wp_filter = function(s) return string.match(s,"%.png$") or string.match(s,"%.jpg$") end
+    wp_files = scandir(wp_path, wp_filter)
+     
+    -- setup the timer
+    wp_timer = timer { timeout = wp_timeout }
+    wp_timer:connect_signal("timeout", function()
+     
+      -- set wallpaper to current index for all screens
+      for s = 1, screen.count() do
+        gears.wallpaper.maximized(wp_path .. wp_files[wp_index], s, true)
+      end
      
       -- stop the timer (we don't need multiple instances running at the same time)
       wp_timer:stop()
@@ -284,6 +361,18 @@ wiki for details.
 
 > Expose effect like compiz
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Revelation has   
+                           been marked as           
+                           deprecated in the        
+                           awesome wiki and the     
+                           repository may be        
+                           deleted at any time.     
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 Revelation brings up a view of all your open clients; left-clicking a
 client pops to the first tag that client is visible on and
 raises/focuses the client. In addition, the Enter key pops to the
@@ -303,19 +392,13 @@ default in awesome 2.3), add to your globalkeys in rc.lua:
 > Enable printscreens
 
 To enable printscreens in awesome through the PrtScr button you need to
-have a screen capturing program. Scrot is a easy to use utility for this
-purpose and is available in Arch repositories.
-
-Just type:
-
-    # pacman -S scrot
-
-and install optional dependencies if you feel that you need them.
+have a screen capturing program, e.g. scrot. See Taking a Screenshot for
+more options.
 
 Next of we need to get the key name for PrtScr, most often this is named
 "Print" but one can never be too sure.
 
-Start up:
+So we can run xev (found in xorg-xev) to find out:
 
     # xev
 
@@ -430,6 +513,12 @@ To use xcompmgr, add this to your ~/.xinitrc:
 
 See man xcompmgr or xcompmgr for more options.
 
+Note:Some users have seen strange behavior such as windows not touching
+the bottom when enabling composite. To fix this problem, install unagi
+from the AUR and add this to your ~/.xinitrc:
+
+    unagi &
+
   ------------------------ ------------------------ ------------------------
   [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
   g]                       is out of date.          g]
@@ -451,8 +540,7 @@ signals. For example, your rc.lua could contain the following:
                                     c.opacity = 0.7
                                  end)
 
-If you got error messages about add_signal, using connect_signal
-insteaded.
+If you got error messages about add_signal, use connect_signal instead.
 
 Note that if you are using conky, you must set it to create its own
 window instead of using the desktop. To do so, edit ~/.conkyrc to
@@ -510,7 +598,8 @@ awesome doesn't run programs set to autostart by the Freedesktop
 specification like GNOME or KDE. However, awesome does provide a few
 functions for starting programs (in addition to the Lua standard library
 function os.execute). To run the same programs on startup as GNOME or
-KDE, you can install dex from the AUR and then run that in your rc.lua:
+KDE, you can install dex-git from the AUR and then run that in your
+rc.lua:
 
     os.execute"dex -a -e Awesome"
 
@@ -608,6 +697,17 @@ uncomment the corresponding line in /etc/profile.d/openjdk6.sh
 If you use a non-reparenting window manager and Java 7, you should
 uncomment the corresponding line in /etc/profile.d/jre.sh
 
+> Note:
+
+As of Java 1.7 and Awesome 3.5 (as installed by the awesome-git package)
+the fixes described above may cause undesirable behaviour related to
+menus not receiving proper focus. Awesome is now, apparently, a
+reparenting window manager as of this commit.
+
+If you are experiencing problems having applied the 'wmname' and
+'_JAVA_AWT_WM_NONREPARENTING' fixes against a recent Java and Awesome,
+try removing both fixes.
+
 > Prevent Nautilus from displaying the desktop (Gnome3)
 
 Run dconf-editor. Navigate to org->gnome->desktop->background and
@@ -630,7 +730,7 @@ If you'd like to get rid of GDM, make sure that your rc.conf DAEMONS
 list includes "dbus" (and "cupsd" if you have a printer). It's advisable
 to get a different login manager (like SLiM), but you can do things
 manually if you wish. That entails setting up your .xinitrc properly and
-installing something like devmon (AUR).
+installing something like devmon.
 
 If you want to keep a few convenient systray applets and your GTK theme,
 append this to your rc.lua;
@@ -656,8 +756,49 @@ In your rc.lua, change the Mouse Bindings section to the following;
         awful.button({ }, 3, function () mymainmenu:toggle() end)))
     -- }}}
 
+> Application directories in menubar
+
+The awesome package in [community] includes menubar (by default,
+pressing modkey+p will open a dmenu-like applications menu at the top of
+the screen). However, it only searches for .desktop files in
+/usr/share/applications and /usr/local/share/applications (the latter of
+which may not exist on most Arch users' systems). To change this, add
+the following line to rc.lua (ideally, under the "Menubar configuration"
+section):
+
+    app_folders = { "/usr/share/applications/", "~/.local/share/applications/" }
+
+Note that the .desktop files are re-read each time awesome starts,
+thereby slowing down the startup. If you prefer other means of launching
+programs, the menubar can be disabled via rc.lua by removing
+local menubar = require("menubar") and other references to the menubar
+variable.
+
+> Applications menu
+
+If you prefer to see a more traditional applications menu when you click
+on the Awesome icon, or right-click on an empty area of the desktop, you
+can follow the instructions in Xdg-menu#Awesome. However this menu is
+not updated when you add or remove programs. So, be sure to run the
+command to update your menu. It may look something like:
+
+     xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu >~/.config/awesome/archmenu.lua
+
 Troubleshooting
 ---------------
+
+> Grey Java GUIs
+
+Some Java Applications may render just grey, empty windows. This is
+related to nonreparenting.
+
+A fix might be uncommenting the last line in /etc/profile.d/jre.sh or
+set this manually.
+
+    export _JAVA_AWT_WM_NONREPARENTING=1
+
+other Methods could be found here:
+http://awesome.naquadah.org/wiki/Problems_with_Java
 
 > LibreOffice
 
@@ -681,12 +822,12 @@ explictly remaps keycode 115 to the correct 'Super_L' key.
 
 Mod4 key vs. IBM ThinkPad users
 
-IBM ThinkPads do not come equipped with a Window key (although Lenovo
-have changed this tradition on their ThinkPads). As of writing, the Alt
-key is not used in command combinations by the default rc.lua (refer to
-the Awesome wiki for a table of commands), which allows it be used as a
-replacement for the Super/Mod4/Win key. To do this, edit your rc.lua and
-replace:
+IBM ThinkPads, IBM Model M's and Chromebooks do not come equipped with a
+Window key (although Lenovo have changed this tradition on their
+ThinkPads). As of writing, the Alt key is not used in command
+combinations by the default rc.lua (refer to the Awesome wiki for a
+table of commands), which allows it be used as a replacement for the
+Super/Mod4/Win key. To do this, edit your rc.lua and replace:
 
     modkey = "Mod4"
 
@@ -699,20 +840,21 @@ single letter. Changing Mod4 to Mod1/Alt could cause overlaps for some
 key combinations. The small amount of instances where this happens can
 be changed in the rc.lua file.
 
-If you do not like to change the awesome standards, you might like to
-remap a key. For instance the caps lock key is rather useless (for me)
-adding the following contents to ~/.Xmodmap
+If you have a Chromebook or do not like to change the Awesome standards,
+you might like to remap a key. For instance the caps lock key is rather
+useless (for me) adding the following contents to ~/.Xmodmap
 
     clear lock 
     add mod4 = Caps_Lock
 
-and (re)load the file. This will change the caps lock key into the mod4
-key and works nicely with the standard awesome settings. In addition, if
-needed, it provides the mod4 key to other X-programs as well.
+and run xmodmap ~/.Xmodmap to (re)load the file. This will change the
+caps lock key into the mod4 key and works nicely with the standard
+awesome settings. In addition, if needed, it provides the mod4 key to
+other X-programs as well.
 
-Not confirmed, but if recent updates of xorg related packages break
-mentioned remapping the second line can be replaced by (tested on a
-DasKeyboard with no left Super key):
+Recent updates of xorg related packages break mentioned remapping the
+second line can be replaced by (tested on a DasKeyboard and IBM Model M
+and xorg-server 1.14.5-2):
 
     keysym Caps_Lock = Super_L Caps_Lock
 
@@ -760,6 +902,11 @@ As example, let's redirect Luakit output to a temporary file:
 
     awful.key({ modkey, }, "w", function () awful.util.spawn_with_shell("luakit 2>>/tmp/luakit.log") end),
 
+Also from the official FAQ, here's an easy way to redirect AwesomeWMs
+own output:
+
+    exec /usr/bin/awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+
 External Links
 --------------
 
@@ -768,14 +915,20 @@ External Links
 -   http://awesome.naquadah.org/ - The official awesome website
 -   http://awesome.naquadah.org/wiki/Main_Page - the awesome wiki
 -   http://www.penguinsightings.org/desktop/awesome/ - A review
--   http://compsoc.tardis.ed.ac.uk/wiki/AwesomeWM_guide - Awesome guide
 -   https://bbs.archlinux.org/viewtopic.php?id=88926 - share your
     awesome!
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Awesome&oldid=254933"
+"https://wiki.archlinux.org/index.php?title=Awesome&oldid=305966"
 
 Categories:
 
 -   Dynamic WMs
 -   Tiling WMs
+
+-   This page was last modified on 20 March 2014, at 17:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

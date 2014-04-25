@@ -17,27 +17,23 @@ also optionally describes how to integrate Tomcat with the Apache Web
 Server, and how to configure MySQL to work with Tomcat Servlets and
 JSPs.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuring Tomcat                                                 |
-|     -   2.1 THE FOLLOWING SHOULD NO LONGER BE NEEDED                     |
-|                                                                          |
-| -   3 Test Tomcat                                                        |
-| -   4 Configure Apache                                                   |
-|     -   4.1 Without mod_jk                                               |
-|     -   4.2 Using mod_jk                                                 |
-|                                                                          |
-| -   5 Configure MySQL                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuring Tomcat
+    -   2.1 THE FOLLOWING SHOULD NO LONGER BE NEEDED
+-   3 Test Tomcat
+-   4 Configure Apache
+    -   4.1 Without mod_jk
+    -   4.2 Using mod_jk
+-   5 Configure MySQL
 
 Installation
 ------------
 
-Install and configure Apache as in the Apache, PHP, and MySQL tutorial.
-You may install PHP and MySQL at this time if you want them.
+Install and configure Apache as in the LAMP tutorial. You may install
+PHP and MySQL at this time if you want them.
 
 Then install Tomcat:
 
@@ -246,8 +242,15 @@ Tomcat servlets and JSPs. See The Mysql Connector/J documentation for
 more information.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tomcat_and_Apache&oldid=204941"
+"https://wiki.archlinux.org/index.php?title=Tomcat_and_Apache&oldid=285941"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 3 December 2013, at 04:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,26 +1,19 @@
 PeerGuardian Linux
 ==================
 
-+--------------------------------------------------------------------------+
-| Summary                                                                  |
-+==========================================================================+
-| PeerGuardian Linux (pgl) is a privacy oriented firewall application. It  |
-| blocks connections to and from hosts specified in huge block lists       |
-| (thousands or millions of IP ranges). pgl is based on the Linux kernel   |
-| netfilter framework and iptables.                                        |
-+--------------------------------------------------------------------------+
+PeerGuardian Linux (pgl) is a privacy oriented firewall application. It
+blocks connections to and from hosts specified in huge block lists
+(thousands or millions of IP ranges). pgl is based on the Linux kernel
+netfilter framework and iptables.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Firewall                                                     |
-|     -   2.2 LAN                                                          |
-|                                                                          |
-| -   3 Starting up                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Server
+    -   2.2 LAN
+-   3 Starting up
 
 Installation
 ------------
@@ -66,19 +59,20 @@ lists to stop incoming traffic on ports 53 (DNS) and 80 (HTTP):
     WHITE_TCP_IN="0:79 81:65535"
     WHITE_UDP_IN="0:52 54:65535"
 
-> Firewall
+> Server
 
-Create /etc/systemd/system/pgl.service pasting the following to ensure
-that pgl only starts after all the rules have been properly set up. This
-example must be adapted to work with other firewalls (ufw, shorewall,
-etc.):
+systemd initialization of the system means that it's quite possible for
+a server to be briefly unprotected, prior to pgl launch. To ensure
+adequate protection, create a service file named after the original
+server (i.e. /etc/systemd/system/httpd.service and paste the following:
 
-    /etc/systemd/system/my-pgl.service
+    /etc/systemd/system/httpd.service
 
-    .include /usr/lib/systemd/system/pgl.service
+    .include /usr/lib/systemd/system/httpd.service
 
     [Unit]
-    After=iptables.service
+    Wants=pgl.service
+    After=pgl.service
 
 > LAN
 
@@ -101,22 +95,23 @@ Starting up
 -----------
 
 Once comfortable with the configuration of both the daemon and lists,
-type in:
-
-    # systemctl start pgl.service
-
-To make sure that pgl works as intended, issue this command:
+start the pgl service. To make sure that pgl works as intended, issue
+this command:
 
     # pglcmd test
 
-To start pgl automatically, use the following syntax to activate it:
-
-    # systemctl enable pgl.service
+To start pgl automatically at boot, enable the pgl service.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PeerGuardian_Linux&oldid=244785"
+"https://wiki.archlinux.org/index.php?title=PeerGuardian_Linux&oldid=281660"
 
-Categories:
+Category:
 
--   Networking
--   Security
+-   Firewalls
+
+-   This page was last modified on 6 November 2013, at 09:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

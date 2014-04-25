@@ -3,46 +3,50 @@ Gitolite
 
 Gitolite allows you to host Git repositories easily and securely.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Add users                                                          |
-| -   4 Gitosis-like usernames                                             |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Add users
+-   4 Gitosis-like usernames
+-   5 See also
 
 Installation
 ------------
 
-gitolite-git is available in the Arch User Repository.
-
-It is also available on github, where you can find the last update.
+gitolite is available in the Arch User Repository, but installation is
+easier when done manually via the Git repository on GitHub.
 
 Configuration
 -------------
 
-Add a user
+-   Add a git user and setup gitolite. Installing Git from pacman should
+    automatically add a "git" user to the system. If not, create a new
+    user named "git":
 
-    # useradd -m -U -r -s /bin/bash -d /srv/git git
-    # su - git
-    $ gitolite setup -pk id_rsa.pub
+    # useradd -m -U -r -s /bin/bash git
 
-Add to your work-machine's ~/.ssh/config:
+-   Make sure /home/git exists, and copy over *your* SSH public key to
+    /home/git/<your_username>.pub
 
-    Host server
-    HostName 192.168.12.2
-    User git
-    ### IdentityFile specifies the private ssh-key
-    IdentityFile ~/.ssh/id_rsa
+    # sudo cp ~/.ssh/id_rsa.pub /home/git/<your_username>.pub
 
-  
- Do NOT add repos or users directly on the server! You MUST manage the
-server by cloning the special 'gitolite-admin' repo on your workstation:
+-   Run Gitolite setup script
 
-    $ git clone server:gitolite-admin
+    # sudo -i -u git
+    $ rm -f ~/.ssh/authorized_keys
+    $ mkdir ~/bin
+    $ gitolite/install -to $HOME/bin
+    $ gitolite setup -pk <your_username>.pub
+
+Do NOT add repositories or users directly on the server! You MUST manage
+the server by cloning the special gitolite-admin repository on your
+workstation:
+
+    $ git clone <your_server_hostname>:gitolite-admin
+
+See Gitolite
 
 Add users
 ---------
@@ -91,8 +95,8 @@ by
 
     $user =~ s/\.pub$//;              # baz@home.pub -> baz@home
 
--   update authorized_keys file (for example, by pushing into
-    gitolite-admin repo)
+-   update authorized_keys file (for example, by pushing into the
+    gitolite-admin repository)
 
 See also
 --------
@@ -100,8 +104,15 @@ See also
 http://sitaramc.github.com/gitolite/index.html
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Gitolite&oldid=222067"
+"https://wiki.archlinux.org/index.php?title=Gitolite&oldid=285957"
 
 Category:
 
 -   Version Control System
+
+-   This page was last modified on 3 December 2013, at 07:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

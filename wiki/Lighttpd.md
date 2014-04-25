@@ -1,42 +1,35 @@
 Lighttpd
 ========
 
-  
- Lighttpd is "a secure, fast, compliant, and very flexible web-server
+Lighttpd is "a secure, fast, compliant, and very flexible web-server
 that has been optimized for high-performance environments. It has a very
 low memory footprint compared to other webservers and takes care of
 cpu-load. Its advanced feature-set (FastCGI, CGI, Auth,
 Output-Compression, URL-Rewriting and many more) make lighttpd the
 perfect webserver-software for every server that suffers load problems."
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Basic Setup                                                  |
-|     -   2.2 FastCGI                                                      |
-|         -   2.2.1 PHP                                                    |
-|             -   2.2.1.1 Using php-fpm                                    |
-|             -   2.2.1.2 eAccelerator                                     |
-|             -   2.2.1.3 Try a php page                                   |
-|                                                                          |
-|         -   2.2.2 Ruby on Rails                                          |
-|         -   2.2.3 Python FastCGI                                         |
-|                                                                          |
-|     -   2.3 SSL                                                          |
-|         -   2.3.1 Server Name Indication                                 |
-|         -   2.3.2 Redirect HTTP requests to HTTPS                        |
-|                                                                          |
-|     -   2.4 Output Compression                                           |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Lighttpd downloads .php files                                |
-|     -   3.2 Styles (CSS) not working properly                            |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Basic Setup
+    -   2.2 CGI
+    -   2.3 FastCGI
+        -   2.3.1 PHP
+            -   2.3.1.1 Using php-fpm
+            -   2.3.1.2 eAccelerator
+            -   2.3.1.3 Try a php page
+        -   2.3.2 Ruby on Rails
+        -   2.3.3 Python FastCGI
+    -   2.4 SSL
+        -   2.4.1 Server Name Indication
+        -   2.4.2 Redirect HTTP requests to HTTPS
+    -   2.5 Output Compression
+-   3 Troubleshooting
+    -   3.1 Lighttpd downloads .php files
+    -   3.2 Styles (CSS) not working properly
+-   4 See also
 
 Installation
 ------------
@@ -59,14 +52,6 @@ finding misconfigurations very fast:
 The default configuration file specifies /srv/http/ as the document
 directory served.
 
-It may be necessary to add a user and group for http if you do not
-already have one. That user needs to have write permissions to
-/var/log/lighttpd as well, so we will make it the owner of the folder:
-
-    # groupadd http
-    # useradd http
-    # chown -R http /var/log/lighttpd
-
 To test the install:
 
     # echo 'TestMe!' >> /srv/http/index.html
@@ -84,14 +69,47 @@ To start the server on every boot:
 
 Example configuration files are available in /usr/share/doc/lighttpd/.
 
+> CGI
+
+CGI scripts work with Lighttpd out of box, you just need to enable the
+CGI module, include the configuration file and make sure your chosen
+programing language interpreter is installed. (ie for python you would
+install python)
+
+Create the file /etc/lighttpd/conf.d/cgi.conf Add the following to it:
+
+    server.modules += ( "mod_cgi" )
+
+    cgi.assign                 = ( ".pl"  => "/usr/bin/perl",
+                                   ".cgi" => "/usr/bin/perl",
+                                   ".rb"  => "/usr/bin/ruby",
+                                   ".erb" => "/usr/bin/eruby",
+                                   ".py"  => "/usr/bin/python",
+                                   ".php" => "/usr/bin/php" )
+
+    index-file.names           += ( "index.pl",   "default.pl",
+                                   "index.rb",   "default.rb",
+                                   "index.erb",  "default.erb",
+                                   "index.py",   "default.py",
+                                   "index.php",  "default.php" )
+
+For PHP scripts you will need to make sure the following is set in
+/etc/php/php.ini
+
+    cgi.fix_pathinfo = 1
+
+In your Lighttpd configuration file, /etc/lighttpd/lighttpd.conf add:
+
+    include "conf.d/cgi.conf"
+
 > FastCGI
 
 Install fcgi. Now you have lighttpd with fcgi support. If it was that
 what you wanted you are all set. People that want Ruby on Rails, PHP or
 Python should continue.
 
-Note: New default user and group: Instead of group "nobody" lighttpd now
-runs as user/group "http" by default.
+Note: New default user and group: Instead of group nobody lighttpd now
+runs as user/group http by default.
 
 First copy the example config file form
 /usr/share/doc/lighttpd/config/conf.d/fastcgi.conf to
@@ -133,45 +151,56 @@ Check that php-cgi is working php-cgi --version
 
 If you get a similar output then php is installed correctly.
 
-Note:Please keep in mind if you receive errors like No input file found
-after attempting to access your php files then make sure
-/etc/php/php.ini has the directives enabled, see here for more
-information lighttpd FAQ entry:
+Create a new configuration file:
 
-    cgi.fix_pathinfo=1
-    open_basedir = /srv/http/:/home/:/tmp/:/usr/share/pear/:/another/path:/second/path
+    /etc/lighttpd/conf.d/fastcgi.conf
 
-And that the files are world readable,
+    # Make sure to install php and php-cgi. See:                                                             
+    # https://wiki.archlinux.org/index.php/Fastcgi_and_lighttpd#PHP
 
-    # chmod -R 755
+    server.modules += ("mod_fastcgi")
 
-In /etc/lighttpd/conf.d/fastcgi.conf add:
-
-    server.modules += ( "mod_fastcgi" )
-
-    #server.indexfiles += ( "index.php" ) #this is deprecated
-    index-file.names += ( "index.php" )
-
-    fastcgi.server = (
+    # FCGI server
+    # ===========
+    #
+    # Configure a FastCGI server which handles PHP requests.
+    #
+    index-file.names += ("index.php")
+    fastcgi.server = ( 
+        # Load-balance requests for this path...
         ".php" => (
-          "localhost" => ( 
-            "bin-path" => "/usr/bin/php-cgi",
-            "socket" => "/run/lighttpd/php-fastcgi.sock",
-            "max-procs" => 4, # default value
-            "bin-environment" => (
-              "PHP_FCGI_CHILDREN" => "1", # default value
-            ),
-            "broken-scriptfilename" => "enable"
-          ))
+            # ... among the following FastCGI servers. The string naming each
+            # server is just a label used in the logs to identify the server.
+            "localhost" => ( 
+                "bin-path" => "/usr/bin/php-cgi",
+                "socket" => "/tmp/php-fastcgi.sock",
+                # breaks SCRIPT_FILENAME in a way that PHP can extract PATH_INFO
+                # from it 
+                "broken-scriptfilename" => "enable",
+                # Launch (max-procs + (max-procs * PHP_FCGI_CHILDREN)) procs, where
+                # max-procs are "watchers" and the rest are "workers". See:
+                # https://redmine.lighttpd.net/projects/1/wiki/frequentlyaskedquestions#How-many-php-CGI-processes-will-lighttpd-spawn 
+                "max-procs" => 4, # default value
+                "bin-environment" => (
+                    "PHP_FCGI_CHILDREN" => "1" # default value
+                )
+            )
+        )   
     )
 
-Then in /etc/lighttpd/lighttpd.conf:
+Make lighttpd use the new configuration file:
+
+    /etc/lighttpd/lighttpd.conf
 
     include "conf.d/fastcgi.conf"
 
-Finally reload the configuration
+Reload lighttpd:
 
     # systemctl reload lighttpd
+
+Note:If you receive errors like No input file found when attempting to
+access php files, there are several possible explanations. See this FAQ
+for more information.
 
 Using php-fpm
 
@@ -179,7 +208,8 @@ There is no adaptive spawning anymore in recent lighttpd releases. For
 dynamic management of PHP processes, you can use php-fpm.
 
     # pacman -S php-fpm
-    # rc.d start php-fpm
+    # systemctl enable php-fpm
+    # systemctl start php-fpm
 
 Note:You can configure the number of servers in the pool and tweak other
 configuration options by editing the file /etc/php/php-fpm.conf. More
@@ -455,8 +485,15 @@ See also
 -   Lighttpd wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lighttpd&oldid=251879"
+"https://wiki.archlinux.org/index.php?title=Lighttpd&oldid=303254"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 5 March 2014, at 17:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

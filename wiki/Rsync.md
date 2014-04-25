@@ -1,41 +1,33 @@
 rsync
 =====
 
-> Summary
+Related articles
 
-Instructions on using rsync.
-
-> Related
-
-Full System Backup with rsync
-
-Backup Programs
+-   Full System Backup with rsync
+-   Backup Programs
 
 rsync is an open source utility that provides fast incremental file
 transfer.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-|     -   2.1 As a cp alternative                                          |
-|     -   2.2 As a backup utility                                          |
-|         -   2.2.1 Automated backup                                       |
-|         -   2.2.2 Automated backup with SSH                              |
-|         -   2.2.3 Automated backup with NetworkManager                   |
-|         -   2.2.4 Automated backup with systemd and inotify              |
-|         -   2.2.5 Differential backup on a week                          |
-|         -   2.2.6 Snapshot backup                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 As a cp alternative
+    -   2.2 As a backup utility
+        -   2.2.1 Automated backup
+        -   2.2.2 Automated backup with SSH
+        -   2.2.3 Automated backup with NetworkManager
+        -   2.2.4 Automated backup with systemd and inotify
+        -   2.2.5 Differential backup on a week
+        -   2.2.6 Snapshot backup
+-   3 Graphical frontends
 
 Installation
 ------------
 
-Install the rsync package using pacman:
-
-    # pacman -S rsync
+Install the rsync from the official repositories.
 
 Usage
 -----
@@ -85,8 +77,8 @@ First, create a script containing the appropriate command options:
     characteristics are preserved (but not ACLs, hard links or extended
     attributes such as capabilities)
  --delete 
-    means files deleted on the source are to be deleted on the backup
-    aswell
+    means files deleted on the source are to be deleted on the backup as
+    well
 
 Here, /folder/to/backup should be changed to what needs to be backed-up
 (/home, for example) and /location/to/backup is where the backup should
@@ -124,7 +116,7 @@ First, create a script containing the appropriate command options:
     #!/bin/bash
 
     if [ x"$2" = "xup" ] ; then
-      rsync --force --ignore-errors -a --delete --bwlimit=2000 --files-from=files.rsync /folder/to/backup /location/to/backup
+            rsync --force --ignore-errors -a --delete --bwlimit=2000 --files-from=files.rsync /folder/to/backup /location/to/backup
     fi
 
  -a 
@@ -137,22 +129,24 @@ First, create a script containing the appropriate command options:
 
 Automated backup with systemd and inotify
 
-Note:Due to the limitations of inotify and systemd (see this question
-and answer), recursive filesystem monitoring is not possible. Although
-you can watch a directory and its contents, it will not recurse into
-subdirectories and watch the contents of them; you must explicitly
-specify every directory to watch, even if that directory is a child of
-an already watched directory.
+> Note:
 
-Note:This setup is based on a systemd/User instance.
+-   Due to the limitations of inotify and systemd (see this question and
+    answer), recursive filesystem monitoring is not possible. Although
+    you can watch a directory and its contents, it will not recurse into
+    subdirectories and watch the contents of them; you must explicitly
+    specify every directory to watch, even if that directory is a child
+    of an already watched directory.
+-   This setup is based on a systemd/User instance.
 
-Instead of running time interval backups with cron, it is possible to
-run a backup every time one of the files you're backing up changes.
-systemd.path units use inotify to monitor the filesystem, and can be
-used in conjunction with systemd.service files to start any process (in
-this case your rsync backup).
+Instead of running time interval backups with time based schedules, such
+as those implemented in cron, it is possible to run a backup every time
+one of the files you are backing up changes. systemd.path units use
+inotify to monitor the filesystem, and can be used in conjunction with
+systemd.service files to start any process (in this case your rsync
+backup) based on a filesystem event.
 
-First, create the systemd.path file that will monitor the files you're
+First, create the systemd.path file that will monitor the files you are
 backing up:
 
     ~/.config/systemd/user/backup.path
@@ -169,13 +163,13 @@ backing up:
 
 Then create a systemd.service file that will be activated when it
 detects a change. By default a service file of the same name as the path
-file will be activated, except with the .service extension instead of
-.path.
+unit (in this case backup.path) will be activated, except with the
+.service extension instead of .path (in this case backup.service).
 
-Note that if you need to run multiple rsync commands, use Type=oneshot.
-This allows you to specify multiple ExecStart= parameters, one for each
-rsync command, that will be executed. Alternatively, you may specify the
-absolute path to the backup script you were using for cron.
+Note:If you need to run multiple rsync commands, use Type=oneshot. This
+allows you to specify multiple ExecStart= parameters, one for each rsync
+command, that will be executed. Alternatively, you can simply write a
+script to perform all of your backups, just like cron scripts.
 
     ~/.config/systemd/user/backup.service
 
@@ -252,21 +246,34 @@ This script implements a simple version of it:
 
     COUNT=$( wc -l $SNAP/rsync.log|cut -d" " -f1 )
     if [ $COUNT -gt $MINCHANGES ] ; then
-       DATETAG=$(date +%Y-%m-%d)
-       if [ ! -e $SNAP/$DATETAG ] ; then
-          cp -al $SNAP/latest $SNAP/$DATETAG
-          mv $SNAP/rsync.log $SNAP/$DATETAG
-       fi
+            DATETAG=$(date +%Y-%m-%d)
+            if [ ! -e $SNAP/$DATETAG ] ; then
+                    cp -al $SNAP/latest $SNAP/$DATETAG
+                    chmod u+w $SNAP/$DATETAG
+                    mv $SNAP/rsync.log $SNAP/$DATETAG
+                   chmod u-w $SNAP/$DATETAG
+             fi
     fi
 
-To make things really, really simple this script can be run out of
-/etc/rc.local.
+To make things really, really simple this script can be run from a
+systemd unit.
+
+Graphical frontends
+-------------------
+
+Install grsync from the official repositories.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Rsync&oldid=252385"
+"https://wiki.archlinux.org/index.php?title=Rsync&oldid=292749"
 
 Categories:
 
 -   Data compression and archiving
--   Networking
 -   System recovery
+
+-   This page was last modified on 13 January 2014, at 20:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

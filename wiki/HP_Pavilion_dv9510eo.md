@@ -1,18 +1,16 @@
 HP Pavilion dv9510eo
 ====================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Wireless                                                           |
-| -   3 Sound                                                              |
-| -   4 Xorg                                                               |
-| -   5 USB Auto Mounting                                                  |
-| -   6 Other                                                              |
-| -   7 Untested                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Wireless
+-   3 Sound
+-   4 Xorg
+-   5 USB Auto Mounting
+-   6 Other
+-   7 Untested
 
 Installation
 ------------
@@ -124,3 +122,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 23 April 2012, at 12:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

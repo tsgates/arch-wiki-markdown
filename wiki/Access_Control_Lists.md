@@ -1,73 +1,63 @@
 Access Control Lists
 ====================
 
-  
- Access Control List (ACL) provides an additional, more flexible
+Access Control List (ACL) provides an additional, more flexible
 permission mechanism for file systems. It is designed to assist with
 UNIX file permissions. ACL allows you to give permissions for any user
 or group to any disc resource.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Enabling ACL                                                 |
-|     -   2.2 Set ACL                                                      |
-|                                                                          |
-| -   3 Examples                                                           |
-|     -   3.1 Output of ls command                                         |
-|                                                                          |
-| -   4 Increase security of your web server                               |
-| -   5 Additional Resources                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Enabling ACL
+    -   2.2 Set ACL
+-   3 Examples
+    -   3.1 Output of ls command
+-   4 Increase security of your web server
+-   5 See also
 
 Installation
 ------------
 
-Install the acl package which is available from the official
-repositories by pacman:
-
-    # pacman -S acl
+The required package acl is a dependency of systemd, it should already
+be installed.
 
 Configuration
 -------------
 
 > Enabling ACL
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
-  png]                     this article or section  png]
-                           is disputed.             
-                           Reason: It seems to work 
-                           out of the box using     
-                           systemd (Discuss)        
-  ------------------------ ------------------------ ------------------------
+To enable ACL, the filesystem must be mounted with the acl option. You
+can use fstab to make it permanent on your system.
 
-To enable ACL - edit /etc/fstab and add the acl attribute in options on
-the partition which you want to use ACL:
+There is a big chance that the acl option is already active as default
+mount option of your filesystem. Use the following command to check it
+for ext* formatted partitions:
 
-    /etc/fstab
+    # tune2fs -l /dev/sdXY | grep "Default mount options:"
 
-    # 
-    # /etc/fstab: static file system information
-    #
-    # <file system>        <dir>         <type>    <options>          <dump> <pass>
-    none                   /dev/pts      devpts    defaults            0      0
-    none                   /dev/shm      tmpfs     defaults            0      0
+    Default mount options:    user_xattr acl
 
-    /dev/cdrom /media/cdrom   auto    ro,user,noauto,unhide   0      0
-    /dev/dvd /media/dvd   auto    ro,user,noauto,unhide   0      0
-    UUID=5de01fca-7c63-49b0-9b2b-8b1790f8428e swap swap defaults 0 0
-    UUID=822dd720-e35f-424c-b012-2c84b4aa265a /data reiserfs defaults 0 1
-    UUID=8e5259dd-26fc-411a-88e2-f38d4dc36724 /home reiserfs defaults,acl 0 1
-    UUID=c18f753e-0039-49bd-930f-587d48b7e083 / reiserfs defaults 0 1
-    UUID=f64bfc77-7958-49c5-a244-1fa2517d676f /tmp reiserfs defaults 0 1
+Also check that the default mount option is not overridden, in such case
+you will see noacl in /proc/mounts in the relevant line.
 
-Save the file and remount the partition:
+You can set the default mount options of a filesystem using the
+tune2fs -o option partition command, for example:
 
-    # mount -o remount /home
+    # tune2fs -o acl /dev/sdXY
+
+Using the default mount options instead of an entry in /etc/fstab is
+very useful for external drives, such partition will be mounted with acl
+option also on other Linux machines. There is no need to edit /etc/fstab
+on every machine.
+
+> Note:
+
+-   acl is specified as default mount option when creating an ext2/3/4
+    filesystem. This is configured in /etc/mke2fs.conf.
+-   The default mount options are not listed in /proc/mounts.
 
 > Set ACL
 
@@ -207,15 +197,22 @@ to users pages from their home directories to www server. Of course if
 www server work as nobody user. But - whole world except nobody - do not
 have any permissions.
 
-Additional Resources
---------------------
+See also
+--------
 
 -   Man Page - man getfacl
 -   Man Page - man setfacl
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Access_Control_Lists&oldid=255730"
+"https://wiki.archlinux.org/index.php?title=Access_Control_Lists&oldid=282039"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 9 November 2013, at 01:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

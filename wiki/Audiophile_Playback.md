@@ -13,15 +13,14 @@ This settings are meant for HD audio playback at 24bit depth and 96000Hz
 frequency. So there's no need to change anything default if your audio
 sources have standard CD quality.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Alsa                                                               |
-| -   2 Pulseaudio                                                         |
-| -   3 Jack                                                               |
-| -   4 List of linux-friendly audiophile sound cards                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Alsa
+-   2 Pulseaudio
+-   3 Jack
+-   4 List of linux-friendly audiophile sound cards
+-   5 Checking actual output parameters
 
 Alsa
 ----
@@ -59,10 +58,46 @@ Jack
 List of linux-friendly audiophile sound cards
 ---------------------------------------------
 
+Audiotrak Prodigy HD2
+
+Checking actual output parameters
+---------------------------------
+
+Check the contents of /proc/asound/cardX/pcmYp/subZ/hw_params, where X,
+Y, and Z are numbers depending on your system. In order to find this
+file, execute the following command while playing some sound:  
+
+find /proc/asound/ -name hw_params | xargs -I FILE grep -v -l "closed" FILE | grep '/proc/asound/card./pcm.p/sub./hw_params'  
+ Indeed, there exist a hw_params file for each sound input/ouput
+subsystem whose content is either "closed" if unused, or the actual
+format of the played sound.
+
+Here is an example of an hw_param contents for a stereo 96kHz /
+24bits:  
+
+    /proc/asound/cardX/pcmYp/subZ/hw_params
+
+    access: MMAP_INTERLEAVED
+    format: S32_LE
+    subformat: STD
+    channels: 2
+    rate: 96000 (96000/1)
+    period_size: 9000
+    buffer_size: 288000
+
+More info available in the alsa documentation
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Audiophile_Playback&oldid=247237"
+"https://wiki.archlinux.org/index.php?title=Audiophile_Playback&oldid=277073"
 
 Categories:
 
 -   Sound
 -   Audio/Video
+
+-   This page was last modified on 29 September 2013, at 23:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,19 +1,16 @@
 DeveloperWiki:iso building
 ==========================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 How to build release iso's/img's                                   |
-|     -   1.1 Preparation                                                  |
-|         -   1.1.1 Bleeding edge archiso (needed for 2009.01)             |
-|         -   1.1.2 Packaged archiso (after new archiso release which is   |
-|             planned after 2009-01 iso release)                           |
-|                                                                          |
-|     -   1.2 Execution                                                    |
-|     -   1.3 unanswered questions                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 How to build release iso's/img's
+    -   1.1 Preparation
+        -   1.1.1 Bleeding edge archiso (needed for 2009.01)
+        -   1.1.2 Packaged archiso (after new archiso release which is
+            planned after 2009-01 iso release)
+    -   1.2 Execution
+    -   1.3 unanswered questions
 
 How to build release iso's/img's
 ================================
@@ -84,3 +81,10 @@ Retrieved from
 Category:
 
 -   Arch development
+
+-   This page was last modified on 6 December 2012, at 02:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

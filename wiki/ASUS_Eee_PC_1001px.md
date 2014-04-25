@@ -3,20 +3,18 @@ ASUS Eee PC 1001px
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 Fn keys                                                            |
-| -   4 Laptop Mode Tools & powersaving                                    |
-| -   5 Graphics                                                           |
-| -   6 Wireless                                                           |
-| -   7 Hardware information                                               |
-|     -   7.1 lspci                                                        |
-|     -   7.2 lsusb                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+-   3 Fn keys
+-   4 Laptop Mode Tools & powersaving
+-   5 Graphics
+-   6 Wireless
+-   7 Hardware information
+    -   7.1 lspci
+    -   7.2 lsusb
 
 Introduction
 ------------
@@ -141,3 +139,10 @@ Retrieved from
 Category:
 
 -   ASUS
+
+-   This page was last modified on 27 October 2012, at 18:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

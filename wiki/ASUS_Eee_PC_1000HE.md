@@ -13,33 +13,27 @@ ASUS Eee PC 1000HE
   Function Keys   Working   
   --------------- --------- --------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Xorg                                                               |
-|     -   2.1 DPI Settings                                                 |
-|     -   2.2 Graphic Performance                                          |
-|     -   2.3 Touchpad                                                     |
-|     -   2.4 xrandr                                                       |
-|                                                                          |
-| -   3 Powersaving                                                        |
-|     -   3.1 laptop-mode-tools                                            |
-|         -   3.1.1 Super Hybrid Engine                                    |
-|                                                                          |
-|     -   3.2 Wireless                                                     |
-|     -   3.3 acpi-eeepc-generic                                           |
-|         -   3.3.1 Sleep                                                  |
-|                                                                          |
-|     -   3.4 cpufrequtils                                                 |
-|                                                                          |
-| -   4 Hardware                                                           |
-|     -   4.1 lspci                                                        |
-|     -   4.2 WiFi                                                         |
-|     -   4.3 Bluetooth                                                    |
-|     -   4.4 Camera                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Xorg
+    -   2.1 DPI Settings
+    -   2.2 Graphic Performance
+    -   2.3 Touchpad
+    -   2.4 xrandr
+-   3 Powersaving
+    -   3.1 laptop-mode-tools
+        -   3.1.1 Super Hybrid Engine
+    -   3.2 Wireless
+    -   3.3 acpi-eeepc-generic
+        -   3.3.1 Sleep
+    -   3.4 cpufrequtils
+-   4 Hardware
+    -   4.1 lspci
+    -   4.2 WiFi
+    -   4.3 Bluetooth
+    -   4.4 Camera
 
 Installation
 ------------
@@ -47,7 +41,7 @@ Installation
 See Install from USB stick. There is out-of-the-box support for the
 wired and wireless NICs. There are no special instructions for
 installation. For an in-depth guide on the installation see the
-Beginners' Guide.
+Beginners' guide.
 
 Xorg
 ----
@@ -61,7 +55,7 @@ add this to the end of your xserverrc (located in /etc/X11/xinit/).
 
     exec /usr/bin/X -nolisten tcp -dpi 96
 
-See also Xorg#Display Size and DPI.
+See also Xorg#Display size and DPI.
 
 > Graphic Performance
 
@@ -274,8 +268,15 @@ To simply test the camera, you may use MPlayer:
 The webcam is reported to work with Skype.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1000HE&oldid=213256"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1000HE&oldid=304904"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 09:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

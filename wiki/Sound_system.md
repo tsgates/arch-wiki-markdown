@@ -12,15 +12,13 @@ Sound system
 This article is about basic sound management. For advanced topics see
 Pro Audio.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 General information                                                |
-| -   2 Drivers and Interface                                              |
-| -   3 Sound servers                                                      |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 General information
+-   2 Drivers and Interface
+-   3 Sound servers
+-   4 See also
 
 General information
 -------------------
@@ -110,9 +108,16 @@ See also
 -   Disable PC Speaker Beep
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sound_system&oldid=251587"
+"https://wiki.archlinux.org/index.php?title=Sound_system&oldid=281193"
 
 Categories:
 
 -   Sound
 -   Audio/Video
+
+-   This page was last modified on 3 November 2013, at 14:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

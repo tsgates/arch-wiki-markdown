@@ -1,6 +1,16 @@
 Ramdisk
 =======
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Mentions         
+                           /etc/rc.local and Arch   
+                           Linux does not use       
+                           initscripts anymore.     
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 A ramdisk is a portion of RAM utilised as a disk. Many distributions use
 /dev/ram for this, however Arch does not have a /dev/ram so we must use
 /etc/fstab to create ramdisks. The most important thing to remember
@@ -9,15 +19,13 @@ stored on a ramdisk will be lost if the computer completely seizes up,
 or loses power. Therefore, it is necessary to save the contents of your
 ramdisk to the harddrive if you want to save them.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Why use one?                                                       |
-| -   2 How to create a ramdisk                                            |
-| -   3 Example usage                                                      |
-| -   4 Useful links                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Why use one?
+-   2 How to create a ramdisk
+-   3 Example usage
+-   4 Useful links
 
 Why use one?
 ------------
@@ -105,8 +113,15 @@ Useful links
 -   Official ramfs documentation
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ramdisk&oldid=251503"
+"https://wiki.archlinux.org/index.php?title=Ramdisk&oldid=274384"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 5 September 2013, at 00:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

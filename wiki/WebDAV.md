@@ -1,15 +1,6 @@
 WebDAV
 ======
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
-                           is a candidate for       
-                           merging with WebDAV      
-                           authentication.          
-                           Notes: Same topic.       
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
-
 WebDAV(Web Distributed Authoring and Versioning) is an extension of HTTP
 1.1 and therefore can be considered to be a procotol. It contains a set
 of concepts and accompanying extension methods to allow read and write
@@ -21,18 +12,14 @@ Apache.
 
 See also File Sharing with Webdav and DNSSD.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Server (Apache)                                                    |
-|     -   1.1 Create directories                                           |
-|                                                                          |
-| -   2 Client (Cadaver)                                                   |
-|     -   2.1 Test it                                                      |
-|                                                                          |
-| -   3 Authentication                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Server (Apache)
+    -   1.1 Create directories
+-   2 Client (Cadaver)
+    -   2.1 Test it
+-   3 Authentication
 
 Server (Apache)
 ---------------
@@ -48,12 +35,13 @@ under the DocumentRoot definition.
 
 Next, add the following (also outside of any directives):
 
+    Alias /dav "/home/httpd/html/dav"
+
     <Directory "/home/httpd/html/dav">
       DAV On
       AllowOverride None
       Options Indexes FollowSymLinks
-      Order allow,deny
-      Allow from all
+      Require all granted
     </Directory>
 
 > Create directories
@@ -121,12 +109,10 @@ would be to require the user foo for everything:
       DAV On
       AllowOverride None
       Options Indexes FollowSymLinks
-      Order allow,deny
       AuthType Digest # substitute "Basic" for "Digest" if you used htpasswd above
       AuthName "WebDAV"
       AuthUserFile /etc/httpd/conf/passwd
       Require user foo
-      Allow from all
     </Directory>
 
 Note:AuthName must match the name passed when using the htdigest command
@@ -141,13 +127,12 @@ httpd.conf
       DAV On
       AllowOverride None
       Options Indexes FollowSymLinks
-      Order allow,deny
       AuthType Digest # substitute "Basic" for "Digest" if you used htpasswd above
       AuthName "WebDAV"
       AuthUserFile /etc/httpd/conf/passwd
-      Allow from all
+      Require all granted
       <LimitExcept GET HEAD OPTIONS PROPFIND>
-        require user foo
+        Require user foo
       </LimitExcept>
     </Directory>
 
@@ -156,8 +141,15 @@ Don't forget to restart apache after making changes!
     # systemctl restart httpd
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=WebDAV&oldid=253945"
+"https://wiki.archlinux.org/index.php?title=WebDAV&oldid=304693"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 16 March 2014, at 03:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

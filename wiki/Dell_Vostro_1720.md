@@ -6,17 +6,14 @@ laptop. This page links to the wiki pages relevant for this laptop. In
 order to avoid information duplication, this page only states
 information that is not on the linked wiki pages.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 CPU                                                                |
-| -   2 Network                                                            |
-|     -   2.1 Ethernet                                                     |
-|     -   2.2 Wireless                                                     |
-|                                                                          |
-| -   3 Touchpad                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 CPU
+-   2 Network
+    -   2.1 Ethernet
+    -   2.2 Wireless
+-   3 Touchpad
 
 CPU
 ---
@@ -112,3 +109,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 23 April 2012, at 12:51.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

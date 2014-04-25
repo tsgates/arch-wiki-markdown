@@ -13,23 +13,20 @@ small footprint.
 -   Dillo helps web authors to comply with web standards by using the
     bug meter.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Starting                                                           |
-| -   3 Configuration                                                      |
-|     -   3.1 Enabling cookies in Dillo by default                         |
-|                                                                          |
-| -   4 Removing cookies                                                   |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Starting
+-   3 Configuration
+    -   3.1 Enabling cookies in Dillo by default
+-   4 Removing cookies
+-   5 See also
 
 Installing
 ----------
 
-Install dillo, available in the Official Repositories.
+Install dillo, available in the official repositories.
 
 Starting
 --------
@@ -63,8 +60,15 @@ See also
 -   Dillo Home Page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dillo&oldid=206667"
+"https://wiki.archlinux.org/index.php?title=Dillo&oldid=283874"
 
 Category:
 
 -   Web Browser
+
+-   This page was last modified on 21 November 2013, at 08:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

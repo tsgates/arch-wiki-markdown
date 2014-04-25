@@ -1,35 +1,27 @@
 Keyboard Shortcuts
 ==================
 
-  Summary
-  -----------------------------------------------------
-  Default keyboard shortcuts and user customizations.
+This article provides a list of (not commonly known) default keyboard
+shortcuts and provides information about user customization.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Standard Shortcuts                                                 |
-|     -   1.1 Kernel                                                       |
-|     -   1.2 Terminal                                                     |
-|         -   1.2.1 Virtual console                                        |
-|         -   1.2.2 Readline                                               |
-|                                                                          |
-|     -   1.3 X11                                                          |
-|     -   1.4 Links                                                        |
-|                                                                          |
-| -   2 User Customization                                                 |
-|     -   2.1 Readline                                                     |
-|     -   2.2 X11                                                          |
-|         -   2.2.1 Modifying the Keyboard Layout                          |
-|         -   2.2.2 Key Binding for X-Selection-Paste                      |
-|                                                                          |
-|     -   2.3 Firefox                                                      |
-|                                                                          |
-| -   3 Tips                                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Standard Shortcuts
+-   1 Standard shortcuts
+    -   1.1 Kernel
+    -   1.2 Terminal
+        -   1.2.1 Virtual console
+        -   1.2.2 Readline
+    -   1.3 X11
+-   2 User customization
+    -   2.1 Readline
+    -   2.2 X11
+    -   2.3 Firefox
+    -   2.4 Key binding for X-selection-paste
+-   3 Tips and tricks
+-   4 See also
+
+Standard shortcuts
 ------------------
 
 > Kernel
@@ -40,8 +32,8 @@ doing a hard shutdown (holding power button to shutdown the
 motherboard).
 
 Must be activated first with echo "1" > /proc/sys/kernel/sysrq or if you
-wish to have it enabled during boot, edit /etc/sysctl.conf and set
-kernel.sysrq = 1
+wish to have it enabled during boot, edit /etc/sysctl.d/99-sysctl.conf
+and set kernel.sysrq = 1
 
 A common idiom to remember this is "Reboot Even If System Utterly
 Broken" (also referred to as "REISUB").
@@ -62,129 +54,129 @@ See Magic SysRq key - Wikipedia for more details.
 Virtual console
 
   Keyboard Shortcut     Description
-  --------------------- -------------------------------------------------------
-  Ctrl+Alt+Del          Reboots Computer (specified in /etc/inittab)
+  --------------------- -----------------------------------------------------------------------------------------
+  Ctrl+Alt+Del          Reboots Computer (specified by the symlink /usr/lib/systemd/system/ctrl-alt-del.target)
   Alt+F1, F2, F3, ...   Switch to n-th virtual console
-  Alt+←                 Switch to previous virtual console
-  Alt+→                 Switch to next virtual console
+  Alt+ ←                Switch to previous virtual console
+  Alt+ →                Switch to next virtual console
   Scroll Lock           When Scroll Lock is activated, input/output is locked
-  ⇑ Shift+PgUp/PgDown   Scrolls console buffer up/down
-  Ctrl+C                Kills current task
-  Ctrl+D                Inserts an EOF
-  Ctrl+Z                Pauses current Task
+  Shift+PgUp/PgDown     Scrolls console buffer up/down
+  Ctrl+c                Kills current task
+  Ctrl+d                Inserts an EOF
+  Ctrl+z                Pauses current Task
 
 Readline
 
-GNU readline is a commonly used library for line-editing, it is used for
-example by bash, ftp and many more (see Arch Package details under
-"Required By" for more examples). readline is also customizable (see
-manpage for details).
+GNU readline is a commonly used library for line-editing; it is used for
+example by Bash, FTP, and many more (see the details of readline package
+under "Required By" for more examples). readline is also customizable
+(see man page for details).
 
 Keyboard Shortcut
 
 Description
 
-Ctrl+L
+Ctrl+l
 
 Clear the screen
 
 Cursor Movement
 
-Ctrl+B
+Ctrl+b
 
 Move cursor one character to the left
 
-Ctrl+F
+Ctrl+f
 
 Move cursor one character to the right
 
-Alt+B
+Alt+b
 
 Move cursor one word to the left
 
-Alt+F
+Alt+f
 
 Move cursor one word to the right
 
-Ctrl+A
+Ctrl+a
 
 Move cursor to start of the line
 
-Ctrl+E
+Ctrl+e
 
 Move cursor to end of the line
 
 Copy & Paste
 
-Ctrl+U
+Ctrl+u
 
 Cut everything from line start to cursor
 
-Ctrl+K
+Ctrl+k
 
 Cut everything from the cursor to end of the line
 
-Alt+D
+Alt+d
 
 Cut the current word after the cursor
 
-Ctrl+W
+Ctrl+w
 
 Cut the current word before the cursor
 
-Ctrl+Y
+Ctrl+y
 
 Paste the previous cut text
 
-Alt+Y
+Alt+y
 
 Paste the second latest cut text
 
-Alt+Ctrl+Y
+Alt+Ctrl+y
 
 Paste the first argument of the previous command
 
-Alt+.or_
+Alt+./_
 
 Paste the last argument of the previous command
 
-History
+> History
 
-Ctrl+P
+Ctrl+p
 
 Move to the previous line
 
-Altl+N
+Alt+n
 
 Move to the next line
 
-Ctrl+S
+Ctrl+s
 
 Search
 
-Ctrl+R
+Ctrl+r
 
 Reverse search
 
-Ctrl+J
+Ctrl+j
 
 End search
 
-Ctrl+G
+Ctrl+g
 
 Abort search (restores original line)
 
-Alt+R
+Alt+r
 
 Restores all changes made to line
 
-Completion
+> Completion
 
 Tab
 
 Auto-complete a name
 
-Altl+?
+Alt+?
 
 List all possible completions
 
@@ -194,40 +186,29 @@ Insert all possible completions
 
 > X11
 
-  ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -------------------------------------------------------------------------------------
   Keyboard Shortcut          Description
-  -------------------------- ------------------------------------------------------------------------------------------------------------------------------------
+  -------------------------- ----------------------------------------------------------
   Ctrl+Alt+F1, F2, F3, ...   Switch to n-th virtual console
-
-  Ctrl+Alt++/-               Switch to higher/lower available resolutions
-
-  Ctrl+Alt+Backspace         Kills X-server (This may not work for recent updates.)
-
-  Ctrl+⇑ Shift+Num Lock      Toggles keyboard mouse; uses numpad, mouse click is done by 5, use /, *, and -to switch the click to left, middle, and right click
 
   Shift+Insert               Copy selected text to clipboard, or paste from clipboard
    Mouse Button 3            
-  ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -------------------------------------------------------------------------------------
 
-xkeyboard-config disable keyboard mouse by default after the version
-2.0.1.To enable it, changing the following line in
-/usr/share/X11/xkb/symbols/pc:
-
-    key <NMLK> { [ Num_Lock ] }; 
-
-back to as it was in version 2.0.1:
-
-    key <NMLK> { [ Num_Lock, Pointer_EnableKeys ] }; 
-
-> Links
-
--   Linux Newbie Administrator Guide - Shortcuts and Commands
--   The Linux keyboard and console HOWTO
-
-User Customization
+User customization
 ------------------
 
 > Readline
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with Readline.   
+                           Notes: This section      
+                           duplicates content of    
+                           the main article.        
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 This example adds keys that allow (in vi-mode) to search backward
 through the history for the string of characters between the start of
@@ -242,19 +223,14 @@ the current line and the point. This is a non-incremental search.
 
 > X11
 
-Modifying the Keyboard Layout
+See Keyboard Configuration in Xorg#Frequently used XKB options for some
+common shortcuts, that are disabled by default.
 
-This example changes the CapsLock key to only activate caps lock when
-the Shift key is also pressed
+> Firefox
 
-    .xinitrc
+Use the customizable-shortcuts add-on.
 
-    xmodmap -e 'keycode  66 = NoSymbol Caps_Lock Caps_Lock'
-
-The keycode of the CapsLock key can be found in the output of
-xmodmap -pk
-
-Key Binding for X-Selection-Paste
+> Key binding for X-selection-paste
 
 Users who prefer to work rather with the keyboard than the mouse may
 benefit from a key binding to the paste operation of the middle mouse
@@ -265,6 +241,10 @@ workflow example is:
 2.  Hit Ctrl+k to enter the "Google search" field.
 3.  Hit F12 to paste the buffer, instead of moving the mouse pointer to
     the field and center-click to paste.
+
+Note:Shift+Insert has a similar yet different functionality, see #X11:
+Shift+Insert inserts the clipboard buffer, not the x-selection-paste
+buffer. In some applications, these two buffers are mirrored.
 
 The method suggested here uses three packages available in the official
 repositories:
@@ -290,26 +270,47 @@ Note:Depending on your X configuration, you may need to drop the
 The key codes for keys other than F12 can be determined using
 xbindkeys -k.
 
-See Also:
+> References:
 
 -   Pasting X selection (not clipboard) contents with keyboard
 -   xvkbd home page
 
-> Firefox
+XMonad Window Manager In the xmonad window manager there is a built-in
+function to paste the x-selection-buffer content. In order to bind that
+function to a key-stroke (here Insert key) the following configuration
+can be used:
 
-Use the customizable-shortcuts add-on.
+    xmonad.hs
 
-Tips
-----
+    import XMonad.Util.Paste
+    ...
+      -- X-selection-paste buffer
+      , ((0,                     xK_Insert), pasteSelection) ]
+
+Tips and tricks
+---------------
 
 -   If you like a keyboard-centered workflow, you might also appreciate
-    a tiling window manager, like Xmonad.
+    a tiling window manager.
+
+See also
+--------
+
+-   Linux Newbie Administrator Guide - Shortcuts and Commands
+-   The Linux keyboard and console HOWTO
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Keyboard_Shortcuts&oldid=255540"
+"https://wiki.archlinux.org/index.php?title=Keyboard_Shortcuts&oldid=301745"
 
 Categories:
 
 -   Keyboards
 -   X Server
 -   Accessibility
+
+-   This page was last modified on 24 February 2014, at 15:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

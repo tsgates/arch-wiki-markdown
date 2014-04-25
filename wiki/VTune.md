@@ -1,22 +1,18 @@
 VTune
 =====
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 VTune Amplifier XE 2013                                            |
-|     -   1.1 Missing asm/system.h                                         |
-|     -   1.2 Implicit declaration of this_cpu_read                        |
-|     -   1.3 kmap_atomic and kunmap_atomic deprecated                     |
-|                                                                          |
-| -   2 VTune Amplifier XE 2011                                            |
-|     -   2.1 Installing VTune                                             |
-|                                                                          |
-| -   3 VTune 9.1                                                          |
-|     -   3.1 Installing VTune                                             |
-|     -   3.2 Installing driver                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 VTune Amplifier XE 2013
+    -   1.1 Missing asm/system.h
+    -   1.2 Implicit declaration of this_cpu_read
+    -   1.3 kmap_atomic and kunmap_atomic deprecated
+-   2 VTune Amplifier XE 2011
+    -   2.1 Installing VTune
+-   3 VTune 9.1
+    -   3.1 Installing VTune
+    -   3.2 Installing driver
 
 VTune Amplifier XE 2013
 -----------------------
@@ -134,7 +130,6 @@ kernel26-lts)
     -   if your build fails with 'the frame size of 1140 bytes is larger
         than 1024 bytes', append -Wframe-larger-than=2048 to
         EXTRA_CFLAGS in Makefile
-
 -   cp vtune_drv*.ko /lib/modules/misc/vtune_drv.ko # copy the module to
     the kernel modules directory
 -   depmod -AeF /boot/System.map26 #rebuild module maps and resolve
@@ -152,3 +147,10 @@ Retrieved from
 Category:
 
 -   Development
+
+-   This page was last modified on 8 March 2013, at 11:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

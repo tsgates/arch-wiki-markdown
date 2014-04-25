@@ -1,15 +1,13 @@
 Honeyd
 ======
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-| -   4 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+-   3 Configuration
+-   4 More Resources
 
 Introduction
 ------------
@@ -105,3 +103,10 @@ Categories:
 
 -   Networking
 -   Security
+
+-   This page was last modified on 10 July 2012, at 13:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -15,16 +15,13 @@ all pages render in pure HTML 4.0 (with no JavaScript required) for
 maximum compatibility across browsers. See:
 http://squirrelmail.org/index.php
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Squirrelmail                                            |
-|     -   1.1 Available Versions                                           |
-|     -   1.2 Install Details                                              |
-|                                                                          |
-| -   2 Tweaks & Recommended Settings                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing Squirrelmail
+    -   1.1 Available Versions
+    -   1.2 Install Details
+-   2 Tweaks & Recommended Settings
 
 Installing Squirrelmail
 -----------------------
@@ -114,3 +111,10 @@ Retrieved from
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 24 August 2012, at 03:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

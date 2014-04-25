@@ -1,37 +1,42 @@
 ISPmanager
 ==========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What is ISPmanager?                                                |
-| -   2 Prerequisites                                                      |
-| -   3 Installing ISP manager                                             |
-|     -   3.1 ISP manager package                                          |
-|     -   3.2 ISP manager configuration                                    |
-|     -   3.3 Install the license                                          |
-|                                                                          |
-| -   4 System configuration for ISP manager                               |
-|     -   4.1 httpd                                                        |
-|         -   4.1.1 Virtual hosts under ISP manager control                |
-|         -   4.1.2 Control interface                                      |
-|         -   4.1.3 php                                                    |
-|                                                                          |
-|     -   4.2 Website statistics                                           |
-|         -   4.2.1 Webalizer                                              |
-|         -   4.2.2 awstats                                                |
-|                                                                          |
-|     -   4.3 DNS (bind)                                                   |
-|     -   4.4 Configuring e-mail                                           |
-|         -   4.4.1 MTA: Postfix                                           |
-|         -   4.4.2 Client access: dovecot                                 |
-|                                                                          |
-|     -   4.5 FTP access                                                   |
-|                                                                          |
-| -   5 Recommendations                                                    |
-| -   6 Resources                                                          |
-+--------------------------------------------------------------------------+
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: upstream site    
+                           unavailable, probably    
+                           dead project (+ the      
+                           package ispmanager-pro   
+                           was removed from AUR)    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+Contents
+--------
+
+-   1 What is ISPmanager?
+-   2 Prerequisites
+-   3 Installing ISP manager
+    -   3.1 ISP manager package
+    -   3.2 ISP manager configuration
+    -   3.3 Install the license
+-   4 System configuration for ISP manager
+    -   4.1 httpd
+        -   4.1.1 Virtual hosts under ISP manager control
+        -   4.1.2 Control interface
+        -   4.1.3 php
+    -   4.2 Website statistics
+        -   4.2.1 Webalizer
+        -   4.2.2 awstats
+    -   4.3 DNS (bind)
+    -   4.4 Configuring e-mail
+        -   4.4.1 MTA: Postfix
+        -   4.4.2 Client access: dovecot
+    -   4.5 FTP access
+-   5 Recommendations
+-   6 Resources
 
 What is ISPmanager?
 -------------------
@@ -288,8 +293,15 @@ Resources
 -   ISP manager's homepage: http://ispsystem.com/en/index.html
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ISPmanager&oldid=225314"
+"https://wiki.archlinux.org/index.php?title=ISPmanager&oldid=277305"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 2 October 2013, at 04:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

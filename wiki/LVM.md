@@ -1,81 +1,62 @@
 LVM
 ===
 
-> Summary
+Related articles
 
-This article will provide an example of how to install and configure
-Arch Linux with Logical Volume Manager (LVM).
+-   Software RAID and LVM
+-   System Encryption with LUKS
+-   dm-crypt/Encrypting an Entire System#LVM on LUKS
+-   dm-crypt/Encrypting an Entire System#LUKS on LVM
 
-Required software
+From Wikipedia:Logical Volume Manager (Linux):
 
-lvm2
+LVM is a logical volume manager for the Linux kernel; it manages disk
+drives and similar mass-storage devices.
 
-> Related
+Contents
+--------
 
-Software RAID and LVM
-
-System Encryption with LUKS
-
-Encrypted LVM
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 LVM Building Blocks                                          |
-|     -   1.2 Advantages                                                   |
-|     -   1.3 Disadvantages                                                |
-|                                                                          |
-| -   2 Installing Arch Linux on LVM                                       |
-|     -   2.1 Create physical volumes                                      |
-|     -   2.2 Create volume group                                          |
-|     -   2.3 Create logical volumes                                       |
-|     -   2.4 Create filesystems and mount logical volumes                 |
-|     -   2.5 Add lvm hook to mkinitcpio.conf                              |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Advanced options                                             |
-|     -   3.2 Grow logical volume                                          |
-|     -   3.3 Shrink logical volume                                        |
-|     -   3.4 Remove logical volume                                        |
-|     -   3.5 Add physical volume to a volume group                        |
-|     -   3.6 Remove partition from a volume group                         |
-|     -   3.7 Snapshots                                                    |
-|         -   3.7.1 Introduction                                           |
-|         -   3.7.2 Configuration                                          |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Changes that could be required due to changes in the         |
-|         Arch-Linux defaults                                              |
-|     -   4.2 LVM commands do not work                                     |
-|     -   4.3 Logical Volumes do not show up                               |
-|     -   4.4 LVM on removable media                                       |
-|     -   4.5 kernel options                                               |
-|     -   4.6 obsolete stuff                                               |
-|                                                                          |
-| -   5 Additional resources                                               |
-+--------------------------------------------------------------------------+
-
-Introduction
-------------
-
-See the Wikipedia article on this subject for more information: Logical
-Volume Manager (Linux)
+-   1 LVM Building Blocks
+-   2 Advantages
+-   3 Disadvantages
+-   4 Installing Arch Linux on LVM
+    -   4.1 Create physical volumes
+    -   4.2 Create volume group
+    -   4.3 Create logical volumes
+    -   4.4 Create file systems and mount logical volumes
+    -   4.5 Add lvm hook to mkinitcpio.conf
+-   5 Configuration
+    -   5.1 Advanced options
+    -   5.2 Grow logical volume
+    -   5.3 Shrink logical volume
+    -   5.4 Remove logical volume
+    -   5.5 Add physical volume to a volume group
+    -   5.6 Remove partition from a volume group
+    -   5.7 Deactivate volume group
+    -   5.8 Snapshots
+        -   5.8.1 Introduction
+        -   5.8.2 Configuration
+-   6 Troubleshooting
+    -   6.1 Changes that could be required due to changes in the
+        Arch-Linux defaults
+    -   6.2 LVM commands do not work
+    -   6.3 Logical Volumes do not show up
+    -   6.4 LVM on removable media
+    -   6.5 Kernel options
+-   7 See also
 
 > LVM Building Blocks
 
 Logical Volume Management makes use of the device-mapper feature of the
-Linux kernel to provide a system of partitions that is independent of
-the underlying disk's layout. With LVM you can abstract your storage
-space and have "virtual partitions" which makes it easier to extend and
-shrink partitions (subject to the filesystem you use allowing this) and
-add/remove partitions without worrying about whether you have enough
-contiguous space on a particular disk, without getting caught up in the
-problems of fdisking a disk that is in use (and wondering whether the
-kernel is using the old or new partition table) and without having to
-move other partition out of the way. This is strictly an
-ease-of-management issue: it does not provide any additional security.
+Linux kernel to provide a system of partitions independent of the
+underlying disk's layout. With LVM you abstract your storage and have
+"virtual partitions", making it easier to extend and shrink partitions
+(subject to potential limitations of your file system) and add/remove
+partitions without worrying about whether you have enough contiguous
+space on a particular disk, getting caught up in fdisking a disk in use
+(and wondering whether the kernel is using the old or new partition
+table), or, having to move other partitions out of the way. This is
+strictly an ease-of-management issue: it does not provide any security.
 However, it sits nicely with the other two technologies we are using.
 
 The basic building blocks of LVM are:
@@ -91,7 +72,7 @@ The basic building blocks of LVM are:
 -   Logical volume (LV): A "virtual/logical partition" that resides in a
     volume group and is composed of physical extents. Think of logical
     volumes as normal partitions.
--   Physical extent (PE): A small part of a disk (usually 4MB) that can
+-   Physical extent (PE): A small part of a disk (usually 4MiB) that can
     be assigned to a logical Volume. Think of physical extents as parts
     of disks that can be allocated to any partition.
 
@@ -119,8 +100,6 @@ Example:
         |/dev/MyStorage/rootvol|/dev/MyStorage/homevol    |/dev/MyStorage/mediavol             |
         |_ _ _ _ _ _ _ _ _ _ _ |_ _ _ _ _ _ _ _ _ _ _ _ _ |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |
 
-  
-
 > Advantages
 
 LVM gives you more flexibility than just using normal hard drive
@@ -133,13 +112,13 @@ partitions:
 -   Resize logical volumes regardless of their order on disk. It does
     not depend on the position of the LV within VG, there is no need to
     ensure surrounding available space.
--   Resize/create/delete logical and physical volumes online.
-    Filesystems on them still need to be resized, but some support
-    online resizing.
+-   Resize/create/delete logical and physical volumes online. File
+    systems on them still need to be resized, but some support online
+    resizing.
 -   Online/live migration of LV being used by services to different
     disks without having to restart services.
--   Snapshots allow you to backup a frozen copy of the filesystem, while
-    keeping service downtime to a minimum.
+-   Snapshots allow you to backup a frozen copy of the file system,
+    while keeping service downtime to a minimum.
 
 These can be very helpful in a server situation, desktop less so, but
 you must decide if the features are worth the abstraction.
@@ -149,17 +128,19 @@ you must decide if the features are worth the abstraction.
 -   Linux exclusive (almost). There is no official support in most other
     OS (FreeBSD, Windows..).
 -   Additional steps in setting up the system, more complicated.
--   If you use the btrfs filesystem, its Subvolume feature will also
+-   If you use the Btrfs file system, its Subvolume feature will also
     give you the benefit of having a flexible layout. In that case,
     using the additional Abstraction layer of LVM may be unnecessary.
 
 Installing Arch Linux on LVM
 ----------------------------
 
-You should create your LVM Volumes between the Partitioning and mkfs
-steps of the Installation Procedure. Instead of directly formating a
-partition to be you root file file-system, it will be created inside a
-logical volume (LV).
+You should create your LVM Volumes between the Partitioning and
+formatting steps of the Installation Procedure. Instead of directly
+formatting a partition to be your root file system, it will be created
+inside a logical volume (LV).
+
+Make sure the lvm2 package is installed.
 
 Quick overview:
 
@@ -171,10 +152,10 @@ Quick overview:
     each partition.
 -   Create your volume group (VG) and add all the PV to it.
 -   Create logical volumes (LV) inside your VG.
--   Continue with “Format the partitions” step of Beginners Guide.
+-   Continue with “Format the partitions” step of Beginners' guide.
 -   When you reach the “Create initial ramdisk environment” step in the
-    Beginners Guide, add the lvm hook to mkinitcpio.conf (see below for
-    details).
+    Beginners Guide, add the lvm hook to /etc/mkinitcpio.conf (see below
+    for details).
 
 Warning:/boot cannot reside in LVM when using GRUB Legacy, which does
 not support LVM. GRUB users do not have this limitation. If you need to
@@ -187,19 +168,20 @@ Make sure you target the right partitions! To find the partitions with
 type 'Linux LVM':
 
 -   MBR system: fdisk -l
--   GPT system: lsblk and then gdisk -l <disk-device>
+-   GPT system: lsblk and then gdisk -l disk-device
 
 Create a physical volume on them:
 
-    # pvcreate <disk-device> (e.g.: pvcreate /dev/sda2)
+    # pvcreate disk-device
 
-This command creates a header on each partition so it can be used for
-LVM. You can track created physical volumes with:
+disk-device may be e.g. /dev/sda2. This command creates a header on each
+partition so it can be used for LVM. You can track created physical
+volumes with:
 
     # pvdisplay
 
-Note:If using a SSD use pvcreate --dataalignment 1m /dev/sda2 (for erase
-block size < 1MiB), see e.g. here
+Note:If using a SSD, use pvcreate --dataalignment 1m /dev/sda2 (for
+erase block size < 1MiB), see e.g. here
 
 > Create volume group
 
@@ -256,7 +238,7 @@ Tip:You can start out with relatively small logical volumes and expand
 them later if needed. For simplicity, leave some free space in the
 volume group so there is room for expansion.
 
-> Create filesystems and mount logical volumes
+> Create file systems and mount logical volumes
 
 Your logical volumes should now be located in /dev/mapper/ and
 /dev/YourVolumeGroupName. If you cannot find them, use the next commands
@@ -267,7 +249,7 @@ groups available:
     # vgscan
     # vgchange -ay
 
-Now you can create filesystems on logical volumes and mount them as
+Now you can create file systems on logical volumes and mount them as
 normal partitions (if you are installing Arch linux, refer to mounting
 the partitions for additional details):
 
@@ -275,13 +257,14 @@ the partitions for additional details):
     # mount /dev/mapper/VolGroup00-lvolhome /home
 
 Warning:When choosing mountpoints, just select your newly created
-logical volumes (use: /dev/mapper/Volgroup00-lvolhome). Do NOT select
+logical volumes (use: /dev/mapper/Volgroup00-lvolhome). Do not select
 the actual partitions on which logical volumes were created (do not use:
 /dev/sda2).
 
 > Add lvm hook to mkinitcpio.conf
 
-You'll need to make sure the udev and lvm2 mkinitcpio hooks are enabled.
+You will need to make sure the udev and lvm2 mkinitcpio hooks are
+enabled.
 
 udev is there by default. Edit the file and insert lvm2 between block
 and filesystem like so:
@@ -309,9 +292,9 @@ this option commented out.
 > Grow logical volume
 
 To grow a logical volume you first need to grow the logical volume and
-then the filesystem to use the newly created free space. Let us say we
-have a logical volume of 15GB with ext3 on it and we want to grow it to
-20G. We need to do the following steps:
+then the file system to use the newly created free space. Let us say we
+have a logical volume of 15 GB with ext3 on it, and we want to grow it
+to 20 GB. We need to do the following steps:
 
     # lvextend -L 20G VolGroup00/lvolhome (or lvresize -L +5G VolGroup00/lvolhome)
     # resize2fs /dev/VolGroup00/lvolhome
@@ -319,48 +302,51 @@ have a logical volume of 15GB with ext3 on it and we want to grow it to
 You may use lvresize instead of lvextend.
 
 If you want to fill all the free space on a volume group, use the next
-command:
+commands:
 
     # lvextend -l +100%FREE VolGroup00/lvolhome
+    # resize2fs /dev/VolGroup00/lvolhome
 
-Warning:Not all filesystems support growing without loss of data and/or
+Warning:Not all file systems support growing without loss of data and/or
 growing online.
 
-Note:If you do not resize your filesystem, you will still have a volume
+Note:If you do not resize your file system, you will still have a volume
 with the same size as before (volume will be bigger but partly unused).
 
 > Shrink logical volume
 
-Because your filesystem is probably as big as the logical volume it
-resides on, you need to shrink the filesystem first and then shrink the
-logical volume. Depending on your filesystem, you may need to unmount it
-first. Let us say we have a logical volume of 15GB with ext3 on it and
-we want to shrink it to 10G. We need to do the following steps:
+Because your file system is probably as big as the logical volume it
+resides on, you need to shrink the file system first and then shrink the
+logical volume. Depending on your file system, you may need to unmount
+it first. Let us say we have a logical volume of 15 GB with ext3 on it
+and we want to shrink it to 10 GB. We need to do the following steps:
 
     # resize2fs /dev/VolGroup00/lvolhome 9G
-    # lvreduce -L 10G VolGroup00/lvolhome (or lvresize -L -5G VolGroup00/lvolhome)
-    # resize2fs /dev/VolGroup00/lvolhome
+    # lvreduce -L 10G VolGroup00/lvolhome
 
-Here we shrunk the filesystem more than needed so that when we shrunk
-the logical volume we did not accidentally cut off the end of the
-filesystem. After that we normally grow the filesystem to fill all free
+Here we shrunk the file system more than needed so that when we shrunk
+the logical volume we did not accidentally cut off the end of the file
+system. After that, we normally grow the file system to fill all free
 space left on logical volume. You may use lvresize instead of lvreduce.
+
+    # lvresize -L -5G VolGroup00/lvolhome
+    # resize2fs /dev/VolGroup00/lvolhome
 
 > Warning:
 
--   Do not reduce the filesystem size to less than the amount of space
+-   Do not reduce the file system size to less than the amount of space
     occupied by data or you risk data loss.
--   Not all filesystems support shrinking without loss of data and/or
+-   Not all file systems support shrinking without loss of data and/or
     shrinking online.
 
-Note:It is better to reduce the filesystem to a smaller size than the
+Note:It is better to reduce the file system to a smaller size than the
 logical volume, so that after resizing the logical volume, we do not
-accidentally cut off some data from the end of the filesystem.
+accidentally cut off some data from the end of the file system.
 
 > Remove logical volume
 
 Warning:Before you remove a logical volume, make sure to move all data
-that you want to keep somewhere else, otherwise it will be lost!
+that you want to keep somewhere else; otherwise, it will be lost!
 
 First, find out the name of the logical volume you want to remove. You
 can get a list of all logical volumes installed on the system with:
@@ -383,8 +369,8 @@ Confirm by typing y and you are done.
 
 Do not forget, to update /etc/fstab!
 
-You can verify the removal of your logical volume by typing "lvs" as
-root again (see first step of this section).
+You can verify the removal of your logical volume by typing lvs as root
+again (see first step of this section).
 
 > Add physical volume to a volume group
 
@@ -398,8 +384,8 @@ This of course will increase the total number of physical extents on
 your volume group, which can be allocated by logical volumes as you see
 fit.
 
-Note:It is considered good form to a partition table on your storage
-medium below LVM, and use the appropriate type code: 8e for MBR, and
+Note:It is considered good form to have a partition table on your
+storage medium below LVM. Use the appropriate type code: 8e for MBR, and
 8e00 for GPT partitions.
 
 > Remove partition from a volume group
@@ -427,6 +413,17 @@ want to avoid LVM thinking that the partition is a physical volume:
 
     # pvremove /dev/sdb1
 
+  
+
+> Deactivate volume group
+
+Just invoke
+
+    # vgchange -a n my_volume_group
+
+This will deactivate the volume group and allow you to unmount the
+container it is stored in.
+
 > Snapshots
 
 Introduction
@@ -452,7 +449,25 @@ You create snapshot logical volumes just like normal ones.
 With that volume, you may modify less than 100M of data, before the
 snapshot volume fills up.
 
-It is important to have the dm-snapshot module listed in the MODULES
+Reverting the modified 'pv' logical volume to the state when the
+'snap01' snapshot was taken can be done with
+
+# lvconvert --merge /dev/vg0/snap01
+
+In case the origin logical volume is active, merging will occur on the
+next reboot.(Merging can be done even from a LiveCD)
+
+The snapshot will no longer exist after merging.
+
+Also multiple snapshots can be taken and each one can be merged with the
+origin logical volume at will.
+
+The snapshot can be mounted and backed up with dd or tar. The size of
+the backup file done with dd will be the size of the files residing on
+the snapshot volume. To restore just create a snapshot, mount it, and
+write or extract the backup to it. And then merge it with the origin.
+
+It is important to have the dm_snapshot module listed in the MODULES
 variable of /etc/mkinitcpio.conf, otherwise the system will not boot. If
 you do this on an already installed system, make sure to rebuild the
 image with
@@ -462,15 +477,19 @@ image with
 Todo: scripts to automate snapshots of root before updates, to
 rollback... updating menu.lst to boot snapshots (separate article?)
 
-snapshots are primarily used to provide a frozen copy of a filesystem to
-make backups; a backup taking two hours provides a more consistent image
-of the filesystem than directly backing up the partition.
+snapshots are primarily used to provide a frozen copy of a file system
+to make backups; a backup taking two hours provides a more consistent
+image of the file system than directly backing up the partition.
 
 See Create root filesystem snapshots with LVM for automating the
-creation of clean root filesystem snapshots during system startup for
+creation of clean root file system snapshots during system startup for
 backup and rollback.
 
-Encrypted_LVM
+Dm-crypt/Encrypting an Entire System#LVM on LUKS and Dm-crypt/Encrypting
+an Entire System#LUKS on LVM.
+
+If you have LVM volumes not activated via the initramfs, enable the
+lvm-monitoring service, which is provided by the lvm2 package.
 
 Troubleshooting
 ---------------
@@ -496,8 +515,6 @@ you can try:
 
 You will need to rebuild the initramfs to commit any changes you made.
 
-  
-
 -   Try preceding commands with lvm like this:
 
     # lvm pvdisplay
@@ -514,7 +531,7 @@ show up in lvscan, you can use the following commands to activate them:
 
 Symptoms:
 
-    ~$ sudo vgscan
+    # vgscan
      Reading all physical volumes.  This may take a while...
      /dev/backupdrive1/backup: read failed after 0 of 4096 at 319836585984: Input/output error
      /dev/backupdrive1/backup: read failed after 0 of 4096 at 319836643328: Input/output error
@@ -528,48 +545,44 @@ Cause:
 Removing an external LVM drive without deactivating the volume group(s)
 first. Before you disconnect, make sure to:
 
-    # vgchange -an <volume group name>
+    # vgchange -an volume group name
 
 Fix: (assuming you already tried to activate the volume group with
-vgchange -ay <vg>, and are receiving the Input/output errors
+# vgchange -ay vg, and are receiving the Input/output errors:
 
-    # vgchange -an <volume group name>
+    # vgchange -an volume group name
 
-Unplug the external drive and wait a few minutes
+Unplug the external drive and wait a few minutes:
 
     # vgscan
-    # vgchange -ay <volume group name>
+    # vgchange -ay volume group name
 
-> kernel options
+> Kernel options
 
 In kernel options, you may need dolvm. root= should be set to the
-logical volume, e.g /dev/mapper/{vg-name}-{lv-name}
+logical volume, e.g /dev/mapper/vg-name-lv-name.
 
-  
-
-> obsolete stuff
-
-If you still use sysvinit, modify USELVM appropriately:
-
-    /etc/rc.conf:
-
-    USELVM="yes"
-
-  
-
-Additional resources
---------------------
+See also
+--------
 
 -   LVM2 Resource Page on SourceWare.org
--   LVM HOWTO article at The Linux Documentation Project
--   Gentoo LVM2 installation guide at Gentoo Documentation
--   LVM article at Gentoo Wiki
+-   LVM HOWTO article at The Linux Documentation project
+-   Gentoo LVM2 installation guide at Gentoo documentation
+-   LVM article at Gentoo wiki
 -   LVM2 Mirrors vs. MD Raid 1 post by Josh Bryan
+-   Ubuntu LVM Guide Part 1Part 2 detals snapshots
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=LVM&oldid=255378"
+"https://wiki.archlinux.org/index.php?title=LVM&oldid=301039"
 
 Categories:
 
 -   Getting and installing Arch
 -   File systems
+
+-   This page was last modified on 24 February 2014, at 03:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

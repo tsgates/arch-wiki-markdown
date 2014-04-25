@@ -1,16 +1,7 @@
 WeeChat
 =======
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
-                           Notes: please use the    
-                           first argument of the    
-                           template to provide more 
-                           detailed indications.    
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
-
-> Summary
+Summary help replacing me
 
 WeeChat is a highly extendable and feature rich IRC Client currently
 under heavy development.
@@ -21,35 +12,32 @@ irssi
 
 XChat
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Running WeeChat                                                    |
-| -   3 Configuration                                                      |
-|     -   3.1 Internal commands                                            |
-|     -   3.2 Internal menu-based                                          |
-|     -   3.3 Configuration Files                                          |
-|                                                                          |
-| -   4 Connecting to a server                                             |
-| -   5 Creating a Server profile                                          |
-| -   6 Configuring SSL                                                    |
-| -   7 Tips and Tricks                                                    |
-|     -   7.1 Upgrading                                                    |
-|     -   7.2 Aliases                                                      |
-|     -   7.3 Key Bindings                                                 |
-|     -   7.4 SSH connection lost when idle                                |
-|                                                                          |
-| -   8 Getting Help                                                       |
-| -   9 External Links                                                     |
-| -   10 Guides                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Running WeeChat
+    -   2.1 Errors loading plugins
+-   3 Configuration
+    -   3.1 Internal commands
+    -   3.2 Internal menu-based
+    -   3.3 Configuration Files
+-   4 Connecting to a server
+-   5 Creating a Server profile
+-   6 Configuring SSL
+-   7 Tips and Tricks
+    -   7.1 Upgrading
+    -   7.2 Aliases
+    -   7.3 Key Bindings
+    -   7.4 SSH connection lost when idle
+-   8 Getting Help
+-   9 External Links
+    -   9.1 Guides
 
 Installing
 ----------
 
-WeeChat is available in the [extra] repo. Install by running:
+weechat is available in the official repositories. Install by running:
 
     # pacman -S weechat
 
@@ -67,14 +55,37 @@ WeeChat is:
 
     $ weechat-curses
 
+> Errors loading plugins
+
+You may see output like the following in the main window after starting
+weechat:
+
+    12:29:37 =!= | Error: unable to load plugin "/usr/lib/weechat/plugins/tcl.so": libtcl8.6.so: cannot open shared object file: No such file or directory
+    12:29:37 =!= | If you're trying to load a script and not a C plugin, try command to load scripts (/perl, /python, ...)
+    12:29:37 =!= | Error: unable to load plugin "/usr/lib/weechat/plugins/ruby.so": libruby.so.2.0: cannot open shared object file: No such file or directory
+    12:29:37 =!= | If you're trying to load a script and not a C plugin, try command to load scripts (/perl, /python, ...)
+    12:29:37     | Plugins loaded: alias, aspell, charset, fifo, guile, irc, logger, lua, perl, python, relay, rmodifier, script, xfer
+
+The default configuration for weechat attempts to load all plugins found
+in /usr/lib/weechat/plugins which in this case includes both tcl and
+ruby. These packages are not required by the weechat package and may not
+be installed on your machine. There are two options if these errors
+bother you:
+
+1.  Install tcl, ruby from the official repositories.
+2.  Or, run /set weechat.plugin.autoload "*,!tcl,!ruby" which will
+    prevent loading those plugins with a bang (!) prefix.
+
+  
+
 Configuration
 -------------
 
 You can configure WeeChat in 3 ways: using WeeChat's internal commands;
 using iset; or by editing the .conf files directly. WeeChat will
-automatically save settings on exit, so if you are editing a .conf file
-in an editor, be sure to run /reload from the console before exiting,
-otherwise your changes will be lost.
+automatically save settings on exit or when you run /save, so if you are
+editing a .conf file in an editor, be sure to run /reload from the
+console before exiting, otherwise your changes will be lost.
 
 > Internal commands
 
@@ -150,7 +161,7 @@ Warning:Some servers need the ssl_dhkey_size value changed to something
 lower. For example, if you're using freenode you'll need to set /set
 irc.server.freenode.ssl_dhkey_size 1024
 
-Note: Different servers may have a different port than 6697 - this is
+Note:Different servers may have a different port than 6697 - this is
 server specific.
 
 Tips and Tricks
@@ -211,9 +222,9 @@ input line:
 
 If you're connecting to your WeeChat through a remote shell using SSH,
 for example running it in screen or tmux you might experience getting
-disconnecting after a while when idle. There are multiple factors in
-play why this might happen, but the easiest way to change this is to
-force the connection to be kept alive by appending this to your
+disconnected after a while when idle. There are multiple factors in play
+why this might happen, but the easiest way to change this is to force
+the connection to be kept alive by appending this to your
 SSH-configuration on the remote shell. This has nothing to do with
 WeeChat itself, but losing connection when idle won't happen with it's
 alternative irssi by default, and thus is a common situation for those
@@ -237,19 +248,27 @@ and the help will be displayed in the main buffer (usually buffer 1).
 External Links
 --------------
 
-WeeChat Home Page   
- WeeChat Documentation   
- WeeChat Scripts   
- WeeChat Development Blog
+-   Home Page
+-   WeeChat Documentation
+-   WeeChat Scripts
+-   WeeChat Development Blog
 
-Guides
-------
+> Guides
 
-FiXato's guide to WeeChat
+-   FiXato's guide to WeeChat
+-   Pascalpoitras: Favorite scripts
+-   Pascalpoitras Weechat Tips
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=WeeChat&oldid=255609"
+"https://wiki.archlinux.org/index.php?title=WeeChat&oldid=293753"
 
 Category:
 
 -   Internet Relay Chat
+
+-   This page was last modified on 20 January 2014, at 17:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

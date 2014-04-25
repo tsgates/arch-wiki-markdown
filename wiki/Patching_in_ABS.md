@@ -88,9 +88,9 @@ these steps:
     it is copied into the src directory. If you redistribute the
     PKGBUILD, you should, of course, include the patch with the
     PKGBUILD.
-2.  Then add an entry to the md5sums array. You can generate sum of your
-    patch using md5sum tool. Using makepkg -g is more convenient if your
-    sources are from the internet.
+2.  Then use updpkgsums to update the md5sums array. Or manually add an
+    entry to the md5sums array; you can generate sum of your patch using
+    md5sum tool.
 3.  Create the build() function in the PKGBUILD. In most cases you will
     want to apply the patch first thing in the function, but you will
     know best where the patch lines need to be applied.
@@ -143,8 +143,15 @@ Most developers create patches from the parent directory of the
 directory that is being patched, so -p1 will usually be right.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Patching_in_ABS&oldid=197617"
+"https://wiki.archlinux.org/index.php?title=Patching_in_ABS&oldid=286463"
 
 Category:
 
 -   Package management
+
+-   This page was last modified on 6 December 2013, at 10:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

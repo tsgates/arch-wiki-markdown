@@ -8,10 +8,75 @@ load averages or network utilization) for all machines that are being
 monitored.
 
 Ganglia is available as the ganglia package on the AUR, along with the
-web frontend ganglia-web.
+web frontend ganglia-web. There is also a reduced-dependency version
+named ganglia-minimal, which would be appropriate on boxes where you
+don't require gmetad and want to avoid pulling in rrdtool as a
+dependency, which would in turn pull in Cairo and Mesa.
 
 The Ganglia Wiki contains all the information you need to get started
 with Ganglia.
+
+Contents
+--------
+
+-   1 Ganglia Web Interface
+    -   1.1 Nginx with php-fpm
+-   2 Troubleshooting
+    -   2.1 Issues with IP-address binding or undesirable hostnames
+-   3 References
+
+Ganglia Web Interface
+---------------------
+
+The ganglia web frontend is available as the ganglia-web package on the
+AUR.
+
+You will also need a web server with a working PHP setup. The following
+sections include some example setups.
+
+Make sure that the open_basedir setting in your /etc/php/php.ini
+includes /usr/share/webapps and /var/lib/ganglia.
+
+> Nginx with php-fpm
+
+Firstly, install the required packages:
+
+    pacman -S nginx php-fpm
+
+This is a minimal configuration for nginx:
+
+    /etc/nginx/nginx.conf
+
+    events {
+      worker_connections  1024;
+    }
+
+    http {
+      include mime.types;
+      default_type application/octet-stream;
+
+      upstream php {
+        server unix:/run/php-fpm/php-fpm.sock;
+      }
+
+      server {
+        listen 80 default_server;
+
+        root /usr/share/webapps;
+        index index.php;
+
+        location ~ \.php$ {
+          fastcgi_pass php;
+          include fastcgi.conf;
+        }
+      }
+    }
+
+Then start all required services:
+
+    systemctl start gmetad gmond php-fpm nginx
+
+Go to http://localhost/ganglia and check that your setup is working.
 
 Troubleshooting
 ---------------
@@ -57,8 +122,15 @@ References
     http://www.mail-archive.com/ganglia-general@lists.sourceforge.net/msg01885.html
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ganglia&oldid=234834"
+"https://wiki.archlinux.org/index.php?title=Ganglia&oldid=291046"
 
 Category:
 
 -   Status monitoring and notification
+
+-   This page was last modified on 31 December 2013, at 11:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

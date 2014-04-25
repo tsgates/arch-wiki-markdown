@@ -9,42 +9,44 @@ has a modern look and feel, while keeping itself tiny and small.
 Installation
 ------------
 
-bmpanel can be found in the AUR and installed using an AUR helper or
-makepkg. However, BMPanel is not maintained anymore, it is recommended
-to try bmpanel2-git.
+BMPanel is available as bmpanel2 in the AUR. If you prefer the legacy
+version not mantained anymore install bmpanel.
 
 Themes
 ------
 
-Themes must be installed in the ~/.bmpanel/themes (respectively
-~/.local/share/bmpanel2/themes for bmpanel2) directory. If it does not
-exist the directory must be created.
-
-To get themes, download them from here and extract them to
-~/.bmpanel/themes or install the bmpanel-themes package. Altering design
-of the theme can be done by adapting the
-~/.bmpanel/themes/<THEME_NAME>/theme file. More information on this can
-be found here.
-
 BMPanel2 themes are available in the bmpanel2-themes package. Further
-information about available themes can be found here.
+information about available themes can be found here. Here you can find
+more themes. Extract them to ~/.local/share/bmpanel2/themes
+(respectively ~/.bmpanel/themes for bmpanel legacy). Altering design of
+the theme can be done by adapting the
+~/.local/share/bmpanel2/themes/theme name/theme file (respectively
+~/.bmpanel/themes/theme name/theme). More information on this can be
+found here.
 
 Starting bmpanel
 ----------------
 
-To start bmpanel automatically after the login you need to write this to
+To start BMPanel automatically after the login you need to write this to
 your ~/.xinitrc file:
 
-    # Starting bmpanel
-    /usr/bin/bmpanel theme_name &
+    bmpanel theme_name &
 
 or:
 
-    /usr/bin/bmpanel2 --theme=theme_name &
+    bmpanel2 --theme=theme_name &
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Bmpanel&oldid=239827"
+"https://wiki.archlinux.org/index.php?title=Bmpanel&oldid=282545"
 
-Category:
+Categories:
 
--   Desktop environments
+-   Application launchers
+-   Eye candy
+
+-   This page was last modified on 13 November 2013, at 07:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

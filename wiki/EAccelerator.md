@@ -8,16 +8,14 @@ eliminated. It also optimizes scripts to speed up their execution.
 eAccelerator typically reduces server load and increases the speed of
 your PHP code by 1-10 times.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Enable it in PHP                                                   |
-| -   3 Check if installation was ok                                       |
-| -   4 Troubleshooting                                                    |
-| -   5 Sources                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Enable it in PHP
+-   3 Check if installation was ok
+-   4 Troubleshooting
+-   5 Sources
 
 Installation
 ------------
@@ -110,3 +108,10 @@ Retrieved from
 Category:
 
 -   Web Server
+
+-   This page was last modified on 20 October 2012, at 09:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

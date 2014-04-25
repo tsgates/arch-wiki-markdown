@@ -1,49 +1,42 @@
 Libcanberra
 ===========
 
-> Summary
+Related articles
 
-This article discusses how to install and configure libcanberra.
-
-> Related
-
-GTK+
-
-Libnotify
+-   GTK+
+-   Libnotify
 
 Libcanberra is a simple abstract interface for playing event sounds. It
 implements the XDG Sound Theme and Naming Specifications for generating
 event sounds on free desktops, such as GNOME. Further description here
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Write your own canberra app                                  |
-|         -   3.1.1 Bash                                                   |
-|         -   3.1.2 C                                                      |
-|         -   3.1.3 Genie                                                  |
-|         -   3.1.4 Vala                                                   |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Systemd
+-   4 Tips and tricks
+    -   4.1 Write your own canberra app
+        -   4.1.1 Bash
+        -   4.1.2 C
+        -   4.1.3 Genie
+        -   4.1.4 Vala
+-   5 See also
 
 Installation
 ------------
 
 Libcanberra can be installed with the package libcanberra, available in
-the Official Repositories. It contains the library and a GTK+ module.
+the Official repositories. It contains the library and a GTK+ module.
 
 You have to choose a backend to play sounds:
 
 -   ALSA backend is included in libcanberra package
 -   GStreamer backend can be installed with package
-    libcanberra-gstreamer, available in the Official Repositories.
+    libcanberra-gstreamer, available in the Official repositories.
 -   PulseAudio backend can be installed with package libcanberra-pulse,
-    available in the Official Repositories.
+    available in the Official repositories.
 -   OSS backend can be installed with the package libcanberra-oss,
     available in the Arch User Repository.
 
@@ -52,7 +45,7 @@ sound:
 
 -   The default sound theme is 'freedesktop', which can be installed
     with the package sound-theme-freedesktop, available in the Official
-    Repositories.
+    repositories.
 -   Alternatively, you can install ubuntu-sounds, available in the Arch
     User Repository.
 
@@ -72,6 +65,13 @@ GtkSettings file:
 In GNOME, these settings are managed by gnome-settings-daemon, and the
 configuration is available in GSettings under org.gnome.desktop.sound
 schema.
+
+Systemd
+-------
+
+To enable bootup, shutdown and reboot sounds using canberra, run:
+
+# systemctl enable canberra-system-bootup.service
 
 Tips and tricks
 ---------------
@@ -154,8 +154,15 @@ See also
 -   Libcanberra Reference Manual
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Libcanberra&oldid=239806"
+"https://wiki.archlinux.org/index.php?title=Libcanberra&oldid=301620"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 24 February 2014, at 11:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

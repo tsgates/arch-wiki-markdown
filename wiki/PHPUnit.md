@@ -1,56 +1,26 @@
 PHPUnit
 =======
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Running                                                            |
-| -   3 Additional                                                         |
-| -   4 Example                                                            |
-| -   5 References                                                         |
-+--------------------------------------------------------------------------+
-
 Installing
 ----------
 
-First of all, you need PEAR to install PHPUnit.
+By far the easiest way to install is using the PHP Archive (PHAR)
+package provided by the project. The PHAR package contains all
+dependencies as well as some of the optional dependencies for PHPUnit.
+The latest version can be retrieved from the project's site:
 
-    pacman -S php-pear
+    wget https://phar.phpunit.de/phpunit.phar
 
-Now you can do just like the official documentation. As root (sudo will
-NOT be enough, You'll have to do this as "real" root), just type
+Note:PHPUnit is also avalible from the AUR as phpunit.
 
-    pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit
+  
 
-Notice that you might have to run following command before start to
-install phpunit
+You can then run PHPUnit using php phpunit.phar. You can also make the
+PHP Archive executable (chmod +x phpunit.phar) and move it to
+/usr/local/bin or ~/bin or somewhere else you have in your $PATH.
 
-    #pear clear-cache
-
-Done.   
-
-Running
--------
-
-For running PHPUnit properly you must have the /usr/bin/ directory
-listed in the open_basedir option at the /etc/php/php.ini
-
-    open_basedir = /srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/bin/
-
-Or just unset it
-
-    open_basedir =
-
-Additional
-----------
-
-In some php framework, you will meet the error of missing Selenium. Just
-install the selenium package with pear ( make sure you have root right )
-
-     pear install phpunit/PHPUnit_Selenium
+Note:You have to enable extension=phar.so in your php.ini for PHP to be
+able to run PHP Archive/PHAR files.
 
 Example
 -------
@@ -106,8 +76,15 @@ References
 -   Introduction to Unit Testing with PHPUnit
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PHPUnit&oldid=247698"
+"https://wiki.archlinux.org/index.php?title=PHPUnit&oldid=302274"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 27 February 2014, at 03:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

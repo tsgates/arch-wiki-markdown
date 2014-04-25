@@ -10,15 +10,13 @@ Sharing Files Remotely
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 NFS                                                                |
-| -   2 FISH                                                               |
-| -   3 SHFS                                                               |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 NFS
+-   2 FISH
+-   3 SHFS
+-   4 See also
 
 NFS
 ---
@@ -110,3 +108,10 @@ Retrieved from
 Category:
 
 -   Networking
+
+-   This page was last modified on 3 December 2012, at 14:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

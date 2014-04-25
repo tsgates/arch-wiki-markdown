@@ -1,18 +1,16 @@
 Toshiba Tecra 8200
 ==================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 INSTALL in a toshiba tecra 8200                                    |
-| -   2 Audio                                                              |
-| -   3 Video                                                              |
-| -   4 Network                                                            |
-| -   5 Modem                                                              |
-| -   6 Some tweaking                                                      |
-| -   7 Some references                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 INSTALL in a toshiba tecra 8200
+-   2 Audio
+-   3 Video
+-   4 Network
+-   5 Modem
+-   6 Some tweaking
+-   7 Some references
 
 INSTALL in a toshiba tecra 8200
 -------------------------------
@@ -129,7 +127,6 @@ Some references
     -   modem pctel Toshiba Satellite 1100- S101.
         -   pctel-linux
         -   fnfx
-
 -   ifplugd
 
 Retrieved from
@@ -138,3 +135,10 @@ Retrieved from
 Category:
 
 -   Toshiba
+
+-   This page was last modified on 26 September 2012, at 14:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

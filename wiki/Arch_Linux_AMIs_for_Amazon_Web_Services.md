@@ -1,17 +1,14 @@
 Arch Linux AMIs for Amazon Web Services
 =======================================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Running public Arch AMIs                                           |
-|     -   1.1 Archlinux AMI                                                |
-|     -   1.2 Other AMIs                                                   |
-|                                                                          |
-| -   2 Building Arch AMIs                                                 |
-| -   3 Updated Images                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Running public Arch AMIs
+    -   1.1 Archlinux AMI
+    -   1.2 Other AMIs
+-   2 Building Arch AMIs
+-   3 Updated Images
 
 Running public Arch AMIs
 ------------------------
@@ -65,8 +62,15 @@ be found here:
 http://www.uplinklabs.net/projects/arch-linux-on-ec2/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_Linux_AMIs_for_Amazon_Web_Services&oldid=250547"
+"https://wiki.archlinux.org/index.php?title=Arch_Linux_AMIs_for_Amazon_Web_Services&oldid=257204"
 
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 16 May 2013, at 09:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

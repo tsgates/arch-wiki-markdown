@@ -1,26 +1,17 @@
 Fbpanel
 =======
 
-> Summary
-
 fbpanel is a lightweight NETWM compliant desktop panel. This article
 describes the installation and configuration of fbpanel.
 
-Official Site
+Contents
+--------
 
-fbpanel.sourceforge.net
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Starting                                                           |
-| -   3 Configuration                                                      |
-|     -   3.1 wincmd plugin (show desktop button)                          |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+-   1 Installing
+-   2 Starting
+-   3 Configuration
+    -   3.1 wincmd plugin (show desktop button)
+-   4 See also
 
 Installing
 ----------
@@ -66,9 +57,17 @@ See also
 -   Official Website
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fbpanel&oldid=246120"
+"https://wiki.archlinux.org/index.php?title=Fbpanel&oldid=290315"
 
 Categories:
 
 -   Application launchers
+-   Eye candy
 -   Status monitoring and notification
+
+-   This page was last modified on 24 December 2013, at 22:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

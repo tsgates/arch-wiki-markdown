@@ -1,21 +1,19 @@
 Dell Studio 1555
 ================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About this laptop                                                  |
-| -   2 Foreword                                                           |
-| -   3 Video                                                              |
-| -   4 Webcam                                                             |
-| -   5 Sound                                                              |
-| -   6 Microphone                                                         |
-| -   7 Ports and drives                                                   |
-| -   8 Power management                                                   |
-| -   9 Input devices                                                      |
-| -   10 Networking                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 About this laptop
+-   2 Foreword
+-   3 Video
+-   4 Webcam
+-   5 Sound
+-   6 Microphone
+-   7 Ports and drives
+-   8 Power management
+-   9 Input devices
+-   10 Networking
 
 About this laptop
 -----------------
@@ -145,3 +143,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 30 April 2013, at 09:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

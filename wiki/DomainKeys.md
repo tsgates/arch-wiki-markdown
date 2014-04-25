@@ -13,19 +13,16 @@ DomainKeys
 
 Note:This is obsoleted by OpenDKIM.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What is it?                                                        |
-|     -   1.1 How it works?                                                |
-|                                                                          |
-| -   2 Installation                                                       |
-| -   3 Generic configuration                                              |
-| -   4 Postfix integration                                                |
-|     -   4.1 Inbound filter                                               |
-|     -   4.2 Outbound filter                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 What is it?
+    -   1.1 How it works?
+-   2 Installation
+-   3 Generic configuration
+-   4 Postfix integration
+    -   4.1 Inbound filter
+    -   4.2 Outbound filter
 
 What is it?
 ===========
@@ -144,8 +141,15 @@ Add following into /etc/postfix/master.cf:
         -o smtpd_authorized_xforward_hosts=127.0.0.0/8
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DomainKeys&oldid=197422"
+"https://wiki.archlinux.org/index.php?title=DomainKeys&oldid=302632"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

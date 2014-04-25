@@ -1,19 +1,37 @@
 Canon ip1800
 ============
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Requirements                                                       |
-|     -   2.1 Download drivers                                             |
-|     -   2.2 Install rpmextract                                           |
-|     -   2.3 Extract drivers                                              |
-|     -   2.4 Move the files                                               |
-|     -   2.5 Install the printer with CUPS                                |
-|     -   2.6 Creating links for libs                                      |
-+--------------------------------------------------------------------------+
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason:                  
+                           cnijfilter-ip1800series  
+                           is available (Discuss)   
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Probably the     
+                           official support landed  
+                           in CUPS meanwhile,       
+                           rc.conf is dead.         
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+Contents
+--------
+
+-   1 Introduction
+-   2 Requirements
+    -   2.1 Download drivers
+    -   2.2 Install rpmextract
+    -   2.3 Extract drivers
+    -   2.4 Move the files
+    -   2.5 Install the printer with CUPS
+    -   2.6 Creating links for libs
+-   3 Installing from AUR
 
 Introduction
 ============
@@ -124,9 +142,29 @@ You'll probably have to link
     # ln -s /usr/lib/libcnbpcnclbjcmd312.so.3.3.0 /usr/lib/libcnbpcnclbjcmd312.so
     # ln -s /usr/lib/libcnbpcnclui312.so.3.3.0 /usr/lib/libcnbpcnclui312.so
 
+  
+
+Installing from AUR
+===================
+
+The second (and better) way to install drivers is from the AUR.
+
+-   cnijfilter-full270 compiles drivers from sources (well, there are
+    still some blobs in the archive). It's available for both i686 and
+    x86_64 (crosscompiling to i686). There are some issues with
+    monitoring and ui utilities, they may not work, but at least
+    printing itself works.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Canon_ip1800&oldid=196828"
+"https://wiki.archlinux.org/index.php?title=Canon_ip1800&oldid=303577"
 
 Category:
 
 -   Printers
+
+-   This page was last modified on 8 March 2014, at 08:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

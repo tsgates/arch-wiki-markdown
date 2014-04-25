@@ -4,18 +4,15 @@
 9vx is an implementation of the simple x86 virtual machine vx32
 specifically designed for running real Plan9 on other host systems.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 A short tutorial                                                   |
-| -   3 Problems                                                           |
-|     -   3.1 Installing Plan9 on a disk image                             |
-|     -   3.2 Putting the Plan9 root file system in an insecure directory  |
-|                                                                          |
-| -   4 Alternatives                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 A short tutorial
+-   3 Problems
+    -   3.1 Installing Plan9 on a disk image
+    -   3.2 Putting the Plan9 root file system in an insecure directory
+-   4 Alternatives
 
 Installation
 ------------
@@ -81,3 +78,10 @@ Retrieved from
 Category:
 
 -   Emulators
+
+-   This page was last modified on 23 April 2012, at 16:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

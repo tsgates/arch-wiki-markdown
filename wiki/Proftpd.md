@@ -16,7 +16,7 @@ large amount of configuration options to the user.
 Installation
 ------------
 
-    # pacman -S proftpd
+proftpd is available in the AUR.
 
 To start the daemon:
 
@@ -108,8 +108,15 @@ Otherwise anonymous logins will receive a 530 error.
 -   Website: proFtpd.org
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Proftpd&oldid=248140"
+"https://wiki.archlinux.org/index.php?title=Proftpd&oldid=258136"
 
 Category:
 
 -   File Transfer Protocol
+
+-   This page was last modified on 21 May 2013, at 19:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

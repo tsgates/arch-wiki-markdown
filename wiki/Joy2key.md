@@ -1,6 +1,31 @@
 Joy2key
 =======
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: ConsoleKit is    
+                           deprecated,              
+                           ck-launch-session should 
+                           not be used. See also    
+                           General                  
+                           Troubleshooting#Session  
+                           permissions.             
+                           Further, initscripts are 
+                           mentioned                
+                           (/etc/inittab), also     
+                           deprecated. (Discuss)    
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
+                           Notes: please use the    
+                           first argument of the    
+                           template to provide more 
+                           detailed indications.    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 > Use a joystick/gamepad to control applications which accept keyboard commands
 
 Note:This solution may not work with XBMC 11.0 and joy2key 1.6.3-1. An
@@ -112,8 +137,15 @@ launching XBMC and Boxee:
 -   [3] XBMC wiki: Installing XBMC for Linux > Autostarting XBMC
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Joy2key&oldid=195602"
+"https://wiki.archlinux.org/index.php?title=Joy2key&oldid=270293"
 
 Category:
 
 -   Input devices
+
+-   This page was last modified on 8 August 2013, at 09:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

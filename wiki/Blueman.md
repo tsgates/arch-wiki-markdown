@@ -1,117 +1,164 @@
 Blueman
 =======
 
-This is a collection of tips and information regarding blueman, a GTK+
-bluetooth manager. The information here was originally collated from the
-AUR thread at https://aur.archlinux.org/packages.php?ID=13870.
+Blueman is a full featured Bluetooth manager written in GTK+.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Blueman and pulseaudio                                             |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Blueman and Thunar                                           |
-|     -   3.2 NOW obsolete! >> Workaround for a Bug with obex and gvfs     |
-|     -   3.3 Workaround a bug with network manager in bluetooth           |
-|         networking                                                       |
-|     -   3.4 Can't receive files                                          |
-|                                                                          |
-| -   4 Discussion Threads on problems                                     |
-+--------------------------------------------------------------------------+
+Related articles
+
+-   Bluez4
+-   Bluetooth
+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 Checking the Bluetooth hardware
+    -   2.2 Autostarting
+    -   2.3 Permissions
+    -   2.4 Mounting Bluetooth devices without Nautilus
+    -   2.5 Blueman and PulseAudio
+-   3 Troubleshooting
+    -   3.1 Workaround for a Bug with obex and gvfs
+    -   3.2 Cannot receive files
+    -   3.3 Blueman applet does not start
+-   4 See also
 
 Installation
 ------------
 
-    # pacman -S blueman
+Warning:Blueman currently relies on the, now unmaintained, Bluez4 stack.
+A version of Blueman that is compatible with Bluez5 is in development.
+[1]
 
-Be sure to add the bluetooth daemon to rc.conf and start blueman with
+Blueman can be installed from the blueman-bzr package in the AUR.
+
+Be sure to enable the Bluetooth daemon and start Blueman with
 blueman-applet.
 
-Blueman and pulseaudio
-----------------------
+Tip:If you want to mount and browse remote devices, you may need to
+install the gvfs-obexftp-bluez4 package from the AUR.
 
-Users who want to use pulseaudio with a bluetooth headset may want to
-activate the pulseaudio plugin of Blueman. This automatically loads
-pulseaudio bluetooth module after audio device is connected and plays
-all audio through the bluetooth headset.
+Usage
+-----
 
-  
+> Checking the Bluetooth hardware
+
+Be sure the local Bluetooth device is availabe by running hcitool dev.
+If only Devices: is dumped, the local Bluetooth device is unavailable.
+If this is the case, try restarting the bluetooth service or toggle the
+WiFi/Bluetooth switch on your laptop (if it exists). For example: the
+switch is Fn+F3 on an Acer Aspire laptop. Also try rebooting to activate
+the local Bluetooth device. If you run blueman-applet without an
+available local Bluetooth device, the Blueman tray icon will not appear.
+
+> Autostarting
+
+The following autostart file should have been created:
+/etc/xdg/autostart/blueman.desktop. This means that Blueman should be
+autostarted with most desktop environments without manual intervention.
+See the article for your desktop environment or window manager as well
+as the Autostarting article for further information on autostarting.
+
+> Permissions
+
+It might be necessary for the user to be added to the lp group in order
+for the user to be able to add and manage Bluetooth devices using
+Blueman. See /etc/dbus-1/system.d/bluetooth.conf for the section that
+enables users of the lp group to communicate with the Bluetooth daemon.
+
+To receive files remember to right click on the Blueman tray icon >
+Local Services > Transfer > File Receiving" and tick the square box next
+to "Enabled".
+
+Note:If you are running Blueman in a session that is started with the
+startx command, you should add source /etc/X11/xinit/xinitrc.d/* to your
+~/.xinitrc to make Nautilus capable of browsing your devices.
+
+> Mounting Bluetooth devices without Nautilus
+
+Blueman is configured to use Nautilus for bluetooth device mounting by
+default. The instructions below describe a method for using different
+file managers with Blueman. The examples in this section focus on
+Thunar. If you are using a different file manager, substitute thunar
+with the name of the file manager you are using.
+
+    obex_thunar.sh
+
+    #!/bin/bash
+    fusermount -u ~/bluetooth
+    obexfs -b $1 ~/bluetooth
+    thunar ~/bluetooth
+
+Now you will need to move the script to an appropriate location (e.g.,
+/usr/local/bin). After that, mark it as executable:
+
+    # chmod +x /usr/local/bin/obex_thunar.sh
+
+The last step is to change the line in Blueman tray icon > Local
+Services > Transfer > Advanced to obex_thunar.sh %d.
+
+Tip:If you do not want to create a script, you could just replace this
+command: nautilus --browse obex:// with this one: thunar obex:// in
+Local Services > Transfer > Advanced
+
+> Blueman and PulseAudio
+
+Users who want to use PulseAudio with a Bluetooth headset may want to
+activate the PulseAudio plugin of Blueman. This automatically loads
+PulseAudio Bluetooth module after audio device is connected and plays
+all audio through the Bluetooth headset.
 
 Troubleshooting
 ---------------
 
-> Blueman and Thunar
+> Workaround for a Bug with obex and gvfs
 
-As long as you have gvfs-obexftp installed, you can use thunar from
-blueman to browse files remotely. Open up the blueman services
-configuration window and replace
+Note:This bug only affects older versions of Blueman.
 
-     nautilus --browse obex://
-
-with
-
-     thunar obex://
-
-> NOW obsolete! >> Workaround for a Bug with obex and gvfs
-
-To browse mobile phone via nautilus with blueman you need a patched
-gvfs. Install gvfs-rar from AUR:
-https://aur.archlinux.org/packages.php?ID=23861
-
-obex-data-server package is broken for now and needs to rebuild with:
+To browse a mobile phone using Nautilus and Blueman you will need a
+patched version of GVFS (The GNOME Virtual File System.) Install
+gvfs-rar from AUR. It is possible that you will need to rebuild the
+obex-data-server package as shown below:
 
     $ ./configure --prefix=/usr --sysconfdir=/etc
 
-Just grab it from ABS and rebuild.
+> Cannot receive files
 
-  
- >>For me now with actual obex-data-server and standard gvfs all is
-working fine (Yes obex-browsing too) the only thing is delete files on
-remote storage do not work.
-
-> Workaround a bug with network manager in bluetooth networking
-
-Some distributions show all bluetooth interfaces as net.80203, which can
-cause strange behaviour in network manager, for example NM trying to get
-dhcp address for an incoming connection.
-
-This is for versions <= 1.01, versions 1.02 and up will include this
-patch.
-
-Put this in /etc/hal/fdi/information/bnep.fdi:
-
-    <?xml version="1.0" encoding="UTF-8"?>
-
-    <deviceinfo version="0.2">
-     <device>
-       <match key="info.category" string="net.80203">
-         <match key="net.interface" contains="bnep">
-             <merge key="info.category" type="string">net.bluetooth</merge>
-             <merge key="info.product" type="string">Bluetooth Interface</merge>
-             <merge key="info.capabilities" type="strlist">net, net.bluetooth</merge>
-             <merge key="net.bluetooth.mac_address" type="copy_property">net.80203.mac_address</merge>
-             <remove key="net.80203.mac_address"/>
-         </match>
-       </match>
-     </device>
-    </deviceinfo>
-
-> Can't receive files
-
-You have to edit /etc/conf.d/bluetooth file and uncomment this line:
+If you cannot receive files with Blueman, edit the /etc/conf.d/bluetooth
+file and uncomment this line:
 
     #SDPD_ENABLE="true"
 
-Discussion Threads on problems
-------------------------------
+> Blueman applet does not start
 
-https://bbs.archlinux.org/viewtopic.php?id=65889
+If blueman-applet fails to start, try removing the entire
+/var/lib/bluetooth directory and restarting the machine (or just the
+dbus and bluetooth services).
+
+    # rm -rf /var/lib/bluetooth
+    $ systemctl reboot
+
+If you see a notification saying Incoming file over Bluetooth then this
+means that the device isn't marked as trusted. Mark it as trusted and
+try sending the file again.
+
+See also
+--------
+
+-   Blueman development, on Launchpad
+-   Blueman development, on GitHub
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Blueman&oldid=238281"
+"https://wiki.archlinux.org/index.php?title=Blueman&oldid=306159"
 
 Category:
 
 -   Bluetooth
+
+-   This page was last modified on 20 March 2014, at 19:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

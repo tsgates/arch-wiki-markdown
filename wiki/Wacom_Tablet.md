@@ -1,59 +1,6 @@
 Wacom Tablet
 ============
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installing                                                         |
-|     -   2.1 Check if kernel drivers needed (usually not)                 |
-|     -   2.2 Install Wacom drivers                                        |
-|     -   2.3 Automatical setup                                            |
-|     -   2.4 Manual setup                                                 |
-|         -   2.4.1 Dynamic with udev                                      |
-|             -   2.4.1.1 USB-devices                                      |
-|             -   2.4.1.2 Serial devices                                   |
-|                                                                          |
-|         -   2.4.2 Static setup                                           |
-|         -   2.4.3 Xorg configuration                                     |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 General concepts                                             |
-|         -   3.1.1 Temporary configuration                                |
-|         -   3.1.2 Permanent configuration                                |
-|                                                                          |
-|     -   3.2 Specific configuration tips                                  |
-|         -   3.2.1 Changing orientation                                   |
-|         -   3.2.2 Remapping Buttons                                      |
-|             -   3.2.2.1 Finding out the button IDs                       |
-|             -   3.2.2.2 The syntax                                       |
-|             -   3.2.2.3 Some examples                                    |
-|             -   3.2.2.4 Execute custom commands                          |
-|             -   3.2.2.5 Application specific hotkeys                     |
-|                                                                          |
-|         -   3.2.3 TwinView Setup                                         |
-|         -   3.2.4 Xrandr Setup                                           |
-|                                                                          |
-|     -   3.3 Pressure curves                                              |
-|                                                                          |
-| -   4 Application-specific configuration                                 |
-|     -   4.1 The GIMP                                                     |
-|     -   4.2 Inkscape                                                     |
-|     -   4.3 Krita                                                        |
-|     -   4.4 VirtualBox                                                   |
-|     -   4.5 Web Browser Plugin                                           |
-|                                                                          |
-| -   5 Newer tablets & Troubleshooting                                    |
-| -   6 Dynamic Xorg setup with HAL (deprecated)                           |
-|     -   6.1 HAL tablet calibration fix                                   |
-|                                                                          |
-| -   7 References                                                         |
-+--------------------------------------------------------------------------+
-
-Introduction
-------------
-
 Before we begin, I would like to point out that this guide was started
 for USB based Wacom tablets, so much of the info in here focuses on
 that. Usually it's recommended to rely on Xorg's auto-detection or to
@@ -64,10 +11,41 @@ when it's connected to a different USB port or even after unplugging and
 replugging it into the same port, and as such it should be considered as
 deprecated.
 
-It is also worth to mention that this wiki article is very much
-influenced by the very helpful Gentoo Linux Wiki - HOWTO Wacom Tablet,
-which I recommend anyone visit if they would like to learn about things
-that are not covered here.
+Contents
+--------
+
+-   1 Installing
+    -   1.1 Check if kernel drivers needed (usually not)
+    -   1.2 Install Wacom drivers
+    -   1.3 Automatical setup
+    -   1.4 Manual setup
+        -   1.4.1 Dynamic with udev
+            -   1.4.1.1 USB-devices
+            -   1.4.1.2 Serial devices
+        -   1.4.2 Static setup
+        -   1.4.3 Xorg configuration
+-   2 Configuration
+    -   2.1 General concepts
+        -   2.1.1 Temporary configuration
+        -   2.1.2 Permanent configuration
+    -   2.2 Specific configuration tips
+        -   2.2.1 Changing orientation
+        -   2.2.2 Remapping Buttons
+            -   2.2.2.1 Finding out the button IDs
+            -   2.2.2.2 The syntax
+            -   2.2.2.3 Some examples
+            -   2.2.2.4 Execute custom commands
+        -   2.2.3 TwinView Setup
+        -   2.2.4 Xrandr Setup
+    -   2.3 Pressure curves
+-   3 Application-specific configuration
+    -   3.1 The GIMP
+    -   3.2 Inkscape
+    -   3.3 Krita
+    -   3.4 VirtualBox
+    -   3.5 Web Browser Plugin
+-   4 Newer tablets & Troubleshooting
+-   5 References
 
 Installing
 ----------
@@ -75,13 +53,11 @@ Installing
 > Check if kernel drivers needed (usually not)
 
 After plugging in the tablet (in case of a USB device) check lsusb
-and/or dmesg  to see if the kernel recognizes your tablet. It should
-also be listed in /proc/bus/input/devices.
+and/or dmesg | grep -i wacom to see if the kernel recognizes your
+tablet. It should also be listed in /proc/bus/input/devices.
 
-In case it's not recognized, which might happen for new devices not
-supported by current kernel, it is also possible to install git version
-of kernel driver from: stable branch (wacom-linux-git), next branch
-(wacom-next-linux-git) or mainline branch (wacom-mainline-linux-git).
+In case it's not recognized, it might happen for new devices not
+supported by current kernel.
 
 > Install Wacom drivers
 
@@ -94,9 +70,7 @@ Wacom tablet on Linux.
 Note:There is also xf86-input-wacom-git in AUR which provides git
 version of xf86-input-wacom, but you might encounter some troubles. For
 me the buttons for example did only work with the stable release, not
-with the git version. So it's recommended to try xf86-input-wacom irst.
-
-  
+with the git version. So it's recommended to try xf86-input-wacom first.
 
 > Automatical setup
 
@@ -114,7 +88,7 @@ which should detect all devices with type, for example
      Wacom Bamboo 2FG 4x5 Finger touch	id: 13	type: TOUCH     
      Wacom Bamboo 2FG 4x5 Finger pad 	id: 14	type: PAD       
 
-You can also test it by opening Gimp or Xournal and checking the
+You can also test it by opening gimp or xournal and checking the
 extended input devices section, or whatever tablet-related configuration
 is supported by the software of your choice.
 
@@ -151,9 +125,7 @@ You might skip this part and move on to the xorg.conf configuration if
 you are using the wacom-udev package from AUR.
 
 Assuming udev is already installed you simply need to install wacom-udev
-from AUR, e.g. by using
-
-     $ yaourt -S wacom-udev
+from the AUR.
 
 USB-devices
 
@@ -520,99 +492,6 @@ Then add your custom key mapping to ~/.xbindkeysrc, for example
      "send-notify Test "No need for escaping the quotes""
          m:0x10 + b:13   (mouse)
 
-Application specific hotkeys
-
-This is quite tricky as the usual tools don't allow application specific
-hotkeys. However I found the idea quite appealing to use the buttons for
-different thinks depending on the application.
-
-To make this possible I use a python script which uses xorg-xprop,
-xdotools and the custom commands setup from the last section, which
-depends on xbindkeys.
-
-Change the mappings in ~/.xbindkeysrc
-
-     "appkey 1"
-         m:0x10 + b:10   (mouse)
-     "appkey 2"
-         m:0x10 + b:11   (mouse)
-     "appkey 3"
-         m:0x10 + b:12   (mouse)
-     "appkey 4"
-         m:0x10 + b:13   (mouse)
-
-And copy the following script to a file named appkey somewhere in your
-path ($PATH) and make it executable using
-
-     chmod 755 /usr/local/bin/appkey
-
-    /usr/local/bin/appkey
-
-    #!/usr/bin/python
-    # written in 2012 by buergi
-    # this script is public domain, no rights reserved, CC0
-    # do with it whatever you want
-
-    import sys
-    from subprocess import Popen,PIPE
-
-    def get_active_window_class(sep=':'):
-        p = Popen(['xdotool', 'getactivewindow'], stdout=PIPE)
-        winid  = p.communicate()[0]
-        p = Popen(['xprop', '-id', winid, 'WM_CLASS'], stdout=PIPE)
-
-        try:
-            out = p.communicate()[0].decode('ascii')
-        except UnicodeDecodeError as e:
-            return 
-
-        try:
-            tmp = out.split(' = ',1)[1]
-            winclass = sep.join(tmp.split('", "'))[1:-2]
-        except IndexError as e:
-            return 
-
-        return winclass
-
-    def send_key(keystroke):
-        Popen(['xdotool', 'key', keystroke])
-
-    def main(argc,argv):
-        key=0
-        if argc==2:
-            key=argv[1]
-        else:
-            print("Usage: %s KEY"%argv[0])
-
-        cls = get_active_window_class()
-        if 'Firefox' in cls: # my configuration for Pentadactyl
-            if key=='1':
-                send_key('shift+h')
-            if key=='2':
-                send_key('shift+l')
-            if key=='3':
-                send_key('Escape')
-                send_key('r')
-        if 'Inkscape' in cls:
-            if key=='1':
-                send_key('F1')
-            if key=='2':
-                send_key('F2')
-            if key=='3':
-                send_key('ctrl+F6')
-        if key=='4':
-            # toggle finger touch
-            p=Popen(['xsetwacom','--get','Wacom Bamboo 16FG 4x5 Finger touch','Touch'],stdout=PIPE)
-            stat  = p.communicate()[0].decode('ascii').strip()
-            istat = 'on' if 'off' in stat else 'off'
-            Popen(['xsetwacom','--set','Wacom Bamboo 16FG 4x5 Finger touch','Touch',istat])
-        return 0
-
-    if __name__ == '__main__':
-        main(len(sys.argv),sys.argv)
-
-  
-
 TwinView Setup
 
 If you are going to use two Monitors the aspect ratio while using the
@@ -695,6 +574,12 @@ For more information checkout the Setting up GIMP section of GIMP Talk -
 Community - Install Guide: Getting Wacom Drawing Tablets To Work In
 Gimp.
 
+If the above was not enough, you may want to try setting up the tablet's
+stylus (and eraser) as a second mouse pointer (separating it from your
+mouse) by using the xinput create-master and xinput reattach commands.
+It can help when GIMP doesn't start painting even if the stylus touches
+the tablet.
+
 > Inkscape
 
 As in The GIMP, to do the same simply got to File → Input Devices....
@@ -702,6 +587,10 @@ Now for each of your eraser, stylus, and cursor devices, set the mode to
 Screen, and remember to save.
 
 > Krita
+
+If your tablet doesn't draw in Krita (clicks/pressure are not
+registered) but works in the brush selection dialog which has a small
+test area, try putting Krita in full-screen or canvas-only mode.
 
 Krita 2.0 and later only require that QT is able to use your tablet to
 function properly. If your tablet is not working in Krita, then make
@@ -715,12 +604,6 @@ Krita... Click on Tablet and then like in Inkscape and GIMP set stylus
 and any others' mode to screen.
 
 > VirtualBox
-
-My current setup is :
-
-     Guest OS: Windows XP
-     Tablet: Wacom Graphire4
-     Linux Driver: xf86-input-wacom 0.8.4-1
 
 First, make sure that your tablet works well under Arch. Then, download
 and install the last driver from Wacom website on the guest OS. Shutdown
@@ -748,178 +631,9 @@ thread. There seems to be a problem with the CTH670 that is fixed in the
 attachment found in this post To compile it use the same instructions as
 in this thread
 
-  
-
-Dynamic Xorg setup with HAL (deprecated)
-----------------------------------------
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: HAL support was  
-                           dropped in Xorg 1.8      
-                           which entered the repos  
-                           in June 2010, it should  
-                           not be used anymore      
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
-
-  
-
-Note: In Xorg 1.8 and later, support for HAL is dropped. Input
-hotplugging will NOT work with these versions of X, you need to use udev
-(see above) instead.
-
-Note: The linuxwacom package from AUR already includes a fitting fdi
-file, so you might skip this part and just try out if it works after
-installing linuxwacom and restarting X.
-
-To use a Wacom/WALTOP/N-Trig tablet with HAL Xorg hotplugging create
-/etc/hal/fdi/policy/10-tablet.fdi with this code:
-
-    <?xml version="1.0" encoding="UTF-8"?> <!-- -*- SGML -*- -->
-
-    <deviceinfo version="0.2">
-     <device>
-       <match key="info.capabilities" contains="input">
-         <match key="info.product" contains="Wacom">
-           <merge key="input.x11_driver" type="string">wacom</merge>
-           <merge key="input.x11_options.Type" type="string">stylus</merge>
-         </match>
-         <match key="info.product" contains="WALTOP">
-           <merge key="input.x11_driver" type="string">wacom</merge>
-           <merge key="input.x11_options.Type" type="string">stylus</merge>
-         </match>
-       </match>
-       <match key="info.product" contains="HID 1b96:0001">
-         <match key="info.parent" contains="if0">
-          <merge key="input.x11_driver" type="string">wacom</merge>
-          <merge key="input.x11_options.Type" type="string">stylus</merge>
-         </match>
-       </match>
-      </device>
-     </deviceinfo>
-
-Then kill your X server, restart HAL and start the X server again.
-
-Following fdi file is known to work with the Bamboo Fun tablet (model
-CTE-650). Using this file corrects several problems with the stylus that
-appear when using the default fdi file above. Create the file
-/etc/hal/fdi/policy/10-tablet.fdi with the following contents:
-
-    <?xml version="1.0" encoding="UTF-8"?>
-    <deviceinfo version="0.2">
-      <device>
-        <match key="info.category" contains="input">
-          <match key="info.product" contains_outof="Wacom">
-            <merge key="input.x11_driver" type="string">wacom</merge>
-            <merge key="input.x11_options.Type" type="string">pad</merge>
-            <append key="info.callouts.add" type="strlist">hal-setup-wacom</append>
-            <append key="wacom.types" type="strlist">eraser</append>
-            <append key="wacom.types" type="strlist">cursor</append>
-            <append key="wacom.types" type="strlist">stylus</append>
-          </match>
-        </match>
-        <match key="info.capabilities" contains="serial">
-          <match key="@info.parent:pnp.id" contains_outof="WACf001;WACf002;WACf003;WACf004;WACf005;WACf006;WACf007;WACf008;WACf009;WACf00a;WACf00b;WACf00c;FUJ02e5">
-            <append key="info.capabilities" type="strlist">input</append>
-            <merge key="input.x11_driver" type="string">wacom</merge>
-            <merge key="input.x11_options.Type" type="string">pad</merge>
-            <merge key="input.x11_options.ForceDevice" type="string">ISDV4</merge>
-            <merge key="input.device" type="copy_property">serial.device</merge>
-            <append key="info.callouts.add" type="strlist">hal-setup-wacom</append>
-            <append key="wacom.types" type="strlist">stylus</append>
-            <match key="@info.parent:pnp.id" contains_outof="WACf008;WACf009">
-              <append key="wacom.types" type="strlist">touch</append>
-            </match>
-          </match>
-        </match>
-      </device>
-      <device>
-        <match key="info.capabilities" contains="input.mouse">
-          <match key="info.product" contains="WACOM">
-            <match key="info.product" contains="Tablet">
-              <merge key="input.x11_driver" type="string">wacom</merge>
-              <merge key="input.x11_options.Type" type="string">pad</merge>
-              <append key="info.callouts.add" type="strlist">hal-setup-wacom</append>
-              <append key="wacom.types" type="strlist">eraser</append>
-              <append key="wacom.types" type="strlist">cursor</append>
-              <append key="wacom.types" type="strlist">stylus</append>
-            </match>
-          </match>
-        </match>
-      </device>
-    </deviceinfo>
-
-> HAL tablet calibration fix
-
-In order for calibration to work even when the screen is rotated (this
-applies for both serial and USB tablets), the wacom-names script is
-useful. It renames your X input devices so that they can be recognized
-by the linuxwacom driver. Download it from here. You need to be a Ubuntu
-forums member to download it. If you are not, here is the script.
-Remember, it was originally intended for Ubuntu so the instructions do
-not all apply to us Archers:
-
-    # wacom-names script by Roger E. Critchlow, Jr. (4-12-09)
-    #   modified by gali98/Favux (4-14-09)
-    #
-    # Place the wacom-names script in  /etc/init.d/wacom-names and link it as
-    # /etc/rc{2,3,4,5}.d/S27wacom-names.
-    # Use "sudo update-rc.d wacom start 27 2 3 4 5 ." or "sudo update-rc.d wacom defaults 27".
-    # Using S27 starts the script after hal and before gdm.  This allows us to modify the hal
-    # properties before the xserver sees them for the first time.
-    #
-    # The script renames the input devices back to what wacomcpl and xsetwacom expect them to
-    # be, so rotation and interactive calibration work.  It also enables xorg.conf & .xinitrc
-    # style configuration of Wacom features like the stylus button(s) and calibration.
-    #
-    # The script needs to be executable.  chmod +x wacom-names
-
-    #! /bin/sh
-    ## find any wacom devices
-    for udi in `hal-find-by-property --key input.x11_driver --string wacom`
-    do
-    type=`hal-get-property --udi $udi --key input.x11_options.Type`
-    ## rewrite the names that the Xserver will use
-    hal-set-property --udi $udi --key info.product --string $type
-    #
-    ## To add a xorg.conf or xsetwacom (.xinitrc) style configuration, say mapping a stylus
-    ## button, you could add to the script:
-    #case $type in
-    #stylus|eraser)
-    ## eg:  map stylus button 2 to mouse button 3 (right click)
-    #hal-set-property --udi $udi --key input.x11_options.Button2 --string 3
-    #
-    #;;
-    #esac
-    done
-
-Copy and paste and (or directly) save it as wacom-names to /etc/rc.d and
-make it an executable.
-
-    # chmod +x /etc/rc.d/wacom-names
-
-Add wacom-names to the DAEMONS line in your rc.conf. Make sure to put it
-after HAL, and do not background HAL, because this script will not work
-if it runs before HAL has started. For example:
-
-    DAEMONS=(syslog-ng @crond hal @acpid @alsa @gpm wacom-names)
-
-Reboot your computer. From here you can either keep wacom-names in your
-rc.conf if your rotation script calls on xsetwacom directly, or if you
-just need the calibration data, you can now use wacomcpl.
-
-If you are looking for more information, this thread at the Ubuntu
-forums is incredibly useful, and also provided the link to Rec's
-wacom-names script.
-
-  
-
 References
 ----------
 
--   Gentoo Linux Wiki - HOWTO Wacom Tablet
 -   Linux Wacom Project Wiki
 -   GIMP Talk - Community - Install Guide: Getting Wacom Drawing Tablets
     To Work In Gimp
@@ -927,8 +641,15 @@ References
 -   Ubuntu Forums - Install a LinuxWacom Kernel Driver for Tablet PC's
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Wacom_Tablet&oldid=248421"
+"https://wiki.archlinux.org/index.php?title=Wacom_Tablet&oldid=303656"
 
 Category:
 
--   Input devices
+-   Graphics tablet
+
+-   This page was last modified on 8 March 2014, at 21:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

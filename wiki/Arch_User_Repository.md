@@ -1,41 +1,24 @@
 Arch User Repository
 ====================
 
-> Summary
+Related articles
 
-The Arch User Repository is a collection of user-submitted PKGBUILDs
-that supplement software available from the official repositories. This
-article describes how to build unsupported software packages from the
-AUR.
-
-> Overview
-
-Packages in Arch Linux are built using makepkg and a custom build script
-for each package (known as a PKGBUILD). Once packaged, software can be
-installed and managed with pacman. PKGBUILDs for software in the
-official repositories are available from the ABS tree; thousands more
-are available from the (unsupported) Arch User Repository.
-
-> Related
-
-AUR Helpers
-
-AurJson
-
-AUR Trusted User Guidelines
-
-> Resources
-
-AUR Web Interface
-
-AUR Mailing List
+-   AUR Helpers
+-   AurJson
+-   AUR Trusted User Guidelines
+-   PKGBUILD
+-   makepkg
+-   pacman
+-   AUR Metadata
+-   Official repositories
+-   Arch Build System
 
 The Arch User Repository (AUR) is a community-driven repository for Arch
 users. It contains package descriptions (PKGBUILDs) that allow you to
 compile a package from source with makepkg and then install it via
 pacman. The AUR was created to organize and share new packages from the
 community and to help expedite popular packages' inclusion into the
-[community] repository. This document explains how users can access and
+community repository. This document explains how users can access and
 utilize the AUR.
 
 A good number of new packages that enter the official repositories start
@@ -43,50 +26,48 @@ in the AUR. In the AUR, users are able to contribute their own package
 builds (PKGBUILD and related files). The AUR community has the ability
 to vote for or against packages in the AUR. If a package becomes popular
 enough — provided it has a compatible license and good packaging
-technique — it may be entered into the [community] repository (directly
+technique — it may be entered into the community repository (directly
 accessible by pacman or abs).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Getting started                                                    |
-| -   2 History                                                            |
-| -   3 Searching                                                          |
-| -   4 Installing packages                                                |
-|     -   4.1 Prerequisites                                                |
-|     -   4.2 Acquire build files                                          |
-|     -   4.3 Build the package                                            |
-|     -   4.4 Install the package                                          |
-|                                                                          |
-| -   5 Feedback                                                           |
-| -   6 Sharing and maintaining packages                                   |
-|     -   6.1 Submitting packages                                          |
-|     -   6.2 Maintaining packages                                         |
-|     -   6.3 Other requests                                               |
-|                                                                          |
-| -   7 [community]                                                        |
-| -   8 Git Repo                                                           |
-| -   9 FAQ                                                                |
-|     -   9.1 Q: What is the AUR?                                          |
-|     -   9.2 Q: What kind of packages are permitted on the AUR?           |
-|     -   9.3 Q: What is a TU?                                             |
-|     -   9.4 Q: What is the difference between the Arch User Repository   |
-|         and [community]?                                                 |
-|     -   9.5 Q: How many votes does it take to get a PKGBUILD into        |
-|         [community]?                                                     |
-|     -   9.6 Q: How do I make a PKGBUILD?                                 |
-|     -   9.7 Q: I'm trying to run "pacman -S foo"; it is not working but  |
-|         I know it is in [community]                                      |
-|     -   9.8 Q: Foo in AUR is outdated; what do I do?                     |
-|     -   9.9 Q: I have a PKGBUILD I would like to submit; can someone     |
-|         check it to see if there are any errors?                         |
-|     -   9.10 Q: Foo in AUR does not compile when I run makepkg; what     |
-|         should I do?                                                     |
-|     -   9.11 Q: How can I speed up repeated build processes?             |
-|     -   9.12 Q: How do I access unsupported packages?                    |
-|     -   9.13 Q: How can I upload to AUR without using the web interface? |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Getting started
+-   2 History
+-   3 Searching
+-   4 Installing packages
+    -   4.1 Prerequisites
+    -   4.2 Acquire build files
+    -   4.3 Build the package
+    -   4.4 Install the package
+-   5 Feedback
+-   6 Sharing and maintaining packages
+    -   6.1 Submitting packages
+    -   6.2 Maintaining packages
+    -   6.3 Other requests
+-   7 community repository
+-   8 Git repository
+-   9 FAQ
+    -   9.1 Q: What is the AUR?
+    -   9.2 Q: What kind of packages are permitted on the AUR?
+    -   9.3 Q: How can I vote for packages in AUR?
+    -   9.4 Q: What is a TU?
+    -   9.5 Q: What is the difference between the Arch User Repository
+        and community?
+    -   9.6 Q: How many votes does it take to get a PKGBUILD into
+        community?
+    -   9.7 Q: How do I make a PKGBUILD?
+    -   9.8 Q: I'm trying to run "pacman -S foo"; it is not working but
+        I know it is in community
+    -   9.9 Q: Foo in AUR is outdated; what do I do?
+    -   9.10 Q: I have a PKGBUILD I would like to submit; can someone
+        check it to see if there are any errors?
+    -   9.11 Q: Foo in AUR does not compile when I run makepkg; what
+        should I do?
+    -   9.12 Q: How can I speed up repeated build processes?
+    -   9.13 Q: How do I access unsupported packages?
+    -   9.14 Q: How can I upload to AUR without using the web interface?
+-   10 See also
 
 Getting started
 ---------------
@@ -96,7 +77,7 @@ These PKGBUILDs can be built into installable packages using makepkg,
 then installed using pacman.
 
 -   Ensure the base-devel group package is installed
-    (pacman -S base-devel).
+    (pacman -S --needed base-devel).
 -   Read the remainder of this article for more info and a short
     tutorial on installing AUR packages.
 -   Visit the AUR Web Interface to inform yourself on updates and
@@ -136,8 +117,8 @@ accessing the AUR from a script (for example) can be found here.
 
 Queries search package names and descriptions via a MySQL LIKE
 comparison. This allows for more flexible search criteria (e.g. try
-searching for 'tool%like%grep' instead of 'tool like grep'). If you need
-to search for a description that contains '%', escape it with '\%'.
+searching for tool%like%grep instead of tool like grep). If you need to
+search for a description that contains %, escape it with \%.
 
 Installing packages
 -------------------
@@ -164,12 +145,9 @@ but can ease in searching, fetching, building, and installing from
 PKGBUILDs found in the AUR. All of these scripts can be found in the
 AUR.
 
-Note:There is not and will never be an official mechanism for installing
-build material from the AUR. All AUR users should be familiar with the
-build process.
-
-What follows is a detailed example of installation of a package called
-"foo".
+Warning:There is not and will never be an official mechanism for
+installing build material from the AUR. All AUR users should be familiar
+with the build process.
 
 > Prerequisites
 
@@ -182,7 +160,7 @@ and AUR packages will not list members of this group as dependencies
 even if the package cannot be built without them. Please ensure this
 group is installed before complaining about failed builds.
 
-    # pacman -S base-devel
+    # pacman -S --needed base-devel
 
 Next choose an appropriate build directory. A build directory is simply
 a directory where the package will be made or "built" and can be any
@@ -211,10 +189,16 @@ saved to the build directory or otherwise copied to the directory after
 downloading. In this example, the file is called "foo.tar.gz" (standard
 format is pkgname.tar.gz, if it has been properly submitted).
 
+Alternatively you can download the tarball from the terminal, changing
+directories to the build directory first:
+
+    $ cd ~/builds
+    $ curl -O https://aur.archlinux.org/packages/fo/foo/foo.tar.gz
+
 > Build the package
 
-Extract the tarball. Change directories to the build directory if not
-already there and extract the build files.
+Change directories to the build directory if not already there, then
+extract the previously downloaded package:
 
     $ cd ~/builds
     $ tar -xvzf foo.tar.gz
@@ -236,7 +220,7 @@ not build the package and seek advice on the forums or mailing list.
     $ nano foo.install
 
 Make the package. After manually confirming the integrity of the files,
-run makepkg as a normal user in the build directory.
+run makepkg as a normal user.
 
     $ makepkg -s
 
@@ -277,17 +261,12 @@ use a pastebin.
 
 One of the easiest activities for all Arch users is to browse the AUR
 and vote for their favourite packages using the online interface. All
-packages are eligible for adoption by a TU for inclusion in [community],
-and the vote count is one of the considerations in that process; it is
-in everyone's interest to vote!
+packages are eligible for adoption by a TU for inclusion in community
+repository, and the vote count is one of the considerations in that
+process; it is in everyone's interest to vote!
 
 Sharing and maintaining packages
 --------------------------------
-
-The user plays an essential role in the AUR, which cannot fulfill its
-potential without the support, involvement, and contribution of the
-wider user community. The life-cycle of an AUR package starts and ends
-with the user and requires the user to contribute in several ways.
 
 Users can share PKGBUILDs using the Arch User Repository. It does not
 contain any binary packages but allows users to upload PKGBUILDs that
@@ -297,16 +276,20 @@ risk.
 
 > Submitting packages
 
+Warning:Before attempting to submit a package you are expected to
+familiarize yourself with Arch Packaging Standards and all articles,
+mentioned at the bottom of it.
+
 After logging in to the AUR web interface, a user can submit a gzipped
 tarball (.tar.gz) of a directory containing build files for a package.
-The directory inside the tarball should contain a PKGBUILD, any .install
-files, patches, etc. (absolutely no binaries). Examples of what such a
-directory should look like can be seen inside /var/abs if the Arch Build
-System was installed.
+The directory inside the tarball should contain a PKGBUILD, .AURINFO,
+any .install files, patches, etc. (absolutely no binaries). Examples of
+what such a directory should look like can be seen inside /var/abs if
+the Arch Build System was installed.
 
 The tarball can be created with the following command:
 
-    $ makepkg --source 
+    $ makepkg --source
 
 Note that this is a gzipped tarball; assuming you are uploading a
 package called libfoo, when you create the file it should look similar
@@ -322,8 +305,8 @@ When submitting a package, observe the following rules:
 
 -   Check the official package database for the package. If any version
     of it exists, do not submit the package. If the official package is
-    out of date, flag it. If the official package is broken or is
-    lacking a feature then please file a bug report.
+    out-of-date, flag it as such. If the official package is broken or
+    is lacking a feature, then please file a bug report.
 -   Check the AUR for the package. If it is currently maintained,
     changes can be submitted in a comment for the maintainer's
     attention. If it is unmaintained, the package can be adopted and
@@ -337,9 +320,9 @@ When submitting a package, observe the following rules:
 -   Packages that contain binaries or that are very poorly written may
     be deleted without warning.
 -   If you are unsure about the package (or the build/submission
-    process) in any way, submit the PKGBUILD to the AUR Mailing List or
-    the AUR boards on the forum for public review before adding it to
-    the AUR.
+    process) in any way, submit the PKGBUILD to the AUR mailing list or
+    the AUR forum on the Arch forums for public review before adding it
+    to the AUR.
 -   Make sure the package is useful. Will anyone else want to use this
     package? Is it extremely specialized? If more than a few people
     would find this package useful, it is appropriate for submission.
@@ -351,13 +334,12 @@ When submitting a package, observe the following rules:
     software.
 -   Gain some experience before submitting packages. Build a few
     packages to learn the process and then submit.
--   If you submit a package.tar.gz with a file named 'package' in it you
-    will get an error: 'Could not change to directory
-    /home/aur/unsupported/package/package'. To resolve this, rename the
-    file named 'package' to something else, for example, 'package.rc'.
-    When it is installed in the pkg directory you may rename it back to
-    'package'. Make sure to also read Arch Packaging
-    Standards#Submitting packages to the AUR.
+-   If you submit a package.tar.gz with a file named package in it you
+    will get an error: "Could not change to directory
+    /home/aur/unsupported/package/package". To resolve this, rename the
+    file named package to something else; for example, package.rc. When
+    it is installed in the pkg directory, you may rename it back to
+    package.
 
 > Maintaining packages
 
@@ -376,7 +358,7 @@ When submitting a package, observe the following rules:
 > Other requests
 
 -   Disownment requests and removal requests go to the aur-general
-    mailing list for TUs and other users to decide upon.
+    mailing list for Trusted Users and other users to decide upon.
 -   Include package name and URL to AUR page, preferably with a footnote
     [1].
 -   Disownment requests will be granted two weeks after the current
@@ -398,12 +380,12 @@ When submitting a package, observe the following rules:
 Removal requests can be disapproved, in which case you will likely be
 advised to disown the package for a future packager's reference.
 
-[community]
------------
+community repository
+--------------------
 
-The [community] repository, maintained by Trusted Users, contains the
-most popular packages from the AUR. It is enabled by default in
-/etc/pacman.conf. If [community] has been disabled or removed, it can be
+The community repository, maintained by Trusted Users, contains the most
+popular packages from the AUR. It is enabled by default in
+/etc/pacman.conf. If community has been disabled or removed, it can be
 enabled by uncommenting or adding these two lines:
 
     /etc/pacman.conf
@@ -416,23 +398,22 @@ enabled by uncommenting or adding these two lines:
 This repository, unlike the AUR, contains binary packages that can be
 installed directly with pacman and the build files can also be accessed
 with the ABS. Some of these packages may eventually make the transition
-to the [core] or [extra] repositories as the developers consider them
+to the core or extra repositories as the developers consider them
 crucial to the distribution.
 
-Users can also access the [community] build files by editing
-/etc/abs.conf and enabling the [community] repository in the REPOS
-array.
+Users can also access the community build files by editing /etc/abs.conf
+and enabling the community repository in the REPOS array.
 
-Git Repo
---------
+Git repository
+--------------
 
-A Git Repo of the AUR is maintained by Thomas Dziedzic providing package
-history among other things. It is updated at least once a day. To clone
-the repository (several hundred MB):
+A Git repository of the AUR is maintained by Thomas Dziedzic, which
+provides package history among other things. It is updated at least once
+per day. To clone the repository (several hundred MB):
 
     $ git clone git://pkgbuild.com/aur-mirror.git
 
-More informations: Web interface, forum thread.
+For more information: Web interface, forum thread.
 
 FAQ
 ---
@@ -442,7 +423,7 @@ Q: What is the AUR?
 A: The AUR (Arch User Repository) is a place where the Arch Linux
 community can upload PKGBUILDs of applications, libraries, etc., and
 share them with the entire community. Fellow users can then vote for
-their favorites to be moved into the [community] repository to be shared
+their favorites to be moved into the community repository to be shared
 with Arch Linux users in binary form.
 
 Q: What kind of packages are permitted on the AUR?
@@ -457,37 +438,42 @@ name itself as the source. This means and requires that users already
 have the restricted source in the build directory prior to building the
 package. When in doubt, ask.
 
+Q: How can I vote for packages in AUR?
+
+A: Sign up on the AUR website to get a "Vote for this package" option
+while browsing packages.
+
 Q: What is a TU?
 
 A: A TU (Trusted User) is a person who is chosen to oversee AUR and the
-[community] repository. They are the ones who maintain popular PKGBUILDs
-in [community], and overall keep the AUR running.
+community repository. They are the ones who maintain popular PKGBUILDs
+in community, and overall keep the AUR running.
 
-Q: What is the difference between the Arch User Repository and [community]?
+Q: What is the difference between the Arch User Repository and community?
 
 A: The Arch User Repository is where all PKGBUILDs that users submit are
 stored, and must be built manually with makepkg. When PKGBUILDs receive
 enough community interest and the support of a TU, they are moved into
-the [community] repository (maintained by the TUs), where the binary
+the community repository (maintained by the TUs), where the binary
 packages can be installed with pacman.
 
-Q: How many votes does it take to get a PKGBUILD into [community]?
+Q: How many votes does it take to get a PKGBUILD into community?
 
 A: Usually, at least 10 votes are required for something to move into
-[community]. However, if a TU wants to support a package, it will often
-be found in the repository.
+community. However, if a TU wants to support a package, it will often be
+found in the repository.
 
 Q: How do I make a PKGBUILD?
 
 A: The best resource is Creating Packages. Remember to look in AUR
 before creating the PKGBUILD as to not duplicate efforts.
 
-Q: I'm trying to run "pacman -S foo"; it is not working but I know it is in [community]
+Q: I'm trying to run "pacman -S foo"; it is not working but I know it is in community
 
-A: You probably have not enabled [community] in your /etc/pacman.conf.
-Just uncomment the relevant lines. If [community] is enabled in your
-/etc/pacman.conf try running pacman -S -y first to synchronize the
-pkgcache before trying your package again.
+A: You probably have not enabled community in your /etc/pacman.conf.
+Just uncomment the relevant lines. If community is enabled in your
+/etc/pacman.conf try running pacman -Syu first to synchronize the
+pkgcache and update your system before trying to install foo again.
 
 Q: Foo in AUR is outdated; what do I do?
 
@@ -541,11 +527,24 @@ Q: How can I upload to AUR without using the web interface?
 A: You can use burp, aurploader or aurup — these are command-line
 programs.
 
+See also
+--------
+
+-   AUR Web Interface
+-   AUR Mailing List
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_User_Repository&oldid=256081"
+"https://wiki.archlinux.org/index.php?title=Arch_User_Repository&oldid=303106"
 
 Categories:
 
 -   Arch User Repository
 -   Package development
 -   Package management
+
+-   This page was last modified on 3 March 2014, at 22:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

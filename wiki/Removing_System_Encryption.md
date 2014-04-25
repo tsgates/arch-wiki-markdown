@@ -10,22 +10,19 @@ Removing System Encryption
 
 Removing system encryption with dm-crypt and LUKS.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-| -   2 Boot into a Live Environment                                       |
-| -   3 Activate Partitions                                                |
-|     -   3.1 Note About Different Setups                                  |
-|     -   3.2 Once Partitions Are Located                                  |
-|         -   3.2.1 Mounting backup space                                  |
-|                                                                          |
-| -   4 Backup Data                                                        |
-| -   5 Undo Encryption                                                    |
-| -   6 Restore Data                                                       |
-| -   7 Reconfigure the Operating System                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequisites
+-   2 Boot into a Live Environment
+-   3 Activate Partitions
+    -   3.1 Note About Different Setups
+    -   3.2 Once Partitions Are Located
+        -   3.2.1 Mounting backup space
+-   4 Backup Data
+-   5 Undo Encryption
+-   6 Restore Data
+-   7 Reconfigure the Operating System
 
 Prerequisites
 -------------
@@ -35,6 +32,11 @@ Prerequisites
 -   Enough drive space to store a backup.
 -   An Arch Linux (or other) live CD.
 -   A few hours.
+
+Note:As of late 2012 new tools have been added to cryptsetup to add or
+remove encryption to/from an existing file system. While they are still
+considered experimental, they may help considerably with such an effort.
+More information is available with man cryptsetup-reencrypt.
 
 Boot into a Live Environment
 ----------------------------
@@ -168,8 +170,15 @@ You need to boot into your operating system and edit /etc/crypttab,
 /etc/mkinitcpio.conf, /etc/fstab, and possibly /boot/grub/menu.lst.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Removing_System_Encryption&oldid=254949"
+"https://wiki.archlinux.org/index.php?title=Removing_System_Encryption&oldid=304917"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 16 March 2014, at 09:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

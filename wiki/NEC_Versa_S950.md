@@ -1,33 +1,30 @@
 NEC Versa S950
 ==============
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Specs                                                              |
-| -   3 Setup                                                              |
-|     -   3.1 CPU                                                          |
-|     -   3.2 Text Console                                                 |
-|     -   3.3 Xorg/video                                                   |
-|     -   3.4 Xorg/input                                                   |
-|     -   3.5 Hitachi HDD                                                  |
-|     -   3.6 Sound and Ethernet                                           |
-|     -   3.7 Wi-Fi                                                        |
-|     -   3.8 Bluetooth                                                    |
-|     -   3.9 IrDA                                                         |
-|     -   3.10 FireWire                                                    |
-|     -   3.11 CardBus (PCMCIA)                                            |
-|     -   3.12 Card reader                                                 |
-|     -   3.13 Framebuffer                                                 |
-|     -   3.14 Modem                                                       |
-|                                                                          |
-| -   4 External display                                                   |
-| -   5 Hibernation                                                        |
-| -   6 Basic disassembly                                                  |
-| -   7 Usage notes                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 Specs
+-   3 Setup
+    -   3.1 CPU
+    -   3.2 Text Console
+    -   3.3 Xorg/video
+    -   3.4 Xorg/input
+    -   3.5 Hitachi HDD
+    -   3.6 Sound and Ethernet
+    -   3.7 Wi-Fi
+    -   3.8 Bluetooth
+    -   3.9 IrDA
+    -   3.10 FireWire
+    -   3.11 CardBus (PCMCIA)
+    -   3.12 Card reader
+    -   3.13 Framebuffer
+    -   3.14 Modem
+-   4 External display
+-   5 Hibernation
+-   6 Basic disassembly
+-   7 Usage notes
 
 Overview
 --------
@@ -399,3 +396,10 @@ Retrieved from
 Category:
 
 -   Laptops
+
+-   This page was last modified on 4 December 2012, at 14:51.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -3,25 +3,20 @@ Open Database Connectivity
 
 An ODBC engine needs drivers to be able to interact with databases.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 ODBC engines                                                       |
-|     -   1.1 unixODBC                                                     |
-|         -   1.1.1 Installation                                           |
-|         -   1.1.2 Configuration                                          |
-|                                                                          |
-|     -   1.2 iODBC                                                        |
-|                                                                          |
-| -   2 Drivers                                                            |
-|     -   2.1 FreeTDS                                                      |
-|         -   2.1.1 Installation                                           |
-|         -   2.1.2 Configuration                                          |
-|                                                                          |
-| -   3 Databases                                                          |
-|     -   3.1 Microsoft SQL Server 2000                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 ODBC engines
+    -   1.1 unixODBC
+        -   1.1.1 Installation
+        -   1.1.2 Configuration
+    -   1.2 iODBC
+-   2 Drivers
+    -   2.1 FreeTDS
+        -   2.1.1 Installation
+        -   2.1.2 Configuration
+-   3 Databases
+    -   3.1 Microsoft SQL Server 2000
 
 ODBC engines
 ------------
@@ -95,3 +90,10 @@ Retrieved from
 Category:
 
 -   Database management systems
+
+-   This page was last modified on 9 February 2013, at 09:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

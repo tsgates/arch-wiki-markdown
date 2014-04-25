@@ -4,10 +4,10 @@ Mouse Polling Rate
 If you have invested in a high resolution mouse, adjusting the USB
 polling rate is a common trick to utilise the added precision it brings.
 The polling rate (or report rate) determines how often the mouse sends
-information to your computer. Measured in Hz, this setting equates to
-lag time (in ms).
+information to your computer. Measured in Hertz (Hz), this setting
+equates to lag time (in ms).
 
-By default, the USB polling rate is set at 125hz. The table below
+By default, the USB polling rate is set at 125 Hz. The table below
 represents combinations of Hz values and their corresponding delay time:
 
   Hz     ms
@@ -61,29 +61,14 @@ Displaying current mouse rate
 -----------------------------
 
 A tool exists (named evhz) that can display the current mouse refresh
-rate -- useful when checking that your customised polling settings have
+rate -- useful when checking that your customized polling settings have
 been applied.
 
-The original source no longer exists ([1]), so a mirror has been
-provided here: evhz.c. Full credit goes to the original author, Alan
-Kivlin.
+evhz.c
 
 Compile it with:
 
     gcc -o evhz evhz.c
-
-> Note:
-
-If compiling fails with the following message
-
-    evhz.c: In function ‘main’:
-    evhz.c:36:2: warning: incompatible implicit declaration of built-in function ‘memset’ [enabled by default]
-
-Add
-
-    #include <string.h>
-
-To the includes part of the code and retry.
 
 Then execute as root:
 
@@ -99,8 +84,15 @@ Further Reading
     though the same principles apply for Linux.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mouse_Polling_Rate&oldid=211601"
+"https://wiki.archlinux.org/index.php?title=Mouse_Polling_Rate&oldid=304905"
 
 Category:
 
 -   Mice
+
+-   This page was last modified on 16 March 2014, at 09:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

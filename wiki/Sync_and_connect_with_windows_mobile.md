@@ -7,23 +7,21 @@ with activesync in windows. It uses the kde app synce-kde, but gnome and
 *box users can relax, the only qt-deps are qscintilla-2.3.2-2 and
 pyqt-4.4.4-2. And they are small.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Connecting to your phone                                           |
-| -   3 Troubleshooting                                                    |
-| -   4 Other problems                                                     |
-| -   5 Work with PocketPC files from file manager                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Connecting to your phone
+-   3 Troubleshooting
+-   4 Other problems
+-   5 Work with PocketPC files from file manager
 
 Installation
 ------------
 
 1.  Install synce-odccm and synce-kde,available in the Official
-    Repositories.
-2.  Install synce-sync-engine, available in the Official Repositories.
+    repositories.
+2.  Install synce-sync-engine, available in the Official repositories.
 
 Connecting to your phone
 ------------------------
@@ -98,8 +96,15 @@ the following to your fstab:
     none /mnt/synce cefs rw,user,noauto,codadev=/dev/cfs0 0 0
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sync_and_connect_with_windows_mobile&oldid=206360"
+"https://wiki.archlinux.org/index.php?title=Sync_and_connect_with_windows_mobile&oldid=301531"
 
 Category:
 
 -   Mobile devices
+
+-   This page was last modified on 24 February 2014, at 11:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

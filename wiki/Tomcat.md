@@ -5,38 +5,32 @@ Tomcat is an open source Java Servlet container developed by the Apache
 Software Foundation. For more information about basic configuration,
 see:Tomcat and Apache
 
-Note:Tomcat currently exists under two stable branches: 6 and 7. Tomcat
-7 does not deprecate tomcat 6. Instead, each branch is the
-implementation of a couple of the "Servlet" and "JSP" Java standards.
-Both versions are officially supported in Arch Linux: tomcat6 and
-tomcat7. Check the version you need depending on your web applications
-requirements. If you just want to try out tomcat or just do not want to
-spend more time figuring out, there are good chances you will want to
-try tomcat7. This wiki page refers to tomcat7 but most of its content
-can be applied to tomcat6.
+Note:Tomcat currently exists under three stable branches: 6, 7 and 8.
+None of these version deprecates the preceding. Instead, each branch is
+the implementation of a couple of the "Servlet" and "JSP" Java
+standards. All versions are officially supported in Arch Linux: tomcat6,
+tomcat7 and tomcat8. Check the version you need depending on your web
+applications requirements. If you just want to try out tomcat or just do
+not want to spend more time figuring out, there are good chances you
+will want to try tomcat7. This wiki page refers to tomcat7 but most of
+its content can be applied to tomcat6 and tomcat8.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Filesystem hierarchy                                         |
-|                                                                          |
-| -   2 Initial configuration                                              |
-| -   3 Start/stop Tomcat                                                  |
-|     -   3.1 Systemd                                                      |
-|     -   3.2 The old way                                                  |
-|     -   3.3 Alternate "manual" way                                       |
-|                                                                          |
-| -   4 Deploy and handle web applications                                 |
-|     -   4.1 The GUI way                                                  |
-|     -   4.2 The CLI way                                                  |
-|                                                                          |
-| -   5 Further setup                                                      |
-|     -   5.1 Migrating from previous versions of Tomcat                   |
-|     -   5.2 Using Tomcat with a different JRE/JDK                        |
-|     -   5.3 Security configuration                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Filesystem hierarchy
+-   2 Initial configuration
+-   3 Start/stop Tomcat
+    -   3.1 Alternate "manual" way
+-   4 Deploy and handle web applications
+    -   4.1 The GUI way
+    -   4.2 The CLI way
+-   5 Logging
+-   6 Further setup
+    -   6.1 Migrating from previous versions of Tomcat
+    -   6.2 Using Tomcat with a different JRE/JDK
+    -   6.3 Security configuration
 
 Installation
 ------------
@@ -45,6 +39,7 @@ See the previous paragraph to choose which version to install:
 
     pacman -S tomcat6
     pacman -S tomcat7
+    pacman -S tomcat8
 
 If using out of a development environment (e.g. production), consider
 installing tomcat-native:
@@ -63,9 +58,7 @@ the following warning in catalina.err:
   /usr/share/tomcat7         Main Tomcat folder containing scripts and links to other directories
   /usr/share/java/tomcat7    Tomcat Java libraries (jars)
   /etc/tomcat7               Configuration files. Among some: tomcat-users.xml (defines users allowed to use administration tools and their roles), server.xml (Main Tomcat configuration file), catalina.policy (security policies configuration file)
-  /etc/rc.d/tomcat7          Start/stop daemon script
-  /etc/conf.d/tomcat7        Default running option file. Use this file rather than the rc.d script to set the JVM you want Tomcat to be run with, options to pass to Tomcat through the environment variable CATALINA_OPTS, ...
-  /var/log/tomcat7           Log files (catalina.err: startup log, catalina.out: output from stdout, others are access logs and business logs defined in /etc/tomcat7/server.xml as Valve)
+  /var/log/tomcat7           Log files not handled by systemd (see #Logging)
   /var/lib/tomcat7/webapps   Where Tomcat deploys your web applications
   /var/tmp/tomcat7           Where Tomcat store your webapps' data
 
@@ -107,46 +100,30 @@ made to this file.
 This blog post gives a good description of these roles.
 
 To have read permissions on the configuration files and work well with
-some IDEs, you must add your user to the tomcat group:
+some IDEs, you must add your user to the tomcat (tomcat6,tomcat7 or
+tomcat8 depending on your version) group:
 
-     gpasswd -a <user> tomcat
+     gpasswd -a <user> tomcat<number>
 
 Start/stop Tomcat
 -----------------
 
-Once Tomcat is started using one of the following method, you can visit
-this page to see the result: http://localhost:8080. If a nice Tomcat
-local home page is displayed this means your Servlet container is up and
-running and ready to host you web apps. If the startup script failed or
-you can only see a Java error displayed in you browser, have a look at
-startup logs in /var/log/tomcat7/catalina.err ("catalina" is the name of
-Tomcat's servlet container). Google is full of answers on recurrent
-issues found in Tomcat logs.
-
-> Systemd
-
-To start with systemd use:
+You can start Tomcat by running:
 
     systemctl start tomcat7
 
-> The old way
-
-Just use the usual Arch Linux script:
-
-    /etc/rc.d/tomcat {start|stop|restart|status}
-
-As usual one can add tomcat to the DAEMONS array of the rc.conf to make
-it start at boot.
-
-Some configuration for this startup script is contained in the file
-/etc/conf.d/tomcat7, which includes the location of Java etc. Check this
-file if you get errors when starting Tomcat with this method (see
-#Further setup).
+Once Tomcat is started, you can visit this page to see the result:
+http://localhost:8080. If a nice Tomcat local home page is displayed
+this means your Servlet container is up and running and ready to host
+you web apps. If the startup script failed or you can only see a Java
+error displayed in you browser, have a look at startup logs using
+systemd's journalctl. Google is full of answers on recurrent issues
+found in Tomcat logs.
 
 Note:To improve security, Arch Linux's Tomcat packages use the jsvc
-binary from Apache's common-daemons. Tomcat rc.d script runs this Apache
-binary with root privileges which itself starts Tomcat with an
-underprivileged user (tomcat:tomcat in Arch Linux). This prevents
+binary from Apache's common-daemons. Tomcat's systemd service runs this
+Apache binary with root privileges which itself starts Tomcat with an
+underprivileged user (tomcat7:tomcat7 in Arch Linux). This prevents
 malicious code that could be executed in a bad web application from
 causing too much damage. This also enables the use of ports under 1024
 if needed. See man jsvc for options available and pass them through the
@@ -202,6 +179,21 @@ option is still set for the right host as shown here:
           unpackWARs="true" autoDeploy="true">
     ...
 
+Logging
+-------
+
+Tomcat when used with official Arch Linux packages uses systemd's
+journalctl for startup log. This means that files
+/var/log/tomcat7/catalina.err and /var/log/tomcat7/catalina.out are not
+used. Other logs such as access logs and business logs defined in
+/etc/tomcat7/server.xml as Valve will still by default end up in
+/var/log/tomcat7/.
+
+To restore upstream style logging, copy systemd file
+/lib/systemd/system/tomcat7.service to
+/etc/systemd/system/tomcat7.service and change both SYSLOG for the
+absolute paths of log files.
+
 Further setup
 -------------
 
@@ -224,17 +216,16 @@ the official website gives instructions on how to handle such a process.
 > Using Tomcat with a different JRE/JDK
 
 Apart from installing the desired JRE/JDK, the only requirement is to
-set the TOMCAT_JAVA_HOME variable in /etc/conf.d/tomcat{,6,7}. This
-variable is used by Tomcat's rc.d script. The following example shows
-how to setup Tomcat to use jre/jdk from community:
+set the TOMCAT_JAVA_HOME variable in Tomcat's systemd service file.
 
-    /etc/conf.d/tomcat{,6,7}
+The service file is /usr/lib/systemd/system/tomcat7.service, copy it to
+/etc/systemd/system/ and replace this line:
 
-    # The JAVA_HOME of the JVM for Tomcat to use
-    # (compulsory to enable tomcat to start at boot)
-    TOMCAT_JAVA_HOME=/opt/java
+       Environment=TOMCAT_JAVA_HOME=/usr/lib/jvm/java-7-openjdk
 
-    [...]
+by (e.g. for Oracle JDK)
+
+       Environment=TOMCAT_JAVA_HOME=/opt/java
 
 > Security configuration
 
@@ -330,8 +321,15 @@ that file!
 -   Always know what you are deploying
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tomcat&oldid=255801"
+"https://wiki.archlinux.org/index.php?title=Tomcat&oldid=304915"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 16 March 2014, at 09:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

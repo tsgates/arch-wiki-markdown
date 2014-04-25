@@ -1,158 +1,203 @@
 PCManFM
 =======
 
-PCManFM is "an extremely fast, lightweight, yet feature-rich file
-manager with tabbed browsing". Source: PCManFM on sourceforge. PCManFM
-is the default file manager of the LXDE (Lightweight X11 Desktop
-Environment).
+Related articles
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Volume handling                                                    |
-|     -   2.1 Auto Mounting USB external storage devices                   |
-|     -   2.2 Mounting with udisks                                         |
-|     -   2.3 Trash support, browsing network shares, and automounting     |
-|         with gvfs                                                        |
-|                                                                          |
-| -   3 Tips & troubleshooting                                             |
-|     -   3.1 No "Applications"                                            |
-|     -   3.2 No icons?                                                    |
-|     -   3.3 NTFS Read/Write Support                                      |
-|     -   3.4 gnome-open opens "Find" dialog instead of the directory      |
-|     -   3.5 No "Previous/Next Folder" functionality with mouse buttons   |
-|     -   3.6 One click for open folders and files                         |
-|     -   3.7 --desktop parameter not working / crashing X-server          |
-|     -   3.8 Terminal emulator advanced configuration not saved           |
-|     -   3.9 Make PCManFM remember your preferred Sort Files settings     |
-|     -   3.10 "Not authorized" errors when accessing/mounting USB drives  |
-|                                                                          |
-| -   4 Available Versions                                                 |
-|     -   4.1 PCManFM2                                                     |
-|     -   4.2 PCManFM-Mod                                                  |
-|     -   4.3 PCManFM_with_Search                                          |
-+--------------------------------------------------------------------------+
+-   LXDE
+-   Openbox
+-   File manager functionality
+-   Thunar
+-   Nautilus
+-   Nemo
+
+From the project home page:
+
+PCMan File Manager (PCManFM) is a file manager application developed by
+Hong Jen Yee from Taiwan which is meant to be a replacement for
+Nautilus, Konqueror and Thunar. Released under the GNU General Public
+License, PCManFM is free software. PCManFM is the standard file manager
+in LXDE, which is also developed by the same author in conjunction with
+other developers.
+
+Contents
+--------
+
+-   1 Installation
+-   2 Desktop management
+    -   2.1 Desktop preferences
+    -   2.2 Creating new icons
+-   3 Daemon mode
+-   4 Autostarting
+-   5 Additional features and functionality
+-   6 Tips and tricks
+    -   6.1 One click for open folders and files
+    -   6.2 Open or Extract Archives with PCManFM
+-   7 Troubleshooting
+    -   7.1 No "Applications"
+    -   7.2 No icons
+    -   7.3 No "Previous/Next Folder" functionality with mouse buttons
+    -   7.4 --desktop parameter not working or crashing X-server
+    -   7.5 Terminal emulator advanced configuration not saved
+    -   7.6 Make PCManFM remember your preferred Sort Files settings
+    -   7.7 "Not authorized" errors when accessing/mounting USB drives
+    -   7.8 Operation not supported
 
 Installation
 ------------
 
-Run the following command to install:
+pcmanfm is available in the official repositories.
 
-    # pacman -S pcmanfm
+It's recommended to install gvfs for trash support, mounting with udisk
+and remote filesystems.
 
-You will also require gamin (a replacement for FAM, which required a
-daemon) to pick up events such as file and directories changes:
+Notable variants are:
 
-    # pacman -S gamin
+-   pcmanfm-git - Development version.
+-   pcmanfm-qt - New Qt implementation.
+-   pcmanfm-qt-git - New Qt implementation, development version.
 
-Volume handling
+Desktop management
+------------------
+
+The command to allow PCManFM to set wallpapers and enable the use of
+desktop icons is:
+
+    pcmanfm --desktop
+
+The native desktop menu of the window manager will be replaced with that
+provided by PCManFM. However, it can easily be restored from the PCManFM
+menu itself by selecting Desktop preferences and then enabling the
+Right click shows WM menu option in the Desktop tab.
+
+> Desktop preferences
+
+If using the native desktop menu provided by a window manager, enter the
+following command to set or amend desktop preferences at any time:
+
+    $ pcmanfm --desktop-pref
+
+It is worthwhile to consider adding this command to a keybind and/or the
+native desktop menu for easy access.
+
+> Creating new icons
+
+User content such as text files, documents, images and so forth can be
+dragged and dropped directly onto the desktop. To create shortcuts for
+applications it will be necessary to copy their .desktop files to the
+~/Desktop directory itself. Do not drag and drop the files there as they
+will be moved completely. The syntax of the command to do so is:
+
+    cp /usr/share/applications/<name of application>.desktop ~/Desktop
+
+For example - where installed - to create a desktop shortcut for
+lxterminal, the following command would be used:
+
+    cp /usr/share/applications/lxterminal.desktop ~/Desktop
+
+For those who used the Xdg user directories program to create their
+$HOME directories no further configuration will be required.
+
+Daemon mode
+-----------
+
+The session or autostart command to run PCManFM as a daemon / background
+process (i.e. to automount removable media such as CD/DVDs and USB
+flash-drives) is:
+
+    pcmanfm -d
+
+Autostarting
+------------
+
+How PCManFM may be autostarted as a daemon process or to manage the
+desktop for a standalone window manager will depend on the window
+manager itself. For example, to enable management of the desktop for
+Openbox, the following command would be added to the
+~/.config/openbox/autostart file:
+
+    pcmanfm --desktop &
+
+Review the relevant wiki article and/or official home page for a
+particular installed or intended window manager. Should a window manager
+not provide an autostart file, PCManFM may be alternatively autostarted
+by editing one or both of the following files:
+
+-   xinitrc: When using the SLiM display manager or Startx command
+-   xprofile: When using a display manager such as LXDM or LightDM
+
+Additional features and functionality
+-------------------------------------
+
+Less experienced users should be aware that a file manager alone -
+especially when installed in a standalone Window manager such as Openbox
+- will not provide the features and functionality users of full desktop
+environments such as Xfce and KDE will be accustomed to. Review the file
+manager functionality article for further information.
+
+Tips and tricks
 ---------------
 
-PCManFM is able to mount and unmount devices, both manually and
-automatically. This feature is offered as an alternative to CLI tools
-such as pmount. There are various 'up-to-date' versions of PCManFM (see
-below), and different volume handling strategies can be chosen.
+> One click for open folders and files
 
-> Auto Mounting USB external storage devices
+Open PCManFM in file explorer mode, go to Edit > Preferences > General >
+Behavior, and select Open files with a simple click. This option works
+with desktop icons too.
 
-To auto mount USB external storage devices only simply install gvfs:
+> Open or Extract Archives with PCManFM
 
-    # pacman -S gvfs
+Install file-roller or xarchiver from the official repositories.
 
-If they do not auto mount after installing, try rebooting your system
-and try again.
+Open PCManFM in file explorer mode, go to Edit > Preferences > Advanced,
+select Archiver Integration and select your installed archiver.
 
-> Mounting with udisks
-
-The current release of PCManFM is able to handle volumes through udisks.
-If you want to use this feature, make sure the D-Bus daemon is installed
-and running. See the D-Bus page for details.
-
-> Trash support, browsing network shares, and automounting with gvfs
-
-To resolve the "Operation not supported" error when clicking on Trash
-Can, you must do the following steps:  
-
-1. Install package gvfs  
- 2. Start pcmanfm only using the following command: dbus-launch
-pcmanfm  
-
-To browse network shares:  
- 1. Install packages gvfs gvfs-smb gvfs-afp  
- 2. Start pcmanfm only using the following command: dbus-launch
-pcmanfm  
- 3. Type smb://<server name>/<share name> to access Windows / CIFS /
-Samba file shares  
- 4. Type afp://<server name>/<share name> to access AFP file shares
-
-Tips & troubleshooting
-----------------------
+Troubleshooting
+---------------
 
 > No "Applications"
-
-    # pacman -S gnome-menus
 
 You can try this method: Delete all files in the $HOME/.cache/menus
 directory, and run PCManFM again.
 
-PCManFM requires the environment variable "XDG_MENU_PREFIX" to be set.
-The value of the variable should match the beginning of a file present
-in the "/etc/xdg/menus/" directory. In case you have installed the
-"gnome-menus" package, you can set the value in your .xinitrc file with
-the line :
+PCManFM requires the environment variable XDG_MENU_PREFIX to be set. The
+value of the variable should match the beginning of a file present in
+the /etc/xdg/menus/ directory. E.g. you can set the value in your
+.xinitrc file with the line:
 
-    $ export XDG_MENU_PREFIX=gnome-
+    export XDG_MENU_PREFIX="lxde-"
 
-See these threads for more informations : [1], and especially this post
-from the Linux Mint Forums [2]
+See these threads for more informations: [1], and especially this post
+from the Linux Mint forums: [2]
 
-> No icons?
+> No icons
 
 If you are using a WM instead of a DE and you have no icons for folders
-and files, specify a gtk icon theme:
+and files, specify a GTK+ icon theme.
 
-Edit ~/.gtkrc-2.0 or /etc/gtk-2.0/gtkrc and add the following line:
+If you have e.g. oxygen-icons installed, edit ~/.gtkrc-2.0 or
+/etc/gtk-2.0/gtkrc and add the following line:
 
     gtk-icon-theme-name = "oxygen"
 
 Note:All instances of PCManFM have to be restarted for changes to apply!
 
-If you do not have oxygen-icons installed, use an different one (gnome,
-hicolor, and locolor do not work). To list all installed icon themes:
+Else, use an different one (gnome, hicolor, and locolor do not work). To
+list all installed icon themes:
 
-    ls ~/.icons /usr/share/icons/
+    $ ls ~/.icons/ /usr/share/icons/
 
 If none of them is suitable, install one. To list all installable icon
 packages:
 
-    pacman -Ss icon-theme
+    $ pacman -Ss icon-theme
 
 Tip:For an alternative GUI solution, install lxappearance and apply an
 icon theme from there.
 
-> NTFS Read/Write Support
-
-Install ntfs-3g (See NTFS-3G):
-
-    # pacman -S ntfs-3g
-
-> gnome-open opens "Find" dialog instead of the directory
-
-Remove or rename the file /usr/share/applications/pcmanfm-find.desktop.
-If you're running pcmanfm-mod from AUR, remove or rename the file
-/usr/share/applications/pcmanfm-mod-find.desktop.
-
 > No "Previous/Next Folder" functionality with mouse buttons
 
-A method to fix this is with Xbindkeys:
+A method to fix this is with Xbindkeys.
 
-Install xbindkeys:
-
-    # pacman -S xbindkeys
-
-Edit ~/.xbindkeysrc to contain the following:
+Install xbindkeys and edit ~/.xbindkeysrc to contain the following:
 
     # Sample .xbindkeysrc for a G9x mouse.
     "/usr/bin/xvkbd -text '\[Alt_L]\[Left]'"
@@ -160,24 +205,17 @@ Edit ~/.xbindkeysrc to contain the following:
     "/usr/bin/xvkbd -text '\[Alt_L]\[Right]'"
      b:9
 
-Actual button codes can be obtained with package xorg-xev
+Actual button codes can be obtained with package xorg-xev.
 
-Add
+Add:
 
     xbindkeys &
 
 to your ~/.xinitrc to execute xbindkeys on log-in.
 
-> One click for open folders and files
+> --desktop parameter not working or crashing X-server
 
-Open PCManFM in file explorer mode, and go to: Edit > Preferences and in
-geral > behavior select Open files with a simple click
-
-this option work in the pcmanfm --desktop too
-
-> --desktop parameter not working / crashing X-server
-
-Make sure you have ownership and write permissions on ~/.config/pcmanfm
+Make sure you have ownership and write permissions on ~/.config/pcmanfm.
 
 Setting the wallpaper either by using the --desktop-pref parameter or
 editing ~/.config/pcmanfm/default/pcmanfm.config solves the problem.
@@ -186,65 +224,43 @@ editing ~/.config/pcmanfm/default/pcmanfm.config solves the problem.
 
 Make sure you have rights on libfm configuration file:
 
-    # chmod -R 755 ~/.config/libfm
-    # chmod 777 ~/.config/libfm/libfm.conf
+    $ chmod -R 755 ~/.config/libfm
+    $ chmod 777 ~/.config/libfm/libfm.conf
 
 > Make PCManFM remember your preferred Sort Files settings
 
-You can use View | Sort Files to change the order in which PCManFM lists
+You can use View > Sort Files to change the order in which PCManFM lists
 the files, but PCManFM won't remember that the next time you start it.
-To make it remember, go to Edit | Preferences and Close. That will write
+To make it remember, go to Edit > Preferences and close. That will write
 your current sort_type and sort_by values into
 ~/.config/pcmanfm/LXDE/pcmanfm.conf.
 
 > "Not authorized" errors when accessing/mounting USB drives
 
-In various WM (in use with PolicyKit), You might receive an "Not
-authorized" errors when trying to access e.g. an USB drive.
+See the no password to access partitions and removable media section of
+the File manager functionality article.
 
-If not existing, create (including the directory actions, which ain't
-existing by default in there)
-/etc/polkit-1/actions/org.freedesktop.udisks2.pkla to contain the
-following:
+> Operation not supported
 
-    [Storage Permissions]
-    Identity=unix-group:storage
-    Action=org.freedesktop.udisks2.filesystem-mount;org.freedesktop.udisks2.modify-device
-    ResultAny=yes
-    ResultInactive=yes
-    ResultActive=yes
+If you get this error while trying to use automount, network or rubbish
+bin features, try launching pcmanfm with
 
-Available Versions
-------------------
+    $ dbus-launch pcmanfm
 
-There are several versions of PCManFM currently available:
-
-> PCManFM2
-
-This is the package in Arch's extra repository as "pcmanfm". The current
-git test version of it is available in the AUR as pcmanfm-git. More
-information is available on the LXDE Forum.
-
-> PCManFM-Mod
-
-PCManFM-Mod adds user-definable commands, other features, and bugfixes
-to the legacy version of the PCManFM file manager v0.5.2. This version
-builds and installs as "pcmanfm-mod" and will run independently of other
-versions of PCManFM you have installed on your system. This legacy
-version is still desired by some due to more stability than the newer
-0.9.x rewrite in progress, less Gnome dependencies, and the use of HAL
-rather than gnome-vfs. PCManFM-Mod is available in the AUR as
-pcmanfm-mod and as pcmanfm-mod-prov (latter provides pcmanfm). More
-information is available at IgnorantGuru's Blog.
-
-> PCManFM_with_Search
-
-Latest PCmanFM version with search dialog in the AUR as
-pcmanfm_with_search.
+If that does not help you might not have the necessary dependencies
+(gvfs, gamin, udisks2, maybe others). This probably only affects non-DE
+environments.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PCManFM&oldid=250685"
+"https://wiki.archlinux.org/index.php?title=PCManFM&oldid=301203"
 
 Category:
 
 -   File managers
+
+-   This page was last modified on 24 February 2014, at 11:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

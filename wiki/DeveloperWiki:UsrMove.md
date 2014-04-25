@@ -3,21 +3,19 @@ DeveloperWiki:UsrMove
 
 This page is for planning.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Stage 1: Packages with files in /lib                               |
-|     -   1.1 libraries                                                    |
-|     -   1.2 initcpio                                                     |
-|     -   1.3 systemd service files                                        |
-|     -   1.4 udev rules                                                   |
-|     -   1.5 modprobe                                                     |
-|     -   1.6 firmware                                                     |
-|     -   1.7 security                                                     |
-|     -   1.8 modules                                                      |
-|     -   1.9 left until the very end                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Stage 1: Packages with files in /lib
+    -   1.1 libraries
+    -   1.2 initcpio
+    -   1.3 systemd service files
+    -   1.4 udev rules
+    -   1.5 modprobe
+    -   1.6 firmware
+    -   1.7 security
+    -   1.8 modules
+    -   1.9 left until the very end
 
 Stage 1: Packages with files in /lib
 ------------------------------------
@@ -237,3 +235,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 5 July 2012, at 00:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

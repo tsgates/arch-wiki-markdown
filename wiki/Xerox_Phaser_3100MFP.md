@@ -1,26 +1,22 @@
 Xerox Phaser 3100MFP
 ====================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-|     -   2.1 Grabbing drivers                                             |
-|     -   2.2 Printer                                                      |
-|         -   2.2.1 Identifying printer problem                            |
-|         -   2.2.2 Installing missed libraries                            |
-|                                                                          |
-|     -   2.3 Scanner                                                      |
-|         -   2.3.1 Installing scanner driver                              |
-|         -   2.3.2 Installing necessary libraries and binaries            |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 I can't download <filename>                                  |
-|     -   3.2 I get "error while loading shared libraries"                 |
-|     -   3.3 "Local Printers:" shows blank in CUPS "Add Printer" page.    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+    -   2.1 Grabbing drivers
+    -   2.2 Printer
+        -   2.2.1 Identifying printer problem
+        -   2.2.2 Installing missed libraries
+    -   2.3 Scanner
+        -   2.3.1 Installing scanner driver
+        -   2.3.2 Installing necessary libraries and binaries
+-   3 Troubleshooting
+    -   3.1 I can't download <filename>
+    -   3.2 I get "error while loading shared libraries"
+    -   3.3 "Local Printers:" shows blank in CUPS "Add Printer" page.
 
 Introduction
 ============
@@ -100,7 +96,7 @@ Now open http://localhost:631 in your browser, add printer and try to
 print test page. If it's ok, then you are really lucky, but most likely
 you'll see this error message:
 
-Error:/usr/lib/cups/filter/rastertoprinter failed
+    Error: /usr/lib/cups/filter/rastertoprinter failed
 
 > Identifying printer problem
 
@@ -117,8 +113,7 @@ Restart CUPS:
 Then restart last job and take a look at error log again, you'll see
 something like this:
 
-Error:[Job 1] /usr/lib/cups/filter/rastertoprinter: line 14:
-/usr/lib/cups/filter/rastertoprinterbin: No such file or directory
+    Error: [Job 1] /usr/lib/cups/filter/rastertoprinter: line 14: /usr/lib/cups/filter/rastertoprinterbin: No such file or directory
 
 As you remember, Xerox told us, that drivers were 32bit only, so we have
 to install necessary libraries. Use this to see, what libraries are
@@ -266,9 +261,7 @@ lack of correct symlink, in this case you should create/fix symlink. For
 example, when rastertoprinterbin fails to load shared library in CUPS
 error log it looks like:
 
-Error:[Job 1] /usr/lib/cups/filter/watermarkfilter: error while loading
-shared libraries: libpng14.so.14: cannot open shared object file: No
-such file or directory
+    Error: [Job 1] /usr/lib/cups/filter/watermarkfilter: error while loading shared libraries: libpng14.so.14: cannot open shared object file: No such file or directory
 
 First of all, check if this library is installed properly. Then check
 symlinks. Also you may need to run ldconfig after symlinks creation.
@@ -289,8 +282,15 @@ the "Model" list when adding the printer, if selecting one does not
 work, try repeat adding the printer and try selecting the other.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xerox_Phaser_3100MFP&oldid=252069"
+"https://wiki.archlinux.org/index.php?title=Xerox_Phaser_3100MFP&oldid=286816"
 
 Category:
 
 -   Printers
+
+-   This page was last modified on 7 December 2013, at 09:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -13,18 +13,16 @@ not work. See below for a method to upgrade your BIOS.
 Contact the author of this wiki with any problems or suggestions
 (lagagnon at gmail.com) (English or Spanish).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Specification                                                      |
-| -   2 What Works Without Any Configuration?                              |
-| -   3 What Works With Minimal Configuration?                             |
-| -   4 What Does Not Work?                                                |
-| -   5 Not Tested                                                         |
-| -   6 Configurations                                                     |
-| -   7 Upgrading your BIOS                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Specification
+-   2 What Works Without Any Configuration?
+-   3 What Works With Minimal Configuration?
+-   4 What Does Not Work?
+-   5 Not Tested
+-   6 Configurations
+-   7 Upgrading your BIOS
 
 Specification
 -------------
@@ -291,3 +289,10 @@ Retrieved from
 Category:
 
 -   Toshiba
+
+-   This page was last modified on 18 August 2012, at 10:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

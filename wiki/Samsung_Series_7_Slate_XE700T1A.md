@@ -1,32 +1,27 @@
 Samsung Series 7 Slate XE700T1A
 ===============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Specification                                               |
-| -   2 Installation                                                       |
-| -   3 Network                                                            |
-|     -   3.1 Wireless                                                     |
-|     -   3.2 Bluetooth                                                    |
-|                                                                          |
-| -   4 Buttons                                                            |
-| -   5 Graphics                                                           |
-| -   6 TouchScreen                                                        |
-|     -   6.1 Screen Rotation                                              |
-|         -   6.1.1 Rotate on button press (Gnome)                         |
-|                                                                          |
-|     -   6.2 Multitouch                                                   |
-|                                                                          |
-| -   7 Accelerometer/Magenetometer                                        |
-| -   8 Sound                                                              |
-| -   9 Webcam                                                             |
-| -   10 Accessories                                                       |
-|     -   10.1 Dock                                                        |
-|     -   10.2 Keyboard                                                    |
-|     -   10.3 Stylus                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 System Specification
+-   2 Installation
+-   3 Network
+    -   3.1 Wireless
+    -   3.2 Bluetooth
+-   4 Buttons
+-   5 Graphics
+-   6 TouchScreen
+    -   6.1 Screen Rotation
+        -   6.1.1 Rotate on button press (Gnome)
+    -   6.2 Multitouch
+-   7 Accelerometer/Magenetometer
+-   8 Sound
+-   9 Webcam
+-   10 Accessories
+    -   10.1 Dock
+    -   10.2 Keyboard
+    -   10.3 Stylus
 
 System Specification
 --------------------
@@ -65,7 +60,7 @@ buttons and the lock button pressed simultaneously are left and right.
 
 Use this to enable Legacy USB. This allowed me to use a USB keyboard,
 and gave me the option to boot from USB. From here it's your classic
-Arch install. (Official Installation Guide)
+Arch install. (Installation guide)
 
 Network
 -------
@@ -179,7 +174,7 @@ Rotate on button press (Gnome)
 You can set the screen to rotate when you press a key combination, or
 the side buttons if you have set them up #Buttons above. Go to System
 Settings > Keyboard > Shortcuts > Custom Shortcuts Click the add button
-and under the commans, add the path to slate.sh -r. Eg:
+and under the commands, add the path to slate.sh -r. Eg:
 
     /home/USERNAME/scripts/slate.sh -r
 
@@ -213,7 +208,7 @@ up and running. Once I do, I'll post instructions on the LSM303DLH page.
 Sound
 -----
 
-After installing Gnome, the sound works without any extras. The rocker
+After installing GNOME, the sound works without any extras. The rocker
 buttons on the side also work without any problems.
 
 Webcam
@@ -267,8 +262,15 @@ meaning that you can write your notes, whilst resting you hand on the
 tablet.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Samsung_Series_7_Slate_XE700T1A&oldid=246731"
+"https://wiki.archlinux.org/index.php?title=Samsung_Series_7_Slate_XE700T1A&oldid=304809"
 
 Category:
 
 -   Samsung
+
+-   This page was last modified on 16 March 2014, at 07:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

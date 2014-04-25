@@ -14,20 +14,17 @@ IBM ThinkPad T30
 Extensive information about Linux on the T30 can be found at [1]. What
 follows here are details specific to Arch Linux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Configuration                                                      |
-|     -   1.1 Modules                                                      |
-|         -   1.1.1 cpufreq Drivers                                        |
-|         -   1.1.2 Wireless Drivers                                       |
-|         -   1.1.3 Sound Drivers                                          |
-|                                                                          |
-|     -   1.2 Networking                                                   |
-|     -   1.3 ACPI                                                         |
-|     -   1.4 Xorg                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Configuration
+    -   1.1 Modules
+        -   1.1.1 cpufreq Drivers
+        -   1.1.2 Wireless Drivers
+        -   1.1.3 Sound Drivers
+    -   1.2 Networking
+    -   1.3 ACPI
+    -   1.4 Xorg
 
 Configuration
 -------------
@@ -108,3 +105,10 @@ Retrieved from
 Category:
 
 -   IBM
+
+-   This page was last modified on 23 April 2012, at 13:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

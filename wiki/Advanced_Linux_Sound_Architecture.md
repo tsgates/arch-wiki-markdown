@@ -1,6 +1,12 @@
 Advanced Linux Sound Architecture
 =================================
 
+Related articles
+
+-   Sound system
+-   Disable PC Speaker Beep
+-   Advanced Linux Sound Architecture/Example Configurations
+
 The Advanced Linux Sound Architecture (ALSA) is a Linux kernel component
 which replaced the original Open Sound System (OSSv3) for providing
 device drivers for sound cards. Besides the sound device drivers, ALSA
@@ -11,82 +17,66 @@ the kernel drivers.
 Note:For an alternative sound environment, see the Open Sound System
 page.
 
-> Summary
+Contents
+--------
 
-Using, configuring and troubleshooting ALSA.
-
-> Related
-
-Sound system
-
-Disable PC Speaker Beep
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 User-space utilities                                         |
-|                                                                          |
-| -   2 Unmuting the channels                                              |
-| -   3 Configuration                                                      |
-|     -   3.1 No sound in virtualbox                                       |
-|     -   3.2 Set the default sound card                                   |
-|     -   3.3 Making sure the sound modules are loaded                     |
-|     -   3.4 Getting SPDIF Output                                         |
-|     -   3.5 System-Wide Equalizer                                        |
-|         -   3.5.1 Using AlsaEqual (provides UI)                          |
-|             -   3.5.1.1 Managing AlsaEqual States                        |
-|                                                                          |
-|         -   3.5.2 Using mbeq                                             |
-|                                                                          |
-| -   4 High quality resampling                                            |
-| -   5 Upmixing/Downmixing                                                |
-|     -   5.1 Upmixing                                                     |
-|     -   5.2 Downmixing                                                   |
-|                                                                          |
-| -   6 Mixing                                                             |
-|     -   6.1 Software mixing (dmix)                                       |
-|     -   6.2 Hardware mixing                                              |
-|         -   6.2.1 Support                                                |
-|         -   6.2.2 Fixes                                                  |
-|                                                                          |
-| -   7 Troubleshooting                                                    |
-|     -   7.1 Sound Skipping While Using Dynamic Frequency Scaling         |
-|     -   7.2 Problems with Availability to Only One User at a Time        |
-|     -   7.3 Simultaneous Playback Problems                               |
-|     -   7.4 Random Lack of Sound on Startup                              |
-|         -   7.4.1 Timidity                                               |
-|                                                                          |
-|     -   7.5 Specific Program Problems                                    |
-|     -   7.6 Model Settings                                               |
-|     -   7.7 Conflicting PC Speaker                                       |
-|     -   7.8 No Microphone Input                                          |
-|     -   7.9 Setting the default Microphone/Capture Device                |
-|     -   7.10 Internal Microphone not working                             |
-|     -   7.11 No Sound with Onboard Intel Sound Card                      |
-|     -   7.12 No Headphone Sound with Onboard Intel Sound Card            |
-|     -   7.13 No sound when S/PDIF video card is installed                |
-|     -   7.14 Poor sound quality or clipping                              |
-|     -   7.15 Pops When Starting and Stopping Playback                    |
-|     -   7.16 S/PDIF Output Does Not Work                                 |
-|     -   7.17 HDMI Output Does Not Work                                   |
-|     -   7.18 HDMI Multi-channel PCM output does not work (Intel)         |
-|     -   7.19 HP TX2500                                                   |
-|     -   7.20 Skipping Sound When Playing MP3                             |
-|     -   7.21 Using a USB Headset and External USB Sound Cards            |
-|         -   7.21.1 Crackling sound with USB devices                      |
-|         -   7.21.2 Hot-plugging a USB Sound Card                         |
-|                                                                          |
-|     -   7.22 Error 'Unknown hardware' Appears After a Kernel Update      |
-|     -   7.23 HDA Analyzer                                                |
-|     -   7.24 ALSA with SDL                                               |
-|     -   7.25 Low Sound Workaround                                        |
-|     -   7.26 Popping sound after resuming from suspension                |
-|                                                                          |
-| -   8 Example configurations                                             |
-| -   9 See also                                                           |
-+--------------------------------------------------------------------------+
+-   1 Installation
+    -   1.1 User-space utilities
+-   2 Unmuting the channels
+-   3 Configuration
+    -   3.1 Set the default sound card
+        -   3.1.1 Select the default PCM via environment variable
+        -   3.1.2 Alternative method
+    -   3.2 Making sure the sound modules are loaded
+    -   3.3 Getting SPDIF output
+    -   3.4 System-wide equalizer
+        -   3.4.1 Using AlsaEqual (provides UI)
+            -   3.4.1.1 Managing AlsaEqual states
+        -   3.4.2 Using mbeq
+-   4 High quality resampling
+-   5 Upmixing/downmixing
+    -   5.1 Upmixing
+    -   5.2 Downmixing
+-   6 Mixing
+    -   6.1 Manually enabling dmix
+-   7 Troubleshooting
+    -   7.1 No sound in VirtualBox
+    -   7.2 Sound skipping while using dynamic frequency scaling
+    -   7.3 Problems with availability to only one user at a time
+    -   7.4 Simultaneous playback problems
+    -   7.5 Random lack of sound on startup
+        -   7.5.1 Timidity
+    -   7.6 Specific program problems
+    -   7.7 Model settings
+    -   7.8 Conflicting PC speaker
+    -   7.9 No microphone input
+    -   7.10 Crackling in microphone
+    -   7.11 Setting the default microphone/capture device
+    -   7.12 Internal microphone not working
+    -   7.13 No sound with onboard Intel sound card
+    -   7.14 No headphone sound with onboard Intel sound card
+    -   7.15 No sound when S/PDIF video card is installed
+    -   7.16 Poor sound quality or clipping
+    -   7.17 Pops when starting and stopping playback
+    -   7.18 S/PDIF output does not work
+    -   7.19 HDMI output does not work
+    -   7.20 HDMI multi-channel PCM output does not work (Intel)
+    -   7.21 HP TX2500
+    -   7.22 Skipping sound when playing MP3
+    -   7.23 Using a USB headset and external USB sound cards
+        -   7.23.1 Crackling sound with USB devices
+        -   7.23.2 Hot-plugging a USB sound card
+    -   7.24 Error 'Unknown hardware' appears after a kernel update
+    -   7.25 HDA analyzer
+    -   7.26 ALSA with SDL
+    -   7.27 Low sound workaround
+    -   7.28 Popping sound after resuming from suspension
+    -   7.29 Mute after reboot
+    -   7.30 Volume too low
+    -   7.31 alsamixer F3 and F4 key issue
+    -   7.32 Removing old ALSA state file (asound.state)
+    -   7.33 HDMI 5.1 sound goes to wrong speakers
+-   8 See also
 
 Installation
 ------------
@@ -109,19 +99,15 @@ the audio group is not recommended, unless you specifically need to[1].
 
 > User-space utilities
 
-From official repositories:
+Install the alsa-utils package from the official repositories which
+contains the alsamixer user-space tool, which allows for configuration
+of the sound device from the console or terminal. Also install the
+alsa-plugins package if you want high quality resampling,
+upmixing/downmixing and other advanced features.
 
--   Install the alsa-utils package which contains the alsamixer
-    user-space tool, which allows for configuration of the sound device
-    from the console or terminal.
--   Install the alsa-oss package if you want OSS applications to work
-    with dmix (software mixing).
-
-Note:Since udev >= 171, the OSS emulation modules (snd_seq_oss,
-snd_pcm_oss, snd_mixer_oss) are not automatically loaded by default.
-
--   Install the alsa-plugins package if you want high quality
-    resampling, upmixing/downmixing and other advanced features.
+If you want OSS applications to work with dmix (software mixing), also
+install the alsa-oss package. Load the snd_seq_oss, snd_pcm_oss and
+snd_mixer_oss kernel modules to enable the OSS emulation modules.
 
 Unmuting the channels
 ---------------------
@@ -137,8 +123,8 @@ Alternatively, use amixer from the command-line:
 
     $ amixer sset Master unmute
 
-m In alsamixer, the MM label below a channel indicates that the channel
-is muted, and 00 indicates that it is open.
+In alsamixer, the MM label below a channel indicates that the channel is
+muted, and 00 indicates that it is open.
 
 Scroll to the Master and PCM channels with the ← and → keys and unmute
 them by pressing the m key. Use the ↑ key to increase the volume and
@@ -165,8 +151,10 @@ Leave alsamixer by pressing Esc.
     channel.
 -   Some machines, (like the Thinkpad T61), have a Speaker channel which
     must be unmuted and adjusted as well.
--   Some machines, (like Dell E6400) may also require the Front and
+-   Some machines, (like the Dell E6400) may also require the Front and
     Headphone channels to be unmuted and adjusted.
+-   If your volume adjustments seems to be lost when you reboot, try
+    running alsamixer as root.
 
 Next, test to see if sound works:
 
@@ -176,29 +164,16 @@ Change -c to fit your speaker setup. Use -c 8 for 7.1, for instance:
 
     $ speaker-test -c 8
 
-If it does not work, proceed to #Configuration and then #Troubleshooting
+If it does not work, proceed to Configuration and then Troubleshooting
 to solve your problems.
 
 The alsa-utils package includes alsa-restore.service and
 alsa-store.service, which are preconfigured to run at boot and shutdown
-respectively.
+respectively. For reference, ALSA stores its settings in
+/var/lib/alsa/asound.state.
 
 Configuration
 -------------
-
-> No sound in virtualbox
-
-If you experience problems with virtualbox, the following command might
-be helpful:
-
-    $ alsactl init
-
-
-    Found hardware: "ICH" "SigmaTel STAC9700,83,84" "AC97a:83847600" "0x8086" "0x0000"
-    Hardware is initialized using a generic method
-
-You might need to activate the ALSA output in your audio software as
-well.
 
 > Set the default sound card
 
@@ -213,11 +188,11 @@ your mia sound card to be #0:
     options snd_mia index=0
     options snd_hda_intel index=1
 
-lsmod | grep snd to get a devices list
-
-snd_mia and snd_hda_intel are the modules used by the respective cards.
-This configuration assumes you have one mia sound card and one card
-using snd_hda_intel (e.g. onboard).
+Use $ cat /proc/asound/modules to get the loaded sound modules and their
+order. This list is usually all that is needed for the loading order.
+Use $ lsmod | grep snd to get a devices & modules list. This
+configuration assumes you have one mia sound card using snd_mia and one
+(e.g. onboard) card using snd_hda_intel.
 
 You can also provide an index of -2 to instruct ALSA to never use a card
 as the primary one. Distributions such as Linux Mint and Ubuntu use the
@@ -237,20 +212,37 @@ getting index 0:
     options snd-usb-ua101 index=-2
     options snd-usb-us122l index=-2
     options snd-usb-usx2y index=-2
-    # Keep snd-pcsp from being loaded as first soundcard
     options snd-pcsp index=-2
-    # Keep snd-usb-audio from beeing loaded as first soundcard
     options snd-usb-audio index=-2
 
 These changes require a system reboot.
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: These            
-                           instructions may not     
-                           work. (Discuss)          
-  ------------------------ ------------------------ ------------------------
+Select the default PCM via environment variable
+
+In your configuration file, preferably global, add:
+
+     pcm.!default {
+       type plug
+       slave.pcm {
+         @func getenv
+         vars [ ALSAPCM ]
+         default "hw:Audigy2"
+       }
+     }
+
+You need to replace the default line with the name of your card (in the
+example is Audigy2). You can get the names with aplay -l or you can also
+use PCMs like surround51. But if you need to use the microphone it is a
+good idea to select full-duplex PCM as default.
+
+Now you can start programs selecting the sound card just changing the
+environment variable ALSAPCM. It works fine for all program that do not
+allow to select the card, for the others ensure you keep the default
+card. For example, assuming you wrote a downmix PCM called mix51to20 you
+can use it with mplayer using the commandline
+ALSAPCM=mix51to20 mplayer example_6_channel.wav
+
+Alternative method
 
 First you will have to find out the card and device id that you want to
 set as the default by running aplay -l:
@@ -275,18 +267,65 @@ For example, the last entry in this list has the card ID 2 and the
 device ID 0. To set this card as the default, you can either use the
 system-wide file /etc/asound.conf or the user-specific file ~/.asoundrc.
 You may have to create the file if it does not exist. Then insert the
-following options with the corresponding card and device id.
+following options with the corresponding card.
 
-    defaults.pcm.card 2
-    defaults.pcm.device 0
-    defaults.ctl.card 2
+    pcm.!default {
+    	type hw
+    	card 2
+    }
+
+    ctl.!default {
+    	type hw           
+    	card 2
+    }
+
+Note:For the Asus U32U serie it seems that card should be set to 1 for
+both pcm and ctl.
+
+In most cases it is recommended to use sound card names instead of
+number references, which also solves boot order problem. Therefore the
+following would be correct for the above example.
+
+    pcm.!default {
+    	type hw
+    	card Audio
+    }
+
+    ctl.!default {
+    	type hw           
+    	card Audio
+    }
+
+To get card names use one of those commands:
+
+    $ aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq
+    $ cat /proc/asound/card*/id
+
+    Intel
+    JamLab
+    Audio
+
+Note:This method could be problematic if system has several cards of the
+same (alsa)name.
 
 The 'pcm' options affect which card and device will be used for audio
 playback while the 'ctl' option affects which card is used by control
 utilities like alsamixer .
 
 The changes should take effect as soon as you (re-)start an application
-(mplayer etc.).
+(MPlayer etc.). You can also test with a command like aplay.
+
+    $ aplay -D default your_favourite_sound.wav
+
+If you receive an error regarding your asound configuration, check the
+upstream documentation for possible changes to the config file format.
+
+Simply setting a type hw as default card is equivalent to addressing
+hardware directly, which leaves the device unavailable to other
+applications. This method is only recommended if it is a part of a more
+sophisticated setup ~/.asoundrc or if user deliberately wants to address
+sound card directly (digital output through eic958 or dedicated music
+server for example).
 
 > Making sure the sound modules are loaded
 
@@ -344,7 +383,7 @@ properly. To solve this, you can try loading the modules manually:
     alsamixer or amixer have reasonable output.
 -   Configure snd-NAME-OF-MODULE and snd-pcm-oss to load at boot.
 
-> Getting SPDIF Output
+> Getting SPDIF output
 
 (from gralves from the Gentoo forums)
 
@@ -359,20 +398,19 @@ properly. To solve this, you can try loading the modules manually:
         value to 0.
     -   Restart ALSA.
 
-Alternative way to enable SPDIF output automatically on login (tested on
-SoundBlaster Audigy):
+As of Feb 2, 2014, the above method does not seem to work. See below.
 
--   add following lines to /etc/rc.local:
+Alternative way to enable SPDIF output automatically on login:
 
-     # Use COAX-digital output
-     amixer set 'IEC958 Optical' 100 unmute
-     amixer set 'Audigy Analog/Digital Output Jack' on
+-   add following line to ~/.xinitrc:
+
+    amixer -c 0 cset name='IEC958 Playback Switch' on
 
 You can see the name of your card's digital output with:
 
      $ amixer scontrols
 
-> System-Wide Equalizer
+> System-wide equalizer
 
 Using AlsaEqual (provides UI)
 
@@ -422,22 +460,22 @@ can configure it using
 or for example, you can make a symlink to your .alsaequal.bin in his
 home...
 
-Managing AlsaEqual States
+Managing AlsaEqual states
 
-Install alsaequal-mgr from Xyne's repos or the AUR.
+Install alsaequal-mgr from the AUR (or alternatively from Xyne's repos).
 
 Configure the equalizer as usual with
 
-    $alsamixer -D equal
+    $ alsamixer -D equal
 
 When you are satisfied with the state, you may give it a name ("foo" in
 this example) and save it:
 
-    $alsaequal-mgr save foo
+    $ alsaequal-mgr save foo
 
 The state "foo" can then be restored at a later time with
 
-    $alsaequal-mgr load foo
+    $ alsaequal-mgr load foo
 
 You can thus create different equalizer states for games, movies, music
 genres, VoIP apps, etc. and reload them as necessary.
@@ -446,7 +484,7 @@ See the project page and the help message for more options.
 
 Using mbeq
 
-Note: This method requires the use of a ladspa plugin which might use
+Note:This method requires the use of a ladspa plugin which might use
 quite a bit of CPU when sound plays. In addition, this was made with
 stereophonic sound (e.g. headphones) in mind.
 
@@ -521,7 +559,7 @@ Change the default rate converter to libsamplerate:
 
     defaults.pcm.rate_converter "samplerate_best"
 
-or
+or:
 
     ~/.asoundrc
 
@@ -529,13 +567,15 @@ or
 
 samplerate_best offers the best sound quality, but you need a decent CPU
 to be able to use it as it requires a lot of CPU cycles for real-time
-resampling. There are other algorithms available (samplerate, etc.) but
-they may not provide much of an improvement over the default resampler.
+resampling. You may also need to adjust buffer_size in your dmix
+settings from the basic 4096 to 8192 or 16384. There are other
+algorithms available (samplerate, etc.) but they may not provide much of
+an improvement over the default resampler.
 
 Warning:On some systems, enabling samplerate_best may cause a problem
 where you get no sound from flashplayer.
 
-Upmixing/Downmixing
+Upmixing/downmixing
 -------------------
 
 > Upmixing
@@ -543,7 +583,7 @@ Upmixing/Downmixing
 In order for stereo sources like music to be able to saturate a 5.1 or
 7.1 sound system, you need to use upmixing. In darker days this used to
 be tricky and error prone but nowadays plugins exist to easily take care
-of this task. Thus, install alsa-plugins.
+of this task. We will use the upmix plugin, included in alsa-plugins.
 
 Then add the following to your ALSA configuration file of choice (either
 /etc/asound.conf or ~/.asoundrc):
@@ -587,8 +627,8 @@ example) or use a high quality resampler.
 > Downmixing
 
 If you want to downmix sources to stereo because you, for instance, want
-to watch a movie with 5.1 sound on a stereo system, you need to use the
-vdownmix plugin that alsa provides in the same package.
+to watch a movie with 5.1 sound on a stereo system, use the vdownmix
+plugin, included in alsa-plugins..
 
 Again, in your configuration file, add this:
 
@@ -601,17 +641,31 @@ Again, in your configuration file, add this:
         slave.pcm "default"
     }
 
+Note:This might not be enough to make downmixing working, see [2]. So,
+you might also need to add pcm.!default "plug:surround51" or
+pcm.!default "plug:surround40". Only one vdownmix plug can be used; if
+you have 7.1 channels, you will need to use surround71 instead the
+configuration above. A good example, which includes a configuration that
+makes both vdownmix and dmix working, can be found here.
+
 Mixing
 ------
 
-> Software mixing (dmix)
+Mixing enables multiple applications to output sound at the same time.
+Most discrete sound cards support hardware mixing, which is enabled by
+default if available. Integrated motherboard sound cards (such as Intel
+HD Audio), usually do not support hardware mixing. On such cards,
+software mixing is done by an ALSA plugin called dmix. This feature is
+enabled automatically if hardware mixing is unavailable.
+
+> Manually enabling dmix
 
 Note:For ALSA 1.0.9rc2 and higher on analog sound outputs you do not
 need to setup dmix. Dmix is enabled as default for soundcards which do
 not support hardware mixing.
 
-If that does not work however, it is a matter of simply creating a
-.asoundrc file in your home folder with the following contents.
+To manually enable dmix is a matter of simply creating a .asoundrc file
+in your home folder with the following contents.
 
     pcm.dsp {
         type plug
@@ -619,7 +673,8 @@ If that does not work however, it is a matter of simply creating a
     }
 
 This should enable software mixing and allows more than one application
-to make use of the soundcard.
+to make use of the soundcard. If not, try replacing all /etc/asound.conf
+content with the above.
 
 For a digital sound output such as S/PDIF, the ALSA package still does
 not enable dmix by default. Thus, the dmix configuration above can be
@@ -627,43 +682,24 @@ used to enable dmix for S/PDIF devices.
 
 See #Troubleshooting for common problems and solutions.
 
-> Hardware mixing
-
-Support
-
-If you have an audio chipset that supports mixing in hardware, then no
-configuration is necessary. Almost every onboard audio chipset does not
-support hardware mixing, and requires mixing to be done in software (see
-above). Many sound cards do support hardware mixing, and the ones best
-supported on Linux are listed below:
-
--   Creative SoundBlaster Live! (5.1 model)
--   Creative SoundBlaster Audigy (some models)
--   Creative SoundBlaster Audidy 2 (ZS models)
--   Creative SoundBlaster Audigy 4 (Pro models)
-
-Note:The low end variants of above cards, (Audigy SE, Audigy 2 NX,
-SoundBlaster Live! 24bit and SoundBlaster Live! 7.1) do not support
-hardware mixing as they use other chips.
-
-Note:The onboard VIA8237 chip supports 4-stream hardware mixing,
-however, it does only 3 for some motherboards (the 4th makes no sound)
-or is just broken. Even if it works, the quality is not good compared to
-other solutions.
-
-Fixes
-
-If you are using 64-bit Arch and the Intel Corporation 82801I (ICH9
-Family) HD Audio Controller (rev 02), you can get sound working for
-Enemy Territory with the following:
-
-    echo "et.x86 0 0 direct" > /proc/asound/card0/pcm0p/oss
-    echo "et.x86 0 0 disable" > /proc/asound/card0/pcm0c/oss
-
 Troubleshooting
 ---------------
 
-> Sound Skipping While Using Dynamic Frequency Scaling
+> No sound in VirtualBox
+
+If you experience problems with VirtualBox, the following command might
+be helpful:
+
+    $ alsactl init
+
+
+    Found hardware: "ICH" "SigmaTel STAC9700,83,84" "AC97a:83847600" "0x8086" "0x0000"
+    Hardware is initialized using a generic method
+
+You might need to activate the ALSA output in your audio software as
+well.
+
+> Sound skipping while using dynamic frequency scaling
 
 Some combinations of ALSA drivers and chipsets may cause audio from all
 sources to skip when used in combination with a dynamic frequency
@@ -672,7 +708,7 @@ solution is to switch back to the performance governor.
 
 Refer to the CPU Frequency Scaling for more information.
 
-> Problems with Availability to Only One User at a Time
+> Problems with availability to only one user at a time
 
 You might find that only one user can use the dmixer at a time. This is
 probably ok for most, but for those who run mpd as a separate user this
@@ -692,7 +728,7 @@ above.
     slave {
     ...
 
-> Simultaneous Playback Problems
+> Simultaneous playback problems
 
 If you are having problems with simultaneous playback, and if PulseAudio
 is installed (i.e. by GNOME), its default configuration is set to
@@ -736,7 +772,7 @@ Effectively, here is an example of a working /etc/asound.conf:
 Note:This /etc/asound.conf file was intended for and used successfully
 with a global MPD configuration. See this section on multiple users
 
-> Random Lack of Sound on Startup
+> Random lack of sound on startup
 
 You can quickly test sound by running speaker-test. If there is no
 sound, the error message might look something like
@@ -754,26 +790,23 @@ reading this instead.
 
 Timidity
 
-Timidity can be the cause of missing audio. Try running
+Timidity can be the cause of missing audio. Try running:
 
-     systemctl | grep timidity
+    $ systemctl status timidity
 
-If the result looks like:
+If it failed, try # killall -9 timidity. If this solves the issue, then
+you should disable the timidity daemon to be started at boot.
 
-     timidity.service            loaded failed failed    TiMidity++ Daemon
+> Specific program problems
 
-then try sudo killall -9 timidity. If this solves the issue, then you
-should disable the timidity daemon to be started at boot.
+For other programs who insist on their own audio setup, e.g., XMMS or
+MPlayer, you would need to set their specific options.
 
-> Specific Program Problems
-
-For other programs who insist on their own audio setup, eg, XMMS or
-Mplayer, you would need to set their specific options.
-
-For mplayer, open up ~/.mplayer/config (or /etc/mplayer/mplayer.conf for
-global setting) and add the following line:
+For MPlayer, open up a configuration file and add the following line:
 
     ao=alsa
+
+For mpv append the same line in one of its configuration files.
 
 For XMMS/Beep Media Player, go into their options and make sure the
 sound driver is set to Alsa, not oss.
@@ -781,8 +814,8 @@ sound driver is set to Alsa, not oss.
 To do this in XMMS:
 
 -   Open XMMS
-    -   Options -> preferences.
-    -   Choose the Alsa output plugin.
+    -   Options > Preferences.
+    -   Choose the ALSA output plugin.
 
 For applications which do not provide a ALSA output, you can use aoss
 from the alsa-oss package. To use aoss, when you run the program, prefix
@@ -794,7 +827,7 @@ pcm.!default{ ... } doesnt work for me anymore. but this does:
 
      pcm.default pcm.dmixer
 
-> Model Settings
+> Model settings
 
 Although Alsa detects your soundcard through the BIOS at times Alsa may
 not be able to recognize your model type. The soundcard chip can be
@@ -826,7 +859,7 @@ then look at the "Setting up modprobe..." section. Enter these values in
     alias sound-service-0-8 snd-seq-oss
     alias sound-service-0-12 snd-pcm-oss
 
-> Conflicting PC Speaker
+> Conflicting PC speaker
 
 If you are sure nothing is muted, that your drivers are installed
 correctly, and that your volume is right, but you still do not hear
@@ -841,7 +874,7 @@ The above fix has been observed to work with via82xx
 
 The above fix has been reported to work with snd_intel8x0
 
-> No Microphone Input
+> No microphone input
 
 In alsamixer, make sure that all the volume levels are up under
 recording, and that CAPTURE is toggled active on the microphone (e.g.
@@ -858,8 +891,8 @@ section.
 To test the microphone, run these commands (see arecord's man page for
 further information):
 
-     arecord -d 5 test-mic.wav
-     aplay test-mic.wav
+    $ arecord -d 5 test-mic.wav
+    $ aplay test-mic.wav
 
 If all fails, you may want to eliminate hardware failure by testing the
 microphone with a different device.
@@ -872,22 +905,38 @@ Many Dell laptops need "-dmic" to be appended to the model name in
 
      options snd-hda-intel model=dell-m6-dmic
 
-Some programs use try to use OSS as the main input software. Add the
-following lines to /etc/modprobe.d/modprobe.conf to prevent OSS modules
-from being loaded:
-
-Note:The OSS modules are no longer autoloaded anyway.
-
-    blacklist snd_pcm_oss
-    blacklist snd_mixer_oss
-    blacklist snd_seq_oss
+Some programs use try to use OSS as the main input software. If you have
+enabled the snd_pcm_oss, snd_mixer_oss or snd_seq_oss kernel modules
+previously (they are not loaded by default), try unloading them.
 
 See also:
 
 -   http://www.alsa-project.org/main/index.php/SoundcardTesting
 -   http://alsa.opensrc.org/Record_from_mic
 
-> Setting the default Microphone/Capture Device
+> Crackling in microphone
+
+If you're getting a crackling or popping from your microphone that can't
+be resolved with ALSA settings or cleaning your microphone jack, try
+adding the following line to /etc/modprobe.d/modprobe.conf:
+
+    options snd-hda-intel model=MODEL position_fix=3
+
+This option will fix crackling on pure Alsa, but will cause issues to
+pulseaudio. To let Pulse use these settings effectively, edit
+/etc/pulse/default.pa and find this line:
+
+    load-module module-udev-detect
+
+And change it to this:
+
+    load-module module-udev-detect tsched=0
+
+See the DMA-Position Problem in the kernel docs.
+
+-   HD-audio Kernel Docs
+
+> Setting the default microphone/capture device
 
 Some applications (Pidgin, Adobe Flash) do not provide an option to
 change the capture device. It becomes a problem if your microphone is on
@@ -920,21 +969,21 @@ include the following:
 Replace "U0x46d0x81d" with your capture device's card name in ALSA. You
 can use arecord -L to list all the capture devices detected by ALSA.
 
-> Internal Microphone not working
+> Internal microphone not working
 
 First make sure all the volume levels are up under recording in
 alsamixer. In my case adding the following option to /etc/sound.conf and
 reloading the snd-* module produced a new volume setting called Capture
 which was capturing for the internal mic. For eg, for snd-hda-intel add
 
-     options snd-hda-intel enable_msi=1
+    options snd-hda-intel enable_msi=1
 
 Then reload the module (as below), up the recording volume of Capture
 and then test.
 
     # rmmod snd-hda-intel && modprobe snd-hda-intel
 
-> No Sound with Onboard Intel Sound Card
+> No sound with onboard Intel sound card
 
 There may be a problem with two conflicting modules loaded, namely
 snd_intel8x0 and snd_intel8x0m. In this case, blacklist snd_intel8x0m:
@@ -948,14 +997,14 @@ See the ALSA wiki.
 
 Unmuting the "Mix" setting in the mixer might help, also.
 
-> No Headphone Sound with Onboard Intel Sound Card
+> No headphone sound with onboard Intel sound card
 
 With Intel Corporation 82801 I (ICH9 Family) HD Audio Controller on
 laptop, you may need to add this line to modprobe or sound.conf:
 
-    options snd-hda-intel model=$model
+    options snd-hda-intel model=model
 
-Where $model is any one of the following (in order of possibility to
+Where model is any one of the following (in order of possibility to
 work, but not merit):
 
 -   dell-vostro
@@ -964,7 +1013,7 @@ work, but not merit):
 -   dell-m6
 -   laptop-hpsense
 
-Note: It may be necessary to put this "options" line below (after) any
+Note:It may be necessary to put this "options" line below (after) any
 "alias" lines about your card.
 
 You can see all the available models in the kernel documentation. For
@@ -976,7 +1025,7 @@ name type the following command (with * being corrected to match your
 files). Note that some chips could have been renamed and do not directly
 match the available ones in the file.
 
-    cat /proc/asound/card*/codec* | grep Codec
+    $ grep Codec /proc/asound/card*/codec*
 
 Note that there is a high chance none of the input devices (all internal
 and external mics) will work if you choose to do this, so it is either
@@ -992,8 +1041,9 @@ And also, if you have problems getting beeps to work (pcspkr):
 Discover available modules and their order:
 
     $ cat /proc/asound/modules
-    0 snd_hda_intel
-    1 snd_ca0106
+
+     0 snd_hda_intel
+     1 snd_ca0106
 
 Disable the undesired video card audio codec in
 /etc/modprobe.d/modprobe.conf:
@@ -1002,8 +1052,17 @@ Disable the undesired video card audio codec in
     #
     install snd_hda_intel /bin/false
 
-If both devices use the same module, it might be possible to disable one
-of them in the BIOS.
+If both devices use the same module then we can use the *enable*
+parameter from snd-hda-intel module, it's an array of booleans that can
+enable/disable the desired sound card.
+
+e.g
+
+    options snd-hda-intel enable=1,0
+
+the following gives you the list of cards
+
+    cat /proc/asound/cards
 
 > Poor sound quality or clipping
 
@@ -1070,7 +1129,7 @@ device:
        card 0
      }
 
-> Pops When Starting and Stopping Playback
+> Pops when starting and stopping playback
 
 Some modules (e.g. snd_ac97_codec and snd_hda_intel) can power off your
 sound card when not in use. This can make an audible noise (like a
@@ -1079,13 +1138,13 @@ when move the slider volume, or open and close windows (KDE4). If you
 find this annoying try modinfo snd_MY_MODULE, and look for a module
 option that adjusts or disables this feature.
 
-Example: to disable the power saving mode and solve cracking sound
-trough speakers problem, using snd_hda_intel add in
-/etc/modprobe.d/modprobe.conf
+Example: disable the power saving mode and solve cracking sound trough
+speakers problem, using snd_hda_intel add in
+/etc/modprobe.d/modprobe.conf:
 
     options snd_hda_intel power_save=0
 
-or
+or:
 
     options snd_hda_intel power_save=0 power_save_controller=N
 
@@ -1108,7 +1167,7 @@ makes the change (see Disabling a hook for more information):
 
     # touch /etc/pm/power.d/intel-audio-powersave
 
-> S/PDIF Output Does Not Work
+> S/PDIF output does not work
 
 If the optical/coaxial digital output of your motherboard/sound card is
 not working or stopped working, and have already enabled and unmuted it
@@ -1116,35 +1175,43 @@ in alsamixer, try running
 
     # iecset audio on
 
-as root.
+You can also put this command in an enabled systemd service as it
+sometimes it may stop working after a reboot.
 
-You can also put this command in rc.local as it sometimes it may stop
-working after a reboot.
+> HDMI output does not work
 
-> HDMI Output Does Not Work
+The procedure described below can be used to test HDMI audio. Before
+proceeding, make sure you have enabled and unmuted the output with
+alsamixer.
 
-If the HDMI output of your motherboard/sound card is not working or
-stopped working, and have already enabled and unmuted it in alsamixer,
-try the following.
+Note:If you are using an ATI card and linux kernel >=3.0, a necessary
+kernel module is disabled by default. See ATI#HDMI_audio.
 
-Query for Playback Devices:
+Connect your PC to the Display via HDMI cable and enable the display
+with a tool such as xrandr or arandr. For example:
 
-     $ aplay -l
-     **** List of PLAYBACK Hardware Devices ****
-     card 0: NVidia [HDA NVidia], device 0: ALC1200 Analog [ALC1200 Analog]
-       Subdevices: 1/1
-       Subdevice #0: subdevice #0
-     card 0: NVidia [HDA NVidia], device 1: ALC1200 Digital [ALC1200 Digital]
-       Subdevices: 1/1
-       Subdevice #0: subdevice #0
-     card 0: NVidia [HDA NVidia], device 3: NVIDIA HDMI [NVIDIA HDMI]
-       Subdevices: 0/1
-       Subdevice #0: subdevice #0
+    $ xrandr # list outputs
+    $ xrandr --output DVI-D_1 --mode 1024x768 --right-of PANEL # enable output
 
-Now that we have the info for the HDMI device, try a test, In the
-example below, 0 is the card number and 3 is the device number.
+Use aplay -l to get the discover the card and device number. For
+example:
 
-     $ aplay -D plughw:0,3 /usr/share/sounds/alsa/Front_Center.wav
+    $ aplay -l
+    **** List of PLAYBACK Hardware Devices ****
+    card 0: SB [HDA ATI SB], device 0: ALC892 Analog [ALC892 Analog]
+      Subdevices: 1/1
+      Subdevice #0: subdevice #0
+    card 0: SB [HDA ATI SB], device 1: ALC892 Digital [ALC892 Digital]
+      Subdevices: 1/1
+      Subdevice #0: subdevice #0
+    card 1: Generic [HD-Audio Generic], device 3: HDMI 0 [HDMI 0]
+      Subdevices: 1/1
+      Subdevice #0: subdevice #0
+
+Send sound to the device. Following the example in the previous step,
+you would send sound to card 1, device 3:
+
+    $ aplay -D plughw:1,3 /usr/share/sounds/alsa/Front_Center.wav
 
 If aplay does not output any errors, but still no sound is heared,
 "reboot" the receiver, monitor or tv set. Since the HDMI interface
@@ -1154,14 +1221,10 @@ particular, if you are using a standalone window manager (don’t know
 about Gnome or KDE), you may need to have some sound playing while
 plugging in the HDMI cable.
 
-Note:If you are using an ATI card and linux 3.0, check your kernel/grub
-settings, you most likely need to use the 'radeon.audio=1' boot
-parameter, or alternatively set up the option in your modprobe
-configuration files. It's important to note that before trying, is to
-check the Radeon Feature Matrix to see if it's actually supported. At
-the moment this is written (march 29th, 2013), some chipsets of the S.
-Islands (namely HD7750 through HD7970) doesn't (still) support HDMI
-Audio.
+mplay and other application could be configured to use special HDMI
+device as audio output. But flashplugin could only use default device.
+The following method is used to override default device. But you need to
+change it back when your TV is disconnected from HDMI port.
 
 If the test is successful, create or edit your ~/.asoundrc file to set
 HDMI as the default audio device.
@@ -1182,7 +1245,7 @@ Or you above config does not work try:
     defaults.pcm.device 3
     defaults.ctl.card 0
 
-> HDMI Multi-channel PCM output does not work (Intel)
+> HDMI multi-channel PCM output does not work (Intel)
 
 As of Linux 3.1 multi-channel PCM output through HDMI with a Intel card
 (Intel Eaglelake, IbexPeak/Ironlake,SandyBridge/CougarPoint and
@@ -1202,24 +1265,24 @@ Add these 2 lines into /etc/modprobe.d/modprobe.conf:
 
     options snd-hda-intel model=hp (works for tx2000cto)
 
-> Skipping Sound When Playing MP3
+> Skipping sound when playing MP3
 
 If you have sound skipping when playing MP3 files and you have more then
-2 speakers attached to your computer (i.e. > 2 speaker system), run
-alsamixer and disable the channels for the speakers that you DO NOT have
-(i.e. do not enable the sound for the center speaker if you do not have
-a center speaker.
+2 speakers attached to your computer (i.e. more than 2 speaker system),
+run alsamixer and disable the channels for the speakers that you do not
+have (i.e. do not enable the sound for the center speaker if you do not
+have a center speaker.
 
-> Using a USB Headset and External USB Sound Cards
+> Using a USB headset and external USB sound cards
 
 If you are using a USB headset with ALSA you can try using asoundconf
 (currently only available from the AUR) to set the headset as the
 primary sound output. Before running make sure you have usb audio module
-enabled (modprobe snd-usb-audio).
+enabled (modprobe snd_usb_audio).
 
     # asoundconf is-active
     # asoundconf list
-    # asoundconf set-default-card <chosen soundcard>
+    # asoundconf set-default-card chosen soundcard
 
 Crackling sound with USB devices
 
@@ -1233,7 +1296,7 @@ Add this to your /etc/modprobe.d/modprobe.conf:
 source:
 http://alsa.opensrc.org/Usb-audio#Tuning_USB_devices_for_minimal_latencies
 
-Hot-plugging a USB Sound Card
+Hot-plugging a USB sound card
 
 In order to automatically make a USB Sound Card the primary output
 device, when the card is plugged in, you can use the following udev
@@ -1243,31 +1306,31 @@ rules (e.g. add the following two lines to
     KERNEL=="pcmC[D0-9cp]*", ACTION=="add", PROGRAM="/bin/sh -c 'K=%k; K=$${K#pcmC}; K=$${K%%D*}; echo defaults.ctl.card $$K > /etc/asound.conf; echo defaults.pcm.card $$K >>/etc/asound.conf'"
     KERNEL=="pcmC[D0-9cp]*", ACTION=="remove", PROGRAM="/bin/sh -c 'echo defaults.ctl.card 0 > /etc/asound.conf; echo defaults.pcm.card 0 >>/etc/asound.conf'"
 
-> Error 'Unknown hardware' Appears After a Kernel Update
+> Error 'Unknown hardware' appears after a kernel update
 
 The following messages may be displayed during the start-up ALSA after
 the kernel update:
 
     Unknown hardware "foo" "bar" ...
     Hardware is initialized using a guess method
-    /usr/sbin/alsactl: set_control:nnnn:failed to obtain info for control #mm (No such file or directory)
+    /usr/bin/alsactl: set_control:nnnn:failed to obtain info for control #mm (No such file or directory)
 
-or
+or:
 
     Found hardware: "HDA-Intel" "VIA VT1705" "HDA:11064397,18490397,00100000" "0x1849" "0x0397"
     Hardware is initialized using a generic method
-    /usr/sbin/alsactl: set_control:1328: failed to obtain info for control #1 (No such file or directory)
-    /usr/sbin/alsactl: set_control:1328: failed to obtain info for control #2 (No such file or directory)
-    /usr/sbin/alsactl: set_control:1328: failed to obtain info for control #25 (No such file or directory)
-    /usr/sbin/alsactl: set_control:1328: failed to obtain info for control #26 (No such file or directory)
+    /usr/bin/alsactl: set_control:1328: failed to obtain info for control #1 (No such file or directory)
+    /usr/bin/alsactl: set_control:1328: failed to obtain info for control #2 (No such file or directory)
+    /usr/bin/alsactl: set_control:1328: failed to obtain info for control #25 (No such file or directory)
+    /usr/bin/alsactl: set_control:1328: failed to obtain info for control #26 (No such file or directory)
 
-Simply store ALSA mixer settings again (as root):
+Simply store ALSA mixer settings again:
 
     # alsactl -f /var/lib/alsa/asound.state store
 
 It may be necessary configure ALSA again with alsamixer
 
-> HDA Analyzer
+> HDA analyzer
 
 If the mappings to your audio pins(plugs) do not correspond but ALSA
 works fine, you could try HDA Analyzer -- a pyGTK2 GUI for HD-audio
@@ -1275,14 +1338,15 @@ control can be found at the ALSA wiki. Try tweaking the Widget Control
 section of the PIN nodes, to make microphones IN and headphone jacks
 OUT. Referring to the Config Defaults heading is a good idea.
 
-NOTE: the script is done by such way that it is incompatible with
-python3 (which is now shipped with ArchLinux) but tries to use it. The
-workaround is: open "run.py", find all occurences of "python" (2
-occurences - one on the first line, and the second on the last line) and
-replace them all by "python2".
+> Note:
 
-NOTE2: the script requires root acces, but running it via su/sudo is
-bogus. Run it via kdesu or gksu.
+-   The script is done by such way that it is incompatible with Python 3
+    (which is now shipped with Arch Linux) but tries to use it. The
+    workaround is: open "run.py", find all occurences of "python" (2
+    occurences - one on the first line, and the second on the last line)
+    and replace them all by "python2".
+-   The script requires root acces, but running it via su/sudo is bogus.
+    Run it via kdesu or gksu.
 
 > ALSA with SDL
 
@@ -1292,7 +1356,7 @@ alsa.
 
     # export SDL_AUDIODRIVER=alsa
 
-> Low Sound Workaround
+> Low sound workaround
 
 If you are facing low sound even after maxing out your
 speakers/headphones, you can give the softvol plugin a try. Add the
@@ -1317,7 +1381,7 @@ following to /etc/asound.conf.
         resolution 6
     }
 
-Note: You will probably have to restart the computer, as restarting the
+Note:You will probably have to restart the computer, as restarting the
 alsa daemon did not load the new configuration for me. Also, if the
 configuration does not work even after restarting, try changing plug
 with hw in the above configuration.
@@ -1325,8 +1389,15 @@ with hw in the above configuration.
 After the changes are loaded successfully, you will see a Pre-Amp
 section in alsamixer. You can adjust the levels there.
 
-Note:Setting a high value for Pre-Amp can cause sound distortion, so
-adjust it according to the level that suits you.
+> Note:
+
+-   Setting a high value for Pre-Amp can cause sound distortion, so
+    adjust it according to the level that suits you.
+-   Some audio codecs may need to have settings adjusted in the HDA
+    Analyzer (see above) in order to achieve proper volume without
+    distortion. Checking the HP option under widget control in the
+    Playback Switch (Node[0x14] PIN in the ALC892 codec, for instance)
+    can sometimes improve audio quality and volume significantly.
 
 > Popping sound after resuming from suspension
 
@@ -1334,22 +1405,137 @@ You might hear a popping sound after resuming the computer from
 suspension. This can be fixed by editing /etc/pm/sleep.d/90alsa and
 removing the line that says aplay -d 1 /dev/zero
 
-Example configurations
-----------------------
+> Mute after reboot
 
-See Advanced Linux Sound Architecture/Example Configurations.
+After reboot, sound setting by alsamixer can not restore. Maybe you can
+restore by command : sudo alsactl restore. Please check the Auto-Mute
+toggle status in alsamixer : set Enabled to Disabled.
+
+> Volume too low
+
+The first thing to try is run alsamixer and try to increase the value of
+the sliders, possibly unmuting channels if necessary. Note that if you
+have many sliders, you may have to scroll to the right to see any
+missing sliders.
+
+If all the sliders are maxed out, and the volume is still too low, you
+can try running the script at
+http://www.alsa-project.org/hda-analyzer.py to reset your codec
+settings:
+
+    $ wget http://www.alsa-project.org/hda-analyzer.py
+    $ sudo python2 hda-analyzer.py
+
+(Note that the script assumes "python" refers to Python 2, but on a
+typical ArchLinux installation, "python" refers to Python 3. Therefore,
+you may need to edit the last line of the script from
+os.system("python %s" % TMPDIR + '/' + FILES[0] + ' ' + ' '.join(sys.argv[1:]))
+to
+os.system("python2 %s" % TMPDIR + '/' + FILES[0] + ' ' + ' '.join(sys.argv[1:])).
+
+Close the analyzer, and when prompted as to whether you want to reset
+the codecs, say "yes".
+
+If the volume is *still* too low, run alsamixer again: resetting the
+codecs may have caused new sliders to become enabled, and some of them
+may be set to a low value.
+
+> alsamixer F3 and F4 key issue
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: This issue dates 
+                           back to 2005 and is      
+                           reported to not happen   
+                           anymore in talk page.    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+In urxvt, the alsamixer quits when F2/F3/F4 key is pressed. F3/F4 is
+used to switch to playback/capture view. But in Xterm, F3/F4 could work
+normally and switch to playback/capture view. This abnormal behavior
+maybe caused by different escape codes sent by different term, see
+http://aperiodic.net/phil/archives/Geekery/term-function-keys.html for
+detail.
+
+> Removing old ALSA state file (asound.state)
+
+The alsa-utils package provides alsa-store.service which automatically
+stores the current ALSA state to /var/lib/alsa/asound.state upon system
+shutdown. This can be problematic for users who are trying to reset
+their current ALSA state as the asound.state file will be recreated with
+the current state upon every shutdown (e.g., attempting to remove
+user-defined channels from the mixer). The alsa-store.service service
+may be temporarily disabled by creating the following empty file:
+
+    # mkdir -p /etc/alsa
+    # touch /etc/alsa/state-daemon.conf
+
+The presence of state-daemon.conf prevents alsa-store.service from
+saving asound.state during shutdown. After disabling this service, the
+asound.state file may be removed as such:
+
+    # rm /var/lib/alsa/asound.state
+
+After rebooting, the previous ALSA state should be lost and the current
+state should be reset to defaults. Re-enable alsa-store.service by
+deleting the condition file we created:
+
+    # rm /etc/alsa/state-daemon.conf
+
+On the next shutdown, the asound.state file should be recreated with
+ALSA defaults. The file may also be generated immediately using:
+
+    # alsactl store
+
+> HDMI 5.1 sound goes to wrong speakers
+
+If your HDMI 5.1 output sends the sound to the wrong speakers, you can
+redirect it to the correct ones using a remap. Add the following to
+/etc/asound.conf.
+
+    pcm.!hdmi-remap {
+      type asym
+      playback.pcm {
+        type plug
+        slave.pcm "remap-surround51"
+      }
+    }
+     
+    pcm.!remap-surround51 {
+      type route
+      slave.pcm "hw:0,3"
+      ttable {
+        0.0= 1
+        1.1= 1
+        2.4= 1
+        3.5= 1
+        4.2= 1
+        5.3= 1
+      }
+    }
 
 See also
 --------
 
 -   Advanced ALSA module configuration
--   Unofficial ALSA Wiki
--   HOWTO: Compile driver from svn
+-   Unofficial ALSA wiki
+-   HOWTO: compile driver from svn
+-   A close look at ALSA: ALSA concept introduction
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Advanced_Linux_Sound_Architecture&oldid=255456"
+"https://wiki.archlinux.org/index.php?title=Advanced_Linux_Sound_Architecture&oldid=304086"
 
 Categories:
 
 -   Sound
 -   Audio/Video
+
+-   This page was last modified on 12 March 2014, at 03:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

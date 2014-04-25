@@ -1,21 +1,31 @@
 Mount encrypted volumes in parallel
 ===================================
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: The approach     
+                           described was            
+                           implemented pre-systemd. 
+                           Hence, the modified      
+                           rc.sysinit is gone on a  
+                           typical Arch install.    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 This is a simple change to rc.sysinit that allows mounting of your
 encypted volumes in parallel, which can speed up boot immensely if you
 have more than one non-root encrypted partition.
 
 NOTE: You cannot use ASK in /etc/crypttab when using this tweak.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 The Code                                                           |
-| -   3 TODO                                                               |
-| -   4 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 The Code
+-   3 TODO
+-   4 See Also
 
 Installing
 ==========
@@ -113,8 +123,15 @@ See Also
 -   System Encryption with LUKS for dm-crypt
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mount_encrypted_volumes_in_parallel&oldid=197000"
+"https://wiki.archlinux.org/index.php?title=Mount_encrypted_volumes_in_parallel&oldid=267964"
 
 Category:
 
 -   Boot process
+
+-   This page was last modified on 25 July 2013, at 19:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

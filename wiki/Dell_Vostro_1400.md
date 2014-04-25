@@ -1,48 +1,31 @@
 Dell Vostro 1400
 ================
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: please use the   
-                           first argument of the    
-                           template to provide a    
-                           brief explanation.       
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
-
 This page deals with setting up Arch Linux on the Dell Vostro 1400
 laptop. Nvidia graphics work excellently with the Nvidia 8400GS with no
 real hacks. I get about 4400 fps in glxgears.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 CPU                                                                |
-| -   2 Network                                                            |
-|     -   2.1 Ethernet                                                     |
-|     -   2.2 Wireless                                                     |
-|         -   2.2.1 mini Dell Wireless / Broadcom based cards              |
-|         -   2.2.2 Intel based cards                                      |
-|                                                                          |
-| -   3 Graphical Input                                                    |
-|     -   3.1 Touchpad                                                     |
-|                                                                          |
-| -   4 Graphics                                                           |
-|     -   4.1 Nvidia GeForce 8400M GS                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 CPU
+-   2 Network
+    -   2.1 Wireless
+        -   2.1.1 Mini Dell Wireless / Broadcom based cards
+        -   2.1.2 Intel based cards
+-   3 Graphical Input
+    -   3.1 Touchpad
+-   4 Graphics
+    -   4.1 Nvidia GeForce 8400M GS
 
 CPU
 ---
 
-For the Intel Core 2 Duo (and all laptop cpu's) you must follow the
+For the Intel Core 2 Duo (and all laptop CPUs) you must follow the
 instructions to setup the CPU Frequency Scaling.
 
 Network
 -------
-
-> Ethernet
 
 > Wireless
 
@@ -50,7 +33,7 @@ To know your exact wireless card you can run:
 
     lspci | grep Net
 
-mini Dell Wireless / Broadcom based cards
+Mini Dell Wireless / Broadcom based cards
 
 If you have a Broadcom BCM4328 802.11a/b/g/n (and maybe other flavours)
 you can follow the installation instructions for Broadcom BCM4312.
@@ -92,7 +75,7 @@ Press Y to install all the packages and wait for the download to finish.
 
 > Nvidia GeForce 8400M GS
 
-The proprietry Nvidia drivers are setup very easily for the GeForce
+The proprietary Nvidia drivers are setup very easily for the GeForce
 8400M GS. Having installed Xorg (see above) you type in this command
 into the console as root:
 
@@ -116,8 +99,15 @@ and comment it out with a hash (#) symble like so:
 You should now have successfully setup the Nvidia drivers.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1400&oldid=196591"
+"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1400&oldid=297843"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 15 February 2014, at 15:24.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

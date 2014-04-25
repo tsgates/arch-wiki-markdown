@@ -2,6 +2,22 @@ Local repository
 ================
 
   ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with pacman      
+                           Tips#Custom local        
+                           repository.              
+                           Notes: This article is   
+                           older than the linked    
+                           section, Custom local    
+                           repository with ABS and  
+                           gensync (former          
+                           prerequisite to this     
+                           page) redirects to it.   
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
   [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
   ng]                      needs expansion.         ng]
                            Reason: please use the   
@@ -12,14 +28,12 @@ Local repository
   ------------------------ ------------------------ ------------------------
 
   ------------------------ ------------------------ ------------------------
-  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
-                           is a candidate for       
-                           merging with pacman      
-                           Tips.                    
-                           Notes: please use the    
-                           second argument of the   
-                           template to provide more 
-                           detailed indications.    
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: please use the   
+                           first argument of the    
+                           template to provide a    
+                           brief explanation.       
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
@@ -30,63 +44,56 @@ the LAN using NFS or FTP. This document should be edited to describe
 this process in detail. For the time being, the original HOWTO is left
 intact below:
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 On the Server Side                                                 |
-| -   3 On all clients                                                     |
-| -   4 To sync your local repository v.s. archlinux.org                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 On the Server Side
+-   3 On all clients
+-   4 To sync your local repository against archlinux.org
 
 Introduction
 ------------
 
-To share all your downloaded packages in your lan Pros save bandwidth,
-diskspace and time.
+Sharing all of your downloaded packages to your LAN can save bandwidth,
+diskspace, and time.
 
-    pacman -Sy
+    pacman -Syu
 
 Will sync against our local repository;
 
     pacman -S pkgname 
 
-Try to download and install pkg from localserver if pkg not exist it
-download from the next server in the list /etc/pacman.conf and save pkg
-on localserver;
+Will try to download and install a package from localserver. If the
+package does not exist it will download it from the next server in the
+list /etc/pacman.conf and save the package on localserver;
 
     alsync
 
-Will update localserver db against ftp.archlinux.org.
+Will update localserver database against ftp.archlinux.org.
 
-Ex. for my network
+In example: for my network
 
     serverip=192.168.14.3
     network=192.168.14.0/255.255.255.0
 
-Adjust to yours.
-
-  
+Adjust to your needs.
 
 On the Server Side
 ------------------
 
-Create an NFS share on the server to host the packages.
+Create an NFS share on the server hosting the packages.
 
--   Install NFS:
-
-     pacman -S nfs-utils
+For detailed help on setting up an NFS server please see NFS
 
 -   Add this line to /etc/exports:
 
-    /var/cache/pacman/pkg 192.168.14.0/255.255.255.0(rw,no_root_squash)
+    /var/cache/pacman/pkg 192.168.14.0/24(rw,no_subtree_check,nohide)
 
--   Add rpcbind, nfs-common and nfs-server to DAEMONS in /etc/rc.conf.
+-   If you modify /etc/exports while the server is running, you must
+    re-export them for changes to take effect:
 
--   Start the NFS daemons:
-
-     # rc.d start rpcbind nfs-common nfs-server
+    # exportfs -ra
 
 On all clients
 --------------
@@ -135,41 +142,48 @@ and after
 I have skipped the step 3 because for me it works as i want already. I
 sync from each PC and all share the pacman cache.
 
-To sync your local repository v.s. archlinux.org
-------------------------------------------------
+To sync your local repository against archlinux.org
+---------------------------------------------------
 
--   "alsync" connects, login, and update your packages database on the
-    local nfsserver
+-   "alsync" connects, logs in, and updates your packages database on
+    the local nfs server
 
      pacman -S openssl
      pacman -S wget
 
   
 
--   create a file called /bin/alsync and put in this lines
+-   create a file called /bin/alsync and add these lines
 
      cd /var/cache/pacman/pkg
      wget -N ftp://ftp.archlinux.org/current/.db.
      wget -N ftp://ftp.archlinux.org/extra/.db.
 
--   chmod 777 /bin/alsync
+-   chmod 755 /bin/alsync
 
 copy this file to your clients
 
--   to try run as root on first client
+-   Attempt to run as root on the first client
 
      alsync
-     pacman -Sy
+     pacman -Syu
      pacman -S new-pkgname
 
--   move to next client and run
+-   Then move to the next client and run
 
-     pacman -Sy
+     pacman -Syu
      pacman -S new-pkgname
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Local_repository&oldid=210878"
+"https://wiki.archlinux.org/index.php?title=Local_repository&oldid=299398"
 
 Category:
 
 -   Package management
+
+-   This page was last modified on 21 February 2014, at 13:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

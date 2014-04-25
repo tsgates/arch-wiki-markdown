@@ -11,20 +11,18 @@ Acer Aspire 2930
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Ethernet                                                           |
-| -   3 Wireless                                                           |
-| -   4 Xorg                                                               |
-| -   5 Sound                                                              |
-| -   6 Card Reader                                                        |
-| -   7 Webcam                                                             |
-| -   8 ACPI                                                               |
-| -   9 Touchpad                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Ethernet
+-   3 Wireless
+-   4 Xorg
+-   5 Sound
+-   6 Card Reader
+-   7 Webcam
+-   8 ACPI
+-   9 Touchpad
 
 Hardware
 --------
@@ -107,3 +105,10 @@ Retrieved from
 Category:
 
 -   Acer
+
+-   This page was last modified on 23 April 2012, at 12:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

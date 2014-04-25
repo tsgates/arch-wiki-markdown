@@ -4,20 +4,18 @@ Automatic Configuration with Cdist
 This page describes how to automatically configure archlinux using
 cdist.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Preperation                                                        |
-| -   3 How to use the types                                               |
-| -   4 Type overview                                                      |
-| -   5 Managed Desktop (__nico_managed_desktop)                           |
-| -   6 Notebook (__nico_notebook)                                         |
-| -   7 Dos gaming station (__nico_dosbox)                                 |
-| -   8 Multimedia Support (__nico_media)                                  |
-| -   9 User based network configuration (__nico_network_user_based)       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Preperation
+-   3 How to use the types
+-   4 Type overview
+-   5 Managed Desktop (__nico_managed_desktop)
+-   6 Notebook (__nico_notebook)
+-   7 Dos gaming station (__nico_dosbox)
+-   8 Multimedia Support (__nico_media)
+-   9 User based network configuration (__nico_network_user_based)
 
 Introduction
 ------------
@@ -113,3 +111,10 @@ Retrieved from
 Category:
 
 -   System administration
+
+-   This page was last modified on 18 November 2012, at 23:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

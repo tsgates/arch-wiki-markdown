@@ -1,7 +1,7 @@
 mod_gnutls
 ==========
 
-  Summary
+  Summary help replacing me
   ----------------------------------------------------------------------------------------------------
   An introduction to mod_gnutls, covering installation and basic configuration of the Apache module.
 
@@ -11,18 +11,15 @@ mod_gnutls uses the GnuTLS library to provide SSL 3.0, TLS 1.0, TLS 1.1
 and 1.2 encryption for Apache HTTPD. It is similar to mod_ssl in
 purpose, but does not use OpenSSL.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Install package                                              |
-|     -   1.2 Configure Apache                                             |
-|                                                                          |
-| -   2 Known issues                                                       |
-|     -   2.1 GnuTLS 3.0.5                                                 |
-|     -   2.2 Connections from localhost                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Install package
+    -   1.2 Configure Apache
+-   2 Known issues
+    -   2.1 GnuTLS 3.0.5
+    -   2.2 Connections from localhost
 
 Installation
 ------------
@@ -104,3 +101,10 @@ Retrieved from
 Category:
 
 -   Web Server
+
+-   This page was last modified on 13 June 2012, at 16:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

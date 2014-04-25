@@ -11,25 +11,26 @@ Security Task Force
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
+Related articles
+
+-   Arch CVE Monitoring Team
+
 This is a draft of the proposal to create a Arch Linux Security Team
 (ALST) centered around Arch Linux. Once the idea has passed, this page
 will be edited to carefully explain the duties of ALST members.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Philosophy                                                         |
-| -   2 Purpose                                                            |
-|     -   2.1 Mirror update speed                                          |
-|     -   2.2 Maintainer's reaction                                        |
-|                                                                          |
-| -   3 Procedure                                                          |
-| -   4 Implementation                                                     |
-|     -   4.1 What constitutes an important security update?               |
-|     -   4.2 Infrastructure                                               |
-|     -   4.3 ALST members' duties                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Philosophy
+-   2 Purpose
+    -   2.1 Mirror update speed
+    -   2.2 Maintainer's reaction
+-   3 Procedure
+-   4 Implementation
+    -   4.1 What constitutes an important security update?
+    -   4.2 Infrastructure
+    -   4.3 ALST members' duties
 
 Philosophy
 ----------
@@ -52,12 +53,12 @@ alleviate two important problems.
 ALST Will Strive to Monitor all Packages within the following
 repositories:
 
-        * [current]
-        * [extra]
-        * [testing]
-        * [community]
+-   current
+-   extra
+-   testing
+-   community
 
-Maintainers in the [unsupported] category may be called upon to update
+Maintainers in the unsupported category may be called upon to update
 packages due to security concerns, however this will be strongly
 dependent on the various maintainers within the AUR system.
 
@@ -65,8 +66,6 @@ ALST Members will not be responsible for creating interim packages to
 prevent duplicate PKGBUILDS or packages. Updated Package builds can be
 suggested to developers and TU's, but it is up to the discretion of the
 package maintainer to update a particular package.
-
-  
 
 > Mirror update speed
 
@@ -145,21 +144,26 @@ lists would follow this format:
     ===================
     http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-1629
 
-    Contact
+    Contact	
     ===================
     If you have problems, concerns, questions or appreciation, you
     can contact the security team at <ALST Email address>
 
-  
- All notices should be signed using PGP (or OSS equivalents such as
+All notices should be signed using PGP (or OSS equivalents such as
 GnuPG) to verify message integrity to users watching the ALST Updates.
 
-All packages will have a severity of one of the following.
+All packages will have a severity of one of the following:
 
-       * Severe – A critical hole has been discovered. It is strongly recommended to update ASAP
-       * High – A noticeable hole has been discovered. Recommend Upgrade
-       * Medium – A hole has been discovered. Update when possible.
-       * Low – A small hole containing a possible exploit has been found. Update as needed.
+Severe
+    A critical hole has been discovered. It is strongly recommended to
+    update ASAP
+High
+    A noticeable hole has been discovered. Recommend Upgrade
+Medium
+    A hole has been discovered. Update when possible.
+Low
+    A small hole containing a possible exploit has been found. Update as
+    needed.
 
 Some updates will be much more critical than others, however updates are
 always recommended in the case of any vulnerability. In the case of a
@@ -199,9 +203,16 @@ however, hopefully that should only be a small number change in
 PKGBUILD.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Security_Task_Force&oldid=238674"
+"https://wiki.archlinux.org/index.php?title=Security_Task_Force&oldid=304505"
 
 Categories:
 
 -   Arch development
 -   Security
+
+-   This page was last modified on 14 March 2014, at 19:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

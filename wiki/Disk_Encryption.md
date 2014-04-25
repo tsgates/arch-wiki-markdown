@@ -1,21 +1,14 @@
 Disk Encryption
 ===============
 
-> Summary
+Related articles
 
-Transparent encryption/decryption software
-
-> Related
-
-dm-crypt with LUKS
-
-eCryptfs
-
-TrueCrypt
-
-EncFS
-
-Mount encrypted volumes in parallel
+-   dm-crypt
+-   TrueCrypt
+-   eCryptfs
+-   EncFS
+-   Tomb
+-   Mount encrypted volumes in parallel
 
 This article discusses common techniques available in Arch Linux for
 cryptographically protecting a logical part of a storage disk (folder,
@@ -23,46 +16,43 @@ partition, whole disk, ...), so that all data that is written to it is
 automatically encrypted, and decrypted on-the-fly when read again.
 
 "Storage disks" in this context can be your computer's hard drive(s),
-external devices like USB sticks or DVD's, as well as virtual storage
-disks like loop-back devices or cloud storage (as long as Arch Linux can
-address it as a block device or filesystem).
+external devices like USB flash drives or DVD's, as well as virtual
+storage disks like loop-back devices or cloud storage (as long as Arch
+Linux can address it as a block device or filesystem).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Why use encryption?                                                |
-|     -   1.1 Data encryption vs system encryption                         |
-|                                                                          |
-| -   2 Available methods                                                  |
-|     -   2.1 Stacked filesystem encryption                                |
-|     -   2.2 Block device encryption                                      |
-|     -   2.3 Comparison table                                             |
-|         -   2.3.1 summary                                                |
-|         -   2.3.2 basic classification                                   |
-|         -   2.3.3 practical implications                                 |
-|         -   2.3.4 usability features                                     |
-|         -   2.3.5 security features                                      |
-|         -   2.3.6 performance features                                   |
-|         -   2.3.7 block device encryption specific                       |
-|         -   2.3.8 stacked filesystem encryption specific                 |
-|         -   2.3.9 compatibility & prevalence                             |
-|                                                                          |
-| -   3 Preparation                                                        |
-|     -   3.1 Choosing a setup                                             |
-|     -   3.2 Choosing a strong passphrase                                 |
-|     -   3.3 Preparing the disk                                           |
-|                                                                          |
-| -   4 How the encryption works                                           |
-|     -   4.1 Basic principle                                              |
-|     -   4.2 Keys, keyfiles and passphrases                               |
-|     -   4.3 Ciphers and modes of operation                               |
-|     -   4.4 Cryptographic metadata                                       |
-|     -   4.5 Data integrity/authenticity                                  |
-|     -   4.6 Plausible deniability                                        |
-|                                                                          |
-| -   5 Notes & References                                                 |
-+--------------------------------------------------------------------------+
+If you already know what you want to protect and how you want to
+encrypt, you are encouraged to directly browse the related how-to
+articles listed on the right.
+
+Contents
+--------
+
+-   1 Why use encryption?
+    -   1.1 Data encryption vs system encryption
+-   2 Available methods
+    -   2.1 Stacked filesystem encryption
+    -   2.2 Block device encryption
+    -   2.3 Comparison table
+        -   2.3.1 summary
+        -   2.3.2 basic classification
+        -   2.3.3 practical implications
+        -   2.3.4 usability features
+        -   2.3.5 security features
+        -   2.3.6 performance features
+        -   2.3.7 block device encryption specific
+        -   2.3.8 stacked filesystem encryption specific
+        -   2.3.9 compatibility & prevalence
+-   3 Preparation
+    -   3.1 Choosing a setup
+    -   3.2 Choosing a strong passphrase
+    -   3.3 Preparing the disk
+-   4 How the encryption works
+    -   4.1 Basic principle
+    -   4.2 Keys, keyfiles and passphrases
+    -   4.3 Cryptographic metadata
+    -   4.4 Ciphers and modes of operation
+    -   4.5 Plausible deniability
+-   5 Notes & References
 
 Why use encryption?
 -------------------
@@ -70,9 +60,9 @@ Why use encryption?
 Disk encryption ensures that files are always stored on disk in an
 encrypted form. The files only become available to the operating system
 and applications in readable form while the system is running and
-unlocked by a trusted user. Reading the encrypted sectors without
-permission will return garbled random-looking data instead of the actual
-files.
+unlocked by a trusted user. An unauthorized person looking at the disk
+contents directly, will only find garbled random-looking data instead of
+the actual files.
 
 For example, this can prevent unauthorized viewing of the data when the
 computer or hard-disk is:
@@ -85,34 +75,35 @@ computer or hard-disk is:
 -   discarded after its end-of-life
 
 In addition, disk encryption can also be used to add some security
-against unauthorized attempts to tamper with your operating system. For
+against unauthorized attempts to tamper with your operating system - for
 example, the installation of keyloggers or Trojan horses by attackers
 who can gain physical access to the system while you're away.
 
 Warning:Disk encryption does not protect your data from all threats.
 
-Including the following:
+You will still be vulnerable to:
 
 -   Attackers who can break into your system (e.g. over the Internet)
     while it is running and after you've already unlocked and mounted
     the encrypted parts of the disk.
 -   Attackers who are able to gain physical access to the computer while
-    (or very shortly after) it is running, and have the resources to
-    perform a cold boot attack.
+    it is running (even if you use a screenlocker), or very shortly
+    after it was running, if they have the resources to perform a cold
+    boot attack.
 -   A government entity, which not only has the resources to easily pull
     off the above attacks, but also may simply force you to give up your
     keys/passphrases using various techniques of coercion. In most
     non-democratic countries around the world, as well as in the USA and
-    UK, it is legal for law enforcement agencies to do so if they have
-    suspicions that you might be hiding something of interest.
+    UK, it may be legal for law enforcement agencies to do so if they
+    have suspicions that you might be hiding something of interest.
 
-A very strong disk encryption setup (e.g. full system encryption with no
-plaintext boot partition and authenticity checking) is required to stand
-a chance against professional attackers, who are able to tamper with
-your system before you use it. And even then it is doubtful whether it
-can really prevent all types of tampering (e.g. hardware keyloggers).
-The best remedy might be hardware-based full disk encryption (e.g.
-Trusted Computing).
+A very strong disk encryption setup (e.g. full system encryption with
+authenticity checking and no plaintext boot partition) is required to
+stand a chance against professional attackers who are able to tamper
+with your system before you use it. And even then it is doubtful whether
+it can really prevent all types of tampering (e.g. hardware keyloggers).
+The best remedy might be hardware-based full disk encryption and Trusted
+Computing.
 
 Warning:Disk encryption also won't protect you against someone simply
 wiping your disk. Regular backups are recommended to keep your data
@@ -133,16 +124,17 @@ in non-encrypted areas of the hard drive, like:
 
 -   swap partitions
     -   (potential remedy: disable swapping)
-
 -   /tmp (temporary files created by user applications)
     -   (potential remedies: avoid such applications; mount /tmp inside
         a ramdisk)
-
 -   /var (log files and databases and such; for example, mlocate stores
     an index of all file names in /var/lib/mlocate/mlocate.db)
 
-In addition, mere data encryption will leave the system vulnerable to
-offline system tampering attacks (see warnings above).
+In addition, mere data encryption will leave you vulnerable to offline
+system tampering attacks (e.g. someone installing a hidden program that
+records the passphrase you use to unlock the encrypted data, or waits
+for you to unlock it and then secretly copies/sends some of the data to
+a location where the attacker can retrieve it).
 
   
  System encryption, defined as the encryption of the operating system
@@ -151,16 +143,15 @@ encryption.
 
 Benefits:
 
--   Preventing unauthorized physical access to operating system files
-    (but see warning above)
--   Preventing unauthorized physical access to private data that may
-    cached by the system.
+-   prevents unauthorized physical access to (and tampering with)
+    operating system files (but see warning above)
+-   prevents unauthorized physical access to private data that may
+    cached by the system
 
 Disadvantages:
 
--   unlocking/locking of the encrypted parts of the disk can no longer
-    coincide with user login/logout, because now the unlocking already
-    needs to happen before or during boot
+-   unlocking of the encrypted parts of the disk can no longer happen
+    during or after user login; it must now happen at boot time
 
   
  In practice, there's not always a clear line between data encryption
@@ -188,7 +179,7 @@ the actual encryption key can be derived (and stored in the kernel
 keyring for the duration of the session).
 
 If you are completely unfamiliar with this sort of operation, please
-first read the #How the encryption works section below.
+also read the #How the encryption works section below.
 
 The available disk encryption methods can be separated into two types by
 their layer of operation:
@@ -216,10 +207,10 @@ system is turned off.
 Available solutions in this category are:
 
 eCryptfs
-    ...
+    See eCryptfs.
 
 EncFS
-    ...
+    See EncFS.
 
 > Block device encryption
 
@@ -238,33 +229,47 @@ Linux:
 
 loop-AES
     loop-AES is a descendant of cryptoloop and is a secure and fast
-    solution to system encryption.
-    However loop-AES is considered less user-friendly than other options
-    as it requires non-standard kernel support.
+    solution to system encryption. However, loop-AES is considered less
+    user-friendly than other options as it requires non-standard kernel
+    support.
 
-dm-crypt + LUKS
+dm-crypt
     dm-crypt is the standard device-mapper encryption functionality
     provided by the Linux kernel. It can be used directly by those who
     like to have full control over all aspects of partition and key
-    management.
-    LUKS is an additional convenience layer which stores all of the
-    needed setup information for dm-crypt on the disk itself and
-    abstracts partition and key management in an attempt to improve ease
-    of use.
+    management. The management of dm-crypt is done with the cryptsetup
+    userspace utility. It can be used for the following types of
+    block-device encryption: LUKS (default), plain, and has limited
+    features for loopAES and Truecrypt devices.
+    -   LUKS, used by default, is an additional convenience layer which
+        stores all of the needed setup information for dm-crypt on the
+        disk itself and abstracts partition and key management in an
+        attempt to improve ease of use and cryptographic security.
+    -   plain dm-crypt mode, being the original kernel functionality,
+        does not employ the convenience layer. It is more difficult to
+        apply the same cryptographic strength with it. When doing so,
+        longer keys (passphrases or keyfiles) are the result. It has,
+        however, other advantages, described in the following.
 
 TrueCrypt
-    ...
+    See TrueCrypt.
 
 For practical implications of the chosen layer of operation, see the
-comparison table below, as well as [1].
+comparison table below, as well as the write up at [1].
 
 > Comparison table
+
+The column "dm-crypt +/- LUKS" denotes features of dm-crypt for both
+LUKS ("+") and plain ("-") encryption modes. If a specific feature
+requires using LUKS, this is indicated by "(with LUKS)". Likewise
+"(without LUKS)" indicates usage of LUKS is counter-productive to
+achieve the feature and plain mode should be used.
 
 summary
 
 Loop-AES
 
-dm-crypt + LUKS
+dm-crypt +/- LUKS
 
 Truecrypt
 
@@ -321,7 +326,7 @@ basic classification
 
 Loop-AES
 
-dm-crypt + LUKS
+dm-crypt +/- LUKS
 
 Truecrypt
 
@@ -362,7 +367,7 @@ cryptographic metadata stored in...
 
  ?
 
-LUKS Header
+with LUKS: LUKS Header
 
 begin/end of (decrypted) device (format)
 
@@ -374,6 +379,8 @@ wrapped encryption key stored in...
 
  ?
 
+with LUKS: LUKS header
+
 key file that can be stored anywhere
 
 control file at the top level of each EncFs container
@@ -382,7 +389,7 @@ practical implications
 
 Loop-AES
 
-dm-crypt + LUKS
+dm-crypt +/- LUKS
 
 Truecrypt
 
@@ -434,7 +441,7 @@ usability features
 
 Loop-AES
 
-dm-crypt + LUKS
+dm-crypt +/- LUKS
 
 Truecrypt
 
@@ -446,11 +453,11 @@ support for automounting on login
 
  ?
 
- ?
+✔
 
  ?
 
- ?
+✔
 
 ✔
 
@@ -474,7 +481,7 @@ non-root users can create/destroy containers for encrypted data
 
 ✖
 
-✖
+limited
 
 ✔
 
@@ -488,13 +495,13 @@ provides a GUI
 
 ✖
 
-✖
+✔
 
 security features
 
 Loop-AES
 
-dm-crypt + LUKS
+dm-crypt +/- LUKS
 
 Truecrypt
 
@@ -532,7 +539,7 @@ support for cascading multiple ciphers
 
  ?
 
- ?
+Not in one device, but blockdevices can be cascaded
 
 ✔
 
@@ -557,7 +564,8 @@ protection against key scrubbing
 
 ✔
 
- ?
+✔  
+(without LUKS)
 
  ?
 
@@ -583,7 +591,7 @@ performance features
 
 Loop-AES
 
-dm-crypt + LUKS
+dm-crypt +/- LUKS
 
 Truecrypt
 
@@ -605,25 +613,13 @@ multithreading support
 
 hardware-accelerated encryption support
 
- ?
-
 ✔
 
 ✔
 
 ✔
 
- ?
-
-optimised handling of sparse files
-
- ?
-
- ?
-
- ?
-
-✖
+✔
 
  ?
 
@@ -631,7 +627,7 @@ block device encryption specific
 
 Loop-AES
 
-dm-crypt + LUKS
+dm-crypt +/- LUKS
 
 Truecrypt
 
@@ -667,11 +663,17 @@ ability to not encrypt filenames
 
 ✔
 
+optimized handling of sparse files
+
+✖
+
+ ?
+
 compatibility & prevalence
 
 Loop-AES
 
-dm-crypt + LUKS
+dm-crypt +/- LUKS
 
 Truecrypt
 
@@ -703,7 +705,7 @@ Windows
 
  ?
 
- ?
+    ✔[9]
 
 Mac OS X
 
@@ -733,8 +735,8 @@ used by
 
  ?
 
--   Arch Linux installer (system encryption)
--   Ubuntu alternate installer (system encryption)
+-   Debian/Ubuntu installer (system encryption)
+-   Fedora installer
 
  ?
 
@@ -753,8 +755,8 @@ goals (please read #Why_use_encryption? above) and system parameters.
  Among other things, you will need to answer the following questions:
 
 -   What kind of "attacker" do you want to protect against?
-    -   Casual computer user trying to passively spy on your disk
-        contents while your system is turned off / stolen / etc.
+    -   Casual computer user snooping around your disk when your system
+        is turned off / stolen / etc.
     -   Professional cryptanalyst who can get repeated read/write access
         to your system before and after you use it
     -   anything in between
@@ -764,10 +766,10 @@ goals (please read #Why_use_encryption? above) and system parameters.
     -   system encryption
     -   something in between
 
-    -   How should swap, /tmp, etc. be taken care of?
-        -   ignore, and hope no data is leaked
-        -   disable or mount as ramdisk
-        -   encrypt (as part of full disk encryption, or separately)
+-   How should swap, /tmp, etc. be taken care of?
+    -   ignore, and hope no data is leaked
+    -   disable or mount as ramdisk
+    -   encrypt (as part of full disk encryption, or separately)
 
 -   How should encrypted parts of the disk be unlocked?
     -   passphrase (same as login password, or separate)
@@ -801,38 +803,43 @@ regarding:
 
 In practice, it could turn out something like:
 
-Example 1: simple data encryption (internal hard drive)
+Example 1
+    simple data encryption (internal hard drive) using a virtual folder
+    called "~/Private" in the user's home dir encrypted with EncFS  
+    └──> encrypted versions of the files stored on-disk in ~/.Private  
+    └──> unlocked on demand with dedicated passphrase  
 
-    • a virtual folder called "~/Private" in the user's home dir encrypted with EncFS
-       ├──> encrypted versions of the files stored on-disk in ~/.Private
-       └──> unlocked on demand with dedicated passphrase
+Example 2
+    simple data encryption (removable media), an USB drive encrypted
+    with TrueCrypt  
+    └──> unlocked when attached to the computer (using dedicated
+    passphrase + using ~/photos/2006-09-04a.jpg as covert keyfile)
 
-Example 2: simple data encryption (removable media)
+Example 3
+    partial system encryption with each user's home directory encrypted
+    with ECryptfs  
+    └──> unlocked on respective user login, using login passphrase  
+    └──> swap and /tmp partitions encrypted with Dm-crypt with LUKS,
+    using an automatically generated per-session throwaway key  
+    └──> indexing/caching of contents of /home by slocate (and similar
+    apps) disabled.
 
-    • whole external USB drive encrypted with TrueCrypt
-       └──> unlocked when attached to the computer
-            (using dedicated passphrase + using ~/photos/2006-09-04a.jpg as covert keyfile)
+Example 4
+    system encryption - whole hard drive except /boot partition
+    encrypted with Dm-crypt with LUKS   
+    └──> unlocked during boot, using passphrases or USB stick with
+    keyfiles  
+    └──> Maybe different passphrases/keys per user - independently
+    revocable  
+    └──> Maybe encryption spanning multiple drives or partition layout
+    flexibility with LUKS on LVM
 
-Example 3: partial system encryption
-
-    • each user's home directory encrypted with eCryptfs
-       └──> unlocked on login, using login passphrase
-    • swap and /tmp partitions encrypted with dm-crypt+LUKS
-       └──> using automatically generated per-session throwaway key
-    • indexing/caching of contents of /home by slocate (and similar apps) disabled
-
-Example 4: system encryption
-
-    • whole hard drive except /boot partition encrypted with dm-crypt+LUKS
-       └──> unlocked during boot, using USB stick with keyfile (shared by all users)
-
-Example 5: paranoid system encryption
-
-    • whole hard drive encrypted with dm-crypt
-       ├──> unlocked before boot, using dedicated passphrase + USB stick with keyfile
-       │    (different one issued to each user - independently revocable)
-       └──> data integrity checked before mounting
-    • /boot partition located on aforementioned USB stick
+Example 5
+    hidden/plain system encryption - whole hard drive encrypted with
+    plain dm-crypt   
+    └──> USB-boot, using dedicated passphrase + USB stick with keyfile  
+    └──> data integrity checked before mounting  
+    └──> /boot partition located on aforementioned USB stick
 
 Many other combinations are of course possible. You should carefully
 plan what kind of setup will be appropriate for your system.
@@ -841,9 +848,13 @@ plan what kind of setup will be appropriate for your system.
 
 When relying on a passphrase, it must be complex enough to not be easy
 to guess or break using brute-force attacks. The tenets of strong
-passphrases are based on length and randomness.  
- Refer to The passphrase FAQ for a detailed discussion, and especially
-consider the Diceware Passphrase method.
+passphrases are based on length and randomness. In cryptography the
+quality of a passphrase is referred to as its
+Wikipedia:Entropic_security.
+
+Refer to The passphrase FAQ for a detailed discussion, and especially
+consider the Diceware Passphrase method. Also, you can check entropy
+level of your chosen passphrase here.
 
 Another aspect of the strength of the passphrase is that it must not be
 easily recoverable from other places. If you use the same passphrase for
@@ -882,17 +893,18 @@ for one or both of the following reasons:
     contain encrypted data - which may be a desirable goal in itself (as
     part of true confidentiality), and also serves as an additional
     barrier against attackers trying to break the encryption.  
-     For this purpose, wiping the disk using high-quality random data is
-    crucial.
+     In order to satisfy this goal, wiping the disk using high-quality
+    random bytes is crucial.
 
-The second reason only makes sense in combination with block device
-encryptions, because in the case of stacked filesystem encryption the
-encrypted data is easily identifiable anyways (in the form of distinct
+The second goal only makes sense in combination with block device
+encryption, because in the case of stacked filesystem encryption the
+encrypted data can easily be located anyways (in the form of distinct
 encrypted files in the host filesystem). Also note that even if you only
 intend to encrypt a particular folder, you will have to erase the whole
 partition if you want to get rid of files that were previously stored in
-that folder in unencrypted form. If there are other folders on the same
-partition, you will have to back them up and move them back afterwards.
+that folder in unencrypted form (due to disk fragmentation). If there
+are other folders on the same partition, you will have to back them up
+and move them back afterwards.
 
 Once you have decided which kind of disk erasure you want to perform,
 refer to the Securely_wipe_disk article for technical instructions.
@@ -916,7 +928,7 @@ administrator with a rough understanding of how different setup choices
 
 For the purposes of disk encryption, each blockdevice (or individual
 file in the case of stacked filesystem encryption) is divided into
-sectors of equal lenght, for example 512 bytes (4,096 bits). The
+sectors of equal length, for example 512 bytes (4,096 bits). The
 encryption/decryption then happens on a per-sector basis, so the n'th
 sector of the blockdevice/file on disk will store the encrypted version
 of the n'th sector of the original data.
@@ -931,31 +943,46 @@ on-the-fly, and temporarily stored in memory:
               ╠═══════╣         ╭┈┈┈┈┈╮
      sector 2 ║"???.."║         ┊ key ┊
               ╠═══════╣         ╰┈┈┬┈┈╯
-              ⁝       ⁝            │
+              :       :            │
               ╠═══════╣            ▼             ┣┉┉┉┉┉┉┉┫
      sector n ║"???.."║━━━━━━━(decryption)━━━━━━▶┋"abc.."┋ sector n
               ╠═══════╣                          ┣┉┉┉┉┉┉┉┫
-              ⁝       ⁝
+              :       :
               ╚═══════╝
      
               encrypted                          unencrypted
-         blockdevice or                          data in memory
+         blockdevice or                          data in RAM
            file on disk
 
 Similarly, on each write operation, all sectors that are affected must
 be re-encrypted complelety (while the rest of the sectors remain
 untouched).
 
+In order to be able to de/encrypt data, the disk encryption system needs
+to know the unique secret "key" associated with it. Whenever the
+encrypted block device or folder in question is to be mounted, its
+corresponding key (called henceforth its "master key") must be supplied.
+
+The entropy of the key is of utmost importance for the security of the
+encryption. A randomly generated byte string of a certain length, for
+example 32 bytes (256 bits), has desired properties but is not feasible
+to remember and apply manually during the mount.
+
+For that reason two techniques are used as aides. The first is the
+application of cryptography to increase the entropic property of the
+master key, usually involving a separate human-friendly passphrase. For
+the different types of encryption the #Comparison_table lists respective
+features. The second method is to create a keyfile with high entropy and
+store it on a medium separate from the data drive to be encrypted.
+
+Further reading:
+
+-   Wikipedia:Authenticated_encryption
+
 > Keys, keyfiles and passphrases
 
-In order to be able to de/encrypt data, the disk encryption system needs
-to know the unique secret "key" associated with it. This is a randomly
-generated byte string of a certain length, for example 32 bytes (256
-bits).
-
-Whenever the encrypted block device or folder in question is to be
-mounted, its corresponding key (called henceforth its "master key") must
-be retrieved - usually from one of the following locations:
+The following are examples how to store and cryptographically secure a
+master key with a keyfile:
 
 -   stored in a plaintext keyfile
 
@@ -970,54 +997,8 @@ be retrieved - usually from one of the following locations:
 
     The master key (and thus the encrypted data) can be protected with a
     secret passphrase, which you will have to remember and enter each
-    time you want to mount the encrypted block device or folder.
-
-    A common setup is to apply so-called "key stretching" to the
-    passphrase (via a "key derivation function"), and use the resulting
-    enhanced passphrase as the mount key for decrypting the actual
-    master key (which has been previously stored in encrypted form):
-
-         ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮                         ╭┈┈┈┈┈┈┈┈┈┈┈╮
-         ┊ mount passphrase ┊━━━━━⎛key derivation⎞━━━▶┊ mount key ┊
-         ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╯ ,───⎝   function   ⎠    ╰┈┈┈┈┈┬┈┈┈┈┈╯
-         ╭──────╮            ╱                              │
-         │ salt │───────────´                               │
-         ╰──────╯                                           │
-         ╭─────────────────────╮                            ▼         ╭┈┈┈┈┈┈┈┈┈┈┈┈╮
-         │ encrypted master key│━━━━━━━━━━━━━━━━━━━━━━(decryption)━━━▶┊ master key ┊
-         ╰─────────────────────╯                                      ╰┈┈┈┈┈┈┈┈┈┈┈┈╯
-
-    The key derivation function (e.g. PBKDF2 or scrypt) is deliberately
-    slow (it applies many iterations of a hash function, e.g. 1000
-    iterations of HMAC-SHA-512), so that brute-force attacks to find the
-    passphrase are rendered infeasible. For the normal use-case of an
-    authorized user, it will only need to be calculated once per
-    session, so the small slowdown is not a problem.  
-    It also takes an additional blob of data, the so-called "salt", as
-    an argument - this is randomly generated once during set-up of the
-    disk encryption and stored unprotected as part of the cryptographic
-    metadata. Because it will be a different value for each setup, this
-    makes it infeasible for attackers to speed up brute-force attacks
-    using precomputed tables for the key derivation function.
-
-    The encrypted master key can be stored on disk together with the
-    encrypted data. This way, the confidentiality of the encrypted data
-    depends completely on the secret passphrase.
-
-    Additional security can be attained by instead storing the encrypted
-    master key in a keyfile on e.g. a USB stick. This provides
-    two-factor authentication: Accessing the encrypted data now requires
-    something only you know (the passphrase), and additionally something
-    only you have (the keyfile).
-
-    Another way of achieving two-factor authentication is to augment the
-    above key retrieval scheme to mathematically "combine" the
-    passphrase with byte data read from one or more external files
-    (located on a USB stick or similar), before passing it to the key
-    derivation function.  
-    The files in question can be anything, e.g. normal JPEG images,
-    which can be beneficial for #Plausible Deniability. They are still
-    called "keyfiles" in this context, though.
+    time you want to mount the encrypted block device or folder. See
+    #Cryptographic metadata below for details.
 
 -   randomly generated on-the-fly for each session
 
@@ -1029,8 +1010,60 @@ be retrieved - usually from one of the following locations:
     again by anyone - which in those particular use-cases is perfectly
     fine.
 
-  
-After is has been derived, the master key is securely stored in memory
+> Cryptographic metadata
+
+Frequently the encryption techniques use cryptographic functions to
+enhance the security of the master key itself. On mount of the encrypted
+device the passphrase or keyfile is passed through these and only the
+result can unlock the master key to decrypt the data.
+
+A common setup is to apply so-called "key stretching" to the passphrase
+(via a "key derivation function"), and use the resulting enhanced
+passphrase as the mount key for decrypting the actual master key (which
+has been previously stored in encrypted form):
+
+     ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮                         ╭┈┈┈┈┈┈┈┈┈┈┈╮
+     ┊ mount passphrase ┊━━━━━⎛key derivation⎞━━━▶┊ mount key ┊
+     ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╯ ,───⎝   function   ⎠    ╰┈┈┈┈┈┬┈┈┈┈┈╯
+     ╭──────╮            ╱                              │
+     │ salt │───────────´                               │
+     ╰──────╯                                           │
+     ╭─────────────────────╮                            ▼         ╭┈┈┈┈┈┈┈┈┈┈┈┈╮
+     │ encrypted master key│━━━━━━━━━━━━━━━━━━━━━━(decryption)━━━▶┊ master key ┊
+     ╰─────────────────────╯                                      ╰┈┈┈┈┈┈┈┈┈┈┈┈╯
+
+The key derivation function (e.g. PBKDF2 or scrypt) is deliberately slow
+(it applies many iterations of a hash function, e.g. 1000 iterations of
+HMAC-SHA-512), so that brute-force attacks to find the passphrase are
+rendered infeasible. For the normal use-case of an authorized user, it
+will only need to be calculated once per session, so the small slowdown
+is not a problem.   
+It also takes an additional blob of data, the so-called "salt", as an
+argument - this is randomly generated once during set-up of the disk
+encryption and stored unprotected as part of the cryptographic metadata.
+Because it will be a different value for each setup, this makes it
+infeasible for attackers to speed up brute-force attacks using
+precomputed tables for the key derivation function.
+
+The encrypted master key can be stored on disk together with the
+encrypted data. This way, the confidentiality of the encrypted data
+depends completely on the secret passphrase.
+
+Additional security can be attained by instead storing the encrypted
+master key in a keyfile on e.g. a USB stick. This provides two-factor
+authentication: Accessing the encrypted data now requires something only
+you know (the passphrase), and additionally something only you have (the
+keyfile).
+
+Another way of achieving two-factor authentication is to augment the
+above key retrieval scheme to mathematically "combine" the passphrase
+with byte data read from one or more external files (located on a USB
+stick or similar), before passing it to the key derivation function.  
+The files in question can be anything, e.g. normal JPEG images, which
+can be beneficial for #Plausible deniability. They are still called
+"keyfiles" in this context, though.
+
+After it has been derived, the master key is securely stored in memory
 (e.g. in a kernel keyring), for as long as the encrypted block device or
 folder is mounted.
 
@@ -1057,13 +1090,25 @@ In a similar manner, a separate key (e.g. one per folder) may be used
 for the encryption of file names in the case of stacked filesystem
 encryption.
 
-In the case of block device encryption, ...
+In the case of block device encryption one master key is used per device
+and, hence, all data. Some methods offer features to assign multiple
+passphrases/keyfiles for the same device and others not. Some use above
+mentioned functions to secure the master key and others give the control
+over the key security fully to the user. Two examples are explained by
+the cryptographic parameters used by dm-crypt in plain or LUKS modes.
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
-  ng]                      needs expansion.         ng]
-                           Reason: (Discuss)        
-  ------------------------ ------------------------ ------------------------
+When comparing the parameters used by both modes one notes that dm-crypt
+plain mode has parameters relating to how to locate the keyfile (e.g.
+--keyfile-size, --keyfile-offset). The dm-crypt LUKS mode does not need
+these, because each blockdevice contains a header with the cryptographic
+metadata at the beginning. The header includes the used cipher, the
+encrypted master-key itself and parameters required for its derivation
+for decryption. The latter parameters in turn result from options used
+during initial encryption of the master-key [e.g. --iter-time,
+--use-random).
+
+For the dis-/advantages of the different techniques, please refer back
+to #Comparison_table or browse the specific pages.
 
 Further reading:
 
@@ -1151,10 +1196,10 @@ metadata and called an "initialization vector (IV)" is used:
               │  ║          ║──────────────────╮      ┋          ┋
               │  ╟──────────╢                  │      ┠┈┈┈┈┈┈┈┈┈┈┨
               │  ║          ║                  ▼      ┋          ┋
-              ⁝  ⁝   ...    ⁝        ...      ...     ⁝   ...    ⁝ ...
+              :  :   ...    :        ...      ...     :   ...    : ...
      
                    ciphertext                         plaintext
-                      on disk                         in memory
+                      on disk                         in RAM
 
 When decrypting, the procedure is reversed analogously.
 
@@ -1169,8 +1214,10 @@ them look completely random to a potential attacker.
 
 There are also a number of other, more complicated modes of operation
 available for disk encryption, which already provide built-in security
-agains such attacks. Some can also additionally guarantee authenticity
-(see below) of the encrypted data.
+against such attacks (and hence don't require ESSIV). Some can also
+additionally guarantee authenticity of the encrypted data (i.e. confirm
+that it has not been modified/corrupted by someone who does not have
+access to the key).
 
 Further reading:
 
@@ -1178,33 +1225,9 @@ Further reading:
 -   Wikipedia:Block_cipher
 -   Wikipedia:Block_cipher_modes_of_operation
 
-> Cryptographic metadata
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
-  ng]                      needs expansion.         ng]
-                           Reason: (Discuss)        
-  ------------------------ ------------------------ ------------------------
-
-> Data integrity/authenticity
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
-  ng]                      needs expansion.         ng]
-                           Reason: (Discuss)        
-  ------------------------ ------------------------ ------------------------
-
-Further reading:
-
--   Wikipedia:Authenticated_encryption
-
 > Plausible deniability
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
-  ng]                      needs expansion.         ng]
-                           Reason: (Discuss)        
-  ------------------------ ------------------------ ------------------------
+Please refer to Wikipedia:Plausible deniability
 
 Notes & References
 ------------------
@@ -1215,19 +1238,28 @@ Notes & References
     be using the filesystem (and the features it provides) anymore
 3.  ^ CrossCrypt - Open Source AES and TwoFish Linux compatible on the
     fly encryption for Windows XP and Windows 2000
-4.  ^ FreeOTFE - supports Windows 2000 and later (for PC), and Windows
-    Mobile 2003 and later (for PDA)
+4.  ^ (1) FreeOTFE (on sf.net) (2) FreeOTFE (archived) - supports
+    Windows 2000 and later (for PC), and Windows Mobile 2003 and later
+    (for PDA)
 5.  ^ see EncFs build instructions for Mac
 6.  ^ see http://www.freshports.org/sysutils/fusefs-encfs/
 7.  ^ see
     http://www.chromium.org/chromium-os/chromiumos-design-docs/protecting-cached-user-data
 8.  ^
     http://kernelnewbies.org/Linux_2_6_38#head-49f5f735853f8cc7c4d89e5c266fe07316b49f4c
+9.  ^ http://members.ferrara.linux.it/freddy77/encfs.html
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Disk_Encryption&oldid=255637"
+"https://wiki.archlinux.org/index.php?title=Disk_Encryption&oldid=296638"
 
 Categories:
 
 -   Security
 -   File systems
+
+-   This page was last modified on 9 February 2014, at 03:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

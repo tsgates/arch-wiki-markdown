@@ -16,21 +16,17 @@ performance and Point-in-time recovery.
 
 Note: MyISAM tables are read-only while they are being backed up.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage Examples                                                     |
-|     -   2.1 xtrabackup                                                   |
-|     -   2.2 innobackupex                                                 |
-|     -   2.3 tar4ibd                                                      |
-|                                                                          |
-| -   3 Tips                                                               |
-|     -   3.1 Setting up a slave with Xtrabackup                           |
-|                                                                          |
-| -   4 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage Examples
+    -   2.1 xtrabackup
+    -   2.2 innobackupex
+    -   2.3 tar4ibd
+-   3 Tips
+    -   3.1 Setting up a slave with Xtrabackup
+-   4 More Resources
 
 Installation
 ------------
@@ -185,3 +181,10 @@ Categories:
 
 -   Database management systems
 -   System recovery
+
+-   This page was last modified on 23 April 2012, at 18:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

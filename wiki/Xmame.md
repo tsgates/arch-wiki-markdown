@@ -43,9 +43,16 @@ Press TAB to customize the input keys after the game starts. Happy
 emulating!
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xmame&oldid=233671"
+"https://wiki.archlinux.org/index.php?title=Xmame&oldid=305917"
 
 Categories:
 
 -   Emulators
 -   Gaming
+
+-   This page was last modified on 20 March 2014, at 17:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

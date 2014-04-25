@@ -19,17 +19,17 @@ function equally well.
 sshguard is not vulnerable to most (or maybe any) of the log analysis
 vulnerabilities that have caused problems for similar tools.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 In Arch Linux                                                |
-|                                                                          |
-| -   3 General Information                                                |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Usage
+    -   3.1 With systemd
+    -   3.2 With syslog-ng
+-   4 General Information
+-   5 How to Unban
+-   6 See also
 
 Installation
 ------------
@@ -44,10 +44,25 @@ the INPUT chain of iptables where sshguard automatically inserts rules
 to drop packets coming from bad hosts:
 
     # iptables -N sshguard
-    # iptables -A INPUT -j sshguard
-    # /etc/rc.d/iptables save
+    # iptables -A INPUT -p tcp --dport 22 -j sshguard
+    # iptables-save > /etc/iptables/iptables.rules
 
-If you do not currently use iptables and just want to get sshguard up
+If you use IPv6:
+
+    # ip6tables -N sshguard
+    # ip6tables -A INPUT -p tcp --dport 22 -j sshguard
+    # ip6tables-save > /etc/iptables/ip6tables.rules
+
+If you don't use IPv6, create and empty file "ip6tables.rules" with:
+
+    # touch /etc/iptables/ip6tables.rules
+
+Finally:
+
+    # systemctl reload iptables
+
+  
+ If you do not currently use iptables and just want to get sshguard up
 and running without any further impact on your system, these commands
 will create and save an iptables configuration that does absolutely
 nothing except allowing sshguard to work:
@@ -63,41 +78,33 @@ nothing except allowing sshguard to work:
 
 To finish saving your iptables configuration. Repeat above steps with
 ip6tables to configure the firewall rules for IPv6 and save them with
-ip6tabes-save to /etc/iptables/ip6tables.rules.
+ip6tables-save to /etc/iptables/ip6tables.rules.
 
 For more information on using iptables to create powerful firewalls, see
-Simple Stateful Firewall.
+Simple stateful firewall.
 
-Then, enable the service:
+Usage
+-----
+
+sshguard does not have its own configuration file. All options are
+supplied as arguments when sshguard is started. See man sshguard.
+
+> With systemd
+
+Enable and start the service:
 
     # systemctl enable sshguard
+    # systemctl start sshguard 
 
-> In Arch Linux
+Add optional sshguard arguments between the quotation marks in the file,
+/usr/lib/systemd/system/sshguard.service.
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: systemd          
-                           sshguard.service relies  
-                           on logging to systemd    
-                           journal and ignores      
-                           /var/log/auth.log        
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
+> With syslog-ng
 
-By default, sshguard does not have its own configuration file: all
-options are supplied on the command line. However, Arch Linux uses the
-/etc/conf.d/sshguard configuration file, allowing additional arguments
-to be passed to the command line when sshguard is started. By default
-sshguard will use its built-in log reader, called Log Sucker, to read
-the logs:
+If you have syslog-ng installed, you may start sshguard directly from
+the command line instead.
 
     /usr/sbin/sshguard -l /var/log/auth.log -b /var/db/sshguard/blacklist.db
-
-The -l switch tells sshguard which log to watch. Note also the -b option
-is used, which makes some bans permanent. Records of permanent bans are
-then kept in /var/db/sshguard/blacklist.db to be remembered between
-restarts.
 
 General Information
 -------------------
@@ -119,14 +126,35 @@ port 22, simply do not send packets going to other ports through the
 When sshguard bans someone, the ban is logged to syslog and ends up in
 /var/log/auth.log.
 
+How to Unban
+------------
+
+If you get banned, you can wait to get unbanned automatically or use
+iptables to unban yourself. First check if your ip is banned by
+sshguard:
+
+    # iptables -L sshguard --line-numbers
+
+Then use the following command to unban, with the line-number as
+identified in the former command:
+
+    # iptables -D sshguard <line-number>
+
 See also
 --------
 
 -   fail2ban
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sshguard&oldid=248371"
+"https://wiki.archlinux.org/index.php?title=Sshguard&oldid=302038"
 
 Category:
 
 -   Secure Shell
+
+-   This page was last modified on 25 February 2014, at 13:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

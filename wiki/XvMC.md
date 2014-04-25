@@ -1,15 +1,10 @@
 XvMC
 ====
 
-> Summary
+Related articles
 
-Explains XvMC support in various hardware and software components.
-
-> Related
-
-VA-API
-
-MPlayer
+-   VA-API
+-   VDPAU
 
 X-Video Motion Compensation (XvMC) is an extension for the X.Org Server.
 The XvMC API allows video programs to offload portions of the video
@@ -19,22 +14,18 @@ acceleration takes the load off the CPU, thereby reducing processor
 requirements for video playback, it is an ideal solution for HDTV video
 playback scenarios.
 
-Note:XvMC is obsoleted by VA-API nowadays, which have better support for
-recent GPUs.
+Note:XvMC is obsoleted by VA-API and VDPAU nowadays, which have better
+support for recent GPUs.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Supported hardware                                                 |
-|     -   1.1 Configuration                                                |
-|                                                                          |
-| -   2 Supported software                                                 |
-|     -   2.1 MPlayer                                                      |
-|     -   2.2 xine                                                         |
-|                                                                          |
-| -   3 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Supported hardware
+    -   1.1 Configuration
+-   2 Supported software
+    -   2.1 MPlayer
+    -   2.2 xine
+-   3 References
 
 Supported hardware
 ------------------
@@ -52,8 +43,8 @@ Only MPEG-1 and MPEG-2 videos are supported by all driver.
     GPUs are supported by the open source xf86-video-intel package,
     available in the official repositories.
 -   AMD Radeon HD 5000 series and newer GPUs are supported by the
-    proprietary catalyst-utils package, available in the official
-    repositories.
+    proprietary catalyst-utils package, available in the Arch User
+    Repository.
 -   AMD Radeon HD 4000 series GPUs are supported by the proprietary
     catalyst-legacy-utils package, available in the Arch User
     Repository.
@@ -120,9 +111,16 @@ References
 -   Xine's xxmc plugin
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=XvMC&oldid=245333"
+"https://wiki.archlinux.org/index.php?title=XvMC&oldid=294620"
 
 Categories:
 
 -   Graphics
 -   X Server
+
+-   This page was last modified on 27 January 2014, at 12:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

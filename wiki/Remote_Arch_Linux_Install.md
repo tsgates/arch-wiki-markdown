@@ -9,22 +9,19 @@ Warning:Please make sure you understand each step before proceeding. It
 is easy to destroy your system or to lose critical data, and your
 service provider will likely charge a lot to help you recover.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Backup and Preparation                                             |
-| -   3 Prepare the intermediate system                                    |
-|     -   3.1 Create a new swap file                                       |
-|     -   3.2 Set old swap partition as new root partition                 |
-|     -   3.3 Install the intermediate system                              |
-|     -   3.4 Things to check before you boot                              |
-|     -   3.5 Prepare a home for your new production server                |
-|                                                                          |
-| -   4 Set up your new system                                             |
-|     -   4.1 Final Remarks                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Backup and Preparation
+-   3 Prepare the intermediate system
+    -   3.1 Create a new swap file
+    -   3.2 Set old swap partition as new root partition
+    -   3.3 Install the intermediate system
+    -   3.4 Things to check before you boot
+    -   3.5 Prepare a home for your new production server
+-   4 Set up your new system
+    -   4.1 Final Remarks
 
 Introduction
 ------------
@@ -110,7 +107,7 @@ Create a directory to mount it in
 
     # mkdir /mnt/newsys
 
-Finally mounts the new directory for installing the intermediate system.
+Finally, mount the new directory for installing the intermediate system.
 
     # mount -t ext4 /dev/sdaX /mnt/newsys
 
@@ -146,7 +143,7 @@ joe) if you dislike vi.
 
     # pacman -S linux openssh
 
-Set up a bootloader following guide in Installation Guide. Set up your
+Set up a bootloader following guide in Installation guide. Set up your
 bootmanager to the new system
 
 Before proceeding double check that you:
@@ -173,7 +170,7 @@ Create filesystems as desired and mount your new root partition to
 Set up your new system
 ----------------------
 
-At this point, follow the normal steps of Installation Guide. Probably
+At this point, follow the normal steps of Installation guide. Probably
 the genfstab script won't work. In that case, you'll need to edit the
 /mnt/etc/fstab file by hand. You can use the content of /etc/mtab as
 reference.
@@ -187,8 +184,15 @@ Now you have Arch Linux running at your server. More things need to be
 done to turn it into something useful.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Remote_Arch_Linux_Install&oldid=253563"
+"https://wiki.archlinux.org/index.php?title=Remote_Arch_Linux_Install&oldid=298222"
 
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 16 February 2014, at 07:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

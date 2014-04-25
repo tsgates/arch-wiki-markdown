@@ -74,3 +74,10 @@ Retrieved from
 Category:
 
 -   Printers
+
+-   This page was last modified on 17 February 2013, at 16:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

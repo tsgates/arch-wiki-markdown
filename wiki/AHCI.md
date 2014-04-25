@@ -1,10 +1,6 @@
 AHCI
 ====
 
-  Summary
-  ---------------------------------------------------
-  Enabling AHCI data transfer mode for SATA devices
-
 AHCI, abbreviation for advanced host controller interface, is the native
 work mode for SATA drives, and has been present in the Linux kernel
 since version 2.6.19.
@@ -13,27 +9,6 @@ While SATA drives are usually configured as legacy/parallel ATA by
 default, enabling AHCI through the BIOS has two main benefits: support
 for hot pluggable SATA drives (mimicking USB drives' behavior) and NCQ,
 or native command queuing.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Add the AHCI module to the kernel image                            |
-| -   2 Configure from BIOS                                                |
-| -   3 Pitfalls                                                           |
-| -   4 Resources                                                          |
-+--------------------------------------------------------------------------+
-
-Add the AHCI module to the kernel image
----------------------------------------
-
-Edit /etc/mkinitcpio.conf and add ahci to the MODULES variable:
-
-    MODULES="ahci"
-
-Rebuild the kernel image so that it includes the newly added module:
-
-    # mkinitcpio -p linux
 
 Configure from BIOS
 -------------------
@@ -75,17 +50,6 @@ and for NCQ:
 
     ata2.00: 625142448 sectors, multi 16: LBA48 NCQ (depth 31/32)
 
-Pitfalls
---------
-
--   Windows XP does not have stock AHCI drivers. A user with SATA drives
-    wishing to enable AHCI mode and dual-boot into Windows XP will need
-    AHCI drivers for their motherboard. This issue does not affect
-    Windows Vista onwards.
--   During booting, if there is a delay before GRUB appears, check BIOS
-    settings. There might be an option that introduces such a delay so
-    that "lazy" optical drives are able to boot.
-
 Resources
 ---------
 
@@ -93,8 +57,15 @@ Resources
 -   NCQ on Wikipedia
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=AHCI&oldid=206371"
+"https://wiki.archlinux.org/index.php?title=AHCI&oldid=291211"
 
 Category:
 
 -   Storage
+
+-   This page was last modified on 1 January 2014, at 07:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

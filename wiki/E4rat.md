@@ -1,60 +1,40 @@
 E4rat
 =====
 
-> Summary
+Related articles
 
-How to drastically reduce boot and log-into-X time for ext4 file systems
-using the e4rat range of tools.
-
-> Related
-
-Improve Boot Performance
-
-Preload
-
-Readahead
-
-Ureadahead
-
-Ext4
-
-Forum threads
-
-Main discussion
-
-Improved e4rat-preload
+-   Improve boot performance
+-   Preload
+-   Ureadahead
+-   Ext4
 
 e4rat stands for e4 'reduced access time' (ext4 file system only) and is
 a project by Andreas Rid and Gundolf Kiefer. The e4rat range of tools
 are comprised of e4rat-collect, e4rat-realloc and e4rat-preload.
 
-Current version is 0.2.1
+Current version is 0.2.3
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Process                                                            |
-|     -   1.1 Who benefits, who does not                                   |
-|                                                                          |
-| -   2 Installation                                                       |
-| -   3 Getting it to work                                                 |
-|     -   3.1 e4rat-collect                                                |
-|     -   3.2 e4rat-realloc                                                |
-|     -   3.3 e4rat-preload                                                |
-|     -   3.4 Alternative: e4rat-preload-lite                              |
-|                                                                          |
-| -   4 e4rat with different init system, e.g. systemd                     |
-| -   5 Bootchart                                                          |
-|     -   5.1 bootchart 0.9-9                                              |
-|     -   5.2 bootchart2                                                   |
-|                                                                          |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 startup.log is not created                                   |
-|     -   6.2 e4rat erroneously reports an ext2 files system               |
-|     -   6.3 /var/lib/e4rat/startup.log is not accessible                 |
-|     -   6.4 Remove annoying message that mess up boot message            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Process
+    -   1.1 Who benefits, who does not
+-   2 Installation
+-   3 Getting it to work
+    -   3.1 e4rat-collect
+    -   3.2 e4rat-realloc
+    -   3.3 e4rat-preload
+    -   3.4 Alternative: e4rat-preload-lite
+-   4 e4rat and init systems
+-   5 Bootchart
+    -   5.1 bootchart 0.9-9
+    -   5.2 bootchart2
+-   6 Troubleshooting
+    -   6.1 startup.log is not created
+    -   6.2 e4rat erroneously reports an ext2 files system
+    -   6.3 /var/lib/e4rat/startup.log is not accessible
+    -   6.4 Remove annoying message that mess up boot message
+-   7 See also
 
 Process
 -------
@@ -89,7 +69,7 @@ cannot afford to lose data on your partition.
 Installation
 ------------
 
-Install e4rat from the Official Repositories.
+Install e4rat from the AUR.
 
 Getting it to work
 ------------------
@@ -99,9 +79,9 @@ Now for the nitty-gritty:
 > e4rat-collect
 
 To have e4rat collect a list of files you will need to append
-init=/sbin/e4rat-collect to your kernel parameters.For example:
+init=/sbin/e4rat-collect to your kernel parameters. For example:
 
-    kernel /vmlinuz0linux root=/dev/disk/by-label/ARCH init=/sbin/e4rat-collect ro 5
+    kernel /vmlinuz-linux root=/dev/disk/by-label/ARCH init=/sbin/e4rat-collect ro 5
 
 This will only have to be done once so you may prefer to append this
 command on the grub command line itself.
@@ -119,7 +99,7 @@ or
     pkill e4rat-collect
 
 Upon successful boot and after having waited the allotted time you
-should see the following file: /var/lib/e4rat/startup.log
+should see the file /var/lib/e4rat/startup.log.
 
 Do not forget to remove the e4rat-collect command from your boot loader
 configuration file (not necessary if you inserted it on the grub command
@@ -178,15 +158,15 @@ You can install e4rat-preload-lite from the AUR.
 Append (or replace) init=/usr/sbin/e4rat-preload-lite permanently to
 your kernel parameters. Reboot and enjoy.
 
-e4rat with different init system, e.g. systemd
-----------------------------------------------
+e4rat and init systems
+----------------------
 
 e4rat-collect defaults to replacing itself with /sbin/init upon
 completion. If you need to specify another process with PID 1, such as
-/bin/systemd, you can change this in /etc/e4rat.conf by setting the
-"init" parameter:
+/usr/lib/systemd/systemd, you can change this in /etc/e4rat.conf by
+setting the init parameter:
 
-    init /bin/systemd 
+    init /usr/lib/systemd/systemd 
 
 This allows to launch both e4rat-preload and bootchart in the same boot
 sequence.
@@ -194,7 +174,7 @@ sequence.
 Bootchart
 ---------
 
-Note: this has not worked for and is still in development - any
+Warning:This has not worked for and is still in development - any
 suggestions welcome
 
 You will see a noticeable improvement but nothing can beat a nice
@@ -203,9 +183,9 @@ the difference.
 
 > bootchart 0.9-9
 
-This version of bootchart automatically stops logging as soon as Display
-Manager comes up. Supposedly the following overrides that and continues
-logging but it does not work for me:
+This version of bootchart automatically stops logging as soon as a
+display manager comes up. Supposedly the following overrides that and
+continues logging but it does not work for me:
 
 To continue logging adjust your /etc/bootchartd.conf as follows:
 
@@ -213,7 +193,7 @@ To continue logging adjust your /etc/bootchartd.conf as follows:
 
 To stop it manually type:
 
-    ~# bootchartd stop
+    # bootchartd stop
 
 To run both e4rat-preload and bootchart append the following to your
 grub kernel line:
@@ -250,12 +230,12 @@ If things do not work you may want to try the following.
 
 > startup.log is not created
 
--   comment out auditd from your rc.conf
--   check the following for any hints
+-   Disable auditd service
+-   Check the following for any hints
 
     dmesg | grep e4rat
 
--   try to increase verbosity and loglevel to 31 in your e4rat.conf
+-   Try to increase verbosity and loglevel to 31 in your e4rat.conf
 
 > e4rat erroneously reports an ext2 files system
 
@@ -263,21 +243,34 @@ Add rootfstype=ext4 to kernel parameters from your bootloader.
 
 > /var/lib/e4rat/startup.log is not accessible
 
--   this suggests that you have /var on a separate partition which is
-    not yet mounted during boot. You need move your startup.log to an
-    accessible partition (/etc/e4rat/ is just fine) and adjust your
-    /etc/e4rat.conf to reflect this change:
+This suggests that you have /var on a separate partition which is not
+yet mounted during boot. You need move your startup.log to an accessible
+partition (/etc/e4rat/ is just fine) and adjust your /etc/e4rat.conf to
+reflect this change:
 
     startup_log_file /etc/e4rat/startup.log
 
 > Remove annoying message that mess up boot message
 
 If you are annoyed by the e4rat-preload message during boot, decrease
-loglevel to 1 in /etc/e4rat.conf
+verbose to 1 in /etc/e4rat.conf
+
+See also
+--------
+
+-   Main discussion on the forum
+-   Improved e4rat-preload - forum thread
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=E4rat&oldid=243534"
+"https://wiki.archlinux.org/index.php?title=E4rat&oldid=299500"
 
 Category:
 
 -   Boot process
+
+-   This page was last modified on 21 February 2014, at 22:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

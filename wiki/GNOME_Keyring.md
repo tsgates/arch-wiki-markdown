@@ -8,19 +8,28 @@ passwords, keys, certificates and make them available to applications.
 
 Note:Gnome Keyring does not support ECDSA keys. See Bug 641082.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Manage using GUI                                                   |
-| -   2 Use Without GNOME                                                  |
-| -   3 SSH Keys                                                           |
-| -   4 Integration with applications                                      |
-| -   5 Gnome Keyring dialog and SSH                                       |
-| -   6 Unlock at Startup                                                  |
-| -   7 Useful Tools                                                       |
-|     -   7.1 gnome-keyring-query                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Manage using GUI
+-   3 Use Without GNOME, but with a display manager
+-   4 Use Without GNOME and a display manager
+-   5 SSH Keys
+-   6 Integration with applications
+-   7 Gnome Keyring dialog and SSH
+-   8 Flushing passphrases
+-   9 Gnome Keyring and Git
+-   10 Unlock at Startup
+-   11 Useful Tools
+    -   11.1 gnome-keyring-query
+
+Installation
+------------
+
+If you're using GNOME, gnome-keyring got installed automatically as a
+part of it. If you're using a different setup, install gnome-keyring
+from the official repositories.
 
 Manage using GUI
 ----------------
@@ -34,21 +43,37 @@ password." Enter the old password and leave empty the new password. You
 will be warned about using unencrypted storage; continue by pushing "Use
 Unsafe Storage."
 
-Use Without GNOME
------------------
+Use Without GNOME, but with a display manager
+---------------------------------------------
+
+Both Slim and LightDM ship with /etc/pam.d/slim or /etc/pam.d/lightdm
+preconfigured to unlock keyring upon login. Users no longer need to
+modify the file. So the keyring will work out of the box for most cases.
+If you are using the keyring to unlock your ssh keys though, make sure
+to have ~/.zshenv
+
+     if [ -n "$DESKTOP_SESSION" ];then
+       if [ -n "$GNOME_KEYRING_PID" ]; then
+         eval $(gnome-keyring-daemon --start --components=ssh)
+         export SSH_AUTH_SOCK
+       fi
+     fi
+
+Use Without GNOME and a display manager
+---------------------------------------
 
 It is possible to use GNOME Keyring without the rest of the GNOME
-desktop. To do this, add the following to your ~/.xinitrc file:
+desktop and a display manager. To do this, add the following to your
+~/.xinitrc file:
 
     # Start a D-Bus session
+    # Source the below file only if you do not already use the default xinitrc skeleton. 
+    # Otherwise you will end up with multiple dbus sessions.
     source /etc/X11/xinit/xinitrc.d/30-dbus
     # Start GNOME Keyring
     eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
     # You probably need to do this too:
-    export SSH_AUTH_SOCK
-    export GPG_AGENT_INFO
-    export GNOME_KEYRING_CONTROL
-    export GNOME_KEYRING_PID
+    export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 
 See FS#13986 for more info.
 
@@ -102,7 +127,7 @@ SSH_AUTH_SOCK, example:
 Now you should add to your ~/.bashrc, according to the output of the
 previous command, for example:
 
-    SSH_AUTH_SOCK=`ss -xl | grep -o '/run/user/1000/keyring-.*/ssh$'`
+    SSH_AUTH_SOCK=`ss -xl | grep -o '/run/user/1000/keyring-.*/ssh'`
     [ -z "$SSH_AUTH_SOCK" ] || export SSH_AUTH_SOCK
 
 If you run on your terminal the following:
@@ -116,14 +141,40 @@ will return something like the following:
 Now when you connect with ssh, gnome-keyring dialog will launch the
 "entry of the passphrase"
 
+Flushing passphrases
+--------------------
+
+       gnome-keyring-daemon -r -d
+
+will start gnome-keyring-daemon and shut down previously running
+daemons. Note: if there is no previously running daemons, it'll still
+start up.
+
+What's a good way of checking whether it's already running?
+
+Gnome Keyring and Git
+---------------------
+
+The Gnome keyring is useful in use with Git when you are pushing over
+https. First compile the helper
+
+    $ cd /usr/share/git/credential/gnome-keyring
+    # make
+
+Set Git up to use the helper
+
+    $ git config --global credential.helper /usr/share/git/credential/gnome-keyring/git-credential-gnome-keyring
+
+Next time you do a git push, you'll be asked to unlock your keyring
+
 Unlock at Startup
 -----------------
 
 GNOME's login manager (gdm) will automatically unlock the keyring once
 you log in; for others it is not so easy.
 
-For SLiM, see SLiM#SLiM_and_Gnome_Keyring, This method works for KDM as
-well, but you need to edit /etc/pam.d/kde instead of /etc/pam.d/slim.
+For SLiM, see SLiM#SLiM_and_Gnome_Keyring; For KDM see
+KDM#KDM_and_Gnome-keyring
 
 If you are using automatic login, then you can disable the keyring
 manager by setting a blank password on the login keyring. Note: your
@@ -134,7 +185,7 @@ be achieved by the following changes in /etc/pam.d/login: Add
 auth       optional     pam_gnome_keyring.so at the end of the auth
 section and
 session    optional     pam_gnome_keyring.so        auto_start at the
-end of the session section. The result should look look similar to this:
+end of the session section. The result should look similar to this:
 
     #%PAM-1.0
 
@@ -167,8 +218,15 @@ gnome-keyring-query from the AUR provides a simple command-line tool for
 querying passwords from the password store of the GNOME Keyring.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GNOME_Keyring&oldid=255333"
+"https://wiki.archlinux.org/index.php?title=GNOME_Keyring&oldid=305472"
 
 Category:
 
--   Desktop environments
+-   GNOME
+
+-   This page was last modified on 18 March 2014, at 16:26.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

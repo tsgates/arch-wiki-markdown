@@ -1,66 +1,51 @@
 Git
 ===
 
-> Summary
+Related articles
 
-Installing and using the Git VCS
-
-> Related
-
-Super Quick Git Guide: Generally about contributing to pacman, although
-it still serves as a practical Git tutorial
-
-Gitweb
-
-Cgit
-
-Subversion
-
-Concurrent Versions System
-
-GitHub
+-   Super Quick Git Guide
+-   Gitweb
+-   Cgit
+-   Subversion
+-   Concurrent Versions System
 
 Git is the version control system (VCS) coded by Linus Torvalds (the
 creator of the Linux kernel) after being criticized for using the
 proprietary BitKeeper with the Linux kernel. Git is now used to maintain
 sources for the Linux kernel as well as thousands of other projects,
-including Pacman, Arch's package manager.
+including a number of Arch Linux projects.
 
 There is extensive documentation, including guides and tutorials,
 available from the official web site.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Basic Usage                                                        |
-|     -   3.1 Cloning a repository                                         |
-|     -   3.2 Committing files                                             |
-|     -   3.3 Pushing your changes                                         |
-|     -   3.4 Pulling from the server                                      |
-|     -   3.5 Examining history                                            |
-|     -   3.6 Dealing With Merges                                          |
-|                                                                          |
-| -   4 Taking Advantage of DVCS                                           |
-|     -   4.1 Creating a branch                                            |
-|     -   4.2 A word on commits                                            |
-|     -   4.3 Commits as checkpoints                                       |
-|     -   4.4 Editing the previous commit                                  |
-|     -   4.5 Squashing, rearranging, and changing history                 |
-|                                                                          |
-| -   5 Git Prompt                                                         |
-| -   6 Transfer Protocols                                                 |
-|     -   6.1 Smart HTTP                                                   |
-|     -   6.2 Git SSH                                                      |
-|         -   6.2.1 Specifying a non-standard port                         |
-|                                                                          |
-|     -   6.3 Git daemon                                                   |
-|     -   6.4 Git repositories rights                                      |
-|                                                                          |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Colors in Git prompt
+-   3 Basic usage
+    -   3.1 Cloning a repository
+    -   3.2 Committing files
+    -   3.3 Pushing your changes
+    -   3.4 Pulling from the server
+    -   3.5 Examining history
+    -   3.6 Dealing with merges
+-   4 Taking advantage of DVCS
+    -   4.1 Creating a branch
+    -   4.2 A word on commits
+    -   4.3 Commits as checkpoints
+    -   4.4 Editing the previous commit
+    -   4.5 Squashing, rearranging, and changing history
+-   5 Git prompt
+-   6 Transfer protocols
+    -   6.1 Smart HTTP
+    -   6.2 Git SSH
+        -   6.2.1 Specifying a non-standard port
+    -   6.3 Git daemon
+    -   6.4 Git repositories rights
+-   7 Tunneling Git through HTTP proxies
+-   8 See also
 
 Installation
 ------------
@@ -81,6 +66,21 @@ If you want to use Git's built-in GUI (e.g. gitk or git gui) you should
 install the tk package, or you will get a rather cryptic message:
 
     /usr/bin/gitk: line 3: exec: wish: not found.
+
+In addition, if you're trying to run Git's built-in GUI (e.g. gitk or
+git gui) on a headless server (i.e. a system on which you haven't done a
+full-blown install of some desktop environment) you may want to make
+sure you have the gsfonts package installed, or you might encounter this
+problem when trying to run gitk:
+
+    Segmentation fault (core dumped)
+
+If you want to use the Git SVN bridge(git svn) and receive the following
+error:
+
+    Can't locate Term/ReadKey.pm in @INC (you may need to install the Term::ReadKey module)
+
+you need to install perl-term-readkey.
 
 Configuration
 -------------
@@ -105,26 +105,28 @@ email. These are used to sign commits you make.
     $ git config --global user.name "Firstname Lastname"
     $ git config --global user.email "your_email@youremail.com"
 
-color.ui is also a very useful option to set - it colorizes all Git
-output.
+> Colors in Git prompt
+
+color.ui is also a very useful option to set because it enables colors
+for all Git output.
 
     $ git config --global color.ui true
 
-Basic Usage
+Basic usage
 -----------
 
 > Cloning a repository
 
-    git clone <repo location> <dir>
+    $ git clone repository_location dir
 
 will clone a Git repository in a new directory inside your current
 directory. Leaving out <dir> will cause it to name the folder after the
 Git repository. For example,
 
-    git clone git@github.com:torvalds/linux.git
+    $ git clone git://github.com/torvalds/linux.git
 
-clones Github's mirror of the Linux kernel into a directory named
-"linux".
+clones GitHub's mirror of the Linux kernel into a directory named linux
+in the terminal's current directory.
 
 > Committing files
 
@@ -144,35 +146,58 @@ message without opening the text editor.
 
 Other useful commit tricks:
 
-git commit -a lets you commit changes you have made to files already
-under Git control without having to take the step of adding the changes
-to the index. You still have to add new files with git add.
+-   git commit -a lets you commit changes you have made to files already
+    under Git control without having to take the step of adding the
+    changes to the index. You still have to add new files with git add.
 
-git add -p lets you commit specific parts of files you have changed.
-This is useful if you have made a bunch of changes that you think would
-be best split into several commits.
+-   git commit -s adds the following line to the end of the commit
+    message, which is useful when submitting patches to mailing lists or
+    contributing to open-source software projects.
+
+    Signed-off-by: <firstname> <lastname> <email>
+
+-   It is common for users to regularly contribute to a various mixture
+    of private repositories, that users typically do not use
+    "Signed-off-by" lines with, and open-source software projects that
+    typically require patches to contain a "Signed-off-by" line. If you
+    want to make sure you do not forget to add a "Signed-off-by" line
+    when contributing to open-source software projects, set the
+    following Git configuration setting to automatically append a
+    "Signed-off-by" line when using git format-patch <commit>:
+
+    $ git config --local format.signoff true
+
+-   git add -p lets you commit specific parts of files you have changed.
+    This is useful if you have made a large number of changes that you
+    think would be best split into several commits.
 
 > Pushing your changes
 
-To push your changes up to a server (such as Github), use
+To push your changes up to a server (such as GitHub), use
 
-    git push <server name> <branch>
+    $ git push server_name branch
 
 Adding -u will make this server the default one to push to for this
-branch. If you have cloned the repository as described above, the server
-will default to the location you cloned the repository from (nicknamed
-"origin") and the branch will default to the master branch. In other
-words, if you have followed this guide's instructions in cloning,
-git push will suffice. You can set up Git to push to multiple servers if
-you want, but that is a more advanced topic. Branches will be discussed
-later in this guide.
+branch.
+
+If you have cloned the repository as described above, the server will
+default to the location you cloned the repository from (named "origin"),
+and the branch will default to the "master" branch. In other words, if
+you have followed this guide's instructions in cloning, git push will
+suffice.
+
+You can set up Git to push to multiple servers if you want, but that is
+a more advanced topic.
+
+Branches will be discussed later in this guide.
 
 > Pulling from the server
 
 If you are working on multiple machines and want to update your local
-repository to what the server has, you use
+repository to what the server has, change directory into your local
+repository and use
 
-    git pull <server name> <branch>
+    $ git pull server_name branch
 
 Similarly to push, the server name and branch should have sane defaults,
 so git pull should suffice. Git pull is actually shorthand for doing two
@@ -198,7 +223,7 @@ The command git log shows the history of your current branch. Note that
 each commit is identified by a SHA-1 hash. The author, commit date, and
 commit message follow. A more useful command is
 
-    git log --graph --oneline --decorate
+    $ git log --graph --oneline --decorate
 
 which provides a display similar to TortoiseGit's log window. It shows
 the following:
@@ -213,15 +238,16 @@ the following:
 It may be convenient to alias this command as git graph by doing the
 following:
 
-    git config --global alias.graph 'log --graph --oneline --decorate'
+    $ git config --global alias.graph 'log --graph --oneline --decorate'
 
 Now typing git graph will run git log --graph --oneline --decorate.
+
 git graph and git log may be given the --all flag in order to view all
 branches instead of just the current one. Adding --stat to one of these
-commands is also useful - it shows which files each commit changed and
-how many lines were changed in each file.
+commands is also useful because it shows which files each commit changed
+and how many lines were changed in each file.
 
-> Dealing With Merges
+> Dealing with merges
 
 Merges happen when you pull, as a result of a rebase operation, and when
 you merge one branch into another. Like other version control tools,
@@ -232,7 +258,7 @@ can usually abort the merge using the --abort flag with whatever command
 started the merge (e.g. git merge --abort, git pull --abort,
 git rebase --abort).
 
-Taking Advantage of DVCS
+Taking advantage of DVCS
 ------------------------
 
 The above commands only provide the basics. The real power and
@@ -252,21 +278,21 @@ workflow looks like this:
 
 > Creating a branch
 
-    git branch <branch name>
+    $ git branch branch_name
 
 can be used to create a branch that will branch off the current commit.
 After it has been created, you should switch to it using
 
-    git checkout <branch name>
+    $ git checkout branch_name
 
 A simpler method is to do both in one step with
 
-    git checkout -b <branch name>
+    $ git checkout -b branch_name
 
 To see a list of branches, and which branch is currently checked out,
 use
 
-    git branch
+    $ git branch
 
 > A word on commits
 
@@ -294,7 +320,7 @@ early and commit often.
 
 > Editing the previous commit
 
-    git commit --amend
+    $ git commit --amend
 
 allows you to modify the previous commit. The contents of the index will
 be applied to it, allowing you to add more files or changes you forgot
@@ -303,7 +329,7 @@ like.
 
 > Squashing, rearranging, and changing history
 
-    git rebase -i <commit>
+    $ git rebase -i commit
 
 will bring up a list of all commits between <commit> and the present,
 including HEAD but excluding <commit>. This command allows you rewrite
@@ -339,14 +365,11 @@ Warning:Only use git rebase -i on local commits that have not yet been
 pushed to anybody else. Modifying commits that are on the central server
 will cause merge problems for obvious reasons.
 
-Note:Vim makes these rebase operations very simple since lines can be
-cut and pasted with few keystrokes.
-
-Git Prompt
+Git prompt
 ----------
 
 The Git package comes with a prompt script. To enable the prompt
-addition you will need to source the git-prompt.sh script and add
+addition, you will need to source the git-prompt.sh script and add
 $(__git_ps1 " (%s)") to your PS1 variable.
 
 -   Add the following line to your ~/.bashrc/~/.zshrc:
@@ -359,6 +382,9 @@ $(__git_ps1 " (%s)") to your PS1 variable.
 
 Note:For information about coloring your Bash prompt, see
 Color_Bash_Prompt
+
+Note:For information about coloring your Git prompt, see #Colors in Git
+Prompt
 
 -   For zsh:
 
@@ -382,46 +408,44 @@ order to see < if you are behind upstream, > if you are ahead and <> if
 you have diverged.
 
 Note:If you experience that $(__git_ps1) returns ((unknown)), then
-there's a .git folder in your current directory which doesn't contain
-any repository, and therefore Git does not recognize it. This can for
-example happen if you for some reason mistake Git's config-file to be
+there's a .git folder in your current directory which does not contain
+any repository, and therefore Git does not recognize it. This can, for
+example, happen if you mistake Git's configuration file to be
 ~/.git/config instead of ~/.gitconfig.
 
-Transfer Protocols
+Transfer protocols
 ------------------
 
 > Smart HTTP
 
-Since version 1.6.6 git is able to use the HTTP(S) protocol as
-efficiently as SSH or Git by utilizing the git-http-backend. Furthermore
-it is not only possible to clone or pull from repositories, but also to
-push into repositories over HTTP(S).
+Git is able to use the HTTP(S) protocol as efficiently as the SSH or Git
+protocols, by utilizing the git-http-backend. Furthermore it is not only
+possible to clone or pull from repositories, but also to push into
+repositories over HTTP(S).
 
 The setup for this is rather simple as all you need to have installed is
-the Apache web server (with mod_cgi, mod_alias, and mod_env enabled) and
-of course, git:
+the Apache web server (apache, with mod_cgi, mod_alias, and mod_env
+enabled) and of course, git.
 
-    # pacman -S apache git
-
-Once you have your basic setup up and running, add the following to your
-Apache's config usually located at /etc/httpd/conf/httpd.conf:
+Once you have your basic setup running, add the following to your Apache
+configuration file, which is usually located at
+/etc/httpd/conf/httpd.conf:
 
     <Directory "/usr/lib/git-core*">
-        Order allow,deny
-        Allow from all
+        Require all granted
     </Directory>
 
     SetEnv GIT_PROJECT_ROOT /srv/git
     SetEnv GIT_HTTP_EXPORT_ALL
     ScriptAlias /git/ /usr/lib/git-core/git-http-backend/
 
-The above example config assumes that your git repositories are located
-at /srv/git and that you want to access them via something like
+The above example configuration assumes that your Git repositories are
+located at /srv/git and that you want to access them via something like
 http(s)://your_address.tld/git/your_repo.git. Feel free to customize
 this to your needs.
 
-Note:Of course you have to make sure that your Apache can read and write
-(if you want to enable push access) on your git repositories.
+Note:Of course, you have to make sure that Apache can read and write (if
+you want to enable push access) to your Git repositories.
 
 For more detailed documentation, visit the following links:
 
@@ -431,30 +455,35 @@ For more detailed documentation, visit the following links:
 > Git SSH
 
 You first need to have a public SSH key. For that follow the guide at
-Using SSH Keys. To set up SSH itself, you need to follow the SSH guide.
-This assumes you have a public SSH key now and that your SSH is working.
-Open your SSH key in your favorite editor (default public key name is
-~/.ssh/id_rsa.pub), and copy its content (Ctrl+c). Now go to your user
-where you have made your Git repository, since we now need to allow that
-SSH key to log in on that user to access the Git repository. Open
+SSH keys. To set up SSH itself, you need to follow the SSH guide. This
+assumes you have a public SSH key now and that your SSH is working. Open
+your SSH key in your favorite editor (default public key name is
+~/.ssh/id_rsa.pub), and copy its content. Now go to your user where you
+have made your Git repository, since we now need to allow that SSH key
+to log in on that user to access the Git repository. Open
 ~/.ssh/authorized_keys in your favorite editor, and paste the contents
-of id_rsa.pub in it. Be sure it is all on one line! That is important!
-It should look somewhat like this:
+of ~/.ssh/id_rsa.pub in it. Be sure it is all on one line! That is
+important! It should look somewhat like this:
 
 Warning:Do not copy the line below! It is an example! It will not work
 if you use that line!
 
-    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCboOH6AotCh4OcwJgsB4AtXzDo9Gzhl+BAHuEvnDRHNSYIURqGN4CrP+b5Bx/iLrRFOBv58TcZz1jyJ2PaGwT74kvVOe9JCCdgw4nSMBV44cy+6cTJiv6f1tw8pHRS2H6nHC9SCSAWkMX4rpiSQ0wkhjug+GtBWOXDaotIzrFwLw== username@hostname
-
+ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCboOH6AotCh4OcwJgsB4AtXzDo9Gzhl+BAHuEvnDRHNSYIURqGN4CrP+b5Bx/iLrRFOBv58TcZz1jyJ2PaGwT74kvVOe9JCCdgw4nSMBV44cy+6cTJiv6f1tw8pHRS2H6nHC9SCSAWkMX4rpiSQ0wkhjug+GtBWOXDaotIzrFwLw== username@hostname
 Now you can checkout your Git repository this way (change where needed.
-Here it is using the git username and localhost):
+Here it is using the username git and the host localhost):
 
     git clone git@localhost:my_repository.git
 
-You should now get an SSH yes/no question. Type yes followed by Enter.
-Then you should have your repository checked out. Because this is with
-SSH, you also do have commit rights now. For that look at Git and Super
-Quick Git Guide.
+You should now get an SSH yes/no question, if you have the SSH client
+setting StrictHostKeyChecking set to ask (the default). Type yes
+followed by Enter. Then you should have your repository checked out.
+Because this is with SSH, you also have commit rights now. To modify an
+existing repository to use SSH, the URL for the origin branch can simply
+be changed.
+
+    git remote set-url origin git@localhost:my_repository.git
+
+For more information, read the Super Quick Git Guide.
 
 Specifying a non-standard port
 
@@ -476,31 +505,59 @@ becomes:
 
 > Git daemon
 
-Note:The git daemon only allows read access. For write access see #Git
-SSH.
+Note:The Git daemon only allows read access. For write access, refer to
+#Git SSH.
 
-This will allow URLs like "git clone git://localhost/my_repository.git".
+This will allow URLs like git clone git://localhost/my_repository.git.
 
-Edit the configuration file for git-daemon /etc/conf.d/git-daemon.conf
-(GIT_REPO is a place with your git projects), then start git-daemon with
-root privileges:
+Start git-daemon.socket with root privileges.
 
-    # systemctl start git-daemon@
+    # systemctl start git-daemon.socket
 
-To run the git-daemon every time at boot, enable the service:
+To run the git-daemon every time at boot, enable the systemd unit
+git-daemon.socket.
 
-    # systemctl enable git-daemon@
+The daemon is started with the following parameters which are placed in
+the systemd service file.
 
-Clients can now simply use:
+    ExecStart=-/usr/lib/git-core/git-daemon --inetd --export-all --base-path=/srv/git
 
-    git clone git://localhost/my_repository.git
+You have to place your repositories in /srv/git/ to be able to clone
+them with the Git daemon.
+
+Clients can now simply use the following:
+
+    $ git clone git://localhost/my_repository.git
 
 > Git repositories rights
 
-To restrict read/write access, you can simply use Unix rights, see
-http://sitaramc.github.com/gitolite/doc/overkill.html
+To restrict read and/or write access, you can simply use Unix
+permissions. Refer to
+http://sitaramc.github.com/gitolite/doc/overkill.html[dead link
+2013-11-06] for more information.
 
-For a fine-grained rights access, see gitolite and gitosis
+For fine-grained access management, refer to gitolite and gitosis.
+
+Tunneling Git through HTTP proxies
+----------------------------------
+
+Restrictive corporate firewalls typically block the port that git uses.
+However, git can be made to tunnel through HTTP proxies using utilities
+such as corkscrew. When git sees the environment variable
+GIT_PROXY_COMMAND set, it will run the command in $GIT_PROXY_COMMAND and
+use that program's stdin and stdout, instead of a network socket.
+
+Create a script file corkscrewtunnel.sh
+
+    #! /bin/bash
+
+    corkscrew proxyhost proxyport $*
+
+Set GIT_PROXY_COMMAND
+
+    export GIT_PROXY_COMMAND=path-to-corkscrewtunnel.sh
+
+Now, git should be able to tunnel successfully through the HTTP proxy.
 
 See also
 --------
@@ -511,8 +568,15 @@ See also
 -   https://help.github.com/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Git&oldid=254873"
+"https://wiki.archlinux.org/index.php?title=Git&oldid=305695"
 
 Category:
 
 -   Version Control System
+
+-   This page was last modified on 20 March 2014, at 01:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

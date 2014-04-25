@@ -1,21 +1,19 @@
 ASUS A53T
 =========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Summary                                                            |
-| -   2 Installation                                                       |
-| -   3 Hardware                                                           |
-|     -   3.1 CPU                                                          |
-|     -   3.2 Audio                                                        |
-|     -   3.3 Video                                                        |
-|     -   3.4 Wireless                                                     |
-|     -   3.5 Webcam                                                       |
-|     -   3.6 lspci Output                                                 |
-|     -   3.7 lsusb Output                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Summary
+-   2 Installation
+-   3 Hardware
+    -   3.1 CPU
+    -   3.2 Audio
+    -   3.3 Video
+    -   3.4 Wireless
+    -   3.5 Webcam
+    -   3.6 lspci Output
+    -   3.7 lsusb Output
 
 Summary
 -------
@@ -126,3 +124,10 @@ Retrieved from
 Category:
 
 -   ASUS
+
+-   This page was last modified on 21 July 2012, at 20:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

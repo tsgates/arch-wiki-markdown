@@ -12,7 +12,7 @@ Classroom
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-> Summary
+Summary help replacing me
 
 This article gives information on using and contributing to Arch
 Classroom, an Arch User p2p knowledge sharing project.
@@ -34,15 +34,13 @@ hosted here to teach a class. If you are interested in taking a class on
 a particular topic, make requests on the Arch Linux Forums, in the Arch
 mailing list or in the Classroom discussion page.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Class List                                                         |
-| -   2 How to Create a Lesson Plan                                        |
-| -   3 Upcoming Classes                                                   |
-| -   4 Previous Classes                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Class List
+-   2 How to Create a Lesson Plan
+-   3 Upcoming Classes
+-   4 Previous Classes
 
 > Class List
 
@@ -79,13 +77,22 @@ irc.freenode.net
 
 > Previous Classes
 
-Links to classes that have already happened (maybe students and teachers
-could write up some info on the experience, similar to the arch con
-pages)
+Classes that have already happened (maybe students and teachers could
+write up some info on the experience, similar to the arch con pages)
+
+-   2013-09-14 : "Beginners Guide to Package Maintaining" hosted by Arch
+    Linux Women
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Classroom&oldid=250988"
+"https://wiki.archlinux.org/index.php?title=Classroom&oldid=280406"
 
 Category:
 
 -   Classroom
+
+-   This page was last modified on 30 October 2013, at 13:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

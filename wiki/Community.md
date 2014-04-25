@@ -1,30 +1,23 @@
 Community
 =========
 
-> Summary
+Related articles
 
-This page deals with the [community] repository.
-
-> Related
-
-AUR User Guidelines#[community]
-
-Getting Involved#Community projects
+-   AUR User Guidelines#[community]
+-   Getting involved#Community projects
 
 Future policies for the community repository should be discussed to
 improve the usefulness of the repository and decrease the number of
 unused packages.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Ideas                                                              |
-|     -   1.1 Minimum Vote Requirement                                     |
-|         -   1.1.1 Plan of Action                                         |
-|         -   1.1.2 Maintenance                                            |
-|         -   1.1.3 Exceptions                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Ideas
+    -   1.1 Minimum Vote Requirement
+        -   1.1.1 Plan of Action
+        -   1.1.2 Maintenance
+        -   1.1.3 Exceptions
 
 Ideas
 -----
@@ -85,8 +78,15 @@ Exceptions
 -   More exceptions may be added on a general basis.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Community&oldid=253353"
+"https://wiki.archlinux.org/index.php?title=Community&oldid=298695"
 
 Category:
 
 -   Arch development
+
+-   This page was last modified on 18 February 2014, at 13:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

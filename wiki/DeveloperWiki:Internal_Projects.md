@@ -1,47 +1,40 @@
 DeveloperWiki:Internal Projects
 ===============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Infrastructure Projects                                            |
-|     -   2.1 Developer Tooling                                            |
-|         -   2.1.1 TODO Items                                             |
-|                                                                          |
-|     -   2.2 Mirror Control                                               |
-|         -   2.2.1 Automated tests                                        |
-|                                                                          |
-|     -   2.3 Packaging Automation                                         |
-|     -   2.4 Server Administration                                        |
-|     -   2.5 Developer Communication Team                                 |
-|                                                                          |
-| -   3 Packaging Projects                                                 |
-|     -   3.1 Bug Squashing                                                |
-|     -   3.2 Rebuild Team                                                 |
-|     -   3.3 Package Review Team                                          |
-|     -   3.4 Orphan Team                                                  |
-|                                                                          |
-| -   4 Web Projects                                                       |
-|     -   4.1 AUR                                                          |
-|     -   4.2 BBS                                                          |
-|     -   4.3 Flyspray (bugtracker)                                        |
-|     -   4.4 Main Site                                                    |
-|     -   4.5 Planet                                                       |
-|     -   4.6 Wiki                                                         |
-|                                                                          |
-| -   5 Coding Projects                                                    |
-|     -   5.1 Arch Linux Init Scripts                                      |
-|     -   5.2 Arch Linux Release Engineering (Installer)                   |
-|     -   5.3 mkinitcpio                                                   |
-|     -   5.4 namcap                                                       |
-|     -   5.5 netcfg                                                       |
-|     -   5.6 srcpac                                                       |
-|     -   5.7 Pacman                                                       |
-|         -   5.7.1 Development Team                                       |
-|         -   5.7.2 Translation Team                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Infrastructure Projects
+    -   2.1 Developer Tooling
+        -   2.1.1 TODO Items
+    -   2.2 Mirror Control
+        -   2.2.1 Automated tests
+    -   2.3 Packaging Automation
+    -   2.4 Server Administration
+    -   2.5 Developer Communication Team
+-   3 Packaging Projects
+    -   3.1 Bug Squashing
+    -   3.2 Rebuild Team
+    -   3.3 Package Review Team
+    -   3.4 Orphan Team
+-   4 Web Projects
+    -   4.1 AUR
+    -   4.2 BBS
+    -   4.3 Flyspray (bugtracker)
+    -   4.4 Main Site
+    -   4.5 Planet
+    -   4.6 Wiki
+-   5 Coding Projects
+    -   5.1 Arch Linux Init Scripts
+    -   5.2 Arch Linux Release Engineering (Installer)
+    -   5.3 mkinitcpio
+    -   5.4 namcap
+    -   5.5 netctl
+    -   5.6 srcpac
+    -   5.7 Pacman
+        -   5.7.1 Development Team
+        -   5.7.2 Translation Team
 
 Introduction
 ============
@@ -163,7 +156,6 @@ Responsible for assigning bugs to package maintainers. If something is
 trivial and a fix can be easily made, then goes and does it. Organizes
 bug squashing days.
 
--   Andrea Scarpino
 -   Paul Mattal
 -   Roman Kyrylych
 -   ...
@@ -193,8 +185,6 @@ packaging standards. It would be good for packages that have not been
 rebuilt in a long time to be rebuilt to take advantage of new
 optimisations.
 
--   Andrea Scarpino
-
 Orphan Team
 -----------
 
@@ -204,9 +194,7 @@ a foster caregiver, moving them to a willing maintainer in [community],
 or sending them to the AUR (or the trash).
 
 -   Eric Bélanger (for trivial upstream update)
--   Andrea Scarpino
 -   Giovanni Scafora
--   Daniel Griffiths
 
 Web Projects
 ============
@@ -223,15 +211,14 @@ AUR
 
 Responsible for coding and deploying the AUR.
 
--   Loui Chang
--   Andrea Scarpino
+-   Lukas Fleischer
 
 BBS
 ---
 
 Responsible for keeping our BBS install up to date and secure.
 
--   Andrea Scarpino
+-   Pierre Schmitz
 
 Flyspray (bugtracker)
 ---------------------
@@ -255,8 +242,7 @@ Planet
 
 Responsible for keeping the planet scripts updated and running.
 
--   Andrea Scarpino
--   Hugo Doria
+-   Bartłomiej Piotrowski
 
 Wiki
 ----
@@ -298,14 +284,14 @@ namcap
 
 Responsible for maintaining and adding features to namcap.
 
--   Hugo Doria
+-   Rémy Oudompheng
 
-netcfg
+netctl
 ------
 
 Network connection and profiles
 
--   James Rayner
+-   Jouke Witteveen
 
 srcpac
 ------
@@ -342,8 +328,15 @@ and usefulness of existing messages.
 -   Giovanni Scafora
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Internal_Projects&oldid=238702"
+"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Internal_Projects&oldid=274848"
 
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 9 September 2013, at 08:24.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

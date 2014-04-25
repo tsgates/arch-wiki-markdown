@@ -4,17 +4,14 @@ Password Recovery
 This guide will show you how to recover a forgotten root password. A
 several methods are available that can help you accomplish this.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Using a LiveCD                                                     |
-|     -   1.1 Change Root                                                  |
-|     -   1.2 Password Erase                                               |
-|                                                                          |
-| -   2 Using GRUB to Invoke Bash                                          |
-| -   3 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Using a LiveCD
+    -   1.1 Change Root
+-   2 Using GRUB to Invoke Bash
+-   3 Countermeasures
+-   4 Resources
 
 Using a LiveCD
 --------------
@@ -30,27 +27,6 @@ architecture type.
 2.  Use the passwd command to reset your root password.
 3.  Exit change root.
 4.  Reboot, and remember your password.
-
-> Password Erase
-
-1. Boot the LiveCD, and mount your root (/) partition. For example:
-
-    mkdir /mnt/arch
-    mount /dev/sda2 /mnt/arch
-
-2. Edit the password file with your editor. Example vim:
-
-    vim /mnt/arch/etc/shadow
-
-3. Delete the second field on the root line (in vim this can be done by
-going to the first letter/symbol in the field and typing d/:/ then
-Enter):
-
-    root:$1$9gDquXRP$gbOHLXuqslL.rw81q4pHc1:14589::::::
-
-4. Save the file (:x in vim).
-
-5. Reboot and root login will not require a password.
 
 Using GRUB to Invoke Bash
 -------------------------
@@ -78,15 +54,30 @@ Note:Some keyboards may not be loaded properly by the init system with
 this method and you will not be able to type anything at the bash
 prompt. If this is the case, you will have to use another method.
 
+Countermeasures
+---------------
+
+An attacker could use the methods mentioned above to break into your
+system. No matter how secure the operating system is or how good
+passwords are, having physical access amounts to loading an alternate OS
+and exposing your data, unless you use full disk encryption.
+
 Resources
 ---------
 
 -   this guide for an example.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Password_Recovery&oldid=234377"
+"https://wiki.archlinux.org/index.php?title=Password_Recovery&oldid=265906"
 
 Categories:
 
 -   System recovery
 -   Security
+
+-   This page was last modified on 11 July 2013, at 22:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

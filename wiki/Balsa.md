@@ -8,7 +8,7 @@ other desktops or window managers.
 Installation
 ------------
 
-Install the balsa package, available from the Official Repositories.
+Install the balsa package, available from the Official repositories.
 
 Configuration
 -------------
@@ -39,8 +39,15 @@ to create /usr/lib/firefox
     ln -s /usr/bin/chromium /usr/lib/firefox/firefox
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Balsa&oldid=207253"
+"https://wiki.archlinux.org/index.php?title=Balsa&oldid=301632"
 
 Category:
 
 -   Email Client
+
+-   This page was last modified on 24 February 2014, at 12:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

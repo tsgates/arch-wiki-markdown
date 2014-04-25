@@ -1,22 +1,18 @@
 DeveloperWiki:Branding Proposals
 ================================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Separate branding from upstream packages                           |
-|     -   2.1 Pros                                                         |
-|     -   2.2 Cons                                                         |
-|                                                                          |
-| -   3 Package Naming Scheme                                              |
-| -   4 Essential Artwork                                                  |
-|     -   4.1 Completed                                                    |
-|     -   4.2 Pending                                                      |
-|                                                                          |
-| -   5 Other Resources                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Separate branding from upstream packages
+    -   2.1 Pros
+    -   2.2 Cons
+-   3 Package Naming Scheme
+-   4 Essential Artwork
+    -   4.1 Completed
+    -   4.2 Pending
+-   5 Other Resources
 
 Introduction
 ============
@@ -94,3 +90,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2011, at 01:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

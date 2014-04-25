@@ -13,26 +13,22 @@ Pimp My Arch!
 Yo dawg, I heard you liked your Arch to be all bling, so we put bling in
 your Arch so you can KISS while you KISS
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Command line Hacking                                               |
-|     -   1.1 Boot Sequence                                                |
-|     -   1.2 Shell and CLI utils                                          |
-|                                                                          |
-| -   2 Archers use GUIs?                                                  |
-|     -   2.1 Transparency                                                 |
-|     -   2.2 WM Replacement                                               |
-|     -   2.3 Dock It                                                      |
-|     -   2.4 DM Tweaks                                                    |
-|     -   2.5 *BOX                                                         |
-|     -   2.6 GNOME                                                        |
-|     -   2.7 KDE                                                          |
-|                                                                          |
-| -   3 Hardware hacks                                                     |
-|     -   3.1 Paint your case with the Arch logo                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Command line Hacking
+    -   1.1 Boot Sequence
+    -   1.2 Shell and CLI utils
+-   2 Archers use GUIs?
+    -   2.1 Transparency
+    -   2.2 WM Replacement
+    -   2.3 Dock It
+    -   2.4 DM Tweaks
+    -   2.5 *BOX
+    -   2.6 GNOME
+    -   2.7 KDE
+-   3 Hardware hacks
+    -   3.1 Paint your case with the Arch logo
 
 Command line Hacking
 --------------------
@@ -49,10 +45,10 @@ Command line Hacking
 
 > Shell and CLI utils
 
--   Is your PS1 old and stale? New from the makers of Choco-Kraut®, it's
-    PS1++!
--   Make your .bashrc the envy of everyone else!
--   Why type so much when you can have aliases?
+-   Custom your Bash prompt by reading there Color Bash Prompt
+-   Adapt your .bashrc to your need Bash configuration
+-   Learn about Bash so much that you will become a real expert read
+    there Bash Hackers and there Wooledge
 
 Archers use GUIs?
 -----------------
@@ -73,6 +69,7 @@ window manager that is)
     to wobble? Give Compiz a go!
 -   Want something that will run fast and slick? Openbox may be the
     answer...
+-   Are you awesome? Use Awesome
 
 > Dock It
 
@@ -85,7 +82,7 @@ Where else would you put your boat?
 
 > *BOX
 
--   Check out Ghost1227's Openbox Desktop Workshop and theme archive.
+-   Check out Ghost1227's Openbox Desktop Workshop.
 
 > GNOME
 
@@ -102,8 +99,15 @@ Hardware hacks
 Shapeshifter tells us how he painted his case with the Arch logo
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pimp_My_Arch!&oldid=238206"
+"https://wiki.archlinux.org/index.php?title=Pimp_My_Arch!&oldid=298631"
 
 Category:
 
 -   Eye candy
+
+-   This page was last modified on 18 February 2014, at 05:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

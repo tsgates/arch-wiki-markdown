@@ -14,43 +14,37 @@ ASUS Eee PC 701
 Most of this information is from the Arch Forum. You can also find a lot
 of helpful information from the EEEUser Forum.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Before You Begin                                                   |
-|     -   1.1 Choosing Your Installation Media                             |
-|                                                                          |
-| -   2 Asus Eee PC model 701 repository from toofishes                    |
-|     -   2.1 Package List                                                 |
-|     -   2.2 Kernel-eee Installation Instruction                          |
-|                                                                          |
-| -   3 Additional Tips & Tweaks                                           |
-|     -   3.1 Tweaking kernel-eee                                          |
-|     -   3.2 Using Wine with toofishes' kernel                            |
-|     -   3.3 Power down with the power button                             |
-|     -   3.4 Use cpufreq for power saving                                 |
-|     -   3.5 Update your BIOS without Xandros                             |
-|     -   3.6 More usable font sizes                                       |
-|         -   3.6.1 The_glu's method                                       |
-|         -   3.6.2 Old method                                             |
-|         -   3.6.3 Alternative Method                                     |
-|                                                                          |
-| -   4 Known problems and their solutions                                 |
-|     -   4.1 Sound                                                        |
-|     -   4.2 Webcam                                                       |
-|     -   4.3 Microphone                                                   |
-|     -   4.4 Wireless doesn't work, even after installing custom Madwifi  |
-|         module                                                           |
-|     -   4.5 Unclean unmount during shutdown when having home directory   |
-|         mounted on SD card                                               |
-|     -   4.6 Booting from card without initrd                             |
-|     -   4.7 Sleeping and waking system on a card                         |
-|     -   4.8 Display doesn't wake up properly                             |
-|     -   4.9 DMA problems                                                 |
-|                                                                          |
-| -   5 Battery Tests                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Before You Begin
+    -   1.1 Choosing Your Installation Media
+-   2 Asus Eee PC model 701 repository from toofishes
+    -   2.1 Package List
+    -   2.2 Kernel-eee Installation Instruction
+-   3 Additional Tips & Tweaks
+    -   3.1 Tweaking kernel-eee
+    -   3.2 Using Wine with toofishes' kernel
+    -   3.3 Power down with the power button
+    -   3.4 Use cpufreq for power saving
+    -   3.5 Update your BIOS without Xandros
+    -   3.6 More usable font sizes
+        -   3.6.1 The_glu's method
+        -   3.6.2 Old method
+        -   3.6.3 Alternative Method
+-   4 Known problems and their solutions
+    -   4.1 Sound
+    -   4.2 Webcam
+    -   4.3 Microphone
+    -   4.4 Wireless doesn't work, even after installing custom Madwifi
+        module
+    -   4.5 Unclean unmount during shutdown when having home directory
+        mounted on SD card
+    -   4.6 Booting from card without initrd
+    -   4.7 Sleeping and waking system on a card
+    -   4.8 Display doesn't wake up properly
+    -   4.9 DMA problems
+-   5 Battery Tests
 
 Before You Begin
 ----------------
@@ -617,3 +611,10 @@ Retrieved from
 Category:
 
 -   ASUS
+
+-   This page was last modified on 22 February 2013, at 20:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

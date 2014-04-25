@@ -5,16 +5,13 @@ jabberd2 is an XMPP server, written in the C language and licensed as
 Free software under the GNU General Public License. It was inspired by
 jabberd14.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Daemon                                                       |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Daemon
+-   3 See also
 
 Installation
 ------------
@@ -60,8 +57,15 @@ See also
 -   Jabberd2 homepage
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Jabberd2&oldid=243174"
+"https://wiki.archlinux.org/index.php?title=Jabberd2&oldid=302643"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

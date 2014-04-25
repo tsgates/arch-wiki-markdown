@@ -1,25 +1,13 @@
 Slime
 =====
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: please use the   
-                           first argument of the    
-                           template to provide a    
-                           brief explanation.       
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-| -   4 Resources                                                          |
-+--------------------------------------------------------------------------+
+-   1 Introduction
+-   2 Installation
+-   3 Configuration
+-   4 Resources
 
 Introduction
 ------------
@@ -71,8 +59,15 @@ Resources
 -   Paul Graham's Lisp resources.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Slime&oldid=238806"
+"https://wiki.archlinux.org/index.php?title=Slime&oldid=279382"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 22 October 2013, at 19:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

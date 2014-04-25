@@ -5,22 +5,17 @@ There are several ways to set up a Virtual Private Network through SSH.
 Note that, while this may be useful from time to time, it may not be a
 full replacement for a regular VPN. See for example [1].
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 OpenSSH's built in tunneling                                       |
-|     -   1.1 Create tun interfaces                                        |
-|         -   1.1.1 Creating interfaces in SSH command                     |
-|                                                                          |
-|     -   1.2 Start SSH                                                    |
-|     -   1.3 Troubleshooting                                              |
-|                                                                          |
-| -   2 Using PPP over SSH                                                 |
-|     -   2.1 Helper script                                                |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 OpenSSH's built in tunneling
+    -   1.1 Create tun interfaces
+        -   1.1.1 Creating interfaces in SSH command
+    -   1.2 Start SSH
+    -   1.3 Troubleshooting
+-   2 Using PPP over SSH
+    -   2.1 Helper script
+-   3 See also
 
 OpenSSH's built in tunneling
 ----------------------------
@@ -48,12 +43,12 @@ Create tun interfaces:
 
 Then do 'netcfg -u vpn' or add it into /etc/conf.d/netcfg.
 
-Also You may manage tun interfaces with 'ip tunnel' command.
+Also you may manage tun interfaces with 'ip tunnel' command.
 
 Creating interfaces in SSH command
 
 SSH can create both interfaces automatically, but you should configure
-IP and routing after connection established.
+IP and routing after the connection is established.
 
     ssh \
       -o PermitLocalCommand=yes \
@@ -78,9 +73,9 @@ or you may add keep-alive options if you are behind a NAT.
 
 -   ssh should have access rights to tun interface or permissions to
     create it. Check owner of tun interface and/or /dev/net/tun.
--   Obviously if you want to access network (not single machine) you
-    should set up properly IP packet forwarding, routing and maybe
-    netfilter on both sides.
+-   Obviously if you want to access a network rather than a single
+    machine you should properly set up IP packet forwarding, routing and
+    maybe a netfilter on both sides.
 
 Using PPP over SSH
 ------------------
@@ -117,8 +112,15 @@ See also
 -   Router
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=VPN_over_SSH&oldid=249181"
+"https://wiki.archlinux.org/index.php?title=VPN_over_SSH&oldid=306046"
 
 Category:
 
 -   Virtual Private Network
+
+-   This page was last modified on 20 March 2014, at 17:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

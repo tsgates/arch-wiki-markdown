@@ -25,20 +25,18 @@ This page documents configuration and troubleshooting of the IBM
 ThinkPad T42. The T42 ThinkWiki page is an indispensable and easy
 reference.
 
-See the Beginners' Guide for installation instructions.
+See the Beginners' guide for installation instructions.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 ACPI                                                               |
-| -   2 CPU frequency scaling                                              |
-| -   3 Suspend and hibernate                                              |
-| -   4 Wireless                                                           |
-|     -   4.1 The IBM Cards                                                |
-|     -   4.2 The Intel Cards                                              |
-|     -   4.3 More Information on Wireless                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 ACPI
+-   2 CPU frequency scaling
+-   3 Suspend and hibernate
+-   4 Wireless
+    -   4.1 The IBM Cards
+    -   4.2 The Intel Cards
+    -   4.3 More Information on Wireless
 
 ACPI
 ----
@@ -90,8 +88,8 @@ Note:If despite trying everything the wireless still doesn't work, try a
 reboot!
 
 Installing these madwifi drivers is common; consult the main Wireless
-Setup document for detailed instructions, and the ThinkWiki pages[1] for
-Thinkpad specific instructions.
+network configuration document for detailed instructions, and the
+ThinkWiki pages[1] for Thinkpad specific instructions.
 
 > The Intel Cards
 
@@ -109,15 +107,20 @@ card, please modify this document to include information about:
 For more details, wireless encryption configurations or problems
 solutions, please visit:
 
--   Wireless Setup
--   Network Profiles
--   Netcfg
--   Network Profiles development
+-   Wireless network configuration
+-   Netctl
 -   Wpa_supplicant
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IBM_ThinkPad_T42&oldid=238915"
+"https://wiki.archlinux.org/index.php?title=IBM_ThinkPad_T42&oldid=298021"
 
 Category:
 
 -   IBM
+
+-   This page was last modified on 16 February 2014, at 07:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

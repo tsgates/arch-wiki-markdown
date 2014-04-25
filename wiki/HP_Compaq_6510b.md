@@ -5,23 +5,21 @@ The HP 6510b is a compact yet powerful laptop with a high-resolution
 screen (if you pick the WXGA+ version). It has been labeled "Novel SuSE
 Enterprise certified" by HP, which should mean Linux runs fine on it.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware specifications                                            |
-| -   2 Setup                                                              |
-|     -   2.1 CPU Frequency Scaling                                        |
-|     -   2.2 X3100 onboard GPU                                            |
-|     -   2.3 IPW3945 ABG wireless LAN                                     |
-|     -   2.4 Broadcom NetLink BCM5787M Gigabit LAN                        |
-|     -   2.5 Suspension and hibernation                                   |
-|     -   2.6 FireWire                                                     |
-|     -   2.7 AuthenTec AES2501 fingerprint reader                         |
-|     -   2.8 Tactile strip                                                |
-|     -   2.9 lspci output                                                 |
-|     -   2.10 lsusb output                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware specifications
+-   2 Setup
+    -   2.1 CPU Frequency Scaling
+    -   2.2 X3100 onboard GPU
+    -   2.3 IPW3945 ABG wireless LAN
+    -   2.4 Broadcom NetLink BCM5787M Gigabit LAN
+    -   2.5 Suspension and hibernation
+    -   2.6 FireWire
+    -   2.7 AuthenTec AES2501 fingerprint reader
+    -   2.8 Tactile strip
+    -   2.9 lspci output
+    -   2.10 lsusb output
 
 Hardware specifications
 -----------------------
@@ -114,8 +112,8 @@ pm-suspend-hybrid. What this does is that it does everything it needs to
 hibernate and then suspends the computer instead of shutting it down, as
 it normally would when hibernating! So if you do not run out of power
 during this suspended state, you can start the computer up again as if
-it was a normal supension—if you do run out of power, it would just act
-like a normal hibernation.
+it was a normal supension — if you do run out of power, it would just
+act like a normal hibernation.
 
 > FireWire
 
@@ -128,42 +126,7 @@ kernel). You have the common stack if you run stock Arch kernels.
 
 > AuthenTec AES2501 fingerprint reader
 
-As duly pointed out on the forums, fingerprint readers are more a threat
-to your privacy than a safeguard. Your fingerprints (unless you are
-paranoid and type with gloves on) are likely to be all over your
-keyboard, rendering the 'security' purpose of this device useless. Keep
-this in mind if you intend to use the reader as a replacement for your
-password; fingerprints can be duplicated easily with basic stuff
-(graphite ea.).  
- There is a utility called fprint available, together with a libfprint
-library it depends on. Both are packaged for Arch Linux. The fprint
-program is still called fprint_demo for the moment, but it works :-).
-Integration with the login manager seems possible - for that you'll need
-amongst others the pam_fprint module installed (find a PKGBUILD here).
-Afer installing the package, run
-
-    pam_fprint_enroll
-
-and follow the instructions to scan the finger you want to use for
-authentication. The next step is to configure PAM. First edit
-/etc/pam.d/login, and make the first lines look like this:
-
-    #%PAM-1.0
-    auth            required        pam_securetty.so
-    auth            requisite       pam_nologin.so
-    auth            sufficient      pam_fprint.so
-    auth            required        pam_unix.so nullok
-    auth            required        pam_tally.so onerr=succeed file=/var/log/faillog
-
-This will make PAM accept a successful fingerprint scan as a valid login
-token, if the scan fails, it will fall back to a password. From this
-moment on, you'll be able to log on with a scan on a tty - enter your
-username, press Enter, and scan the finger you told pam_fprint_enroll to
-use as default. Voilà :-).
-
-On the forum you can also find a topic that covers setting up your
-fingerprint reader with PAM and SLiM, but this is with the aes2501
-kernelspace driver.
+See fprint.
 
 > Tactile strip
 
@@ -221,8 +184,15 @@ The AuthenTec device is the fingerprint reader, the Hewlett-Packard one
 is the Bluetooth module.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=HP_Compaq_6510b&oldid=237798"
+"https://wiki.archlinux.org/index.php?title=HP_Compaq_6510b&oldid=299011"
 
 Category:
 
 -   HP
+
+-   This page was last modified on 20 February 2014, at 00:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

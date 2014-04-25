@@ -12,20 +12,16 @@ interface cards support only standard-sized frames.
 Using a larger MTU value (jumbo frames) can significantly speed up your
 network transfers.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Requirements                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Systemd unit                                                 |
-|     -   2.2 Netcfg                                                       |
-|                                                                          |
-| -   3 Examples                                                           |
-|     -   3.1 Example LAN Architecture using Jumbo Frames                  |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Requirements
+-   2 Configuration
+    -   2.1 Systemd unit
+    -   2.2 Netctl
+-   3 Examples
+    -   3.1 Example LAN Architecture using Jumbo Frames
+-   4 See also
 
 Requirements
 ------------
@@ -39,10 +35,10 @@ Configuration
 
 Invoke ip with the mtu parameter as follows:
 
-    # ip link set ethx mtu y
+    # ip link set ethx mtu <size>
 
-Where ethx is the ethernet adapter in question (eth0, eth1, etc.) and y
-is the size of the frame you wish to use (1500, 4000, 9000).
+Where ethx is the ethernet adapter in question (eth0, eth1, etc.) and
+<size> is the size of the frame you wish to use (1500, 4000, 9000).
 
 Use ip link show | grep mtu to verify that the setting has been applied.
 
@@ -67,7 +63,7 @@ To make the setting permanent, we will create a systemd unit.
     [Service]
     Type=oneshot
     EnvironmentFile=/etc/conf.d/setmtu
-    ExecStart=/sbin/ip link set dev %i up mtu ${%i}
+    ExecStart=/usr/bin/ip link set dev %i up mtu ${%i}
 
     [Install]
     WantedBy=multi-user.target
@@ -84,14 +80,12 @@ That will set the mtu of eth0 to 4000.
 And now enable and start the service on every device you want to
 configure. (In this example, the service would be setmtu@eth0.service)
 
-> Netcfg
+> Netctl
 
-For adapters configured by netcfg, another way to set the mtu
-persistently is to insert a line like this in the network profile:
+For adapters configured by netctl, another way to set the mtu
+persistently is to use the ExecUpPost variable in the network profile:
 
-    POST_UP='/sbin/ip link set eth0 mtu 4000'
-
-Netcfg_Tips#Using_jumbo_frames
+    ExecUpPost='/usr/bin/ip link set eth0 mtu 4000'
 
 Examples
 --------
@@ -133,8 +127,6 @@ Summary of Test 1
   B to A        +98 %          B to A        +98 %
   ------------- ----------- -- ------------- -----------
 
-  
-
 * * * * *
 
 Test 2 - Several small files (1,283,439 kb total) via Samba
@@ -154,8 +146,6 @@ Summary of Test 2
   A to B        +16 %          A to B        +4 %
   B to A        +4%            B to A        +92 %
   ------------- ----------- -- ------------- -----------
-
-  
 
 * * * * *
 
@@ -188,16 +178,21 @@ fast. Xfers to the WAN (the Internet) from PCs behind the switch are
 just as fast as a PC without JFs enabled connected either directly to
 the cable modem, or to the router.
 
-  
-
 See also
 --------
 
 -   Gigabit Ethernet Jumbo Frames - And why you should care
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Jumbo_Frames&oldid=246038"
+"https://wiki.archlinux.org/index.php?title=Jumbo_Frames&oldid=304900"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 16 March 2014, at 09:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

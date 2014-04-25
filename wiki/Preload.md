@@ -8,69 +8,37 @@ time, loaded into memory. This results in faster startup times as less
 data needs to be fetched from disk. preload is often paired with
 prelink.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Running the daemon                                                 |
-|     -   2.1 Systemd                                                      |
-|     -   2.2 rc.conf (deprecated)                                         |
-|                                                                          |
-| -   3 Configuration                                                      |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
-
 Installation
 ------------
 
-preload is available through pacman. In Arch Linux, just issue the
-command:
-
-    # pacman -S preload
-
-Running the daemon
-------------------
-
-> Systemd
-
-Start directly with (as root)
-
-    # systemctl start preload.service
-
-To start preload at system boot, type as root
-
-    # systemctl enable preload.service
-
-> rc.conf (deprecated)
-
-Start directly with
-
-    # /etc/rc.d/preload start
-
-To start preload at system boot, add it to the DAEMONS section in
-/etc/rc.conf:
-
-    DAEMONS =(... preload ...)
+Install preload from the AUR. You may now start the systemd service
+preload, and/or enable it in order to start at boot.
 
 Configuration
 -------------
 
-The configuration file is /etc/preload.conf, it contains default
-settings that should be suitable for regular users. The cycle option
-lets you configure how often to ping the preload system to update its
-model of which applications and libraries to cache.
+The configuration file is located in /etc/conf.d/preload, it contains
+default settings that should be suitable for regular users. The cycle
+option lets you configure how often to ping the preload system to update
+its model of which applications and libraries to cache.
 
 See also
 --------
 
 -   http://en.wikipedia.org/wiki/Preload_(software)
 -   http://techthrob.com/2009/03/02/drastically-speed-up-your-linux-system-with-preload/
--   Readahead
+-   Improve boot performance
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Preload&oldid=237407"
+"https://wiki.archlinux.org/index.php?title=Preload&oldid=300459"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 23 February 2014, at 15:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

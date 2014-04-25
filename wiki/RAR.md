@@ -4,25 +4,21 @@ RAR
 RAR (and UNRAR) is the Linux port of the commandline-only version of
 WinRAR available in both the i686 and x86-64 flavors.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Key features                                                       |
-| -   2 Installation                                                       |
-|     -   2.1 RAR                                                          |
-|     -   2.2 UNRAR                                                        |
-|                                                                          |
-| -   3 Configuration file                                                 |
-| -   4 RAR compression examples                                           |
-|     -   4.1 General syntax                                               |
-|     -   4.2 Recursively compress an entire directory structure           |
-|     -   4.3 Mixed-mode archives                                          |
-|     -   4.4 Recursively compress many directory structures using a list  |
-|                                                                          |
-| -   5 UNRAR examples                                                     |
-|     -   5.1 General syntax                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Key features
+-   2 Installation
+    -   2.1 RAR
+    -   2.2 UNRAR
+-   3 Configuration file
+-   4 RAR compression examples
+    -   4.1 General syntax
+    -   4.2 Recursively compress an entire directory structure
+    -   4.3 Mixed-mode archives
+    -   4.4 Recursively compress many directory structures using a list
+-   5 UNRAR examples
+    -   5.1 General syntax
 
 Key features
 ------------
@@ -57,15 +53,12 @@ Installation
 
 > RAR
 
-Obtain rar (full package minus UNRAR) available in the AUR which is
-maintained by adaptee.
+Obtain rar (full package minus UNRAR) available in the AUR.
 
 > UNRAR
 
-The unrar is provided separately and resides in the official extra
-repository. Install it via Pacman as usual:
-
-     # pacman -S unrar
+The unrar is provided separately and resides in the official
+repositories. Install it via pacman as usual.
 
 Configuration file
 ------------------
@@ -90,17 +83,15 @@ RAR compression examples
 
 > General syntax
 
-    $ rar <command> -<switch 1> -<switch N> <archive> <files.rar> <@listfiles...>
+    $ rar command -switch 1 -switch N archive files.rar @listfiles...
 
 For a complete listing of commands and switches, see the last section of
-this article or simply run:
-
-    $ rar | more
+this article or simply run rar.
 
 > Recursively compress an entire directory structure
 
 -   Task: backup /home/darkhorse to /media/data/darkhorse-backup.rar
-    using 10 % recovery records.
+    using 10 % recovery records:
 
     $ rar a -r -rr10 /media/data/darkhorse-backup.rar /home/darkhorse
 
@@ -118,7 +109,7 @@ this article or simply run:
 You can also use mixed-mode archives which means that file types you
 specifiy do not get compressed - they simply get stored.
 
--   Task: backup /home/darkhorse to /media/data/darkhorse-backup.rar
+-   Task: backup /home/darkhorse to /media/data/darkhorse-backup.rar:
 
     $ rar a -r -rr10 -s -m5 -msjpg;mp3;tar /media/data/darkhorse-backup.rar /home/darkhorse
 
@@ -136,7 +127,7 @@ specifiy do not get compressed - they simply get stored.
 > Recursively compress many directory structures using a list
 
 -   Task: backup /home/darkhorse and /home/palomino and /home/seabiscuit
-    to /media/data/homes-backup.rar
+    to /media/data/homes-backup.rar.
 
 First create a list (simple text file) containing the various targets.
 In this example, the list will be three lines long. I named it
@@ -153,7 +144,7 @@ UNRAR examples
 
 > General syntax
 
-    $ unrar <command> -<switch 1> -<switch N> <archive> <files...> <@listfiles...> <path_to_extract\>
+    $ unrar command -switch 1 -switch N archive files... @listfiles... path_to_extract\
 
 For a complete listing of commands and switches simply run:
 
@@ -168,8 +159,15 @@ For multi-part rar files, run:
     $ unrar x homes-backup.part1.rar homes-backup/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=RAR&oldid=235168"
+"https://wiki.archlinux.org/index.php?title=RAR&oldid=304896"
 
 Category:
 
 -   Data compression and archiving
+
+-   This page was last modified on 16 March 2014, at 09:03.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

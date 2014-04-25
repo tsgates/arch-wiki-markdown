@@ -1,24 +1,30 @@
 ASUS Eee PC 1000HA
 ==================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Before You Begin                                                   |
-|     -   1.1 Choosing Your Installation Media                             |
-|                                                                          |
-| -   2 Installing Arch Linux                                              |
-|     -   2.1 Mount the installation media                                 |
-|     -   2.2 Start the Installation                                       |
-|     -   2.3 Prepare Hard Drive                                           |
-|     -   2.4 Select Packages                                              |
-|     -   2.5 Small BIOS notice                                            |
-|                                                                          |
-| -   3 Getting Everything Working                                         |
-|     -   3.1 Xorg                                                         |
-|     -   3.2 Setting up large external monitors                           |
-+--------------------------------------------------------------------------+
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: Out of date and  
+                           all covered by           
+                           Beginners' guide.        
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+Contents
+--------
+
+-   1 Before You Begin
+    -   1.1 Choosing Your Installation Media
+-   2 Installing Arch Linux
+    -   2.1 Mount the installation media
+    -   2.2 Start the Installation
+    -   2.3 Prepare Hard Drive
+    -   2.4 Select Packages
+    -   2.5 Small BIOS notice
+-   3 Getting Everything Working
+    -   3.1 Xorg
+    -   3.2 Setting up large external monitors
 
 Before You Begin
 ----------------
@@ -35,8 +41,8 @@ methods:
 Installing Arch Linux
 ---------------------
 
--   NOTE: Please refer to the Official Arch Linux Install Guide and
-    Beginners Guide for detailed instructions.
+-   NOTE: Please refer to the Installation guide and Beginners' guide
+    for detailed instructions.
 
 > Mount the installation media
 
@@ -100,8 +106,15 @@ the netbook's screen with this command.
     xrandr --output LVDS1 --off && xrandr --output VGA1 --auto
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1000HA&oldid=249613"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1000HA&oldid=302915"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 2 March 2014, at 13:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

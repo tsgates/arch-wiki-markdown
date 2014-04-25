@@ -5,34 +5,31 @@ Duplicity is a network backup program.
 
 It can save snapshots of directories and files to a remote GnuPG
 encrypted tar file, which acts as a backup repository. Connecting with
-the remote backup repository can take place through one of the rsync,
-ftp, HSI, WebDAV, Tahoe-LAFS, or Amazon S3 protocols.
+the remote backup repository can take place through any of the following
+protocols: rsync, ftp, HSI, WebDAV, Tahoe-LAFS, or Amazon S3.
 
 Backups are granularly incremental, meaning that only changes in files
 (since the last snapshot) are stored.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Basic Usage                                                        |
-|     -   2.1 Doing backups                                                |
-|     -   2.2 Restoring files from backup                                  |
-|     -   2.3 Repository inspection and house-keeping                      |
-|     -   2.4 Example backup script                                        |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Basic Usage
+    -   2.1 Doing backups
+    -   2.2 Restoring files from backup
+    -   2.3 Repository inspection and house-keeping
+    -   2.4 Example backup script
+-   3 See also
 
 Installation
 ------------
 
-Install duplicity from the Official Repositories.
+Install duplicity from the Official repositories.
 
 -   duply, a shell front-end, is available in AUR.
 -   deja-dup, an easy-to-use front-end, is available in the Official
-    Repositories.
+    repositories.
 
 Basic Usage
 -----------
@@ -61,11 +58,11 @@ saved in the remote repository /usr/backup on host other.host, do:
 
     duplicity scp://uid@other.host//usr/backup /home/me 
 
-Note the reversed ordering or the arguments compared to the backup
+Note the reversed ordering of the arguments compared to the backup
 command above. The URL argument is always treated as the backup
 repository, and the local path argument as the directory to sync with
-the backup. (A local backup repository needs to be explicitly specify
-using the file:// protocol prefix!)
+the backup. (A local backup repository would need to be explicitly
+specified using the file:// protocol prefix!)
 
 Additional command-line option exist to allow:
 
@@ -161,11 +158,16 @@ See also
 -   Déjà Dup home page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Duplicity&oldid=220248"
+"https://wiki.archlinux.org/index.php?title=Duplicity&oldid=301605"
 
 Categories:
 
 -   Data compression and archiving
--   Networking
--   Security
 -   System recovery
+
+-   This page was last modified on 24 February 2014, at 11:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

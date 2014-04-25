@@ -1,7 +1,7 @@
 Assp
 ====
 
-  Summary
+  Summary help replacing me
   ------------------------------------------------------------
   Installation of ASSP - Anti Spam SMTP Proxy on a TrimSlice
 
@@ -11,25 +11,21 @@ auto-whitelists, self learning Bayesian, Greylisting, DNSBL, DNSWL,
 URIBL, SPF, SRS, Backscatter, Virus scanning, attachment blocking,
 Senderbase and multiple other filter methods.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Features                                                           |
-| -   2 Installation                                                       |
-|     -   2.1 Basic                                                        |
-|     -   2.2 Download ASSP                                                |
-|     -   2.3 Create necessary directories                                 |
-|     -   2.4 Install files in place                                       |
-|     -   2.5 CPAN                                                         |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Start script                                                 |
-|                                                                          |
-| -   4 Start ASSP                                                         |
-|     -   4.1 Manually                                                     |
-|     -   4.2 Daemon                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Features
+-   2 Installation
+    -   2.1 Basic
+    -   2.2 Download ASSP
+    -   2.3 Create necessary directories
+    -   2.4 Install files in place
+    -   2.5 CPAN
+-   3 Configuration
+    -   3.1 Start script
+-   4 Start ASSP
+    -   4.1 Manually
+    -   4.2 Daemon
 
 Features
 --------
@@ -75,14 +71,14 @@ Installation
 Install Perl Modules and there dependencies perl-mail-spf-query,
 perl-email-mime,perl-net-dns,perl-email-send,perl-io-socket-ssl,perl-io-socket-inet6,perl-authen-sasl,
 perl-berkeleydb, perl-net-cidr-lite available in the Official
-Repositories.
+repositories.
 
 perl-compress-zlib,
 perl-convert-tnef,perl-net-smtp-tls,perl-sys-meminfo,perl-lingua-stem-snowball
 and perl-email-valid from AUR.
 
 Install unzip,net-snmp and clamav available in the Official
-Repositories.
+repositories.
 
 > Download ASSP
 
@@ -213,8 +209,15 @@ To start/stop/restart the Daemon manually, please read Performing
 daemons actions manually, to start at Boot please read Starting on Boot.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Assp&oldid=253338"
+"https://wiki.archlinux.org/index.php?title=Assp&oldid=306057"
 
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 20 March 2014, at 17:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

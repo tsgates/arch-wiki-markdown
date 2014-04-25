@@ -2,16 +2,16 @@ Gamin
 =====
 
   ------------------------ ------------------------ ------------------------
-  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
-                           Notes: please use the    
-                           first argument of the    
-                           template to provide more 
-                           detailed indications.    
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with File        
+                           manager functionality.   
+                           Notes: May be too short  
+                           for a separate article.  
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-  
- Gamin is a file and directory monitoring system defined to be a subset
+Gamin is a file and directory monitoring system defined to be a subset
 of the FAM (File Alteration Monitor) system. It is a service provided by
 a library which allows for the detection of modification to a file or
 directory.
@@ -38,8 +38,15 @@ External links
 -   FAM, Gamin and inotify
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Gamin&oldid=255887"
+"https://wiki.archlinux.org/index.php?title=Gamin&oldid=300571"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 23 February 2014, at 15:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

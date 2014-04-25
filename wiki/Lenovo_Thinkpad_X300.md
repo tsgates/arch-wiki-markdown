@@ -11,34 +11,40 @@ Lenovo Thinkpad X300
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 My system                                                    |
-|                                                                          |
-| -   2 First boot                                                         |
-|     -   2.1 Things that do work                                          |
-|     -   2.2 Things that do not work                                      |
-|     -   2.3 Untested/unknown                                             |
-|                                                                          |
-| -   3 Fixes                                                              |
-|     -   3.1 Graphic card                                                 |
-|     -   3.2 WiFi                                                         |
-|     -   3.3 Sound                                                        |
-|     -   3.4 Touchpad                                                     |
-|     -   3.5 Backlight                                                    |
-|     -   3.6 Webcam                                                       |
-|     -   3.7 Bluetooth                                                    |
-|     -   3.8 Fingerprint Reader                                           |
-|     -   3.9 Suspend / Hibernate                                          |
-|                                                                          |
-| -   4 Configuration                                                      |
-|     -   4.1 Language                                                     |
-|     -   4.2 xorg                                                         |
-|     -   4.3 FluxBox                                                      |
-+--------------------------------------------------------------------------+
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: All information  
+                           are already covered by   
+                           Beginners' guide,Laptop  
+                           and other general pages. 
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+Contents
+--------
+
+-   1 Introduction
+    -   1.1 My system
+-   2 First boot
+    -   2.1 Things that do work
+    -   2.2 Things that do not work
+    -   2.3 Untested/unknown
+-   3 Fixes
+    -   3.1 Graphic card
+    -   3.2 WiFi
+    -   3.3 Sound
+    -   3.4 Touchpad
+    -   3.5 Backlight
+    -   3.6 Webcam
+    -   3.7 Bluetooth
+    -   3.8 Fingerprint Reader
+    -   3.9 Suspend / Hibernate
+-   4 Configuration
+    -   4.1 Language
+    -   4.2 xorg
+    -   4.3 FluxBox
 
 Introduction
 ------------
@@ -154,26 +160,6 @@ Reference: Video Cards
 > WiFi
 
 Model: Intel Wireless 4965 AG
-
-Driver used: iwlwifi-4965-ucode 228.57.2.21-1
-
-Problem: wlan0 exists on startup but cannot be activated = no networks
-found.
-
-To install driver:
-
-    # pacman -S iwlwifi-4965-ucode
-
-To activate and scan for wireless networks I used:
-
-    # ip link set dev wlan0 up
-    # iwlist wlan0 scan
-
-And for connecting to WEP/WPA secured networks I am using wireless tools
-and netcfg which works flawless.
-
-    pacman -S wireless_tools
-    pacman -S netcfg
 
 Reference: Wireless Setup
 
@@ -413,8 +399,15 @@ or this into /etc/X11/xorg.conf:
     EndSection
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_Thinkpad_X300&oldid=253692"
+"https://wiki.archlinux.org/index.php?title=Lenovo_Thinkpad_X300&oldid=302857"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 2 March 2014, at 08:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

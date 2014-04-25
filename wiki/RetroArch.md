@@ -1,10 +1,28 @@
 RetroArch
 =========
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
+  g]                       is poorly written.       g]
+                           Reason: Poor structure   
+                           and out of date.         
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 RetroArch is a modular, command-line driven, multi-system emulator that
 is designed to be fast, lightweight, and portable. It has features few
 other emulators frontends have, such as real-time rewinding and
 game-aware shading based on the libretro API.
+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+-   3 Configuration
+-   4 Troubleshooting
+    -   4.1 No keyboard/mouse input
+    -   4.2 Video Problems
 
 Installation
 ------------
@@ -16,7 +34,7 @@ A GTK+/Qt frontend, retroarch-phoenix-git, is also available.
 Usage
 -----
 
-RetroArch employs the use of separate emulator cores (or
+RetroArch employs the use of separate emulator cores (or emulator
 implementations) available from both the AUR and the libretro github.
 
 Each package from the AUR will install an emulator core to
@@ -64,10 +82,48 @@ shaders.
 Warning:When using the alsa driver make sure audio_out_rate is equal to
 your system's default output rate. This is usually 48000.
 
+  
+
+Troubleshooting
+---------------
+
+> No keyboard/mouse input
+
+If you are having no keyboard input in an X-less environment, this is
+due to the fact that the /dev/input nodes are root-only. You can set up
+a udev rule which makes these accessible to non-root. To
+/etc/udev/rules.d/99-evdev.rules, add
+
+    KERNEL=="event*", NAME="input/%k", MODE="666"
+
+Then reload the udev rules with:
+
+    sudo udevadm control --reload-rules
+
+Until next reboot (or replugging devices), you can force permissions
+with sudo chmod 666 /dev/input/event*.
+
+> Video Problems
+
+If your video driver has very bad performance, it is possible to run it
+on a thread to avoid almost all video driver overhead. Set
+video_threaded = true in ~/.config/retroarch/retroarch.cfg
+
+Butter smooth VSync behavior in this case is impossible however, and
+latency might increase slighly. Use only if you cannot obtain full speed
+or if changing video resolution/refresh rate settings seem to not work.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=RetroArch&oldid=251952"
+"https://wiki.archlinux.org/index.php?title=RetroArch&oldid=306056"
 
 Categories:
 
 -   Gaming
 -   Emulators
+
+-   This page was last modified on 20 March 2014, at 17:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

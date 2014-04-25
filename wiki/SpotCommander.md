@@ -1,115 +1,120 @@
 SpotCommander
 =============
 
-SpotCommander is an open source web-based remote control for the
-GNU/Linux version of Spotify. The application is written in PHP and
-HTML5, and thus optimized especially for mobile devices, like
-smartphones or tablets. It has a visual appealing, responsive and
-intuitive user interface.
+SpotCommander is a remote control for Spotify for Linux, optimized for
+mobile devices. It's based on HTML5 & PHP, works on any device with a
+modern browser, and it's free and open source.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Features                                                           |
-| -   2 Installation                                                       |
-|     -   2.1 Preconditions                                                |
-|         -   2.1.1 Install Apache web server                              |
-|         -   2.1.2 Configuration of Apache                                |
-|         -   2.1.3 Other required packages                                |
-|                                                                          |
-|     -   2.2 Install SpotCommander                                        |
-|     -   2.3 Add daemon to startup (optional)                             |
-|     -   2.4 Configuration (optional)                                     |
-|                                                                          |
-| -   3 Usage                                                              |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+SpotCommander is the most elegant, intuitive, feature-rich & universal
+remote control for Spotify, exclusive for Linux users!
+
+Contents
+--------
+
+-   1 Features
+-   2 Option 1: Install from AUR
+-   3 Option 2: Install manually
+    -   3.1 Install & configure required packages
+    -   3.2 Give Apache access to /tmp
+    -   3.3 Reboot
+    -   3.4 Install SpotCommander
+    -   3.5 Try it
+    -   3.6 Configuration
+-   4 See also
 
 Features
 --------
 
-The application offers amongst others the following features:
-
--   Launch and quit Spotify
+-   Reponsive & intuitive user interface
+-   Launch/quit Spotify
 -   Now playing
 -   Control playback
--   Change Spotify's volume
--   Toggle shuffle and repeat
--   Browse playlists, albums and starred items
--   Search for tracks
+-   Adjust volume
+-   Toggle shuffle & repeat
+-   Playlists
+-   Starred items
+-   Search
+-   Browse playlists
+-   Browse albums
+-   Browse artists
 -   Recently played
 -   Queue
+-   Lyrics
+-   Start track radio
+-   Top lists
+-   Popular playlists
+-   New albums
+-   Genres
+-   Share to social networks
 -   Gestures
 -   Keyboard shortcuts
+-   Android app
+-   Fullscreen on iOS
+-   Automatic update checking
 
-Installation
-------------
+Option 1: Install from AUR
+--------------------------
+
+SpotCommander is available in AUR, and can be installed like any other
+package from AUR. The PKGBUILD automates the manual installation process
+described below.
+
+Note:If you have any kind of web server software installed on your
+system already, you should install manually instead to avoid touching
+your current configuration.
+
+Option 2: Install manually
+--------------------------
 
 Note:This must be done as root.
 
-> Preconditions
+> Install & configure required packages
 
-Install Apache web server
+-   Install required packages:
 
--   To be able to use SpotCommander, it is neccessary to have an Apache
-    web server installed on the device, which should be controlled
-    remotely later. Apache and PHP can be installed this way:
+     $ pacman -S apache php php-apache php-sqlite qt4 inotify-tools xautomation wmctrl wget
 
-     $ pacman -S apache php php-apache
+-   DON NOT FORGET: Enable PHP as described in the LAMP article. Make
+    sure you enable mod_mpm_prefork.
 
-See the LAMP article for more detailed information about Apache.
-
-Configuration of Apache
-
--   Configure Apache. In /etc/httpd/conf/httpd.conf add:
-
-    AddType text/cache-manifest .appcache
-
-    <Directory "/srv/http/spotcommander">
-    AllowOverride All
-    ExpiresActive On
-    ExpiresByType text/cache-manifest "access plus 0 seconds"
-    </Directory>
-
--   To be able to run the application, the sqlite extension of PHP is
-    required. First, install the package:
-
-     $ pacman -S php-sqlite
-
--   Now edit the php configuration in /etc/php/php.ini:
-
-     $ nano /etc/php/php.ini
-
--   Comment out the following lines, to enable the needed extensions:
+-   Enable required PHP modules. In /etc/php/php.ini, uncomment these:
 
      extension=curl.so
      ...
-     extension=openssl.so
-     ...
      extension=pdo_sqlite.so
+     ...
+     extension=posix.so
      ...
      extension=sqlite3.so
 
-Note:Make sure you have the openssl package installed.
+-   As root, create the file /etc/httpd/conf/extra/spotcommander.conf
+    and add:
 
--   Restart Apache:
+    <Directory "/srv/http/spotcommander">
+    AllowOverride All
+    </Directory>
 
-     $ systemctl restart httpd.service
+Note:If you are going to install in another directory than
+/srv/http/spotcommander, make sure you use the correct directory above.
 
--   It is neccessary to give Apache access to /tmp. Search in
-    /usr/lib/systemd/system/httpd.service for the line PrivateTmp=true
-    and change it as follows:
+-   In /etc/httpd/conf/httpd.conf, add to bottom:
+
+    Include conf/extra/spotcommander.conf
+
+-   Make Apache start when system boots:
+
+     $ systemctl enable httpd.service
+
+> Give Apache access to /tmp
+
+-   Open /usr/lib/systemd/system/httpd.service and set:
 
      PrivateTmp=false
 
-To make this change take effect, a reboot is needed.
+> Reboot
 
-Other required packages
-
--   In addition the following packages need to be installed:
-
-     $ pacman -S qt4 inotify-tools xautomation wmctrl 
+-   Some of the actions above require a reboot to take effect, so you
+    must reboot your system now before continuing
 
 > Install SpotCommander
 
@@ -119,78 +124,78 @@ Other required packages
 
 -   Download the tar.bz2 file:
 
-     $ wget -N http://www.olejon.net/code/spotcommander/files/spotcommander-8.6.tar.bz2
+     $ wget -N http://www.olejon.net/code/spotcommander/files/spotcommander-9.0.tar.bz2
 
 -   Extract the tar.bz2 file:
 
-     $ tar -jxvf spotcommander-8.6.tar.bz2
+     $ tar -jxvf spotcommander-9.0.tar.bz2
 
 -   Remove the tar.bz2 file:
 
-     $ rm spotcommander-8.6.tar.bz2
+     $ rm spotcommander-9.0.tar.bz2
 
 -   Go into the spotcommander folder:
 
      $ cd spotcommander
 
--   Set the correct file permissions:
+-   Set the correct permissions:
 
      $ chmod 755 . && chmod 755 bin/* && chmod 777 cache/* && chmod -R 777 db/ && chmod 666 run/*
 
--   Create a symlink, to be able to execute the SpotCommander daemon:
+-   Create symlink:
 
      $ ln -fs $(pwd)/bin/spotcommander /usr/local/bin/spotcommander
 
--   Start the daemon. Run this command in a desktop terminal as the
-    desktop user running Spotify:
+-   You must now start the daemon. Open up a desktop terminal (not SSH)
+    as the desktop user running Spotify (not root), and run this
+    command:
 
      $ spotcommander start
 
--   If you have followed the instructions carefully, you should be able
-    to open SpotCommander under http://localhost/spotcommander now.
+By running it in the terminal the first time, you will be able to see if
+there are any errors.
 
-> Add daemon to startup (optional)
-
-Create the file /etc/xdg/autostart/spotcommander.desktop and add:
+-   You should add the daemon to your startup applications. As root,
+    create the file /etc/xdg/autostart/spotcommander.desktop and add:
 
     [Desktop Entry]
     Type=Application
     Name=SpotCommander
     Exec=spotcommander start
 
-> Configuration (optional)
+> Try it
+
+-   You should now be able to control Spotify by going to:
+
+     http://your.computers.ip.address.or.hostname/spotcommander
+
+-   To find your current IP address, run this command:
+
+     $ ip addr
+
+-   Android users should download the Android app, which can find your
+    computer automatically
+
+> Configuration
 
 It is not necessary to configure anything, but in the config.php file
 there are some options you can change.
 
-Usage
------
-
-After you have set up the server successfully, every device in your
-local network should be able to access SpotCommander under the ip adress
-of the server. For example, if the server would have the ip
-192.168.0.24:
-
-     http://192.168.0.24/spotcommander/
-
-To find out your current ip adress, execute the following:
-
-     ip addr
-
-If you cannot access the server, make sure, that apache is accessible by
-other hosts in the LAN. Check in /etc/httpd/conf/httpd.conf to what
-hosts it is listening to. The line should look like this:
-
-     Listen 80
-
 See also
 --------
 
--   Official web site with more detailed information
+-   Official website
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SpotCommander&oldid=255820"
+"https://wiki.archlinux.org/index.php?title=SpotCommander&oldid=304607"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 15 March 2014, at 12:26.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

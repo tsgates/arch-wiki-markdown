@@ -1,64 +1,55 @@
 Input Japanese using uim
 ========================
 
-This page explains how to get the Japanese input to work using uim.  
- If you use SCIM, see Smart Common Input Method platform.  
- If you use IBus, see Ibus.
+This page explains how to get the Japanese input to work using uim.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Japanese fonts                                               |
-|     -   1.2 uim                                                          |
-|         -   1.2.1 Using pacman                                           |
-|         -   1.2.2 Compiling uim from source using PKGBUILD               |
-|             -   1.2.2.1 Arch's configuration                             |
-|             -   1.2.2.2 Steps to build                                   |
-|                                                                          |
-|     -   1.3 Input method                                                 |
-|         -   1.3.1 Anthy                                                  |
-|             -   1.3.1.1 Extra dictionary                                 |
-|                                                                          |
-|         -   1.3.2 Modified Anthy (anthy-ut)                              |
-|             -   1.3.2.1 Compiling Modified Anthy using PKGBUILD          |
-|                                                                          |
-|         -   1.3.3 Anthy Kaomoji                                          |
-|         -   1.3.4 Mozc                                                   |
-|             -   1.3.4.1 Mozc (Vanilla)                                   |
-|             -   1.3.4.2 mozc-ut and mozc-svn                             |
-|             -   1.3.4.3 Registering Mozc                                 |
-|                                                                          |
-|         -   1.3.5 Google CGI API for Japanese Input                      |
-|                                                                          |
-| -   2 Settings                                                           |
-|     -   2.1 Environment variables                                        |
-|     -   2.2 Toolbar utilities                                            |
-|         -   2.2.1 uim-toolbar-gtk/qt                                     |
-|         -   2.2.2 uim-toolbar-gtk-systray                                |
-|         -   2.2.3 Panel applet                                           |
-|                                                                          |
-|     -   2.3 uim preferences                                              |
-|     -   2.4 Input Japanese on Emacs                                      |
-|         -   2.4.1 LEIM or minor-mode                                     |
-|             -   2.4.1.1 Settings for the minor-mode                      |
-|             -   2.4.1.2 Settings for the LEIM                            |
-|                                                                          |
-|         -   2.4.2 Preferred character encoding                           |
-|         -   2.4.3 Enable inline candidates displaying mode by default    |
-|         -   2.4.4 Set Hiragana input mode by default                     |
-|         -   2.4.5 Ignoring C-SPC on uim.el                               |
-|         -   2.4.6 Disabling XIM on Emacs                                 |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Cannot input Japanese on Opera                               |
-|     -   3.2 Cannot type a consonant in Zenkaku mode                      |
-|     -   3.3 uim-toolbar-gtk-systray: tray icon is crushed                |
-|     -   3.4 I use darker theme, I cannot read the uim mode icons         |
-|                                                                          |
-| -   4 Useful literature                                                  |
-+--------------------------------------------------------------------------+
+If you use SCIM, see Smart Common Input Method platform.
+
+If you use IBus, see Ibus.
+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Japanese fonts
+    -   1.2 uim
+        -   1.2.1 Using pacman
+        -   1.2.2 Compiling uim from source using PKGBUILD
+    -   1.3 Input method
+        -   1.3.1 Anthy
+            -   1.3.1.1 Extra dictionary
+        -   1.3.2 Modified Anthy (anthy-ut)
+            -   1.3.2.1 Compiling modified Anthy using PKGBUILD
+        -   1.3.3 Anthy Kaomoji
+        -   1.3.4 Mozc
+            -   1.3.4.1 Mozc (Vanilla)
+            -   1.3.4.2 mozc-ut and mozc-svn
+            -   1.3.4.3 Registering Mozc
+        -   1.3.5 Google CGI API for Japanese input
+-   2 Settings
+    -   2.1 Environment variables
+    -   2.2 Toolbar utilities
+        -   2.2.1 uim-toolbar-gtk/qt
+        -   2.2.2 uim-toolbar-gtk-systray
+        -   2.2.3 Panel applet
+    -   2.3 uim preferences
+    -   2.4 Input Japanese on Emacs
+        -   2.4.1 LEIM or minor-mode
+            -   2.4.1.1 Settings for the minor-mode
+            -   2.4.1.2 Settings for the LEIM
+        -   2.4.2 Preferred character encoding
+        -   2.4.3 Enable inline candidates displaying mode by default
+        -   2.4.4 Set Hiragana input mode by default
+        -   2.4.5 Ignoring C-SPC on uim.el
+        -   2.4.6 Disabling XIM on Emacs
+-   3 Troubleshooting
+    -   3.1 Set the GTK_IM_MODULE variable, but uim still not works with
+        GTK+ 2 applications
+    -   3.2 Cannot input Japanese on Opera
+    -   3.3 Cannot type a consonant in Zenkaku mode
+    -   3.4 uim-toolbar-gtk-systray: tray icon is crushed
+    -   3.5 I use darker theme, I cannot read the uim mode icons
+-   4 See also
 
 Installation
 ------------
@@ -75,7 +66,7 @@ see also Fonts and Font Configuration for configuration or more detail.
 
 Recommended Japanese fonts are as follows.
 
--   IPA fonts (AUR: otf-ipafont)
+-   IPA fonts || otf-ipafont
 
 A high quality and formal style opensource font set including Gothic
 (sans-serif) and Mincho (serif) glyphs. Default font of openSUSE-ja.
@@ -98,46 +89,23 @@ following fonts:
 
 Using pacman
 
-Pull down the necessary things with a :
-
-    # pacman -S uim
+Install uim from the official repositories.
 
 Compiling uim from source using PKGBUILD
 
-For instance, if you want to build uim with your configurationin, you
-can compile from source.
+If you want to build uim with your configurationin, you can compile from
+source, using ABS for istance. See official wiki for all configure
+options.
 
-Arch's configuration
+In Arch official repositories, uim is built with the following custom
+configuration (as of 1.8.6):
 
-In Arch official repository, uim is built with the following custom
-configuration (as of 1.8.4):
+-   --with-anthy-utf8 - Enable Anthy(UTF-8) support
+-   --with-qt4-immodule - Build Qt4 immodule
+-   --with-qt4 - Build uim-tools for Qt4
 
--   --with-anthy-utf8 : Enable Anthy(UTF-8) support
--   --with-qt4-immodule : Build Qt4 immodule
--   --with-qt4 : Build uim-tools for Qt4
-
-Please see official wiki for all configure options.
-
-Steps to build
-
-The one of the easy way to build from source is using ABS.  
- First, install ABS:
-
-    # pacman -S abs
-
-Update ABS:
-
-    # abs
-
-Then, copy uim's directory to under your $HOME. For example:
-
-    $ cp -R /var/abs/extra/uim ~/sources/
-
-Edit PKGBUILD.
-
-Finally, run makepkg under uim directory to make and install package:
-
-    $ makepkg -s -i
+If you want KDE4 plasma widget, install automoc4 for making dependency,
+and add --enable-kde4-applet option to PKGBUILD file.
 
 > Input method
 
@@ -147,9 +115,7 @@ Anthy is one of the most popular Japanese input methods in the open
 source world. However, it has not been maintained for a long time.
 Debian succeeds it from May 2010.
 
-To install Anthy :
-
-    # pacman -S anthy
+Install anthy from the official repositories.
 
 Extra dictionary
 
@@ -179,13 +145,14 @@ Modified Anthy consists two different upstreams:
 -   Patched source of Anthy by G-HAL
 -   Huge extended dictionalies by UTSUMI
 
-Warning:Modified Anthy applies to only Anthy (UTF-8). So you have to
-choose Anthy (UTF-8) for default input method on uim.
+> Warning:
 
-Warning:Modified Anthy does not have compatibility of the dictionaries
-and learning data with original Anthy.
+-   Modified Anthy applies to only Anthy (UTF-8). So you have to choose
+    Anthy (UTF-8) for default input method on uim.
+-   Modified Anthy does not have compatibility of the dictionaries and
+    learning data with original Anthy.
 
-Compiling Modified Anthy using PKGBUILD
+Compiling modified Anthy using PKGBUILD
 
 Modified Anthy is available on AUR named anthy-ut.
 
@@ -233,6 +200,7 @@ You can install this from unofficial user repository. Add the following
 into your /etc/pacman.conf:
 
     [pnsft-pur]
+    SigLevel = Optional TrustAll
     Server = http://downloads.sourceforge.net/project/pnsft-aur/pur/$arch
 
 Note:This repo provides x86_64 packages only now.
@@ -253,14 +221,21 @@ mozc-ut and mozc-svn
 
 mozc-ut and mozc-svn can be built uim-mozc.
 
+Note:mozc-ut can work with uim-mozc.
+
 To build uim-mozc, edit PKGBUILD like follow, i,e. uncomment _uim_mozc=
 line:
 
+    ## If you will not be using ibus, comment out below.
+    _ibus_mozc="yes"
     ## If you will be using uim, uncomment below.
     _uim_mozc="yes"
     ## If applying patch for uim-mozc fails, try to uncomment below.
     #_kill_kill_line="yes"
     ## This will disable the 'kill-line' function of uim-mozc.
+
+Tip:If you will never be using ibus-mozc, comment out the _ibus_mozc=
+line.
 
 Registering Mozc
 
@@ -268,7 +243,7 @@ Warning:You must run the following command whenever you upgrade or
 (re-)install uim.  
  # uim-module-manager --register mozc
 
-Google CGI API for Japanese Input
+Google CGI API for Japanese input
 
 Google CGI API for Japanese Input (Google-CGIAPI-Jp) is CGI service to
 provide Japanese conversion on the Internet by Google. It can be used on
@@ -305,11 +280,11 @@ uim-toolbar-gtk/qt
 
 Using toolbar appears as a window.
 
-For Gtk2:
+For GTK+ 2:
 
     uim-toolbar-gtk &
 
-For Gtk3:
+For GTK+ 3:
 
     uim-toolbar-gtk3 &
 
@@ -321,11 +296,11 @@ uim-toolbar-gtk-systray
 
 Using toolbar for system tray.
 
-For Gtk2:
+For GTK+ 2:
 
     uim-toolbar-gtk-systray &
 
-For Gtk3:
+For GTK+ 3:
 
     uim-toolbar-gtk3-systray &
 
@@ -340,18 +315,16 @@ Configure uim preferences by running :
 
     $ uim-pref-gtk (Or, uim-pref-gtk3/uim-pref-qt4)
 
-which brings forth a GUI.  
- Choose your preferring input method as 'Default input method'.
+which brings forth a GUI.
+
+Choose your preferring input method as 'Default input method'.
 
 Note:Mozc will be not listed in 'Default input method' at first time so
 you will need to add it into 'Enabled input methods' to use.
 
-  
- You can run uim-xim or restart X to test your settings.  
- Provided everything went well you should be able to input Japanese in
-X.
+You can run uim-xim or restart X to test your settings.
 
-お疲れ様です！
+Provided everything went well you should be able to input Japanese in X.
 
 > Input Japanese on Emacs
 
@@ -451,13 +424,30 @@ disabled on Emacs.
 Troubleshooting
 ---------------
 
+> Set the GTK_IM_MODULE variable, but uim still not works with GTK+ 2 applications
+
+In case you already set the GTK_IM_MODULE environmental variable, but
+uim still not works with GTK+ 2 applications, you need to specify the
+location of gtk.immodules, which is created by and can be generated with
+gtk-query-immodules-2.0.
+
+The default location is /etc/gtk-2.0/gtk.immodules for GTK+ 2.
+
+You can do this with either the GTK_IM_MODULE_FILE variable (not
+recommended, it causes GTK+ 3 applications to see incompatible modules)
+or the im_module_file setting (recommended).
+
+Add the following to /etc/gtk-2.0/gtkrc or ~/.gtkrc-2.0:
+
+     im_module_file "/etc/gtk-2.0/gtk.immodules"
+
 > Cannot input Japanese on Opera
 
 If you use Opera and cannot input Japanese with uim, try to edit
 environment variable as follows: Make sure to add follows in the
 beginning of /usr/bin/opera.
 
-    export XMODIFIERS=@im='uim'
+    export XMODIFIERS='@im=uim'
     export QT_IM_MODULE='xim'
 
 > Cannot type a consonant in Zenkaku mode
@@ -478,8 +468,6 @@ config file.
        (if (symbol-bound? 'ja-rk-rule-hoge)
        (set! ja-rk-rule (append ja-rk-rule-hoge ja-rk-rule)))
 
-  
-
 > uim-toolbar-gtk-systray: tray icon is crushed
 
 Though some of DE, WM or panel application may provide only one icon
@@ -493,7 +481,7 @@ display only 'Input mode' icon for example as follows:
 3.  Take the all checkmarks off.
 4.  Click 'Anthy', 'Anthy (UTF-8)' or 'Mozc' which you are using on
     'Group' list.
-5.  Click Edit button in 'Toolbar' box -> 'Enable toolbar buttons' line.
+5.  Click Edit button in 'Toolbar' box > 'Enable toolbar buttons' line.
 6.  Enable only 'Input mode' and click 'Close' button.
 7.  Click 'OK' button to close uim-pref-gtk.
 
@@ -508,8 +496,8 @@ You can choose icons for darker background (uim 1.6.0 or later).
 2.  Click 'Toolbar' on 'Group' list.
 3.  Check 'Use icon for dark background'.
 
-Useful literature
------------------
+See also
+--------
 
 uim 
     uim official document
@@ -520,8 +508,15 @@ Fonts
     modified Japanese fonts
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Input_Japanese_using_uim&oldid=250197"
+"https://wiki.archlinux.org/index.php?title=Input_Japanese_using_uim&oldid=282514"
 
 Category:
 
 -   Internationalization
+
+-   This page was last modified on 12 November 2013, at 20:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

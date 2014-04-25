@@ -17,18 +17,15 @@ can use the guitar-pro package from the AUR instead. Guitar Pro 6 can
 also use timidity instead of RSE, so this guide maybe still be useful to
 Guitar Pro 6 users as well.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 MIDI doesn't play                                            |
-|     -   3.2 Missing note heads and other symbols                         |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Troubleshooting
+    -   3.1 MIDI doesn't play
+    -   3.2 Missing note heads and other symbols
+-   4 See also
 
 Installation
 ------------
@@ -106,3 +103,10 @@ Categories:
 
 -   Audio/Video
 -   Wine
+
+-   This page was last modified on 13 June 2012, at 13:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,36 +1,30 @@
 Lenovo ThinkPad Edge E420s
 ==========================
 
-  Summary
+  Summary help replacing me
   ---------------------------------------------------------------------------------------
   This article covers the Arch Linux support for the Lenovo ThinkPad Edge E420s laptop.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Hardware                                                           |
-|     -   2.1 lspci                                                        |
-|     -   2.2 lsusb                                                        |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Clickpad                                                     |
-|     -   3.2 Video                                                        |
-|         -   3.2.1 Dual Monitors                                          |
-|                                                                          |
-|     -   3.3 Ethernet                                                     |
-|     -   3.4 Wireless                                                     |
-|         -   3.4.1 Intel Centrino Wireless-N 1000                         |
-|                                                                          |
-|     -   3.5 Sound                                                        |
-|     -   3.6 Webcam                                                       |
-|     -   3.7 Power                                                        |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Delay with Space Bar                                         |
-|     -   4.2 Trackpoint is NOT detected or is detected after X minutes    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Hardware
+    -   2.1 lspci
+    -   2.2 lsusb
+-   3 Configuration
+    -   3.1 Clickpad
+    -   3.2 Video
+        -   3.2.1 Dual Monitors
+    -   3.3 Ethernet
+    -   3.4 Wireless
+        -   3.4.1 Intel Centrino Wireless-N 1000
+    -   3.5 Sound
+    -   3.6 Webcam
+    -   3.7 Power
+-   4 Troubleshooting
+    -   4.1 Delay with Space Bar
+    -   4.2 Trackpoint is NOT detected or is detected after X minutes
 
 Installation
 ------------
@@ -41,7 +35,7 @@ official install release use that instead!
 Hardware
 --------
 
-Using Kernel 2.6.38.3
+Using kernel 2.6.38.3
 
   Device                                      Works
   ------------------------------------------- ------------
@@ -118,7 +112,7 @@ Check out the xrandr man page for more info
 
 > Ethernet
 
-1.  Use the r8168 module in the Official Repositories
+1.  Use the r8168 module in the Official repositories
 2.  Blacklist r8169 (follow pacman install message)
 3.  Add r8168 to rc.conf
 
@@ -164,8 +158,15 @@ disable scrolling with the clickpad and the two finger middle click.
     modprobe psmouse proto=bare
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_Edge_E420s&oldid=238801"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_Edge_E420s&oldid=304814"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 16 March 2014, at 07:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

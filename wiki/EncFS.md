@@ -1,13 +1,9 @@
 EncFS
 =====
 
-> Summary
+Related articles
 
-Setup and usage of EncFS.
-
-> Related
-
-Disk Encryption
+-   Disk Encryption
 
 EncFS is a userspace stackable cryptographic file-system similar to
 eCryptfs, and aims to secure data with the minimum hassle. It uses FUSE
@@ -15,7 +11,7 @@ to mount an encrypted directory onto another directory specified by the
 user. It does not use a loopback system like some other comparable
 systems such as TrueCrypt and dm-crypt.
 
-EncFS is definetely the simplest software if you want to try disk
+EncFS is definitely the simplest software if you want to try disk
 encryption on Linux.
 
 This has a number of advantages and disadvantages compared to these
@@ -36,28 +32,26 @@ there are situations in which it is useful.
 For more details on how EncFS compares to other disk encryption
 solution, see Disk Encryption#Comparison table.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Comparison to eCryptFS                                             |
-| -   2 Installation                                                       |
-| -   3 Usage                                                              |
-| -   4 User friendly mounting                                             |
-|     -   4.1 Mount using gnome-encfs                                      |
-|     -   4.2 Mount using CryptKeeper trayicon                             |
-|     -   4.3 Mount at login using pam_encfs                               |
-|         -   4.3.1 Single password                                        |
-|         -   4.3.2 /etc/pam.d/                                            |
-|             -   4.3.2.1 login                                            |
-|             -   4.3.2.2 gdm                                              |
-|             -   4.3.2.3 Configuration                                    |
-|                                                                          |
-|     -   4.4 Mount at Gnome startup using gnome-encfs                     |
-|     -   4.5 Mount when USB drive with EncFS folders is inserted using    |
-|         fsniper                                                          |
-|         -   4.5.1 HOWTO                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Comparison to eCryptFS
+-   2 Installation
+-   3 Usage
+-   4 User friendly mounting
+    -   4.1 Mount using Gnome Encfs Manager
+    -   4.2 Mount using gnome-encfs
+    -   4.3 Mount using CryptKeeper trayicon
+    -   4.4 Mount at login using pam_encfs
+        -   4.4.1 Single password
+        -   4.4.2 /etc/pam.d/
+            -   4.4.2.1 login
+            -   4.4.2.2 gdm
+            -   4.4.2.3 Configuration
+    -   4.5 Mount when USB drive with EncFS folders is inserted using
+        fsniper
+        -   4.5.1 How to
+-   5 See Also
 
 Comparison to eCryptFS
 ----------------------
@@ -65,36 +59,34 @@ Comparison to eCryptFS
 eCryptFS is implemented in kernelspace and therefore little bit harder
 to configure. You have to remember various encryption options (used
 cyphers, key type, etc...), in EncFS this is not the case, because EncFS
-is storing these informations in it's signature so you do not have to
-remember anything (except the passphrase :-). But it's authors claims
-that eCryptFS is faster because there is no overhead caused by context
-switching (between kernel and userspace).
+is storing that information in its signature so you do not have to
+remember anything (except the passphrase). The authors of eCryptFS claim
+it is faster because there is no overhead caused by context switching
+(between kernel and userspace).
 
 Installation
 ------------
 
-Install the encfs package using pacman:
-
-    # pacman -S encfs
+Install the encfs package.
 
 Usage
 -----
 
 To create a secured repository, type:
 
-    $ encfs ~/.DIRNAME ~/DIRNAME
+    $ encfs ~/.name ~/name
 
 Note that absolute paths must be used. This will be followed by a prompt
 about whether you want to go with the default (paranoid options) or
 expert configuration. The latter allows specifying algorithms and other
 options. The former is a fairly secure default setup. After entering a
 key for the encryption, the encoded file-system will be created and
-mounted. The encoded files are stored, in this example, at ~/.DIRNAME,
-and their unencrypted versions in ~/DIRNAME.
+mounted. The encoded files are stored, in this example, at ~/.name, and
+their unencrypted versions in ~/name.
 
 To unmount the file-system, type:
 
-    $ fusermount -u ~/DIRNAME
+    $ fusermount -u ~/name
 
 To remount the file-system, issue the first command, and enter the key
 used to encode it. Once this has been entered, the file-system will be
@@ -103,27 +95,40 @@ mounted again.
 User friendly mounting
 ----------------------
 
+> Mount using Gnome Encfs Manager
+
+The Gnome Encfs Manager is an easy to use manager and mounter for encfs
+stashes featuring per-stash configuration, Gnome Keyring support, a tray
+menu inspired by Cryptkeeper but using the AppIndicator API and lots of
+unique features.
+
+The author has created a repo which is more up to date than the AUR
+package. Add it to /etc/pacman.conf
+
+     [home_moritzmolch_gencfsm_Arch_Extra]
+     SigLevel = Never
+     Server = http://download.opensuse.org/repositories/home:/moritzmolch:/gencfsm/Arch_Extra/$arch
+
+     sudo pacman -Sy gnome-encfs-manager
+
 > Mount using gnome-encfs
 
 gnome-encfs integrates EncFS folders into the GNOME desktop by storing
 their passwords in the keyring and optionally mounting them at login
-using GNOME's autostart mechanism.
-https://bitbucket.org/obensonne/gnome-encfs/
-
-This method has the advantage that (1) mounting and can automated and
-(2) the password does not have to be the same as your user password.
+using GNOME's autostart mechanism. See
+https://bitbucket.org/obensonne/gnome-encfs/. This method has the
+advantage that mounting and can automated and the password does not have
+to be the same as your user password.
 
 > Mount using CryptKeeper trayicon
 
-Quite simple app, just install from AUR and add to your X session:
-
--   https://aur.archlinux.org/packages.php?ID=12743
+Quite simple app, just install cryptkeeper from AUR and add it to your X
+session.
 
 > Mount at login using pam_encfs
 
-Pam module
+Install pam_encfs. See also:
 
--   https://aur.archlinux.org/packages.php?ID=2759
 -   http://pam-encfs.googlecode.com/svn/trunk/README
 -   http://pam-encfs.googlecode.com/svn/trunk/pam_encfs.conf
 -   https://wiki.edubuntu.org/EncryptedHomeFolder
@@ -135,7 +140,7 @@ Warning:Note that if you will use same password (eg.: using
 try_first_pass or use_first_pass) for login and encfs (so encfs will
 mount during your login) then you should use SHA password hashes
 (Preferably SHA512 with some huge numer of rounds) and (which is most
-important) SECURE PASSWORD! because hash of your password is probably
+important) secure password, because hash of your password is probably
 stored in unencrypted form in /etc/shadow and it can be cracked in order
 to get your encfs password (because it's same as your regular unix login
 password).
@@ -194,7 +199,7 @@ Note:For debug purposes you may try automount on virtual console login
 first. This article has a section about automount on virtual console
 login.
 
-Edit the file /etc/pam.d/gdm-password
+Edit the file /etc/pam.d/gdm-password.
 
 Insert (do not overwrite) the following into the bottom of gdm-password:
 
@@ -211,14 +216,9 @@ Insert (do not overwrite) the following into the bottom of gdm-password:
     password        required        pam_unix.so
     session         required        pam_encfs.so
 
-  
- Save and exit.
+Save and exit.
 
 Configuration
-
-Get pam_encfs from AUR:
-
-    yaourt -S pam_encfs
 
 Edit /etc/security/pam_encfs.conf :
 
@@ -235,18 +235,12 @@ At the bottom, comment any existing demo entries and add:
     #USERNAME       SOURCE                                  TARGET PATH                 ENCFS Options           FUSE Options
     foo             /home/foo/EncryptedFolder             /home/foo/DecryptedFolder       -v                    allow_other
 
-  
- Next, edit /etc/fuse.conf : Uncomment:
+Next, edit /etc/fuse.conf: Uncomment:
 
     user_allow_other
 
-  
- To test your config, open a new virtual terminal (Control+Alt+F2) and
+To test your config, open a new virtual terminal (e.g. Ctrl+Alt+F4) and
 login. You should see pam successfuly mount your EncFS folder.
-
-> Mount at Gnome startup using gnome-encfs
-
--   https://aur.archlinux.org/packages.php?ID=37097
 
 > Mount when USB drive with EncFS folders is inserted using fsniper
 
@@ -254,32 +248,29 @@ Simple method to automount (asking for password) encfs when USB drive
 with EncFS one or more folders in root is inserted. We will use fsniper
 (filesystem watching daemon using inotify) and git (for askpass binary).
 
--   https://aur.archlinux.org/packages.php?ID=16677
--   https://github.com/Harvie/Programs/tree/master/bash/encfs/automount
-    (latest version of files used in following HOWTO)
+See more at
+https://github.com/Harvie/Programs/tree/master/bash/encfs/automount
+(latest version of files used in the How to).
 
-HOWTO
+How to
 
-1.  (you need USB automount working for this - like thunar or nautilus
-    does)
-2.  make encrypted folder on your drive, eg.: encfs /media/USB/somename
-    /media/USB/somename.plain (and then unmount everything)
-3.  install fsniper and git from aur
-4.  configure fsniper:
-
-    # ~/.config/fsniper/config
-    # You can get fsniper at http://code.l3ib.org/?p=fsniper.git
+1. You need USB automount working for this - like thunar or nautilus
+does.  
+ 2. Make encrypted folder on your drive, eg.:
+encfs /media/USB/somename /media/USB/somename.plain (and then unmount
+everything).  
+ 3. Create a ~/.config/fsniper/config file:
 
     watch {
     	/etc/ {
     		mtab {
-    			# %% is replaced with the filename of the new file
-    			handler = encfs-automount.sh %%;
+    			# %% is replaced with the filename of the new file
+    			handler = encfs-automount.sh %%;
     		}
     	}
     }
 
-1.  install helper script:
+4. install helper script:
 
     #!/bin/sh
     #	~/.config/fsniper/scripts/encfs-automount.sh
@@ -317,7 +308,7 @@ HOWTO
     		list_mounts | grep "$plaintext" >/dev/null && {
     			echo Already mounted: "$plaintext"
     		} || {
-    			echo WOOHOO Will mount "$cyphertext to $plaintext"
+    			echo Will mount "$cyphertext to $plaintext"
     			"$ASKPASS" "EncFS $cyphertext to $plaintext" | encfs --stdinpass "$cyphertext" "$plaintext"
     		}
     	}
@@ -326,18 +317,30 @@ HOWTO
 
     rm "$lock" 2>/dev/null
 
-1.  Make sure that /usr/lib/git-core/git-gui--askpass is working for you
-    (that's why you need git package - but you can adjust the helper
-    script)
-2.  try fsniper --log-to-stdout in terminal (askpass should appear when
-    USB drive is inserted)
-3.  add fsniper --daemon to your session
-4.  do not forget to unmount encfs before removing drive
+5. Make sure that /usr/lib/git-core/git-gui--askpass is working for you
+(that's why you need git package - but you can adjust the helper
+script).  
+ 6. Try fsniper --log-to-stdout in terminal (askpass should appear when
+USB drive is inserted).  
+ 7. Add fsniper --daemon to your session.  
+ 8. Do not forget to unmount encfs before removing drive.
+
+See Also
+--------
+
+-   Security audit of EncFS by Taylor Hornby (January 14, 2014).
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=EncFS&oldid=255241"
+"https://wiki.archlinux.org/index.php?title=EncFS&oldid=301066"
 
 Categories:
 
 -   Security
 -   File systems
+
+-   This page was last modified on 24 February 2014, at 06:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

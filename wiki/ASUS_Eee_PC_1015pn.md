@@ -1,7 +1,7 @@
 ASUS Eee PC 1015pn
 ==================
 
-  Summary
+  Summary help replacing me
   ----------------------------------------------------------------------------------------------------------
   General information regarding Asus EEE PC 1015pn and related notes on installing/using Arch Linux on it.
 
@@ -9,26 +9,22 @@ Asus 1015PN is a dual-core netbook with Nvidia IOn graphics for better
 gaming. It works fine with Linux OSs. This article provides some
 information on hardwares specs and some knowledge base about it.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Specs                                                       |
-| -   2 HDD important issue                                                |
-|     -   2.1 Solution 1                                                   |
-|     -   2.2 Solution 2                                                   |
-|                                                                          |
-| -   3 nVidia ION 2 with Optimus                                          |
-|     -   3.1 Installing acpi_call                                         |
-|     -   3.2 Selecting Video Card                                         |
-|     -   3.3 Check consumption                                            |
-|                                                                          |
-| -   4 ACPI                                                               |
-| -   5 Wireless                                                           |
-| -   6 Bumblebee                                                          |
-| -   7 To Do                                                              |
-| -   8  Links                                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 System Specs
+-   2 HDD important issue
+    -   2.1 Solution 1
+    -   2.2 Solution 2
+-   3 nVidia ION 2 with Optimus
+    -   3.1 Installing acpi_call
+    -   3.2 Selecting Video Card
+    -   3.3 Check consumption
+-   4 ACPI
+-   5 Wireless
+-   6 Bumblebee
+-   7 To Do
+-   8  Links
 
 System Specs
 ------------
@@ -60,7 +56,7 @@ HDD important issue
 With the Western Digital hard disc (eg. WD2500BEVT), there is an
 important issue: using the APM (Advanced Power Management) there are too
 nomerous spin-down, that can damage the hard drive. To confirm this
-issue, you have to install smartmontools from Official Repositories.
+issue, you have to install smartmontools from Official repositories.
 
 And you have to run multiple times this command (once in a minute for
 like 5 minutes):
@@ -244,14 +240,18 @@ The 1015pn can be configured to run automatically on the Intel video
 card, turn on and use the Nvidia part for specific processes when
 requested, and otherwise leave the Nvidia part turned off.
 
-First, add the command
+First, install acpi_call-git from the AUR. Add acpi_call module into
+/etc/modules-load.d/.
 
-    echo "\OSGS 0x03" > /proc/acpi/call
+Lets make use of systemd's tmpfiles to ensure that the Intel VGA
+controller is used on every subsequent boot.
 
-to /etc/rc.local to ensure that the Intel VGA controller is used on
-every subsequent boot. Next, install and configure Bumblebee. Finally,
-remove any automated or otherwise scripted acpi calls to turn off the
-Nvidia VGA controller.
+    /etc/tmpfiles.d/acpi_call.conf
+
+    w /proc/acpi/call - - - - \OSGS 0x03
+
+Next, install and configure Bumblebee. Finally, remove any automated or
+otherwise scripted acpi calls to turn off the Nvidia VGA controller.
 
 Power management of the Nvidia VGA controller can also be handled by
 Bumblebee. Please note, however, that Bumblebee support for power
@@ -279,8 +279,6 @@ MODULES section of /etc/rc.conf, Bumblebee will automatically power down
 the Nvidia VGA controller unless it is being used with the optirun
 command.
 
-  
-
 To Do
 -----
 
@@ -297,8 +295,15 @@ To Do
 -   https://github.com/Bumblebee-Project/Bumblebee
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1015pn&oldid=241541"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1015pn&oldid=301584"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 24 February 2014, at 11:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

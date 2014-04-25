@@ -1,19 +1,17 @@
 ThinkPad: Mute button
 =====================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Problem:                                                           |
-|     -   1.1 Nothing works                                                |
-|     -   1.2 External Audio still on                                      |
-|                                                                          |
-| -   2 Solution:                                                          |
-|     -   2.1 Older IBM ThinkPads                                          |
-|     -   2.2 Nothing works:                                               |
-|     -   2.3 External Audio still on:                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Problem:
+    -   1.1 Nothing works
+    -   1.2 External Audio still on
+-   2 Solution:
+    -   2.1 Older IBM ThinkPads
+    -   2.2 Nothing works:
+    -   2.3 External Audio still on:
+    -   2.4 External Audio still on (and you use XFCE):
 
 Problem:
 --------
@@ -81,9 +79,26 @@ password on startup).
 That's it - if you have a better Idea, please do not hesitate to edit
 this page!
 
+> External Audio still on (and you use XFCE):
+
+Go to Applications->Settings->Keyboard->Application Shortcuts tab. Hit
+Add and for the command, use 'amixer sset Master toggle'. For the key,
+hit the mute button. Protip, to make sure the led state is correct,
+start with the led in the opposite state of your mutedness so that when
+you map the button, it starts out in the correct state. Alternatively,
+you could just reboot and make sure the led is off before you get into
+your XFCE session.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ThinkPad:_Mute_button&oldid=238545"
+"https://wiki.archlinux.org/index.php?title=ThinkPad:_Mute_button&oldid=306011"
 
 Category:
 
--   Laptops
+-   Lenovo
+
+-   This page was last modified on 20 March 2014, at 17:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,16 +1,14 @@
 Sony Vaio VPCF13
 ================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Xorg video issues                                                  |
-| -   3 Display backlight regulation                                       |
-| -   4 Suspend to RAM                                                     |
-| -   5 Sources                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Xorg video issues
+-   3 Display backlight regulation
+-   4 Suspend to RAM
+-   5 Sources
 
 Introduction
 ------------
@@ -127,3 +125,10 @@ Retrieved from
 Category:
 
 -   Sony
+
+-   This page was last modified on 23 April 2012, at 13:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,9 +1,6 @@
 DeveloperWiki:Website Hierarchy Proposal
 ========================================
 
-Introduction
-============
-
 The following is a proposal of a new link hierarchy for the Arch Linux
 website. Feel free to comment on these changes, or offer suggestions on
 the Talk page. This article is part of the DeveloperWiki
@@ -82,8 +79,15 @@ differences between full/core and ISO/USB images)
 > Sitemap
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Website_Hierarchy_Proposal&oldid=161315"
+"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Website_Hierarchy_Proposal&oldid=276214"
 
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2013, at 12:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

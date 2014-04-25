@@ -38,17 +38,15 @@ all the basic tools for compiling with uclibc in ready-made form. An
 alternative, and more flexible approach is to use buildroot. I describe
 first how to get these set up, and then give some examples of their use.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Using a prebuilt root file-system                                  |
-| -   2 Using buildroot                                                    |
-| -   3 Using the development environment                                  |
-|     -   3.1 Compiling the unionfs utilities                              |
-|     -   3.2 Compiling busybox                                            |
-|     -   3.3 Compiling run-init.c from klibc                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Using a prebuilt root file-system
+-   2 Using buildroot
+-   3 Using the development environment
+    -   3.1 Compiling the unionfs utilities
+    -   3.2 Compiling busybox
+    -   3.3 Compiling run-init.c from klibc
 
 Using a prebuilt root file-system
 ---------------------------------
@@ -508,3 +506,10 @@ Retrieved from
 Category:
 
 -   Development
+
+-   This page was last modified on 23 April 2012, at 16:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

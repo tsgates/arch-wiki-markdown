@@ -1,25 +1,26 @@
 Nitrogen
 ========
 
+Related articles
+
+-   feh
+
 Nitrogen is a fast and lightweight desktop background browser and setter
 for X windows.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-|     -   2.1 Setting wallpaper                                            |
-|     -   2.2 Restoring wallpaper                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 Setting wallpaper
+    -   2.2 Restoring wallpaper
 
 Installation
 ------------
 
-Nitrogen is available in the official repositories:
-
-    # pacman -S nitrogen
+Nitrogen can be installed with the package nitrogen, available in the
+official repositories.
 
 Usage
 -----
@@ -48,8 +49,15 @@ following to your startup file (e.g. ~/.xinitrc,
     nitrogen --restore &
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Nitrogen&oldid=236060"
+"https://wiki.archlinux.org/index.php?title=Nitrogen&oldid=290718"
 
 Category:
 
 -   Graphics and desktop publishing
+
+-   This page was last modified on 29 December 2013, at 03:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

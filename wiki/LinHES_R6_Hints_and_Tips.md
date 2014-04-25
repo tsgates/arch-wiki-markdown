@@ -6,15 +6,13 @@ previous Knoppmyth versions of LinHES. Please expand this guide with any
 information, tips or warning you feel would be useful. If you find
 anything missing please add it in.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Upgrade Preparation                                                |
-| -   2 R6 Installation Walk-through (Detailed)                            |
-| -   3 Troubleshooting                                                    |
-| -   4 R6.02.00 Upgrade Walk-through                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Upgrade Preparation
+-   2 R6 Installation Walk-through (Detailed)
+-   3 Troubleshooting
+-   4 R6.02.00 Upgrade Walk-through
 
 Upgrade Preparation
 -------------------
@@ -173,3 +171,10 @@ Retrieved from
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 6 December 2012, at 00:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

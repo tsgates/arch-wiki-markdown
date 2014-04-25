@@ -1,7 +1,7 @@
 Clojure
 =======
 
-  Summary
+  Summary help replacing me
   -------------------------------------------------------------
   This article explains how to install and configure Clojure.
 
@@ -26,7 +26,7 @@ ensure clean, correct, multithreaded designs.
 Installation
 ------------
 
-From the Official Repositories: clojure, or from the AUR: clojure-git.
+From the Official repositories: clojure, or from the AUR: clojure-git.
 
 REPL
 ----
@@ -37,8 +37,15 @@ terminal type
     lein repl
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Clojure&oldid=237933"
+"https://wiki.archlinux.org/index.php?title=Clojure&oldid=306036"
 
 Category:
 
 -   Programming language
+
+-   This page was last modified on 20 March 2014, at 17:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

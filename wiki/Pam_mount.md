@@ -9,20 +9,18 @@ The encrypted drive's passphrase should be the same as your linux user's
 password, so you do not have to type in two different passphrases to
 login.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 General Setup                                                      |
-| -   2 Login Manager Configuration                                        |
-|     -   2.1 Slim                                                         |
-|     -   2.2 GDM                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 General Setup
+-   2 Login Manager Configuration
+    -   2.1 Slim
+    -   2.2 GDM
 
 General Setup
 -------------
 
-1.  Install pam_mount from the Official Repositories.
+1.  Install pam_mount from the Official repositories.
 2.  Edit /etc/security/pam_mount.conf.xml as follows:
 
 Insert 2 new lines at the end of the file, but before the last closing
@@ -32,7 +30,7 @@ tag, </pam_mount>. Notes:
 -   /dev/sdaX should be replaced with the corresponding device or
     container file.
 -   fstype="auto" can be changed to any <type> that is present in
-    /sbin/mount.<type>. "auto" should work fine in most cases.
+    /usr/bin/mount.<type>. "auto" should work fine in most cases.
 -   Add mount options, if needed.
 
     /etc/security/pam_mount.conf.xml
@@ -47,9 +45,10 @@ Login Manager Configuration
 
 In general, you have to edit configuration files in /etc/pam.d so that
 pam_mount will be called on login. The correct order of entries in each
-file is important. It is probably necessary to change both
-/etc/pam.d/login and the file for your display manager (e.g., Slim or
-GDM). Example configuration files follow, with the added lines in bold.
+file is important. It is necessary to edit /etc/pam.d/system-auth as
+shown below. If you use a display manager (e.g., Slim or GDM) edit its
+file, too. Example configuration files follow, with the added lines in
+bold.
 
     /etc/pam.d/system-auth
 
@@ -73,9 +72,6 @@ GDM). Example configuration files follow, with the added lines in bold.
     session   required  pam_env.so
     session   required  pam_unix.so
     session   optional  pam_permit.so
-
-You may need to add similar lines to /etc/pam.d/su and /etc/pam.d/sudo,
-depending on how you use su and sudo, respectively.
 
 > Slim
 
@@ -127,8 +123,15 @@ Note that the configuration file has changed to be
     session         optional        pam_gnome_keyring.so auto_start
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pam_mount&oldid=248794"
+"https://wiki.archlinux.org/index.php?title=Pam_mount&oldid=301588"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 24 February 2014, at 11:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

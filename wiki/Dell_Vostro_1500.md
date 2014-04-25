@@ -4,31 +4,26 @@ Dell Vostro 1500
 Test Configuration: 1.4Ghz Core 2 Duo; 2G RAM, Intel integrated Graphics
 card, Bluetooth, no webcam
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-|     -   1.1 Problems                                                     |
-|                                                                          |
-| -   2 Installation                                                       |
-| -   3 Xorg                                                               |
-|     -   3.1 Xorg 7.4                                                     |
-|         -   3.1.1 Touchpad                                               |
-|                                                                          |
-| -   4 Wireless                                                           |
-|     -   4.1 Intel PRO/Wireless 3945                                      |
-|     -   4.2 Wicd                                                         |
-|                                                                          |
-| -   5 Suspend/Hibernate                                                  |
-| -   6 Adjust Brightness                                                  |
-| -   7 Modem                                                              |
-| -   8 Webcam                                                             |
-| -   9 USB, SD card slot, Ethernet, Firewire, VGA, S-video                |
-| -   10 Mediakeys                                                         |
-| -   11 SD Card Reader                                                    |
-| -   12 References                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+    -   1.1 Problems
+-   2 Installation
+-   3 Xorg
+    -   3.1 Xorg 7.4
+        -   3.1.1 Touchpad
+-   4 Wireless
+    -   4.1 Intel PRO/Wireless 3945
+    -   4.2 Wicd
+-   5 Suspend/Hibernate
+-   6 Adjust Brightness
+-   7 Modem
+-   8 Webcam
+-   9 USB, SD card slot, Ethernet, Firewire, VGA, S-video
+-   10 Mediakeys
+-   11 SD Card Reader
+-   12 References
 
 Hardware
 ========
@@ -58,7 +53,7 @@ Installation
     necessary drivers to install wireless networking for the Intel
     PRO/Wireless 3945 card. You can use the "ftp" install disc if you
     will be installing the base system over wired ethernet.)
-2.  Follow the Beginners_Guide
+2.  Follow the Beginners' guide
 
 Xorg
 ====
@@ -249,8 +244,15 @@ Webcam:
 -   Webcam Setup
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1500&oldid=196592"
+"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1500&oldid=298156"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 16 February 2014, at 07:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

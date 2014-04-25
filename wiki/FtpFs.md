@@ -17,18 +17,15 @@ it is possible to make it work.
 
 Note: the recommended way to mount ftp is with curlftpfs.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Fuseftp                                                            |
-|     -   1.1 Installation                                                 |
-|     -   1.2 Usage example                                                |
-|                                                                          |
-| -   2 LUFIS / ftpfs                                                      |
-|     -   2.1 To install                                                   |
-|     -   2.2 Usage example                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Fuseftp
+    -   1.1 Installation
+    -   1.2 Usage example
+-   2 LUFIS / ftpfs
+    -   2.1 To install
+    -   2.2 Usage example
 
 Fuseftp
 -------
@@ -84,3 +81,10 @@ Retrieved from
 Category:
 
 -   File systems
+
+-   This page was last modified on 26 September 2012, at 17:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -28,22 +28,19 @@ have noticed that it's either working out of the box (besides some
 calibration) or is very tedious, especially when it isn't supported by
 the kernel.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Available X11 drivers                                              |
-| -   3 evtouch drivers                                                    |
-|     -   3.1 Calibration                                                  |
-|         -   3.1.1 Rough calibration                                      |
-|         -   3.1.2 Fine calibration (optional)                            |
-|         -   3.1.3 Correct orientation of the coordinate system           |
-|         -   3.1.4 Make the calibration persistent to unplugging or       |
-|             suspending                                                   |
-|                                                                          |
-| -   4 Using a touchscreen in a multi-head setup                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Available X11 drivers
+-   3 evtouch drivers
+    -   3.1 Calibration
+        -   3.1.1 Rough calibration
+        -   3.1.2 Fine calibration (optional)
+        -   3.1.3 Correct orientation of the coordinate system
+        -   3.1.4 Make the calibration persistent to unplugging or
+            suspending
+-   4 Using a touchscreen in a multi-head setup
 
 Introduction
 ------------
@@ -84,16 +81,15 @@ Less common drivers, not contained in the repository, are:
 
 (Note: (*) are deprecated and thus were removed from the repos [1])
 
-Some for some devices proprietary drivers exists as well, as e.g.
-xf86-input-egalax but it's recommended to try the open source drivers
-first.
+Proprietary drivers exist for some devices (e.g.: xf86-input-egalax),
+but it's recommended to try the open source drivers first.
 
-Depending on your touchscreen device choose an appropriated driver.
+Depending on your touchscreen device choose an appropriate driver.
 
 The evtouch input drivers support a wide variety of touchscreens from
-different vendors like Fujitsu, eGalax, IDEACO, ITM, Touchkit.
+different vendors like Fujitsu, eGalax, IDEACO, ITM, and Touchkit.
 
-Since I've only got one touchscreen device (USB 0eef:0001 D-WAV
+Note:Since I've only got one touchscreen device (USB 0eef:0001 D-WAV
 Scientific Co., Ltd eGalax TouchScreen) which works with the evtouch
 driver I confine myself to this driver. Perhaps someone can add details
 about how to set up other drivers.
@@ -134,7 +130,7 @@ calibration program.
 No matter whether you started it from TTY or X11, this will start a new
 X server and bring up a white screen. Move the pen around the display
 border, along all edges a view times to get the minimum and maximum
-coordinates. Press Return. Then tab exactly on the red cross. The next
+coordinates. Press Return. Then tap exactly on the red cross. The next
 cross will turn red, touch it again and repeat this procedure for all
 crosses. When your done you should return to command line. The
 calibration data was written to /etc/evtouch/config.
@@ -288,8 +284,15 @@ need to simply map our inputs to our output like so:
 More info can be found at Calibrating_Touchscreen
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Touchscreen&oldid=240742"
+"https://wiki.archlinux.org/index.php?title=Touchscreen&oldid=286801"
 
 Category:
 
 -   Input devices
+
+-   This page was last modified on 7 December 2013, at 09:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,34 +1,29 @@
 Lenovo ThinkPad Edge E330
 =========================
 
-  Summary
-  ---------------------------------------------------------------------------------------
-  This article covers the Arch Linux support for the Lenovo ThinkPad Edge E330s laptop.
+This article covers the Arch Linux support for the Lenovo ThinkPad Edge
+E330s laptop.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Review                                                             |
-| -   3 Hardware                                                           |
-|     -   3.1 lspci                                                        |
-|     -   3.2 lsusb                                                        |
-|                                                                          |
-| -   4 Configuration                                                      |
-|     -   4.1 Clickpad                                                     |
-|     -   4.2 Video                                                        |
-|     -   4.3 Wireless                                                     |
-|         -   4.3.1 Intel Centrino Wireless-N 2230 (rev c4)                |
-|                                                                          |
-|     -   4.4 Sound                                                        |
-|     -   4.5 Webcam                                                       |
-|     -   4.6 Power                                                        |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Brightness control                                           |
-|     -   5.2 USB2.0 not working or giving kernel traces                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Review
+-   3 Hardware
+    -   3.1 lspci
+    -   3.2 lsusb
+-   4 Configuration
+    -   4.1 Clickpad
+    -   4.2 Jumping cursor on touchpad release
+    -   4.3 Video
+    -   4.4 Wireless
+        -   4.4.1 Intel Centrino Wireless-N 2230 (rev c4)
+    -   4.5 Sound
+    -   4.6 Webcam
+    -   4.7 Power
+-   5 Troubleshooting
+    -   5.1 Brightness control
+    -   5.2 USB 2.0 not working or giving kernel traces
 
 Installation
 ------------
@@ -46,17 +41,17 @@ for a hardware review.
 Hardware
 --------
 
-My notebook is a LENOVO 3354ALG/3354ALG, BIOS H3ET65WW(1.02) 09/12/2012
-with a Core i3-3110M cpu, memory upgraded to 2x4GB and I've instantly
+My notebook is a Lenovo 3354ALG/3354ALG, BIOS H3ET65WW(1.02) 09/12/2012
+with a Core i3-3110M CPU, memory upgraded to 2x4GB and I've instantly
 replaced the 320GB hdd with a 64GB Crucial m4 slim(!) SSD.
 
-Using Kernel 3.7.2
+Using kernel 3.7.2
 
   Device                                              Works
-  --------------------------------------------------- -----------------------------------------------------------
+  --------------------------------------------------- ------------------------------------------------------------
   Video                                               Yes
   Ethernet                                            Yes
-  Wireless (Intel Centrino Wireless-N 2230 (rev c4)   Yes (but a bit slower than expected, not above 150MBit/s)
+  Wireless (Intel Centrino Wireless-N 2230 (rev c4)   Yes (but a bit slower than expected, not above 150 MBit/s)
   Bluetooth                                           Yes
   Audio                                               Yes
   Camera                                              Yes
@@ -103,12 +98,44 @@ Configuration
 
 worked out of the box for my with xf86-input-synaptics 1.6.2-4
 
+In some cases it is necessary to add the following to
+/etc/X11/xorg.conf.d/50-touchpad.conf
+
+    Section "InputClass"
+            Identifier "touchpad"
+            MatchProduct "SynPS/2 Synaptics TouchPad"
+            Driver "synaptics"
+            # fix touchpad resolution
+            Option "VertResolution" "100"
+            Option "HorizResolution" "65"
+            # disable synaptics driver pointer acceleration
+            Option "MinSpeed" "1"
+            Option "MaxSpeed" "1"
+            # tweak the X-server pointer acceleration
+            Option "AccelerationProfile" "2"
+            Option "AdaptiveDeceleration" "16"
+            Option "ConstantDeceleration" "16"
+            Option "VelocityScale" "32"
+    EndSection
+
+Also see:
+http://forums.lenovo.com/t5/Linux-Discussion/lenovo-e330-touchpad-problem-on-ubuntu-12-04-LTS-32-bit/td-p/1053541
+
+> Jumping cursor on touchpad release
+
+I struggled with jumping cursor when releasing the finger, making it
+impossible to hit small objects. It was solved with synclient
+FingerHigh/Low:
+
+    synclient FingerHigh=40
+    synclient FingerLow=40
+
 > Video
 
-In order to use the builtin intel graphics adapter you will have to
+In order to use the built-in Intel graphics adapter, you will have to
 install the corresponding drivers:
 
-    # pacman -S xf86-video-intel intel-dri libva-intel-driver
+    # pacman -S xf86-video-intel libva-intel-driver
 
 Option "AccelMethod" "SNA" in xorg.conf works well for me.
 
@@ -120,7 +147,7 @@ Works out of the box. Module: iwldvm
 
 > Sound
 
-Works out of the box. Module: snd-hda-intel
+Works out of the box. Kernel module: snd_hda_intel
 
 > Webcam
 
@@ -137,13 +164,13 @@ Troubleshooting
 > Brightness control
 
 Brightness can only be switched between darkest and brightest values
-using OS method. So it's better to use hardware vendor to control it:
-append "acpi_backlight=vendor" to the grub kernel line!
+using OS method. So it is better to use hardware vendor to control it:
+append acpi_backlight=vendor to the kernel line in the bootloader.
 
-> USB2.0 not working or giving kernel traces
+> USB 2.0 not working or giving kernel traces
 
 Not sure if this was solved by using acpi_backlight=vendor or by
-blacklisting these modules I don't use:
+blacklisting these modules I do not use:
 
     cat /etc/modprobe.d/modprobe.conf 
     blacklist joydev
@@ -151,9 +178,18 @@ blacklisting these modules I don't use:
     blacklist iTCO_vendor_support
     blacklist iTCO_wdt
 
+    blacklist thinkpad_acpi # it not used by this model and gives warnings about unknown events to the logfiles when loaded.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_Edge_E330&oldid=248698"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_Edge_E330&oldid=304799"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 16 March 2014, at 07:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

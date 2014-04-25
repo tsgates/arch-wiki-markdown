@@ -12,22 +12,20 @@ Asus Eee PC 1101HA
   Function Keys     Partially working   
   ----------------- ------------------- --------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Video                                                              |
-| -   3 Sound                                                              |
-| -   4 Camera                                                             |
-| -   5 Hotkeys                                                            |
-| -   6 Fan                                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Video
+-   3 Sound
+-   4 Camera
+-   5 Hotkeys
+-   6 Fan
 
 Installation
 ------------
 
-For an in-depth guide on the installation see the Beginners_Guide.
+For an in-depth guide on the installation see the Beginners' guide.
 
 Video
 -----
@@ -85,8 +83,15 @@ This model have more temperature than it seems to be "normal". It seems
 that fan does not work properly. It reaches 69 Celsius degrees.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Asus_Eee_PC_1101HA&oldid=227844"
+"https://wiki.archlinux.org/index.php?title=Asus_Eee_PC_1101HA&oldid=304998"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 10:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

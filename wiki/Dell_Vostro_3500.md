@@ -13,22 +13,18 @@ Dell Vostro 3500
 This page deals with setting up Arch Linux on the Dell Vostro 3500
 laptop.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation notes                                                 |
-| -   2 CPU                                                                |
-|     -   2.1 Fan Control                                                  |
-|                                                                          |
-| -   3 Network                                                            |
-|     -   3.1 Ethernet                                                     |
-|     -   3.2 Wireless                                                     |
-|                                                                          |
-| -   4 Video                                                              |
-|     -   4.1 Intel card                                                   |
-|     -   4.2 Nvidia card                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation notes
+-   2 CPU
+    -   2.1 Fan Control
+-   3 Network
+    -   3.1 Ethernet
+    -   3.2 Wireless
+-   4 Video
+    -   4.1 Intel card
+    -   4.2 Nvidia card
 
 Installation notes
 ------------------
@@ -184,8 +180,15 @@ Works well under bumblebee with 3D acceleration on both nvidia and
 nouveau drivers.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Vostro_3500&oldid=196595"
+"https://wiki.archlinux.org/index.php?title=Dell_Vostro_3500&oldid=306020"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 20 March 2014, at 17:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

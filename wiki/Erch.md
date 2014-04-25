@@ -1,6 +1,25 @@
 Erch
 ====
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: please use the   
+                           first argument of the    
+                           template to provide a    
+                           brief explanation.       
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
+                           Notes: please use the    
+                           first argument of the    
+                           template to provide more 
+                           detailed indications.    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 Erch is Embedded Arch
 ---------------------
 
@@ -53,8 +72,15 @@ Different categories for minimal:
 -   getting ABS going to rebuild the system to makepkg specs.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Erch&oldid=254482"
+"https://wiki.archlinux.org/index.php?title=Erch&oldid=304968"
 
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 16 March 2014, at 09:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

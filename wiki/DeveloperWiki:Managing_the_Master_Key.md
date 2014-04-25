@@ -3,20 +3,18 @@ DeveloperWiki:Managing the Master Key
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prepare your Smartcard                                             |
-| -   2 Creating the master key                                            |
-| -   3 Signing the master key                                             |
-| -   4 Signing your own packager key                                      |
-| -   5 Revoking a master key                                              |
-| -   6 Signing developer keys                                             |
-| -   7 Revoking developer keys                                            |
-| -   8 Open questions                                                     |
-| -   9 External documentation                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prepare your Smartcard
+-   2 Creating the master key
+-   3 Signing the master key
+-   4 Signing your own packager key
+-   5 Revoking a master key
+-   6 Signing developer keys
+-   7 Revoking developer keys
+-   8 Open questions
+-   9 External documentation
 
 Prepare your Smartcard
 ----------------------
@@ -150,3 +148,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 November 2011, at 12:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

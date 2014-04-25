@@ -31,8 +31,15 @@ alteration monitor
 -   FAM, Gamin, inotify
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=FAM&oldid=240577"
+"https://wiki.archlinux.org/index.php?title=FAM&oldid=300565"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 23 February 2014, at 15:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

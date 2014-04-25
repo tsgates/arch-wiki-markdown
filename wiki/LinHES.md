@@ -17,23 +17,20 @@ control.
 -   Package Maintainers/developers: Greg Frost, James Meyer, Nathan
     Harris
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Key Features                                                       |
-| -   2 Divergence from the Arch Way                                       |
-| -   3 Brief History                                                      |
-|     -   3.1 Version History of KM/LinHES                                 |
-|     -   3.2 R5.5/R6.x Differences Table and Equivalent Commands          |
-|                                                                          |
-| -   4 Required Hardware                                                  |
-| -   5 R6 Installation Walk-through (Brief)                               |
-| -   6 External Links                                                     |
-|     -   6.1 Distro General                                               |
-|     -   6.2 ISO Downloads                                                |
-|     -   6.3 Miscellaneous                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Key Features
+-   2 Divergence from the Arch Way
+-   3 Brief History
+    -   3.1 Version History of KM/LinHES
+    -   3.2 R5.5/R6.x Differences Table and Equivalent Commands
+-   4 Required Hardware
+-   5 R6 Installation Walk-through (Brief)
+-   6 External Links
+    -   6.1 Distro General
+    -   6.2 ISO Downloads
+    -   6.3 Miscellaneous
 
 Key Features
 ------------
@@ -273,11 +270,12 @@ External Links
 > Distro General
 
 -   Homepage: http://www.linhes.org/
--   Wiki: http://www.knoppmythwiki.org/
--   Forums: http://www.linhes.org/phpBB2
--   Bug Tracker: http://linhes.org/flyspray/
+-   Wiki: http://www.linhes.org/
+-   Forums: http://forum.linhes.org/
+-   Bug Tracker: http://www.linhes.org/projects/linhes/issues
 -   LinHES PKGBUILD Repository:
-    http://linhes.org/cgit/cgit.cgi/LinHES-PKGBUILD
+    http://www.linhes.org/projects/linhes/repository
+    http://cgit.linhes.org/
 
 > ISO Downloads
 
@@ -318,8 +316,15 @@ External Links
     series!
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=LinHES&oldid=246506"
+"https://wiki.archlinux.org/index.php?title=LinHES&oldid=304898"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 16 March 2014, at 09:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

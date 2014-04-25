@@ -1,19 +1,41 @@
 Cacti
 =====
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: some rc.d        
+                           scripts are still        
+                           mentioned (Discuss)      
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
+  g]                       is poorly written.       g]
+                           Reason: excessive usage  
+                           of bullet points;        
+                           instructions do not      
+                           comply with Help:Style   
+                           (specifically:           
+                           Help:Style#Package_manag 
+                           ement_instructions       
+                           and                      
+                           Help:Style#Daemon_operat 
+                           ions)                    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 This article describes how to set up Cacti on an Arch Linux system.
 Cacti is a web-based system monitoring and graphing solution.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Server Setup                                                       |
-| -   2 Cacti Setup                                                        |
-| -   3 Web Configuration                                                  |
-| -   4 See Also                                                           |
-| -   5 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Server Setup
+-   2 Cacti Setup
+-   3 Web Configuration
+-   4 See Also
+-   5 External Links
 
 Server Setup
 ------------
@@ -49,18 +71,49 @@ The following should all be performed as root.
 
 -   Start mysqld and snmpd if they're not already running:
 
-    # /etc/rc.d/mysqld start
-    # /etc/rc.d/snmpd start
+    # systemctl start mysqld
+    # systemctl start snmpd
 
--   Add mysqld and snmdp to the DAEMONS array in /etc/rc.conf to ensure
-    that they're running at bootup
+-   Ensure mysqld and snmpd will run at boot:
 
--   Edit /etc/httpd/conf/httpd.conf
+    # systemctl enable mysqld
+    # systemctl enable snmpd
 
--   Inside the <Directory "/srv/http"> block, ensure that you have the
-    following line:
+-   Apache HTTPD setup:
 
-    AllowOverride All
+-   Create a new httpd config file, /etc/httpd/conf/extra/cacti.conf
+    with the following contents:
+
+    /etc/httpd/conf/extra/cacti.conf
+
+    Alias /cacti /usr/share/webapps/cacti
+
+    <Directory /usr/share/webapps/cacti>
+            Options +FollowSymLinks
+            AllowOverride All
+            order allow,deny
+            allow from all
+
+            AddType application/x-httpd-php .php
+
+            <IfModule mod_php5.c>
+                    php_flag magic_quotes_gpc Off
+                    php_flag short_open_tag On
+                    php_flag register_globals Off
+                    php_flag register_argc_argv On
+                    php_flag track_vars On
+                    # this setting is necessary for some locales
+                    php_value mbstring.func_overload 0
+                    php_value include_path .
+            </IfModule>
+
+            DirectoryIndex index.php
+    </Directory>
+
+-   Edit /etc/httpd/conf/httpd.conf. At the end of the file, include
+    cacti.conf:
+
+    # Include conf/extra/cacti.conf
 
 -   MySQL setup
 
@@ -74,12 +127,6 @@ The following should all be performed as root.
       mysql> GRANT ALL ON cacti.* TO cacti@localhost IDENTIFIED BY 'some_password';
       mysql> FLUSH PRIVILEGES;
       mysql> exit
-
-Note: As of march 2011 (mysql 5.5.9-1, cacti 0.8.7g-1) mysql fails to
-import the SQL due to an outdated syntax. You can update the file using
-this command:
-
-    cd /usr/share/webapps/cacti && mv cacti.sql cacti.sql.org && sed s/TYPE=/ENGINE=/g cacti.sql.org > cacti.sql
 
 -   Edit /usr/share/webapps/cacti/include/config.php. The password was
     specified in the previous step.
@@ -127,7 +174,6 @@ with the cacti installer.
     -v', and'net-snmp-config --version' for NET-SNMP. Click Finish.
     -   If any paths are invalid, you'll need to figure out why. Check
         the apache error logs for hints.
-
 -   Login with username "admin" and password "admin".
 -   Change the password as requested, click Save.
 -   (Optional) If you chose to install spine, follow these instructions
@@ -151,8 +197,15 @@ External Links
 -   http://cacti.net
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Cacti&oldid=240559"
+"https://wiki.archlinux.org/index.php?title=Cacti&oldid=289670"
 
 Category:
 
 -   Status monitoring and notification
+
+-   This page was last modified on 20 December 2013, at 21:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

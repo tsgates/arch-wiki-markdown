@@ -29,10 +29,18 @@ Policy
 
 -   use single quotes if a string does not contain parseable content
 -   use source instead of .
+-   use $() instead of ``
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Bash_Coding_Style&oldid=196011"
+"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Bash_Coding_Style&oldid=259450"
 
 Category:
 
 -   Arch development
+
+-   This page was last modified on 29 May 2013, at 07:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

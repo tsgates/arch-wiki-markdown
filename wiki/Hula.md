@@ -15,16 +15,14 @@ This is a guide for how to build Hula ([1]) a calendar and mail server.
 This guide does not explain how to configure it, just build it and
 access the administration GUI.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing necessary packages                                      |
-| -   2 Getting the source.                                                |
-| -   3 Building Hula.                                                     |
-| -   4 Completing the installation.                                       |
-| -   5 Starting hula.                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing necessary packages
+-   2 Getting the source.
+-   3 Building Hula.
+-   4 Completing the installation.
+-   5 Starting hula.
 
 Installing necessary packages
 -----------------------------
@@ -99,3 +97,10 @@ Retrieved from
 Category:
 
 -   Web Server
+
+-   This page was last modified on 13 March 2013, at 04:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

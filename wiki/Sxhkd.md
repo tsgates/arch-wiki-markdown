@@ -22,7 +22,7 @@ sxhkd defaults to $XDG_CONFIG_HOME/sxhkd/sxhkdrc for its configuration
 file. An alternate configuration file can be specified with the -e
 option.
 
-Each line of the configuration file is inerpreted as so:
+Each line of the configuration file is interpreted as so:
 
 -   If it starts with #, it is ignored.
 -   If it starts with one or more white space commands, it is read as a
@@ -69,9 +69,16 @@ If sxhkd receives a SIGUSR1 signal, it will reload its configuration
 file.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sxhkd&oldid=248524"
+"https://wiki.archlinux.org/index.php?title=Sxhkd&oldid=283521"
 
 Categories:
 
 -   Keyboards
 -   X Server
+
+-   This page was last modified on 18 November 2013, at 12:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

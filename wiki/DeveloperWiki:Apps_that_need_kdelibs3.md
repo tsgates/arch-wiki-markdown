@@ -21,8 +21,15 @@ current KDE version.
 -   qtcurve-kde3 (this will be removed within kdelib3)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Apps_that_need_kdelibs3&oldid=215798"
+"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Apps_that_need_kdelibs3&oldid=264457"
 
 Category:
 
--   Desktop environments
+-   KDE
+
+-   This page was last modified on 27 June 2013, at 09:02.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

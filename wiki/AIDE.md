@@ -14,26 +14,23 @@ for a possibly biased comparison), or use standalone rootkit scanners
 (rkhunter, chkrootkit) and log monitoring solutions (logwatch,
 logcheck).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setup                                                              |
-|     -   1.1 Installation                                                 |
-|     -   1.2 Configuration                                                |
-|     -   1.3 Usage                                                        |
-|     -   1.4 Cron                                                         |
-|     -   1.5 Security                                                     |
-|                                                                          |
-| -   2 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setup
+    -   1.1 Installation
+    -   1.2 Configuration
+    -   1.3 Usage
+    -   1.4 Cron
+    -   1.5 Security
+-   2 See also
 
 Setup
 -----
 
 > Installation
 
-Install aide from the Official Repositories.
+Install aide from the official repositories.
 
 > Configuration
 
@@ -45,11 +42,11 @@ and the AIDE Manual for documentation.
 
 To check your configuration, use aide -D.
 
-To initialize the database, use aide -i. Depending on your configuration
-and system, this command can take a while to complete.
+To initialize the database, use aide -i or aideinit. Depending on your
+configuration and system, this command can take a while to complete.
 
 You can check the system against the baseline database using aide -C, or
-update the baseline db using aide -u
+update the baseline db using aide -u.
 
 For more info, see man aide.
 
@@ -68,7 +65,7 @@ simple as
     database=/var/lib/aide/aide.db.gz
     database_out=/var/lib/aide/aide.db.new.gz
 
-    if [ ! -f "$database" ]; then
+    if [ ! -f "$database" ]; then
             echo "$database not found" >&2
             exit 1
     fi
@@ -90,13 +87,20 @@ perform checks against this copy periodically.
 See also
 --------
 
--   AIDE Manual
--   Gentoo Docs - Intrusion Detection
+-   AIDE manual
+-   Gentoo Docs - Intrusion detection
 -   Samhain Labs - file integrity checkers
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=AIDE&oldid=209929"
+"https://wiki.archlinux.org/index.php?title=AIDE&oldid=276934"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 28 September 2013, at 13:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

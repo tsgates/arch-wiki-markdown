@@ -1,7 +1,7 @@
 Alopex
 ======
 
-> Summary
+Summary help replacing me
 
 Information on installing and configuring Alopex
 
@@ -19,33 +19,30 @@ been drawn from other great tilers like monsterwm. It manages windows
 using tiling, horizontal or vertical stacking layouts with transient
 floating and fullscreen modes.
 
-Note:TTWM 1.0 can still be installed using ttwm.
+Note:This page will remain focused on Alopex 2.x until 3.x moves to a
+usable/testable state. From then on, this page will be edited to reflect
+documentation of the most recent version.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Recommended Reading                                                |
-| -   3 Basic usage                                                        |
-|     -   3.1 Launching programs                                           |
-|     -   3.2 Using tags                                                   |
-|     -   3.3 Window layouts                                               |
-|     -   3.4 Exiting                                                      |
-|                                                                          |
-| -   4 Extended Usage                                                     |
-|     -   4.1 Custom Configuration                                         |
-|         -   4.1.1 Custom Keybindings                                     |
-|         -   4.1.2 Customizing Tags                                       |
-|                                                                          |
-|     -   4.2 Statusbar                                                    |
-|         -   4.2.1 Custom Icons                                           |
-|                                                                          |
-|     -   4.3 Multi-Monitor Support                                        |
-|     -   4.4 Window Rules                                                 |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Recommended Reading
+-   3 Basic usage
+    -   3.1 Launching programs
+    -   3.2 Using tags
+    -   3.3 Window layouts
+    -   3.4 Exiting
+-   4 Extended Usage
+    -   4.1 Custom Configuration
+        -   4.1.1 Custom Keybindings
+        -   4.1.2 Customizing Tags
+    -   4.2 Statusbar
+        -   4.2.1 Custom Icons
+    -   4.3 Themes
+    -   4.4 Multi-Monitor Support
+    -   4.5 Window Rules
+-   5 See also
 
 Installation
 ------------
@@ -80,19 +77,19 @@ Reference
 
 Key
 
-Mod1
+KEY1
 
 "Super"
 
-Mod2
+KEY2
 
 "Alternate"
 
-Mod3
+KEY3
 
 "Control"
 
-Mod4
+KEY4
 
 "Shift"
 
@@ -101,7 +98,7 @@ Mod4
 Dmenu is a useful addon to Alopex. As opposed to list-style or drop-down
 menus, dmenu is a type-to-complete program launcher. It is the
 recommended launcher for Alopex, and the default configuration maps
-running dmenu to Mod1 + p.
+running dmenu to KEY1 + p.
 
 Note:The creator of Alopex has also made a very small, light-weight
 alternative to dmenu called interrobang. It can be installed easily
@@ -111,7 +108,7 @@ customize keybindings in #Custom Configuration.
 > Using tags
 
 To move or assign a window to a given tag, the intended window must
-first be focused. This can be accomplished by using Mod1 + j and/or Mod1
+first be focused. This can be accomplished by using KEY1 + j and/or KEY1
 + k.
 
 Action
@@ -120,23 +117,23 @@ Keybind
 
 View Tag "x"
 
-Mod1 + x
+KEY1 + x
 
 Move to Tag "x"
 
-Mod1 + Mod2 + x
+KEY1 + KEY2 + x
 
 Assign to Tag "x"
 
-Mod1 + Mod3 + x
+KEY1 + KEY3 + x
 
 Toggle Visibility of Tag "x"
 
-Mod1 + Mod4 + x
+KEY1 + KEY4 + x
 
 Note:As with dwm, Alopex makes a distinction between tags and views
 (workspaces). By default, Alopex has six tags enabled and two views
-available. You can switch between the two views using Mod2 + Tab. To
+available. You can switch between the two views using KEY2 + Tab. To
 better understand the difference and how you can arrange your workflow
 to utilize the difference, this article (written for dwm) may be
 helpful.
@@ -150,7 +147,7 @@ Alopex has three rule-based layouts complimented by transient fullscreen
 and floating modes: Vertical and Horizontal Stacking and "Monocle" (Full
 screen with statusbar tabs). By default, the vertical stacking layout
 will be used. Cycling through all three layouts can be done by pressing
-Mod1 + space. You can select each mode more directly with the following
+KEY1 + space. You can select each mode more directly with the following
 shortcuts:
 
 Mode
@@ -163,7 +160,7 @@ Arrangement
 
 V-Stack (rstack)
 
-Mod1 + Mod2 + r
+KEY1 + KEY2 + r
 
 3
 
@@ -171,7 +168,7 @@ Master on left, stack on right
 
 H-Stack (bstack)
 
-Mod1 + Mod2 + b
+KEY1 + KEY2 + b
 
 3
 
@@ -179,26 +176,26 @@ Master on top, stack on bottom
 
 Monocle
 
-Mod1 + Mod2 + m
+KEY1 + KEY2 + m
 
 1
 
 Variable sized tabs for each window
 
 Using the stackcount option, you can specify how many windows you would
-like to be visible in the stack. You can also use Mod1 + = and Mod1 + -
+like to be visible in the stack. You can also use KEY1 + = and KEY1 + -
 to dynamically increment and decrement the number of visible windows in
-the stack (respectively). Furthermore, using Mod1 + . will keep all open
+the stack (respectively). Furthermore, using KEY1 + . will keep all open
 windows visible.
 
-Tip:You can toggle a window to and from Fullscreen mode by pressing Mod1
-+ f, and, similarly, you can toggle floating mode by pressing Mod1 +
-Mod2 + f.
+Tip:You can toggle a window to and from Fullscreen mode by pressing KEY1
++ f, and, similarly, you can toggle floating mode by pressing KEY1 +
+KEY2 + f.
 
 > Exiting
 
-Cleanly killing a window can be done by pressing Mod2 + F4. Cleanly
-exiting Alopex can be done by pressing Mod1 + Mod4 + Q.
+Cleanly killing a window can be done by pressing KEY2 + F4. Cleanly
+exiting Alopex can be done by pressing KEY1 + KEY4 + Q.
 
 Extended Usage
 --------------
@@ -322,6 +319,22 @@ Note:Because these icons are sourced at compile-time, any customization
 of the icon-set will require the user to recompile, reinstall and
 restart Alopex.
 
+> Themes
+
+Alopex has support for rudimentary themes in the form of colorschemes
+applied at compile-time. These themes are defined in theme.h. By
+default, Alopex ships three themes, WinterCoat, SummerCoat and DayLight.
+Adding a custom theme is as simple as copying the default theme.h to
+$XDG_CONFIG_HOME/alopex/theme.h or $HOME/.alopex_theme.h and adding a
+new array with your desired colors. To select which theme to use, simply
+pass the environment variable MOLT defined as the name of your desired
+theme before makepkg. For example:
+
+    $ MOLT=DayLight makepkg -s
+
+If no theme is explicitly selected, the WinterCoat theme will be applied
+by default.
+
 > Multi-Monitor Support
 
 Alopex has experimental support for up to 16 external monitors using
@@ -337,8 +350,9 @@ the documentation in the manpages and in config.h for more details.
 > Window Rules
 
 Alopex also has the ability to define limited window rules based on the
-WM_NAME and WM_CLASS strings from X11. You can modify, or add to, these
-rules by editing the rules array in config.h using the following syntax:
+resource name or class name strings from the client window's WM_CLASS
+property. You can modify, or add to, these rules by editing the rules
+array in config.h using the following syntax:
 
     static Rule rules[] = {
        { "name",   "class",  tags,   flags },
@@ -365,8 +379,15 @@ See also
 -   The Interrobang thread on the forums
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Alopex&oldid=255752"
+"https://wiki.archlinux.org/index.php?title=Alopex&oldid=285252"
 
 Category:
 
 -   Dynamic WMs
+
+-   This page was last modified on 29 November 2013, at 19:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

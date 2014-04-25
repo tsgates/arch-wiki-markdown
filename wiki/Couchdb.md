@@ -4,16 +4,14 @@ Couchdb
 "Apache CouchDB is a document-oriented database that can be queried and
 indexed in a MapReduce fashion using JavaScript." - CouchDB homepage
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Running                                                            |
-| -   3 Using Futon                                                        |
-| -   4 Configuring                                                        |
-| -   5 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Running
+-   3 Using Futon
+-   4 Configuring
+-   5 More Resources
 
 Installation
 ------------
@@ -21,6 +19,11 @@ Installation
 Install the couchdb package:
 
     # pacman -S couchdb
+
+By default, the package depends on a version of erlang including GTK.
+The erlang-nox package satisfies the requirements without GTK
+
+    # pacman -S erlang-nox couchdb
 
 Running
 -------
@@ -33,6 +36,14 @@ To launch on startup, enable it:
 
     # systemctl enable couchdb
 
+Test to see if the service is running by doing "curl -XGET
+http://127.0.0.1:5984/". Ping will not work (it's not supposed to unlike
+on other systems where it does). Note that in order to access this
+instance of CouchDB from another system you'll need to configure it (see
+below).
+
+  
+
 Using Futon
 -----------
 
@@ -42,8 +53,9 @@ http://localhost:5984/_utils
 Configuring
 -----------
 
-Change the default port, bind address, log-level and other useful
-nuggets in /etc/couchdb/local.ini.
+Change the default port, bind address (set to 0.0.0.0 to access CouchDB
+from any computer other than local), log-level and other useful nuggets
+in /etc/couchdb/local.ini.
 
 If you want to run CouchDB on port 80 you will have to run the daemon as
 root or use an iptables rule such as:
@@ -74,8 +86,8 @@ Then uncomment httpsd and update the path in the [ssl] section
      cert_file = /etc/couchdb/server.crt
      key_file = /etc/couchdb/server.key
 
-Futon can be accessed over ssl on port 6984 via
-https://localhost:6984/_utils/
+Futon can be accessed over ssl on port 5984 via
+https://localhost:5984/_utils/
 
 Admin users can be created in your local.ini file. Add the username and
 password in plaintext, next time couch is restarted it will hash the
@@ -94,8 +106,15 @@ More Resources
 -   create a read-only database
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Couchdb&oldid=233072"
+"https://wiki.archlinux.org/index.php?title=Couchdb&oldid=263315"
 
 Category:
 
 -   Database management systems
+
+-   This page was last modified on 18 June 2013, at 18:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

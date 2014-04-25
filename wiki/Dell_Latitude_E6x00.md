@@ -6,24 +6,21 @@ The Dell Latitude E-Series: 6400/6500.
 This article will tell you how to get the basic components of the laptop
 running with Arch.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Throttling                                                         |
-| -   3 Hardware                                                           |
-|     -   3.1 Overview                                                     |
-|     -   3.2 Broadcom BCM4312                                             |
-|     -   3.3 Audio                                                        |
-|     -   3.4 Video                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Throttling
+-   3 Hardware
+    -   3.1 Overview
+    -   3.2 Broadcom BCM4312
+    -   3.3 Audio
+    -   3.4 Video
 
 Installation
 ------------
 
-The Official Arch Linux Install Guide should get you running without a
-problem.
+The Installation guide should get you running without a problem.
 
 Further help can be found in the Forum:
 
@@ -257,8 +254,15 @@ Config for current xorg-server v1.5.x:
      EndSection
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Latitude_E6x00&oldid=238280"
+"https://wiki.archlinux.org/index.php?title=Dell_Latitude_E6x00&oldid=298294"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 16 February 2014, at 07:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

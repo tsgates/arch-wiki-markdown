@@ -13,35 +13,29 @@ Gnome Color Chooser
 GNOME's color schemes are editable easily via the ~/.gtkrc-2.0 file, but
 the GNOME color chooser makes this process easier and graphical.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Tips and Tricks                                                    |
-|     -   2.1 Global                                                       |
-|         -   2.1.1 Default Normal                                         |
-|         -   2.1.2 Default Entry Fields                                   |
-|                                                                          |
-|     -   2.2 Buttons                                                      |
-|         -   2.2.1 Buttons                                                |
-|         -   2.2.2 Comboboxes                                             |
-|                                                                          |
-|     -   2.3 Panel                                                        |
-|         -   2.3.1 Panel                                                  |
-|         -   2.3.2 Start Menu                                             |
-|                                                                          |
-|     -   2.4 Desktop                                                      |
-|     -   2.5 Specific                                                     |
-|         -   2.5.1 Window Decoration                                      |
-|         -   2.5.2 Scrollbars                                             |
-|         -   2.5.3 Progress Bars                                          |
-|         -   2.5.4 Tooltips                                               |
-|         -   2.5.5 Links                                                  |
-|                                                                          |
-|     -   2.6 Icons                                                        |
-|     -   2.7 Engines                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Tips and Tricks
+    -   2.1 Global
+        -   2.1.1 Default Normal
+        -   2.1.2 Default Entry Fields
+    -   2.2 Buttons
+        -   2.2.1 Buttons
+        -   2.2.2 Comboboxes
+    -   2.3 Panel
+        -   2.3.1 Panel
+        -   2.3.2 Start Menu
+    -   2.4 Desktop
+    -   2.5 Specific
+        -   2.5.1 Window Decoration
+        -   2.5.2 Scrollbars
+        -   2.5.3 Progress Bars
+        -   2.5.4 Tooltips
+        -   2.5.5 Links
+    -   2.6 Icons
+    -   2.7 Engines
 
 Installation
 ------------
@@ -196,8 +190,15 @@ Allow you to change icon sizes, as of the time of this writing.
 Advanced: (presumably) Allows you to select "engines" for each subset.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Gnome_Color_Chooser&oldid=233828"
+"https://wiki.archlinux.org/index.php?title=Gnome_Color_Chooser&oldid=279712"
 
 Category:
 
--   Desktop environments
+-   Eye candy
+
+-   This page was last modified on 25 October 2013, at 16:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

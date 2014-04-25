@@ -1,16 +1,14 @@
 DeveloperWiki:Branding Todo List
 ================================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Web development/design                                             |
-| -   3 Packages with outdated artwork                                     |
-| -   4 3rd Party site/media                                               |
-| -   5 Other Resources                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Web development/design
+-   3 Packages with outdated artwork
+-   4 3rd Party site/media
+-   5 Other Resources
 
 Introduction
 ------------
@@ -54,3 +52,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2011, at 18:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

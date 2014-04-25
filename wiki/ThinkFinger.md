@@ -10,31 +10,27 @@ Newer models using different readers might not work with ThinkFinger.
 Warning:ThinkFinger-svn revisions above rev 72 require you to load the
 module uinput!
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 TF-Tool                                                      |
-|                                                                          |
-| -   3 Pam                                                                |
-|     -   3.1 /etc/pam.d/login                                             |
-|     -   3.2 /etc/pam.d/su                                                |
-|     -   3.3 /etc/pam.d/sudo                                              |
-|     -   3.4 /etc/pam.d/xscreensaver                                      |
-|     -   3.5 /etc/pam.d/gdm                                               |
-|     -   3.6 /etc/pam.d/xdm                                               |
-|                                                                          |
-| -   4 SLiM                                                               |
-| -   5 Alternative fingerprint reader software                            |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 TF-Tool
+-   3 Pam
+    -   3.1 /etc/pam.d/login
+    -   3.2 /etc/pam.d/su
+    -   3.3 /etc/pam.d/sudo
+    -   3.4 /etc/pam.d/xscreensaver
+    -   3.5 /etc/pam.d/gdm
+    -   3.6 /etc/pam.d/xdm
+-   4 SLiM
+-   5 Alternative fingerprint reader software
+-   6 See also
 
 Installation
 ------------
 
-Get it from extra: pacman -S thinkfinger
+Install thinkfinger from the official repositories.
 
 Configuration
 -------------
@@ -225,9 +221,16 @@ See also
 -   http://www.thinkwiki.org/index.php?title=Installing_Ubuntu_6.06_on_a_ThinkPad_T43#Fingerprint_Reader
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ThinkFinger&oldid=249146"
+"https://wiki.archlinux.org/index.php?title=ThinkFinger&oldid=286049"
 
 Categories:
 
 -   Input devices
 -   Lenovo
+
+-   This page was last modified on 3 December 2013, at 17:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

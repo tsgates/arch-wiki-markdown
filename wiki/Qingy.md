@@ -7,21 +7,18 @@ overhead of the X Window System. It allows users to log in and start the
 session of their choice (text console, gnome, kde, wmaker, etc.).
 Running several X sessions is also possible.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 How to get qingy?                                                  |
-| -   2 Replace *getty with qingy                                          |
-| -   3 Configuring qingy                                                  |
-| -   4 Starting X                                                         |
-| -   5 Adding a session entry                                             |
-|     -   5.1 Text mode session                                            |
-|     -   5.2 X mode session                                               |
-|                                                                          |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 Synaptic touchpad and keyboard issue                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 How to get qingy?
+-   2 Replace *getty with qingy
+-   3 Configuring qingy
+-   4 Starting X
+-   5 Adding a session entry
+    -   5.1 Text mode session
+    -   5.2 X mode session
+-   6 Troubleshooting
+    -   6.1 Synaptic touchpad and keyboard issue
 
 How to get qingy?
 -----------------
@@ -30,18 +27,9 @@ First you need a working DirectFB. I'm recommending Uvesafb but if you
 have some graphical issues with it use vesafb. Qingy may not work with
 KMS.
 
-A package is available in the [community] repo. To install:
-
-    # pacman -S qingy 
-
-Several extra themes are also available. In [community] repo, there is
-an Arch specific theme:
-
-    # pacman -S qingy-theme-arch
-
-A package of several various themes is available in AUR:
-
--   qingy-themes
+The qingy package is available in the Arch User Repository. Several
+extra themes are available in the qingy-themes package. qingy-theme-arch
+is an Arch specific theme.
 
 Replace *getty with qingy
 -------------------------
@@ -55,11 +43,18 @@ getty from that tty:
 where X is the tty you want qingy to be on. Do this as many times as
 needed.
 
-Also, you need to mask the qingy service with:
+Also, you need to mask the getty service with:
 
     # systemctl mask getty@ttyX
 
 for each of the ttys you enabled qingy on.
+
+You may additionaly have to tweak/disable the autovt@.service. The
+latter spawns getty's on-the-fly when switching virtual-consoles and may
+interfere with an already spawned qingy. To disable automatic spawning
+of getty's altogether, modify /etc/systemd/logind.conf:
+
+    NAutoVTs=0
 
 Configuring qingy
 -----------------
@@ -181,8 +176,15 @@ to /etc/directfbrc. This should correct both the mouse and keyboard
 issues.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Qingy&oldid=256040"
+"https://wiki.archlinux.org/index.php?title=Qingy&oldid=299112"
 
 Category:
 
 -   Display managers
+
+-   This page was last modified on 20 February 2014, at 19:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

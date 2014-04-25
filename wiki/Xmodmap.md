@@ -1,53 +1,64 @@
-Xmodmap
+xmodmap
 =======
 
-> Summary
+Related articles
 
-A general overview of modifying keymaps and pointer mappings with
-xmodmap.
+-   Xorg
+-   Extra Keyboard Keys
+-   Extra Keyboard Keys in Xorg
+-   Extra Keyboard Keys in Console
 
-> Related
-
-Xorg
-
-Extra Keyboard Keys
-
-Extra Keyboard Keys in Xorg
-
-Extra Keyboard Keys in Console
-
-Xmodmap is a utility for modifying keymaps and pointer button mappings
+xmodmap is a utility for modifying keymaps and pointer button mappings
 in Xorg.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Keymap table                                                       |
-| -   3 Custom table                                                       |
-|     -   3.1 Test changes                                                 |
-|                                                                          |
-| -   4 Special keys/signals                                               |
-| -   5 Reverse Scrolling                                                  |
-| -   6 Accents on US keyboards                                            |
-| -   7 Additional resources                                               |
-+--------------------------------------------------------------------------+
+xmodmap is not directly related to XKB, it uses different (pre-XKB)
+ideas on how keycodes are processed within Xorg. Generally it is not
+recommended to use xmodmap, except maybe for the simplest tasks. See X
+KeyBoard extension if you have special demands on layout configuration.
+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+-   3 Keymap table
+-   4 Custom table
+    -   4.1 Activate your custom table
+    -   4.2 Test changes
+-   5 Special keys/signals
+-   6 Reverse Scrolling
+-   7 Templates
+    -   7.1 Spanish
+    -   7.2 Turn CapsLock into Control, and LeftControl into Hyper
+-   8 See also
 
 Introduction
 ------------
 
-The Linux kernel generates a code each time a key is pressed on a
-keyboard. That code is compared to a table of keycodes defining a figure
-that is then displayed.
+On a Linux system using Xorg, there are two types of keyboard values:
+keycodes and keysyms.
 
-This process is complicated by Xorg, which starts its own table of
-keycodes. Each keycode can belong to a keysym. A keysym is like a
-function, started by typing a key. Xmodmap allows you to edit these
-keycode-keysym relations.
+ Keycode 
+    The keycode is the numeric representation received by the Linux
+    kernel when a keyboard key or a mouse button is pressed.
 
-xkeycaps provides a graphical front-end to xmodmap, you can install it
+ Keysym 
+    The keysym is the value assigned to the keycode. For example, when
+    you press the A key on the keyboard, it generates keycode 73.
+    Keycode 73 is mapped to the keysym 0×61 which corresponds to the
+    letter a in the ASCII table.
+    The keysyms are managed by Xorg in a table of keycodes defining the
+    keycode-keysym relations which is called the keymap table. The
+    command xmodmap can be used to show/modify that key table.
+
+Installation
+------------
+
+In order to use xmodmap, you need to install the xorg-xmodmap package
 from the official repositories.
+
+Optionally, install also xkeycaps which provides a graphical front-end
+to xmodmap.
 
 Keymap table
 ------------
@@ -58,12 +69,12 @@ Print the current keymap table formatted into expressions:
 
     keycode  57 = n N
 
-Each keymap is followed by the keysyms it is mapped to. The above
+Each keycode is followed by the keysym it is mapped to. The above
 example indicates that the keycode 57 is mapped to the lowercase n,
-while the uppercase N is mapped to keycode 57 and Shift.
+while the uppercase N is mapped to keycode 57 plus Shift.
 
-Each keysym column in the table corresponds to a particular key
-combination:
+Each keysym column in the table corresponds to a particular combination
+of modifier keys:
 
 1.  Key
 2.  Shift+Key
@@ -73,20 +84,22 @@ combination:
 6.  AltGr+Shift+Key
 
 Not all keysyms have to be set, but if you want to assign a latter
-keysym without assigning earlier ones set them to NoSymbol.
+keysym without assigning earlier ones, set them to NoSymbol.
 
-You can check which keymap corresponds to a key on your keyboard with
-xev.
+You can check which keycode corresponds to a key on your keyboard with
+the xev utility, see Extra Keyboard Keys#In Xorg for details.
 
-Tip:There are predefined descriptive keycodes that make mapping
-additional keys easier (e.g. XF86AudioMute, XF86Mail). Those keycodes
-can be found in: /usr/include/X11/XF86keysym.h
+Tip:There are predefined descriptive keysyms for multimedia keys, e.g.
+XF86AudioMute or XF86Mail. These keysyms can be found in
+/usr/include/X11/XF86keysym.h. Many multimedia programs are designed to
+work with these keysyms out-of-the-box, without the need to configure
+any third-party application.
 
 Custom table
 ------------
 
-You can create your own map and store it in your home directory (i.e.
-~/.Xmodmap). Print the current keymap table into a configuration file:
+You can create your own map and store it in a configuration file in your
+home directory (i.e. ~/.Xmodmap):
 
     xmodmap -pke > ~/.Xmodmap
 
@@ -95,25 +108,17 @@ configuration with:
 
     xmodmap ~/.Xmodmap
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
-  png]                     this article or section  png]
-                           is disputed.             
-                           Reason: Some desktop     
-                           environments such as     
-                           GNOME should             
-                           automatically detect the 
-                           file and ask you if you  
-                           want to use it.          
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
+> Activate your custom table
 
-To activate your custom table when starting Xorg add the following:
+If you are using GDM, XDM or KDM, there is no need to source your
+~/.Xmodmap manually as these display managers source that file if it is
+present, whereas startx does not. Therefore, to activate your custom
+table when starting Xorg, add the following:
 
     ~/.xinitrc
 
-    if [ -f $HOME/.Xmodmap ]; then
-        /usr/bin/xmodmap $HOME/.Xmodmap
+    if [ -s ~/.Xmodmap ]; then
+        xmodmap ~/.Xmodmap
     fi
 
 Alternatively, edit the global startup script /etc/X11/xinit/xinitrc.
@@ -175,10 +180,11 @@ gives you a list of modifiers and keys that are assigned to them.
 Reverse Scrolling
 -----------------
 
-The natural scrolling feature available in OS X Lion can be mimicked
-with xmodmap. Since the synaptics driver uses the buttons 4/5/6/7 for
-up/down/left/right scrolling, you simply need to swap the order of how
-the buttons are declared in ~/.Xmodmap.
+The natural scrolling feature available in OS X Lion (mimicking
+smartphone or tablet scrolling) can be replicated with xmodmap. Since
+the synaptics driver uses the buttons 4/5/6/7 for up/down/left/right
+scrolling, you simply need to swap the order of how the buttons are
+declared in ~/.Xmodmap.
 
 Open ~/.Xmodmap and append the following line to the file:
 
@@ -195,147 +201,65 @@ or delete the line altogether. For more information check Peter
 Hutterer's post, Natural scrolling in the synaptics driver, or the
 Reverse scrolling direction ala Mac OS X Lion? forum thread.
 
-Accents on US keyboards
------------------------
+Templates
+---------
 
-The following is an example configuration:
+> Spanish
 
-    AltGr + e -> é
-    AltGr + r -> è
-    AltGr + a -> à
-    AltGr + u -> ù
-    AltGr + i -> ì
-    AltGr + o -> ò
-    AltGr + c -> ç
-    AltGr + [ -> «
-    AltGr + ] -> »
-    AltGr + ; -> dead diaresis (ï, ü, etc.)
-    AltGr + 6 -> dead circumflex (î, ê, etc.) 
+    keycode  24 = a A aacute Aacute ae AE ae
+    keycode  26 = e E eacute Eacute EuroSign cent EuroSign
+    keycode  30 = u U uacute Uacute downarrow uparrow downarrow
+    keycode  31 = i I iacute Iacute rightarrow idotless rightarrow
+    keycode  32 = o O oacute Oacute oslash Oslash oslash
+    keycode  57 = n N ntilde Ntilde n N n
+    keycode  58 = comma question comma questiondown dead_acute dead_doubleacute dead_acute
+    keycode  61 = exclam section exclamdown section dead_belowdot dead_abovedot dead_belowdot
+    !Maps the Mode key to the Alt key
+    keycode 64 = Mode_switch
 
-This is an xmodmap file which remaps keys to match the above example.
+> Turn CapsLock into Control, and LeftControl into Hyper
 
-    clear Mod1
-    clear Mod2
-    !  us.map with a few redefinitions
-    keycode   9 = Escape Escape
-    keycode  10 = 1 exclam
-    keycode  11 = 2 at at
-    keycode  12 = 3 numbersign
-    keycode  13 = 4 dollar dollar
-    keycode  14 = 5 percent currency
-    keycode  15 = 6 asciicircum dead_circumflex
-    keycode  16 = 7 ampersand braceleft
-    keycode  17 = 8 asterisk bracketleft
-    keycode  18 = 9 parenleft bracketright
-    keycode  19 = 0 parenright braceright
-    keycode  20 = minus underscore backslash
-    keycode  21 = equal plus
-    keycode  22 = BackSpace Delete
-    keycode  23 = Tab Tab
-    keycode  24 = q
-    keycode  25 = w
-    keycode  26 = e E eacute
-    keycode  27 = r R egrave
-    keycode  28 = t
-    keycode  29 = y
-    keycode  30 = u U ugrave
-    keycode  31 = i I igrave
-    keycode  32 = o O ograve
-    keycode  33 = p
-    keycode  34 = bracketleft braceleft guillemotleft
-    keycode  35 = bracketright braceright guillemotright
-    keycode  36 = Return
-    keycode  37 = Control_L
-    keycode  38 = a A agrave
-    keycode  39 = s
-    keycode  40 = d
-    keycode  41 = f
-    keycode  42 = g
-    keycode  43 = h
-    keycode  44 = j
-    keycode  45 = k
-    keycode  46 = l
-    keycode  47 = semicolon colon dead_diaeresis
-    keycode  48 = apostrophe quotedbl
-    keycode  49 = grave asciitilde dead_grave
-    keycode  50 = Shift_L
-    keycode  51 = backslash bar
-    keycode  52 = z
-    keycode  53 = x
-    keycode  54 = c C ccedilla
-    keycode  55 = v
-    keycode  56 = b
-    keycode  57 = n
-    keycode  58 = m
-    keycode  59 = comma less apostrophe
-    keycode  60 = period greater quotedbl
-    keycode  61 = slash question
-    keycode  62 = Shift_R
-    keycode  63 = KP_Multiply
-    keycode  64 = Alt_L Meta_L
-    keycode  65 = space space
-    keycode  66 = Caps_Lock
-    keycode  67 = F1 F11
-    keycode  68 = F2 F12
-    keycode  69 = F3 F13
-    keycode  70 = F4 F14
-    keycode  71 = F5 F15
-    keycode  72 = F6 F16
-    keycode  73 = F7 F17
-    keycode  74 = F8 F18
-    keycode  75 = F9 F19
-    keycode  76 = F10 F20
-    keycode  77 = Num_Lock
-    keycode  78 = Scroll_Lock
-    keycode  79 = KP_7
-    keycode  80 = KP_8
-    keycode  81 = KP_9
-    keycode  82 = KP_Subtract
-    keycode  83 = KP_4
-    keycode  84 = KP_5
-    keycode  85 = KP_6
-    keycode  86 = KP_Add
-    keycode  87 = KP_1
-    keycode  88 = KP_2
-    keycode  89 = KP_3
-    keycode  90 = KP_0
-    keycode  94 = less greater bar
-    keycode  95 = F11 F11
-    keycode  96 = F12 F12
-    keycode 108 = KP_Enter
-    keycode 109 = Control_R
-    keycode 112 = KP_Divide
-    keycode 113 = Mode_switch
-    keycode 114 = Break
-    keycode 110 = Find
-    keycode  98 = Up
-    keycode  99 = Prior
-    keycode 100 = Left
-    keycode 102 = Right
-    keycode 115 = Select
-    keycode 104 = Down
-    keycode 105 = Next
-    keycode 106 = Insert
-    keycode 116 = Mode_switch
-    ! right windows-menu key, redefined as Compose key
-    keycode 117 = Multi_key
-    add Mod1 = Alt_L
-    add Mod2 = Mode_switch
+Laptop users may find that using CapsLock as Control is so useful.
 
-Additional resources
---------------------
+The Hyper key can be used by programs like Emacs, i3, openbox,... as a
+modifier.
+
+    clear      lock 
+    clear   control
+    clear      mod1
+    clear      mod2
+    clear      mod3
+    clear      mod4
+    clear      mod5
+    keycode      66 = Control_L
+    keycode      37 = Hyper_L
+    add     control = Control_L Control_R
+    add        mod1 = Alt_L Alt_R Meta_L
+    add        mod2 = Num_Lock
+    add        mod3 = Hyper_L
+    add        mod4 = Super_L Super_R
+    add        mod5 = Mode_switch ISO_Level3_Shift
+
+See also
+--------
 
 -   Current man page at X.Org Foundation
 -   Multimediakeys with .Xmodmap HOWTO by Christian Weiske
 -   Mapping unsupported keys with xmodmap by Pascal Bleser
--   Multimedia Keys article on the Gentoo Wiki
--   How to retrieve scancodes by Marvin Raaijmakers
+-   Multimedia Keys article[dead link 2013-10-05] on the Gentoo Wiki
 -   List of Keysyms Recognised by Xmodmap on LinuxQuestions
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xmodmap&oldid=253910"
+"https://wiki.archlinux.org/index.php?title=Xmodmap&oldid=300458"
 
 Categories:
 
--   Input devices
+-   Keyboards
 -   X Server
+
+-   This page was last modified on 23 February 2014, at 15:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

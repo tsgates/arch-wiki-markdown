@@ -12,36 +12,47 @@ Vino
 
 Vino is a VNC (Virtual Network Computing) server allowing remote
 connection to your actual desktop. It is a default component of the
-Gnome Desktop Environment.
+GNOME Desktop environment.
 
-How to Install on Arch
-----------------------
+Installation
+------------
 
-To install Vino type the following:
+Install the package vino, which is available in the official
+repositories.
 
-    # pacman -S vino
+If you are running GNOME, you need to restart GNOME so that vino-server
+is started automatically when enabling the remote desktop feature.
 
-If you are running gnome you need to restart gnome so that the
-vino-server is started automatically when enabling the remote desktop
-feature.
+Configuration
+-------------
 
-You can then configure vino via the following command :
-
-    # vino-preferences
+You can configure vino via gnome-control-center.
 
 Now you can connect remotely to your desktop via a VNC viewer like
-TightVNC. Remember to forward Port 5900 if you are behind a NAT and to
-allow the connection through iptables.
+TightVNC or Remmina. Remember to forward port 5900 if you are behind a
+NAT device and to allow the connection through iptables.
 
-If you use some standalone wm like openbox and it doesn't work , you can
-start the vino-server manually or add the command to the wm autostart
-script
+If you are having problems regarding security and encryption you could
+try:
+
+    $ gsettings set org.gnome.Vino require-encryption false
+
+If you use a standalone window manager like Openbox and it does not
+work, you can start vino-server manually or add the command to the
+window manager's autostart script
 
     # /usr/lib/vino/vino-server &
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Vino&oldid=240583"
+"https://wiki.archlinux.org/index.php?title=Vino&oldid=305762"
 
 Category:
 
--   Virtual Network Computing
+-   Remote Desktop
+
+-   This page was last modified on 20 March 2014, at 02:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

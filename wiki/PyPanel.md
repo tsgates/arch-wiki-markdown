@@ -1,30 +1,38 @@
 PyPanel
 =======
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
-  ng]                      needs expansion.         ng]
-                           Reason: No explanation   
-                           of what it does          
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
+From PyPanel sourceforge page:
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Launchers                                                    |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+PyPanel is a lightweight panel/taskbar written in Python and C for X11
+window managers. It can be easily customized to match any desktop theme
+or taste. PyPanel works with EWMH compliant WMs (Openbox, PekWM, FVWM,
+etc.) and is distributed under the GNU General Public License v2.
+
+Some of the customizable features include:
+
+-   Transparency with shading/tinting
+-   Panel dimensions, location and layout
+-   Font type and colors with Xft and shadow support
+-   Button events/actions
+-   Clock and workspace name display
+-   System Tray (Notification Area)
+-   Autohiding
+-   Application Launcher
+-   Custom Application Icons
+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Launchers
+-   3 Tips and tricks
+-   4 See also
 
 Installation
 ------------
 
-Install pypanel, available in the Official Repositories.
+Install pypanel, available in the official repositories.
 
 Configuration
 -------------
@@ -72,7 +80,7 @@ also adjusted according preference. Read the comments and experiment.
 
 > Launchers
 
-If you wish to add Launchers to PyPanel, you will have to enable the
+If you wish to add launchers to PyPanel, you will have to enable the
 launcher in the Panel Layout section.
 
      # Panel Layout:
@@ -133,9 +141,16 @@ See also
 -   PyPanel SourceForge page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PyPanel&oldid=205188"
+"https://wiki.archlinux.org/index.php?title=PyPanel&oldid=281629"
 
 Categories:
 
 -   Application launchers
 -   Eye candy
+
+-   This page was last modified on 6 November 2013, at 01:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

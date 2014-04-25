@@ -10,7 +10,7 @@ GPGPU
                            little bit. (Discuss)    
   ------------------------ ------------------------ ------------------------
 
-> Summary
+Summary help replacing me
 
 Installation and usage of OpenCL and CUDA, the two major Linux GPGPU
 frameworks
@@ -26,30 +26,26 @@ In Linux, there are currently two major GPGPU frameworks: OpenCL and
 CUDA  
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 OpenCL                                                             |
-|     -   1.1 Overview                                                     |
-|     -   1.2 OpenCL library                                               |
-|     -   1.3 The OpenCL ICD model                                         |
-|     -   1.4 Implementations                                              |
-|         -   1.4.1 AMD                                                    |
-|         -   1.4.2 Nvidia                                                 |
-|         -   1.4.3 Intel                                                  |
-|                                                                          |
-|     -   1.5 Development                                                  |
-|         -   1.5.1 Language bindings                                      |
-|                                                                          |
-| -   2 CUDA                                                               |
-|     -   2.1 Development                                                  |
-|     -   2.2 Language bindings                                            |
-|     -   2.3 Driver issues                                                |
-|                                                                          |
-| -   3 List of OpenCL and CUDA accelerated software                       |
-| -   4 Links and references                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 OpenCL
+    -   1.1 Overview
+    -   1.2 OpenCL library
+    -   1.3 The OpenCL ICD model
+    -   1.4 Implementations
+        -   1.4.1 AMD
+        -   1.4.2 Mesa (Gallium)
+        -   1.4.3 Nvidia
+        -   1.4.4 Intel
+    -   1.5 Development
+        -   1.5.1 Language bindings
+-   2 CUDA
+    -   2.1 Development
+    -   2.2 Language bindings
+    -   2.3 Driver issues
+-   3 List of OpenCL and CUDA accelerated software
+-   4 Links and references
 
 OpenCL
 ------
@@ -68,7 +64,6 @@ Distribution of the OpenCL framework generally consists of:
     -   Device drivers
     -   OpenCL/C code compiler
     -   SDK *
-
 -   Header files *
 
 * only needed for development
@@ -95,9 +90,9 @@ able to access all platforms and all devices present in the system.
 Although itself vendor-agnostic, the ICD Loader still has to be provided
 by someone. In Archlinux, there are currently two options:
 
--   extra/libcl by Nvidia. Provides OpenCL version 1.0 and is thus
-    slightly outdated. Its behaviour with OpenCL 1.1 code has not been
-    tested as of yet.
+-   extra/libcl by Nvidia. Provides OpenCL version 1.0 (even in the
+    current version) and is thus slightly outdated. Its behaviour with
+    OpenCL 1.1 code has not been tested as of yet.
 -   unsupported/libopencl by AMD. Provides up to date version 1.1 of
     OpenCL. It is currently distributed by AMD under a restrictive
     license and therefore could not have been pushed into official repo.
@@ -126,12 +121,12 @@ AMD
 OpenCL implementation from AMD is known as AMD APP SDK, formerly also
 known as AMD Stream SDK or ATi Stream.
 
-For Arch Linux, AMD APP SDK is currently available in AUR as amdstream.
-This package is installed as /opt/amdstream and apart from SDK files it
-also contains a profiler (/opt/amdstream/bin/sprofile) and a number of
-code samples (/opt/amdstream/samples/opencl). It also provides the
-clinfo utility which lists OpenCL platforms and devices present in the
-system and displays detailed information about them.
+For Arch Linux, AMD APP SDK is currently available in AUR as amdapp-sdk.
+This package is installed as /opt/AMDAPP and apart from SDK files it
+also contains a number of code samples (/opt/AMDAPP/SDK/samples/). It
+also provides the clinfo utility which lists OpenCL platforms and
+devices present in the system and displays detailed information about
+them.
 
 As AMD APP SDK itself contains CPU OpenCL driver, no extra driver is
 needed to use execute OpenCL on CPU devices (regardless of its vendor).
@@ -140,6 +135,35 @@ dependency), the open-source driver (xf86-video-ati) does not support
 OpenCL.
 
 Code is compiled using llvm (dependency).
+
+Mesa (Gallium)
+
+OpenCL support from Mesa is in development (see
+http://www.x.org/wiki/GalliumStatus/). AMD Radeon cards are supported by
+the r600g driver.
+
+Arch Linux does currently (October 2013; Mesa 9.2.2; LLVM 3.3) not build
+Mesa with OpenCL support. See
+http://dri.freedesktop.org/wiki/GalliumCompute/ for installation
+instructions (use the development branches of LLVM and Mesa for optimal
+results).
+
+You could also use lordheavy's repo. Install these packages:
+
+-   ati-dri-git
+-   opencl-mesa-git
+-   libclc-git
+
+Surprisingly, pyrit performs 20% better with radeon+r600g compared to
+Catalyst 13.11 Beta1 (tested with 7 other CPU cores):
+
+    catalyst     #1: 'OpenCL-Device 'Barts'': 21840.7 PMKs/s (RTT 2.8)
+    radeon+r600g #1: 'OpenCL-Device 'AMD BARTS'': 26608.1 PMKs/s (RTT 3.0)
+
+At the time of this writing (30 October 2013), one must apply patches
+[1] and [2] on top of Mesa commit
+ac81b6f2be8779022e8641984b09118b57263128 to get this performance
+improvement. The latest unpatched LLVM trunk was used (SVN rev 193660).
 
 Nvidia
 
@@ -151,8 +175,9 @@ Intel
 
 The Intel implementation, named simply Intel OpenCL SDK, provides
 optimized OpenCL performance on Intel CPUs (mainly Core and Xeon) and
-CPUs only. There is no GPU support as Intel GPUs do not support
-OpenCL/GPGPU. Package is available in AUR: intel-opencl-sdk.
+CPUs only. Package is available in AUR: intel-opencl-sdk. OpenCL for
+integrated graphics hardware is available in the AUR through beignet for
+Ivy Bridge and newer hardware.
 
 > Development
 
@@ -185,7 +210,6 @@ of several components:
 -   required:
     -   proprietary Nvidia kernel module
     -   CUDA "driver" and "runtime" libraries
-
 -   optional:
     -   additional libraries: CUBLAS, CUFFT, CUSPARSE, etc.
     -   CUDA toolkit, including the nvcc compiler
@@ -194,7 +218,8 @@ of several components:
 
 The kernel module and CUDA "driver" library are shipped in extra/nvidia
 and extra/opencl-nvidia. The "runtime" library and the rest of the CUDA
-toolkit are available in community/cuda.
+toolkit are available in community/cuda. The library is available only
+in 64-bit version.
 
 > Development
 
@@ -253,9 +278,16 @@ Links and references
 -   Intel OpenCL SDK homepage
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GPGPU&oldid=253524"
+"https://wiki.archlinux.org/index.php?title=GPGPU&oldid=302802"
 
 Categories:
 
 -   Development
 -   Graphics
+
+-   This page was last modified on 1 March 2014, at 21:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

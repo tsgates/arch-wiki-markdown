@@ -11,22 +11,19 @@ Learning Environment (VLE).
 This article describes how to set up the Moodle server on an Arch Linux
 system. Usage is not covered. For more help visit its home page.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install the LAMP Stack                                             |
-| -   2 Download and install Moodle                                        |
-| -   3 Preconfiguration                                                   |
-|     -   3.1 File access                                                  |
-|     -   3.2 Create the MoodleData Directory                              |
-|     -   3.3 Configure PHP extension                                      |
-|     -   3.4 Restart Apache                                               |
-|                                                                          |
-| -   4 Installation                                                       |
-| -   5 See also                                                           |
-| -   6 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Install the LAMP Stack
+-   2 Download and install Moodle
+-   3 Preconfiguration
+    -   3.1 File access
+    -   3.2 Create the MoodleData Directory
+    -   3.3 Configure PHP extension
+    -   3.4 Restart Apache
+-   4 Installation
+-   5 See also
+-   6 External links
 
 Install the LAMP Stack
 ----------------------
@@ -160,3 +157,10 @@ Retrieved from
 Category:
 
 -   Web Server
+
+-   This page was last modified on 19 December 2012, at 00:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

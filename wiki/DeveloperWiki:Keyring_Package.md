@@ -51,7 +51,6 @@ Areas Needing Finalized for Package Signing Keyring
     -   Note: should be at least one "backup" key to replace a revoked
         key immediately (and thus maintain web of trust)
     -   Query: is the backup key published before it is needed
-
 -   Who holds the master keys?
 -   Who holds the revoke certificates for the master keys?
 -   How are the master key holders going to verify the dev keys before
@@ -66,3 +65,10 @@ Retrieved from
 Category:
 
 -   Package development
+
+-   This page was last modified on 23 April 2012, at 11:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

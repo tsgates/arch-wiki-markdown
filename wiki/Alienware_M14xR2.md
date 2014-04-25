@@ -4,25 +4,22 @@ Alienware M14xR2
 This wiki page documents the configuration and troubleshooting specific
 to the Alienware M14xR2 laptop.
 
-See the Beginners' Guide for installation instructions.
+See the Beginners' guide for installation instructions.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Specifications                                              |
-|     -   1.1 Base model                                                   |
-|     -   1.2 Ports                                                        |
-|     -   1.3 lspci output                                                 |
-|                                                                          |
-| -   2 Ethernet                                                           |
-| -   3 Wireless LAN & Bluetooth                                           |
-| -   4 Sound                                                              |
-| -   5 Touchpad                                                           |
-| -   6 Video                                                              |
-| -   7 AlienFX                                                            |
-| -   8 Known Bugs                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 System Specifications
+    -   1.1 Base model
+    -   1.2 Ports
+    -   1.3 lspci output
+-   2 Ethernet
+-   3 Wireless LAN & Bluetooth
+-   4 Sound
+-   5 Touchpad
+-   6 Video
+-   7 AlienFX
+-   8 BIOS
 
 System Specifications
 ---------------------
@@ -210,39 +207,52 @@ Wireless LAN is working out of the box with the ath9k module:
     parm:           btcoex_enable:Enable wifi-BT coexistence (int)
     parm:           enable_diversity:Enable Antenna diversity for AR9565 (int)
 
-Bluetooth support is comming with kernel 3.8 as noted in this changelog.
-Our device is AR9462 (Foxconn / Hon Hai [0489:e04e]).
+Bluetooth:
 
-As 28 of March, using kernel 3.8.4, there's no bluetooth support. A bug
-should be filled.
+TODO
 
 Sound
 -----
 
-Alsa works out of the box except for headphone detection but a lot of
-people complains on bugs on our chipset CA0132 that also affect to
-M17xR4.
+This computer is using the CA0132 chipset. Alsa should work out of the
+box except for some bugs.
 
-Changes are coming on 3.9 kernel, see this.
+For those using 3.8 kernel note that card sometimes will do random noise
+that can be fixed by reloading the corresponding module saying that
+buffer position should be fixed:
 
-NOTE: At some point, my audio stopped working and I tried everithing. It
-didn't work until I formated and reinstalled everything.
+    rmmod snd_hda_intel
+    modprobe snd_hda_intel position_fix=1
+
+If you loose sound after system wake you can recover it by rebooting
+into Windows and booting Linux again. I believe this has to do with a
+firmware problem. There's also no headphone detection.
+
+In kernel 3.9 firmware problem seems to be fixed and headphone detection
+is working (If speakers don't automute go to alsamixer and unmute
+HP/Speaker Auto Detect). A lot of channels and fx were added to alsa.
+Automute only works with the one headphone and microphone jack and not
+with the earphones jack. This should be reported.
 
 Touchpad
 --------
 
-TODO
+Works out of the box. See Synaptics
 
 Video
 -----
 
-Since kernel 3.5 PRIME technology is officially supported by the nouveau
-graphic drivers. This means that Nvidia Optimus used in this computer is
-supported. Anyway you need to install bumblebee for letting
+Since kernel 3.5, PRIME technology is officially supported by the
+Nouveau graphic drivers. This means that the Nvidia Optimus GPU used in
+this computer is supported. You need to install bumblebee to let
 vgaswitcheroo disable your graphics card.
 
-In kernel 3.7 power managing methods were add so that battery life
+In kernel 3.7 power managing methods were added, so battery life
 increased a lot.
+
+Kernel 3.10 is coming with a lot of fixes in the Nouveau driver for our
+NVE0 (Kepler) graphics card. We are expecting a lot of power management
+improvements.
 
 AlienFX
 -------
@@ -252,15 +262,30 @@ installed from AUR.
 
 You can visit pyalienfx project webpage for reporting issues.
 
-Known Bugs
-----------
+BIOS
+----
 
--   [Firmware Bug]: ACPI(PEGP) defines _DOD but not _DOS error appears
-    on dmesg. More information on this bugzilla report.
+Current latest version is A12 from InsydeH20.
+
+The updater provided by Dell is windows only. If you want to update and
+you don't have Windows I recomend you using HirensBoot CD and
+Unetbooting for creating an Windows Live USB in order to flash the bios.
+
+It contains the flasing utility and the update file (isflashWin.bin).
+WARNING: This file should not be used with the DOS flashit utility! As
+it seems this file is an MSDOS executable file which holds LZMA data
+inside. I could never get it working.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Alienware_M14xR2&oldid=253821"
+"https://wiki.archlinux.org/index.php?title=Alienware_M14xR2&oldid=298105"
 
 Category:
 
 -   Alienware
+
+-   This page was last modified on 16 February 2014, at 07:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -8,30 +8,25 @@ nowadays very cheap. The only drawback is the lack of internal optical
 drive. You can see the specs of the X31 on ThinkWiki, a wonderful
 resource with additional information.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Hibernation                                                        |
-| -   3 Xorg and direct rendering                                          |
-|     -   3.1 Rovclock                                                     |
-|     -   3.2 Dual Screen                                                  |
-|                                                                          |
-| -   4 Powersaving                                                        |
-|     -   4.1 Laptop-mode                                                  |
-|     -   4.2 Undervolting                                                 |
-|     -   4.3 Modprobe                                                     |
-|     -   4.4 Powertop                                                     |
-|     -   4.5 Hard drive dilemma                                           |
-|                                                                          |
-| -   5 ACPI and Hardware-related                                          |
-|     -   5.1 Fan-control                                                  |
-|     -   5.2 thinkpad_acpi and tp_smapi kernel modules                    |
-|                                                                          |
-| -   6 Wireless                                                           |
-| -   7 Audio keys                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Hibernation
+-   3 Xorg and direct rendering
+    -   3.1 Rovclock
+    -   3.2 Dual Screen
+-   4 Powersaving
+    -   4.1 Laptop-mode
+    -   4.2 Undervolting
+    -   4.3 Modprobe
+    -   4.4 Powertop
+    -   4.5 Hard drive dilemma
+-   5 ACPI and Hardware-related
+    -   5.1 Fan-control
+    -   5.2 thinkpad_acpi and tp_smapi kernel modules
+-   6 Wireless
+-   7 Audio keys
 
 Installation
 ------------
@@ -368,3 +363,10 @@ Retrieved from
 Category:
 
 -   IBM
+
+-   This page was last modified on 24 October 2012, at 01:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -5,31 +5,26 @@ Luakit is an extremely fast, lightweight and flexible web browser using
 the webkit engine. It is customizable through lua scripts and fully
 usable with keyboard shortcuts.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Basic usage                                                        |
-|     -   2.1 Browsing                                                     |
-|     -   2.2 Input fields                                                 |
-|     -   2.3 Bookmarks                                                    |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Homepage                                                     |
-|     -   3.2 Custom search engines                                        |
-|     -   3.3 Download location                                            |
-|     -   3.4 Adblock                                                      |
-|     -   3.5 Bookmarks management                                         |
-|         -   3.5.1 Sync                                                   |
-|         -   3.5.2 Converting plain text bookmarks to SQLite format       |
-|         -   3.5.3 Import from Firefox                                    |
-|         -   3.5.4 Export bookmarks                                       |
-|                                                                          |
-|     -   3.6 Tor                                                          |
-|                                                                          |
-| -   4 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Basic usage
+    -   2.1 Browsing
+    -   2.2 Input fields
+    -   2.3 Bookmarks
+-   3 Configuration
+    -   3.1 Homepage
+    -   3.2 Custom search engines
+    -   3.3 Download location
+    -   3.4 Adblock
+    -   3.5 Bookmarks management
+        -   3.5.1 Sync
+        -   3.5.2 Converting plain text bookmarks to SQLite format
+        -   3.5.3 Import from Firefox
+        -   3.5.4 Export bookmarks
+    -   3.6 Tor
+-   4 External links
 
 Installation
 ------------
@@ -37,7 +32,8 @@ Installation
 The luakit package can be found in the official repositories and can be
 installed with pacman.
 
-You can also use the git version available from the [AUR].
+You can also use the git version with luakit-git, available from the
+AUR.
 
 With the Unix philosophy in mind, Luakit is entirely customizable
 through its configuration files. Those files are written in the Lua
@@ -57,6 +53,11 @@ Note:Most of the shortcuts are viewable and customizable from binds.lua.
 
 Press : to access the command prompt. You can do nearly everything from
 there. Use Tab to autocomplete commands.
+
+Use the help command to get information on the available keyboard
+shortcuts and what they do. (To see how the action for a particular
+keyboard shortcut is implemented in Lua, click anywhere in its help
+text.)
 
 To quit, use the quit command, or the ZQ shortcut. You can also close
 the browser while remembering the session (i.e. restoring the tabs) by
@@ -141,6 +142,8 @@ replacing the searched terms with an %s. Example:
 
     search_engines = {
         aur = "https://aur.archlinux.org/packages.php?O=0&K=%s&do_Search=Go",
+        aw  = "https://wiki.archlinux.org/index.php/Special:Search?fulltext=Search&search=%s",
+
     -- ...
     }
 
@@ -198,6 +201,9 @@ https://github.com/mason-larobina/luakit/wiki/AdBlock-Lua-module
 Full info on enabled lists and AdBlock state you can find using :adblock
 or gA at luakit://adblock/ internal page, if you enabled adblock_chrome
 module which is not a mandatory part.
+
+Note:For Adblock to run in normal mode, easylist.txt and any others must
+be placed in ~/.local/share/luakit/adblock/
 
 AdBlock for Luakit plugin is also available as a part of Luakit Plugins
 project: https://github.com/mason-larobina/luakit-plugins/
@@ -472,8 +478,15 @@ External links
 -   Cheatsheet: http://shariebeth.com/computers/luakitcheatsheet.txt
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Luakit&oldid=252424"
+"https://wiki.archlinux.org/index.php?title=Luakit&oldid=305780"
 
 Category:
 
 -   Web Browser
+
+-   This page was last modified on 20 March 2014, at 02:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

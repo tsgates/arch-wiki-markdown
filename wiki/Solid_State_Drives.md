@@ -1,10 +1,10 @@
 Solid State Drives
 ==================
 
-> Summary
+Summary help replacing me
 
 This article covers many aspects of SSDs (solid state drives) as they
-relate to Linux; however, the underlying principals and key learning
+relate to Linux; however, the underlying principles and key learning
 presented within are general enough to be applicable to users running
 SSDs on other operating systems such as the Windows family of products
 as well as Mac OS X. Beyond the aforementioned information, Linux users
@@ -18,61 +18,55 @@ SSD Memory Cell Clearing
 
 profile-sync-daemon
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-|     -   1.1 Introduction                                                 |
-|     -   1.2 Advantages over HDDs                                         |
-|     -   1.3 Limitations                                                  |
-|     -   1.4 Pre-Purchase Considerations                                  |
-|         -   1.4.1 Reviews                                                |
-|                                                                          |
-| -   2 Tips for Maximizing SSD Performance                                |
-|     -   2.1 TRIM                                                         |
-|         -   2.1.1 Enable TRIM by Mount Flags                             |
-|         -   2.1.2 Apply TRIM via cron                                    |
-|             -   2.1.2.1 Enable TRIM for LVM                              |
-|                                                                          |
-|         -   2.1.3 Enable TRIM With mkfs.ext4 or tune2fs (Discouraged)    |
-|                                                                          |
-|     -   2.2 I/O Scheduler                                                |
-|         -   2.2.1 Kernel parameter (for a single device)                 |
-|         -   2.2.2 Using the sys virtual filesystem (for multiple         |
-|             devices)                                                     |
-|         -   2.2.3 Using udev for one device or HDD/SSD mixed environment |
-|                                                                          |
-|     -   2.3 Swap Space on SSDs                                           |
-|     -   2.4 SSD Memory Cell Clearing                                     |
-|                                                                          |
-| -   3 Tips for Minimizing SSD Read/Writes                                |
-|     -   3.1 Intelligent Partition Scheme                                 |
-|     -   3.2 noatime Mount Flag                                           |
-|     -   3.3 Locate High-Use Files to RAM                                 |
-|         -   3.3.1 Browser Profiles                                       |
-|         -   3.3.2 Others                                                 |
-|                                                                          |
-|     -   3.4 Compiling in tmpfs                                           |
-|     -   3.5 Disabling Journaling on the filesystem                       |
-|                                                                          |
-| -   4 Choice of Filesystem                                               |
-|     -   4.1 Btrfs                                                        |
-|     -   4.2 Ext4                                                         |
-|     -   4.3 XFS                                                          |
-|     -   4.4 JFS                                                          |
-|                                                                          |
-| -   5 Firmware Updates                                                   |
-|     -   5.1 ADATA                                                        |
-|     -   5.2 Crucial                                                      |
-|     -   5.3 Kingston                                                     |
-|     -   5.4 Mushkin                                                      |
-|     -   5.5 OCZ                                                          |
-|     -   5.6 Samsung                                                      |
-|     -   5.7 SanDisk                                                      |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+    -   1.1 Introduction
+    -   1.2 Advantages over HDDs
+    -   1.3 Limitations
+    -   1.4 Pre-Purchase Considerations
+        -   1.4.1 Reviews
+-   2 Tips for Maximizing SSD Performance
+    -   2.1 Partition Alignment
+    -   2.2 TRIM
+        -   2.2.1 Verify TRIM Support
+        -   2.2.2 Enable TRIM by Mount Flags
+        -   2.2.3 Apply TRIM via cron
+        -   2.2.4 Apply TRIM via a systemd service
+            -   2.2.4.1 Enable TRIM for LVM
+        -   2.2.5 Enable TRIM With tune2fs (Discouraged)
+    -   2.3 I/O Scheduler
+        -   2.3.1 Kernel parameter (for a single device)
+        -   2.3.2 Using the sys virtual filesystem (for multiple
+            devices)
+        -   2.3.3 Using udev for one device or HDD/SSD mixed environment
+    -   2.4 Swap Space on SSDs
+    -   2.5 SSD Memory Cell Clearing
+    -   2.6 Disabling NCQ
+-   3 Tips for Minimizing SSD Read/Writes
+    -   3.1 Intelligent Partition Scheme
+    -   3.2 noatime Mount Flag
+    -   3.3 Locate High-Use Files to RAM
+        -   3.3.1 Browser Profiles
+        -   3.3.2 Others
+    -   3.4 Compiling in tmpfs
+    -   3.5 Disabling Journaling on the filesystem
+-   4 Choice of Filesystem
+    -   4.1 Btrfs
+    -   4.2 Ext4
+    -   4.3 XFS
+    -   4.4 JFS
+    -   4.5 Other filesystems
+-   5 Firmware Updates
+    -   5.1 ADATA
+    -   5.2 Crucial
+    -   5.3 Kingston
+    -   5.4 Mushkin
+    -   5.5 OCZ
+    -   5.6 Samsung
+    -   5.7 SanDisk
+-   6 See also
 
 Overview
 --------
@@ -165,6 +159,25 @@ reviews.
 Tips for Maximizing SSD Performance
 -----------------------------------
 
+> Partition Alignment
+
+Using partitions that are aligned with the erase block size is highly
+recommended. In past, this required manual calculation and intervention
+when partitioning. Many of the common partition tools handle partition
+alignment automatically (assuming users are using an up-to-date
+version):
+
+-   fdisk
+-   gdisk
+-   gparted
+-   parted
+
+To verify a partition is aligned, query it using /usr/bin/blockdev as
+shown below, if a '0' is returned, the partition is aligned:
+
+    # blockdev --getalignoff /dev/<partition>
+    0
+
 > TRIM
 
 Most SSDs support the ATA_TRIM command for sustained long-term
@@ -172,9 +185,18 @@ performance and wear-leveling. For more including some before and after
 benchmark, see this tutorial.
 
 As of linux kernel version 3.7, the following filesystems support TRIM:
-ext4, btrfs, JFS, and XFS.
+Ext4, Btrfs, JFS, and XFS.
 
-The Choice_of_Filesystem section of this article offers more details.
+The Choice of Filesystem section of this article offers more details.
+
+Verify TRIM Support
+
+    # hdparm -I /dev/sda |grep TRIM
+            *    Data Set Management TRIM supported (limit 1 block)
+            *    Deterministic read data after TRIM
+
+To have a better understanding of "limit 1 block" or "limit 8 block",
+see wikipedia:TRIM#ATA
 
 Enable TRIM by Mount Flags
 
@@ -184,8 +206,8 @@ command stated above.
     /dev/sda1  /       ext4   defaults,noatime,discard   0  1
     /dev/sda2  /home   ext4   defaults,noatime,discard   0  2
 
-Note:It does not work with ext3; using the discard flag for an ext3 root
-partition will result in it being mounted read-only.
+Note:Using the discard flag for an ext3 root partition will result in it
+being mounted read-only.
 
 Warning:Users need to be certain that kernel version 2.6.33 or above is
 being used AND that their SSD supports TRIM before attempting to mount a
@@ -209,35 +231,43 @@ which, by default, is set up for hourly, daily, weekly, and monthly
 jobs. To add to the list of daily cron tasks, simply create a script
 that takes care of the desired actions and put it in /etc/cron.daily,
 /etc/cron.weekly, etc. Appropriate nice and ionice values are
-recommended if this method is chosen. If implemented, remove the
-"discard" option from /etc/fstab.
+recommended if this method is chosen. If implemented, remove the discard
+option from /etc/fstab.
 
-Note:Use the 'discard' mount option as a first choice. This method
-should be considered second to the normal implementation of TRIM.
+Note:Use the discard mount option as a first choice. This method should
+be considered second to the normal implementation of TRIM.
+
+Apply TRIM via a systemd service
+
+See this blog post.
 
 Enable TRIM for LVM
 
-Enable issue_discards option in /etc/lvm/lvm.conf
+Enable issue_discards option in /etc/lvm/lvm.conf.
 
-Enable TRIM With mkfs.ext4 or tune2fs (Discouraged)
+Enable TRIM With tune2fs (Discouraged)
 
-One can set the trim flag statically with tune2fs or when the filesystem
-is created.
+One can set the trim flag statically with tune2fs:
 
     # tune2fs -o discard /dev/sdXY
 
-or
-
-    # mkfs.ext4 -E discard /dev/sdXY
-
-Note:After this option is set as described above, any time the user
-checks mounted filesystems with "mount", the discard option will not
-show up. Even when discard is passed on the CLI in addition to the
-option being set with tune2fs or mkfs.ext4, it will not show up. See the
-following thread for a discussion about his:
-https://bbs.archlinux.org/viewtopic.php?id=137314
+Warning:This method will cause the discard option to not show up with
+mount.
 
 > I/O Scheduler
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: According to the 
+                           discussion page, the CFQ 
+                           scheduler can detect     
+                           SSDs and modifies its    
+                           behavior appropriately,  
+                           so there is no need to   
+                           change the I/O           
+                           scheduler. (Discuss)     
+  ------------------------ ------------------------ ------------------------
 
 Consider switching from the default CFQ scheduler (Completely Fair
 Queuing) to NOOP or Deadline. The latter two offer performance boosts
@@ -251,39 +281,60 @@ The CFQ scheduler is enabled by default on Arch. Verify this by viewing
 the contents /sys/block/sdX/queue/scheduler:
 
     $ cat /sys/block/sdX/queue/scheduler
+
     noop deadline [cfq]
 
 The scheduler currently in use is denoted from the available schedulers
 by the brackets.
 
-Users can change this on the fly without the need to reboot.
-
-As root:
+Users can change this on the fly without the need to reboot with:
 
     # echo noop > /sys/block/sdX/queue/scheduler
 
-As a regular user:
+or:
 
-    $ echo noop | sudo tee /sys/block/sdX/queue/scheduler
+    $ sudo tee /sys/block/sdX/queue/scheduler <<< noop
 
 This method is non-persistent (eg. change will be lost upon rebooting).
 Confirm the change was made by viewing the contents of the file again
-and ensuring noop is between brackets.
+and ensuring "noop" is between brackets.
 
 Kernel parameter (for a single device)
 
 If the sole storage device in the system is an SSD, consider setting the
 I/O scheduler for the entire system via the elevator=noop kernel
-parameter. See Kernel parameters for more info.
+parameter.
 
 Using the sys virtual filesystem (for multiple devices)
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Using tmpfiles.d 
+                           to set the scheduler     
+                           does not appear to work  
+                           on current versions of   
+                           Arch; The udev method    
+                           below works perfectly.   
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: rc.local has     
+                           been deprecated for some 
+                           time now; recommend      
+                           using a custom service.  
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 This method is preferred when the system has several physical storage
 devices (for example an SSD and an HDD).
 
-Create the following tmpfile where "X" is the letter for the SSD device.
+Create the following tmpfile where X is the letter for the SSD device.
 
-     /etc/tmpfiles.d/set_IO_scheduler.conf 
+    /etc/tmpfiles.d/set_IO_scheduler.conf 
 
     w /sys/block/sdX/queue/scheduler - - - - noop
 
@@ -317,51 +368,54 @@ Device IDs are listed in /dev/disk/by-id/ as symbolic links pointing to
 their corresponding /dev/ nodes. To view the links listed with their
 targets, issue the following command:
 
-    ls -l /dev/disk/by-id/
+    $ ls -l /dev/disk/by-id/
 
 Using udev for one device or HDD/SSD mixed environment
 
 Though the above will undoubtedly work, it is probably considered a
-reliable workaround. It should also be noted that with the move to
-systemd there will be no rc.local. Ergo, it would be preferred to use
-the system that is responsible for the devices in the first place to
-implement the scheduler. In this case it is udev, and to do this, all
-one needs is a simple udev rule.
+reliable workaround. Ergo, it would be preferred to use the system that
+is responsible for the devices in the first place to implement the
+scheduler. In this case it is udev, and to do this, all one needs is a
+simple udev rule.
 
-To do this, create and edit a file in /etc/udev/rules.d named something
-like '60-schedulers.rules'. In the file include the following:
+To do this, create the following:
+
+    /etc/udev/rules.d/60-schedulers.rules
 
     # set deadline scheduler for non-rotating disks
+    ACTION=="add|change", KERNEL=="sd[a-z]", TEST!="queue/rotational", ATTR{queue/scheduler}="deadline"
     ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="deadline"
 
     # set cfq scheduler for rotating disks
     ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="cfq"
 
-Of course, set deadline/cfq to the desired schedulers. Changes should
+Of course, set Deadline/CFQ to the desired schedulers. Changes should
 occur upon next boot. To check success of the new rule:
 
-    $ cat /sys/block/sdX/queue/scheduler   #where X is the device in question
+    $ cat /sys/block/sdX/queue/scheduler  # where X is the device in question
 
-Note:Keep in mind cfq is the default scheduler, so the second rule with
+Note:Keep in mind CFQ is the default scheduler, so the second rule with
 the standard kernel is not actually necessary. Also, in the example
 sixty is chosen because that is the number udev uses for its own
 persistent naming rules. Thus, it would seem that block devices are at
 this point able to be modified and this is a safe position for this
 particular rule. But the rule can be named anything so long as it ends
-in '.rules'. (Credit: falconindy and w0ng for posting on his blog)
+in .rules.)
 
 > Swap Space on SSDs
 
-One can place a swap partition on an SSD. Note that most modern desktops
-with an excess of 2 Gigs of memory rarely use swap at all. The notable
-exception is systems which make use of the hibernate feature. The
-following is a recommendeded tweak for SSDs using a swap partition that
-will reduce the "swappiness" of the system thus avoiding writes to swap:
+One can place a swap partition on an SSD. Most modern desktops with an
+excess of 2 Gigs of memory rarely use swap at all. The notable exception
+is systems which make use of the hibernate feature. The following is a
+recommended tweak for SSDs using a swap partition that will reduce the
+"swappiness" of the system thus avoiding writes to swap:
 
     # echo 1 > /proc/sys/vm/swappiness
 
-Or one can simply modify /etc/sysctl.conf as recommended in the
-Maximizing Performance wiki article:
+Or one can simply do as recommended in the Maximizing Performance
+article:
+
+    /etc/sysctl.d/99-sysctl.conf
 
     vm.swappiness=1
     vm.vfs_cache_pressure=50
@@ -378,6 +432,27 @@ incremental save.
 The reset is easily accomplished in a three step procedure denoted on
 the SSD Memory Cell Clearing wiki article.
 
+> Disabling NCQ
+
+Some SSDs do not work properly with Linux Native Command Queueing (NCQ).
+The tell-tale dmsg errors look like this:
+
+    [ 9.115544] ata9: exception Emask 0x0 SAct 0xf SErr 0x0 action 0x10 frozen
+    [ 9.115550] ata9.00: failed command: READ FPDMA QUEUED
+    [ 9.115556] ata9.00: cmd 60/04:00:d4:82:85/00:00:1f:00:00/40 tag 0 ncq 2048 in
+    [ 9.115557] res 40/00:18:d3:82:85/00:00:1f:00:00/40 Emask 0x4 (timeout)
+
+To disable NCQ, you need to tell the kernel at boot. If you use GRUB,
+update the boot flags:
+
+    /etc/defaults/grub
+
+    GRUB_CMDLINE_LINUX="libata.force=noncq"
+
+And then rebuild your GRUB config:
+
+    # grub-mkconfig -o /boot/grub/grub.cfg
+
 Tips for Minimizing SSD Read/Writes
 -----------------------------------
 
@@ -392,7 +467,7 @@ standard 10000 write/erase cycle, and 10GB of data written per day,
 would get an 8 years life expectancy. It gets better with bigger SSDs
 and modern controllers with less write amplification.
 
-Use iotop -oPa and sort by disk writes to see how much programs are
+Use $ iotop -oPa and sort by disk writes to see how much programs are
 writing to disk.
 
 > Intelligent Partition Scheme
@@ -409,9 +484,10 @@ with the file. The importance of the noatime setting is that it
 eliminates the need by the system to make writes to the file system for
 files which are simply being read. Since writes can be somewhat
 expensive as mentioned in previous section, this can result in
-measurable performance gains. Note that the write time information to a
-file will continue to be updated anytime the file is written to with
-this option enabled.
+measurable performance gains.
+
+Note:The write time information to a file will continue to be updated
+anytime the file is written to with this option enabled.
 
     /dev/sda1  /       ext4   defaults,noatime   0  1
     /dev/sda2  /home   ext4   defaults,noatime   0  2
@@ -420,7 +496,8 @@ Note:This setting will cause issues with some programs such as Mutt, as
 the access time of the file will eventually be previous than the
 modification time, which would make no sense. Using the relatime option
 instead of noatime will ensure that the atime field will never be prior
-to the last modification time of a file.
+to the last modification time of a file. Alternatively, using the
+maildir storage format also solves this mutt issue.
 
 > Locate High-Use Files to RAM
 
@@ -450,6 +527,8 @@ systems with >4 GB of memory, one can create a /scratch and mount it to
 tmpfs set to use more than 50 % of the physical memory.
 
 Example of a machine with 8 GB of physical memory:
+
+    $ mount | grep tmpfs
 
     tmpfs     /scratch     tmpfs     nodev,nosuid,size=7G     0     0
 
@@ -543,19 +622,40 @@ certainly been picked up by Linux news sites. It is apparent that it can
 be enabled via the discard mount option, or by using the method of batch
 TRIMs with fstrim.
 
+> Other filesystems
+
+There are other filesystems specifically designed for SSD. For example
+F2fs.
+
 Firmware Updates
 ----------------
 
 > ADATA
 
 ADATA has a utility available for Linux (i686) on their support page
-here. The link to the utility will appear after selecting the model.
+here. The link to latest firmware will appear after selecting the model.
+
+Latest Linux update utility is packed with firmware and needs to be
+runned as root. You might need to set correct permissions for binary
+file first.
 
 > Crucial
 
 Crucial provides an option for updating the firmware with an ISO image.
-These images can be found after selecting your product here and
-downloading the "Manual Boot File."
+These images can be found after selecting the product here and
+downloading the "Manual Boot File." Owners of an M4 Crucial model, may
+check if a firmware upgrade is needed with smartctl.
+
+    $ smartctl --all /dev/sdX
+
+    ==> WARNING: This drive may hang after 5184 hours of power-on time:
+    http://www.tomshardware.com/news/Crucial-m4-Firmware-BSOD,14544.html
+    See the following web pages for firmware updates:
+    http://www.crucial.com/support/firmware.aspx
+    http://www.micron.com/products/solid-state-storage/client-ssd#software
+
+Users seeing this warning are advised to backup all sensible data and
+consider upgrading immediately.
 
 > Kingston
 
@@ -578,21 +678,25 @@ their forum here.
 Samsung notes that update methods other than by using their Magician
 Software is "not supported", but it is possible. Apparently the Magician
 Software can be used to make a USB drive bootable with the firmware
-update. However, I could not get the Magician Software to cooperate with
-me. The easiest method is to use the bootable ISO images they provide
-for updating the firmware. They can be grabbed from here. Note Samsung
-does not make it obvious at all that they actually provide these. They
-seem to have 4 different firmware update pages each referencing
-different ways of doing things.
+update. The easiest method, though, is to use the bootable ISO images
+they provide for updating the firmware. They can be grabbed from here.
+
+Note:Samsung does not make it obvious at all that they actually provide
+these. They seem to have 4 different firmware update pages each
+referencing different ways of doing things.
 
 > SanDisk
 
 SanDisk makes ISO firmware images to allow SSD firmware update on
-operating systems that are unsupported by their SanDisk SSD Toolkit.
-Note that one must choose the firmware for the right SSD model, as well
-as for the capacity that it has (e.g. 60GB, or 256GB). After burning the
-adequate ISO firmware image, simply restart your computer to boot with
-the newly created CD/DVD boot disk (may work from a USB stick.
+operating systems that are unsupported by their SanDisk SSD Toolkit. One
+must choose the firmware for the right SSD model, as well as for the
+capacity that it has (e.g. 60GB, or 256GB). After burning the adequate
+ISO firmware image, simply restart the PC to boot with the newly created
+CD/DVD boot disk (may work from a USB stick.
+
+The iso images just contain a linux kernel and an initrd. Extract them
+to /boot partition and boot them with GRUB or Syslinux to update the
+firmware.
 
 I could not find a single page listing the firmware updates yet (site is
 a mess IMHO), but here are some relevant links:
@@ -611,10 +715,23 @@ See also
     solid-state with rotational drives for top performance.
 -   Speed Up Your SSD By Correctly Aligning Your Partitions (using
     GParted)
+-   Re: Varying Leafsize and Nodesize in Btrfs
+-   Re: SSD alignment and Btrfs sector size
+-   Erase Block (Alignment) Misinformation?
+-   Is alignment to erase block size needed for modern SSD's?
+-   Btrfs support for efficient SSD operation (data blocks alignment)
+-   SSD, Erase Block Size & LVM: PV on raw device, Alignment
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Solid_State_Drives&oldid=255545"
+"https://wiki.archlinux.org/index.php?title=Solid_State_Drives&oldid=304823"
 
 Category:
 
 -   Storage
+
+-   This page was last modified on 16 March 2014, at 07:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

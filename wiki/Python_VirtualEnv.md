@@ -20,21 +20,17 @@ virtualenvwrapper designed by Doug Hellmann to (greatly) improve your
 work flow. A quick how-to to help you to begin working inside virtual
 environment is then provided.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Virtual Environments at a glance                                   |
-| -   2 Virtualenv                                                         |
-|     -   2.1 Installation                                                 |
-|     -   2.2 Basic Usage                                                  |
-|                                                                          |
-| -   3 Virtualenvwrapper                                                  |
-|     -   3.1 Installation                                                 |
-|     -   3.2 Basic Usage                                                  |
-|                                                                          |
-| -   4 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Virtual Environments at a glance
+-   2 Virtualenv
+    -   2.1 Installation
+    -   2.2 Basic Usage
+-   3 Virtualenvwrapper
+    -   3.1 Installation
+    -   3.2 Basic Usage
+-   4 See Also
 
 Virtual Environments at a glance
 --------------------------------
@@ -54,7 +50,7 @@ commands you can invoke from your favorite console.
 Virtualenv
 ----------
 
-virtualenv supports Python 2.5+ and Python 3.x.
+virtualenv supports Python 2.6+ and Python 3.x.
 
 > Installation
 
@@ -131,7 +127,7 @@ capability) is Doug Hellmann's page.
 
 -   Create the virtualenv:
 
-    $ mkvirtualenv -p python2.7 my_env
+    $ mkvirtualenv -p /usr/bin/python2.7 my_env
 
 -   Activate the virtualenv:
 
@@ -154,8 +150,15 @@ See Also
 -   virtualenvwrapper page at Doug Hellmann's
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Python_VirtualEnv&oldid=251720"
+"https://wiki.archlinux.org/index.php?title=Python_VirtualEnv&oldid=305751"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 20 March 2014, at 01:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

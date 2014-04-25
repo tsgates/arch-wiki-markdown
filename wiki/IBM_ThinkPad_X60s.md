@@ -1,34 +1,27 @@
 IBM ThinkPad X60s
 =================
 
-> Summary
-
-Installation instructions for the IBM ThinkPad X60s
-
 Related articles
 
-IBM ThinkPad X60
-
-Lenovo Thinkpad X60 Tablet
+-   IBM ThinkPad X60
+-   Lenovo Thinkpad X60 Tablet
 
 The IBM Thinkpad X60s is a small light laptop with a Core Duo or Core 2
 Duo processor and Intel Graphics. It has no internal optical drive. You
 can see the specs at ThinkWiki, a wonderful resource with additional
 information.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Graphics                                                           |
-| -   3 Ethernet                                                           |
-| -   4 Wireless Networking                                                |
-| -   5 Special Keys                                                       |
-| -   6 Suspend                                                            |
-|     -   6.1 With pm-utils                                                |
-|     -   6.2 With uswsusp                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Graphics
+-   3 Ethernet
+-   4 Wireless Networking
+-   5 Special Keys
+-   6 Suspend
+    -   6.1 With pm-utils
+    -   6.2 With uswsusp
 
 Installation
 ------------
@@ -53,7 +46,7 @@ with the standard Arch x86_64 kernel.
 A basic Arch Linux installation will do just fine for almost everything.
 Select the i686 or x86_64 version as indicated above. Install from a USB
 CD drive or a USB flash drive following the instructions in the
-Beginners Guide.
+Beginners' guide.
 
 It is easiest to do the initial installation with a wired ethernet
 connection which you can set up in the installation menu. In the base
@@ -63,7 +56,7 @@ wireless networking
     [*] wireless-tools
     [*] iwlwifi-3945-ucode
 
-Follow the Beginners Guide step by step to install sudo, add users, add
+Follow the Beginners' guide step by step to install sudo, add users, add
 to groups, video card driver, then install Xorg, and a desktop
 environment.
 
@@ -80,7 +73,8 @@ Gigabit ethernet works out of the box with the e1000e kernel module.
 Wireless Networking
 -------------------
 
-See Wireless_Setup#iwl3945.2C_iwl4965_and_iwl5000-series.
+See Wireless network
+configuration#iwl3945.2C_iwl4965_and_iwl5000-series.
 
 Special Keys
 ------------
@@ -184,8 +178,15 @@ is that PolicyKit.conf is no longer used and a better fix is required in
 either /etc/acpi or /etc/hal.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IBM_ThinkPad_X60s&oldid=196670"
+"https://wiki.archlinux.org/index.php?title=IBM_ThinkPad_X60s&oldid=298158"
 
 Category:
 
 -   IBM
+
+-   This page was last modified on 16 February 2014, at 07:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

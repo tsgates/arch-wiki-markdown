@@ -3,33 +3,27 @@ ASUS Eee PC S101
 
 For now, this is just some notes on the Asus EeePC S101.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 boot loader setup of Kernel                                  |
-|                                                                          |
-| -   2 Wireless                                                           |
-| -   3 Xorg                                                               |
-| -   4 Touchpad                                                           |
-| -   5 ACPI                                                               |
-|     -   5.1 Touchpad toggle - Silver Button                              |
-|     -   5.2 Sleep Fn+F1                                                  |
-|     -   5.3 Wifi Fn+F2                                                   |
-|     -   5.4 Brightness Fn+F5/F6                                          |
-|     -   5.5 Camera Fn+F7                                                 |
-|                                                                          |
-| -   6 extend battery life                                                |
-|     -   6.1 Notes                                                        |
-|                                                                          |
-| -   7 Software                                                           |
-|     -   7.1 LXDE                                                         |
-|                                                                          |
-| -   8 Hardware                                                           |
-|     -   8.1 lspci                                                        |
-|     -   8.2 lsusb                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 boot loader setup of Kernel
+-   2 Wireless
+-   3 Xorg
+-   4 Touchpad
+-   5 ACPI
+    -   5.1 Touchpad toggle - Silver Button
+    -   5.2 Sleep Fn+F1
+    -   5.3 Wifi Fn+F2
+    -   5.4 Brightness Fn+F5/F6
+    -   5.5 Camera Fn+F7
+-   6 extend battery life
+    -   6.1 Notes
+-   7 Software
+    -   7.1 LXDE
+-   8 Hardware
+    -   8.1 lspci
+    -   8.2 lsusb
 
 Installation
 ============
@@ -41,8 +35,8 @@ Installation
     stick.(ex. UNetBootin under windows)
 -   Disable boost boot in BIOS Setup to allow USB stick bootable at boot
     time.
--   Follow Official_Arch_Linux_Install_Guide to install till reboot.
--   Follow Beginners'_Guide to install your hardware driver and desktop.
+-   Follow Installation guide to install till reboot.
+-   Follow Beginners' guide to install your hardware driver and desktop.
 -   remember to add hal in DAEMONS line of /etc/rc.conf , it will
     automatic detect all hardware.
 
@@ -189,8 +183,15 @@ lsusb
     Bus 001 Device 003: ID 04f2:b036 Chicony Electronics Co., Ltd Asus Integrated 0.3M UVC Webcam
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_S101&oldid=238964"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_S101&oldid=298293"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 February 2014, at 07:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

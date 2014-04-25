@@ -2,62 +2,51 @@ JWM
 ===
 
   ------------------------ ------------------------ ------------------------
-  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
-  g]                       is poorly written.       g]
-                           Reason: excessive use of 
-                           unordered (bulleted)     
-                           lists. (Discuss)         
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: ConsoleKit is    
+                           deprecated (Discuss)     
   ------------------------ ------------------------ ------------------------
 
-  Summary
-  -----------------------------------------------------------------------------------------------------------
-  This article attempts to walk users through the installation and configuration of the JWM window manager.
+This article attempts to walk users through the installation and
+configuration of the JWM window manager.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Package installation                                               |
-| -   3 Starting JWM                                                       |
-| -   4 Configuration                                                      |
-|     -   4.1 Creating ~/.jwmrc                                            |
-|     -   4.2 Overview of Selected Tags                                    |
-|         -   4.2.1 <StartupCommand>                                       |
-|         -   4.2.2 <Program>                                              |
-|         -   4.2.3 <Menu>                                                 |
-|         -   4.2.4 <RootMenu>                                             |
-|         -   4.2.5 <Groups>                                               |
-|             -   4.2.5.1 Window Class                                     |
-|                                                                          |
-|         -   4.2.6 <TrayButton>                                           |
-|         -   4.2.7 <Swallow>                                              |
-|         -   4.2.8 <Tray>                                                 |
-|         -   4.2.9 <Key>                                                  |
-|         -   4.2.10 <Include>                                             |
-|         -   4.2.11 <RestartCommand>                                      |
-|         -   4.2.12 <ShutdownCommand>                                     |
-|                                                                          |
-|     -   4.3 Verifying configuration changes                              |
-|     -   4.4 Additional troubleshooting                                   |
-|                                                                          |
-| -   5 Useful tips & tricks                                               |
-|     -   5.1 Additional applications                                      |
-|     -   5.2 Xinitrc startup applications                                 |
-|     -   5.3 Improve <Tasklist> contrast                                  |
-|     -   5.4 Power & event management                                     |
-|     -   5.5 Logout & Refresh                                             |
-|         -   5.5.1 Reboot & shutdown                                      |
-|                                                                          |
-|     -   5.6 Custom minimal build                                         |
-|         -   5.6.1 Minimal PKGBUILD example                               |
-|                                                                          |
-|     -   5.7 Minimal font suggestions                                     |
-|     -   5.8 Manual tiling support                                        |
-|                                                                          |
-| -   6 Package removal                                                    |
-| -   7 Additional resources                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Package installation
+-   3 Starting JWM
+-   4 Configuration
+    -   4.1 Creating ~/.jwmrc
+    -   4.2 Overview of selected tags
+        -   4.2.1 <StartupCommand>
+        -   4.2.2 <Program>
+        -   4.2.3 <Menu>
+        -   4.2.4 <RootMenu>
+        -   4.2.5 <Groups>
+            -   4.2.5.1 Window class
+        -   4.2.6 <TrayButton>
+        -   4.2.7 <Swallow>
+        -   4.2.8 <Tray>
+        -   4.2.9 <Key>
+        -   4.2.10 <Include>
+        -   4.2.11 <RestartCommand>
+        -   4.2.12 <ShutdownCommand>
+    -   4.3 Verifying configuration changes
+    -   4.4 Additional troubleshooting
+-   5 Tips and tricks
+    -   5.1 Additional applications
+    -   5.2 Xinitrc startup applications
+    -   5.3 Improve <Tasklist> contrast
+    -   5.4 Power and event management
+    -   5.5 Logout and refresh
+        -   5.5.1 Reboot and shutdown
+    -   5.6 Custom minimal build
+        -   5.6.1 Minimal PKGBUILD example
+    -   5.7 Minimal font suggestions
+    -   5.8 Manual tiling support
+-   6 See also
 
 Introduction
 ------------
@@ -83,9 +72,7 @@ a system tray dock.
 Package installation
 --------------------
 
-jwm is part of the official Arch Linux [community] repository.
-
-    # pacman -S jwm
+Install jwm from the official repositories.
 
 Warning:Recent SVN snapshots (e.g. 500) have migrated to Mod key masks
 (e.g. H to 4).
@@ -93,131 +80,130 @@ Warning:Recent SVN snapshots (e.g. 500) have migrated to Mod key masks
 Starting JWM
 ------------
 
--   Run the xinit program to start the X server and the JWM client
-    program:
+Run the xinit program to start the X server and the JWM client program:
 
     $ xinit /usr/bin/jwm
 
--   Alternatively, add the appropriate entry (e.g. /usr/bin/jwm or
-    exec /usr/bin/jwm) in your .xinitrc file and run:
+Alternatively, add the appropriate entry (e.g. /usr/bin/jwm or
+exec /usr/bin/jwm) in your .xinitrc file and run:
 
     $ startx
 
--   See the ArchWiki entry Start X at Boot for additional details.
+See the ArchWiki entry Start X at Boot for additional details.
 
 Configuration
 -------------
 
 > Creating ~/.jwmrc
 
-In adherence to the principles of The Arch Way, the look, feel and
+In adherence to the principles of the Arch Way, the look, feel and
 function of the JWM desktop is controlled by way of a single
-configuration file: ~/.jwmrc  
- A sample configuration file is installed upon program installation and
+configuration file: ~/.jwmrc
+
+A sample configuration file is installed upon program installation and
 is located at /etc/system.jwmrc. Create ~/.jwmrc:
 
     $ touch ~/.jwmrc
 
-or
+or:
 
     $ cp -i /etc/system.jwmrc ~/.jwmrc
 
 All that is left at this point is to establish the environment by
-editing the XML .jwmrc file.
-
--   JWM Configuration details the complete list of tags, attributes and
-    values available for JWM.
+editing the XML .jwmrc file. See JWM Configuration details the complete
+list of tags, attributes and values available for JWM.
 
 Note:The rolling content of JWM Configuration is based on the latest SVN
 snapshot and may not reflect the options available in the the current
 release.
 
-> Overview of Selected Tags
+> Overview of selected tags
 
 <StartupCommand>
 
--   Load and fork Parcellite as a background daemon when JWM starts:
+Load and fork parcellite from parcellite package as a background daemon
+when JWM starts:
 
-     <StartupCommand>parcellite -d</StartupCommand>
+    <StartupCommand>parcellite -d</StartupCommand>
 
--   Quietly connect to and fork the urxvtd daemon to the current
-    $DISPLAY when JWM starts:
+Quietly connect to and fork the urxvtd daemon to the current $DISPLAY
+when JWM starts:
 
-     <StartupCommand>urxvtd -q -o -f</StartupCommand>
+    <StartupCommand>urxvtd -q -o -f</StartupCommand>
 
--   Recursively force the removal of selected directories as a general
-    housekeeping measure when JWM starts:
+Recursively force the removal of selected directories as a general
+housekeeping measure when JWM starts:
 
     <StartupCommand>rm -rf $HOME/.adobe $HOME/.cache $HOME/.local/share/Trash $HOME/.macromedia $HOME/.recently-used.xbel $HOME/.Xauthority</StartupCommand>
 
--   Enable DPMS (Energy Star) to turn monitor 0:0 off to its lowest
-    state of power consumption state after 900 seconds of screen idle
-    after JWM starts:
+Enable DPMS (Energy Star) to turn monitor 0:0 off to its lowest state of
+power consumption state after 900 seconds of screen idle after JWM
+starts:
 
-     <StartupCommand>xset -display :0.0 dpms 0 0 900</StartupCommand>
+    <StartupCommand>xset -display :0.0 dpms 0 0 900</StartupCommand>
 
--   Enable devmon as a daemon after JWM starts:
+Enable devmon from devmon package after JWM starts:
 
-     <StartupCommand>/usr/bin/devmon</StartupCommand>
+    <StartupCommand>/usr/bin/devmon</StartupCommand>
 
-Note:<StartupCommand> commands are spawn as ConsoleKit sessions so long
-as JWM is launched within a ConsoleKit session.
+> Note:
 
-Note:Run the xdpyinfo command (owned by xorg-utils) to reveal the name
-of the current display.
+-   <StartupCommand> commands are spawn as ConsoleKit sessions so long
+    as JWM is launched within a ConsoleKit session.
+-   Run the xdpyinfo command (owned by xorg-utils) to reveal the name of
+    the current display.
 
 <Program>
 
--   Open Thunar in a specified directory:
+Open Thunar in a specified directory:
 
     <Program label="Thunar">thunar ~/Desktop</Program>
 
--   Connect to the local CUPS web interface using the preferred web
-    application (xdg-open):
+Connect to the local CUPS web interface to configure printers (use
+xdg-open to use the default web browser):
 
     <Program label="CUPS Printing">xdg-open http://localhost:631</Program>
 
--   Iconize and start FileZilla with Site Manager opened:
+Iconize and start FileZilla with Site Manager opened:
 
     <Program icon="filezilla.png">filezilla -s</Program>
 
 <Menu>
 
--   Create containers for a list of additional programs to display as a
-    submenus under <RootMenu>:
+Create containers for a list of additional programs to display as a
+submenus under <RootMenu>:
 
     <Menu label="Sample">
-      <Program label="Xfburn">xfburn -d</Program>
-      <Program label="urxvt Client">urxvtc</Program>
+        <Program label="Xfburn">xfburn -d</Program>
+        <Program label="urxvt Client">urxvtc</Program>
     </Menu>
 
     <Menu label="Example">
-      <Program label="Opera">opera -nolirc -nomail</Program>
-      <Program label="Writer">/opt/openoffice.org3/program/swriter -nologo</Program>
+        <Program label="Opera">opera -nolirc -nomail</Program>
+        <Program label="Writer">lowriter</Program>
     </Menu>
 
 <RootMenu>
 
--   Create a menu container displaying the label="Test" of height="24"
-    pixels and bound to the left mouse button onroot="1" under
-    <RootMenu>:
+Create a menu container displaying the label="Test" of height="24"
+pixels and bound to the left mouse button onroot="1" under <RootMenu>:
 
     <RootMenu labeled="true" label="Test" height="24" onroot="1">
         <Program label="Thunar">thunar ~/Desktop</Program>
         <Program label="CUPS Printing">xdg-open http://localhost:631</Program>
         <Program icon="filezilla.png">filezilla -s</Program>
-      <Menu label="Sample">
-        <Program label="Xfburn">xfburn -d</Program>
-        <Program label="urxvt Client">urxvtc</Program>
-      </Menu>
-      <Menu label="Example">
-        <Program label="Opera">opera -newprivatetab -noargb -nolirc -nomail</Program>
-        <Program label="Writer">/usr/lib/openoffice.org3/program/swriter -nologo</Program>
-      </Menu>
+        <Menu label="Sample">
+            <Program label="Xfburn">xfburn -d</Program>
+            <Program label="urxvt Client">urxvtc</Program>
+        </Menu>
+        <Menu label="Example">
+            <Program label="Opera">opera -newprivatetab -noargb -nolirc -nomail</Program>
+            <Program label="Writer">lowriter</Program>
+        </Menu>
     </RootMenu>
 
--   Create a nested menu container with no label, of height="32" pixels,
-    and bound to the right mouse button onroot="3" under <RootMenu>:
+Create a nested menu container with no label, of height="32" pixels, and
+bound to the right mouse button onroot="3" under <RootMenu>:
 
     <RootMenu height="32" onroot="3">
         <Program label="Thunar">thunar ~/Desktop</Program>
@@ -228,71 +214,68 @@ of the current display.
         <Program label="urxvt Client">urxvtc</Program>
       <Menu label="Example">
         <Program label="Opera">opera -newprivatetab -noargb -nolirc -nomail</Program>
-        <Program label="Writer">/usr/lib/openoffice.org3/program/swriter -nologo</Program>
+        <Program label="Writer">lowriter</Program>
       </Menu>
       </Menu>
     </RootMenu>
 
 <Groups>
 
--   Preserve panel space by not displaying Squeeze and Xarchiver within
-    the <Tasklist>:
+Preserve panel space by not displaying Squeeze and Xarchiver within the
+<Tasklist>:
 
     <Group>
-      <Class>Squeeze</Class>
-      <Class>Xarchiver</Class>
+        <Class>Squeeze</Class>
+        <Class>Xarchiver</Class>
         <Option>nolist</Option>
     </Group>
 
--   Always start Firefox maximized on desktop:2 without a title bar:
+Always start Firefox maximized on desktop:2 without a title bar:
 
     <Group>
-      <Class>Firefox</Class>
+        <Class>Firefox</Class>
         <Option>maximized</Option>
         <Option>desktop:2</Option>
         <Option>notitle</Option>
     </Group>
 
-Window Class
+Window class
 
 The xprop utility displays window and font properties in an X server.
 
--   Set xprop to display the window class name of an application:
+Set xprop to display the window class name of an application:
 
     xprop WM_CLASS 
 
--   Click on the desired application window to display the string name
-    of the window class:
+Click on the desired application window to display the string name of
+the window class:
 
     WM_CLASS(STRING) = "urxvt", "URxvt"
 
-xprop is part of the xorg-utils package in the Arch Linux [extra]
-repository.
-
-    # pacman -S xorg-utils
+xprop is part of the xorg-utils package in the Arch Linux official
+repositories.
 
 <TrayButton>
 
--   Create a panel <TrayButton> displaying the label="Pattern" which
-    launches the root:1 menu:
+Create a panel <TrayButton> displaying the label="Pattern" which
+launches the root:1 menu:
 
     <TrayButton label="Pattern">root:1</TrayButton>
 
 <Swallow>
 
--   Integrate, or <Swallow> into the tray the program whose
-    name=wicd-gtk and allow the named program to execute the command
-    wicd-gtk
+Integrate, or <Swallow> into the tray the program whose name=wicd-gtk
+and allow the named program to execute the command wicd-gtk
 
     <Swallow name="wicd-gtk">
-      wicd-gtk
+        wicd-gtk
     </Swallow>
 
 <Tray>
 
--   Create a panel <Tray> of height="24" pixels offset x="0" pixels from
-    the left of the screen and y="0" from the top of the screen. Display
-    within the panel:
+Create a panel <Tray> of height="24" pixels offset x="0" pixels from the
+left of the screen and y="0" from the top of the screen. Display within
+the panel:
 
 1.  A menu <TrayButton> which displays the root:1 menu.
 2.  A <TaskList/> which displays running applications within the current
@@ -307,32 +290,32 @@ repository.
 6.  For supported applications, a system tray area for programs to
     <Dock/>.
 7.  A <Clock> which displays the date and time in the specified format.
-    1.  Man strftime for time and date character conversion
+    1.  See strftime manual page for time and date character conversion
         specifications.
 
     <Tray x="0" y="0" height="24">
-      <TrayButton label="Pattern">root:1</TrayButton>
-      <TaskList/> 
-      <TrayButton label="X">showdesktop</TrayButton>
-      <Pager/>
-      <Swallow name="wicd-gtk">
-        wicd-client
-      </Swallow>
-      <Dock/>
-      <Clock format="%a %b %d %l:%M %p"></Clock>
+        <TrayButton label="Pattern">root:1</TrayButton>
+        <TaskList/> 
+        <TrayButton label="X">showdesktop</TrayButton>
+        <Pager/>
+        <Swallow name="wicd-gtk">
+            wicd-client
+        </Swallow>
+        <Dock/>
+        <Clock format="%a %b %d %l:%M %p"></Clock>
     </Tray>
 
 <Key>
 
--   Bind the F1 key to launch and display the root:3 menu:
+Bind the F1 key to launch and display the root:3 menu:
 
     <Key key="F1">root:1</Key>
 
--   Bind the Super+l key combination to lock the screen (XScreenSaver)
+Bind the Super+l key combination to lock the screen (XScreenSaver)
 
     <Key mask="S" key="l">exec:xscreensaver-command -lock</Key>
 
-Note: Run the xev command (owned by xorg-utils) to print the contents of
+Note:Run the xev command (owned by xorg-utils) to print the contents of
 keybound X events to standard output.
 
 <Include>
@@ -346,27 +329,24 @@ and control
 
 Contents of an example ~/.jwmrc-super-hyper-keys:
 
-    <Key mask="PH" key="t">exec:thunderbird -addressbook</Key>
-    <Key mask="PH" key="h">exec:htop -d 10 -u USER</Key>
-    <Key mask="PH" key="c">exec:catfish --hidden --path=/usr</Key>
+<Key mask="PH" key="t">exec:thunderbird -addressbook</Key> <Key mask="PH" key="h">exec:htop -d 10 -u USER</Key> <Key mask="PH" key="c">exec:catfish --hidden --path=/usr</Key>
 
 <RestartCommand>
 
--   Call sync to flush file system buffers before dismounting all
-    mounted TrueCrypt volumes when the user logs out of the current X
-    session:
+Call sync to flush file system buffers before dismounting all mounted
+TrueCrypt volumes when the user logs out of the current X session:
 
     <RestartCommand>sync; truecrypt -d</RestartCommand>
 
--   The <RestartCommand> complements, or can take the place of
-    $HOME/.bash_logout for users working in an X environment.
+The <RestartCommand> complements, or can take the place of
+$HOME/.bash_logout for users working in an X environment.
 
 <ShutdownCommand>
 
--   Recursively force the removal of the contents of the Trash folder
-    when JWM shuts down
+Recursively force the removal of the contents of the Trash folder when
+JWM shuts down
 
-     <ShutdownCommand>rm -rf ~/.local/share/Trash/*</ShutdownCommand>
+    <ShutdownCommand>rm -rf ~/.local/share/Trash/*</ShutdownCommand>
 
 Note:<ShutdownCommand> does not appear to behave as expected when using
 dbus-send Shutdown or Stop commands.
@@ -393,8 +373,8 @@ review standard output errors and messages. Man the script command for
 details on how to create a typescript of what is printed to the
 terminal.
 
-Useful tips & tricks
---------------------
+Tips and tricks
+---------------
 
 > Additional applications
 
@@ -420,14 +400,14 @@ Useful tips & tricks
     root desktop window of Conky:
 
 1.  Review the Conky FAQ for workarounds in ~/.conkyrc
-2.  <Group> Conky and specify the following <Option> tags in ~/.jwmrc
+2.  <Group> Conky and specify the following <Option> tags in ~/.jwmrc:
 
     <Group>
-    <Class>Conky</Class>
-    <Option>nolist</Option>
-    <Option>noborder</Option>
-    <Option>notitle</Option>
-    <Option>sticky</Option>
+        <Class>Conky</Class>
+        <Option>nolist</Option>
+        <Option>noborder</Option>
+        <Option>notitle</Option>
+        <Option>sticky</Option>
     </Group>
 
 -   volumeicon, runned as a <StartupCommand>, provides a volume control
@@ -437,7 +417,7 @@ Useful tips & tricks
 > Xinitrc startup applications
 
 Startup applications can be executed outside of the <StartupCommand> by
-including the appropriate options in ~./xinitrc
+including the appropriate options in ~/.xinitrc
 
     #!/bin/bash
 
@@ -449,7 +429,7 @@ including the appropriate options in ~./xinitrc
     /usr/bin/setxkbmap -option terminate:ctrl_alt_bksp &
     export OPERAPLUGINWRAPPER_PRIORITY=0
     export OPERA_KEEP_BLOCKED_PLUGIN=0
-    exec ck-launch-session /usr/bin/jwm
+    exec /usr/bin/jwm
 
 > Improve <Tasklist> contrast
 
@@ -457,33 +437,35 @@ Change the default <Tasklist> settings to match the improved contrast
 style of the default <MenuStyle> and active <WindowStyle>
 
     <TaskListStyle>
-      <ActiveForeground>black</ActiveForeground>
-      <ActiveBackground>gray90:gray70</ActiveBackground>
+        <ActiveForeground>black</ActiveForeground>
+        <ActiveBackground>gray90:gray70</ActiveBackground>
     </TaskListStyle>
 
     <TaskListStyle>
-      <ActiveForeground>white</ActiveForeground>
-      <ActiveBackground>#70849d:#2e3a67</ActiveBackground>
+        <ActiveForeground>white</ActiveForeground>
+        <ActiveBackground>#70849d:#2e3a67</ActiveBackground>
     </TaskListStyle>
 
-> Power & event management
+> Power and event management
 
 Power and event management commands can be run within <Key> and/or
-<Program> tags.  
+<Program> tags.
 
-> Logout & Refresh
+> Logout and refresh
 
 <Exit/> (Logout) is the menu command to cleanly log out of the current X
-server.  
- <Restart/> (Refresh) is the menu command tag which reinitializes the
-configuration file and updates menus and keybindings accordingly.  
- <Restart/> and <Exit/> can be bound to the Ctrl+Alt modified keys
+server.
+
+<Restart/> (Refresh) is the menu command tag which reinitializes the
+configuration file and updates menus and keybindings accordingly.
+
+<Restart/> and <Exit/> can be bound to the Ctrl+Alt modified keys
 following the example syntax below:
 
     <Key mask="CA" key="r">exec:jwm -restart</Key>
     <Key mask="CA" key="e">exec:jwm -exit</Key>
 
-Reboot & shutdown
+Reboot and shutdown
 
 A system with sudo installed and properly configured can be rebooted
 with the Restart and Poweroff menu options.
@@ -494,9 +476,9 @@ with the Restart and Poweroff menu options.
 See the ArchWiki entry regarding allowing users to shutdown for
 additional information.
 
-Note:For users wishing to power down a system, 'poweroff' or 'shutdown
--P now' may be preferable to 'shutdown -h now' as it leaves no doubt as
-to the intention of the user initiated command.
+Note:For users wishing to power down a system, poweroff or
+shutdown -P now may be preferable to shutdown -h now as it leaves no
+doubt as to the intention of the user initiated command.
 
 System power and event management can also be handled by HAL via
 dbus-send message signals without the need to modify the sudoers file.
@@ -533,8 +515,8 @@ Minimal PKGBUILD example
     PKGBUILD
 
     pkgname=jwm
-    pkgver=2.0.1
-    pkgrel=100
+    pkgver=2.1.0
+    pkgrel=3
     pkgdesc="A lightweight window manager for the X11 Window System"
     arch=('i686' 'x86_64')
     url="http://joewing.net/programs/jwm/"
@@ -542,32 +524,33 @@ Minimal PKGBUILD example
     depends=('libx11')
     backup=('etc/system.jwmrc')
     source=(http://joewing.net/programs/jwm/releases/jwm-$pkgver.tar.bz2)
-    md5sums=('48f323cd78ea891172b2a61790e8c0ec')
+    md5sums=('e8fab21b2410eb82032b7c3472af642c')
 
     build() {
-      cd ${srcdir/${pkgname}-${pkgver}
-
-      ./configure --disable-confirm --disable-icons --disable-png  \ 
-      --disable-xpm --disable-jpeg --disable-fribidi --disable-xinerama  \
-      --disable-shape --disable-xft --disable-xrender --disable-debug  \ 
-      --prefix=/usr --sysconfdir=/etc
-
+      cd "$srcdir/$pkgname-$pkgver"
+      ./configure --prefix=/usr --sysconfdir=/etc --disable-fribidi \
+      --disable-confirm --disable-icons --disable-png \ 
+      --disable-xpm --disable-jpeg --disable-xinerama \
+      --disable-xft --disable-xrender --disable-debug 
       make
-      make BINDIR=$pkgdir/usr/bin \
-           MANDIR=$pkgdir/usr/share/man \
-           SYSCONF=$pkgdir/etc install
+    }
+
+    package() {
+      cd "$srcdir/$pkgname-$pkgver"
+      make BINDIR="$pkgdir/usr/bin" MANDIR="$pkgdir/usr/share/man" \
+           SYSCONF="$pkgdir/etc" install
     }
 
 > Minimal font suggestions
 
     <WindowStyle>
-    <Font>-*-fixed-*-r-*-*-10-*-*-*-*-*-*-*</Font>
+    -*-fixed-*-r-*-*-10-*-*-*-*-*-*-*
 
     <TaskListStyle>
-    <Font>-*-fixed-*-r-*-*-13-*-*-*-*-*-*-*</Font>
+    -*-fixed-*-r-*-*-13-*-*-*-*-*-*-*
 
     <TrayStyle>
-    <Font>-*-fixed-*-r-*-*-13-*-*-*-*-*-*-*</Font>
+    -*-fixed-*-r-*-*-13-*-*-*-*-*-*-*
 
 -   Man xfontsel and review the X Logical Font Description article for
     additional details and pattern descriptions.
@@ -587,46 +570,27 @@ be keybound according to the example below:
 Note:Run the env command to list the modified environments of the
 current user.
 
-Package removal
----------------
+See also
+--------
 
-To remove the JWM package while retaining its configuration files and
-dependencies:
-
-    # pacman -R jwm
-
-To remove the JWM package and its configuration files while retaining
-its dependencies:
-
-    # pacman -Rn jwm
-
-To remove the JWM package and dependencies not required by any other
-packages while retaining its configuration files:
-
-    # pacman -Rs jwm
-
-To remove the JWM package, its configuration files and dependencies not
-required by any other packages:
-
-    # pacman -Rns jwm
-
-Note:pacman will not remove configuration files outside of the defaults
-that were created during package installation. This includes ~/.jwmrc
-
-Additional resources
---------------------
-
--   Joe's Window Manager - Official Site
+-   Joe's Window Manager - Official site
 
 Examples of what can be accomplished with a bit of creativity and
 substitution can be found at:
 
 -   PuppyLinux : JoesWindowManager
--   Puppy Linux JWM Themes Exchange
+-   Puppy Linux JWM themes exchange
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=JWM&oldid=253815"
+"https://wiki.archlinux.org/index.php?title=JWM&oldid=301501"
 
 Category:
 
 -   Stacking WMs
+
+-   This page was last modified on 24 February 2014, at 11:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

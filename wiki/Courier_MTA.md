@@ -1,18 +1,12 @@
 Courier MTA
 ===========
 
-> Summary
+Related articles
 
-This article focuses on the big Courier-MTA mail-server suite, which
-integrates an MTA and the POP3/IMAP mail fetching methods.
-
-> Related
-
-Simple Virtual User Mail System
-
-Postfix
-
-SOHO Postfix
+-   DBMail
+-   Simple Virtual User Mail System
+-   Postfix
+-   SOHO Postfix
 
 Courier MTA is an SMTP and POP3/IMAP4 Server with courier.
 
@@ -27,25 +21,22 @@ The advantages of Courier-MTA are:
 -   Web based administration possible
 -   Also has a separate mail delivery agent (MDA), if it is needed
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preamble                                                           |
-| -   2 Installing                                                         |
-| -   3 Authuserdb authentication                                          |
-| -   4 Creating the vmail user                                            |
-| -   5 Creating the email accounts                                        |
-| -   6 Setting up Maildirs                                                |
-| -   7 Creating the user database                                         |
-| -   8 Configuring courier                                                |
-|     -   8.1 Setting localdomain and hosteddomains                        |
-|                                                                          |
-| -   9 Testing your setup                                                 |
-| -   10 Configuring IMAP and POP3                                         |
-| -   11 Remarks                                                           |
-| -   12 See also                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Preamble
+-   2 Installing
+-   3 Authuserdb authentication
+-   4 Creating the vmail user
+-   5 Creating the email accounts
+-   6 Setting up Maildirs
+-   7 Creating the user database
+-   8 Configuring courier
+    -   8.1 Setting localdomain and hosteddomains
+-   9 Testing your setup
+-   10 Configuring IMAP and POP3
+-   11 Remarks
+-   12 See also
 
 Preamble
 --------
@@ -98,7 +89,7 @@ your /etc/hosts.
 Installing
 ----------
 
-Install courier-mta from the Arch User Repository.
+Install courier-mta from the Arch User Repository(requires base-devel).
 
 Any other mail transfer agents (like cyrus) or smtp servers (sendmail,
 postfix, etc) must be uninstalled for this, so answer 'yes' when
@@ -219,15 +210,6 @@ exit as shown above.
 Creating the user database
 --------------------------
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: initscripts has  
-                           been depreciated. Use    
-                           systemd instead.         
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
-
 Now it's time to create the BerkeleyDB from the plain textfiles. It is
 important that the files in /etc/authlib/userdb are visible for root
 only. If they have any world or group rights, courier will not allow the
@@ -240,7 +222,8 @@ Now we can check if the authentication works. Courier comes with a
 little tool that checks if users can be authenticated. Before using this
 tool, we must make sure the authentication daemon is running:
 
-    # /etc/rc.d/authdaemond start
+    # systemctl start authdaemond
+    # systemctl enable authdaemond
     # authtest user1@domain1
     # authtest user2@domain2
 
@@ -491,8 +474,15 @@ See also
 -   SOHO Postfix
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Courier_MTA&oldid=240896"
+"https://wiki.archlinux.org/index.php?title=Courier_MTA&oldid=305908"
 
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 20 March 2014, at 17:26.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

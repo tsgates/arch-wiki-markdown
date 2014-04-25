@@ -14,20 +14,17 @@ Fbterm
 Fbterm (Frame buffer terminal emulator) is standalone replacement of
 Linux kernel terminal that can function outside of Xorg.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Features                                                           |
-| -   2 Installation                                                       |
-| -   3 Customization                                                      |
-|     -   3.1 Fonts                                                        |
-|     -   3.2 Input method support                                         |
-|                                                                          |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Background image                                             |
-|     -   4.2 White font color                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Features
+-   2 Installation
+-   3 Customization
+    -   3.1 Fonts
+    -   3.2 Input method support
+-   4 Tips and tricks
+    -   4.1 Background image
+    -   4.2 White font color
 
 Features
 --------
@@ -121,3 +118,10 @@ Retrieved from
 Category:
 
 -   Terminal emulators
+
+-   This page was last modified on 12 February 2013, at 20:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

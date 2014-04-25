@@ -9,50 +9,46 @@ highlighting and scripting capabilities. Vim is not a simple text
 editor, like nano or pico. It does require some time to learn, and a
 great amount of time to master.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-|     -   2.1 Basic editing                                                |
-|     -   2.2 Moving around                                                |
-|     -   2.3 Repeating commands                                           |
-|     -   2.4 Deleting                                                     |
-|     -   2.5 Undo and redo                                                |
-|     -   2.6 Visual mode                                                  |
-|     -   2.7 Search and replace                                           |
-|     -   2.8 Saving and quitting                                          |
-|     -   2.9 Additional commands                                          |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Wrap searches                                                |
-|     -   3.2 Spell checking                                               |
-|     -   3.3 Syntax highlighting                                          |
-|     -   3.4 Using the mouse                                              |
-|     -   3.5 Traverse line breaks with arrow keys                         |
-|     -   3.6 Example ~/.vimrc                                             |
-|                                                                          |
-| -   4 Merging files (vimdiff)                                            |
-| -   5 Vim tips                                                           |
-|     -   5.1 Line numbers                                                 |
-|     -   5.2 Substitute on lines                                          |
-|     -   5.3 Make Vim restore cursor position in files                    |
-|     -   5.4 Empty space at the bottom of gVim windows                    |
-|     -   5.5 Replace vi command with vim                                  |
-|                                                                          |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 "^M"                                                         |
-|                                                                          |
-| -   7 See also                                                           |
-|     -   7.1 Official                                                     |
-|     -   7.2 Tutorials                                                    |
-|         -   7.2.1 Videos                                                 |
-|         -   7.2.2 Games                                                  |
-|                                                                          |
-|     -   7.3 Example configurations                                       |
-|     -   7.4 Other                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 Basic editing
+    -   2.2 Moving around
+    -   2.3 Repeating commands
+    -   2.4 Deleting
+    -   2.5 Undo and redo
+    -   2.6 Visual mode
+    -   2.7 Search and replace
+    -   2.8 Saving and quitting
+    -   2.9 Additional commands
+-   3 Configuration
+    -   3.1 Wrap searches
+    -   3.2 Spell checking
+    -   3.3 Syntax highlighting
+    -   3.4 Using the mouse
+    -   3.5 Traverse line breaks with arrow keys
+    -   3.6 Example ~/.vimrc
+-   4 Plugins
+    -   4.1 cscope
+    -   4.2 Taglist
+-   5 Merging files (vimdiff)
+-   6 Vim tips
+    -   6.1 Line numbers
+    -   6.2 Substitute on lines
+    -   6.3 Make Vim restore cursor position in files
+    -   6.4 Empty space at the bottom of gVim windows
+    -   6.5 Replace vi command with vim
+-   7 Troubleshooting
+    -   7.1 "^M"
+-   8 See also
+    -   8.1 Official
+    -   8.2 Tutorials
+        -   8.2.1 Videos
+        -   8.2.2 Games
+    -   8.3 Example configurations
+    -   8.4 Other
 
 Installation
 ------------
@@ -61,13 +57,15 @@ Install the command line version with the vim package, or you can
 install the GUI version (which also provides vim) by installing the gvim
 package.
 
-Note:The vim package is meant to be as lightweight as possible; hence,
-it does not support Python, Lua, and Ruby interpreters, nor does it
-support X server options (this means that it will not support copy and
-paste from the X clipboard). If you require these options, install the
-gvim package instead (it includes the vim binary as well). The
-herecura-stable unofficial repository also provides a couple different
-Vim / gVim variants:
+> Note:
+
+-   The vim package is meant to be as lightweight as possible; hence, it
+    does not support Python, Lua, and Ruby interpreters, nor does it
+    support X server options (this means that it will not support copy
+    and paste from the X clipboard). If you require these options,
+    install the gvim package instead (it includes the vim binary as
+    well). The herecura-stable unofficial repository also provides a
+    couple different Vim / gVim variants:
 
     $ pacman -Slq herecura-stable | grep vim
 
@@ -79,9 +77,9 @@ Vim / gVim variants:
     vim-rt
     vim-tiny
 
-Note:There are some visualization problems in KDE using gvim from
-official repositories. In that case you can install vim-gvim-qt from
-herecura-stable or vim-qt
+-   There are some visualization problems in KDE using gvim from
+    official repositories. In that case you can install vim-gvim-qt from
+    herecura-stable or vim-qt
 
 Usage
 -----
@@ -109,7 +107,7 @@ exist. If it does, you will see what is in there). You will not be able
 to edit right away – you are in Command Mode. In this mode you are able
 to issue commands to Vim with the keyboard.
 
-Note:Vim is an example of classic Unix-style ware. It has a steep
+Note:Vim is an example of classic Unix-style ware. It has a difficult
 learning curve, but once you get started, you will find that it is
 extremely powerful. Also, all commands are case sensitive. Sometimes the
 uppercase versions are “blunter” versions (s will replace a character, S
@@ -215,8 +213,8 @@ To search and replace use the substitute :s/ command. The syntax is:
 [range]s///[arguments]. For example:
 
     Command        Outcome
-    :s/xxx/yyy/    Replace xxx with yyy at the first occurence
-    :s/xxx/yyy/g   Replace xxx with yyy first occurrence, global (whole sentence)
+    :s/xxx/yyy/    Replace xxx with yyy at the first occurrence
+    :s/xxx/yyy/g   Replace xxx with yyy, every occurrence in the current line
     :s/xxx/yyy/gc  Replace xxx with yyy global with confirm
     :%s/xxx/yyy/g  Replace xxx with yyy global in the whole file
 
@@ -260,7 +258,7 @@ to the last known cursor position), consider using Vim's example
 configuration file:
 
     # mv /etc/vimrc /etc/vimrc.bak
-    # cp /usr/share/vim/vim73/vimrc_example.vim /etc/vimrc
+    # cp /usr/share/vim/vim74/vimrc_example.vim /etc/vimrc
 
 > Wrap searches
 
@@ -318,14 +316,14 @@ languages):
 
 > Using the mouse
 
-Vim has the ability to make use of the mouse, but requires xterm's mouse
-reporting feature.
+Vim has the ability to make use of the mouse, but it only works for
+certain terminals (on Linux it is xterm and Linux console with gpm).
 
-1.  See the example .vimrc below to enable the mouse.
-2.  Use xterm. In your console: export TERM=xterm-256color or
-    export TERM=xterm
+To enable this feature, add this line into ~/.vimrc:
 
-Notes:
+    set mouse=a
+
+> Note:
 
 -   This even works in PuTTY over SSH.
 -   In PuTTY, the normal highlight/copy behaviour is changed because Vim
@@ -345,57 +343,129 @@ to your ~/.vimrc file.
 
 An example Vim configuration.
 
+Plugins
+-------
+
+Adding plugins to vim can increase your productivity. The group
+vim-plugins has many plugins to choose from(there are more in the repos
+though ie: vim-supertab).
+
+    pacman -Ss vim-plugins
+
+> cscope
+
+Cscope is a tool for browsing a project. By navigating to a
+word/symbol/function and calling cscope(usually with shortcut keys) it
+can find: functions calling the function, the function definition, and
+more. Multiple steps are required to search a code base.
+
+Install the cscope package.
+
+Copy the cscope default file where it will be automatically read by vim:
+
+    mkdir -p ~/.vim/plugin
+    wget -P ~/.vim/plugin http://cscope.sourceforge.net/cscope_maps.vim 
+
+Create a file which contains the files you wish cscope to index(Cscope
+can handle many languages but this example finds .c, .cpp, and .h
+files):
+
+    cd /path/to/projectfolder/
+    find . -type f -print | grep -E '\.(c(pp)?|h)$' > cscope.files
+
+Create database files that cscope will read:
+
+    cscope -bq
+
+Note:You must browse your project files from this location or set and
+export the $CSCOPE_DB variable, pointing it to the cscope.out file.
+
+Default keyboard shortcuts
+
+     Ctrl-\ and
+          c: Find functions calling this function
+          d: Find functions called by this function
+          e: Find this egrep pattern
+          f: Find this file
+          g: Find this definition
+          i: Find files #including this file
+          s: Find this C symbol
+          t: Find assignments to
+
+Feel free to change the shortcuts.
+
+    #Maps ctrl-c to find functions calling the function 
+    nnoremap <C-c> :cs find c <C-R>=expand("<cword>")<CR><CR>
+
+> Taglist
+
+Taglist provides an overview of the structure of source code files and
+allows you to efficiently browse through source code files in different
+programming languages.
+
+Install the vim-taglist package.
+
+Usefull options to be put in ~/.vimrc
+
+    let Tlist_Compact_Format = 1
+    let Tlist_GainFocus_On_ToggleOpen = 1
+    let Tlist_Close_On_Select = 1
+    nnoremap <C-l> :TlistToggle<CR>
+
 Merging files (vimdiff)
 -----------------------
 
-Vim includes a diff editor (a program that can merge differences between
-two files). vimdiff will open colored windows each showing the content
-of the file with colored highlights of the differences, line by line.
-You are left with two modes: the insert one, which let you edit the
-file, and the screen mode, which let you move around windows and lines.
-Begin by running vimdiff file1 file2. Some example commands are found
-below:
+Vim includes a diff editor, a program that aids the merging of
+differences between two (or more, with limited usefulness) files.
+vimdiff opens a horizontally multi-paned view that colorfully highlights
+differences, each pane containing one of the files to be
+examined/edited. Vim has several modes, two important ones being Insert
+mode, which lets text be edited, and Command mode, which lets the cursor
+be moved move across windows and lines. Begin by running
+vimdiff file1 file2. Some example commands follow.
 
-]c  
+ ]c  
     next difference
-[c  
+ [c  
     previous difference
-Ctrl+w+w  
+ Ctrl+w+w  
     switch windows
-i  
+ i  
     enter Insert mode
-Esc  
+ Esc  
     exit Insert mode
-p  
-    paste a line
-do  
-    diff obtain. when cursor is on a highlighted difference and changes
-    from other window will move into the current one
-dp  
-    diff put. same as diff obtain but will put the changes from current
-    windows into the other one
-zo  
+ p  
+    paste
+ do  
+    diff obtain. When the cursor is on a (highlighted) difference,
+    copies the changes from the other window to the current one.
+ dp  
+    diff put. Inverse of diff obtain; copies the changes from current
+    windows to the other one.
+ zo  
     open folded text
-zc  
+ zc  
     close folded text
-:diffupdate 
+ :diffupdate 
     re-scan the files for differences
-yy  
+ yy  
     copy a line
-:wq  
+ dd  
+    cut a line
+ :wq  
     save and exit the current window
-:wqa  
+ :wqa  
     save and exit both windows
-:q!  
+ :q!  
     exit without saving
 
-Once your file has been correctly edited taking account changes in
+Once your file has been correctly edited, taking into account changes in
 file.pacnew:
 
     # mv file file.bck
     # mv file.pacnew file
 
-Check if your new file is correct, then remove your backup:
+Check whether your new file is correct, then remove your backup:
 
     # rm file.bck
 
@@ -436,22 +506,16 @@ See also this tip in Vim Wiki.
 When using a window manager configured to ignore window size hints, gVim
 will fill the non-functional area with the GTK theme background color.
 
-A solution is to make a more pleasing background color: just put the
-following lines in ~/.gtkrc-2.0:
+The solution is to adjust how much space gVim reserves at the bottom of
+the window. Take note that if you set it to zero, you won't be able to
+see the bottom horizontal scrollbar, if you have one. Put the following
+line in ~/.vimrc:
 
-    style "vimfix" {
-      bg[NORMAL] = "#242424" # this matches my gVim theme 'Normal' bg color.
-    }
-    widget "vim-main-window.*GtkForm" style "vimfix"
+    set guiheadroom=0
 
 > Replace vi command with vim
 
-Run the following commands:
-
-    # ln -s $(which vim) /usr/local/bin/vi
-    # ln -s $(which vim) /usr/local/bin/view
-
-Also see http://superuser.com/questions/27091/vim-to-replace-vi
+Create an alias for vi to vim.
 
 Troubleshooting
 ---------------
@@ -492,7 +556,7 @@ See also
 Videos
 
 -   Vimcasts - Screencasts in .ogg format.
--   Tutorial Videos - Covering the basics up to advanced topics.
+-   Vim Tutorial Videos - Covering the basics up to advanced topics.
 
 Games
 
@@ -505,6 +569,8 @@ Games
 -   A detailed configuration from Amir Salihefendic
 -   Bart Trojanowski
 -   Steve Francia's Vim Distribution
+-   W4RH4WK's Vim configuration
+-   Fast vimrc/colorscheme from askapache
 
 > Other
 
@@ -513,9 +579,16 @@ Games
 -   Vivify - A ColorScheme Editor for Vim
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Vim&oldid=255248"
+"https://wiki.archlinux.org/index.php?title=Vim&oldid=305897"
 
 Categories:
 
 -   Development
 -   Text editors
+
+-   This page was last modified on 20 March 2014, at 16:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

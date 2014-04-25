@@ -4,39 +4,34 @@ OpenTTD
 OpenTTD is a tile-based transportation management game based on
 Transport Tycoon Deluxe. The game is in the community repository.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Original Transport Tycoon Deluxe data (optional)             |
-|         -   1.1.1 Where to get the data                                  |
-|         -   1.1.2 Graphics and sound effects                             |
-|         -   1.1.3 Music                                                  |
-|                                                                          |
-| -   2 Tutorial                                                           |
-| -   3 Configuration                                                      |
-|     -   3.1 Game Options                                                 |
-|     -   3.2 Difficulty                                                   |
-|     -   3.3 Advanced Settings                                            |
-|     -   3.4 AI/Game Script Settings                                      |
-|                                                                          |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Cheats                                                       |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Original Transport Tycoon Deluxe data (optional)
+        -   1.1.1 Where to get the data
+        -   1.1.2 Graphics and sound effects
+        -   1.1.3 Music
+-   2 Tutorial
+-   3 Configuration
+    -   3.1 Game Options
+    -   3.2 Difficulty
+    -   3.3 Advanced Settings
+    -   3.4 AI/Game Script Settings
+-   4 Tips and tricks
+    -   4.1 Cheats
+-   5 See also
 
 Installation
 ------------
 
-Install openttd, available in the Official Repositories.
+Install openttd, available in the Official repositories.
 
 A free replacement of the base graphics can be installed with the
-package openttd-opengfx, available in the Official Repositories.
+package openttd-opengfx, available in the Official repositories.
 
 A free replacement of the base sound can be installed with the package
-openttd-opensfx, available in the Official Repositories.
+openttd-opensfx, available in the Official repositories.
 
 > Original Transport Tycoon Deluxe data (optional)
 
@@ -148,8 +143,15 @@ See also
 -   OpenTTD Wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=OpenTTD&oldid=252836"
+"https://wiki.archlinux.org/index.php?title=OpenTTD&oldid=301548"
 
 Category:
 
 -   Gaming
+
+-   This page was last modified on 24 February 2014, at 11:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

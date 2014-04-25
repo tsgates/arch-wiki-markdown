@@ -19,24 +19,20 @@ motherboard (includes OpenGL 2.0-compatible video) and well-known
 Atheros network devices (on some models). Even special keyboard and
 suspend work fine.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Summary                                                            |
-|     -   1.1 Specifications                                               |
-|                                                                          |
-| -   2 Installing Arch                                                    |
-|     -   2.1 Pre-Install                                                  |
-|     -   2.2 During the Installation                                      |
-|     -   2.3 Post-Install                                                 |
-|         -   2.3.1 Kernel Issues                                          |
-|         -   2.3.2 Setup the Touchpad                                     |
-|         -   2.3.3 Fan Issues                                             |
-|         -   2.3.4 Panel aspect ratio                                     |
-|                                                                          |
-| -   3 Extra resources                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Summary
+    -   1.1 Specifications
+-   2 Installing Arch
+    -   2.1 Pre-Install
+    -   2.2 During the Installation
+    -   2.3 Post-Install
+        -   2.3.1 Kernel Issues
+        -   2.3.2 Setup the Touchpad
+        -   2.3.3 Fan Issues
+        -   2.3.4 Panel aspect ratio
+-   3 Extra resources
 
 Summary
 -------
@@ -148,8 +144,15 @@ Extra resources
 -   Power saving tips and tricks from Ubuntu forum
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_1410&oldid=238295"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_1410&oldid=304888"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 16 March 2014, at 08:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

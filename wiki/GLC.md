@@ -7,18 +7,16 @@ around that library. GLC should be able to capture any application that
 uses ALSA for sound and OpenGL for drawing. It is similar to Fraps on
 Windows.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-| -   3 Playback                                                           |
-| -   4 Encoding                                                           |
-| -   5 Mixing audio streams                                               |
-| -   6 Interfaces                                                         |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+-   3 Playback
+-   4 Encoding
+-   5 Mixing audio streams
+-   6 Interfaces
+-   7 See also
 
 Installation
 ------------
@@ -85,8 +83,8 @@ H.264 Ultrafast + FLAC Audio: (fairly quick encoding, high quality, good
 filesize) This script requires the following packages: ffmpeg
 
     #!/bin/bash
-    glc-play $1 -a 1 -o $1.wav
-    glc-play $1 -o - -y 1 | ffmpeg -i - -vcodec libx264 -preset ultrafast -i glc.wav -acodec flac output.mkv
+    glc-play $1 -a 1 -o glc.wav
+    glc-play $1 -o - -y 1 | ffmpeg -i - -preset ultrafast -i glc.wav -acodec flac -vcodec libx264 output.mkv
     rm glc.wav
 
 It will output as output.mkv
@@ -158,8 +156,15 @@ See also
     there as well
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GLC&oldid=253039"
+"https://wiki.archlinux.org/index.php?title=GLC&oldid=305996"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 20 March 2014, at 17:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

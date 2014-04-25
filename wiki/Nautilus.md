@@ -1,18 +1,13 @@
 Nautilus
 ========
 
-> Summary
+Related articles
 
-This article covers installation, configuration, and general usage tips
-for Nautilus.
-
-> Related
-
-GNOME: Desktop Environment that encompasses Nautilus
-
-Thunar: Xfce4's default file manager.
-
-Nautilus Guide - official GNOME guide on using Nautilus.
+-   GNOME
+-   File manager functionality
+-   Nemo
+-   Thunar
+-   PCManFM
 
 Nautilus is the default file manager for GNOME. From the Gnome website:
 The Nautilus file manager provides a simple and integrated way to manage
@@ -28,53 +23,64 @@ following:
 -   Write data to a CD or DVD
 -   Install and remove fonts
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Desktop Management                                           |
-|     -   2.2 Remove folders from the places sidebar                       |
-|     -   2.3 Always show text-entry location                              |
-|     -   2.4 Plugins                                                      |
-|     -   2.5 Nautilus 3.6 create an empty document                        |
-|     -   2.6 Nautilis 3.6 use delete key to move to trash                 |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Nautilus can't browse my windows network shares              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Desktop Management
+    -   2.2 Change default item view
+    -   2.3 Remove folders from the places sidebar
+    -   2.4 Always show text-entry location
+    -   2.5 Plugins
+    -   2.6 Create an empty document in Nautilus 3.6 and above
+    -   2.7 Use delete key to move to trash in Nautilus 3.6 and above
+-   3 Troubleshooting
+    -   3.1 Nautilus can't browse my windows network shares
+    -   3.2 Nautilus can't browse my apple network shares
+    -   3.3 Nautilus is no longer the default file manager
 
 Installation
 ------------
 
 Install nautilus from the Official Repositories.
 
-Note:Nautilus does not require the entire gnome-shell package, but it
-does require gnome-desktop. Some may find this nice because gnome-shell
-is a bit more of an undertaking to install.
+Note:Nautilus does not depend on the gnome-shell package, but it does
+require gnome-desktop.
 
 Nautilus is part of the gnome group.
 
 Configuration
 -------------
 
-Nautilus is simple to configure graphically, but not all potential
-configurations can be done via the preferences menu in nautilus. More
-options are available with dconf-editor under org.gnome.nautilus.
+Nautilus is simple to configure graphically, but not all options are
+available in the preferences menu. More options are available with
+dconf-editor under org.gnome.nautilus.
 
 > Desktop Management
 
 Nautilus, by default, no longer controls your background/desktop in
-gnome-shell. If you like having icons on your desktop or enjoy the neat
-click-and-drag rectangle when you're bored, you can easily configure
+gnome-shell. If you need icons on your desktop you can easily configure
 nautilus to handle the desktop.
 
-Install the package gnome-tweak-tool and run it. Click on the "Desktop"
-list item, and click the "Have file manager handle the desktop" slider
-to "on". You may have to restart nautilus by running
-killall nautilus; nautilus or if you are running Gnome, press ALT+F2,
-type r, and press Enter.
+Install the package gnome-tweak-tool and run the program. Click on the
+"Desktop" tab and set the "Icons on Desktop" slider to "on". You may
+have to restart nautilus by running killall nautilus; nautilus or if you
+are running Gnome, press ALT+F2, type r, and press Enter.
+
+Alternatively you can use dconf-editor to change the same setting.
+Expand org > gnome > desktop and click on background. Tick the option
+labelled show-desktop-icons.
+
+Note:Nautilus will manage the desktop when using the GNOME Classic
+session.
+
+> Change default item view
+
+You can change the default view for the items by setting the
+default-folder-viewer variable, e.g. for the list view:
+
+    $ gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
 
 > Remove folders from the places sidebar
 
@@ -106,7 +112,12 @@ packages in the official repositories that do just that.
 -   Nautilus Actions — Configures programs to be launched when files are
     selected in Nautilus
 
-http://gnome.org || nautilus-actions
+http://www.nautilus-actions.org/ || nautilus-actions
+
+-   Nautilus Terminal — Terminal embedded in Nautilus. It is always open
+    in the current folder, and follows the navigation.
+
+http://projects.flogisoft.com/nautilus-terminal/ || nautilus-terminal
 
 -   Open in Terminal — A nautilus plugin for opening terminals in
     arbitrary local paths
@@ -121,24 +132,26 @@ http://download.gnome.org/sources/nautilus-sendto/ || nautilus-sendto
 -   Sound Converter — Nautilus extension to convert audio files formats
 
 http://code.google.com/p/nautilus-sound-converter/ ||
-nautilus-soundconverter
+nautilus-sound-converter
 
--   seahorse-nautilus — PGP encryption and signing for nautilus
+-   Seahorse Nautilus — PGP encryption and signing for nautilus
 
 http://git.gnome.org/browse/seahorse-nautilus/ || seahorse-nautilus
 
-> Nautilus 3.6 create an empty document
+> Create an empty document in Nautilus 3.6 and above
 
-Gnome 3.6 brings new changes to Nautilus. Some features are dropped in
-favour of easy maintainence of Nautilus. Creating an empty document
-option has been removed from the default menu in Nautilus. One has to
-create a ~/Templates/  folder in your home folder and place an empty
-file inside the folder through your favourite Terminal by
-touch ~/Templates/new or by using any other file manager. Restart
-nautilus to get back the function of creating an empty document from
-Nautilus menu.
+Gnome 3.6 brought changes to Nautilus. The option to create an empty
+document has been removed from the right-click menu in Nautilus. To get
+this option back one has to create a ~/Templates/  folder in your home
+folder and place an empty file inside the folder through your favourite
+Terminal by touch ~/Templates/new or by using any other file manager.
+Then just restart Nautilus.
 
-> Nautilis 3.6 use delete key to move to trash
+On non-English installations, the templates directory might have another
+name. One can find the actual directory with the following command:
+xdg-user-dir TEMPLATES.
+
+> Use delete key to move to trash in Nautilus 3.6 and above
 
 By default Nautilus now no longer uses the delete key to move files to
 trash. If you want to get that feature back make the following changes
@@ -155,9 +168,45 @@ Troubleshooting
 Nautilus relies on gvfs-smb for this functionality, it can be Installed
 from the Official Repositories
 
-Retrieved from
-"https://wiki.archlinux.org/index.php?title=Nautilus&oldid=254322"
+> Nautilus can't browse my apple network shares
 
-Category:
+Nautilus relies on gvfs-afp and avahi for this functionality, they can
+be Installed from the Official Repositories. Note that in addition to
+installing avahi, it needs to be started too, using
+
+    # systemctl start avahi-daemon
+
+and/or
+
+    # systemctl enable avahi-daemon
+
+> Nautilus is no longer the default file manager
+
+If Nautilus is not recognised as the default file manager, set Nautilus
+as default handler for the mime type inode/directory
+
+    $ xdg-mime default nautilus.desktop inode/directory
+
+Alternatively, add the following line under the [Default Applications]
+section in the ~/.local/share/applications/mimeapps.list file:
+
+    inode/directory=nautilus.desktop
+
+Tip:If you want the change to be systemwide run the command above as
+root or create a mimeapps.list file in /usr/share/applications and add
+the line there instead.
+
+Retrieved from
+"https://wiki.archlinux.org/index.php?title=Nautilus&oldid=296691"
+
+Categories:
 
 -   File managers
+-   GNOME
+
+-   This page was last modified on 9 February 2014, at 18:51.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

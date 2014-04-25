@@ -1,25 +1,20 @@
 Stress Test
 ===========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Stress test programs                                               |
-|     -   2.1 Mprime (prime95)                                             |
-|     -   2.2 Linpack                                                      |
-|     -   2.3 Systester                                                    |
-|     -   2.4 Memtest86+                                                   |
-|                                                                          |
-| -   3 Stressing CPU and Memory                                           |
-|     -   3.1 Mprime (Prime95 for Windows and MacOS)                       |
-|     -   3.2 Linpack                                                      |
-|     -   3.3 Systester (SuperPi for Windows)                              |
-|                                                                          |
-| -   4 Stressing Memory                                                   |
-|     -   4.1 Running Memtest86+                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Discovering Errors
+-   3 CPU Stressing Programs
+-   4 Memory Stressing Programs
+    -   4.1 Memtest86+
+-   5 Stressing CPU and Memory
+    -   5.1 Mprime (Prime95 for Windows and MacOS)
+    -   5.2 Linpack
+    -   5.3 Systester (AKA SuperPi for Windows)
+-   6 Stressing Memory
+    -   6.1 Running Memtest86+
 
 Introduction
 ------------
@@ -31,26 +26,94 @@ the overclock level. The steps of overclocking a PC are beyond the scope
 of this article, but there is pretty inclusive guide written by graysky
 on the topic: [Overclocking guide].
 
-Stress test programs
---------------------
+Note:The linked guide is a bit dated. More contemporary guides are
+recommended for modern hardware.
 
-> Mprime (prime95)
+Discovering Errors
+------------------
 
-mprime-bin - Mprime factors large numbers and is an excellent way to
-stress CPU and memory.
+Some stressing applications like mprime and linpack (see below) have
+built in consistency checks to discover errors due to non-matching
+results. A more general and simple method for measuring hardware
+instabilities can be found in the kernel itself. To use it, simply watch
+the output from the kernel ring buffer by this command:
 
-> Linpack
+    # cat /proc/kmsg
+
+The key error to watch for looks like this:
+
+    [Hardware Error]: Machine check events logged
+
+The kernel can throw these errors during an mprime run before mprime
+itself finishes the calculate and reports the error thus providing a
+very sensitive method to assess stability.
+
+CPU Stressing Programs
+----------------------
+
+These are listed in two categories: 'higher demand voltage' and 'medium
+demand voltage'. It is important to use some from each category to
+evaluate system stability. Ironically, machines can be more sensitive to
+selections from the 'medium demand' category than from the 'high demand'
+category. 'Higher demand voltage' programs demand the most vcore when
+run due to intense hardware usage. 'Medium demand voltage' programs do
+not always call for the highest vcore when running and as such can be
+more prone to throwing errors for systems that are undervolted relative
+to the clock speed requested.
+
+Example on an overclocked i7-3770K (4.50 GHz); vcore is +0.020 V in
+offset mode with all powersaving features enabled.
+
+    Idle: 0.7440 V - 0.8320 V (varies).
+    Mprime small FFTs: 1.2880 V (steady).
+    Mprime large FFTs: 1.3040 V (steady).
+    Mprime blend: 1.2960 V (steady).
+    Linpack: 1.2320 V - 1.2720 V (varies).
+    x264 encoding: 1.2320 V - 1.2720 V (varies).
+    gcc compiling: 1.2720 V (steady).
+
+This machine running with a vcore of +0.005 (in offset mode) remains
+stable in both mprime and linpack for hours, but throws errors under
+both x264 and gcc after only several minutes.
+
+Voltage Demand
+
+Program
+
+Description
+
+> Medium
+
+Cc/Gcc
+
+Both cc/gcc compilation is a great method of stress testing. Both are
+available in the base-devel group.
+
+HandBrake-cli
+
+handbrake-cli can be used to encode using high quality settings.
+
+Systester
+
+systester Systester is a multithreaded piece of software capable of
+deriving values of pi out to 128,000,000 decimal places. It has built in
+check for system stability.
+
+> High
+
+mprime
+
+mprime-bin factors large numbers and is an excellent way to stress CPU
+and memory.
+
+linpack
 
 linpack - Linpack makes use of the BLAS (Basic Linear Algebra
 Subprograms) libraries for performing basic vector and matrix
-operations. and is an excellent way to stress CPUs for stability. Only
-runs on Intel processors (?).
+operations. and is an excellent way to stress CPUs for stability.
 
-> Systester
-
-systester - Systester is a multithreaded piece of software capable of
-deriving values of pi out to 128,000,000 decimal places. It has built in
-check for system stability.
+Memory Stressing Programs
+-------------------------
 
 > Memtest86+
 
@@ -146,7 +209,7 @@ excellent way to stress CPUs for stability. linpack is available from
 the AUR. After installation, users should adjust /etc/linpack.conf
 according to the amount of memory on the target system.
 
-> Systester (SuperPi for Windows)
+> Systester (AKA SuperPi for Windows)
 
 Systester is available in the AUR in both cli and gui version. It tests
 system stability by calculating up to 128 millions of Pi digits and
@@ -178,8 +241,15 @@ Tip:Allowing Memtest86+ to run for >10 cycles without errors is usually
 sufficient.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Stress_Test&oldid=246337"
+"https://wiki.archlinux.org/index.php?title=Stress_Test&oldid=279103"
 
 Category:
 
 -   CPU
+
+-   This page was last modified on 19 October 2013, at 14:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

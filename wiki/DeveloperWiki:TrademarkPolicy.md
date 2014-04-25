@@ -3,17 +3,15 @@ DeveloperWiki:TrademarkPolicy
 
 This article is part of the DeveloperWiki.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Trademark Policy                                                   |
-|     -   1.1 The Trademarks                                               |
-|     -   1.2 Permitted Use                                                |
-|     -   1.3 Restricted use that requires a trademark license             |
-|     -   1.4 Logo Usage Guidelines                                        |
-|         -   1.4.1 Attribution                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Trademark Policy
+    -   1.1 The Trademarks
+    -   1.2 Permitted Use
+    -   1.3 Restricted use that requires a trademark license
+    -   1.4 Logo Usage Guidelines
+        -   1.4.1 Attribution
 
 Trademark Policy
 ================
@@ -238,3 +236,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2011, at 18:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

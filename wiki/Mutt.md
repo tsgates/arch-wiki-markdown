@@ -1,17 +1,11 @@
 Mutt
 ====
 
-> Summary
+Related articles
 
-A guide on configuring and using Mutt.
-
-> Related
-
-fdm
-
-msmtp
-
-offlineimap
+-   fdm
+-   msmtp
+-   offlineimap
 
 Mutt is a text-based mail client renowned for its powerful features.
 Though over a decade old, Mutt remains the mail client of choice for a
@@ -20,86 +14,80 @@ plagued by complex keybindings along with a daunting amount of
 documentation. This guide will help the average user get Mutt up and
 running, and begin customizing it to their particular needs.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Installing                                                         |
-| -   3 Configuring                                                        |
-|     -   3.1 IMAP                                                         |
-|         -   3.1.1 Using native IMAP support                              |
-|             -   3.1.1.1 imap_user                                        |
-|             -   3.1.1.2 imap_pass                                        |
-|             -   3.1.1.3 folder                                           |
-|             -   3.1.1.4 spoolfile                                        |
-|             -   3.1.1.5 mailboxes                                        |
-|             -   3.1.1.6 Summary                                          |
-|                                                                          |
-|         -   3.1.2 External IMAP support                                  |
-|                                                                          |
-|     -   3.2 POP3                                                         |
-|         -   3.2.1 Retrieving mail                                        |
-|             -   3.2.1.1 More than one Email account with getmail         |
-|                                                                          |
-|         -   3.2.2 Sorting mail                                           |
-|                                                                          |
-|     -   3.3 Maildir                                                      |
-|     -   3.4 SMTP                                                         |
-|         -   3.4.1 Folders                                                |
-|         -   3.4.2 Using native SMTP support                              |
-|         -   3.4.3 External SMTP support                                  |
-|         -   3.4.4 Sending mails from Mutt                                |
-|                                                                          |
-|     -   3.5 Multiple accounts                                            |
-|     -   3.6 Passwords management                                         |
-|                                                                          |
-| -   4 Advanced features                                                  |
-|     -   4.1 E-mail character encoding                                    |
-|     -   4.2 Printing                                                     |
-|     -   4.3 Custom mail headers                                          |
-|     -   4.4 Signature block                                              |
-|         -   4.4.1 Random signature                                       |
-|                                                                          |
-|     -   4.5 Viewing URLs & opening your favorite web browser             |
-|     -   4.6 Viewing HTML                                                 |
-|     -   4.7 Mutt and Vim                                                 |
-|     -   4.8 Mutt and GNU nano                                            |
-|     -   4.9 Mutt and Emacs                                               |
-|     -   4.10 Colors                                                      |
-|     -   4.11 Index Format                                                |
-|     -   4.12 Contact management                                          |
-|         -   4.12.1 Address aliases                                       |
-|         -   4.12.2 Abook                                                 |
-|                                                                          |
-|     -   4.13 Request IMAP mail retrieval manually                        |
-|     -   4.14 Avoiding slow index on large (IMAP) folders due to coloring |
-|     -   4.15 Speed up folders switch                                     |
-|     -   4.16 Use Mutt to send mail from command line                     |
-|     -   4.17 Composing HTML e-mails                                      |
-|     -   4.18 How to display another email while composing                |
-|     -   4.19 Archive treated e-mails                                     |
-|     -   4.20 Mutt-Sidebar                                                |
-|     -   4.21 Migrating mails from one computer to another                |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Backspace does not work in Mutt                              |
-|     -   5.2 Android's default MUA receives empty e-mail with attachment  |
-|         "Unknown.txt"                                                    |
-|     -   5.3 The change-folder function always prompt for the same        |
-|         mailbox                                                          |
-|     -   5.4 I cannot change folder when using Mutt read-only (Mutt -R)   |
-|                                                                          |
-| -   6 Documentation                                                      |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 Installing
+-   3 Configuring
+    -   3.1 IMAP
+        -   3.1.1 Using native IMAP support
+            -   3.1.1.1 imap_user
+            -   3.1.1.2 imap_pass
+            -   3.1.1.3 folder
+            -   3.1.1.4 spoolfile
+            -   3.1.1.5 mailboxes
+            -   3.1.1.6 Summary
+        -   3.1.2 External IMAP support
+    -   3.2 POP3
+        -   3.2.1 Retrieving mail
+            -   3.2.1.1 More than one Email account with getmail
+        -   3.2.2 Sorting mail
+    -   3.3 Maildir
+    -   3.4 SMTP
+        -   3.4.1 Folders
+        -   3.4.2 Using native SMTP support
+        -   3.4.3 External SMTP support
+        -   3.4.4 Sending mails from Mutt
+    -   3.5 Multiple accounts
+    -   3.6 Passwords management
+-   4 Advanced features
+    -   4.1 E-mail character encoding
+    -   4.2 Printing
+    -   4.3 Custom mail headers
+    -   4.4 Signature block
+        -   4.4.1 Random signature
+    -   4.5 Viewing URLs & opening your favorite web browser
+    -   4.6 Viewing HTML
+    -   4.7 Mutt and Vim
+    -   4.8 Mutt and GNU nano
+    -   4.9 Mutt and Emacs
+    -   4.10 Colors
+    -   4.11 Index Format
+        -   4.11.1 Display recipient instead of sender in "Sent" folder
+            view
+        -   4.11.2 Variable column width
+    -   4.12 Contact management
+        -   4.12.1 Address aliases
+        -   4.12.2 Abook
+    -   4.13 Request IMAP mail retrieval manually
+    -   4.14 Avoiding slow index on large (IMAP) folders due to coloring
+    -   4.15 Speed up folders switch
+    -   4.16 Use Mutt to send mail from command line
+    -   4.17 Composing HTML e-mails
+    -   4.18 How to display another email while composing
+    -   4.19 Archive treated e-mails
+    -   4.20 Mutt-Sidebar
+    -   4.21 Migrating mails from one computer to another
+    -   4.22 Filtering the message view
+    -   4.23 Display the index above the pager view
+-   5 Troubleshooting
+    -   5.1 Backspace does not work in Mutt
+    -   5.2 Android's default MUA receives empty e-mail with attachment
+        "Unknown.txt"
+    -   5.3 The change-folder function always prompt for the same
+        mailbox
+    -   5.4 I cannot change folder when using Mutt read-only (Mutt -R)
+    -   5.5 Error sending message, child exited 127 (Exec error.).
+-   6 Documentation
+-   7 See also
 
 Overview
 --------
 
 Mutt focuses primarily on being a Mail User Agent (MUA), and was
-originally written to view mail. Later implementations added for
-retrieval, sending, and filtering mail are simplistic compared to other
+originally written to view mail. Later implementations (added for
+retrieval, sending, and filtering mail) are simplistic compared to other
 mail applications and, as such, users may wish to use external
 applications to extend Mutt's capabilities.
 
@@ -113,7 +101,7 @@ procmail to filter it in the case of POP3, and msmtp to send it.
 Installing
 ----------
 
-Install mutt, available in the Official Repositories.
+Install mutt, available in the official repositories.
 
 Optionally install external helper applications for an IMAP setup, such
 as offlineimap and msmtp.
@@ -137,8 +125,8 @@ This section covers IMAP, #POP3, #Maildir and #SMTP configuration.
 Note that Mutt will recognize two locations for its configuration file;
 ~/.muttrc and ~/.mutt/muttrc. Either location will work. You should also
 know some prerequisite for Mutt configuration. Its syntax is very close
-the Bourne Shell. For example, you can get the content of another config
-file:
+to the Bourne Shell. For example, you can get the content of another
+config file:
 
     source /path/to/other/config/file
 
@@ -168,8 +156,8 @@ imap_user
 
     set imap_user=USERNAME
 
-Continuing with the previous example, remember that Gmail requires your
-full email address (this is not standard):
+Tip:Continuing with the previous example, remember that Gmail requires
+your full email address (this is not standard):
 
     set imap_user=your.username@gmail.com
 
@@ -178,6 +166,10 @@ imap_pass
 If unset, the password will be prompted for.
 
     set imap_pass=SECRET
+
+Tip:If you have enabled two-factor authentication in Gmail and you have
+added an application specific password for Mutt, you will want to use
+that password here rather than your regular Gmail password.
 
 folder
 
@@ -428,7 +420,7 @@ Folders
 There is basically only one important folder here: the one where all
 your sent e-mails will be saved.
 
-    record = +Sent
+    set record = +Sent
 
 Gmail saves automatically sent e-mail to +[Gmail]/Sent, so we do not
 want duplicates.
@@ -444,6 +436,10 @@ For example:
 
     set my_pass='mysecretpass'
     set my_user=myname
+
+    set realname = 'Your Real Name'
+    set from = your-email-address
+    set use_from = yes
 
     set smtp_url=smtps://$my_user:$my_pass@smtp.domain.tld
     set ssl_force_tls = yes
@@ -546,7 +542,7 @@ Hooks take two parameters:
 The regex is the folder to be matched (or not if preceded by the !). The
 command tells what to do.
 
-Let's give a full example:
+Let us give a full example:
 
     .muttrc
 
@@ -599,8 +595,8 @@ another, just change the folder (c key). Alternatively you can use the
 sidebar.
 
 To change folder for different mailboxes you have to type the complete
-address -- for IMAP/POP3 folders, this may be quite inconvenient --
-let's bind some key to it.
+address -- for IMAP/POP3 folders, this may be quite inconvenient -- let
+us bind some key to it.
 
     ## Shortcuts
     macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.mutt/personal<enter><change-folder>!<enter>'
@@ -644,26 +640,29 @@ passwords for a couple of seconds:
     set my_pw_personal = ****
     set my_pw_work = ****
 
-Note:Remember that user defined variables must start with my
+Note:Remember that user defined variables must start with my_
 
 Now encrypt the file:
 
-    gpg -e -r <your-name> ~/.my-pwds
+    gpg -e -r 'your-name' ~/.my-pwds
 
-Note that <your-name> must match the one you provided at the
+Note that 'your-name' must match the one you provided at the
 gpg --gen-key step. Now you can wipe your file containing your passwords
 in clear:
 
     shred -xu ~/.my-pwds
 
-Back to your account dedicated files, e.g. .mutt/personal_config:
+Back to your account dedicated files, e.g. .mutt/muttrc:
 
     set imap_pass=$my_pw_personal
     # Every time the password is needed, use $my_pw_personal variable.
 
 And in your .muttrc, before you source any account dedicated file:
 
-    source "gpg2 -dq ~/.my-pwds.gpg |"
+    source "gpg2 -dq $HOME/.my-pwds.gpg |"
+
+Note:At the end of the line above, there is no space between the pipe
+and the double quote.
 
 -   The -q parameter makes gpg2 quiet which prevents gpg2 output messing
     with Mutt interface.
@@ -673,9 +672,9 @@ And in your .muttrc, before you source any account dedicated file:
 Explanation: when Mutt starts, it will first source the result of the
 password decryption, that's why it will prompt for a passphrase. Then
 all passwords will be stored in memory in specific variables for the
-time Mutt runs. Then when a folder-hook is called, is sets the imap_pass
-variable to the variable holding the appropriate password. When
-switching account, the imap_pass variable will be set to another
+time Mutt runs. Then, when a folder-hook is called, it sets the
+imap_pass variable to the variable holding the appropriate password.
+When switching accounts, the imap_pass variable will be set to another
 variable holding another password, etc.
 
 If you use external tools like OfflineIMAP and msmtp, you need to set up
@@ -691,6 +690,8 @@ Guides to get you started with using & customizing Mutt :
 -   The Woodnotes Guide to the Mutt Email Client (maintained by Randall
     Wood)
 -   The Homely Mutt (by Steve Losh)
+-   Everything You Need To Know To Start Using GnuPG with Mutt (by
+    Justin R. Miller)
 
 If you have any Mutt specific questions, feel free to ask in the irc
 channel.
@@ -827,28 +828,32 @@ background, using the -n parameter:
 The 2>/dev/null is to make it quiet, i.e. to prevent useless message
 printing where you do not want them to.
 
--   Note - If you have some problems with urlview due to Mutt's url
-    encoding you can try extract_url.pl
-
--   Note - If you would like to see a short contextual preview of the
-    content around each URL, try urlscan. The macro in your muttrc is
-    the same as for urlview (except for the 'urlscan' command). There is
-    no additional configuration required other than ensuring $BROWSER is
-    set.
+Note:urlview has a few deficiencies (e.g. the inability to handle
+certain email encodings) and is fairly feature-bare (e.g. it does not
+provide context for links it finds). There are a couple alternatives
+that do better. One, which can handle all email encodings and provides
+link context, is extract_url.pl. Another, which can also provide link
+context but cannot handle all email encodings, is urlscan. Both are
+drop-in replacements for urlview, though extract_url has features which
+benefit from additional configuration changes.
 
 > Viewing HTML
 
 It is possible to pass the html body to an external HTML program and
-then dump it, keeping email viewing uniform and unobtrusive. Two
-programs are described here: lynx and w3m.
+then dump it, keeping email viewing uniform and unobtrusive. Three
+programs are described here: lynx, w3m and elinks.
 
-Install lynx or w3m:
+Install lynx, w3m or elinks:
 
     pacman -S lynx
 
 or
 
     pacman -S w3m
+
+or
+
+    pacman -S elinks
 
 If ~/.mutt/mailcap does not exist you will need to create it and save
 the following to it.
@@ -858,6 +863,10 @@ the following to it.
 or, in case of w3m,
 
     text/html; w3m -I %{charset} -T text/html; copiousoutput;
+
+or, in case of elinks,
+
+    text/html; elinks -dump ; copiousoutput;
 
 Edit muttrc and add the following,
 
@@ -880,6 +889,14 @@ available and use w3m/lynx only when no text version is availble in the
 email:
 
     alternative_order text/plain text/html
+
+Some HTML mails may not display correctly in a text-based web browser.
+As a fallback solution, you can bind a key to open a graphical browser
+in such cases. The following macro will open the HTML mail selected from
+the attachment view in the web browser defined in the environment. (Feel
+free to adapt the ~/.cache/mutt/ folder).
+
+    macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && $BROWSER ~/.cache/mutt/mail.html && rm ~/.cache/mutt/mail.html<enter>"
 
 > Mutt and Vim
 
@@ -1054,6 +1071,61 @@ Index Format, i.e. the columns displayed in the folder view.
 See the Mutt Reference, man 3 strftime and man 3 printf for more
 details.
 
+Display recipient instead of sender in "Sent" folder view
+
+By default Mutt will display the sender in the index view. It is fine
+for most folders, but rather useless for the one were you store a copy
+of your sent e-mails since it will always display your name.
+
+The "columns" of the index can be configured through the index_format
+variable. Its syntax is documented in the muttrc man page. The values of
+our concern are %t (recipient) and %F (sender).
+
+To change the columns according to the current folder, we need to use a
+hook:
+
+    muttrc
+
+    folder-hook   *[sS]ent* 'set index_format="%2C | %Z [%d] %-30.30t (%-4.4c) %s"'
+    folder-hook ! *[sS]ent* 'set index_format="%2C | %Z [%d] %-30.30F (%-4.4c) %s"'
+
+The exclamation mark means everything that does not match the following
+regex. Of course you can change the index_format following you taste,
+and the regular expression if the folder does not have Sent not sent in
+its name.
+
+Variable column width
+
+If you resize the window, the subject might get truncated while there is
+still unused space left for some fields, like for the sender. You can
+get the maximum number of columns supported by your terminal (i.e. the
+width) using a shell call to tput cols. With this value, you can set a
+percentage of the width to fields like Sender and Subject.
+
+Example using the above folder-hook and a sidebar width of 24:
+
+    muttrc
+
+    ## From field gets 30% of remaining space, Subject gets 70%.
+    ## Remaining space is the total width minus the other fields (35), minus the sidebar (24)
+    set my_col_from = `echo $((30 * ($(tput cols)-35-24) / 100))`
+    set my_col_subject = `echo $((70 * ($(tput cols)-35-24) / 100))`
+
+    folder-hook .*[sS]ent.* 'set index_format="%2C | %Z [%d] %-$my_col_from.${my_col_from}t (%-4.4c) %-$my_col_subject.${my_col_subject}s"'
+    folder-hook ! .*[sS]ent.* 'set index_format="%2C | %Z [%d] %-$my_col_from.${my_col_from}F (%-4.4c) %-$my_col_subject.${my_col_subject}s"'
+
+Unfortunately, the above example suffers from one caveat: the my_col_*
+variables get computed one time only, on first start. So if you want it
+to refresh automatically, we need to set the variable in a hook. Sadly
+there is no hook for window resizing, but you can still use the
+folder-hook so that a simple folder switch suffice to recompute the
+view.
+
+    muttrc
+
+    folder-hook .*[sS]ent.* 'set my_col_from = `echo $((30 * ($(tput cols)-35-24) / 100))`; set my_col_subject = `echo $((70 * ($(tput cols)-35-24) / 100))`; set index_format="%2C | %Z [%d] %-$my_col_from.${my_col_from}t (%-4.4c) %-$my_col_subject.${my_col_subject}s"'
+    folder-hook ! .*[sS]ent.* 'set my_col_from = `echo $((30 * ($(tput cols)-35-24) / 100))`; set my_col_subject = `echo $((70 * ($(tput cols)-35-24) / 100))`; set index_format="%2C | %Z [%d] %-$my_col_from.${my_col_from}F (%-4.4c) %-$my_col_subject.${my_col_subject}s"'
+
 > Contact management
 
 Address aliases
@@ -1102,7 +1174,7 @@ Abook
 abook is a stand-alone program dedicated to contact management. It uses
 a very simple text-based interface and contacts are stored in a plain
 text, human-readable database. Besides the desired contact properties
-are extensible (birthday, address, fax, and do on).
+are extensible (birthday, address, fax, and so on).
 
 Abook is specifically designed to be interfaced with Mutt, so that it
 can serve as a full, more featured replacement of Mutt internal aliases.
@@ -1305,6 +1377,30 @@ Note that if you had a folder created for you header cache, all
 mailboxes will have their own cache file, so you can delete caches
 individually without having to remove everything.
 
+> Filtering the message view
+
+You can restrict the view to e-mails matching a pattern and specific
+properties with the limit command (default shortcut: l).
+
+To view all e-mails containing "foo" in the header, simply write "foo"
+and you are done. To remove the filter, use the "all" keyword.
+
+To view all flagged messages, use
+
+    ~F
+
+To view all unread messages, use
+
+    ~U
+
+All possible patterns are listed in the official manual.
+
+> Display the index above the pager view
+
+Set the following variable in your muttrc:
+
+    set pager_index_lines=10
+
 Troubleshooting
 ---------------
 
@@ -1316,7 +1412,7 @@ This is a common problem with some xterm-like terminals. Two solutions:
 
     bind index,pager ^? previous-page
 
-Note that ^? is one single character representing backspace in Caret
+Note that ^? is one single character representing backspace in caret
 notation. To type in Emacs, use Ctrl+q Backspace, in Vim
 Ctrl+v Backspace.
 
@@ -1352,6 +1448,19 @@ switching. Either use the sidebar or set another macro:
 
     macro index,pager <f3> '<enter-command>source ~/.mutt/personal<enter><change-folder>!<enter>'
 
+> Error sending message, child exited 127 (Exec error.).
+
+This is an SMTP error. It means that mutt does not know how to send the
+message. You can either try installing sendmail and see if that solves
+your issue, or you can set the smtp_url variable. If you use gmail, you
+can add the following to your muttrc to tell mutt to use gmails smtp
+server.
+
+    set smtp_url=smtps://$imap_user:$imap_pass@smtp.gmail.com
+
+Take note of the smtps protocol, it is important. This should solve the
+problem.
+
 Documentation
 -------------
 
@@ -1376,8 +1485,15 @@ See also
 -   muttrc builder
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mutt&oldid=255970"
+"https://wiki.archlinux.org/index.php?title=Mutt&oldid=305918"
 
 Category:
 
 -   Email Client
+
+-   This page was last modified on 20 March 2014, at 17:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

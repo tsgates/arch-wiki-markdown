@@ -1,15 +1,13 @@
 Xhost
 =====
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Summary                                                            |
-| -   2 Installation                                                       |
-| -   3 Usage                                                              |
-| -   4 The 'cannot connect to X server :0.0' output                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Summary
+-   2 Installation
+-   3 Usage
+-   4 The 'cannot connect to X server :0.0' output
 
 Summary
 -------
@@ -30,7 +28,7 @@ See man xhost for the full info.
 Installation
 ------------
 
-Install xorg-xhost from the Official Repositories.
+Install xorg-xhost from the Official repositories.
 
 Usage
 -----
@@ -63,8 +61,15 @@ connect from any host, which is your confirmation that you can now sudo
 <your soft> without issue.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xhost&oldid=236202"
+"https://wiki.archlinux.org/index.php?title=Xhost&oldid=301577"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 24 February 2014, at 11:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -14,15 +14,13 @@ Beep is an advanced PC speaker beeping program. It is useful for
 situations where no sound card and/or speakers are available, and simple
 audio notification is desired.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Tips and Tricks                                                    |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Tips and Tricks
+-   4 See also
 
 Installation
 ------------
@@ -69,8 +67,15 @@ See also
 -   Advanced Linux Sound Architecture
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Beep&oldid=235236"
+"https://wiki.archlinux.org/index.php?title=Beep&oldid=273840"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 1 September 2013, at 11:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

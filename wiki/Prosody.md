@@ -1,29 +1,11 @@
 Prosody
 =======
 
-> Summary
-
-This article discusses how to setup and use Prosody, a lightweight XMPP
-server. It covers installation, configuration, operation, and removal of
-Prosody.
-
-Important Links
-
-Prosody.im
-
-Documentation
-
-Prosodical Thoughts (Blog)
-
-Issue Tracker
-
-Prosody Modules (Extra Modules)
-
 Prosody (pronunciation: 1, 2) is an XMPP server written in the Lua
 programming language. Prosody is designed to be lightweight and highly
 extensible. It is licensed under a permissive MIT license. Prosody is
 available for Arch Linux in the Community repository with some optional
-dependencies available from the AUR.
+dependencies available from the Arch User Repository.
 
 Previous experience with building and installing packages from the AUR
 and basic knowledge of XMPP will be very helpful when following the
@@ -31,42 +13,28 @@ guide. As per usual, when command line commands are provided, lines
 preceded by $ indicate that the command may be run as a regular user,
 while lines preceded by # indicate that the command must be run as root.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Optional Dependencies                                        |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Logging                                                      |
-|                                                                          |
-| -   3 Operation                                                          |
-|     -   3.1 Security                                                     |
-|         -   3.1.1 User Registration                                      |
-|         -   3.1.2 Stream Encryption                                      |
-|                                                                          |
-|     -   3.2 Listing Users                                                |
-|                                                                          |
-| -   4 Removal                                                            |
-| -   5 Tips & Tricks                                                      |
-|     -   5.1 Components                                                   |
-|         -   5.1.1 Multi-User Chat                                        |
-|                                                                          |
-|     -   5.2 Prosody Modules                                              |
-|     -   5.3 Console                                                      |
-|                                                                          |
-| -   6 Troubleshooting                                                    |
-| -   7 Development                                                        |
-|     -   7.1 Change Log                                                   |
-|     -   7.2 Packages                                                     |
-|                                                                          |
-| -   8 More Resources                                                     |
-|     -   8.1 Development                                                  |
-|     -   8.2 Documentation                                                |
-|     -   8.3 Communication                                                |
-|     -   8.4 Social                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Optional Dependencies
+-   2 Configuration
+    -   2.1 Logging
+-   3 Operation
+    -   3.1 Security
+        -   3.1.1 User Registration
+        -   3.1.2 Stream Encryption
+    -   3.2 Listing Users
+-   4 Removal
+-   5 Tips & Tricks
+    -   5.1 Components
+        -   5.1.1 Multi-User Chat
+    -   5.2 Prosody Modules
+    -   5.3 Console
+-   6 Troubleshooting
+-   7 Development
+-   8 Communication
+-   9 See also
 
 Installation
 ------------
@@ -85,17 +53,17 @@ to build and install packages from the AUR please see this tutorial.
 
  TLS/SSL Support (Recommended) 
     Allow Prosody to encrypt streams to prevent eavesdropping.  
-    Requires: luasec (Community)
+    Requires: lua51-sec (Community)
 
  Better Connection Scaling (Recommended) 
     Allow Prosody to use libevent to handle a greater number of
     simultaneous connections.  
-    Requires: luaevent (AUR)
+    Requires: lua51-event (AUR)
 
  Stream Compression 
     Allow Prosody to compress client-to-server streams for compatible
     clients to save bandwidth.  
-    Requires: lua-zlib (Community)
+    Requires: lua51-zlib (Community)
 
  Cyrus SASL Support 
     Allow Prosody to use the Cyrus SASL library to provide
@@ -120,29 +88,23 @@ No output means the syntax is correct.
 
 > Logging
 
-The Arch Linux Prosody package is pre-configured to log to
-/var/log/prosody/prosody.err and /var/log/prosody/prosody.log. The Arch
-Linux package also includes a logrotate script in
-/etc/logrotate.d/prosody, configure it to suit your needs. If you
-enabled the olddir path for rotated log files in /etc/logrotate.conf you
-will likely want to move old prosody log files. First create the
-directory:
-
-# mkdir /var/log/old/prosody
-
-Then uncomment the olddir line in /etc/logrotate.d/prosody.
+The Arch Linux Prosody package is pre-configured to log to syslog. Thus,
+by default, Prosody log messages are available in the systemd journal.
 
 Operation
 ---------
 
-You can start Prosody through the included rc.d script:
+You can start Prosody through the included Systemd script:
 
-# /etc/rc.d/prosody start
+# systemctl start prosody
 
-Of course you can add prosody to your DAEMONS array in your /etc/rc.conf
-file to have it automatically started at boot. Prosody uses the default
-XMPP ports, 5222 and 5269, for client-to-server and server-to-server
-communications respectively. Configure your firewall as necessary.
+To automatically start Prosody at boot execute:
+
+# systemctl enable prosody
+
+Prosody uses the default XMPP ports, 5222 and 5269, for client-to-server
+and server-to-server communications respectively. Configure your
+firewall as necessary.
 
 You can manipulate Prosody users by using the prosodyctl program. To add
 a user:
@@ -221,8 +183,7 @@ Check above for optional dependencies that may also be removed.
 
 Prosody may leave the following directories on your filesystem that you
 may want to remove if you do not plan on reinstalling Prosody:
-/etc/prosody, /var/lib/prosody, /var/log/prosody, and
-/var/log/old/prosody.
+/etc/prosody and /var/lib/prosody.
 
 Tips & Tricks
 -------------
@@ -331,13 +292,11 @@ variety of steps you can take to narrow down the cause:
     Run luac -p /etc/prosody/prosody.cfg.lua to check for any syntax
     errors in your configuration file. If there is no output your syntax
     is fine.
--   Check the log files  
-    Log files are located in /var/log/prosody. Errors are only logged if
-    there is a critical problem so always address those issues. If you
-    think you have a very low level issue (like protocol compatibility
-    between clients and servers with Prosody) then you can enable the
-    very verbose debug level logging. The default configuration file has
-    commented out lines to log debug messages to prosody.debug.
+-   Check the log  
+    Errors are only logged if there is a critical problem so always
+    address those issues. If you think you have a very low level issue
+    (like protocol compatibility between clients and servers with
+    Prosody) then you can enable the very verbose debug level logging.
 -   Check permissions  
     The Prosody package should add a new prosody user and group to your
     system and set appropriate permissions, but it is always good to
@@ -352,7 +311,7 @@ variety of steps you can take to narrow down the cause:
     5269) are listed.
 -   Restart  
     Like most things, it doesn't hurt to restart Prosody
-    (/etc/rc.d/prosody restart) to see if it resolves an issue.
+    (systemctl restart prosody) to see if it resolves an issue.
 
 If you're unable to resolve your issue yourself there are a variety of
 resources you can use to seek help. In order of immediacy with which
@@ -365,15 +324,6 @@ you'll likely receive help:
 Development
 -----------
 
-> Change Log
-
-You may view the change log of the Prosody package by issuing the
-following command:
-
-$ pacman -Qc prosody
-
-> Packages
-
 Two development packages are maintained for Prosody in the AUR,
 prosody-devel and prosody-hg]. prosody-devel tracks the latest source
 release of a development version (alpha, beta, release candidate) and
@@ -382,37 +332,31 @@ development version is released. prosody-hg tracks the Mercurial
 repository tip for Prosody and will always contain the latest code as it
 is checked in. Both packages are built similarly to the stable package.
 
-More Resources
---------------
-
-> Development
-
--   Issue Tracker
--   Source Repository
--   Prosody Modules (Non-Core Modules)
-
-> Documentation
-
--   Frequently Asked Questions
--   Troubleshooting Guide
--   XEP Support List
--   Module List
-
-> Communication
+Communication
+-------------
 
 -   Mailing Lists: prosody-dev, prosody-users
 -   Conference: prosody@conference.prosody.im
 -   Blog: Prosodical Thoughts
 
-> Social
+See also
+--------
 
--   Freshmeat
--   Identi.ca
--   Ohloh
+-   Official documentation
+-   Prosodical Thoughts (Blog)
+-   Issue Tracker
+-   Prosody Modules (Extra Modules)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Prosody&oldid=249136"
+"https://wiki.archlinux.org/index.php?title=Prosody&oldid=302651"
 
 Category:
 
--   Networking
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

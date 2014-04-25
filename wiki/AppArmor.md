@@ -11,34 +11,29 @@ AppArmor
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-AppArmor is a MAC (Mandatory Access Control) system, implemented upon
-LSM (Linux Security Modules).
+AppArmor is a Mandatory Access Control (MAC) system, implemented upon
+the Linux Security Modules (LSM).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preventing circumvention of path-based MAC via links               |
-| -   2 Implementation Status                                              |
-|     -   2.1 AUR/apparmor package                                         |
-|                                                                          |
-| -   3 Links                                                              |
-| -   4 AppArmor Packages                                                  |
-| -   5 Kernel Configuration                                               |
-| -   6 Bootloader Configuration                                           |
-|     -   6.1 Enable                                                       |
-|         -   6.1.1 Disable                                                |
-|                                                                          |
-| -   7 System Configuration                                               |
-|     -   7.1 Mounts (/etc/fstab securityfs)                               |
-|                                                                          |
-| -   8 UserSpace Tools                                                    |
-|     -   8.1 Users                                                        |
-|     -   8.2 Maintainers                                                  |
-|                                                                          |
-| -   9 More Info                                                          |
-| -   10 See also                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Preventing circumvention of path-based MAC via links
+-   2 Implementation Status
+    -   2.1 AUR/apparmor package
+-   3 Links
+-   4 AppArmor Packages
+-   5 Kernel Configuration
+-   6 Bootloader Configuration
+    -   6.1 Enable
+    -   6.2 Disable
+-   7 System Configuration
+    -   7.1 Mounts (/etc/fstab securityfs)
+    -   7.2 Systemd support
+-   8 UserSpace Tools
+    -   8.1 Users
+    -   8.2 Maintainers
+-   9 More Info
+-   10 See also
 
 Preventing circumvention of path-based MAC via links
 ----------------------------------------------------
@@ -56,9 +51,7 @@ Implementation Status
 AppArmor is currently available in the Arch Linux kernel, but it has to
 be activated on kernel boot.
 
-The userspace support requires AUR packages.
-
--   https://aur.archlinux.org/packages.php?ID=42279
+Userspace support requires the AUR package apparmor.
 
 Not all the packages work out-of-the-box, but it is a work in progress.
 If you know how to build profiles yourself you shouldn't have too many
@@ -83,7 +76,7 @@ Added lot of features:
 
 But we still miss following features (TODO):
 
--   init (rc.d) scripts! http://aur.pastebin.com/beQ4BjGX
+-   A systemd .service for every important daemon in AppArmor
 -   chase missing dependencies
 -   test everything
 -   make list of files that should go to backup=() arrays in packages...
@@ -93,15 +86,15 @@ But we still miss following features (TODO):
     -   make some package with profiles for all [core] packages enabled
         by default without need for any further user configuration
     -   etc...
-
--   apparmor gnome applet (can't build, deprecated...)
+-   apparmor gnome applet (can't build, deprecated..., find a working
+    Replacement)
 
 Links
 -----
 
 -   Official pages
     -   Kernel: https://apparmor.wiki.kernel.org/
-        http://wiki.apparmor.net/index.php/Main_Page
+        http://wiki.apparmor.net/
     -   Userspace: https://launchpad.net/apparmor
 
 -   http://www.kernel.org/pub/linux/security/apparmor/AppArmor-2.6/
@@ -111,15 +104,15 @@ Links
 -   https://help.ubuntu.com/community/AppArmor
 -   FS#21406
 -   http://stuff.mit.edu/afs/sipb/contrib/linux/Documentation/apparmor.txt
--   https://apparmor.wiki.kernel.org/index.php/Kernel_interfaces
--   https://apparmor.wiki.kernel.org/index.php/AppArmor_versions
+-   http://wiki.apparmor.net/index.php/Kernel_interfaces
+-   http://wiki.apparmor.net/index.php/AppArmor_versions
 -   http://manpages.ubuntu.com/manpages/oneiric/man5/apparmor.d.5.html
 -   http://manpages.ubuntu.com/manpages/oneiric/man8/apparmor_parser.8.html
--   https://apparmor.wiki.kernel.org/index.php/Distro_CentOS
+-   http://wiki.apparmor.net/index.php/Distro_CentOS
 -   http://bodhizazen.net/aa-profiles/
 -   https://wiki.ubuntu.com/ApparmorProfileMigration
 -   wikipedia:Linux_Security_Modules
--   https://apparmor.wiki.kernel.org/index.php/Gittutorial
+-   http://wiki.apparmor.net/index.php/Gittutorial
 
 AppArmor Packages
 -----------------
@@ -137,13 +130,14 @@ FYI, you do not need to touch it):
      CONFIG_SECURITY_APPARMOR_BOOTPARAM_VALUE=0
      # CONFIG_DEFAULT_SECURITY_APPARMOR is not set
 
-However, integration of AppArmor into the 2.6.36 kernel is not quite
-complete. It is missing network mediation and some of the interfaces for
-introspection. See here for details. There are compatibility patches
-that can be applied to every recent kernel to reintroduce these
-interfaces. The patchset is pretty small and should be applied if you
-decide to use AppArmor. (Note: the patchset for 2.6.39 works with Kernel
-3.0.x)
+However, integration of AppArmor into the kernel is not quite complete.
+It is missing network mediation. See here for details. There are
+compatibility patches provided with the AppArmor tarball that can be
+applied to every recent kernel to reintroduce these interfaces. The
+patchset is pretty small and should be applied if you decide to use
+AppArmor. A suitably patched kernel is provided by the AUR package
+linux-apparmor. Historic note: as of Linux 3.12, the profile
+introspection patch is not needed anymore.
 
 Bootloader Configuration
 ------------------------
@@ -162,7 +156,7 @@ command as root:
 
 (Y=enabled, N=disabled, no such file = module not in kernel)
 
-Disable
+> Disable
 
 AppArmor will be disabled by default in Arch Linux, so you will not need
 to disable it explicitly until you will build your own kernel with
@@ -174,9 +168,16 @@ System Configuration
 
 > Mounts (/etc/fstab securityfs)
 
-https://apparmor.wiki.kernel.org/index.php/Kernel_interfaces
+http://wiki.apparmor.net/index.php/Kernel_interfaces
 
      none     /sys/kernel/security securityfs defaults            0      0
+
+> Systemd support
+
+The AUR package apparmor includes a systemd service file that loads all
+AppArmor profiles in /etc/apparmor.d/. To enable it to run on boot, use:
+
+    # systemctl enable apparmor
 
 UserSpace Tools
 ---------------
@@ -189,8 +190,8 @@ You can currently install userspace tools from AUR.
 
 You need userspace tools that are compatible with your kernel version.
 The compatibility list can be found here:
-https://apparmor.wiki.kernel.org/index.php/AppArmor_versions e.g.:
-Kernel 2.6.36 is compatible with AppArmor 2.5.1
+http://wiki.apparmor.net/index.php/AppArmor_versions e.g.: Kernel 2.6.36
+is compatible with AppArmor 2.5.1
 
 More Info
 ---------
@@ -224,9 +225,16 @@ See also
 -   SELinux
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=AppArmor&oldid=254481"
+"https://wiki.archlinux.org/index.php?title=AppArmor&oldid=277935"
 
 Categories:
 
 -   Security
 -   Kernel
+
+-   This page was last modified on 7 October 2013, at 10:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

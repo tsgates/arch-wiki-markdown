@@ -42,8 +42,15 @@ automatically.
     $ loginctl show-session $XDG_SESSION_ID
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ConsoleKit&oldid=251416"
+"https://wiki.archlinux.org/index.php?title=ConsoleKit&oldid=305770"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 20 March 2014, at 02:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

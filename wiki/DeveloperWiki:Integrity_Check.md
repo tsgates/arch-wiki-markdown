@@ -1,15 +1,13 @@
 DeveloperWiki:Integrity Check
 =============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Bug Reports                                                        |
-|     -   2.1 depends                                                      |
-|     -   2.2 NOTE : PKGBUILDs calling pacman -Q                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Bug Reports
+    -   2.1 depends
+    -   2.2 NOTE : PKGBUILDs calling pacman -Q
 
 Introduction
 ============
@@ -67,3 +65,10 @@ Retrieved from
 Category:
 
 -   Package development
+
+-   This page was last modified on 5 December 2012, at 23:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

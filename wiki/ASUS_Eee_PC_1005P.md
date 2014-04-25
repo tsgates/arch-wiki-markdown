@@ -15,29 +15,24 @@ ASUS Eee PC 1005P
 This article describes both the 1005P and the 1005PE, since the only
 difference of the 1005PE is wlan n and a bigger harddrive.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Kernel                                                             |
-| -   3 Xorg                                                               |
-|     -   3.1 Video Driver                                                 |
-|     -   3.2 Device Autodetection                                         |
-|     -   3.3 Graphic Performance                                          |
-|     -   3.4 Touchpad                                                     |
-|     -   3.5 xrandr                                                       |
-|                                                                          |
-| -   4 Powersaving and ACPI                                               |
-|     -   4.1 laptop-mode-tools                                            |
-|         -   4.1.1 Setup                                                  |
-|         -   4.1.2 LCD brightness                                         |
-|         -   4.1.3 SHE                                                    |
-|                                                                          |
-|     -   4.2 Hotkeys                                                      |
-|                                                                          |
-| -   5 Hardware Info                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Kernel
+-   3 Xorg
+    -   3.1 Video Driver
+    -   3.2 Device Autodetection
+    -   3.3 Graphic Performance
+    -   3.4 Touchpad
+    -   3.5 xrandr
+-   4 Powersaving and ACPI
+    -   4.1 laptop-mode-tools
+        -   4.1.1 Setup
+        -   4.1.2 LCD brightness
+        -   4.1.3 SHE
+    -   4.2 Hotkeys
+-   5 Hardware Info
 
 Installation
 ------------
@@ -193,8 +188,15 @@ lspci says:
     02:00.0 Network controller: Atheros Communications Inc. AR9285 Wireless Network Adapter (PCI-Express) (rev 01)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1005P&oldid=254957"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1005P&oldid=304861"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 08:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

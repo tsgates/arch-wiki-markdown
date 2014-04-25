@@ -18,7 +18,7 @@ This command shows you how much entropy your server has collected. If it
 is rather low (<1000), you should probably install haveged. Otherwise
 cryptographic applications will block until there is enough entropy
 available, which eg. could result in slow wlan speed, if your server is
-a Software Access Point.
+a Software access point.
 
 You should use this command again to verify how much haveged boosted
 your entropy pool after the installation.
@@ -34,8 +34,15 @@ Service
 The package provides haveged.service, see systemd for details.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Haveged&oldid=231565"
+"https://wiki.archlinux.org/index.php?title=Haveged&oldid=303737"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 9 March 2014, at 09:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

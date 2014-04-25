@@ -9,20 +9,17 @@ original VHCS.
 
 For more detail information,please visit ispCP Project Info.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 ispCP Omega Release                                                |
-|     -   1.1 Installation                                                 |
-|     -   1.2 Upgradation                                                  |
-|     -   1.3 Configuration                                                |
-|     -   1.4 Uninstallation                                               |
-|     -   1.5 Troubleshooting                                              |
-|                                                                          |
-| -   2 ispCP Release                                                      |
-| -   3 More resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 ispCP Omega Release
+    -   1.1 Installation
+    -   1.2 Upgradation
+    -   1.3 Configuration
+    -   1.4 Uninstallation
+    -   1.5 Troubleshooting
+-   2 ispCP Release
+-   3 More resources
 
 ispCP Omega Release
 -------------------
@@ -140,8 +137,15 @@ More resources
 ispCP Project
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IspCP&oldid=240567"
+"https://wiki.archlinux.org/index.php?title=IspCP&oldid=268472"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 28 July 2013, at 00:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

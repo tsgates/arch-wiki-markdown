@@ -25,3 +25,10 @@ Retrieved from
 Category:
 
 -   Terminal emulators
+
+-   This page was last modified on 24 March 2013, at 05:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -8,52 +8,39 @@ Pro Audio
                            irqbalance (Discuss)     
   ------------------------ ------------------------ ------------------------
 
-> Summary
+Related articles
 
-Information on using Arch Linux for (semi-)professional audio
+-   Unofficial user repositories
+-   envy24control
 
-> Related
+Contents
+--------
 
-Unofficial User Repositories
-
-envy24control
-
-ArchAudio
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 Pro Audio on Arch Linux                                      |
-|                                                                          |
-| -   2 Getting Started                                                    |
-|     -   2.1 System Configuration                                         |
-|     -   2.2 JACK                                                         |
-|         -   2.2.1 FireWire                                               |
-|         -   2.2.2 Jack Flash                                             |
-|         -   2.2.3 Quickscan Jack script                                  |
-|                                                                          |
-|     -   2.3 A General Example                                            |
-|                                                                          |
-| -   3 Realtime Kernel                                                    |
-|     -   3.1 ABS                                                          |
-|     -   3.2 AUR                                                          |
-|                                                                          |
-| -   4 MIDI                                                               |
-| -   5 Environment Variables                                              |
-| -   6 Tips and Tricks                                                    |
-| -   7 Hardware                                                           |
-|     -   7.1 M-Audio Delta 1010                                           |
-|     -   7.2 M-Audio Fast Track Pro                                       |
-|     -   7.3 PreSonus Firepod                                             |
-|                                                                          |
-| -   8 Restricted Software                                                |
-|     -   8.1 Steinberg's SDKs                                             |
-|                                                                          |
-| -   9 Arch Linux Pro Audio Project                                       |
-| -   10 Linux and Arch Linux Pro Audio in the News                        |
-+--------------------------------------------------------------------------+
+-   1 Introduction
+    -   1.1 Pro Audio on Arch Linux
+-   2 Getting Started
+    -   2.1 System Configuration
+        -   2.1.1 Checklist
+    -   2.2 JACK
+        -   2.2.1 FireWire
+        -   2.2.2 Jack Flash
+        -   2.2.3 Quickscan Jack script
+    -   2.3 A General Example
+-   3 Realtime Kernel
+    -   3.1 ABS
+    -   3.2 AUR
+-   4 MIDI
+-   5 Environment Variables
+-   6 Tips and Tricks
+-   7 Hardware
+    -   7.1 M-Audio Delta 1010
+    -   7.2 M-Audio Fast Track Pro
+    -   7.3 PreSonus Firepod
+    -   7.4 PreSonus AudioBox USB
+-   8 Restricted Software
+    -   8.1 Steinberg's SDKs
+-   9 Arch Linux Pro Audio Project
+-   10 Linux and Arch Linux Pro Audio in the News
 
 Introduction
 ------------
@@ -156,8 +143,7 @@ if you prefer to compile, search the AUR. Nothing stops you from
 building directly off of upstream releases, but then you might as well
 run LFS.
 
-Start by installing either jack or jack2 (see below) from the official
-repositories.
+Start by installing JACK.
 
 The following packages are a good start to build a full-featured pro
 audio system:
@@ -173,10 +159,6 @@ audio system:
 -   lmms
 -   dssi
 
-Additionally, if you are on a 64-bit installation and need to run 32-bit
-applications that require jack or jack2, install lib32-jack or
-jack2-multilib from the multilib repository, respectively.
-
 Other packages you may need that are available from the AUR:
 
 -   traverso
@@ -184,17 +166,26 @@ Other packages you may need that are available from the AUR:
 -   fst-git
 -   jost
 -   wineasio
+-   vst-bridge
 
 > System Configuration
 
-Tip:You may want to consider the following often seen system
-optimizations:
+You may want to consider the following often seen system optimizations:
 
--   Install linux-rt kernel and include threadirqs in your kernel boot
-    line (also possible with regular kernels >=2.6.39).
--   Install the systemd-rtirq package and enable the rtirq service using
-    systemd.
 -   Add yourself to the audio group.
+-   Add the threadirqs kernel parameter.
+
+Warning:Enabling threadirqs seems to be causing system lockups in
+conjunction with usb devices in at least some kernel versions starting
+with 3.13 and including at least 3.14-rc2. See for example
+https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1279081 and
+http://www.spinics.net/lists/linux-usb/msg102504.html also linked from
+there.  
+ EDIT: The changelog seems to indicate that this has been fixed in the
+3.13.6 vanilla kernel. (Search for threadirqs in
+https://www.kernel.org/pub/linux/kernel/v3.x/ChangeLog-3.13.6)
+
+-   Install linux-rt kernel.
 -   Set the cpufreq governor to performance.
 -   Add noatime to the filesystem mount options (see Maximizing
     Performance).
@@ -203,10 +194,10 @@ Realtime configuration has mostly been automated. There is no longer any
 need to edit files like /etc/security/limits.conf for realtime access.
 However, if you must change the settings, see
 /etc/security/limits.d/99-audio.conf and
-/lib/udev/rules.d/40-hpet-permissions.rules (these files are provided by
-jack or jack2). Additionaly, you may want to increase the highest
-requested RTC interrupt frequency (default is 64 Hz) by adding to
-/etc/rc.local something like this:
+/usr/lib/udev/rules.d/40-hpet-permissions.rules (these files are
+provided by jack or jack2). Additionaly, you may want to increase the
+highest requested RTC interrupt frequency (default is 64 Hz) by running
+the following at boot:
 
     echo 2048 > /sys/class/rtc/rtc0/max_user_freq
     echo 2048 > /proc/sys/dev/hpet/max-user-freq
@@ -217,7 +208,7 @@ trying to write to disk. Then, there's inotify which watches for changes
 to files and reports them to applications requesting this information.
 When working with lots of audio data, a lot of watches will need to be
 kept track of, so they will need to be increased. These two settings can
-be adjusted in /etc/sysctl.conf (file owned by procps).
+be adjusted in /etc/sysctl.d/99-sysctl.conf.
 
     vm.swappiness = 10
     fs.inotify.max_user_watches = 524288
@@ -232,8 +223,11 @@ is 64).
 The SOUND_CARD_PCI_ID can be obtained like so:
 
     $ lspci ¦ grep -i audio
+
     03:00.0 Multimedia audio controller: Creative Labs SB Audigy (rev 03)
     03:01.0 Multimedia audio controller: VIA Technologies Inc. VT1720/24 [Envy24PT/HT] PCI Multi-Channel Audio Controller (rev 01)
+
+Checklist
 
 The steps below are mostly to double-check that you have a working
 multimedia system:
@@ -256,8 +250,8 @@ multimedia system:
 
 -   Is PAM-security and realtime working OK?
 
-See: Realtime for Users (Pay special attention especially if you do not
-run KDM, GDM or Slim.)
+See: Realtime for Users#PAM-enabled Login (Pay special attention
+especially if you do not run KDM, GDM or Slim.)
 
 -   Have I rebooted after having done all that?
 
@@ -504,9 +498,8 @@ Tips and Tricks
 -   IRQ issues can occur and cause problems. An example is video
     hardware reserving the bus, causing needless interrupts in the
     system I/O path. See discussion at FFADO IRQ Priorities How-To. If
-    you have a realtime or a recent kernel, you can use this helpful
-    script rtirq to adjust priorities of IRQ handling threads. Also
-    available as systemd-rtirq.
+    you have a realtime or a recent kernel, you can use rtirq to adjust
+    priorities of IRQ handling threads.
 
 -   Do not use the irqbalance daemon, or do so carefully [1].
 
@@ -634,6 +627,15 @@ ffadomixer does not work with this card yet, hopefully in the future we
 can control more aspects of the card through a software interface like
 that.
 
+> PreSonus AudioBox USB
+
+1.  Startup: It's called "USB" by ALSA.
+2.  Specs: Two mono TRS+XLR in, two mono TRS out, MIDI in and out, plus
+    separate stereo headphone jack. Knob controls for both inputs, for
+    main out, and for headphone, four in all.
+3.  Hardware: Works very well, audio and MIDI too. No software mixer
+    controls at all.
+
 Restricted Software
 -------------------
 
@@ -692,8 +694,15 @@ Linux and Arch Linux Pro Audio in the News
     "songshop" Beasley, February 2010
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pro_Audio&oldid=254108"
+"https://wiki.archlinux.org/index.php?title=Pro_Audio&oldid=304946"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 16 March 2014, at 09:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

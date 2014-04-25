@@ -1,21 +1,17 @@
 Nokia6230i
 ==========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Common settings                                                    |
-|     -   1.1 DKU2 cable                                                   |
-|                                                                          |
-| -   2 GPRS                                                               |
-|     -   2.1 DKU2                                                         |
-|     -   2.2 Bluetooth                                                    |
-|                                                                          |
-| -   3 Backup/restore phonebook                                           |
-|     -   3.1 Backup                                                       |
-|     -   3.2 Restore                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Common settings
+    -   1.1 DKU2 cable
+-   2 GPRS
+    -   2.1 DKU2
+    -   2.2 Bluetooth
+-   3 Backup/restore phonebook
+    -   3.1 Backup
+    -   3.2 Restore
 
 Common settings
 ---------------
@@ -159,3 +155,10 @@ Retrieved from
 Category:
 
 -   Mobile devices
+
+-   This page was last modified on 13 June 2012, at 10:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

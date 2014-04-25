@@ -7,25 +7,22 @@ jailbreak. WiFi requires no additional configuration provided your
 computer can connect to wireless networks, and you'll find instructions
 for USB and Bluetooth below.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Tethering over USB                                                 |
-|     -   1.1 Tethering over USB using Personal Hotspot                    |
-|         -   1.1.1 Troubleshooting                                        |
-|             -   1.1.1.1 The iPhone appears in the device list but it     |
-|                 doesn't connect                                          |
-|                                                                          |
-|     -   1.2 Tethering over USB using SSH and itunnel                     |
-|     -   1.3 Tethering over USB from within a Windows guest in Virtualbox |
-|                                                                          |
-| -   2 Tethering over Bluetooth                                           |
-|     -   2.1 Hardware Requirements                                        |
-|     -   2.2 Setup                                                        |
-|         -   2.2.1 Gnome/XFCE                                             |
-|         -   2.2.2 netcfg                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Tethering over USB
+    -   1.1 Tethering over USB using Personal Hotspot
+        -   1.1.1 Troubleshooting
+            -   1.1.1.1 The iPhone appears in the device list but it
+                doesn't connect
+            -   1.1.1.2 "Trust This Computer" Alert Loop
+    -   1.2 Tethering over USB using SSH and itunnel
+    -   1.3 Tethering over USB from within a Windows guest in Virtualbox
+-   2 Tethering over Bluetooth
+    -   2.1 Hardware Requirements
+    -   2.2 Setup
+        -   2.2.1 Gnome/XFCE
+        -   2.2.2 netcfg
 
 Tethering over USB
 ------------------
@@ -35,10 +32,8 @@ Tethering over USB
 Tethering natively over USB is the optimal choice as it provides a more
 stable connection and uses less batteries than bluetooth or wifi.
 
-To tether your iPhone over USB, you'll need the following packages
-installed:
-
-    # pacman -S usbmuxd libimobiledevice ifuse
+To tether your iPhone over USB, you will need to install these packages:
+usbmuxd, libimobiledevice and ifuse.
 
 Then ensure the ipheth module is loaded (currently included in the
 default and LTS Archlinux kernels)
@@ -59,10 +54,9 @@ To manually unmount it later, run:
 
     # fusermount -u /path/to/mountpoint
 
-Once your iPhone's filesystem is mounted, you should be able to use
-netcfg, NetworkManager, wicd, dhcpcd etc to connect to the internet
-through the new iPhone ethernet device just like you would any other
-ethernet connection.
+Once your iPhone's filesystem is mounted, you should be able to use any
+network manager to connect to the internet through the new iPhone
+ethernet device just like you would any other ethernet connection.
 
 Troubleshooting
 
@@ -73,6 +67,18 @@ your computer before connecting in some circumstances (iPhones using a
 PIN unlock?):
 
     # idevicepair pair
+
+"Trust This Computer" Alert Loop
+
+At the time of this writing Feb 12, 2014, the library that enables this
+functionality, libimobiledevice and/or its dependencies are not up to
+date on the AUR. The bug, however is fixed in the master branch and
+until the package maintainer updates the AUR packages, a script has been
+made available for self-compilation of the required libraries under
+ArchLinux.
+
+Alternatively, install usbmuxd-git, libimobiledevice-git, and ifuse-git
+from the Arch User Repository.
 
 > Tethering over USB using SSH and itunnel
 
@@ -104,35 +110,7 @@ but simultaneous charging from an USB port works well.
 
 > Setup
 
-From the article entitled Bluetooth:
-
-To use Bluetooth, the bluez package for the Linux Bluetooth protocol
-stack must be installed:
-
-    # pacman -S bluez
-
-Once bluez is installed, both the dbus daemon and the bluetooth daemon
-must be running:
-
-    # /etc/rc.d/dbus start
-
-    # /etc/rc.d/bluetooth start
-
-The dbus daemon is used to read settings and for pin pairing, while the
-bluetooth daemon is required for the Bluetooth protocol. It is important
-that dbus is started before bluetooth. If dbus was not running when
-bluetooth was started, then try (after dbus is running):
-
-    # /etc/rc.d/bluetooth restart
-
-To start bluetooth automatically on boot, add bluetooth to your daemons
-array in rc.conf:
-
-    DAEMONS=(... bluetooth ...)
-
-No further configuration seems to be necessary on Arch systems. If
-problems arise, see the first sources link for possible config file
-edits.
+See the main article Bluetooth and setup the bluetooth daemon.
 
 Gnome/XFCE
 
@@ -160,6 +138,14 @@ connect to it, run the following as root.
 
 netcfg
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: netcfg has been  
+                           superseded by netctl     
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 Alternatively, you can create a netcfg network profile to allow easy
 tethering from the command line, without requiring Blueman or Gnome.
 Assuming an already paired iPhone with address '00:00:DE:AD:BE:EF',
@@ -183,8 +169,16 @@ To bring the interface down and un-tether:
     # netcfg down tether
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IPhone_Tethering&oldid=223932"
+"https://wiki.archlinux.org/index.php?title=IPhone_Tethering&oldid=304190"
 
-Category:
+Categories:
 
+-   Networking
 -   Mobile devices
+
+-   This page was last modified on 12 March 2014, at 19:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

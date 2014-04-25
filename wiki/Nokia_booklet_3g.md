@@ -31,17 +31,15 @@ works.
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install                                                            |
-| -   2 Graphics Card                                                      |
-| -   3 Hard Disk                                                          |
-| -   4 3G Modem                                                           |
-| -   5 Software                                                           |
-| -   6 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Install
+-   2 Graphics Card
+-   3 Hard Disk
+-   4 3G Modem
+-   5 Software
+-   6 Links
 
 Install
 -------
@@ -121,8 +119,15 @@ Links
 -   Nokia official support
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Nokia_booklet_3g&oldid=229675"
+"https://wiki.archlinux.org/index.php?title=Nokia_booklet_3g&oldid=298315"
 
 Category:
 
 -   Nokia
+
+-   This page was last modified on 16 February 2014, at 07:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

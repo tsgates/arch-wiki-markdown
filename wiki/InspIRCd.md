@@ -7,18 +7,15 @@ scratch, it avoids a number of design flaws and speed issues that plague
 other more established IRCd projects with the same or less features,
 such as UnrealIRCd 3. It's the IRCd used by the Chatspike IRC network.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing InspIRCd                                                |
-| -   2 Configuring (mandatory)                                            |
-| -   3 Loading modules                                                    |
-|     -   3.1 Third-party modules                                          |
-|                                                                          |
-| -   4 Starting/Stopping the daemon                                       |
-| -   5 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing InspIRCd
+-   2 Configuring (mandatory)
+-   3 Loading modules
+    -   3.1 Third-party modules
+-   4 Starting/Stopping the daemon
+-   5 External links
 
 Installing InspIRCd
 -------------------
@@ -102,3 +99,10 @@ Retrieved from
 Category:
 
 -   Internet Relay Chat
+
+-   This page was last modified on 16 December 2012, at 08:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

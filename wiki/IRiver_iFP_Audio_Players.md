@@ -16,20 +16,17 @@ iRiver iFP Audio Players
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Description                                                        |
-|     -   1.1 Configure needed kernel modules                              |
-|     -   1.2 Install iRiver driver/manager software                       |
-|     -   1.3 Verify that you can connect to your iRiver device            |
-|     -   1.4 Midnight Commander setup                                     |
-|     -   1.5 Setting up udev to automatically assign permissions          |
-|                                                                          |
-| -   2 Notes                                                              |
-|     -   2.1 Upgrading firmware                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Description
+    -   1.1 Configure needed kernel modules
+    -   1.2 Install iRiver driver/manager software
+    -   1.3 Verify that you can connect to your iRiver device
+    -   1.4 Midnight Commander setup
+    -   1.5 Setting up udev to automatically assign permissions
+-   2 Notes
+    -   2.1 Upgrading firmware
 
 > Description
 
@@ -75,9 +72,6 @@ Midnight Commander setup
 
 -   Install Midnight Commander, provided by the mc package, from the
     official repositories.
-
-    # pacman -S mc
-
 -   Copy the ifpline binary to the Midnight Commander extfs directory
 
     # cp /usr/bin/ifpline /usr/share/mc/extfs/
@@ -136,18 +130,18 @@ And add the user you want to have permissions to the storage group:
 
 > Notes
 
-Do not delete the default folders in the / directory of your iRiver—it
+Do not delete the default folders in the / directory of your iRiver — it
 may cause issues!
 
 Midnight Commander, by default, preserves file permissions when copying
 files. Because these file permissions cannot be written to your iRiver,
 an error message will be displayed after each file copy. To prevent
-these messages from appearing, uncheck the "preserve attributes"
-checkbox on Midnight Commander's copy dialog.
+these messages from appearing, uncheck the "preserve attributes" check
+box on Midnight Commander's copy dialog.
 
 If you frequently copy directories to your iRiver rather than individual
-tracks, then select the directory to copy & check the "Dive into subdir
-if exists" checkbox.
+tracks, then select the directory to copy and check the "Dive into
+subdir if exists" checkbox.
 
 The ifpline commands can easily be incorporated into your own shell
 scripts to make the management of your iRiver even easier! Run ifpline
@@ -155,15 +149,22 @@ for a list of all supported commands.
 
 Upgrading firmware
 
-1.  Get the firmware for the manager version and name it IFP-3XXT.HEX
-2.  Run ifpline firmupdate ./IFP-3XXT.HEX
-3.  Wait for the device to update, concluding in a power-off
-4.  Unplug everything, turn on the player, and plug it back in
-5.  Run ifpline ls / to see some files and ensure it is working
+1.  Get the firmware for the manager version and name it IFP-3XXT.HEX.
+2.  Run ifpline firmupdate ./IFP-3XXT.HEX.
+3.  Wait for the device to update, concluding in a power-off.
+4.  Unplug everything, turn on the player, and plug it back in.
+5.  Run ifpline ls / to see some files and ensure it is working.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IRiver_iFP_Audio_Players&oldid=230505"
+"https://wiki.archlinux.org/index.php?title=IRiver_iFP_Audio_Players&oldid=305697"
 
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 20 March 2014, at 01:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,19 +1,16 @@
 ASUS UL30A
 ==========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About the laptop                                                   |
-| -   2 Compatibility                                                      |
-|     -   2.1 Webcam Flipping                                              |
-|                                                                          |
-| -   3 Powersaving                                                        |
-| -   4 Fun                                                                |
-| -   5 lspci                                                              |
-| -   6 lsusb                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 About the laptop
+-   2 Compatibility
+    -   2.1 Webcam Flipping
+-   3 Powersaving
+-   4 Fun
+-   5 lspci
+-   6 lsusb
 
 About the laptop
 ----------------
@@ -190,3 +187,10 @@ Retrieved from
 Category:
 
 -   ASUS
+
+-   This page was last modified on 10 April 2013, at 06:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -7,35 +7,29 @@ symmetrical, making it well-suited for use with either hand. Picture.
 Out-of-the box it does not scroll, but you can configure it to enable
 this.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Basic function                                                     |
-| -   3 Configuration                                                      |
-|     -   3.1 Buttons and trackball                                        |
-|         -   3.1.1 Assigning buttons                                      |
-|         -   3.1.2 "Both-large-buttons" combination-click                 |
-|         -   3.1.3 Scroll modifier                                        |
-|                                                                          |
-|     -   3.2 Right-side or left-side                                      |
-|     -   3.3 System-wide or per-user                                      |
-|     -   3.4 Xorg input hotplugging                                       |
-|     -   3.5 Without Xorg hotplugging                                     |
-|                                                                          |
-| -   4 Sample configuration                                               |
-|     -   4.1 Configuration file                                           |
-|     -   4.2 Restarting X                                                 |
-|                                                                          |
-| -   5 Minimal configuration                                              |
-| -   6 Additional tweaks                                                  |
-|     -   6.1 Console (gpm)                                                |
-|     -   6.2 Chromium browser                                             |
-|     -   6.3 Firefox browser                                              |
-|                                                                          |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Basic function
+-   3 Configuration
+    -   3.1 Buttons and trackball
+        -   3.1.1 Assigning buttons
+        -   3.1.2 "Both-large-buttons" combination-click
+        -   3.1.3 Scroll modifier
+    -   3.2 Right-side or left-side
+    -   3.3 System-wide or per-user
+    -   3.4 Xorg input hotplugging
+    -   3.5 Without Xorg hotplugging
+-   4 Sample configuration
+    -   4.1 Configuration file
+    -   4.2 Restarting X
+-   5 Minimal configuration
+-   6 Additional tweaks
+    -   6.1 Console (gpm)
+    -   6.2 Chromium browser
+    -   6.3 Firefox browser
+-   7 See also
 
 Installation
 ------------
@@ -426,7 +420,7 @@ disabled as well.
 > Restarting X
 
 Changes made to /etc/X11/xorg.conf.d/10-evdev.conf do not take effect
-until the X session is restarted. To restart the X session, logout from
+until the X session is restarted. To restart the X session, log out from
 your window manager and log back in.
 
 Users of other Linux distributions may find the configuration file in
@@ -523,16 +517,23 @@ The slightest horizontal motion triggers a URL redirection. To fix this:
 See also
 --------
 
--   Arch wiki documentation: All mouse buttons working
--   Arch wiki documentation: Description of 10-evdev.conf
+-   Arch wiki documentation: All Mouse Buttons Working
+-   Arch wiki documentation: Xorg#Configuration
 -   Marble mouse scroll wheel: Replacement for SetPoint driver
 -   Joe Shaw blog post: Linux input ecosystem
 -   Ubuntu community: Logitech Marble Mouse
 -   Chrome web store: AutoScroll extension
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Logitech_Marble_Mouse&oldid=252079"
+"https://wiki.archlinux.org/index.php?title=Logitech_Marble_Mouse&oldid=304930"
 
 Category:
 
 -   Mice
+
+-   This page was last modified on 16 March 2014, at 09:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

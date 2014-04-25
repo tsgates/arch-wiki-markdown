@@ -1,47 +1,34 @@
 Arch Linux April Jokes
 ======================
 
-  Summary
-  ---------------------------------------------------------------------------------------
-  Collection of April Fools' Day jokes in Arch Linux news archives published since 2004
-
 Every first day of April, the Arch Linux website traditionally features
 an April Fools' Day joke on the front page. This document collects the
 jokes as a fun reading for readers of this Wiki.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 2012                                                               |
-| -   2 Canterbury                                                         |
-|     -   2.1 History                                                      |
-|     -   2.2 Goal                                                         |
-|     -   2.3 Features                                                     |
-|                                                                          |
-| -   3 April Fools Challenge                                              |
-|     -   3.1 About the april fools challenge joke                         |
-|                                                                          |
-| -   4 Dropping i686 Support                                              |
-|     -   4.1 About the dropping i686 support joke                         |
-|     -   4.2 After-action Report                                          |
-|                                                                          |
-| -   5 Arch in German                                                     |
-|     -   5.1 About the German Arch joke                                   |
-|                                                                          |
-| -   6 Arch Ark                                                           |
-|     -   6.1 Ark Linux                                                    |
-|                                                                          |
-| -   7 Judd goes to Google                                                |
-|     -   7.1 Judd's actual goodbye to Arch project                        |
-|     -   7.2 Arch Linux and its release system                            |
-|                                                                          |
-| -   8 Arch against Wombats                                               |
-|     -   8.1 Wombats                                                      |
-|                                                                          |
-| -   9 GNOME 2.6                                                          |
-|     -   9.1 GNOME version history                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 2012
+-   2 Canterbury
+    -   2.1 History
+    -   2.2 Goal
+    -   2.3 Features
+-   3 April Fools Challenge
+    -   3.1 About the april fools challenge joke
+-   4 Dropping i686 Support
+    -   4.1 About the dropping i686 support joke
+    -   4.2 After-action Report
+-   5 Arch in German
+    -   5.1 About the German Arch joke
+-   6 Arch Ark
+    -   6.1 Ark Linux
+-   7 Judd goes to Google
+    -   7.1 Judd's actual goodbye to Arch project
+    -   7.2 Arch Linux and its release system
+-   8 Arch against Wombats
+    -   8.1 Wombats
+-   9 GNOME 2.6
+    -   9.1 GNOME version history
 
 2012
 ----
@@ -336,8 +323,15 @@ Before the above news was posted, the GNOME project had released 2.0 in
 2002, and latest release before the 1st of April 2004 was GNOME 2.2.[4]
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_Linux_April_Jokes&oldid=251095"
+"https://wiki.archlinux.org/index.php?title=Arch_Linux_April_Jokes&oldid=290865"
 
 Category:
 
 -   About Arch
+
+-   This page was last modified on 30 December 2013, at 08:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

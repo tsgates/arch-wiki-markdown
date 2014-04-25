@@ -13,57 +13,40 @@ Dell Inspiron models, including:
 -   Dell Inspiron e1505
 -   Dell Inspiron e1705
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware Specifications                                            |
-|     -   1.1 Base Components                                              |
-|     -   1.2 Video Options                                                |
-|     -   1.3 Wireless Options                                             |
-|                                                                          |
-| -   2 Hardware                                                           |
-|     -   2.1 Audio                                                        |
-|         -   2.1.1 Sigmatel/Intel Chipset                                 |
-|             -   2.1.1.1 ALSA Audio Drivers                               |
-|             -   2.1.1.2 OSS Audio Drivers                                |
-|                                                                          |
-|     -   2.2 Video                                                        |
-|         -   2.2.1 ATI X1300/X1400 Radeon Mobility                        |
-|             -   2.2.1.1 Proprietary Driver (catalyst/fglrx)              |
-|             -   2.2.1.2 Open Source ATI Driver                           |
-|                                                                          |
-|         -   2.2.2 Intel Graphics Media Accelerator 950                   |
-|             -   2.2.2.1 Open Source Intel Driver                         |
-|                                                                          |
-|         -   2.2.3 nVidia GeForce Go 7300                                 |
-|                                                                          |
-|     -   2.3 Networking                                                   |
-|         -   2.3.1 Broadcom 440x 10/100 Ethernet                          |
-|         -   2.3.2 Dell Wireless 1390                                     |
-|         -   2.3.3 Dell Wireless 1500 Draft 802.11n Wireless (Intel       |
-|             4965AGN)                                                     |
-|         -   2.3.4 Dell Wireless 350 Bluetooth Module                     |
-|         -   2.3.5 Dell Wireless 355 Bluetooth Module                     |
-|         -   2.3.6 Intel PRO/Wireless 3945ABG                             |
-|                                                                          |
-|     -   2.4 Conexant HDA D110 MDC V.92 modem (winmodem)                  |
-|     -   2.5 Ricoh R5C822 SD/SDIO/MMC/MS/MSPro Card Reader                |
-|     -   2.6 Synaptics Touchpad                                           |
-|                                                                          |
-| -   3 Power Management                                                   |
-|     -   3.1 ACPI Hibernation/Suspend with pm-utils                       |
-|     -   3.2 CPU Frequency Scaling with cpufrequtils                      |
-|                                                                          |
-| -   4 Multimedia Buttons & Fn Hotkeys                                    |
-|     -   4.1 Multimedia Buttons                                           |
-|         -   4.1.1 GNOME                                                  |
-|         -   4.1.2 Openbox and other Window Managers                      |
-|                                                                          |
-|     -   4.2 Function (Fn) Hotkeys                                        |
-|                                                                          |
-| -   5 Other Resources                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware Specifications
+    -   1.1 Base Components
+    -   1.2 Video Options
+    -   1.3 Wireless Options
+-   2 Hardware
+    -   2.1 Audio
+        -   2.1.1 Sigmatel/Intel Chipset
+            -   2.1.1.1 ALSA Audio Drivers
+            -   2.1.1.2 OSS Audio Drivers
+    -   2.2 Video
+        -   2.2.1 ATI X1300/X1400 Radeon Mobility
+            -   2.2.1.1 Proprietary Driver (catalyst/fglrx)
+            -   2.2.1.2 Open Source ATI Driver
+        -   2.2.2 Intel Graphics Media Accelerator 950
+            -   2.2.2.1 Open Source Intel Driver
+        -   2.2.3 nVidia GeForce Go 7300
+    -   2.3 Networking
+        -   2.3.1 Broadcom 440x 10/100 Ethernet
+        -   2.3.2 Wireless
+    -   2.4 Conexant HDA D110 MDC V.92 modem (winmodem)
+    -   2.5 Ricoh R5C822 SD/SDIO/MMC/MS/MSPro Card Reader
+    -   2.6 Synaptics Touchpad
+-   3 Power Management
+    -   3.1 ACPI Hibernation/Suspend with pm-utils
+    -   3.2 CPU Frequency Scaling with cpufrequtils
+-   4 Multimedia Buttons & Fn Hotkeys
+    -   4.1 Multimedia Buttons
+        -   4.1.1 GNOME
+        -   4.1.2 Openbox and other Window Managers
+    -   4.2 Function (Fn) Hotkeys
+-   5 Other Resources
 
 Hardware Specifications
 -----------------------
@@ -83,13 +66,11 @@ documented.
     -   T2050 (1.66GHz/667MHz FSB/2MB Cache)
     -   T1350 (1.66GHz/667MHz FSB/2MB Cache)
     -   T5200 (1.60GHz/667MHz FSB/2MB Cache)
-
 -   512MB/1GB/2GB 533MHz/667MHz DDR2 SDRAM Memory
 -   15.4" Widescreen Display
     -   WXGA (1280 x 800)
     -   WSXGA 1280x800 with TrueLife™
     -   WSXGA+ 1680x1050 with TrueLife™
-
 -   80GB/100GB/120GB/160GB 5400/7200 RPM SATA Hard Drive
 -   8x CD/DVD+/-RW/DL+R
 -   Broadcom 440x 10/100 Ethernet
@@ -185,69 +166,9 @@ Broadcom 440x 10/100 Ethernet
 The Broadcom Ethernet card should have out-of-the-box support. No
 configuration necessary.
 
-Dell Wireless 1390
+Wireless
 
-See Broadcom wireless.
-
-Dell Wireless 1500 Draft 802.11n Wireless (Intel 4965AGN)
-
-Grab the driver packages:
-
-    # pacman -S iwlwifi iwlwifi-4965-ucode
-
-Add wlan0="dhcp" to the NETWORKING section:
-
-    eth0="dhcp"
-    wlan0="dhcp"
-
-If wlan0 is listed in the INTERFACES section, make sure it is disabled:
-
-    INTERFACES=(lo !eth0 !wlan0)
-
-Dell Wireless 350 Bluetooth Module
-
-Install the bluetooth libraries and basic utilties:
-
-    # pacman -S bluez-libs bluez-utils
-
-Add bluetooth to the DAEMONS list in /etc/rc.conf, for example:
-
-    DAEMONS=(syslog-ng powersaved bluetooth ipw3945d ...)
-
-Now, depending on your desktop environment, install the appropriate
-tools:
-
-For GNOME:
-
-    # pacman -S gnome-bluetooth bluez-gnome
-
-For KDE:
-
-    # pacman -S kdebluetooth
-
-Dell Wireless 355 Bluetooth Module
-
-The steps described above for Dell Wireless 350 Bluetooth Module work
-with Dell Wireless 355 Bluetooth Module too.
-
-Intel PRO/Wireless 3945ABG
-
-Grab the firmware package:
-
-    # pacman -S iwlwifi-3945-ucode
-
-Edit /etc/rc.conf as root and add iwl3945 to the MODULES list:
-
-    MODULES=(fglrx iwl3945 b44 mii ...)
-
-Add wlan0="dhcp" to the NETWORKING section:
-
-    eth0="dhcp"
-    wlan0="dhcp"
-
-If wlan0 is listed in the INTERFACES section, make sure it is disabled:
-
-    INTERFACES=(lo !eth0 !wlan0)
+See Wireless network configuration.
 
 > Conexant HDA D110 MDC V.92 modem (winmodem)
 
@@ -312,17 +233,10 @@ Power Management
 The powersave scripts have been officially replaced by pm-utils. Refer
 to the Pm-utils wiki for detailed instructions.
 
-ATI video card owners might need to add
-
-Template error:are you trying to use the = sign? Visit
-Help:Template#Escape template-breaking characters for workarounds.
-
-to the kernel options in kernel parameters in order to resume from
-suspend2ram.
-
-This behavior seems to change from version to version of catalyst, so
-your mileage may vary. Try it without vga=0 first, and if it doesn't
-work then add it.
+ATI video card owners might need to add vga=0 to the kernel options in
+kernel parameters in order to resume from suspend2ram. This behavior
+seems to change from version to version of catalyst, so your mileage may
+vary. Try it without vga=0 first, and if it doesn't work then add it.
 
 > CPU Frequency Scaling with cpufrequtils
 
@@ -458,8 +372,15 @@ Gentoo Wiki: HARDWARE Dell Inspiron 6400
 Gentoo Wiki: HARDWARE Dell Inspiron 6400 Fixes for common problems
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Inspiron_6400&oldid=254501"
+"https://wiki.archlinux.org/index.php?title=Dell_Inspiron_6400&oldid=302854"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 2 March 2014, at 08:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

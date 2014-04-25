@@ -16,21 +16,19 @@ modern PCs.
 
 Have a look on Wikipedia for more general information.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 TPM or not TPM                                                     |
-| -   2 Enabling in the BIOS                                               |
-| -   3 Drivers                                                            |
-| -   4 trousers/tcsd                                                      |
-| -   5 Using the TPM                                                      |
-|     -   5.1 tpm-tools                                                    |
-|     -   5.2 tpmmanager                                                   |
-|     -   5.3 openssl_tpm_engine                                           |
-|     -   5.4 tpm_keyring2                                                 |
-|     -   5.5 opencryptoki                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 TPM or not TPM
+-   2 Enabling in the BIOS
+-   3 Drivers
+-   4 trousers/tcsd
+-   5 Using the TPM
+    -   5.1 tpm-tools
+    -   5.2 tpmmanager
+    -   5.3 openssl_tpm_engine
+    -   5.4 tpm_keyring2
+    -   5.5 opencryptoki
 
 TPM or not TPM
 --------------
@@ -60,7 +58,7 @@ trousers/tcsd
 
 For using a TPM you must compile some packages from the AUR.
 
-You will need the Trousers package, which was created and released by
+You will need the trousers package, which was created and released by
 IBM.
 
 It provides you with "tcsd", a user space daemon that manages Trusted
@@ -84,7 +82,7 @@ are also part of the trousers project.
 
 > tpm-tools
 
-https://aur.archlinux.org/packages.php?ID=14331
+tpm-tools
 
 Is a set of tools like tpm_changeownerauth, tpm_clear, tpm_createek,
 tpm_getpubek, tpm_resetdalock, tpm_restrictpubek, tpm_revokeek,
@@ -96,34 +94,41 @@ Each of them has an own manpage.
 
 > tpmmanager
 
-https://aur.archlinux.org/packages.php?ID=30261
+tpmmanager
 
 A Qt front-end to tpm-tools, not developed by the trousers team.
 
 > openssl_tpm_engine
 
-https://aur.archlinux.org/packages.php?ID=14332
+openssl_tpm_engine
 
 OpenSSL engine which interfaces with the TSS API
 
 > tpm_keyring2
 
-https://aur.archlinux.org/packages.php?ID=14339
+tpm_keyring2
 
 A key manager for TPM based eCryptfs keys
 
 > opencryptoki
 
-https://aur.archlinux.org/packages.php?ID=22500
+opencryptoki
 
 openCryptoki is a PKCS#11 implementation for Linux. It includes drivers
 and libraries to enable IBM cryptographic hardware as well as a software
 token for testing.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=TPM&oldid=206778"
+"https://wiki.archlinux.org/index.php?title=TPM&oldid=277272"
 
 Categories:
 
 -   Security
 -   Hardware
+
+-   This page was last modified on 1 October 2013, at 20:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -27,19 +27,16 @@ public and hybrid (cloudbursting) clouds. OpenNebula interoperability
 makes cloud an evolution by leveraging existing IT infrastructure,
 protecting your investments, and avoiding vendor lock-in."
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Configuration specific to QEMU-KVM                           |
-|     -   2.2 Configuration specific to Xen                                |
-|     -   2.3 Configuration specific to VMware                             |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-| -   4 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Configuration specific to QEMU-KVM
+    -   2.2 Configuration specific to Xen
+    -   2.3 Configuration specific to VMware
+-   3 Troubleshooting
+-   4 Resources
 
 Installation
 ------------
@@ -95,3 +92,10 @@ Retrieved from
 Category:
 
 -   Virtualization
+
+-   This page was last modified on 13 June 2012, at 15:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

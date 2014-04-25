@@ -10,17 +10,15 @@ OpenVAS
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Installation                                                       |
-| -   3 Managing users                                                     |
-| -   4 Updating                                                           |
-| -   5 Running OpenVAS                                                    |
-| -   6 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 Installation
+-   3 Managing users
+-   4 Updating
+-   5 Running OpenVAS
+-   6 See Also
 
 Overview
 --------
@@ -101,3 +99,10 @@ Categories:
 
 -   Networking
 -   Security
+
+-   This page was last modified on 11 January 2013, at 20:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

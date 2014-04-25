@@ -6,19 +6,16 @@ laptop. This page links to the wiki pages relevant for this laptop. In
 order to avoid information duplication, this page only states
 information that is not on the linked wiki pages.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 CPU                                                                |
-| -   2 Network                                                            |
-|     -   2.1 Ethernet                                                     |
-|     -   2.2 Wireless                                                     |
-|         -   2.2.1 mini Dell Wireless / Broadcom based cards              |
-|         -   2.2.2 Intel based cards                                      |
-|                                                                          |
-| -   3 Touchpad                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 CPU
+-   2 Network
+    -   2.1 Ethernet
+    -   2.2 Wireless
+        -   2.2.1 mini Dell Wireless / Broadcom based cards
+        -   2.2.2 Intel based cards
+-   3 Touchpad
 
 CPU
 ---
@@ -111,8 +108,15 @@ the instructions for the AlpsPS/2 ALPS GlidePoint here:
 Touchpad_Synaptics
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1710&oldid=196593"
+"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1710&oldid=297867"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 15 February 2014, at 15:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

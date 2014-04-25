@@ -11,32 +11,24 @@ Floppy Disks
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-  Summary
-  ---------------------------------------------------------------------
-  This article discusses methods of using floppy disks on Arch Linux.
-
 Altough rarely used nowadays, one still might need/want to use a floppy
 disk (for example, I practice guitar to backing tracks played from my
 Yamaha keyboard, which has only a floppy disk drive interface). Common
 tasks with floppies are described bellow, with available tools to
 accomplish them.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Kernel module                                                |
-|     -   1.2 Packages                                                     |
-|                                                                          |
-| -   2 Common tasks                                                       |
-|     -   2.1 Format                                                       |
-|     -   2.2 Mount                                                        |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-| -   4 More Resources                                                     |
-| -   5 Todo                                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Kernel module
+    -   1.2 Packages
+-   2 Common tasks
+    -   2.1 Format
+    -   2.2 Mount
+-   3 Troubleshooting
+-   4 More Resources
+-   5 Todo
 
 Installation
 ------------
@@ -146,9 +138,16 @@ Todo
 -   recovering a "dead" floppy
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Floppy_Disks&oldid=239108"
+"https://wiki.archlinux.org/index.php?title=Floppy_Disks&oldid=291300"
 
 Categories:
 
 -   Storage
 -   File systems
+
+-   This page was last modified on 2 January 2014, at 02:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

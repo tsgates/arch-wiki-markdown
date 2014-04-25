@@ -25,3 +25,10 @@ Retrieved from
 Category:
 
 -   Events
+
+-   This page was last modified on 11 February 2013, at 16:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

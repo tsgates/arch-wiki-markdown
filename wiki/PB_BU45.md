@@ -1,21 +1,19 @@
 PB BU45
 =======
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Arch Linux in the Packard Bell BU45                                |
-|     -   1.1 X.org configuration                                          |
-|     -   1.2 Touchpad Configuration                                       |
-|     -   1.3 Wifi configuration                                           |
-|     -   1.4 Sound                                                        |
-|     -   1.5 Vista Partition                                              |
-|     -   1.6 Bluetooth                                                    |
-|     -   1.7 Web cam                                                      |
-|     -   1.8 Card reader and fingerprint reader                           |
-|     -   1.9 Hibernation                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Arch Linux in the Packard Bell BU45
+    -   1.1 X.org configuration
+    -   1.2 Touchpad Configuration
+    -   1.3 Wifi configuration
+    -   1.4 Sound
+    -   1.5 Vista Partition
+    -   1.6 Bluetooth
+    -   1.7 Web cam
+    -   1.8 Card reader and fingerprint reader
+    -   1.9 Hibernation
 
 Arch Linux in the Packard Bell BU45
 ===================================
@@ -332,8 +330,15 @@ I found this solution in a forum and do not know why it wasn't working
 or why it works now. Some help would be welcomed.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PB_BU45&oldid=225296"
+"https://wiki.archlinux.org/index.php?title=PB_BU45&oldid=256749"
 
 Category:
 
 -   Laptops
+
+-   This page was last modified on 12 May 2013, at 08:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

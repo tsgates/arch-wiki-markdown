@@ -1,48 +1,52 @@
 All Mouse Buttons Working
 =========================
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: rc.conf refs,    
+                           style still to fix,      
+                           unclear sections         
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 This article is for users that have a mouse with more than 7 mouse
 buttons and want to be able to use all of them. Logitech makes several
 of these (if you have a Logitech Marble® Mouse you can also look at this
 page), and Microsoft makes a few as well.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-| -   2 Finding the Mouse Name                                             |
-| -   3 Configuring Xorg                                                   |
-| -   4 Post Configuration                                                 |
-|     -   4.1 Google Chrome                                                |
-|     -   4.2 Opera                                                        |
-|     -   4.3 Firefox                                                      |
-|         -   4.3.1 Horizontal Scroll                                      |
-|                                                                          |
-|     -   4.4 Firefox3                                                     |
-|         -   4.4.1 Thumb Buttons - Forward and Back                       |
-|                                                                          |
-|     -   4.5 xmodmap tweaking                                             |
-|                                                                          |
-| -   5 Alternate Methods                                                  |
-|     -   5.1 Method 1 - IMPS/2                                            |
-|     -   5.2 Method 2 - ExplorerPS/2                                      |
-|     -   5.3 Method 3 - Auto                                              |
-|     -   5.4 Method 4 - btnx                                              |
-|     -   5.5 Method 5 - easystroke                                        |
-|     -   5.6 Firefox 3 button 6 + 7 correction:                           |
-|                                                                          |
-| -   6 Binding keyboard to mouse buttons                                  |
-|     -   6.1 xvkbd and xbindkeys                                          |
-|     -   6.2 Why standard methods are not enough?                         |
-|     -   6.3 kbde                                                         |
-|     -   6.4 evrouter                                                     |
-|     -   6.5 Binding + and - in Logitech G5 mouse                         |
-|     -   6.6 startup scripts                                              |
-|                                                                          |
-| -   7 User Tools                                                         |
-| -   8 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequisites
+-   2 Finding the mouse name
+-   3 Configuring Xorg
+-   4 Post Configuration
+    -   4.1 Google Chrome
+    -   4.2 Opera
+    -   4.3 Firefox
+        -   4.3.1 Horizontal scroll
+    -   4.4 Firefox 3
+        -   4.4.1 Thumb Buttons - forward and back
+    -   4.5 xmodmap tweaking
+-   5 Alternate methods
+    -   5.1 Method 1 - IMPS/2
+    -   5.2 Method 2 - ExplorerPS/2
+    -   5.3 Method 3 - Auto
+    -   5.4 Method 4 - btnx
+    -   5.5 Method 5 - easystroke
+    -   5.6 Firefox 3 button 6 + 7 correction
+-   6 Binding keyboard to mouse buttons
+    -   6.1 xvkbd and xbindkeys
+    -   6.2 Why standard methods are not enough?
+    -   6.3 kbde
+    -   6.4 evrouter
+    -   6.5 Binding + and - in Logitech G5 mouse
+    -   6.6 startup scripts
+-   7 User tools
+-   8 Device Specific Configuration Files
+    -   8.1 R.A.T. 7 and R.A.T. 9 Mouse
+-   9 See also
 
 Prerequisites
 -------------
@@ -63,7 +67,7 @@ driver, allowing lower latency and less translation issues.
 With the newer Xorg 11R7.0 it seems only the following changes to
 /etc/X11/xorg.conf need to be made with nothing else needing to be done.
 
-Finding the Mouse Name
+Finding the mouse name
 ----------------------
 
 Note:To get accurate information it is sometimes required to execute
@@ -160,6 +164,16 @@ To find the appropriate id, do:
 
 -   Edit by: Diamir
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: The udev rule    
+                           will not work, the       
+                           SYSFS= and BUS= keys     
+                           have been removed [1].   
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 With a Desktop type keyboard-mouse, this does not work because there is
 only one USB attachment and /dev/input/by-id contains only the keyboard.
 In this case, we can create a udev rule to get a consistent link. The
@@ -203,7 +217,7 @@ this case:
 So I enter the following command (adapt event # to your particular
 case):
 
-    udevinfo -a -p `udevinfo -q path -n /dev/input/event4` | grep modalias
+    udevinfo -a -p $(udevinfo -q path -n /dev/input/event4) | grep modalias
     ATTRS{modalias}=="input:b0003v045Ep008Ae0111-0,1,2,4,k71,72,73,74,83,86,8A,8C,8E,8F,9B,9C,9E,9F,A3,A4,A5,A6,AB,AC,B5,B6,CE,D2,D5,E2,E7,E8,E9,EA,EB,110,111,112,113,114,1B0,1B1,r0,1,6,7,8,9,A,am4,lsfw"
     ATTRS{modalias}=="usb:v045Ep008Ad7373dc00dsc00dp00ic03isc00ip00"
     ATTRS{modalias}=="pci:v00001106d00003038sv00001043sd000080EDbc0Csc03i00"
@@ -220,16 +234,12 @@ Post Configuration
 
 > Google Chrome
 
-It just works™.
-
-Horizontal scroll works out of the box - push the scroll wheel left or
-right. Thumb buttons also work as next/previous page.
+It works. Horizontal scroll works out of the box - push the scroll wheel
+left or right. Thumb buttons also work as next/previous page.
 
 > Opera
 
-It just works™.
-
-Note: buttons can be mapped to functions easily in
+It works. Note: buttons can be mapped to functions easily in
 Preferences > Advanced > Shortcuts > Mouse set-up. For example, to bind
 button 8 to back:
 
@@ -239,7 +249,7 @@ button 8 to back:
 
 > Firefox
 
-Horizontal Scroll
+Horizontal scroll
 
 By default, left right scroll on a FX/MX mouse translates into
 back/forward, respectively. If you do not like this, open about:config
@@ -256,7 +266,7 @@ OR (tested on Logitech G5)
 NOTE: If you use a positive value for numlines, your left/right will
 switch, ie: pressing left scrolls the window to the right.
 
-> Firefox3
+> Firefox 3
 
 OR (tested on Microsoft Wireless Intellimouse explorer 2.0)
 
@@ -269,7 +279,7 @@ inverted.
 
   
 
-Thumb Buttons - Forward and Back
+Thumb Buttons - forward and back
 
 Note: The following maybe redundant depending on whether xev detects all
 your mouse buttons correctly (functions can be mapped on a per-app
@@ -277,8 +287,6 @@ basis) or you want to change the default behaviour.
 
 To do this we need to map keystrokes to the desired mouse buttons and
 install xvkbd and xbindkeys.
-
-    # pacman -S xvkbd xbindkeys
 
 In most modern applications which use back/forward features, XF86Back is
 mapped to back and XF86Forward is mapped to forward by default. On most
@@ -298,7 +306,7 @@ containing:
 Now to test... Run the following command and if it works as expected
 remember to add xbindkeys to .xinitrc or somewhere where it will be
 executed each time X starts. Also, this should work with Epiphany and
-Konqueror without any additional configuration or use of imwheel.
+Konqueror without any additional configuration or use of Imwheel.
 
     xbindkeys
 
@@ -340,7 +348,7 @@ called 'xev', which is part of XOrg. When xev is run, it will show a box
 on your desktop that you can put the cursor into and click buttons to
 find out what buttons have been mapped.
 
-Alternate Methods
+Alternate methods
 -----------------
 
 The following methods use standard X.org mouse input driver
@@ -445,18 +453,18 @@ button.
 
 Note:In case of easystroke doesn't automatically detect mouse buttons,
 you can specify it manually. Button identifiers (numbers) can be viewed
-by xev
+by xev.
 
 Go to Action tab > Add action, give the new action a name, as Type
 choose "Key", as Details set "Alt+Left" for Back button, "Alt+Right" for
 Forward button, as Stroke click the proper mouse button (confirm if a
 warning is displayed), and voilà! Your mouse button is configured.
 
-Note: Since Firefox 3, buttons 6 + 7 are no longer mapped to back and
+Note:Since Firefox 3, buttons 6 + 7 are no longer mapped to back and
 forward as in Firefox 2. Therefore, if using the above methods in Xorg,
-refer further to corrective methods below if necessary
+refer further to corrective methods below if necessary.
 
-> Firefox 3 button 6 + 7 correction:
+> Firefox 3 button 6 + 7 correction
 
 For MX518, try changing the above ButtonMapping Option to:
 
@@ -482,13 +490,13 @@ Let's say we want to bind some mouse buttons to keyboard ones. The
 problem we will encounter is that we do not know how to emulate a key
 press. Here comes in handy xvkbd. We can use it along with xbindkeys.
 
-    xbindkeys --defaults >> ~/.xbindkeysrc
-    xbindkeys
+    $ xbindkeys --defaults >> ~/.xbindkeysrc
+    $ xbindkeys
 
-to restart xbindkeys type:
+To restart xbindkeys type:
 
-    pkill -f xbindkeys
-    xbindkeys 
+    $ pkill -f xbindkeys
+    $ xbindkeys 
 
 Here's example ~/.xbindkeysrc config:
 
@@ -503,7 +511,7 @@ Here's example ~/.xbindkeysrc config:
     "xvkbd  -text 3"
            m:0x0 + b:12
 
-if you want to check your mouse buttons number use xev. Don't forget to
+If you want to check your mouse buttons number use xev. Don't forget to
 type capital letters in xvkbd -text usage and to escape opening bracket
 with \, or you get simply [Shift] written.
 
@@ -512,7 +520,7 @@ pasting), you need both xsel and xvkbd installed, What it does it
 executes that command whenever button 13 of the mouse is pressed (in
 ~/.xbindkeysrc) :
 
-     "xvkbd -no-jump-pointer -text "\D1`xsel`" 2>/dev/null"
+     "xvkbd -no-jump-pointer -text "\D1$(xsel)" 2>/dev/null"
      b:13
 
 > Why standard methods are not enough?
@@ -534,7 +542,7 @@ To emulate keystroke which will be later detected in Enemy Territory we
 need something more advanced than xvkbd. Here comes in handy kbde, but
 it doesn't exist in AUR yet – we've got to compile it by ourselves. We
 need two programs: kbde and kbde-driver. Kbde website is located on
-sourceforge [1], check it for download, you need only kbde-driver.
+sourceforge [2], check it for download, you need only kbde-driver.
 Apparently, it doesn't work for me without some hacking. Use your editor
 and add
 
@@ -571,7 +579,7 @@ generates 3 strokes before it is released.
 
 Now we need something which will work when Enemy Territory is loaded.
 Apparently, xbindkeys does not work here, so we need another program:
-evrouter [2], which can be found in the AUR: [3]
+evrouter [3], which can be found in the AUR: evrouter
 
 OK, so now we must have evdev and we can NOT use it in X, so here is how
 my example /etc/X11/xorg.conf mouse section looks like:
@@ -616,14 +624,13 @@ It will give you output similar to config. Here is my example config
 Same config using evrouters built in X11 key event emulator instead of
 kbde:
 
-      "Logitech USB Gaming Mouse" "/dev/input/event.*" any key/278 "XKey/2"
-      "Logitech USB Gaming Mouse" "/dev/input/event.*" any key/278 "XKey/3"
-      "Logitech USB Gaming Mouse" "/dev/input/event.*" any key/278 "XKey/4"
-      "Logitech USB Gaming Mouse" "/dev/input/event.*" any key/278 "XKey/5"
-      "Logitech USB Gaming Mouse" "/dev/input/event.*" any key/278 "XKey/6"
+    "Logitech USB Gaming Mouse" "/dev/input/event.*" any key/278 "XKey/2"
+    "Logitech USB Gaming Mouse" "/dev/input/event.*" any key/278 "XKey/3"
+    "Logitech USB Gaming Mouse" "/dev/input/event.*" any key/278 "XKey/4"
+    "Logitech USB Gaming Mouse" "/dev/input/event.*" any key/278 "XKey/5"
+    "Logitech USB Gaming Mouse" "/dev/input/event.*" any key/278 "XKey/6"
 
-  
- This works great, even in Enemy Territory. The "none" modifier means
+This works great, even in Enemy Territory. The "none" modifier means
 that I have to only press the button, other options are Ctrl+Alt and so
 on. Here I use "any" because "none" means that after pressing Shift,
 Ctrl, or Alt, our buttons would not work. Also note that it accepts
@@ -648,7 +655,7 @@ and here is one to start it:
     #!/bin/bash
     mydevicename="Logitech USB Gaming Mouse"
 
-    device=`evrouter -D /dev/input/event* | grep "$mydevicename"` | cut -d ":" -f 2
+    device=$(evrouter -D /dev/input/event* | grep "$mydevicename") | cut -d ":" -f 2
     evrouter $device > /dev/null
 
 You have to edit the mydevicename variable to its proper value (the one
@@ -669,7 +676,7 @@ This will change your DPI to 2000, light the 1st LED and disables DPI
 on-the-fly changing, so you can use it with evrouter. If you would use
 it frequently I suggest you to copy it to the /usr/bin directory:
 
-    $ sudo cp g5hack /usr/bin/
+    # cp g5hack /usr/bin/
 
 If you want to bind your + and - buttons you must copy the line at the
 bottom (one with the comment '"-" button does not function anymore'
@@ -718,7 +725,7 @@ and made my user a member of it.
 
 And voila, we've got it working immediately after KDE login.
 
-User Tools
+User tools
 ----------
 
 imwheel provides configurable mouse wheel and button mapping. It can be
@@ -746,7 +753,27 @@ by udev.
 Note:The lomoco package may be out of date. There is a hack for newer
 Logitech mice: [5]
 
-See Also
+Device Specific Configuration Files
+-----------------------------------
+
+> R.A.T. 7 and R.A.T. 9 Mouse
+
+This is the configuration file that will get your R.A.T. 7 or R.A.T. 9
+mouse working properly under linux.
+
+/etc/X11/xorg.conf.d/910-rat.conf:
+
+    Section "InputClass"
+    	Identifier "R.A.T."
+    	MatchProduct "R.A.T.7|R.A.T.9"
+    	MatchDevicePath "/dev/input/event*"
+    	Option "Buttons" "17"
+    	Option "ButtonMapping" "1 2 3 4 5 0 0 8 9 7 6 12 0 0 0 16 17"
+    	Option "AutoReleaseButtons" "13 14 15"
+    	Option "ZAxisMapping" "4 5 6 7"
+    EndSection
+
+See also
 --------
 
 -   http://www.gentoo-wiki.info/HOWTO_Advanced_Mouse
@@ -756,9 +783,16 @@ For similar setup, specially for Logitech MX, see:
 -   http://lotphelp.com/lotp/lotp-guide-logitech-mx-mouse-ubuntu
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=All_Mouse_Buttons_Working&oldid=255849"
+"https://wiki.archlinux.org/index.php?title=All_Mouse_Buttons_Working&oldid=296114"
 
 Categories:
 
 -   Mice
 -   X Server
+
+-   This page was last modified on 4 February 2014, at 04:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

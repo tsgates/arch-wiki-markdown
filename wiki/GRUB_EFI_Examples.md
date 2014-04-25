@@ -1,7 +1,7 @@
 GRUB EFI Examples
 =================
 
-> Summary
+Summary help replacing me
 
 It is well know that different motherboard manufactures implement UEFI
 differently. The purpose of this page is to show hardware-specific
@@ -11,20 +11,20 @@ Related Articles
 
 Grub
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Apple Mac EFI systems                                              |
-|     -   1.1 Generic Macs                                                 |
-|                                                                          |
-| -   2 Asus                                                               |
-|     -   2.1 Z68 Family and U47 Family                                    |
-|     -   2.2 P8Z77 Family                                                 |
-|                                                                          |
-| -   3 Intel                                                              |
-|     -   3.1 S5400 Family                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Apple Mac EFI systems
+    -   1.1 Generic Macs
+-   2 Asus
+    -   2.1 Z68 Family and U47 Family
+    -   2.2 P8Z77 Family
+    -   2.3 M5A97
+-   3 Intel
+    -   3.1 S5400 Family
+-   4 Lenovo
+    -   4.1 K450 IdeaCentre
+    -   4.2 M92p ThinkCentre
 
 Apple Mac EFI systems
 ---------------------
@@ -70,7 +70,7 @@ show up and you can boot into your system. Afterwards you can use
 efibootmgr to setup a menu entry, for example if you have the uefi
 partition in /dev/sda1: (read Unified_Extensible_Firmware_Interface)
 
-    efibootmgr -c -g -d /dev/sda -p 1 -w -L "Archlinux Grub" -l '\EFI\arch_grub\grubx64.efi'
+    efibootmgr -c -g -d /dev/sda -p 1 -w -L "Arch Linux (GRUB)" -l /EFI/arch_grub/grubx64.efi
 
 If your motherboard has no such option (or even if it does), you can use
 UEFI shell (Unified_Extensible_Firmware_Interface#UEFI_Shell) to create
@@ -94,36 +94,92 @@ menu.
 > P8Z77 Family
 
 -   Boot to live media and chroot into the target system.
+-   Make sure that a 100 MB fat32 partition is marked as "EFI System"
+    (gdisk terminology uses hex code ef00).
+
+Note:If you get the message WARNING: Not enough clusters for a 32 bit
+FAT!, reduce cluster size with mkfs.vfat -s2 -F32 ... otherwise the
+partition may be unreadable by UEFI.
 
 FROM WITHIN THE CHROOT
 
     # mount -t vfat /dev/sdXY /boot/efi
     # grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch --recheck
     # grub-mkconfig -o /boot/grub/grub.cfg
-    # mkdir /boot/efi/boot && cd /boot/efi
     # wget https://edk2.svn.sourceforge.net/svnroot/edk2/trunk/edk2/ShellBinPkg/UefiShell/X64/Shell.efi
-    # cp Shell.efi shellx64.efi && cp Shell.efi /boot/efi/boot
     # umount /boot/efi
+
+The EFI partition should be contain just two files:
+
+    /Shell.efi
+    /EFI/arch/grubx64.efi
 
 -   Reboot and enter the BIOS (the Delete key will do this).
 -   Using the arrow keys, move to the 'exit' menu and drop down to the
-    EFI shell you just downloaded and copied to three places.
--   You will need to add an entry to your boot menu manually. Below is
-    an example, see the UEFI#Launching UEFI Shell article for more.
-    Below is an example added a new entry to a menu with 3 current
-    entries.
+    EFI shell.
+-   Add an entry for Arch to the menu. Below is an example, see the
+    UEFI#Launching UEFI Shell article for more.
 
 FROM WITHIN THE EFI SHELL
 
     Shell> bcfg boot dump -v
-    Shell> bcfg boot add 3 fs0:\EFI\arch\grubx64.efi "Arch Linux (grub manually added)"
+    Shell> bcfg boot add 1 fs0:\EFI\arch\grubx64.efi "Arch Linux (grub manually added)"
     Shell> exit
 
 -   Reboot the machine and enter the BIOS.
--   Navigate to the 'Boot' section and adjust the boot order to your
-    liking with the "Arch Linux (grub manually added)" being the one on
-    your SSD.
--   Boot to this entry and enjoy your system.
+-   Navigate to the 'Boot' section and adjust the boot order to with the
+    "Arch Linux (grub manually added)" being the one on the SSD.
+-   Boot to this entry and enjoy.
+
+> M5A97
+
+Finish the standard Arch install procedures, making sure that you
+install grub-efi-x86_64 and partition your boot hard disk as GPT.
+
+From [1]:
+
+The UEFI system partition will need to be mounted at /boot/efi/ for the
+GRUB install script to detect it:
+
+    # mkdir -p /boot/efi
+    # mount -t vfat /dev/sdXY /boot/efi
+
+Where X is your boot hard disk and Y is the efi partition you created
+earlier.
+
+Install GRUB UEFI application to /boot/efi/EFI/arch_grub and its modules
+to /boot/grub/x86_64-efi using:
+
+    # modprobe dm-mod
+    # grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck --debug
+    # mkdir -p /boot/grub/locale
+    # cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+
+Generate a configuration for GRUB
+
+    # grub-mkconfig -o /boot/grub/grub.cfg
+
+Then copy the modified UEFI Shell v2 binary UefiShellX64.efi into your
+ESP root.
+
+    # cp ~/Shell2/UefiShellX64.efi /mnt/boot/efi/shellx64.efi
+
+The reason that we need this shell application is that the efibootmgr
+command will fail silently during grub-install.
+
+After this launch the UEFI Shell from the UEFI setup/menu (in ASUS UEFI
+BIOS, switch to advanced mode, press Exit in the top right corner and
+choose "Launch EFI shell from filesystem device"). The UEFI shell will
+show up. From here we need to add our GRUB UEFI app to the bootloader.
+
+    Shell> bcfg boot add 3 fs0:\EFI\Arch_Grub\grubx64.efi "Arch_Grub"
+
+where fs0 is the mapping corresponding to the UEFI System Partition and
+3 is the zero based boot entry index.
+
+To list the current boot entries you can run:
+
+    Shell> bcfg boot dump -v
 
 Intel
 -----
@@ -149,9 +205,42 @@ the root of the EFI partition.
     EFI file, otherwise grub will not find it and enter the interactive
     shell
 
+  
+
+Lenovo
+------
+
+> K450 IdeaCentre
+
+The "EFI System" partition requires the file EFI\Boot\bootx64.efi to be
+present in order to boot, otherwise you will receive "Error 1962: No
+operating system found. Boot sequence will automatically repeat."
+Assuming the "EFI System" partition is mounted on /boot/efi:
+
+     # grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck --debug
+     # mkdir /boot/efi/EFI/Boot
+     # touch /boot/efi/EFI/Boot/bootx64.efi
+
+This is a workaround for what is likely a bug in the UEFI
+implementation.
+
+> M92p ThinkCentre
+
+This system whitelists efi labels. It will only boot from a label called
+"Red Hat Enterprise Linux". So specify the bootloader id appropriately:
+
+     # grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Red Hat Enterprise Linux" --recheck --debug
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GRUB_EFI_Examples&oldid=249668"
+"https://wiki.archlinux.org/index.php?title=GRUB_EFI_Examples&oldid=299086"
 
 Category:
 
 -   Boot loaders
+
+-   This page was last modified on 20 February 2014, at 14:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

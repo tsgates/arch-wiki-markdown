@@ -4,37 +4,37 @@ Very Secure FTP Daemon
 vsftpd (Very Secure FTP Daemon) is a lightweight, stable and secure FTP
 server for UNIX-like systems.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Enabling uploading                                           |
-|     -   2.2 Local user login                                             |
-|     -   2.3 Anonymous login                                              |
-|     -   2.4 Chroot jail                                                  |
-|     -   2.5 Limiting user login                                          |
-|     -   2.6 Limiting connections                                         |
-|     -   2.7 Using xinetd                                                 |
-|     -   2.8 Using SSL to Secure FTP                                      |
-|     -   2.9 Dynamic DNS                                                  |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 PAM with virtual users                                       |
-|         -   3.1.1 Adding private folders for the virtual users           |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 vsftpd: refusing to run with writable root inside chroot()   |
-|     -   4.2 FileZilla Client: GnuTLS error -8 when connecting via SSL    |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Enabling uploading
+    -   2.2 Local user login
+    -   2.3 Anonymous login
+    -   2.4 Chroot jail
+    -   2.5 Limiting user login
+    -   2.6 Limiting connections
+    -   2.7 Using xinetd
+    -   2.8 Using SSL to Secure FTP
+    -   2.9 Dynamic DNS
+    -   2.10 Port configurations
+    -   2.11 Configuring iptables
+-   3 Tips and tricks
+    -   3.1 PAM with virtual users (updated)
+        -   3.1.1 Adding private folders for the virtual users
+-   4 Troubleshooting
+    -   4.1 vsftpd: no connection (Error 500) with recent kernels (3.5
+        and newer) and .service
+    -   4.2 vsftpd: refusing to run with writable root inside chroot()
+    -   4.3 FileZilla Client: GnuTLS error -8 when connecting via SSL
+    -   4.4 vsftpd.service fails to run on boot
+-   5 See also
 
 Installation
 ------------
 
-Simply install vsftpd from the Official Repositories.
+Simply install vsftpd from the Official repositories.
 
 To start the server:
 
@@ -52,8 +52,9 @@ Configuration
 Most of the settings in vsftpd are done by editing the file
 /etc/vsftpd.conf. The file itself is well-documented, so this section
 only highlights some important changes you may want to modify. For all
-available options and documentation, one can man vsftpd.conf (5). Files
-are served by default from /srv/ftp.
+available options and documentation, one can man vsftpd.conf (5) (or
+visit vsftpd.conf online manpage). Files are served by default from
+/srv/ftp.
 
 > Enabling uploading
 
@@ -73,10 +74,14 @@ to login:
 
 The line in /etc/vsftpd.conf controls whether anonymous users can login:
 
-    anonymous_enable=YES          # Allow anonymous login
-    no_anon_password=YES          # No password is required for an anonymous login
-    anon_max_rate=30000           # Maximum transfer rate for an anonymous client in Bytes/second
-    anon_root=/example/directory/ # Directory to be used for an anonymous login
+    # Allow anonymous login
+    anonymous_enable=YES
+    # No password is required for an anonymous login          
+    no_anon_password=YES
+    # Maximum transfer rate for an anonymous client in Bytes/second          
+    anon_max_rate=30000 
+    # Directory to be used for an anonymous login           
+    anon_root=/example/directory/
 
 > Chroot jail
 
@@ -126,50 +131,41 @@ per IP for local users by adding the information in /etc/vsftpd.conf:
 
 > Using xinetd
 
-If you want to use vsftpd with xinetd, add the following lines to
-/etc/xinetd.d/vsftpd:
+Xinetd provides enhanced capabilities for monitoring and controlling
+connections. It is not necessary though for a basic good working
+vsftpd-server.
+
+Installation of vsftpd will add a necessary service file,
+/etc/xinetd.d/vsftpd. By default services are disabled. Enable the ftp
+service:
 
     service ftp
     {
             socket_type             = stream
             wait                    = no
             user                    = root
-            server                  = /usr/sbin/vsftpd
+            server                  = /usr/bin/vsftpd
             log_on_success  += HOST DURATION
             log_on_failure  += HOST
             disable                 = no
     }
 
-The option below should be set in /etc/vsftpd.conf:
+If you have set the vsftpd daemon to run in standalone mode make the
+following change in /etc/vsftpd.conf:
 
-    pam_service_name=ftp
+    listen=NO
 
-Finally, add xinetd to your daemons line in /etc/rc.conf. You do not
-need to add vsftpd, as it will be called by xinetd whenever necessary.
-
-If you get errors like this while connecting to the server:
-
-    500 OOPS: cap_set_proc
-
-You need to add capability in MODULES= line in /etc/rc.conf.
-
-While upgrading to version 2.1.0 you might get an error like this when
-connecting to the server from a client:
+Otherwise connection will fail:
 
     500 OOPS: could not bind listening IPv4 socket
 
-In earlier versions it has been enough to leave the following lines
-commented:
+Instead of starting the vsftpd daemon start xinetd:
 
-    # Use this to use vsftpd in standalone mode, otherwise it runs through (x)inetd
-    # listen=YES
+    # systemctl start xinetd
 
-In this newer version, and maybe future releases, it is necessary
-however to explicitly configure it to not run in a standalone mode, like
-this:
+To start xinetd automatically at boot:
 
-    # Use this to use vsftpd in standalone mode, otherwise it runs through (x)inetd
-    listen=NO
+    # systemctl enable xinetd
 
 > Using SSL to Secure FTP
 
@@ -224,47 +220,94 @@ periodically and restarts the server, as it can be found elsewhere!
 Note:You won't be able to connect in passive mode via LAN anymore. Try
 the active mode on your LAN PC's FTP client.
 
+  
+
+> Port configurations
+
+Especially for private FTP servers that are exposed to the web it's
+recommended to change the listening port to something other than the
+standard port 21. This can be done using the following lines in
+/etc/vsftpd.conf:
+
+    listen_port=2211
+
+Furthermore a custom passive port range can be given by:
+
+    pasv_min_port=49152
+    pasv_max_port=65534
+
+> Configuring iptables
+
+Often the server running the FTP daemon is protected by an iptables
+firewall. To allow access to the FTP server the corresponding port needs
+to be opened using something like
+
+    # iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 2211 -j ACCEPT
+
+This article won't provide any instruction on how to set up iptables but
+here is an example: Simple stateful firewall.
+
+There are some kernel modules needed for proper FTP connection handling
+by iptables that should be referenced here. Among those especially
+ip_conntrack_ftp. It is needed as FTP uses the given listen_port (21 by
+default) for commands only; all the data transfer is done over different
+ports. These ports are chosen by the FTP daemon at random and for each
+session (also depending on whether active or passive mode is used). To
+tell iptables that packets on ports should be accepted, ip_conntrack_ftp
+is required. To load it automatically on boot create a new file in
+/etc/modules-load.d e.g.:
+
+    # echo ip_conntrack_ftp > /etc/modules-load.d/ip_conntrack_ftp.conf
+
+If you changed the listen_port you also need to configure the conntrack
+module accordingly:
+
+    /etc/modprobe.d/ip_conntrack_ftp.conf
+
+    options nf_conntrack_ftp ports=2211
+    options ip_conntrack_ftp ports=2211
+
 Tips and tricks
 ---------------
 
-> PAM with virtual users
+> PAM with virtual users (updated)
 
-Using virtual users has the advantage of not requiring a real login
-account on the system. Keeping the environment in a container is of
-course a more secure option.
+Since PAM no longer provides pam_userdb.so another easy method is to use
+pam_pwdfile. For environments with many users another option could be
+pam_mysql. This section is however limited to explain how to configure a
+chroot environment and authentication by pam_pwdfile.so.
 
-A virtual users database has to be created by first making a simple text
-file like this:
+In this example we create the directory vsftpd:
 
-    user1
-    password1
-    user2
-    password2
+    # mkdir /etc/vsftpd
 
-Include as many virtual users as you wish according to the structure in
-the example. Save it as logins.txt; the file name does not have any
-significance. Next step depends on Berkeley database system, which is
-included in the core system of Arch. As root create the actual database
-with the help of the logins.txt file, or what you chose to call it:
+One option to create and store user names and passwords is to use the
+Apache generator htpasswd:
 
-    # db_load -T -t hash -f logins.txt /etc/vsftpd_login.db
+    # htpasswd -c /etc/vsftpd/.passwd
 
-It is recommended to restrict permissions for the now created
-vsftpd_login.db file:
+A problem with the above command is that vsftpd might not be able to
+read the generated MD5 hashed password. If running the same command with
+the -d switch, crypt() encryption, password become readable by vsftpd,
+but the downside of this is less security and a password limited to 8
+characters. Openssl could be used to produce a MD5 based BSD password
+with algorithm 1:
 
-    # chmod 600 /etc/vsftpd_login.db
+    # openssl passwd -1
 
-Warning:Be aware that stocking passwords in plain text is not safe.
-Don't forget to remove your temporary file with rm logins.txt.
+Whatever solution the produced /etc/vsftpd/.passwd should look like
+this:
 
-PAM should now be set to make use of vsftpd_login.db. To make PAM check
-for user authentication create a file named ftp in the /etc/pam.d/
-directory with the following information:
+    username1:hashed_password1
+    username2:hashed_password2
+    ...
 
-    auth required pam_userdb.so db=/etc/vsftpd_login crypt=hash 
-    account required pam_userdb.so db=/etc/vsftpd_login crypt=hash
+Next you need to create a PAM service using pam_pwdfile.so and the
+generated /etc/vsftpd/.passwd file. In this example we create a file in
+the /etc/pam.d directory named vsftpd with the following content:
 
-Note:We use /etc/vsftpd_login without .db extension in PAM-config!
+    auth required pam_pwdfile.so pwdfile /etc/vsftpd/.passwd
+    account required pam_permit.so
 
 Now it is time to create a home for the virtual users. In the example
 /srv/ftp is decided to host data for virtual users, which also reflects
@@ -277,21 +320,40 @@ Make virtual the owner:
 
     # chown virtual:virtual /srv/ftp
 
-Configure vsftpd to use the created environment by editing
-/etc/vsftpd.conf. These are the necessary settings to make vsftpd
-restrict access to virtual users, by user-name and password, and
-restrict their access to the specified area /srv/ftp:
+A basic /etc/vsftpd.conf with no private folders configured, which will
+default to the home folder of the virtual user:
 
+    # pointing to the correct PAM service file
+    pam_service_name=vsftpd
+    write_enable=YES
+    hide_ids=YES
+    listen=YES
+    connect_from_port_20=YES
     anonymous_enable=NO
     local_enable=YES
+    write_enable=YES
+    dirmessage_enable=YES
+    xferlog_enable=YES
     chroot_local_user=YES
     guest_enable=YES
     guest_username=virtual
     virtual_use_local_privs=YES
 
-If the xinetd method is used start the service. You should now only be
-allowed to login by user-name and password according to the made
-database.
+Some parameters might not be necessary for your own setup. If you want
+the chroot environment to be writable you will need to add the following
+to the configuration file:
+
+    allow_writeable_chroot=YES
+
+Otherwise vsftpd because of default security settings will complain if
+it detects that chroot is writable.
+
+Start the vsftpd daemon:
+
+    # systemctl start vsftpd
+
+You should now be able to login from a ftp-client with any of the users
+and passwords stored in /etc/vsftpd/.passwd.
 
 Adding private folders for the virtual users
 
@@ -309,17 +371,33 @@ Then, add the following lines to /etc/vsftpd.conf:
 Troubleshooting
 ---------------
 
+> vsftpd: no connection (Error 500) with recent kernels (3.5 and newer) and .service
+
+add this to your /etc/vsftpd.conf
+
+    seccomp_sandbox=NO
+
 > vsftpd: refusing to run with writable root inside chroot()
 
 As of vsftpd 2.3.5, the chroot directory that users are locked to must
-not be writable. This is in order to prevent a security vulnerabilty. To
-do this:
+not be writable. This is in order to prevent a security vulnerabilty.
 
-    # chmod a-w /home/user
+The safe way to allow upload is to keep chroot enabled, and configure
+your FTP directories.
 
-Workaround: You can put this into your /etc/vsftpd.conf to workaround
-this security enhancement (since vsftpd 3.0.0; from Fixing 500 OOPS:
-vsftpd: refusing to run with writable root inside chroot ()):
+    local_root=/srv/ftp/user
+
+    # mkdir -p /srv/ftp/user/upload
+    #
+    # chmod 550 /srv/ftp/user
+    # chmod 750 /srv/ftp/user/upload
+
+  
+ If you must:
+
+You can put this into your /etc/vsftpd.conf to workaround this security
+enhancement (since vsftpd 3.0.0; from Fixing 500 OOPS: vsftpd: refusing
+to run with writable root inside chroot ()):
 
     allow_writeable_chroot=YES
 
@@ -334,6 +412,17 @@ vsftpd tries to display plain-text error messages in the SSL session. In
 order to debug this, temporarily disable encryption and you will see the
 correct error message.[1]
 
+> vsftpd.service fails to run on boot
+
+If you have enabled the vsftpd service and it fails to run on boot, make
+sure it is set to load after network.target in the service file:
+
+    /usr/lib/systemd/system/vsftpd.service
+
+    [Unit]
+    Description=vsftpd daemon
+    After=network.target
+
 See also
 --------
 
@@ -341,8 +430,15 @@ See also
 -   vsftpd.conf man page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Very_Secure_FTP_Daemon&oldid=248142"
+"https://wiki.archlinux.org/index.php?title=Very_Secure_FTP_Daemon&oldid=302535"
 
 Category:
 
 -   File Transfer Protocol
+
+-   This page was last modified on 28 February 2014, at 22:02.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

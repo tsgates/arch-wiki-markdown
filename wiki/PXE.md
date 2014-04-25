@@ -1,13 +1,9 @@
 PXE
 ===
 
-> Summary
+Related articles
 
-Detailed guide to booting official installation media via PXE.
-
-> Related
-
-Network Installation Guide
+-   Diskless System
 
 From Wikipedia:Preboot Execution Environment:
 
@@ -19,25 +15,21 @@ devices (like hard disks) or installed operating systems.
 In this guide, PXE is used to boot the installation media with an
 appropriate option-rom that supports PXE on the target.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preparation                                                        |
-| -   2 Server setup                                                       |
-|     -   2.1 Network                                                      |
-|     -   2.2 DHCP + TFTP                                                  |
-|     -   2.3 HTTP                                                         |
-|                                                                          |
-| -   3 Installation                                                       |
-|     -   3.1 Boot                                                         |
-|     -   3.2 Post-boot                                                    |
-|                                                                          |
-| -   4 Alternate Methods                                                  |
-|     -   4.1 NFS                                                          |
-|     -   4.2 NBD                                                          |
-|     -   4.3 Low memory                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Preparation
+-   2 Server setup
+    -   2.1 Network
+    -   2.2 DHCP + TFTP
+    -   2.3 HTTP
+-   3 Installation
+    -   3.1 Boot
+    -   3.2 Post-boot
+-   4 Alternate Methods
+    -   4.1 NFS
+    -   4.2 NBD
+    -   4.3 Low memory
 
 Preparation
 -----------
@@ -47,12 +39,12 @@ Download the latest official install media from here.
 Next mount the image:
 
     # mkdir -p /mnt/archiso
-    # mount -o loop,ro archlinux-2013.02.01-dual.iso /mnt/archiso
+    # mount -o loop,ro archlinux-2013.11.01-dual.iso /mnt/archiso
 
 Server setup
 ------------
 
-You'll need to setup a DHCP, TFTP, and HTTP server to configure
+You will need to setup a DHCP, TFTP, and HTTP server to configure
 networking, load pxelinux/kernel/initramfs, and finally load the root
 filesystem (respectively).
 
@@ -65,7 +57,7 @@ Bring up your wired NIC, and assign it an address appropriately.
 
 > DHCP + TFTP
 
-You'll need both a DHCP and TFTP server to configure networking on the
+You will need both a DHCP and TFTP server to configure networking on the
 install target and to facilitate the transfer of files between the PXE
 server and client; dnsmasq does both, and is extremely easy to set up.
 
@@ -81,7 +73,7 @@ Configure dnsmasq:
     interface=eth0
     bind-interfaces
     dhcp-range=192.168.0.50,192.168.0.150,12h
-    dhcp-boot=/arch/boot/syslinux/pxelinux.0
+    dhcp-boot=/arch/boot/syslinux/lpxelinux.0
     dhcp-option-force=209,boot/syslinux/archiso.cfg
     dhcp-option-force=210,/arch/
     enable-tftp
@@ -112,7 +104,7 @@ Then start darkhttpd using our /mnt/archiso as the document root:
 Installation
 ------------
 
-For this portion you'll need to figure out how to tell the client to
+For this portion you will need to figure out how to tell the client to
 attempt a PXE boot; in the corner of the screen along with the normal
 post messages, usually there will be some hint on which key to press to
 try PXE booting first. On an IBM x3650 F12 brings up a boot menu, the
@@ -144,7 +136,7 @@ boot process:
     dnsmasq-tftp[2544]: sent /mnt/archiso/arch/boot/syslinux/vesamenu.c32 to 192.168.0.110
     dnsmasq-tftp[2544]: sent /mnt/archiso/arch/boot/syslinux/splash.png to 192.168.0.110
 
-After you load pxelinux.0 and archiso.cfg via TFTP, you'll (hopefully)
+After you load pxelinux.0 and archiso.cfg via TFTP, you will (hopefully)
 be presented with a syslinux boot menu with several options, two of
 which are of potential usefulness to us.
 
@@ -173,20 +165,20 @@ PXE-target, and in init:
     1348347588 192.168.0.110 "GET /arch/x86_64/usr-lib-modules.fs.sfs" 200 36819181 "" "curl/7.27.0"
     1348347588 192.168.0.110 "GET /arch/any/usr-share.fs.sfs" 200 63693037 "" "curl/7.27.0"
 
-After the root filesystem is downloaded via HTTP, you'll eventually end
-up at a root zsh prompt with that fancy grml config.
+After the root filesystem is downloaded via HTTP, you will eventually
+end up at a root zsh prompt with that fancy grml config.
 
 > Post-boot
 
 Unless you want all traffic to be routed through your PXE server (which
-won't work anyway unless you set it up properly), you'll want to kill
-dnsmasq and get a new lease on the install target, as appropriate for
-your network layout.
+will not work anyway unless you set it up properly), you will want to
+kill dnsmasq and get a new lease on the install target, as appropriate
+for your network layout.
 
     # systemctl stop dnsmasq.service
 
 You can also kill darkhttpd; the target has already downloaded the root
-filesystem, so it's no longer needed. While you're at it, you can also
+filesystem, so it's no longer needed. While you are at it, you can also
 unmount the installation image:
 
     # umount /mnt/archiso
@@ -195,6 +187,37 @@ At this point you can follow the official installation guide.
 
 Alternate Methods
 -----------------
+
+As implied in the syslinux menu, there are several other alternatives:
+
+> NFS
+
+You will need to set up an NFS server with an export at the root of your
+mounted installation media, which would be /mnt/archiso if you followed
+the earlier sections of this guide. After setting up the server, add the
+following line to your /etc/exports file:
+
+    /etc/exports
+
+    /mnt/archiso 192.168.0.0/24(ro,no_subtree_check)
+
+If the server was already running, re-export the filesystems with
+exportfs -r -a -v.
+
+The default settings in the installer expect to find the NFS at
+/run/archiso/bootmnt, so you will need to edit the boot options. To do
+this, press Tab on the appropriate boot menu choice and edit the
+archiso_nfs_srv option accordingly:
+
+    archiso_nfs_srv=${pxeserver}:/mnt/archiso
+
+Alternatively, you can use /run/archiso/bootmnt for the entire process.
+
+After the kernel loads, the Arch bootstrap image will copy the root
+filesystem via NFS to the booting host. This can take a little while.
+Once this completes, you should have a running system.
+
+> NBD
 
   ------------------------ ------------------------ ------------------------
   [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
@@ -213,16 +236,6 @@ Alternate Methods
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-As implied in the syslinux menu, there are several other alternatives:
-
-> NFS
-
-You will need to setup a NFS server with the root export at the root of
-your mounted installation media--that would be /mnt/archiso if you
-followed the earlier sections of this guide.
-
-> NBD
-
 Install nbd and configure it:
 
     # vim /etc/nbd-server/config
@@ -240,12 +253,21 @@ filesystem should be copied to ram in its entirety in early-boot.
 It highly recommended to leave this option alone, and should only be
 disabled if entirely necessary (systems with less than ~256MB physical
 memory). Append copytoram=n to your kernel line if you wish to do so.
+You should be aware that this option currently does not work if using
+HTTP for the transfer; NFS or NBD must be used.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PXE&oldid=248919"
+"https://wiki.archlinux.org/index.php?title=PXE&oldid=302041"
 
 Categories:
 
 -   Getting and installing Arch
 -   Networking
 -   Boot process
+
+-   This page was last modified on 25 February 2014, at 13:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

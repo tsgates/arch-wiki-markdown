@@ -1,46 +1,108 @@
 SysVinit
 ========
 
-init is the first process that is executed once the Linux kernel loads.
-The default init program used by the kernel is /sbin/init provided by
-systemd-sysvcompat (by default on new installs, see systemd) or
-sysvinit. The word init will always refer to sysvinit in this article.
+Warning:SysVinit is obsoleted in Arch Linux [1] and has been dropped
+from the official repositories. You need to migrate to systemd.
+
+On systems based on SysVinit, init is the first process that is executed
+once the Linux kernel loads. The default init program used by the kernel
+is /sbin/init provided by systemd-sysvcompat (by default on new
+installs, see systemd) or sysvinit. The word init will always refer to
+sysvinit in this article.
 
 inittab is the startup configuration file for init located in /etc. It
 contains directions for init on what programs and scripts to run when
-entering a specfic runlevel.
+entering a specific runlevel.
 
-Tip:See man 5 inittab and man 8 init for a more formal and complete
-description.
+Although a SysVinit-based Arch system does use init, most of the work is
+delegated to the #Main Boot Scripts. This article concentrates on init
+and inittab.
 
-Tip:Although Arch does use init, most of the work is delegated to the
-#Main Boot Scripts. This article concentrates on init and inittab; if
-you're looking for an overview of Arch's boot process, see Arch Boot
-Process.
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview of init and inittab                                       |
-| -   2 Switching runlevel                                                 |
-|     -   2.1 Through bootloader                                           |
-|     -   2.2 After boot up                                                |
-|                                                                          |
-| -   3 inittab                                                            |
-|     -   3.1 Default Runlevel                                             |
-|     -   3.2 Main Boot Scripts                                            |
-|     -   3.3 Single User Boot                                             |
-|     -   3.4 Gettys and Login                                             |
-|     -   3.5 Ctrl+Alt+Del                                                 |
-|     -   3.6 X Programs                                                   |
-|     -   3.7 Power-Sensing Scripts                                        |
-|     -   3.8 Custom Keyboard Request                                      |
-|         -   3.8.1 Trigger the kbrequest                                  |
-|                                                                          |
-| -   4 See Also                                                           |
-| -   5 External Links                                                     |
-+--------------------------------------------------------------------------+
+-   1 Migration to systemd
+    -   1.1 Considerations before switching
+    -   1.2 Installation procedure
+    -   1.3 Supplementary information
+-   2 Overview of init and inittab
+-   3 Installation
+-   4 Switching runlevel
+    -   4.1 Through bootloader
+    -   4.2 After boot up
+-   5 inittab
+    -   5.1 Default Runlevel
+    -   5.2 Main Boot Scripts
+    -   5.3 Single User Boot
+    -   5.4 Gettys and Login
+    -   5.5 Ctrl+Alt+Del
+    -   5.6 X Programs
+    -   5.7 Power-Sensing Scripts
+    -   5.8 Custom Keyboard Request
+        -   5.8.1 Trigger the kbrequest
+-   6 See Also
+-   7 External Links
+
+Migration to systemd
+--------------------
+
+> Note:
+
+-   systemd and systemd-sysvcompat are both installed by default on
+    installation media newer than 2012-10-13. This section is aimed at
+    Arch Linux installations that still rely on sysvinit and
+    initscripts.
+-   If you are running Arch Linux inside a VPS, please see Virtual
+    Private Server#Moving your VPS from initscripts to systemd.
+
+> Considerations before switching
+
+-   Do some reading about systemd.
+-   Note the fact that systemd has a journal system that replaces
+    syslog, although the two can co-exist. See #Journal.
+-   While systemd can replace some of the functionality of cron, acpid,
+    or xinetd, there is no need to switch away from using the
+    traditional daemons unless you want to.
+-   Interactive initscripts are not working with systemd. In particular,
+    netcfg-menu cannot be used at system start-up (FS#31377).
+
+> Installation procedure
+
+1.  Install systemd from the official repositories.
+2.  Append the following to your kernel parameters:
+    init=/usr/lib/systemd/systemd.
+3.  Once completed you may enable any desired services via the use of
+    systemctl enable service_name (this roughly equates to what you
+    included in the DAEMONS array. New names can be found in Daemons
+    List).
+4.  Reboot your system and verify that systemd is currently active by
+    issuing the following command: cat /proc/1/comm. This should return
+    the string systemd.
+5.  Make sure your hostname is set correctly under systemd:
+    hostnamectl set-hostname myhostname or /etc/hostname.
+6.  Proceed to remove initscripts and sysvinit from your system and
+    install systemd-sysvcompat.
+7.  Optionally, remove the init=/usr/lib/systemd/systemd parameter. It
+    is no longer needed because systemd-sysvcompat provides a symlink to
+    systemd's init where sysvinit used to be.
+
+> Supplementary information
+
+-   If you have quiet in your kernel parameters, you might want to
+    remove it for your first couple of systemd boots, to assist with
+    identifying any issues during boot.
+
+-   It is not necessary to add your user to groups (sys, disk, lp,
+    network, video, audio, optical, storage, scanner, power, etc.) for
+    most use cases with systemd. The groups can even cause some
+    functionality to break. For example, the audio group will break fast
+    user switching and allows applications to block software mixing.
+    Every PAM login provides a logind session, which for a local session
+    will give you permissions via POSIX ACLs on audio/video devices, and
+    allow certain operations like mounting removable storage via udisks.
+
+-   See the Network configuration article for how to set up networking
+    targets.
 
 Overview of init and inittab
 ----------------------------
@@ -81,6 +143,20 @@ If the runlevel init is entering appears in runlevels, action is carried
 out, executing process if appropriate. Some special actions would cause
 init to ignore runlevels and adopt a special matching method. More
 explanation follows in the next section.
+
+See also man 5 inittab and man 8 init.
+
+Installation
+------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
+  ng]                      needs expansion.         ng]
+                           Reason: This section     
+                           should explain how to    
+                           replace systemd with     
+                           sysvinit. (Discuss)      
+  ------------------------ ------------------------ ------------------------
 
 Switching runlevel
 ------------------
@@ -217,7 +293,7 @@ See Also
 -   Disable Clearing of Boot Messages
 -   Start X at Login
 -   xinitrc
--   Display Manager
+-   Display manager
 -   SLiM
 
 External Links
@@ -229,10 +305,17 @@ External Links
 -   Linux.com. An introduction to services, runlevels, and rc.d scripts.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SysVinit&oldid=233054"
+"https://wiki.archlinux.org/index.php?title=SysVinit&oldid=305962"
 
 Categories:
 
 -   Boot process
 -   Daemons and system services
 -   System recovery
+
+-   This page was last modified on 20 March 2014, at 17:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

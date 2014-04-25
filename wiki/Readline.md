@@ -1,45 +1,33 @@
 Readline
 ========
 
-> Summary
-
-Improving readline over its default capabilities.
-
-Important pages
-
-Official site
-
-> Related
-
-Bash
-
 Readline is a library by the GNU Project, used by Bash and other
 CLI-interface programs to edit and interact with the command line.
 Before reading this page please refer to the library home page as only
 subtle configuration will be introduced here.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Command-line editing                                               |
-| -   2 History                                                            |
-|     -   2.1 History search                                               |
-|         -   2.1.1 Avoid duplicates                                       |
-|         -   2.1.2 Avoid whitespaces                                      |
-|                                                                          |
-| -   3 Macros                                                             |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Disabling control echo                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Command-line editing
+-   2 History
+    -   2.1 History search
+        -   2.1.1 Avoid duplicates
+        -   2.1.2 Avoid whitespaces
+-   3 Macros
+-   4 Tips and tricks
+    -   4.1 Disabling control echo
 
 Command-line editing
 --------------------
 
 By default Readline uses Emacs style shortcuts for interacting with
-command line. However, vi style editing interface is also supported. If
-you are a vi or vim user, you may want to put the following line to your
-~/.inputrc to enable vi-like keybindings:
+command line. However, vi style editing interface is also supported.
+Either way, rich sets of shortcut keys are provided for editing without
+using the far-away cursor keys.
+
+If you are a vi or vim user, you may want to put the following line to
+your ~/.inputrc to enable vi-like keybindings:
 
     set editing-mode vi
 
@@ -54,9 +42,9 @@ History
 -------
 
 Usually, pressing the up arrow key will cause the last command to be
-shown regardless of what has been typed so far. However, users may find
-it more practical to list only past commands that match the current
-input.
+shown regardless of the command that has been typed so far. However,
+users may find it more practical to list only past commands that match
+the current input.
 
 For example, if the user has typed the following commands:
 
@@ -66,13 +54,13 @@ For example, if the user has typed the following commands:
 -   man mount
 
 In this situation, when typing ls and pressing the up arrow key, current
-input will be replaced with man mount, the last performed command. Had
-history search been enabled, only past commands beginning with ls (the
-current input) would've been shown, in this case
+input will be replaced with man mount, the last performed command. If
+the history search has been enabled, only past commands beginning with
+ls (the current input) will be shown, in this case
 ls /usr/src/linux-2.6.15-ARCH/kernel/power/Kconfig.
 
-You can enable this mode by adding the lines below to /etc/inputrc or
-~/.inputrc:
+You can enable the history search mode by adding the following lines to
+/etc/inputrc or ~/.inputrc:
 
     "\e[A":history-search-backward
     "\e[B":history-search-forward
@@ -132,7 +120,8 @@ in your history. To prevent this, add to your ~/.bashrc:
 
 Avoid whitespaces
 
-To disable logging blank commands add this to your ~/.bashrc:
+To disable logging of lines beginning with a space add this to your
+~/.bashrc:
 
     export HISTCONTROL=ignorespace
 
@@ -192,8 +181,15 @@ pressed. For users who wish to disable this, simply add the following to
     set echo-control-characters off
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Readline&oldid=207156"
+"https://wiki.archlinux.org/index.php?title=Readline&oldid=299846"
 
 Category:
 
 -   Command shells
+
+-   This page was last modified on 22 February 2014, at 15:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

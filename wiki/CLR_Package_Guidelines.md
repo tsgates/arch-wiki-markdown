@@ -21,25 +21,21 @@ of version 1.5.6 (?), your package may have a chance to run under it.
 Please see the Wine PKGBUILD Guidelines for more information if such is
 the case.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Packaging gotchas                                                  |
-|     -   1.1 Signed assemblies                                            |
-|                                                                          |
-| -   2 Sample PKGBUILDs                                                   |
-|     -   2.1 xbuild                                                       |
-|         -   2.1.1 Unsigned DLL                                           |
-|                                                                          |
-|     -   2.2 NAnt                                                         |
-|     -   2.3 Prebuild                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Packaging gotchas
+    -   1.1 Signed assemblies
+-   2 Sample PKGBUILDs
+    -   2.1 xbuild
+        -   2.1.1 Unsigned DLL
+    -   2.2 NAnt
+    -   2.3 Prebuild
 
 Packaging gotchas
 -----------------
 
--   Always add mono to makedepends and depends
+-   Always add mono to depends
 -   Always set arch to any. Mono does not yet support compiling
     (running?) 64-bit assemblies.
 -   Always add !strip to options
@@ -80,7 +76,6 @@ Unsigned DLL
     arch=('any')
     url="http://www.foo.bar"
     license=('GPL')
-    makedepends=('mono')
     depends=('mono')
     options=('!strip')
     source=("http://www.foo.bar/foobar.tar.gz")
@@ -113,8 +108,15 @@ Unsigned DLL
 > Prebuild
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=CLR_Package_Guidelines&oldid=216505"
+"https://wiki.archlinux.org/index.php?title=CLR_Package_Guidelines&oldid=286718"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 7 December 2013, at 00:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

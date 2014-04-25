@@ -10,28 +10,23 @@ Linuxsampler
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Quick Installation                                                 |
-| -   3 The (not so) long way                                              |
-|     -   3.1 Installation                                                 |
-|         -   3.1.1 The backend : Linuxsampler                             |
-|         -   3.1.2 The editor : Gigedit                                   |
-|         -   3.1.3 The frontend : Qsampler                                |
-|                                                                          |
-|     -   3.2 Building a default template in qsampler                      |
-|     -   3.3 Building a performance template in qsampler                  |
-|                                                                          |
-| -   4 Advanced topics                                                    |
-|     -   4.1 Filtering midi messages before they reach LS                 |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-| -   6 External Resources                                                 |
-| -   7 TODO                                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 Quick Installation
+-   3 The (not so) long way
+    -   3.1 Installation
+        -   3.1.1 The backend : Linuxsampler
+        -   3.1.2 The editor : Gigedit
+        -   3.1.3 The frontend : Qsampler
+    -   3.2 Building a default template in qsampler
+    -   3.3 Building a performance template in qsampler
+-   4 Advanced topics
+    -   4.1 Filtering midi messages before they reach LS
+-   5 Troubleshooting
+-   6 External Resources
+-   7 TODO
 
 Overview
 --------
@@ -234,7 +229,6 @@ outputs for recording in Ardour.
         do it from here with the "midi input setup" and "audio output
         setup" buttons.
     -   Press ok.
-
 -   The channel is added to the main window and the gig file is loaded
     into RAM. Well, only the start of the sounds used in the instrument
     are cached in memory, the main task of LS will be to stream the
@@ -317,17 +311,22 @@ TODO
     hosts (mostly prerequisite programs and command lines)
     -   In a quick test, LS lv2 plugin works great.Test host was "elven"
         from "ll-plugins" package
-
 -   addjsampler-fantasia in the install section and configuration
     section
     -   jsampler working with openjdk6 or jre.jsampler-cvs slow graphics
         with openjdk6 (on xf86-video-ati video driver), ok with jre
-
 -   add options at build time in advanced topics
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Linuxsampler&oldid=197887"
+"https://wiki.archlinux.org/index.php?title=Linuxsampler&oldid=273563"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 1 September 2013, at 10:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

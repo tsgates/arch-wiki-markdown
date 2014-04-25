@@ -24,16 +24,14 @@ window-managers such as Fluxbox. In the same vein as the Xcompmgr
 alternative to composite management in *box WMs, 3ddesk offers a nice
 slice of eye-candy to those who do not wish to run Compiz.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-| -   4 Troubleshooting                                                    |
-| -   5 Additional Resources                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequisites
+-   2 Installation
+-   3 Configuration
+-   4 Troubleshooting
+-   5 Additional Resources
 
 Prerequisites
 -------------
@@ -109,3 +107,10 @@ Retrieved from
 Category:
 
 -   Eye candy
+
+-   This page was last modified on 13 June 2012, at 13:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

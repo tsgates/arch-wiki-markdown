@@ -15,28 +15,25 @@ HP Folio 13
   USB 2.0         Working             ehci-hcd
   eSATA           Working             
   Card Reader     Working             
-  Function Keys   Partially Working   
+  Function Keys   Working             
   --------------- ------------------- ------------------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Configuration                                                      |
-|     -   2.1 Installation                                                 |
-|     -   2.2 CPU                                                          |
-|     -   2.3 Video                                                        |
-|     -   2.4 Audio                                                        |
-|         -   2.4.1 HDMI                                                   |
-|                                                                          |
-|     -   2.5 Touchpad                                                     |
-|     -   2.6 Suspend to RAM                                               |
-|     -   2.7 Webcam                                                       |
-|     -   2.8 Function Keys                                                |
-|     -   2.9 Bluetooth                                                    |
-|     -   2.10 Wireless                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Configuration
+    -   2.1 Installation
+    -   2.2 CPU
+    -   2.3 Video
+    -   2.4 Audio
+        -   2.4.1 HDMI
+    -   2.5 Touchpad
+    -   2.6 Suspend to RAM
+    -   2.7 Webcam
+    -   2.8 Function Keys
+    -   2.9 Bluetooth
+    -   2.10 Wireless
 
 Hardware
 --------
@@ -113,7 +110,8 @@ Note:In order to prevent the screen from turning off/black at startup,
 you need to add i915.modeset=1 acpi_backlight=vendor to Kernel
 parameters
 
-As the brightness adjustment Fn keys don't work, and the laptop defaults
+As the brightness adjustment Fn keys don't work [updated: as of kernel
+3.10 brightness and other Fn keys do all work], and the laptop defaults
 to 100% brightness, in order to save power and extend battery life, you
 may want to reduce the screen brightness at boot up. To do so, enter the
 following into /etc/rc.local:
@@ -215,6 +213,9 @@ Update: the sound level/mute keys no longer seem to work with kernel
 3.6.x. This is a known bug related to GNOME, and has a fix in GNOME 3.6
 [testing] as of 19/10/12.
 
+Update 29 July 2013: Function keys now all work. This update/fix
+appeared around kernel 3.10.
+
 > Bluetooth
 
 Does not work out of the box. You will need to add the following to
@@ -246,8 +247,15 @@ Other model use Intel Centrino Wireless-N 1030, iwlwifi module included
 in kernel. Not works in NetworkManager for me, but it does in Wicd.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=HP_Folio_13&oldid=241721"
+"https://wiki.archlinux.org/index.php?title=HP_Folio_13&oldid=270566"
 
 Category:
 
 -   HP
+
+-   This page was last modified on 10 August 2013, at 02:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

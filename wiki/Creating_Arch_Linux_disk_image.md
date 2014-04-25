@@ -6,29 +6,25 @@ Arch Linux. This disk image can be run in a virtual machine using
 software such as QEMU, VirtualBox, or VMware, and it can be customized
 however you want.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Archiso                                                            |
-| -   2 Install Arch Linux in a disk image using the installation media    |
-| -   3 Install Arch Linux in a disk image without the installation media  |
-|     -   3.1 Make a file containing the disk image                        |
-|     -   3.2 Create filesystem(s) on the virtual disk                     |
-|         -   3.2.1 Use entire disk as one filesystem                      |
-|         -   3.2.2 Partitioned disk                                       |
-|                                                                          |
-|     -   3.3 Install packages on the guest's filesystem                   |
-|     -   3.4 Write a fstab file for the guest                             |
-|     -   3.5 Generate initramfs for the guest                             |
-|     -   3.6 Install bootloader on the guest                              |
-|         -   3.6.1 Extlinux                                               |
-|         -   3.6.2 GRUB2                                                  |
-|                                                                          |
-|     -   3.7 Cleanup                                                      |
-|     -   3.8 Boot the guest                                               |
-|     -   3.9 Other tips                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Archiso
+-   2 Install Arch Linux in a disk image using the installation media
+-   3 Install Arch Linux in a disk image without the installation media
+    -   3.1 Make a file containing the disk image
+    -   3.2 Create filesystem(s) on the virtual disk
+        -   3.2.1 Use entire disk as one filesystem
+        -   3.2.2 Partitioned disk
+    -   3.3 Install packages on the guest's filesystem
+    -   3.4 Write a fstab file for the guest
+    -   3.5 Generate initramfs for the guest
+    -   3.6 Install bootloader on the guest
+        -   3.6.1 Extlinux
+        -   3.6.2 GRUB2
+    -   3.7 Cleanup
+    -   3.8 Boot the guest
+    -   3.9 Other tips
 
 Archiso
 -------
@@ -50,8 +46,8 @@ install Arch Linux into a disk image by booting the virtual machine from
 the installation media with the disk image file attached as a virtual
 hard disk. This is the preferred way to make a virtual disk image
 containing Arch Linux because other than starting up the virtual
-machine, the installation will proceed exactly as in the Official
-Installation Guide.
+machine, the installation will proceed exactly as in the Installation
+guide.
 
 Install Arch Linux in a disk image without the installation media
 -----------------------------------------------------------------
@@ -71,6 +67,10 @@ advantages:
 However, this method is more difficult than using the installation
 media. In addition, it will not work if your host machine does not have
 pacman (i.e. is not running Arch Linux).
+
+Warning: As of 2014.02.11, using the above cited method leave you with a
+broken filesystem with missing libraries. Safest way is to boot from
+Arch-iso
 
 In these directions, the host system refers to the Arch Linux system you
 are currently running, while the guest system refers to the Arch Linux
@@ -133,7 +133,7 @@ filesystem. There will be no swap partition.
     # losetup -f --show archlinux.raw
     # kpartx -a /dev/loop0
 
-Note:kpartx is part of the multipath-tools package. See
+Note:kpartx is part of the multipath-tools-git package from the AUR. See
 QEMU#Mounting_a_partition_inside_a_raw_disk_image for other ways to
 mount a partition inside a disk image. But beware: GRUB2 will not
 install correctly to the disk image unless the partition loopback device
@@ -157,9 +157,13 @@ or, for an unpartitioned disk:
 
     # mount archlinux.raw $TMPDIR
 
-Install the packages you want on the system (like the base group):
+Install arch-install-scripts and then install the packages you want on
+the system (like the base group):
 
     # pacstrap $TMPDIR base
+
+Note: the above command may leaves you with errors about missing
+libraries. See above warning
 
 > Write a fstab file for the guest
 
@@ -210,9 +214,9 @@ Extlinux
 
     # dd if=/usr/lib/syslinux/mbr.bin conv=notrunc bs=440 count=1 of=/dev/loop0
 
--   Create a configuration file for Extlinux. Replace $UUID with the
-    UUID of the guest's root filesystem, which was set to the variable
-    $UUID above.
+-   Create a configuration file for Extlinux. Replace
+    UUID with the UUID of the guest's root filesystem, which was set to the variable UUID
+    above.
 
     $TMPDIR/boot/extlinux.conf
 
@@ -246,8 +250,8 @@ first trying Extlinux, unless you need to use GRUB.
 
     # grub-install --boot-directory=$TMPDIR/boot /dev/loop0
 
--   Write a grub.cfg file. Replace $UUID, in both places, with the UUID
-    of the guest's root filesystem, which was set to the variable $UUID
+-   Write a grub.cfg file. Replace
+    UUID, in both places, with the UUID of the guest's root filesystem, which was set to the variable UUID
     above.
 
     $TMPDIR/boot/grub/grub.cfg
@@ -307,9 +311,16 @@ prompt in as little as 3 seconds after starting QEMU.
     doesn't necessarily have to be Arch Linux.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Creating_Arch_Linux_disk_image&oldid=253925"
+"https://wiki.archlinux.org/index.php?title=Creating_Arch_Linux_disk_image&oldid=298271"
 
 Categories:
 
 -   Virtualization
 -   Getting and installing Arch
+
+-   This page was last modified on 16 February 2014, at 07:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

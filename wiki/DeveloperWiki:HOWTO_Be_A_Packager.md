@@ -1,40 +1,35 @@
 DeveloperWiki:HOWTO Be A Packager
 =================================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Follow Package Guidelines                                          |
-| -   2 How To Use SVN                                                     |
-|     -   2.1 Non-recursive checkout                                       |
-|     -   2.2 Checkout a package                                           |
-|     -   2.3 Updating all packages                                        |
-|     -   2.4 Adding a package                                             |
-|     -   2.5 Removing a package                                           |
-|     -   2.6 Moving a package between repos                               |
-|     -   2.7 "Tagging" releases                                           |
-|     -   2.8 Cleaning up your checkout                                    |
-|                                                                          |
-| -   3 The Process                                                        |
-|     -   3.1 Checkout/update your local repository                        |
-|     -   3.2 Update the needed package                                    |
-|     -   3.3 Traverse to the package's trunk directory                    |
-|     -   3.4 Change and build                                             |
-|     -   3.5 Run namcap on both PKGBUILD and package                      |
-|     -   3.6 Use devtools to upload and commit                            |
-|     -   3.7 Update the repository                                        |
-|                                                                          |
-| -   4 Staging Directories                                                |
-| -   5 Miscellaneous Stuff                                                |
-|     -   5.1 SVN $Id$ tags                                                |
-|     -   5.2 Package checking tools                                       |
-|         -   5.2.1 namcap                                                 |
-|         -   5.2.2 checkpkg                                               |
-|                                                                          |
-|     -   5.3 Commit messages                                              |
-|     -   5.4 Avoid having to enter your password all the time             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Follow Package Guidelines
+-   2 How To Use SVN
+    -   2.1 Non-recursive checkout
+    -   2.2 Checkout a package
+    -   2.3 Updating all packages
+    -   2.4 Adding a package
+    -   2.5 Removing a package
+    -   2.6 Moving a package between repos
+    -   2.7 "Tagging" releases
+    -   2.8 Cleaning up your checkout
+-   3 The Process
+    -   3.1 Checkout/update your local repository
+    -   3.2 Update the needed package
+    -   3.3 Traverse to the package's trunk directory
+    -   3.4 Change and build
+    -   3.5 Run namcap on both PKGBUILD and package
+    -   3.6 Use devtools to upload and commit
+    -   3.7 Update the repository
+-   4 Staging Directories
+-   5 Miscellaneous Stuff
+    -   5.1 SVN Id tags
+    -   5.2 Package checking tools
+        -   5.2.1 namcap
+        -   5.2.2 checkpkg
+    -   5.3 Commit messages
+    -   5.4 Avoid having to enter your password all the time
 
 Follow Package Guidelines
 -------------------------
@@ -206,9 +201,9 @@ and those slated for removal.
 Miscellaneous Stuff
 -------------------
 
-> SVN $Id$ tags
+> SVN Id tags
 
-$Id$ tags are a nice helper for PKGBUILDs and should be added to the top
+Id tags are a nice helper for PKGBUILDs and should be added to the top
 of all PKGBUILDs in a comment. However, svn needs an additional push to
 know that it should modify this line on checkout.
 
@@ -258,3 +253,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 24 January 2013, at 11:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

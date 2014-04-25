@@ -1,19 +1,14 @@
 ATI
 ===
 
-> Summary
+Related articles
 
-An overview of the open source ATI/AMD video card driver.
+-   AMD Catalyst
+-   Xorg
 
-> Related
-
-AMD Catalyst
-
-Xorg
-
-Owners of ATI/AMD video cards have a choice between AMD's proprietary
-driver (catalyst) and the open source driver (xf86-video-ati). This
-article covers the open source driver.
+Owners of AMD (previously ATI) video cards have a choice between AMD's
+proprietary driver (catalyst) and the open source driver
+(xf86-video-ati). This article covers the open source driver.
 
 The open source driver is currently not on par with the proprietary
 driver in terms of 3D performance on newer cards or reliable TV-out
@@ -24,65 +19,53 @@ OpenGL-accelerated window managers, such as Compiz or KWin.
 If unsure, try the open source driver first, it will suit most needs and
 is generally less problematic (see the feature matrix for details).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Naming conventions                                                 |
-| -   2 Overview                                                           |
-| -   3 Installation                                                       |
-|     -   3.1 Installing xf86-video-ati                                    |
-|                                                                          |
-| -   4 Configuration                                                      |
-| -   5 Kernel mode-setting (KMS)                                          |
-|     -   5.1 Enabling KMS                                                 |
-|         -   5.1.1 Early KMS start                                        |
-|         -   5.1.2 Late start                                             |
-|                                                                          |
-|     -   5.2 Troubleshooting KMS                                          |
-|         -   5.2.1 Disable KMS                                            |
-|         -   5.2.2 Renaming xorg.conf                                     |
-|                                                                          |
-| -   6 Performance tuning                                                 |
-|     -   6.1 Activate PCI-E 2.0                                           |
-|     -   6.2 Glamor                                                       |
-|                                                                          |
-| -   7 Powersaving                                                        |
-|     -   7.1 With KMS enabled                                             |
-|     -   7.2 Without KMS                                                  |
-|                                                                          |
-| -   8 TV out                                                             |
-|     -   8.1 Force TV-out in KMS                                          |
-|                                                                          |
-| -   9 HDMI Audio                                                         |
-|     -   9.1 Testing HDMI Audio                                           |
-|                                                                          |
-| -   10 Dual Head Setup                                                   |
-|     -   10.1 Independent X Screens                                       |
-|                                                                          |
-| -   11 Enabling video acceleration                                       |
-| -   12 Troubleshooting                                                   |
-|     -   12.1 Artifacts upon logging in                                   |
-|     -   12.2 Adding undetected resolutions                               |
-|     -   12.3 Slow performance with open-source drivers                   |
-|     -   12.4 AGP is disabled (with KMS)                                  |
-|     -   12.5 TV showing a black border around the screen                 |
-|     -   12.6 Black screen with mouse cursor on resume from suspend in X  |
-|     -   12.7 No Desktop Effects in KDE4 with X1300 and Radeon Driver     |
-|     -   12.8 Black screen and no console, but X works in KMS             |
-|     -   12.9 Some 3D applications show textures as all black or crash    |
-|     -   12.10 2D performance (e.g. scrolling) is slow                    |
-|     -   12.11 ATI X1600 (RV530 series) 3D application show black windows |
-|     -   12.12 Vertical colored stripes on chipset RS482 (Xpress 200M     |
-|         Series) with/out KMS                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Naming conventions
+-   2 Overview
+-   3 Installation
+-   4 Configuration
+-   5 Kernel mode-setting (KMS)
+    -   5.1 Early start
+    -   5.2 Late start
+-   6 Performance tuning
+    -   6.1 Deactivating PCI-E 2.0
+    -   6.2 Glamor
+-   7 Hybrid graphics/AMD Dynamic Switchable Graphics
+-   8 Powersaving
+    -   8.1 Old methods
+        -   8.1.1 Dynamic frequency switching
+        -   8.1.2 Profile-based frequency switching
+        -   8.1.3 Persistent configuration
+        -   8.1.4 Graphical tools
+        -   8.1.5 Other notes
+    -   8.2 Dynamic power management
+        -   8.2.1 Graphical tools
+-   9 TV out
+    -   9.1 Force TV-out in KMS
+-   10 HDMI audio
+-   11 Dual Head setup
+    -   11.1 Independent X screens
+-   12 Enabling video acceleration
+-   13 Turn vsync off
+-   14 Troubleshooting
+    -   14.1 Artifacts upon logging in
+    -   14.2 Adding undetected resolutions
+    -   14.3 AGP is disabled (with KMS)
+    -   14.4 TV showing a black border around the screen
+    -   14.5 Black screen with mouse cursor on resume from suspend in X
+    -   14.6 No desktop effects in KDE4 with X1300 and Radeon driver
+    -   14.7 Black screen and no console, but X works in KMS
+    -   14.8 2D performance (e.g. scrolling) is slow
+    -   14.9 ATI X1600 (RV530 series) 3D application show black windows
 
 Naming conventions
 ------------------
 
-ATI's Radeon brand follows a naming scheme that relates each product to
-a market segment. Within this article, readers will see both product
-names (e.g. HD 4850, X1900) and code or core names (e.g. RV770, R580).
+The Radeon brand follows a naming scheme that relates each product to a
+market segment. Within this article, readers will see both product names
+(e.g. HD 4850, X1900) and code or core names (e.g. RV770, R580).
 Traditionally, a product series will correspond to a core series (e.g.
 the "X1000" product series includes the X1300, X1600, X1800, and X1900
 products which utilize the "R500" core series – including the RV515,
@@ -105,14 +88,12 @@ The xf86-video-ati (radeon) driver:
     -   Radeons from HD 2xxx to HD 6xxx have full 2D acceleration and
         functional 3D acceleration, but are not supported by all the
         features that the proprietary driver provides.
-
--   Supports DRI1, RandR 1.2/1.3, EXA acceleration and kernel
-    mode-setting/DRI2 (with the latest Linux kernel, libdrm and Mesa
-    versions).
+-   Supports DRI1, RandR 1.2/1.3/1.4, EXA acceleration and kernel
+    mode-setting/DRI2.
 
 Generally, xf86-video-ati should be your first choice, no matter which
-ATI card you own. In case you need to use a driver for newer ATI cards,
-you should consider the proprietary catalyst driver.
+AMD/ATI card you own. In case you need to use a driver for newer AMD
+cards, you should consider the proprietary catalyst driver.
 
 Note:xf86-video-ati is specified as radeon for the kernel and in
 xorg.conf.
@@ -120,16 +101,15 @@ xorg.conf.
 Installation
 ------------
 
-If Catalyst/fglrx has been previously installed, see here.
+Note:If coming from the proprietary Catalyst driver, see AMD
+Catalyst#Uninstallation first.
 
-  
+Install the xf86-video-ati package from the official repositories. It
+provides the DDX driver for 2D acceleration and it pulls in ati-dri as a
+dependency, providing the DRI driver for 3D acceleration.
 
-> Installing xf86-video-ati
-
-Install xf86-video-ati, available in the Official Repositories.
-
-The -git version of the driver and other needed packages (linux-git,
-etc) can be found in the radeon repository or the AUR.
+For 32-bit 3D support on x86_64, install lib32-ati-dri from the multilib
+repository.
 
 Configuration
 -------------
@@ -159,23 +139,23 @@ console (tty) switching. KMS also enables newer technologies (such as
 DRI2) which will help reduce artifacts and increase 3D performance, even
 kernel space power-saving.
 
-KMS for ATI video cards requires the Xorg free video user space driver
-xf86-video-ati version 6.12.4 or later.
+> Note:
 
-> Enabling KMS
+-   KMS is enabled by default for autodetected AMD/ATI cards. This
+    section remains for configurations outside stock.
+-   As of Linux 3.9, the radeon driver requires kernel mode-setting (the
+    old user mode-setting can still be enabled as a kernel compile
+    option, however, some features like HDMI audio depend on KMS). If
+    you have radeon.modeset=0 or nomodeset among kernel parameters,
+    remove it. If you have options radeon modeset=0 anywhere in
+    /etc/modprobe.d/, remove it.
 
-Note: Since Linux kernel v.2.6.33, KMS is enabled by default for
-autodetected ATI/AMD cards. This section remains for configurations
-outside stock.
-
-Early KMS start
+> Early start
 
 These two methods will start KMS as early as possible in the boot
 process.
 
-1. The earliest point is to append the kernel line in your bootloader
-with radeon.modeset=1. See your bootloader's page for info on how to do
-this.
+1. Remove all conflicting UMS drivers from kernel command line:
 
 -   Remove all vga= options from the kernel line in the bootloader
     configuration file. Using other framebuffer drivers (such as uvesafb
@@ -189,14 +169,15 @@ this.
     linux-zen), remember to use a separate mkinitcpio configuration file
     (e.g. /etc/mkinitcpio-zen.conf) and not /etc/mkinitcpio.conf.
 -   Remove any framebuffer related modules from your mkinitcpio file.
--   Add radeon to MODULES array in your mkinitcpio file. For AGP
-    support, it is necessary to add intel_agp (or ali_agp, ati_agp,
-    amd_agp, amd64_agp etc.) before the radeon module.
+-   Add radeon to MODULES array in your mkinitcpio file. For AGP support
+    it is necessary to add the AGP driver for your chipset (e.g.
+    intel_agp, ali_agp, ati_agp, amd_agp, amd64_agp, etc.) before the
+    radeon module.
 -   Re-generate your initramfs.
 
 Finally, Reboot the system.
 
-Late start
+> Late start
 
 With this choice, KMS will be enabled when modules are loaded during the
 boot process.
@@ -206,8 +187,8 @@ appropriate mkinitcpio configuration file, e.g.
 /etc/mkinitcpio-zen.conf. These instructions are written for the default
 kernel (linux).
 
-Note: For AGP support, it may be necessary to add intel_agp, ali_agp,
-ati_agp, amd_agp, or amd64_agp) to appropriate .conf files in
+Note:For AGP support, it may be necessary to add intel_agp, ali_agp,
+ati_agp, amd_agp, or amd64_agp to appropriate .conf files in
 /etc/modules-load.d.
 
 1.  Remove all vga= options from the kernel line in the bootloader
@@ -215,57 +196,12 @@ ati_agp, amd_agp, or amd64_agp) to appropriate .conf files in
     or radeonfb) will conflict with KMS. Remove any framebuffer related
     modules from /etc/mkinitcpio.conf. video= can now be used in
     conjunction with KMS.
-2.  Add options radeon modeset=1 to /etc/modprobe.d/modprobe.conf.
-3.  Reboot the system.
-
-> Troubleshooting KMS
-
-Disable KMS
-
-Users should consider disabling kernel mode-setting if encountering
-kernel panics, distorted framebuffer on boot, no GPU signal, Xorg
-refusing to start, Xorg falling back to Mesa software rasterizer (no 3D
-acceleration) or 'POWER OFF' problem (kernel 2.6.33-2)at shutdown.
-
-1.  Add radeon.modeset=0 (or nomodeset, if this does not work) to the
-    kernel options line in the bootloader configuration file. That
-    should work.
-    Note: Adding nomodeset to the kernel boot line might prevent GNOME
-    3's gnome-shell or KDE's desktop effects from running.
-    If you want to remove KMS support from the initramfs, follow the
-    next two steps.
-2.  If radeon was added to the MODULES array in mkinitcpio.conf to
-    enable early start, remove it.
-3.  Rebuild the initramfs with
-
-        # mkinitcpio -p linux
-
-Alternatively, module options can be specified in a file within the
-/etc/modprobe.d directory. If using the radeon module
-(lsmod | grep radeon) disable KMS by creating a file containing the
-above code:
-
-    /etc/modprobe.d/radeon.conf
-
-    options radeon modeset=0
-
-Renaming xorg.conf
-
-Renaming /etc/X11/xorg.conf, which may include options that conflict
-with KMS, will force Xorg to autodetect hardware with sane defaults.
-After renaming, restart Xorg.
+2.  Reboot the system.
 
 Performance tuning
 ------------------
 
 The following options apply to /etc/X11/xorg.conf.d/20-radeon.conf.
-
-By design, xf86-video-ati runs at AGP 4x speed. It is generally safe to
-modify this. If you notice hangs, try reducing the value or removing the
-line entirely (you can use values 1, 2, 4, 8). If KMS is enabled, this
-option is not used and it is superseded by radeon.agpmode kernel option.
-
-    Option "AGPMode" "8"
 
 ColorTiling is completely safe to enable and supposedly is enabled by
 default. Most users will notice increased performance but it is not yet
@@ -285,12 +221,6 @@ be used together with EXA.
 
     Option "EnablePageFlip" "on"
 
-AGPFastWrite will enable fast writes for AGP cards. This one can cause
-instabilities, so be prepared to remove it if you cannot get into X.
-This option is not used when KMS is on.
-
-    Option "AGPFastWrite" "yes"
-
 EXAVSync option attempts to avoid tearing by stalling the engine until
 the display controller has passed the destination region. It reduces
 tearing at the cost of performance and has been know to cause
@@ -300,17 +230,16 @@ DRI2 acceleration) is enabled.
 
     Option "EXAVSync" "yes"
 
-Bellow is a sample config file /etc/X11/xorg.conf.d/20-radeon.conf:
+Below is a sample config file /etc/X11/xorg.conf.d/20-radeon.conf:
 
     Section "Device"
-           Identifier  "My Graphics Card"
-            Option	"AGPMode"               "8"   #not used when KMS is on
-    	Option	"AGPFastWrite"          "off" #could cause instabilities enable it at your own risk
+    	Identifier  "My Graphics Card"
+    	Driver	"radeon"
     	Option	"SWcursor"              "off" #software cursor might be necessary on some rare occasions, hence set off by default
-    	Option	"EnablePageFlip"        "on"  #supported on all R/RV/RS4xx and older hardware and set off by default
-    	Option	"AccelMethod"           "EXA" #valid options are XAA, EXA and Glamor. EXA is the default.
+    	Option	"EnablePageFlip"        "on"  #supported on all R/RV/RS4xx and older hardware, and set on by default
+    	Option	"AccelMethod"           "EXA" #valid options are XAA, EXA and Glamor. Default value varies per-GPU.
     	Option	"RenderAccel"           "on"  #enabled by default on all radeon hardware
-    	Option	"ColorTiling"           "on"  #enabled by default on RV300 and later radeon cards.
+    	Option	"ColorTiling"           "on"  #enabled by default on RV300 and later radeon cards
     	Option	"EXAVSync"              "off" #default is off, otherwise on. Only works if EXA activated
     	Option	"EXAPixmaps"            "on"  #when on icreases 2D performance, but may also cause artifacts on some old cards. Only works if EXA activated
     	Option	"AccelDFS"              "on"  #default is off, read the radeon manpage for more information
@@ -326,33 +255,31 @@ Alternatively, do it with a modprobe option in
     options radeon gartsize=32
 
 For further information and other options, read the radeon manpage and
-the module's info page:
-
-    man radeon
-
-    modinfo radeon
+the module's info page: man radeon, modinfo radeon.
 
 A fine tool to try is driconf. It will allow you to modify several
 settings, like vsync, anisotropic filtering, texture compression, etc.
 Using this tool it is also possible to "disable Low Impact fallback"
 needed by some programs (e.g. Google Earth).
 
-> Activate PCI-E 2.0
+> Deactivating PCI-E 2.0
 
-Can be unstable with some motherboards or not produce any performarce,
-test yourself adding "radeon.pcie_gen2=1" on the kernel command line.
+Since kernel 3.6, PCI-E v2.0 in radeon is turned on by default.
 
-Note:As of kernel 3.6, PCI-E v2.0 in radeon appears to be turned on by
-default.
+It can be unstable with some motherboards, so it can be deactivated by
+adding radeon.pcie_gen2=0 on the kernel command line.
 
-More info on Phoronix article
+See Phoronix article for more information.
 
 > Glamor
 
-With the newest version of the free ATI drivers, you can now use a novel
-AccelMethod called "glamor": it is a 2D acceleration method implemented
-through OpenGL, and it should work with graphic cards whose driver are
-newer or equal to R300.
+Glamor is a 2D acceleration method implemented through OpenGL, and it
+should work with graphic cards whose drivers are newer or equal to R300.
+
+Since xf86-video-ati driver-1:7.2.0-1, glamor is automaticaly enabled
+with radeonsi drivers (Southern Island and superior GFX cards); with
+other graphic cards you can use it by adding the AccelMethod glamor to
+your xorg.conf config file in the Device section:
 
      Option	"AccelMethod"           "glamor"
 
@@ -363,119 +290,139 @@ However, you need to add the following section before:
     	Load "glamoregl" 
     EndSection
 
+Warning:Until Xorg Bug 68524 is fixed, glamor will be extremely slow to
+use with the radeonsi driver.
+
+Hybrid graphics/AMD Dynamic Switchable Graphics
+-----------------------------------------------
+
+It is the technology used on recent laptops equiped with two GPUs, one
+power-efficent (generally Intel integrated card) and one more powerful
+and more power-hungry (generally Radeon or Nvidia). There are three ways
+to get it work:
+
+-   If you do not need to run any GPU-hungry application, you can
+    plainly disable the discrete card:
+    echo OFF > /sys/kernel/debug/vgaswitcheroo/switch. You can do more
+    things with vgaswitcheroo (see Ubuntu wiki for more information) but
+    ultimately at best one card is bound to one graphic session, you
+    cannot use both on one graphic session.
+-   You can use PRIME. It is the proper way to use hybrid graphics on
+    Linux but still requires a bit of manual intervention from the user.
+-   You can also use bumblebee with radeon, there is a bumblebee-amd-git
+    package on AUR.
+
 Powersaving
 -----------
 
-The powersaving part is totally different with and without KMS.
+With the radeon driver, power saving is disabled by default and has to
+be enabled manually if desired.
 
-> With KMS enabled
+You can choose between three different methods:
 
-With the radeon driver, power saving is disabled by default but the
-stock kernel (2.6.35 as of this writing) provides a "sysfs" utility to
-enable it.
+1.  dynpm
+2.  profile
+3.  dpm (available since kernel 3.11)
 
-Power saving through KMS is still a work in progress for the most part.
-It should work, but some chips do have problems with it. A common issue
-for all is screen blinking when the kernel switches between power
-states, and in some configurations it even causes system freezes. But
-KMS is awesome, so it is your choice. The UMS method is generally more
-stable, however its power savings might not be as good as those provided
-by KMS options.
+It is hard to say which is the best for you, so you have to try it
+yourself!
 
-There are two ways to enable power management:
+Power management is supported on all chips that include the appropriate
+power state tables in the vbios (R1xx and newer). "dpm" is only
+supported on R6xx and newer chips.
 
-1.  Try adding radeon.dynpm=1 to the Kernel parameters (if using the
-    stock kernel < 2.6.35). If you are using Linux kernel >= 2.6.35 this
-    option is no longer needed and the sysfs interface will be present
-    by default. If this option is passed to a kernel >= 2.6.35, the
-    driver will fail and fall back to software rendering.
-2.  Use the (unsupported) [radeon] repo:
+See http://www.x.org/wiki/RadeonFeature/#index3h2 for details.
 
-This repository will grant you up-to-date packages of the radeon driver
-and its dependencies, from (mostly) git snapshots.
+> Old methods
 
-    [mesa-git]
-    Server = http://pkgbuild.com/~lcarlier/$repo/$arch/
+Dynamic frequency switching
 
-  
- You can select the methods via sysfs.
+This method dynamically changes the frequency depending on GPU load, so
+performance is ramped up when running GPU intensive apps, and ramped
+down when the GPU is idle. The re-clocking is attempted during vertical
+blanking periods, but due to the timing of the re-clocking functions,
+does not always complete in the blanking period, which can lead to
+flicker in the display. Due to this, dynpm only works when a single head
+is active.
 
-With root access, you have two choices:
-
-1. Dynamic frequency switching (depending on GPU load)
+It can be activated by simply running the following command:
 
     # echo dynpm > /sys/class/drm/card0/device/power_method
 
-The "dynpm" method dynamically changes the clocks based on the number of
-pending fences, so performance is ramped up when running GPU intensive
-apps, and ramped down when the GPU is idle. The re-clocking is attempted
-during vertical blanking periods, but due to the timing of the
-re-clocking functions, does not always complete in the blanking period,
-which can lead to flicker in the display. Due to this, dynpm only works
-when a single head is active.
+Profile-based frequency switching
 
-Note:The "profile" method mentioned below is not as aggressive as
-"dynpm," but is currently much more stable and flicker free and works
-with multiple heads active.
+This method will allow you to select one of the five profiles (described
+below). Different profiles, for the most part, end up changing the
+frequency/voltage of the GPU. This method is not as aggressive, but is
+more stable and flicker free and works with multiple heads active.
 
-2. Profile-based frequency switching
+To activate the method, run the following command:
 
     # echo profile > /sys/class/drm/card0/device/power_method
 
-The "profile" mode will allow you to select one of the five profiles
-below. Different profiles, for the most part, end up changing the
-frequency/voltage of the card.
+Select one of the available profiles:
 
--   "default" uses the default clocks and does not change the power
-    state. This is the default behavior.
--   "auto" selects between "mid" and "high" power states based on the
-    whether the system is on battery power or not. The "low" power state
-    are selected when the monitors are in the dpms off state.
--   "low" forces the gpu to be in the low power state all the time. Note
-    that "low" can cause display problems on some laptops; this is why
-    auto only uses "low" when displays are off.
--   "mid" forces the gpu to be in the "mid" power state all the time.
-    The "low" power state is selected when the monitors are in the dpms
-    off state.
--   "high" forces the gpu to be in the "high" power state all the time.
-    The "low" power state is selected when the monitors are in the dpms
-    off state.
+-   default uses the default clocks and does not change the power state.
+    This is the default behaviour.
+-   auto selects between mid and high power states based on the whether
+    the system is on battery power or not. The low power state is
+    selected when the monitors are in the DPMS-off state.
+-   low forces the gpu to be in the low power state all the time. Note
+    that low can cause display problems on some laptops, which is why
+    auto only uses low when monitors are off.
+-   mid forces the gpu to be in the mid power state all the time. The
+    low power state is selected when the monitors are in the DPMS-off
+    state.
+-   high forces the gpu to be in the high power state all the time. The
+    low power state is selected when the monitors are in the DPMS-off
+    state.
 
-So lets say we want the "low" option...for this, run the following
-command:
+As an example, we will activate the low profile (replace low with any of
+the aforementioned profiles as necessary):
 
     # echo low > /sys/class/drm/card0/device/power_profile
 
-Replace "low" with any of the aforementioned profiles as necessary.
+Persistent configuration
 
-Tip:Echoing a profile value to this file is not permanent, so when you
-find something that fits your needs, you can use tmpfiles.d or following
-udev rule:
+The activation described above is not persistent, it will not last when
+the computer is rebooted. To make it persistent, you can use
+systemd-tmpfiles (example for #Dynamic frequency switching):
 
-dynpm-method example:
+    /etc/tmpfiles.d/radeon-pm.conf
 
-    $ cat /etc/udev/rules.d/30-local.rules
+    w /sys/class/drm/card0/device/power_method - - - - dynpm
 
-    KERNEL=="dri/card0", SUBSYSTEM=="drm", DRIVERS=="radeon", ATTR{device/power_method}="dynpm"
+Alternatively, you may use this udev rule instead (example for
+#Profile-based frequency switching):
 
-auto-profile example:
+    /etc/udev/rules.d/30-radeon-pm.rules
 
-    $ cat /etc/udev/rules.d/30-local.rules
+    KERNEL=="dri/card0", SUBSYSTEM=="drm", DRIVERS=="radeon", ATTR{device/power_method}="profile", ATTR{device/power_profile}="low"
 
-    KERNEL=="dri/card0", SUBSYSTEM=="drm", DRIVERS=="radeon", ATTR{device/power_method}="profile", ATTR{device/power_profile}="auto"
+Note:If the above rule is failing, try removing the dri/ prefix.
 
-Note:Gnome-shell users may be interested in the following extension:
-Radeon Power Profile Manager for manually controlling the GPU profiles.
-The extension is now available in the AUR and will default to the mid
-profile at startup.
+Graphical tools
 
-Note:Another option from the same author for non Gnome-shell users (with
-a few more features) written in PyQt4 is Radeon-tray [1].
+-   Radeon-tray — A small program to control the power profiles of your
+    Radeon card via systray icon. It is written in PyQt4 and is suitable
+    for non-Gnome users.
 
-  
- Power management is supported on all asics (r1xx-evergreen) that
-include the appropriate power state tables in the vbios; not all boards
-do (especially older desktop cards).
+https://github.com/StuntsPT/Radeon-tray || radeon-tray
+
+-   power-play-switcher — A gui for changing powerplay setting of the
+    open source driver for ati radeon video cards.
+
+https://code.google.com/p/power-play-switcher/ || power-play-switcher
+
+-   Gnome-shell-extension-Radeon-Power-Profile-Manager — A small
+    extension for Gnome-shell that will allow you to change the power
+    profile of your radeon card when using the open source drivers.
+
+https://github.com/StuntsPT/shell-extension-radeon-power-profile-manager
+|| gnome-shell-extension-radeon-ppm
+gnome-shell-extension-radeon-power-profile-manager-git
+
+Other notes
 
 To view the speed that the GPU is running at, perform the following
 command and you will get something like this output:
@@ -486,14 +433,6 @@ command and you will get something like this output:
       default engine clock: 300000 kHz
       current engine clock: 300720 kHz
       default memory clock: 200000 kHz
-
-If /sys/kernel/debug is empty, run this command:
-
-    # mount -t debugfs none /sys/kernel/debug
-
-To permanently mount, add the following line to /etc/fstab:
-
-    debugfs   /sys/kernel/debug   debugfs   defaults   0   0
 
 It depends on which GPU line yours is, however. Along with the radeon
 driver versions, kernel versions, etc. So it may not have much/any
@@ -506,31 +445,45 @@ driver for the sensor used on your board (lm63, lm64, etc.). The drm
 will attempt to load the appropriate hwmon driver. On boards that use
 the internal thermal sensor, the drm will set up the hwmon interface
 automatically. When the appropriate driver is loaded, the temperatures
-can be accessed via lm_sensors tools or via sysfs in /sys/class/hwmon .
+can be accessed via lm_sensors tools or via sysfs in /sys/class/hwmon.
 
-There is a GUI for switching profiles here (available in AUR).
+> Dynamic power management
 
-> Without KMS
+With kernel 3.11, ASPM is activated by default but DPM is not. To
+activate it, add the parameter radeon.dpm=1 to the kernel parameters.
 
-In your xorg.conf file, add 2 lines to "Device" Section:
+Unlike dynpm, the "dpm" method uses hardware on the GPU to dynamically
+change the clocks and voltage based on GPU load. It also enables clock
+and power gating.
 
-           Option      "DynamicPM"          "on"
-           Option      "ClockGating"        "on"
+There are 3 operation modes to choose from:
 
-If the two options are enabled successfully, you will see following
-lines in /var/log/Xorg.0.log:
+-   battery lowest power consumption
+-   balanced sane default
+-   performance highest performance
 
-           (**) RADEON(0): Option "ClockGating" "on"
-           (**) RADEON(0): Option "DynamicPM" "on"
+They can be changed via sysfs
 
-           Static power management enable success
-           (II) RADEON(0): Dynamic Clock Gating Enabled
-           (II) RADEON(0): Dynamic Power Management Enabled
+    # echo battery > /sys/class/drm/card0/device/power_dpm_state
 
-If you desire low power cost, you can add an extra line to "Device"
-Section of xorg.conf:
+For testing or debugging purposes, you can force the card to run in a
+set performance mode:
 
-           Option      "ForceLowPowerMode"   "on"
+-   auto default; uses all levels in the power state
+-   low enforces the lowest performance level
+-   high enforces the highest performance level
+
+    # echo low > /sys/class/drm/card0/device/power_dpm_force_performance_level
+
+Graphical tools
+
+-   Gnome-shell-extension-Radeon-Power-Profile-Manager by lalmeras —
+    This GNOME Shell extension (forked from StuntsPT's one) allows to
+    switch easily between battery, balanced and performance dpm
+    settings. This extension supports setups with multiple cards.
+
+https://github.com/lalmeras/shell-extension-radeon-power-profile-manager
+|| not packaged
 
 TV out
 ------
@@ -589,7 +542,7 @@ To send the output to the TV, I do
 
     xvattr -a XV_CRTC -v 1
 
-Note: you need to install xvattr from AUR to execute this command.
+Note: you need to install xvattr to execute this command.
 
 To switch back to my monitor, I change this to 0. -1 is used for
 automatic switching in dualhead setups.
@@ -599,65 +552,56 @@ xorg configuration file.
 
 > Force TV-out in KMS
 
-Kernel can recognize video= parameter in following form:
+Kernel can recognize video= parameter in following form (see KMS for
+more details):
 
-     video=<conn>:<xres>x<yres>[M][R][-<bpp>][@<refresh>][i][m][eDd]
-
-(see KMS)
+    video=<conn>:<xres>x<yres>[M][R][-<bpp>][@<refresh>][i][m][eDd]
 
 For example:
 
-     video=DVI-I-1:1280x1024-24@60e
+    video=DVI-I-1:1280x1024-24@60e
 
-or
+Parameters with whitespaces must be quoted:
 
-     "video=9-pin DIN-1:1024x768-24@60e"
+    "video=9-pin DIN-1:1024x768-24@60e"
 
-Parameters with whitespaces must be quoted. Current mkinitcpio
-implementation also requires # before. For example:
+Current mkinitcpio implementation also requires # in front. For example:
 
-     root=/dev/disk/by-uuid/d950a14f-fc0c-451d-b0d4-f95c2adefee3 ro quiet radeon.modeset=1 security=none # video=DVI-I-1:1280x1024-24@60e "video=9-pin DIN-1:1024x768-24@60e"
+    root=/dev/disk/by-uuid/d950a14f-fc0c-451d-b0d4-f95c2adefee3 ro quiet radeon.modeset=1 security=none # video=DVI-I-1:1280x1024-24@60e "video=9-pin DIN-1:1024x768-24@60e"
 
 -   Grub can pass such command line as is.
--   Lilo needs backslashes for doublequotes (append="...... # ....
-    \"video=9-pin DIN-1:1024x768-24@60e\"")
+-   Lilo needs backslashes for doublequotes (append
+    # \"video=9-pin DIN-1:1024x768-24@60e\")
 -   Grub2: TODO
 
 You can get list of your video outputs with following command:
 
-    ls -1 /sys/class/drm/ | grep -E '^card[[:digit:]]+-' | cut -d- -f2-
+    $ ls -1 /sys/class/drm/ | grep -E '^card[[:digit:]]+-' | cut -d- -f2-
 
-HDMI Audio
+HDMI audio
 ----------
 
-xf86-video-ati can enable HDMI audio output for all supported chipsets
-up to r7xx when using KMS. Just use xrandr to enable the output and Test
-as described below.
+HDMI audio is supported in the xf86-video-ati video driver. By default
+HDMI audio is disabled in the driver kernel versions >=3.0 because it
+can be problematic. However, if your Radeon card is listed in the Radeon
+Feature Matrix it may work. To enable HDMI audio add radeon.audio=1 to
+your kernel parameters.
 
-> Testing HDMI Audio
+If there is no video after bootup, the driver option will have to be
+disabled.
 
-1.  Connect your PC to the Display via HDMI cable.
-2.  Use xrandr to get picture to the Display, e.g.:
-    xrandr --output DVI-D_1 --mode 1280x768 --right-of PANEL. Simply
-    typing xrandr will give you a list of valid outputs.
-3.  Run aplay -l to get the list of sound devices. Find HDMI and note
-    the card number and corresponding device number. Example of what you
-    want to see:
-    card 1: HDMI [HDA ATI HDMI], device 3: ATI HDMI [ATI HDMI]
-4.  Try sending sound to this device:
-    aplay -D plughw:1,3 /usr/share/sounds/alsa/Front_Center.wav. Be sure
-    to change plughw:z,y to match the hardware number found with last
-    command. You should be able to hear the test sound from the display.
+> Note:
 
--   The audio module is disabled by default in kernel >=3.0. Add
-    radeon.audio=1 to the Kernel parameters.
--   If the sound is distorted try setting tsched=0 and make sure rtkit
-    daemon is running.
+-   If HDMI audio does not simply work after installing the driver, test
+    your setup with the procedure at Advanced Linux Sound
+    Architecture#HDMI output does not work.
+-   If the sound is distorted in PulseAudio try setting tsched=0 and
+    make sure rtkit daemon is running.
 
-Dual Head Setup
+Dual Head setup
 ---------------
 
-> Independent X Screens
+> Independent X screens
 
 Independent dual-headed setups can be configured the usual way. However
 you might want to know that the radeon driver has a "ZaphodHeads" option
@@ -678,14 +622,13 @@ outputs (for instance one HDMI out, one DVI, one VGA), will only select
 and use HDMI+DVI outputs for the dual-head setup, unless you explicitely
 specify "ZaphodHeads"   "VGA-0".
 
-Moreover, this option allows you to easily select the screen you want to
-mark as primary.
-
 Enabling video acceleration
 ---------------------------
 
 Latest mesa package added support for MPEG1/2 decoding to free drivers,
-exported via libvdpau. After installing it assign environment variable
+exported via libvdpau and are automaticaly detected.
+
+You can force used driver by assigning environment variable
 LIBVA_DRIVER_NAME to vdpau and VDPAU_DRIVER to the name of driver core,
 e.g.:
 
@@ -696,6 +639,26 @@ e.g.:
 
 for r600-based cards (all available VDPAU drivers are in
 /usr/lib/vdpau/).
+
+Turn vsync off
+--------------
+
+The radeon driver will enable vsync by default, which is perfectly fine
+except for benchmarking. To turn it off, create ~/.drirc (or edit it if
+it already exists) and add the following section:
+
+    ~/.drirc
+
+    <driconf>
+        <device screen="0" driver="dri2">
+            <application name="Default">
+                <option name="vblank_mode" value="0" />
+            </application>
+        </device>
+        <!-- Other devices ... -->
+    </driconf>
+
+It is effectively dri2, not your video card code (like r600).
 
 Troubleshooting
 ---------------
@@ -709,9 +672,6 @@ improperly configured xorg.conf files are known to cause trouble.
 
 In order to run without a configuration tile, it is recommended that the
 xorg-input-drivers package group be installed.
-
-Artifacts may also be related to kernel mode setting. Consider disabling
-KMS.
 
 You may as well try disabling EXAPixmaps in
 /etc/X11/xorg.conf.d/20-radeon.conf:
@@ -731,25 +691,6 @@ Further tweaking could be done by disabling AccelDFS:
 e.g. When EDID fails on a DisplayPort connection.
 
 This issue is covered on the Xrandr page.
-
-> Slow performance with open-source drivers
-
-Note:Make sure you are member of video group.
-
-Some cards can be installed by default trying to use KMS. You can check
-whether this is your case running:
-
-    dmesg | egrep "drm|radeon"
-
-This command might show something like this, meaning it is trying to
-default to KMS:
-
-    [drm] radeon default to kernel modesetting.
-    ...
-    [drm:radeon_driver_load_kms] *ERROR* Failed to initialize radeon, disabling IOCTL
-
-If your card is not supported by KMS (anything older than r100), then
-you can disable KMS. This should fix the problem.
 
 > AGP is disabled (with KMS)
 
@@ -777,7 +718,7 @@ redrawn when under the mouse cursor. Forcing EXAPixmaps to "enabled" in
 /etc/X11/xorg.conf.d/20-radeon.conf may fix the problem. See performance
 tuning for more information.
 
-> No Desktop Effects in KDE4 with X1300 and Radeon Driver
+> No desktop effects in KDE4 with X1300 and Radeon driver
 
 A bug in KDE4 may prevent an accurate video hardware check, thereby
 deactivating desktop effects despite the X1300 having more than
@@ -807,12 +748,6 @@ This can be fixed by adding a this to the kernel boot line:
 This will tell the fbcon to map itself to the /dev/fb1 framebuffer dev
 and not the /dev/fb0, that in our case exist on the wrong graphics card.
 
-> Some 3D applications show textures as all black or crash
-
-You might need texture compression support, which is not included with
-the open source driver. Install libtxc_dxtn (and lib32-libtxc_dxtn for
-multilib systems).
-
 > 2D performance (e.g. scrolling) is slow
 
 If you have problem with 2D performance, like scrolling in terminal or
@@ -832,32 +767,23 @@ Bellow is a sample config file /etc/X11/xorg.conf.d/20-radeon.conf:
 There are three possible solutions:
 
 -   Try add pci=nomsi to your boot loader Kernel parameters.
--   If this doesn't work, you can try adding noapic instead of
+-   If this does not work, you can try adding noapic instead of
     pci=nomsi.
 -   If none of the above work, then you can try running
     vblank_mode=0 glxgears or vblank_mode=1 glxgears to see which one
-    works for you, then install driconf via pacman and set that option
-    in ~/.drirc.
-
-  
-
-> Vertical colored stripes on chipset RS482 (Xpress 200M Series) with/out KMS
-
-The bug :With the graphical chipset Xpress 200M Series (Radeon Xpress
-1150), booting with KMS gives you sometimes, as soon as Xorg boots, a
-screen with many vertical colored stripes. You cannot Alt+Sys+K or do
-anything. Take a look [2] for more information, How to fixed ? : disable
-dri (needn't to disable kms) Side effert: if i disable "dri" and use no
-kernel options (no "nomodeset") i see the vertical stripes at boot, only
-for 5 seconds, before having kdm displayed. Then, i have the same
-results.
-
-    If I start for example KDE Desktop Effects, i will see again the vertical stripes for 5 seconds...and return to kdm ! :)
+    works for you, then install driconf and set that option in ~/.drirc.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ATI&oldid=253505"
+"https://wiki.archlinux.org/index.php?title=ATI&oldid=296218"
 
 Categories:
 
 -   Graphics
 -   X Server
+
+-   This page was last modified on 4 February 2014, at 18:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

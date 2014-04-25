@@ -12,32 +12,27 @@ For more information, see other pages:
 -   Asus_Eee_PC_900A
 -   Array.org EeePC Ubuntu Repository
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Wireless                                                           |
-| -   2 Xorg                                                               |
-| -   3 Touchpad                                                           |
-| -   4 ACPI                                                               |
-|     -   4.1 Notes                                                        |
-|         -   4.1.1 Sleep                                                  |
-|         -   4.1.2 Wifi                                                   |
-|         -   4.1.3 Brightness                                             |
-|                                                                          |
-| -   5 Software                                                           |
-|     -   5.1 LXDE                                                         |
-|     -   5.2 XFCE                                                         |
-|     -   5.3 KWin                                                         |
-|                                                                          |
-| -   6 Hardware                                                           |
-|     -   6.1 lspci                                                        |
-|     -   6.2 lsusb                                                        |
-|                                                                          |
-| -   7 Problems                                                           |
-|     -   7.1 Compiz                                                       |
-|         -   7.1.1 Solution                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Wireless
+-   2 Xorg
+-   3 Touchpad
+-   4 ACPI
+    -   4.1 Notes
+        -   4.1.1 Sleep
+        -   4.1.2 Wifi
+        -   4.1.3 Brightness
+-   5 Software
+    -   5.1 LXDE
+    -   5.2 XFCE
+    -   5.3 KWin
+-   6 Hardware
+    -   6.1 lspci
+    -   6.2 lsusb
+-   7 Problems
+    -   7.1 Compiz
+        -   7.1.1 Solution
 
 Wireless
 --------
@@ -261,8 +256,15 @@ seems to occur:
     /usr/bin/compiz (thumbnail) - Warn: No compatible text plugin found.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1000&oldid=238235"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1000&oldid=256770"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 12 May 2013, at 09:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

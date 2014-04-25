@@ -30,8 +30,15 @@ parameters when bootloader menu shows up. Easier to remember, as well.
   emergency       emergency.target                                        Emergency shell
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Init_Rosetta&oldid=235037"
+"https://wiki.archlinux.org/index.php?title=Init_Rosetta&oldid=304914"
 
 Category:
 
 -   Boot process
+
+-   This page was last modified on 16 March 2014, at 09:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

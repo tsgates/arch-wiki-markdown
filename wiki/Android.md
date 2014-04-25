@@ -1,137 +1,133 @@
 Android
 =======
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Android Development on Arch                                        |
-|     -   1.1 Install Android SDK core components                          |
-|     -   1.2 Getting Android SDK Platform packages                        |
-|         -   1.2.1 Automatic installation                                 |
-|         -   1.2.2 Getting from AUR                                       |
-|         -   1.2.3 Manual installation                                    |
-|                                                                          |
-|     -   1.3 Setting up Development Environment                           |
-|         -   1.3.1 Setting up Eclipse                                     |
-|         -   1.3.2 Setting up Netbeans                                    |
-|                                                                          |
-|     -   1.4 Connecting to a real device - Android Debug Bridge (ADB)     |
-|         -   1.4.1 Using existing rules                                   |
-|         -   1.4.2 Figure Out Your Device Ids                             |
-|         -   1.4.3 Adding udev Rules                                      |
-|         -   1.4.4 Configuring adb                                        |
-|         -   1.4.5 Does It Work?                                          |
-|                                                                          |
-|     -   1.5 Tools specific to NVIDIA Tegra platform                      |
-|     -   1.6 Tethering                                                    |
-|                                                                          |
-| -   2 Building Android                                                   |
-| -   3 Tips & Tricks                                                      |
-|     -   3.1 During Debugging "Source not found"                          |
-|     -   3.2 Linux distribution on the sdcard                             |
-|     -   3.3 Android SDK on Arch 64                                       |
-|     -   3.4 Better MTPFS Support                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Android Development on Arch
----------------------------
+-   1 Exploring Android device on Arch
+-   2 Android development on Arch Linux
+    -   2.1 Install Android SDK core components
+    -   2.2 Getting Android SDK platform API
+    -   2.3 Setting up Development Environment
+        -   2.3.1 Android Studio
+        -   2.3.2 Eclipse
+        -   2.3.3 Netbeans
+    -   2.4 Connecting to a real device - Android Debug Bridge (ADB)
+        -   2.4.1 Using existing rules
+        -   2.4.2 Figure Out Your Device Ids
+        -   2.4.3 Adding udev Rules
+        -   2.4.4 Configuring adb
+        -   2.4.5 Does It Work?
+    -   2.5 Tools specific to NVIDIA Tegra platform
+    -   2.6 Tethering
+-   3 Building Android
+    -   3.1 OS bitness
+    -   3.2 Required packages
+    -   3.3 Java Development Kit
+    -   3.4 Setting up the build environment
+    -   3.5 Downloading the source code
+    -   3.6 Actually building the code
+    -   3.7 Testing the build
+-   4 Tips & Tricks
+    -   4.1 During Debugging "Source not found"
+    -   4.2 Linux distribution on the sdcard
+    -   4.3 Android SDK on Arch 64
+    -   4.4 Better MTP support
+-   5 See Also
 
-There are three parts to set up:
+Exploring Android device on Arch
+--------------------------------
 
-1.  Android SDK core component,
-2.  Android SDK Platform packages
-3.  Development environment
+To view the contents of your Android storage on your Arch machine, you
+can install GVFS. For recognizing your phone, you also need gvfs-mtp (if
+your device is connected via MTP) or gvfs-gphoto2 (if your phone is
+connected via PTP).
+
+Android development on Arch Linux
+---------------------------------
+
+There are 3 steps that need to be performed before you can develop
+Android applications on your Arch Linux box:
+
+1.  Install the Android SDK core component,
+2.  Install one or several Android SDK Platform packages,
+3.  Install one of the IDE compatible with the Android SDK.
 
 > Install Android SDK core components
 
-Before developing android applications, you need to install at least one
-Android platform. Install core SDK components from AUR:
+Note:First, if you are running a 64-bit system, make sure the multilib
+repository is enabled in pacman.conf.
+
+Before developing Android applications, you need to install the Android
+SDK, which is made of 3 distinct packages, all installable from AUR:
 
 1.  android-sdk
 2.  android-sdk-platform-tools
+3.  android-sdk-build-tools
 
-Typical installation location is /opt/android-sdk.
+If you have not changed the PKGBUILD, these packages will be installed
+to this default location /opt/android-sdk.
 
-Note:If you are running Arch64, you have to enable the multilib repo, to
-be able to to install the required dependencies using pacman.
+> Getting Android SDK platform API
 
-> Getting Android SDK Platform packages
+Even if the AUR currently contains multiple packages with Android
+platforms, installing the platform API from AUR is not the clean way to
+proceed. Aside the fact AUR packages might be outdated, an "SDK manager"
+comes with the Android SDK, we will thus prefer it.
 
-And then install the Android SDK Platform packages which can be done
-either automatically, from the AUR, or manually.
+First, make sure your $PATH environment variable contains the path to
+the Android SDK tools directory, by default /opt/android-sdk/tools/ and
+/opt/android-sdk/platform-tools/.
 
-Automatic installation
-
-Automatic installation is done via the Android SDK and device manager,
-which is accessible by invoking (assuming that the $PATH variable
-contains the path to the Android SDK tools directory):
-
-    $ android
-
-or alternatively:
-
-    $ <path_to_android-sdk>/tools/android
-
-If the automatic installation errors out, then you must do one of the
-following:
-
--   run the android tool with heightened privileges
+As the SDK manager will download the API platforms to /opt and a
+standard user account doesn't have right to write in that directory, we
+will launch the SDK Manager with root privileges.
 
     # android
 
--   set your user account as the owner of the directory. To change the
-    owner ID for all SDK directories, run the following command as root:
+or with sudo,
 
-    # chown -R USER /opt/android-sdk
+    $ sudo android
 
--   change the group ID instead (recommended for multiple users), first
-    create the group, perhaps called android, and add your user account
-    to it:
+The manager will then fetch some files to check if new versions of the
+Android SDK are available.
 
-    # groupadd android
-    # gpasswd -a USER android
+Note:If you get an error like
+Failed to fetch URL https://dl-ssl.google.com/android/repository/addons_list-2.xml, reason: peer not authenticated,
+you need to go the options menu (Tools > Options...) and check Force
+https://... sources to be fetched using http://....
 
-Next, change the directory permissions:
+Afterwards, check one or several API platforms you want to install (e.g.
+Android 4.4.2 (API 19)), then click on Install packages... and accept
+all license and package descriptions.
 
-    # chgrp -R android /opt/android-sdk
-    # chmod -R g+w /opt/android-sdk
-    # find /opt/android-sdk -type d -exec chmod g+s {} \;
+Finally, to make sure all users can read and browse the Android SDK
+location, change the directory rights:
 
-The final command sets the setgid bit on all subdirectories so that any
-new files created within them will inherit the proper group ID. Then
-rerun
+    # chmod -R 755 /opt/android-sdk
 
-    $ android
-
-For step-by-step automatic installation, see: Installing SDK Components.
-
-Getting from AUR
-
-AUR currently contains multiple packages with Android platforms
-sometimes duplicating each other and/or having incorrect file
-permissions set.
-
-Manual installation
-
-For manual installation:
-
-1.  Download the platform you want to develop on. This site provides
-    online links to several Android SDK components.
-2.  Extract the tarball to /<path_to_android-sdk>/platforms.
-
-Now, you should see the platform of your choice installed in the
-Installed Packages window of the Android SDK and device manager.
+Tip:For more details about the specific Android SDK packages, see
+Installing SDK Components on the Android developer website.
 
 > Setting up Development Environment
 
-When using Eclipse as an IDE you need to install the ADT plugin and
-related packages. If you get a message about unresolvable dependencies,
-install Java manually and try again. Alternatively you can use Netbeans
-for development after installing living and usually up to date plugin
-according to these instructions.
+Android Studio is a new (and still experimental!) Android development
+environment based on IntelliJ IDEA. The more traditional IDE is Eclipse
+with the ADT plugin and related packages. Alternatively you can use
+Netbeans for development after installing the plugin as described below.
 
-Setting up Eclipse
+Android Studio
+
+Android Studio is a new (and still experimental!) Android development
+environment based on IntelliJ IDEA. Similar to Eclipse with the ADT
+Plugin, Android Studio provides integrated Android developer tools for
+development and debugging.
+
+You can download and install it with the android-studio package from the
+AUR. If you get an error about a missing SDK, refer to the section
+Getting Android SDK platform API above.
+
+Eclipse
 
 Most stuff required for Android development in Eclipse is already
 packaged in AUR:
@@ -148,17 +144,24 @@ Dependencies:
 
 > Note:
 
+-   if you get a message about unresolvable dependencies, install Java
+    manually and try again.
 -   as an alternative, you can install the ADT via eclipse's built in
     "add new software" command (see instructions on ADT site).
 -   if you are in real trouble, it is also possible to download Android
     SDK and use the bundled Eclipse. This usually works without
     problems.
+-   if you need to install extra SDK plugins not found in the AUR, you
+    must change the file ownership of /opt/android-sdk first. You can do
+    this with
+    # chgrp -R users /opt/android-sdk ; chmod -R 0775 /opt/android-sdk
+    (see File Permissions for more details).
 
 Enter the path to the Android SDK Location in
 
     Windows -> Preferences -> Android
 
-Setting up Netbeans
+Netbeans
 
 If you prefer using Netbeans as your IDE and want to develop Android
 applications, download the nbandroid by going to:
@@ -166,7 +169,7 @@ applications, download the nbandroid by going to:
     Tools -> Plugins -> Settings
 
 Add the following URL:
-http://kenai.com/projects/nbandroid/downloads/download/updatecenter/updates.xml
+http://nbandroid.org/release72/updates/updates.xml
 
 Then go to Available Plugins and install the Android and Android Test
 Runner plugins for your IDE version. Once you have installed go to:
@@ -185,8 +188,14 @@ create a new Android project and start developing using Netbeans.
 > Connecting to a real device - Android Debug Bridge (ADB)
 
 To get ADB to connect to a real device or phone under Arch, you must
-install the udev rules to connect the device to the proper /dev/
-entries.
+
+-   Enable USB Debugging on your phone or device. This is usually done
+    from Settings --> Applications --> Development --> USB debugging.
+    Reboot the phone after checking this option to make sure USB
+    debugging is enabled (if there is no such option, this step probably
+    does not apply to your version of Android)
+-   install the udev rules to connect the device to the proper /dev/
+    entries.
 
 Using existing rules
 
@@ -225,9 +234,6 @@ with yours. Copy these rules into /etc/udev/rules.d/51-android.rules:
 Then, to reload your new udev rules, execute:
 
     # udevadm control --reload-rules
-
-Note: reloading udev rules under systemd should not be required, as any
-rule changes should be picked up automatically.
 
 Configuring adb
 
@@ -286,31 +292,61 @@ ADT and their documentation.
 
 > Tethering
 
-See Android_Tethering
+See Android Tethering
 
 Building Android
 ----------------
 
-To build android, you need to install these packages.
+Please note that these instructions are based on the official AOSP build
+instructions. Other Android-derived systems such as CyanogenMod will
+often require extra steps.
 
-For 32 bits or 64 bits systems
+> OS bitness
 
-    git gnupg flex bison gperf sdl wxgtk squashfs-tools curl ncurses zlib schedtool openjdk6 perl-switch zip unzip
+Android 2.2.x (Froyo) and below are the only versions of Android that
+will build on a 32-bit system. For 2.3.x (Gingerbread) and above, you
+will need a 64-bit installation.
 
-Only for 64 bits systems
+> Required packages
 
-    lib32-zlib lib32-ncurses lib32-readline gcc-libs-multilib gcc-multilib lib32-gcc-libs
+To build any version of Android, you need to install these packages:
 
-And you need to change the default python from version 3 to version 2
+-   32-bit and 64-bit systems: gcc git gnupg flex bison gperf sdl wxgtk
+    squashfs-tools curl ncurses zlib schedtool perl-switch zip unzip
+    libxslt python2-virtualenv
 
-    # rm /usr/bin/python
-    # ln -s /usr/bin/python2 /usr/bin/python
+-   64-bit systems only: gcc-multilib lib32-zlib lib32-ncurses
+    lib32-readline
+
+> Java Development Kit
+
+Android requires a working Sun/Oracle JDK installed on your build
+system. It will not work with OpenJDK.
+
+For 2.3.x and higher, you can use jdk6, if you don't develop on the JVM,
+or jdk6-compat, if you do have a preferred JVM for other tasks. For
+2.2.x and below, a version 5 JDK is required; jre5-opt is currently the
+only one left on the AUR.
+
+Note that, if you choose to install jdk6-compat, you will need to set
+the JAVA_HOME environment variable to the location of the JDK6:
+
+    $ export JAVA_HOME=/opt/java6
+
+Otherwise, $PATH will be reset to the location of the JDK7 by the build
+scripts, and all your AOSP builds will abort, complaining about the
+wrong version of javac (the Java Compiler.)
+
+To set JAVA_HOME on the system level, see the files in /etc/profile.d
+named jdk.sh, jdk.csh, jre.csh, and jre.sh.
+
+> Setting up the build environment
 
 Download the repo utility.
 
     $ mkdir ~/bin
     $ export PATH=~/bin:$PATH
-    $ curl https://dl-ssl.google.com/dl/googlesource/git-repo/repo > ~/bin/repo
+    $ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
     $ chmod a+x ~/bin/repo
 
 Create a directory to build.
@@ -318,24 +354,56 @@ Create a directory to build.
     $ mkdir ~/android
     $ cd ~/android
 
-Synchronize the repositories.
+You will need to change the default Python from version 3 to version 2:
 
-    $ repo init -u https://android.googlesource.com/platform/manifest (checkout the master)
+    $ virtualenv2 venv # Creates a directory, venv/, containing the Virtualenv
+
+Activate the Virtualenv, which will update $PATH to point at Python 2.
+
+Note:this activation is only active for the current terminal session.
+
+    $ source venv/bin/activate
+
+> Downloading the source code
+
+This will clone the repositories. You only need to do this the first
+time you build Android, or if you want to switch branches.
+
+-   The repo has a -j switch that operates similarly to the one used
+    with make. Since it controls the number of simultaneous downloads,
+    you should adjust the value depending on downstream network
+    bandwidth.
+
+-   You will need to specify a branch (release of Android) to check out
+    with the -b switch. If you leave the switch out, you will get the
+    so-called master branch.
+
+    $ repo init -u https://android.googlesource.com/platform/manifest -b master
+    $ repo sync -j4
+
+Wait a long time. Just the uncompiled source code, along with the .repo
+and .git directories that are used to keep track of it, are well over 10
+GB.
+
+Note:If you want to update your local copy of the Android source, at a
+later time, simply enter the build directory, load the Virtualenv, and
+re-sync:
+
     $ repo sync
 
-Wait a lot.
+> Actually building the code
 
-When finished, start building.
+This should do what you need for AOSP:
 
     $ source build/envsetup.sh
     $ lunch full-eng
     $ make -j4
 
 If you run lunch without arguments, it will ask what build you want to
-create. Use -j with a number between the number of cores and 2 * number
-of cores.
+create. Use -j with a number between one and two times number of
+cores/threads.
 
-The build takes a lot of time.
+The build takes a very long time.
 
 Note:Make sure you have enough RAM.
 
@@ -345,7 +413,9 @@ it fills up, the build will fail. 4GB of RAM or more is recommended.
 
 -   Alternatively, you can get rid of the tmpfs from fstab all together.
 
-When finished, run the final image.
+> Testing the build
+
+When finished, run/test the final image(s).
 
     $ emulator
 
@@ -380,14 +450,27 @@ Provide a localtime file in /usr/share/zoneinfo/localtime e.g.:
 
      # cp /usr/share/zoneinfo/Europe/Berlin /usr/share/zoneinfo/localtime
 
-> Better MTPFS Support
+> Better MTP support
 
 If you have an Android device that doesn't support UMS and you find
-mtpfs to be extremely slow you can install jmtpfs from the AUR.
+mtpfs to be extremely slow you can install jmtpfs from the AUR. See MTP
+for more options.
+
+See Also
+--------
+
+-   Android Notifier
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Android&oldid=255597"
+"https://wiki.archlinux.org/index.php?title=Android&oldid=303705"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 9 March 2014, at 02:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

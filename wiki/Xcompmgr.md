@@ -1,17 +1,11 @@
 Xcompmgr
 ========
 
-> Summary
-
-Describes the installation and usage of Xcompmgr.
-
 Related articles
 
-Compiz
-
-Cairo Compmgr
-
-Compton
+-   Compiz
+-   Cairo Compmgr
+-   Compton
 
 Xcompmgr is a simple composite manager capable of rendering drop shadows
 and, with the use of the transset utility, primitive window
@@ -22,27 +16,22 @@ Because it does not replace any existing window manager, it is an ideal
 solution for users of lightweight window managers, seeking a more
 elegant desktop.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Forks and updated versions                                   |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Window Transparency                                          |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Start/Stop Xcompmgr on demand                                |
-|     -   3.2 Toggle Xcompmgr                                              |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Mozilla Firefox crashes when entering a Flash site           |
-|     -   4.2 Background turns light gray briefly after logging in (e.g.   |
-|         in Openbox)                                                      |
-|     -   4.3 BadPicture request in awesome                                |
-|     -   4.4 Screen not updating in awesome after resolution change       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Forks and updated versions
+-   2 Configuration
+    -   2.1 Window transparency
+-   3 Tips and tricks
+    -   3.1 Start/Stop Xcompmgr on demand
+    -   3.2 Toggle Xcompmgr
+-   4 Troubleshooting
+    -   4.1 Mozilla Firefox crashes when entering a Flash site
+    -   4.2 Background turns light gray briefly after logging in (e.g.
+        in Openbox)
+    -   4.3 BadPicture request in awesome
+    -   4.4 Screen not updating in awesome after resolution change
 
 Installation
 ------------
@@ -93,7 +82,7 @@ For a full list of options, run:
 
     $ xcompmgr --help
 
-> Window Transparency
+> Window transparency
 
 Although its practical use is limited, due to its slow performance, the
 transset-df utility can be used to set the transparency of individual
@@ -102,7 +91,7 @@ windows.
 To set the transparency of a program window, make sure the desired
 program is already running, then execute:
 
-    $ transset-df [opacity]
+    $ transset-df opacity
 
 where opacity is a number between 0 and 1, 0 being transparent and 1
 being opaque.
@@ -122,41 +111,41 @@ manager.
 
     ~/.bin/comp
 
-     #!/bin/bash
-     #
-     # Start a composition manager.
-     # (xcompmgr in this case)
-     
-     comphelp() {
-       echo "Composition Manager:"
-       echo "   (re)start: COMP"
-       echo "   stop:      COMP -s"
-       echo "   query:     COMP -q"
-       echo "              returns 0 if composition manager is running, else 1"
-       exit
-     }
-     
-     checkcomp() {
-       pgrep xcompmgr &>/dev/null
-     }
-     
-     stopcomp() {
-       checkcomp && killall xcompmgr
-     }
-     
-     startcomp() {
-       stopcomp
-     # Example settings only. Replace with your own.
-       xcompmgr -CcfF -I-.015 -O-.03 -D6 -t-1 -l-3 -r4.2 -o.5 &
-       exit
-     }
-     
-     case "$1" in
-         "") startcomp ;;
-       "-q") checkcomp ;;
-       "-s") stopcomp; exit ;;
-          *) comphelp ;;
-     esac
+    #!/bin/bash
+    #
+    # Start a composition manager.
+    # (xcompmgr in this case)
+
+    comphelp() {
+        echo "Composition Manager:"
+        echo "   (re)start: COMP"
+        echo "   stop:      COMP -s"
+        echo "   query:     COMP -q"
+        echo "              returns 0 if composition manager is running, else 1"
+        exit
+    }
+
+    checkcomp() {
+        pgrep xcompmgr &>/dev/null
+    }
+
+    stopcomp() {
+        checkcomp && killall xcompmgr
+    }
+
+    startcomp() {
+        stopcomp
+        # Example settings only. Replace with your own.
+        xcompmgr -CcfF -I-.015 -O-.03 -D6 -t-1 -l-3 -r4.2 -o.5 &
+        exit
+    }
+
+    case "$1" in
+        "")   startcomp ;;
+        "-q") checkcomp ;;
+        "-s") stopcomp; exit ;;
+        *)    comphelp ;;
+    esac
 
 For ease of use, you can bind this script to a hot-key using, for
 example, Xbindkeys. This allows for fast restart or temporary
@@ -169,11 +158,11 @@ Assign the following script to any hot-key:
     #!/bin/bash
 
     if pgrep xcompmgr &>/dev/null; then
-           echo "Turning xcompmgr ON"
-           xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &
+        echo "Turning xcompmgr ON"
+        xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &
     else
-           echo "Turning xcompmgr OFF"
-           pkill xcompmgr &
+        echo "Turning xcompmgr OFF"
+        pkill xcompmgr &
     fi
 
     exit 0
@@ -212,7 +201,7 @@ When using an external monitor, you may encounter problems when
 automatically changing display resolutions: a part of the screen becomes
 "stuck" and no longer updates itself. This problem occurs because of the
 initial resolution change (happening before Xcompmgr starts) as well as
-awesome setting the background via Feh.
+awesome setting the background via feh.
 
 To fix it, you need to install hsetroot, from the official repositories,
 and put the following line in .xinitrc, just before xcompmgr:
@@ -222,9 +211,16 @@ and put the following line in .xinitrc, just before xcompmgr:
 (you can replace #000066 with your color of choice).
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xcompmgr&oldid=255834"
+"https://wiki.archlinux.org/index.php?title=Xcompmgr&oldid=287947"
 
 Categories:
 
 -   X Server
 -   Eye candy
+
+-   This page was last modified on 14 December 2013, at 10:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

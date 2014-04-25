@@ -1,33 +1,27 @@
 DeveloperWiki:Building in a Clean Chroot
 ========================================
 
-  
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Why                                                                |
-| -   3 Convenience Way                                                    |
-| -   4 Classic Way                                                        |
-|     -   4.1 Setting Up A Chroot                                          |
-|     -   4.2 Building in the Chroot                                       |
-|                                                                          |
-| -   5 Handling Major Rebuilds                                            |
-| -   6 Alternate Rebuild Handling                                         |
-|     -   6.1 Using a custom repo                                          |
-|     -   6.2 Manual package installation                                  |
-|     -   6.3 Installation after building                                  |
-+--------------------------------------------------------------------------+
+-   1 Introduction
+-   2 Why
+-   3 Convenience Way
+-   4 Classic Way
+    -   4.1 Setting Up A Chroot
+        -   4.1.1 Custom pacman.conf
+    -   4.2 Building in the Chroot
+    -   4.3 Manual package installation
+    -   4.4 Installation after building
+-   5 Handling Major Rebuilds
 
 Introduction
-============
+------------
 
 This article is part of the DeveloperWiki.
 
 Why
-===
+---
 
 Building in a clean chroot prevents missing dependencies in packages,
 whether due to unwanted linking or packages missing in the depends array
@@ -36,7 +30,7 @@ repositories (core, extra, community) while having packages from
 [testing] installed.
 
 Convenience Way
-===============
+---------------
 
 To quickly build a package in a chroot without any further tinkering,
 one can use the helper scripts from the devtools package.
@@ -66,131 +60,119 @@ Note:[core] is omitted because those packages are required to go through
   multilib-staging              x86_64         multilib-staging-build
 
 Classic Way
-===========
+-----------
 
-Setting Up A Chroot
--------------------
+> Setting Up A Chroot
 
 The devtools package provides tools for creating and building within
 clean chroots. Install it if not done already:
 
-    pacman -S devtools
+    # pacman -S devtools
 
 To make a clean chroot, create a directory in which the chroot will
 reside. For example, $HOME/chroot.
 
-Now create the chroot:
+    $ mkdir ~/chroot
 
-    CHROOT=$HOME/chroot
-    mkdir $CHROOT
-    sudo mkarchroot $CHROOT/root base base-devel sudo
+Define the CHROOT variable:
+
+    # CHROOT=$HOME/chroot
+
+Now create the chroot (the sub directory root is required because the
+$CHROOT directory will get other sub directories for clean working
+copies):
+
+    # mkarchroot $CHROOT/root base-devel
 
 Note:One can also define the CHROOT variable in $HOME/.bashrc using the
 export command if the location is to be repeatedly used.
 
-Edit $CHROOT/root/etc/makepkg.conf to set the packager name and any
-makeflags. Also adjust the mirror list in
-$CHROOT/root/etc/pacman.d/mirrorlist and enable [testing] in
-$CHROOT/root/etc/pacman.conf if desired.
+Edit ~/.makepkg.conf to set the packager name and any makeflags. Also
+adjust the mirrorlist in $CHROOT/root/etc/pacman.d/mirrorlist and enable
+the testing repository in $CHROOT/root/etc/pacman.conf, if desired.
 
-Alternatively, provide a custompacman.conf and makepkg.conf with the
+Custom pacman.conf
+
+Alternatively, provide a custom pacman.conf and makepkg.conf with the
 following:
 
-    sudo mkarchroot -C <pacman.conf> -M <makepkg.conf> $CHROOT/root base base-devel sudo
+    # mkarchroot -C <pacman.conf> -M <makepkg.conf> $CHROOT/root base-devel
 
-It is recommended however users do not use custom pacman.conf and
-makepkg.conf during the initial creation of clean chroot to ensure no
-user-specific adjustments are made. Use with caution.
+Warning: Using a custom pacman.conf or makepkg.conf during the initial
+creation of clean chroot can result in unintended custom adjustments to
+the chroot environment. Use with caution.
 
-Building in the Chroot
-----------------------
+> Building in the Chroot
 
 Firstly, make sure the chroot is up to date with:
 
-    sudo mkarchroot -u $CHROOT/root
+    # arch-nspawn $CHROOT/root pacman -Syu
 
 Then, to build a package in the chroot, run the following from the dir
 containing the PKGBUILD:
 
-    sudo makechrootpkg -c -r $CHROOT
+    # makechrootpkg -c -r $CHROOT
 
-A unionfs is used to maintain the clean chroot during building. All
-installed dependencies or makedepends and other changes made during
-building are done in $CHROOT/rw. Passing the -c flag to makechrootpkg
-ensures that this directory is cleaned before building starts.
+Passing the -c flag to makechrootpkg ensures that the working chroot
+(named $CHROOT/$USERNAME) is cleaned before building starts.
 
-Handling Major Rebuilds
-=======================
+> Manual package installation
 
-The cleanest way to handle a major rebuild is to create a new chroot and
-build the first package (typically the package for which the rebuild is
-meant). Then create a local repo inside the new chroot. To do this:
+Packages can be installed manually to the working chroot by using:
 
-    sudo mkdir $CHROOT/root/repo
-    sudo chmod 0777 $CHROOT/root/repo
+    # makechrootpkg -r $CHROOT -I package-1.0-1-i686.pkg.tar.xz
 
-The chmod statement allows for the coping of package files and for the
-creation of the local repo as your user rather than root.
+If done from a directory that contains a PKGBUILD, the package will then
+be built. Avoid being in such a directory if you want to just install
+the package.
 
-    cp <package> $CHROOT/root/repo
-    cd $CHROOT/root/repo
-    repo-add local.db.tar.gz <package>
-
-Then add the local repo to $CHROOT/root/etc/pacman.conf
-
-    [local]
-    Server = file:///repo
-
-As long as you add only self built packages to this repo, you can add
-
-    SigLevel = TrustAll
-
-and update the repo:
-
-    sudo mkarchroot -u $CHROOT/root
-
-With every additional package rebuilt, copy the package to the local
-repo directory, add it to the repo database and update the chroot.
-
-Alternate Rebuild Handling
-==========================
-
-The above directions will work fine, but they can dirty the "pristine"
-chroot that makechrootpkg tries to keep in check (that is the point of
-using unionfs - dirtying a separate 'rw' directory).
-
-Using a custom repo
--------------------
-
-Follow the steps above to setup a local repo inside the chroot.
-
-Build packages using:
-
-    sudo makechrootpkg -r $CHROOT -u
-
-The -u will update the chroot before building (-Syu) but updates will be
-installed to the rw layer, maintaining a clean chroot.
-
-Manual package installation
----------------------------
-
-Packages can be installed manually to the rw layer of the chroot by
-using:
-
-    sudo makechrootpkg -r $CHROOT -I package-1.0-1-i686.pkg.tar.gz
-
-Installation after building
----------------------------
+> Installation after building
 
 Tell makechrootpkg to simply install a package to the rw layer of the
 chroot after building by passing the -i arg. Unrecognized args get
 passed to makepkg, so this calls `makepkg` with the -i arg.
 
-    sudo makechrootpkg -r $CHROOT -- -i
+    # makechrootpkg -r $CHROOT -- -i
+
+Handling Major Rebuilds
+-----------------------
+
+The cleanest way to handle a major rebuild is to use the [staging]
+repositories. Build the first package against [extra] and push it to
+[staging]. Then rebuild all following packages against [staging] and
+push them there.
+
+If you can't use [staging], you can build against custom packages using
+a command like this:
+
+    # extra-x86_64-build -- -I ~/packages/foobar/foobar-2-1-any.pkg.tar.xz
+
+You can specify more than one package to be installed using multiple -I
+arguments.
+
+A simpler, but dirtier way to handle a major rebuild is to install all
+built packages in the chroot, never cleaning it. Build the first package
+using:
+
+    # extra-x86_64-build
+
+And build all following packages using:
+
+    # makechrootpkg -n -r /var/lib/archbuild/extra-x86_64
+
+Running namcap (the -n argument) implies installing the package in the
+chroot. *-build also does this by default.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Building_in_a_Clean_Chroot&oldid=245841"
+"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Building_in_a_Clean_Chroot&oldid=286773"
 
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 7 December 2013, at 03:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

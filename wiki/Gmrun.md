@@ -4,17 +4,14 @@ Gmrun
 Gmrun (Gnome Completion-Run) is an lightweight application launcher
 similar to GNOME Run, Application Finder, KRunner, etc.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-| -   3 Configuration                                                      |
-|     -   3.1 Adding Custom Shortcuts                                      |
-|                                                                          |
-| -   4 Key bindings                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+-   3 Configuration
+    -   3.1 Adding Custom Shortcuts
+-   4 Key bindings
 
 Installation
 ------------
@@ -158,8 +155,15 @@ You can use your Desktop Environment's or Windows Manager's keybinding
 settings to set one for Gmrun.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Gmrun&oldid=238942"
+"https://wiki.archlinux.org/index.php?title=Gmrun&oldid=301211"
 
 Category:
 
 -   Application launchers
+
+-   This page was last modified on 24 February 2014, at 11:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

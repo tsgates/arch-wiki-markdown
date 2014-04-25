@@ -12,18 +12,16 @@ providing very high aggregate bandwidth across the cluster. Both
 MapReduce and the Hadoop Distributed File System are designed so that
 node failures are automatically handled by the framework.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Single Node Setup                                                  |
-|     -   3.1 Standalone Operation                                         |
-|     -   3.2 Pseudo-Distributed Operation                                 |
-|         -   3.2.1 Set up passphraseless ssh                              |
-|         -   3.2.2 Execution                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Single Node Setup
+    -   3.1 Standalone Operation
+    -   3.2 Pseudo-Distributed Operation
+        -   3.2.1 Set up passphraseless ssh
+        -   3.2.2 Execution
 
 Installation
 ------------
@@ -52,17 +50,27 @@ You also should set up follow files correctly.
     /etc/locale.conf
 
 JAVA_HOME should be set automatically by jdk7-openjdk
-/etc/profile.d/jre.sh. You could check JAVA_HOME:
+/etc/profile.d/jre.sh. Check JAVA_HOME:
 
     $ echo $JAVA_HOME
 
-If it does not print anything, maybe you should log out and log in to
-make it right.
+If it does not print anything, log out and log back in to see the
+change.
 
 Single Node Setup
 -----------------
 
-Note:This part is base on the Hadoop Official Documentation
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: This section of  
+                           the article is based on  
+                           documentation for an     
+                           earlier version of       
+                           Hadoop. (Discuss)        
+  ------------------------ ------------------------ ------------------------
+
+Note:This section is based on the Hadoop Official Documentation
 
 > Standalone Operation
 
@@ -79,13 +87,21 @@ Output is written to the given output directory.
     $ hadoop jar /usr/lib/hadoop/hadoop-examples-*.jar grep input output 'dfs[a-z.]+'
     $ cat output/*
 
+For the current 2.2.x release of hadoop included in the AUR:
+
+    $ HADOOP_CONF_DIR=/usr/lib/hadoop/orig_etc/hadoop/
+    $ mkdir input
+    $ cp /etc/hadoop/hadoop/*.xml input
+    $ hadoop jar /usr/lib/hadoop-2.2.0/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar grep input output 'dfs[a-z.]+'
+    $ cat output/*
+
 > Pseudo-Distributed Operation
 
 Hadoop can also be run on a single-node in a pseudo-distributed mode
 where each Hadoop daemon runs in a separate Java process.
 
-By default, Hadoop will run as the user root. If you use initscripts,
-you can change the user in /etc/conf.d/hadoop-all:
+By default, Hadoop will run as the user root. You can change the user in
+/etc/conf.d/hadoop:
 
     HADOOP_USERNAME="<your user name>"
 
@@ -100,6 +116,12 @@ following commands:
 
     $ ssh-keygen -t rsa -P "" -f ~/.ssh/id_rsa
     $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys2
+
+Also make sure this line is commented in /etc/ssh/sshd_config
+
+    /etc/ssh/sshd_config
+
+    #AuthorizedKeysFile .ssh/authorized_keys
 
 Execution
 
@@ -156,8 +178,15 @@ When you're done, stop the daemons with:
     # systemctl stop hadoop-tasktracker
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Hadoop&oldid=251537"
+"https://wiki.archlinux.org/index.php?title=Hadoop&oldid=298980"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 19 February 2014, at 20:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -8,29 +8,27 @@ freesites without fear of censorship and more. Data is encrypted and
 routed through multiple nodes making almost impossible to identify who
 requested the information and what its content is.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation and Setup                                             |
-| -   2 Configuration                                                      |
-|     -   2.1 Wizard                                                       |
-|     -   2.2 Manual Configuration                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation and Setup
+-   2 Configuration
+    -   2.1 Wizard
+    -   2.2 Manual Configuration
 
 Installation and Setup
 ----------------------
 
 You can install freenet from the the AUR.
 
-Then, add freenet to your /etc/rc.conf
+Then, add freenet to the list of services activated at boot:
 
-    DAEMONS=(... network freenet ...)
+    # systemctl enable freenet
 
 Finally, you can either restart your computer or start the daemon
 manually:
 
-    # /etc/rc.d/freenet start
+    # systemctl start freenet
 
 Configuration
 -------------
@@ -58,8 +56,15 @@ and
     /opt/freenet/wrapper.conf
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Freenet&oldid=198282"
+"https://wiki.archlinux.org/index.php?title=Freenet&oldid=302635"
 
 Category:
 
--   Networking
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

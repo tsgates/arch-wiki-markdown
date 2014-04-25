@@ -2,11 +2,11 @@ Oggenc
 ======
 
   ------------------------ ------------------------ ------------------------
-  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
-                           Notes: please use the    
-                           first argument of the    
-                           template to provide more 
-                           detailed indications.    
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: Stub, outdated,  
+                           ffmpeg does the job btw. 
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
@@ -32,8 +32,15 @@ See also
 -   Gnormalize with vorbis-tools
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Oggenc&oldid=197904"
+"https://wiki.archlinux.org/index.php?title=Oggenc&oldid=305722"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 20 March 2014, at 01:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

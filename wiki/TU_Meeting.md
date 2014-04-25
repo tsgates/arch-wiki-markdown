@@ -46,3 +46,10 @@ Retrieved from
 Category:
 
 -   Events
+
+-   This page was last modified on 26 September 2012, at 18:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

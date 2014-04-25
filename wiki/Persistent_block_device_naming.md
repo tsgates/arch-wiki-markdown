@@ -1,18 +1,11 @@
 Persistent block device naming
 ==============================
 
-> Summary
-
-An overview of persistent block device naming; the preferred method of
-referencing block devices.
-
 Related articles
 
-fstab
-
-udev
-
-LVM
+-   fstab
+-   udev
+-   LVM
 
 This article describes how to use persistent names for your block
 devices. This has been made possible by the introduction of udev and has
@@ -26,20 +19,17 @@ disappearing. Persistent naming solves these issues.
 Note:If you are using LVM2, this article is not relevant as LVM takes
 care of this automatically.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Persistent naming methods                                          |
-|     -   1.1 by-label                                                     |
-|     -   1.2 by-uuid                                                      |
-|     -   1.3 by-id and by-path                                            |
-|     -   1.4 Individual device names                                      |
-|                                                                          |
-| -   2 Using persistent naming                                            |
-|     -   2.1 fstab                                                        |
-|     -   2.2 Boot managers                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Persistent naming methods
+    -   1.1 by-label
+    -   1.2 by-uuid
+    -   1.3 by-id and by-path
+    -   1.4 Individual device names
+-   2 Using persistent naming
+    -   2.1 fstab
+    -   2.2 Boot managers
 
 Persistent naming methods
 -------------------------
@@ -48,9 +38,9 @@ There are four different schemes for persistent naming: by-label,
 by-uuid, by-id and by-path. The following sections describes what the
 different persistent naming methods are and how they are used.
 
-Here is a good command for viewing all the information.
+Here is a good command for viewing all the information:
 
-    # lsblk -f
+    $ lsblk -f
 
     NAME   FSTYPE LABEL    UUID                                 MOUNTPOINT
     sda                                                         
@@ -81,7 +71,7 @@ have one are listed in the /dev/disk/by-label directory. This directory
 is created and destroyed dynamically, depending on whether you have
 partitions with labels attached.
 
-    $ ls -lF /dev/disk/by-label
+    $ ls -l /dev/disk/by-label
 
     total 0
     lrwxrwxrwx 1 root root 10 Oct 16 10:27 data -> ../../sdb2
@@ -97,7 +87,7 @@ to be unambiguous to prevent any possible conflicts. Following are some
 methods for changing labels on common filesystems:
 
  swap 
-    swaplabel -L <label> /dev/XXX
+    swaplabel -L <label> /dev/XXX using util-linux
  ext2/3/4 
     e2label /dev/XXX <label> using e2fsprogs
  btrfs 
@@ -113,7 +103,7 @@ methods for changing labels on common filesystems:
  fat/vfat 
     mlabel -i /dev/XXX ::<label> using mtools
  ntfs 
-    ntfslabel /dev/XXX <label> using ntfsprogs
+    ntfslabel /dev/XXX <label> using ntfs-3g
 
 Note:Labels can be up to 16 characters long.
 
@@ -126,7 +116,7 @@ FAT and NTFS filesystems (fat and windows labels above) do not support
 UUID, but are still listed in /dev/disk/by-uuid with a shorter UID
 (unique identifier):
 
-    # ls -l /dev/disk/by-uuid/
+    $ ls -l /dev/disk/by-uuid/
 
     total 0
     lrwxrwxrwx 1 root root 10 Oct 16 10:27 2d781b26-0285-421a-b9d0-d4a0d3b55680 -> ../../sda1
@@ -144,6 +134,9 @@ configuration files (e.g. fstab or crypttab). Also every time a
 partition is resized or reformatted a new UUID is generated and configs
 have to get adjusted (manually).
 
+Tip:In case your swap partition does not have an UUID assigned, you will
+need to reset the swap partition using mkswap utility.
+
 > by-id and by-path
 
 by-id creates a unique name depending on the hardware serial number,
@@ -155,8 +148,8 @@ will not be discussed any further here.
 
 > Individual device names
 
-You can also create individual device names: udev#Setting static device
-names (for iscsi).
+You can also create individual device names: Udev#Setting static device
+names.
 
 Using persistent naming
 -----------------------
@@ -166,16 +159,7 @@ naming. Following are some examples of how to configure them.
 
 > fstab
 
-To enable persistent naming in /etc/fstab replace the device kernel name
-in the first column with the persistent name path as follows:
-
-    /dev/disk/by-label/home_myhost ...
-    /dev/disk/by-uuid/31f8eb0d-612b-4805-835e-0e6d8b8c5591 [...]
-
-or directly specify the persistent name type using a prefix:
-
-    LABEL=home_myhost ...
-    UUID=1f8eb0d-612b-4805-835e-0e6d8b8c5591 [...]
+See the main article: fstab#UUID
 
 > Boot managers
 
@@ -188,16 +172,16 @@ prerequisites must be met:
 In the above example, /dev/sda1 is the root partition. In the GRUB
 grub.cfg file, the linux line looks like this:
 
-    linux /boot/vmlinuz-linux root=/dev/sda1 ro quiet
+    linux /boot/vmlinuz-linux root=/dev/sda1 rw quiet
 
 Depending on which naming scheme you would prefer, change it to one of
 the following:
 
-    linux /boot/vmlinuz-linux root=/dev/disk/by-label/root_myhost ro quiet
+    linux /boot/vmlinuz-linux root=/dev/disk/by-label/root_myhost rw quiet
 
 or:
 
-    linux /boot/vmlinuz-linux root=UUID=2d781b26-0285-421a-b9d0-d4a0d3b55680 ro quiet
+    linux /boot/vmlinuz-linux root=UUID=2d781b26-0285-421a-b9d0-d4a0d3b55680 rw quiet
 
 If you are using LILO, then do not try this with the root=...
 configuration option; it will not work. Use append="root=..." or
@@ -208,13 +192,20 @@ There is an alternative way to use the label embedded in the filesystem.
 For example if (as above) the filesystem in /dev/sda1 is labeled
 root_myhost, you would give this line to GRUB:
 
-    linux /boot/vmlinuz-linux root=LABEL=root_myhost ro quiet
+    linux /boot/vmlinuz-linux root=LABEL=root_myhost rw quiet
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Persistent_block_device_naming&oldid=255294"
+"https://wiki.archlinux.org/index.php?title=Persistent_block_device_naming&oldid=289858"
 
 Categories:
 
 -   Boot process
 -   File systems
 -   Hardware detection and troubleshooting
+
+-   This page was last modified on 22 December 2013, at 02:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

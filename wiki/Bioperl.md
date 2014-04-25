@@ -13,16 +13,14 @@ Bioperl
 Bioperl is a set of scripts in Perl language to aid researchers in
 Computational Biology and Bioinformatics.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Extras                                                             |
-| -   4 Troubleshooting                                                    |
-| -   5 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Extras
+-   4 Troubleshooting
+-   5 More Resources
 
 Installation
 ------------
@@ -127,3 +125,10 @@ Retrieved from
 Category:
 
 -   Mathematics and science
+
+-   This page was last modified on 13 June 2012, at 13:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

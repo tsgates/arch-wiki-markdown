@@ -1,21 +1,31 @@
 BIND (chroot)
 =============
 
+  
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Arch no longer   
+                           supports Initscripts.    
+                           This article needs to be 
+                           updated to work with     
+                           systemd. (Discuss)       
+  ------------------------ ------------------------ ------------------------
+
 It's not a good idea to run BIND as root, so this document will briefly
 explain how to setup a basic DNS server using BIND 9.8.0 in a jailed
 environment (chroot). This document assumes that you already know how to
 configure and use BIND (the Berkeley Internet Name Domain).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Init script                                                        |
-| -   3 Configuration                                                      |
-| -   4 Setup BIND                                                         |
-| -   5 Running At Startup                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Init script
+-   3 Configuration
+-   4 Setup BIND
+-   5 Running At Startup
 
 Installation
 ------------
@@ -148,8 +158,15 @@ Here is an example:
     DAEMONS=(rsyslogd crond iptables network named-chroot)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=BIND_(chroot)&oldid=227597"
+"https://wiki.archlinux.org/index.php?title=BIND_(chroot)&oldid=267999"
 
 Category:
 
 -   Domain Name System
+
+-   This page was last modified on 25 July 2013, at 23:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

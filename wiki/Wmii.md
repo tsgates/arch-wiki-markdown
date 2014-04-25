@@ -1,6 +1,10 @@
 wmii
 ====
 
+Related articles
+
+-   i3
+
 wmii (window manager improved 2) is a dynamic window manager for X11. It
 supports classic and dynamic window management with extended keyboard,
 mouse, and filesystem based remote control. It replaces the workspace
@@ -12,65 +16,58 @@ focus on using the wmiirc configuration file, which is simply a shell
 script. Please see the ruby-wmii article to see how to configure wmii in
 ruby.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Configuration Variables                                      |
-|     -   2.2 Window Colors                                                |
-|                                                                          |
-| -   3 Usage                                                              |
-|     -   3.1 Layouts                                                      |
-|         -   3.1.1 Floating layout                                        |
-|                                                                          |
-|     -   3.2 Views and Tagging                                            |
-|                                                                          |
-| -   4 WMII filesystem                                                    |
-| -   5 Other nice stuff                                                   |
-|     -   5.1 Laptop Status Bar                                            |
-|     -   5.2 Conky Replacement Status Bar                                 |
-|     -   5.3 Terminal Title                                               |
-|     -   5.4 Weechat Highlight Notification                               |
-|     -   5.5 Mod4 on an old Thinkpad                                      |
-|     -   5.6 Nice fonts                                                   |
-|     -   5.7 Keyboard layouts                                             |
-|     -   5.8 Note: Version 3.9.2-1                                        |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Configuration Variables
+    -   2.2 Window Colors
+-   3 Usage
+    -   3.1 Layouts
+        -   3.1.1 Floating layout
+    -   3.2 Views and Tagging
+-   4 WMII filesystem
+-   5 Other nice stuff
+    -   5.1 Laptop Status Bar
+    -   5.2 Conky Replacement Status Bar
+    -   5.3 Terminal Title
+    -   5.4 Weechat Highlight Notification
+    -   5.5 Mod4 on an old Thinkpad
+    -   5.6 Nice fonts
+    -   5.7 Keyboard layouts
+    -   5.8 Note: Version 3.9.2-1
+-   6 See also
 
 Installation
 ------------
 
-wmii is available from the extra repository. You can install it by
-issuing the following command:
-
-    pacman -S wmii
-
-Alternatively, you can get the latest development version which is
-available from the AUR.
+Install the package wmii from the official repositories or alternatively
+install wmii-hg from the AUR for the latest development version.
 
 Next you will need to edit your ~/.xinitrc to enable you to start wmii
 with startx:
 
-    exec wmii
+    ~/.xinitrc
+
+     exec wmii
 
 To allow for starting wmii without logging off or killing the X session,
 add the following in the ~/.xinitrc
 
-    until wmii; do
-      true
-    done
+    ~/.xinitrc
+
+     until wmii; do
+       true
+     done
 
 Upon your first login, you will be greeted with the wmii welcome
 message, which also includes a short tutorial on wmii. Completing this
 tutorial will give you a good idea on how wmii works.
 
-Note:If the welcome message does not show up, make sure you have
-xmessage installed from the xorg-xmessage package. Then you can read the
-welcome by pressing $MODKEY-a and selecting 'welcome'.
+Note: If the welcome message does not show up, make sure you have
+xmessage installed from xorg-xmessage in the official repositories. Then
+you can read the welcome by pressing $MODKEY-a and selecting 'welcome'.
 
 Configuration
 -------------
@@ -489,8 +486,15 @@ See also
 -   IRC channel is #wmii on the OFTC IRC network
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Wmii&oldid=239074"
+"https://wiki.archlinux.org/index.php?title=Wmii&oldid=303799"
 
 Category:
 
 -   Dynamic WMs
+
+-   This page was last modified on 9 March 2014, at 15:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

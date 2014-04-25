@@ -1,48 +1,36 @@
 xinitrc
 =======
 
-> Summary
+Related articles
 
-An overview of the primary configuration file for the xinit (startx)
-program.
+-   Display manager
+-   Start X at Login
+-   Xorg
+-   xprofile
 
-> Related
-
-Display Manager
-
-Start X at Login
-
-Xorg
-
-xprofile
-
-The ~/.xinitrc file is a shell script read by xinit and startx. It is
-mainly used to execute desktop environments, window managers and other
-programs when starting the X server (e.g., starting daemons and setting
-environment variables). The xinit and startx programs starts the X
-Window System and works as first client programs on systems that cannot
-start X directly from /etc/init, or in environments that use multiple
-window systems.
+The ~/.xinitrc file is a shell script read by xinit and by its front-end
+startx. It is mainly used to execute desktop environments, window
+managers and other programs when starting the X server (e.g., starting
+daemons and setting environment variables). The xinit program starts the
+X Window System server and works as first client program on systems that
+are not using a display manager.
 
 One of the main functions of ~/.xinitrc is to dictate which client for
-the X Window System is invoked with the /usr/bin/startx and/or
-/usr/bin/xinit program on a per-user basis. There exists numerous
-additional specifications and commands that may also be added to
-~/.xinitrc as you further customize your system.
+the X Window System is invoked with startx or xinit programs on a
+per-user basis. There exists numerous additional specifications and
+commands that may also be added to ~/.xinitrc as you further customize
+your system.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Getting started                                                    |
-|     -   1.1 Making a DE/WM choice                                        |
-|     -   1.2 Preserving the session                                       |
-|                                                                          |
-| -   2 File examples                                                      |
-| -   3 File configuration                                                 |
-|     -   3.1 On the command line                                          |
-|     -   3.2 At startup                                                   |
-+--------------------------------------------------------------------------+
+Most DMs also source the similar xprofile before xinit.
+
+Contents
+--------
+
+-   1 Getting started
+-   2 Configuration
+-   3 Tips and tricks
+    -   3.1 Override xinitrc from command line
+    -   3.2 Making a DE/WM choice
 
 Getting started
 ---------------
@@ -53,7 +41,7 @@ skeleton, because the files it contains form the basic structure for
 users' home directories.) The xorg-xinit package will populate /etc/skel
 with a framework .xinitrc file.
 
-Note:~/.xinitrc is a so-called 'dot' (.) file. Files in a *nix file
+Tip:~/.xinitrc is a so-called 'dot' (.) file. Files in a *nix file
 system which are preceded with a dot (.) are 'hidden' and will not show
 up with a regular ls command, usually for the sake of keeping
 directories tidy. Dot files may be seen by running ls -A. The 'rc'
@@ -102,68 +90,36 @@ After editing ~/.xinitrc properly, it's time to run X. To run X as a
 non-root user, issue:
 
     $ startx
-    $ xinit
-    $ xinit -- :1
 
-Note:xinit doesn't handle multiple session if you are already logged-in
-into some other vt. for that you have to specify session by appending
--- :<session_no>. If you are already running X then you should start
-with :1 or more.
+or
+
+    $ xinit -- :1 -nolisten tcp vt$XDG_VTNR
+
+> Note:
+
+-   xinit doesn't read the system-wide /etc/X11/xinit/xserverrc file, so
+    you either have to copy it into your home directory as name
+    .xserverrc, or specify vt$XDG_VTNR as command line option in order
+    to preserve session permissions.
+-   xinit doesn't handle multiple sessions if you are already logged-in
+    into some other virtual terminal. For that you have to specify
+    session by appending -- :session_no. If you are already running X
+    then you should start with :1 or more.
 
 Your DE/WM of choice should now start up. You are now free to test your
 keyboard with its layout, moving your mouse around and of course enjoy
 the view.
 
-> Making a DE/WM choice
-
-If you arn't using any graphical login manager or don't want to, you
-might have to edit the ~/.xinitrc very frequently. This can be easly
-solved by simple few line case addition which will take the argument and
-load the desire DE/WM.
-
-    #!/bin/sh
-    #
-    # ~/.xinitrc
-    #
-    # Executed by startx (run your window manager from here)
-
-    if [ -d /etc/X11/xinit/xinitrc.d ]; then
-      for f in /etc/X11/xinit/xinitrc.d/*; do
-        [ -x "$f" ] && . "$f"
-      done
-      unset f
-    fi
-
-    # Here xfce is kept as default
-    case $1 in
-        gnome) exec gnome-session;;
-        kde) exec startkde;;
-        xfce);;
-        *) exec startxfce4;;
-    esac
-
-After editing ~/.xinitrc, you can easily start desire DE/WM by passing
-argument.
-
-    $ xinit
-    $ xinit gnome
-    $ xinit kde
-    $ xinit xfce -- :1
-
-> Preserving the session
-
-X must always be run on the same tty where the login occurred, to
-preserve the logind session. This is handled by the default
-/etc/X11/xinit/xserverrc. Also see General Troubleshooting#Session
-permissions for related issues.
-
-Note:In the past ck-launch-session was used to start a new session
-instead of simply not breaking the old one. There is no equivalent to
-this hack with logind, and a multi-seat aware display manager is
-required to run X on an arbitrary tty.
-
-File examples
+Configuration
 -------------
+
+When a display manager is not used, it is important to keep in mind that
+the life of the X session starts and ends with ~/.xinitrc. This means
+that once the script quits, X quits regardless of whether you still have
+running programs (including your window manager). Therefore it's
+important that the window manager quitting and X quitting should
+coincide. This is easily achieved by running the window manager as the
+last program in the script.
 
 Following is a simple ~/.xinitrc file example, including some startup
 programs:
@@ -173,10 +129,10 @@ programs:
     #!/bin/sh
 
     if [ -d /etc/X11/xinit/xinitrc.d ]; then
-      for f in /etc/X11/xinit/xinitrc.d/*; do
-        [ -x "$f" ] && . "$f"
-      done
-      unset f
+            for f in /etc/X11/xinit/xinitrc.d/*; do
+                    [ -x "$f" ] && . "$f"
+            done
+            unset f
     fi
 
     xrdb -merge ~/.Xresources         # update x resources db
@@ -187,45 +143,47 @@ programs:
 
     exec openbox-session              # starts the window manager
 
-Prepending exec is recommended as it replaces the current process with
-the process, so the script will stop running and X won't exit even if
-the process forks into the background.
+Note that in the example above, programs such as xscreensaver, xsetroot
+and sh are run in the background (& suffix added). Otherwise, the script
+would halt and wait for each program and daemons to exit before
+executing openbox-session. Also note that openbox-session is not
+backgrounded. This ensures that the script will not quit until openbox
+does.
 
-File configuration
-------------------
+Prepending the window manager openbox-session with exec is recommended
+as it replaces the current process with that process, so the script will
+stop running and X won't exit even if the process forks into the
+background.
 
-When a display manager is not used, it is important to keep in mind that
-the life of the X session starts and ends with ~/.xinitrc. This means
-that once the script quits, X quits regardless of whether you still have
-running programs (including your window manager). Therefore it's
-important that the window manager quitting and X quitting should
-coincide. This is easily achieved by running the window manager as the
-last program in the script.
+Tips and tricks
+---------------
 
-Note that in the first example above, programs such as cairo-compmgr,
-xscreensaver, xsetroot and sh are run in the background (& suffix
-added). Otherwise, the script would halt and wait for each program and
-daemons to exit before executing openbox-session. Also note that
-openbox-session is not backgrounded. This ensures that the script will
-not quit until openbox does.
+> Override xinitrc from command line
 
-The following sections explains how to configure ~/.xinitrc for Multiple
-WMs and DEs.
+If you have a working ~/.xinitrc, but just want to try other WM/DE, you
+can run it by issuing startx followed by the path to the window manager:
 
-> On the command line
+    $ startx /full/path/to/window-manager
 
-If you have a working ~/.xinitrc, but just want to try other WM/DE you
-can run it by issuing xinit followed by the path to the window manager:
+Note that the full path is required. Optionally, you can also override
+/etc/X11/xinit/xserverrc file (which stores the default X server
+options) with custom options by appending them after --, e.g.:
 
-    xinit /full/path/to/window-manager
+    $ startx /usr/bin/enlightenment -- -nolisten tcp -br +bs -dpi 96 vt$XDG_VTNR
 
-Note that the full path is required. Optionally, you can pass options to
-the X server after appending -- - e.g.:
+or
 
-    xinit /usr/bin/enlightenment -- -br +bs -dpi 96
+    $ xinit /usr/bin/enlightenment -- -nolisten tcp -br +bs -dpi 96 vt$XDG_VTNR
 
-The following example ~/.xinitrc shows how to start a particular window
-manager with an argument:
+> Making a DE/WM choice
+
+If you aren't using any graphical login manager or don't want to, you
+might have to edit the ~/.xinitrc very frequently. This can be easily
+solved by simple few line case addition, which will take the argument
+and load the desired desktop environment or window manager.
+
+The following example ~/.xinitrc shows how to start a particular DE/WM
+with an argument:
 
     ~/.xinitrc
 
@@ -236,33 +194,57 @@ manager with an argument:
     # Executed by startx (run your window manager from here)
 
     if [ -d /etc/X11/xinit/xinitrc.d ]; then
-      for f in /etc/X11/xinit/xinitrc.d/*; do
-        [ -x "$f" ] && . "$f"
-      done
-      unset f
+            for f in /etc/X11/xinit/xinitrc.d/*; do
+                    [ -x "$f" ] && . "$f"
+            done
+            unset f
     fi
 
-    if [[ $1 == "fluxbox" ]]
-    then
-      exec startfluxbox
-    elif [[ $1 == "spectrwm" ]]
-    then
-      exec spectrwm
-    else
-      echo "Choose a window manager"
-    fi
+    # Here Xfce is kept as default
+    session=${1:-xfce}
 
-Using this example you can start fluxbox or spectrwm with the command
-xinit fluxbox or xinit spectrwm.
+    case $session in
+            enlightenment) exec enlightenment_start;;
+            fluxbox) exec startfluxbox;;
+            gnome) exec gnome-session;;
+            lxde) exec startlxde;;
+            kde) exec startkde;;
+            openbox) exec openbox-session;;
+            xfce) exec startxfce4;;
+            # No known session, try to run it as command
+            *) exec $1;;                
+    esac
 
-> At startup
+Then copy the /etc/X11/xinit/xserverrc file into your home directory:
 
-See Start X at Login.
+    $ cp /etc/X11/xinit/xserverrc ~/.xserverrc
+
+After that, you can easily start a particular DE/WM by passing an
+argument, e.g.:
+
+    $ xinit
+    $ xinit gnome
+    $ xinit kde
+    $ xinit wmaker
+
+or
+
+    $ startx
+    $ startx ~/.xinitrc gnome
+    $ startx ~/.xinitrc kde
+    $ startx ~/.xinitrc wmaker
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xinitrc&oldid=255258"
+"https://wiki.archlinux.org/index.php?title=Xinitrc&oldid=301265"
 
 Categories:
 
 -   Desktop environments
 -   X Server
+
+-   This page was last modified on 24 February 2014, at 11:24.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

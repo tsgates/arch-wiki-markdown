@@ -9,84 +9,89 @@ developers for rapid development.
 This document describes how to set up the Ruby on Rails Framework on an
 Arch Linux system.
 
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Option A: via RubyGems
+    -   1.2 Option B: via pacgem
+    -   1.3 Option C: from the AUR
+-   2 Configuration
+-   3 Application servers
+    -   3.1 Mongrel
+    -   3.2 Unicorn
+        -   3.2.1 Systemd service
+        -   3.2.2 Nginx Configuration
+    -   3.3 Apache/Nginx (using Phusion Passenger)
+-   4 Databases
+    -   4.1 SQLite
+    -   4.2 PostgreSQL
+    -   4.3 MySQL
+-   5 The Perfect Rails Setup
+    -   5.1 Step 0: SQLite
+    -   5.2 Step 1: RVM
+    -   5.3 Step 2: Rubies
+    -   5.4 Step 3: Nginx with Passenger support
+    -   5.5 Step 4: Gemsets and Apps
+    -   5.6 Passenger for Nginx and Passenger Standalone
+    -   5.7 Step 5: .rvmrc files and ownerships
+    -   5.8 Step 6: Reverse proxies
+        -   5.8.1 Launch Passenger Standalone daemons at system start-up
+    -   5.9 Step 7: Deployment
+        -   5.9.1 With subdomains
+        -   5.9.2 Without subdomains
+    -   5.10 References
+-   6 See also
+-   7 References
+
+Installation
+------------
+
 Ruby on Rails requires Ruby to be installed, so read that article first
-for installation instructions.
+for installation instructions. The nodejs package is also required.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Option A: Installation via RubyGems (Recommended)                  |
-|     -   1.1 Updating Gems                                                |
-|                                                                          |
-| -   2 Option B: Installing via the AUR                                   |
-| -   3 Configuration                                                      |
-| -   4 Application servers                                                |
-|     -   4.1 Mongrel                                                      |
-|     -   4.2 Unicorn                                                      |
-|         -   4.2.1 Systemd service                                        |
-|         -   4.2.2 Nginx Configuration                                    |
-|                                                                          |
-|     -   4.3 Apache/Nginx (using Phusion Passenger)                       |
-|                                                                          |
-| -   5 Databases                                                          |
-|     -   5.1 SQLite                                                       |
-|     -   5.2 PostgreSQL                                                   |
-|     -   5.3 MySQL                                                        |
-|                                                                          |
-| -   6 Option C: The Perfect Rails Setup                                  |
-|     -   6.1 Step 0: SQLite                                               |
-|     -   6.2 Step 1: RVM                                                  |
-|     -   6.3 Step 2: Rubies                                               |
-|         -   6.3.1 Advice                                                 |
-|                                                                          |
-|     -   6.4 Step 3: Nginx with Passenger support                         |
-|     -   6.5 Step 4: Gemsets and Apps                                     |
-|     -   6.6 Passenger for Nginx and Passenger Standalone                 |
-|     -   6.7 Step 5: .rvmrc files and ownerships                          |
-|     -   6.8 Step 6: Reverse proxies                                      |
-|         -   6.8.1 Launch Passenger Standalone daemons at system start-up |
-|                                                                          |
-|     -   6.9 Step 7: Deployment                                           |
-|                                                                          |
-| -   7 With subdomains                                                    |
-| -   8 Without subdomains                                                 |
-|     -   8.1 References                                                   |
-|                                                                          |
-| -   9 See also                                                           |
-| -   10 References                                                        |
-+--------------------------------------------------------------------------+
+Ruby on Rails itself can be installed multiple ways:
 
-Option A: Installation via RubyGems (Recommended)
--------------------------------------------------
+> Option A: via RubyGems
 
-Note: If this command is run without being root (using sudo or
-otherwise), the gem will be installed into the home directory of the
-user.
+Note:You can also install Rails system-wide using Gems. To do this, run
+the following commands as root and append them with --no-user-install.
+Please read Ruby#Installing gems per-user or system-wide for possible
+dangers of using RubyGem in this way.
 
-    # gem install rails
+The following command will install Rails for the current user:
+
+    $ gem install rails
 
 Building the documentation takes a while. If you want to skip it, append
-the parameters --no-ri --no-rdoc to the install command.
+--no-document to the install command.
 
-    # gem install rails --no-ri --no-rdoc
-
-> Updating Gems
+    $ gem install rails --no-document
 
 gem is a package manager for Ruby modules, somewhat like pacman is to
 Arch Linux. To update your gems, simply run:
 
-    # gem update
+    $ gem update
 
-Option B: Installing via the AUR
---------------------------------
+> Option B: via pacgem
+
+You can install Rails using pacgem from the AUR. Pacgem automatically
+creates PKGBUILDs and Arch packages for each of the gems. These packages
+will then be installed using pacman.
+
+    # pacgem rails
+
+The gem packages can be updated with
+
+    # pacgem -u
+
+> Option C: from the AUR
 
 Warning:This is not recommended, as this might not include the latest
 Rails version, and additional dependencies may be introduced that may
 require you to run gem install anyway.
 
-There is a rails package available in the AUR. Note that this is not in
-an official repository, so you will need to build it manually.
+There is a rails package available in the AUR.
 
 Configuration
 -------------
@@ -97,17 +102,19 @@ rails command:
 
     $ rails new testapp_name
 
-Note:If you get an Error message like this:
+Note:If you get an error like
+Errno::ENOENT: No such file or directory (...) An error occurred while installing x, and Bundler cannot continue.,
+you might have to configure Bundler so that it installs gems per-user
+and not system-wide. Alternatively, run # rails new testapp_name once as
+root. If it has completed successfully, delete testapp_name/ and run
+$ rails new testapp_name again as a regular user.
+
+Note:If you get an error message like this:
 
     ... FetchError: SSL_connect returned=1 errno= 0 state=SSLv2/v3 read server hello A: sslv3 alert handshake
     failure (https://s3.amazonaws.com/ production.s3.rubygems.org/gems/rake-10.0.3.gem) 
 
-try
-
-    $ pacman -Suy
-    $ pacman -S nodejs
-
-then try again.
+install nodejs and try again.
 
 This creates a new folder inside your current working directory.
 
@@ -120,8 +127,8 @@ Next start the web server. It listens on port 3000 by default:
 Now visit the testapp_name website on your local machine by opening
 http://localhost:3000 in your browser
 
-Note: If ruby complains about not being able to find a JavaScript
-runtime, do # pacman -S nodejs.
+Note:If Ruby complains about not being able to find a JavaScript
+runtime, install nodejs.
 
 A test-page should shown greeting you "Welcome aboard".
 
@@ -252,6 +259,9 @@ Note:The current Nginx package in the official repositories actually is
 compiled with the Passenger module, so you can install it via pacman.
 The configuration files are stored in /etc/nginx/conf/.
 
+Note:As of 2013-10-07 this doesn't seem to be the casy any longer and
+you will have to follow the remaining steps here
+
 Start by installing the 'passenger' gem:
 
     # gem install passenger
@@ -259,6 +269,10 @@ Start by installing the 'passenger' gem:
 If you are aiming to use Apache, run:
 
     # passenger-install-apache2-module
+
+In case a rails application is deployed with a sub-URI, like
+http://example.com/yourapplication, some additional configuration is
+required, see the modrails documentation
 
 For Nginx:
 
@@ -291,22 +305,17 @@ SQLite, simply install sqlite3.
 
 > PostgreSQL
 
-(Stub.)
-
 Install postgresql.
 
 > MySQL
 
-Note:You must first install MySQL with the appropriate headers in
-/usr/include (just installing mysql is fine) before attempting to
-install the Ruby MySQL extensions.
-
-Please refer to MySQL on how to install MySQL Server.
+First, install and configure a MySQL server. Please refer to MySQL on
+how to do this.
 
 A gem with some native extensions is required, probably best installed
 as root:
 
-    # sudo gem install mysql
+    # gem install mysql
 
 You can generate a rails application configured for MySQL by using the
 -d parameter:
@@ -332,20 +341,17 @@ as this can be done via Rails with:
 If no errors are shown, then your database has been created and Rails
 can talk to your MySQL database.
 
-Option C: The Perfect Rails Setup
----------------------------------
+The Perfect Rails Setup
+-----------------------
 
 Phusion Passenger running multiple Ruby versions.
 
--   Archlinux: A simple, lightweight distribution. ;)
+-   Arch Linux: A simple, lightweight distribution. ;)
 -   Nginx: A fast and lightweight web server with a strong focus on high
     concurrency, performance and low memory usage.
 -   Passenger (a.k.a. mod_rails or mod_rack): Supports both Apache and
     Nginx web servers. It makes deployment of Ruby web applications,
     such as those built on Ruby on Rails web framework, a breeze.
--   Ruby Enterprise Edition (REE): Passenger allows Ruby on Rails
-    applications to use about 33% less memory, when used in combination
-    with REE.
 -   Ruby Version Manager (RVM): A command-line tool which allows you to
     easily install, manage, and work with multiple Ruby environments
     from interpreters to sets of gems. RVM lets you deploy each project
@@ -356,9 +362,7 @@ Phusion Passenger running multiple Ruby versions.
 
 > Step 0: SQLite
 
-Easy as:
-
-    $ sudo pacman -S sqlite
+Install sqlite.
 
 Note:Of course SQLite is not critical in this setup, you can use MySQL
 and PostgreSQL as well.
@@ -369,10 +373,10 @@ Make a multi-user RVM installation as specified here.
 
 In the 'adding users to the rvm group' step, do
 
-    $ sudo usermod -a -G rvm http
-    $ sudo usermod -a -G rvm nobody
+    # usermod -a -G rvm http
+    # usermod -a -G rvm nobody
 
-. http and nobody are the users related to Nginx and Passenger,
+http and nobody are the users related to Nginx and Passenger,
 respectively.
 
 Note:Maybe adding the 'nobody' user to the 'rvm' group is not necessary.
@@ -380,111 +384,55 @@ Note:Maybe adding the 'nobody' user to the 'rvm' group is not necessary.
 > Step 2: Rubies
 
 Once you have a working RVM installation in your hands, it is time to
-install the Ruby Enterprise Edition interpreter
+install the latest Ruby interpreter
 
-Note:During the installation of Ruby Enterprise Edition patches will be
-applied. Consider installing base-devel beforehand.
-
-    $ rvm install ree
-
-. Also take the chance to include other interpreters you want to use,
-like the last Ruby version
+Note:During the installation of Ruby patches will be applied. Consider
+installing the base-devel group beforehand.
 
     $ rvm install 2.0.0
 
-Advice
-
-There is a documented bug with older versions of Ruby (ie. the 1.8.7
-version that REE uses) and the GCC versions 4.6 and up. If you get
-segmentation fault errors when trying to install gems such as Passenger,
-remove your install of REE and reinstall with the following:
-
-    $ rvm remove ree
-    $ CFLAGS="-O2 -fno-tree-dce -fno-optimize-sibling-calls" rvm install ree
-
-It is also possible to make it work with older versions of GCC, but that
-requires considerably more time.
-
-I have found useful to delete the 'global' gemsets of the environments
-that have web applications. Their gems were somehow interfering with
-Passenger. Do not do
-
-    $ rvm ree do gemset delete global
-    $ rvm 2.0.0 do gemset delete global
-
-now, but consider this later if you encounter complications.
+Note: It may be useful to delete the 'global' gemsets of the
+environments that have web applications. Their gems might somehow
+interfere with Passenger. In that case, a
+rvm 2.0.0 do gemset delete global is sufficient.
 
 > Step 3: Nginx with Passenger support
 
-Do not install Nginx via pacman. This web server does not support
-modules as Apache, so it must be compiled from source with the
-functionality of mod_rails (Passenger). Fortunately this is
-straightforward thanks to the passenger gem. Get it:
+Run the following to allow passenger install nginx:
 
-    $ rvm use ree
+    $ rvm use 2.0.0 
     $ gem install passenger
-
-. The gem will be put into the 'default' gemset. Now execute the
-following script:
-
-Note:The current nginx package in the official repos actually was
-compiled with the passenger module. So you can install it via pacman and
-skip this step. The config files are stored in /etc/nginx/conf/.
-
     $ rvmsudo passenger-install-nginx-module
 
-. It will download the sources of Nginx, compile and install it for you.
-It will guide you through all the process. (The default location for
-Nginx is /opt/nginx.)
+The passenger gem will be put into the default gemset.
+
+This will download the sources of Nginx, compile and install it for you.
+It will guide you through all the process. Note that the default
+location for Nginx will be /opt/nginx.
 
 Note:If you encounter a compilation error regarding Boost threads, see
 this article.
 
-After completion, the script will require you to add two lines into the
-'http block' at /opt/nginx/conf/nginx.conf that look like:
+After completion, add the following two lines into the 'http block' at
+/opt/nginx/conf/nginx.conf that look like:
 
     http { 
       ...
-      passenger_root /usr/local/rvm/gems/ree-1.8.7-2011.03/gems/passenger-3.0.9;
-      passenger_ruby /usr/local/rvm/wrappers/ree-1.8.7-2011.03/ruby;
+      passenger_root /usr/local/rvm/gems/ruby-2.0.0-p353/gems/passenger-3.0.9;
+      passenger_ruby /usr/local/rvm/wrappers/ruby-2.0.0-p353/ruby;
       ...
     }
-
-If you installed Nginx from pacman the passenger_root needs to be
-changed to:
-
-    passenger_root /usr/lib/passenger/;
-
-Warning:Do not set it to /usr/lib/passenger/bin/passenger since this
-will result in Nginx segfaulting when checking the config
-
-For everything that is not Ruby, use Nginx as usual to serve static
-pages, PHP and Python. Check the wiki page for more information.
-
-To enable the Nnginx service by default at start-up just add nginx to
-the DAEMONS array in /etc/rc.conf:
-
-    DAEMONS=(ntpd syslog-ng ... nginx)
-
-If you are using systemd instead of initscripts, you must run the
-following command to have your system run nginx on startup
-
-    # systemctl enable nginx.service
-
-Note:It is possible that your Nginx installation has not come with an
-init script; check your /etc/rc.d/ directory for a file called nginx, if
-that is your case manually create it. Help yourself with
-Nginx/Init_script. If you installed nginx to another location, such as
-/opt/nginx, you will need to edit the init script accordingly.
 
 > Step 4: Gemsets and Apps
 
 For each Rails application you should have a gemset. Suppose that you
 want to try RefineryCMS against BrowserCMS, two open-source Content
-Management Systems based on Rails. Then you should do:
+Management Systems based on Rails.
 
-    $ rvm use ree@refinery --create
-    $ gem install rails -v 3.0.11
+Install RefineryCMS first:
+
+    $ rvm use 2.0.0@refinery --create
+    $ gem install rails -v 4.0.1
     $ gem install passenger
     $ gem install refinerycms refinerycms-i18n sqlite3
 
@@ -493,9 +441,10 @@ Deploy a RefineryCMS instance called refineria:
     $ cd /srv/http/
     $ rvmsudo refinerycms refineria
 
-Again:
+Install BrowserCMS in a different gemset:
 
     $ rvm use 2.0.0@browser --create
+    $ gem install rails -v 4.0.1
     $ gem install passenger
     $ gem install browsercms sqlite3
 
@@ -511,13 +460,13 @@ Deploy a BrowserCMS instance called navegador:
 Observe that the passenger gem was installed three times and with
 different intentions; in the environments
 
--   ree => for Nginx,
--   ree@refinery => Standalone, and
--   2.0.0@browser => Standalone.
+-   2.0.0 => for Nginx,
+-   2.0.0@refinery => Standalone
+-   2.0.0@browser => Standalone
 
 The strategy is to combine Passenger for Nginx with Passenger
 Standalone. One must first identify the Ruby environment (interpreter
-plus gemset) that one uses the most; in this setup the REE interpreter
+plus gemset) that one uses the most; in this setup the Ruby interpreter
 and the default gemset were selected. One then proceeds with setting up
 Passenger for Nginx to use that environment (step 3).
 
@@ -541,11 +490,11 @@ root folder.
 
 Create /srv/http/refineria/.rvmrc doing
 
-    sudo sh -c 'echo "rvm ree@refinery" > /srv/http/refineria/.rvmrc'
+    # echo "rvm ree@refinery" > /srv/http/refineria/.rvmrc
 
 , and /srv/http/navegador/.rvmrc with
 
-    sudo sh -c 'echo "rvm 2.0.0@browser" > /srv/http/navegador/.rvmrc'
+    # echo "rvm 2.0.0@browser" > /srv/http/navegador/.rvmrc
 
 You have to enter to both application root folders now, because every
 first time that RVM finds a .rvmrc it asks you if you trust the given
@@ -560,7 +509,7 @@ produces root-owned archives when generated by Rails; in the other hand,
 nobody is the user for Passenger —if you have not changed it—: who will
 use and should posses them. Fix this doing
 
-    $ sudo chown -R nobody.nobody /srv/http/refineria /srv/http/navegador
+    # chown -R nobody.nobody /srv/http/refineria /srv/http/navegador
 
 > Step 6: Reverse proxies
 
@@ -630,7 +579,6 @@ subsequently shut itself down.
 > Step 7: Deployment
 
 With subdomains
----------------
 
 Once again edit /opt/nginx/conf/nginx.conf to include some vital
 instructions:
@@ -662,7 +610,6 @@ Note:Or if using TCP sockets, configure the proxy_pass directive like
     proxy_pass http://127.0.0.1:3000;
 
 Without subdomains
-------------------
 
 If you for some reason don't want to host each application on it's own
 subdomain but rather in a url like: site.com/railsapp then you could do
@@ -694,7 +641,7 @@ something like this in your config:
 
 At this point you are in conditions to run Nginx with:
 
-    $ sudo rc.d start nginx
+    # systemctl start nginx
 
 and to access both CMSs through refinery.domain.com and
 browser.domain.com.
@@ -719,8 +666,15 @@ References
 -   Mongrel http://mongrel.rubyforge.org.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ruby_on_Rails&oldid=255931"
+"https://wiki.archlinux.org/index.php?title=Ruby_on_Rails&oldid=302015"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 25 February 2014, at 12:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

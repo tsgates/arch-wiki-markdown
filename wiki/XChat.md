@@ -43,9 +43,16 @@ Additional Resources
 -   Toxin XChat Theme Installer Script
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=XChat&oldid=215714"
+"https://wiki.archlinux.org/index.php?title=XChat&oldid=302676"
 
 Categories:
 
--   Internet Applications
+-   Internet applications
 -   Internet Relay Chat
+
+-   This page was last modified on 1 March 2014, at 04:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -9,21 +9,18 @@ deal, and it does not have many dependencies. This makes it ideal for
 window manager users who want a panel but do not have one by default,
 like Openbox users.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Application Launchers in tint2-svn (AUR)                     |
-|     -   2.2 Applications Menu in OpenBox3                                |
-|                                                                          |
-| -   3 Running tint2                                                      |
-|     -   3.1 Openbox                                                      |
-|     -   3.2 GNOME 3                                                      |
-|                                                                          |
-| -   4 Enabling transparency                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Application Launchers in tint2-svn (AUR)
+    -   2.2 Applications Menu in OpenBox3
+    -   2.3 Volume control
+-   3 Running tint2
+    -   3.1 Openbox
+    -   3.2 GNOME 3
+-   4 Enabling transparency
 
 Installation
 ------------
@@ -132,6 +129,12 @@ See Openbox Menus for further help on creating your own menu to use
 here, and menumaker to generate a nice full menu.xml for most (possibly
 all) of your installed programs.
 
+> Volume control
+
+Tint2 does not come with a volume control applet. VolWheel is a simple
+one that sits in the tray. Install it with volwheel and show it by
+running volwheel.
+
 Running tint2
 -------------
 
@@ -208,8 +211,15 @@ Various other (better) ways to make Xcompmgr run at startup are
 discussed in the Openbox article.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tint2&oldid=250173"
+"https://wiki.archlinux.org/index.php?title=Tint2&oldid=299828"
 
 Category:
 
 -   Eye candy
+
+-   This page was last modified on 22 February 2014, at 15:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

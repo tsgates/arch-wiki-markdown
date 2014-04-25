@@ -20,26 +20,22 @@ HP Envy 14
   Suspend to RAM   Working             
   ---------------- ------------------- -------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Configuration                                                      |
-|     -   2.1 CPU                                                          |
-|     -   2.2 Video                                                        |
-|         -   2.2.1 Intel                                                  |
-|         -   2.2.2 AMD                                                    |
-|             -   2.2.2.1 Switching                                        |
-|                                                                          |
-|     -   2.3 Audio                                                        |
-|         -   2.3.1 HDMI                                                   |
-|                                                                          |
-|     -   2.4 Touchpad                                                     |
-|     -   2.5 Suspend to RAM                                               |
-|     -   2.6 Webcam                                                       |
-|     -   2.7 Function Keys                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Configuration
+    -   2.1 CPU
+    -   2.2 Video
+        -   2.2.1 Intel
+        -   2.2.2 AMD
+            -   2.2.2.1 Switching
+    -   2.3 Audio
+        -   2.3.1 HDMI
+    -   2.4 Touchpad
+    -   2.5 Suspend to RAM
+    -   2.6 Webcam
+    -   2.7 Function Keys
 
 Hardware
 ========
@@ -88,10 +84,8 @@ Radeon 6630M with dedicated 1 GB RAM.
 Note: that the screen goes black after booting because the backlight is
 disabled by default. Increase back light using shift-fn-f3 key
 combination. After installing add command
-
-    echo 1 > /sys/class/backlight/acpi_video0/brightness
-
-to /etc/rc.local for turning the back light on automatically.
+w /sys/class/backlight/acpi_video0/brightness - - - - 1 to
+/etc/tmpfiles.d/local.conf for turning the back light on automatically.
 
 > Intel
 
@@ -104,7 +98,7 @@ Radeon card is used by default. No Xorg configuration needed.
 
 Switching
 
-WIP, see Tackling the Switchable graphics
+WIP, see Tackling the Switchable graphics.
 
 Audio
 -----
@@ -137,8 +131,15 @@ Works out of the box, including keyboard back light activation
 (shift-fn-f5).
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=HP_Envy_14&oldid=196625"
+"https://wiki.archlinux.org/index.php?title=HP_Envy_14&oldid=259907"
 
 Category:
 
 -   HP
+
+-   This page was last modified on 31 May 2013, at 19:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

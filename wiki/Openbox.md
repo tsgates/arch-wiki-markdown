@@ -1,320 +1,1224 @@
 Openbox
 =======
 
-> Summary
+Related articles
 
-A comprehensive guide on the installation and use of the Openbox window
-manager.
+-   Desktop environment
+-   Display manager
+-   File manager functionality
+-   Window manager
+-   Oblogout
 
-> Overview
+Openbox is a lightweight, powerful, and highly configurable stacking
+window manager with extensive standards support. It may be built upon
+and run independently as the basis of a unique desktop environment, or
+within other integrated desktop environments such as KDE and Xfce, as an
+alternative to the window managers they provide. The LXDE desktop
+environment is itself built around Openbox.
 
-The Xorg project provides an open source implementation of the X Window
-System – the foundation for a graphical user interface. Desktop
-environments such as Enlightenment, GNOME, KDE, LXDE, and Xfce provide a
-complete graphical environment. Various window managers offer
-alternative and novel environments, and may be used standalone to
-conserve system resources. Display managers provide a graphical login
-prompt.
+A comprehensive list of features are documented at the official Openbox
+website. This article pertains to specifically installing Openbox under
+Arch Linux.
 
-Openbox is a lightweight and highly configurable window manager with
-extensive standards support. Its features are documented at the official
-website. This article pertains to installing Openbox under Arch Linux.
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Upgrading to Openbox 3.5                                           |
-| -   3 Openbox as a stand-alone WM                                        |
-| -   4 Openbox as a WM for desktop environments                           |
-|     -   4.1 GNOME 2.24 and 2.26                                          |
-|     -   4.2 GNOME 2.26 redux                                             |
-|     -   4.3 KDE                                                          |
-|     -   4.4 Xfce4                                                        |
-|                                                                          |
-| -   5 Openbox for multihead users                                        |
-| -   6 Configuration                                                      |
-|     -   6.1 Manual configuration                                         |
-|     -   6.2 ObConf                                                       |
-|     -   6.3 Application customization                                    |
-|                                                                          |
-| -   7 Menus                                                              |
-|     -   7.1 Manual configuration of menus                                |
-|     -   7.2 Icons in the menu                                            |
-|     -   7.3 MenuMaker                                                    |
-|     -   7.4 Obmenu                                                       |
-|         -   7.4.1 Obm-xdg                                                |
-|                                                                          |
-|     -   7.5 XDG-menu                                                     |
-|     -   7.6 openbox-menu                                                 |
-|     -   7.7 Python-based xdg menu script                                 |
-|     -   7.8 Openbox menu generators                                      |
-|         -   7.8.1 obmenugen                                              |
-|         -   7.8.2 obmenu-generator                                       |
-|                                                                          |
-|     -   7.9 Pipe menus                                                   |
-|                                                                          |
-| -   8 Startup programs                                                   |
-|     -   8.1 Enabling autostart                                           |
-|     -   8.2 Autostart script                                             |
-|     -   8.3 Autostart directory                                          |
-|                                                                          |
-| -   9 Themes and appearance                                              |
-|     -   9.1 Openbox themes                                               |
-|     -   9.2 Cursors, icons, wallpapers                                   |
-|                                                                          |
-| -   10 Recommended programs                                              |
-| -   11 Tips and tricks                                                   |
-|     -   11.1 Window snap behaviour                                       |
-|     -   11.2 File associations                                           |
-|     -   11.3 Copy and paste                                              |
-|     -   11.4 Window transparency                                         |
-|     -   11.5 Xprop values for applications                               |
-|         -   11.5.1 Xprop for Firefox                                     |
-|                                                                          |
-|     -   11.6 Linking the menu to a button                                |
-|     -   11.7 Running a terminal emulator as desktop background           |
-|         -   11.7.1 ToggleShowDesktop exception                           |
-|                                                                          |
-|     -   11.8 Switching between keyboard layouts                          |
-|     -   11.9 Keyboard volume control                                     |
-|         -   11.9.1 ALSA                                                  |
-|         -   11.9.2 Pulseaudio                                            |
-|         -   11.9.3 OSS                                                   |
-|                                                                          |
-| -   12 Troubleshooting Openbox 3.5                                       |
-|     -   12.1 X server crashes                                            |
-|     -   12.2 Autostarting unwanted applications in 3.5                   |
-|     -   12.3 SSH agent no longer starting                                |
-|     -   12.4 Openbox not registering with D-Bus                          |
-|     -   12.5 Windows load behind the active window                       |
-|                                                                          |
-| -   13 See also                                                          |
-+--------------------------------------------------------------------------+
+-   1 Installation
+-   2 Openbox Sessions
+    -   2.1 Standalone
+    -   2.2 Within other desktop environments
+        -   2.2.1 GNOME
+        -   2.2.2 KDE
+        -   2.2.3 Xfce
+-   3 System configuration
+    -   3.1 D-Bus
+    -   3.2 GTK+ 2
+    -   3.3 XDG
+    -   3.4 Home folders
+    -   3.5 Authentication and passwords
+-   4 Configuration
+    -   4.1 rc.xml
+    -   4.2 menu.xml
+    -   4.3 autostart
+        -   4.3.1 Listing commands
+    -   4.4 environment
+    -   4.5 Optional GUI configuration packages
+-   5 Openbox reconfiguration
+-   6 Keybinds
+    -   6.1 Special keys
+        -   6.1.1 Modifiers
+        -   6.1.2 Multimedia keys
+        -   6.1.3 Navigation keys
+    -   6.2 Volume Control
+        -   6.2.1 ALSA
+        -   6.2.2 Pulseaudio
+        -   6.2.3 OSS
+    -   6.3 Brightness control
+    -   6.4 Window snapping
+    -   6.5 Desktop menu
+-   7 Menus
+    -   7.1 Static
+        -   7.1.1 menumaker
+        -   7.1.2 obmenu
+        -   7.1.3 xdg-menu
+        -   7.1.4 logout menu options
+    -   7.2 Pipes
+        -   7.2.1 Examples
+    -   7.3 Generators
+        -   7.3.1 obmenu-generator
+        -   7.3.2 openbox-menu
+        -   7.3.3 obmenugen
+    -   7.4 Menu icons
+    -   7.5 Desktop menu as a panel menu
+-   8 GTK+ desktop theming
+    -   8.1 Configuration
+    -   8.2 Installation: official and AUR
+    -   8.3 Installation: other sources
+        -   8.3.1 Zip and tar files
+    -   8.4 Troubleshooting
+        -   8.4.1 Theme cannot be used
+        -   8.4.2 Theme looks broken
+    -   8.5 Edit or create new themes
+-   9 Compositing effects
+-   10 Mouse cursor and application icon themes
+    -   10.1 xcursor themes (mouse)
+    -   10.2 Application icon themes
+-   11 Desktop icons and wallpapers
+    -   11.1 Desktop management using file managers
+    -   11.2 Wallpaper / background programs
+        -   11.2.1 nitrogen
+        -   11.2.2 feh
+        -   11.2.3 hestroot
+        -   11.2.4 xsetroot
+    -   11.3 Icon programs
+        -   11.3.1 idesk
+        -   11.3.2 xfdesktop
+    -   11.4 conky reconfiguration
+-   12 File managers
+-   13 oblogout
+-   14 Openbox for multihead users
+-   15 Tips and tricks
+    -   15.1 Packages for beginners
+    -   15.2 Set default applications / file associations
+    -   15.3 Terminal content copy and paste
+    -   15.4 Ad-hoc window transparency
+    -   15.5 Using obxprop for faster configuration
+    -   15.6 Xprop values for applications
+        -   15.6.1 Firefox
+    -   15.7 Switching between keyboard layouts
+-   16 Troubleshooting
+    -   16.1 Windows load behind the active window
+-   17 See also
 
 Installation
 ------------
 
-Install openbox, available in the Official Repositories. After
-installation, you should copy the default configuration files rc.xml,
-menu.xml, autostart, and environment to ~/.config/openbox:
+Install openbox, available in the official repositories.
 
-Note: Do this as a regular user, not as root.
+Openbox Sessions
+----------------
 
-    $ mkdir -p ~/.config/openbox
-    $ cp /etc/xdg/openbox/{rc.xml,menu.xml,autostart,environment} ~/.config/openbox
+Again, Openbox may be run independently as a standalone window manager,
+or within other integrated desktop environments such as KDE and XFCE as
+an alternative to the window managers they provide.
 
-These four files form the basis of your openbox configuration. Each file
-addresses a unique aspect of your configuration and the role of each
-file is as follows:
+> Standalone
 
- rc.xml
-    This is the main configuration file. It defines keyboard shortcuts,
-    themes, virtual desktops, and more.
+Many popular display managers such as LXDM, SLiM, and LightDM will
+automatically detect Openbox, allowing for it to be run as a standalone
+session.
 
-menu.xml
-    This file defines the content of the right-click menu. It defines
-    launchers for applications and other shortcuts. See the #Menus
-    section.
-
-autostart
-    This file is read by openbox-session at startup. It contains the
-    programs that are run at startup. It is typically used to set
-    environment variables, launch panels/docks, set background image or
-    execute other startup scripts. See the Openbox Wiki.
-
-environment
-    This file is sourced by openbox-session at startup. It contains
-    environment variables to be set in Openbox's context. Any variables
-    you set here will be visible to Openbox itself and anything you
-    start from its menus.
-
-Upgrading to Openbox 3.5
-------------------------
-
-If you are upgrading to Openbox 3.5 or later from an earlier release, be
-aware of these changes:
-
--   There is a new config file called environment that you should copy
-    from /etc/xdg/openbox to ~/.config/openbox.
--   The config file previously called autostart.sh is now just called
-    autostart. You should rename yours to remove the .sh from the end of
-    the name.
--   Some of the configuration grammar in rc.xml has changed. While
-    Openbox appears to understand the old options, it would be wise to
-    compare your configuration to the one in /etc/xdg/openbox and look
-    for changes that affect you.
-
-Openbox as a stand-alone WM
----------------------------
-
-Openbox can be used as a stand-alone window manager (WM). This is
-usually simpler to install and configure than using Openbox with desktop
-environments. Running openbox alone may reduce your system's CPU and
-memory load.
-
-To run Openbox as a stand-alone window manager, append the following to
-~/.xinitrc:
+However, it may be necessary to manually specify the command to start an
+openbox session where intending to set it as a default session for SLiM,
+or where not using a display manager at all (e.g. logging in at the
+command line, followed by the command startx). In either instance, it
+will be necessary to modify the Xinitrc file in order to add the
+following command:
 
     exec openbox-session
 
-See xinitrc for details, such as preserving the logind (and/or
-consolekit) session.
+> Within other desktop environments
 
-If you used another window manager previously (such as Xfwm) and now
-Openbox will not start after logging out of X, try moving the autostart
-folder:
+When replacing the native window manager of a desktop environment with
+Openbox, any desktop compositing effects - such a transparency -
+provided by that native window manager will be lost. This is because
+Openbox itself does not provide any compositing functionality. However,
+it is easily possible to use a separate compositing program to re-enable
+compositing.
 
-    mv ~/.config/autostart ~/.config/autostart.bak
+GNOME
 
-Note: python2-xdg is required for Openbox's xdg-autostart
+Openbox does not seem to work with GNOME 3. The Gnome-Shell touch-style
+interface requires both its native window manager and its native
+gtk-window-decorator packages to function. Furthermore, attempting to
+run Openbox within the Classic-Gnome-Shell interface results in the loss
+of the gnome-panel. Ceasing Openbox and attempting to restore the native
+window manager will result in crashing the desktop. Gnome 3 is tightly
+integrated, and is therefore deliberately designed not to be modular in
+nature (i.e. allowing components to be changed).
 
-Openbox as a WM for desktop environments
+KDE
+
+See the using Openbox in KDE section of the main KDE article.
+
+Xfce
+
+See the replacing the native window manager section of the main Xfce
+article.
+
+System configuration
+--------------------
+
+Those installing Openbox - particularly as a stand-alone Window Manager
+- will have noticed that several elements may fail to work properly, or
+even work at all. Examples of the common problems encountered are:
+
+-   File Managers: Other partitions are not displayed or accessable. The
+    trash function - where provided - does not work
+-   Authentication: Passwords are not stored / remembered during
+    sessions
+-   Secure Shell (SSH): SSH agent will not start
+-   Wireless Connection: Instant failure when attempting to connect to
+    wifi (related to authentication)
+-   Themes: Application windows are mismatched or haphazard-looking
+-   Folders: Expected folders such as Documents, Downloads and so forth
+    are missing from the Home folder
+-   System Tray: Installed packages fail to autostart or can be seen
+    running twice
+
+Most of these problems are actually the result of Dbus and GTK issues,
+both of which can be fixed simultaneously by editing the ~/.xprofile
+file - or if using SLiM as a display manager instead - by editing the
+~/.xinitrc file. It will also be necessary to install some key packages
+to ensure full functionality.
+
+> D-Bus
+
+File manager, authentication, SSH agent, and WiFi-connection problems
+will likely be due to that D-Bus is not functioning correctly. Most
+display managers such as GDM, KDM, LightDM and LXDM will handle this for
+you.
+
+When using xinit or certain other DMs (such as XDM and SLiM), make sure
+~/.xinitrc is based on /etc/skel/.xinitrc (so that it sources
+/etc/X11/xinit/xinitrc.d/, see xinitrc for more information).
+
+> GTK+ 2
+
+Problems with the theme and look will likely be due to the absence of
+the appropriate command to ensure that a uniform look must be applied to
+applications that use GTK 2. Again, edit ~/.xinitrc and/or ~/.xprofile
+with the following command:
+
+    export GTK2_RC_FILES="$HOME/.gtkrc-2.0" 
+
+The ~/.gtkrc-2.0 file will be automatically generated where using
+lxappearance to set themes.
+
+It will also be necessary to install libgnomeui to ensure that Qt is
+also able to find GTK themes.
+
+> XDG
+
+In addition to sourcing the local ~/.config/openbox/autostart file to
+autostart applications, Openbox will also source .desktop files
+automatically installed by some packages in the global
+/etc/xdg/autostart directory. The package responsible for allowing
+Openbox to additionally source the /etc/xdg/autostart directory is
+python2-xdg.
+
+For example, where initially autostarting a package such as the Network
+Manager applet (nm-applet) locally, should python2-xdg be installed at a
+later time - either explicitly or as a dependency for another package -
+its global XDG .desktop file will then also be sourced as a consequence,
+resulting in seeing two icons running in the system tray. It is
+therefore recommended to install python2-xdg explicitly, as this will
+ensure that applications that should automatically autostart when
+installed will do so.
+
+> Home folders
+
+Tip:This fix will be especially helpful for those who wish to use a file
+manager to manage their desktop, as it will automatically create a
+special ~/Desktop directory, which will house all files and application
+shortcuts stored on the desktop itself.
+
+Where expected Home folders such as Downloads, Documents, etc., are not
+present, then please review the Xdg user directories article.
+
+> Authentication and passwords
+
+For authentication (e.g. WiFi passwords, etc.), it will be necessary to
+install the appropriate packages. They are:
+
+-   polkit: Application development toolkit for controlling system-wide
+    privileges; see polkit
+-   lxpolkit: Simple policykit authentication agent for LXDE
+    (polkit-gnome currently does not work properly)
+-   gnome-keyring: store / remember passwords; see GNOME Keyring
+
+Configuration
+-------------
+
+Warning:Edit these files as the user you will be using Openbox with. Not
+as root!
+
+Tip:Local configuration files will always override global equivalents.
+These files may also be manually edited by any appropriate text editor,
+such as Leafpad or Geany; there is no need to use sudo or gksu commands
+to edit them.
+
+Four key files form the basis of the openbox configuration, each serving
+a unique role. They are: rc.xml, menu.xml, autostart, and environment.
+Although these files are discussed in more detail below, to start
+configuring Openbox, it will first be necessary to create a local
+Openbox profile (i.e for your specific user account) based on them. This
+can be done by copying them from the global /etc/xdg/openbox profile
+(applicable to any and all users) as a template:
+
+    $ mkdir -p ~/.config/openbox
+    $ cp -R /etc/xdg/openbox/* ~/.config/openbox
+
+> rc.xml
+
+Tip:Custom keyboard shortcuts (keybindings) must be added to the
+<keyboard> section of this file, and underneath the
+<!-- Keybindings for running aplications --> heading.
+
+~/.config/openbox/rc.xml is the main configuration file, responsible for
+determining the behaviour and settings of the overall session,
+including:
+
+-   Keyboard shortcuts (e.g. starting applications; controlling the
+    volume)
+-   Theming
+-   Desktop and Virtual desktop settings, and
+-   Application Window settings
+
+This file is also pre-configured, meaning that it will only be necessary
+to amend existing content in order to customise behaviour to suit
+personal preference.
+
+> menu.xml
+
+~/.config/openbox/menu.xml defines the type and behaviour of the desktop
+menu, accessable by right-clicking the background. Although the default
+provided is a static menu (meaning that it will not automatically update
+when new applications are installed), it is possible to employ the use
+of dynamic menus that will automatically update as well.
+
+The available options are discussed extensively below in the Menus
+section.
+
+> autostart
+
+Tip:Be aware that some applications will automatically start via
+.desktop files installed in the /etc/xdg/autostart/ or
+~/.config/autostart/ directories.
+
+~/.config/openbox/autostart determines which applications are to be
+launched upon beginning the Openbox session. These may include:
+
+-   Panels and/or docks
+-   Compositors
+-   Background providers
+-   Screensavers
+-   Applications to autoload or autostart (e.g. Conky)
+-   Daemon processes (e.g. File Managers for automounting and other
+    functions)
+-   Other appropriate commands (e.g. disable DPMS)
+
+Listing commands
+
+There are two very important points to note when adding commands to the
+~/.config/openbox/autostart file:
+
+-   Each and every command must be terminated with an ampersand (&).
+    Where a command does not end with an ampersand, then no further
+    commands listed below it will be executed.
+-   It is strongly recommended to add delays to the execution of some or
+    all commands in the autostart file, even if only by a single second.
+    The consequence of not doing so is that all commands will be
+    executed simultaneously, potentially resulting in the mis- or
+    non-starting of items. The syntax of the command to delay the
+    execution of commands (in seconds) is:
+
+    (sleep <number of seconds>s && <command>) &
+
+For example, to delay the execution of Conky by 3 seconds, the command
+would be (and note the termination of it with an ampersand):
+
+    (sleep 3s && conky) &
+
+Here is a more complete example of a possible
+~/.config/openbox/autostart file:
+
+    ## Autostart File ##
+
+    ##Disable DPMS
+    xset -dpms; xset s off &
+
+    ##Compositor
+    compton -CGb &
+
+    ##Background
+    (sleep 1s && nitrogen --restore) &
+
+    ##tint2 panel
+    (sleep 1s && tint2) &
+
+    ##Sound Icon
+    (sleep 1s && volumeicon) &
+
+    ##Screensaver
+    (sleep 1s && xscreensaver -no-splash) &
+
+    ##Conky
+    (sleep 3s && conky) &
+
+    ##Disable touchpad
+    /user/bin/synclient TouchpadOff=1 &
+
+> environment
+
+Note:This is the least important file, and many users may not need to
+edit it at all.
+
+~/.config/openbox/environment can be used to export and set relevant
+environmental variables such as to:
+
+-   Define new pathways (e.g. execute commands that would otherwise
+    require the entire pathway to be listed with them)
+-   Change language settings, and
+-   Define other variables to be used (e.g. the fix for GTK theming
+    could be listed here)
+
+> Optional GUI configuration packages
+
+Several GUIs are available to quickly and easily configure your Openbox
+desktop. From the official repositories these include:
+
+-   obconf: Basic Openbox configuration manager
+-   lxappearance-obconf: LXDE configuration manager (provides additional
+    options)
+-   lxinput: LXDE keyboard and mouse configuration
+-   lxrandr: LXDE monitor configuration
+
+Others, such as obkey (configure keyboard shortcuts via the rc.xml file)
+and ob-autostart (configure the Openbox autostart file) are available
+from the AUR. Programs and applications relating to the configuration of
+Openbox's desktop menu are discussed in the Menus section.
+
+Openbox reconfiguration
+-----------------------
+
+Tip:where not already present, it would be worthwhile adding this
+command to a menu and/or as a keybind for convenience.
+
+Openbox will not always automatically reflect any changes made to its
+configuration files within a session. As a consequence, it will be
+necessary to manually reload those files after they have been edited. To
+do so, enter the following command:
+
+    $ openbox --reconfigure
+
+Where intending to add this command as a keybinnd to
+~/.config/openbox/rc.xml, it will only be necessary to list the command
+as reconfigure. An example has been provided below, using the Super+F11
+keybind:
+
+    <keybind key="W-F11">
+      <action name="Reconfigure"/>
+    </keybind>
+
+Keybinds
+--------
+
+All keybinds must be added to the ~/.config/openbox/rc.xml file, and
+below the <!-- Keybindings for running aplications --> heading. Although
+a brief overview has been provided here, a more in-depth explanation of
+keybindings can be found at openbox.org. There is a utility 'obkey' in
+AUR for adjust key-binding. Before use obkey, you should use obconf to
+create ~/.config/openbox/rc.xml.
+
+> Special keys
+
+While the use of standard alpha-numeric keys for keybindings is
+self-explanatory, special names are assigned to other types of keys,
+such as modifers, multimedia keys and navigation keys.
+
+Modifiers
+
+Modifer keys play an important role in keybindings (e.g. holding down
+the shift or CTRL / control key in combination with another key to
+undertake an action). Using modifers helps to prevent conflicting
+keybinds, whereby two or more actions are linked to the same key or
+combination of keys. The syntax to use a modifer with another key is:
+
+    "<modifier>-<key>"
+
+The modifer codes are as follows:
+
+-   S: Shift
+-   C: Control / CTRL
+-   A: Alt
+-   W: Super / Windows
+-   M: Meta
+-   H: Hyper (If it is bound to something)
+
+For example, the code below would use super and t to launch lxterminal
+
+    <keybind key="W-t">
+        <action name="Execute">
+            <command>lxterminal</command>
+        </action>
+    </keybind>
+
+Multimedia keys
+
+Where available, it is possible to set the appropriate multimedia keys
+to perform their intended functions, such as to control the volume
+and/or the screen brightness. These will usually be integrated into the
+function keys, and are identified by their appropriate symbols. See the
+Multimedia Keys article for further information.
+
+The volume and brightness multimedia codes are as follows (note that
+commands will still have to be assigned to them to actually function):
+
+-   XF86AudioRaiseVolume: Increase volume
+-   XF86AudioLowerVolume: Decrease volume
+-   XF86AudioMute: Mute / unmute volume
+-   XF86MonBrightnessUp: Increase screen brightess
+-   XF86MonBrightnessDown: Decrease screen brightness
+
+Examples of how these may be used in ~/.config/openbox/rc.xml have been
+provided below.
+
+Navigation keys
+
+These are the directional / arrow keys, usually used to move the cursor
+up, down, left, or right. The (self-explanatory) navigation codes are as
+follows:
+
+-   Up: Up
+-   Down: Down
+-   Left: Left
+-   Right: Right
+
+> Volume Control
+
+What commands should be used for controlling the volume will depend on
+whether ALSA, PulseAudio, or OSS is used for sound.
+
+ALSA
+
+If ALSA is used for sound, the amixer program can be used to adjust the
+volume, which is part of the alsa-utils package. The following example -
+using the multimedia keys intended to control the volume - will adjust
+the volume by +/- 5% (which may be changed, as desired):
+
+    <keybind key="XF86AudioRaiseVolume">
+        <action name="Execute">
+            <command>amixer set Master 5%+ unmute</command>
+        </action>
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+        <action name="Execute">
+            <command>amixer set Master 5%- unmute</command>
+        </action>
+    </keybind>
+    <keybind key="XF86AudioMute">
+        <action name="Execute">
+            <command>amixer set Master toggle</command>
+        </action>
+    </keybind>
+
+Pulseaudio
+
+Where using PulseAudio with ALSA as a backend, the amixer program
+commands will have to be modifed, as illustrated below in comparison to
+the ALSA example:
+
+    <keybind key="XF86AudioRaiseVolume">
+        <action name="Execute">
+            <command>amixer -D pulse set Master 5%+ unmute</command>
+        </action>
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+        <action name="Execute">
+            <command>amixer -D pulse set Master 5%- unmute</command>
+        </action>
+    </keybind>
+    <keybind key="XF86AudioMute">
+        <action name="Execute">
+            <command>amixer set Master toggle</command>
+        </action>
+    </keybind>
+
+OSS
+
+Note:This option may be suitable for more experienced users.
+
+Where using OSS, it is possible to create keybindings to raise or lower
+specific mixers. This allows, for example, the volume of a specific
+application (such as an audio player) to be changed without changing the
+overall system volume settings in turn. In this instance, the
+application must first have been configured to use its own mixer.
+
+In the following example, MPD has been configured to use its own mixer -
+also named mpd - to increase and decrease the volume by a single decibel
+at a time. The -- that appears after the ossmix command has been added
+to prevent a negative value from being treated as an argument:
+
+    <keybind key="[chosen keybind]">
+        <action name="Execute">
+            <command>ossmix -- mpd +1</command>
+        </action>
+    </keybind>
+    <keybind key="[chosen keybind]">
+        <action name="Execute">
+            <command>ossmix -- mpd -1</command>
+        </action>
+    </keybind>
+
+> Brightness control
+
+The xbacklight program is used to control screen brightness, which is
+part of the Xorg X-Window system. In the example below, the multimedia
+keys intended to control the screen brightness will adjust the settings
+by +/- 10%:
+
+    <keybind key="XF86MonBrightnessUp">
+         <action name="Execute">
+           <command>xbacklight +10</command>
+         </action>
+    </keybind>
+    <keybind key="XF86MonBrightnessDown">
+         <action name="Execute">
+           <command>xbacklight -10</command>
+         </action>
+    </keybind>
+
+> Window snapping
+
+Many desktop environments and window managers support window snapping
+(e.g. Windows 7 Aero snap), whereby they will automatically snap into
+place when moved to the edge of the screen. This effect can also be
+simulated in Openbox through the use of keybinds on focused windows.
+
+As illustrated in the example below, percentages must be used to
+determine window sizes (see openbox.org for further information). In
+this instance, The super key is used in conjunction with the navigation
+keys:
+
+    <keybind key="W-Left">
+        <action name="UnmaximizeFull"/>
+        <action name="MaximizeVert"/>
+        <action name="MoveResizeTo">
+            <width>50%</width>
+        </action>
+        <action name="MoveToEdge"><direction>west</direction></action>
+    </keybind>
+    <keybind key="W-Right">
+        <action name="UnmaximizeFull"/>
+        <action name="MaximizeVert"/>
+        <action name="MoveResizeTo">
+            <width>50%</width>
+        </action>
+        <action name="MoveToEdge"><direction>east</direction></action>
+    </keybind>
+
+However, it should be noted that once a window has been 'snapped' to an
+edge, it will remain vertically maximised unless subsequently maximised
+and then restored. The solution is to implement additional keybinds - in
+this instance using the down and up keys - to do so. This will also make
+pulling 'snapped' windows from screen edges faster as well:
+
+    <keybind key="W-Down">
+       <action name="Unmaximize"/>
+    </keybind>
+    <keybind key="W-Up">
+       <action name="Maximize"/>
+    </keybind>
+
+This Ubuntu forum thread provides more information. Applications such as
+opensnap-git are also available from the AUR to automatically simulate
+window snapping behaviour without the use of keybinds.
+
+> Desktop menu
+
+It is also possible to create a keybind to access the desktop menu. For
+example, the following code will bring up the menu by pressing CTRL + m:
+
+    <keybind key="C-m">
+        <action name="ShowMenu">
+           <menu>root-menu</menu>
+        </action>
+    </keybind>
+
+Menus
+-----
+
+It is possible to employ three types of menu in Openbox: static, pipes
+(dynamic), and generators (static or dynamic). They may also be used
+alone or in any combination.
+
+> Static
+
+As the name would suggest, this default type of menu does not change in
+any way, and may be manually edited and/or (re)generated automatically
+through the use on an appropriate software package.
+
+Fast and efficient, while this type of menu can be used to select
+applications, it can also be useful to access specific functions and/or
+perform specific tasks (e.g. desktop configuration), leaving the access
+of applications to another process (e.g. the synapse or xfce4-appfinder
+applications).
+
+The ~/.config/openbox/menu.xml file will be the sole source of static
+desktop menu content.
+
+menumaker
+
+Warning:A root terminal must be installed in order to use MenuMaker,
+even though a standard user terminal may be used to run it. xterm is a
+good choice.
+
+menumaker automatically generates xml menus for several window managers,
+including Openbox, Fluxbox, IceWM and XFCE. It will search for all
+installed executable programs and consequently create a menu file for
+them. It is also possible to configure MenuMaker to exclude certain
+application types (e.g. relating to Gnome or KDE), if desired.
+
+Once installed and executed, it will automatically generate a new
+~/.config/openbox/menu.xml file. To avoid overwriting an existing file,
+enter:
+
+    $ mmaker -v OpenBox3
+
+Otherwise, to overwrite an existing file, add the force argument (f):
+
+    $ mmaker -vf OpenBox3
+
+Once a new ~/.config/openbox/menu.xml file has been generated it may
+then be manually edited, or configured using a GUI menu editor, such as
+obmenu.
+
+obmenu
+
+Warning:obm-xdg - a pipe menu to generate a list of GTK+ and Gnome
+applications - is also provided with obmenu. However, it has
+long-running bugs whereby it may produce an invalid output, or even not
+function at all. Consequently it has been omitted from discussion.
+
+obmenu is a "user-friendly" GUI application to edit
+~/.config/openbox/menu.xml, without the need to code in xml.
+
+xdg-menu
+
+archlinux-xdg-menu will automatically generate a menu based on xdg files
+contained within the /etc/xdg/ directory for numerous Window Managers,
+including Openbox. Review the Xdg-menu#OpenBox article for further
+information.
+
+logout menu options
+
+Tip:The commands provided can also be attached to keybinds.
+
+The ~/.config/openbox/menu.xml file can be edited in order to provide a
+sub-menu with the same options as provided by oblogout. The sample
+script below will provide all of these options, with the exception of
+the ability to lock the screen:
+
+    <menu id="exit-menu" label="Exit">
+    	<item label="Log Out">
+    		<action name="Execute">
+    			<command>openbox --exit</command>
+    		</action>
+    	</item>
+    	<item label="Shutdown">
+    		<action name="Execute">
+    			<command>systemctl poweroff</command>
+    		</action>
+    	</item>
+    	<item label="Restart">
+    		<action name="Execute">
+    		        <command>systemctl reboot</command>
+    		</action>
+    	</item>
+    	<item label="Suspend">
+    		<action name="Execute">
+    		        <command>systemctl suspend</command>
+    		</action>
+    	</item>
+    	<item label="Hibernate">
+    		<action name="Execute">
+    		        <command>systemctl hibernate</command>
+    		</action>
+    	</item>
+    </menu>
+
+Once the entries have been composed, add the following line to present
+the sub-menu where desired within the main desktop menu (usually as the
+last entry):
+
+    <menu id="exit-menu"/>
+
+> Pipes
+
+Tip:It is entirely feasible for a static menu to contain one or more
+pipe sub-menus. The functionality of some pipe menus may also rely on
+the installation of relevant software packages.
+
+This type of menu is in essence a script that provides dynamic,
+refreshed lists on-the-fly as and when run. These lists may be used for
+multiple purposes, including to list applications, to provide
+information, and to provide control functions. Pre-configured pipe menus
+can be installed, although not from the official repositories. More
+experienced users can also modify and/or create their own custom
+scripts. Again, ~/.config/openbox/menu.xml may and commonly will contain
+several pipe menus.
+
+Examples
+
+-   openbox-xdgmenu: fast xdg-menu converter to xml-pipe-menu
+-   obfilebrowser: Application and file browser
+-   obdevicemenu: Management of removable media with Udisks
+-   wifi pipe menu: Wireless networking using Netctl
+
+Openbox.org also provides a further list of pipe menus.
+
+> Generators
+
+This type of menu is akin to those provided by the taskbars of desktop
+environments such as XFCE or LXDE. Automatically updating on-the-fly,
+this type of menu can be powerful and very convenient. It may also be
+possible to add custom categories and menu entries; read the
+documentation for your intended dynamic menu to determine if and how
+this can be done.
+
+A menu generator will have to be executed from the
+~/.config/openbox/menu.xml file.
+
+obmenu-generator
+
+Tip:icons can still be disabled in obmenu-generator, even where enabled
+in ~/.config/openbox/rc.xml.
+
+obmenu-generator is currently only available from the AUR, although it
+is still highly recommended. With the ability to be used as a static or
+dynamic menu, it is highly configurable, powerful, and versatile. Menu
+categories and individual entries may also be easily hidden, customised,
+and/or added with ease. The official homepage provides further
+information and screenshots.
+
+Below is an example of how obmenu-generator would be dynamically
+executed without icons in ~/.config/openbox/menu.xml:
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <openbox_menu>
+        <menu id="root-menu" label="OpenBox 3" execute="/usr/bin/obmenu-generator">
+        </menu>
+    </openbox_menu>
+
+To automatically iconify entries, the -i option would be added:
+
+    <menu id="root-menu" label="OpenBox 3" execute="/usr/bin/obmenu-generator -i">
+
+openbox-menu
+
+Tip:If this menu produces an error, it may be solved by enabling icons
+in ~/.config/openbox/rc.xml.
+
+openbox-menu uses the LXDE menu-cache to create dynamic menus. The
+official homepage provides further information and screenshots.
+
+obmenugen
+
+Obmenugen is currently only available from the AUR, and can be used to a
+generate static or dynamic application menu based on .desktop files. The
+official homepage provides further information.
+
+> Menu icons
+
+To show icons next to menu entries, it will be necessary to ensure they
+are enabled in the <menu> section of the ~/.config/openbox/rc.xml file:
+
+    <applicationIcons>yes</applicationIcons>
+
+Where using a static menu, it will then be necessary to edit the
+~/.config/openbox/menu.xml file to provide both the icon = command,
+along with the full path and icon name for each entry. An example of the
+syntax used to provide an icon for a category is:
+
+    <menu id="apps-menu" label="[label name]" icon="[pathway to icon]/[icon name]">
+
+> Desktop menu as a panel menu
+
+Tip:XDoTool can simulate any keybind for any action, and as such, it may
+therefore be used for many other purposes...
+
+xdotool is a package that can issue commands to simulate key presses /
+keybinds, meaning that it is possible to use it to invoke
+keybind-related actions without having to actually press their assigned
+keys. As this includes the ability to invoke an assigned keybind for the
+Openbox desktop menu, it is therefore possible to use XDoTool to turn
+the Openbox desktop menu into a panel menu. Especially where the desktop
+menu is heavily customised and feature-rich, this may prove very useful
+to:
+
+-   Replace an existing panel menu
+-   Implement a panel menu where otherwise not provided or possible
+    (e.g. for tint2-svn)
+-   Compensate where losing access to the desktop menu due to the use of
+    an application like xfdesktop to manage the desktop.
+
+Once XDoTool has been installed - if not already present - it will be
+necessary to create a keybind to access the root menu in
+~/.config/openbox/rc.xml, and again below the
+<!-- Keybindings for running aplications --> heading. For example, the
+following code will bring up the menu by pressing CTRL + m:
+
+    <keybind key="C-m">
+        <action name="ShowMenu">
+           <menu>root-menu</menu>
+        </action>
+    </keybind>
+
+Openbox must then be re-configured. In this instance, XDoTool will be
+used to simulate the CTRL + m keypress to access the desktop menu with
+the following command (note the use of + in place of -):
+
+    xdotool key control+m
+
+How this command may be used as a panel launcher / icon is largely
+dependent on the features of panel used. While some panels will allow
+the above command to be executed directly in the process of creating a
+new launcher, others may require the use of an executable script. As an
+example, a custom executable script called obpanelmenu.sh will be
+created in the ~/.config folder:
+
+    $ text editor ~/.config/obpanelmenu.sh
+
+Once the empty file has been opened, the appropriate XDoTool command
+must be added to the empty file (i.e. to simulate the CTRL + m keypress
+for this example):
+
+    xdotool key control+m
+
+After the file has been saved and closed, it may then be made into an
+executable script with the following command:
+
+    $ chmod +x ~/.config/obpanelmenu.sh
+
+Executing it will bring up the Openbox desktop menu. Consequently, where
+using a panel that supports drag-and-drop functionality to add new
+launchers, simply drag the executable script onto it before changing the
+icon to suit personal taste. For instructions on how to use this
+executable script with tint2-svn - a derivative of the popular tint2
+panel that allows launchers to be added - see Tint2-Svn launchers.
+
+GTK+ desktop theming
+--------------------
+
+Tip:It is strongly advised to install the obconf and lxappearance-obconf
+GUI applications to configure visual settings and theming. The latter is
+particularly important as it is responsible for generating the
+~/.gtkrc-2.0 file (see the GTK fix section).
+
+It is important to note that a substantial range of both
+Openbox-specific and generalised, Openbox-compatible GTK themes are
+available to change the look of window decorations and the desktop menu.
+Generalised themes are designed to be simultaneously compatible with a
+range of popular desktop environments and/or window managers, commonly
+including Openbox. For example, gtk-theme-numix-blue supports both
+Openbox and XFCE.
+
+> Configuration
+
+obconf and/or lxappearance-obconf should be used to select and configure
+available GTK themes. See Uniform Look for Qt and GTK Applications for
+information about theming Qt based applications like Virtualbox or
+Skype.
+
+> Installation: official and AUR
+
+A good selection of openbox-themes are available from the official
+repositories.
+
+Both Openbox-specific and Openbox-compatible themes installed from the
+official repositories and/or the AUR will be automatically installed to
+the /usr/share/themes directory. Both will also be immediately available
+for selection.
+
+> Installation: other sources
+
+box-look.org is an excellent and well-established source of themes.
+deviantART.com is another excellent resource. Many more can be found
+through the utilisation of a search engine.
+
+Zip and tar files
+
+Themes downloaded from other sources such as box-look.org will usually
+be compressed in a .tar.gz or .zip format. Although tar will have been
+installed as part of the base arch installation to extract .tar.gz
+files, it will be necessary to install a program such as unzip to
+extract .zip files in the terminal. user-friendly GUI archivers are also
+available; see List_of_Applications#Compression_tools for further
+information.
+
+Extracted theme files should also be placed in the /usr/share/themes
+directory. For example, assuming downloaded content is automatically
+stored in the ~/Downloads folder, to simultaneously extract and move a
+.tar.gz theme file, the syntax of the command would be:
+
+    # tar xvf ~/Downloads/<theme file name>.tar.gz -C /usr/share/themes/
+
+To use unzip in the same scenario for a .zip theme file, the syntax of
+the command would be:
+
+    # unzip ~/Downloads/<theme file name>.zip -d /usr/share/themes/
+
+Alternatively, it is also possible to simply move / copy and paste the
+extracted files to the /usr/share/themes directory using an installed
+file manager as root.
+
+> Troubleshooting
+
+There are two particular problems that may be encountered on rare
+occasions, especially where downloading themes from unsupported
+websites. These have been addressed below.
+
+Theme cannot be used
+
+If for any reason the newly extracted theme cannot be selected, open the
+theme directory to first ensure that it is indeed compatible with
+Openbox by determining that an openbox-3 directory is present, and that
+within this directory a themerc file is also present. An .obt (OpenBox
+Theme) file may also be present in some instances, which can then be
+manually loaded in obconf.
+
+Where expected files and directories are present and correct, then on
+occasion it is possible that the theme author has not correctly set
+permission to access the file (e.g. permission may still be for the
+account of the author, rather than for root). To eliminate this
+possibility, ensure the folder and file permissions are for root:
+
+    # chown -R root /user/share/themes
+
+Theme looks broken
+
+Of course, the first line of enquiry would be to check that it is not
+just a badly made, broken theme! Otherwise, ensure that the Openbox GTK
+fix has been implemented, and then re-start the session. Unfortunately
+some older themes can simply break if not maintained sufficiently to
+keep pace with the changes incurred by GTK updates. To avoid such
+occurrences, it is best to check that desired themes have recently been
+created or at least updated / patched.
+
+> Edit or create new themes
+
+Tip:Where deciding to modify an existing theme (e.g. the colour scheme),
+it would be best to work on a copy of it, rather than the original. This
+will retain the original should anything go wrong, and ensure that your
+changes are not over-written through an update.
+
+The process of creating new or modifying existing themes is covered
+extensively at the official openbox.org website. A user-friendly GUI to
+do so - obtheme - is also available from the AUR.
+
+Compositing effects
+-------------------
+
+Openbox does not natively provide support for compositing, and it will
+therefore be necessary to install a compositor for this purpose. The use
+of compositing enables various desktop visual effects, including
+transparency, fading, and shadows. Although compositing is not a
+necessary component, it can help to provide a more pleasant-looking
+environment, and avoid common issues such as screen distortion when
+oblogout is used, and visual glitches when terminal window transparency
+has been enabled. Three of the most common choices are:
+
+-   Compton: Powerful and reliable, with extensive options
+-   Xcompmgr: Older and simpler version of compton
+-   Cairo Compmgr: Advanced compositing effects, plugin support, and a
+    user-friendly GUI. Also more buggy and far heavier use of system
+    resources.
+
+Mouse cursor and application icon themes
 ----------------------------------------
 
-Openbox can be used as a replacement window manager for full-fledged
-desktop environments. The method for deploying Openbox depends on the
-desktop environment.
+Any mouse cursor and/or application icon theme may be used with Openbox.
+Numerous themes are available from both the official repositories and
+the AUR.
 
-> GNOME 2.24 and 2.26
+> xcursor themes (mouse)
 
-Create /usr/share/applications/openbox.desktop with the following lines:
+Tip:Review the Xcursor article for an in-depth explanation.
 
-    [Desktop Entry]
-    Type=Application
-    Encoding=UTF-8
-    Name=OpenBox
-    Exec=openbox
-    NoDisplay=true
-    # name of loadable control center module
-    X-GNOME-WMSettingsModule=openbox
-    # name we put on the WM spec check window
-    X-GNOME-WMName=OpenBox
+Standard xcursor theme packages available from the official repositories
+include xcursor-themes, xcursor-bluecurve, xcursor-vanilla-dmz, and
+xcursor-pinux. To search the official repositories for all available
+xcursor themes, enter the following command:
 
-In gconf, set /desktop/gnome/session/required_components/windowmanager
-to openbox:
+    $ pacman -Ss xcursor
 
-    $ gconftool-2 -s -t string /desktop/gnome/session/required_components/windowmanager openbox
+Installed x-cursor themes may then be set though using the obconf and
+lxappearance-obconf GUI applications. It may then be necessary to either
+log out and back in again to implement the change, or to reconfigure
+Openbox.
 
-Finally, choose the GNOME session from the GDM sessions menu.
+> Application icon themes
 
-> GNOME 2.26 redux
+Standard xcursor theme packages available from the official repositories
+include the gnome-icon-theme and lxde-icon-theme. A nice icon theme
+currently available from the AUR is numix-icon-theme-git. To search the
+official repositories for all available icon themes, enter the following
+command:
 
-If the previous guide for GNOME 2.24 fails:
+    $ pacman -Ss icon-theme
 
-If, when attempting to log into a "Gnome/Openbox" session -- and it
-consistently fails to start, try the following. This is one way of
-achieving your goal of using Openbox as the WM anytime you open a Gnome
-session:
+Again, installed icon themes may then be set though using the obconf and
+lxappearance-obconf GUI applications. It may then be necessary to either
+log out and back in again to implement the change, or to reconfigure
+Openbox.
 
-1.  Log into your Gnome-only session (it should still be using Metacity
-    as its window manager).
-2.  Install Openbox if you have not done so already
-3.  Navigate your menus to System → Preferences → Startup Applications
-    (possibly named 'Session' in older Gnome versions)
-4.  Open Startup Application, select '+ Add' and enter the text shown
-    below. Omit the text after #.
-5.  Click the 'Add' button for the data entry window. Make sure the
-    checkbox beside your new entry is selected.
-6.  Log out from your Gnome session and log back in
-7.  You should now be running openbox as your window manager.
+Desktop icons and wallpapers
+----------------------------
 
-    Name:    Openbox Windox Manager          # Can be changed
-    Command: openbox --replace               # Text should not be removed from this line, but possibly added to it
-    Comment: Replaces metacity with openbox  # Can be changed
+Openbox does not natively support the use of desktop icons or
+wallpapers. As a consequence, it will be necessary to install additional
+applications for this purpose, where desired.
 
-This creates a startup list entry which is executed by Gnome each time
-the user's session is started.
+> Desktop management using file managers
 
-> KDE
+Some file managers have the capacity to fully manage the desktop,
+meaning that they may be used to provide wallpapers and enable the use
+if icons on the desktop. The LXDE desktop environment itself uses
+PCManFM for this purpose.
 
-1.  If you use KDM, select the "KDE/Openbox" login option.
-2.  Open System Settings > Default Applications (in the Workspace
-    Appearance and Behaviour section), and change the default window
-    manager to Openbox (this will also avoid having to log out and log
-    back in again).
-3.  If you use startx, add exec openbox-kde-session to ~/.xinitrc
-4.  From the shell:
+-   PCManFM: See the PCManFM desktop management article.
+-   SpaceFM: See the SpaceFM desktop management article.
 
-    $ xinit /usr/bin/openbox-kde-session
+> Wallpaper / background programs
 
-> Xfce4
+Tip:The wallpaper programs listed here will have many more options than
+shown in this brief overview, including the ability to use solid colours
+for backgrounds. Review their documentation and man pages for more
+information.
 
-Log into a normal Xfce4 session. From your terminal, type:
+There are numerous packages available to set desktop backgrounds in
+Openbox, each of which will need to be autostarted in the
+~/.config/openbox/autostart file. A few of the most well known have been
+listed.
 
-    $ killall xfwm4 ; openbox & exit
+nitrogen
 
-This kills xfwm4, runs Openbox, and closes the terminal. Log out, being
-sure to check the "Save session for future logins" box. On your next
-login, Xfce4 should use Openbox as its window manager.
+Tip:If nitrogen does not show in the desktop menu, then it can be
+manually added.
 
-Alternatively, you can chooose Settings -> Session and Startup from
-menu, go to the Application Autostart tab and add openbox --replace to
-the list of automatically started applications.
+nitrogen is a user-friendly choice, as it also provides a GUI window to
+browse and set installed images. To access the GUI, enter the following
+command in a terminal:
 
-To enable exiting from a session using xfce4-session, edit
-~/.config/openbox/menu.xml.  If the file is not there, copy it from
- /etc/xdg/openbox/.  Look for the following entry:
+    $ nitrogen
 
-     <item label="Exit Openbox">
-       <action name="Exit">
-         <prompt>yes</prompt>
-       </action>
-     </item>
+To use nitrogen as the background provider, add the following command to
+the ~/.config/openbox/autostart file so that it will restore the last
+set wallpaper:
 
-Change it to:
+    nitrogen --restore &
 
-     <item label="Exit Openbox">
-       <action name="Execute">
-         <prompt>yes</prompt>
-        <command>xfce4-session-logout</command>
-       </action>
-     </item>
+feh
 
-Otherwise, choosing "Exit" from the root-menu causes Openbox to
-terminate its execution, leaving you with no window manager.
+Feh is a popular image viewer that may also be used to set wallpapers.
+In this instance, it will be necessary to add the full directory path
+and name of the image to be used as the wallpaper. To use Feh as the
+background provider, add the following command to the
+~/.config/openbox/autostart file:
 
-If you have a problem changing virtual desktops with the mouse wheel
-skipping over desktops, edit ~/.config/openbox/rc.xml. Move the mouse
-binds with... actions "DesktopPrevious" and "DesktopNext" from context
-Desktop to the context Root. Note that you may need to create a
-definition for the Root context as well.
+    feh --bg-scale /path/to/image.file &
 
-When using the Openbox root-menu instead of Xfce's menu, you may exit
-the Xfdesktop with this terminal command:
+hestroot
 
-    $ xfdesktop --quit
+hsetroot is a command-line tool specifically designed to set wallpapers.
+As with Feh, it will be necessary to add the full directory path and
+name of the image to be used as the wallpaper. To use HSetRoot as the
+background provider, add the following command to the
+~/.config/openbox/autostart file:
 
-Xfdesktop manages the wallpaper and desktop icons, requiring you to use
-other utilities such as ROX for these functions.
+    hsertroot -fill /path/to/image.file &
 
-(When terminating Xfdesktop, the above issue with the virtual desktops
-is no longer a problem.)
+xsetroot
 
-If you want have rc.xml separated than your default openbox session
-rc.xml
+xsetroot is installed as part of the Xorg X-Windows system, and may be
+used to set simple background colours. For example, to use XSetRoot to
+set a black background, the following would be added to the
+~/.config/openbox/autostart file:
 
-Edit the ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml or
-(to make the change for all XFCE users)
-/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml: Replace the
-xfwm startup command,
+    xsetroot -solid "#000000" &
 
-    <property name="Client0_Command" type="array">
-      <value type="string" value="xfwm4"/>
-    </property>
+> Icon programs
 
-with the following:
+While there are programs dedicated to enabling desktop icons alone, it
+would seem that they have greater drawbacks than the utilisation of file
+managers for the task. These programs are discussed briefly, below.
 
-    <property name="Client0_Command" type="array">
-           <value type="string" value="openbox"/>
-           <value type="string" value="--config-file"/>
-           <value type="string" value="~/.config/xfce4/openbox/rc.xml"/>
-    </property>
+idesk
 
-and also the menu, you can set the separated menu ex: xfce4-menu.xml ,
-change it to your custom xfce4 rc.xml , but notice that the menu must be
-place at ~/.config/openbox/
+idesk is a simple program that can enable icons in addition to managing
+wallpaper. It will be necessary to create an ~/.idesktop directory, and
+desktop icons must also be manually created. To use idesk to provide
+icons, add the following command to the ~/.config/openbox/autostart
+file:
+
+    idesk &
+
+xfdesktop
+
+xfdesktop is the desktop manager for XFCE. The Thunar file manager will
+also be downloaded as a dependency. Where this is used, the Openbox
+desktop menu will no longer be accessible by right-clicking the
+background.
+
+As such, it will consequently be necessary to access it by other means,
+such as by creating a keybind, and/or by - where permitted -
+re-configuring an installed panel to use the desktop menu as a panel
+menu. To use xfdesktop to provide icons, add the following command to
+the ~/.config/openbox/autostart file:
+
+    xfdesktop &
+
+> conky reconfiguration
+
+Particularly where using a file manager to manage the desktop, it will
+be necessary to edit ~/.conkyrc to change the own_window_type command in
+order for conky to continue to be displayed (where used). The revised
+command that should be used is:
+
+    own_window_type normal
+
+File managers
+-------------
+
+Multiple file managers may be used with Openbox, including PCManFM,
+SpaceFM, Thunar, xfe, and qtfm. Thunar is the native file manager for
+Xfce, and if installing be aware that some Xfce-related dependencies
+will also be installed, including exo (set default applications) and
+xfce4-about (provide information about the Xfce deskop environment). The
+menu entries for these may consequently have to be hidden.
+
+A file manager alone will not provide the same features and
+functionality as provided by default in full desktop environments like
+Xfce and KDE. For example, it may not be initially possible to view or
+access other partitions or access removable media. See File manager
+functionality for further information.
+
+oblogout
+--------
+
+See the Oblogout article for an overview on how to use this useful,
+graphical logout script.
 
 Openbox for multihead users
 ---------------------------
@@ -343,397 +1247,56 @@ can also be found in the AUR: pytyle3-git.
 Both pytyle3 and pager-multihead-git will work without Openbox Multihead
 if only one monitor is active.
 
-Configuration
--------------
-
-There are several options for configuring Openbox settings:
-
-> Manual configuration
-
-To configure Openbox manually, edit the ~/.config/openbox/rc.xml file
-with a text editor. The file has explanatory comments throughout, for
-more details about editing it see the Openbox wiki.
-
-> ObConf
-
-ObConf is an Openbox configuration tool. It is used to set most common
-preferences such as themes, virtual desktops, window properties, and
-desktop margins. It can be installed with the obconf package, available
-in the official repositories.
-
-ObConf cannot configure keyboard shortcuts and certain other features.
-For these features edit rc.xml manually. Alternatively, you can try
-obkey from the AUR.
-
-> Application customization
-
-Openbox allows per-application customizations. This lets you define
-rules for a given program. For example:
-
--   Start your web browser on a specific virtual desktop.
--   Open your terminal program with no window decorations (window
-    chrome).
--   Make your bit-torrent client open at a given screen position.
-
-Per-application settings are defined in ~/.config/openbox/rc.xml.
-Instructions are in the file's comments. More details are found in the
-Openbox wiki.
-
-Menus
------
-
-The default Openbox menu includes a variety of menu items to get you
-started. Many of these items launch applications you do not want, have
-not installed yet, or never intend to install. You will surely want to
-customize menu.xml at some point. There are a number of ways to do so.
-
-> Manual configuration of menus
-
-You can edit ~/.config/openbox/menu.xml with a text editor. Many of the
-settings are self-explanatory. The article Help:Menus in the Openbox
-wiki has extensive details.
-
-> Icons in the menu
-
-Since version 3.5.0 you can have icons next to your menu entries. To do
-that :
-
-1.  add <showIcons>yes</showIcons> in the <menu> section of the rc.xml
-    file
-2.  edit the menu entries in menu.xml and add icons="<path>" like this :
-
-    <menu id="apps-menu" label="SomeApp" icon="/home/user/.icons/application.png">
-
-then openbox --reconfigure or openbox --restart if the menus do not
-update properly.
-
-> MenuMaker
-
-MenuMaker creates XML menus for several window managers including
-Openbox. MenuMaker searchs your computer for executable programs and
-creates a menu file from the result. It can be configured to exclude
-certain application types (GNOME, KDE, etc) if you desire. It can be
-installed with the menumaker package available in the official
-repositories.
-
-Once installed, generate a menu file (named menu.xml) by running the
-program.
-
-    $ mmaker -v OpenBox3     #  Will not overwrite an existing menu file.
-    $ mmaker -vf OpenBox3    #  Force option permits overwriting the menu file.
-    $ mmaker --help          #  See the full set of options for MenuMaker.
-
-MenuMaker creates a comprehensive menu.xml. You may edit this file by
-hand or regenerate it after installing software.
-
-> Obmenu
-
-Obmenu is a menu editor for Openbox. This GUI application is the best
-choice for those who dislike editing XML code. Obmenu can be installed
-with the package obmenu, available in the official repositories.
-
-Once installed, run obmenu then add and remove applications as desired.
-
-  
-
-Obm-xdg
-
-obm-xdg is a command-line tool that comes with Obmenu. It generates a
-categorized sub-menu of installed GTK/GNOME applications.
-
-To use obm-xdg with other menus, add the following line to
-~/.config/openbox/menu.xml:
-
-    <menu execute="obm-xdg" id="xdg-menu" label="xdg"/>
-
-Then add the following line under your root-menu entry where you want to
-have the menu appear:
-
-    <menu id="xdg-menu"/>
-
-Then run openbox --reconfigure to refresh the Openbox menu. You should
-now see a sub-menu labeled xdg in your menu.
-
-To use obm-xdg by itself, create ~/.config/openbox/menu.xml and add
-these lines:
-
-    <openbox_menu>
-     <menu execute="obm-xdg" id="root-menu" label="apps"/>
-    </openbox_menu>
-
-Note:If you do not have GNOME installed, you need to install the package
-gnome-menus for obm-xdg.
-
-> XDG-menu
-
-The archlinux-xdg-menu package in official repositories can
-automatically generate a menu for Openbox from XDG files. For a guide on
-using XDG-menu, see the Xdg-menu#OpenBox article.
-
-> openbox-menu
-
-Openbox-menu uses menu-cache from the LXDE Project to create dynamic
-menus for Openbox.
-
-If you get an error while trying to open this menu try adding icons to
-the Openbox menu.
-
-It can be installed with the package openbox-menu, available in the AUR.
-
-> Python-based xdg menu script
-
-This script is found in Fedora's Openbox package. You have only to put
-the script somewhere and create a menu entry. The latest version of the
-script can be found here.
-
-Download the script from the above repository and Place int into any
-directory you want.
-
-Open menu.xml with your text editor and add the following entry. Of
-course, you can modify the label as you see fit.
-
-    <menu id="apps-menu" label="xdg-menu" execute="python2 /path/to/xdg-menu"/>
-
-Save the file and run openbox --reconfigure.
-
-Note:If you do not have GNOME installed, you need to install the package
-gnome-menus for xdg-menu.
-
-> Openbox menu generators
-
-obmenugen
-
-Obmenugen can be installed with the package obmenugen, available in the
-AUR. creates the menu file from .desktop files. Obmenugen provides a
-text file which filters (hides) menu items using basic regular
-expressions.
-
-    $ obmenugen               # Create a menu file
-    $ openbox --reconfigure   # To see the menu you generated
-
-obmenu-generator
-
-Obmenu-generator is a pipe/static menu generator for Openbox with icon
-support. You can install obmenu-generator from AUR.
-
-The following command generates a pipe menu with icons:
-
-    $ obmenu-generator -p -i
-
-To see a list of options type this:
-
-    $ obmenu-generator -h
-
-> Pipe menus
-
-Like other window managers, Openbox allows for scripts to dynamically
-build menus (menus on-the-fly). Examples are system monitors, media
-player controls, or weather monitors. Pipe menu script examples are
-found in the Openbox:Pipemenus page at Openbox's site.
-
-Some interesting pipe menus provided by Openbox users:
-
--   obfilebrowser — A pipe menu file browser.
-
-http://xyne.archlinux.ca/projects/obfilebrowser/ || obfilebrowser
-
--   wifi-pipe — A pipe menu for scanning and connecting to wireless hot
-    spots using netcfg.
-
-https://github.com/pbrisbin/wifi-pipe || not packaged? (search in AUR)
-
--   obdevicemenu — A pipe menu for managing removable devices using
-    Udisks.
-
-https://bbs.archlinux.org/viewtopic.php?id=114702 || obdevicemenu
-
-Startup programs
-----------------
-
-Openbox supports running programs at startup. This is provided by
-command openbox-session.
-
-> Enabling autostart
-
-There are two ways to enable autostart:
-
-1.  When using startx or xinit to begin a session, edit ~/.xinitrc.
-    Change the line that executes openbox to openbox-session.
-2.  When using GDM or KDM, selecting an Openbox session automatically
-    runs the autostart script.
-
-> Autostart script
-
-Openbox provides a system-wide startup script which applies to all users
-and is located at /etc/xdg/openbox/autostart. A user may also create his
-own startup script to be executed after the system-wide script by
-creating the file ~/.config/openbox/autostart. This file is not provided
-by default and must be created by the user.
-
-Further instructions are available in the Help:Autostart article at the
-official Openbox site.
-
-Note:The autostart files used to be named autostart.sh prior to OpenBox
-3.5.0. While these scripts will presently still work, users who are
-upgrading are advised to drop the .sh extension.
-
-Note:All the programs in the autostart file should be run as daemons or
-run in the background,otherwise the items in /etc/xdg/autostart/ won't
-be started!
-
-> Autostart directory
-
-Openbox also starts any *.desktop files in /etc/xdg/autostart - this
-happens regardless of whether a user startup script is present.
-nm-applet, for example, installs a file at this location, and may cause
-it to run twice for users with the usual
-(sleep 3 && /usr/bin/nm-applet --sm-disable) & in their startup script.
-There is a discussion on managing the effects of this at [1].
-
-Themes and appearance
----------------------
-
-See the main article: Openbox Themes and Apps#Themes and appearance
-
-> Openbox themes
-
-Themes control the appearance of windows, titlebars, and buttons. They
-also control menu appearance and on-screen display (OSD). Some Openbox
-themes can be installed with the package openbox-themes, available in
-the official repositories.
-
-> Cursors, icons, wallpapers
-
-Xcursor themes can be installed with the package xcursor-themes,
-available in the official repositories, or with other packages from such
-as xcursor-bluecurve, xcursor-vanilla-dmz or xcursor-pinux. Many other
-themes can be found in the official repositories or the AUR.
-
-Icon themes are also available in the repositories, for example
-lxde-icon-theme, tangerine-icon-theme or gnome-icon-theme can be found
-in the official repositories with many more in the AUR.
-
-Wallpapers are easily set with utilities such as Nitrogen, Feh or
-hsetroot.
-
-Please see Openbox Themes and Apps for information on these GUI
-customizations.
-
-Recommended programs
---------------------
-
-See the main article: Openbox Themes and Apps#Recommended programs
-
 Tips and tricks
 ---------------
 
-> Window snap behaviour
+> Packages for beginners
 
-Windows 7 and other VMs supports a window behaviour to snap windows when
-they are moved to the edge of the screen. This effect can also be
-achieved through an Openbox keybinding. Openbox supports specifying
-percentages, and actions. To simulate Aero Snap:
+Tip:See the List of Applications article for many more possibilities.
 
-    ~/.config/openbox/rc.xml
+The packages listed below have been listed to aid newer users:
 
-    <keybind key="W-Left">
-        <action name="UnmaximizeFull"/>
-        <action name="MaximizeVert"/>
-        <action name="MoveResizeTo">
-            <width>50%</width>
-        </action>
-        <action name="MoveToEdge"><direction>west</direction></action>
-    </keybind>
-    <keybind key="W-Right">
-        <action name="UnmaximizeFull"/>
-        <action name="MaximizeVert"/>
-        <action name="MoveResizeTo">
-            <width>50%</width>
-        </action>
-        <action name="MoveToEdge"><direction>east</direction></action>
-    </keybind>
+-   Display Manager: LXDM or LightDM
+-   Audio: ALSA
+-   Volume: volumeicon or pnmixer with gnome-alsamixer
+-   Network: Network manager with network-manager-applet
+-   Panel: Tint2 or Tint2-svn
+-   Background: Nitrogen or Feh
+-   Menu: OBMenu-Generator
+-   Compositor: Compton
+-   Desktp Notifications: xfce4-notifyd
+-   Logout script: Oblogout
+-   File Manager: PCManFM, SpaceFM, or Thunar
+-   Clipboard Manager: parcellite
+-   Configuration GUIs: obconf, lxappearance-obconf, lxrandr, lxinput,
+    tintwizard or tintwizard-svn
 
-The only issue with any methods around, is that once maximized to an
-edge - it stays full (vertically) until you maximize and restore. So you
-can add the next few lines to simulate the other windows behaviors
-(maximize, restore). That will speed up pulling a window from a screen
-edge as well.
+> Set default applications / file associations
 
-    ~/.config/openbox/rc.xml
+See the Default applications article.
 
-    <keybind key="W-Down">
-        <action name="Unmaximize"/>
-    </keybind>
-    <keybind key="W-Up">
-        <action name="Maximize"/>
-    </keybind>
+> Terminal content copy and paste
 
-Then reconfigure Openbox and try it.
+Within a terminal, either:
 
-openbox --reconfigure
+-   Ctrl+Ins will copy and Shift+Ins will paste.
+-   Ctrl+Shift+c will copy and mouse middle-click will paste.
 
-  
- As an alternative/extension you can use opensnap. It provides Aero Snap
-like functionality and resizes windows if you drag them to an edge of
-the screen. It does not provide keyboard shortcuts however.
+> Ad-hoc window transparency
 
-> File associations
+Warning:This may not work where other actions are defined within the
+action group.
 
-Because Openbox and the applications you use with it are not
-well-integrated you might run into the issues with your browser. Your
-browser may not know which program it is supposed to use for certain
-types of files.
+The program transset-df is available in the official repositories, and
+can enable window transparency on-the-fly.
 
-A package in the AUR called gnome-defaults-list contains a list of
-file-types and programs specific to the Gnome desktop. The list is
-installed to /etc/gnome/defaults.list.
-
-Open this file with your text editor. Here you can replace a given
-application with the name of the program of your choosing. For example,
-replace totem with vlc  or  eog with mirage. Save the file to
-~/.local/share/applications/defaults.list.
-
-Another way of setting file associations is to install package
-perl-file-mimeinfo from the official repositories and invoke mimeopen
-like this:
-
-    mimeopen -d /path/to/file
-
-You are asked which application to use when opening /path/to/file:
-
-    Please choose a default application for files of type text/plain
-           1) notepad  (wine-extension-txt)
-           2) Leafpad  (leafpad)
-           3) OpenOffice.org Writer  (writer)
-           4) gVim  (gvim)
-           5) Other...
-
-Your answer becomes the default handler for that type of file. Mimeopen
-is installed as /usr/bin/perlbin/vendor/mimetype.
-
-> Copy and paste
-
-From a terminal Ctrl+Ins for copy and Shift+Ins for paste.
-
-Also Ctrl+Shift+c for copy and mouse middle-click for paste (in
-terminals).
-
-Other applications most likely use the conventional keyboard shortcuts
-for copy and paste.
-
-> Window transparency
-
-The program transset-df is available in the official repositories. With
-transset-df you can enable window transparency on-the-fly.
-
-For instance by placing the following in the <mouse> section you can
-have your mouse adjust window transparency by scrolling while hovering
-over the title bar:
-
-    ~/.config/openbox/rc.xml
+For example, using the following code in the <mouse> section of the
+~/.config/openbox/rc.xml file will enable control of application window
+transparency by hovering the mouse-pointer over the title bar and
+scrolling with the middle button:
 
     <context name="Titlebar">
-        . . .
+        ...
         <mousebind button="Up" action="Click">
             <action name= "Execute" >
             <execute>transset-df -p .2 --inc  </execute>
@@ -744,307 +1307,155 @@ over the title bar:
             <execute>transset-df -p .2 --dec </execute>
             </action>
         </mousebind>
-          . . .
+        ...
     </context>
 
-Warning:It appears to work only when no additional actions are defined
-within the action group.
+> Using obxprop for faster configuration
+
+openbox package provides a obxprop binary that can parse relevant values
+for applications settings in rc.xml. Officially
+obxprop | grep "^_OB_APP" is recommended for this task. Doing so for
+multiple applications and its windows can be very inefficient however.
+The following script obxprop2obrc makes it much easier to configure even
+a large number of applications.
+
+    #!/bin/bash
+    ##Script: obxprop-to-openbox-rc.sh
+    ##Recommended executable name: obxprop2obrc
+
+    while [ $# -ne 0 ]; do
+    case $1 in
+        -f*)
+            shift;
+            FILE="$1";
+    	shift;
+        ;;
+        -t*)
+            shift;
+            TIME="$1";
+    	shift;
+        ;;
+        *)
+            echo Usage: $0 [-f FILE_TEMPLATE] [-t WAIT_TO_KILL_TIME] 
+            exit 1;
+        ;;
+    esac
+    done
+
+    if [ $TIME ]; then
+        OBXPROPS=( $(obxprop | cat & (sleep $TIME && pkill -13 cat) | awk -F \" '/_OB_APP/{ print "\x22"$2"\x22" }' ) );
+    else
+        OBXPROPS=( $(obxprop | awk -F \" '/_OB_APP/{ print "\x22"$2"\x22" }' ) );
+    fi
+    OBPROPS=(TYPE TITLE GROUP_CLASS GROUP_NAME CLASS NAME ROLE);
+    j=0;
+    for i in $( seq 2 2 14 ); do
+        OBPROP="$( echo ${OBXPROPS[@]} | awk -F \" '{ print $'$i'}' )";
+        if [[ -z $OBPROP ]]; then 
+            declare ${OBPROPS[$j]}='"*"';
+        else 
+            declare ${OBPROPS[$j]}="\"$OBPROP\"";
+        fi
+        j=$(($j+1));
+    done;
+
+    echo "    <application type="$TYPE" title="$TITLE" class="$CLASS" name="$NAME" role="$ROLE">"
+    if [ -f "$FILE"  ]; then cat "$FILE" && exit; fi
+    cat << EOF
+          <desktop>1</desktop>
+          <desktop>all</desktop>
+          <decor>yes</decor>
+          <decor>no</decor>
+          <focus>yes</focus>
+          <focus>no</focus>
+          <fullscreen>yes</fullscreen>
+          <fullscreen>no</fullscreen>
+          <iconic>yes</iconic>
+          <iconic>no</iconic>
+          <maximized>yes</maximized>
+          <maximized>no</maximized>
+          <maximized>both</maximized>
+          <maximized>horizontal</maximized>
+          <maximized>vertical</maximized>
+          <monitor>0</monitor>
+          <monitor>1</monitor>
+          <position force="no">
+          <position force="yes">
+            <width>40%</width>
+            <height>30%</height>
+            <x>-1</x>
+            <y>-1</y>
+            <x>center</x>
+            <y>center</y>
+          </position>
+          <layer>above</layer>
+          <layer>normal</layer>
+          <layer>below</layer>
+          <shade>yes</shade>
+          <shade>no</shade>
+          <skip_pager>yes</skip_pager>
+          <skip_pager>no</skip_pager>
+          <skip_taskbar>yes</skip_taskbar>
+          <skip_taskbar>no</skip_taskbar>
+        </application>
+    EOF
+
+If no further options are used default configuration, that can be edited
+by deleting unnecessary lines, is printed out. This script can use
+templates with default values when using -f switch:
+
+    $ obxprop2obrc -f templates-rc-inkscape-dialogs.sc > part-rc-applications-inkscape.xml
+    $ cat part-rc-applications-inkscape.xml
+
+    <application type="normal" title="Align and Distribute (Shift+Ctrl+A)" class="Inkscape" name="inkscape" role="*">
+      <desktop>3</desktop>
+      <decor>yes</decor>
+      <maximized>no</maximized>
+      <position force="yes">
+        <width>20%</width>
+        <height>30%</height>
+        <x>-1</x>
+        <y>-1</y>
+      </position>
+      <layer>normal</layer>
+      <shade>yes</shade>
+    </application>
+
+It also has a time switch -t which kills obxprop and thus can reduce
+time significantly in certain situations, although it may not work
+perfectly.
 
 > Xprop values for applications
 
-Xprop can be installed with the package xorg-xprop, available in the
-official repositories.
-
-If you use per-application settings frequently, you might find this bash
-alias handy:
+xorg-xprop is available in the official repositories, and can be used to
+relay property values for selected applications. Where frequently using
+per-application settings, the following Bash Alias may be useful: dy:
 
     alias xp='xprop | grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""'
 
-To use, run xp and click on the running program that you would like to
-define with per-app settings. The result displays only the info that
-Openbox requires, namely the WM_WINDOW_ROLE and WM_CLASS (name and
-class) values:
+To use Xorg-XProp, run using the alias given xp, and click on the active
+program desired to define with per-application settins. The results
+displayed will only be the information that Openbox itself requires,
+namely the WM_WINDOW_ROLE and WM_CLASS (name and class) values:
 
-    $ xp
     WM_WINDOW_ROLE(STRING) = "roster"
     WM_CLASS(STRING) = "gajim.py", "Gajim.py"
     WM_CLASS(STRING) = "NAME", "CLASS"
 
-Xprop for Firefox
+Firefox
 
 For whatever reason, Firefox and like-minded equivalents ignore
 application rules (e.g. <desktop>) unless class="Firefox*" is used. This
 applies irrespective of whatever values xprop may report for the
 program's WM_CLASS.
 
-> Linking the menu to a button
-
-Some people want to link the Openbox menu (or any menu) to an object.
-This is useful for creating a panel button to pop up a menu. Although
-Openbox does not provide this, a program called xdotool simulates a
-keypress. Openbox can be configured to bind that keypress to the
-ShowMenu action.
-
-After installing xdotool, add the following to the <keyboard> section:
-
-    ~/.config/openbox/rc.xml
-
-    <keybind key="A-C-q">
-        <action name="ShowMenu">
-            <menu>root-menu</menu>
-        </action>
-    </keybind>
-
-Then execute openbox --reconfigure or openbox --restart to use the new
-configuration. The following command summons a menu at your cursor
-position. The command may given as-is, linked to an object, or placed in
-a script.
-
-    $ xdotool key ctrl+alt+q
-
-Of course, change the key shortcut to your liking. Here is a snippet
-from a Tint2 configuration file which pops up a menu when the clock area
-is clicked. Each key combination is set to open a menu within Openbox's
-rc.xml configuration file. The right‑click menu is different from the
-left‑click menu:
-
-    clock_rclick_command = xdotool key --clearmodifiers "ctrl+XF86PowerOff"
-    clock_lclick_command = xdotool key --clearmodifiers "alt+XF86PowerOff"
-
-> Running a terminal emulator as desktop background
-
-With Openbox, running a terminal as desktop background is easy. You will
-not need devilspie here.
-
-The following example shows how to run the terminal emulator Urxvt as
-desktop background:
-
-First you must enable transparency, open your ~/.Xdefaults file (if it
-does not exist yet, create it).
-
-    URxvt*transparent:true
-    URxvt*scrollBar:false
-    URxvt*geometry:124x24    #I do not use the whole screen, if you want a full screen term do not bother with this and see below.
-    URxvt*borderLess:true
-    URxvt*foreground:Black   #Font color. My wallpaper is White, you may wish to change this to White.
-
-Then add the following to the <applications> section:
-
-    ~/.config/openbox/rc.xml
-
-    <application name="urxvt">
-        <decor>no</decor>
-        <focus>yes</focus>
-        <position>
-            <x>center</x>
-            <y>20</y>
-        </position>
-        <layer>below</layer>
-        <desktop>all</desktop>
-        <maximized>true</maximized> #Only if you want a full size terminal.
-    </application>
-
-The magic comes from the <layer>below</layer> line, which place the
-application under all others. Here urxvt is displayed on all desktops,
-change it to your convenience.
-
-Tip:Instead of using <application name="urxvt">, you can use another
-name ("urxvt-bg" for example), and use the -name option when starting
-uxrvt. That way, only the urxvt terminals which you choose to name
-urxvt-bg would be captured and modified by the application rule in
-rc.xml. For example:
-
-    $ urxvt -name urxvt-bg
-
-ToggleShowDesktop exception
-
-If you use ToggleShowDesktop to minimize all your application and show
-the desktop it will also minimize the urxvt window. Several methods are
-available to bypass this, but none works properly:
-
--   one method is explained in this forum post. This involves editing
-    Urxvt's source code.
-
-Warning:This method seems to have been broken in a recent update, now
-leading to a memory leak when the patched Urxvt is run.
-
--   the best method is outlined here. It still has a big disadvantage:
-    it makes ToggleShowDesktop a one-way action, not restoring the other
-    desktop applications when ToggleShowDesktop is run for a second
-    time. It does create the opportunity to use a different terminal
-    emulator than Urxvt, however.
-
 > Switching between keyboard layouts
 
-If you don't want to use a separate program for managing keyboard
-layouts, you can manually configure X to switch layouts on certain key
-combinations. See Xorg#Switching_between_keyboard_layouts for
+See the article section switching between keyboard layouts for
 instructions.
 
-> Keyboard volume control
-
-ALSA
-
-If you use ALSA for sound, you can use the amixer program (part of the
-alsa-utils package) to adjust the sound volume. You can use Openbox's
-keybindings to map different shortcuts to actions. If you want to use
-the multimedia keys, but do not know their names, you could look at the
-Multimedia Keys page to find out.
-
-For example, add the following in the <keyboard> section:
-
-    ~/.config/openbox/rc.xml
-
-    <keybind key="W-Up">
-        <action name="Execute">
-            <command>amixer set Master 5%+</command>
-        </action>
-    </keybind>
-
-This binds Super+↑ to increase your master ALSA volume by 5%.
-Corresponding binding for volume down:
-
-    ~/.config/openbox/rc.xml
-
-    <keybind key="W-Down">
-        <action name="Execute">
-            <command>amixer set Master 5%-</command>
-        </action>
-    </keybind>
-
-As another example you can also use the XF86Audio* keybindings:
-
-    ~/.config/openbox/rc.xml
-
-    <keybind key="XF86AudioRaiseVolume">
-        <action name="Execute">
-            <command>amixer set Master 5%+ unmute</command>
-        </action>
-    </keybind>
-    <keybind key="XF86AudioLowerVolume">
-        <action name="Execute">
-            <command>amixer set Master 5%- unmute</command>
-        </action>
-    </keybind>
-    <keybind key="XF86AudioMute">
-        <action name="Execute">
-            <command>amixer set Master toggle</command>
-        </action>
-    </keybind>
-
-The above example should work for the majority of multimedia keyboards.
-It should enable to raise, lower and mute the Master control of your
-audio device by using the respective multimedia keyboard keys. Notice
-also that in this example:
-
--   The "Mute" key should unmute the Master control if it is already in
-    mute mode.
--   The "Raise" and "Lower" keys should unmute the Master control if it
-    is in mute mode.
-
-Pulseaudio
-
-If you are using PulseAudio with ALSA as a backend the above keybinding
-are slightly different as amixer must be told to use PulseAudio. As
-always, add the following to the <keyboard> section to get the proper
-behaviour:
-
-    ~/.config/openbox/rc.xml
-
-    <keybind key="XF86AudioRaiseVolume">
-        <action name="Execute">
-            <command>amixer -D pulse set Master 5%+ unmute</command>
-        </action>
-    </keybind>
-    <keybind key="XF86AudioLowerVolume">
-        <action name="Execute">
-            <command>amixer -D pulse set Master 5%- unmute</command>
-        </action>
-    </keybind>
-    <keybind key="XF86AudioMute">
-        <action name="Execute">
-            <command>amixer set Master toggle</command>
-        </action>
-    </keybind>
-
-This keybindings should work for most of the systems. Other examples can
-be found here.
-
-OSS
-
-With OSS, you can use keybindings to raise or lower specific mixers.
-This is useful in cases where you wish to change the volume of a
-specific application (such as an audio player) without changing the
-system's volume. Note that the application must be first set up to use
-its own mixer. In this example, MPD is configured to have its own mixer,
-named mpd:
-
-    ~/.config/openbox/rc.xml
-
-    <keybind key="KEY_BINDING">
-        <action name="Execute">
-            <command>ossmix -- mpd -1</command>
-        </action>
-    </keybind>
-
-This example decreases the volume of the mpd mixer by one dB. To
-increase the volume, replace the mixer value (-1) with a positive one.
-The -- that appears after ossmix are added, as listed in ossmix's man
-page, to prevent any negative value from being treated as an argument.
-
-Troubleshooting Openbox 3.5
----------------------------
-
-> X server crashes
-
-Problems have been detected after upgrade to version 3.5, that the X
-server might crash in attempt to start Openbox, ending with this error
-message:
-
-    (metacity:25137): GLib-WARNING **: In call to g_spawn_sync(), exit status of a child process \
-                       was requested but SIGCHLD action was set to SIG_IGN and ECHILD was received by waitpid(), so exit \
-                       status can't be returned. This is a bug in the program calling g_spawn_sync(); either do not request \
-                       the exit status, or do not set the SIGCHLD action.
-    xinit: connection to X server lost
-    waiting for X server to shut down
-
-In this particular case, some problem with metacity package has been
-identified as the cause of the X server crash issue. To solve the
-problem reinstall the metacity and compiz-decorator-gtk packages. If
-that does not solve the problem, try removing them.
-
-Also, plenty of similar cases have been found on the Internet, that not
-only metacity package might be causing the X server to crash. Thus,
-whatever else instead of metacity you get in the error output message,
-try to reinstall it (or remove if necessary) in an attempt to get rid of
-this X server crash.
-
-> Autostarting unwanted applications in 3.5
-
-If unwanted applications start with your Openbox session even though
-they are not listed in your ~/.config/openbox/autostart, check the
-~/.config/autostart/ directory, it might contain the residues from your
-previously used desktop environment (GNOME, KDE, etc.), and remove
-unwanted files.
-
-> SSH agent no longer starting
-
-Whereas Openbox 3.4.x allowed launching an SSH agent from
-~/.config/openbox/autostart, with 3.5 that no longer seems to work. You
-need to put the following code in ~/.config/openbox/environment:
-
-    SSHAGENT="/usr/bin/ssh-agent"
-    SSHAGENTARGS="-s"
-    if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
-            eval `$SSHAGENT $SSHAGENTARGS`
-            trap "kill $SSH_AGENT_PID" 0
-    fi
-
-> Openbox not registering with D-Bus
-
-Just like with SSH agent, lots of people used to have D-Bus code in
-~/.config/openbox/autostart - which no longer works (e.g. Thunar does
-not see any removable devices anymore).
+Troubleshooting
+---------------
 
 > Windows load behind the active window
 
@@ -1063,16 +1474,23 @@ just created to focus it. To fix this behavior add this to your
 See also
 --------
 
--   Openbox Website – The official website
--   Planet Openbox – Openbox news portal
--   Box-Look.org – A good resource for themes and related artwork
+-   Openbox Website - Official website
+-   Planet Openbox - Openbox news portal
+-   Box-Look.org - A good resource for themes and related artwork
 -   Openbox Hacks and Configs Thread @ Arch Linux Forums
 -   Openbox Screenshots Thread @ Arch Linux Forums
--   Using GNOME 3 with Openbox Tutorial
+-   An Openbox guide
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Openbox&oldid=252386"
+"https://wiki.archlinux.org/index.php?title=Openbox&oldid=305583"
 
 Category:
 
 -   Stacking WMs
+
+-   This page was last modified on 19 March 2014, at 11:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

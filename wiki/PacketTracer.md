@@ -11,6 +11,14 @@ PacketTracer
   ------------------------ ------------------------ ------------------------
 
   ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Currently        
+                           packettracer 6.0.1 needs 
+                           to be used. (Discuss)    
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
   [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
   g]                       is poorly written.       g]
                            Reason: Numerous         
@@ -105,8 +113,15 @@ in /usr/lib, e.g.
     libQtXml.so.4.3.3 -> /usr/lib/libQtXml.so.4
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PacketTracer&oldid=233388"
+"https://wiki.archlinux.org/index.php?title=PacketTracer&oldid=274892"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 9 September 2013, at 23:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

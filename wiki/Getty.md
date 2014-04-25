@@ -10,15 +10,13 @@ implemented as virtual consoles. Six of these virtual consoles are
 provided by default and they are usually accessible by pressing
 Ctrl+Alt+F1 through Ctrl+Alt+F6.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 agetty                                                             |
-| -   2 fgetty                                                             |
-| -   3 Others                                                             |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 agetty
+-   2 fgetty
+-   3 Others
+-   4 See also
 
 agetty
 ------
@@ -41,7 +39,7 @@ Authentication Module (including SHA-2) support.
 Others
 ------
 
--   mingetty official package: mingetty
+-   mingetty AUR mingetty
 -   qingy official package: qingy
 -   fbgetty official package: fbgetty
 -   ngetty AUR: ngetty
@@ -56,8 +54,15 @@ See also
 -   Automatic login to virtual console
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Getty&oldid=207083"
+"https://wiki.archlinux.org/index.php?title=Getty&oldid=273646"
 
 Category:
 
 -   Boot process
+
+-   This page was last modified on 1 September 2013, at 10:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

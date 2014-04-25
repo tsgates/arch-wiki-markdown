@@ -29,12 +29,10 @@ thinking that we are just asking for packagers.
     -   complete rewrite (in python)?
         -   +1 for python, but the python package is ~80MB and current
             netinstall iso is ~200MB -> too fat?
-
 -   netcfg
 -   automatic package buildfarm
     -   There has been some work on Arch integration into
         openbuildservice.org - [1]
-
 -   single authentication database and managing our packaging ssh
     accounts from archweb
 -   Implement pkgstats submission and graph/stats creation in archweb
@@ -57,3 +55,10 @@ Retrieved from
 Category:
 
 -   Arch development
+
+-   This page was last modified on 23 April 2012, at 10:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

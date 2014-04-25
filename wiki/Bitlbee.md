@@ -3,34 +3,29 @@ Bitlbee
 
 Bitlbee is a "console-based IRC to IM chatting gateway, including
 ICQ/MSN/Jabber". It allows the user to interact with popular chat
-networks XMPP/Jabber (including Google Talk), MSN Messenger, Yahoo!
-Messenger, AIM and ICQ, the Twitter microblogging network (plus all
-other Twitter API compatible services like identi.ca and status.net),
-and social networking chat networks like Facebook and StudiVZ within
-their IRC client.
+networks XMPP/Jabber, MSN Messenger, Yahoo! Messenger, AIM and ICQ, the
+Twitter microblogging network (plus all other Twitter API compatible
+services like identi.ca and status.net), and social networking chat
+networks like Facebook and StudiVZ within their IRC client.
 
 The users' buddies appear as normal IRC users in a channel and
 conversations use the private message facility of IRC.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Daemon                                                       |
-|                                                                          |
-| -   3 Connect to channel                                                 |
-| -   4 Google Chat                                                        |
-|     -   4.1 Troubleshooting                                              |
-|                                                                          |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Daemon
+-   3 Connect to channel
+-   4 Google Chat
+    -   4.1 Troubleshooting
+-   5 See Also
 
 Installation
 ------------
 
-Install bitlbee, available in the Official Repositories. Alternatively,
+Install bitlbee, available in the Official repositories. Alternatively,
 install the development version, bitlbee-bzr, available in the Arch User
 Repository.
 
@@ -82,45 +77,45 @@ Google Chat
 In the control channel, &bitlbee, issue the following command after
 replacing <username> and <password> with your information:
 
-    <@user> account add jabber <username>@gmail.com <password> talk.google.com:5223:ssl
-
-Appending the command with talk.google.com:5223:ssl is not strictly
-necessary, but it is recommended to enable extra security.
+    <@user> account add jabber <username>@gmail.com <password>
 
 If you have enabled Google Authenticator make sure to create an
 application specific password (see: Google Accounts Help).
 
 To verify that the account was added check the account list:
 
-    <@user> account list 
-    <@root> 0. JABBER, username@gmail.com (connected) 
+    <@user> account list
+    <@root>  0 (gtalk): jabber, username@gmail.com
     <@root> End of account list
 
 You can change the server value of your gmail account with the following
 command:
 
-    account 0 set server talk.google.com
+    account gtalk set server talk.google.com
 
 To log into your Google account issue the following:
 
-    <@user> account 0 on
-    <@root> JABBER(username@gmail.com) - Logging in: Connecting 
-    <@root> JABBER(username@gmail.com) - Logging in: Connected 
-    <@root> JABBER(username@gmail.com) - Logging in: Requesting Authentication Method
-    <@root> JABBER(username@gmail.com) - Logging in: Authenticating 
-    <@root> JABBER(username@gmail.com) - Logged in
+    <@user> account gtalk on
+    <@root> jabber - Logging in: Connecting
+    <@root> jabber - Logging in: Connected to server, logging in
+    <@root> jabber - Logging in: Converting stream to TLS
+    <@root> jabber - Logging in: Connected to server, logging in
+    <@root> jabber - Logging in: Authentication finished
+    <@root> jabber - Logging in: Server changed session resource string to `BitlBeeD52466D9'
+    <@root> jabber - Logging in: Authenticated, requesting buddy list
+    <@root> jabber - Logging in: Logged in
 
 > Troubleshooting
 
 If you get errors like the following:
 
-    <@user> account 0 on 
-    <@root> JABBER(username@gmail.com) - Logging in: Connecting
-    <@root> JABBER(username@gmail.com) - Logging in: Connected
-    <@root> JABBER(username@gmail.com) - Logging in: Requesting Authentication Method
-    <@root> JABBER(username@gmail.com) - Logging in: Authenticating
-    <@root> JABBER(username@gmail.com) - Login error: Error 403: Unknown error
-    <@root> JABBER(username@gmail.com) - Signing off...
+    <@user> account gtalk on
+    <@root> jabber - Logging in: Connecting
+    <@root> jabber - Logging in: Connected
+    <@root> jabber - Logging in: Requesting Authentication Method
+    <@root> jabber - Logging in: Authenticating
+    <@root> jabber - Login error: Error 403: Unknown error
+    <@root> jabber - Signing off...
 
 Switching the domain from "gmail.com" to "googlemail.com" may help. This
 seems to be the case for some European countries, especially Germany
@@ -129,15 +124,15 @@ where Google doesn't own the trademark for the name Gmail [1].
 The easiest way to change your account settings is to simply delete the
 account you created and add it again.
 
-    account 0 del
+    account gtalk del
     account add jabber username@googlemail.com mypasswd
 
 or just use the `set` switch for the `account` command
 
     account list   # find the id for your gtalk account, in this case I'll use '0'
-    account 0 set  # list all the possible settings for this account
-    account 0 set username foo@gmail.com        # change your username
-    account 0 set password somethingverysecret  # change your passphrase
+    account gtalk set  # list all the possible settings for this account
+    account gtalk set username foo@gmail.com        # change your username
+    account gtalk set password somethingverysecret  # change your passphrase
 
 See Also
 --------
@@ -150,8 +145,15 @@ See Also
 -   HOWTO: Connect to Facebook chat with Bitlee on the Bitlbee Wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Bitlbee&oldid=242505"
+"https://wiki.archlinux.org/index.php?title=Bitlbee&oldid=301441"
 
 Category:
 
 -   Internet Relay Chat
+
+-   This page was last modified on 24 February 2014, at 11:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

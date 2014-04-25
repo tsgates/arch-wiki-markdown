@@ -1,37 +1,35 @@
 lm sensors
 ==========
 
+Related articles
+
+-   hddtemp
+-   monitorix
+
 lm_sensors (Linux monitoring sensors) is a free and open-source
 application that provides tools and drivers for monitoring temperatures,
 voltage, and fans. This document explains how to install, configure, and
-use lm_sensors so that you can monitor CPU temperatures, motherboard
-temperatures, and fan speeds.
+use lm_sensors.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Usage                                                              |
-|     -   1.1 Installation                                                 |
-|     -   1.2 Setting up lm_sensors                                        |
-|     -   1.3 Automatic lm_sensors deployment                              |
-|     -   1.4 Testing your lm_sensors                                      |
-|     -   1.5 Reading SPD values from memory modules (optional)            |
-|                                                                          |
-| -   2 Using sensor data                                                  |
-|     -   2.1 Graphical Front-ends                                         |
-|     -   2.2 sensord                                                      |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Renumbering Cores for Multi-CPU Systems                      |
-|         -   3.1.1 Step 1. ID what each chip is reporting                 |
-|         -   3.1.2 Step 2. Redefine the cores                             |
-|                                                                          |
-|     -   3.2 Sensors not working since Linux 2.6.31                       |
-|     -   3.3 K10Temp Module                                               |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Usage
+    -   1.1 Installation
+    -   1.2 Setup
+    -   1.3 Running sensors
+    -   1.4 Reading SPD values from memory modules (optional)
+-   2 Using Sensor Data
+    -   2.1 Graphical Front-ends
+    -   2.2 sensord
+-   3 Tips and Tricks
+    -   3.1 Adjusting Values
+        -   3.1.1 Example 1. Adjusting Temperature Offsets
+        -   3.1.2 Example 2. Renaming Labels
+        -   3.1.3 Example 3. Renumbering Cores for Multi-CPU Systems
+    -   3.2 Automatic lm_sensors Deployment
+    -   3.3 K10Temp Module
+    -   3.4 Sensors not working since Linux 2.6.31
 
 Usage
 -----
@@ -40,7 +38,7 @@ Usage
 
 Install the lm_sensors package from the official repositories.
 
-> Setting up lm_sensors
+> Setup
 
 Use sensors-detect to detect and generate a list of kernel modules:
 
@@ -48,125 +46,83 @@ Use sensors-detect to detect and generate a list of kernel modules:
 
 This will create the /etc/conf.d/lm_sensors configuration file which is
 used by the sensors daemon to automatically load kernel modules on boot.
-You will be asked if you want to probe for various hardware. The "safe"
-answers are the defaults, so just hitting Enter to all the questions
-will generally not cause any problems.
+Users are asked to probe for various hardware. The "safe" answers are
+the defaults, so just hitting Enter to all the questions will generally
+not cause any problems.
 
-When the detection is finished, you will be presented with a summary of
-the probes. Here is an example summary from my system:
+When the detection is finished, a summary of the probes is presented.
+
+Example:
 
     # sensors-detect
 
+    This program will help you determine which kernel modules you need
+    to load to use lm_sensors most effectively. It is generally safe
+    and recommended to accept the default answers to all questions,
+    unless you know what you're doing.
+
+    Some south bridges, CPUs or memory controllers contain embedded sensors.
+    Do you want to scan for them? This is totally safe. (YES/no): 
+    Module cpuid loaded successfully.
+    Silicon Integrated Systems SIS5595...                       No
+    VIA VT82C686 Integrated Sensors...                          No
+    VIA VT8231 Integrated Sensors...                            No
+    AMD K8 thermal sensors...                                   No
+    AMD Family 10h thermal sensors...                           No
+
+    ...
+
     Now follows a summary of the probes I have just done.
-    Just press ENTER to continue:
-    Driver `it87':
-      * ISA bus, address 0x290
-         Chip `ITE IT8718F Super IO Sensors' (confidence: 9)
+    Just press ENTER to continue: 
+
     Driver `coretemp':
-      * Chip `Intel Core family thermal sensor' (confidence: 9)
+      * Chip `Intel digital thermal sensor' (confidence: 9)
 
-If you plan on using the daemon, be sure to answer YES when asked if you
-want to to generate /etc/conf.d/lm_sensors.
+    Driver `lm90':
+      * Bus `SMBus nForce2 adapter at 4d00'
+        Busdriver `i2c_nforce2', I2C address 0x4c
+        Chip `Winbond W83L771AWG/ASG' (confidence: 6)
 
-To automatically load the kernel modules at boot time:
+    Do you want to overwrite /etc/conf.d/lm_sensors? (YES/no): 
+    ln -s '/usr/lib/systemd/system/lm_sensors.service' '/etc/systemd/system/multi-user.target.wants/lm_sensors.service'
+    Unloading i2c-dev... OK
+    Unloading cpuid... OK
 
-    systemctl enable lm_sensors.service
+Note:A systemd service is automatically enabled if users answer YES when
+asked about generating /etc/conf.d/lm_sensors. Answering YES also
+automatically starts the service.
 
-Alternatively, instead of using the daemon, you can add the modules to
-the MODULES array in /etc/modules-load.d/lm_sensors.conf:
+> Running sensors
 
-    coretemp
-    it87
-    acpi-cpufreq
-
-> Automatic lm_sensors deployment
-
-If you wish to deploy lm-sensors on multiple diferent linux machines
-issue is that sensors-detect ask you quite a few questions. There are
-few tricks that you can use to automate replies.
-
-First one is if you wish to accept defaults which sensors-detect suggest
-you need just to press [ENTER] all the time. To automate this use this
-one liner:
-
-    # yes "" | sensors-detect
-
-If you wish to override defaults and answer YES to all questions then
-use this oneliner:
-
-    # yes | sensors-detect
-
-> Testing your lm_sensors
-
-To test your setup, load the kernel modules manually or by using the
-/etc/rc.d/sensors init script. You do NOT have to do both. Example
-manually adding them
-
-    # modprobe it87
-    # modprobe coretemp
-
-Example using the script
-
-    # systemctl start lm_sensors
-
-You should see something like this when you run sensors
+Example running sensors:
 
     $ sensors
 
     coretemp-isa-0000
     Adapter: ISA adapter
-    Core 0:      +30.0°C  (high = +76.0°C, crit = +100.0°C)  
+    Core 0:       +35.0°C  (crit = +105.0°C)
+    Core 1:       +32.0°C  (crit = +105.0°C)
 
-    coretemp-isa-0001
-    Adapter: ISA adapter
-    Core 1:      +30.0°C  (high = +76.0°C, crit = +100.0°C)  
-
-    coretemp-isa-0002
-    Adapter: ISA adapter
-    Core 2:      +32.0°C  (high = +76.0°C, crit = +100.0°C)  
-
-    coretemp-isa-0003
-    Adapter: ISA adapter
-    Core 3:      +30.0°C  (high = +76.0°C, crit = +100.0°C)  
-
-    it8718-isa-0290
-    Adapter: ISA adapter
-    in0:         +1.17 V  (min =  +0.00 V, max =  +4.08 V)   
-    in1:         +1.31 V  (min =  +1.28 V, max =  +1.68 V)   
-    in2:         +3.28 V  (min =  +2.78 V, max =  +3.78 V)   
-    in3:         +2.88 V  (min =  +2.67 V, max =  +3.26 V)   
-    in4:         +2.98 V  (min =  +2.50 V, max =  +3.49 V)   
-    in5:         +1.34 V  (min =  +0.58 V, max =  +1.34 V)   ALARM
-    in6:         +2.02 V  (min =  +1.04 V, max =  +1.36 V)   ALARM
-    in7:         +2.83 V  (min =  +2.67 V, max =  +3.26 V)   
-    Vbat:        +3.28 V
-    fan1:       1500 RPM  (min = 3245 RPM)  ALARM
-    fan2:          0 RPM  (min = 3245 RPM)  ALARM
-    fan3:          0 RPM  (min = 3245 RPM)  ALARM
-    temp1:       +18.0°C  (low  = +127.0°C, high = +64.0°C)  sensor = thermal diode
-    temp2:       +32.0°C  (low  = +127.0°C, high = +64.0°C)  sensor = thermistor
-    temp3:       +38.0°C  (low  = +127.0°C, high = +64.0°C)  sensor = thermistor
-    cpu0_vid:   +2.050 V
-
-    acpitz-virtual-0
-    Adapter: Virtual device
-    temp1:       +18.0°C  (crit = +64.0°C)
+    w83l771-i2c-0-4c
+    Adapter: SMBus nForce2 adapter at 4d00
+    temp1:        +28.0°C  (low  = -40.0°C, high = +70.0°C)
+                           (crit = +85.0°C, hyst = +75.0°C)
+    temp2:        +37.4°C  (low  = -40.0°C, high = +70.0°C)
+                           (crit = +110.0°C, hyst = +100.0°C)
 
 > Reading SPD values from memory modules (optional)
 
-To read the SPD timing values from your memory modules, install
-i2c-tools from the official repositories. Once you have i2c-tools
-installed, you will need to load the eeprom kernel module.
+To read the SPD timing values from memory modules, install i2c-tools
+from the official repositories. Once installed, load the eeprom kernel
+module.
 
     # modprobe eeprom
 
-Finally, you can view your memory information with decode-dimms.
+Finally, view memory information with decode-dimms.
 
 Here is partial output from one machine:
 
-    $ decode-dimms
-
-    # decode-dimms version 5733 (2009-06-09 13:13:41 +0200)
+    # decode-dimms
 
     Memory Serial Presence Detect Decoder
     By Philip Edelbrock, Christian Zuckschwerdt, Burkart Lingner,
@@ -229,7 +185,7 @@ Here is partial output from one machine:
 
     ...
 
-Using sensor data
+Using Sensor Data
 -----------------
 
 > Graphical Front-ends
@@ -251,17 +207,121 @@ There are a variety of front-ends for sensors data.
 > sensord
 
 There is an optional daemon called sensord (included with the lm_sensors
-package) which can log your data to a round robin database (rrd) and
-later visualize graphically. See the sensord man page for details.
+package) which can log data to a round robin database (rrd) and later
+visualize graphically. See the sensord man page for details.
 
-Troubleshooting
+Tips and Tricks
 ---------------
 
-> Renumbering Cores for Multi-CPU Systems
+> Adjusting Values
 
-In rare cases, the actual numbering of physical cores on multi-processor
-motherboards can be incorrect. Consider the following HP Z600
-workstation with dual Xeons:
+In some cases, the data displayed might be incorrect or users may wish
+to rename the output. Use cases include:
+
+-   Incorrect temperature values due to a wrong offset (i.e. temps are
+    reported 20 °C higher then actual).
+-   Users wish to rename the output of some sensors.
+-   The cores might be displayed in an incorrect order.
+
+All of the above (and more) can be adjusted by overriding the package
+provides settings in /etc/sensors3.conf by creating /etc/sensors.d/foo
+wherein any number of tweaks will override the default values. It is
+recommended to rename 'foo' to the motherboard brand and model but this
+naming nomenclature is optional.
+
+Note:Do not edit /etc/sensors3.conf directly since package updates will
+overwrite any changes thus losing them.
+
+Example 1. Adjusting Temperature Offsets
+
+This is a real example on a Zotac ION-ITX-A-U motherboard. The coretemp
+values are off by 20 °C (too high) and are adjusted down to Intel specs.
+
+    $ sensors
+
+    coretemp-isa-0000
+    Adapter: ISA adapter
+    Core 0:       +57.0°C  (crit = +125.0°C)
+    Core 1:       +55.0°C  (crit = +125.0°C)
+    ...
+
+Run sensors with the -u switch to see what options are available for
+each physical chip (raw mode):
+
+    $ sensors -u
+
+    coretemp-isa-0000
+    Adapter: ISA adapter
+    Core 0:
+      temp2_input: 57.000
+      temp2_crit: 125.000
+      temp2_crit_alarm: 0.000
+    Core 1:
+      temp3_input: 55.000
+      temp3_crit: 125.000
+      temp3_crit_alarm: 0.000
+    ...
+
+Create the following file overriding the default values:
+
+    /etc/sensors.d/Zotac-IONITX-A-U
+
+    chip "coretemp-isa-0000"
+      label temp2 "Core 0"
+      compute temp2 @-20,@-20
+
+      label temp3 "Core 1"
+      compute temp3 @-20,@-20
+
+Now invoking sensors shows the adjust values:
+
+    $ sensors
+
+    coretemp-isa-0000
+    Adapter: ISA adapter
+    Core 0:       +37.0°C  (crit = +105.0°C)
+    Core 1:       +35.0°C  (crit = +105.0°C)
+    ...
+
+Example 2. Renaming Labels
+
+This is a real example on an Asus A7M266. The user wishes more verbose
+names for the temperature labels 'temp1' and 'temp2':
+
+    $ sensors
+
+    as99127f-i2c-0-2d
+    Adapter: SMBus Via Pro adapter at e800
+    ...
+    temp1:        +35.0°C  (high =  +0.0°C, hyst = -128.0°C)
+    temp2:        +47.5°C  (high = +100.0°C, hyst = +75.0°C)
+    ...
+
+Create the following file to override the default values:
+
+    /etc/sensors.d/Asus_A7M266
+
+    chip "as99127f-*"
+      label temp1 "Mobo Temp"
+      label temp2 "CPU0 Temp"
+
+Now invoking sensors shows the adjust values:
+
+    $ sensors
+
+    as99127f-i2c-0-2d
+    Adapter: SMBus Via Pro adapter at e800
+    ...
+    Mobo Temp:        +35.0°C  (high =  +0.0°C, hyst = -128.0°C)
+    CPU0 Temp:        +47.5°C  (high = +100.0°C, hyst = +75.0°C)
+    ...
+
+Example 3. Renumbering Cores for Multi-CPU Systems
+
+This is a real example on an HP Z600 workstation with dual Xeons. The
+actual numbering of physical cores is incorrect: numbered 0, 1, 9, 10
+which is repeated into the second CPU. Most users expect the core
+temperatures to report out in sequential order, i.e. 0,1,2,3,4,5,6,7.
 
     $ sensors
 
@@ -278,27 +338,10 @@ workstation with dual Xeons:
     Core 1:       +56.0°C  (high = +85.0°C, crit = +95.0°C)
     Core 9:       +60.0°C  (high = +85.0°C, crit = +95.0°C)
     Core 10:      +61.0°C  (high = +85.0°C, crit = +95.0°C)
+    ...
 
-    smsc47b397-isa-0480
-    Adapter: ISA adapter
-    fan1:        1730 RPM
-    fan2:        1746 RPM
-    fan3:        1224 RPM
-    fan4:        2825 RPM
-    temp1:        +46.0°C
-    temp2:        +37.0°C
-    temp3:        +23.0°C
-    temp4:       -128.0°C
-
-Note the cores are numbered 0, 1, 9, 10 which is repeated into the
-second CPU. Most users want the core temperatures to report out in
-sequential order, i.e. 0,1,2,3,4,5,6,7. Fixing the order is accomplished
-in two steps.
-
-Step 1. ID what each chip is reporting
-
-Run sensors with the -u switch to see what options are available for
-each physical chip:
+Again, run sensors with the -u switch to see what options are available
+for each physical chip:
 
     $ sensors -u coretemp-isa-0000
 
@@ -345,29 +388,25 @@ each physical chip:
       temp12_input: 59.000
       temp12_max: 85.000
       temp12_crit: 95.000
+    ...
 
-Step 2. Redefine the cores
+Create the following file overriding the default values:
 
-Create /etc/sensors.d/cores.conf wherein the new definitions are defined
-based on the output of step 1:
-
-    /etc/sensors.d/cores.conf
+    /etc/sensors.d/HP_Z600
 
     chip "coretemp-isa-0000"
-
-        label temp2 "Core 0"
-        label temp3 "Core 1"
-        label temp11 "Core 2"
-        label temp12 "Core 3"
+      label temp2 "Core 0"
+      label temp3 "Core 1"
+      label temp11 "Core 2"
+      label temp12 "Core 3"
 
     chip "coretemp-isa-0004"
+      label temp2 "Core 4"
+      label temp3 "Core 5"
+      label temp11 "Core 6"
+      label temp12 "Core 7"
 
-        label temp2 "Core 4"
-        label temp3 "Core 5"
-        label temp11 "Core 6"
-        label temp12 "Core 7"
-
-Problem solved. Output after completing these steps:
+Now invoking sensors shows the adjust values:
 
     $ sensors
 
@@ -384,17 +423,48 @@ Problem solved. Output after completing these steps:
     Core5:        +54.0°C  (high = +85.0°C, crit = +95.0°C)
     Core6:        +59.0°C  (high = +85.0°C, crit = +95.0°C)
     Core7:        +60.0°C  (high = +85.0°C, crit = +95.0°C)
+    ...
 
-    smsc47b397-isa-0480
-    Adapter: ISA adapter
-    fan1:        1734 RPM
-    fan2:        1726 RPM
-    fan3:        1222 RPM
-    fan4:        2827 RPM
-    temp1:        +45.0°C  
-    temp2:        +37.0°C  
-    temp3:        +23.0°C  
-    temp4:       -128.0°C  
+> Automatic lm_sensors Deployment
+
+If users wishing to deploy lm-sensors on multiple machines can use
+either of the following:
+
+1. Accept defaults to questions:
+
+    # yes "" | sensors-detect
+
+2. Override defaults and answer YES to all questions:
+
+     # yes | sensors-detect
+
+> K10Temp Module
+
+Some K10 processors have issues with their temperature sensor. From the
+kernel documentation (linux-<version>/Documentation/hwmon/k10temp):
+
+All these processors have a sensor, but on those for Socket F or AM2+,
+the sensor may return inconsistent values (erratum 319). The driver will
+refuse to load on these revisions unless users specify the force=1
+module parameter.
+
+Due to technical reasons, the driver can detect only the mainboard's
+socket type, not the processor's actual capabilities. Therefore, users
+of an AM3 processor on an AM2+ mainboard, can safely use the force=1
+parameter.
+
+On affected machines the module will report "unreliable CPU thermal
+sensor; monitoring disabled". Users which to force it can:
+
+    # rmmod k10temp
+    # modprobe k10temp force=1
+
+Confirm that the sensor is in fact valid and reliable. If it is, can
+edit /etc/modprobe.d/k10temp.conf and add:
+
+    options k10temp force=1
+
+This will allow the module to load at boot.
 
 > Sensors not working since Linux 2.6.31
 
@@ -412,48 +482,17 @@ modules (e.g. via ACPI modules) for the hardware in question. Many
 utilities and monitors (e.g. /usr/bin/sensors) can gather information
 from either source. Where possible, this is the preferred solution.
 
-> K10Temp Module
-
-Some K10 processors have issues with their temperature sensor. From the
-kernel documentation (linux-<version>/Documentation/hwmon/k10temp):
-
-All these processors have a sensor, but on those for Socket F or AM2+,
-the sensor may return inconsistent values (erratum 319). The driver will
-refuse to load on these revisions unless you specify the force=1 module
-parameter.
-
-Due to technical reasons, the driver can detect only the mainboard's
-socket type, not the processor's actual capabilities. Therefore, if you
-are using an AM3 processor on an AM2+ mainboard, you can safely use the
-force=1 parameter.
-
-On affected machines the module will report "unreliable CPU thermal
-sensor; monitoring disabled". If you still want to use the module you
-can:
-
-    # rmmod k10temp
-    # modprobe k10temp force=1
-
-Confirm with Lm_sensors#Testing your lm_sensors that the sensor is in
-fact valid and reliable. If it is, you can edit
-/etc/modprobe.d/k10temp.conf and add:
-
-    options k10temp force=1
-
-This will allow the module to load at boot.
-
-See also
---------
-
--   hddtemp - Software to read temperatures of hard drives.
--   monitorix - Monitorix is a free, open source, lightweight system
-    monitoring tool designed to monitor as many services and system
-    resources as possible.
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lm_sensors&oldid=255223"
+"https://wiki.archlinux.org/index.php?title=Lm_sensors&oldid=304072"
 
 Categories:
 
 -   Status monitoring and notification
 -   CPU
+
+-   This page was last modified on 11 March 2014, at 21:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

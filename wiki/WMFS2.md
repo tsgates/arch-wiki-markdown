@@ -10,7 +10,7 @@ WMFS2
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-> Summary
+Summary help replacing me
 
 An introduction to WMFS2, a dynamic tiling window manager.
 
@@ -20,25 +20,27 @@ WMFS
 
 Comparison of Tiling Window Managers
 
-WMFS2 is the second iteration of the Window Manager From Scratch, a
-dynamic tiling window manager.
+From the project home page:
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Differences from WMFS                                              |
-| -   2 Installation                                                       |
-| -   3 Basic Usage                                                        |
-| -   4 Configuration                                                      |
-|     -   4.1 Themes                                                       |
-|     -   4.2 Clients                                                      |
-|     -   4.3 Statusbar                                                    |
-|         -   4.3.1 Elements:                                              |
-|             -   4.3.1.1 Tags                                             |
-|             -   4.3.1.2 Launchers                                        |
-|             -   4.3.1.3 Statustext                                       |
-+--------------------------------------------------------------------------+
+WMFS2 is a lightweight and highly configurable tiling window manager for
+X written in C. WMFS2 is a free software distributed under the BSD
+license. it can be drive from keyboard or mouse and it's configuration
+stands in one text file easily understandable.
+
+Contents
+--------
+
+-   1 Differences from WMFS
+-   2 Installation
+-   3 Basic usage
+-   4 Configuration
+    -   4.1 Themes
+    -   4.2 Clients
+    -   4.3 Statusbar
+        -   4.3.1 Elements
+            -   4.3.1.1 Tags
+            -   4.3.1.2 Launchers
+            -   4.3.1.3 Statustext
 
 Differences from WMFS
 ---------------------
@@ -70,15 +72,15 @@ Installation
 
 WMFS2 can be installed via the wmfs2-git package in the AUR.
 
-Basic Usage
+Basic usage
 -----------
 
 WMFS2 primarily differs from the original WMFS in the way windows are
 managed. While in the previous version windows were arranged according
-to predefined layouts--as they are in window managers such as DWM and
-Awesome--WMFS2 features key and mouse bindings allowing the user to
-manually configure layouts on each tag--as is the case with wmii, i3 and
-others.
+to predefined layouts - as they are in window managers such as DWM and
+Awesome - WMFS2 features key and mouse bindings allowing the user to
+manually configure layouts on each tag - as is the case with wmii, i3
+and others.
 
 If one opens, say, multiple instances of a terminal (by default,
 Super+Enter opens urxvt), they will be arranged in a diminishing
@@ -169,7 +171,7 @@ are to be handled by the window manager.
           tab        = false
       [/rule]
 
-    [/rules] 
+    [/rules]
 
 By default, all clients open on the currently active tag, and can be
 manipulated using the default mouse or key bindings. By specifying
@@ -193,8 +195,7 @@ will be tabbed or not.
     every tag)
 -   autofocus: Give focus to new created clients. default is false
 
-  
- The first several options are essentially all the potential names a
+The first several options are essentially all the potential names a
 running program/process might have, as specified in the output of xprop.
 So long as the instance entry correctly displays the "WM_Class" portion
 of the xprop output, there should be no need to worry about the class,
@@ -242,7 +243,7 @@ will suffice.
 
 If only one statusbar/panel is desired, the name entry is not required.
 
-Elements:
+Elements
 
 -   Tags: Displays all available tags, and indicates which one(s) is
     currently visible and which have open clients
@@ -304,10 +305,9 @@ specified in the [theme] section of wmfsrc. However, they can also be
 marked using small boxes, a la DWM and Awesome, by modifying the
 appropriate line in the [theme] section of wmfsrc.
 
-          
     tags_sel_statusline = "\R[2;2;4;4;#BD0406]"
 
-    tags_occupied_statusline = "\R[7;13;13;2;#C68709] "  
+    tags_occupied_statusline = "\R[7;13;13;2;#C68709] " 
 
 The first option will place a small red box next to the currently active
 tag; the second will place a think yellow line underneath occupied tags.
@@ -351,8 +351,15 @@ be accomplished using either individual bash scripts written to suit the
 user's needs, or by piping conky data directly into the statusbar.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=WMFS2&oldid=217364"
+"https://wiki.archlinux.org/index.php?title=WMFS2&oldid=263849"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 22 June 2013, at 13:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -11,24 +11,22 @@ Note:The XWiimote tools are still experimental. Connecting and managing
 your Wii Remote works well and there is a driver to use the Wii Remote
 as X11 input, but extended features may still be missing.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-| -   2 Connect the Wii Remote                                             |
-| -   3 Device Handling                                                    |
-|     -   3.1 X.Org Input Driver                                           |
-|     -   3.2 Infrared Sources                                             |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 The input mapping is very weird                              |
-|     -   4.2 BlueZ does not include the wiimote plugin                    |
-|     -   4.3 I cannot connect my wiimote                                  |
-|     -   4.4 My Wii Remote is still not working                           |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequisites
+-   2 Connect the Wii Remote
+-   3 Device Handling
+    -   3.1 X.Org Input Driver
+    -   3.2 Infrared Sources
+-   4 Troubleshooting
+    -   4.1 The input mapping is very weird
+    -   4.2 BlueZ does not include the wiimote plugin
+    -   4.3 I cannot connect my wiimote
+    -   4.4 Cannot use Wiimote in Dolphin-emu after pairing with
+        xwiimote
+    -   4.5 My Wii Remote is still not working
+-   5 See also
 
 Prerequisites
 -------------
@@ -141,6 +139,9 @@ Possible infrared sources are:
 -   Small candles (should have about 30cm distance)
 -   Home made sensor bar ([3])
 
+Note: xf86-input-xwiimote has support for mouse-emulation via IR using
+the Option "MotionSource" "ir" 
+
 There is currently no user-space application that enables
 mouse-emulation with the IR-sensor. If you need that, you should
 consider using the no longer supported cwiid approach. However, the
@@ -176,6 +177,9 @@ resides in /usr/sbin on archlinux or simply use:
 
     grep wiimote /usr/sbin/bluetoothd
 
+Note: with bluez 5.5, this file resides in /usr/lib/bluetooth on
+archlinux
+
 If this matches, then your BlueZ includes the wiimote plugin and no more
 user-interaction is needed. If this does not match, you need to enable
 it yourself or work without it. If you do not want to compile your own
@@ -207,6 +211,12 @@ connect your Wii Remote manually each time. However, the Auto-Reconnect
 feature only works if you paired your Wii-Remote. Connecting without the
 wiimote plugin will not enable Auto-Reconnect.
 
+> Cannot use Wiimote in Dolphin-emu after pairing with xwiimote
+
+Dolphin uses its own driver so pressing the resync button on the wiimote
+while dolphin is running should resync the wiimote to dolphin instead of
+the xwiimote.
+
 > My Wii Remote is still not working
 
 The XWiimote software stack is actively developed. Please report your
@@ -223,8 +233,15 @@ See also
 -   [4]: Developer blog about Wii Remotes
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=XWiimote&oldid=207174"
+"https://wiki.archlinux.org/index.php?title=XWiimote&oldid=303277"
 
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 5 March 2014, at 22:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

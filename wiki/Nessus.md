@@ -5,15 +5,13 @@ Nessus is a proprietary vulnerability scanner available free of charge
 for personal use. There are over 40,000 plugins covering a large range
 of both local and remote flaws.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Post-installation setup                                            |
-| -   3 Usage                                                              |
-| -   4 Removal                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Post-installation setup
+-   3 Usage
+-   4 Removal
 
 Installation
 ------------
@@ -23,8 +21,8 @@ Download and extract the nessus tarball available in the AUR.
 Go to http://tenable.com/products/nessus/nessus-download-agreement,
 agree to the license, and download the package:
 
--   32-bit: Nessus-5.2.0-fc16.i386.rpm
--   64-bit: Nessus-5.2.0-fc16.x86_64.rpm
+-   32-bit: Nessus-5.2.1-fc16.i386.rpm
+-   64-bit: Nessus-5.2.1-fc16.x86_64.rpm
 
 Move the RPM file into the nessus directory (i.e. the directory you
 extracted the tarball's contents to).
@@ -74,9 +72,16 @@ Note:This will delete your Nessus configuration files.
     # rm -r /opt/nessus
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Nessus&oldid=255560"
+"https://wiki.archlinux.org/index.php?title=Nessus&oldid=306001"
 
 Categories:
 
 -   Networking
 -   Security
+
+-   This page was last modified on 20 March 2014, at 17:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

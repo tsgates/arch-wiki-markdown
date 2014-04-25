@@ -8,54 +8,44 @@ window manager based on dminiwm (same author), which is based on catwm
 Snapwm has an emphasis on easy configurability and choice. It's
 primarily keyboard driven but has some mouse support also.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Using the AUR                                                |
-|     -   1.2 Using Git                                                    |
-|     -   1.3 Alternative Method                                           |
-|     -   1.4 Dmenu                                                        |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 RC.CONF                                                      |
-|     -   2.2 KEY.CONF                                                     |
-|     -   2.3 APPS.CONF                                                    |
-|                                                                          |
-| -   3 The Bar                                                            |
-|     -   3.1 Colors                                                       |
-|     -   3.2 Icons                                                        |
-|                                                                          |
-| -   4 Layout Modes                                                       |
-|     -   4.1 Vertical                                                     |
-|     -   4.2 Fullscreen                                                   |
-|     -   4.3 Horizontal                                                   |
-|     -   4.4 Grid                                                         |
-|     -   4.5 Stacking                                                     |
-|                                                                          |
-| -   5 Window Manager Functions                                           |
-| -   6 Transparency                                                       |
-| -   7 Multi Monitor Support                                              |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Using the AUR
+    -   1.2 Using Git
+    -   1.3 Alternative method
+    -   1.4 Dmenu
+-   2 Configuration
+    -   2.1 rc.conf
+    -   2.2 key.conf
+    -   2.3 apps.conf
+-   3 The Bar
+    -   3.1 Colors
+    -   3.2 Icons
+-   4 Layout modes
+    -   4.1 Vertical
+    -   4.2 Fullscreen
+    -   4.3 Horizontal
+    -   4.4 Grid
+    -   4.5 Stacking
+-   5 Window manager functions
+-   6 Transparency
+-   7 Multi monitor support
+-   8 Desktop Managers
+-   9 See also
 
 Installation
 ------------
 
 > Using the AUR
 
-Download snapwm-git from the AUR. Then, as a non-root user, run:
-
-    $ makepkg -i
-
-while in the saved PKGBUILD's directory. The files will be retrieved,
-built and installed.
+Install snapwm-git from the AUR.
 
 The sample configuration files will be installed in
 /usr/share/snapwm-git/. Create the directory ~/.config/snapwm/:
 
-    $ mkdir -p ~/.config/snapwm/
+    $ mkdir -p ~/.config/snapwm
 
 Copy the three sample files to
 ~/.config/snapwm/{rc.conf, key.conf, apps.conf}  and edit to suit.
@@ -64,10 +54,9 @@ Copy the three sample files to
 
 The latest version can be downloaded using Git. Initially, you can do:
 
-    git clone https://github.com/moetunes/Nextwm 
+    git clone https://github.com/moetunes/Nextwm
 
-and then update with git pull. See the Git wiki page or man git for more
-info.
+and then update with git pull.
 
 Note:While the official name of the window manager and executable is
 snapwm, you will notice that in moetunes' GitHub, the directory is named
@@ -75,15 +64,15 @@ Nextwm which may cause some confusion.
 
 Xlib is all that is required. To install it, do:
 
-    $make
-    #make install
-    $make clean
+    $ make
+    # make install
+    $ make clean
 
-> Alternative Method
+> Alternative method
 
 Instead of actually installing it system-wide as above, you can simply
 run make and then copy the executable to somewhere in your path, like
-~/bin for example. You can then run it the same way(exec snapwm) on a
+~/bin for example. You can then run it the same way (exec snapwm) on a
 per user basis.
 
 > Dmenu
@@ -91,9 +80,7 @@ per user basis.
 Most users will want this. As the name implies, dmenu is a menu that
 acts like an auto-complete for typing the name of binaries. It
 integrates well with tiling window managers like snapwm. See the dmenu
-wiki page or man dmenu for more info. To install it, do:
-
-    pacman -S dmenu
+wiki page or man dmenu for more info.
 
 The sample.key.conf file comes with a command to start demenu_run, which
 will search $PATH for a matching executable as soon as you start typing.
@@ -101,15 +88,13 @@ will search $PATH for a matching executable as soon as you start typing.
      CMD dmenucmd;dmenu_run;-i;-nb;#666622;-nf;white;NULL;
      KEY Alt;v;spawn;dmenucmd;
 
-  
-
 Configuration
 -------------
 
-All user settings are read from three files in ~/.config/snapwm/ . Each
+All user settings are read from three files in ~/.config/snapwm/. Each
 line in these files takes the form of :
 
-     <Option><space><semi colon separated list>
+    <Option><space><semi colon separated list>
 
 and if there is more than one item in the list the line must end in a
 semi colon.
@@ -121,9 +106,9 @@ All options and settings in the three configuration files are changeable
 in the running window manager by editing and saving the configuration
 file/s and updating. (default key Alt+u)
 
-> RC.CONF
+> rc.conf
 
-<option><space><semi colon separated list>
+    <Option><space><semi colon separated list>
 
 Should have the number of desktops as the first option, which is
 changeable in the running window manager.
@@ -131,9 +116,9 @@ changeable in the running window manager.
 Colours, how new windows are handled and options for the bar are set
 here.
 
-> KEY.CONF
+> key.conf
 
-There are two options CMD and KEY . CMD should come before any key using
+There are two options CMD and KEY. CMD should come before any key using
 it.
 
 CMD takes the form of :
@@ -149,9 +134,9 @@ KEY takes the form of :
 
      KEY<space><Modifier>;<key>;<function>;<variable>;
 
-There are eight modifying keys available :
+There are nine modifying keys available :
 
-       Alt  CtrlAlt  ShftAlt  Super  ShftSuper  Control CtrlSuper ALTSuper
+       Alt  CtrlAlt  ShftAlt  Super  ShftSuper  Control CtrlSuper ALTSuper NULL
 
 An example for setting Alt+x to open xterm. The terminal command would
 be
@@ -160,12 +145,12 @@ xterm -bg black -fg white
 
 To make the command and the keyboard shortcut.
 
-     CMD xtermcmd;xterm;-bg;black;-fg;white;NULL;
-     KEY Alt;x;spawn;xtermcmd;
+    CMD xtermcmd;xterm;-bg;black;-fg;white;NULL;
+    KEY Alt;x;spawn;xtermcmd;
 
-> APPS.CONF
+> apps.conf
 
-There are two options DESKTOP and POSITION . Order isn't important.
+There are two options DESKTOP and POSITION. Order isn't important.
 
 DESKTOP is used to set the desktop that an app will open on and whether
 to change to that desktop when the app opens.
@@ -200,7 +185,7 @@ which can be changed with xsetroot -name.
 
 For example, with conky, you could use something like:
 
-    conky | while read -r; do xsetroot -name "$REPLY"; done &
+    $ conky | while read -r; do xsetroot -name "$REPLY"; done &
 
 You can toggle the bars' visibility.
 
@@ -254,8 +239,7 @@ text:
 
     &B2&1${time %I:%M}&B0
 
-  
- The colors in the running wm are changeable by editing the rc file and
+The colors in the running wm are changeable by editing the rc file and
 updating.
 
 > Icons
@@ -271,7 +255,7 @@ comma to separate them in your rc.conf:
 
     static const char defaultfontlist[] = "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*,-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*";
 
-Layout Modes
+Layout modes
 ------------
 
 Snapwm has five layout modes: vertical, fullscreen, horizontal, grid and
@@ -280,7 +264,7 @@ can be changed in the running wm.
 
 It allows the "normal" method of tiling window managers, with the new
 window as the master, or with the new window opened at the top or bottom
-of the stack(attach aside). The default tiling method for all layout
+of the stack (attach aside). The default tiling method for all layout
 modes is set in rc.conf, and can be changed in the running wm.
 
 > Vertical
@@ -288,25 +272,24 @@ modes is set in rc.conf, and can be changed in the running wm.
        --------------
        |        | W |
        |        |___|
-       | Master |   |
+       |   M    |   |
        |        |___|
        |        |   |
        --------------
 
-     Default keyboard shortcut : Alt+Shift+v
+Default keyboard shortcut: Alt+Shift+v.
 
 Windows can be added/removed from the master area with a keyboard
 shortcut.
-
-  
 
 > Fullscreen
 
 Takes up all the screen less the bar.
 
-     Default keyboard shortcut : Alt+Shift+f
+Default keyboard shortcut: Alt+Shift+f.
 
-     There are no borders in fullscreen mode or if there is only one open window.
+There are no borders in fullscreen mode or if there is only one open
+window.
 
   
 
@@ -314,30 +297,26 @@ Takes up all the screen less the bar.
 
        -------------
        |           |
-       |  Master   |
+       |     M     |
        |-----------|
        | W |   |   |
        -------------
 
-     Default keyboard shortcut : Alt+Shift+h
+Default keyboard shortcut: Alt+Shift+h.
 
 Windows can be added/removed from the master area with a keyboard
 shortcut.
 
-  
-
 > Grid
 
-       -------------
-       |      |    |
-       |Master|    |
-       |------|----|
-       |  w   |    |
-       -------------
+       --------------
+       |       |    |
+       |   M   |    |
+       |-------|----|
+       |  w    |    |
+       --------------
 
-     Default keyboard shortcut : Alt+Shift+g
-
-  
+Default keyboard shortcut: Alt+Shift+g.
 
 > Stacking
 
@@ -348,7 +327,7 @@ shortcut.
        ||____|___| |
        |___________|
 
-     Default keyboard shortcut : Alt+Shift+c
+Default keyboard shortcut: Alt+Shift+c.
 
      Window placement strategy is set in rc.conf
        CENTER_STACK 0  all windows open centered on screen
@@ -363,8 +342,6 @@ shortcut.
      Windows can be made taller/shorter
        Default keyboard shortcut : Alt+p/o
 
-  
-
 -   Changing the layout mode or resizing windows on one desktop doesn't
     affect the other desktops.
 -   The Master window can be resized.
@@ -376,95 +353,89 @@ shortcut.
     Alt+right/left mouse button and
 -   the size and position is remembered when the mode is changed
 
-  
-
-Window Manager Functions
+Window manager functions
 ------------------------
 
-The functions available to the user are :
+The functions available to the user are:
 
-     next_win
-       Default keyboard shortcut : Alt + j
+    next_win
+      Default keyboard shortcut: Alt + j
 
-     prev_win
-       Default keyboard shortcut : Alt + k
+    prev_win
+      Default keyboard shortcut: Alt + k
 
-     move_up
-       Default keyboard shortcut : Alt + Shift + j
-           move the current window up the stack
+    move_up
+      Default keyboard shortcut: Alt + Shift + j
+          move the current window up the stack
 
-     move_down
-       Default keyboard shortcut : Alt + Shift + k
-           move the current window down the stack
+    move_down
+      Default keyboard shortcut: Alt + Shift + k
+          move the current window down the stack
 
-     swap_master
-       Default keyboard shortcut : Alt + Shift + Return
-           move the current window to the master area
+    swap_master
+      Default keyboard shortcut: Alt + Shift + Return
+          move the current window to the master area
 
-     change_desktop
-       Default keyboard shortcut : Alt + [number]
+    change_desktop
+      Default keyboard shortcut: Alt + [number]
 
-     last_desktop
-       Default keyboard shortcut : Alt + Tab
+    last_desktop
+      Default keyboard shortcut: Alt + Tab
 
-     rotate_desktop
-       Default keyboard shortcut : Super + Right/Left
+    rotate_desktop
+      Default keyboard shortcut: Super + Right/Left
 
-     follow_client_to_desktop
-       Default keyboard shortcut : Alt + Shift + [number]
-           send the current window to another desktop and open that desktop
+    follow_client_to_desktop
+      Default keyboard shortcut: Alt + Shift + [number]
+          send the current window to another desktop and open that desktop
 
-     client_to_desktop
-       Default keyboard shortcut : Super + Shift + [number]
-           send the current window to another desktop
+    client_to_desktop
+      Default keyboard shortcut: Super + Shift + [number]
+          send the current window to another desktop
 
-     switch_mode
-       Default keyboard shortcut : Alt + Shift + v/f/h/g/c
+    switch_mode
+      Default keyboard shortcut: Alt + Shift + v/f/h/g/c
 
-     rotate_mode
-       Default keyboard shortcut : Alt + a
-           order is vertical, fullscreen, horizontal, grid, stacking
+    rotate_mode
+      Default keyboard shortcut: Alt + a
+          order is vertical, fullscreen, horizontal, grid, stacking
 
-     resize_master
-       Default keyboard shortcut : Alt + h/l
+    resize_master
+      Default keyboard shortcut: Alt + h/l
 
-     more_master
-       Default keyboard shortcut : Alt + Shift + m/l
-           add/remove window from the master area in vert or horiz mode
+    more_master
+      Default keyboard shortcut: Alt + Shift + m/l
+          add/remove window from the master area in vert or horiz mode
 
-     resize_stack
-       Default keyboard shortcut : Alt + p/o
-           increase/decrease the size of the window at the top of the stack
+    resize_stack
+      Default keyboard shortcut: Alt + p/o
+          increase/decrease the size of the window at the top of the stack
 
-     kill_client
-       Default keyboard shortcut : Alt + c
+    kill_client
+      Default keyboard shortcut: Alt + c
 
-     quit
-       Default keyboard shortcut : Control + Alt + q
+    quit
+      Default keyboard shortcut: Control + Alt + q
 
-     spawn
-       Default keyboard shortcut : User defined for each application
+    spawn
+      Default keyboard shortcut: User defined for each application
 
-     toggle_bar
-       Default keyboard shortcut : Super + b
+    toggle_bar
+      Default keyboard shortcut: Super + b
 
-     update_config
-       Default keyboard shortcut : Alt + u
-
-  
+    update_config
+      Default keyboard shortcut: Alt + u
 
 Transparency
 ------------
 
 Unfocused windows have an alpha value and can be transparent if used
-with a compositing manager(like cairo-compmgr).
+with a compositing manager (like cairo-compmgr).
 
 The value is a percent and can be changed in the running wm by editing
 the rc file, 100 is opaque.
 
-  
-
-Multi Monitor Support
+Multi monitor support
 ---------------------
 
 With X aware of multiple connected monitors, snapwm will place different
@@ -476,14 +447,25 @@ of the second, etc.
 
 Using two monitors and four desktops as an example:
 
-     desktops 1 & 3 will show on monitor 1, the last focused one always visible
+    desktops 1 & 3 will show on monitor 1, the last focused one always visible
 
-     desktops 2 & 4 will show on monitor 2, the last focused one always visible
+    desktops 2 & 4 will show on monitor 2, the last focused one always visible
 
 To move an application to the other monitor, send it to the desktop
 showing on that monitor with the follow_/client_to_desktop functions.
 
-  
+Desktop Managers
+----------------
+
+Most desktop managers will need a file in /usr/share/xsessions to have
+snapwm as a choice at login. A simple one would be:
+
+    [Desktop Entry]
+    Encoding=UTF-8
+    Name=Snapwm
+    Comment=Log in to Snapwm
+    Exec=/usr/bin/snapwm
+    Type=Xsession
 
 See also
 --------
@@ -494,8 +476,15 @@ See also
     friendly and active on the forum.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Snapwm&oldid=247451"
+"https://wiki.archlinux.org/index.php?title=Snapwm&oldid=297921"
 
 Category:
 
 -   Dynamic WMs
+
+-   This page was last modified on 15 February 2014, at 19:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

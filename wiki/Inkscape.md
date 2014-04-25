@@ -15,18 +15,14 @@ under a free software license, the GNU GPL. Its stated goal is to become
 a powerful graphics tool while being fully compliant with the XML, SVG,
 and CSS standards.[1]
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Without GNOME dependencies                                   |
-|                                                                          |
-| -   2 Troubleshooting                                                    |
-|     -   2.1 Build error with libpng 1.2.x                                |
-|                                                                          |
-| -   3 Related pages                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Without GNOME dependencies
+-   2 Troubleshooting
+    -   2.1 Build error with libpng 1.2.x
+-   3 See also
 
 Installation
 ------------
@@ -37,7 +33,7 @@ inkscape can be installed from the official repositories.
 
 Inkscape has quite a few GNOME dependencies, which can be annoying to
 users of other environments. If you do not want these, you can compile
-inkscape-nognome from the AUR.
+inkscape-bzr from the AUR.
 
 Troubleshooting
 ---------------
@@ -61,18 +57,23 @@ Lines in /usr/include/libpng12/pngconf.h out:
 to undo them after inkscape is built. This could be related to Debian
 Bug#522477 and might get fixed in libpng 1.4)
 
-Related pages
--------------
+See also
+--------
 
-Multimedia in Arch Linux
-
-Inkscape Homepage
-
-Inkscape at Wikipedia
+-   Multimedia in Arch Linux
+-   Inkscape Homepage
+-   Inkscape at Wikipedia
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Inkscape&oldid=210240"
+"https://wiki.archlinux.org/index.php?title=Inkscape&oldid=305738"
 
 Category:
 
 -   Graphics and desktop publishing
+
+-   This page was last modified on 20 March 2014, at 01:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

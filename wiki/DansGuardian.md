@@ -1,29 +1,7 @@
 DansGuardian
 ============
 
-  
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preface                                                            |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-|     -   3.1 Config Files                                                 |
-|     -   3.2 Blacklists                                                   |
-|     -   3.3 "Access Denied" Template                                     |
-|     -   3.4 Web Frontend                                                 |
-|                                                                          |
-| -   4 Starting DansGuardian                                              |
-|     -   4.1 systemd (the default)                                        |
-|     -   4.2 initscripts (deprecated)                                     |
-+--------------------------------------------------------------------------+
-
-Preface
--------
-
-From the DansGuardian website.
+From the project home page:
 
 DansGuardian is an award winning Open Source web content filter which
 currently runs on Linux, FreeBSD, OpenBSD, NetBSD, Mac OS X, HP-UX, and
@@ -50,15 +28,27 @@ The original author of this article runs Squid and DansGuardian content
 filters at several schools in the UK, successfully blocking
 inappropriate content.
 
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Config files
+    -   2.2 Blacklists
+    -   2.3 "Access Denied" template
+    -   2.4 Web frontend
+
 Installation
 ------------
 
 DansGuardian is available from the AUR, as the dansguardian package.
 
+Start dansguardian daemon. If you wish to have it at boot, enable it.
+
 Configuration
 -------------
 
-> Config Files
+> Config files
 
 Assuming you have Squid already set up, configuring DansGuardian is a
 relatively straightforward process. All of the configuration files,
@@ -109,7 +99,7 @@ URL blocklists. Some of the important files are:
 Whenever you add or remove a URL from the list, you must tell
 DansGuardian you have done so. This can be done with:
 
-    dansguardian -r
+    # dansguardian -r
 
 Which will force DansGuardian to reload it's configuration. Doing it
 this way, rather than restarting the daemon, will mean that for the most
@@ -120,67 +110,41 @@ to run dansguardian -r).
 
 You can download a blacklist collection from URLBlacklist, but be sure
 to read the FAQ first, as you will, paradoxically, want to unsort the
-collection to enable DansGuardian to start faster. Once you have
-installed the blacklist under /etc/dansguardian you can add them to your
-DansGuardian configuration by opening the appropriate configuration file
-and adding:
+collection to enable DansGuardian to start faster. Optionally, you can
+find blacklists at Squidblacklist.org, Once you have installed a
+blacklist under /etc/dansguardian you can add them to your DansGuardian
+configuration by opening the appropriate configuration file and adding:
 
     .Include</etc/dansguardian/blacklists/ads/domains>
     .Include</etc/dansguardian/blacklists/drugs/domains>
+    .Include</etc/dansguardian/blacklists/porn/dg-porn
     etc...
 
 To the bottom of the file. Take a look around the blacklist collection
 to see what is available.
 
-> "Access Denied" Template
+> "Access Denied" template
 
 If you wish to change the page that gets displayed to users when a
 website is blocked, you need to edit the file:
 
-    /usr/share/dansguardian/languages/<LANGUAGE>/template.html.
+    /usr/share/dansguardian/languages/LANGUAGE/template.html.
 
-> Web Frontend
+> Web frontend
 
 If you would like a web-based frontend to manage DansGuardian, you could
 use Webmin with the DansGuardian Webmin Module.
 
-Starting DansGuardian
----------------------
-
-> systemd (the default)
-
-To start or stop DansGuardian instantly:
-
-    # systemctl start dansguardian
-    # systemctl stop dansguardian
-
-To instruct systemd to start DansGuardian at boot:
-
-    # systemctl enable dansguardian
-    # systemctl disable dansguardian
-
-> initscripts (deprecated)
-
-DansGuardian needs to start after your proxy has started, so run:
-
-    /etc/rc.d/squid start
-    /etc/rc.d/dansguardian start
-
-And ensure in your DAEMONS=() section of rc.conf, that DansGuardian
-starts after squid:
-
-    DAEMONS=(... squid dansguardian ...)
-
-Without a valid proxy, DansGuardian will fail to start, so you will not
-want to background Squid. Depending on the size of your blacklists and
-your hardware, DansGuardian can take quite a while to start (30-60
-seconds), so you may wish to background DansGuardian.
-
-    DAEMONS=(... squid @dansguardian ...)
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DansGuardian&oldid=247971"
+"https://wiki.archlinux.org/index.php?title=DansGuardian&oldid=277257"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 1 October 2013, at 19:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

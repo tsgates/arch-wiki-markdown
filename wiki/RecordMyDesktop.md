@@ -10,20 +10,17 @@ video and Vorbis for audio.
 recordMyDesktop is a CLI tool but there are two GUI interfaces
 available, gtk-recordmydesktop and qt-recordmydesktop.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Audio record is lagging                                      |
-|     -   3.2 Audio record lags and is out of sync                         |
-|     -   3.3 Audio record is distorted (slower/graver)                    |
-|     -   3.4 No sound with PulseAudio                                     |
-|                                                                          |
-| -   4 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+-   3 Troubleshooting
+    -   3.1 Audio record is lagging
+    -   3.2 Audio record lags and is out of sync
+    -   3.3 Audio record is distorted (slower/graver)
+    -   3.4 No sound with PulseAudio
+-   4 External Links
 
 Installation
 ------------
@@ -106,3 +103,10 @@ Categories:
 
 -   X Server
 -   Audio/Video
+
+-   This page was last modified on 4 March 2013, at 15:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

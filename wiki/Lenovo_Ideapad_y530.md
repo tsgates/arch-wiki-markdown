@@ -1,16 +1,14 @@
 Lenovo Ideapad y530
 ===================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Making stuff work                                                  |
-|     -   1.1 Enabling all speakers                                        |
-|     -   1.2 Workaround for brightness bug                                |
-|     -   1.3 Switching wifi on/off during work                            |
-|     -   1.4 Sample xorg.conf                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Making stuff work
+    -   1.1 Enabling all speakers
+    -   1.2 Workaround for brightness bug
+    -   1.3 Switching wifi on/off during work
+    -   1.4 Sample xorg.conf
 
 Making stuff work
 -----------------
@@ -147,3 +145,10 @@ Retrieved from
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 23 April 2012, at 13:03.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

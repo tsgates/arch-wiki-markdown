@@ -2,9 +2,12 @@ Motd
 ====
 
   ------------------------ ------------------------ ------------------------
-  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with Core        
+                           utilities.               
                            Notes: please use the    
-                           first argument of the    
+                           second argument of the   
                            template to provide more 
                            detailed indications.    
                            (Discuss)                
@@ -15,7 +18,8 @@ login(1) after a successful login but just before it executes the login
 shell.
 
 It is a good place to display your Terms of Service to remind users of
-your local policies or anything you wish to tell them. A sample script:
+your local policies or anything you wish to tell them. A sample script
+that can be used to create /etc/motd:
 
     #!/bin/bash
     #define the filename to use as output
@@ -41,8 +45,15 @@ your local policies or anything you wish to tell them. A sample script:
     echo -e "$X" >> $motd
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Motd&oldid=206292"
+"https://wiki.archlinux.org/index.php?title=Motd&oldid=305344"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 17 March 2014, at 16:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

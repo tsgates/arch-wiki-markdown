@@ -1,7 +1,7 @@
 Trident
 =======
 
-> Summary
+Summary help replacing me
 
 This article describes the installation of the Xorg 2D acceleration
 graphics driver and a framebuffer driver for Trident cards.
@@ -15,23 +15,18 @@ now-defunct Trident. It supports chips from the (Cyber)Blade, Image,
 ProVidia and TGUI series. It also supports some ISA and VLB Trident
 cards.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Xorg driver                                                        |
-|     -   1.1 Installation                                                 |
-|     -   1.2 Configuration                                                |
-|                                                                          |
-| -   2 Framebuffer driver                                                 |
-|     -   2.1 Installation                                                 |
-|     -   2.2 Configuration                                                |
-|                                                                          |
-| -   3 FAQ                                                                |
-|     -   3.1 tridentfb does no longer work after a minor kernel update    |
-|     -   3.2 The AUR package is not up to date - tridentfb cannot be      |
-|         build with the current kernel                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Xorg driver
+    -   1.1 Installation
+    -   1.2 Configuration
+-   2 Framebuffer driver
+    -   2.1 Installation
+    -   2.2 Configuration
+-   3 Troubleshooting
+    -   3.1 tridentfb does no longer work after a minor kernel update
+    -   3.2 tridentfb conflicts with the new kernel package
 
 Xorg driver
 -----------
@@ -39,7 +34,7 @@ Xorg driver
 > Installation
 
 If you already have installed Xorg you only need to install
-xf86-video-trident from the Official Repositories.
+xf86-video-trident from the Official repositories.
 
 > Configuration
 
@@ -89,9 +84,9 @@ Paste following text and save the file:
 As trident cards a quite slow, using only 16 bit as color depth (see
 DefaultDepth in the Screen Section) is a good idea to speed things up.
 By only using 8 bit you can speed up things even more, but in my
-expirence a lot of programs have problems with color conversion an
-picture in my browser looked bit like Andy Warhol pictures. So you may
-want to keep 16.
+expirence a lot of programs have problems with color conversion. For
+example images in my browser look a bit like Andy Warhol pictures using
+8 bit. So you may want to keep 16 bit.
 
 On my Notebook Xorg does not properly detect the native screen
 resolution, which causes Xorg to crash. In the past adding "NoDDC" to
@@ -142,8 +137,8 @@ your configuration available in the initrd. Now run
 to update your initrd. After every update of tridentfb you have to run
 mkinitcpio, if you have tridentfb included in your initrd.
 
-FAQ
----
+Troubleshooting
+---------------
 
 > tridentfb does no longer work after a minor kernel update
 
@@ -151,21 +146,27 @@ If you have updateded you kernel from version 3.x.y to 3.x.(y+1) and
 experience problems, just rebuild and reinstall the package. Also the
 package has to be rebuild and reinstalled after major kernel updates.
 
-> The AUR package is not up to date - tridentfb cannot be build with the current kernel
+> tridentfb conflicts with the new kernel package
 
-You have updated the kernel but the PKGBUILD has not been updated yet to
-work with your current kernel? No problem! Only two numbers have to be
-changed in the PKGBUILD to work with your kernel version: Change
-pkgver=X.X to meet your kernel major version, for example to
-"pkgver=3.6" for kernel 3.6.4 and also change the last entry of the
-depends array to make tridentfb conflict with the linux kernel one
-version higher then your current kernel. If you are using kernel 3.6.4
-the new entry should look like: 'linux<3.7'
+This is on purpose. When compiling (running makepkg) the tridentfb
+modules is build against the currently installed and running kernel. To
+update the kernel, remove the tridentfb package first. After you have
+installed the new kernel, reboot. Then you can rebuild and reinstall the
+tridentfb package from AUR. (Currently the tridentfb package calculates
+its version automatically to match your kernel version. So you don't
+need to edit the PKGBUILD file after a kernel update.)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Trident&oldid=236686"
+"https://wiki.archlinux.org/index.php?title=Trident&oldid=301682"
 
 Categories:
 
 -   Graphics
 -   X Server
+
+-   This page was last modified on 24 February 2014, at 12:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

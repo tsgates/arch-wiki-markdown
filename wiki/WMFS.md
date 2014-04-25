@@ -1,13 +1,9 @@
 WMFS
 ====
 
-> Summary
+Related articles
 
-Information on installing and configuring WMFS
-
-Related links
-
-Comparison of Tiling Window Managers
+-   Comparison of Tiling Window Managers
 
 WMFS (Window Manager From Scratch) is a lightweight and highly
 configurable tiling window manager for X. It can be configured with a
@@ -22,33 +18,29 @@ in this wiki.
 
 Rest of this page can be applied only to older version of WMFS.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Configuration file                                           |
-|     -   2.2 Tags & Rules                                                 |
-|     -   2.3 Key Bindings                                                 |
-|         -   2.3.1 Scratchpad                                             |
-|                                                                          |
-|     -   2.4 Statusbar configuration                                      |
-|     -   2.5 Conky                                                        |
-|     -   2.6 WMFS Status Toolkit                                          |
-|                                                                          |
-| -   3 Usage                                                              |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Status bar not working in last git version                   |
-|                                                                          |
-| -   5 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Configuration file
+    -   2.2 Tags & Rules
+    -   2.3 Key Bindings
+        -   2.3.1 Scratchpad
+    -   2.4 Statusbar configuration
+    -   2.5 Conky
+    -   2.6 WMFS Status Toolkit
+-   3 Usage
+-   4 Troubleshooting
+    -   4.1 Status bar not working in last git version
+-   5 Resources
 
 Installation
 ------------
 
 WMFS is in AUR. Due the high development rate it is recommended to use
-the git version, wmfs-git.
+the git version, wmfs2-git. Please note that the package wmfs-git is now
+not being actively developed.
 
 WMFS will look for a configuration file in $XDG_CONFIG_HOME/wmfs. To
 configure WMFS to your liking, you will need to create a configuration
@@ -266,8 +258,15 @@ Resources
 -   #wmfs on Freenode
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=WMFS&oldid=206461"
+"https://wiki.archlinux.org/index.php?title=WMFS&oldid=291215"
 
 Category:
 
 -   Dynamic WMs
+
+-   This page was last modified on 1 January 2014, at 07:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

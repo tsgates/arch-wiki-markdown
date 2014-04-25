@@ -6,15 +6,13 @@ this laptop, 98% problem free... and no I have not yet configured the
 media card reader, as I have no use for it. If anyone really has a
 problem, let me know (PM from forums).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Modules                                                            |
-| -   2 Other                                                              |
-| -   3 Unusual settings                                                   |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Modules
+-   2 Other
+-   3 Unusual settings
+-   4 See also
 
 Modules
 -------
@@ -63,3 +61,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 23 April 2012, at 12:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -3,23 +3,20 @@ Maya
 
 How to install Maya8.5-x64 on Arch64.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Dependencies                                                       |
-| -   3 Installation                                                       |
-|     -   3.1 Installing Maya                                              |
-|     -   3.2 Installing License                                           |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Refresh Problems with Nvidia                                 |
-|     -   4.2 Crash with signal 11                                         |
-|     -   4.3 Other Known Issues                                           |
-|                                                                          |
-| -   5 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Dependencies
+-   3 Installation
+    -   3.1 Installing Maya
+    -   3.2 Installing License
+-   4 Troubleshooting
+    -   4.1 Refresh Problems with Nvidia
+    -   4.2 Crash with signal 11
+    -   4.3 Syntax Error when using any "Edit Mesh" commands
+    -   4.4 Other Known Issues
+-   5 More Resources
 
 Introduction
 ------------
@@ -181,6 +178,16 @@ installing the appropriate packages and adding the line
 
 within the Section "ServerLayout".
 
+> Syntax Error when using any "Edit Mesh" commands
+
+At the moment, there is a bug between the Maya GUI and its commandline
+interface. The commandline interface cannot interpret "," as a numeric
+separator and therefore all commands parsed under a system locale using
+"," instead of "." will fail to run. This could happen if you use
+en_DK.utf8 as locale. Fix this by running maya using:
+
+     LC_NUMERIC="C" /usr/autodesk/maya/bin/maya
+
 > Other Known Issues
 
 Maya was not built to be compatible with compositing managers such as
@@ -199,9 +206,16 @@ Links that might help you solve another issue:
 -   Ubuntu Forums
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Maya&oldid=225304"
+"https://wiki.archlinux.org/index.php?title=Maya&oldid=276525"
 
 Categories:
 
 -   Graphics and desktop publishing
 -   Arch64
+
+-   This page was last modified on 24 September 2013, at 14:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

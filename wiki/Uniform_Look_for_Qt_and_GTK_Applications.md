@@ -1,17 +1,10 @@
 Uniform Look for Qt and GTK Applications
 ========================================
 
-> Summary
+Related articles
 
-This articles details theme configuration of GTK+ at Qt applications to
-ensure a uniform style. This article will cover configuration, theme
-engines, tricks and troubleshooting.
-
-> Related
-
-GTK+
-
-Qt
+-   GTK+
+-   Qt
 
 Qt and GTK+ based programs both use a different widget toolkit to render
 the graphical user interface. Each come with different themes, styles
@@ -40,6 +33,8 @@ You can choose various approaches:
     -   if you work in KDE 4 desktop environment then a GTK-Qt engine is
         available, which updates GTK+ configuration files automatically
         so that GTK+ appearance is similar to the Qt one;
+    -   similarly if you work in the Trinity desktop environment a
+        GTK-Qt and GTK3-Qt engine is available.
     -   if you work in other desktop environments, you can choose the
         QGtkStyle engine (built in Qt), which forces Qt apps to use your
         GTK+ 2.x theme.
@@ -47,43 +42,37 @@ You can choose various approaches:
 Should you use also GTK+ 3.x toolkit, follow the GTK+ 3.x wiki article
 to find out how to make it look similar to GTK+ 2.x themes.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Styles for both Qt and GTK+                                        |
-|     -   1.1 KDE4 Oxygen                                                  |
-|         -   1.1.1 oxygen-gtk                                             |
-|             -   1.1.1.1 Automatic procedure                              |
-|             -   1.1.1.2 Manual procedure                                 |
-|                                                                          |
-|         -   1.1.2 Oxygen icons                                           |
-|                                                                          |
-|     -   1.2 QtCurve                                                      |
-|     -   1.3 Others                                                       |
-|                                                                          |
-| -   2 Changing styles in each toolkit                                    |
-|     -   2.1 Qt4 styles                                                   |
-|     -   2.2 Qt3 styles                                                   |
-|     -   2.3 GTK+2 styles                                                 |
-|     -   2.4 GTK+1 styles                                                 |
-|                                                                          |
-| -   3 Theme Engines                                                      |
-|     -   3.1 GTK+-Qt Engine                                               |
-|     -   3.2 QGtkStyle                                                    |
-|                                                                          |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 KDE file dialogs for GTK+ apps                               |
-|     -   4.2 aMSN with GTK+ or KDE dialogs                                |
-|     -   4.3 Run an application with a specific theme                     |
-|     -   4.4 Using a GTK+ icon theme in Qt apps                           |
-|     -   4.5 Improve subpixel rendering of GTK apps under KDE             |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 gtk-qt-engine does not work with OpenOffice                  |
-|     -   5.2 Qt applications do not use QGtkStyle                         |
-|     -   5.3 Themes not working in GTK+ apps                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Styles for both Qt and GTK+
+    -   1.1 KDE4 Oxygen
+        -   1.1.1 oxygen-gtk
+            -   1.1.1.1 Automatic procedure
+            -   1.1.1.2 Manual procedure
+        -   1.1.2 Oxygen icons
+    -   1.2 QtCurve
+    -   1.3 Others
+-   2 Changing styles in each toolkit
+    -   2.1 Qt5 styles
+    -   2.2 Qt4 styles
+    -   2.3 Qt3 styles
+    -   2.4 GTK+3 styles
+    -   2.5 GTK+2 styles
+    -   2.6 GTK+1 styles
+-   3 Theme engines
+    -   3.1 GTK+-Qt engine
+    -   3.2 QGtkStyle
+-   4 Tips and tricks
+    -   4.1 KDE file dialogs for GTK+ applications
+    -   4.2 aMSN with GTK+ or KDE dialogs
+    -   4.3 Run an application with a specific theme
+    -   4.4 Using a GTK+ icon theme in Qt apps
+    -   4.5 Improve subpixel rendering of GTK apps under KDE
+-   5 Troubleshooting
+    -   5.1 gtk-qt-engine does not work with OpenOffice
+    -   5.2 Qt applications do not use QGtkStyle
+    -   5.3 Themes not working in GTK+ apps
 
 Styles for both Qt and GTK+
 ---------------------------
@@ -96,7 +85,7 @@ applications regardless of the toolkit they had been written with.
 > KDE4 Oxygen
 
 Oxygen is a Qt style that comes by default with KDE4. There are various
-ways of mimicking its appearance that are discribed below.
+ways of mimicking its appearance that are described below.
 
 oxygen-gtk
 
@@ -118,19 +107,18 @@ Note:Before KDE 4.10, you needed to create the file
 described below. But that is actually counter-productive with KDE 4.10’s
 oxygen-gtk, and you should delete this file after upgrading to prevent
 it from messing with your colors. Cleanup-removal of
-~/.kde4/share/config/gtkrc might be necessary, too
+~/.kde4/share/config/gtkrc might be necessary, too.
 
 Automatic procedure
 
 A few dedicated applications are available in the official repositories
 that are able to change the GTK+ theme.
 
-You can also install kde-gtk-config from AUR. After installation, it can
-be found in System Settings > Application Appearance > GTK
-Configuration. It allows you to configure the look and feel for both
-GTK+ 2.x and GTK+ 3.x applications and is integrated with the KDE add-on
-installer (Get Hot New Stuff), so you can also download and install
-other GTK+ themes.
+You can also install kde-gtk-config. After installation, it can be found
+in System Settings > Application Appearance > GTK Configuration. It
+allows you to configure the look and feel for both GTK+ 2.x and GTK+ 3.x
+applications and is integrated with the KDE add-on installer (Get Hot
+New Stuff), so you can also download and install other GTK+ themes.
 
 Manual procedure
 
@@ -140,7 +128,6 @@ file ~/.kde4/share/config/gtkrc-2.0 with the following content:
     ~/.kde4/share/config/gtkrc-2.0
 
      include "/usr/share/themes/oxygen-gtk/gtk-2.0/gtkrc"
-     include "~/.themes/oxygen-gtk/gtk-2.0/gtkrc"
 
      style "user"
      { 
@@ -184,7 +171,7 @@ file ~/.kde4/share/config/gtkrc-2.0 with the following content:
 
 Then you need to create the symbolic link ~/.kde4/share/config/gtkrc:
 
-    ln -s ~/.kde4/share/config/gtkrc-2.0 ~/.kde4/share/config/gtkrc
+    $ ln -s ~/.kde4/share/config/gtkrc-2.0 ~/.kde4/share/config/gtkrc
 
 Oxygen icons
 
@@ -202,10 +189,10 @@ installed with the oxygen-gtk-icons package from AUR.
 > QtCurve
 
 QtCurve is a highly popular and configurable set of widget styles for
-Qt4/KDE4, KDE3 and GTK+ 2.x. QtCurve can be installed with the packages
-qtcurve-kde4, qtcurve-kde3 or qtcurve-gtk2, all available in the
-official repositories. It has many controls for various options, ranging
-from the appearance of buttons to the shape of sliders.
+GTK+ 2.x, Qt4, Qt5 and KDE4. QtCurve can be installed with the packages
+from qtcurve group, available in the official repositories. It has many
+controls for various options, ranging from the appearance of buttons to
+the shape of sliders.
 
 To manually change the GTK+ theme to QtCurve, you need to create the
 file ~/.gtkrc-2.0-kde4 with the following content:
@@ -243,17 +230,27 @@ Changing styles in each toolkit
 You can use the following methods to change the theme used in each
 environment.
 
+> Qt5 styles
+
+Qt5 decides the style to use based on what desktop environment is used.
+If it doesn't recognize the desktop environment, it falls back to a
+generic style. To force a specific style, you can set the
+QT_STYLE_OVERRIDE environment variable. Specifically, set it to gtk if
+you want to use the gtk theme. Qt5 applications also support the -style
+flag, which you can use to launch a Qt5 application with a specific
+style.
+
 > Qt4 styles
 
-Qt4 styles cand be changed in a similar way:
+Qt4 styles can be changed in a similar way:
 
--   using the KDE4 System Settings (systemsettings), the settings can be
+-   Using the KDE4 System Settings (systemsettings), the settings can be
     found in Common Appearance and Behavior > Application Appearance >
     Style > Widget Style
--   using the command-line tool
-    kwriteconfig --file kdeglobals --group General --key widgetStyle [name of style].
--   using the Qt Configuration (qtconfig) application, the settings can
-    be found in Appearance > Select GUI Style.
+-   Using the command-line tool
+    $ kwriteconfig --file kdeglobals --group General --key widgetStyle [name of style].
+-   Using the Qt Configuration (qtconfig-qt4) application, the settings
+    can be found in Appearance > Select GUI Style.
 
 Note that while Qt Configuration allows you to choose the theme, font,
 etc. for Qt apps, you can modify more settings with KDE4 System Settings
@@ -263,18 +260,18 @@ etc. for Qt apps, you can modify more settings with KDE4 System Settings
 
 Qt3 styles can be changed in the following ways:
 
--   using the KDE3 Control Center (kcontrol), the settings can be found
+-   Using the KDE3 Control Center (kcontrol), the settings can be found
     in Appearance & Themes > Style > Widget Style.
--   using the command-line tool kde-config --style [name of style].
--   using the default Qt Configuration (qt3config) application, the
+-   Using the command-line tool kde-config --style [name of style].
+-   Using the default Qt Configuration (qt3config) application, the
     settings can be found in Appearance > Select GUI Style.
 
-> GTK+2 styles
+> GTK+3 styles
 
-Various applications and methods are available to change the GTK+ 2.x
+Some applications and methods are available to change the GTK+ 3.x
 styles:
 
--   kde-gtk-config — An application that allows you to change style and
+-   kde-gtk-config — Application that allows you to change style and
     font of GTK+2 and Gtk+3 applications.
 
 https://projects.kde.org/kde-gtk-config || kde-gtk-config
@@ -282,31 +279,36 @@ https://projects.kde.org/kde-gtk-config || kde-gtk-config
 After installation, kde-gtk-config can also be found in System Settings
 > Application Appearance > GTK.
 
--   gtk-kde4 — An application that allows you to change style and font
-    of GTK+2 applications in KDE4.
+-   LXAppearance — Desktop independent GTK+2 and GTK+3 style
+    configuration tool from the LXDE project (it does not require other
+    parts of the LXDE desktop).
+
+http://wiki.lxde.org/en/LXAppearance || lxappearance
+
+> GTK+2 styles
+
+Various applications and methods are available to change the GTK+ 2.x
+styles: (See GTK+3 section above for more.)
+
+-   gtk-kde4 — Application that allows you to change style and font of
+    GTK+2 applications in KDE4.
 
 http://kde-look.org/content/show.php?content=74689 || gtk-kde4
 
 After installation, gtk-kde4 can also be found in System Settings > Lost
 and Found > GTK style.
 
--   LXAppearance — A desktop independent GTK+ style configuration tool
-    from the LXDE project (it does not require other parts of the LXDE
-    desktop).
-
-http://wiki.lxde.org/en/LXAppearance || lxappearance
-
--   GTK+ Change Theme — A little program that lets you change your GTK+
+-   GTK+ Change Theme — Little program that lets you change your GTK+
     2.0 theme (considered a better alternative to switch2).
 
 http://plasmasturm.org/code/gtk-chtheme/ || gtk-chtheme
 
--   GTK+ Preference Tool — A GTK+ theme selector and font switcher.
+-   GTK+ Preference Tool — GTK+ theme selector and font switcher.
 
 http://gtk-win.sourceforge.net/home/index.php/Main/GTKPreferenceTool ||
 gtk2_prefs
 
--   GTK+ Theme Switch — A simple GTK+ theme switcher.
+-   GTK+ Theme Switch — Simple GTK+ theme switcher.
 
 http://muhri.net/nav.php3?node=gts || gtk-theme-switch2
 
@@ -317,7 +319,7 @@ http://muhri.net/nav.php3?node=gts || gtk-theme-switch2
 To change GTK1 styles you can install the gtk-theme-switch package from
 the AUR.
 
-Theme Engines
+Theme engines
 -------------
 
 A Theme Engine can be thought of as a thin layer API which translates
@@ -325,7 +327,7 @@ themes (excluding icons) between one or more toolkits. These engines add
 some extra code in the process and it is arguable that this kind of a
 solution is not as elegant and optimal as using native styles.
 
-> GTK+-Qt Engine
+> GTK+-Qt engine
 
 This one is for use by GTK+ applications running in KDE, which basically
 means this does not work in other desktop environments. It applies all
@@ -355,7 +357,7 @@ components. To use this style you must have at least GTK+ 2.0 and Qt
 -   Qt Configuration: choose "GTK+" under Appearance > GUI Style.
 -   KDE4 System Settings: choose "GTK+ Style" under Application
     Appearance > Style > Applications.
--   the command-line: edit the .config/Trolltech.conf file by adding:
+-   the command-line: edit the ~/.config/Trolltech.conf file by adding:
 
     ~/.config/Trolltech.conf
 
@@ -370,29 +372,30 @@ not require a separate package anymore.
 Tips and tricks
 ---------------
 
-> KDE file dialogs for GTK+ apps
+> KDE file dialogs for GTK+ applications
 
 KGtk is a wrapper script that uses LD_PRELOAD to force KDE file dialogs
 (open, save, etc.) in GTK+ 2.x apps. If you use KDE and prefer its file
-dialogs over GTK+'s then you can install kgtk from the AUR (a KDE3
-version is also available in the kde3-kgtk package). Once installed you
-can run GTK+ 2.x applications with kgtk-wrapper in two ways (using Gimp
-in the examples):
+dialogs over GTK+'s then you can install kgtk from the AUR. Once
+installed you can run GTK+ 2.x applications with kgtk-wrapper in two
+ways (using Gimp in the examples):
 
 -   Calling kgtk-wrapper directly and using the GTK+ 2.x binary as an
     argument:
 
-    /usr/bin/kgtk-wrapper gimp
+    $ /usr/bin/kgtk-wrapper gimp
 
--   Creating a symbolic link to kgtk using the name of the GTK+ 2.x
-    binary:
+-   Modifying the KDE .desktop shortcuts files you can find at
+    /usr/share/applications/ to prefix the Exec statement with
+    kgtk-wrapper.
 
-    ln -s /usr/bin/kgtk-wrapper /usr/local/bin/gimp
+e.g. with GIMP, edit the /usr/share/applications/gimp.desktop shortcut
+file and replace Exec=gimp-2.8 %U by Exec=kgtk-wrapper gimp-2.8 %U.
 
-To run the version of Gimp with KDE dialogs, make sure you have
-/usr/local/bin/ before /usr/bin/ in your PATH.
-
-Note:Some GTK+ applications may not be compatible with KGtk.
+Note:Some GTK+ applications may not be compatible with KGtk-wrapper
+(e.g. Chromium), sometimes the wrapper makes the application crash (e.g.
+Firefox) and even other applications like KDM (when used with e.g.
+Thunderbird).
 
 > aMSN with GTK+ or KDE dialogs
 
@@ -412,7 +415,9 @@ This will launch Firefox with the QtCurve theme.
 > Using a GTK+ icon theme in Qt apps
 
 If you are not using GNOME, run gconf-editor, look under desktop > gnome
-> interface for the icon_theme key and change it to your preference.
+> interface for the icon_theme key and change it to your preference. As
+you're not using GNOME it's possible that you will have to set
+export DESKTOP_SESSION=gnome somewhere in your ~/.xinitrc.
 
 > Improve subpixel rendering of GTK apps under KDE
 
@@ -541,9 +546,16 @@ that GTK+ looks for it's settings in the standard ~/.gtkrc2.0 instead of
 the ~/.gtkrc2.0-kde file.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Uniform_Look_for_Qt_and_GTK_Applications&oldid=255564"
+"https://wiki.archlinux.org/index.php?title=Uniform_Look_for_Qt_and_GTK_Applications&oldid=305938"
 
 Categories:
 
--   Desktop environments
+-   Widget Toolkits
 -   Eye candy
+
+-   This page was last modified on 20 March 2014, at 17:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

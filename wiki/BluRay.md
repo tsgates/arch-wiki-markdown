@@ -1,6 +1,20 @@
 BluRay
 ======
 
+Related articles
+
+-   Optical Disc Drive
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-go-next.png]      This article or section  [Tango-go-next.png]
+                           is a candidate for       
+                           moving to Blu-ray.       
+                           Notes: The official      
+                           spelling is "Blu-ray",   
+                           not "BluRay".[1][2]      
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 This article is designed to help Linux users to play the BluRay discs
 they have legally purchased on their computers. Since no official BluRay
 player software is available on their system, Linux users have to use
@@ -8,41 +22,32 @@ open-source libraries capable of handling the DRM schemes that protect
 these disc contents. This is legal in most countries where
 interoperability allows this.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 How it works                                                       |
-|     -   1.1 BluRay DRM                                                   |
-|         -   1.1.1 AACS                                                   |
-|             -   1.1.1.1 AACS decryption process                          |
-|                                                                          |
-|         -   1.1.2 BD+                                                    |
-|                                                                          |
-|     -   1.2 Summary                                                      |
-|                                                                          |
-| -   2 Playback                                                           |
-|     -   2.1 Preparation                                                  |
-|         -   2.1.1 Method 1 (PK and Host K/C)                             |
-|         -   2.1.2 Method 2 (VUK)                                         |
-|                                                                          |
-|     -   2.2 Media Players                                                |
-|         -   2.2.1 mplayer                                                |
-|             -   2.2.1.1 Stuttering Video                                 |
-|             -   2.2.1.2 Incorrect Audio Language                         |
-|             -   2.2.1.3 Out of Sync Audio                                |
-|                                                                          |
-|         -   2.2.2 vlc                                                    |
-|         -   2.2.3 xine                                                   |
-|                                                                          |
-|     -   2.3 Troubleshooting                                              |
-|         -   2.3.1 Absent KEYDB.cfg file                                  |
-|         -   2.3.2 Revoked Host key/certificate                           |
-|         -   2.3.3 Using aacskeys                                         |
-|             -   2.3.3.1 If aacskeys is not able to generate the key      |
-|                                                                          |
-| -   3 Other Useful Software                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 How it works
+    -   1.1 BluRay DRM
+        -   1.1.1 AACS
+            -   1.1.1.1 AACS decryption process
+        -   1.1.2 BD+
+    -   1.2 Summary
+-   2 Playback
+    -   2.1 Preparation
+        -   2.1.1 Method 1 (PK and Host K/C)
+        -   2.1.2 Method 2 (VUK)
+    -   2.2 Media Players
+        -   2.2.1 mplayer
+            -   2.2.1.1 Stuttering Video
+            -   2.2.1.2 Incorrect Audio Language
+            -   2.2.1.3 Out of Sync Audio
+        -   2.2.2 vlc
+        -   2.2.3 xine
+    -   2.3 Troubleshooting
+        -   2.3.1 Absent KEYDB.cfg file
+        -   2.3.2 Revoked Host key/certificate
+        -   2.3.3 Using aacskeys
+            -   2.3.3.1 If aacskeys is not able to generate the key
+-   3 Other Useful Software
 
 How it works
 ------------
@@ -67,15 +72,15 @@ published in a cat and mouse play.
 AACS
 
 The AACS specification and decryption process are publicly available at
-[1]. Many articles and research papers describe it in detail at [2], [3]
-or [4]. libaacs is a research project from the VideoLAN developer team
+[3]. Many articles and research papers describe it in detail at [4], [5]
+or [6]. libaacs is a research project from the VideoLAN developer team
 to implement the Advanced Access Content System specification, and
-distributed as an open-source library [5]. This project does not offer
+distributed as an open-source library [7]. This project does not offer
 any key or certificate that could be used to decode encrypted
 copyrighted material. However, combined with a key database file, it is
 possible to use it to play BluRay discs that use the AACS standard. This
 file is called KEYDB.cfg and is accessed by libaacs in ~/.config/aacs.
-The format of this file is available at [6].
+The format of this file is available at [8].
 
 AACS decryption process
 
@@ -134,9 +139,8 @@ to backup these VUKs.
 
 BD+
 
-There is currently no way to handle BD+ with open-source libraries. The
-VideoLAN development is working on a libbdplus library too, but the
-source code is not made public until legal clarification.
+In December 2013, VideoLAN released the long awaited libbdplus which
+provides experimental support for BD+ decryption.
 
 > Summary
 
@@ -171,10 +175,10 @@ Playback
 
 > Preparation
 
-Firstly install libbluray from the official repositories and libaacs-git
-from the AUR. Then try method 1, and if this does not work, try method
-2. The two methods are not exclusive, you can use both methods in the
-same KEYDB.cfg file.
+Firstly install libbluray and libaacs from the official repositories.
+Then try method 1, and if this does not work, try method 2. The two
+methods are not exclusive, you can use both methods in the same
+KEYDB.cfg file.
 
 Method 1 (PK and Host K/C)
 
@@ -363,9 +367,16 @@ backup a commercial BluRay movie under Fair Use guidelines:
     Microsoft OS in a VM.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=BluRay&oldid=241215"
+"https://wiki.archlinux.org/index.php?title=BluRay&oldid=303393"
 
 Categories:
 
 -   Audio/Video
 -   Optical
+
+-   This page was last modified on 6 March 2014, at 17:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

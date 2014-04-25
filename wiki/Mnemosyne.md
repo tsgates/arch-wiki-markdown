@@ -10,19 +10,16 @@ but flexible work-flow.
 
 Mnemosyne is written in Python 2 and uses the Qt toolkit.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Installing from AUR                                          |
-|     -   1.2 Manual Installation                                          |
-|     -   1.3 Configuring                                                  |
-|         -   1.3.1 Size of mathematical formulae                          |
-|                                                                          |
-| -   2 Other Resources                                                    |
-| -   3 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Installing from AUR
+    -   1.2 Manual Installation
+    -   1.3 Configuring
+        -   1.3.1 Size of mathematical formulae
+-   2 Other Resources
+-   3 See Also
 
 Installation
 ------------
@@ -71,8 +68,15 @@ See Also
 -   Anki - another open-source flashcard program using spaced repetition
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mnemosyne&oldid=231386"
+"https://wiki.archlinux.org/index.php?title=Mnemosyne&oldid=303794"
 
 Category:
 
 -   Applications
+
+-   This page was last modified on 9 March 2014, at 14:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

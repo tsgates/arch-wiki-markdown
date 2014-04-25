@@ -1,6 +1,16 @@
 Oidentd
 =======
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: please use the   
+                           first argument of the    
+                           template to provide a    
+                           brief explanation.       
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 oidentd is an ident (rfc1413 compliant) daemon that runs on Linux,
 Darwin, FreeBSD, OpenBSD, NetBSD and Solaris. oidentd can handle IP
 masqueraded/NAT connections on Linux, Darwin, FreeBSD (ipf only),
@@ -9,22 +19,19 @@ ident responses. Users can be granted permission to specify their own
 ident responses. Responses can be specified according to host and port
 pairs.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Global configuration                                         |
-|     -   2.2 User configuration                                           |
-|                                                                          |
-| -   3 Starting oidentd                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Global configuration
+    -   2.2 User configuration
+-   3 Starting oidentd
 
 Installation
 ------------
 
-Install oidentd, available in the Official Repositories。
+Install oidentd, available in the Official repositories。
 
 Configuration
 -------------
@@ -86,17 +93,24 @@ Starting oidentd
 With oidentd installed and configured, you are now ready to start the
 daemon.
 
--   /etc/rc.d/oidentd start
+    systemctl start oidentd.socket
 
 If you want to have oidentd start up automatically every time you start
-your computer, then you need to add oidentd to your DAEMONS=() array in
-/etc/rc.conf. For example:
+your computer, then you need to enable oidentd.socket with systemd. For
+example:
 
-    DAEMONS=(pcmcia syslogd klogd !fam esd mono network autofs cupsd oidentd crond gdm)
+    systemctl enable oidentd.socket
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Oidentd&oldid=240526"
+"https://wiki.archlinux.org/index.php?title=Oidentd&oldid=301530"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 24 February 2014, at 11:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

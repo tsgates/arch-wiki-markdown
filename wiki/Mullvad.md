@@ -144,8 +144,15 @@ Then create the .desktop file
     Categories=Network
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mullvad&oldid=253731"
+"https://wiki.archlinux.org/index.php?title=Mullvad&oldid=262390"
 
 Category:
 
 -   Virtual Private Network
+
+-   This page was last modified on 11 June 2013, at 17:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

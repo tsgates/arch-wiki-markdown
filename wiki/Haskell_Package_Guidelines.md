@@ -16,25 +16,25 @@ the number is growing.
 
 See the ArchHaskell community page for contact details and ways to help.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Haskell Packages                                                   |
-|     -   1.1 [haskell-core]                                               |
-|     -   1.2 [haskell-web]                                                |
-|     -   1.3 Last resorts                                                 |
-|                                                                          |
-| -   2 Improving ArchHaskell                                              |
-|     -   2.1 Community                                                    |
-|     -   2.2 Overview                                                     |
-|     -   2.3 [haskell-core] maintenance                                   |
-|     -   2.4 Other repo maintenance                                       |
-|     -   2.5 Creating another repo                                        |
-|     -   2.6 List of satellite repos                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Haskell Packages
+-   1 Haskell packages
+    -   1.1 [haskell-core]
+    -   1.2 [haskell-happstack]
+    -   1.3 [haskell-web]
+    -   1.4 Last resorts
+    -   1.5 Tips
+        -   1.5.1 Haskell-Platform
+-   2 Improving ArchHaskell
+    -   2.1 Community
+    -   2.2 Overview
+    -   2.3 [haskell-core] maintenance
+    -   2.4 Other repo maintenance
+    -   2.5 Creating another repo
+    -   2.6 List of satellite repos
+
+Haskell packages
 ----------------
 
 To use Haskell on Arch Linux, you have two mutually exclusive options:
@@ -87,18 +87,44 @@ are signed. The fingerprint of the key used for signing is:
      sub   2048D/A418C0FE 2012-12-26
 
 If you use SigLevel = Required TrustedOnly in /etc/pacman.conf for
-[haskell-core], then you need to do sudo pacman-key --lsign-key 4209170B
-to add Magnus Therning's key.
+[haskell-core], then you need to do the following to add Magnus
+Therning's key:
+
+     # sudo pacman-key -r 4209170B
+     # sudo pacman-key --lsign-key 4209170B
+
+Force a refresh of all package lists:
+
+     # sudo pacman -Syy
+
+> [haskell-happstack]
+
+The [haskell-happstack] repository contains packages for web development
+based on the Happstack framework. It requires [haskell-core], and
+includes most of the Happstack packages in HackageDB, plus Gitit and
+clckwrks, all their dependencies not in [haskell-core] and some other
+not web related packages. To enable the repository, add the following
+entry to /etc/pacman.conf:
+
+     [haskell-happstack]
+     Server = ftp://noaxiom.org/$repo/$arch
+
+Add and sign the maintainer's key:
+
+     # pacman-key -r B0544167
+     # pacman-key --lsign-key B0544167
+
+Bug reports and feature requests in GitHub.
 
 > [haskell-web]
 
-The [haskell-web] repository builds on [haskell-core], providing several
-more packages, especially those useful for web applications.
+The [haskell-web] repository is not maintained anymore. If you wish to
+help, please send a mail to the list or use the IRC channel. The
+repository was built on [haskell-core], providing several more packages,
+especially those useful for web applications.
 
     [haskell-web]
     Server = http://archhaskell.mynerdside.com/$repo/$arch
-
-Add it after [haskell-core].
 
 > Last resorts
 
@@ -109,6 +135,18 @@ Unfortunately, many of the packages in the AUR are outdated due to a
 lack of resources. If you have the time, it is recommended to use
 cblrepo and create something like [haskell-web], which can then be added
 to the collection of haskell-providing repositories.
+
+> Tips
+
+Haskell-Platform
+
+The haskell platform is a stabalised package set, and is in writing
+moment not available in the repos. A close equal would be to install
+GHC, cabal-install, haddock, happy and alex. So with [haskell-core] you
+would do "pacman -S ghc cabal-install haskell-haddock happy alex"
+
+Note: for official repos only, install "haddock" instead of
+"haskell-haddock"
 
 Improving ArchHaskell
 ---------------------
@@ -147,8 +185,15 @@ For example, for haskell-foo, ensure:
 > List of satellite repos
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Haskell_Package_Guidelines&oldid=255112"
+"https://wiki.archlinux.org/index.php?title=Haskell_Package_Guidelines&oldid=305721"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 20 March 2014, at 01:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

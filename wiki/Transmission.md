@@ -4,102 +4,213 @@ Transmission
 Transmission is a light-weight and cross-platform BitTorrent client. It
 is the default BitTorrent client in many Linux distributions.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Run as a daemon                                              |
-|         -   2.1.1 Changing daemon user                                   |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuring the GUI version
+-   3 Transmission-daemon and CLI
+    -   3.1 Starting and stopping the daemon
+        -   3.1.1 Autostart at boot
+        -   3.1.2 Run only while connected to network
+            -   3.1.2.1 Netctl
+            -   3.1.2.2 Wicd
+            -   3.1.2.3 NetworkManager
+    -   3.2 Choosing a user
+    -   3.3 Configuring the daemon
+-   4 See also
 
 Installation
 ------------
 
-There are several options in Official Repositories:
+There are several options in official repositories:
 
-transmission-cli
-    includes CLI tools, daemon and web client.
+-   transmission-cli - daemon, with CLI, and web client
+    (http://localhost:9091) interfaces.
+-   transmission-remote-cli - Curses interface for the daemon.
+-   transmission-gtk - GTK3 package.
+-   transmission-qt - Qt5 package.
 
-transmission-gtk
-    GTK+ GUI.
+Note:The GTK client cannot connect to the daemon, so users wishing to
+use the daemon will need to consider using the Qt package for a GUI or
+the remote-cli package for a curses-based GUI.
 
-transmission-qt
-    Qt GUI.
+Configuring the GUI version
+---------------------------
 
-Configuration
--------------
+Both GUI versions, transmission-gtk and transmission-qt, can function
+autonomously without a formal back-end daemon.
 
-For transmission-gtk and transmission-qt, the default path of
+GUI versions are configured to work out-of-the-box, but the user may
+wish to change some of the settings. The default path to the GUI
 configuration files is ~/.config/transmission.
 
-For transmission-cli, default configuration path is
-~/.config/transmission-daemon.
+A guide to configuration options can be found on the Transmission web
+site: https://trac.transmissionbt.com/wiki/EditConfigFiles#Options.
 
-> Run as a daemon
+Transmission-daemon and CLI
+---------------------------
 
-First install transmission-cli. Then start the transmission daemon.
+The commands for transmission-cli are:
 
-Navigate to http://127.0.0.1:9091 in your web browser to see the web
-client.
+transmission-daemon: starts the daemon.
 
-You can edit the main configuration file
-~/.config/transmission-daemon/settings.json to fit your preference. You
-need to stop the daemon before editing configuration files, or your
-edits will not be saved. By default, the daemon will run as the user
-transmission, whose home directory is /var/lib/transmission/. This means
-the default location for the configuration file is
-/var/lib/transmission/.config/transmission-daemon/settings.json.
+transmission-remote: invokes the CLI for the daemon, whether local or
+remote, followed by the command you want the daemon to execute.
 
-Note:If you cannot find the ~/.config/transmission-daemon folder, run
-transmission-daemon once to create it.
+transmission-remote-cli: (requires transmission-remote-cli) starts the
+curses interface for the daemon, whether local or remote.
 
-If you change your download location, make sure the transmission user
-has rw privileges to your download directory.
+transmission-cli: starts a non-daemonized local instance of
+transmission, for manually downloading a torrent.
 
-Changing daemon user
+transmission-show: returns information on a given torrent file.
 
-If you use systemd, you have to override the user in both the service
-file (/usr/lib/systemd/system/transmission.service) and the tmpfile
-(/usr/lib/tmpfiles.d/transmission.conf). To do so, copy both files to
-the appropriate directory in /etc:
+transmission-create: creates a new torrent.
 
-    # cp /usr/lib/systemd/system/transmission.service /etc/systemd/system/
-    # cp /usr/lib/tmpfiles.d/transmission.conf /etc/tmpfiles.d/
+transmission-edit: add, delete, or replace a tracker's announce URL.
 
-Create a new group named for example, transmission:
+> Starting and stopping the daemon
 
-    # groupadd transmission
+As explained in #Choosing a user, the transmission daemon can be run:
 
-Add your custom user to the newly created [group] ie. transmission:
+-   As the user transmission, by running as root:
 
-    # gpasswd -a [user] [group]
+        # transmission-daemon
 
-Then change User= to your custom user in the service file and edit the
-tmpfile to the following:
+    The daemon can then be stopped with:
 
-    /etc/tmpfiles.d/transmission.conf
+        # killall transmission-daemon
 
-    d /run/transmission - [user] [group] -
+-   As your own user, by running under your user name:
 
-Then run systemd-tmpfiles --create transmission.conf and restart the
-transmission service.
+        $ transmission-daemon
 
-You may need to reload service files after editing:
+    The daemon can then be stopped with:
 
-    # systemctl daemon-reload
+        $ killall transmission-daemon
 
-Don't forget to change permissions to 777 on folder '/run/transmission'.
+-   Starting (and stopping) the transmission service with systemctl will
+    use the user set in #Choosing a user. Note that the name for the
+    systemd service is transmission, not transmission-daemon.
 
-If you would use Transmission daemon with its own group, you have to
-give the writing permission to transmission group in your download's
-directory. For this you need to run:
+Starting the daemon will create an initial transmission configuration
+file. See #Configuring the daemon.
 
-    # chgrp transmission /path/to/download
-    # chmod g+w /path/to/download
+An alternative option to stop the transmission daemon is to use the
+transmission-remote command:
+
+    $ transmission-remote --exit
+
+Autostart at boot
+
+Enable the transmission daemon to run at system start, using systemd.
+
+Note that the name for the systemd service is transmission, not
+transmission-daemon.
+
+Run only while connected to network
+
+Netctl
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
+  ng]                      needs expansion.         ng]
+                           Reason: Todo (Discuss)   
+  ------------------------ ------------------------ ------------------------
+
+Wicd
+
+Create a start script in folder /etc/wicd/scripts/postconnect, and a
+stop script in folder /etc/wicd/scripts/predisconnect. Remember to make
+them executable. For example:
+
+    /etc/wicd/scripts/postconnect/transmission
+
+    #!/bin/bash
+
+    /usr/bin/transmission-daemon
+
+    /etc/wicd/scripts/predisconnect/transmission
+
+    #!/bin/bash
+
+    killall transmission-daemon
+
+NetworkManager
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
+  ng]                      needs expansion.         ng]
+                           Reason: Todo (Discuss)   
+  ------------------------ ------------------------ ------------------------
+
+> Choosing a user
+
+Choose how you want to run transmission:
+
+-   As a separate user, transmission by default (recommended for
+    increased security).
+
+By default, transmission creates a user and a group transmission, with
+its home files at /var/lib/transmission/, and runs as this "user". This
+is a security precaution, so transmission, and its downloads, have no
+access to files outside of /var/lib/transmission/. Configuration,
+operation, and access to downloads needs to be done with "root"
+privileges (e.g. by using sudo).
+
+-   Under the user's own user name.
+
+To set this up, override the provided service file and specify your
+username:
+
+    /etc/systemd/system/transmission.service.d/transmission.conf
+
+    [Service]
+    User=your_username
+
+> Configuring the daemon
+
+Create an initial configuration file by starting the daemon.
+
+-   If running Transmission under the username transmission, the
+    configuration file will be located at
+    /var/lib/transmission/.config/transmission-daemon/settings.json.
+
+-   If running Transmission under your own username, the configuration
+    file will be located at ~/.config/transmission-daemon/settings.json.
+
+One can customize the daemon by using a Transmission client or using the
+included web interface accessible via http://localhost:9091 in a
+supported browser.
+
+A guide to configuration options can be found on the Transmission web
+site: https://trac.transmissionbt.com/wiki/EditConfigFiles#Options
+
+Note:If you want to edit the configuration manually using a text editor,
+stop the daemon first; otherwise, it would overwrite its configuration
+file when it closes.
+
+A recommendation for those running under username transmission is to
+create a shared download directory with the correct permissions to allow
+access to both the transmission user and system users, and then to
+update the configuration file accordingly. For example:
+
+    # mkdir /mnt/data/torrents
+    # chown -R facade:transmission /mnt/data/torrents
+    # chmod -R 775 /mnt/data/torrents
+
+Now /mnt/data/torrents will be accessible for the system user facade and
+for the transmission group to which the transmission user belongs.
+Making the target directory world read/writable is highly discouraged
+(i.e. do not chmod the directory to 777). Instead, give individual
+users/groups appropriate permissions to the appropriate directories.
+
+Note:If /mnt/data/torrents is located on a removable device, e.g. with
+an /etc/fstab entry with the option nofail, Transmission will complain
+that it cannot find your files. To remedy this, you can add
+RequiresMountsFor=/mnt/data/torrents to
+/etc/systemd/system/transmission.service.d/transmission.conf.
 
 See also
 --------
@@ -108,8 +219,15 @@ See also
 -   HeadlessUsage
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Transmission&oldid=250764"
+"https://wiki.archlinux.org/index.php?title=Transmission&oldid=302665"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

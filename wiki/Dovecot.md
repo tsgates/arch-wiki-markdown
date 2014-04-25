@@ -1,9 +1,22 @@
 Dovecot
 =======
 
-  
- This article describes how to set up a mail server suitable for
-personal or small office use.
+Summary help replacing me
+
+This article explains how to install and configure Dovecot.
+
+> Related
+
+Postfix
+
+Courier MTA
+
+OpenSMTPD
+
+Fail2ban
+
+This article describes how to set up a mail server suitable for personal
+or small office use.
 
 Dovecot is an open source IMAP and POP3 server for Linux/UNIX-like
 systems, written primarily with security in mind. Developed by Timo
@@ -12,20 +25,18 @@ aims to be a lightweight, fast and easy to set up open source
 mailserver. For more detailed information, please see the official
 Dovecot Wiki.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Assumptions                                                  |
-|     -   2.2 Create the SSL certificate                                   |
-|     -   2.3 PAM Authentication                                           |
-|     -   2.4 Dovecot configuration                                        |
-|     -   2.5 Sieve                                                        |
-|                                                                          |
-| -   3 Starting the server                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Assumptions
+    -   2.2 Create the SSL certificate
+    -   2.3 PAM Authentication
+    -   2.4 Dovecot configuration
+    -   2.5 Sieve
+-   3 Starting the server
+-   4 Tricks
 
 Installation
 ------------
@@ -94,7 +105,11 @@ Sieve is a programming language that can be used to create filters for
 email on mail server.
 
 -   Install pigeonhole
--   Add "managesieve sieve" to "protocols" in dovecot.conf
+-   Add "sieve" to "protocols" in dovecot.conf (and the lines from the
+    next points)
+
+    protocols = imap pop3 sieve
+
 -   Add minimal 80-sieve.conf
 
     service managesieve-login {
@@ -109,17 +124,27 @@ email on mail server.
     protocol sieve {
     }
 
+-   Add "sieve" to "mail_plugins" in "protocol lda" section
+
+    protocol lda {
+      mail_plugins = sieve
+    }
+
 -   Specify sieve storage location in "plugin" section:
 
-     sieve=/var/mail/%u/dovecot.sieve
-     sieve_storage=/var/mail/%u/sieve
+    plugin {
+      sieve=/var/mail/%u/dovecot.sieve
+      sieve_dir=/var/mail/%u/sieve
+    }
+
+Note: Nowadays it is recommended to use LMTP instead of LDA.
+Nevertheless can the Dovecot LDA still be used for small mailservers.
+More information can be found in the Dovecot Wiki
 
 -   Ensure that your MTA uses dovecot for delivery. For example:
     postfix's main.cf and dovecot-lda:
 
      mailbox_command = /usr/lib/dovecot/dovecot-lda -f "$SENDER" -a "$RECIPIENT"
-
--   Add "sieve" to "mail_plugins" in "protocol lda" section
 
 Starting the server
 -------------------
@@ -128,9 +153,34 @@ Use the standard systemd syntax to control the dovecot.service daemon.
 
     # systemctl start dovecot.service
 
+To have it start on boot
+
+    # systemctl enable dovecot.service
+
+Tricks
+------
+
+Generate hashes with non-default hash functions.
+
+    doveadm pw -s SHA512-CRYPT -p "superpassword"
+
+Remember to make sure that the column in the database is large
+enough(you might not get a warning..)
+
+Remember to set the password scheme in your dovecot-sql.conf file
+
+    default_pass_scheme = SHA512-CRYPT
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dovecot&oldid=253030"
+"https://wiki.archlinux.org/index.php?title=Dovecot&oldid=305746"
 
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 20 March 2014, at 01:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

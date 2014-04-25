@@ -6,34 +6,29 @@ particular, procedures for implementation, maintenance and optimization
 will be presented along with background information on the file system
 itself and some cautionary notes on precarious implementations.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Background                                                         |
-|     -   1.1 GNU/Linux Development Team                                   |
-|     -   1.2 Technical features                                           |
-|                                                                          |
-| -   2 Implementing on GNU/Linux                                          |
-| -   3 Optimizations                                                      |
-|     -   3.1 Defragmenting JFS                                            |
-|     -   3.2 Deadline I/O Scheduler                                       |
-|     -   3.3 External Journal                                             |
-|     -   3.4 noatime fstab attribute                                      |
-|     -   3.5 Journal Modes                                                |
-|     -   3.6 Variable block sizes                                         |
-|                                                                          |
-| -   4 fsck and recovery                                                  |
-| -   5 Cautionary Notes                                                   |
-|     -   5.1 JFS root mounts read only on startup                         |
-|     -   5.2 JFS and secure deletions                                     |
-|     -   5.3 Forced fsck on JFS root file system                          |
-|     -   5.4 JFS losing files                                             |
-|                                                                          |
-| -   6 Benchmarks                                                         |
-| -   7 Conclusions                                                        |
-| -   8 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Background
+    -   1.1 GNU/Linux development team
+    -   1.2 Technical features
+-   2 Implementing on GNU/Linux
+-   3 Optimizations
+    -   3.1 Defragmenting JFS
+    -   3.2 Deadline I/O scheduler
+    -   3.3 External journal
+    -   3.4 noatime fstab attribute
+    -   3.5 Journal modes
+    -   3.6 Variable block sizes
+-   4 fsck and recovery
+-   5 Cautionary notes
+    -   5.1 JFS root mounts read only on startup
+    -   5.2 JFS and secure deletions
+    -   5.3 Forced fsck on JFS root file system
+    -   5.4 JFS losing files
+-   6 Benchmarks
+-   7 Conclusions
+-   8 See also
 
 Background
 ----------
@@ -56,7 +51,7 @@ the Linux kernel since 2002.
 -   The current GNU/Linux version is a port based on JFS for OS/2.
 
 Note:While there are potential issues, JFS file systems for OS/2 and
-GNU/Linux are inter-operable.[1]
+GNU/Linux are inter-operable.[1].
 
 While it is difficult to make general comparisons between JFS and other
 file systems available on UNIX and UNIX-like operating systems, it is
@@ -65,7 +60,7 @@ systems [2]. With certain optimizations, JFS has also been claimed to be
 faster for certain file operations, as compared to other GNU/Linux file
 systems (see [3],Benchmarks).
 
-> GNU/Linux Development Team
+> GNU/Linux development team
 
 The development of the GNU/Linux JFS port is headed by
 
@@ -77,9 +72,9 @@ The development of the GNU/Linux JFS port is headed by
 JFS is a modern file system supporting many features, a few of which are
 listed here.
 
--   fully 64-bit
+-   fully 64-bit.
 -   dynamic space allocation for i-nodes, i.e. no running out of i-nodes
-    on file systems with large number of small files
+    on file systems with large number of small files.
 -   Directory structures designed for speed and efficiency:
 
 - directories with eight or fewer entries have their contents storied
@@ -91,21 +86,21 @@ a B+ tree keyed on name.
 -   JFS utilizes extents for allocating blocks for large files.
 -   Support for extended attributes in addition to standard Unix-style
     permissions.
--   Support for both internal and external logs (see below)
+-   Support for both internal and external logs (see below).
 -   Extremely Scalable; Consistent performance from minimum file size up
     to 4 petabytes.
--   Algorithms designed for high performance on very large systems
--   Performance tuned for GNU/Linux
+-   Algorithms designed for high performance on very large systems.
+-   Performance tuned for GNU/Linux.
 -   Designed from the ground up to provide Transaction/Log (not an
-    add-on)
--   Restarts after a system failure < 1 sec
--   Proven Journaling FS technology (10+ years in AIX)
--   Original design goals: Performance, Robustness, SMP
--   Team members from the original AIX JFS Designed/Developed this File
-    System
+    add-on).
+-   Restarts after a system failure < 1 sec.
+-   Proven Journaling FS technology (10+ years in AIX).
+-   Original design goals: Performance, Robustness, SMP.
+-   Team members from the original AIX JFS Designed/Developed this file
+    system.
 -   Designed to operate on SMP hardware, with code optimized for at
-    least a 4-way SMP machine
--   TRIM support will come in the next releases (Kernel 3.7 series)
+    least a 4-way SMP machine.
+-   TRIM support will come in the next releases (Kernel 3.7 series).
 
 Note:JFS uses a journal to maintain consistency of metadata only. Thus,
 only consistency of metadata (and not actual file contents) can be
@@ -138,19 +133,16 @@ POSIX Access Control Lists" and/or "JFS Security Labels"
             ---> [*] JFS POSIX Access Control Lists
             ---> [*] JFS Security Labels
 
-  
- Next, the JFS utilities package will be needed to perform all file
-system related tasks:
+Next, the jfsutils package will be needed to perform all file system
+related tasks.
 
-    pacman -S jfsutils
+Actual creation of a JFS file system can be done with the either:
 
-Actual creation of a JFS file system can be done with the either
+    # mkfs.jfs /dev/target_dev
 
-    mkfs.jfs /dev/target_dev
+or:
 
-or
-
-    jfs_mkfs /dev/target_dev
+    # jfs_mkfs /dev/target_dev
 
 Both commands are equivalent.
 
@@ -160,10 +152,10 @@ Optimizations
 There are several concepts that can be implemented with a JFS filesystem
 to boost its performance:
 
--   periodic defragmentation of the file system
--   using the deadline I/O scheduler
--   utilizing an external journal
--   attaching the noatime attribute the the file system in /etc/fstab
+-   Periodic defragmentation of the file system.
+-   Using the deadline I/O scheduler.
+-   Utilizing an external journal.
+-   Attaching the noatime attribute the the file system in /etc/fstab.
 
 > Defragmenting JFS
 
@@ -200,7 +192,7 @@ Warning:If a VMWare session is sitting on an underlying JFS partition
 that is highly fragmented, performance of the virtual machine may be
 significantly degraded.
 
-> Deadline I/O Scheduler
+> Deadline I/O scheduler
 
 JFS seems to perform better when the kernel has been configured to use
 the Deadline I/O Scheduler. Indeed, JFS's performance seems to exceed
@@ -214,8 +206,9 @@ One is to recompile with the Deadline I/O scheduler set to the default:
             ---> Default I/O scheduler (Deadline) --->
 
 If you are using a generic Arch package for your kernel, you can simply
-append elevator=deadline to the kernel line in your /boot/grub/menu.lst
-The kernel entry would look something like:
+append elevator=deadline to the kernel line commandline or permenantly
+to kernel line in your /etc/default/grub and run grub-mkconfig -o
+/boot/default/grub.cfg. The kernel entry would look something like:
 
     # (0) Arch 2.6.22
     title   Arch Linux
@@ -231,7 +224,7 @@ devices by invoking the following command:
 This sets the Deadline scheduler as the default for /dev/sda (the entire
 physical device).
 
-> External Journal
+> External journal
 
 Warning:As this is a relatively new feature to the GNU/Linux port of
 JFS, it is recommended to upgrade to the very latest version of jfsutils
@@ -249,14 +242,14 @@ a partition that is bigger than 128MB results in the excess being
 ignored, according to mkfs.jfs. You can either create an external log
 for an already-existing JFS file system by executing the following:
 
-    mkfs.jfs -J journal_dev /dev/external_journal             # creates a journal on device /dev/external_journal
-    mkfs.jfs -J device=/dev/external_journal /dev/jfs_device  # attaches the external journal to the existing file 
+    # mkfs.jfs -J journal_dev /dev/external_journal             # creates a journal on device /dev/external_journal
+    # mkfs.jfs -J device=/dev/external_journal /dev/jfs_device  # attaches the external journal to the existing file 
                                                               #   system on /dev/jfs_device
 
 or a command can be issued to create both a new external journal and its
 corresponding JFS file system:
 
-    mkfs.jfs -j /dev/external_journal /dev/jfs_device
+    # mkfs.jfs -j /dev/external_journal /dev/jfs_device
 
 This last command formats BOTH the external journal and the JFS file
 system.
@@ -277,31 +270,32 @@ scenarios, this alteration has been widely touted as a fast and easy way
 to get a performance boost out of one's hardware. Even Linus Torvalds
 seems to be a proponent of this optimization [9].
 
-Note:One may also specify a relatime option which updates the atime if
-the previous atime is older than the mtime or ctime [10]. In terms of
-performance, this will not be as fast as the noatime mount option, but
-is useful if using applications that need to know when files were last
-read (like mutt).
+> Note:
 
-Note:Using the noatime/relatime option can improve disk performance with
-any file system, not just JFS.
+-   One may also specify a relatime option which updates the atime if
+    the previous atime is older than the mtime or ctime [10]. In terms
+    of performance, this will not be as fast as the noatime mount
+    option, but is useful if using applications that need to know when
+    files were last read (like mutt).
+-   Using the noatime/relatime option can improve disk performance with
+    any file system, not just JFS.
 
-Here is an example /etc/fstab entry with the noatime tag
+Here is an example /etc/fstab entry with the noatime tag:
 
-     /dev/sdb1 /media/backup jfs rw,users,noauto,noatime 0  0
+    /dev/sdb1 /media/backup jfs rw,users,noauto,noatime 0  0
 
 One may also mount a file system with the noatime attribute by invoking
 something similar to the following:
 
-    mount -o noatime -t jfs /dev/jfs_dev /mnt/jfs_fs
+    # mount -o noatime -t jfs /dev/jfs_dev /mnt/jfs_fs
 
 Note:Access time is NOT the same as the last-modified time. Disabling
 access time will still enable you to see when files were last modified
 by a write operation.
 
-> Journal Modes
+> Journal modes
 
-JFS does not support various journal modes like Ext3. Thus, passing the
+JFS does not support various journal modes like ext3. Thus, passing the
 mount option data=writeback with mount or in /etc/fstab will have no
 effect on a JFS file system. JFS's current journaling mode is similar to
 Ext3's default journaling mode: ordered [11].
@@ -329,14 +323,14 @@ target device. Normally, fsck is all that is needed.
 
 If the superblock on your file system gets destroyed, it may be possible
 to recover some parts of the file system. Currently, the only tool able
-to do this is a utility called 'jfsrec'. JFSrec is currently available
+to do this is a utility called jfsrec. JFSrec is currently available
 from the AUR using the jfsrec-svn package.
 
 There is also an AUR package called jfsrec, but this is merely a
 placeholder for jfsrec-svn as JFSrec is currently only in its seventh
 SVN revision. Once installed, one simply need to type:
 
-    jfsrec
+    # jfsrec
 
 to get a help menu explaining how to use this utility.
 
@@ -344,7 +338,7 @@ Warning:As stated above, JFSrec is only in its seventh SVN revision; and
 it is not known how actively the project is maintained. So use JFSrec
 with caution.
 
-Cautionary Notes
+Cautionary notes
 ----------------
 
 While JFS is very stable in its current stage of development, there are
@@ -441,22 +435,29 @@ stable, CPU efficient and fast. In particular, VMWare sessions stand to
 benefit enormously from a properly optimized and defragmented,
 underlying JFS file system.
 
-References
-----------
+See also
+--------
 
 -   A more technical overview of JFS
 -   30 days with JFS
 -   JFS Sourceforge page
 -   Note on defragmenting JFS file systems
 -   JFS Recovery Sourceforge page
--   A presentation on JFS given by Steve Best (pdf)
+-   Presentation on JFS given by Steve Best (pdf)
 -   Debian file system comparison
 -   Wikipedia:JFS (file system)
 -   Some filesystem benchmarks
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=JFS_Filesystem&oldid=238187"
+"https://wiki.archlinux.org/index.php?title=JFS_Filesystem&oldid=291989"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 8 January 2014, at 06:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

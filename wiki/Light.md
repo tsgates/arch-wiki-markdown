@@ -5,15 +5,13 @@ Light is a program used to easily control a screens
 backlight-controllers. It is the successor of LightScript, and is also
 its official C-port.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Features                                                           |
-| -   2 Installation                                                       |
-| -   3 Usage                                                              |
-| -   4 Bugs/Feedback                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Features
+-   2 Installation
+-   3 Usage
+-   4 Bugs/Feedback
 
 Features
 --------
@@ -83,3 +81,10 @@ Retrieved from
 Category:
 
 -   Power management
+
+-   This page was last modified on 18 November 2012, at 15:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

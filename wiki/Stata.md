@@ -5,6 +5,14 @@ STATA is a general-purpose statistical software package for *nix,
 Windows and Mac. In the following you'll be presented with how to
 install STATA and the needed libraries.
 
+Contents
+--------
+
+-   1 Needed libraries
+    -   1.1 GNOME
+-   2 Installing Stata
+-   3 Tips and tricks
+
 Needed libraries
 ----------------
 
@@ -81,9 +89,26 @@ After you have installed Stata, change the permissions on
 
     chmod -R 755 /usr/local/stata12
 
+Tips and tricks
+---------------
+
+To add state to your path, add the following to the end of your path in
+your bashrc.
+
+    bashrc
+
+    PATH=$PATH:/usr/local/stata12/
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Stata&oldid=247075"
+"https://wiki.archlinux.org/index.php?title=Stata&oldid=259043"
 
 Category:
 
--   Status monitoring and notification
+-   Mathematics and science
+
+-   This page was last modified on 27 May 2013, at 00:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

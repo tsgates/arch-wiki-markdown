@@ -4,22 +4,18 @@ Acer Aspire Timeline 1825PTZ
 The Acer Aspire Timeline 1825PTZ is a Netvertible from Acer. Also look
 at Acer Aspire Timeline 1810tz.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-|     -   1.1 /proc/cpuinfo                                                |
-|     -   1.2 lspci                                                        |
-|                                                                          |
-| -   2 Touchpad                                                           |
-| -   3 Touchscreen                                                        |
-|     -   3.1 rotate                                                       |
-|     -   3.2 rotate back                                                  |
-|                                                                          |
-| -   4 Webcam                                                             |
-| -   5 Audio                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+    -   1.1 /proc/cpuinfo
+    -   1.2 lspci
+-   2 Touchpad
+-   3 Touchscreen
+    -   3.1 rotate
+    -   3.2 rotate back
+-   4 Webcam
+-   5 Audio
 
 Hardware
 ========
@@ -238,3 +234,10 @@ Retrieved from
 Category:
 
 -   Acer
+
+-   This page was last modified on 23 April 2012, at 12:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

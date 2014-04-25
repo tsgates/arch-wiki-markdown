@@ -1,48 +1,37 @@
 Installing Arch Linux on a USB key
 ==================================
 
-> Summary
+Related articles
 
-Guide to installing, configuring and using a full-featured Arch Linux
-system on a USB flash drive.
-
-> Related
-
-Beginners' Guide
-
-Installation Guide
-
-General Recommendations
-
-General Troubleshooting
+-   Beginners' guide
+-   Installation guide
+-   General recommendations
+-   General Troubleshooting
 
 This page explains how to perform a regular Arch installation onto a USB
 key (or "flash drive"). In contrast to having a LiveUSB as covered in
-USB Installation Media, the result will be a persistent installation
-identical to normal installation to HDD, but on a USB flash drive.
+USB Flash Installation Media, the result will be a persistent
+installation identical to normal installation to HDD, but on a USB flash
+drive.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preparation                                                        |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-|     -   3.1 GRUB legacy                                                  |
-|     -   3.2 Syslinux                                                     |
-|                                                                          |
-| -   4 Tips                                                               |
-|     -   4.1 Using your USB install on multiple machines                  |
-|         -   4.1.1 Architecture                                           |
-|         -   4.1.2 Input drivers                                          |
-|         -   4.1.3 Video drivers                                          |
-|         -   4.1.4 Boot without using UUID                                |
-|         -   4.1.5 Kernel parameters                                      |
-|                                                                          |
-|     -   4.2 Optimizing for the lifespan of flash memory                  |
-|                                                                          |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Preparation
+-   2 Installation
+-   3 Configuration
+    -   3.1 GRUB legacy
+    -   3.2 Syslinux
+-   4 Tips
+    -   4.1 Using your USB install on multiple machines
+        -   4.1.1 Architecture
+        -   4.1.2 Input drivers
+        -   4.1.3 Video drivers
+        -   4.1.4 Persistent block device naming
+        -   4.1.5 Kernel parameters
+    -   4.2 Compatibility
+    -   4.3 Optimizing for the lifespan of flash memory
+-   5 See also
 
 Preparation
 -----------
@@ -54,25 +43,25 @@ There are various ways of installing Arch on a USB stick, the simplest
 being from within Arch itself:
 
 -   If you are already running Arch, simply install arch-install-scripts
-    and proceed with the Installation Guide just like you would from the
-    iso, but you will not be using /dev/sda. Use lsblk to get the
+    and proceed with the installation guide just like you would from the
+    iso, but you will not be using /dev/sda. Use $ lsblk to get the
     /dev/sd* name of your USB key prior to installation.
 
 Warning:If you mistakingly format /dev/sda, you are likely to go about
 deleting everything on your hard drive.
 
 -   An Arch Linux CD/USB can be used to install Arch onto the USB key,
-    via booting the CD/USB and following the Installation Guide. If
+    via booting the CD/USB and following the installation guide. If
     booting from a Live USB, the installation will have to be made on a
     different USB stick.
--   Or, if you have another linux computer available (it need not be
+-   Or, if you have another Linux computer available (it need not be
     Arch), you can follow the instructions to install from existing
-    linux, and then skip to the configuration section.
+    Linux, and then skip to the configuration section.
 
 Installation
 ------------
 
-Follow the Installation Guide as you normally would, with these
+Follow the installation guide as you normally would, with these
 exceptions:
 
 -   If cfdisk fails with "Partition ends in the final partial cylinder"
@@ -82,15 +71,32 @@ exceptions:
     it's ok, delete it (d) and write changes (w). Now return to cfdisk.
 -   It is highly recommended to review the Tips for Minimizing SSD
     Read/Writes on the SSD wiki article prior to selecting a filesystem.
-    To sum up, ext4 without a journal should be fine. Recognize that
+    To sum up, ext4 without a journal should be fine, which can be
+    created with # mkfs.ext4 -O ^has_journal /dev/sdXX. Recognize that
     flash has a limited number of writes, and a journaling file system
     will take some of these as the journal is updated. For this same
-    reason, it is best to forgo a swap partition. Note that this does
+    reason, it is best to forget the swap partition. Note that this does
     not affect installing onto a USB hard drive.
 -   Before creating the initial RAM disk # mkinitcpio -p linux, in
     /etc/mkinitcpio.conf add the block hook to the hooks array right
     after udev. This is necessary for appropriate module loading in
     early userspace.
+-   If you want to be able to continue to use the UFD device as a
+    cross-platform removable drive, this can be accomplished by creating
+    a partition housing an appropriate file system (most likely NTFS).
+    Note that the data partition may need to be the first partition on
+    the device, as Windows assumes that there can only be one partition
+    on a removable device, and will happily automount an EFI system
+    partition otherwise. Remember to install dosfstools and ntfs-3g.
+    Some tools are available online that may allow you to flip the
+    removable media bit on your UFD device this would trick operating
+    systems into treating your UFD device as an external hard disk and
+    allow you to use whichever partitioning scheme you choose.
+
+Warning:It is not possible to flip the removable media bit on every UFD
+device and attempting to use software that is incompatible with your
+device may damage it. Attempting to flip the removable media bit is not
+recommended.
 
 Configuration
 -------------
@@ -103,17 +109,16 @@ Configuration
 
 To get the proper UUIDs for your partitions issue blkid
 
--   menu.lst, the Grub configuration file, should be edited to (loosely)
-    match the following:
+> Note:
 
-Note:When grub is installed on the USB key, the key will always be hd0,0
-
-Note:It seems that current versions of GRUB2 will automatically default
-to using uuid. The following directions are for GRUB legacy
+-   When GRUB is installed on the USB key, the key will always be hd0,0.
+-   It seems that current versions of GRUB will automatically default to
+    using uuid. The following directions are for GRUB legacy.
 
 > GRUB legacy
 
-With the static /dev/sdaX:
+menu.lst, the GRUB legacy configuration file, should be edited to
+(loosely) match the following: With the static /dev/sdaX:
 
     root (hd0,0)
     kernel /boot/vmlinuz-linux root=/dev/sda1 ro
@@ -133,7 +138,7 @@ And for UUID, it should be like this:
 
 > Syslinux
 
-With the static /dev/sdaX
+With the static /dev/sdaX:
 
     LABEL Arch
             MENU LABEL Arch Linux
@@ -141,7 +146,7 @@ With the static /dev/sdaX
             APPEND root=/dev/sdax ro
             INITRD ../initramfs-linux.img
 
-Using your UUID
+Using your UUID:
 
     LABEL Arch
             MENU LABEL Arch Linux
@@ -157,92 +162,44 @@ Tips
 Architecture
 
 For the most versatile compatibility it is recommended that you install
-the x64_32 architecture with multilib support because it will run on
-both 32 and 64 bit architectures.
+the i686 architecture because it will run on both 32 (IA-32) and 64
+(amd64) bit architectures.
 
-Note:If you have installed i686 architecture and would like to migrate
-to x64_32 please refer to the
-Migrating_Between_Architectures_Without_Reinstalling wiki article for
-help
+Additionally, due to the reduzed size of 32 bit binaries and the absence
+of (possible) multilib packages, an i686 installation typically consumes
+less space than an equivalent x86_64 one.
+
+Note:Chrooting into a 64 bit linux installation (eg. when using the USB
+key as install/rescue media) is only possible from x86_64 Arch.
 
 Input drivers
 
 For laptop use (or use with a tactile screen) you will need the
-xf86-input-synaptics package for the touchpad/touchscreen to work:
-
-    # pacman -S xf86-input-synaptics
+xf86-input-synaptics package for the touchpad/touchscreen to work.
 
 For instructions on fine tuning or troubleshooting touchpad issues, see
 the Touchpad Synaptics article.
 
 Video drivers
 
-For the most versatile compatibility install all of the open source
-video drivers including their multilib counterparts.
-
 Note:The use of proprietary video drivers is not recommended for this
 type of installation.
 
-The recommended video drivers are:
+The recommended video drivers are: xf86-video-vesa mesa xf86-video-ati
+xf86-video-intel xf86-video-nouveau xf86-video-nv.
 
--   xf86-video-vesa
--   mesa
--   xf86-video-ati
--   xf86-video-intel
--   xf86-video-nouveau
--   xf86-video-nv
--   lib32-ati-dri
--   lib32-intel-dri
--   lib32-nouveau-dri
+For the most versatile compatibility install all of the open source
+video drivers include their multilib counterparts: lib32-ati-dri
+lib32-intel-dri lib32-nouveau-dri.
 
-To install all of these drivers at once:
+Persistent block device naming
 
-    # pacman -S xf86-video-vesa mesa xf86-video-ati xf86-video-intel xf86-video-nouveau xf86-video-nv lib32-ati-dri lib32-intel-dri lib32-nouveau-dri
+It is recommended to use UUID in both fstab and bootloader
+configuration. See Persistent block device naming for details.
 
-Boot without using UUID
-
-When using the USB key on various target machines, it is helpful to have
-multiple entries in GRUB, for machines with different setups. For
-example, the GRUB configuration could contain:
-
-    # (0) Arch Linux
-    title  Arch Linux (first drive)
-    root   (hd0,0)
-    kernel /boot/vmlinuz-linux root=/dev/sda1 ro
-    initrd /boot/initramfs-linux.img
-
-As well as
-
-    # (1) Arch Linux
-    title  Arch Linux (second drive)
-    root   (hd0,0)
-    kernel /boot/vmlinuz-linux root=/dev/sdb1 ro
-    initrd /boot/initramfs-linux.img
-
-And so forth, giving you the option to select a configuration for a
-wider variety of machines. However, changing the root= option in GRUB
-does not change /etc/fstab and you must do something (in our example
-using udev symlink), so the root partition will always be mounted
-correctly.
-
--   Run udevinfo -p /sys/block/sdx/ -a (where sdx is the device name of
-    your usb key)
--   Find unique information pertaining to your usb key. I chose
-    SYSFS{model}=="DataTraveler 2.0"
--   Make a new file: /etc/udev/udev.rules/10-my-usb-key.rules and
-    insert:
-
-    KERNEL=="sd**", SYSFS{product}=="DataTraveler 2.0", SYMLINK+="WHATEVERYOUWANTOTCALLIT%n"
-
-(KERNEL=="sd**" is because the kernel - 2.6.16 here - names all usb
-devices sd as it uses the scsi sub-system and you want to look at every
-sd device and apply the setting to every partition), with SYSFS{model}==
-being the unique identifier collected from udevinfo.
-
--   Run /etc/start-udev uevents and make sure the symlinks appears in
-    /dev.
--   If so, edit /etc/fstab, replacing your old sdx with the new
-    symlinks.
+Alternatively, you may create udev rule to create custom symlink for
+your usb key. Then use this symlink in fstab and bootloader
+configuration. See udev#Setting static device names for details.
 
 Kernel parameters
 
@@ -258,21 +215,31 @@ a kernel parameter as a preemptive measure you may have to adjust the
 display resolution manually when using machines with Nvidia video cards.
 See Xrandr for more info.
 
+> Compatibility
+
+The fallback image should be used for maximum compatibility.
+
 > Optimizing for the lifespan of flash memory
 
 -   Again, it is highly recommended to review the Tips for Minimizing
     SSD Read/Writes on the SSD wiki article.
 
-See Also
+See also
 --------
 
--   Official Arch Linux Install Guide
 -   Installing Arch Linux from VirtualBox
 -   Solid State Drives
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Installing_Arch_Linux_on_a_USB_key&oldid=254919"
+"https://wiki.archlinux.org/index.php?title=Installing_Arch_Linux_on_a_USB_key&oldid=299052"
 
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 20 February 2014, at 10:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

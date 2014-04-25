@@ -17,39 +17,37 @@ easily automate repetitive tasks, quickly deploy critical applications,
 and proactively manage change, scaling from 10s of servers to 1000s,
 on-premise or in the cloud.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Facter                                                       |
-|         -   2.1.1 Ruby-Facter 1.7.0                                      |
-|                                                                          |
-|     -   2.2 Packages                                                     |
-|     -   2.3 Services                                                     |
-|         -   2.3.1 Puppet 3.2.0rc1                                        |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Facter
+    -   3.1 Installation
+-   4 puppet resources
+    -   4.1 Packages
+    -   4.2 Services
+-   5 extra/patches
+    -   5.1 Puppet 3.2.1
+-   6 puppetdb
+-   7 See also
 
 Installation
-============
+------------
 
 Puppet packages are available in AUR. Install either puppet or
-puppet-git. The maintainer of the puppet AUR packages is not interested
-in shipping patches to minimize work as well as avoid confusion as to
-where bugs should go. So I will collect my patches here.
+puppet-git.
 
 Configuration
-=============
+-------------
 
 Puppet's main configuration file is puppet.conf which is located at
 /etc/puppet/puppet.conf. You have 3 options to place settings depending
 if it is a master/agent  
- [main]  
- [agent]  
- [master]  
+
+     [main]
+     [agent]
+     [master]
 
 Bare minimum of settings are:
 
@@ -63,63 +61,56 @@ Puppet will look for node configuration in
 /etc/puppet/manifests/site.pp.
 
 After starting puppet by daemon/cron/standalone, it will generate
-certificates in /etc/puppet/ssl/ directory.
-
-On the puppet master you need to accept this certificate:
-sudo puppet cert sign <name>.
+certificates in /etc/puppet/ssl/ directory. And you need to accept this
+certificaten the puppet master with: sudo puppet cert sign <name>.
 
 Facter
 ------
 
-Facter is a package that gathers facts about the system it runs on. Use
-with puppet facts find facter.
+Facter is a companion program of puppet that gathers facts about the
+system it runs on.  
+ commands:
 
-Facter requires both ifconfig as well as ip to gather network related
-facts.
+    # puppet facts find facter
+    # facter -p
 
-> Ruby-Facter 1.7.0
+> Installation
+
+Install it from aur ruby-facter. Facter requires both ifconfig as well
+as ip to gather network related facts.
 
 With facter 1.7.0 the new ifconfig in arch will give proper output to IP
-adresses,   
-but netmask/mtu are still a problem.
+adresses, but netmask/mtu are still a problem.
 
 Netmask has been adressed on github version of facter.
 
-Packages
---------
+puppet resources
+----------------
+
+> Packages
 
 "Pacman" is supported by puppet. Installing packages works out of the
-box with puppet 3.1.0 and the git packages.
+box since puppet 3.1.0.
 
-Services
---------
+> Services
 
-> Puppet 3.2.0rc1
+Since puppet 3.2.1 systemd on archlinux is fully supported.  
+ The systemd provider in Puppet today only uses two commands for the
+service enable state:  
 
-Has been released and has been uploaded to aur. The diff below needs to
-be changed accordingly.
+     systemctl is-enabled <unit>, checking return code for the current enable state
+     systemctl enable/disable <unit> to change it.
 
-Puppet has trouble with systemd on arch linux. This diff fixes it:
+Otherwise service running will use:
 
-    --- puppet-3.1.0-orig/lib/puppet/provider/service/systemd.rb    2013-02-25 08:49:29.000000000 +0100
-    +++ puppet-3.1.0/lib/puppet/provider/service/systemd.rb 2013-02-26 16:59:36.828276309 +0100
-    @@ -3,9 +3,10 @@
-     Puppet::Type.type(:service).provide :systemd, :parent => :base do
-       desc "Manages `systemd` services using `/bin/systemctl`."
-     
-    -  commands :systemctl => "/bin/systemctl"
-    +  commands :systemctl => "/usr/bin/systemctl"
-      
-       #defaultfor :osfamily => [:redhat, :suse]
-    +  defaultfor :osfamily => [:archlinux]
-     
-       def self.instances
-         i = []
+     # systemctl start/stop/restart <unit>
 
-Apply in /usr/lib/ruby/gems/1.9.1/gems.
+Using the full unit name unit.service is supported.
 
-When pupet 3.2.0 is release this won't be needed anymore patch has been
-sent upstream.
+extra/patches
+-------------
+
+> Puppet 3.2.1
 
 If you want to enable the "storeconfig" option in
 /etc/puppet/puppet.conf you will also need this patch:
@@ -145,14 +136,31 @@ Apply in the same place.
 
 Before you apply above patch read this:using_stored_configuration
 
+puppetdb
+--------
+
+PuppetDB is the fast, scalable, and reliable data warehouse for
+Puppet.  
+ It caches data generated by Puppet, and gives you advanced features at
+awesome speed with a powerful API.  
+ Puppetdb is in aur install puppetdb and puppetdb-terminus   
+ [More information: https://github.com/puppetlabs/puppetdb]
+
 See also
-========
+--------
 
 -   Puppet Dashboard - Software based on or using puppet in this wiki.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Puppet&oldid=255425"
+"https://wiki.archlinux.org/index.php?title=Puppet&oldid=272315"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 24 August 2013, at 07:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

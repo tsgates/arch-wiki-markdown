@@ -22,15 +22,6 @@ Usage
 
 First, invoke the i2prouter daemon:
 
-> SysV
-
-    /etc/rc.d/i2prouter start
-
-(add i2prouter to the DAEMONS array in your /etc/rc.conf to start at
-boot)
-
-> systemd
-
     systemctl start i2prouter.service
 
 (issue systemctl enable i2prouter.service to start at boot)
@@ -61,8 +52,15 @@ External Links
 -   I2P Wikipedia entry
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=I2P&oldid=219620"
+"https://wiki.archlinux.org/index.php?title=I2P&oldid=306037"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 20 March 2014, at 17:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,19 +1,11 @@
 Extra Keyboard Keys in Console
 ==============================
 
-> Summary
+Related articles
 
-A general overview of how to assign actions to extra keyboard keys.
-
-> Related
-
-Xorg
-
-Xmodmap
-
-Extra Keyboard Keys
-
-Extra Keyboard Keys in Xorg
+-   Extra Keyboard Keys
+-   Extra Keyboard Keys in Xorg
+-   Map scancodes to keycodes
 
 When using the console, you can use hotkeys to print a specific
 character. Moreover we can also print a sequence of characters and some
@@ -27,6 +19,14 @@ belongs to is updated, editing this file is discouraged. It is better to
 integrate the existing keymap with a personal keymap. The loadkeys
 utility can do this.
 
+Contents
+--------
+
+-   1 Creating a custom keymap
+-   2 Adding directives
+    -   2.1 Other examples
+-   3 Saving changes
+
 Creating a custom keymap
 ------------------------
 
@@ -37,13 +37,18 @@ method is to mimic the directory hierarchy in /usr/local:
     # vim /usr/local/share/kbd/keymaps/personal.map
 
 As a side note, it is worth noting that such a personal keymap is useful
-also to redefine the behavior of keys already treated by the default
+also to redefine the behaviour of keys already treated by the default
 keymap: when loaded with loadkeys, the directives in the default keymap
 will be replaced when they conflict with the new directives and
 conserved otherwise. This way, only changes to the keymap must be
 specified in the personal keymap.
 
-Adding Directives
+Tip:You can also edit an existing keymap located in the
+/usr/share/kbd/keymaps/ directory tree. Keymaps have an .map.gz
+extension, for example us.map.gz is an American keymap. Just copy the
+keymap to /usr/local/share/kbd/keymaps/personal.map.gz and gunzip it.
+
+Adding directives
 -----------------
 
 Two kinds of directives are required in this personal keymap. First of
@@ -84,26 +89,54 @@ system into hibernation, the following keymap is added:
 
     string F70 = "sudo /usr/sbin/hibernate\n"
 
+> Other examples
+
+-   To make the Right Alt key same as Left Alt key (for Emacs), use the
+    following line in your keymap. It will include the file
+    /usr/share/kbd/keymaps/i386/include/linux-with-two-alt-keys.inc,
+    check it for details.
+
+    include "linux-with-two-alt-keys"
+
+-   To swap CapsLock with Escape (for Vim), remap the respective
+    keycodes:
+
+    keycode 1 = Caps_Lock
+    keycode 58 = Escape
+
+-   To make CapsLock another Control key, remap the respective keycode:
+
+    keycode 58 = Control
+
+-   To swap CapsLock with Left Control key, remap the respective
+    keycodes:
+
+    keycode 29 = Caps_Lock
+    keycode 58 = Control
+
 Saving changes
 --------------
 
 In order to make use of the personal keymap, it must be loaded with
-'loadkeys':
+loadkeys:
 
     $ loadkeys /usr/local/share/kbd/keymaps/personal.map
 
 However this keymap only active for the current session. In order to
-load the keymap at boot it is necessary to add the following to
-/etc/rc.local:
-
-    loadkeys -q /usr/local/share/kbd/keymaps/personal.map&
-
-Note that this line must be preceded by all occurrences of 'setkeycodes'
-since the keymap may use the keycodes set by 'setkeycodes'.
+load the keymap at boot, specify the full path to the file in KEYMAP
+variable in /etc/vconsole.conf. The file does not have to be gzipped as
+the official keymaps provided by kbd.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Extra_Keyboard_Keys_in_Console&oldid=222861"
+"https://wiki.archlinux.org/index.php?title=Extra_Keyboard_Keys_in_Console&oldid=287572"
 
 Category:
 
 -   Keyboards
+
+-   This page was last modified on 11 December 2013, at 00:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

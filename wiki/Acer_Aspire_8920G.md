@@ -11,40 +11,34 @@ you. This machine is running 2.6.31-ARCH and all the hardware is ok
 other than having to load the wireless driver iwl4965 and nvidia
 everything else just worked from the core install.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-|     -   1.1 Standard Hardware                                            |
-|                                                                          |
-| -   2 System Files and Command Outputs                                   |
-|     -   2.1 Command Outputs                                              |
-|         -   2.1.1 lsusb                                                  |
-|         -   2.1.2 lspci                                                  |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Wireless                                                     |
-|     -   3.2 Nvidia Graphics                                              |
-|     -   3.3 Window Decorator & Compiz Error                              |
-|         -   3.3.1 Disable Compiz and set Gnome to use Metacity           |
-|         -   3.3.2 Loading Compiz with gtk-window-decorator               |
-|                                                                          |
-| -   4 Tips & Tricks                                                      |
-|     -   4.1 fstab mounting and offline drives                            |
-|     -   4.2 Ok, I've mounted my network shares now my laptop hangs on    |
-|         shutdown!                                                        |
-|     -   4.3 Saving Power                                                 |
-|         -   4.3.1 Cpufreq is our first port of call                      |
-|             -   4.3.1.1 Install the components                           |
-|             -   4.3.1.2 Now setup the modules and daemons                |
-|             -   4.3.1.3 Now configure the files for powersaving          |
-|                                                                          |
-|         -   4.3.2 Bluetooth                                              |
-|             -   4.3.2.1 Verify that it works                             |
-|             -   4.3.2.2 Saving power by turning off bluetooth by default |
-|                 when the system is logged into the Desktop               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+    -   1.1 Standard Hardware
+-   2 System Files and Command Outputs
+    -   2.1 Command Outputs
+        -   2.1.1 lsusb
+        -   2.1.2 lspci
+-   3 Troubleshooting
+    -   3.1 Wireless
+    -   3.2 Nvidia Graphics
+    -   3.3 Window Decorator & Compiz Error
+        -   3.3.1 Disable Compiz and set Gnome to use Metacity
+        -   3.3.2 Loading Compiz with gtk-window-decorator
+-   4 Tips & Tricks
+    -   4.1 fstab mounting and offline drives
+    -   4.2 Ok, I've mounted my network shares now my laptop hangs on
+        shutdown!
+    -   4.3 Saving Power
+        -   4.3.1 Cpufreq is our first port of call
+            -   4.3.1.1 Install the components
+            -   4.3.1.2 Now setup the modules and daemons
+            -   4.3.1.3 Now configure the files for powersaving
+        -   4.3.2 Bluetooth
+            -   4.3.2.1 Verify that it works
+            -   4.3.2.2 Saving power by turning off bluetooth by default
+                when the system is logged into the Desktop
 
 Hardware
 --------
@@ -179,7 +173,7 @@ and just need to dot the i's and cross the t's to polish things off.
 
 > Wireless
 
-Works out of the box. See Network Configuration.
+Works out of the box. See Network configuration.
 
 > Nvidia Graphics
 
@@ -602,8 +596,15 @@ Then add this line in bold to nano and save the file
     # about 20~30 seconds which just plain sucks!
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_8920G&oldid=238822"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_8920G&oldid=304886"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 16 March 2014, at 08:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

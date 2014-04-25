@@ -17,34 +17,27 @@ by this document.
 
 See also: Pacman package signing
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Web of Trust - Simple introduction                                 |
-| -   3 Pacman's keyring                                                   |
-| -   4 Arch Key Signing keys                                              |
-|     -   4.1 Use case: Arch Key Signing Keys creation                     |
-|     -   4.2 Use case: Signing of developer's keys                        |
-|                                                                          |
-| -   5 Package signing by developers                                      |
-|     -   5.1 Use case                                                     |
-|                                                                          |
-| -   6 Installation of KSK by the users                                   |
-|     -   6.1 Use case                                                     |
-|                                                                          |
-| -   7 Package verification                                               |
-|     -   7.1 Use case                                                     |
-|                                                                          |
-| -   8 Affected tools                                                     |
-|     -   8.1 Makepkg                                                      |
-|     -   8.2 devtools                                                     |
-|     -   8.3 pacman                                                       |
-|     -   8.4 pacman-key                                                   |
-|                                                                          |
-| -   9 Final comments                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Web of Trust - Simple introduction
+-   3 Pacman's keyring
+-   4 Arch Key Signing keys
+    -   4.1 Use case: Arch Key Signing Keys creation
+    -   4.2 Use case: Signing of developer's keys
+-   5 Package signing by developers
+    -   5.1 Use case
+-   6 Installation of KSK by the users
+    -   6.1 Use case
+-   7 Package verification
+    -   7.1 Use case
+-   8 Affected tools
+    -   8.1 Makepkg
+    -   8.2 devtools
+    -   8.3 pacman
+    -   8.4 pacman-key
+-   9 Final comments
 
 Introduction
 ------------
@@ -363,3 +356,10 @@ Categories:
 
 -   Package development
 -   Pacman development
+
+-   This page was last modified on 23 April 2012, at 11:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

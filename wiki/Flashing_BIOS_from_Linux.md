@@ -12,28 +12,23 @@ successfully run this procedure many times, your mileage may vary. Be
 careful! You may want to consider updating microcode instead if it is
 supported by your system.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 BiosDisk                                                           |
-|     -   2.1 Installation                                                 |
-|     -   2.2 Usage                                                        |
-|                                                                          |
-| -   3 Flashrom                                                           |
-|     -   3.1 Installation                                                 |
-|         -   3.1.1 Method 1: Official repositories (Recommended)          |
-|         -   3.1.2 Method 2: AUR                                          |
-|                                                                          |
-|     -   3.2 Usage                                                        |
-|                                                                          |
-| -   4 FreeDOS                                                            |
-|     -   4.1 Unetbootin                                                   |
-|     -   4.2 Gentoo                                                       |
-|     -   4.3 Images that are too large for a floppy                       |
-|     -   4.4 Usage                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 BiosDisk
+    -   2.1 Installation
+    -   2.2 Usage
+-   3 Flashrom
+    -   3.1 Installation
+        -   3.1.1 Method 1: Official repositories (Recommended)
+        -   3.1.2 Method 2: AUR
+    -   3.2 Usage
+-   4 FreeDOS
+    -   4.1 Unetbootin
+    -   4.2 Gentoo
+    -   4.3 Images that are too large for a floppy
+    -   4.4 Usage
 
 Introduction
 ------------
@@ -114,21 +109,21 @@ Find out if your motherboard and chipset is supported by flashrom at
 this website. Supported Hardware You can also find out if your hardware
 is supported by issuing the following command
 
-    sudo flashrom
+    # flashrom
 
 The above command will tell you your motherboard and chipset. You can
-then find out if your's is supported by issuing this command
+then find out if yours is supported by issuing this command:
 
-    flashrom -L | grep whatevernameyougotfromthefirstcommand
+    $ flashrom -L | grep whatevernameyougotfromthefirstcommand
 
 Read the BIOS image into a file:
 
-     $ flashrom -r backup.bin
+    $ flashrom -r backup.bin
 
 Write a BIOS image (proprietary or LinuxBIOS) on the ROM chip:
 
-     $ flashrom -w newbios.bin
-     $ flashrom -v newbios.bin
+    $ flashrom -w newbios.bin
+    $ flashrom -v newbios.bin
 
 FreeDOS
 -------
@@ -140,7 +135,7 @@ floppy disk image with FreeDOS kernel on it.
 > Unetbootin
 
 By far the easiest way to make a bootable FreeDOS USB Stick is using
-unetbootin, available in the Official Repositories.
+unetbootin, available in the Official repositories.
 
 You should format a pendrive with FAT16 and flag it as "boot" (you may
 do this through a GUI with gparted, qtparted or partitionmanager). Then,
@@ -266,6 +261,13 @@ Or for GRUB2 in /boot/grub/grub.cfg:
      initrd16 /boot/flashbios.img
      }
 
+Or for syslinux in /boot/syslinux/syslinux.cfg:
+
+    LABEL flashbios
+    	MENU LABEL Flash BIOS
+    	LINUX ../memdisk
+    	INITRD ../fdboot.img
+
 Step 4: Reboot, flash, reboot, enjoy your new BIOS
 
 Finally reboot your machine, make sure that your CD drive is first in
@@ -274,8 +276,15 @@ boots. If using the GRUB method, just choose the new entry on the list,
 and it should boot into FreeDOS.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Flashing_BIOS_from_Linux&oldid=255089"
+"https://wiki.archlinux.org/index.php?title=Flashing_BIOS_from_Linux&oldid=305755"
 
 Category:
 
 -   Mainboards and BIOS
+
+-   This page was last modified on 20 March 2014, at 02:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

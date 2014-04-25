@@ -1,20 +1,17 @@
 XMLTV HOWTO
 ===========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What does XMLTV actually *do* ?                                    |
-| -   2 Why XMLTV is so problematic?                                       |
-| -   3 What about the DVB-T EPG ?                                         |
-| -   4 Compilation                                                        |
-|     -   4.1 Make a package                                               |
-|     -   4.2 Compile by hand                                              |
-|                                                                          |
-| -   5 Configuring XMLTV                                                  |
-| -   6 Checking XMLTV actually works                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 What does XMLTV actually *do* ?
+-   2 Why XMLTV is so problematic?
+-   3 What about the DVB-T EPG ?
+-   4 Compilation
+    -   4.1 Make a package
+    -   4.2 Compile by hand
+-   5 Configuring XMLTV
+-   6 Checking XMLTV actually works
 
 What does XMLTV actually *do* ?
 -------------------------------
@@ -76,7 +73,7 @@ You will be prompted for every grabber. The script will tell you, which
 grabber isn't supported and why. You will have to install additional
 dependencies then. For the grabber "tv_grab_eu_epgdata" for example you
 will have to install perl-datetime-format-strptime from AUR. Add these
-dependecies in the PKGBUILD and run makepkg.
+dependencies in the PKGBUILD and run makepkg.
 
 > Compile by hand
 
@@ -165,7 +162,7 @@ data. It should look like this
 
     <programme start="20070330035500 +0100" stop="20070330042000 +0100" channel="abc1.disney.com">
        <title>8 Simple Rules for Dating My Teenage Daughter</title>
-       Rory's Got a Girlfriend
+       <sub-title>Rory's Got a Girlfriend</sub-title>
        <desc lang="en">Sitcom in which a father has his hands full when his wife returns to work and he is left to supervise their teenage daughters. Paul has to face the fact that his son wants to start dating girls, and Kerry envies her sister.</desc>
        <credits>
          <actor>John Ritter</actor>
@@ -174,8 +171,15 @@ data. It should look like this
 except there'll be pages of it.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=XMLTV_HOWTO&oldid=225291"
+"https://wiki.archlinux.org/index.php?title=XMLTV_HOWTO&oldid=258180"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 22 May 2013, at 00:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -10,29 +10,24 @@ better performance, reliability, and features.
 
 Source: Ext4 - Linux Kernel Newbies
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Creating ext4 partitions from scratch                              |
-| -   2 Migrating from ext3 to ext4                                        |
-|     -   2.1 Mounting ext3 partitions as ext4 without converting          |
-|         -   2.1.1 Rationale                                              |
-|         -   2.1.2 Procedure                                              |
-|                                                                          |
-|     -   2.2 Converting ext3 partitions to ext4                           |
-|         -   2.2.1 Rationale                                              |
-|         -   2.2.2 Procedure                                              |
-|         -   2.2.3 Migrating files to extents                             |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Remove reserved blocks                                       |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Data corruption                                              |
-|     -   4.2 Barriers and Performance                                     |
-|         -   4.2.1 E4rat                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Creating ext4 partitions from scratch
+-   2 Migrating from ext3 to ext4
+    -   2.1 Mounting ext3 partitions as ext4 without converting
+        -   2.1.1 Rationale
+        -   2.1.2 Procedure
+    -   2.2 Converting ext3 partitions to ext4
+        -   2.2.1 Rationale
+        -   2.2.2 Procedure
+        -   2.2.3 Migrating files to extents
+-   3 Tips and tricks
+    -   3.1 Remove reserved blocks
+-   4 Troubleshooting
+    -   4.1 Data corruption
+    -   4.2 Barriers and Performance
+        -   4.2.1 E4rat
 
 Creating ext4 partitions from scratch
 -------------------------------------
@@ -144,8 +139,7 @@ partition is not fully converted.
 
 -   The conversion process with e2fsprogs must be done when the drive is
     not mounted. If converting one's root (/) partition, the simplest
-    way to achieve this is to boot from some other live medium, as
-    described in the 'Prerequisites' section above.
+    way to achieve this is to boot from some other live medium.
     -   Boot the live medium (if necessary).
     -   For each partition to be converted to ext4:
         -   Ensure the partition is NOT mounted
@@ -205,21 +199,22 @@ Tips and tricks
 
 > Remove reserved blocks
 
-By default 5% of a filesystem will be flagged as reserved for root user.
-For modern high-capacity disks, this is much higher than necessary -
-particularly if the partition is not being used for system files. It is
-generally safe to reduce the percentage of reserved blocks to free up
-disk space when the partition is either
+By default 5% of a filesystem will be flagged as reserved for root user
+to avoid fragmentation. For modern high-capacity disks, this is higher
+than necessary if the partition is used as long-term archive (see this
+email for more info). It is generally safe to reduce the percentage of
+reserved blocks to free up disk space when the partition is either
 
 -   Very large (for example >50 G)
--   Not being used for system files
+-   Used as long-term archive
 
 Use the tune2fs utility to do this. The command below would set the
 percentage of reserved blocks on the partition /dev/sdXY to 1.0%:
 
     tune2fs -m 1.0 /dev/sdXY
 
-If you need to know your drives labels type the following:
+If you need to find your drive's device name, issue the following
+command:
 
     df -T | awk '{print $1,$2,$NF}' | grep "^/dev"
 
@@ -274,8 +269,15 @@ partition to improve access time, and preloads them at the very
 beginning of the boot process.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ext4&oldid=242195"
+"https://wiki.archlinux.org/index.php?title=Ext4&oldid=286425"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 5 December 2013, at 21:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

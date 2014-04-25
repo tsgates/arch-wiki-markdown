@@ -78,8 +78,15 @@ Hibernation (is still flaky). Suspend seems to work OK with kernel
 2.6.35, xorg 1.9.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_7720&oldid=196474"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_7720&oldid=304875"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 16 March 2014, at 08:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

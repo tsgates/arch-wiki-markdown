@@ -1,7 +1,7 @@
 Notmuch
 =======
 
-> Summary
+Summary help replacing me
 
 This article explains how to install and configure notmuch.
 
@@ -14,21 +14,18 @@ of xapian. Much like Sup, it focuses on one thing: indexing your email
 messages. Notmuch can be used as an email reader, or simply as an
 indexer and search tool for other MUAs, like mutt.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 First time Usage                                                   |
-| -   3 Frontends                                                          |
-|     -   3.1 Emacs                                                        |
-|     -   3.2 Vim                                                          |
-|     -   3.3 alot                                                         |
-|     -   3.4 bower                                                        |
-|     -   3.5 ner                                                          |
-|                                                                          |
-| -   4 Integrating with mutt                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 First time Usage
+-   3 Frontends
+    -   3.1 Emacs
+    -   3.2 Vim
+    -   3.3 alot
+    -   3.4 bower
+    -   3.5 ner
+-   4 Integrating with mutt
 
 Overview
 --------
@@ -40,7 +37,7 @@ provide a way to permanently delete unwanted email messages. It doesn't
 fetch or send mails, nor does it store your email addresses, you'll need
 to use programs like offlineimap, msmtp and abook for those tasks.
 
-Notmuch is available in the Official Repositories: notmuch or
+Notmuch is available in the official repositories: notmuch or
 notmuch-git from the AUR
 
 It provides python, vim, and emacs bindings.
@@ -81,29 +78,27 @@ type:
 > alot
 
 alot is a standalone CLI interface for notmuch, written in python. It is
-available from AUR:
-
-alot [1]
-
-alot-git [2]
+available from AUR as alot or alot-git.
 
 Alot uses mailcap for handling different kinds of files. This currently
 includes html mails, which means that you need to configure a ~/.mailcap
 file in order to view html mails. As minimum, put this line into your
 ~/.mailcap:
 
-    text/html; w3m -dump %s; nametemplate=%s.html; copiousoutput
+     text/html; w3m -dump %s; nametemplate=%s.html; copiousoutput
 
 More file handlers can be configured of course.
 
 > bower
 
-bower[3] is another CLI interface, this one is written in Mercury[4].
+bower is another CLI interface, this one is written in Mercury.
 
 > ner
 
-ner - notmuch email reader [5] is yet another CLI interface, apparently
+ner - notmuch email reader - is yet another CLI interface, apparently
 written in C++.
+
+ner-git is avaiable from the AUR.
 
 Integrating with mutt
 ---------------------
@@ -117,8 +112,15 @@ blogpost steps through how to setup notmuch with mutt, but the
 information is a little outdated.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Notmuch&oldid=251917"
+"https://wiki.archlinux.org/index.php?title=Notmuch&oldid=301790"
 
 Category:
 
 -   Email Client
+
+-   This page was last modified on 24 February 2014, at 15:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

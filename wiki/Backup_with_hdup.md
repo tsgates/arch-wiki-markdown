@@ -1,25 +1,20 @@
 Backup with hdup
 ================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Intro                                                              |
-|     -   1.1 Features                                                     |
-|     -   1.2 Other backup programs                                        |
-|                                                                          |
-| -   2 Installing/running/restoring                                       |
-|     -   2.1 Installing and setting hdup up                               |
-|     -   2.2 Running hdup                                                 |
-|     -   2.3 Restoring backups                                            |
-|     -   2.4 More goodies: encryption and ssh                             |
-|         -   2.4.1 Backing up over SSH                                    |
-|                                                                          |
-|     -   2.5 Tips                                                         |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Intro
+    -   1.1 Features
+    -   1.2 Other backup programs
+-   2 Installing/running/restoring
+    -   2.1 Installing and setting hdup up
+    -   2.2 Running hdup
+    -   2.3 Restoring backups
+    -   2.4 More goodies: encryption and ssh
+        -   2.4.1 Backing up over SSH
+    -   2.5 Tips
+-   3 Troubleshooting
 
 Intro
 -----
@@ -182,12 +177,17 @@ that you can decrypt them manually with
 
 in case you need it.
 
--   For other encryption (e.g. mcrypt), just add
+-   For mcrypt encryption
 
-    algorithm = mcrypt
+    algorithm = rijndael-192
+    key = <path to the key file>
 
-In this case, hdup will ask for a password both when archiving and
-restoring.
+If you want to use another algorithm choose one from
+
+    mcrypt -list
+
+Note: Key file will be needed for decryption, so it's not a good idea to
+keep it on the same drive you're backing up.
 
 Backing up over SSH
 
@@ -237,8 +237,15 @@ solved the following error:
     /bin/tar: /opt/backup/debian/etc/filelist: file name read contains null
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Backup_with_hdup&oldid=198713"
+"https://wiki.archlinux.org/index.php?title=Backup_with_hdup&oldid=282029"
 
 Category:
 
 -   System recovery
+
+-   This page was last modified on 8 November 2013, at 21:02.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

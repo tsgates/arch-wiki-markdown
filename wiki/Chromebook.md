@@ -8,83 +8,308 @@ Chromebook
   ------------------------ ------------------------ ------------------------
 
 This article is to provide information on how to get Arch up and running
-on the Chromebook series of laptops (or netbooks) as built by Samsung,
-Acer, Google.
+on the Chromebook series of laptops built by Acer, HP, Samsung, Toshiba,
+and Google. Currently overhauling all of this and trying to get more
+specific model pages built with uniform methods listed here.
 
-Discussion of this topic began in this forum thread:
-https://bbs.archlinux.org/viewtopic.php?id=148602
+Contents
+--------
 
-Initially written with the intention of getting a Samsung Series 5 550
-to dual boot with Arch. (Only reason for the dual boot is to potentially
-collect firmware changes pushed downward from Chromeos).
-
-  
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Model Specific Overview                                            |
-| -   2 General Chromebook Installation                                    |
-|     -   2.1 Pre-requisites                                               |
-|     -   2.2 Developer Mode                                               |
-|     -   2.3 Repartitioning                                               |
-|     -   2.4 cgpt command                                                 |
-|         -   2.4.1 Example                                                |
-|                                                                          |
-| -   3 Samsung Series 5 550                                               |
-|     -   3.1 Developer Mode                                               |
-+--------------------------------------------------------------------------+
+-   1 Model Specific Overview
+-   2 General Chromebook Installation
+    -   2.1 Pre-requisites
+    -   2.2 Developer Mode
+    -   2.3 Repartitioning
+    -   2.4 cgpt command
+        -   2.4.1 Example
+-   3 Samsung Series 5 550
+    -   3.1 Developer Mode
+-   4 Chromebook Pixel
 
 Model Specific Overview
 -----------------------
 
-(as copied from Wikipedia)
+Chromebook Models
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Manufacturer   Model                 Available   Generation   Processor                       RAM         Storage                   Screen size   Weight           Base price
-  -------------- --------------------- ----------- ------------ ------------------------------- ----------- ------------------------- ------------- ---------------- ---------------------
-  Google         Cr-48                 Dec 2010    Prototype    1.66 GHz Intel Atom N455        2 GB DDR3   16 GB Solid-state drive   12.1 in       3.8 lb           Not for retail sale
+Available
 
-  Samsung        Series 5 (XE500C21)   Jun 2011    1            1.66 GHz Intel Atom N570        2 GB DDR3   16 GB Solid-state drive   12.1 in       3.06 - 3.26 lb   $349.99 Wi-Fi  
-                                                                                                                                                                     $449.99 3G
+Brand
 
-  Acer           AC700                 Jul 2011    1            1.66 GHz Intel Atom N570        2 GB DDR3   16 GB Solid-state drive   11.6 in       3.19 lb          $299.99 Wi-Fi  
-                                                                                                                                                                     $399.99 3G
+Model
 
-  Samsung        Series 5              May 2012    2            1.3 GHz Intel Celeron 867       4 GB DDR3   16 GB Solid-state drive   12.1 in       3.3 lb           $449.99 Wi-Fi  
-                 XE550C22                                                                                                                                            $549.99 3G
+Processor
 
-  Samsung        Series 3              Oct 2012    3            1.7 GHz Samsung Exynos 5 Dual   2 GB DDR3   16 GB Solid-state drive   11.6 in       2.43 lb          $249.99 Wi-Fi  
-                 XE303C12                                                                                                                                            $329.99 3G
+RAM
 
-  Acer           C7 Chromebook         Nov 2012    3            1.1 GHz Intel Celeron 847       2 GB DDR3   320 GB HDD                11.6 in       3 lb             $199.99 Wi-Fi
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Storage
 
-  :  Chromebook models
+Screen
 
-  
+Resolution
+
+Weight
+
+Base Price
+
+Dec 2010
+
+Google
+
+Cr-48
+
+1.66 GHz Intel Atom N455
+
+2 GB  
+DDR3
+
+16 GB SSD
+
+12.1 in  
+(30.7 cm)
+
+1280x800  
+(16:10)
+
+3.8 lb  
+(1.7 kg)
+
+Not for sale.
+
+Jun 2011
+
+Samsung
+
+Series 5  
+XE500C21
+
+1.66 GHz Intel Atom N570
+
+3.06-3.26 lb  
+(1.4–1.5 kg)
+
+$349.99 Wi-Fi  
+$449.99 3G
+
+Jul 2011
+
+Acer
+
+AC700
+
+11.6 in  
+(29.5 cm)
+
+1366x768  
+(16:9)
+
+3.19 lb  
+(1.4 kg)
+
+$299.99 Wi-Fi  
+$399.99 3G
+
+May 2012
+
+Samsung
+
+Series 5  
+XE550C22
+
+1.3 GHz Intel Celeron 867  
+1.6 Ghz Intel Core i5 2467M
+
+4 GB  
+DDR3
+
+12.1 in  
+(30.7 cm)
+
+1280x800  
+(16:10)
+
+3.3 lb  
+(1.5 kg)
+
+$449.99 Wi-Fi  
+$549.99 3G
+
+Oct 2012
+
+Series 3  
+XE303C12
+
+1.7 GHz Samsung Exynos 5250
+
+2 GB  
+DDR3
+
+11.6 in  
+(29.5 cm)
+
+1366x768  
+(16:9)
+
+2.43 lb  
+(1.1 kg)
+
+$249.99 Wi-Fi  
+$329.99 3G
+
+Nov 2012
+
+Acer
+
+C7
+
+1.1 GHz Intel Celeron 847  
+1.5 GHz Intel Celeron 1007U
+
+2-4 GB  
+DDR3
+
+320 GB HDD  
+16 GB SSD
+
+3-3.05 lb  
+(1.4 kg)
+
+$199.99 Wi-Fi
+
+Feb 2013
+
+HP
+
+Pavilion 14  
+Chromebook
+
+1.1 GHz Intel Celeron 847
+
+14 in  
+(35.6 cm)
+
+3.96 lb  
+(1.8 kg)
+
+$329.99 Wi-Fi
+
+Lenovo
+
+ThinkPad X131e  
+Chromebook
+
+1.5 GHz Intel Celeron 1007U
+
+4 GB  
+DDR3
+
+16 GB SSD
+
+11.6 in  
+(29.5 cm)
+
+3.92 lb  
+(1.8 kg)
+
+$429 Wi-Fi
+
+Google
+
+Chromebook  
+Pixel
+
+1.8 GHz Intel Core i5 3427U
+
+32 GB SSD  
+64 GB SSD
+
+12.85 in  
+(32.6 cm)
+
+2560x1700  
+(3:2)
+
+3.35 lb  
+(1.5 kg)
+
+$1249 Wi-Fi  
+$1499 LTE
+
+Oct 2013
+
+HP
+
+Chromebook 11
+
+1.7 GHz Samsung Exynos 5250
+
+2 GB  
+DDR3
+
+16 GB SSD
+
+11.6 in  
+(29.5 cm)
+
+1366x768  
+(16:9)
+
+2.3 lb  
+(1.04 kg)
+
+$279 Wi-Fi
+
+Nov 2013
+
+Chromebook 14
+
+1.4 GHz Intel Celeron 2955U
+
+2 GB DDR3  
+4 GB DDR3
+
+14 in  
+( 35.6 cm)
+
+4.07 lb  
+(1.84 kg)
+
+$299 Wi-Fi  
+$349 HSPA+
+
+Unknown
+
+Acer
+
+C720
+
+2 GB  
+DDR3
+
+11.6 in  
+(29.5 cm)
+
+2.76 lb  
+(1.25 kg)
+
+$199 Wi-Fi
 
 General Chromebook Installation
 -------------------------------
 
 > Pre-requisites
 
-One thing to note is that if you need to claim your free 100gb of google
-drive space, you probably want to do that before your install of arch.
-This needs to happen from chromeos (version > 23) and will not work from
-linux. It is a good idea to use this google drive before installing Arch
-as it will sync/backup the chromeos system as designed.
+You should claim your free 100GB-1TB of Google Drive space before you
+install Arch. This needs to happen from ChromeOS(version > 23), not
+linux. This will sync/backup ChromeOS, as designed.
 
 > Developer Mode
 
-A wealth of information is at
-http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/samsung-sandy-bridge#TOC-Entering-Developer-Mode
-. The notes below are primarily taken from there.
+Developer Mode information on all models is at
+http://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices.
 
-The first step is to enable developer mode on the Chromebook system. Be
-aware that although everything in the "Downloads" area goes to your
-online google drive account, this will delete all stored data.
+First, enable developer mode on your Chromebook. Although everything in
+the "Downloads" area syncs to your Google Drive account, this will
+delete data stored on the hard or solid state drive.
 
 > Repartitioning
 
@@ -145,6 +370,9 @@ partition!.
 Samsung Series 5 550
 --------------------
 
+Reminder- Needs to be moved to its own page given the boatload of new
+development surrounding this model including with coreboot / seabios.
+
 > Developer Mode
 
 Developer mode on the Samsung Series 5 has two levels of access,
@@ -170,9 +398,24 @@ switch towards the back of the device, and reboot.
 Warning:Be gentle with the developer switch! Some people have reported
 that the developer switch breaks easily.
 
+Chromebook Pixel
+----------------
+
+Suspending more than once causes a reboot unless the tpm module is
+enabled with specific options:
+
+    modprobe tpm_tis force=1 interrupts=0
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Chromebook&oldid=252004"
+"https://wiki.archlinux.org/index.php?title=Chromebook&oldid=304166"
 
 Category:
 
 -   Laptops
+
+-   This page was last modified on 12 March 2014, at 14:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

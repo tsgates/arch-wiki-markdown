@@ -10,8 +10,8 @@ Convert ext2 to ext3
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-If you have installed Arch to an ext2 filesystem, it is a good idea to
-enable the journal and turn it into an ext3 filesystem. Journaling
+Note:If you have installed Arch to an ext2 filesystem, it is a good idea
+to enable the journal and turn it into an ext3 filesystem. Journaling
 provides a range of benefits.
 
 1. Identify the partition(s) for conversion by inspecting /etc/fstab and
@@ -19,33 +19,43 @@ the output of the mount command
 
 2. Add a journal to the partition(s):
 
-    sudo tune2fs -j PARTITION
+    # tune2fs -j partition
 
-Where PARTITION is /dev/hda1, /dev/sda1, /dev/discs/disc0/part1, etc.
+Where partition is /dev/sda1, /dev/hda1, /dev/discs/disc0/part1, etc.
 
-2. Edit /etc/fstab and change ext2 to ext3 for the partition.
+3. Edit /etc/fstab and change ext2 to ext3 for the partition.
 
 For example:
 
     /dev/sda3 / ext2 defaults 0 1
 
-becomes
+becomes:
 
     /dev/sda3 / ext3 defaults 0 1
 
-3. Add the ext3 module to /etc/mkinitcpio.conf
+4. Add the ext3 module to /etc/mkinitcpio.conf:
 
     MODULES="ext3"
 
-4. Rebuild the initrd image (for a standard kernel):
+5. Rebuild the initrd image (for a standard kernel):
 
-    sudo mkinitcpio -p linux
+    # mkinitcpio -p linux
 
-See also: Migrating from ext3 to ext4
+See also
+--------
+
+Migrating from ext3 to ext4
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Convert_ext2_to_ext3&oldid=216995"
+"https://wiki.archlinux.org/index.php?title=Convert_ext2_to_ext3&oldid=300513"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 23 February 2014, at 15:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

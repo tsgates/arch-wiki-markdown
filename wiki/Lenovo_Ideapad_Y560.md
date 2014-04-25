@@ -20,23 +20,19 @@ Memory: Up to 8GB ram
 
 Graphics: ATI Mobility Radeon HD 5730
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Initial Installation                                               |
-| -   2 Graphics                                                           |
-|     -   2.1 Catalyst                                                     |
-|     -   2.2 Radeon                                                       |
-|                                                                          |
-| -   3 Networking                                                         |
-|     -   3.1 Wireless                                                     |
-|     -   3.2 Ethernet                                                     |
-|                                                                          |
-| -   4 The Linux-Ideapad Kernel                                           |
-| -   5 Sound                                                              |
-| -   6 Touchpad                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Initial Installation
+-   2 Graphics
+    -   2.1 Catalyst
+    -   2.2 Radeon
+-   3 Networking
+    -   3.1 Wireless
+    -   3.2 Ethernet
+-   4 The Linux-Ideapad Kernel
+-   5 Sound
+-   6 Touchpad
 
 Initial Installation
 --------------------
@@ -48,7 +44,7 @@ increase the extended partition to fill in the gap, then installing Arch
 within new logical partitions inside. Installing the bootloader to
 /dev/sda will allow it to boot into all of the operating systems, though
 you will need to chainload windows (chainloader +1 boot option, see the
-Beginner's Guide for an example).
+Beginners' guide for an example).
 
 Graphics
 --------
@@ -189,9 +185,6 @@ Sound
 -----
 
 ALSA works fine with the sound card, using the snd_hda_intel module.
-However, uDev does not automatically mute the speakers when a headset is
-plugged in, and will need to be scripted or done manually through
-alsamixer. As of 11/29/2012, this issue has been corrected
 
 Touchpad
 --------
@@ -218,8 +211,15 @@ as root, and replace the contents with the following options:
     EndSection
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_Ideapad_Y560&oldid=237334"
+"https://wiki.archlinux.org/index.php?title=Lenovo_Ideapad_Y560&oldid=298129"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 16 February 2014, at 07:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

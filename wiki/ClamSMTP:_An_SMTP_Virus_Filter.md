@@ -15,19 +15,16 @@ Clamav
 
 Postfix
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 CLAMSMTP                                                     |
-|     -   2.2 CLAMAV                                                       |
-|     -   2.3 POSTFIX                                                      |
-|                                                                          |
-| -   3 Testing                                                            |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 CLAMSMTP
+    -   2.2 CLAMAV
+    -   2.3 POSTFIX
+-   3 Testing
+-   4 See also
 
 Installation
 ------------
@@ -165,3 +162,10 @@ Categories:
 
 -   Mail Server
 -   Security
+
+-   This page was last modified on 28 November 2012, at 03:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

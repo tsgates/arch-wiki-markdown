@@ -4,27 +4,23 @@ DeveloperWiki:Backups
 This page provides an overview of the Arch Linux services that require
 backed up.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 BBS                                                                |
-| -   2 Wiki                                                               |
-| -   3 Flyspray                                                           |
-| -   4 Mailman                                                            |
-| -   5 ArchWeb                                                            |
-| -   6 Git                                                                |
-| -   7 SVN                                                                |
-|     -   7.1 Core/Extra Repos                                             |
-|     -   7.2 Community Repos                                              |
-|                                                                          |
-| -   8 System files                                                       |
-|     -   8.1 Gerolde                                                      |
-|     -   8.2 Gudrun                                                       |
-|     -   8.3 Sigurd                                                       |
-|                                                                          |
-| -   9 AUR                                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 BBS
+-   2 Wiki
+-   3 Flyspray
+-   4 Mailman
+-   5 ArchWeb
+-   6 Git
+-   7 SVN
+    -   7.1 Core/Extra Repos
+    -   7.2 Community Repos
+-   8 System files
+    -   8.1 Gerolde
+    -   8.2 Gudrun
+    -   8.3 Sigurd
+-   9 AUR
 
 BBS
 ---
@@ -242,3 +238,10 @@ Retrieved from
 Category:
 
 -   Arch development
+
+-   This page was last modified on 23 April 2012, at 10:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

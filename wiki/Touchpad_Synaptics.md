@@ -1,74 +1,69 @@
 Touchpad Synaptics
 ==================
 
-> Summary
+Related articles
 
-This article details the installation and configuration of the Synaptics
-input driver in Arch Linux.
-
-> Related
-
-Xorg
-
-Touchpad Synaptics/10-synaptics.conf example
+-   Xorg
+-   Touchpad Synaptics/10-synaptics.conf example
 
 This article details the installation and configuration process of the
 Synaptics input driver for Synaptics (and ALPS) touchpads found on most
 notebooks.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Frequently used options                                      |
-|     -   2.2 Other options                                                |
-|     -   2.3 GNOME                                                        |
-|     -   2.4 MATE                                                         |
-|     -   2.5 Configuration on the fly                                     |
-|         -   2.5.1 Console tools                                          |
-|         -   2.5.2 Graphical tools                                        |
-|                                                                          |
-| -   3 Advanced Configuration                                             |
-|     -   3.1 Using xinput to determine touchpad capabilities              |
-|     -   3.2 Synclient                                                    |
-|     -   3.3 Circular Scrolling                                           |
-|     -   3.4 Natural Scrolling                                            |
-|     -   3.5 Software Toggle                                              |
-|     -   3.6 Disable Trackpad while Typing                                |
-|         -   3.6.1 Using automatic palm detection                         |
-|         -   3.6.2 Using .xinitrc                                         |
-|         -   3.6.3 Using a Login Manager                                  |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 xorg.conf.d/50-synaptics.conf doesn't seem to apply under    |
-|         GNOME and MATE                                                   |
-|     -   4.2 ALPS Touchpads                                               |
-|     -   4.3 The touchpad is not working, Xorg.0.log shows "Query no      |
-|         Synaptics: 6003C8"                                               |
-|     -   4.4 Touchpad detected as "PS/2 Generic Mouse" or "Logitech PS/2  |
-|         mouse"                                                           |
-|     -   4.5 Non-functional Synaptics Special Abilities (multi-tap,       |
-|         scrolling, etc.)                                                 |
-|     -   4.6 Disable touchpad upon external mouse detection               |
-|     -   4.7 Cursor Jump                                                  |
-|     -   4.8 Touchpad device is not located at /dev/input/*               |
-|     -   4.9 Firefox and special touchpad events                          |
-|     -   4.10 Opera: horizontal scrolling issues                          |
-|     -   4.11 Scrolling and multiple actions with Synaptics on LG Laptops |
-|     -   4.12 Other external mouse issues                                 |
-|     -   4.13 Touchpad synchronization issues                             |
-|     -   4.14 Delay between a button tap and the actual click             |
-|     -   4.15 SynPS/2 Synaptics TouchPad can not grab event device,       |
-|         errno=16                                                         |
-|     -   4.16 Synaptics Loses Multitouch Detection After Rebooting From   |
-|         Windows                                                          |
-|     -   4.17 Buttonless TouchPads (aka ClickPads)                        |
-|     -   4.18 Touchpad detected as mouse (elantech touchpads)             |
-|                                                                          |
-| -   5 External Resources                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Frequently used options
+    -   2.2 Other options
+    -   2.3 GNOME/Cinnamon
+    -   2.4 MATE
+    -   2.5 Configuration on the fly
+        -   2.5.1 Console tools
+        -   2.5.2 Graphical tools
+-   3 Advanced configuration
+    -   3.1 Using xinput to determine touchpad capabilities
+    -   3.2 Synclient
+    -   3.3 evtest
+    -   3.4 Circular Scrolling
+    -   3.5 Natural scrolling
+    -   3.6 Software toggle
+    -   3.7 Disable trackpad while typing
+        -   3.7.1 Using automatic palm detection
+        -   3.7.2 Using .xinitrc
+        -   3.7.3 Using a login manager
+    -   3.8 Disable touchpad upon external mouse detection
+        -   3.8.1 System with multiple X sessions
+-   4 Troubleshooting
+    -   4.1 Touchpad does not work after resuming from hibernate/suspend
+    -   4.2 Emulate middle (3rd) mouse button
+    -   4.3 xorg.conf.d/50-synaptics.conf doesn't seem to apply under
+        GNOME and MATE
+    -   4.4 ALPS Touchpads
+    -   4.5 The touchpad is not working, Xorg.0.log shows "Query no
+        Synaptics: 6003C8"
+    -   4.6 Touchpad detected as "PS/2 Generic Mouse" or "Logitech PS/2
+        mouse"
+    -   4.7 Non-functional Synaptics special abilities (multi-tap,
+        scrolling, etc.)
+    -   4.8 Cursor jump
+    -   4.9 Touchpad device is not located at /dev/input/*
+    -   4.10 Firefox and special touchpad events
+        -   4.10.1 Firefox 16.0 and earlier
+        -   4.10.2 Firefox 17.0 and later
+    -   4.11 Opera: horizontal scrolling issues
+    -   4.12 Scrolling and multiple actions with Synaptics on LG laptops
+    -   4.13 Other external mouse issues
+    -   4.14 Touchpad synchronization issues
+    -   4.15 Delay between a button tap and the actual click
+    -   4.16 Xorg.log.0 shows SynPS/2 Synaptics touchpad can not grab
+        event device, errno=16
+    -   4.17 Synaptics loses multitouch detection after rebooting from
+        Windows
+    -   4.18 Buttonless touchpads (aka ClickPads)
+    -   4.19 Touchpad detected as mouse
+-   5 See also
 
 Installation
 ------------
@@ -90,11 +85,6 @@ refer to the synaptics manual page:
 
     $ man synaptics
 
-Note:Synaptics 1.0 and higher support input device properties if the
-driver is running on X server 1.6 or higher. On these driver versions,
-Option "SHMConfig" is not needed to enable run-time configuration. See
-man page for more info.
-
 > Frequently used options
 
 The following lists options that many users may wish to configure. Note
@@ -105,52 +95,52 @@ circular scrolling:
 
     /etc/X11/xorg.conf.d/50-synaptics.conf
 
-     Section "InputClass"
-           Identifier "touchpad"
-           Driver "synaptics"
-           MatchIsTouchpad "on"
-                  Option "TapButton1" "1"
-                  Option "TapButton2" "2"
-                  Option "TapButton3" "3"
-                  Option "VertEdgeScroll" "on"
-                  Option "VertTwoFingerScroll" "on"
-                  Option "HorizEdgeScroll" "on"
-                  Option "HorizTwoFingerScroll" "on"
-                  Option "CircularScrolling" "on"
-                  Option "CircScrollTrigger" "2"
-                  Option "EmulateTwoFingerMinZ" "40"
-                  Option "EmulateTwoFingerMinW" "8"
-                  Option "CoastingSpeed" "0"
-                  ...
-     EndSection
+    Section "InputClass"
+        Identifier "touchpad"
+        Driver "synaptics"
+        MatchIsTouchpad "on"
+            Option "TapButton1" "1"
+            Option "TapButton2" "2"
+            Option "TapButton3" "3"
+            Option "VertEdgeScroll" "on"
+            Option "VertTwoFingerScroll" "on"
+            Option "HorizEdgeScroll" "on"
+            Option "HorizTwoFingerScroll" "on"
+            Option "CircularScrolling" "on"
+            Option "CircScrollTrigger" "2"
+            Option "EmulateTwoFingerMinZ" "40"
+            Option "EmulateTwoFingerMinW" "8"
+            Option "CoastingSpeed" "0"
+            ...
+    EndSection
 
- TapButton1
+ TapButton1 
     (integer) configures which mouse-button is reported on a non-corner,
     one finger tap.
- TapButton2
+ TapButton2 
     (integer) configures which mouse-button is reported on a non-corner,
     two finger tap
- TapButton3
+ TapButton3 
     (integer) configures which mouse-button is reported on a non-corner,
     three finger tap
- RBCornerButton
+ RBCornerButton 
     (integer) configures which mouse-button is reported on a right
     bottom corner, one finger tap (use Option "RBCornerButton" "3" to
     achieve Ubuntu style tap behaviour for right mouse button in lower
     right corner)
- RTCornerButton
+ RTCornerButton 
     (integer) as above, but for top right corner, one finger tap.
- VertEdgeScroll
+ VertEdgeScroll 
     (boolean) enables vertical scrolling while dragging across the right
     edge of the touch pad.
- HorizEdgeScroll
+ HorizEdgeScroll 
     (boolean) enables horizontal scrolling while dragging across the
     bottom edge of the touch pad.
- VertTwoFingerScroll
+ VertTwoFingerScroll 
     (boolean) enables vertical scrolling using two fingers.
- HorizTwoFingerScroll
+ HorizTwoFingerScroll 
     (boolean) enables horizontal scrolling using two fingers.
- EmulateTwoFingerMinZ/W
+ EmulateTwoFingerMinZ/W 
     (integer) play with this value to set the precision of two finger
     scroll.
 
@@ -158,33 +148,29 @@ An example with a brief description of all options. As usual settings
 will vary between machines. It is recommended that you discover your own
 options using synclient.
 
-Note:If you find that your hand frequently brushes your touchpad,
-causing the TapButton2 option to be triggered (which will more than
-likely paste from your clipboard), and you do not mind losing
-two-finger-tap functionality, set TapButton2 to -1.
+> Note:
 
-Note:Recent versions include a "Coasting" feature, enabled by default,
-which may have the undesired effect of continuing almost any scrolling
-until the next tap or click, even if you are no longer touching the
-touchpad. This means that to scroll just a bit, you need to scroll (by
-using the edge, or a multitouch option) and then almost immediately tap
-the touchpad, otherwise scrolling will continue forever. If wish to
-avoid this, set CoastingSpeed to 0.
+-   If you find that your hand frequently brushes your touchpad, causing
+    the TapButton2 option to be triggered (which will more than likely
+    paste from your clipboard), and you do not mind losing
+    two-finger-tap functionality, set TapButton2 to -1.
+-   Recent versions include a "Coasting" feature, enabled by default,
+    which may have the undesired effect of continuing almost any
+    scrolling until the next tap or click, even if you are no longer
+    touching the touchpad. This means that to scroll just a bit, you
+    need to scroll (by using the edge, or a multitouch option) and then
+    almost immediately tap the touchpad, otherwise scrolling will
+    continue forever. If wish to avoid this, set CoastingSpeed to 0.
 
 > Other options
 
- VertScrollDelta and HorizScrollDelta
+ VertScrollDelta and HorizScrollDelta 
     (integer) configures the speed of scrolling, it's a bit
     counter-intuitive because higher values produce greater precision
     and thus slower scrolling. Negative values cause natural scrolling
     like in OS X.
 
- SHMConfig
-    (boolean) Switch on/off shared memory for run-time debugging. This
-    option does not have an effect on run-time configuration anymore and
-    is only useful for hardware event debugging.
-
-> GNOME
+> GNOME/Cinnamon
 
 Users of GNOME may have to edit its configuration as well, because in
 default it is set to disable tapping to click, horizontal scrolling and
@@ -201,33 +187,43 @@ To change these settings in Gnome 3:
 2.  Click Mouse and Touchpad.
 3.  Change the settings on the Touchpad tab.
 
+To change these settings in Cinnamon:
+
+1.  Open Cinnamon System Settings.
+2.  Click Mouse and Touchpad.
+3.  Change the settings on the Touchpad tab.
+
 Gnome settings daemon may override existing settings (for example ones
 set in xorg.conf.d) for which there is no equivalent in any of the
 graphical configuration utilities. It is possible to stop gnome from
 touching mouse settings at all:
 
 1.  Run dconf-editor
-2.  Edit /org/gnome/settings-daemon/plugins/mouse/
+2.  Edit /org/gnome/settings-daemon/plugins/mouse/ (or
+    /org/cinnamon/settings-daemon/plugins/mouse/ for cinnamon)
 3.  Uncheck the active setting
 
 It will now respect your system's existing synaptics configuration.
+
+Remember: Since Gnome works on a user by user basis, when you run
+dconf-editor or gconf-editor, this should be done in your current user
+session. Repeat this procedure for each and every user you have for this
+computer.
 
 > MATE
 
 As with GNOME, it is possible configure the way MATE handles the
 touchpad:
 
-1.  Run mateconf-editor
-2.  Edit the keys in the desktop/mate/peripherals/touchpad/ folder.
+1.  Run dconf-editor
+2.  Edit the keys in the org.mate.peripherals-touchpad folder.
 
 To prevent Mate settings daemon from overriding existing settings, do as
 follows:
 
-1.  Run mateconf-editor
-2.  Edit /apps/mate_settings_daemon/plugins/mouse/
+1.  Run dconf-editor
+2.  Edit org.mate.SettingsDaemon.plugins.mouse
 3.  Uncheck the active setting.
-
-  
 
 > Configuration on the fly
 
@@ -237,9 +233,6 @@ certain options through a software application, these options are
 applied immediately without needing a restart of Xorg. This is useful to
 test configuration options before you include them in the configuration
 file.
-
-Note:The SHMConfig option has been removed from Synaptics. Configuration
-through synclient doesn't need it anymore.
 
 Warning:On-the-fly configuration is non-permanent and will not remain
 active through a reboot, suspend/resume, or restart of Xorg. This should
@@ -274,28 +267,30 @@ http://live.gnome.org/GPointingDeviceSettings ||
 gpointing-device-settings
 
 Note:For GPointingDeviceSettings to work with Synaptics touchpads both
-xf86-input-synaptics and libsynaptics have to be installed!
+xf86-input-synaptics and libsynaptics have to be installed.
 
--   GSynaptics (Deprecated!) — allows the user to configure options such
-    as horizontal, vertical and circular scrolling as well as the option
-    to enable or disable the touchpad. The GSynaptics website mentions
-    that its development has stopped and that it will eventually be
-    outdated, the application functions perfectly with xorg 1.11,
-    through users looking for a graphical tools are suggested to use
-    GPointingDeviceSettings instead, GSynaptics should only be used as a
-    last resort
+-   Synaptiks (unmaintained) — touchpad configuration and management
+    tool for KDE. It provides a System Settings module to configure
+    basic and advanced features of the touchpad. Additionally it comes
+    with a little system tray application, which can switch the touchpad
+    automatically off, while an external mouse is plugged or while you
+    are typing. This utility is currently unmaintained; moreover it
+    seems to crash under KDE 4.11.
 
-http://gsynaptics.sourceforge.jp/ || gsynaptics
+https://github.com/synaptiks/synaptiks || synaptiks
 
--   Synaptiks — touchpad configuration and management tool for KDE. It
-    provides a System Settings module to configure basic and advanced
-    features of the touchpad. Additionally it comes with a little system
-    tray application, which can switch the touchpad automatically off,
-    while an external mouse is plugged or while you are typing.
+-   kcm_touchpad — touchpad configuration tool for KDE. It provides a
+    System Settings module to configure basic and advanced features of
+    the touchpad. Additionally it comes with a little system tray
+    application (plasmoid), which can switch the touchpad manual or
+    automatically off, while an external mouse is plugged or while you
+    are typing. Received a major update in February 2014, works under
+    KDE SC 4.12+
 
-http://synaptiks.lunaryorn.de || synaptiks
+https://projects.kde.org/projects/playground/utils/kcm-touchpad/repository
+|| kcm_touchpad
 
-Advanced Configuration
+Advanced configuration
 ----------------------
 
 > Using xinput to determine touchpad capabilities
@@ -317,7 +312,7 @@ You can now use xinput to find your touchpad's capabilities:
 
     $ xinput list-props "SynPS/2 Synaptics TouchPad" | grep Capabilities
 
-          Synaptics Capabillities (309):  1, 0, 1, 0, 0, 1, 1
+          Synaptics Capabilities (309):  1, 0, 1, 0, 0, 1, 1
 
 From left to right, this shows:
 
@@ -351,46 +346,21 @@ After you have successfully tried and tested your options through
 synclient, you can make these changes permanent by adding them to
 /etc/X11/xorg.conf.d/50-synaptics.conf.
 
-The synclient monitor can display pressure and placement on the touchpad
-in real-time, allowing further refinement of the default Synaptics
-settings.
+> evtest
 
-You can start the Synaptics monitor with the following command:
+The tool evtest can display pressure and placement on the touchpad in
+real-time, allowing further refinement of the default Synaptics
+settings. The evtest monitoring can be started with:
 
-    $ synclient -m 100
+    $ evtest /dev/input/eventX
 
-Where -m activates the monitor and the following number specifies the
-update interval in milliseconds.
+X denotes the touchpad's ID. It can be found by looking at the output of
+cat /proc/bus/input/devices.
 
-This monitor provides information about the current state of your
-touchpad. For example, if you move the mouse with the touchpad, the x
-and y values in the monitor will change. Therewith you can easy figure
-out your touchpad's dimension which is defined in the LeftEdge-,
-RightEdge-, BottomEdge- and TopEdge-Options.
-
-The abbreviations for the parameters are as follow:
-
-  Abbreviation      Description
-  ----------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------
-  time              Time in seconds since the logging was started.
-  x, y              The x/y coordinates of the finger on the touchpad. The origin is in the upper left corner.
-  z                 The pressure value. It represents the pressure you are using to navigate on your touchpad.
-  f                 Number of fingers currently touching the touchpad.
-  w                 Value that represents the finger width.
-  l,r,u,d,m,multi   Those values represent the state of the left, right, up, down, middle and multi buttons pressed where zero means not pressed and one means pressed.
-  gl,gm,gr          For touchpads which have a guest device, this are the associated button states for guest left, guest middle and guest right pressed (1) and not pressed (0).
-  gdx, gdy          x/y coordinates of the guest device.
-
-If a value constantly is zero, it implies that this option is not
-supported by your device.
-
-Now use synclient to test new values. For example, to adjust minimum
-pointer speed:
-
-    $ synclient MinSpeed=0.5
-
-To make the changes permanent, they will need to be put in your
-/etc/X11/xorg.conf.d/50-synaptics.conf file.
+evtest needs exclusive access to the device which means it cannot be run
+together with an X server instance. You can either kill the X server or
+run evtest from a different virtual terminal (e.g., by pressing
+Ctrl+Alt+2).
 
 > Circular Scrolling
 
@@ -403,12 +373,12 @@ add the following options to the touchpad device section of
 
     /etc/X11/xorg.conf.d/50-synaptics.conf
 
-     Section "InputClass"
-             ...
-             Option      "CircularScrolling"          "on"
-             Option      "CircScrollTrigger"          "0"
-             ...
-     EndSection
+    Section "InputClass"
+        ...
+        Option      "CircularScrolling"          "on"
+        Option      "CircScrollTrigger"          "0"
+        ...
+    EndSection
 
 The option CircScrollTrigger may be one of the following values,
 determining which edge circular scrolling should start:
@@ -431,21 +401,21 @@ you start from.
 To scroll fast, draw small circles in the center of your touchpad. To
 scroll slowly and more precise, draw large circles.
 
-> Natural Scrolling
+> Natural scrolling
 
 It is possible to enable natural scrolling through synaptics. Simply use
 negative values for VertScrollDelta and HorizScrollDelta like so:
 
     /etc/X11/xorg.conf.d/50-synaptics.conf
 
-     Section "InputClass"
-             ...
-             Option      "VertScrollDelta"          "-111"
-             Option      "HorizScrollDelta"         "-111"
-             ...
-     EndSection
+    Section "InputClass"
+        ...
+        Option      "VertScrollDelta"          "-111"
+        Option      "HorizScrollDelta"         "-111"
+        ...
+    EndSection
 
-> Software Toggle
+> Software toggle
 
 You may find it useful to have a software toggle that will turn on or
 off your touchpad, especially if it is extremely sensitive and you are
@@ -457,30 +427,30 @@ daemon determine when to turn off the trackpad.
 You will want to grab xbindkeys if you do not already have key binding
 software.
 
-Then save this script to something such as /sbin/trackpad-toggle.sh:
+Then save this script to something such as /usr/bin/trackpad-toggle.sh:
 
-    /sbin/trackpad-toggle.sh
+    /usr/bin/trackpad-toggle.sh
 
-     #!/bin/bash
-     
-     synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')
+    #!/bin/bash
+
+    synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')
 
 Then finally add a key binding to use the script. It is best to call
 with xbindkeys like so (file ~/.xbindkeysrc):
 
     ~/.xbindkeysrc
 
-     "/sbin/trackpad-toggle.sh"
-         m:0x5 + c:65
-         Control+Shift + space
+    "/usr/bin/trackpad-toggle.sh"
+        m:0x5 + c:65
+        Control+Shift + space
 
 Now just (re)start xbindkeys and Ctrl+Shift+Space will now toggle your
-trackpad!
+trackpad.
 
 Of course you could easily use any other keybinding software, such as
 the ones provided by Xfce4 and GNOME.
 
-> Disable Trackpad while Typing
+> Disable trackpad while typing
 
 Using automatic palm detection
 
@@ -512,23 +482,21 @@ Once you have found the correct settings, save them into
 Using .xinitrc
 
 To have the touchpad disabled automatically when you begin typing, add
-the following line to your ~/.xinitrc before you run your window manager
-(if not using a login manager):
+the following line to your ~/.xinitrc (before any line starting with
+exec, otherwise the command will not be executed):
 
-    $ syndaemon -t -k -i 2 -d &
+    $ syndaemon -t -k -i 2 &
 
- -i 2
+ -i 2 
     sets the idle time to 2 seconds. The idle time specifies how many
     seconds to wait after the last key-press before enabling the
     touchpad again.
- -t
+ -t 
     tells the daemon not to disable mouse movement when typing and only
     disable tapping and scrolling.
- -k
+ -k 
     tells the daemon to ignore modifier keys when monitoring keyboard
     activity (e.g.: allows Ctrl+Left Click).
- -d
-    starts as a daemon, in the background.
 
 More details are available in the man page:
 
@@ -537,9 +505,9 @@ More details are available in the man page:
 If you are using a login manager, you will need to specify the command
 where your DE allows you to do so.
 
-Using a Login Manager
+Using a login manager
 
-The "-d" option is necessary to start syndaemon as a background process
+The -d option is necessary to start syndaemon as a background process
 for post Login instructions.
 
 For GNOME: (GDM)
@@ -550,7 +518,7 @@ Startup Applications. In the Startup Programs tab click the Add button.
 Name the Startup Program whatever you like and input any comments you
 like (or leave this field blank). In the command field add:
 
-    In Gnome 3 run gnome-session-properties to access startup applications. 
+    In Gnome 3 run gnome-session-properties to access startup applications.
 
     $ syndaemon -t -k -i 2 -d &
 
@@ -564,12 +532,149 @@ For KDE: (KDM)
 Goto System Settings > Startup and Shutdown > Autostart, then click Add
 Program, enter:
 
-     syndaemon -t -k -i 2 -d &
+    $ syndaemon -t -k -i 2 -d &
 
 Then check Run in terminal.
 
+> Disable touchpad upon external mouse detection
+
+With the assistance of udev, it is possible to automatically disable the
+touchpad if an external mouse has been plugged in. To achieve this, add
+the following udev rules:
+
+    /etc/udev/rules.d/01-touchpad.rules
+
+    SUBSYSTEM=="input", KERNEL=="mouse[0-9]*", ACTION=="add", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/username/.Xauthority", RUN+="/usr/bin/synclient TouchpadOff=1"
+    SUBSYSTEM=="input", KERNEL=="mouse[0-9]*", ACTION=="remove", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/username/.Xauthority", RUN+="/usr/bin/synclient TouchpadOff=0"
+
+GDM stores Xauthority files in /var/run/gdm in a randomly-named
+directory. For some reason also multiple authority files may appear for
+a user. So you need udev rules like these:
+
+    /etc/udev/rules.d/01-touchpad.rules
+
+    SUBSYSTEM=="input", KERNEL=="mouse[0-9]", ACTION=="add", PROGRAM="/usr/bin/find /var/run/gdm -name username -print -quit", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="$result/database", RUN+="/usr/bin/synclient TouchpadOff=1"
+    SUBSYSTEM=="input", KERNEL=="mouse[0-9]", ACTION=="remove", PROGRAM="/usr/bin/find /var/run/gdm -name username -print -quit", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="$result/database", RUN+="/usr/bin/synclient TouchpadOff=0"
+
+However, these udev rules conflict with syndaemon. To disable touchpad
+and simultaneously kill syndaemon, you can use a rule like this:
+
+    /etc/udev/rules.d/01-touchpad.rules
+
+    SUBSYSTEM=="input", KERNEL=="mouse[0-9]", ACTION=="add", PROGRAM="/usr/bin/find /var/run/gdm -name username -print -quit", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="$result/database", RUN+="/bin/sh -c '/usr/bin/synclient TouchpadOff=1 ; sleep 1; /bin/killall syndaemon; '"
+
+If syndaemon starts automatically with mouse removal, then you can
+combine this with the remove rule above. If you need to start syndaemon
+yourself, then alter the command accordingly with your favourite
+syndaemon options.
+
+System with multiple X sessions
+
+For an environment where multiple users are present, a slightly
+different approach is needed to detect the current users X environment.
+This script will help achieving this:
+
+    /usr/bin/mouse-pnp-event-handler.sh
+
+    #!/bin/sh
+    ## $1 = "add" / "remove"
+    ## $2 = %k from udev 
+
+    ## Set TRACKPAD_NAME according to your configuration. 
+    ## Check your trackpad name with: 
+    ## find /sys/class/input/ -name mouse* -exec udevadm info -a {} \; | grep 'ATTRS{name}'
+    TRACKPAD_NAME="SynPS/2 Synaptics TouchPad"
+
+
+    USERLIST=$(w -h | cut -d' ' -f1 | sort | uniq)
+    MOUSELIST=$(find /sys/class/input/ -name mouse*)
+
+    for CUR_USER in ${USERLIST}; do
+             CUR_USER_XAUTH="$(sudo -Hiu ${CUR_USER} env | grep -e "^HOME=" | cut -d'=' -f2)/.Xauthority"
+
+      
+            ## Can't find a way to get another users DISPLAY variable from an isolated root environment. Have to set it manually.
+            #CUR_USER_DISPL="$(sudo -Hiu ${CUR_USER} env | grep -e "^DISPLAY=" | cut -d'=' -f2)"
+            CUR_USER_DISPL=":0"
+
+            export XAUTHORITY="${CUR_USER_XAUTH}"
+            export DISPLAY="${CUR_USER_DISPL}"
+
+            if [ -f "${CUR_USER_XAUTH}" ]; then
+                    case "$1" in
+                            "add")
+                                    /usr/bin/synclient TouchpadOff=1
+                                    /usr/bin/logger "USB mouse plugged. Disabling touchpad for $CUR_USER. ($XAUTHORITY - $DISPLAY)"
+                            ;;
+                            "remove")
+                                    ## Only execute synclient if there are no external USB mice connected to the system.
+                                    EXT_MOUSE_FOUND="0"
+                                    for CUR_MOUSE in ${MOUSELIST}; do
+                                            if [ "$(cat ${CUR_MOUSE}/device/name)" != "${TRACKPAD_NAME}" ]; then
+                                                    EXT_MOUSE_FOUND="1"
+                                            fi
+                                    done
+                                    if [ "${EXT_MOUSE_FOUND}" == "0" ]; then
+                                            /usr/bin/synclient TouchpadOff=0
+                                            /usr/bin/logger "No additional external mice found. Enabling touchpad for $CUR_USER."
+                                    else
+                                            logger "Additional external mice found. Won't enable touchpad yet for $CUR_USER."
+                                    fi
+                            ;;
+                    esac
+            fi
+    done
+
+Update the TRACKPAD_NAME variable for your system configuration. Run
+find /sys/class/input/ -name mouse* -exec udevadm info -a {} \; | grep 'ATTRS{name}'
+to get a list of useful mice-names. Choose the one for your trackpad.
+
+Then have udev run this script when USB mices are plugged in or out,
+with these udev rules:
+
+    /etc/udev/rules.d/01-touchpad.rules
+
+    SUBSYSTEM=="input", KERNEL=="mouse[0-9]*", ACTION=="add", RUN+="/usr/bin/mouse-pnp-event-handler.sh add %k"
+    SUBSYSTEM=="input", KERNEL=="mouse[0-9]*", ACTION=="remove", RUN+="/usr/bin/mouse-pnp-event-handler.sh remove %k"
+
 Troubleshooting
 ---------------
+
+> Touchpad does not work after resuming from hibernate/suspend
+
+Occasionally touchpads will fail to work when the computer resumes from
+sleep or hibernation. This can often be corrected without rebooting by
+
+-   Switching to a console and back again,
+-   entering sleep mode again, and resuming again, or
+-   locating the correct kernel module, then removing it and inserting
+    it again.
+
+Note:You can use Ctrl-Alt-F1 through F8 to switch to a console without
+using the mouse.
+
+    modprobe -r psmouse #psmouse happens to be the kernel module for my touchpad (Alps DualPoint)
+    modprobe psmouse
+
+Now switch back to the tty that X is running on. If you chose the right
+module, your touchpad should be working again.
+
+> Emulate middle (3rd) mouse button
+
+Add this:
+
+    /etc/X11/xorg.conf.d/10-evdev.conf
+
+    Section "InputClass"
+            Identifier "Emulate Middle Butten"
+            MatchIsPointer "on"
+            Option "Emulate3Buttons" "on"
+    EndSection
+
+to your /etc/X11/xorg.conf.d/10-evdev.conf (or any Xorg conf you want)
+and you will have middle click emulation.
+
+Thx to augegr
 
 > xorg.conf.d/50-synaptics.conf doesn't seem to apply under GNOME and MATE
 
@@ -594,7 +699,13 @@ this behavior.
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-TODOneeds to be rewritten for udev
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: needs to be      
+                           rewritten for udev       
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 For ALPS Touchpads, if the above configuration does not provide the
 desired results, try the following configuration instead:
@@ -655,15 +766,15 @@ MatchDevicePath "/dev/input/event*" to our
 
     /etc/X11/xorg.conf.d/50-synaptics.conf
 
-     Section "InputClass"
-           Identifier "touchpad catchall"
-           Driver "synaptics"
-           MatchIsTouchpad "on"
-           MatchDevicePath "/dev/input/event*"
-                 Option "TapButton1" "1"
-                 Option "TapButton2" "2"
-                 Option "TapButton3" "3"
-     EndSection 
+    Section "InputClass"
+        Identifier "touchpad catchall"
+        Driver "synaptics"
+        MatchIsTouchpad "on"
+        MatchDevicePath "/dev/input/event*"
+            Option "TapButton1" "1"
+            Option "TapButton2" "2"
+            Option "TapButton3" "3"
+    EndSection 
 
 Restart X and check xorg logs again, the error should be gone and the
 touchpad should be functional.
@@ -685,7 +796,7 @@ Among the affected notebooks are the following models:
 
 -   Acer Aspire 7750G
 -   Dell Latitude E6230, E6520, E6430 and E6530 (ALPS DualPoint
-    TouchPad), Inspiron N5110 (ALPS GlidePoint), Inspiron 14R Turbo
+    TouchPad), Inspiron N5110 (ALPS GlidePoint), Inspiron 14R 5420/Turbo
     SE7420/SE7520 (ALPS GlidePoint)
 -   Samsung
     NC110/NF210/QX310/QX410/QX510/SF310/SF410/SF510/RF410/RF510/RF710/RV515
@@ -696,7 +807,7 @@ You can check whether your touchpad is correctly detected by running:
 
 More information can be found in this thread.
 
-> Non-functional Synaptics Special Abilities (multi-tap, scrolling, etc.)
+> Non-functional Synaptics special abilities (multi-tap, scrolling, etc.)
 
 In some cases Synaptics touchpads only work partially. Features like
 two-finger scrolling or two-finger middle-click do not work even if
@@ -708,41 +819,12 @@ If preventing the module from loading twice does not solve your issue,
 try commenting out the toggle "MatchIsTouchpad" (which is now included
 by default in the synaptics config).
 
-> Disable touchpad upon external mouse detection
+If clicking with either 2 or 3 fingers is interpreted as a right-click,
+so you cannot get a middle click either way regardless of configuration,
+this bug is probably the culprit:
+https://bugs.freedesktop.org/show_bug.cgi?id=55365
 
-With the assistance of udev, it is possible to automatically disable the
-touchpad if an external mouse has been plugged in. To achieve this, add
-the following udev rules to /etc/udev/rules.d/01-touchpad.rules:
-
-    /etc/udev/rules.d/01-touchpad.rules
-
-     ACTION=="add", SUBSYSTEM=="input", KERNEL=="mouse[0-9]", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/<your username>/.Xauthority", ENV{ID_CLASS}="mouse", ENV{REMOVE_CMD}="/usr/bin/synclient TouchpadOff=0", RUN+="/usr/bin/synclient TouchpadOff=1"
-     
-
-GDM stores Xauthority files in /var/run/gdm in a randomly-named
-directory. For some reason also multiple authority files may appear for
-a user. So you need udev rules like these:
-
-    ACTION=="add", KERNEL=="mouse[0-9]", SUBSYSTEM=="input", PROGRAM="/usr/bin/find /var/run/gdm -name *username* -print -quit", ENV{DISPLAY}=":0.0",
-    ENV{XAUTHORITY}="$result/database", RUN+="/usr/bin/synclient TouchpadOff=1"
-    ACTION=="remove", KERNEL=="mouse[0-9]", SUBSYSTEM=="input", PROGRAM="/usr/bin/find /var/run/gdm -name *username* -print -quit", ENV{DISPLAY}=":0.0",
-    ENV{XAUTHORITY}="$result/database", RUN+="/usr/bin/synclient TouchpadOff=0"
-
-Note:udev rules must be a single line each, so format accordingly.
-
-Note:These udev rules conflict with syndaemon (see #Using .xinitrc)
-
-To disable touchpad and simultaneously kill syndaemon, you can use a
-rule like this:
-
-    ACTION=="add", KERNEL=="mouse[0-9]", SUBSYSTEM=="input", PROGRAM="/usr/bin/find /var/run/gdm -name *username* -print -quit", ENV{DISPLAY}=":0.0",ENV{XAUTHORITY}="$result/database", RUN+="/bin/sh -c '/usr/bin/synclient TouchpadOff=1 ; sleep 1; /bin/killall syndaemon; '"
-
-If syndaemon starts automatically with mouse removal, then you can
-combine this with the remove rule above. If you need to start syndaemon
-yourself, then alter the command accordingly with your favourite
-syndaemon options.
-
-> Cursor Jump
+> Cursor jump
 
 Some users have their cursor inexplicably jump around the screen. There
 currently no patch for this, but the developers are aware of the problem
@@ -784,22 +866,21 @@ would be used.
   ------------------------ ------------------------ ------------------------
   [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
   ng]                      needs expansion.         ng]
-                           Reason: please use the   
-                           first argument of the    
-                           template to provide a    
-                           brief explanation.       
+                           Reason: TODO: explain    
+                           how to apply this in     
+                           /etc/X11/xorg.conf.d/50- 
+                           synaptics.conf           
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-TODOexplain how to apply this in /etc/X11/xorg.conf.d/50-synaptics.conf
-
 > Firefox and special touchpad events
 
-By default, Firefox is set up to do special events upon tapping or
-scrolling certain parts of your touchpad. You can edit the settings of
-those actions by typing about:config in your Firefox address bar. To
-alter these options, double-click on the line in question, changing
-"true" to "false" and vise versa.
+You can enable/disable some special events that Firefox handles upon
+tapping or scrolling certain parts of your touchpad by editing the
+settings of those actions. Type about:config in your Firefox address
+bar. To alter options, double-click on the line in question.
+
+Firefox 16.0 and earlier
 
 To prevent Firefox from scrolling (backward/forward) through browser
 history and instead scroll through pages, edit these settings as shown:
@@ -813,16 +894,43 @@ clipboard content upon tapping the upper-right corner of your touchpad
 
     middlemouse.contentLoadURL = false
 
+Firefox 17.0 and later
+
+Horizontal scrolling will now by default scroll through pages and not
+through your history. To reenable Mac-style forward/backward with
+two-finger swiping, edit:
+
+    mousewheel.default.action.override_x = 2
+
+You may encounter accidental forwards/backwards while scrolling
+vertically. To change Firefox's sensitivity to horizontal swipes, edit:
+
+    mousewheel.default.delta_multiplier_x
+
+The optimum value will depend on your touchpad and how you use it, try
+starting with 10. A negative value will reverse the swipe directions.
+
 > Opera: horizontal scrolling issues
 
-Same as above. To fix it, go to Tools -> Preferences -> Advanced ->
+Same as above. To fix it, go to Tools > Preferences > Advanced >
 Shortcuts. Select "Opera Standard" mouse setup and click "Edit". In
 "Application" section:
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
+  png]                     this article or section  png]
+                           is disputed.             
+                           Reason: Description here 
+                           is not so clear and i    
+                           don't use Opera,Please   
+                           make it clear :)         
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 -   assign key "Button 6" to command "Scroll left"
 -   assign key "Button 7" to command "Scroll right"
 
-> Scrolling and multiple actions with Synaptics on LG Laptops
+> Scrolling and multiple actions with Synaptics on LG laptops
 
 These problems seem to be occurring on several models of LG laptops.
 Symptoms include: when pressing Mouse Button 1, Synaptics interprets it
@@ -834,8 +942,8 @@ The scrolling issue can be resolved by entering in xorg.conf:
 
     Option "UpDownScrolling" "0"
 
-NOTE that this will make Synaptics interpret one button push as three.
-There is a patch written by Oskar Sandberg[1] that removes these clicks.
+Note:This will make Synaptics interpret one button push as three. There
+is a patch written by Oskar Sandberg[1] that removes these clicks.
 
 Apparently, when trying to compile this against the latest version of
 Synaptics it fails. The solution to this is using the GIT repository for
@@ -848,7 +956,6 @@ To build the package after downloading the tarball and unpacking it,
 execute:
 
     $ cd synaptics-git
-
     $ makepkg
 
 > Other external mouse issues
@@ -913,6 +1020,15 @@ workarounds.
 
 > Delay between a button tap and the actual click
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: On Synaptics     
+                           Driver 1.7.1, the        
+                           FastTaps option has been 
+                           removed. (Discuss)       
+  ------------------------ ------------------------ ------------------------
+
 If you experience a delay between the tap on the touchpad and the actual
 click that is registered you need to enable FastTaps:
 
@@ -921,15 +1037,15 @@ To do so, you should add Option "FastTaps" "1" to
 
     /etc/X11/xorg.conf.d/50-synaptics.conf
 
-     Section "InputClass"
-          Identifier "Synaptics Touchpad"
-          Driver "synaptics"
-          ...
-          Option "FastTaps" "1"
-          ...
-     EndSection
+    Section "InputClass"
+        Identifier "Synaptics Touchpad"
+        Driver "synaptics"
+        ...
+        Option "FastTaps" "1"
+        ...
+    EndSection
 
-> SynPS/2 Synaptics TouchPad can not grab event device, errno=16
+> Xorg.log.0 shows SynPS/2 Synaptics touchpad can not grab event device, errno=16
 
 If you are using Xorg 7.4, you may get a warning like this from
 /var/log/Xorg.0.log, thais is because the driver will grab the event
@@ -946,9 +1062,9 @@ you touchpad section in /etc/X11/xorg.conf.d/50-synaptics.conf:
 
     /etc/X11/xorg.conf.d/50-synaptics.conf
 
-     ...
-     Option "GrabEventDevice" "''boolean''"
-     ...
+    ...
+    Option "GrabEventDevice" "boolean"
+    ...
 
 This will come into effect when X is restarted, though you can also
 change it by using synclient. When changing this parameter with the
@@ -956,7 +1072,7 @@ synclient program, the change will not take effect until the Synaptics
 driver is disabled and re-enabled. This can be achieved by switching to
 a text console and then switching back to X.
 
-> Synaptics Loses Multitouch Detection After Rebooting From Windows
+> Synaptics loses multitouch detection after rebooting from Windows
 
 Many drivers include a firmware that is loaded into flash memory when
 the computer boots. This firmware is not necessarily cleared upon
@@ -965,7 +1081,7 @@ to clear the flash memory is to shutdown completely rather than using
 reboot. It is generally considered best practice to never use reboot
 when switching between operating systems.
 
-> Buttonless TouchPads (aka ClickPads)
+> Buttonless touchpads (aka ClickPads)
 
 Some laptops have a special kind of touchpad which has the mouse buttons
 as part of the tracking plate, instead of being external buttons. For
@@ -975,10 +1091,13 @@ as a left button resulting in the second mouse button being unusable and
 click + drag will not work. Previously support for such devices was
 achieved by using third party patches, but from version 1.6.0 the
 synaptics driver has native multitouch support (using the mtdev
-library).
+library). Note that although the driver registers multiple touches, it
+does not track individual fingers (as of version 1.7.1) which results in
+confusing behavior when using physical buttons of a clickpad for
+drag-and-drop and other gestures. You can look into the
+xf86-input-mtrack driver for better multitouch support.
 
-  
- To enable other buttons modify the touchpad section in
+To enable other buttons modify the touchpad section in
 /etc/X11/xorg.conf.d/50-synaptics.conf (or better, of your custom
 synaptics configuration file prefixed with a higher number):
 
@@ -1008,42 +1127,74 @@ In the following example right button will occupy 40% of the rightmost
 part of the button area. We then proceed to setup the middle button to
 occupy 20% of the touchpad in a small area in the center.
 
-       ...
-       Option     "SoftButtonAreas"  "60% 0 82% 0 40% 59% 82% 0"
-       ...
+    ...
+    Option     "SoftButtonAreas"  "60% 0 82% 0 40% 59% 82% 0"
+    ...
 
 You can use synclient to check the new soft button areas:
 
-       $ synclient -l | grep -i ButtonArea
-           RightButtonAreaLeft     = 3914
-           RightButtonAreaRight    = 0
-           RightButtonAreaTop      = 3918
-           RightButtonAreaBottom   = 0
-           MiddleButtonAreaLeft    = 3100
-           MiddleButtonAreaRight   = 3873
-           MiddleButtonAreaTop     = 3918
-           MiddleButtonAreaBottom  = 0
+    $ synclient -l | grep -i ButtonArea
+
+            RightButtonAreaLeft     = 3914
+            RightButtonAreaRight    = 0
+            RightButtonAreaTop      = 3918
+            RightButtonAreaBottom   = 0
+            MiddleButtonAreaLeft    = 3100
+            MiddleButtonAreaRight   = 3873
+            MiddleButtonAreaTop     = 3918
+            MiddleButtonAreaBottom  = 0
 
 If your buttons aren't working, soft button areas are not changing,
 ensure you do not have a synaptics configuration file distributed by a
 package which is overriding your custom settings (ie. some AUR packages
 distribute configurations prefixed with very high numbers).
 
-  
+These settings cannot be modified on the fly with synclient, however,
+xinput works:
 
-> Touchpad detected as mouse (elantech touchpads)
+    xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Soft Button Areas" 4000 0 4063 0 3000 4000 4063 0
 
-This can happend on some laptops with elantech touchpad, for example
-ASUS x53s. In this situation you need psmouse-elantech package from AUR.
+You cannot use percentages with this command, so look at
+/var/log/Xorg.0.log to figure out the touchpad x and y-axis ranges.
 
-External Resources
-------------------
+> Touchpad detected as mouse
 
--   Synaptics TouchPad driver
+Elantech touchpads:
+
+This can happen with some laptops with an Elantech touchpad, for example
+the ASUS x53s. In this situation you need psmouse-elantech package from
+AUR.
+
+ALPS touchpads:
+
+It can also happen with some newer ALPS touchpads. Run the following to
+see if you have a newer ALPS touchpad:
+
+    $ dmesg | grep "Unknown ALPS"  
+    [  569.861053] psmouse serio1: alps: Unknown ALPS touchpad: E7=73 03 0a, EC=88 b6 06
+
+If you get the Unknown ALPS touchpad line, then you need to install a
+patched psmouse module which you can find at
+https://github.com/he1per/psmouse-dkms-alpsv7
+
+Note:the patch comes from developers at the linux-input@vger.kernel.org
+mailing list, it was packaged and posted to github.
+
+See also
+--------
+
+-   Synaptics touchpad driver
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Touchpad_Synaptics&oldid=252618"
+"https://wiki.archlinux.org/index.php?title=Touchpad_Synaptics&oldid=304518"
 
 Category:
 
 -   Input devices
+
+-   This page was last modified on 14 March 2014, at 20:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

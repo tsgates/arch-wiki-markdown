@@ -1,21 +1,19 @@
 Lenovo ThinkPad X1
 ==================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Model description                                                  |
-| -   2 Drive space customization                                          |
-| -   3 Installation method                                                |
-|     -   3.1 UEFI                                                         |
-|                                                                          |
-| -   4 Hardware                                                           |
-|     -   4.1 Fingerprint Reader                                           |
-|                                                                          |
-| -   5 Power management                                                   |
-| -   6 ACPI                                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Model description
+-   2 Drive space customization
+-   3 Installation method
+    -   3.1 Legacy-BIOS
+    -   3.2 UEFI
+-   4 Hardware
+    -   4.1 Fingerprint Reader
+    -   4.2 Adjusting Backlight Brightness
+-   5 Power management
+-   6 Extra Keys
 
 Model description
 -----------------
@@ -50,38 +48,23 @@ partition, from your installed Windows system.
 Due to the fact that there is no optical drive, you need to install Arch
 from USB stick.
 
-The lazy way to install is just default installation, works flawlessly.
-Installed system will boot in legacy-BIOS mode.
+> Legacy-BIOS
+
+This procedure is far less involved then UEFI and works perfectly.
+
+In order to turn off UEFI booting you will need to boot into your BIOS
+and change the boot mode to Legacy. Afterward, follow the Beginners'
+guide for standard installation instructions.
 
 > UEFI
 
-Note:This procedure reflects a single user's experience, and no attempt
-was made to experiment with different settings.
+Installation from UEFI bootable USB works with the default bootloader,
+so rEFInd is unnecessary. In the BIOS under Startup, set "UEFI/Legacy
+Boot" to UEFI only. The default partition table (and Windows
+installation) uses MBR. For UEFI, reformat the disk as GPT.
 
-Download the official ISO or create your own using something like
-Archiso. Follow the instructions for creating a UEFI bootable USB from
-the ISO. Note that the default bootloader works fine so there's no need
-to replace it with an alternative like rEFInd. In the BIOS under
-Startup, set "UEFI/Legacy Boot" to UEFI only and turn off CSM support
-(this step might not be necessary, try skipping it first if you like).
-
-Upon saving your changes and restarting, the UEFI boot options from the
-USB stick should come up and you can proceed to installing Arch.
-
-It appears that the default partition table (and Windows installation)
-uses MBR. To use UEFI, you should reformat the disk as GPT (wiping the
-drive in the process). Follow the instructions for creating the EFI
-system partition. gdisk recommends a size of 300M. Follow the Beginner's
-Guide to see how to correctly generate (and then fix) the fstab entry
-for the ESP.
-
-Booting using an efibootmgr entry is quite simple (and doesn't require
-any extra packages). Simply follow the instructions for creating the
-EFISTUB and adding the efibootmgr entry. The note about Lenovo Thinkpads
-truncating the UEFI options doesn't apply to the X1: the recommended
-efibootmgr entry works fine. The note about escaping the backslashes in
-the initrd path does apply, verify with efibootmgr -v that the boot
-entry doesn't have any missing characters.
+Booting using an efibootmgr entry works well. The warnings about
+incompatibility and embedding arguments to do not apply.
 
 Hardware
 --------
@@ -92,8 +75,26 @@ video-intel drivers.
 > Fingerprint Reader
 
 fingerprint-gui from the AUR is already patched to work with the X1's
-newer fingerprint reader. Note that the dropdown entry for the
-fingerprint device will be blank.
+newer fingerprint reader. To get the gui's dropdown to recognize your
+device, you'll have to add your user to the plugdev group:
+
+    # gpasswd -a <username> plugdev
+
+It has been seen that the relevant udev rules do not get set properly.
+To do this, open /usr/lib/udev/rules.d/40-libbsapi.rules with your
+favorite text editor to add (or create with) the following lines:
+
+    /usr/lib/udev/rules.d/40-libbsapi.rules
+
+    ATTRS{idVendor}==”147e”, ATTRS{idProduct}==”2020″,   SYMLINK+=”input/touchchip-%k”, MODE=”0664″, GROUP=”plugdev”
+    ATTRS{idVendor}==”147e”, ATTRS{idProduct}==”2020″,   ATTR{power/control}==”*”, ATTR{power/control}=”auto”
+
+Restart your computer for the group and udev changes to take effect.
+
+> Adjusting Backlight Brightness
+
+Add acpi_osi="!Windows 2012" to your kernel parameters (see
+https://bbs.archlinux.org/viewtopic.php?id=158775).
 
 Power management
 ----------------
@@ -105,33 +106,35 @@ Tp_smapi does not seem to work at all.
 
 Suspend works fine, even with status indicator.
 
-ACPI
-----
+Extra Keys
+----------
 
-The only special keys that seems to work out of the box are the sleep,
-wifi, and keyboard backlight keys. All of the others (volume,
-brightness, etc.) need to be mapped using something like acpid. Here are
-the relevant acpi events
+The sleep, wifi, brightness, and keyboard backlight keys all work out of
+the box. All of the others (volume, media, etc.) can be bound using the
+standard X labels:
 
-    ac_adapter ACPI0003:00 00000080 00000000 # adapter unplugged
-    ac_adapter ACPI0003:00 00000080 00000001 # adapter plugged-in
-    battery PNP0C0A:00 00000080 00000001 # battery present
-    button/mute MUTE 00000080 00000000 K
-    button/volumedown VOLDN 00000080 00000000 K
-    button/volumeup VOLUP 00000080 00000000 K
-    video/switchmode VMOD 00000080 00000000 K
-    button/prog1 PROG1 00000080 00000000 K # the thin button above F6
-    video/brightnessdown BRTDN 00000087 00000000
-    video/brightnessup BRTUP 00000086 00000000
-    cd/prev CDPREV 00000080 00000000 K
-    cd/play CDPLAY 00000080 00000000 K
-    cd/next CDNEXT 00000080 00000000 K
-
-I had no luck getting an acpi event for the microphone mute button.
+    XF86ScreenSaver
+    XF86WebCam
+    XF86Display
+    XF86AudioPrev
+    XF86AudioPlay
+    XF86AudioNext
+    XF86AudioMute
+    XF86AudioLowerVolume
+    XF86AudioRaiseVolume
+    XF86AudioMicMute
+    XF86Launch1 # the black button above F6
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_X1&oldid=255356"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_X1&oldid=298130"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 16 February 2014, at 07:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

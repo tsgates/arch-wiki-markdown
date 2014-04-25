@@ -13,36 +13,30 @@ it synchronizes screen savers so they all start and stop together and,
 if screen locking is enabled, only one screen requires a password to
 unlock them all.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Arch Linux                                                   |
-|     -   1.2 Windows and Mac OS X                                         |
-|                                                                          |
-| -   2 Pre-configuration                                                  |
-| -   3 Server configuration                                               |
-|     -   3.1 Arch Linux                                                   |
-|     -   3.2 Windows                                                      |
-|     -   3.3 Mac OS X                                                     |
-|     -   3.4 Configuration examples                                       |
-|                                                                          |
-| -   4 Clients configuration                                              |
-|     -   4.1 Arch Linux                                                   |
-|         -   4.1.1 Autostart                                              |
-|                                                                          |
-|     -   4.2 Windows                                                      |
-|     -   4.3 Mac OS X                                                     |
-|                                                                          |
-| -   5 Known Issues                                                       |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 Keyboard repeat                                              |
-|     -   6.2 Keyboard mapping                                             |
-|     -   6.3 messages.log being spammed with by synergyc                  |
-|                                                                          |
-| -   7 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Arch Linux
+    -   1.2 Windows and Mac OS X
+-   2 Pre-configuration
+-   3 Server configuration
+    -   3.1 Arch Linux
+    -   3.2 Windows
+    -   3.3 Mac OS X
+    -   3.4 Configuration examples
+-   4 Clients configuration
+    -   4.1 Arch Linux
+        -   4.1.1 Use Encryption
+        -   4.1.2 Autostart
+    -   4.2 Windows
+    -   4.3 Mac OS X
+-   5 Known Issues
+-   6 Troubleshooting
+    -   6.1 Keyboard repeat
+    -   6.2 Keyboard mapping
+    -   6.3 messages.log being spammed with by synergyc
+-   7 External Links
 
 Installation
 ------------
@@ -95,19 +89,42 @@ Tip:You may also use either qsynergy from the official repositories or
 quicksynergy from the AUR which provide a GUI to simplify the
 configuration process.
 
-To start the server daemon, run:
-
-    # systemctl start synergys
+Tip:Need to open tcp port 24800
 
 If you experience problems and you wish to run the server in the
 foreground, you can run the following command instead:
 
     # synergys -f
 
-If you want to run the synergy server daemon every time Arch Linux boots
-up,
+The synergy server process needs to attach to your user's X session,
+which means it needs to run as your user otherwise you will see errors
+like this in your logs:
 
-    # systemctl enable synergys
+    Synergy 1.4.12: 2013-06-18T18:45:45 DEBUG: XOpenDisplay(":0.0")
+    Synergy 1.4.12: 2013-06-18T18:45:45 WARNING: primary screen unavailable: unable to open screen
+    Synergy 1.4.12: 2013-06-18T18:45:45 DEBUG: retry in 60 seconds
+
+To get around this, you can create a custom systemd service file to
+start the daemon as your user. Create the file
+/etc/systemd/system/synergys@.service
+
+    [Unit]
+    Description=Synergy Server Daemon
+    After=network.target
+
+    [Service]
+    Type=forking
+    ExecStart=/usr/bin/synergys --config /etc/synergy.conf
+    User=%i
+
+    [Install]
+    WantedBy=multi-user.target
+
+Then enable it as the appropriate user (replacing 'mary' with your
+username):
+
+    # systemctl enable synergys@mary
+    # systemctl start synergys@mary
 
 > Windows
 
@@ -265,6 +282,15 @@ Or, to run synergy in the foreground:
 
 Here, server-host-name is the host name of the server.
 
+Use Encryption
+
+To use the encryption feature type:
+
+    $ synergyc --crypto-pass <pass> <server-host-name>
+
+<pass> is not the choosen passphrase of the server! It can be found in
+the servers log in DEBUG2 mode.
+
 Autostart
 
 There exist several ways to automatically start the Synergy client, and
@@ -297,71 +323,32 @@ The following is an alternative:
 
 For example, using kdm you should edit /usr/share/config/kdm/Xsetup.
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: this section     
-                           does not work for        
-                           systemd (Discuss)        
-  ------------------------ ------------------------ ------------------------
+-   To start the Synergy client with systemd, create a service file,
+    /etc/systemd/system/synergyc@.service and optionally a config file,
+    /etc/conf.d/synergyc.conf
 
--   You can even start synergyc in the init chain by adding the
-    following to /etc/rc.local:
+     /etc/systemd/system/synergyc@.service
 
-    /etc/rc.local
+    [Unit]
+    Description=Synergy Client Daemon
+    After=network.target
 
-    ...
+    [Service]
+    EnvironmentFile=/etc/conf.d/synergyc.conf
+    ExecStart=/usr/bin/synergyc --no-daemon --debug ${DEBUGLEVEL:-INFO} ${SERVERALIAS}
+    User=%i
 
-    echo "Starting Synergy client"
-    #replace server-host-name with the real name
-    synergyc server-host-name
+    [Install]
+    WantedBy=multi-user.target
 
--   A similar result can be obtained by creating a daemon and adding it
-    to the daemons array in /etc/rc.conf; just create a file
-    /etc/rc.d/synergyc with the following content, making sure to set
-    its permissions to chmod 755:
+    /etc/conf.d/synergyc.conf
 
-    /etc/rc.d/synergyc
+    DEBUGLEVEL=WARNING
+    SERVERALIAS=server-name
 
-    #!/bin/bash
-    . /etc/rc.conf
-    . /etc/rc.d/functions
+To start the service for your user,
 
-    #Put the server host name in the following line
-    SERVERALIAS="server-host-name"
-
-    PID=`pidof -o %PPID /usr/bin/synergyc`
-    case "$1" in
-     start)
-       stat_busy "Starting Synergy Client"
-       [ -z "$PID" ] && /usr/bin/synergyc "$SERVERALIAS"
-       if [ $? -gt 0 ]; then
-         stat_fail
-       else
-         /usr/bin/xset r on
-         add_daemon synergyc
-         stat_done
-       fi
-       ;;
-     stop)
-       stat_busy "Stopping Synergy Client"
-       [ ! -z "$PID" ] && kill -9 $PID
-       if [ $? -gt 0 ]; then
-         stat_fail
-       else
-         rm_daemon synergyc
-         stat_done
-       fi
-       ;;
-     restart)
-       $0 stop
-       sleep 1
-       $0 start
-       ;;
-     *)
-       echo "usage: $0 {start|stop|restart}"
-    esac
-    exit 0
+    # systemctl start synergyc@mary
 
 Automatically starting Synergy is also documented in its official
 reference page.
@@ -456,11 +443,17 @@ External Links
 
 -   Synergy website: http://synergy-foss.org
 -   Official documentation: http://synergy-foss.org/docs
--   Gentoo Wiki Synergy Setup: http://en.gentoo-wiki.com/wiki/Synergy
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Synergy&oldid=244719"
+"https://wiki.archlinux.org/index.php?title=Synergy&oldid=305712"
 
 Category:
 
 -   Input devices
+
+-   This page was last modified on 20 March 2014, at 01:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

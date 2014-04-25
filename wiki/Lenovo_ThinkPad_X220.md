@@ -10,20 +10,17 @@ Lenovo ThinkPad X220
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setup                                                              |
-|     -   1.1 Graphics                                                     |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Heat issues                                                  |
-|     -   2.2 My laptop gets stuck in a reboot loop if I resume from       |
-|         suspend! Help!                                                   |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setup
+    -   1.1 Graphics
+    -   1.2 Booting
+-   2 Issues
+    -   2.1 Heat
+    -   2.2 Reboot loop after resume from suspend!
+    -   2.3 Microphone
+-   3 See also
 
 Setup
 -----
@@ -36,10 +33,21 @@ automatically. There's no need for a Xorg configuration file.
 
     pacman -S xf86-video-intel
 
-Configuration
--------------
+> Booting
 
-> Heat issues
+The X220 cannot boot from a GPT disk with legacy BIOS, so either use an
+MBR disk or setup UEFI.
+
+  
+
+Issues
+------
+
+> Heat
+
+Warning:This is quite old and shouldn't be applied on up-to-date systems
+without actual problems. In case of doubt better take a look at
+Intel#Module-based_Powersaving_Options
 
 According to a forum post you should set some power saving options in
 /etc/modprobe.d/modprobe.conf or add them to your kernel line in your
@@ -52,10 +60,10 @@ menu.lst. We use rc6=7 for deepest sleep mode.
 
 As well you could suffer of Kernel Power Regressions.
 
-> My laptop gets stuck in a reboot loop if I resume from suspend! Help!
+> Reboot loop after resume from suspend!
 
 This can be caused by the EFI storage getting too full. Run the
-following commands as root to free up some space -
+following commands as root to free up some space.
 
      # First clear the pstore
      mkdir -p /dev/pstore
@@ -69,6 +77,19 @@ following commands as root to free up some space -
 
 This information was taken from the Lenovo forums
 
+> Microphone
+
+The x220 internal microphone has been the source of many complaints
+across platforms. Specifically, it can generate a lot of static or
+hissing on top of any recorded audio. The workaround is to mute the
+right mic input channel (in audio control programs that allow
+independent channel setting) or to drag the balance slider in a GUI for
+the internal mic level fully to the left.
+
+Note also that the audio jack is a combination headset/mic jack and will
+work with modern smartphone headsets with inline microphones, as an
+alternative.
+
 See also
 --------
 
@@ -76,15 +97,21 @@ See also
     -   Thinkpad X220 model 4287CTO using a msata SSD for 64 bit
         Archlinux
     -   X220 i5
-
 -   Thinkwiki X220 reference
 -   "Arch By Hand" UEFI GPT SSD LUKS Install Script, built on an x220
     tablet with an SSD.
 -   Power saving options for the X220 - Notebook Review Forum
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_X220&oldid=255328"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_X220&oldid=302688"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 1 March 2014, at 07:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

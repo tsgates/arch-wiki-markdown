@@ -4,17 +4,15 @@ Oolite
 Oolite is a space trading / sim game based on the well-known Elite game
 from the 80's.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Troubleshooting                                                    |
-|     -   2.1 Testing for shader problem                                   |
-|     -   2.2 Verify which setting works                                   |
-|     -   2.3 Feedback                                                     |
-|     -   2.4 Radeon HD 2xxx and later videocards                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Troubleshooting
+    -   2.1 Testing for shader problem
+    -   2.2 Verify which setting works
+    -   2.3 Feedback
+    -   2.4 Radeon HD 2xxx and later videocards
 
 Installation
 ------------
@@ -104,3 +102,10 @@ Retrieved from
 Category:
 
 -   Gaming
+
+-   This page was last modified on 16 January 2013, at 14:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

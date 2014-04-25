@@ -8,27 +8,22 @@ such as lighttpd or apache to serve it's pages.
 
 To set up rutorrent, we will need to have rtorrent and lighttpd set up.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 rtorrent                                                           |
-| -   2 lighttpd                                                           |
-|     -   2.1 lighttpd.conf                                                |
-|         -   2.1.1 Test                                                   |
-|                                                                          |
-|     -   2.2 php.ini                                                      |
-|                                                                          |
-| -   3 rutorrent                                                          |
-| -   4 Testing                                                            |
-| -   5 Plugins                                                            |
-| -   6 SSL and Authentication                                             |
-|     -   6.1 User Authentication                                          |
-|     -   6.2 SSL                                                          |
-|                                                                          |
-| -   7 Troubleshooting                                                    |
-| -   8 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 rtorrent
+-   2 lighttpd
+    -   2.1 lighttpd.conf
+        -   2.1.1 Test
+    -   2.2 php.ini
+-   3 rutorrent
+-   4 Testing
+-   5 Plugins
+-   6 SSL and Authentication
+    -   6.1 User Authentication
+    -   6.2 SSL
+-   7 Troubleshooting
+-   8 See Also
 
 rtorrent
 --------
@@ -59,7 +54,7 @@ lighttpd
 
 Install lighthttp and php.
 
-    # pacman -S lighttpd php php-cgi
+    # pacman -S lighttpd php php-cgi fcgi
 
 Information on setting up lighthttp can be found on it's wiki page:
 https://wiki.archlinux.org/index.php/Lighttpd
@@ -261,12 +256,12 @@ the passwords.
 
 For htdigest, the format of the lines is:
 
-       username:Realm:hash
+    username:Realm:hash
 
 Username is your desired username, Realm is a name you chose to give to
 the access level. Hash is an md5sum of a string that looks like:
 
-       username:Realm:password
+    username:Realm:password
 
 So your actual password is not stored in the file, it just contributes
 to the md5sum.
@@ -283,12 +278,12 @@ first 32 bytes so we don't get the dash at the end.
 So now save the hash in a variable by running:
 
        $ hash=$(echo -n "tom:rtorrent:secret_pass" | md5sum | cut -b -32)
-       $ echo hash
+       $ echo $hash
        6a4aaa1091eb2d1d025bbd692dee3f0c
 
 Now save it to our password file:
 
-       $ sudo echo "tom:rtorrent:$hash" > /etc/lighttpd/lighttpd-htdigest.user
+    # echo "tom:rtorrent:$hash" > /etc/lighttpd/lighttpd-htdigest.user
 
 You can use any file name you like, just add the same file to
 lighttpd.conf.
@@ -296,11 +291,10 @@ lighttpd.conf.
 root as owner of this file should work ok, however it didn't work for me
 unless I made http owner.
 
-       $ sudo chown http /etc/lighttpd/lighttpd-htdigest.user
-       $ sudo chmod 400 /etc/lighttpd/lighttpd-htdigest.user
+    # chown http /etc/lighttpd/lighttpd-htdigest.user
+    # chmod 400 /etc/lighttpd/lighttpd-htdigest.user
 
-  
- Now we will change /etc/lighttpd/lighttpd.conf to tell it to use this
+Now we will change /etc/lighttpd/lighttpd.conf to tell it to use this
 password file for anytime rutorrent is accessed.
 
 Add the following lines:
@@ -308,7 +302,7 @@ Add the following lines:
        server.modules += ( "mod_auth" )
        auth.debug = 0
        auth.backend = "htdigest"
-       auth.backend.htdigest.userfile = "lighttpd-htdigest.user"
+       auth.backend.htdigest.userfile = "/etc/lighttpd/lighttpd-htdigest.user"
 
   
 
@@ -321,7 +315,7 @@ Add the following lines:
 Restart lighttpd, and it should now require you to enter your username
 and password when you reload rutorrent.
 
-       $ sudo /etc/rc.d/lighttpd restart
+    # systemctl restart lighttpd
 
 > SSL
 
@@ -375,8 +369,15 @@ See Also
 -   Using XMLRPC with rtorrent
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Rutorrent_with_lighttpd&oldid=255873"
+"https://wiki.archlinux.org/index.php?title=Rutorrent_with_lighttpd&oldid=302657"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

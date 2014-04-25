@@ -23,22 +23,19 @@ Note:This page previously contained some bad advice. Setting the TERM
 environment variable in your ~/.bashrc is a BAD idea. Please do not do
 it. Follow the advice below.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Why do not my Home and End keys work in terminals?                 |
-|     -   1.1 libreadline problem                                          |
-|     -   1.2 I do not touch my TERM value, and the keys still do not work |
-|         right                                                            |
-|     -   1.3 Adjusting terminfo (If nothing helps)                        |
-|                                                                          |
-| -   2 Why do not my Home and End keys work in application XYZ?           |
-|     -   2.1 Lynx                                                         |
-|     -   2.2 URxvt/Rxvt                                                   |
-|     -   2.3 Zsh                                                          |
-|     -   2.4 Less                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Why do not my Home and End keys work in terminals?
+    -   1.1 libreadline problem
+    -   1.2 I do not touch my TERM value, and the keys still do not work
+        right
+    -   1.3 Adjusting terminfo (If nothing helps)
+-   2 Why do not my Home and End keys work in application XYZ?
+    -   2.1 Lynx
+    -   2.2 URxvt/Rxvt
+    -   2.3 Zsh
+    -   2.4 Less
 
 Why do not my Home and End keys work in terminals?
 --------------------------------------------------
@@ -123,8 +120,8 @@ can see, with the ^[ to \e conversion, mine ARE listed), you need to add
 them there. 99% of the time this will not effect other terminals.
 Technically, one should add these settings to ~/.inputrc, because it's
 easier to keep track of, and stays with your user that way. You can also
-do MUCH cooler things with a user-specific inputrc (See Inputrc for more
-details).
+do MUCH cooler things with a user-specific inputrc (See Readline for
+more details).
 
 > Adjusting terminfo (If nothing helps)
 
@@ -182,7 +179,7 @@ like following:
 
 > Zsh
 
-See Zsh#Key_Bindings.
+See Zsh#Key_bindings.
 
 > Less
 
@@ -203,9 +200,16 @@ or for making less work in xterm
 or you may create systemwide config the same way.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Home_and_End_keys_not_working&oldid=234596"
+"https://wiki.archlinux.org/index.php?title=Home_and_End_keys_not_working&oldid=262391"
 
 Categories:
 
 -   Command shells
 -   Keyboards
+
+-   This page was last modified on 11 June 2013, at 17:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

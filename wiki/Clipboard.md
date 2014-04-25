@@ -11,15 +11,13 @@ Clipboard
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 History                                                            |
-| -   2 Background                                                         |
-| -   3 Clipboard Managers                                                 |
-| -   4 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 History
+-   2 Background
+-   3 List of clipboard managers
+-   4 See also
 
 History
 -------
@@ -54,28 +52,82 @@ using the mouse or keyboard, then pasted using the middle mouse button
 (or some emulation of it). This can cause confusion and, in some cases,
 inconsistent or undesirable results from rogue applications.
 
-Clipboard Managers
-------------------
+List of clipboard managers
+--------------------------
 
-There is a variety of clipboard managers available, and several desktop
-environments come with their own clipboard manager or have a clipboard
-manager intended for them (Glipper for GNOME and Clipman for Xfce);
-however, there are several DE-agnostic clipboard managers such as
-Parcellite (GTK+) and autocutsel (command-line), both of which are
-available in [community] and can be run as daemons.
+-   Anamnesis — Clipboard manager that stores all the clipboard history
+    and offers an interface to do a full-text search. It has both a
+    commandline and GUI mode available.
 
-Resources
----------
+http://anamnesis.sourceforge.net/ || anamnesis
 
--   List of clipboard manager packages
+-   ClipIt — Fork of Parcellite with additional features and bugfixes.
+
+http://sourceforge.net/projects/gtkclipit/ || clipit
+
+-   Clipman — A clipboard manager for Xfce. It keeps the clipboard
+    contents around while it is usually lost when you close an
+    application. It is able to handle text and images, and has a feature
+    to execute actions on specific text selections by matching them
+    against regular expressions.
+
+http://goodies.xfce.org/projects/panel-plugins/xfce4-clipman-plugin ||
+xfce4-clipman-plugin
+
+-   CopyQ — Clever clipboard manager with searchable and editable
+    history, custom actions on items and command line support.
+
+https://github.com/hluk/CopyQ || copyq
+
+-   Glipper — Clipboard manager for the GNOME desktop with many features
+    and plugin support.
+
+https://launchpad.net/glipper || glipper
+
+-   GPaste — Clipboard management system that aims at being a new
+    generation Parcellite, with a modular structure split in a couple of
+    libraries and a daemon for adaptability. Offers a GNOME Shell
+    extension and a CLI interface.
+
+https://github.com/Keruspe/GPaste || gpaste
+
+-   Klipper — Full featured clipboard manager for the KDE desktop.
+
+http://userbase.kde.org/Klipper || kdebase-workspace
+
+-   loliclip — Clipboard synchronizer developed for window manager
+    users. Development ceased in favour of xcmenu.
+
+https://github.com/Cloudef/xcmenu || loliclip
+
+-   Parcellite — Lightweight yet feature-rich clipboard manager.
+
+http://parcellite.sourceforge.net/ || parcellite
+
+-   Pasteall — Clipboard monitor simple and functional.
+
+https://github.com/LaraCraft304/Pasteall || pasteall
+
+-   xcmenu — Clipboard synchronizer developed for window manager users.
+
+https://github.com/Cloudef/xcmenu || xcmenu-git
+
+See also
+--------
 
 -   Cut-and-paste in X
-
 -   X Selections, Cut Buffers, and Kill Rings.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Clipboard&oldid=244008"
+"https://wiki.archlinux.org/index.php?title=Clipboard&oldid=305975"
 
 Category:
 
 -   X Server
+
+-   This page was last modified on 20 March 2014, at 17:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

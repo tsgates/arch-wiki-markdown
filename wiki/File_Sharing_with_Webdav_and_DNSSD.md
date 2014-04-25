@@ -1,6 +1,27 @@
 File Sharing with Webdav and DNSSD
 ==================================
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: please use the   
+                           first argument of the    
+                           template to provide a    
+                           brief explanation.       
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with WebDAV.     
+                           Notes: please use the    
+                           second argument of the   
+                           template to provide more 
+                           detailed indications.    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 Say you need a location that you can use to store things: eg music,
 photos, books etc. Say you want Nautilus and other file managers to find
 this automatically. You could use Samba or you could do the following
@@ -160,8 +181,15 @@ show you the parameters you set up.
 have created. Click on them and they should mount.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=File_Sharing_with_Webdav_and_DNSSD&oldid=207254"
+"https://wiki.archlinux.org/index.php?title=File_Sharing_with_Webdav_and_DNSSD&oldid=270399"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 8 August 2013, at 22:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,35 +1,28 @@
 pppd
 ====
 
-  Summary
-  ----------------------------------------------------------------------------------------------------------
-  This article explains how to set up a point-to-point connections using pppd and the kernel PPPoE driver.
-
 ppp (Paul's PPP Package) is an open source package which implements the
 point-to-point protocol (PPP) on Linux and Solaris systems. It is
 implemented as single pppd daemon and acts as backend for xl2tpd, pptpd
-and netcfg. 3G, L2TP and PPPoE connections are internally based on PPP
+and netctl. 3G, L2TP and PPPoE connections are internally based on PPP
 protocol and therefore can be managed by ppp.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 PPPoE                                                        |
-|     -   2.2 Starting pppd with Arch                                      |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Do an auto redial                                            |
-|     -   3.2 ISP auto-disconnect after 24h                                |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Default route                                                |
-|     -   4.2 Masquerading seems to be working fine but some sites don't   |
-|         work.                                                            |
-|     -   4.3 pppd cannot load kernel module ppp_generic                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 PPPoE
+    -   2.2 Starting pppd with Arch
+-   3 Tips and tricks
+    -   3.1 Do an auto redial
+    -   3.2 ISP auto-disconnect after 24h
+    -   3.3 ISP auto-disconnect after 24h using a Systemd timer
+-   4 Troubleshooting
+    -   4.1 Default route
+    -   4.2 Masquerading seems to be working fine but some sites don't
+        work.
+    -   4.3 pppd cannot load kernel module ppp_generic
 
 Installation
 ------------
@@ -143,7 +136,8 @@ SIGHUP signal to the process
 And you have redialed the connection.
 
 Make sure you have persist option enabled in your
-/etc/ppp/peers/provider tab.
+/etc/ppp/peers/provider tab. Additionally you might want to set
+holdoff 0 to reconnect without waiting.
 
 > ISP auto-disconnect after 24h
 
@@ -169,7 +163,7 @@ pppd_redial.sh):
     pppd_id=$(pidof pppd)
 
     kill -s HUP $pppd_id
-    wall $message
+    echo $message
 
 Give it execute permissions and put it on a path visible to root.
 
@@ -178,7 +172,41 @@ variable is set if the command fails. So add anywhere in the file,
 
     0 4 * * * /bin/bash /root/pppd_redial.sh
 
+Confirm that crond is up and running. If it isn't just enable it with,
+
+    # systemctl enable cronie.service
+    # systemctl start cronie.service
+
 Save and exit. Your PPPoE connection will now restart every day at 4AM.
+
+> ISP auto-disconnect after 24h using a Systemd timer
+
+An alternative way to force a reconnect is using a Systemd timer and the
+poff script (in particular its -r option). Simply create a .service and
+.timer file with the same name:
+
+    ppp-redial.timer
+
+    [Unit]
+    Description=Reconnect PPP connections daily
+
+    [Timer]
+    OnCalendar=*-*-* 05:00:00
+
+    [Install]
+    WantedBy=multi-user.target
+
+    ppp-redial.service
+
+    [Unit]
+    Description=Reconnect PPP connections
+
+    [Service]
+    Type=simple
+    ExecStart=/usr/bin/poff -r
+
+Now just enable and start the timer and Systemd will cause a restart at
+the specified time.
 
 Troubleshooting
 ---------------
@@ -200,7 +228,7 @@ and xx.xx.xx.xx is not the correct route for you
 with this content:
 
     #!/bin/sh
-    /sbin/route del default
+    /usr/bin/route del default
 
 -   Restart your pppd service.
 
@@ -228,7 +256,7 @@ loaded. So, here is a systemd unit to solve it:
 
     [Service]
     Type=oneshot
-    ExecStart=/usr/sbin/iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+    ExecStart=/usr/bin/iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 
     [Install]
     WantedBy=multi-user.target
@@ -256,8 +284,15 @@ If there is no alias included add
 and reboot.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pppd&oldid=241226"
+"https://wiki.archlinux.org/index.php?title=Pppd&oldid=289836"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 22 December 2013, at 01:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -71,8 +71,15 @@ Then run createdb as root:
     # createdb
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DAViCal&oldid=251385"
+"https://wiki.archlinux.org/index.php?title=DAViCal&oldid=270484"
 
 Category:
 
--   Networking
+-   Web Server
+
+-   This page was last modified on 9 August 2013, at 09:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

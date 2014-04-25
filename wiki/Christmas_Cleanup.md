@@ -30,10 +30,17 @@ See also
 -   Arch Translation Day
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Christmas_Cleanup&oldid=200940"
+"https://wiki.archlinux.org/index.php?title=Christmas_Cleanup&oldid=264184"
 
 Categories:
 
 -   Arch development
 -   Package development
 -   Events
+
+-   This page was last modified on 25 June 2013, at 14:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

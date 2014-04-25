@@ -6,28 +6,24 @@ private and trusted environment (ex: a development team).
 
 Updated for Trac 0.11
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Basic Environment                                                  |
-| -   2 Preparation                                                        |
-|     -   2.1 Required Packages                                            |
-|     -   2.2 Post-Install Steps                                           |
-|         -   2.2.1 Disable connection pooling                             |
-|         -   2.2.2 Install webadmin plugin                                |
-|                                                                          |
-| -   3 Setup Basic Environment                                            |
-|     -   3.1 Set permissions                                              |
-|     -   3.2 Create User List                                             |
-|     -   3.3 Create Database                                              |
-|     -   3.4 Configure Web Server                                         |
-|                                                                          |
-| -   4 Create Projects                                                    |
-|     -   4.1 Create Subversion Repository                                 |
-|     -   4.2 Create Trac Project                                          |
-|         -   4.2.1 Modify the /mnt/rpo/trac/MY_PROJECT/conf/trac.ini file |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Basic Environment
+-   2 Preparation
+    -   2.1 Required Packages
+    -   2.2 Post-Install Steps
+        -   2.2.1 Disable connection pooling
+        -   2.2.2 Install webadmin plugin
+-   3 Setup Basic Environment
+    -   3.1 Set permissions
+    -   3.2 Create User List
+    -   3.3 Create Database
+    -   3.4 Configure Web Server
+-   4 Create Projects
+    -   4.1 Create Subversion Repository
+    -   4.2 Create Trac Project
+        -   4.2.1 Modify the /mnt/rpo/trac/MY_PROJECT/conf/trac.ini file
 
 Basic Environment
 -----------------
@@ -197,3 +193,10 @@ Retrieved from
 Category:
 
 -   Version Control System
+
+-   This page was last modified on 13 June 2012, at 11:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -9,17 +9,14 @@ encountered. A few examples of gopher sites can be found here. Note that
 not all browsers support gopher, or have incomplete support. Firefox has
 limited support, but it can be enhanced with this add-on.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 GoFish                                                             |
-|     -   1.1 Installation                                                 |
-|     -   1.2 Configuration                                                |
-|                                                                          |
-| -   2 .cache                                                             |
-| -   3 Additional Resources                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 GoFish
+    -   1.1 Installation
+    -   1.2 Configuration
+-   2 .cache
+-   3 Additional Resources
 
 GoFish
 ------
@@ -107,3 +104,10 @@ Retrieved from
 Category:
 
 -   Networking
+
+-   This page was last modified on 23 April 2012, at 17:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

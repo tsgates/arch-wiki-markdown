@@ -3,33 +3,30 @@ ASUS K52J
 
 The parameters depend on the submodel...
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Model K52JT-SX011V:                                                |
-|     -   1.1 Hardware                                                     |
-|     -   1.2 Graphics                                                     |
-|         -   1.2.1 Setting resolution                                     |
-|         -   1.2.2 Setting monster resolution                             |
-|         -   1.2.3 HDMI tvout                                             |
-|         -   1.2.4 Setting Brightness                                     |
-|         -   1.2.5 Hibernate and Suspend                                  |
-|         -   1.2.6 HDMI port                                              |
-|                                                                          |
-|     -   1.3 Touchpad                                                     |
-|     -   1.4 DVD                                                          |
-|     -   1.5 Sound                                                        |
-|     -   1.6 Webcam                                                       |
-|     -   1.7 Networking                                                   |
-|         -   1.7.1 LAN                                                    |
-|         -   1.7.2 sd-cardreader                                          |
-|         -   1.7.3 WLAN                                                   |
-|         -   1.7.4 bluetooth                                              |
-|                                                                          |
-|     -   1.8 Untested                                                     |
-|     -   1.9 lspci                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Model K52JT-SX011V:
+    -   1.1 Hardware
+    -   1.2 Graphics
+        -   1.2.1 Setting resolution
+        -   1.2.2 Setting resolution fix
+        -   1.2.3 Setting monster resolution
+        -   1.2.4 HDMI tvout
+        -   1.2.5 Setting Brightness
+        -   1.2.6 Hibernate and Suspend
+        -   1.2.7 HDMI port
+    -   1.3 Touchpad
+    -   1.4 DVD
+    -   1.5 Sound
+    -   1.6 Webcam
+    -   1.7 Networking
+        -   1.7.1 LAN
+        -   1.7.2 sd-cardreader
+        -   1.7.3 WLAN
+        -   1.7.4 bluetooth
+    -   1.8 Untested
+    -   1.9 lspci
 
 Model K52JT-SX011V:
 ===================
@@ -61,6 +58,12 @@ but works even better with xf86-video-ati-git from the AUR.
 > Setting resolution
 
      xrandr --output LVDS --auto
+
+> Setting resolution fix
+
+If KDE breaks the virtual desktop size..
+
+     xrandr --output LVDS --fb "1366x768"
 
 > Setting monster resolution
 
@@ -225,8 +228,15 @@ lspci
     ff:05.3 Host bridge: Intel Corporation Core Processor Integrated Memory Controller Channel 1 Thermal Control Registers (rev 04)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_K52J&oldid=233234"
+"https://wiki.archlinux.org/index.php?title=ASUS_K52J&oldid=273996"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 1 September 2013, at 19:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

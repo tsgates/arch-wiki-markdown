@@ -88,3 +88,10 @@ Retrieved from
 Category:
 
 -   Laptops
+
+-   This page was last modified on 16 April 2013, at 05:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

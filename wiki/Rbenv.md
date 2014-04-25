@@ -1,21 +1,25 @@
 Rbenv
 =====
 
+Related articles
+
+-   RVM
+-   Chruby
+-   Ruby
+
 rbenv (Simple Ruby Version Management) lets you easily switch between
 multiple versions of Ruby. It's simple, unobtrusive, and follows the
 UNIX tradition of single-purpose tools that do one thing well.
 
-Another tool to be used for the same purpose is rvm.
+Another tool to be used for the same purpose is RVM.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Comparison with RVM                                                |
-| -   2 Installation                                                       |
-| -   3 Plugins                                                            |
-| -   4 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Comparison with RVM
+-   2 Installation
+-   3 Plugins
+-   4 External links
 
 Comparison with RVM
 -------------------
@@ -66,8 +70,15 @@ External links
 -   Official web site
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Rbenv&oldid=252469"
+"https://wiki.archlinux.org/index.php?title=Rbenv&oldid=299729"
 
 Category:
 
 -   Programming language
+
+-   This page was last modified on 22 February 2014, at 03:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

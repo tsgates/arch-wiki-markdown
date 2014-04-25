@@ -13,19 +13,17 @@ More information:
 You may also be interested in XWiki, which caters to similar needs, but
 is Java-based.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Apache                                                             |
-| -   3 Nginx                                                              |
-| -   4 After Installation                                                 |
-| -   5 Upgrade                                                            |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 Argument "5.8.1" isn't numeric in numeric lt (<) ... when    |
-|         accessing configure                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Apache
+-   3 Nginx
+-   4 After Installation
+-   5 Upgrade
+-   6 Troubleshooting
+    -   6.1 Argument "5.8.1" isn't numeric in numeric lt (<) ... when
+        accessing configure
 
 Installation
 ------------
@@ -261,11 +259,14 @@ Upgrade
 -------
 
 The Foswiki Upgrade Guide is the official reference for the upgrade
-process, and is generally sufficient to help you with the upgrade. The
-most painful part of the upgrade process is the copying of topics from
-the old installation to the new. A script is available that almost
-completely automates this process, leaving you only with the task of
-merging a few core topics that were modified in the old installation.
+process, and is generally sufficient to help you with the upgrade.
+Remember to install any plugins that were used in the old installation.
+The easiest way to do this is to compare the lib/Foswiki/Plugins
+directories. The most painful part of the upgrade process is the copying
+of topics from the old installation to the new. A script is available
+that almost completely automates this process, leaving you only with the
+task of merging a few core topics that were modified in the old
+installation.
 
 You can find the script here:
 https://github.com/giddie/bits-n-pieces/blob/master/Foswiki/foswiki-copy.
@@ -296,8 +297,15 @@ a number while "5.8.1" is not), you can safely comment out line 505-513
 of {Foswiki_root}/lib/Foswiki/Configure/Checker.pm.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Foswiki&oldid=217400"
+"https://wiki.archlinux.org/index.php?title=Foswiki&oldid=287808"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 13 December 2013, at 11:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

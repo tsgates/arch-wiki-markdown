@@ -1,6 +1,14 @@
 Simple IP Failover with Heartbeat
 =================================
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
+  g]                       is poorly written.       g]
+                           Reason: The page needs   
+                           to be updated according  
+                           to Help:Style (Discuss)  
+  ------------------------ ------------------------ ------------------------
+
 This article illustrates a method of implementing VERY simple
 active/passive IP failover using heartbeat. You are reccomended to
 familiarize yourself with the concepts of High Availability Clustering
@@ -53,7 +61,7 @@ services will use to the 'lan' IP you choose for this, in your router.
 *It is NOT neccesary to have a genuine registered domain name (FQDN) or
 a DNS server for the purposes of these instructions, heartbeat will use
 our /etc/hosts file for all heartbeat related hostname/domain name
-lookups locally(Irregardless of what /etc/host.conf tells it to use.);
+lookups locally(regardless of what /etc/host.conf tells it to use.);
 but, if you would like to reach your highly available services via a
 domain name from outside your Local Area Network, you will have to
 register a domain and fix it up with the proper zone/ns/mx/A
@@ -207,9 +215,16 @@ and check node two to see that it has taken over your H.A Services &
 Virtual IP Address. E.G. 'ip addr show','ps aux'...
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Simple_IP_Failover_with_Heartbeat&oldid=198732"
+"https://wiki.archlinux.org/index.php?title=Simple_IP_Failover_with_Heartbeat&oldid=298612"
 
 Categories:
 
 -   Networking
 -   System recovery
+
+-   This page was last modified on 17 February 2014, at 22:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

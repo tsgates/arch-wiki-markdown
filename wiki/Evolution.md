@@ -10,27 +10,24 @@ environment. You can see your calendar, tasks and location in the GNOME
 panel along with the weather and date. Just add the clock to your gnome
 panel.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 IMAP Setup                                                         |
-| -   3 Alternative IMAP Setup                                             |
-|     -   3.1 Offlineimap setup                                            |
-|     -   3.2 First offlineimap sync and automated sync-ing                |
-|     -   3.3 Evolution setup for offlineimap's maildir                    |
-|                                                                          |
-| -   4 GMAIL Setup                                                        |
-|     -   4.1 Receiving Mail                                               |
-|     -   4.2 Sending Mail                                                 |
-|                                                                          |
-| -   5 Gmail Calendar                                                     |
-| -   6 Tudelft webmail (Exchange)                                         |
-| -   7 Using Evolution Outside Of Gnome                                   |
-| -   8 Troubleshooting                                                    |
-| -   9 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 IMAP Setup
+-   3 Alternative IMAP Setup
+    -   3.1 Offlineimap setup
+    -   3.2 First offlineimap sync and automated sync-ing
+    -   3.3 Evolution setup for offlineimap's maildir
+-   4 GMAIL Setup
+    -   4.1 Receiving Mail
+    -   4.2 Sending Mail
+-   5 Gmail Calendar
+-   6 Tudelft webmail (Exchange)
+-   7 Using Evolution Outside Of Gnome
+-   8 Troubleshooting
+    -   8.1 Failing to Synchronize with Server
+-   9 References
 
 Installation
 ------------
@@ -57,13 +54,6 @@ server type, this is IMAP. Now fill in the textbox server, for the
 server adress and username. For the rest of the options just follow the
 wizard. It is very easy, if you get stuck read this guide [1].
 
-Unfortunately, Evolution currently (version 2.26) suffers from a serious
-IMAP issue, as reported in [2]. It appears this issue has existed for at
-least the past 3 years prior to this version, and it shows no signs of
-being dealt with soon. This bug especially affects to the point of
-unuseability those with slow connections. The next section shows an
-alternative IMAP connectivity method which works better.
-
 Alternative IMAP Setup
 ----------------------
 
@@ -75,11 +65,11 @@ inspiration for this app) is that you have a full copy of your email,
 including attachments, on your PC for retrieval, even if on the move
 without an internet connection.
 
-To set this up, you will need to install offlineimap ([3]). It is
+To set this up, you will need to install offlineimap ([2]). It is
 currently in the AUR, as well as in community, so just run the
 following:-
 
-    #pacman -S offlineimap
+    # pacman -S offlineimap
 
 > Offlineimap setup
 
@@ -152,7 +142,7 @@ http://www.linux.com (no longer available).
 Once you have completed your offlineimap setup, you should perform your
 first sync by running with your normal user account
 
-    $offlineimap
+    $ offlineimap
 
 Assuming you've set your password and all other settings correctly,
 offlineimap will begin to sync the requested repositories. This may take
@@ -160,7 +150,7 @@ a long while, depending on connection speed and size of your mail
 account, so you should preferably find a fast connection to do this. You
 can run offlineimap using another interface by specifying
 
-    $offlineimap -u TTY.TTYUI
+    $ offlineimap -u TTY.TTYUI
 
 This allows interactive entry of passwords.
 
@@ -175,7 +165,7 @@ crond requires you to add the following line to your crontab.
 
 For those unfamiliar with crontab and/or vi, just run
 
-    $crontab -e
+    $ crontab -e
 
 Press 'i' to start input, type in the line above, press Esc to escape
 back to the prompt, and type ':wq' to save and quit.
@@ -239,7 +229,7 @@ The rest is user specific.
 
 You are now finished with configuring evolution for gmail. Just hit
 Send/ Receive in the main screen and wait for new mail. If it still
-didn't work, go to this link [4]
+didn't work, go to this link [3]
 
 Gmail Calendar
 --------------
@@ -310,6 +300,17 @@ is not lost. First, we can see if we got our account files in
 account in Evolution with the same parameters. (I only lost the
 signatures
 
+> Failing to Synchronize with Server
+
+If you change internet connections, such as switching VPN or restart X,
+Evolution may have problems connecting to the mail servers. You would
+see it endlessly trying to connect in the status bar at the bottom.
+
+A possible solution is to switch to "Work Offline" select "Don't
+Synchronize” in the pop-up. Then after a minute has passed, go back to
+On-line mode. It should now have no problem fetching from the mail
+servers.
+
 References
 ----------
 
@@ -318,8 +319,16 @@ Gnome Evolution Guide
 Tudelft Evolution 2.24 Setup
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Evolution&oldid=244571"
+"https://wiki.archlinux.org/index.php?title=Evolution&oldid=287878"
 
-Category:
+Categories:
 
 -   Email Client
+-   GNOME
+
+-   This page was last modified on 13 December 2013, at 16:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -11,15 +11,13 @@ share of worldwide smartphone sales, making it the second most popular
 platform after Nokia's Symbian OS. The service is available in North
 America and in most European countries.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Synchronization Using barry                                        |
-|     -   1.1 Installing packages                                          |
-|     -   1.2 Creating a Sync Pair                                         |
-|     -   1.3 Sync and smile                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Synchronization Using barry
+    -   1.1 Installing packages
+    -   1.2 Creating a Sync Pair
+    -   1.3 Sync and smile
 
 > Synchronization Using barry
 
@@ -120,3 +118,10 @@ Retrieved from
 Category:
 
 -   Mobile devices
+
+-   This page was last modified on 13 June 2012, at 14:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

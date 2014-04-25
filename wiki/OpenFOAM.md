@@ -10,19 +10,16 @@ OpenFOAM
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Basic Installation                                                 |
-| -   3 Prerequisites                                                      |
-| -   4 Development Installation                                           |
-|     -   4.1 Obtain Source Files                                          |
-|         -   4.1.1 Latest Stable Release                                  |
-|                                                                          |
-|     -   4.2 Environment Variables                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 Basic Installation
+-   3 Prerequisites
+-   4 Development Installation
+    -   4.1 Obtain Source Files
+        -   4.1.1 Latest Stable Release
+    -   4.2 Environment Variables
 
 Overview
 --------
@@ -92,3 +89,10 @@ Retrieved from
 Category:
 
 -   Mathematics and science
+
+-   This page was last modified on 7 December 2012, at 07:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

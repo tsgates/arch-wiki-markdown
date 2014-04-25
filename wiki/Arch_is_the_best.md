@@ -1,17 +1,16 @@
 Arch is the best
 ================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Purpose                                                            |
-| -   2 History                                                            |
-| -   3 Install                                                            |
-| -   4 The Code                                                           |
-| -   5 Translations                                                       |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Purpose
+-   2 History
+-   3 Install
+-   4 The Code
+-   5 Translations
+-   6 Encodings
+-   7 See also
 
 Purpose
 -------
@@ -134,6 +133,16 @@ programming language.
     }
 
   
+ COBOL - A simple, lightweight programming language.
+
+        IDENTIFICATION DIVISION.
+        PROGRAM-ID.  TheBest.
+        
+        PROCEDURE DIVISION.
+            DISPLAY "Arch is the best!".
+            STOP RUN.
+
+  
  CoffeeScript - A programming language that transcompiles to JavaScript.
 
     alert 'Arch is the best!'
@@ -216,6 +225,10 @@ Allegro, SBCL...)
        print('Arch is the best');
      }
 
+Emacs Lisp
+
+     (message "Arch is the best!")
+
   
  Erlang - A concurrent, garbage-collected programming language and
 runtime system.
@@ -244,6 +257,9 @@ Or using message passing between processes
          end.
 
   
+ Factor - High-level stack-based language.
+
+    "Arch is the best" print
 
   
  Forth - Stack-based language.
@@ -354,8 +370,14 @@ LaTeX-like input language.
 
     print "Arch is the best!"
 
+Morpho - Morpho is a multi-paradigm programming language that supports
+procedural, object-oriented and functional programming.
+
+    writeln("Arch is the best!");
+
   
- Nasm(x86_64) (or yasm) - The Netwide Assembler
+ Nasm(x86_64) (or yasm) - Notice that the string is in the .text
+section, which feels superior
 
     ;nasm -f elf64 arch.asm
     ;ld -o arch arch.o
@@ -395,6 +417,10 @@ Octave - High-level interpreted language, primarily intended for
 numerical computations.
 
     printf("Arch is the best!\n")
+
+Ook! - brainfuck, translated to Orangutan
+
+    Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook. Ook. Ook! Ook? Ook. Ook? Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook? Ook. Ook? Ook! Ook? Ook. Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook! Ook? Ook! Ook! Ook? Ook! Ook. Ook? Ook! Ook? Ook! Ook! Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook? Ook! Ook? Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook? Ook! Ook? Ook. Ook! Ook. Ook. Ook? Ook. Ook? Ook. Ook. Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook? Ook. Ook! Ook. Ook. Ook? Ook. Ook? Ook. Ook. Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook? Ook. Ook! Ook. Ook. Ook? Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook? Ook. Ook. Ook. Ook! Ook. Ook! Ook? Ook! Ook! Ook? Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook.
 
 Perl - A high-level, general-purpose, interpreted, dynamic programming
 language.
@@ -488,9 +514,9 @@ Scheme - A dialect of Lisp.
 
     (display "Arch is the best!\n")
 
-or in Casper-Ti-Vector style
+or in XunDu style
 
-    #!/usr/bin/guile -s
+    #!/usr/bin/guile1.8 -s
     !#
     (define 节 or)
     (define 哀 #t)
@@ -596,6 +622,14 @@ graphical user interfaces.
 Translations
 ------------
 
+Ancient Chinese
+
+    阿祺，盡善矣。
+
+Ancient Greek
+
+    Ἆρχ ἄριστον!
+
 > Arabic
 
     ارتش هو الأفضل
@@ -620,10 +654,6 @@ Bahasa Indonesia
 
     আর্চ সবচেয়ে ভালো!
 
-Binary ASCII
-
-    0100000101110010011000110110100000100000011010010111001100100000011101000110100001100101001000000110001001100101011100110111010000100001
-
 > British
 
     Arch is simply spiffing.
@@ -640,9 +670,9 @@ Chinese (Simplified)
 
     Arch 最棒了！
 
-Ancient Chinese
+Chinese (Tranditional)
 
-    阿祺，盡善矣。
+    狀哉我大 Arch!
 
 Chinese (Taobao Style - 淘宝体)
 
@@ -652,21 +682,17 @@ Chinese (Taobao Style - 淘宝体)
 
     Arch je nejlepší!
 
+> Croatian
+
+    Arch je najbolji!
+
 > Danish
 
     Arch er bedst!
 
-Desrever (Reversed)
-
-    !tseb eht si hcrA
-
 > Dutch
 
     Arch is de beste!
-
-Old English
-
-    Arch biþ betst!
 
 > Esperanto
 
@@ -676,13 +702,17 @@ Old English
 
     Arch on parim!
 
-> Finnish
+> Fikonspråket
 
-    Arch on paras!
+    Firch Arkon fir äkon fist bäkon
 
 > Filipino
 
     Mabuhay ang Arch!
+
+> Finnish
+
+    Arch on paras!
 
 > French
 
@@ -696,17 +726,9 @@ Old English
 
     Arch ist das Beste!
 
-Ancient Greek
-
-    Ἆρχ ἄριστον!
-
 > Greek
 
     Το Arch είναι το καλύτερο!
-
-> h4x0r
-
-    Arch 15 7h3 b357!
 
 > Hantec
 
@@ -715,10 +737,6 @@ Ancient Greek
 > Hebrew
 
     ארצ' זה הכי אחי!
-
-Hexadecimal ASCII
-
-    4172636820697320746865206265737421
 
 > Hindi
 
@@ -744,6 +762,10 @@ Hexadecimal ASCII
 
     Арч - ең жақсы!
 
+> Klingon
+
+    Arch'pu'ta' 'a'
+
 > Latin
 
     Arch optimus est!
@@ -756,6 +778,10 @@ Hexadecimal ASCII
 
     Arch yra geriausias!
 
+> Lojban
+
+    la .artc. xagrai
+
 > Marathi
 
     आर्च सगळ्यात भारी आहे!
@@ -763,6 +789,10 @@ Hexadecimal ASCII
 > Norwegian
 
     Arch er best!
+
+Old English
+
+    Arch biþ betst!
 
 > Persian
 
@@ -790,7 +820,7 @@ Pig Latin
 
 > Russian
 
-    Арч - лучший!
+    Арч — лучший!
 
 > Serbian
 
@@ -804,21 +834,34 @@ Pig Latin
 
     Arch je najboljši!
 
-> Spanish
+Spanish (Standard)
 
     ¡Arch es el mejor!
 
-Spanish (Argentina) - AKA "Casteshano"
+Spanish (Argentina)
 
     Arch es una mazza!!
+
+Spanish (Chile)
+
+    Arch es bacán
+
+Spanish (Chile, low class)
+
+    Arch es la raja
+
+Spanish (Chile, marginal) This are writted in IPA because standard
+spanish not have those sounds
+
+    ˈæɹʃ ɛːʰ tɜ.rˈiː.u.lɛ la rˈa.χa ʃʊ.ɹʊ
+
+Spanish (Uruguay)
+
+    Arch la rompe!
 
 > Swedish
 
     Arch är bäst!
-
-> Fikonspråket
-
-    Firch Arkon fir äkon fist bäkon
 
 > Turkish
 
@@ -836,25 +879,56 @@ Spanish (Argentina) - AKA "Casteshano"
 
     Arch є найкращий!
 
+> Urdu
+
+    آرچ سب سے بہتر ہے! 
+
 > Vietnamese
 
     Arch là tốt nhất!
 
-Morse Code
+Welsh (Cymraeg)
 
-    ..- -... ..- -. - ..-   .. ...   - .... .   -... . ... -
+Emphasis on Arch:
 
-> Braille
+    Arch sydd yr orau un!
+    Arch sydd y gorau un!
 
-    ⠁⠗⠉⠓⠀⠊⠎⠀⠮⠀⠃⠑⠎⠞⠲
+Emphasis on being the best (one):
+
+    Yr orau un yw Arch!
+    Y gorau un yw Arch!
+
+Encodings
+---------
 
 > Base64
 
     QXJjaCBpcyB0aGUgYmVzdCEK
 
-URL Encoded
+Binary ASCII
 
-    Arch%20is%20the%20best!
+    0100000101110010011000110110100000100000011010010111001100100000011101000110100001100101001000000110001001100101011100110111010000100001
+
+> Braille
+
+    ⠁⠗⠉⠓⠀⠊⠎⠀⠮⠀⠃⠑⠎⠞⠲
+
+Desrever (Reversed)
+
+    !tseb eht si hcrA
+
+> h4x0r
+
+    Arch 15 7h3 b357!
+
+Hexadecimal ASCII
+
+    4172636820697320746865206265737421
+
+Morse Code
+
+    ..- -... ..- -. - ..-   .. ...   - .... .   -... . ... -
 
 > ROT13
 
@@ -864,17 +938,9 @@ Upside Down
 
     ¡ʇsǝq ǝɥʇ s! ɥɔɹ∀
 
-Welsh (Cymraeg)
+URL Encoded
 
-Emphasis on being the best (one):
-
-    Yr orau un yw Arch!
-    Y gorau un yw Arch!
-
-Emphasis on Arch:
-
-    Arch sydd yr orau un!
-    Arch sydd y gorau un!
+    Arch%20is%20the%20best!
 
 See also
 --------
@@ -882,8 +948,15 @@ See also
 -   forum Thread
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_is_the_best&oldid=253540"
+"https://wiki.archlinux.org/index.php?title=Arch_is_the_best&oldid=306153"
 
 Category:
 
 -   About Arch
+
+-   This page was last modified on 20 March 2014, at 19:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,44 +1,35 @@
 Autofs
 ======
 
-  Summary
-  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  This document outlines the procedure needed to set up AutoFS, a package that provides support for automounting removable media or network shares when they are inserted or accessed.
-
 This document outlines the procedure needed to set up AutoFS, a package
 that provides support for automounting removable media or network shares
 when they are inserted or accessed.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Removable media                                              |
-|     -   2.2 NFS Network mounts                                           |
-|     -   2.3 Samba                                                        |
-|     -   2.4 FTP and SSH (with Fuse)                                      |
-|         -   2.4.1 Remote FTP                                             |
-|         -   2.4.2 Remote SSH                                             |
-|                                                                          |
-| -   3 MTP                                                                |
-| -   4 Troubleshooting and tweaks                                         |
-|     -   4.1 Using NIS                                                    |
-|     -   4.2 Optional parameters                                          |
-|     -   4.3 Identify multiple devices                                    |
-|     -   4.4 AutoFS permissions                                           |
-|                                                                          |
-| -   5 See also                                                           |
-| -   6 Alternatives to AutoFS                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Removable media
+    -   2.2 NFS network mounts
+    -   2.3 Samba
+    -   2.4 FTP and SSH (with FUSE)
+        -   2.4.1 Remote FTP
+        -   2.4.2 Remote SSH
+-   3 MTP
+-   4 Troubleshooting and tweaks
+    -   4.1 Using NIS
+    -   4.2 Optional parameters
+    -   4.3 Identify multiple devices
+    -   4.4 AutoFS permissions
+    -   4.5 fusermount problems
+-   5 Alternatives to AutoFS
+-   6 See also
 
 Installation
 ------------
 
--   Install the autofs package:
-
-    # pacman -S autofs
+Install the autofs package from the official repositories.
 
 Note:You no longer need to load autofs4 module.
 
@@ -67,8 +58,8 @@ this to any other location you prefer. For instance:
     /media/net      /etc/autofs/auto.net      --timeout=60
 
 Note:Make sure there is an empty line on the end of template files
-(press ENTER after last word). If there is no correct EOF line, the
-AutoFS daemon won't properly load.
+(press ENTER after last word). If there is no correct EOF (end of file)
+line, the AutoFS daemon won't properly load.
 
 The optional parameter timeout sets the amount of seconds after which to
 unmount directories.
@@ -141,7 +132,7 @@ remain mounted as long as you access them.
 If you have a CD/DVD combo-drive you can change the cdrom line with
 -fstype=auto to have the media type autodetected.
 
-> NFS Network mounts
+> NFS network mounts
 
 AutoFS provides a new way of automatically discovering and mounting
 NFS-shares on remote servers (the AutoFS network template in
@@ -154,10 +145,12 @@ the /etc/autofs/auto.master file:
 
 Each host name needs to be resolveable, e.g. the name an IP address in
 /etc/hosts or via DNS and please make sure you have at least nfs-common
-installed and working.
+installed and working. You also have to enable RPC (systemctl
+start|enable rpcbind) to browse shared Folders.
 
-For instance, if you have a remote server fileserver with an NFS share
-named /home/share, you can just access the share by typing:
+For instance, if you have a remote server fileserver (the name of the
+directory is the hostname of the server) with an NFS share named
+/home/share, you can just access the share by typing:
 
     # cd /net/fileserver/home/share
 
@@ -193,23 +186,19 @@ other_options section
 
 Note:Escape $, and other characters, with a backslash when neccessary.
 
-> FTP and SSH (with Fuse)
+> FTP and SSH (with FUSE)
 
 Remote FTP and SSH servers can be accessed seamlessly with AutoFS using
 FUSE, a virtual file system layer.
 
 Remote FTP
 
-First, install the curlftpfs package from the Community repository:
-
-    # pacman -S curlftpfs
-
-Load the fuse module:
+First, install the curlftpfs package. Load the fuse module:
 
     # modprobe fuse
 
-Add fuse to the MODULES array in /etc/rc.conf to load it on each system
-boot.
+Create a /etc/modules-load.d/fuse.conf file containg fuse to load it on
+each system boot.
 
 Next, add a new entry for FTP servers in /etc/autofs/auto.master:
 
@@ -269,20 +258,16 @@ Note:The example below does not use an ssh-passphrase to simplify the
 installation procedure, please note that this may be a security risk in
 case your local system gets compromised.
 
-Install the sshfs package from the Extra repository:
-
-    # pacman -S sshfs
+Install the sshfs package.
 
 Load the fuse module:
 
     # modprobe fuse
 
-Add fuse to the MODULES array in /etc/rc.conf to load it on each system
-boot:
+Create a /etc/modules-load.d/fuse.conf file containg fuse to load it on
+each system boot if you have not one yet.
 
-Install OpenSSH:
-
-    # pacman -S openssh
+Install openssh.
 
 Generate an SSH keypair:
 
@@ -299,7 +284,7 @@ Next, copy the public key to the remote SSH server:
 
 See that you can login to the remote server without entering a password:
 
-    # sudo ssh -i /home/username/.ssh/id_dsa username@remotehost
+    # ssh -i /home/username/.ssh/id_dsa username@remotehost
 
 Note:The above command is needed to add the remote server to the root's
 list of known_hosts. Alternatively, hosts can be added to
@@ -323,9 +308,7 @@ MTP
 
 Media Transfer Protocol (MTP) is used in some Android devices.
 
-Install the mtpfs package from the Community repository:
-
-    # pacman -S mtpfs
+Install the mtpfs package.
 
 Create a new entry for MTP Device in /etc/autofs/auto.misc:
 
@@ -372,8 +355,8 @@ After restarting the autofs daemon, verbose output is visible in
 
 If you use multiple USB drives/sticks and want to easily tell them
 apart, you can use AutoFS to set up the mount points and Udev to create
-distinct names for your USB drives. See Map Custom Device Entries with
-udev for instructions on setting up Udev rules.
+distinct names for your USB drives. See udev#Setting static device names
+for instructions on setting up Udev rules.
 
 > AutoFS permissions
 
@@ -397,6 +380,26 @@ have a permissions problem:
     May  7 19:44:16 peterix automount[15218]: lookup(program): lookup for petr failed
     May  7 19:44:16 peterix automount[15218]: failed to mount /media/cifs/petr
 
+> fusermount problems
+
+With certain versions of util-linux, you may not be able to unmount a
+fuse file system drive mounted by autofs, even if you use the "user="
+option. See the discussion here:
+http://fuse.996288.n3.nabble.com/Cannot-umount-as-non-root-user-anymore-tp689p697.html
+
+Alternatives to AutoFS
+----------------------
+
+-   Systemd can automount filesystems upon demand; see here for the
+    description and the article on sshfs for an example.
+-   Thunar Volume Manager is an automount system for users of the Thunar
+    file manager.
+-   Pcmanfm-fuse is a lightweight file manager with built-in support for
+    accessing remote shares:
+    https://aur.archlinux.org/packages.php?ID=22992
+-   udiskie is a minimalistic automatic disk mounting service using
+    udisks
+
 See also
 --------
 
@@ -407,24 +410,17 @@ See also
     http://en.gentoo-wiki.com/wiki/Mounting_SFTP_and_FTP_shares
 -   More information on SSH can be found on the SSH and Using SSH Keys
     pages of this wiki.
--   Information on setting up NFS can be found here: NFS
-
-Alternatives to AutoFS
-----------------------
-
--   systemd can automount filesystems upon demand; see here for the
-    description and the article on sshfs for an example.
--   Thunar Volume Manager is an automount system for users of the Thunar
-    file manager.
--   Pcmanfm-fuse is a lightweight file manager with built-in support for
-    accessing remote shares:
-    https://aur.archlinux.org/packages.php?ID=22992
--   udiskie is a minimalistic automatic disk mounting service using
-    udisks
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Autofs&oldid=255062"
+"https://wiki.archlinux.org/index.php?title=Autofs&oldid=303474"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 7 March 2014, at 11:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

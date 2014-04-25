@@ -1,25 +1,22 @@
 Jalbum
 ======
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 Extra Skins                                                        |
-|     -   3.1 Installation of Skins                                        |
-|         -   3.1.1 BananAlbum                                             |
-|                                                                          |
-| -   4 Free Hosting Service                                               |
-| -   5 Sample Jalbums                                                     |
-| -   6 Tips                                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+-   3 Extra Skins
+    -   3.1 Installation of Skins
+        -   3.1.1 BananAlbum
+-   4 Free Hosting Service
+-   5 Sample Jalbums
+-   6 Tips
 
 Introduction
 ------------
 
-[Jalbum] consists of freeware cross-platform software for managing and
+Jalbum consists of freeware cross-platform software for managing and
 creating digital photo albums or galleries, and a free / paid-for photo
 sharing service on which to publish them. Uses need not use the free
 sharing service though. Jalbum outputs a stand-alone directory
@@ -49,20 +46,7 @@ Jalbum was created by Swedish programmer David Ekholm in 2002.
 Installation
 ------------
 
-BlackEagle has written a PKGBUILD for Jalbum which is available in the
-AUR [at this URL]. For those unfamiliar with the AUR, installation is
-trivial. First get the tarball, then unpack it, install the dependency
-if you haven't already, make the package, and install it. The example
-below is given using Arch x86_64 and version 8.3.1 of Jalbum (current at
-the time this article was written). Obviously you will substitute the
-current version number and architecture appropriate for your system:
-
-    $ wget https://aur.archlinux.org/packages/jalbum/jalbum.tar.gz
-    $ tar zxvf jalbum.tar.gz
-    $ cd jalbum
-    # pacman -S java-environment
-    $ makepkg -s
-    # pacman -U jalbum-8.3.1-1-x86_64.pkg.tar.gz
+You can install Jalbum with the package jalbum from the AUR.
 
 Jalbum should now be available from your Applications>Graphics menu
 (Gnome).
@@ -72,7 +56,7 @@ Extra Skins
 
 As mentioned above, there are many additional skins one can
 download/install to enhance Jalbum's options of photo albums/galleries.
-A complete listing of skins is available from [this URL].
+A complete listing of skins is available from this URL.
 
 > Installation of Skins
 
@@ -84,16 +68,9 @@ file for the skin and install it via pacman for maximal flexibility.
 
 BananAlbum
 
-Currently, the popular [BananAlbum] skin is packaged for pacman
-available from [this URL]. BananAlbum is a flash-based album with a sexy
-interface, and is highly customizable. It is installed following a
-similar process to that described above:
-
-    $ wget https://aur.archlinux.org/packages/bananalbum/bananalbum.tar.gz
-    $ tar zxvf bananalbum.tar.gz
-    $ cd bananalbum
-    $ makepkg -s
-    # pacman -U bananalbum-6.1.4-1-x86_64.pkg.tar.gz
+Currently, the popular BananAlbum skin is avaiable as bananalbum from
+the AUR. BananAlbum is a flash-based album with a sexy interface, and is
+highly customizable.
 
 Free Hosting Service
 --------------------
@@ -107,18 +84,25 @@ indefinitely, with no risk of deletion due to inactivity.
 Sample Jalbums
 --------------
 
-Sample Jalbums are available from the official [Jalbum site].
+Sample Jalbums are available from the official Jalbum site.
 
 Tips
 ----
 
 -   EXIF data from photographs can be displayed with most skins.
 -   One can further customize the bananalbum skin to display EXIF data
-    to the right of the photo by following the advice in [this thread].
+    to the right of the photo by following the advice in this thread.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Jalbum&oldid=198161"
+"https://wiki.archlinux.org/index.php?title=Jalbum&oldid=263676"
 
 Category:
 
 -   Graphics and desktop publishing
+
+-   This page was last modified on 20 June 2013, at 20:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

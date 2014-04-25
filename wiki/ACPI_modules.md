@@ -1,6 +1,11 @@
 ACPI modules
 ============
 
+Related articles
+
+-   acpid
+-   DSDT
+
 From ACPI site:
 
 ACPI (Advanced Configuration and Power Interface) is an open industry
@@ -12,18 +17,16 @@ special ACPI functions or add information to /proc or /sys. These
 information can be parsed by acpid for events or other monitoring
 applications.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Which modules are available?                                       |
-| -   2 How to select the correct ones                                     |
-| -   3 Getting Information                                                |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 DSDT fix                                                     |
-|     -   4.2 ACPI fix for notebooks                                       |
-|     -   4.3 Acpica                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Which modules are available?
+-   2 How to select the correct ones
+-   3 Getting Information
+-   4 Troubleshooting
+    -   4.1 DSDT fix
+    -   4.2 ACPI fix for notebooks
+-   5 See also
 
 Which modules are available?
 ----------------------------
@@ -102,7 +105,7 @@ Getting Information
 -------------------
 
 To read out battery information you can simply install package acpi in
-Official Repositories and run:
+official repositories and run:
 
     acpi -i
 
@@ -145,17 +148,24 @@ controllable.
 5.seems fixed in 3.6 pf
 
   
- If notebook doesn't start just remove AC adapter and remove battery for
-5 sec and start without AC!
+ If notebook doesn't start just remove the AC adapter and battery for 5
+seconds and start without AC!
 
-> Acpica
+See also
+--------
 
-Installing Acpica from the AUR may fix suspend-related lockups on some
-machines.
+-   Wikipedia:Advanced Configuration and Power Interface
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ACPI_modules&oldid=254173"
+"https://wiki.archlinux.org/index.php?title=ACPI_modules&oldid=301777"
 
 Category:
 
 -   Power management
+
+-   This page was last modified on 24 February 2014, at 15:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

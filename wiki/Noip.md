@@ -45,3 +45,10 @@ Retrieved from
 Category:
 
 -   Domain Name System
+
+-   This page was last modified on 25 April 2013, at 09:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

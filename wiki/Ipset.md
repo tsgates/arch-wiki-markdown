@@ -11,7 +11,7 @@ Ipset
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-> Summary
+Summary help replacing me
 
 Information regarding the setup and configuration of ipset.
 
@@ -25,21 +25,18 @@ ipset is a companion application for the iptables Linux firewall. It
 allows you to setup rules to quickly and easily block a set of IP
 addresses, among other things.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Blocking a list of addresses                                 |
-|                                                                          |
-| -   3 Other Commands                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Blocking a list of addresses
+-   3 Other Commands
 
 Installation
 ------------
 
-Install ipset from the Official Repositories.
+Install ipset from the official repositories.
 
 Configuration
 -------------
@@ -82,9 +79,15 @@ To delete all sets:
 Please see the man page for ipset for further information.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ipset&oldid=207453"
+"https://wiki.archlinux.org/index.php?title=Ipset&oldid=301782"
 
-Categories:
+Category:
 
--   Security
--   Networking
+-   Firewalls
+
+-   This page was last modified on 24 February 2014, at 15:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,17 +1,13 @@
 Hardware Compatibility List
 ===========================
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   Hardware Compatibility List (HCL)
   Full Systems
-  Laptops - Desktops - Servers - Virtual Machines
+  Laptops - Desktops
   Components
-  Video Cards - Sound Cards - Wired Net Adapters - Modems - Wireless Adapters - Monitors - Bluetooth Adapters - Printers - Scanners - TV Cards - Digital Cameras - Web Cameras - UPS - Floppy Drives - CD and DVD Writer/Readers - SCSI Adapters - Gadgets - SATA IDE Cards - External SATA Cards - Keyboards - Main Boards - RAID Controllers
-  Firmwares
-  UEFI
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  
+  Video Cards - Sound Cards - Wired Net Adapters - Modems - Wireless Adapters - Printers - Scanners - TV Cards - Digital Cameras - CD and DVD Writer/Readers - Keyboards - Main Boards
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Hardware support provides challenges to any Linux distribution. The
 following pages are used by the Arch Linux community to record the
@@ -24,26 +20,22 @@ Full Systems
 
 -   Laptops
 -   Desktops
--   Servers
--   Virtual Machines
 
 Components
 ----------
 
-+--------------------------------------+--------------------------------------+
-| -   Bluetooth Adapters               | -   Network Adapters (Wireless)      |
-| -   CD and DVD Writer/Readers        | -   RAID Controllers                 |
-| -   Digital Cameras                  | -   Printers                         |
-| -   Floppy Drives                    | -   Scanners                         |
-| -   Gadgets                          | -   SCSI Adapters                    |
-| -   IDE + SATA Cards                 | -   Sound Cards                      |
-| -   External SATA Cards              | -   TV Cards                         |
-| -   Keyboards                        | -   UPS                              |
-| -   Main Boards                      | -   Video Cards                      |
-| -   Monitors                         | -   Web Cameras                      |
-| -   Modems                           |                                      |
-| -   Network Adapters (Wired)         |                                      |
-+--------------------------------------+--------------------------------------+
+-   CD and DVD Writer/Readers
+-   Digital Cameras
+-   Keyboards
+-   Main Boards
+-   Modems
+-   Network Adapters (Wired)
+-   Network Adapters (Wireless)
+-   Printers
+-   Scanners
+-   Sound Cards
+-   TV Cards
+-   Video Cards
 
 Firmwares
 ---------
@@ -53,9 +45,16 @@ Firmwares
   
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Hardware_Compatibility_List&oldid=196383"
+"https://wiki.archlinux.org/index.php?title=Hardware_Compatibility_List&oldid=302896"
 
 Categories:
 
 -   Hardware Compatibility List
 -   Hardware detection and troubleshooting
+
+-   This page was last modified on 2 March 2014, at 12:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

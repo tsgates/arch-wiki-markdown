@@ -17,26 +17,33 @@ bit install has not been verified.
 
 At the time of installation I was running Java 7 and Kernel 3.0.1
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Requirements (all architectures)                             |
-|         -   1.1.1 Requirements (32 bit versions)                         |
-|         -   1.1.2 Requirements (64 bit versions)                         |
-|                                                                          |
-|     -   1.2 Software Install                                             |
-|                                                                          |
-| -   2 Running the IDE                                                    |
-| -   3 Troubleshooting                                                    |
-| -   4 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Requirements (all architectures)
+        -   1.1.1 Requirements (32 bit versions)
+        -   1.1.2 Requirements (64 bit versions)
+    -   1.2 Software Install
+-   2 Running the IDE
+-   3 Troubleshooting
+-   4 Links
 
 Installation
 ------------
 
 > Requirements (all architectures)
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: The required     
+                           package rxtx is no       
+                           longer maintained or     
+                           found in the AUR.        
+                           java-rxtx replaces it.   
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 Install rxtx from the AUR.
 
@@ -61,14 +68,47 @@ default.
 
 Requirements (64 bit versions)
 
-The software expects 32 bit libraries, so some extra installations are
-required.
++--------------------------+--------------------------+--------------------------+
+| [Tango-dialog-warning.pn | This article or section  | [Tango-dialog-warning.pn |
+| g]                       | is out of date.          | g]                       |
+|                          | Reason: Editor's         |                          |
+|                          | comment: this block is   |                          |
+|                          | saved for posterity.     |                          |
+|                          | Change made 08 December  |                          |
+|                          | 2013.                    |                          |
+|                          | The software expects 32  |                          |
+|                          | bit libraries, so some   |                          |
+|                          | extra installations are  |                          |
+|                          | required.                |                          |
+|                          |                          |                          |
+|                          | Install lib32-libusb and |                          |
+|                          | lib32-libusb-compat so   |                          |
+|                          | the software can         |                          |
+|                          | communicate with the USB |                          |
+|                          | ports.                   |                          |
+|                          |                          |                          |
+|                          | Install lib32-elfutils   |                          |
+|                          | from the AUR. If you     |                          |
+|                          | just have the standard   |                          |
+|                          | gcc package, this will   |                          |
+|                          | require replacing it     |                          |
+|                          | with gcc-multilib        |                          |
+|                          |                          |                          |
+|                          | The required package     |                          |
+|                          | rxtx is no longer        |                          |
+|                          | maintained or found in   |                          |
+|                          | the AUR. java-rxtx       |                          |
+|                          | replaces it. (Discuss)   |                          |
++--------------------------+--------------------------+--------------------------+
 
-Install lib32-libusb and lib32-libusb-compat so the software can
-communicate with the USB ports.
+For mpide to communicate with the microprocessor board via USB, install
+the required USB packages.
 
-Install lib32-elfutils from the AUR. If you just have the standard gcc
-package, this will require replacing it with gcc-multilib
+    $ sudo pacman -S libusb-compat libusbx
+
+Then install the packages required by mpide:
+
+    $ sudo pacman -S java-rxtx avrdude avr-binutils avr-gcc avr-gdb avr-lib
 
 > Software Install
 
@@ -116,9 +156,16 @@ Links
 -   Max32 page at Digilent
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ChipKit&oldid=212530"
+"https://wiki.archlinux.org/index.php?title=ChipKit&oldid=287567"
 
 Categories:
 
 -   Development
 -   Mathematics and science
+
+-   This page was last modified on 10 December 2013, at 23:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

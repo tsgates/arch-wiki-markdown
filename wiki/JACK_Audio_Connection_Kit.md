@@ -1,54 +1,56 @@
 JACK Audio Connection Kit
 =========================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install                                                            |
-|     -   1.1 JACK2                                                        |
-|     -   1.2 JACK                                                         |
-|                                                                          |
-| -   2 Basic Configuration                                                |
-|     -   2.1 GUI                                                          |
-|     -   2.2 Setup                                                        |
-|         -   2.2.1 Overview                                               |
-|         -   2.2.2 A Shell-Based Example Setup                            |
-|             -   2.2.2.1 Details of the Shell-Based Example Setup         |
-|                                                                          |
-|         -   2.2.3 A GUI-Based Example Setup                              |
-|         -   2.2.4 More                                                   |
-|                                                                          |
-| -   3 Jack for a multi-user system                                       |
-|     -   3.1 Playing nice with ALSA                                       |
-|     -   3.2 gstreamer                                                    |
-|     -   3.3 PulseAudio                                                   |
-|                                                                          |
-| -   4 MIDI                                                               |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 "Cannot lock down memory area (Cannot allocate memory)"      |
-|         message on startup                                               |
-|     -   5.2 jack2-dbus and qjackctl errors                               |
-|     -   5.3 Problems with specific applications                          |
-|         -   5.3.1 VLC - no audio after starting JACK                     |
-|                                                                          |
-| -   6 Related Articles                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Install
--------
+-   1 Installation
+    -   1.1 JACK2
+        -   1.1.1 JACK2 D-Bus
+    -   1.2 JACK
+    -   1.3 GUI
+-   2 Basic Configuration
+    -   2.1 Overview
+    -   2.2 A Shell-Based Example Setup
+        -   2.2.1 Details of the Shell-Based Example Setup
+    -   2.3 A GUI-Based Example Setup
+    -   2.4 More
+-   3 Jack for a multi-user system
+    -   3.1 Playing nice with ALSA
+    -   3.2 gstreamer
+    -   3.3 PulseAudio
+-   4 MIDI
+-   5 Troubleshooting
+    -   5.1 "Cannot lock down memory area (Cannot allocate memory)"
+        message on startup
+    -   5.2 jack2-dbus and qjackctl errors
+    -   5.3 Problems with specific applications
+        -   5.3.1 VLC - no audio after starting JACK
+-   6 Related Articles
 
-In order for jack to work, your user needs to be added to the audio
+Installation
+------------
+
+In order for JACK to work, your user needs to be added to the audio
 group for direct access to hardware.
+
+There are two JACK implementations, see this comparison for the
+difference between the two.
 
 > JACK2
 
 JACK2 is rewritten explicitly towards multiprocessor hardware. Install
-it with jack2, available from the official repositories.
+it with jack2, available from the official repositories. If you are on a
+64-bit installation and need to run 32-bit applications that require
+JACK, also install lib32-jack2 from the multilib repository.
 
-Also available is also Jack2 with D-Bus. It can be installed with
-jack2-dbus. It is controlled by the jack_control utility. The important
-commands are listed below:
+JACK2 D-Bus
+
+JACK2 with D-Bus can be installed via jack2-dbus. It is the same as the
+jack2 package but does not provide the legacy "jackd" server.
+
+It is controlled by the jack_control utility. The important commands are
+listed below:
 
     jack_control start  -  starts the jack server
     jack_control stop  - stops the jack server
@@ -56,26 +58,22 @@ commands are listed below:
     jack_control eps realtime True  -  set engine parameters, such as realtime
     jack_control dps period 256  -  set the driver parameter period to 256
 
-You may also need to play with the driver parameters nperiods and rate.
-
 > JACK
 
 Alternatively, there is the older JACK, installable with jack, available
-from the official repositories.
+from the official repositories. If you are on a 64-bit installation and
+need to run 32-bit applications that require JACK, also install
+lib32-jack from the multilib repository.
+
+> GUI
+
+If you want a GUI control application, the most widely used one is
+qjackctl, available in the official repositories.
 
 Basic Configuration
 -------------------
 
-> GUI
-
-No matter which JACK edition you are using, you will want a GUI
-configurator. Probably the de facto standard right now, is qjackctl,
-installable with the package qjackctl, available in the official
-repositories.
-
-> Setup
-
-Overview
+> Overview
 
 This Linux Magazine article is a very good general overview, although do
 not worry about manual compilations, quite a few JACK tools work right
@@ -89,18 +87,25 @@ is not necessary, as long as you set up for non-realtime latencies --
 The right configuration for your hardware and application needs, depends
 on several factors.
 
-A Shell-Based Example Setup
+> A Shell-Based Example Setup
+
+JACK docs linking this precise example do merit consideration. But the
+original author of the example wishes to state that it is for priority
+access to computation, to RAM, and motherboard nexus hardware, not
+mostly audio, that he uses schedtool on sound-production processes.
 
 The D-Bus edition of JACK2 can make startup much easier. Formerly, we
-had to have qjackctl start it for us, or use a daemonizer, or some other
-method. But as long as jack2-dbus is installed and dbus is running
-(which it should be in Arch), we can create a shell script as follows,
-to be run at X login:
+had to have QjackCtl start it for us, or use a daemonizer, or some other
+method. But using jack2-dbus, we can easily start and configure it via a
+shell script.
+
+Create a shell script that can be executed at X login:
 
     start_jack.sh
 
     #!/bin/bash
-    jack_control start
+
+    jack_control start.
     sudo schedtool -R -p 20 `pidof jackdbus`
     jack_control eps realtime true
     jack_control ds alsa
@@ -115,7 +120,7 @@ to be run at X login:
     qjackctl &
     sleep 10
     sudo schedtool -R -p 20 `pidof qjackctl`
-    qmidiroute /home/jeb/All2MIDI1.qmr &
+    qmidiroute /home/username/All2MIDI1.qmr &
     sleep 10
     sudo schedtool -R -p 20 `pidof qmidiroute`
     yoshimi -S &
@@ -125,7 +130,7 @@ to be run at X login:
 The above will start a complete realtime JACK live-synthesis setup,
 integrating several tools. Details of each line follow. When discovering
 your own best configuration, it is helpful to do trial and error using
-QJackCTL's GUI with a non-D-Bus JACK2 version.
+QjackCtl's GUI with a non-D-Bus JACK2 version.
 
 Details of the Shell-Based Example Setup
 
@@ -149,7 +154,7 @@ Sets JACK to use the ALSA driver set.
     jack_control dps device hw:HD2
 
 Sets JACK to use ALSA-compatible sound card named HD2. One can find the
-names with 'ls /proc/asound/cards'. Most ALSA tutorials and default
+names with cat /proc/asound/cards. Most ALSA tutorials and default
 configurations use card numbers, but this can get confusing when
 external MIDI devices are in use; names make it easier.
 
@@ -175,7 +180,7 @@ was built for. If a USB sound system were in use it might be good to try
 and/or FX, 5 ms is the smallest a human being can detect. There are many
 cases of perfect-storm-gorgeous hardware which can handle 1 ms latency
 without stressing the CPU, but definitely this is not always the case!
-QJackCTL will tell you how you are doing; at no-load, which means no
+QjackCtl will tell you how you are doing; at no-load, which means no
 clients attached, you will want a max of 3-5% CPU usage, and if you
 cannot get that without xruns (the red numbers which mean the system
 cannot keep up with the demands), you will have to improve your
@@ -202,12 +207,12 @@ Set a2jmidid to realtime scheduling in the Linux kernel.
 
     qjackctl &
 
-Load QJackCTL. GUI configuration tells it to run in the system tray. It
+Load QjackCtl. GUI configuration tells it to run in the system tray. It
 will pick up the JACK session started by D-Bus just fine, and very
 smoothly too. It maintains the patchbay, the connections between these
 applications and any other JACK-enabled apps to be started manually. The
 patchbay is set up using manual GUI, but connections pre-configured in
-the patchbay are automatically created by qjackctl itself when apps are
+the patchbay are automatically created by QjackCtl itself when apps are
 started.
 
     sleep 10
@@ -249,14 +254,14 @@ Wait for the above to settle.
 
 Set Yoshimi to realtime scheduling in the Linux kernel.
 
-With all of the above in a script run at logon, and with the QJackCtl
+With all of the above in a script run at logon, and with the QjackCtl
 patchbay set correctly, all we have to do is plug the PC/laptop into a
 MIDI keyboard using a USB-to-MIDI adapter, or simply the USB-in MIDI
 capability of many modern keyboards, and you are ready to play!
 
 The essence of QJackCtl is described fairly well in this article.
 
-A GUI-Based Example Setup
+> A GUI-Based Example Setup
 
 The shell-based example above, lays out in detail lots of things you may
 well need to know, and it does work well. If you want something much
@@ -284,18 +289,17 @@ more GUI, however, do this:
 -   Install pulseaudio-alsa.
 -   Install qjackctl, and tell your GUI window/desktop system to run it
     at startup.
--   Make sure qjackctl is told to:
+-   Make sure QjackCtl is told to:
     -   use the D-Bus interface,
     -   run at startup,
     -   save its configuration to the default location,
     -   start the JACK audio server on application startup,
     -   enable the system tray icon, and
-    -   start minimized to ssytem tray.
-
+    -   start minimized to sytem tray.
 -   Reboot.
--   After logging in, you will see QJackCtl in your system tray.
+-   After logging in, you will see QjackCtl in your system tray.
     Left-click on it.
--   Start tweaking in the QJackCtl GUI. The info embedded in the
+-   Start tweaking in the QjackCtl GUI. The info embedded in the
     shell-script setup above may be of some help :-) As may be the info
     in this article. Just remember that you have to get your latency
     down to less than 5ms for live tone production or filtration of any
@@ -303,16 +307,24 @@ more GUI, however, do this:
 -   From the AUR, install non-daw. One of the components of this package
     is called non-session-manager; it has the function of setting up
     "sessions": sets of other audio software items which Jack (through
-    the QJackCtl patchbay or not!) will wire together. NSM can handle as
+    the QjackCtl patchbay or not!) will wire together. NSM can handle as
     many different sessions as you wish to set up; and as a result, it's
     all GUI, apart from the one rc.local edit in the beginning.
 
-More
+> More
 
 Yet more info is in the Pro Audio page.
 
 Jack for a multi-user system
 ----------------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: this needs to be 
+                           updated for systemd      
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 So, you have a decent multiuser system as it was designed more than 20
 years ago, and now some developers decided that sound is only for a
@@ -398,9 +410,7 @@ Where my /etc/conf.d/jack-audio-connection-kit is
 > Playing nice with ALSA
 
 To allow Alsa programs to play while jack is running you must install
-the jack plugin for alsa:
-
-    pacman -S alsa-plugins
+the jack plugin for alsa with alsa-plugins.
 
 And enable it by editing (or creating) /etc/asound.conf (system wide
 settings) to have these lines:
@@ -436,8 +446,11 @@ settings) to have these lines:
 You need not restart your computer or anything. Just edit the alsa
 config files, start up jack, and there you go...
 
-Remember to start it as a user. If you start it with "jackd -d alsa" as
+Remember to start it as a user. If you start it with jackd -d alsa" as
 user X, it will not work for user Y.
+
+Another approach, using ALSA loopback device (more complex but probably
+more robust), is described in this article.
 
 > gstreamer
 
@@ -464,8 +477,8 @@ Edit /etc/pulse/client.conf, uncomment "autospawn" and set it to "no":
     ;autospawn = yes
     autospawn = no
 
-If you want both to play along, see:
-PulseAudio/Examples#PulseAudio_through_JACK_the_new_new_way
+If you want both to play along, see: PulseAudio/Examples#PulseAudio
+through JACK
 
 MIDI
 ----
@@ -553,8 +566,15 @@ Related Articles
 -   Pro Audio
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=JACK_Audio_Connection_Kit&oldid=252133"
+"https://wiki.archlinux.org/index.php?title=JACK_Audio_Connection_Kit&oldid=303964"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 11 March 2014, at 01:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

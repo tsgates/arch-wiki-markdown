@@ -12,13 +12,9 @@ Super Quick Git Guide
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-> Summary
+Related articles
 
-Contributing to the pacman Git repo
-
-> Related
-
-Git
+-   Git
 
 This isn't meant to be an all-encompassing guide by any means - it is
 meant to be a really quick walk-through on how to do some basic
@@ -35,22 +31,19 @@ In addition, all git commands have decent manpages to refer to. They can
 be reached one of two ways - for the git-add command, type 'man git-add'
 or 'git help add'.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Getting started                                                    |
-| -   2 Next steps                                                         |
-|     -   2.1 Git branches                                                 |
-|     -   2.2 Adding a remote repository                                   |
-|     -   2.3 Other time savers                                            |
-|                                                                          |
-| -   3 Making a patch                                                     |
-| -   4 Fixing your patch                                                  |
-| -   5 Sending patches                                                    |
-| -   6 Further reading                                                    |
-| -   7 Advanced hints                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Getting started
+-   2 Next steps
+    -   2.1 Git branches
+    -   2.2 Adding a remote repository
+    -   2.3 Other time savers
+-   3 Making a patch
+-   4 Fixing your patch
+-   5 Sending patches
+-   6 Further reading
+-   7 Advanced hints
 
 Getting started
 ---------------
@@ -298,8 +291,15 @@ lot of GIT's console output.
     git config --global color.status auto
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Super_Quick_Git_Guide&oldid=205938"
+"https://wiki.archlinux.org/index.php?title=Super_Quick_Git_Guide&oldid=290716"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 29 December 2013, at 03:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

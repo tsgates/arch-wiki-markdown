@@ -18,17 +18,14 @@ http://sourceforge.net/projects/alc900-cups/forums/forum/423970/topic/3173254
 For now use the cvs version, in future releases the open source project
 will support archlinux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-|     -   2.1 Files needed                                                 |
-|     -   2.2 Installation                                                 |
-|                                                                          |
-| -   3 Configuration                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+    -   2.1 Files needed
+    -   2.2 Installation
+-   3 Configuration
 
 Introduction
 ============
@@ -134,3 +131,10 @@ Retrieved from
 Category:
 
 -   Printers
+
+-   This page was last modified on 23 April 2012, at 13:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

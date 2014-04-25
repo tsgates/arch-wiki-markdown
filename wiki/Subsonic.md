@@ -6,47 +6,47 @@ and play it from other machines, cell phones, via a web interface, or
 various other applications. It can be installed using the subsonic
 package on AUR.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Additional config                                                  |
-|     -   1.1 Run subsonic daemon NOT as root                              |
-|     -   1.2 Install Transcoders                                          |
-|     -   1.3 Systemd Setup                                                |
-|                                                                          |
-| -   2 Troubleshooting                                                    |
-|     -   2.1 UTF-8 file names not added to the database                   |
-|     -   2.2 FLAC playback                                                |
-|                                                                          |
-| -   3 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Additional config
------------------
+-   1 Configuration
+    -   1.1 Configure permissions
+    -   1.2 Install transcoders
+    -   1.3 HTTPS Setup
+-   2 Troubleshooting
+    -   2.1 UTF-8 file names not added to the database
+    -   2.2 FLAC playback
+-   3 Madsonic
+-   4 External links
 
-> Run subsonic daemon NOT as root
+Configuration
+-------------
 
-By default, subsonic runs as root. This can be changed at any time after
-installation, even if the daemon has never run.
+After performing any configuration, remember to restart the daemon.
 
-Stop the daemon, if it's running:
+    # systemctl restart subsonic
 
-    # rc.d stop subsonic
+For details on using systemctl, see Systemd#Using_units.
 
-Add a system user "subsonic" without home folder and add it to "audio"
-group if you want to use the jukebox feature:
+> Configure permissions
 
-    # useradd --system --groups audio subsonic
+By default, Subsonic runs as root. The following instructions make
+Subsonic run as user "subsonic".
 
-Change folder owners as follow. Path may change, and the ones listed
-below are the current (2013-02-05) defaults. If the transcode folder
-does not exist, you should #Install Transcoders.
+Stop the daemon if it's running. Add a system user named "subsonic".
+Optionally, add this user to the "audio" group to enable the jukebox
+feature.
 
-    # chown -R subsonic:subsonic /tmp/subsonic
-    # chown -R subsonic:subsonic /var/subsonic
-    # chown -R root:root /var/subsonic/transcode
-    # chown -R root:root /var/subsonic/jetty/*/webapp
+    # systemctl stop subsonic
+    # useradd --system subsonic
+    # gpasswd --add subsonic audio
+
+Create several folders and customize their permissions.
+
+    # cd /var/subsonic
+    # chown -R subsonic:subsonic .
+    # test -d transcode || mkdir transcode
+    # chown -R root:root transcode
 
 Change this line in /var/subsonic/subsonic.sh:
 
@@ -56,48 +56,41 @@ to this:
 
     sudo -u subsonic ${JAVA} -Xmx${SUBSONIC_MAX_MEMORY}m \
 
-and restart the subsonic daemon.
-
-    # rc.d start subsonic
-
-> Install Transcoders
+> Install transcoders
 
 By default, Subsonic uses FFmpeg to transcode videos and songs to an
 appropriate format and bitrate on-the-fly. After installation, you can
 change these defaults so that, for example, Subsonic will transcode FLAC
-files using FLAC + LAME instead of FFmpeg. At a minimum, you should
-Install the ffmpeg package from the official repositories. You may also
-want to install flac and lame.
+files using FLAC and LAME instead of FFmpeg. You should therefore
+Install the ffmpeg, and you may also want to install flac and lame.
 
 For security reasons, Subsonic will not search the system for any
-transcoders. Instead, the user has to create links to the necessary
-transcoders in the /var/subsonic/transcode folder. Create the transcode
-folder if it does not already exist, then make the necessary symlinks.
+transcoders. Instead, the user must create symlinks to the transcoders
+in the /var/subsonic/transcode folder. Create the transcode folder if it
+does not already exist, then make the necessary symlinks.
 
     # mkdir /var/subsonic/transcode
     $ cd /var/subsonic/transcode
-    # ln -s `which ffmpeg`
-    # ln -s `which flac`
-    # ln -s `which lame`
+    # ln -s "$(which ffmpeg)"
+    # ln -s "$(which flac)"
+    # ln -s "$(which lame)"
 
-Finally, restart subsonic daemon.
+> HTTPS Setup
 
-    # rc.d start subsonic
+To enable HTTPS browsing and streaming, edit /var/subsonic/subsonic.sh
+and change this line:
 
-> Systemd Setup
+    SUBSONIC_HTTPS_PORT=0
 
-The subsonic installation includes a systemd service file. To install
-it:
+To this:
 
-    # cp /var/subsonic/subsonic.service /usr/lib/systemd/system/subsonic.service
+    SUBSONIC_HTTPS_PORT=8443
 
-Then, run:
-
-    # systemctl --system daemon-reload 
-
-And finally enable it:
-
-    # systemctl enable subsonic.service
+Note:port 8443 seems hard-coded somewhere. When attempting to change it
+to port 8080 it will automatically redirect the browser to port 8443
+after manually accepting the invalid HTTPS certificate. You will still
+be able to re-navigate to port 8080 after the warning page and have it
+work on that port.
 
 Troubleshooting
 ---------------
@@ -118,7 +111,7 @@ e.g. LANG=nn_NO.utf8.
 
 The FFmpeg transcoder doesn't handle FLAC files well, and clients will
 often fail to play the resultant streams. (at least, on my machine)
-Using FLAC + LAME instead of FFmpeg solves this issue. This workaround
+Using FLAC and LAME instead of FFmpeg solves this issue. This workaround
 requires that the FLAC and LAME transcoders have been installed, as
 explained in #Install Transcoders.
 
@@ -131,14 +124,31 @@ then add a new entry. You'll end up with something like this:
   mp3 default   ... NOT flac ...   mp3          ffmpeg ...                            
   mp3 flac      flac               mp3          flac --silent --decode --stdout %s   lame --silent -h -b %b -
 
+Madsonic
+--------
+
+Madsonic is a fork of Subsonic with extra features, does not require a
+registration fee (read completely free) and is available in AUR.
+
+Once you start the server, pay close attention to the Transcoding
+options, as you will probably have to change the command from
+"Audioffmpeg" to "ffmpeg".
+
 External links
 --------------
 
 -   Official web site
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Subsonic&oldid=247137"
+"https://wiki.archlinux.org/index.php?title=Subsonic&oldid=306195"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 21 March 2014, at 04:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

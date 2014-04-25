@@ -3,15 +3,13 @@ ID3 Tag Problems
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Description of the Problem                                         |
-| -   2 Solution                                                           |
-|     -   2.1 Scripted Solution                                            |
-|     -   2.2 Alternative (Fake) Solution                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Description of the Problem
+-   2 Solution
+    -   2.1 Scripted Solution
+    -   2.2 Alternative (Fake) Solution
 
 Description of the Problem
 ==========================
@@ -54,7 +52,7 @@ the command line. We will be using it. The process goes like this:
     example). If so, you are done.
 -   Strip the tag info (through eyeD3) using the following script:
 
-    #!/usr/bin/env python
+    #!/usr/bin/env python2
 
     # truncates a file after a TAG pattern is found
     # use at your own risk!
@@ -107,8 +105,15 @@ http://ubuntuforums.org/showpost.php?p=2108913&postcount=11.
 Start using OGG Vorbis. Not really a solution, but a nice alternative.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ID3_Tag_Problems&oldid=197880"
+"https://wiki.archlinux.org/index.php?title=ID3_Tag_Problems&oldid=278582"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 13 October 2013, at 15:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

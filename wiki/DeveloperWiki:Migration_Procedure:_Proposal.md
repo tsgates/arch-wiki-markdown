@@ -20,7 +20,6 @@ into current:
 -   Clean your personal test machine back to the [current] package set
     -   building with pacbuild will ensure dependenies are right -
         alexander
-
 -   Reinstall [testing], verifying all steps are documented somewhere
     (ideally, the wiki)
 -   Post a main page announcement, add announcement to the Announcements
@@ -41,3 +40,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2011, at 18:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

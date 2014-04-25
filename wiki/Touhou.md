@@ -17,26 +17,18 @@ even unofficial games.
 
 Despite the difficulty, they can be very addicting games.
 
-The purporse of this wiki, is to help users with the installation under
-arch linux of these games, and other touhou-related packages.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Packages                                                           |
-|     -   1.1 How to package a game                                        |
-|     -   1.2 Python Engine                                                |
-|                                                                          |
-| -   2 Extra Info                                                         |
-|     -   2.1 Installing the full version                                  |
-|     -   2.2 MIDI Music                                                   |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
-
-Packages
+Contents
 --------
+
+-   1 Installation
+    -   1.1 Python Engine
+-   2 Extra Info
+    -   2.1 Installing the full version
+    -   2.2 MIDI Music
+-   3 See also
+
+Installation
+------------
 
 PC-98 games can be played using Linux-native X Neko Project II emulator
 (xnp2 in AUR).
@@ -60,10 +52,6 @@ games that have free, downloadable trial editions to build off of:
 -   Touhou 11: Subterranean Animism
 -   Touhou 12: Undefined Fantastic Object
 -   Touhou 13: Ten Desires
-
-> How to package a game
-
-See Wine PKGBUILD Guidelines.
 
 > Python Engine
 
@@ -114,10 +102,18 @@ See also
 
 -   Touhou Project on Wikipedia
 -   Running Touhou Games in Linux
+-   Wine PKGBUILD Guidelines
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Touhou&oldid=233991"
+"https://wiki.archlinux.org/index.php?title=Touhou&oldid=305793"
 
 Category:
 
 -   Gaming
+
+-   This page was last modified on 20 March 2014, at 05:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

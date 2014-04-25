@@ -1,30 +1,26 @@
 Acer Extensa 5235
 =================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-|     -   1.1 lspci output                                                 |
-|                                                                          |
-| -   2 Kernel                                                             |
-| -   3 Graphics                                                           |
-| -   4 Touchpad                                                           |
-| -   5 Card Reader                                                        |
-| -   6 Sound                                                              |
-| -   7 Networking                                                         |
-|     -   7.1 LAN                                                          |
-|     -   7.2 WLAN                                                         |
-|                                                                          |
-| -   8 Suspend to RAM                                                     |
-| -   9 External VGA                                                       |
-| -   10 Controlling Screen Brightness                                     |
-| -   11 Controlling the fan                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+    -   1.1 lspci output
+-   2 Kernel
+-   3 Graphics
+-   4 Touchpad
+-   5 Card reader
+-   6 Sound
+-   7 Networking
+    -   7.1 LAN
+    -   7.2 WLAN
+-   8 Suspend to RAM
+-   9 External VGA
+-   10 Controlling screen brightness
+-   11 Controlling the fan
 
 Hardware
-========
+--------
 
 -   Processor: Intel® Celeron™ M 900 (2.2GHz, 1MB cache)
 -   RAM: 1GB DDR3
@@ -39,8 +35,7 @@ Hardware
 
 3x USB2.0, 1x VGA, Audio Headphone, Line In/Mic
 
-lspci output
-------------
+> lspci output
 
     00:00.0 Host bridge: Intel Corporation Mobile 4 Series Chipset Memory Controller Hub (rev 07)
     00:02.0 VGA compatible controller: Intel Corporation Mobile 4 Series Chipset Integrated Graphics Controller (rev 07)
@@ -65,11 +60,11 @@ lspci output
     09:00.0 Ethernet controller: Atheros Communications Device 1063 (rev c0)
 
 Kernel
-======
+------
 
 The default i686 kernel runs fine. x86_64 was not tested.
 
-Update: Due to a change in the ACPI code, version 2.6.34.2 or later can
+Warning:Due to a change in the ACPI code, version 2.6.34.2 or later can
 crash upon boot. The LTS-Kernel (currently 2.6.32) works fine; after
 installation, you can still upgrade to 2.6.34.1; the package is
 available from the Arch Rollback Machine (see
@@ -77,69 +72,59 @@ Downgrade_packages#Finding_Your_Older_Version ). This issue has been
 reported to the linux-acpi developers, so hopefully it will get fixed.
 
 Graphics
-========
+--------
 
-Works fine with xf86-video-intel
-
-    # pacman -S xf86-video-intel
+Works fine with xf86-video-intel.
 
 Only problem is adjusting the screen brightness. See below for further
 instructions.
 
 Touchpad
-========
+--------
 
-Works using the synaptics driver
-
-    # pacman -S synaptics
-
-Can be configured in xorg.conf or through synclient. The hardware
-apparently only supports one-finger operations though, so
+The touchpad works using the xf86-input-synaptics driver. It can be
+configured in xorg.conf or through synclient. The hardware apparently
+only supports one-finger operations though, so
 two-finger-scrolling/tapping will not work.
 
-Card Reader
-===========
+Card reader
+-----------
 
 Works fine, but only tested with SD cards.
 
 Sound
-=====
+-----
 
 Works out of the box, using snd-hda-intel and snd_hda_codec_conexant. No
 special options necessary.
 
 Networking
-==========
+----------
 
-LAN
----
+> LAN
 
 Works out of the box.
 
-WLAN
-----
+> WLAN
 
 Works out of the box, using ath9k module.
 
 Suspend to RAM
-==============
+--------------
 
-Works without problems using pm-utils
-
-    # pacman -S pm-utils
-    # pm-suspend 
+Works without problems using pm-utils.
 
 Use acpid or some power manager to enable on lid-closing or similar.
 Sleep button has no effect, though. Does not seem to emit an ACPI
 signal, but is detected by Xorg as XF86Sleep.
 
 External VGA
-============
+------------
 
 Works without problems, can be accessed e.g. using xrandr.
 
-Controlling Screen Brightness
-=============================
+Controlling screen brightness
+-----------------------------
 
 The only real problem when using this notebook. It seems the new intel
 driver with mandatory kernel modesetting does not natively support
@@ -178,7 +163,7 @@ This assumes that you saved the backlight-setting script in
 not need sudo for this to work.
 
 Controlling the fan
-===================
+-------------------
 
 Another annoyance is the poor fan control of this notebook. The fan is
 not accessible using PWM, so fancontrol or similar will not work.
@@ -192,8 +177,15 @@ You'll need to setup lm-sensors for this, which is working fine using
 the coretemp module.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Extensa_5235&oldid=196487"
+"https://wiki.archlinux.org/index.php?title=Acer_Extensa_5235&oldid=259539"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 29 May 2013, at 21:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

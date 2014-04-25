@@ -7,18 +7,14 @@ Remember that if you think something belongs on this page, add it! The
 current pacman developers are not likely to know what people need to
 know and should be on this page.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 References and Links                                               |
-| -   2 Developer Repositories                                             |
-|     -   2.1 Allan McRae                                                  |
-|     -   2.2 Dan McGee                                                    |
-|     -   2.3 Dave Reisner                                                 |
-|                                                                          |
-| -   3 Git Tips                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 References and Links
+-   2 Developer Repositories
+    -   2.1 Allan McRae
+    -   2.2 Dan McGee
+-   3 Git Tips
 
 References and Links
 --------------------
@@ -55,12 +51,6 @@ Web: http://code.toofishes.net/cgit/dan/pacman.git/
  Clone: git://code.toofishes.net/dan/pacman.git  
  Clone: http://code.toofishes.net/git/dan/pacman.git
 
-> Dave Reisner
-
-Web: https://github.com/falconindy/pacman  
- Clone: git://github.com/falconindy/pacman.git  
- Clone: https://github.com/falconindy/pacman.git
-
 Git Tips
 --------
 
@@ -77,6 +67,10 @@ Enable useful hooks
      mv .git/hooks/commit-msg.sample .git/hooks/commit-msg
      mv .git/hooks/pre-commit.sample .git/hooks/pre-commit
      mv .git/hooks/pre-rebase.sample .git/hooks/pre-rebase
+
+or
+
+     rename .sample "" .git/hooks/*.sample
 
 Always do your work on a new local branch to save yourself headaches.
 
@@ -111,8 +105,15 @@ Get toofishes working branch
       git checkout -b toofishes-working toofishes/working
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pacman_Development&oldid=237805"
+"https://wiki.archlinux.org/index.php?title=Pacman_Development&oldid=294139"
 
 Category:
 
 -   Pacman development
+
+-   This page was last modified on 23 January 2014, at 15:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

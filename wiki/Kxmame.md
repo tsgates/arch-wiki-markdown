@@ -16,7 +16,7 @@ emulators.
 How to obtain
 -------------
 
-Download, build and install the kxmane-svn AUR package.
+Download, build and install the kxmame-svn AUR package.
 
 Steps to follow after installation
 ----------------------------------
@@ -36,9 +36,16 @@ Steps to follow after installation
 You should now be able to start your roms from within kxmame.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Kxmame&oldid=198133"
+"https://wiki.archlinux.org/index.php?title=Kxmame&oldid=277273"
 
 Categories:
 
 -   Gaming
 -   Emulators
+
+-   This page was last modified on 1 October 2013, at 20:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

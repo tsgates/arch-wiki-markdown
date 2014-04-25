@@ -3,30 +3,23 @@ Huawei E220
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Plugging In                                                        |
-|     -   2.1 Quick Start                                                  |
-|         -   2.1.1 Easy Install using Network Manager                     |
-|         -   2.1.2 Scripting                                              |
-|         -   2.1.3 Bare Naked                                             |
-|         -   2.1.4 Configure n' Dial                                      |
-|         -   2.1.5 If using PIN code add this before Init2                |
-|                                                                          |
-|     -   2.2 Slow Start                                                   |
-|                                                                          |
-| -   3 Extras                                                             |
-|     -   3.1 Port Testing                                                 |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Hal                                                          |
-|     -   4.2 Route                                                        |
-|                                                                          |
-| -   5 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Plugging In
+    -   2.1 Quick Start
+        -   2.1.1 Easy Install using Network Manager
+        -   2.1.2 Bare Naked
+        -   2.1.3 Configure n' Dial
+        -   2.1.4 If using PIN code add this before Init2
+    -   2.2 Slow Start
+-   3 Extras
+    -   3.1 Port Testing
+-   4 Troubleshooting
+    -   4.1 Hal
+    -   4.2 Route
+-   5 Links
 
 Introduction
 ============
@@ -58,17 +51,6 @@ interferences and conflicts.
 Plugging In
 ===========
 
-Archers do not use old stuff, let alone use old kernels. That is,
-however, not enough reason to explain why in some cases the modem still
-needs the workaround. Thus, you have to see for yourself if you are one
-of the lucky ones. It almost seems as if the "support" in kernels >
-2.6.20 is a myth, although that may be entirely incorrect (maybe it is
-how Arch developers package the vanilla kernels in which case we have
-only phrakkkture and gang to thank).
-
-The magic (trick) lies in the kernel modules; udev rules, unloading,
-blacklisting, reloading and loading things will get it done.
-
 Quick Start
 -----------
 
@@ -99,23 +81,6 @@ change. You're good to go then.
  For Vodafone brands of this device, you can use vodafone-mccd which is
 the Vodafone Mobile Connect Card Driver for Linux. The official name is
 very long, yes.
-
-> Scripting
-
-If you have UDEV and HAL set up right but do not want extra bulk like an
-entire package (yeah right as if it adds a GiB full of stuff), then have
-no fear - bash is here. You can have my custom "installer" which
-incorporates everything including the HAL and UDEV rules. You can change
-the default installation of stuff to /usr instead of /usr/local if you
-want. Well, you can change anything if you want (or can). Download the
-tar archive and then extract it and pwn it:
-
-    $ tar xf huawei-e220.tar.gz
-    $ cd huawei-e220
-    $ nano setup.sh # if you want to
-    # ./setup.sh
-
-Enjoy me lad!
 
 > Bare Naked
 
@@ -305,8 +270,15 @@ http://wwwu.uni-klu.ac.at/agebhard/HuaweiE220/
  USB 3G Modem
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Huawei_E220&oldid=249631"
+"https://wiki.archlinux.org/index.php?title=Huawei_E220&oldid=294464"
 
 Category:
 
 -   Modems
+
+-   This page was last modified on 26 January 2014, at 03:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

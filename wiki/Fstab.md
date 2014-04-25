@@ -1,53 +1,54 @@
 fstab
 =====
 
-> Summary
+Related articles
 
-This article explains how to configure and use fstab.
+-   Persistent block device naming
+-   NTFS Write Support
+-   Firefox Ramdisk
+-   Boot Debugging
+-   udev
 
-> Related
+The /etc/fstab file can be used to define how disk partitions, various
+other block devices, or remote filesystems should be mounted into the
+filesystem.
 
-Persistent block device naming
+Each filesystem is described in a separate line. These definitions will
+be converted into systemd mount units dynamically at boot, and when the
+configuration of the system manager is reloaded. The default setup will
+automatically fsck and mount filesystems before starting services that
+need them to be mounted. For example, systemd automatically makes sure
+that remote filesystem mounts like NFS or Samba are only started after
+the network has been set up. Therefore, local and remote filesystem
+mounts specified in /etc/fstab should work out of the box. See
+man 5 systemd.mount for details.
 
-NTFS Write Support
+The mount command will use fstab, if just one of either directory or
+device is given, to fill in the value for the other parameter. When
+doing so, mount options which are listed in fstab will also be used.
 
-Firefox Ramdisk
+Contents
+--------
 
-Boot Debugging
-
-udev
-
-The /etc/fstab file contains static filesystem information. It defines
-how storage devices and partitions are to be mounted and integrated into
-the overall system. It is read by the mount command to determine which
-options to use when mounting a specific device or partition.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 File example                                                       |
-| -   2 Field definitions                                                  |
-| -   3 Identifying filesystems                                            |
-|     -   3.1 Kernel name                                                  |
-|     -   3.2 Label                                                        |
-|     -   3.3 UUID                                                         |
-|                                                                          |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Auto mount devices                                           |
-|     -   4.2 Swap UUID                                                    |
-|     -   4.3 Filepath spaces                                              |
-|     -   4.4 External devices                                             |
-|     -   4.5 atime options                                                |
-|     -   4.6 tmpfs                                                        |
-|         -   4.6.1 Usage                                                  |
-|             -   4.6.1.1 Improving compile times                          |
-|                                                                          |
-|     -   4.7 Writing to FAT32 as Normal User                              |
-|     -   4.8 Remounting the root partition                                |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+-   1 File example
+-   2 Field definitions
+-   3 Identifying filesystems
+    -   3.1 Kernel name
+    -   3.2 Label
+    -   3.3 UUID
+-   4 Tips and tricks
+    -   4.1 Automount with systemd
+    -   4.2 Filepath spaces
+    -   4.3 External devices
+    -   4.4 atime options
+    -   4.5 tmpfs
+        -   4.5.1 Usage
+            -   4.5.1.1 Improving compile times
+                -   4.5.1.1.1 For one session
+                -   4.5.1.1.2 Permanently
+    -   4.6 Writing to FAT32 as Normal User
+    -   4.7 Remounting the root partition
+-   5 See also
 
 File example
 ------------
@@ -57,9 +58,6 @@ A simple /etc/fstab, using kernel name descriptors:
     /etc/fstab
 
     # <file system>        <dir>         <type>    <options>             <dump> <pass>
-
-    tmpfs                  /tmp          tmpfs     nodev,nosuid          0      0
-
     /dev/sda1              /             ext4      defaults,noatime      0      1
     /dev/sda2              none          swap      defaults              0      0
     /dev/sda3              /home         ext4      defaults,noatime      0      2
@@ -76,9 +74,9 @@ or tab:
 -   <dir> - the mountpoint where <file system> is mounted to.
 -   <type> - the file system type of the partition or storage device to
     be mounted. Many different file systems are supported: ext2, ext3,
-    ext4, reiserfs, xfs, jfs, smbfs, iso9660, vfat, ntfs, swap and auto.
-    The auto type lets the mount command guess what type of file system
-    is used. This is useful for optical media (CD/DVD).
+    ext4, btrfs, reiserfs, xfs, jfs, smbfs, iso9660, vfat, ntfs, swap
+    and auto. The auto type lets the mount command guess what type of
+    file system is used. This is useful for optical media (CD/DVD).
 -   <options> - mount options of the filesystem to be used. Note that
     some mount options are filesystem specific. Some of the most common
     options are:
@@ -114,8 +112,13 @@ or tab:
     but doesn't break mutt or other applications that need to know if a
     file has been read since the last time it was modified.) Can help
     performance (see atime options).
+-   discard - Issue TRIM commands to the underlying block device when
+    blocks are freed. Recommended to use if the filesystem is located on
+    an SSD.
 -   flush - The vfat option to flush data more often, thus making copy
     dialogs or progress bars to stay up until all data is written.
+-   nofail - Mount device when present but ignore if absent. This
+    prevents errors being reported at boot for removable media.
 -   defaults - the default mount options for the filesystem to be used.
     The default options for ext4 are: rw, suid, dev, exec, auto, nouser,
     async.
@@ -129,7 +132,8 @@ or tab:
 
 -   <pass> - used by fsck to decide which order filesystems are to be
     checked. Possible entries are 0, 1 and 2. The root file system
-    should have the highest priority 1 - all other file systems you want
+    should have the highest priority 1 (unless its type is btrfs, in
+    which case this field should be 0) - all other file systems you want
     to have checked should have a 2. File systems with a value 0 will
     not be checked by the fsck utility.
 
@@ -141,9 +145,9 @@ There are three ways to identify a partition or storage device in
 of using UUIDs or labels is that they are not dependent on the order in
 which the drives are (physically) connected to the machine. This is
 useful if the storage device order in the BIOS is changed, or if you
-switch the storage device cabling. Also, sometimes the BIOS may
-occasionally change the order of storage devices. Read more about this
-in the Persistent block device naming article.
+switch the storage device cabling. Also, the BIOS may occasionally
+change the order of storage devices. Read more about this in the
+Persistent block device naming article.
 
 To list basic information about the partitions, run:
 
@@ -170,19 +174,16 @@ See the example.
 
 Note:Each label should be unique, to prevent any possible conflicts.
 
-To label a device or partition, see this article. You can also install
-and use gparted, but renaming the root partition would have to be done
-from a "live" Linux distribution (Parted Magic, Ubuntu, etc) because the
-partition needs to be unmounted first.
+For detailed information on how to label a device or partition, see
+Persistent block device naming#by-label. Renaming the root partition has
+to be done from a "live" Linux distribution because the partition needs
+to be unmounted first.
 
 Run lsblk -f to list the partitions, and prefix them with LABEL= :
 
     /etc/fstab
 
-    # <file system>        <dir>         <type>    <options>             <dump> <pass>
-
-    tmpfs                  /tmp          tmpfs     nodev,nosuid          0      0
-     
+    # <file system>        <dir>         <type>    <options>             <dump> <pass> 
     LABEL=Arch_Linux       /             ext4      defaults,noatime      0      1
     LABEL=Arch_Swap        none          swap      defaults              0      0
 
@@ -190,7 +191,7 @@ Run lsblk -f to list the partitions, and prefix them with LABEL= :
 
 All partitions and devices have a unique UUID. They are generated by
 filesystem utilities (e.g. mkfs.*) when you create or format a
-partition.
+partition. See Persistent block device naming#by-uuid for details.
 
 Run lsblk -f to list the partitions, and prefix them with UUID= :
 
@@ -201,9 +202,6 @@ Tip:If you would like to return just the UUID of a specific partition:
     /etc/fstab
 
     # <file system>                            <dir>     <type>    <options>             <dump> <pass>
-
-    tmpfs                                      /tmp      tmpfs     nodev,nosuid          0      0
-
     UUID=24f28fc6-717e-4bcd-a5f7-32b959024e26  /         ext4      defaults,noatime      0      1
     UUID=03ec5dd3-45c0-4f95-a363-61ff321a09ff  /home     ext4      defaults,noatime      0      2
     UUID=4209c845-f495-4c43-8a03-5363dd433153  none      swap      defaults              0      0
@@ -211,58 +209,41 @@ Tip:If you would like to return just the UUID of a specific partition:
 Tips and tricks
 ---------------
 
-> Auto mount devices
+> Automount with systemd
 
-To auto mount other disks devices during a boot, do this:
+If you have a large /home partition, it might be better to allow
+services that do not depend on /home to start while /home is checked by
+fsck. This can be achieved by adding the following options to the
+/etc/fstab entry of your /home partition:
 
-use lsblk -f command to list all disks devices.
+    noauto,x-systemd.automount
 
-copy the UUID related to device and input in /etc/fstab and make a new
-line with device informations.
+This will fsck and mount /home when it is first accessed, and the kernel
+will buffer all file access to /home until it is ready.
 
-exemple:
+Note:This will make your /home filesystem type autofs, which is ignored
+by mlocate by default. The speedup of automounting /home may not be more
+than a second or two, depending on your system, so this trick may not be
+worth it.
 
-    $ lsblk -f
+The same applies to remote filesystem mounts. If you want them to be
+mounted only upon access, you will need to use the
+noauto,x-systemd.automount parameters. In addition, you can use the
+x-systemd.device-timeout=# option to specify a timeout in case the
+network resource is not available.
 
-    NAME   FSTYPE LABEL      UUID                                 MOUNTPOINT
-    sda                                                           
-    ├─sda1 ext4   Arch_Linux 978e3e81-8048-4ae1-8a06-aa727458e8ff /
-    ├─sda2 ntfs   Windows    6C1093E61093B594                     
-    └─sda3 ext4   Storage    f838b24e-3a66-4d02-86f4-a2e73e454336 /media/Storage
+If you have encrypted filesystems with keyfiles, you can also add the
+noauto parameter to the corresponding entries in /etc/crypttab. systemd
+will then not open the encrypted device on boot, but instead wait until
+it is actually accessed and then automatically open it with the
+specified keyfile before mounting it. This might save a few seconds on
+boot if you are using an encrypted RAID device for example, because
+systemd does not have to wait for the device to become available. For
+example:
 
-    /etc/fstab
+    /etc/crypttab
 
-    # <file system>	<dir>	<type>	<options>	<dump>	<pass>
-    tmpfs		/tmp	tmpfs	nodev,nosuid	0	0
-    ...
-
-    f838b24e-3a66-4d02-86f4-a2e73e454336 /media/Storage ext4 defaults 0 0
-
-    ...
-
-remember: check the fstab man page to more info!
-
-> Swap UUID
-
-In case your swap partition doesn't have an UUID, you can add it
-manually. This happens when the UUID of the swap is not shown with the
-lsblk -f command. Here are some steps to assign a UUID to your swap:
-
-Identify the swap partition:
-
-    # swapon -s
-
-Disable the swap:
-
-    # swapoff /dev/sda7
-
-Recreate the swap with a new UUID assigned to it:
-
-    # mkswap -U random /dev/sda7
-
-Activate the swap:
-
-    # swapon /dev/sda7
+    data /dev/md0 /root/key noauto
 
 > Filepath spaces
 
@@ -286,28 +267,34 @@ reported at boot.
 
 > atime options
 
-The use of noatime, nodiratime or relatime can improve drive
-performance. Linux by default uses atime, which keeps a record (writes
-to the drive) every time it reads anything. This is more purposeful when
-Linux is used for servers; it doesn't have much value for desktop use.
-The worst thing about the default atime option is that even reading a
-file from the page cache (reading from memory instead of the drive) will
-still result in a write! Using the noatime option fully disables writing
-file access times to the drive every time you read a file. This works
-well for almost all applications, except for a rare few like Mutt that
-need the such information. For mutt, you should only use the relatime
-option. Using the relatime option enables the writing of file access
-times only when the file is being modified (unlike noatime where the
-file access time will never be changed and will be older than the
-modification time). The nodiratime option disables the writing of file
-access times only for directories while other files still get access
-times written. The best compromise might be the use of relatime in which
-case programs like Mutt will continue to work, but you'll still have a
-performance boost because files will not get access times updated unless
-they are modified.
+The use of noatime, nodiratime or relatime can impact drive performance.
+
+-   The atime option updates the atime of the files every time they are
+    accessed. This is more purposeful when Linux is used for servers; it
+    does not have much value for desktop use. The drawback about the
+    atime option is that even reading a file from the page cache
+    (reading from memory instead of the drive) will still result in a
+    write!
+
+Using the noatime option fully disables writing file access times to the
+drive every time you read a file. This works well for almost all
+applications, except for a rare few like Mutt that needs such
+information. For mutt, you should only use the relatime option.
+
+The nodiratime option disables the writing of file access times only for
+directories while other files still get access times written.
 
 Note:noatime already includes nodiratime. You do not need to specify
-both.[1]
+both.
+
+-   relatime enables the writing of file access times only when the file
+    is being modified (unlike noatime where the file access time will
+    never be changed and will be older than the modification time). The
+    best compromise might be the use this option since programs like
+    Mutt will continue to work, but you will still have a performance
+    boost as the files will not get access times updated unless they are
+    modified. This option is used when the defaults keyword option or no
+    options at all are specified in fstab for a given mount point.
 
 > tmpfs
 
@@ -320,7 +307,9 @@ Some directories where tmpfs is commonly used are /tmp, /var/lock and
 /var/run. Do NOT use it on /var/tmp, because that folder is meant for
 temporary files that are preserved across reboots. Arch uses a tmpfs
 /run directory, with /var/run and /var/lock simply existing as symlinks
-for compatibility. It is also used for /tmp in the default /etc/fstab.
+for compatibility. It is also used for /tmp by the default systemd setup
+and does not require an entry in /etc/fstab unless a specific
+configuration is needed.
 
 Note:When using systemd, temporary files in tmpfs directories can be
 recreated at boot by using tmpfiles.d.
@@ -330,17 +319,8 @@ total RAM, but this can be customized. Note that the actual memory/swap
 consumption depends on how much you fill it up, as tmpfs partitions do
 not consume any memory until it is actually needed.
 
-To use tmpfs for /tmp, add this line to /etc/fstab:
-
-    /etc/fstab
-
-    tmpfs   /tmp         tmpfs   nodev,nosuid                  0  0
-
-You may or may not want to specify the size here, but you should leave
-the mode option alone in these cases to ensure that they have the
-correct permissions (1777). In the example above, /tmp will be set to
-use up to half of your total RAM. To explicitly set a maximum size, use
-the size mount option:
+To explicitly set a maximum size, in this example to override the
+default /tmp mount, use the size mount option:
 
     /etc/fstab
 
@@ -351,7 +331,8 @@ users. This is useful for websites, mysql tmp files, ~/.vim/, and more.
 It's important to try and get the ideal mount options for what you are
 trying to accomplish. The goal is to have as secure settings as possible
 to prevent abuse. Limiting the size, and specifying uid and gid + mode
-is very secure. More info.
+is very secure. For more information on this subject, follow the links
+listed in the #See also section.
 
     /etc/fstab
 
@@ -386,17 +367,41 @@ into RAM shows a significant improvement in performance.
 
 Improving compile times
 
-Note:The tmpfs folder (/tmp, in this case) needs to be mounted without
-noexec, else it will prevent build scripts or utilities from being
-executed. Also, as stated above, the default size is half of the
-available RAM. You may run out of space.
+Compiling requires handling of many small files and involves many I/O
+operations; therefore it is a prime activity to benefit from moving its
+working directory to a #tmpfs.
 
-You can run makepkg with a tmpfs folder for the build directory (which
-is also a setting in /etc/makepkg.conf):
+For one session
+
+The BUILDDIR value may be exported within a shell to temporarily set
+makepkg build directory to an existing tmpfs:
 
     $ BUILDDIR=/tmp/makepkg makepkg
 
+Permanently
+
+Just uncomment the BUILDDIR line in /etc/makepkg.conf, see
+Makepkg#Improving compile times for details.
+
 > Writing to FAT32 as Normal User
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with USB Storage 
+                           Devices#Mounting USB     
+                           memory.                  
+                           Notes: The linked        
+                           section assumes that the 
+                           partition on USB storage 
+                           uses FAT32 or NTFS       
+                           filesystem, so we have   
+                           two sections covering    
+                           the same topic. Either   
+                           merge everything here or 
+                           in the linked section.   
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 To write on a FAT32 partition, you must make a few changes to your
 /etc/fstab file.
@@ -425,9 +430,10 @@ mount it to /mnt/fat32, then you would use:
 > Remounting the root partition
 
 If for some reason the root partition has been improperly mounted read
-only, remount the root partition with the following command:
+only, remount the root partition with read-write access with the
+following command:
 
-    # mount -o remount,rw /;   #Remount the root partition with read-write access
+    # mount -o remount,rw /
 
 See also
 --------
@@ -435,12 +441,19 @@ See also
 -   Full device listing including block device
 -   Filesystem Hierarchy Standard
 -   30x Faster Web-Site Speed (Detailed tmpfs)
--   FSTab Config Tutorial
+-   Adding Samba shares to /etc/fstab
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fstab&oldid=252652"
+"https://wiki.archlinux.org/index.php?title=Fstab&oldid=296407"
 
 Categories:
 
 -   File systems
 -   Boot process
+
+-   This page was last modified on 6 February 2014, at 18:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

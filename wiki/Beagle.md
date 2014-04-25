@@ -3,21 +3,42 @@ Beagle
 
 Beagle is a desktop search daemon, similar to Spotlight on Mac OS X.
 
-Note:Beagle does not appear to be in active development anymore.
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: This article     
+                           provides informations    
+                           about an ancient piece   
+                           of software not packaged 
+                           in any way. The bigger   
+                           part of the article      
+                           (#Prerequisites)         
+                           contains ancillar        
+                           information instead of   
+                           directly related ones.   
+                           The latter part says     
+                           nothing but "launch the  
+                           daemon, a settings tool  
+                           exists. Use it.".        
+                           Official site is for     
+                           sale. Probably Beagle    
+                           does not work in a       
+                           recent Mono VM. Much     
+                           safer alternatives       
+                           exist. (Discuss)         
+  ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-|     -   1.1 Enabling extended file attributes                            |
-|     -   1.2 Increasing inotify value                                     |
-|                                                                          |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-| -   4 Autostart                                                          |
-| -   5 Searching                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequisites
+    -   1.1 Enabling extended file attributes
+    -   1.2 Increasing inotify value
+-   2 Installation
+-   3 Configuration
+-   4 Autostart
+-   5 Searching
 
 Prerequisites
 -------------
@@ -57,29 +78,28 @@ directories instead of having to rescan the filesystem.
 By default the maximum number of watches is set to 8192, which is rather
 low. Increasing this value will have no noticeable side effects, so you
 can safely increase it. You can do this by adding the following to
-/etc/sysctl.conf:
+/etc/sysctl.d/99-inotify.conf:
 
      fs.inotify.max_user_watches = 65536
 
 This will take effect from the next reboot, however you can change it
 right away by issuing the following command:
 
-     # echo 65536 > /proc/sys/fs/inotify/max_user_watches 
+     # echo 65536 > /proc/sys/fs/inotify/max_user_watches
 
 Installation
 ------------
 
-Beagle is available from the [extra] repository. It depends on Mono, so
-if you do not already have this installed there may be a lot of packages
-to download.
+Beagle is not available in Arch Linux. It depends on Mono, so if you do
+not already have this installed there may be a lot of packages to
+download.
 
      # pacman -S beagle
 
 By default it comes with a GNOME GUI, which has a lot of GNOME
-dependencies. If you do not want these there is a version
-(beagle-no-gnome) in the AUR which does not include this. If you are
-using KDE there are various GUIs available, including KBeagleBar and
-Kerry.
+dependencies. If you do not want these you can compile a version which
+does not include this. If you are using KDE there are various GUIs
+available, including KBeagleBar and Kerry.
 
 Configuration
 -------------
@@ -120,8 +140,15 @@ following command (or setup a hotkey):
      $ beagle-search
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Beagle&oldid=197687"
+"https://wiki.archlinux.org/index.php?title=Beagle&oldid=301731"
 
 Category:
 
 -   Search
+
+-   This page was last modified on 24 February 2014, at 13:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

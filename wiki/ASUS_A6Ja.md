@@ -1,28 +1,24 @@
 ASUS A6Ja
 =========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Configuration                                                      |
-|     -   2.1 CPU                                                          |
-|     -   2.2 Video                                                        |
-|         -   2.2.1 Xorg                                                   |
-|                                                                          |
-|     -   2.3 Audio                                                        |
-|     -   2.4 Wi-Fi                                                        |
-|     -   2.5 Webcam                                                       |
-|     -   2.6 Bluetooth                                                    |
-|     -   2.7 Pointer                                                      |
-|     -   2.8 Leds & ACPI upgrade                                          |
-|     -   2.9 OLED Display                                                 |
-|         -   2.9.1 Function Keys                                          |
-|                                                                          |
-|     -   2.10 Utilities                                                   |
-|         -   2.10.1 The Lapsus daemon                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Configuration
+    -   2.1 CPU
+    -   2.2 Video
+        -   2.2.1 Xorg
+    -   2.3 Audio
+    -   2.4 Wi-Fi
+    -   2.5 Webcam
+    -   2.6 Bluetooth
+    -   2.7 Pointer
+    -   2.8 Leds & ACPI upgrade
+    -   2.9 OLED Display
+        -   2.9.1 Function Keys
+    -   2.10 Utilities
+        -   2.10.1 The Lapsus daemon
 
 Hardware
 --------
@@ -35,7 +31,6 @@ Hardware
 -   Display:
     -   TFT 15.4" WXGA (1280x800) ColorShine TFT-LCD, Asus Splendid
         Video Intelligent Technology
-
 -   Video: ATI Mobility Radeon X1600 256MB
 -   Audio: Scheda Intel High Definition Audio
 -   Wi-Fi: Intel PRO/Wireless 3945ABG 802.11a/b/g
@@ -55,12 +50,10 @@ Hardware
     -   1 x RJ11 Modem jack for phone line
     -   1 x RJ45 LAN Jack for LAN insert
     -   1 x TV-out(S-Video)
-
 -   Card Reader: MMC, SD, MS, MS-Pro
 -   Dimension and Weight:
     -   354mm * 284mm * 35 mm(W x D x H)
     -   2.7 Kg (8-cell)
-
 -   Pointer: Touch pad
 
 Configuration
@@ -94,7 +87,8 @@ Follow the official documentation: ALSA
 
 > Wi-Fi
 
-To enable wireless follow the official guide: Wireless Setup
+To enable wireless follow the official guide: Wireless network
+configuration
 
 NetworkManager is also a cool option.
 
@@ -168,7 +162,7 @@ features.
 
 Function Keys
 
-Follow one of the guides in Extra Funtion Keys
+Follow one of the guides in Extra Keyboard Keys
 
 > Utilities
 
@@ -199,8 +193,15 @@ daemon: /etc/rc.d/lapsusd start. You can add it into DAEMONS array in
 /etc/rc.conf.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_A6Ja&oldid=208347"
+"https://wiki.archlinux.org/index.php?title=ASUS_A6Ja&oldid=297827"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 15 February 2014, at 15:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

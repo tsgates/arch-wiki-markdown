@@ -11,21 +11,16 @@ System Specs:
 
 -   Processor
     -   Intel(R) Core(TM)2 Duo CPU P8600 @ 2.40GHz
-
 -   RAM Memory
     -   4 GB DDR3
-
 -   Webcam
     -   2.0 Megapixel Webcam
-
 -   Hard Disk
     -   320GB SATA 7200 rpm HDD
     -   500GB SATA 7200 rpm HDD
-
 -   Video Card
     -   NVIDIA 9400M
     -   NVIDIA 9500M (9400M G + 9200M GS)
-
 -   Wireless
     -   Broadcom Corporation BCM4322 802.11a/b/g/n Wireless LAN
         Controller
@@ -34,6 +29,14 @@ System Specs:
 The basic installation performs normally, with the core cd, also the
 wireless modules ( Atheros wifi card ) were well recognised and worked
 out of the box.
+
+Contents
+--------
+
+-   1 Power Management
+    -   1.1 HDD important issue
+    -   1.2 Hybernation - Suspend
+-   2 Touchpad
 
 Power Management
 ----------------
@@ -148,9 +151,25 @@ http://www.linux.com/news/hardware/laptops/8253-how-to-suspend-and-hibernate-a-l
 
 This should suspend your laptop to RAM when the lid is closed.
 
+Touchpad
+--------
+
+The touchpad does not work completely out of the box. By default only
+the mouse buttons are working. To get the touchpad working, especially
+the area to move the mouse, follow the instructions described on the
+wiki page Touchpad Synaptics. Just installing the package and an X
+restart should do the trick.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Studio_XPS_13&oldid=254492"
+"https://wiki.archlinux.org/index.php?title=Dell_Studio_XPS_13&oldid=274160"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 2 September 2013, at 18:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

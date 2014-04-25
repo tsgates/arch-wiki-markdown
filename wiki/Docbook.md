@@ -12,18 +12,15 @@ Docbook
 
 We will assume that our docbook document is in File.xml
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setting up Docbook in Arch                                         |
-| -   2 Validating XML file                                                |
-| -   3 Converting into XHTML                                              |
-|     -   3.1 Single file                                                  |
-|     -   3.2 Segmented                                                    |
-|                                                                          |
-| -   4 Automating                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setting up Docbook in Arch
+-   2 Validating XML file
+-   3 Converting into XHTML
+    -   3.1 Single file
+    -   3.2 Segmented
+-   4 Automating
 
 Setting up Docbook in Arch
 --------------------------
@@ -72,3 +69,10 @@ Retrieved from
 Category:
 
 -   Office
+
+-   This page was last modified on 23 April 2012, at 18:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

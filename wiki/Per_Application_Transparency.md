@@ -1,23 +1,6 @@
 Per Application Transparency
 ============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-|     -   3.1 Finding the Window                                           |
-|     -   3.2 Matching Different Applications                              |
-|                                                                          |
-| -   4 Starting With X                                                    |
-| -   5 Advanced Configuration                                             |
-+--------------------------------------------------------------------------+
-
-Introduction
-------------
-
 Following xterm automatic transparency guide one can get per app
 transparency with just xcompmgr and transset-df - just replace xterm
 with your program name:
@@ -47,15 +30,25 @@ for each window that opens.
 Adding devilspie to the mix however, will allow you to achieve per
 application transparency automatically.
 
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Finding the window
+    -   2.2 Matching different applications
+-   3 Starting with X
+-   4 Advanced configuration
+
 Installation
 ------------
 
 Firstly, you will need to make sure that xcompmgr, transset-df, and
 devilspie are installed. They are all available in the official
 repositories. Once installed, run xcompmgr (if you do not already have
-it running).
+it running):
 
-    $ xcompmgr & 
+    $ xcompmgr &
 
 Note:You do not need to pass any arguments to it, but if you would like
 some other effects, check out the Xcompmgr page. Xcompmgr has also been
@@ -96,7 +89,7 @@ with the former being completely transparent, and the latter being
 completely opaque.) The key here is the availability of the window_xid
 variable, and thus, the power of devilspie in this example.
 
-> Finding the Window
+> Finding the window
 
 The other trick here is knowing how to match the desired window.
 Sometimes you might want to use application_name instead of matching
@@ -109,7 +102,7 @@ And then start your desired application. The terminal should output some
 identification details that you can use in your opacity.ds file.
 Alternatively, you could use xprop.
 
-> Matching Different Applications
+> Matching different applications
 
 While this will simply make GVim transparent, you might want to do this
 with more than one application. Here's an example configuration that
@@ -127,7 +120,7 @@ windows should be apparent from this example.)
     )
     )
 
-Starting With X
+Starting with X
 ---------------
 
 Simply place the following in your X startup script (i.e., ~/.xinitrc)
@@ -136,7 +129,7 @@ to have per application window transparency load:
     xcompmgr &
     devilspie -a &
 
-Advanced Configuration
+Advanced configuration
 ----------------------
 
 Comprehensive documentation of the devilspie configuration file.
@@ -144,9 +137,15 @@ Comprehensive documentation of the devilspie configuration file.
 Alternatively, gdevilspie is a GUI configuration editor for devilspie.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Per_Application_Transparency&oldid=220717"
+"https://wiki.archlinux.org/index.php?title=Per_Application_Transparency&oldid=278651"
 
-Categories:
+Category:
 
 -   Eye candy
--   Desktop environments
+
+-   This page was last modified on 14 October 2013, at 11:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

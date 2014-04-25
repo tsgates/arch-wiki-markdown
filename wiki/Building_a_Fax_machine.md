@@ -57,15 +57,13 @@ application with the "Print" command.
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Part-1                                                             |
-| -   2 Part-2                                                             |
-| -   3 Part-3                                                             |
-| -   4 Testing                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Part-1
+-   2 Part-2
+-   3 Part-3
+-   4 Testing
 
 Part-1
 ======
@@ -370,3 +368,10 @@ Retrieved from
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 13 June 2012, at 11:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

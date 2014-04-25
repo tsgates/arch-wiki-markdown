@@ -1,53 +1,36 @@
 Acer C7 Chromebook
 ==================
 
-The following is a work in progress, of getting arch working on Acer's
-new C7 200$ Chromebook. From opening the box to an Arch Linux command
-line.
+This page is a work in progress guide to running Arch Linux on the Acer
+C7 Chromebook. See these installation instructions for the Acer C720
+Chromebook. Over seven models exist, starting at $199.
 
-Currently you'll need a second computer already running *nix. In the
-future If there's enough requests I'll create a way to install Arch
-without the need for a second computer. Much like the cr48-ubuntu
-script. If you're already running Ubuntu on your C7 then you can just
-skip to creating your own arch image.
+For now you need another computer running *nix. If you're already
+running ChrUbuntu on your Acer C7, skip to creating your own Arch image.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Arch onto an Acer C7 Chromebook                         |
-|     -   1.1 Backup all your data!                                        |
-|     -   1.2 Enabling Dev Mode                                            |
-|     -   1.3 Partitioning For Arch                                        |
-|     -   1.4 Create Arch Disk Image                                       |
-|         -   1.4.1 Create Image File                                      |
-|         -   1.4.2 Convert Image To A Partition                           |
-|         -   1.4.3 Install Arch onto this new image                       |
-|                                                                          |
-|     -   1.5 Copy Arch Image To C7                                        |
-|                                                                          |
-| -   2 Problems AKA: Work In Progress                                     |
-| -   3 See alse                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Installing Arch onto an Acer C7 Chromebook
-------------------------------------------
+-   1 Install Arch on an Acer C7 Chromebook
+-   2 Enabling Dev Mode
+-   3 Install ChrUbuntu
+    -   3.1 Create Image File
+    -   3.2 Convert Image to A Partition
+    -   3.3 Install Arch on The New Image
+-   4 Copy Arch Image to C7
+-   5 Installing a 64bit Kernel
+-   6 Finishing Up
+-   7 Extra - Reduce Boot Time(DANGEROUS)
+-   8 See Also
 
-Currently Archlinux does work on the C7 but the install process is a bit
-odd. Currently I have no way to replace the chromeos kernel, and I'd
-really like to. If you manage to figure it out PLEASE let me know how.
-In the mean time the system does work really well (for a chromebook)
-with Arch.
+> Install Arch on an Acer C7 Chromebook
 
-> Backup all your data!
+Arch runs well on the Acer C7. For 64bit installs first see Installing a
+x86_64 kernel. "Patches welcome" for custom x86_64 ChromiumOS kernels.
+The default install is 32bit due to the stock kernel.
 
-I'm assuming you're buying the system to install Arch, and that there's
-no personal data on the device. But if that's not the case
-
-Warning:*BACK UP YOUR DATA.*
-
-Off device too, the hard disk gets wiped clean by design when you enter
-Dev Mode.
+Warning:*BACK UP YOUR DATA.* All of it, somewhere else(Cloud, USB,
+another machine). The entire data partition will be purged many times.
 
 > Enabling Dev Mode
 
@@ -56,204 +39,277 @@ unsigned code. This will wipe all your data!
 
 To enter Dev Mode:
 
--   Press hold down the Esc+F3 (Refresh) keys, and press the Power
-    button.
+-   Press and hold the Esc+F3 (Refresh) keys, then press the Power
+    button. This enters recovery mode.
+-   Now, press Ctrl+D (no prompt). It will ask you to confirm, then the
+    system will reboot into Dev Mode.
 
-This enters recovery mode,
+Dev Mode will show the white boot screen. Press Ctrl+D or wait 30
+seconds to beep and boot.
 
--   Now press Ctrl+d (there's no prompt). It will ask you to confirm,
-    then the system will reboot into dev-mode.
+Note:To hard reset, press Esc+F3 (Refresh). This acts like a reset
+button on a desktop PC. The same warnings apply - The OS cannot save
+itself from this, and data loss is possible.
 
-Dev Mode will always show the scary boot screen and you need to press
-Ctrl+d or wait 30 seconds to continue booting.
+See Also: Acer C7: Entering Developer Mode
 
-If you want to boot fromDirect_bootstrapping_Archlinux a chromium type
-usb drive you'll have to run "crossystem dev_boot_usb=1" from ChromeOS
-and reboot once to boot from USB drives with Ctrl+u. But we don't care
-about that.
+> Install ChrUbuntu
 
-Note:If you need to hard reset. Press the refresh/F3 and press the power
-button. This will hard reset the system. It's occasionally useful, but
-use it with care - it wont sync the disk or shut down nicely, so there's
-a nonzero chance of trashing the contents of your disk.
+While it is completely backwards to install Ubuntu just to install Arch,
+currently it's the most automated and safe way. Scripts are a
+work-in-progress, trying to mash the ChrUbuntu script with
+arch-bootstrap. Stay tuned for details if they arrive.
 
-(all of this was stolen from [1]) Direct_bootstrapping_Archlinux
+-   After enabling dev mode on your Chromebook, boot to the ChromeOS
+    setup screen. Set keyboard layout, language, and connect to a
+    network. Do *not* log in to an account.
+-   Press Ctrl+Alt+F2 and login as "chronos".
+-   Bring up a bash prompt.
 
-> Partitioning For Arch
+    # bash
 
-Next you need to make room for Arch by repartitioning the Chromebook.
+-   Download Chrubuntu installer and run it.
 
-You can use the following script to repartition your C7 to make room for
-Arch Linux. (It will also probably work on other chromebooks as well.)
+    # curl -L -O git.io/pikNcg
+    # sudo bash ./pikNcg
 
-It will prompt you for sizes, then it will partition your disk for
-installing Arch, then reboot. After it reboots the C7 will reinstall
-ChromeOS to factory, but you'll have the partitions needed for
-installing Arch in the later sections.
+Set the partition size for the future Arch install. Example: I input
+"260", most of the stock Acer C7(C710-2487)'s 320GB HDD.
 
-    if [ "$1" != "" ]; then
-      target_disk=$1
-      echo "Got ${target_disk} as target drive"
-      echo ""
-      echo "WARNING! All data on this device will be wiped out! Continue at your own risk!"
-      echo ""
-      read -p "Press [Enter] to partition for Arch Linux on ${target_disk} or CTRL+C to quit"
+-   Wait for the system reboot.
+-   Wait 3-5 minutes for the system "repair" job to run.
+-   Reset keyboard layout, language, and reconnect to a network. Don't
+    log in to an account.
+-   Ctrl+Alt+F2 again and log in as "chronos"(again).
+-   Bring up a bash prompt(again).
 
-      ext_size="`blockdev --getsz ${target_disk}`"
-      aroot_size=$((ext_size - 65600 - 33))
-      parted --script ${target_disk} "mktable gpt"
-      cgpt create ${target_disk} 
-      cgpt add -i 6 -b 64 -s 32768 -S 1 -P 5 -l KERN-A -t "kernel" ${target_disk}
-      cgpt add -i 7 -b 65600 -s $aroot_size -l ROOT-A -t "rootfs" ${target_disk}
-      sync
-      blockdev --rereadpt ${target_disk}
-      partprobe ${target_disk}
-      crossystem dev_boot_usb=1
-    else
-      target_disk="`rootdev -d -s`"
-      # Do partitioning (if we haven't already)
-      ckern_size="`cgpt show -i 6 -n -s -q ${target_disk}`"
-      croot_size="`cgpt show -i 7 -n -s -q ${target_disk}`"
-      state_size="`cgpt show -i 1 -n -s -q ${target_disk}`"
+    # bash
 
-      max_archlinux_size=$(($state_size/1024/1024/2))
-      rec_archlinux_size=$(($max_archlinux_size - 1))
-      # If KERN-C and ROOT-C are one, we partition, otherwise assume they're what they need to be...
-      if [ "$ckern_size" =  "1" -o "$croot_size" = "1" ]
-      then
-        while :
-        do
-          read -p "Enter the size in gigabytes you want to use for Arch Linux. Acceptable range is 5 to $max_archlinux_size  but $rec_archlinux_size is the recommended maximum: " archlinux_size
-          if [ ! $archlinux_size -ne 0 2>/dev/null ]
-          then
-            echo -e "\n\nNumbers only please...\n\n"
-            continue
-          fi
-          if [ $archlinux_size -lt 5 -o $archlinux_size -gt $max_archlinux_size ]
-          then
-            echo -e "\n\nThat number is out of range. Enter a number 5 through $max_archlinux_size\n\n"
-            continue
-          fi
-          break
-        done
-        # We've got our size in GB for ROOT-C so do the math...
+-   Download ChrUbuntu installer and run it(again).
 
-        #calculate sector size for rootc
-        rootc_size=$(($archlinux_size*1024*1024*2))
+    # curl -L -O git.io/pikNcg
+    # sudo bash ./pikNcg
 
-        #kernc is always 16mb
-        kernc_size=32768
+-   Let the ChrUbuntu installer run. You'll be asked a few setup
+    questions, it's safe to hit Enter for all as we'll never use Ubuntu.
+-   While that installs, let's install Arch on our spare *nix box!
 
-        #new stateful size with rootc and kernc subtracted from original
-        stateful_size=$(($state_size - $rootc_size - $kernc_size))
-
-        #start stateful at the same spot it currently starts at
-        stateful_start="`cgpt show -i 1 -n -b -q ${target_disk}`"
-
-        #start kernc at stateful start plus stateful size
-        kernc_start=$(($stateful_start + $stateful_size))
-
-        #start rootc at kernc start plus kernc size
-        rootc_start=$(($kernc_start + $kernc_size))
-
-        #Do the real work
-        
-        echo -e "\n\nModifying partition table to make room for Arch." 
-        echo -e "Your Chromebook will reboot, wipe your data and then"
-        echo -e "you should re-run this script..."
-        umount /mnt/stateful_partition
-        
-        # stateful first
-        cgpt add -i 1 -b $stateful_start -s $stateful_size -l STATE ${target_disk}
-
-        # now kernc
-        cgpt add -i 6 -b $kernc_start -s $kernc_size -l KERN-C ${target_disk}
-
-        # finally rootc
-        cgpt add -i 7 -b $rootc_start -s $rootc_size -l ROOT-C ${target_disk}
-
-        reboot
-        exit
-      fi
-    fi
-
-> Create Arch Disk Image
+Warning:When the script finishes, it will ask you to press Enter to
+reboot, DO NOT. Press Ctrl+C to exit to a shell.
 
 Create Image File
 
--   First we need to create an Arch Image to do things with. It's
-    recommended that you use arch to create this image (because that's
-    how I did it), but you can probably do this from any linux system.
+-   First we need to create an Arch Image to do things with. This can be
+    done an any *nix box.
 
     # truncate -s 1G arch.img
 
-Convert Image To A Partition
+Convert Image to A Partition
 
--   Convert image to a ext3 filesystem.
+-   Convert image to an ext4 filesystem.
 
-    # mkfs.ext3 arch.img
+    # mkfs.ext4 -m 1 arch.img
 
--   Mount image to install to
+-   Mount image to install to.
 
     # mkdir /mnt/arch_install
-    # mount -o arch.img /mnt/arch_install
+    # mount arch.img /mnt/arch_install
 
-Install Arch onto this new image
+Install Arch on The New Image
 
-There's plenty of ways to go about this, the method I recommend is
-Directly bootstrapping Archlinux. If you go this way you can just follow
-the Installation_Guide. But anyway you choose to create your Arch linux
-install should work, unless you do something very strange, in that case
-good luck!
+Go through the Installation Guide as normal. I recommend a system with
+the Arch install scripts package installed. This is a doable process
+with many *nix systems(well documented on the Wiki), it will be much
+smoother with the install scripts.
 
-> Copy Arch Image To C7
+For 32 bit (x86),
 
-The following is a quick mockup to get you started. It's incomplete, be
-careful, you'll be left with an unworking system if you follow this
-guide!
+    # pacstrap /mnt/arch_install base base-devel --arch i686
 
-You should now have the following
+Note:The `--arch i686` part is important if you're on the stock stable
+channel which currently uses a 32bit-PAE kernel.
 
-1.  An image of Arch Linux
-2.  A freshly partitioned Acer C7
-3.  A copy of the kernel
-4.  A copy of the kernel modules
+For 64 bit (x64)
 
-From there all you need to do is;
+    # pacstrap /mnt/arch_install base base-devel --arch x86_64
 
--   get the arch.img on the C7
--   download a copy of your kernel
--   download a copy of your kernel modules
--   mount your image
--   mount your root-c partition
--   repack/resign the kernel
--   dd the kernel
--   copy over the kernel modules
--   copy over cgpt
--   set boot with cgpt
--   reboot
--   be happy
+When setting up fstab, you'll need to mount "/dev/sda7" at "/". UUIDs
+aren't really an option here as data is about to get sorted all over the
+place.
 
-Problems AKA: Work In Progress
-------------------------------
+> Copy Arch Image to C7
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
-                           Notes: please use the    
-                           first argument of the    
-                           template to provide more 
-                           detailed indications.    
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
+Now it gets messy. You should have a ChrUbuntu install that you did not
+reboot into(you're back in the bash shell in ChromeOS) and a ready-to-go
+Arch install on arch.img. Copy the arch.img file to a transfer
+medium(USB, HDD, Cloud, SSHFS, BT, etc).
 
-See alse
+-   Copy the Arch image to the Chromebook.
+-   Create working directories.
+
+    # mkdir mnt mnt2 mnt3 backup
+
+-   If your Arch image is on a USB key or drive, run "mount /dev/sdb1
+    mnt" (replacing /dev/sdb1 with the identifier of your USB drive
+    according to ChromeOS). Then run "mount mnt/arch.img mnt2"
+    (replacing arch.img with the name of your Arch image).
+-   Otherwise, I'm assuming your Arch image was downloaded to the
+    Chromebook somehow. So run "mount /path/to/arch.img mnt2"
+-   Mount Ubuntu's root at mnt3.
+
+    # mount /dev/sda7 mnt3
+
+-   Copy all firmware and kernel modules, which we'll need to
+    successfully boot Arch.
+
+    # cp -a mnt3/lib/{firmware,modules} backup/
+
+-   Save all module configs.
+
+    # cp -a mnt3/etc/modprobe.d/*.conf backup/
+
+-   Remove old Ubuntu install
+
+    # rm -rf mnt3/*
+
+Warning:Make 100% certain you typed "mnt3/*" and not some other
+mountpoint or you may toast your USB stick or Arch install.
+
+-   Copy your Arch install off to what was Ubuntu's root directory.
+
+    # cp -a mnt2/* mnt3/
+
+-   Restore module configs.
+
+    # cp -a backup/*.conf mnt3/etc/modprobe.d/
+
+If running x86
+
+-   Run "cp -a backup/modules/* mnt3/lib/modules/". This will restore
+    kernel modules.
+
+If running x86_64
+
+    # wget http://grayhatter.com/public/archC7/zgb-x64-modules.tar.bz2
+    # tar xf zgb-x64-modules.tar.bz2
+    # sudo cp -R 3.4.0 mnt3/lib/modules/
+
+-   Restore kernel firmwares.
+
+    # cp -a backup/firmware mnt3/lib/
+
+-   Copy CGPT to arch so we can boot back and fourth.
+
+    # cp /usr/bin/cgpt mnt3/usr/bin/
+    # mkdir mnt3/usr/bin/old_bins
+    # cp /usr/bin/old_bins/cgpt mnt3/usr/bin/old_bins
+
+-   To use CGPT later, you will need to install glibc (32-bit) or
+    lib32-glibc (64-bit).
+-   "umount" mnt3, mnt2, and mnt. In that order.
+
+> Installing a 64bit Kernel
+
+You have two choices, the official or unofficial way. 64bit kernels can
+be used with a 64 or 32bit filesystem.
+
+-   Official: You can simply login on your Chromebook and go to
+    chrome://help , then change the channel from stable to Dev.
+
+To check your kernel(currently the ChromeOS filesystem is 32bit), run:
+
+    # sudo modprobe configs && zcat /proc/config.gz | grep CONFIG_64BIT ; uname -m
+
+If you have a 64bit kernel you will see the output CONFIG_64BIT=y and
+x86_64.
+
+Or
+
+-   Unofficial: Run these commands from within ChromeOS before
+    rebooting.
+
+    # wget http://grayhatter.com/public/archC7/zgb-x64-kernel-partition.bz2
+    # bunzip2 zgb-x64-kernel-partition.bz2
+    # use_kernfs="zgb-x64-kernel-partition"
+    # target_kern="/dev/sda6"
+    # vbutil_kernel --repack $use_kernfs \
+     --keyblock /usr/share/vboot/devkeys/kernel.keyblock \
+     --version 1 \
+     --signprivate /usr/share/vboot/devkeys/kernel_data_key.vbprivk \
+     --oldblob $use_kernfs
+    # dd if=$use_kernfs of=${target_kern}
+
+> Finishing Up
+
+-   Reboot and enjoy your Arch install! Note that ChrUbuntu's installer
+    only told cgpt to boot to the Linux partition one time, so if
+    anything is hosed, a reboot will send you back to ChromeOS. If all
+    went well and you are happy with everything, you can reboot to
+    ChromeOS, drop to the Ctrl+Alt+F2 console, and run a `sudo cgpt add
+    -i 6 -P 5 -S 1 /dev/sda` to make the Chromebook always boot Arch.
+
+Extra - Reduce Boot Time(DANGEROUS)
+-----------------------------------
+
+To see how dangerous this is; see bricking, unbricking, and lessions
+learned.
+
+There is a way to silence the developer screen while reduce the auto
+boot time to three seconds(vs 30), removing the need to hit Ctrl+d each
+boot. This is dangerous because you can brick your Chromebook, requiring
+a JTAG to recover. These steps have been fully tested several times on
+several Acer C7 revisions. The BIOS flashing does not start if anything
+is unstable, having built in protection. Proceed with caution.
+
+-   Make sure the battery is completely full, Acer C7 is plugged in, and
+    booted into ChromeOS.
+-   Press Ctrl+Alt+F2 or Ctrl+Alt+T to get to a terminal (log in if you
+    use Ctrl+Alt+F2)
+
+    # cd ~/Downloads
+    # shell
+    # sudo -s
+    # flashrom -r bios.bin # Back up old BIOS
+    # gbb_utility –set –flags=0×01 bios.bin bios.new # Modifies the BIOS as needed
+
+-   Refer to this image to find the "Write Protect Jumper"
+    http://goo.gl/4OuGrw
+-   Short the BIOS protect jumper, making sure the connection is stable.
+    Jumpers from an old IDE HDD should work, I used a small knife.
+
+    # flashrom” again – “flashrom -w bios.new # Flashes the modified BIOS
+
+-   If this command fails, the jumpers are not fully shorted or the
+    connection became unstable on the jumpers. It will revert if the
+    connection becomes unstable at any time. If it fails while in a
+    flash, DO NOT REBOOT! Flash again until it works if it started the
+    flash, ensuring tools recovery works and that you didn't have a bad
+    flash. Do not rely on the built in check.
+-   If successful, you should have a working BIOS mod. Reboot. The
+    developer mode screen should vanish in three seconds, silently!
+-   Back up bios.bin and bios.new to another machine or the cloud in
+    case you ever want to revert.
+
+See Also
 --------
 
--   Developer information on Official site
+-   Official developer information, straight from Chromium.org
+-   The ChrUbuntu script official Github
+-   The official ChrUbuntu script site for the older script. It has tips
+    on cgpt commands and other info.
+-   Source for BIOS modification (for different device, this page shows
+    correct procedure for C7)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_C7_Chromebook&oldid=254953"
+"https://wiki.archlinux.org/index.php?title=Acer_C7_Chromebook&oldid=289735"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 21 December 2013, at 03:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -5,22 +5,18 @@ In this page, i'll try to make your Arch installation on HP Pavillion
 dv1000 series as easy as i can, If you have something to add please
 contribute to this page
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What does work?                                                    |
-| -   2 What does not work?                                                |
-| -   3 Installation                                                       |
-| -   4 Configurations                                                     |
-|     -   4.1 Graphic Card and Xorg                                        |
-|                                                                          |
-| -   5 Modules                                                            |
-|     -   5.1 Wireless                                                     |
-|     -   5.2 Sound                                                        |
-|                                                                          |
-| -   6 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 What does work?
+-   2 What does not work?
+-   3 Installation
+-   4 Configurations
+    -   4.1 Graphic Card and Xorg
+-   5 Modules
+    -   5.1 Wireless
+    -   5.2 Sound
+-   6 External Links
 
 What does work?
 ---------------
@@ -82,3 +78,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 6 March 2013, at 05:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -11,19 +11,17 @@ Sony Vaio VPCS12C5E
   ------------------------ ------------------------ ------------------------
 
 This page is about setting up Arch Linux on the Sony Vaio VPCS12C5E
-laptop. It is advisable to read the article about laptops beforehand to
-get an idea about the topic in general.
+laptop. It is advisable to read Laptop beforehand to get an idea about
+the topic in general.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Dedicated graphics                                                 |
-| -   3 WWAN                                                               |
-| -   4 Webcam                                                             |
-| -   5 Further resources                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 Dedicated graphics
+-   3 WWAN
+-   4 Webcam
+-   5 Further resources
 
 Overview
 ========
@@ -61,13 +59,14 @@ binaries.
 WWAN
 ====
 
-To get the optional UMTS modem get working you can refer to this page.
-You probably want to install [gobi-loader]. In order to get the
-appropriate firmware you can either use the package [gobi-firmware] or
-get it off from a Windows installation. Further information can be found
-at the [ThinkWiki] as they seem to use the same hardware for some of
-their devices. The device ID for Sony seems to be "05c6:9224" before the
-firmware is loaded and "05c6:9225" when the firmware is actually loaded.
+To get the optional UMTS modem get working you can refer to Gobi
+Broadband Modems. You probably want to install gobi-loader. In order to
+get the appropriate firmware you can either use the package
+gobi-firmware or get it off from a Windows installation. Further
+information can be found at the ThinkWiki as they seem to use the same
+hardware for some of their devices. The device ID for Sony seems to be
+"05c6:9224" before the firmware is loaded and "05c6:9225" when the
+firmware is actually loaded.
 
 Webcam
 ======
@@ -85,8 +84,15 @@ model (and some similiar), take a lookg at the following links:
 -   http://code.google.com/p/vaio-f11-linux/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sony_Vaio_VPCS12C5E&oldid=196733"
+"https://wiki.archlinux.org/index.php?title=Sony_Vaio_VPCS12C5E&oldid=263677"
 
 Category:
 
 -   Sony
+
+-   This page was last modified on 20 June 2013, at 20:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

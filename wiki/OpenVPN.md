@@ -5,18 +5,18 @@ OpenVPN
   [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
   ng]                      needs expansion.         ng]
                            Reason: (at least) add   
-                           support for ipv6 and L2  
-                           ethernet bridging        
+                           support for IPv6 and L2  
+                           Ethernet bridging        
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
 This article describes a basic installation and configuration of
 OpenVPN, suitable for private and small business use. For more detailed
-information, please see the official OpenVPN 2.2 man page and the
-OpenVPN documentation.
+information, please see the OpenVPN 2.3 man page and the OpenVPN
+documentation.
 
 OpenVPN is a robust and highly flexible VPN daemon. OpenVPN supports
-SSL/TLS security, ethernet bridging, TCP or UDP tunnel transport through
+SSL/TLS security, Ethernet bridging, TCP or UDP tunnel transport through
 proxies or NAT, support for dynamic IP addresses and DHCP, scalability
 to hundreds or thousands of users, and portability to most major OS
 platforms.
@@ -26,8 +26,7 @@ crypto capabilities from it.
 
 OpenVPN supports conventional encryption using a pre-shared secret key
 (Static Key mode) or public key security (SSL/TLS mode) using client &
-server certificates. OpenVPN also supports non-encrypted TCP/UDP
-tunnels.
+server certificates. OpenVPN also supports unencrypted TCP/UDP tunnels.
 
 OpenVPN is designed to work with the TUN/TAP virtual networking
 interface that exists on most platforms.
@@ -38,54 +37,48 @@ with a relatively lightweight footprint.
 OpenVPN was written by James Yonan and is published under the GNU
 General Public License (GPL).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install OpenVPN                                                    |
-| -   2 Configure the system for TUN/TAP support                           |
-| -   3 Connect to a VPN provided by a third party                         |
-| -   4 Create a Public Key Infrastructure (PKI) from scratch              |
-| -   5 A basic L3 IP routing configuration                                |
-|     -   5.1 The server configuration file                                |
-|     -   5.2 The client configuration file                                |
-|     -   5.3 Testing the OpenVPN configuration                            |
-|     -   5.4 Configure the MTU with Fragment and MSS                      |
-|                                                                          |
-| -   6 Starting OpenVPN                                                   |
-|     -   6.1 Manual startup                                               |
-|     -   6.2 Systemd service configuration                                |
-|                                                                          |
-| -   7 Advanced L3 IP routing                                             |
-|     -   7.1 Prerequisites for routing a LAN                              |
-|         -   7.1.1 IPv4 forwarding                                        |
-|         -   7.1.2 Promiscuous LAN interface                              |
-|         -   7.1.3 Routing tables                                         |
-|                                                                          |
-|     -   7.2 Connect the server LAN to a client                           |
-|     -   7.3 Connect the client LAN to a server                           |
-|     -   7.4 Connect both the client and server LANs                      |
-|     -   7.5 Connect clients and client LANs                              |
-|                                                                          |
-| -   8 L2 Ethernet bridging                                               |
-| -   9 Contributions that do not yet fit into the main article            |
-|     -   9.1 Routing client traffic through the server                    |
-|         -   9.1.1 Configure ufw for routing                              |
-|         -   9.1.2 Using iptables                                         |
-|                                                                          |
-|     -   9.2 Configuring LDAP authorization                               |
-|     -   9.3 Deprecated older wiki content                                |
-|         -   9.3.1 Using PAM and passwords to authenticate                |
-|         -   9.3.2 Using certs to authenticate                            |
-|         -   9.3.3 Routing traffic through the server                     |
-|         -   9.3.4 Setting up the Client                                  |
-|             -   9.3.4.1 With password authentication                     |
-|             -   9.3.4.2 Certs authentication                             |
-|             -   9.3.4.3 DNS                                              |
-|             -   9.3.4.4 Webmin                                           |
-|                                                                          |
-|         -   9.3.5 Connecting to the Server                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Install OpenVPN
+-   2 Configure the system for TUN/TAP support
+-   3 Connect to a VPN provided by a third party
+-   4 Create a Public Key Infrastructure (PKI) from scratch
+-   5 A basic L3 IP routing configuration
+    -   5.1 The server configuration file
+    -   5.2 The client configuration file
+    -   5.3 Testing the OpenVPN configuration
+    -   5.4 Configure the MTU with Fragment and MSS
+-   6 Starting OpenVPN
+    -   6.1 Manual startup
+    -   6.2 systemd service configuration
+        -   6.2.1 OpenVPN not restarting after suspend
+-   7 Advanced L3 IP routing
+    -   7.1 Prerequisites for routing a LAN
+        -   7.1.1 IPv4 forwarding
+        -   7.1.2 Promiscuous LAN interface
+        -   7.1.3 Routing tables
+    -   7.2 Connect the server LAN to a client
+    -   7.3 Connect the client LAN to a server
+    -   7.4 Connect both the client and server LANs
+    -   7.5 Connect clients and client LANs
+-   8 L2 Ethernet bridging
+-   9 Contributions that do not yet fit into the main article
+    -   9.1 Routing client traffic through the server
+        -   9.1.1 Configure ufw for routing
+        -   9.1.2 Using iptables
+    -   9.2 Configuring LDAP authorization
+    -   9.3 Deprecated older wiki content
+        -   9.3.1 Using PAM and passwords to authenticate
+        -   9.3.2 Using certs to authenticate
+        -   9.3.3 Routing traffic through the server
+        -   9.3.4 Setting up the client
+            -   9.3.4.1 With password authentication
+            -   9.3.4.2 Certificates authentication
+            -   9.3.4.3 DNS
+            -   9.3.4.4 Webmin
+        -   9.3.5 Connecting to the server
+-   10 See Also
 
 Install OpenVPN
 ---------------
@@ -93,7 +86,7 @@ Install OpenVPN
 Install openvpn from the official repositories.
 
 Note:The software contained in this package supports both server and
-client mode, so install it on all machines that need to create vpn
+client mode, so install it on all machines that need to create VPN
 connections.
 
 Configure the system for TUN/TAP support
@@ -102,7 +95,7 @@ Configure the system for TUN/TAP support
 OpenVPN requires TUN/TAP support. Make sure to load at boot the tun
 module.
 
-Read Kernel Modules for more information.
+Read Kernel modules for more information.
 
 The default kernel is already properly configured, but if you use
 another kernel make sure to enable the TUN/TAP module. If
@@ -121,6 +114,9 @@ Connect to a VPN provided by a third party
 To connect to a VPN provided by a third party, most of the following can
 most likely be ignored. Use the certificates and instructions given by
 your provider, for instance see: Airvpn.
+
+Note:To connect to servers of the most VPN providers that offer free
+service, one can plainly use pptpd since most offers only this protocol.
 
 Create a Public Key Infrastructure (PKI) from scratch
 -----------------------------------------------------
@@ -141,10 +137,10 @@ The public ca.crt certificate is needed on all servers and clients. The
 private ca.key key is secret and only needed on the key generating
 machine.
 
-A server needs server.crt, and dh2048.pem (public), and server.key and
-ta.key (private).
+A server needs server.crt, dh2048.pem (public), server.key, and ta.key
+(private).
 
-A client needs client.crt (public), and client.key and ta.key (private).
+A client needs client.crt (public), client.key, and ta.key (private).
 
 A basic L3 IP routing configuration
 -----------------------------------
@@ -157,15 +153,15 @@ configurations are possible, in fact machines can be both "servers" and
 "clients", blurring the distinction between server and client.
 
 What really distinguishes a server from a client (apart from the type of
-certificate used) is the configuration file itself. The openvpn daemon
-startup script reads all the .conf configuration files it finds in
-/etc/openvpn on startup and acts accordingly. In fact if it finds more
-than one configuration file, it will start one OpenVPN processes per
-configuration file.
+certificate used) is the configuration file itself. The OpenVPN daemon
+start-up script reads all the .conf configuration files it finds in
+/etc/openvpn on start-up and acts accordingly. If it finds more than one
+configuration file, it will start one OpenVPN process per configuration
+file.
 
-This article explains how to setup a server called elmer, and a client
-that connects to it called bugs. More servers and clients can easily be
-added, by creating more key/certificate pairs and adding more server and
+This article explains how to set up a server named elmer and a client
+that connects to it named bugs. More servers and clients can easily be
+added by creating more key/certificate pairs and adding more server and
 client configuration files.
 
 The OpenVPN package comes with a collection of example configuration
@@ -186,7 +182,7 @@ man page and the OpenVPN documentation.
 
 > The server configuration file
 
-Copy the example server configuration file to /etc/openvpn/server.conf
+Copy the example server configuration file to /etc/openvpn/server.conf:
 
     # cp /usr/share/openvpn/examples/server.conf /etc/openvpn/server.conf
 
@@ -198,7 +194,7 @@ Edit the following:
 -   Enable the SSL/TLS HMAC handshake protection. Note the use of the
     parameter 0 for a server.
 -   It is recommended to run OpenVPN with reduced privileges once it has
-    initialized, do this by uncommenting the user and group directives.
+    initialized. Do this by uncommenting the user and group directives.
 
     /etc/openvpn/server.conf
 
@@ -221,14 +217,14 @@ server.
 
 > The client configuration file
 
-Copy the example client configuration file to /etc/openvpn/client.conf
+Copy the example client configuration file to /etc/openvpn/client.conf:
 
     # cp /usr/share/openvpn/examples/client.conf /etc/openvpn/client.conf
 
 Edit the following:
 
 -   The remote directive to reflect either the server's Fully Qualified
-    Domain Name hostname (as known to the client) or its IP address.
+    Domain Name, hostname (as known to the client), or its IP address.
 -   Uncomment the user and group directives to drop privileges.
 -   The ca, cert, and key parameters to reflect the path and names of
     the keys and certificates.
@@ -279,7 +275,7 @@ something similar to this:
     Wed Dec 28 14:41:57 2011 UID set to nobody
     Wed Dec 28 14:41:57 2011 Initialization Sequence Completed
 
-On the server, find the IP assigned to the tunX device:
+On the server, find the IP address assigned to the tunX device:
 
     # ip addr show
 
@@ -302,7 +298,7 @@ Do the same on the client:
         link/none
         inet 10.8.0.6 peer 10.8.0.5/32 scope global tun0
 
-And the client side has been given the IP 10.8.0.6.
+And the client side has been given the IP address 10.8.0.6.
 
 Now try pinging the interfaces.
 
@@ -335,18 +331,18 @@ On the client:
 You now have a working OpenVPN installation, and your client (bugs) will
 be able to use services on the server (elmer), and vice versa.
 
-Note:If using a firewall, make sure that ip packets on the TUN device
+Note:If using a firewall, make sure that IP packets on the TUN device
 are not blocked.
 
 > Configure the MTU with Fragment and MSS
 
-Note:If you do not configure MTU then you will notice that small packets
-like ping and DNS will work, however web browsing will not work.
+Note:If you do not configure MTU, then you will notice that small
+packets like ping and DNS will work, however web browsing will not work.
 
 Now it is time to configure the maximum segment size (MSS). In order to
 do this we need to discover what is the smallest MTU along the path
 between the client and server. In order to do this you can ping the
-server and disable fragmentation. Then specify the max packetsize.
+server and disable fragmentation. Then specify the max packet size.
 
     # ping -c5 -M do -s 1500 elmer.acmecorp.org
 
@@ -404,10 +400,10 @@ Size (MSS).
 
   
 
-Note:This will add about 3min's to OpenVPN start time. It is advisable
-to configure the fragment size unless your client is a laptop that will
-be connecting over many different networks and the bottle neck is on the
-client side.
+Note:This will add about 3 minutes to OpenVPN start time. It is
+advisable to configure the fragment size unless your client is a laptop
+that will be connecting over many different networks and the bottle neck
+is on the client side.
 
 You can also allow OpenVPN to do this for you by having OpenVPN do the
 ping testing every time the client connects to the VPN.
@@ -436,16 +432,46 @@ Starting OpenVPN
 
 > Manual startup
 
-To troubleshoot a vpn connection, start the daemon manually with:
+To troubleshoot a VPN connection, start the daemon manually with:
 # openvpn /etc/openvpn/client.conf.
 
-> Systemd service configuration
+> systemd service configuration
 
-To start openvpn automatically at system boot, enable
+To start OpenVPN automatically at system boot, enable
 openvpn@<configuration>.service.
 
 For example, if the configuration file is /etc/openvpn/client.conf, the
 service name is openvpn@client.service.
+
+OpenVPN not restarting after suspend
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
+  png]                     this article or section  png]
+                           is disputed.             
+                           Reason: To avoid         
+                           problems on systemd      
+                           updates, modified        
+                           configuration should be  
+                           placed in                
+                           /etc/systemd/system/.    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+If you put your system to sleep, on resume openvpn doesn't restart,
+which results in broken connectivity.
+
+    /usr/lib/systemd/system-sleep/vpn.sh
+
+    #!/bin/sh
+    if [ "$1" == "pre" ]
+    then
+      killall openvpn
+    fi
+
+Make it executable chmod a+x /usr/lib/systemd/system-sleep/vpn.sh
+
+Add Restart=always to your /usr/lib/systemd/system/openvpn@.service
 
 Advanced L3 IP routing
 ----------------------
@@ -458,35 +484,29 @@ For a host to be able to forward IPv4 packets between the LAN and VPN,
 it must be able to forward the packets between its NIC and its tun/tap
 device.
 
-Edit etc/sysctl.conf to permanently enable ipv4 packet forwarding (takes
-effect at the next boot):
+Edit or create etc/sysctl.d/99-sysctl.conf to permanently enable IPv4
+packet forwarding (takes effect at the next boot):
 
-    /etc/sysctl.conf
+    /etc/sysctl.d/99-sysctl.conf
 
     # Enable packet forwarding
     net.ipv4.ip_forward=1
 
-To temporarily enable without rebooting:
+Tip:To temporarily enable without rebooting:
 # echo 1 > /proc/sys/net/ipv4/ip_forward
 
 Promiscuous LAN interface
 
-The forwarding host's NIC (eth0 in the following examples) must also be
-able to accept packets for a different IP address than it is configured
-for, something known as promiscious mode. To enable, add the following
-to /etc/rc.local (takes effect at the next boot):
+The forwarding host's NIC (enp1s0 in the following examples) must also
+be able to accept packets for a different IP address than it is
+configured for, something known as promiscuous mode. To set the enp1s0
+in promiscuous mode using systemd, use this service file and enable it
+using:
 
-    /etc/rc.local
+     # systemctl enable promiscuous@enp1s0
 
-    ip link set dev eth0 promisc on
-
-To temporarily enable without rebooting:
-# ip link set dev eth0 promisc on
-
-To set the eth0 in promiscuous mode using systemd use this service file
-and enable it using:
-
-     # systemctl enable promiscuous@eth0.service
+Tip:To temporarily enable without rebooting:
+# ip link set dev enp1s0 promisc on.
 
 Routing tables
 
@@ -523,13 +543,14 @@ configuration file:
 
     push "route 10.66.0.0 255.255.255.0"
 
-Note:Remember to enable ipv4 forwarding and to make the LAN interface
-promiscuous on the server. Make sure the server LAN knows how to reach
-the VPN client.
+> Note:
 
-Note:To route more LANs from the server to the client, add more push
-directives to the server configuration file, but keep in mind that the
-server side LANs will need to know how to route to the client.
+-   Remember to enable IPv4 forwarding and to make the LAN interface
+    promiscuous on the server. Make sure the server LAN knows how to
+    reach the VPN client.
+-   To route more LANs from the server to the client, add more push
+    directives to the server configuration file, but keep in mind that
+    the server side LANs will need to know how to route to the client.
 
 > Connect the client LAN to a server
 
@@ -566,14 +587,15 @@ subnet should be routed from the tun device to the server LAN:
     client-config-dir ccd
     route 192.168.4.0 255.255.255.0
 
-Note:Remember to enable ipv4 forwarding and to make the LAN interface
-promiscuous on the client. Make sure the client LAN knows how to reach
-the VPN server.
+> Note:
 
-Note:To route more LANs from the client to the server, add more iroute
-and route directives to the appropriate configuration files, but keep in
-mind that the client side LANs will need to know how to route to the
-server.
+-   Remember to enable IPv4 forwarding and to make the LAN interface
+    promiscuous on the client. Make sure the client LAN knows how to
+    reach the VPN server.
+-   To route more LANs from the client to the server, add more iroute
+    and route directives to the appropriate configuration files, but
+    keep in mind that the client side LANs will need to know how to
+    route to the server.
 
 > Connect both the client and server LANs
 
@@ -587,29 +609,25 @@ Combine the two previous sections:
     client-config-dir ccd
     route 192.168.4.0 255.255.255.0
 
-  
-
     /etc/openvpn/ccd/bugs
 
     iroute 192.168.4.0 255.255.255.0
 
-  
-
-Note:Remember to enable ipv4 forwarding and to make the LAN interfaces
+Note:Remember to enable IPv4 forwarding and to make the LAN interfaces
 promiscuous on both the client and the server. Make sure that all the
 LANs or the needed hosts can route to all the destinations.
 
 > Connect clients and client LANs
 
-By default clients will not see each other, to allow ip packets to flow
-between clients and/or client LANs add a client-to-client directive to
+By default clients will not see each other. To allow IP packets to flow
+between clients and/or client LANs, add a client-to-client directive to
 the server configuration file:
 
     /etc/openvpn/server.conf
 
     client-to-client
 
-In order for another client or client LAN to see a specific client LAN
+In order for another client or client LAN to see a specific client LAN,
 you will need to add a push directive for each client subnet to the
 server configuration file (this will make the server announce the
 available subnet(s) to other clients):
@@ -661,24 +679,17 @@ Append the following to your server's openvpn.conf configuration file:
 Change "192.168.1.1" to your preferred DNS IP address.
 
 If you have problems with non responsive DNS after connecting to server,
-install BIND as simple DNS forwarder and push openvpn ip address of
-server as DNS to clients.
+install BIND as simple DNS forwarder and push the IP address of the
+OpenVPN server as DNS to clients.
 
 Configure ufw for routing
 
 Configure your ufw settings to enable routing traffic from clients
 through server.
 
-You must change default forward policy, edit /etc/sysctl.conf to
-permanently enable ipv4 packet forwarding. Takes effect at the next
-boot.
+You must change default forward policy as in #IPv4 forwarding.
 
-    /etc/sysctl.conf
-
-    # Enable packet forwarding
-    net.ipv4.ip_forward=1
-
-And then configure ufw in /etc/default/ufw
+And then configure ufw in /etc/default/ufw:
 
     /etc/default/ufw
 
@@ -694,13 +705,13 @@ IP/subnet mask to match the one in /etc/openvpn/server.conf.
     *nat
     :POSTROUTING ACCEPT [0:0]
 
-    # Allow traffic from clients to eth0
-    -A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE
+    # Allow traffic from clients to enp1s0
+    -A POSTROUTING -s 10.8.0.0/8 -o enp1s0 -j MASQUERADE
 
     # don't delete the "COMMIT" line or the NAT table rules above won't be processed
     COMMIT
 
-Open openvpn port 1194
+Open OpenVPN port 1194:
 
     ufw allow 1194
 
@@ -709,9 +720,9 @@ Using iptables
 Use an iptable for NAT forwarding:
 
     echo 1 > /proc/sys/net/ipv4/ip_forward
-    iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+    iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o enp1s0 -j MASQUERADE
 
-If running ArchLinux in a OpenVZ VPS environment [1]:
+If running Arch Linux in a OpenVZ VPS environment [1]:
 
     iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o venet0 -j SNAT --to (venet0 ip)
 
@@ -719,9 +730,7 @@ If all is well, make the changes permanent:
 
 Edit /etc/conf.d/iptables and change IPTABLES_FORWARD=1
 
-    /etc/rc.d/iptables save
-
-  
+    # iptables-save > /etc/iptables/iptables.rules
 
 > Configuring LDAP authorization
 
@@ -736,7 +745,7 @@ Edit /etc/conf.d/iptables and change IPTABLES_FORWARD=1
   ------------------------ ------------------------ ------------------------
 
 You may also want to install openvpn-authldap-plugin, available in the
-Arch User Repository.
+AUR.
 
 > Deprecated older wiki content
 
@@ -777,7 +786,7 @@ Using PAM and passwords to authenticate
     verb 3
     client-cert-not-required
     username-as-common-name
-    plugin /usr/lib/openvpn/openvpn-auth-pam.so login
+    plugin /usr/lib/openvpn/plugins/openvpn-plugin-auth-pam.so login
 
 Using certs to authenticate
 
@@ -816,9 +825,9 @@ Change "192.168.1.1" to your external DNS IP address.
 Use an iptable for NAT forwarding:
 
     echo 1 > /proc/sys/net/ipv4/ip_forward
-    iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+    iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o enp1s0 -j MASQUERADE
 
-If running ArchLinux in a OpenVZ VPS environment [2]:
+If running Arch Linux in a OpenVZ VPS environment [2]:
 
     iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o venet0 -j SNAT --to (venet0 ip)
 
@@ -826,11 +835,11 @@ If all is well, make the changes permanent:
 
 Edit /etc/conf.d/iptables and change IPTABLES_FORWARD=1
 
-    /etc/rc.d/iptables save
+    # iptables-save > /etc/iptables/iptables.rules
 
-Setting up the Client
+Setting up the client
 
-The clientside .conf file
+The client-side .conf file
 
 With password authentication
 
@@ -852,7 +861,7 @@ passwd file (referenced by auth-user-pass) must contain two lines:
 -   first line - username
 -   second - password
 
-Certs authentication
+Certificates authentication
 
     client
     remote <MYSERVER> 1194
@@ -876,10 +885,10 @@ Copy three files from server to remote computer.
 
 Install the tunnel/tap module:
 
-     # sudo modprobe tun
+    # modprobe tun
 
-To have the tun module loaded automatically at boot time add it to the
-Modules line in /etc/rc.conf
+To have the tun module loaded automatically at boot, read
+Kernel_modules.
 
 DNS
 
@@ -909,7 +918,7 @@ Next, save the following script at
     # Used snippets of resolvconf script by Thomas Hood <jdthood@yahoo.co.uk>
     # and Chris Hanson
     # Licensed under the GNU GPL.  See /usr/share/common-licenses/GPL.
-    #
+    # 07/2013 colin@daedrum.net Fixed intet name
     # 05/2006 chlauber@bnc.ch
     #
     # Example envs set from openvpn:
@@ -917,7 +926,8 @@ Next, save the following script at
     # foreign_option_2='dhcp-option DNS 193.43.27.133'
     # foreign_option_3='dhcp-option DOMAIN be.bnc.ch'
 
-    [ -x /usr/sbin/resolvconf ] || exit 0
+    #[ -x $(which resolvconf) ] || exit 0
+    [ -x /usr/bin/resolvconf ] || exit 0
 
     case $script_type in
 
@@ -946,10 +956,11 @@ Next, save the following script at
                R="${R}nameserver $NS
     "
        done
-       echo -n "$R" | /usr/sbin/resolvconf -a "${dev}.inet"
+       #echo -n "$R" | resolvconf -p -a "${dev}"
+       echo -n "$R" | /usr/bin/resolvconf -a "${dev}.inet"
        ;;
     down)
-       /usr/sbin/resolvconf -d "${dev}.inet"
+       resolvconf -d "${dev}.inet"
        ;;
     esac
 
@@ -967,30 +978,48 @@ Now, when your launch your OpenVPN connection, you should find that your
 resolv.conf file is updated accordingly, and also returns to normal when
 your close the connection.
 
+Caveat: The script will fail to restore the original DNS settings if
+your OpenVPN client.conf is set-up to drop root privileges after
+connection.
+
 Webmin
 
 webmin-plugin-openvpn is available in the AUR.
 
 Note:You must add "openvpn" to the end of /etc/webmin/webmin.acl.
 
-Connecting to the Server
+Connecting to the server
 
 You need to start the service on the server
 
-    /etc/rc.d/openvpn start
+    systemctl start openvpn@server
 
-You can add it to rc.conf to make it permanent.
+To make it permanent:
+
+    systemctl enable openvpn@server
 
 On the client, in the home directory create a folder that will hold your
 OpenVPN client config files along with the .crt/.key files. Assuming
 your OpenVPN config folder is called .openvpn and your client config
 file is vpn1.conf, to connect to the server issue the following command:
 
-    cd ~/.openvpn && sudo openvpn vpn1.conf
+    # cd ~/.openvpn && openvpn vpn1.conf
+
+See Also
+--------
+
+-   VPNBook Ruby Script (Free OpenVPN)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=OpenVPN&oldid=254660"
+"https://wiki.archlinux.org/index.php?title=OpenVPN&oldid=302371"
 
 Category:
 
 -   Virtual Private Network
+
+-   This page was last modified on 28 February 2014, at 07:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

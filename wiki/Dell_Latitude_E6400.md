@@ -17,8 +17,7 @@ running with Arch.
 Installation
 ------------
 
-The Official Arch Linux Install Guide should get you running without a
-problem.
+The Installation guide should get you running without a problem.
 
 You can also check out the Dell Latitude E6x00 page on information
 specific to your hardware.
@@ -36,8 +35,15 @@ The Dell E6400 comes with the following hardware:
 -   Optional: Modem, Bluetooth, Webcam, and WWAN card
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Latitude_E6400&oldid=238363"
+"https://wiki.archlinux.org/index.php?title=Dell_Latitude_E6400&oldid=298291"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 16 February 2014, at 07:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

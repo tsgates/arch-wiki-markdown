@@ -7,19 +7,17 @@ rather than a IP layer-3 based IP tunnel (TUN). The general OpenVPN page
 describes setting up PAM authentication or OpenSSL security certificates
 in more detail.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Dynamic Bridge Installation                                        |
-| -   3 Dynamic Bridge Configuration                                       |
-| -   4 Using Systemd                                                      |
-| -   5 Static Bridge Installation                                         |
-| -   6 Static Bridge Configuration                                        |
-| -   7 Static Bridge Troubleshooting                                      |
-| -   8 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Dynamic Bridge Installation
+-   3 Dynamic Bridge Configuration
+-   4 Using Systemd
+-   5 Static Bridge Installation
+-   6 Static Bridge Configuration
+-   7 Static Bridge Troubleshooting
+-   8 More Resources
 
 Introduction
 ------------
@@ -90,7 +88,7 @@ TAP mode. Make sure the 'up' and 'down' scripts are executable with
     eth=$2
     dev=$3
     mtu=$4
-    cd /usr/sbin/
+    cd /usr/bin/
 
     # only if you start dhcpcd and leave it
     #  running for eth
@@ -122,7 +120,7 @@ TAP mode. Make sure the 'up' and 'down' scripts are executable with
     #!/bin/bash
     br=$1
     eth=$2
-    cd /usr/sbin/
+    cd /usr/bin/
 
     dhcpcd -k $br
 
@@ -165,10 +163,8 @@ should be revised at some point.
 Static Bridge Installation
 --------------------------
 
-The first thing you want to do is install OpenVPN, the Linux bridging
-utilities and netcfg.
-
-    pacman -S openvpn bridge-utils netcfg
+The first thing you want to do is install these packages: openvpn,
+bridge-utils, netctl.
 
 Static Bridge Configuration
 ---------------------------
@@ -190,52 +186,52 @@ applications. So, setting up a static bridge configuration as follows is
 the recommended method.
 
 To create an OpenVPN bridge for your server, you are going to have to
-use netcfg and create two network profiles - one for the tap interface
+use netctl and create two network profiles - one for the tap interface
 and one for the bridge.
 
-Go to /etc/network.d/. Then copy the tuntap example file to the
-directory.
+Go to /etc/netctl and copy the tuntap example file to the directory:
 
-    cd /etc/network.d/
-    cp examples/tuntap openvpn_tap
+     # cd /etc/netctl/
+     # cp examples/tuntap openvpn_tap
 
-Now edit openvpn_tap to create a tap interface. It may look like this.
+Now edit openvpn_tap to create a tap interface. It may look like this:
 
-    INTERFACE='tap0'
-    CONNECTION='tuntap'
-    MODE='tap'
-    USER='nobody'
-    GROUP='nobody'
+    /etc/netctl/openvpn_tap
+
+    Description='tuntap connection'
+    Interface=tap0
+    Connection=tuntap
+    Mode='tap'
+    User='nobody'
+    Group='nobody'
 
 Do not configure the IP address here, this is going to be done for the
 bridge interface!
 
 To create the bridge profile, copy the example file:
 
-    cp examples/bridge openvpn_bridge
+      # cp examples/bridge openvpn_bridge
 
 Now edit openvpn_bridge. It may look like this:
 
-    INTERFACE="br0"
-    CONNECTION="bridge"
-    DESCRIPTION="OpenVPN Bridge"
-    BRIDGE_INTERFACES="eth0 tap0"
-    IP='static'
-    ADDR='192.168.11.1'
-    GATEWAY='192.168.11.254'
+    /etc/netctl/openvpn_bridge
+
+    Description="Bridge connection"
+    Interface=br0
+    Connection=bridge
+    BindsToInterfaces=(eth0 tap0)
+    IP=static
+    Address=('192.168.11.1/24')
+    Gateway='192.168.11.254'
     DNS=('192.168.11.254')
 
 For more information, for example how to use DHCP instead, check the
-netcfg article.
+netctl article.
 
-Now set the NETWORKS array in /etc/conf.d/netcfg (order is important!):
+Now enable both profile with:
 
-    NETWORKS=(openvpn_tap openvpn_bridge)
-
-Then add net-profiles to your DAEMONS array (net-profiles must be before
-openvpn!):
-
-    DAEMONS=(... net-profiles openvpn ...)
+     # netctl enable openvpn_tap
+     # netctl enable openvpn_bridge
 
 Static Bridge Troubleshooting
 -----------------------------
@@ -262,8 +258,15 @@ more than appreciated.
 * * * * *
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=OpenVPN_Bridge&oldid=231959"
+"https://wiki.archlinux.org/index.php?title=OpenVPN_Bridge&oldid=271455"
 
 Category:
 
 -   Virtual Private Network
+
+-   This page was last modified on 17 August 2013, at 15:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

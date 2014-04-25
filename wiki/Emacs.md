@@ -1,10 +1,6 @@
 Emacs
 =====
 
-  Summary
-  --------------------------------------------------------
-  Tutorial on acquiring and using the Emacs text editor.
-
 Emacs is the extensible, customizable, self-documenting real-time
 display editor. At the core of Emacs lies an Emacs Lisp interpreter, the
 language in which the majority of Emacs' built-in functionality and
@@ -12,80 +8,75 @@ extensions are implemented. GTK is the default X toolkit used as of GNU
 Emacs 22, though it functions equally well within a CLI environment. The
 text-editing capabilities of Emacs are often compared to that of vim.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Running Emacs                                                      |
-|     -   2.1 Normal way                                                   |
-|     -   2.2 No Colors                                                    |
-|     -   2.3 As a daemon                                                  |
-|     -   2.4 As a systemd unit                                            |
-|                                                                          |
-| -   3 Quick Start                                                        |
-|     -   3.1 Basic terminology and convention                             |
-|     -   3.2 Movement                                                     |
-|     -   3.3 Files and buffers                                            |
-|     -   3.4 Editing                                                      |
-|     -   3.5 Killing, yanking and regions                                 |
-|     -   3.6 Search and replace                                           |
-|     -   3.7 Prefix arguments                                             |
-|     -   3.8 Windows and frames                                           |
-|     -   3.9 Modes                                                        |
-|                                                                          |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 TRAMP                                                        |
-|     -   4.2 Keyboard macros and registers                                |
-|     -   4.3 Regular expressions                                          |
-|     -   4.4 Rectangular selections                                       |
-|     -   4.5 Bookmarks                                                    |
-|     -   4.6 Elisp interpreter                                            |
-|     -   4.7 Smart window switch                                          |
-|     -   4.8 Shell calls                                                  |
-|     -   4.9 Shell buffers                                                |
-|     -   4.10 Show matching parentheses                                   |
-|     -   4.11 Spell checking                                              |
-|     -   4.12 Tables                                                      |
-|     -   4.13 Agenda, spreadsheet and document authoring                  |
-|     -   4.14 Refactoring and smart completion                            |
-|         -   4.14.1 Features                                              |
-|         -   4.14.2 Configuration                                         |
-|         -   4.14.3 Further reading                                       |
-|                                                                          |
-|     -   4.15 Using Emacs as git mergetool                                |
-|                                                                          |
-| -   5 Customization                                                      |
-|     -   5.1 Multiple configurations                                      |
-|     -   5.2 Loading extensions                                           |
-|     -   5.3 Local and custom variables                                   |
-|     -   5.4 Custom colors and theme                                      |
-|     -   5.5 SyncTeX support                                              |
-|                                                                          |
-| -   6 Documentation                                                      |
-|     -   6.1 Contextual help                                              |
-|     -   6.2 The Manuals                                                  |
-|                                                                          |
-| -   7 Extensions                                                         |
-|     -   7.1 Emacs MediaWiki                                              |
-|                                                                          |
-| -   8 Troubleshooting                                                    |
-|     -   8.1 Colored output issues                                        |
-|     -   8.2 Menus appear empty                                           |
-|     -   8.3 Problems displaying characters in X Windows                  |
-|     -   8.4 Slow startup                                                 |
-|     -   8.5 Cannot open load file: ...                                   |
-|     -   8.6 Dead-accent keys problem: '<dead-acute> is undefined'        |
-|     -   8.7 C-M-% and some other bindings do not work in emacs nox       |
-|     -   8.8 Emacs client gets stuck when switching back to it            |
-|                                                                          |
-| -   9 Alternatives                                                       |
-|     -   9.1 mg                                                           |
-|     -   9.2 zile                                                         |
-|     -   9.3 uemacs                                                       |
-|                                                                          |
-| -   10 See also                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Running Emacs
+    -   2.1 Normal way
+    -   2.2 No Colors
+    -   2.3 As a daemon
+    -   2.4 As a systemd unit
+-   3 Quick Start
+    -   3.1 Basic terminology and convention
+    -   3.2 Movement
+    -   3.3 Files and buffers
+    -   3.4 Editing
+    -   3.5 Killing, yanking and regions
+    -   3.6 Search and replace
+    -   3.7 Prefix arguments
+    -   3.8 Indentation
+    -   3.9 Windows and frames
+    -   3.10 Modes
+-   4 Tips and tricks
+    -   4.1 TRAMP
+    -   4.2 Keyboard macros and registers
+    -   4.3 Regular expressions
+    -   4.4 Rectangular selections
+    -   4.5 Bookmarks
+    -   4.6 Elisp interpreter
+    -   4.7 Smart window switch
+    -   4.8 Shell calls
+    -   4.9 Shell buffers
+    -   4.10 Show matching parentheses
+    -   4.11 Spell checking
+    -   4.12 Tables
+    -   4.13 Agenda, spreadsheet and document authoring
+    -   4.14 Refactoring and smart completion
+        -   4.14.1 Features
+        -   4.14.2 Configuration
+        -   4.14.3 Further reading
+    -   4.15 Using Emacs as git mergetool
+    -   4.16 Using the Caps Lock key as a Control Key
+-   5 Customization
+    -   5.1 Multiple configurations
+    -   5.2 Loading extensions
+    -   5.3 Local and custom variables
+    -   5.4 Custom colors and theme
+    -   5.5 SyncTeX support
+-   6 Documentation
+    -   6.1 Contextual help
+    -   6.2 The manuals
+-   7 Extensions
+    -   7.1 Emacs MediaWiki
+-   8 Troubleshooting
+    -   8.1 Colored output issues
+    -   8.2 Menus appear empty
+    -   8.3 Problems displaying characters in X Windows
+    -   8.4 Slow startup
+    -   8.5 Incorrect network configuration
+    -   8.6 Cannot open load file: ...
+    -   8.7 Dead-accent keys problem: '<dead-acute> is undefined'
+    -   8.8 C-M-% and some other bindings do not work in emacs nox
+    -   8.9 Emacs client gets stuck when switching back to it
+    -   8.10 Emacs-nox output gets messy
+    -   8.11 Shift + Arrow keys not working in emacs within tmux
+    -   8.12 Improper window resizing in KDE
+-   9 Alternatives
+    -   9.1 mg
+    -   9.2 zile
+    -   9.3 uemacs
+-   10 See also
 
 Installation
 ------------
@@ -93,9 +84,29 @@ Installation
 Emacs comes in several variants (sometimes referred to as emacsen). The
 most common of these is GNU Emacs.
 
-Install emacs, available in the Official Repositories. If you usually
-work in a terminal, you may prefer the emacs-nox variant without GTK
-(nor sound and other fancy stuff).
+Install emacs, available in the official repositories. If you usually
+work in a terminal, you may prefer the emacs-nox variant without GTK+
+(nor sound and other fancy stuff). Beware that the text version comes
+with some drawbacks: it supports less colors and less features for font
+handling (size change in live, various sizes in one document, and so
+on). Besides, emacs-nox has some limitation with advanced features like
+the Speedbar or GUD (the debugging environment), and is somewhat slower
+when handling complex faces (a "face" is the visual appearance of text
+in Emacs).
+
+If you want to fully enjoy all the extended features of Emacs without
+installing a daunting amount of dependencies, you can use the PKGBUILD
+to customize your needs. Using anything else than gtk3 you can get rid
+of gconf. Image and sound support can be disabled as well. Run
+./configure --help in Emacs source folder to list all available options.
+
+    PKGBUILD
+
+    # ...
+      ./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/lib \
+        --localstatedir=/var --with-x-toolkit=gtk2 --with-xft \
+        --without-gconf --without-sound
+    # ...
 
 Another common variant is xemacs.
 
@@ -103,7 +114,7 @@ Running Emacs
 -------------
 
 Before launching emacs, you should know how to close it (especially if
-you run it in a terminal) : use the Ctrl+xCtrl+c key sequence.
+you run it in a terminal): use the Ctrl+xCtrl+c key sequence.
 
 > Normal way
 
@@ -134,7 +145,7 @@ This will cause all text to appear in white color only.
 > As a daemon
 
 Emacs can take some time to start since it has to load the .emacs file
-each time. Besides, you may want to access the same files from differant
+each time. Besides, you may want to access the same files from different
 instances. Since version 23, Emacs is capable to run as a daemon to
 which users can connect. To run Emacs as a daemon:
 
@@ -161,30 +172,84 @@ call the command, it will start emacs as a daemon, so that it remains
 running in background to improve startup time for future calls (and to
 remember buffers as well).
 
+If you start the client from a terminal or another program, you may want
+not to wait for it to return, so that you can continue using the calling
+program and even close it without closing the Emacs client. To do so,
+start the client with the -n (--no-wait) parameter:
+
+    $ emacsclient -nc
+
+Note that some programs such as Mutt or Git (for commit messages) wait
+for the editor to finish, so you cannot use the -n parameter. If your
+default editor is set to use it, you will have to specify an alternate
+editor (e.g. emacsclient -a "" -t) for those programs.
+
 You could use the following shell configuration:
 
-    alias emacs='emacsclient -t -a ""'
-    EDITOR='emacsclient -t -a ""'
+    alias em='emacsclient -nc -a ""'
+    alias emc='emacsclient -t -a ""'
+    EDITOR='emacsclient -a ""'
 
 but it has some caveats: many program will fail to load the external
 editor because of the spaces in the command.
 
 A more convenient and reliable solution is to write your own script:
 
-    /bin/em
+    /usr/local/bin/em
 
     #!/bin/sh
-    emacsclient -a "" -t "$@"
+    if [ -z "$DISPLAY" ]; then
+        IS_GRAPHICAL=true
+    else
+        IS_GRAPHICAL=$(emacs --batch -Q --eval='(if (fboundp '"'"'tool-bar-mode) (message "true") (message "false"))' 2>&1)
+    fi
+
+    if $IS_GRAPHICAL; then
+        emacsclient -a "" -nc "$@"
+    else
+        emacsclient -a "" -t "$@"
+    fi
 
 then make it executable:
 
-    # chmod 755 /bin/em
+    # chmod 755 /usr/local/bin/em
 
-Now 'em' will work just as expected.
+Now 'em' will work just as expected. Setting the EDITOR environment
+variable to the aforementionned script should suffice to make the client
+be your defaut editor.
 
-With xfce, if you want to tell it to use emacsclient -c instead of
-emacs %f when opening a new file, you can change your modify your
-emacs.desktop like so:
+You may find that typing "em filename.c" could be easily mistyped as "rm
+filename.c", so you may prefer to use "emc" (read "emacs client")
+instead of "em". Non-X Emacs should be used when emc is called from
+terminal, whether you are in X or not. Another thing, Emacs daemon also
+complains about the "long standing Gtk bug". That bug can be avoid by
+telling the Emacs daemon that there is no DISPLAY. So, here is another
+alternative:
+
+    /usr/local/bin/emc
+
+    #!/bin/sh
+    ps aux|grep 'emacs *--daemon' || DISPLAY='' emacs --daemon -nw --no-splash
+
+    if [ "x$1" = "x-nw" ]; then
+      exec emacsclient "$@"
+    else
+      exec emacsclient -nc "$@"
+    fi
+
+And create an alias in the interactive shell script
+
+    $HOME/.zshrc or $HOME/.bashrc
+
+    [ -f $HOME/.aliases ] && . ~/.aliases
+
+    $HOME/.aliases
+
+    alias emc='emc -nw'
+
+On desktop environments (such as GNOME, KDE or Xfce), if you want to
+tell it to use emacsclient -c instead of emacs %f when opening a new
+file, you can change your modify your emacs.desktop like so:
 
     /usr/share/applications/emacs.desktop
 
@@ -225,11 +290,11 @@ Create a systemd unit for emacs:
 
 You need to enable the unit so that it gets started on every boot:
 
-    systemctl enable emacs@<username>
+    # systemctl enable emacs@username
 
 To actually use the unit, either reboot or start the unit manually:
 
-    systemctl start emacs@<username>
+    # systemctl start emacs@username
 
 Quick Start
 -----------
@@ -336,7 +401,7 @@ select a completion from that list. Completion in the minibuffer is
 available for many forms of input including commands and filenames.
 
 The minibuffer also provides a history feature. The previous items
-entered for a command can be recalled using the Up Arrow or C-p.
+entered for a command can be recalled using the Up Arrow or M-p.
 
 To exit the minibuffer at any time, press C-g.
 
@@ -371,12 +436,12 @@ separator(s) is known as filling in Emacs. A paragraph can be filled
 using M-q.
 
 Characters and words can be transposed using C-t and M-t, respectively.
-For example: Hello World! → World! Hello
+For example: Hello World! to World! Hello.
 
 The case of words is also readily adjustable. M-l downcases a word from
-point (HELLO → hello); M-u upcases a word from point (hello → HELLO) and
-M-c capitalizes the first character of a word from point while
-downcasing the remainder (hElLo → Hello).
+point (HELLO to hello); M-u upcases a word from point (hello to HELLO)
+and M-c capitalizes the first character of a word from point while
+downcasing the remainder (hElLo to Hello).
 
 > Killing, yanking and regions
 
@@ -421,6 +486,9 @@ the string which was searched for will be the default for any following
 search. To make use of this, press C-s C-s or C-r C-r to search forward
 or backward again, respectively.
 
+I-search has some useful commands. Use M-e to edit the search field. Use
+M-c to toggle case-sensitive matching.
+
 Regular Expression searches behave identically to the searching
 described above except for the command to initiate the search. Use C-M-s
 or C-M-r to initiate a regexp search forward or backward, respectively.
@@ -455,9 +523,11 @@ universal argument.
 
     M-80 %
 
-===Indentation Indentation is usually performed with either <TAB>, to
-indent a single line, or with C-M-\, to indent a region. If the region
-is active (i.e. highlighted), then <TAB> will also indent region.
+> Indentation
+
+Indentation is usually performed with either <TAB>, to indent a single
+line, or with C-M-\, to indent a region. If the region is active (i.e.
+highlighted), then <TAB> will also indent region.
 
 Exactly how text is indented usually depends on the major-mode which is
 active. Major-modes often define indentation styles specialising in
@@ -497,7 +567,7 @@ above definition of 'window').
 From now on the definition of these terms as they exist in Emacs will be
 used.
 
-To split the window vertically or horizontally, use C-x 2 or C-x 3,
+To split the window horizontally or vertically use C-x 2 or C-x 3,
 respectively. This has the effect of creating another window in the
 current frame. To cycle between multiple windows, use C-x o.
 
@@ -741,15 +811,14 @@ Emacs can remember a list of visited files.
 
 > Elisp interpreter
 
-Emacs can evaluate any elisp expression at anytime with the
-eval-last-sexp function (bound to C-x C-e by default). Emacs always
-spawn a *scratch* buffer when you start it. It will not be saved to
-disk, so feel free to add any pice of text / code you want. It is
-especially useful for elisp evaluation. Note that this buffer starts
-using the lisp-interaction-mode by default.
+Evaluate an elisp expression using eval-last-sexp (C-x C-e). Emacs
+always spawns a *scratch* buffer when started. It will not be saved to
+disk, feel free to add any text / code you want. It is especially useful
+for elisp evaluation. Note that this buffer starts using
+lisp-interaction-mode by default.
 
-Alternatively Emacs provides a top-level elisp interpreter with the ielm
-command.
+Alternatively, Emacs provides a top-level elisp interpreter with the
+ielm command.
 
 > Smart window switch
 
@@ -794,7 +863,7 @@ feature of elisp for your shell functions.
 
 You can use the show-paren mode. By default, there’s a small delay
 before showing a matching parenthesis. Set the show-paren-delay to 0 to
-deactivate.
+deactivate it.
 
     ~/.emacs
 
@@ -945,7 +1014,7 @@ Emacs standard distribution. Currently C, C++, Scheme, Javascript, Java,
 HTML, and Make are well supported. You can find a table on the current
 support state on the CEDET page.
 
-Open a file in your favorite programming landuage supported by Semantic
+Open a file in your favorite programming language supported by Semantic
 and turn on the Semantic minor mode with
 
     M-x semantic-mode
@@ -1049,6 +1118,22 @@ where the light configuration file loads only what you need for Ediff.
 See kerneltrap.org and stackoverflow for more details on this trick and
 the Ediff issue.
 
+> Using the Caps Lock key as a Control Key
+
+Some users like this behavior to avoid the so-called 'emacs pinky'. If
+you want to try it on X, just run
+
+    $ /usr/bin/setxkbmap -option 'ctrl:nocaps'
+
+Alternatively, to swap these keys, run
+
+    $ /usr/bin/setxkbmap -option 'ctrl:swapcaps'
+
+To set this permanently, consider adding it to your .xinitrc file.
+
+Now, if you ever need to upcase an region, just use the default C-x C-u
+keybinding, which calls the upcase-region function.
+
 Customization
 -------------
 
@@ -1149,7 +1234,7 @@ For example, let's define two configuration files.
     (load "~/.emacs.d/plugins" nil t)
     (load "~/.emacs.d/theme" nil t)
 
-This is the full configuration we load for the deamon. But the plugins
+This is the full configuration we load for the daemon. But the plugins
 file is huge and slow to load. If we want to spaqn a new Emacs instance
 that does not need the plutings features, it can be cumbersome to load
 it everytime in the long time.
@@ -1297,7 +1382,7 @@ Documentation
 
 You may find yourself overwhelmed by the amount of Emacs features. You
 may find it difficult to know how to use Emacs Lisp to customize your
-favorite mods, or even to create your own modes / packages. Thankfully
+favorite modes, or even to create your own modes / packages. Thankfully
 Emacs takes a strong point to auto-documenting everything: its
 internals, current configuration, bindings, etc. Almost everything is
 documented.
@@ -1321,11 +1406,11 @@ most helpful of these:
 
     C-h t        Start the Emacs tutorial.
 
-    C-h v        Describe the given function.
+    C-h v        Describe the given variable.
 
     C-h w        Find which key(s) a command is bound to.
 
-> The Manuals
+> The manuals
 
 If you really want to master Emacs, the most recommanded source of
 documentation remains the official manuals:
@@ -1350,18 +1435,18 @@ You may want to read the Info book to know more about it: C-h i m info
 Extensions
 ----------
 
-While Emacs includes hundreds of modes, libraries and other extensions,
-there are many more available to further Emacs' capabilities. The
-majority of these come with instructions detailing any changes needed to
-be made to ~/.emacs. These instructions are generally found in the
-comment block at the beginning of an elisp source file, or in a README
-(or similar) should the extension consist of multiple source files.
+Emacs includes hundreds of modes, libraries and other extensions, with
+many more available to further Emacs' capabilities. Most of these come
+with instructions detailing any changes needed to be made in ~/.emacs.
+These instructions are generally found in the comment block at the
+beginning of an elisp source file, or in a README (or similar), should
+the extension consist of multiple source files.
 
 A number of popular extensions are available as packages in the
-'community' repository, and more still are available via the AUR. The
-name of such packages have a 'emacs-' prefix (for example,
-emacs-lua-mode). In many cases, the changes which need to be made to
-~/.emacs are shown during the installation of the package.
+'community' repository, and more still, via AUR. The name of such
+packages have a 'emacs-' prefix (for example, emacs-lua-mode). In many
+cases, the changes which need to be made in ~/.emacs are shown during
+the installation of the package.
 
 Should instructions describing how to activate a specific extension not
 be available in the aforementioned location(s), check for a
@@ -1439,6 +1524,24 @@ you might use:
 
     (autoload 'anything "anything" "Select anything" t)
 
+> Incorrect network configuration
+
+If
+
+    $ emacs -q
+
+starts slowly for you, there may be an issue with your network
+configuration. To see if this is the case, you may need to monitor any
+network packets sent from your computer (using a program like Wireshark)
+to see if there is any strange behavior. For example, if you see DNS
+errors, than you may need to add
+
+    127.0.0.1	localhost	HOSTNAME
+
+to /etc/hosts, where HOSTNAME is the hostname obtained by running
+
+    $ hostname
+
 > Cannot open load file: ...
 
 The most common cause of this error is the 'load-path' variable not
@@ -1494,7 +1597,7 @@ a3b
 This is because terminals are more limited than Xorg. Some terminals may
 handle more bindings than other, though. Two solutions:
 
--   either use the GTK version
+-   either use the graphical version,
 -   or change the binding to a supported one.
 
 Example:
@@ -1510,23 +1613,145 @@ blocking. If one Emacs instance is in the minibuffer (after an M-x for
 instance), then all other instance will wait for it to finish. Press C-g
 to cancel any input to make sure this Emacs session is not blocking.
 
+> Emacs-nox output gets messy
+
+When working in a terminal, the color, indentation, or anything related
+to the output might become crazy. This is (probably?) because Emacs was
+sent a special character at some point which may conflict with the
+current terminal. There is not much to be done but restarting emacs. If
+someone has a workaround or a more detailed explanation on the issue,
+feel free to contribute.
+
+Graphical Emacs does not suffer from this issue.
+
+> Shift + Arrow keys not working in emacs within tmux
+
+First you must enable xterm-keys in your tmux config.
+
+    .tmux.conf
+
+    setw -g xterm-keys on
+
+But, this will break other key combinations. To fix them, put the
+following in your emacs config.
+
+    .emacs
+
+    ;; handle tmux's xterm-keys
+    ;; put the following line in your ~/.tmux.conf:
+    ;;   setw -g xterm-keys on
+    (if (getenv "TMUX")
+        (progn
+          (let ((x 2) (tkey ""))
+    	(while (<= x 8)
+    	  ;; shift
+    	  (if (= x 2)
+    	      (setq tkey "S-"))
+    	  ;; alt
+    	  (if (= x 3)
+    	      (setq tkey "M-"))
+    	  ;; alt + shift
+    	  (if (= x 4)
+    	      (setq tkey "M-S-"))
+    	  ;; ctrl
+    	  (if (= x 5)
+    	      (setq tkey "C-"))
+    	  ;; ctrl + shift
+    	  (if (= x 6)
+    	      (setq tkey "C-S-"))
+    	  ;; ctrl + alt
+    	  (if (= x 7)
+    	      (setq tkey "C-M-"))
+    	  ;; ctrl + alt + shift
+    	  (if (= x 8)
+    	      (setq tkey "C-M-S-"))
+
+    	  ;; arrows
+    	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d A" x)) (kbd (format "%s<up>" tkey)))
+    	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d B" x)) (kbd (format "%s<down>" tkey)))
+    	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d C" x)) (kbd (format "%s<right>" tkey)))
+    	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d D" x)) (kbd (format "%s<left>" tkey)))
+    	  ;; home
+    	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d H" x)) (kbd (format "%s<home>" tkey)))
+    	  ;; end
+    	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d F" x)) (kbd (format "%s<end>" tkey)))
+    	  ;; page up
+    	  (define-key key-translation-map (kbd (format "M-[ 5 ; %d ~" x)) (kbd (format "%s<prior>" tkey)))
+    	  ;; page down
+    	  (define-key key-translation-map (kbd (format "M-[ 6 ; %d ~" x)) (kbd (format "%s<next>" tkey)))
+    	  ;; insert
+    	  (define-key key-translation-map (kbd (format "M-[ 2 ; %d ~" x)) (kbd (format "%s<delete>" tkey)))
+    	  ;; delete
+    	  (define-key key-translation-map (kbd (format "M-[ 3 ; %d ~" x)) (kbd (format "%s<delete>" tkey)))
+    	  ;; f1
+    	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d P" x)) (kbd (format "%s<f1>" tkey)))
+    	  ;; f2
+    	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d Q" x)) (kbd (format "%s<f2>" tkey)))
+    	  ;; f3
+    	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d R" x)) (kbd (format "%s<f3>" tkey)))
+    	  ;; f4
+    	  (define-key key-translation-map (kbd (format "M-[ 1 ; %d S" x)) (kbd (format "%s<f4>" tkey)))
+    	  ;; f5
+    	  (define-key key-translation-map (kbd (format "M-[ 15 ; %d ~" x)) (kbd (format "%s<f5>" tkey)))
+    	  ;; f6
+    	  (define-key key-translation-map (kbd (format "M-[ 17 ; %d ~" x)) (kbd (format "%s<f6>" tkey)))
+    	  ;; f7
+    	  (define-key key-translation-map (kbd (format "M-[ 18 ; %d ~" x)) (kbd (format "%s<f7>" tkey)))
+    	  ;; f8
+    	  (define-key key-translation-map (kbd (format "M-[ 19 ; %d ~" x)) (kbd (format "%s<f8>" tkey)))
+    	  ;; f9
+    	  (define-key key-translation-map (kbd (format "M-[ 20 ; %d ~" x)) (kbd (format "%s<f9>" tkey)))
+    	  ;; f10
+    	  (define-key key-translation-map (kbd (format "M-[ 21 ; %d ~" x)) (kbd (format "%s<f10>" tkey)))
+    	  ;; f11
+    	  (define-key key-translation-map (kbd (format "M-[ 23 ; %d ~" x)) (kbd (format "%s<f11>" tkey)))
+    	  ;; f12
+    	  (define-key key-translation-map (kbd (format "M-[ 24 ; %d ~" x)) (kbd (format "%s<f12>" tkey)))
+    	  ;; f13
+    	  (define-key key-translation-map (kbd (format "M-[ 25 ; %d ~" x)) (kbd (format "%s<f13>" tkey)))
+    	  ;; f14
+    	  (define-key key-translation-map (kbd (format "M-[ 26 ; %d ~" x)) (kbd (format "%s<f14>" tkey)))
+    	  ;; f15
+    	  (define-key key-translation-map (kbd (format "M-[ 28 ; %d ~" x)) (kbd (format "%s<f15>" tkey)))
+    	  ;; f16
+    	  (define-key key-translation-map (kbd (format "M-[ 29 ; %d ~" x)) (kbd (format "%s<f16>" tkey)))
+    	  ;; f17
+    	  (define-key key-translation-map (kbd (format "M-[ 31 ; %d ~" x)) (kbd (format "%s<f17>" tkey)))
+    	  ;; f18
+    	  (define-key key-translation-map (kbd (format "M-[ 32 ; %d ~" x)) (kbd (format "%s<f18>" tkey)))
+    	  ;; f19
+    	  (define-key key-translation-map (kbd (format "M-[ 33 ; %d ~" x)) (kbd (format "%s<f19>" tkey)))
+    	  ;; f20
+    	  (define-key key-translation-map (kbd (format "M-[ 34 ; %d ~" x)) (kbd (format "%s<f20>" tkey)))
+
+    	  (setq x (+ x 1))
+    	  ))
+          )
+      )
+
+> Improper window resizing in KDE
+
+KDE users may observe that the Emacs window does not resize properly,
+but rather, the resized portion is transparent and mouse clicks are sent
+to the underlying window. To correct this behavior, change KDE's GTK3
+theme to something other than oxygen-gtk. For instance, use the Emacs
+theme which is included with gtk3.
+
 Alternatives
 ------------
 
 There are numerous implementations of Emacs. GNU/Emacs is probably the
-most popular.   
- Lighter Emacs compatibile alternatives can be found in Arch
-repositories or in AUR.
+most popular.
+
+Lighter Emacs compatibile alternatives can be found in Arch repositories
+or in AUR.
 
 > mg
 
 mg (originally called MicroGnuEmacs) is lightweight implementation of
 Emacs written in C.
 
-It's possible to install mg right away from community
-
-    # pacman -S mg
-
+It's possible to install mg right away from the official repositories.
 or download source from official page.
 
 > zile
@@ -1536,33 +1761,38 @@ clone. Zile is short for Zile Is Lossy Emacs. Zile has been written to
 be as similar as possible to Emacs; every Emacs user should feel at
 home.".
 
-zile can be found in extra
-
-    # pacman -S zile
+zile can be found in the official repositories.
 
 the latest taballs can be found in official GNU mirrors.
 
 > uemacs
 
-uemacs is "Micro-emacs version customized by Linus Torvalds". It can be
-found in AUR as uemacs.
+Micro-emacs version customized by Linus Torvalds. Available as
+uemacs-git in the AUR.
 
 See also
 --------
 
 -   GNU Emacs home page
--   GNU Emacs Manual
+-   GNU Emacs manual
 -   Emacs Wiki
--   WikEmacs - a more readable, but less complete Emacs Wiki
+-   WikEmacs - a more readable, but less complete Emacs wiki
 -   Useful introduction to Emacs and its shortcuts
 -   The Church of Emacs
--   Emacs Cheat Sheet
+-   Emacs cheat sheet
 -   Official reference card
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Emacs&oldid=252850"
+"https://wiki.archlinux.org/index.php?title=Emacs&oldid=305274"
 
 Categories:
 
 -   Development
 -   Text editors
+
+-   This page was last modified on 17 March 2014, at 03:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

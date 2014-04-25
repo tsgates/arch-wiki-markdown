@@ -1,214 +1,159 @@
 GNOME
 =====
 
-> Summary
+Related articles
 
-GNOME 3 provides a modern desktop, rewritten from scratch, using the
-GTK3+ toolkit.
+-   Desktop environment
+-   Display manager
+-   Window manager
+-   GTK+
+-   GDM
+-   Nautilus
+-   Gedit
+-   Epiphany
+-   GNOME Flashback
 
-> Overview
+GNOME is a desktop environment developed by The GNOME Project.
 
-The Xorg project provides an open source implementation of the X Window
-System – the foundation for a graphical user interface. Desktop
-environments such as Enlightenment, GNOME, KDE, LXDE, and Xfce provide a
-complete graphical environment. Various window managers offer
-alternative and novel environments, and may be used standalone to
-conserve system resources. Display managers provide a graphical login
-prompt.
+GNOME 3 has two sessions:
 
-> Related
+-   GNOME is the default, innovative layout.
+-   GNOME Classic is a traditional desktop layout, similar to the GNOME
+    2 user interface whilst using GNOME 3 technologies. It does so
+    through the use of pre-activated extensions and parameters (see here
+    for a list). Hence it is more of a customized GNOME Shell than a
+    truly distinct mode.
 
-GTK+
+Both of them use GNOME Shell, a desktop shell and plugin of the Mutter
+window manager. Mutter acts as a composite manager for the desktop,
+employing hardware graphics acceleration to provide effects aimed at
+reducing screen clutter. GNOME session manager automatically detects if
+your video driver is capable of running GNOME Shell and if not, falls
+back to software rendering using llvmpipe.
 
-GDM
+Contents
+--------
 
-Nautilus
-
-From About Us | GNOME:
-
-The GNOME Project was started in 1997 by two then university students,
-Miguel de Icaza and Federico Mena. Their aim: to produce a free (as in
-freedom) desktop environment. Since then, GNOME has grown into a hugely
-successful enterprise. Used by millions of people across the world, it
-is the most popular desktop environment for GNU/Linux and UNIX-type
-operating systems. The desktop has been utilised in successful,
-large-scale enterprise and public deployments, and the project’s
-developer technologies are utilised in a large number of popular mobile
-devices.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-|     -   2.1 Starting GNOME                                               |
-|                                                                          |
-| -   3 Using the shell                                                    |
-|     -   3.1 GNOME cheat sheet                                            |
-|     -   3.2 Restarting the shell                                         |
-|     -   3.3 Shell crashes                                                |
-|     -   3.4 Shell freezes                                                |
-|                                                                          |
-| -   4 Customizing GNOME appearance                                       |
-|     -   4.1 Overall appearance                                           |
-|         -   4.1.1 Gsettings                                              |
-|         -   4.1.2 GNOME tweak tool                                       |
-|         -   4.1.3 GTK3 theme via settings.ini                            |
-|         -   4.1.4 Icon theme                                             |
-|                                                                          |
-|     -   4.2 Nautilus                                                     |
-|     -   4.3 Totem                                                        |
-|     -   4.4 GNOME panel                                                  |
-|         -   4.4.1 Show date in top bar                                   |
-|         -   4.4.2 Always show the "Log Out" entry in the user menu       |
-|         -   4.4.3 Hiding icons in the top bar                            |
-|             -   4.4.3.1 Hiding icons with shell extensions               |
-|             -   4.4.3.2 Manually editing the GNOME panel script          |
-|                                                                          |
-|         -   4.4.4 Show battery icon                                      |
-|         -   4.4.5 Disable "Suspend" in the status and gdm menu           |
-|         -   4.4.6 Eliminate delay when logging out                       |
-|         -   4.4.7 Show system monitor                                    |
-|         -   4.4.8 Show weather information                               |
-|                                                                          |
-|     -   4.5 Activity view                                                |
-|         -   4.5.1 Remove entries from Applications view                  |
-|         -   4.5.2 To Remove Wine Launchers from the Applications menu    |
-|         -   4.5.3 Change application icon size                           |
-|         -   4.5.4 Change dash icon size                                  |
-|         -   4.5.5 Change switcher (alt-tab) icon size                    |
-|         -   4.5.6 Change system tray icon size                           |
-|         -   4.5.7 Disable Activity hot corner hovering                   |
-|         -   4.5.8 Disable Message Tray hovering                          |
-|                                                                          |
-|     -   4.6 Titlebar                                                     |
-|         -   4.6.1 Remove title bar                                       |
-|         -   4.6.2 Reduce title bar height                                |
-|         -   4.6.3 Reorder titlebar buttons                               |
-|         -   4.6.4 Hide titlebar when maximized                           |
-|                                                                          |
-|     -   4.7 Login screen                                                 |
-|         -   4.7.1 Login background image                                 |
-|         -   4.7.2 Larger font for login                                  |
-|         -   4.7.3 Turning off the sound                                  |
-|         -   4.7.4 Make the power button interactive                      |
-|         -   4.7.5 Prevent suspend when closing the lid                   |
-|         -   4.7.6 Change Critical Battery Level Action (for Laptops)     |
-|         -   4.7.7 GDM keyboard layout                                    |
-|                                                                          |
-|     -   4.8 Other tips                                                   |
-|                                                                          |
-| -   5 Miscellaneous settings                                             |
-|     -   5.1 Automatic program launch upon logging in                     |
-|     -   5.2 Editing applications menu                                    |
-|     -   5.3 Some 'System Settings' not preserved                         |
-|     -   5.4 Disable sound effects in Terminal                            |
-|     -   5.5 Move dialog windows                                          |
-|     -   5.6 Show context menu icons                                      |
-|     -   5.7 GNOME shell extensions                                       |
-|     -   5.8 Default file browser/replace Nautilus                        |
-|     -   5.9 Default PDF viewer                                           |
-|     -   5.10 Default terminal                                            |
-|     -   5.11 Middle mouse button                                         |
-|     -   5.12 Display dimming                                             |
-|     -   5.13 Alternate window manager                                    |
-|                                                                          |
-| -   6 Hidden features                                                    |
-|     -   6.1 Changing hotkeys                                             |
-|         -   6.1.1 Nautilus 3.4 and older                                 |
-|                                                                          |
-|     -   6.2 Shutdown via the status menu                                 |
-|     -   6.3 Screencast recording                                         |
-|     -   6.4 Modify Keyboard with XkbOptions                              |
-|     -   6.5 Toggle keyboard layouts                                      |
-|                                                                          |
-| -   7 Integrated messaging (Empathy)                                     |
-| -   8 Forcing fallback mode                                              |
-| -   9 Troubleshooting                                                    |
-|     -   9.1 When an extension breaks GNOME                               |
-|     -   9.2 Extensions do not work after GNOME 3 update                  |
-|     -   9.3 The "Windows" key                                            |
-|     -   9.4 Keyboard Shortcut do not work with only conky running        |
-|     -   9.5 X freezes with black screen after Gnome 3.8 upgrade          |
-|     -   9.6 xf86-video-ati driver: flickers from time to time            |
-|     -   9.7 Window opens behind other windows when using multiple        |
-|         monitors                                                         |
-|     -   9.8 Multiple monitors and dock extension                         |
-|     -   9.9 No event sounds for Empathy and other programs               |
-|     -   9.10 Gnome sets the keyboard layout to USA after every log in    |
-|     -   9.11 Panels do not respond to right-click in fallback mode       |
-|     -   9.12 "Show Desktop" keyboard shortcut does not work              |
-|     -   9.13 Nautilus does not start                                     |
-|     -   9.14 Epiphany does not play Flash videos                         |
-|     -   9.15 Unable to apply stored configuration for monitors           |
-|     -   9.16 Lock button fails to re-enable touchpad                     |
-|     -   9.17 Unable to connect to secured Wi-Fi networks                 |
-|     -   9.18 "Any command has been defined 33"                           |
-|     -   9.19 GDM and GNOME use X11 cursors                               |
-|     -   9.20 Tracker & Documents don't list any local files              |
-|     -   9.21 Passwords are not remembered                                |
-|     -   9.22 Windows can't be modified with Alt-Key + Mouse-Button       |
-|     -   9.23 Gnome-shell 3.8.x fails to load with a black screen +       |
-|         cursor                                                           |
-|                                                                          |
-| -   10 External links                                                    |
-+--------------------------------------------------------------------------+
-
-Introduction
-------------
-
-GNOME 3 has two interfaces:
-
--   GNOME Shell is the new standard layout using the Mutter window
-    manager. It acts as a composite manager for the desktop, employing
-    hardware graphics acceleration to provide effects aimed at reducing
-    screen clutter.
-
--   Classic mode is the successor of the discontinued "fallback mode"
-    starting with GNOME 3.8. It aims at implementing a more traditionnal
-    desktop interface while using standard GNOME 3 technologies
-    (including graphic acceleration). It does so through the use of
-    pre-activated extensions and paramaters (see here for a list) and
-    relies on llvmpipe for graphic acceleration. Hence it consists more
-    of a customized GNOME Shell than a truly distinct mode.
-
-GNOME-session automatically detects if your computer is incapable of
-running GNOME Shell and starts Classic mode with llvmpipe when
-appropriate.
+-   1 Installation
+-   2 Starting GNOME
+-   3 Using the shell
+    -   3.1 GNOME cheat sheet
+    -   3.2 Restarting the shell
+    -   3.3 Shell crashes
+    -   3.4 Shell freezes
+-   4 Pacman integration: GNOME PackageKit
+    -   4.1 Packages updates notifications
+-   5 Customizing GNOME appearance
+    -   5.1 Overall appearance
+        -   5.1.1 Gsettings
+        -   5.1.2 GNOME tweak tool
+        -   5.1.3 dconf
+        -   5.1.4 GTK3 theme via settings.ini
+        -   5.1.5 Icon theme
+    -   5.2 GNOME panel
+        -   5.2.1 Show date in top bar
+        -   5.2.2 Hiding icons in the top bar
+            -   5.2.2.1 Hiding icons with shell extensions
+            -   5.2.2.2 Manually editing the GNOME panel script
+        -   5.2.3 Eliminate delay when logging out
+        -   5.2.4 Show system monitor
+        -   5.2.5 Show weather information
+    -   5.3 Activity view
+        -   5.3.1 Remove entries from Applications view
+        -   5.3.2 Change application icon size
+        -   5.3.3 Change dash icon size
+        -   5.3.4 Change switcher (alt-tab) icon size
+        -   5.3.5 Change system tray icon size
+        -   5.3.6 Disable Activity hot corner hovering
+        -   5.3.7 Disable Message Tray hovering
+    -   5.4 Titlebar
+        -   5.4.1 Reduce title bar height
+        -   5.4.2 Reorder titlebar buttons
+        -   5.4.3 Hide titlebar when maximized
+-   6 Miscellaneous settings
+    -   6.1 Power Management
+        -   6.1.1 Prevent Suspend-To-RAM (S3) when closing the LID
+        -   6.1.2 No reaction on lid close
+        -   6.1.3 Change Critical Battery Level Action (for Laptops)
+    -   6.2 Switch back scrolling behavior
+    -   6.3 Autostarting / Automatic program launch upon logging in
+    -   6.4 Editing applications menu
+    -   6.5 Inner padding in Gnome Terminal
+    -   6.6 Disable blinking cursor in Terminal
+    -   6.7 Make new tabs inherit current directory in Gnome Terminal
+        (3.8+)
+    -   6.8 Move dialog windows
+    -   6.9 GNOME shell extensions
+    -   6.10 Default Applications
+        -   6.10.1 Default file browser/replace Nautilus
+        -   6.10.2 Default PDF viewer
+        -   6.10.3 Default terminal
+        -   6.10.4 Default web browser for gnome-gmail-notifier
+    -   6.11 Middle mouse button
+    -   6.12 Display dimming
+    -   6.13 Changing hotkeys
+        -   6.13.1 Hotkeys in Nautilus 3.4 and older
+    -   6.14 Screencast recording
+    -   6.15 Modify Keyboard with XkbOptions
+    -   6.16 Toggle keyboard layouts
+    -   6.17 Other tips
+-   7 Tracker (search program)
+-   8 Totem (movie player)
+-   9 Empathy (integrated messaging) and Gnome Online Accounts
+-   10 Troubleshooting
+    -   10.1 Cannot change settings in dconf-editor
+    -   10.2 When an extension breaks GNOME
+    -   10.3 Extensions do not work after GNOME 3 update
+    -   10.4 Remove Gnome Shell Extensions
+    -   10.5 The "Windows" key
+    -   10.6 Keyboard Shortcut do not work with only conky running
+    -   10.7 Window opens behind other windows when using multiple
+        monitors
+    -   10.8 Multiple monitors and dock extension
+    -   10.9 "Show Desktop" keyboard shortcut does not work
+    -   10.10 Unable to apply stored configuration for monitors
+    -   10.11 Lock button fails to re-enable touchpad
+    -   10.12 GDM and GNOME use X11 cursors
+    -   10.13 Tracker & Documents do not list any local files
+    -   10.14 Passwords are not remembered
+    -   10.15 Windows cannot be modified with Alt-Key + Mouse-Button
+    -   10.16 Gnome-shell 3.8.x fails to load with a black screen +
+        cursor
+    -   10.17 Gnome 3.10 UI elements scale incorrectly
+    -   10.18 Tear-free video with Intel HD Graphics
+-   11 External links
 
 Installation
 ------------
 
 GNOME 3 is available in the official repositories and can be installed
-with two groups of packages:
+with one of the following:
 
--   gnome contains the core desktop environment and applications
-    required for the standard GNOME experience.
+-   The gnome-shell package provides a minimal desktop shell.
+-   The gnome group contains the core desktop environment and
+    applications required for the standard GNOME experience.
+-   The gnome-extra group contains various optional tools such as an
+    editor, an archive manager, a disk burner, a mail client, games,
+    development tools and other non-critical applications that integrate
+    well with the GNOME desktop. Installing just the gnome-extra group
+    will not pull in the whole gnome group via dependencies. If you want
+    to install all GNOME packages then you will need to explicitly
+    install both groups.
 
--   gnome-extra contains various optional tools such as a media player,
-    a calculator, an editor and other non-critical applications that go
-    well with the GNOME desktop. Installing this group is optional.
-
-Note that installing only gnome-extra will not pull the whole gnome
-group by dependencies: if you really want everything you must explicitly
-install both groups.
-
-> Starting GNOME
+Starting GNOME
+--------------
 
 Graphical log-in
 
-For the best desktop integration, login manager GDM is recommended.
-Other login managers can be used in place of GDM. Check out the wiki
-article on display managers to learn how desktop environments are
-started.
+For the best desktop integration, GDM (the GNOME Display manager) is
+recommended. GDM is installed as part of the gnome group and can be used
+by enabling gdm.service using systemd.
 
-The login manager is a limited process entrusted with duties that impact
-the system. The PolicyKit wiki article addresses the topic of
-system‑wide access control.
+Other display managers can be used in place of GDM if desired.
 
-Tip:Refer to the GDM article for installation and configuration
-instructions.
+Note:Native support for screenlocking in GNOME is provided by GDM. If
+you choose to not use GDM you will need to use a different screenlocking
+program such as Xscreensaver.
 
 Starting GNOME manually
 
@@ -219,20 +164,19 @@ following line to your ~/.xinitrc file:
 
      exec gnome-session
 
-After the exec command is placed, GNOME can be launched by typing
-startx.
+Or exec gnome-session --session=gnome-classic for GNOME Classic. After
+editing your ~/.xinitrc, GNOME can be launched by typing startx.
 
-See xinitrc for details, such as preserving the logind (and/or
-consolekit) session.
+See xinitrc for details, such as preserving the logind session.
 
 Using the shell
 ---------------
 
 > GNOME cheat sheet
 
-The GNOME web site has a helpful GNOME Shell cheat sheet explaining task
-switching, keyboard use, window control, the panel, overview mode, and
-more.
+The GNOME web site has a helpful outdated GNOME Shell cheat sheet
+explaining task switching, keyboard use, window control, the panel,
+overview mode, and more.
 
 > Restarting the shell
 
@@ -245,14 +189,14 @@ then r then Enter
 
 Certain tweaks and/or repeated shell restarts may cause the shell to
 crash when a restart is attempted. In this case, you are informed about
-the crash and then forced to log out. Some shell changes, such as
-switching between GNOME Shell and fallback mode, cannot be accomplished
-via a keyboard restart; you must log out and log back in to effect them.
+the crash and then forced to log out. Some shell changes cannot be
+accomplished via a keyboard restart; you must log out and log back in to
+effect them.
 
-It is common sense — but worth repeating — that valuable documents
-should be saved (and perhaps closed) before attempting a shell restart.
-It is not strictly necessary; open windows and documents usually remain
-intact after a shell restart.
+Note:Valuable documents should be saved (and perhaps closed) before
+attempting a shell restart. It is not strictly necessary; open windows
+and documents usually remain intact after a shell restart however there
+is a risk that data could be lost if documents are not saved.
 
 > Shell freezes
 
@@ -273,7 +217,7 @@ restart X by:
 
 The GNOME Shell then restarts automatically.
 
-If this doesn't work, you can try to restart your login manager. For
+If this does not work, you can try to restart your login manager. For
 instance, if you use GDM, try:
 
     # systemctl restart gdm.service
@@ -281,43 +225,64 @@ instance, if you use GDM, try:
 Tip:You can also use htop in tty; press t, select the gnome-shell tree,
 press k and send SIGKILL.
 
+Pacman integration: GNOME PackageKit
+------------------------------------
+
+GNOME has its own Pacman GUI: gnome-packagekit.
+
+Using the alpm backend, it supports the following features:
+
+-   Install and remove packages from the repos.
+-   Periodically refresh package databases and prompt for updates.
+-   Install packages from tarballs.
+-   Search for packages by name, description, category or file.
+-   Show package dependencies, files and reverse dependencies.
+-   Ignore IgnorePkgs and hold HoldPkgs.
+-   Report optional dependencies, .pacnew files, etc.
+
+You can change the remove operation from -Rc to -Rsc by setting the
+DConf key org.gnome.packagekit.enable-autoremove.
+
+> Packages updates notifications
+
+If you want GNOME to check automatically for updates, you must install
+gnome-settings-daemon-updates from the official repository.
+
 Customizing GNOME appearance
 ----------------------------
 
 > Overall appearance
 
-GNOME 3 may have "started from scratch", but like most large software
-projects it is assembled from parts dating to different eras. There is
-not one all-encompassing configuration tool. The new Systems Settings
-tool is a big improvement over previous control panels. System Settings
-is well-organized, but you may find yourself wishing for more control
-over system appearance.
-
-You may be familiar with existing configuration tools: some of these
-still work; many will not. Some settings are not readily exposed for you
-to change. Indubitably, many settings will migrate to newer tools and/or
-become exposed as time progresses and the wider community embraces and
-extends the latest GNOME desktop.
+There is no all-encompassing configuration tool however a variety of
+tools are available to ensure that all customisations that the user
+needs to make can be made. The new Systems Settings tool (provided by
+gnome-control-center) is a simple and streamlined panel which covers
+most basic settings however more extensive customisation may require the
+use of some of the tools below.
 
 Gsettings
 
 A new command-line tool gsettings stores data in a binary format, unlike
-previous tools using XML text. A tutorial Customizing the GNOME Shell
-explores the power of gsettings.
+previous tools using XML text. See Customizing the GNOME Shell for a
+tutorial on using gsettings.
 
 GNOME tweak tool
 
 This graphical tool customizes fonts, themes, titlebar buttons and other
-settings.
+settings. gnome-tweak-tool is available from the official repositories.
+It is set up as a user friendly frontend to the gsettings tool.
 
-    # pacman -S gnome-tweak-tool
+dconf
+
+The dconf tool is a tree based graphical frontend to gsettings. It is
+somewhat similar to the regedit tool in Windows. Most GNOME
+configuration settings are exposed in this tool.
 
 GTK3 theme via settings.ini
 
-Like ~/.gtkrc-2.0 with GTK2+, it is possible to set a GTK3 theme via
-${XDG_CONFIG_HOME}/gtk-3.0/settings.ini.
-
-Variable $XDG_CONFIG_HOME is usually set to ~/.config
+It is possible to set a GTK3 theme via
+${XDG_CONFIG_HOME}/gtk-3.0/settings.ini (usually
+~/.config/gtk-3.0/settings.ini).
 
 Adwaita, the default GNOME 3 theme, is a part of gnome-themes-standard.
 Additional GTK3 themes can be found at Deviantart web site. For example:
@@ -326,7 +291,6 @@ Additional GTK3 themes can be found at Deviantart web site. For example:
 
     [Settings]
     gtk-theme-name = Adwaita
-    gtk-fallback-icon-theme = gnome
     # next option is applicable only if selected theme supports it
     gtk-application-prefer-dark-theme = true
     # set font name and dimension
@@ -340,17 +304,17 @@ Icon theme
 Using gnome-tweak-tool version 3.0.3 and later, you can place any icon
 theme you wish to use inside ~/.icons.
 
-Usefully, GNOME 3 is compatible with GNOME 2 icon themes, which means
-you are not stuck with the default icons. To install a new set of icons,
-copy your desired icon theme's directory to ~/.icons. As an example:
+GNOME 3 is compatible with a number of icon themes including GNOME 2
+icon themes. To install a new set of icons, copy your desired icon
+theme's directory to ~/.icons. As an example:
 
     $ cp -R /home/user/Desktop/my_icon_theme ~/.icons
 
 The new theme my_icon_theme is now selectable using gnome-tweak-tool
 under interface.
 
-Alternatively, you may textually select your icon theme with no need for
-gnome-tweak-tool. Add the GTK icon theme name to
+Alternatively, you may manually select your icon theme without the use
+of gnome-tweak-tool or dconf. Add the GTK icon theme name to
 ${XDG_CONFIG_HOME}/gtk-3.0/settings.ini. Please note, not to use "" as
 your settings would not be recognised then.
 
@@ -360,17 +324,6 @@ your settings would not be recognised then.
 
     gtk-icon-theme-name = my_new_icon_theme
 
-> Nautilus
-
-See Nautilus.
-
-> Totem
-
-To play back h.264 videos, you need to install gst-libav
-
-For more information on gstreamer hardware acceleration, see Gstreamer:
-Hardware Acceleration.
-
 > GNOME panel
 
 Show date in top bar
@@ -379,37 +332,20 @@ By default GNOME displays only the weekday and time in the top bar. This
 can be changed with the following command. Changes take effect
 immediately.
 
-GNOME 3.4.2:
-
-    # gsettings set org.gnome.shell.clock show-date true
-
-GNOME 3.6.2:
-
     # gsettings set org.gnome.desktop.interface clock-show-date true
 
-Always show the "Log Out" entry in the user menu
+You can also change this setting using dconf or gnome-tweak-tool. In
+dconf-editor expand org -> gnome -> desktop -> interface and tick the
+option labelled clock-show-date.
 
-Since GNOME 3.6, the "Log Out" entry in the user menu is only shown when
-multiple non-root users are present in the system.
-
-To always enable this entry, run the following command from a terminal:
-
-    # gsettings set org.gnome.shell always-show-log-out true
-
-You can also change this in dconf-editor: Navigate to org.gnome.shell,
-then check the "always-show-log-out" checkbox.
-
-Then, restart the GNOME shell:
-
-1.  Alt+F2
-2.  r
-3.  Enter
+In gnome-tweak-tool click on the "Top Bar" tab and tick the option
+labelled Show Date.
 
 Hiding icons in the top bar
 
-When doing a GNOME install, some unwanted icons might appear in the
-panel. These icons can be removed either with GNOME shell extensions or
-by manually editing the GNOME panel script.
+When installing GNOME, some unwanted icons might appear in the panel.
+These icons can be removed either with GNOME shell extensions or by
+manually editing the GNOME panel script.
 
 Hiding icons with shell extensions
 
@@ -445,40 +381,8 @@ Then, save your results and restart the shell:
 2.  r
 3.  Enter
 
-Show battery icon
-
-To show the battery tray icon, install gnome-power-manager from the
-official repositories.
-
-Disable "Suspend" in the status and gdm menu
-
-A quick way to do it system-wide for GNOME 3.2 is to change line 539 of
-/usr/share/gnome-shell/js/ui/userMenu.js and line 103 of
-/usr/share/gnome-shell/js/gdm/powerMenu.js. (For GNOME versions prior to
-3.2, look at line 153 of /usr/share/gnome-shell/js/ui/statusMenu.js.)
-This change takes effect the next time GNOME Shell is started.
-
-    /usr/share/gnome-shell/js/ui/userMenu.js
-
-     // this._haveSuspend = this._upClient.get_can_suspend();  //  Comment this line out.
-     this._haveSuspend = false;                                //  Use this line instead.
-
-To accomplish this, paste the following command(s) in your terminal:
-
-     GNOME_SHELL=/usr/share/gnome-shell
-     SCRIPTS=`grep -lr get_can_suspend $GNOME_SHELL/js`
-     for FILE in $SCRIPTS ; do
-           sed -r -i -e 's/[^= ]+.get_can_suspend\(\)/false/' "$FILE"
-     done
-
-The above change does not persist after a GNOME version update, however.
-A more perennial solution is to add the code above in some gdm or system
-startup script (eg: /etc/rc.local), to keep the "suspend" option
-disabled after updates.
-
-Alternatively you can install the GNOME shell extension
-alternative status menu in package
-gnome-shell-extension-alternative-status-menu.
+Note:As of GNOME 3.8 the accessibility icon is hidden from the panel by
+default.
 
 Eliminate delay when logging out
 
@@ -494,22 +398,26 @@ takes effect immediately after entering the command.
 
 Show system monitor
 
-Install the gnome-shell-system-monitor-applet-git extension available in
-the AUR.
+The system-monitor extension is included in the gnome-shell-extensions
+package. The git version is available as
+gnome-shell-system-monitor-applet-git in the AUR.
 
 Show weather information
 
-Install gnome-shell-extension-weather-git from AUR.
+The Weather extension can be installed from the official extension
+website. The git version is available as
+gnome-shell-extension-weather-git in the AUR.
 
 > Activity view
 
 Remove entries from Applications view
 
-Like other desktop environments, GNOME uses .desktop files to populate
-its Applications view. These text files are in /usr/share/applications.
-It is not possible to edit these files from a folder view ‒ Nautilus
-does not treat their icons as text files. Use a terminal to display or
-edit .desktop file entries.
+Like most desktop environments, GNOME uses .desktop files to populate
+its Applications view. These text files are located in the
+/usr/share/applications folder. It is not possible to edit these files
+from a folder view ‒ Nautilus does not treat their icons as text files.
+Use a terminal to display or edit .desktop file entries. You will need
+root privileges to edit the .desktop files.
 
     # ls /usr/share/applications
     # nano /usr/share/applications/foo.desktop
@@ -525,27 +433,18 @@ Note:Removing a .desktop file does not uninstall an application, but
 instead removes its desktop integration: MIME types, shortcuts, and so
 forth.
 
-The following command appends one line to a .desktop file and hides its
-associated icon from Applications view:
+To hide an application launcher open its .desktop file in a text editor
+and add the following line:
 
-    $ echo "NoDisplay=true" >> foo.desktop
-
-To Remove Wine Launchers from the Applications menu
-
-Enter ~/.local/share/applications/wine/Programs/ and look for the wine
-application's name. In the directories are the ".desktop" files which
-configure the launchers. Remove the program directory to easily remove
-the launchers.
+    NoDisplay=true
 
 Change application icon size
 
-One awkward selection of the GNOME designers is their choice of large
-icons for Applications view. This view is painful when working with a
-small screen containing many large application icons. There is a way to
-reduce the icon size. It is done by editing the GNOME-Shell theme.
+To change the application icon size it is necessary to edit the
+GNOME-Shell theme.
 
-Edit system files directly (make a backup first) or copy theme files to
-your local folder and edit these files.
+You can edit system files directly (make a backup first) or copy theme
+files to your local folder and edit these files.
 
 -   For the default theme, edit
     /usr/share/gnome-shell/theme/gnome-shell.css
@@ -634,6 +533,9 @@ To disable automatic activity view when the hot corner is hovered, edit
 
 and set reactive to false. GNOME Shell needs to be restarted.
 
+Tip:There are also GNOME Shell extensions that can be installed which
+will modify this behaviour.
+
 Disable Message Tray hovering
 
 The message tray is shown when the mouse hovers at the bottom of the
@@ -649,19 +551,6 @@ activity view.
 
 > Titlebar
 
-Remove title bar
-
-Install Maximus GNOME shell extension.
-
-It can also have white list / black list of application.
-
-This extension requires xorg-xprop, install it if you don't have it
-already.
-
-    pacman -S xorg-xprop
-
-More about GNOME shell extensions.
-
 Reduce title bar height
 
 -   global - edit
@@ -672,7 +561,7 @@ Reduce title bar height
     /home/$USER/.themes/Adwaita/metacity-1/metacity-theme-3.xml, search
     for title_vertical_pad and reduce its value to a minimum of 0.
 
-Then Restart the GNOME shell.
+Then restart the GNOME shell.
 
 To restore the original values, install the package
 gnome-themes-standard from the official repositories or remove
@@ -682,21 +571,24 @@ Reorder titlebar buttons
 
 At present this setting can be changed through dconf-editor.
 
-For example, we move the close and minimize buttons to the left side of
-the titlebar. Open dconf-editor and locate the
+For example, to move the close and minimize buttons to the left side of
+the titlebar, open dconf-editor and locate the
 org.gnome.shell.overrides.button_layout key. Change its value to
 close,minimize: (Colon symbol designates the spacer between left side
-and right side of the titlebar.) Use whichever buttons in whatever order
-you prefer. You cannot use a button more than once. Also, keep in mind
-that certain buttons are deprecated. Restart the shell to see your new
-button arrangement.
+and right side of the titlebar.) Place the buttons in your preferred
+order. You cannot use a button more than once. Also, keep in mind that
+certain buttons are deprecated. Restart the shell to see your new button
+arrangement.
 
 Hide titlebar when maximized
 
+The command below will hide the titlebar when windows are maximised:
+
     # sed -i -r 's|(<frame_geometry name="max")|\1 has_title="false"|' /usr/share/themes/Adwaita/metacity-1/metacity-theme-3.xml
 
-Restart the GNOME shell. After this tweak, you may find it difficult to
-un-maximize a window when there is no titlebar to grab.
+After entering the command restart the GNOME shell. After this tweak,
+you may find it difficult to un-maximize a window when there is no
+titlebar to grab.
 
 With suitable keybindings, you should be able to use Alt+F5, Alt+F10 or
 Alt+Space to remedy the situation.
@@ -709,7 +601,7 @@ NoUpgrade.
 
     ... previous lines ...
 
-    # Pacman won't upgrade packages listed in IgnorePkg and members of IgnoreGroup
+    # Pacman will not upgrade packages listed in IgnorePkg and members of IgnoreGroup
     # IgnorePkg   =
     # IgnoreGroup =
 
@@ -720,143 +612,56 @@ NoUpgrade.
 To restore original Adwaita theme values, install the
 gnome-themes-standard package.
 
-> Login screen
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
-                           is a candidate for       
-                           merging with GDM.        
-                           Notes: Login managers    
-                           have their own wiki      
-                           pages and information    
-                           should be maintained     
-                           separately. (Discuss)    
-  ------------------------ ------------------------ ------------------------
-
-To modify characteristics of the login screen (GDM, the GNOME display
-manager) the following lines can be executed. The first command allows
-all users, including "gdm", to access X settings (albeit temporarily).
-This command creates a temporary vulnerability, so be advised. The
-second command opens a bash session with the credentials of user "gdm".
-
-Note:For exposition, user gdm's terminal prompt is shown as $. In
-actuality, it shows something like -bash-4.2$.
-
-    # xhost +
-    # su - gdm -s /bin/bash
-    $ dbus-launch
-
-The third command prints DBUS_SESSION_BUS_ADDRESS and
-DBUS_SESSION_BUS_PID. We must export these variables. Either manually
-export the below two variables shown in the output of dbus-launch like
-this:
-
-    $ export DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Jb433gMQHS,guid=fc14d4bf3d000e38276a5a2200000d38
-    $ export DBUS_SESSION_BUS_PID=4283
-
-Or use the follow command:
-
-    $ `dbus-launch | sed "s/^/export /"`
-
-Check to see if dconf-service is running and if not, start it like this
-
-    $ /usr/lib/dconf/dconf-service &
-
-Login background image
-
-Once session variables have been exported as explained above, you may
-issue commands to retrieve or set items used by GDM.
-
-The easiest way to changes all the settings is by launching the
-Configuration Editor gui with the command
-
-    $ dconf-editor
-
-The location of each setting is the same as in the command line style of
-configuration shown below:
-
-The following is the command-line approach to retrieve or set the file
-name used for GDM's wallpaper.
-
-     $  GSETTINGS_BACKEND=dconf gsettings get org.gnome.desktop.background picture-uri
-     $  GSETTINGS_BACKEND=dconf gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/gnome/SundownDunes.jpg'
-     
-     $  GSETTINGS_BACKEND=dconf gsettings set org.gnome.desktop.background picture-options 'zoom'
-     ## Possible values: centered, none, scaled, spanned, stretched, wallpaper, zoom
-
-Note:You must specify a file which user "gdm" has permission to read.
-GDM cannot read files in your home directory.
-
-An alternative graphical interface to changing themes (gtk3, icons and
-cursor), the wallpaper and minor other settings of the GDM login screen,
-you can install gdm3setup from AUR.
-
-Larger font for login
-
-This tweak enlarges the login font with a scaling factor. It is the same
-method employed by Accessibility Manager on the desktop.
-
-You must export the GDM session variables before performing this tweak.
-
-    $ GSETTINGS_BACKEND=dconf gsettings set org.gnome.desktop.interface text-scaling-factor '1.25'
-
-Turning off the sound
-
-This tweak disables the audible feedback heard when the system volume is
-adjusted (via keyboard) on the login screen. You must first export the
-GDM session variables.
-
-    $ GSETTINGS_BACKEND=dconf gsettings set org.gnome.desktop.sound event-sounds 'false'
-
-If the above tweak does not work for you or you are unable to export the
-GDM session variables, there is always the easiest solution to the
-"ready sound" problem: mute or lower the sound while in GDM login screen
-using the media keys (if available) of your keyboard.
-
-Make the power button interactive
-
-The default installation sets the power button to suspend the system.
-Power off or Show dialog is a better choice. You must first export the
-GDM session variables as outlined previously.
-
-     $ GSETTINGS_BACKEND=dconf gsettings set org.gnome.settings-daemon.plugins.power button-power 'interactive'
-     $ GSETTINGS_BACKEND=dconf gsettings set org.gnome.settings-daemon.plugins.power button-hibernate 'interactive'
-     $ gsettings list-recursively org.gnome.settings-daemon.plugins.power
-
-Warning:Please note that the acpid daemon also handle the "power button"
-an "hibernate button" event. Running both systems at the same time may
-lead to unexpected behaviour.
-
-Prevent suspend when closing the lid
-
-On some systems it happens that your laptop suspends when you are
-closing the lid despite having set the options Laptop lid close action
-on battery and Laptop lid close action on AC to blank. If this is the
-case, append the following line to /etc/systemd/logind.conf:
-
-    HandleLidSwitch=ignore
-
-Change Critical Battery Level Action (for Laptops)
-
-The gnome-power-manager gui doesn't have a choice for "do nothing" on
-laptops at critical battery level. To manually edit this, open the
-dconf-editor -> org -> gnome -> settings-daemon -> plugins -> power.
-Edit the "critical-battery-action" value to "nothing".
-
-GDM keyboard layout
-
-GDM does not know about your GNOME 3 desktop keyboard settings. To
-change keyboard settings used by GDM, set your layout using Xorg
-configuration. Refer to this section of the Beginner's Guide.
-
-> Other tips
-
-See GNOME Tips.
-
 Miscellaneous settings
 ----------------------
 
-> Automatic program launch upon logging in
+> Power Management
+
+Prevent Suspend-To-RAM (S3) when closing the LID
+
+This setting is not exposed in GNOME's System Settings or in dconf. The
+current approach is to manage this on the level of Systemd. Change the
+variable HandleLidSwitch to ignore in /etc/systemd/logind.conf
+
+    /etc/systemd/logind.conf
+
+    HandleLidSwitch=ignore
+
+See the Power management#ACPI_events article for more information.
+
+Note:Ensure that the HandleLidSwitch entry is uncommented or the setting
+will not take effect.
+
+No reaction on lid close
+
+When configuring the lid close events via Systemd#ACPI_power_management,
+the settings may seem to have no effect. If you have an external monitor
+connected to your laptop, this is default GNOME behaviour. Disconnect
+the monitor and the settings should work, otherwise your
+/etc/systemd/logind.conf may be incorrect. To change default behaviour
+open the dconf-editor and change org -> gnome -> settings-daemon ->
+plugins -> xrandr -> default-monitors-setup to "do-nothing".
+
+Change Critical Battery Level Action (for Laptops)
+
+The System Settings panel only allows the user to choose between Suspend
+or Hibernate. To choose another option such as Do Nothing open the
+dconf-editor and navigate to -> org -> gnome -> settings-daemon ->
+plugins -> power. Edit the "critical-battery-action" value to "nothing".
+
+> Switch back scrolling behavior
+
+If you do not like the new scrollbar behavior just put
+gtk-primary-button-warps-slider = false under the [Settings] section in
+~/.config/gtk-3.0/settings.ini:
+
+    ~/.config/gtk-3.0/settings.ini
+
+    [Settings]
+    gtk-primary-button-warps-slider = false
+    ...
+
+> Autostarting / Automatic program launch upon logging in
 
 Specify which programs start automatically after logging in using
 gnome-session-properties. This tool is part of the gnome-session
@@ -866,33 +671,41 @@ package.
 
 > Editing applications menu
 
-gnome-menus provides gmenu-simple-editor which can show/hide menu
-entries.
-
 alacarte provides a more complete menu editor for adding/editing menu
 entries.
 
-> Some 'System Settings' not preserved
+> Inner padding in Gnome Terminal
 
-GNOME 3 is using systemd (an init daemon for Linux) with more modern
-capabilities. Previously GNOME programs were altered to use Arch's init
-functionalities to gather settings but either the maintenance required
-to do this or possibly this is because of a transitioning to the new
-init system (read more about this here). Areas that settings will not be
-preserved are Date and Time and adding ICC profiles in the Color menu
-and possibly others.
+To move the terminal output away from the window borders create the
+stylesheet ~/.config/gtk-3.0/gtk.css with the following setting:
 
-To gain the functionality back, systemd needs to be installed and the
-gdm.service and NetworkManager.service services need to be enabled.
+       TerminalScreen {
+         -VteTerminal-inner-border: 10px 10px 10px 10px;
+       }
 
-> Disable sound effects in Terminal
+> Disable blinking cursor in Terminal
 
-By default the terminal has these annoying sound effects when e.g.
-pushing the tab button on your keyboard. One solution is to turn off or
-mute all sound effects in the settings menu of Gnome. However, this will
-also turn off notification sounds in other application such as Skype. A
-better solution is to open a terminal, go to Edit -> Profile Preferences
--> General and untick Terminal bell.
+Since Gnome 3.8 and the migration to gsettings and dconf the key
+required to modify in order to disable the blinking cursor in the
+Terminal differs slightly in contrast to the old gconf key. To disable
+the blinking cursor in Gnome 3.8 use:
+
+    gsettings set org.gnome.desktop.interface cursor-blink false
+
+If you prefer dconf to the gsettings CLI then open dconf-editor and
+expand expand org -> gnome -> desktop -> interface and untick the option
+labelled cursor-blink.
+
+> Make new tabs inherit current directory in Gnome Terminal (3.8+)
+
+In Gnome 3.8, the behaviour of how current directories are tracked has
+changed. To restore this behaviour, you need to source the
+/etc/profile.d/vte.sh file, put this in your ~/.bashrc or ~/.zshrc for
+zsh users:
+
+    source /etc/profile.d/vte.sh
+
+For more information refer to the Gnome wiki
 
 > Move dialog windows
 
@@ -905,12 +718,6 @@ gconf-editor and change this setting:
 After the change you will need to restart the shell for it to take
 affect.
 
-> Show context menu icons
-
-Some programs do have context menu icons which, however, are disabled by
-default to show up in Gnome. In order to show them set
- org.gnome.desktop.interface menus-have-icons to true.
-
 > GNOME shell extensions
 
 GNOME Shell can be customized with extensions. These provide features
@@ -922,12 +729,38 @@ information about gnome shell extensions can be found here.
 
 See when an extension breaks GNOME for troubleshooting information.
 
-> Default file browser/replace Nautilus
+> Default Applications
 
-You can trick GNOME into using another file browser by editing the Exec
-line in /usr/share/applications/nautilus.desktop. See the correct
-parameters in the .desktop file of the file manager of your choice,
-e.g.:
+While one can right click any file and set the default applications in
+'Preferences', the settings are actually saved in
+ $HOME/.local/share/applications/mimeapps.list and
+ $HOME/.local/share/applications/mimeinfo.cache
+
+For systemwide preferences create or edit the file
+/usr/share/applications/mimeapps.list.
+
+Tip:If you are making the change systemwide you may to create the
+/usr/share/applications/mimeapps.list file yourself.
+
+Default file browser/replace Nautilus
+
+You can specify a different file manager in the mimeapps.list file as
+shown below:
+
+User only: add the line inode/directory=myfilemanager.desktop to
+~/.local/share/applications/mimeapps.list
+
+Systemwide: add the line inode/directory=myfilemanager.desktop to
+/usr/share/applications/mimeapps.list
+
+Where my filemanager.desktop is the correct .desktop file for the file
+manager of your choice.
+
+  
+ Alternatively you can trick GNOME into using another file browser by
+editing the Exec line in /usr/share/applications/nautilus.desktop. See
+the correct parameters in the .desktop file of the file manager of your
+choice, e.g.:
 
     /usr/share/applications/nautilus.desktop
 
@@ -939,7 +772,7 @@ e.g.:
     Exec=nemo %U
     [...]
 
-> Default PDF viewer
+Default PDF viewer
 
 In some cases when you have installed Inkscape or other graphic programs
 Evince Document Viewer might no longer be selected as the default PDF
@@ -949,7 +782,7 @@ the default application again.
 
     xdg-mime default evince.desktop application/pdf
 
-> Default terminal
+Default terminal
 
 gsettings (which replaces gconftool-2) is used to set the default
 terminal. The setting affects nautilus-open-terminal (a Nautilus
@@ -962,6 +795,13 @@ Note:The -e flag is for executing a command. When nautilus-open-terminal
 invokes urxvtc, it puts a cd command at the end of the command line so
 that the new terminal starts in the directory you opened it from. Other
 terminals will require a different (perhaps empty) exec-arg.
+
+Default web browser for gnome-gmail-notifier
+
+To configure the web browser used by the AUR package
+gnome-gmail-notifier, open gconf-editor and edit the
+/desktop/gnome/url-handlers/http/ key. You may want to change https/,
+about/, and unknown/ keys while you are at it.
 
 > Middle mouse button
 
@@ -984,58 +824,14 @@ To set a new value type the following
 
 where <int> is the value in seconds
 
-> Alternate window manager
-
-You can use an alternate window manager with GNOME by forcing fallback
-mode and creating two files:
-
-Note:Xmonad is used as an example, but this works for other window
-managers.
-
-    /usr/share/gnome-session/sessions/xmonad.session
-
-    [GNOME Session]
-    Name=Xmonad session
-    RequiredComponents=gnome-panel;gnome-settings-daemon;
-    RequiredProviders=windowmanager;notifications;
-    DefaultProvider-windowmanager=xmonad
-    DefaultProvider-notifications=notification-daemon
-
-    /usr/share/xsessions/xmonad-gnome-session.desktop
-
-    [Desktop Entry]
-    Name=Xmonad GNOME
-    Comment=Tiling window manager
-    TryExec=/usr/bin/gnome-session
-    Exec=gnome-session --session=xmonad
-    Type=XSession
-
-The next time you log in, you should have the ability to choose Xmonad
-GNOME as your session.
-
-If there isn't a .desktop file for the window manager, you'll need to
-create one. Example for wmii:
-
-    /usr/share/applications/wmii.desktop
-
-    [Desktop Entry]
-    Version=1.0
-    Type=Application
-    Name=wmii
-    TryExec=wmii
-    Exec=wmii
-
-For more information, see this article on running awesome as the window
-manager in GNOME.
-
-Hidden features
----------------
-
-GNOME 3 hides many useful options which you can customize with
-dconf-editor. GNOME 3 also supports gconf-editor for settings that have
-not yet migrated to dconf.
-
 > Changing hotkeys
+
+Certain hotkeys cannot be changed directly via the System Settings
+panel. In order to change these keys, use dconf-editor. An example of
+particular note is the hotkey Alt-Above_Tab. On US keyboards, this is
+Alt-`: is a hotkey often used in the Emacs editor. It can be changed by
+opening dconf-editor and modifying the switch-group key found in
+org.gnome.desktop.wm.keybindings.
 
 It is possible to manually change the keys via an application's
 so-called accel map file. Where it is to be found is up to the
@@ -1054,11 +850,10 @@ to this :
 
     (gtk_accel_path "<Actions>/DirViewActions/Trash" "Delete")
 
-The file is regenerate regularly so don't waist time on commenting the
-file. The uncommented line will stay but every comment you may add will
-be lost.
+The file is regenerated regularly so do not comment the file. The
+uncommented line will stay but every comment you add will be lost.
 
-Nautilus 3.4 and older
+Hotkeys in Nautilus 3.4 and older
 
 Firstly, use dconf-editor to place a checkmark next to can-change-accels
 in the key named org.gnome.desktop.interface.
@@ -1075,21 +870,6 @@ default assignment is a somewhat-awkward Ctrl+Delete.
 
 Unless you select a file or folder, Move to Trash will be grayed-out.
 Finally, disable can-change-accels to prevent accidental hotkey changes.
-
-> Shutdown via the status menu
-
-Currently, the GNOME designers have hidden the Shutdown option inside
-the status menu. To shut down your system with the status menu, click
-the menu and hold down the Alt key so that the Suspend item changes to
-Power Off. The subsequent dialog allows you to shut down or restart your
-system.
-
-If you disable the Suspend menu item system-wide as described elsewhere
-in this document you do not have to go through these motions.
-
-Another option is to install the Alternative Status Menu extension. See
-the section on shell extensions. The alternative menu extension installs
-a new status menu with a non-hidden Power Off entry.
 
 > Screencast recording
 
@@ -1112,6 +892,11 @@ org.gnome.desktop.input-sources.xkb-options and add desired XkbOptions
 See /usr/share/X11/xkb/rules/xorg for all XkbOptions and then
 /usr/share/X11/xkb/symbols/* for the respective descriptions.
 
+Note:To enable the Ctrl+Alt+Backspace combination to terminate Xorg, use
+the gnome-tweak-tool from official repositories. Within the Gnome Tweak
+Tool, navigate to Typing > Terminate and select the option
+Ctrl+Alt+Backspace from the dropdown menu.
+
 > Toggle keyboard layouts
 
 Since Gnome does not consider any configuration in
@@ -1122,16 +907,38 @@ you have to use the Gnome-Tweak-Tool and set Typing -> Modifiers-only
 input sources -> select Alt-shift. For more information see also the
 forum thread.
 
-Integrated messaging (Empathy)
-------------------------------
+> Other tips
+
+See GNOME Tips.
+
+Tracker (search program)
+------------------------
+
+The tracker provides the Tracker program, an indexing application. You
+can configure it with tracker-preferences, and monitor status with
+tracker-control. Once installed, indexing should start automatically
+when you log in. You can explicitly start indexing with
+tracker-control -s. Search settings can also be configured in the System
+Settings panel.
+
+Totem (movie player)
+--------------------
+
+Totem is a movie player based on GStreamer. For information about adding
+codecs or hardware acceleration, see GStreamer.
+
+Empathy (integrated messaging) and Gnome Online Accounts
+--------------------------------------------------------
 
 Empathy, the engine behind integrated messaging, and all system settings
 based on messaging accounts will not show up unless the telepathy group
 of packages or at least one of the backends (telepathy-gabble, or
-telepathy-haze, for example) is installed.
+telepathy-haze, for example) is installed. You will also need to install
+the telepathy group to add accounts in the GNOME Online Accounts
+interface found in the System Settings panel.
 
-These packages are not included in default Arch GNOME installs. You can
-install the Telepathy and optionally any backends with:
+These packages are not included in either the gnome or gnome-extra
+groups . You can install the Telepathy and optionally any backends with:
 
     # pacman -S telepathy
 
@@ -1143,31 +950,15 @@ running and will need to be killed before you can add any new accounts.
 View descriptions of telepathy components on the Freedesktop.org
 Telepathy Wiki.
 
-Forcing fallback mode
----------------------
-
-Your session automatically starts in fallback mode when gnome-shell is
-not present, or when your hardware cannot handle graphics acceleration —
-such as running within a virtual machine or running on old hardware.
-
-If you wish to enable fallback mode while still having gnome-shell
-installed, make the following system change:
-
-Go to System Settings (gnome-control-center) -> Details -> Graphics and
-set Forced Fallback Mode to ON.
-
-You can alternatively choose the type of session from a terminal with
-gsettings:
-
-    $ gsettings set org.gnome.desktop.session session-name gnome-fallback
-
-You may want to log out after making the change. You will see the chosen
-type of session upon your next login.
-
-To disable the forced-fallback mode change it back to gnome.
-
 Troubleshooting
 ---------------
+
+> Cannot change settings in dconf-editor
+
+When one cannot set settings in dconf, it is possible their dconf user
+settings are corrupt. In this case it is best to delete the user dconf
+files in ~/.config/dconf/user* and set the settings in dconf-editor
+after.
 
 > When an extension breaks GNOME
 
@@ -1200,9 +991,33 @@ sub-folder.
   Instead of (for example):   "shell-version": ["3.4"]
   --------------------------- --------------------------
 
-  
- "3.x" indicates the extension works with every Shell version. If it
-breaks, you'll know to change it back.
+"3.x" indicates the extension works with every Shell version. If it
+breaks, you will know to change it back.
+
+> Remove Gnome Shell Extensions
+
+If you have trouble with uninstalling Gnome Extensions via
+https://extensions.gnome.org/local/, then probably they have been
+installed as system-wide extensions with
+pacman -S gnome-shell-extensions before. To remove them, you have to be
+careful, because the following instruction removes all extensions from
+other user's, too.
+
+    pacman -R gnome-shell-extensions
+
+Following that, you refresh Gnome Shell by pressing ALT+F2 and entering
+restart
+
+Then go to https://extensions.gnome.org/local/ again and have a look for
+your installed extensions list. It should have changed.
+
+All other extensions should be removable by pressing the red X icon to
+the right. If not, something may be broken.
+
+As a final step, you can remove them manually from
+~/.local/share/gnome-shell/extensions/* and/or
+/usr/share/gnome-shell/extensions. Restart Gnome Shell again and you
+should be fine.
 
 > The "Windows" key
 
@@ -1231,26 +1046,6 @@ solution: edit .conkyrc
     own_window_class Conky
     own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 
-> X freezes with black screen after Gnome 3.8 upgrade
-
-Possibly you don't have SNA enabled. Therefore, just add SNA
-acceleration like written here.
-
-> xf86-video-ati driver: flickers from time to time
-
-If you use that driver, your desktop might flicker a lot when you hover
-the bottom right corner, and also when you start up gdm. Write the
-following in your /etc/X11/xorg.conf.d/20-radeon.conf and see if it
-works then:
-
-    Section "Device"
-           Identifier "Radeon"
-           Driver "radeon"
-           Option "EnablePageFlip" "off"
-    EndSection
-
-https://wiki.archlinux.org/index.php/Intel_Graphics#Choose_acceleration_method
-
 > Window opens behind other windows when using multiple monitors
 
 This is possibly a bug in GNOME Shell which causes new windows to open
@@ -1277,47 +1072,6 @@ coordinate pair to position it correctly.
 
     this.actor.set_position(primary.width-this._item_size-this._spacing-15, (primary.height-height)/2);
 
-> No event sounds for Empathy and other programs
-
-If you are using OSS, you may want to install libcanberra-oss from the
-AUR.
-
-> Gnome sets the keyboard layout to USA after every log in
-
-See the [this] bug report for more information. It is related to GDM and
-can be fixed by choosing the correct layout at GDM login startup.
-However, users who do not use GDM or any login manager but a pure startx
-approach have to use a workaround. Create the file ~/.keyboard and make
-it executable chmod +x:
-
-    # Set the correct keyboard layout after Gnome start
-    setxkbmap -layout "us,pl" -variant altgr-intl -option "grp:alt_shift_toggle" nodeadkeys
-
-Now run gnome-session-properties and add this .keyboard file to the
-programs run at startup:
-
-    Name: Keyboard layout 
-    Command: /home/username/.keyboard
-    Comment: Sets the correct keyboard layout after Gnome start
-
-Further you need to create the executable file
-/etc/pm/sleep.d/90_keyboard with the following content in order to run
-the script on resume from suspend and hibernation.
-
-    #!/bin/bash
-    case $1 in
-        resume|thaw)
-            /home/username/.keyboard
-            ;;
-    esac
-
-> Panels do not respond to right-click in fallback mode
-
-Check Configuration Editor:
-/apps/metacity/general/mouse_button_modifier. This modifier key (Alt,
-Super, etc) used for normal windows is also used by panels and their
-applets.
-
 > "Show Desktop" keyboard shortcut does not work
 
 GNOME developers treated the corresponding binding as bug (see
@@ -1326,19 +1080,6 @@ being deprecated. To show the desktop again assign ALT+STRG+D to the
 following setting:
 
     System Settings --> Keyboard --> Shortcuts --> Navigation --> Hide all normal windows
-
-> Nautilus does not start
-
-1.  Press Alt+F2
-2.  Enter gnome-tweak-tool
-3.  Select the File Manager tab.
-4.  Locate option Have file manager handle the desktop and assure it is
-    toggled off.
-
-> Epiphany does not play Flash videos
-
-Adobe Flash Player is buggy and does not work directly in Epiphany. See
-Epiphany#Flash for a workaround involving nspluginwrapper.
 
 > Unable to apply stored configuration for monitors
 
@@ -1361,21 +1102,9 @@ the following to unlock it.
 
     $ xinput set-prop "SynPS/2 Synaptics TouchPad" "Device Enabled" 1
 
-> Unable to connect to secured Wi-Fi networks
-
-You can see the network connections listing, but choosing an encrypted
-network fails to show a dialog for key entry. You may need to install
-network-manager-applet. See GNOME NetworkManager setup.
-
-> "Any command has been defined 33"
-
-When you press the Print Screen key (sometimes labeled PrntScr or PrtSc)
-to take a screenshot, and you got "Any command has been defined 33",
-install metacity.
-
 > GDM and GNOME use X11 cursors
 
-To fix this issue, become root and put the following into
+To fix this problem, become root and put the following into
 /usr/share/icons/default/index.theme (creating the directory
 /usr/share/icons/default if necessary):
 
@@ -1385,9 +1114,9 @@ To fix this issue, become root and put the following into
     Inherits=Adwaita
 
 Note: Instead of "Adwaita", you can choose another cursor theme (e.g.
-Human). Alternatively, you can install gnome-cursors-fix from the AUR.
+Human).
 
-> Tracker & Documents don't list any local files
+> Tracker & Documents do not list any local files
 
 In order for Tracker (and, therefore, Documents) to detect your local
 files, they must be stored in directories that it knows of. If your
@@ -1396,7 +1125,7 @@ documents are contained in one of the usual XDG standard directories
 
      # xdg-user-dirs-update
 
-This will create all of the usual XDG home directories if they don't
+This will create all of the usual XDG home directories if they do not
 already exist and it will create the config file definining these
 directories that Tracker and Documents depend upon.
 
@@ -1405,17 +1134,16 @@ directories that Tracker and Documents depend upon.
 If you get a password prompt every time you login, and you find password
 are not saved, you might need to create/set a default keyring:
 
-    $ pacman -S seahorse
+Install seahorse. Open "Passwords and Keys" from the menu or run
+seahorse. Select View > By Keyring. If there is no keyring in the left
+column (it will be marked with a lock icon), go to File > New > Password
+Keyring and give it a nice name. You will be asked to enter a password.
+If you do not give it a password it will be unlocked automatically even
+when using autologin, but passwords will not be stored securely.
+Finally, right-click on the keyring you just created and select "Set as
+default".
 
-Open "Passwords and Keys" from the menu or run "seahorse". Select View >
-By Keyring. If there is no keyring in the left column (it will be marked
-with a lock icon), go to File > New > Password Keyring and give it a
-nice name. You will be asked to enter a password. If you do not give it
-a password it will be unlocked automatically even when using autologin,
-but passwords will not be stored securely. Finally, right-click on the
-keyring you just created and select "Set as default".
-
-> Windows can't be modified with Alt-Key + Mouse-Button
+> Windows cannot be modified with Alt-Key + Mouse-Button
 
 Change the dconf-setting
 "org.gnome.desktop.wm.preferences.mouse-button-modifier" from <Super>
@@ -1432,6 +1160,31 @@ Disable non-UTF-8 locales and perform a locale-gen until this is
 resolved. For more information see this bug report:
 https://bugzilla.gnome.org/show_bug.cgi?id=698952
 
+Additionally, if multiple locales of different languages are enabled, it
+may be necessary to disable all locales except for one (which is UTF-8).
+
+> Gnome 3.10 UI elements scale incorrectly
+
+With 3.10 Gnome introduced HDPI support. If your displays EDID info does
+not contain the correct screen size, but the resolution is right, this
+can lead to incorrectly scaled UI elements. As a workaround you can open
+dconf-editor and find the key scaling-factor in
+org.gnome.desktop.interface. Set it to 1 to get the standard scale.
+
+> Tear-free video with Intel HD Graphics
+
+Enabling the Xorg Intel TearFree option is a known workaround to tearing
+problems on Intel adapters, however the way this option acts makes it
+redundant with the use of a compositor (adds up memory consumption and
+lowers performance, see the original bug report's final comment).
+
+On the other hand, GNOME Shell uses Mutter as a compositor which has a
+tweak known to address tearing problems (see the original suggestion for
+this fix and its mention in the Freedesktop bug report): the line
+CLUTTER_PAINT=disable-clipped-redraws:disable-culling must be appended
+to /etc/environment and Xorg server restarted. This tweak solved tearing
+problems.
+
 External links
 --------------
 
@@ -1440,14 +1193,20 @@ External links
 -   Themes, icons, and backgrounds:
     -   GNOME Art
     -   GNOME Look
-
 -   GTK/GNOME programs:
     -   GNOME Files
     -   GNOME Project Listing
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GNOME&oldid=255877"
+"https://wiki.archlinux.org/index.php?title=GNOME&oldid=305768"
 
 Category:
 
--   Desktop environments
+-   GNOME
+
+-   This page was last modified on 20 March 2014, at 02:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

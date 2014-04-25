@@ -64,3 +64,10 @@ Retrieved from
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 10 March 2013, at 22:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

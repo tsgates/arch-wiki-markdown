@@ -18,18 +18,16 @@ by multiple simultaneous conflicting updates, especially since conflicts
 can interact with each other. Collected here are detailed instructions
 to bring old machines from various points of time up to date.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Timeline                                                           |
-| -   2 End of initscripts support                                         |
-| -   3 Fontconfig 2.10.1 update                                           |
-| -   4 The /lib directory becomes a symlink                               |
-| -   5 Upgrading Filesystem                                               |
-|     -   5.1 Symlinks to /run and /run/lock                               |
-|     -   5.2 Conflict with mtab                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Timeline
+-   2 End of initscripts support
+-   3 Fontconfig 2.10.1 update
+-   4 The /lib directory becomes a symlink
+-   5 Upgrading Filesystem
+    -   5.1 Symlinks to /run and /run/lock
+    -   5.2 Conflict with mtab
 
 Timeline
 ========
@@ -122,20 +120,20 @@ case for most people), then you can simply perform:
 
 Then reboot the system before continuing along with the upgrade.
 
-Upgrading while running a kernels prior to linux-3.4 will get a warning
-about permissions on /sys. This is nothing to worry about, as of
-linux-3.4 the permissions will be 555, and this upgrade reflects this in
-the filesystem package.
+If upgrading while running a kernel prior to linux-3.4, you will get a
+warning about permissions on /sys. This is nothing to worry about; as of
+linux-3.4, the permissions will be 555, and this upgrade reflects this
+in the filesystem package.
 
 Conflict with mtab
 ------------------
 
-The file /etc/mtab used to be generated at boot and hence was owned by
-any package. Now it is a symlink to /proc/self/mounts owned by
+The file /etc/mtab used to be generated at boot and hence was not owned
+by any package. Now it is a symlink to /proc/self/mounts owned by
 filesystem. This change means that initscripts no longer requires write
 access to the rootfs (though other packages might).
 
-However following the instructions on the news, while sufficiently for
+However, following the instructions in the news, while sufficient for
 dealing with this conflict at the time, will now interact with later
 filesystem update. To upgrade do
 
@@ -143,18 +141,25 @@ filesystem update. To upgrade do
      pacman -S initscripts
      rm -r /var/{lock,run} /etc/mtab
 
-Now you'll to comment out CheckSpace in /etc/pacman.conf as pacman needs
-to access /etc/mtab to enable this feature. It is highly recommended to
-enable to restore it after dealing with the conflict.
+Now you'll need to comment out CheckSpace in /etc/pacman.conf as pacman
+needs to access /etc/mtab to enable this feature. It is highly
+recommended to re‐enable it after dealing with the conflict.
 
      pacman -S filesystem
 
-And then reboot the system before continuing along with the upgrade like
+And then reboot the system before continuing along with the upgrade as
 described in the previous section.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Upgrade_Path&oldid=236589"
+"https://wiki.archlinux.org/index.php?title=Upgrade_Path&oldid=259491"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 29 May 2013, at 13:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

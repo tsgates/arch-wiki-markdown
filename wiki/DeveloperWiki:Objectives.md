@@ -1,16 +1,14 @@
 DeveloperWiki:Objectives
 ========================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Current Suggestions                                                |
-|     -   2.1 AndyRTR                                                      |
-|     -   2.2 Paul Mattal                                                  |
-|     -   2.3 Alexander Baldeck                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Current Suggestions
+    -   2.1 AndyRTR
+    -   2.2 Paul Mattal
+    -   2.3 Alexander Baldeck
 
 Introduction
 ============
@@ -91,3 +89,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2011, at 18:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

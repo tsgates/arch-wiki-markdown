@@ -2,31 +2,27 @@ Tp smapi
 ========
 
 tp_smapi is a set of kernel modules that retrieves information from and
-conveys commands to the hardware of ThinkPad laptops. This information
-is presented through the /sys/devices/platform/smapi filesystem. Much
-like the /proc filesystem, you can read and write information to these
-files to get information about and send commands to the hardware.
-tp_smapi is highly recommended if you're using a ThinkPad laptop.
+conveys commands to the hardware of many ThinkPad laptops. This
+information is presented through the /sys/devices/platform/smapi
+filesystem. Much like the /proc filesystem, you can read and write
+information to these files to get information about and send commands to
+the hardware. tp_smapi is highly recommended if you're using a supported
+ThinkPad laptop.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Supported Laptops                                                  |
-| -   2 Installation                                                       |
-| -   3 Features                                                           |
-|     -   3.1 Control Battery Charging                                     |
-|         -   3.1.1 General Way                                            |
-|         -   3.1.2 Check whether settings were accepted                   |
-|                                                                          |
-|     -   3.2 Protect the Hard Disk from Drops                             |
-|                                                                          |
-| -   4 Workaround for Partially Supported Laptops                         |
-|     -   4.1 1st Option                                                   |
-|     -   4.2 2nd Option                                                   |
-|                                                                          |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Supported Laptops
+-   2 Installation
+-   3 Features
+    -   3.1 Control Battery Charging
+        -   3.1.1 General Way
+        -   3.1.2 Check whether settings were accepted
+    -   3.2 Protect the Hard Disk from Drops
+-   4 Workaround for Partially Supported Laptops
+    -   4.1 1st Option
+    -   4.2 2nd Option
+-   5 See Also
 
 Supported Laptops
 -----------------
@@ -39,7 +35,7 @@ workaround.
 
 If you are installing on a recent Thinkpad that has an Ivy Bridge
 processor (X230, T430, T530, etc.), tp_smapi will not work. Use
-tpacpi-bat.
+tpacpi-bat or tpacpi-bat-git.
 
 Installation
 ------------
@@ -51,9 +47,9 @@ It's providing you 3 new Kernel modules.
 
 Kernel Module
 
-Name
+> Name
 
-Description
+> Description
 
 tp_smapi
 
@@ -68,8 +64,8 @@ thinkpad_ec
 ThinkPad embedded controller hardware access (tp_smapi and hdaps both
 depend on it)
 
-After a reboot tp_smapi and it's dependencys will get autoloaded and the
-sysfs-interface under /sys/devices/platform/smapi should be fully
+After a reboot, tp_smapi and its dependencies will get autoloaded and
+the sysfs-interface under /sys/devices/platform/smapi should be fully
 functional.
 
 Features
@@ -220,7 +216,7 @@ your liking and run it every couple of minutes as a root cron.
 > 2nd Option
 
 To control the battery charging thresholds, install the Perl script
-tpacpi-bat from the AUR.
+tpacpi-bat or tpacpi-bat-git from the AUR.
 
 Insert the acpi_call kernel module by running
 
@@ -239,15 +235,25 @@ add these lines to /etc/rc.local to set the at startup. While these
 values should be permanent, they will be reset any time the battery is
 removed.
 
+Note:See tpacpi-bat help for the list of commands:
+perl /usr/lib/perl5/vendor_perl/tpacpi-bat -h.
+
 See Also
 --------
 
 tp_smapi on ThinkWiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tp_smapi&oldid=250895"
+"https://wiki.archlinux.org/index.php?title=Tp_smapi&oldid=304907"
 
 Categories:
 
 -   Laptops
 -   Kernel
+
+-   This page was last modified on 16 March 2014, at 09:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

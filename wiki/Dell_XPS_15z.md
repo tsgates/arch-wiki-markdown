@@ -25,7 +25,7 @@ Works
 
 Touchpad
 
-Modify
+Works
 
 Graphics
 
@@ -51,26 +51,22 @@ System info
 
 Not tested
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Settings                                                    |
-| -   2 System Setup                                                       |
-|     -   2.1 Hangs on boot                                                |
-|     -   2.2 Graphics                                                     |
-|         -   2.2.1 Disabling Nvidia card with acpi_call                   |
-|         -   2.2.2 Using Bumblebee                                        |
-|         -   2.2.3 Video Performance                                      |
-|         -   2.2.4 Boot time errors                                       |
-|         -   2.2.5 X11: no screen found                                   |
-|                                                                          |
-|     -   2.3 Bluetooth                                                    |
-|     -   2.4 Touchpad and Keyboard                                        |
-|         -   2.4.1 Keyboard is not working                                |
-|                                                                          |
-|     -   2.5 Card Reader                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 System Settings
+-   2 System Setup
+    -   2.1 Hangs on boot
+    -   2.2 Graphics
+        -   2.2.1 Disabling Nvidia card with acpi_call
+        -   2.2.2 Using Bumblebee
+        -   2.2.3 Video Performance
+        -   2.2.4 Boot time errors
+        -   2.2.5 X11: no screen found
+    -   2.3 Bluetooth
+    -   2.4 Touchpad and Keyboard
+        -   2.4.1 Keyboard is not working
+    -   2.5 Card Reader
 
 System Settings
 ===============
@@ -191,8 +187,8 @@ Then regenerate the initramfs:
 > X11: no screen found
 
 This error may happen when you install Nvidia driver instead of intel
-driver. More info here. Basic solution is to uninstall NVidia driver and
-install intel driver.
+driver. Basic solution is to uninstall NVidia driver and install intel
+driver.
 
 Bluetooth
 ---------
@@ -202,14 +198,9 @@ See Bluetooth.
 Touchpad and Keyboard
 ---------------------
 
-As of kernel 3.6, out of the box the keyboard works perfectly and the
-touchpad works with basic functionality (no multitouch). A driver has
-been written to enable full multitouch support but has not yet been
-included in the mainline kernel. To use this driver, you will need to
-use a kernel with the driver built in. There are two kernels in the AUR
-that include this driver: linux-xps15z and linux-mainline-dellxps. See
-Kernels/Compilation/Arch_Build_System for information on compiling
-kernel.
+Touchpad is fully supported in kernel 3.9 or later. Make sure to install
+xf86-input-synaptics as well as a program such as synaptiks so that you
+can customize all of the features.
 
 > Keyboard is not working
 
@@ -231,8 +222,15 @@ To make the card reader function enter the following command:
 This will allow it to auto mount cards until the next reboot
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_XPS_15z&oldid=241645"
+"https://wiki.archlinux.org/index.php?title=Dell_XPS_15z&oldid=304829"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 16 March 2014, at 07:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

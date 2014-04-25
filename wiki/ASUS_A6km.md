@@ -11,25 +11,23 @@ installation described uses this 202 BIOS version and so far no problems
 have been encountered, even the power management modules behave
 properly.
 
-See the Beginners' Guide for installation instructions.
+See the Beginners' guide for installation instructions.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Wireless                                                           |
-| -   3 Audio                                                              |
-| -   4 Touchpad                                                           |
-| -   5 Webcam                                                             |
-| -   6 Modem                                                              |
-| -   7 IrDA                                                               |
-| -   8 Card Reader                                                        |
-| -   9 Tv Out                                                             |
-| -   10 Other Software/Utilities                                          |
-|     -   10.1 Power Management                                            |
-|     -   10.2 Suspend to RAM/Disk                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Wireless
+-   3 Audio
+-   4 Touchpad
+-   5 Webcam
+-   6 Modem
+-   7 IrDA
+-   8 Card Reader
+-   9 Tv Out
+-   10 Other Software/Utilities
+    -   10.1 Power Management
+    -   10.2 Suspend to RAM/Disk
 
 Hardware
 --------
@@ -165,8 +163,15 @@ For cpu scaling, see CPU Frequency Scaling.
 For suspend-to-ram, follow the instructions in the Suspend to RAM page.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_A6km&oldid=250473"
+"https://wiki.archlinux.org/index.php?title=ASUS_A6km&oldid=298034"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 February 2014, at 07:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

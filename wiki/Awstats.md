@@ -2,18 +2,7 @@ Awstats
 =======
 
   
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: Article still    
-                           refers to the old AUR    
-                           package, even though the 
-                           package has been moved   
-                           to [community] (Discuss) 
-  ------------------------ ------------------------ ------------------------
-
-From AWStats - Free log file analyzer for advanced statistics:
+ From AWStats - Free log file analyzer for advanced statistics:
 
 AWStats is a free powerful and featureful tool that generates advanced
 web, streaming, ftp or mail server statistics, graphically. This log
@@ -25,29 +14,26 @@ Apache log files (NCSA combined/XLF/ELF log format or common/CLF log
 format), WebStar, IIS (W3C log format) and a lot of other web, proxy,
 wap, streaming servers, mail servers and some ftp servers.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 mod_perl                                                     |
-|     -   1.2 Awstats                                                      |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Enable mod_perl for Apache                                   |
-|     -   2.2 Configure Apache to log for AWStats                          |
-|     -   2.3 Including AWStats configuration in Apache's configuration    |
-|     -   2.4 AWStats Configuration                                        |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 mod_perl
+    -   1.2 Awstats
+-   2 Configuration
+    -   2.1 Enable mod_perl for Apache
+    -   2.2 Configure Apache to log for AWStats
+    -   2.3 Including AWStats configuration in Apache's configuration
+    -   2.4 AWStats Configuration
+-   3 Nginx
+-   4 See also
 
 Installation
 ------------
 
 > mod_perl
 
-mod_perl is required to run AWStats with Apache. The mod_perl package is
+mod_perl is required to run AWStats with apache. The mod_perl package is
 available in the [extra] repository; install it using pacman.
 
 > Awstats
@@ -126,8 +112,8 @@ convert them to stats.
 
 > AWStats Configuration
 
-The AUR package comes with an hourly cron script to update stats shown
-on AWStats. This cron script reads AWStats configuration files in
+The package comes with an hourly cron script to update stats shown on
+AWStats. This cron script reads AWStats configuration files in
 /etc/awstats and updates the stats for the sites that are defined in
 these configuration files. Instead of creating these configuration
 files, you can use AWStats' configuration tool. Run:
@@ -148,14 +134,125 @@ You are done, now you can run hourly cron script to test the results.
 Warning:With these settings anyone will be able to reach AWStats.
 Setting a authentication would help keeping these stats private.
 
+Nginx
+-----
+
+If your web server software is nginx, follow steps below:
+
+1. Install awstats as described above. It is necessary to get the
+folders and files owned by user "http" and group "http" with the
+following command:
+
+    chown -R http:http /usr/share/webapps/awstats/
+
+2. Use awstats configuration tool to generate a site configuration file
+as described above. Make sure the following lines are set correctly:
+
+    LogFile="/var/log/nginx/access.log"
+    LogFormat=1
+
+3. To make the Perl scripts of awstats work on nginx, create
+/etc/nginx/cgi-bin.php script with the following code:
+
+    <?php
+    $descriptorspec = array(
+       0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
+       1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
+       2 => array("pipe", "w")   // stderr is a file to write to
+    );
+    $newenv = $_SERVER;
+    $newenv["SCRIPT_FILENAME"] = $_SERVER["X_SCRIPT_FILENAME"];
+    $newenv["SCRIPT_NAME"] = $_SERVER["X_SCRIPT_NAME"];
+    if (is_executable($_SERVER["X_SCRIPT_FILENAME"])) {
+       $process = proc_open($_SERVER["X_SCRIPT_FILENAME"], $descriptorspec, $pipes, NULL, $newenv);
+       if (is_resource($process)) {
+           fclose($pipes[0]);
+           $head = fgets($pipes[1]);
+           while (strcmp($head, "\n")) {
+               header($head);
+               $head = fgets($pipes[1]);
+           }
+           fpassthru($pipes[1]);
+           fclose($pipes[1]);
+           fclose($pipes[2]);
+           $return_value = proc_close($process);
+       } else {
+           header("Status: 500 Internal Server Error");
+           echo("Internal Server Error");
+       }
+    } else {
+       header("Status: 404 Page Not Found");
+       echo("Page Not Found");
+    }
+    ?> 
+
+4. Add these directives to the domain nginx config file:
+
+    location ^~ /awstats-icon {
+       alias /usr/share/webapps/awstats/icon/;
+       access_log off;
+    }
+    location ^~ /awstatscss {
+       alias /usr/share/webapps/awstats/examples/css/;
+       access_log off;
+    }
+    location ^~ /awstatsclasses {
+       alias /usr/share/webapps/awstats/examples/classes/;
+       access_log off;
+    }
+    location ~ ^/cgi-bin/.*\.(cgi|pl|py|rb) {
+       gzip off;
+       fastcgi_pass  unix:/var/run/php-fpm/php-fpm.sock;
+       fastcgi_index cgi-bin.php;
+       fastcgi_param SCRIPT_FILENAME    /etc/nginx/cgi-bin.php;
+       fastcgi_param SCRIPT_NAME        /cgi-bin/cgi-bin.php;
+       fastcgi_param X_SCRIPT_FILENAME  /usr/share/webapps/awstats$fastcgi_script_name;
+       fastcgi_param X_SCRIPT_NAME      $fastcgi_script_name;
+       fastcgi_param QUERY_STRING       $query_string;
+       fastcgi_param REQUEST_METHOD     $request_method;
+       fastcgi_param CONTENT_TYPE       $content_type;
+       fastcgi_param CONTENT_LENGTH     $content_length;
+       fastcgi_param GATEWAY_INTERFACE  CGI/1.1;
+       fastcgi_param SERVER_SOFTWARE    nginx;
+       fastcgi_param REQUEST_URI        $request_uri;
+       fastcgi_param DOCUMENT_URI       $document_uri;
+       fastcgi_param DOCUMENT_ROOT      $document_root;
+       fastcgi_param SERVER_PROTOCOL    $server_protocol;
+       fastcgi_param REMOTE_ADDR        $remote_addr;
+       fastcgi_param REMOTE_PORT        $remote_port;
+       fastcgi_param SERVER_ADDR        $server_addr;
+       fastcgi_param SERVER_PORT        $server_port;
+       fastcgi_param SERVER_NAME        $server_name;
+       fastcgi_param REMOTE_USER        $remote_user;
+    }
+
+5. You can access your awstats page of your site at
+"http://your_domain.com/cgi-bin/awstats.pl?config=your_domain.com"
+Optionally, you may want to add this rewrite rule to the nginx site
+config file:
+
+    location ~ ^/awstats {
+       rewrite ^ http://your_domain.com/cgi-bin/awstats.pl?config=your_domain.com;
+    }
+
+With this you can access your awstats page simply by typing
+"http://your_domain.com/awstats" in the address bar of your browser.
+
 See also
 --------
 
 -   mod_perl Apache + Perl
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Awstats&oldid=222261"
+"https://wiki.archlinux.org/index.php?title=Awstats&oldid=301593"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 24 February 2014, at 11:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

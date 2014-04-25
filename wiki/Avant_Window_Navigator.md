@@ -1,7 +1,7 @@
 Avant Window Navigator
 ======================
 
-> Summary
+Summary help replacing me
 
 This article discusses how to install and use Avant Window Navigator
 (AWN).
@@ -13,28 +13,24 @@ GNOME
 Avant Window Navigator (AWN) is a lightweight dock written in C. It has
 support for launchers, task lists and third party applets.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Additional dependencies                                      |
-|     -   1.2 Compositing                                                  |
-|                                                                          |
-| -   2 Usage                                                              |
-| -   3 Configuration                                                      |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 External applets                                             |
-|         -   4.1.1 DockbarX                                               |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Additional dependencies
+    -   1.2 Compositing
+-   2 Usage
+-   3 Configuration
+-   4 Tips and tricks
+    -   4.1 External applets
+        -   4.1.1 DockbarX
+-   5 See also
 
 Installation
 ------------
 
 -   Avant Window Navigator can be installed with the package
-    avant-window-navigator, available in the official repositories.
+    avant-window-navigator, available in the Arch User Repository.
 -   To get additional applets to use with AWN you will need to install
     awn-extras-applets.
 
@@ -110,9 +106,16 @@ See also
 -   AWN on Launchpad
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Avant_Window_Navigator&oldid=235592"
+"https://wiki.archlinux.org/index.php?title=Avant_Window_Navigator&oldid=305991"
 
 Categories:
 
 -   Application launchers
 -   Eye candy
+
+-   This page was last modified on 20 March 2014, at 17:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

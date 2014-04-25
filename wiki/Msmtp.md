@@ -1,44 +1,30 @@
 msmtp
 =====
 
-> Summary
+Related articles
 
-msmtp configuration and usage hints.
-
-Required software
-
-msmtp
-
-> Related
-
-mutt
-
-OfflineIMAP
+-   mutt
+-   OfflineIMAP
 
 msmtp is a very simple and easy to use smtp client with excellent
 sendmail compatibility.
 
-An alternative lightweight MTA that also handles local mail is dma,
-available in the AUR.
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Quick start                                                        |
-| -   3 Using the mail command                                             |
-| -   4 Test msmtp                                                         |
-| -   5 Configuring cron for msmtp                                         |
-| -   6 Miscellaneous                                                      |
-|     -   6.1 Practical password management                                |
-|     -   6.2 Using msmtp offline                                          |
-|     -   6.3 Vim syntax highlighting                                      |
-|     -   6.4 Send mail with PHP using msmtp                               |
-|                                                                          |
-| -   7 Troubleshooting                                                    |
-|     -   7.1 Issues with TLS                                              |
-+--------------------------------------------------------------------------+
+-   1 Installing
+-   2 Quick start
+-   3 Using the mail command
+-   4 Test msmtp
+-   5 Configuring cron for msmtp
+-   6 Miscellaneous
+    -   6.1 Practical password management
+    -   6.2 Using msmtp offline
+    -   6.3 Vim syntax highlighting
+    -   6.4 Send mail with PHP using msmtp
+-   7 Troubleshooting
+    -   7.1 Issues with TLS
+    -   7.2 Server sent empty reply
 
 Installing
 ----------
@@ -99,13 +85,18 @@ writeable to anyone else but the owner:
 This does not apply to system configuration file (in Arch, this is
 /etc/msmtprc; copy the example over from /usr/share/doc/msmtp/ ).
 
+To avoid saving the password in the clear in the configuration file use
+passwordeval to perform external decryption for example with gpg:
+
+    ~/.msmtprc
+
+    passwordeval    "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
+
 Using the mail command
 ----------------------
 
-To send mails using the 'mail' command you have to install
-heirloom-mailx (some applications require it, e.g. smartd):
-
-    $ pacman -S heirloom-mailx
+To send mails using the 'mail' command you must install the package
+s-nail.
 
 Either install msmtp-mta or edit /etc/mail.rc to set sendmail
 
@@ -169,10 +160,30 @@ Configuring cron for msmtp
 Assuming you're using the default cron daemon, cronie, you'll want to
 make sure it knows to use msmtp rather than sendmail.
 
-You can do this by either installing msmtp-mta or by adding the proper
-crond option in /etc/conf.d/crond:
+You can do this by either installing msmtp-mta or by editing the
+cronie.service systemd unit:
 
-    CRONDARGS=-m/usr/bin/msmtp
+    /etc/systemd/system/cronie.service.d/msmtp.conf
+
+    [Service]
+    ExecStart=
+    ExecStart=/usr/bin/crond -n -m '/usr/bin/msmtp -t'
+
+Then you must tell cronie or msmtp what your email address is.
+
+-   Either add this line to /etc/msmtprc:
+
+        aliases /etc/aliases
+
+    and create /etc/aliases:
+
+        your_username: email@address.com
+
+    — OR —
+
+-   Add a MAILTO line to your crontab:
+
+        MAILTO=email@address.com
 
 Miscellaneous
 -------------
@@ -191,6 +202,24 @@ tool like gpg:
 
 If gpg prompt for the passphrase cannot be issued (e.g. when called from
 Mutt) then start the gpg-agent before.
+
+A simple hack to start the agent is to execute a external command in
+your muttrc.
+
+Note: Mutt uses the backtick  ` command `  syntax to execute external
+commands
+
+For example, you can put something like the following in your muttrc
+
+    muttrc
+
+    set my_msmtp_pass=`gpg -d mypwfile.gpg`
+
+Mutt will execute this when it starts, gpg-agent will cache your
+password, msmtp will be happy and you can send mail.
+
+Note: If you do this, you will have to restart mutt after gpg-agent
+clears the password to start sending emails again
 
 If you cannot use a keyring tool for any reason, you may want to use the
 password directly. There is a patched version msmtp-pwpatched in the AUR
@@ -286,10 +315,24 @@ check:
 
     $ msmtp --tls-certcheck off
 
+> Server sent empty reply
+
+If you get a "server sent empty reply" error, add the following line to
+~/.msmtprc:
+
+    tls_starttls off
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Msmtp&oldid=247141"
+"https://wiki.archlinux.org/index.php?title=Msmtp&oldid=305955"
 
 Categories:
 
 -   Email Client
 -   Mail Server
+
+-   This page was last modified on 20 March 2014, at 17:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

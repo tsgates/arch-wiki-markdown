@@ -13,17 +13,16 @@ PDF forms
 This article is meant to guide (Arch)linux users to use PDF forms. Some
 of the information here is from this thread.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Reading and filling PDF forms                                      |
-|     -   1.1 Evince                                                       |
-|     -   1.2 Inkscape                                                     |
-|     -   1.3 Okular                                                       |
-|     -   1.4 Adobe Acrobat Reader                                         |
-|     -   1.5 Cabaret Stage                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Reading and filling PDF forms
+    -   1.1 Evince
+    -   1.2 Inkscape
+    -   1.3 Okular
+    -   1.4 Adobe Acrobat Reader
+    -   1.5 Cabaret Stage
+    -   1.6 Text2pdf
 
 Reading and filling PDF forms
 -----------------------------
@@ -47,11 +46,11 @@ should work well enough if you intend to print them.
 
 > Okular
 
-Okular (available in the extra repository) is a universal document
-viewer based on KPDF for KDE 4. The last stable release is Okular 0.10,
-shipped in the kdegraphics module of KDE SC 4.4. Its development began
-as part of Google's Summer of Code program. The description of the
-project is located at KDE Developer's Corner.
+Okular (available in the extra repository as package kdegraphics-okular)
+is a universal document viewer based on KPDF for KDE 4. The last stable
+release is Okular 0.10, shipped in the kdegraphics module of KDE SC 4.4.
+Its development began as part of Google's Summer of Code program. The
+description of the project is located at KDE Developer's Corner.
 
 Okular combines the excellent functionalities of KPDF with the
 versatility of supporting different kind of documents, like PDF,
@@ -69,9 +68,21 @@ read and fill PDF files.
 This freeware application claims to be able to read, fill, and save PDF
 forms.
 
+> Text2pdf
+
+Text2pdf it's a nice application that can convert text files to pdf
+format available throught AUR there text2pdf...
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PDF_forms&oldid=252650"
+"https://wiki.archlinux.org/index.php?title=PDF_forms&oldid=302343"
 
 Category:
 
 -   Office
+
+-   This page was last modified on 27 February 2014, at 17:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

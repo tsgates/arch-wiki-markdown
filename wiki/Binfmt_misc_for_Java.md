@@ -22,21 +22,18 @@ The information in this article is almost entirely taken from the files
 binfmt_misc.txt and java.txt in the Documentation sub-directory of the
 Linux kernel source tree.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setup                                                              |
-|     -   1.1 Mounting binfmt_misc                                         |
-|     -   1.2 Registering the file type with binfmt_misc                   |
-|     -   1.3 The wrapper scripts                                          |
-|         -   1.3.1 jarwrapper                                             |
-|         -   1.3.2 javawrapper                                            |
-|         -   1.3.3 javaclassname                                          |
-|                                                                          |
-| -   2 Testing                                                            |
-| -   3 Notes                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setup
+    -   1.1 Mounting binfmt_misc
+    -   1.2 Registering the file type with binfmt_misc
+    -   1.3 The wrapper scripts
+        -   1.3.1 jarwrapper
+        -   1.3.2 javawrapper
+        -   1.3.3 javaclassname
+-   2 Testing
+-   3 Notes
 
 Setup
 -----
@@ -416,3 +413,10 @@ Retrieved from
 Category:
 
 -   Emulators
+
+-   This page was last modified on 23 April 2012, at 16:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

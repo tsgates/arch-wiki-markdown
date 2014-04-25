@@ -40,3 +40,10 @@ Retrieved from
 Category:
 
 -   ASUS
+
+-   This page was last modified on 14 June 2012, at 00:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

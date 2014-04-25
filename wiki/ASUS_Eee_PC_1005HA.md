@@ -12,47 +12,39 @@ ASUS Eee PC 1005HA
   Function Keys   Working   
   --------------- --------- ------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Display and input settings                                         |
-|     -   2.1 DPI Settings                                                 |
-|     -   2.2 Graphic Performance                                          |
-|     -   2.3 Keyboard                                                     |
-|     -   2.4 Touchpad                                                     |
-|     -   2.5 xrandr                                                       |
-|                                                                          |
-| -   3 Powersaving and ACPI                                               |
-|     -   3.1 laptop-mode-tools                                            |
-|         -   3.1.1 Installation and setup                                 |
-|         -   3.1.2 LCD brightness                                         |
-|         -   3.1.3 CPU Powersaving                                        |
-|         -   3.1.4 USB suspend                                            |
-|                                                                          |
-|     -   3.2 CPU frequency scaling                                        |
-|     -   3.3 Hotkeys                                                      |
-|         -   3.3.1 Wifi toggle                                            |
-|         -   3.3.2 Sound volume hotkeys                                   |
-|         -   3.3.3 Sleep                                                  |
-|                                                                          |
-|     -   3.4 Display settings                                             |
-|                                                                          |
-| -   4 Hardware                                                           |
-|     -   4.1 Ethernet                                                     |
-|     -   4.2 WiFi                                                         |
-|     -   4.3 Camera                                                       |
-|     -   4.4 Microphone                                                   |
-|                                                                          |
-| -   5 Hardware Info                                                      |
-|     -   5.1 lspci                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Display and input settings
+    -   2.1 DPI Settings
+    -   2.2 Keyboard
+    -   2.3 Touchpad
+    -   2.4 xrandr
+-   3 Powersaving and ACPI
+    -   3.1 laptop-mode-tools
+        -   3.1.1 Installation and setup
+        -   3.1.2 LCD brightness
+        -   3.1.3 CPU Powersaving
+        -   3.1.4 USB suspend
+    -   3.2 CPU frequency scaling
+    -   3.3 Hotkeys
+        -   3.3.1 Wifi toggle
+        -   3.3.2 Sound volume hotkeys
+        -   3.3.3 Sleep
+    -   3.4 Display settings
+-   4 Hardware
+    -   4.1 Ethernet
+    -   4.2 WiFi
+    -   4.3 Camera
+    -   4.4 Microphone
+-   5 Hardware Info
+    -   5.1 lspci
 
 Installation
 ============
 
-For an in-depth guide on the installation see the Beginners_Guide.
+For an in-depth guide on the installation see the Beginners' guide.
 
 Display and input settings
 ==========================
@@ -61,6 +53,8 @@ If not already installed, you need xorg and xf86-video-intel to have X
 working, and also drivers for keyboard and touchpad:
 
     # pacman -S xorg-server xf86-video-intel xf86-input-evdev xf86-input-synaptics
+
+See Intel for more information.
 
 DPI Settings
 ------------
@@ -71,34 +65,6 @@ like your fonts really small. An easy way to set your DPI would be to
 add this to the end of your xserverrc (located in /etc/X11/xinit/).
 
      exec /usr/bin/X -nolisten tcp -dpi 96
-
-Graphic Performance
--------------------
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: please use the   
-                           first argument of the    
-                           template to provide a    
-                           brief explanation.       
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
-
-See Intel for more information.
-
-According to the intel driver documentation, X-Video Motion Compensation
-or "XvMC" is not enabled by default. Enabling this option can greatly
-reduce CPU utilization when playing back MPEG-2 video. To enable this
-option, two things need to be done; first, add this to the device
-section of your xorg.conf:
-
-    Option "XvMC" "true"
-
-Lastly, create a config file to tell the X server where the XvMC library
-is:
-
-    echo /usr/lib/libIntelXvMC.so > /etc/X11/XvMCConfig
 
 Keyboard
 --------
@@ -385,61 +351,36 @@ lspci
 
 Note that this is the 1005HA-M version.
 
-~]$ lspci
+    $ lspci
 
-00:00.0 Host bridge: Intel Corporation Mobile 945GME Express Memory
-Controller Hub (rev 03)
-
-00:02.0 VGA compatible controller: Intel Corporation Mobile 945GME
-Express Integrated Graphics Controller (rev 03)
-
-00:02.1 Display controller: Intel Corporation Mobile 945GM/GMS/GME,
-943/940GML Express Integrated Graphics Controller (rev 03)
-
-00:1b.0 Audio device: Intel Corporation 82801G (ICH7 Family) High
-Definition Audio Controller (rev 02)
-
-00:1c.0 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express
-Port 1 (rev 02)
-
-00:1c.1 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express
-Port 2 (rev 02)
-
-00:1c.3 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express
-Port 4 (rev 02)
-
-00:1d.0 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI
-Controller #1 (rev 02)
-
-00:1d.1 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI
-Controller #2 (rev 02)
-
-00:1d.2 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI
-Controller #3 (rev 02)
-
-00:1d.3 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI
-Controller #4 (rev 02)
-
-00:1d.7 USB Controller: Intel Corporation 82801G (ICH7 Family) USB2 EHCI
-Controller (rev 02)
-
-00:1e.0 PCI bridge: Intel Corporation 82801 Mobile PCI Bridge (rev e2)
-
-00:1f.0 ISA bridge: Intel Corporation 82801GBM (ICH7-M) LPC Interface
-Bridge (rev 02)
-
-00:1f.2 SATA controller: Intel Corporation 82801GBM/GHM (ICH7 Family)
-SATA AHCI Controller (rev 02)
-
-01:00.0 Ethernet controller: Attansic Technology Corp. Atheros AR8132 /
-L1c Gigabit Ethernet Adapter (rev c0)
-
-02:00.0 Network controller: Atheros Communications Inc. AR9285 Wireless
-Network Adapter (PCI-Express) (rev 01)
+    00:00.0 Host bridge: Intel Corporation Mobile 945GME Express Memory Controller Hub (rev 03)
+    00:02.0 VGA compatible controller: Intel Corporation Mobile 945GME Express Integrated Graphics Controller (rev 03)
+    00:02.1 Display controller: Intel Corporation Mobile 945GM/GMS/GME, 943/940GML Express Integrated Graphics Controller (rev 03)
+    00:1b.0 Audio device: Intel Corporation 82801G (ICH7 Family) High Definition Audio Controller (rev 02)
+    00:1c.0 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express Port 1 (rev 02)
+    00:1c.1 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express Port 2 (rev 02) 
+    00:1c.3 PCI bridge: Intel Corporation 82801G (ICH7 Family) PCI Express Port 4 (rev 02) 
+    00:1d.0 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #1 (rev 02) 
+    00:1d.1 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #2 (rev 02) 
+    00:1d.2 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #3 (rev 02) 
+    00:1d.3 USB Controller: Intel Corporation 82801G (ICH7 Family) USB UHCI Controller #4 (rev 02) 
+    00:1d.7 USB Controller: Intel Corporation 82801G (ICH7 Family) USB2 EHCI Controller (rev 02) 
+    00:1e.0 PCI bridge: Intel Corporation 82801 Mobile PCI Bridge (rev e2) 
+    00:1f.0 ISA bridge: Intel Corporation 82801GBM (ICH7-M) LPC Interface Bridge (rev 02) 
+    00:1f.2 SATA controller: Intel Corporation 82801GBM/GHM (ICH7 Family) SATA AHCI Controller (rev 02) 
+    01:00.0 Ethernet controller: Attansic Technology Corp. Atheros AR8132 / L1c Gigabit Ethernet Adapter (rev c0) 
+    02:00.0 Network controller: Atheros Communications Inc. AR9285 Wireless Network Adapter (PCI-Express) (rev 01)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1005HA&oldid=238289"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1005HA&oldid=304878"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 08:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

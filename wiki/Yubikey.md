@@ -7,28 +7,26 @@ The Yubikey is a small USB token that generates One-Time Passwords
 One of its strengths is that it emulates a USB keyboard to send the OTP
 as text, and thus requires no drivers.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 How does it work                                             |
-|     -   1.2 Security risks                                               |
-|         -   1.2.1 AES key compromission                                  |
-|         -   1.2.2 Validation requests/responses tampering                |
-|                                                                          |
-|     -   1.3 YubiCloud and validation servers                             |
-|                                                                          |
-| -   2 Two-factor authentication with SSH                                 |
-|     -   2.1 Prerequisites                                                |
-|     -   2.2 PAM configuration                                            |
-|         -   2.2.1 If using HTTPS to authenticate the validation server   |
-|         -   2.2.2 If using HMAC to authenticate the validation server    |
-|                                                                          |
-|     -   2.3 SSHD configuration                                           |
-|     -   2.4 That is it!                                                  |
-|     -   2.5 Explanation                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+    -   1.1 How does it work
+    -   1.2 Security risks
+        -   1.2.1 AES key compromission
+        -   1.2.2 Validation requests/responses tampering
+    -   1.3 YubiCloud and validation servers
+-   2 Two-factor authentication with SSH
+    -   2.1 Prerequisites
+    -   2.2 PAM configuration
+        -   2.2.1 If using HTTPS to authenticate the validation server
+        -   2.2.2 If using HMAC to authenticate the validation server
+    -   2.3 SSHD configuration
+    -   2.4 That is it!
+    -   2.5 Explanation
+-   3 Installing the OATH Applet for a Yubikey NEO
+    -   3.1 Configure the NEO as a CCID Device
+    -   3.2 Install the Applet
 
 Introduction
 ------------
@@ -206,9 +204,64 @@ the password to the next PAM module, pam_unix.so, which was instructed
 not to prompt for the password, but to receive it from the previous
 module, with use_first_pass.
 
+Installing the OATH Applet for a Yubikey NEO
+--------------------------------------------
+
+These steps will allow you to install the OATH applet onto your Yubikey
+NEO. This allows the use of Yubico Authenticator in the Google Play
+Store.
+
+> Configure the NEO as a CCID Device
+
+1.  Get yubikey-personalization-gui-git from the AUR. Because eworm is
+    too lazy to update his package, you need to get
+    yubikey-personalization-git first and change the depends in the
+     yubikey-personalization-gui-git PKGBUILD.
+2.  Add the udev rules and reboot so you can manage the YubiKey without
+    needing to be root
+3.  Run  ykpersonalize -m82, enter  y, and hit enter.
+
+> Install the Applet
+
+1.  Install gpshell, gppcscconnectionplugin, globalplatform, and
+    pcsclite.
+2.  Start  pcscd with  sudo systemctl start pcscd.
+3.  Download the most recent CAP file from the ykneo-oath site.
+4.  Download  gpinstall.txt from GitHub.
+5.  Edit the line in gpinstall.txt beginning with  install -file to
+    reflect the path where the CAP file is located.
+6.  Open a terminal and run  gpshell <location of gpinstall.txt>
+7.  Ideally, a bunch of text will scroll by and it ends saying something
+    like
+
+     Command --> 80E88013D7C000C400BE00C700CA00CA00B400BE00CE00D200D500D700B000DB00C700DF00BEFFFF00BE00E400AC00AE00AE00DB00E700A
+    A00EA00ED00ED00ED00BE00EF00F100F400F100F700FA00FF00BE00F700AA01010103010700CA00C400B400AA00F700B400AA00B600C7010C
+    010C00AA0140012001B0056810B0013005600000056810E0011006B4B44304B44404B44106B44B4405B443400343B002410636810E06B4B44
+    407326810B004B43103441003334002B102B404B3B403BB4003B440076820A4100221024405B4341008B44600000231066820A100
+    Wrapped command --> 84E88013DFC000C400BE00C700CA00CA00B400BE00CE00D200D500D700B000DB00C700DF00BEFFFF00BE00E400AC00AE00AE00DB00E700A
+    A00EA00ED00ED00ED00BE00EF00F100F400F100F700FA00FF00BE00F700AA01010103010700CA00C400B400AA00F700B400AA00B600C7010C
+    010C00AA0140012001B0056810B0013005600000056810E0011006B4B44304B44404B44106B44B4405B443400343B002410636810E06B4B44
+    407326810B004B43103441003334002B102B404B3B403BB4003B440076820A4100221024405B4341008B44600000231066820A15D848CB77
+    27D0EDA00
+    Response <-- 009000
+    Command --> 80E60C002107A000000527210108A00000052721010108A000000527210101010003C901000000
+    Wrapped command --> 84E60C002907A000000527210108A00000052721010108A000000527210101010003C9010000B4648127914A4C7C00
+    Response <-- 009000
+    card_disconnect
+    release_context
+
+1.  Unplug the NEO and try it with the Yubico Authenticator app
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Yubikey&oldid=207071"
+"https://wiki.archlinux.org/index.php?title=Yubikey&oldid=306013"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 20 March 2014, at 17:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

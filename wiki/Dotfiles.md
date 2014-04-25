@@ -1,17 +1,17 @@
 dotfiles
 ========
 
-  Summary
+  Summary help replacing me
   ----------------------------------------------------------------------------------------------
   This article collects links to many user repositories containing custom configuration files.
 
-dotfiles are configuration files
+dotfiles are configuration files.
 
 Managing dotfiles with git
 --------------------------
 
 A popular way of keeping a centralized copy of your dotfiles is hosting
-them on github.
+them on GitHub.
 
 Repositories
 ------------
@@ -46,13 +46,31 @@ vim
 
 rxvt-unicode
 
-ncmpcpp
+screen
 
-conky
+dzen
 
 mutt
 
 irssi
+
+cinelli
+
+zsh
+
+dwm
+
+vim
+
+termite-git
+
+pianobar
+
+htop
+
+mutt-kz
+
+weechat
 
 falconindy
 
@@ -106,9 +124,25 @@ mutt
 
 weechat
 
-jasonwryan
+insanum
 
 bash
+
+herbstluftwm
+
+vim
+
+evilvte
+
+tmux
+
+dzen
+
+mutt-kz
+
+jasonwryan
+
+bash/zsh
 
 dwm
 
@@ -120,7 +154,7 @@ tmux
 
 ncmpcpp
 
-bash script
+custom
 
 mutt
 
@@ -315,8 +349,15 @@ See also
 -   dotfiles.org - Copy of contents
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dotfiles&oldid=252687"
+"https://wiki.archlinux.org/index.php?title=Dotfiles&oldid=304788"
 
 Category:
 
 -   Dotfiles
+
+-   This page was last modified on 16 March 2014, at 07:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -4,23 +4,21 @@ Mediawiki
 Note: If you are using xampp, instead of LAMP, there are different steps
 you need to take after installing. More info here
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Web server                                                   |
-|         -   2.1.1 Apache                                                 |
-|         -   2.1.2 Nginx                                                  |
-|         -   2.1.3 Lighttpd                                               |
-|                                                                          |
-|     -   2.2 LocalSettings.php                                            |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Mathematics (texvc)                                          |
-|     -   3.2 Unicode                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 PHP
+    -   2.2 Web server
+        -   2.2.1 Apache
+        -   2.2.2 Nginx
+        -   2.2.3 Lighttpd
+    -   2.3 LocalSettings.php
+-   3 Tips and tricks
+    -   3.1 Mathematics (texvc)
+    -   3.2 Unicode
+    -   3.3 VisualEditor
 
 Installation
 ------------
@@ -41,6 +39,11 @@ extension1=pdo_sqlite.so
 Configuration
 -------------
 
+The steps to achieve a working MediaWiki configuration involve editing
+the PHP settings and adding the MediaWiki configuration snippets.
+
+> PHP
+
 First, adjust the open_basedir in /etc/php/php.ini to include the
 webapps directory (allows update.php to be run from the command line):
 
@@ -52,7 +55,21 @@ Then, still on /etc/php/php.ini, look for the Dynamic Extensions section
 and uncomment ;extension=gd.so, uncomment ;extension=intl.so and add
 extension=xcache.so.
 
-Now do the steps corresponding to your web server.
+Second, tweak the session handling or you might get a fatal error
+(PHP Fatal error: session_start(): Failed to initialize storage module[...])
+by finding the session.save_path path. A good choice can be
+/var/lib/php/sessions or /tmp/.
+
+    /etc/php/php.ini
+
+    session.save_path = "/var/lib/php/sessions"
+
+You will need to create the directory if it doesn't exist and then
+restrict its permissions:
+
+    # mkdir -p /var/lib/php/sessions/
+    # chown http:http /var/lib/php/sessions
+    # chmod go-rwx /var/lib/php/sessions
 
 > Web server
 
@@ -141,6 +158,10 @@ Include a server directive, similar to this
 
     }
 
+Finally, restart the nginx.service daemon:
+
+    # systemctl restart nginx.service
+
 Lighttpd
 
 You should have Lighttpd installed and configured. "mod_alias" and
@@ -169,7 +190,7 @@ Tips and tricks
 
 > Mathematics (texvc)
 
-Usually installing texvc package and enabling it in config are enough:
+Usually installing texvc and enabling it in the config are enough:
 
     $wgUseTeX = true;
 
@@ -184,9 +205,32 @@ If you get problems, try to increase limits for shell commands:
 Check that php, apache and mysql uses UTF-8. Otherwise you may face
 strange bugs because of encoding mismatch.
 
+> VisualEditor
+
+After following this instruction on how to install the VisualEditor, you
+need a backend nodejs application on your server, called Parsoid, to get
+it finally working. Simply install parsoid-git from the AUR and adjust
+the path to your MediaWiki in following file:
+
+    /usr/share/webapps/parsoid/api/localsettings.js
+
+    parsoidConfig.setInterwiki( 'localhost', 'http://localhost/mediawiki/api.php' );
+
+After that simply enable and start the server process using Systemd:
+
+    systemctl enable parsoid
+    systemctl start parsoid
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mediawiki&oldid=254751"
+"https://wiki.archlinux.org/index.php?title=Mediawiki&oldid=299325"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 21 February 2014, at 04:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

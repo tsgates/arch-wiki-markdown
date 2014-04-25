@@ -1,18 +1,17 @@
 DirectFB
 ========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Build Requirements                                                 |
-| -   3 Installation Step by Step                                          |
-| -   4 Using                                                              |
-| -   5 SawMan                                                             |
-| -   6 Lite                                                               |
-| -   7 Disko                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 Build Requirements
+-   3 Installation Step by Step
+-   4 Using
+-   5 Directfb with shared application enabled
+-   6 SawMan
+-   7 Lite
+-   8 Disko
 
 Overview
 --------
@@ -104,13 +103,31 @@ around with DirectFB.
 Installation Step by Step
 -------------------------
 
+DirectFB is included in the official community repository. Install it
+with pacman:
+
+    # pacman -S directfb
+
 Using
 -----
+
+Directfb with shared application enabled
+----------------------------------------
+
+The directfb package does not enable running multiply applications on
+the same display. This is of cause necessary for running different
+windows on this display. For testing install aur/directfb-multi and
+aur/linux-fusion.
+
+Directfb includes an internal Window-Manager so you will not need
+SawMan. For moving a window around press the SUPER key on the keyboard.
 
 SawMan
 ------
 
-(better a link to a SawMan page)
+SawMan is a Window-Manager for DirectFB. There is only an outdated
+package in the AUR; check this page:
+https://aur.archlinux.org/packages/sawman/
 
 Lite
 ----
@@ -127,8 +144,15 @@ Disko
 http://www.tldp.org/HOWTO/Framebuffer-HOWTO/x168.html#AEN170
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DirectFB&oldid=207352"
+"https://wiki.archlinux.org/index.php?title=DirectFB&oldid=290506"
 
 Category:
 
 -   Graphics
+
+-   This page was last modified on 26 December 2013, at 22:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

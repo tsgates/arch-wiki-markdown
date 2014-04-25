@@ -5,22 +5,19 @@ Mercurial (commonly referred to as hg) is a distributed version control
 system written in Python and is similar in many ways to Git, Bazaar and
 darcs.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Usage                                                              |
-|     -   3.1 Dotfiles Repo                                                |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Usage
+    -   3.1 Dotfiles Repo
+-   4 See also
 
 Installation
 ------------
 
-Install mercurial, available in the Official Repositories.
+Install mercurial, available in the Official repositories.
 
 Configuration
 -------------
@@ -116,8 +113,15 @@ See also
 -   Intuxication - free mercurial hosting
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mercurial&oldid=255990"
+"https://wiki.archlinux.org/index.php?title=Mercurial&oldid=301560"
 
 Category:
 
 -   Version Control System
+
+-   This page was last modified on 24 February 2014, at 11:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

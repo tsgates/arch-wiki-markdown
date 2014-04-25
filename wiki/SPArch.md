@@ -10,7 +10,7 @@ SPArch
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-  Summary
+  Summary help replacing me
   ----------------------------------------------------------
   A guide to getting Arch Linux to run on a sparc machine.
 
@@ -19,16 +19,14 @@ steps along the lines of Install from Existing Linux. Note also that
 there are not many repositories currently, and they do not have many
 packages.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing pacman on your host system                              |
-| -   2 Setting up a chroot                                                |
-| -   3 Building a bootable base system                                    |
-| -   4 Sharing your packages with others                                  |
-| -   5 Packages needed for a base system (sparc64)                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing pacman on your host system
+-   2 Setting up a chroot
+-   3 Building a bootable base system
+-   4 Sharing your packages with others
+-   5 Packages needed for a base system (sparc64)
 
 Installing pacman on your host system
 -------------------------------------
@@ -190,3 +188,10 @@ Retrieved from
 Category:
 
 -   Arch development
+
+-   This page was last modified on 13 June 2012, at 14:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

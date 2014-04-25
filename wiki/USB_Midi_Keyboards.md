@@ -3,19 +3,16 @@ USB Midi Keyboards
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 USB Midi Keyboards                                                 |
-| -   2 Preliminary Testing                                                |
-|     -   2.1 USB                                                          |
-|     -   2.2 ALSA                                                         |
-|                                                                          |
-| -   3 Plugging the keyboard                                              |
-| -   4 Verifying Events                                                   |
-| -   5 Playing                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 USB Midi Keyboards
+-   2 Preliminary Testing
+    -   2.1 USB
+    -   2.2 ALSA
+-   3 Plugging the keyboard
+-   4 Verifying Events
+-   5 Playing
 
 USB Midi Keyboards
 ------------------
@@ -118,12 +115,19 @@ Here client 65 is the actual MIDI synthesizer. Assuming the soundcard is
 set up properly, you should be able to route the output of the keyboard
 to the MIDI synthesizer. Assuming out is the output client number (65 in
 our example) and in is the input client number (72 in our example), type
-aconnect out in. Now you can play your keyboard via the MIDI output of
+aconnect in out. Now you can play your keyboard via the MIDI output of
 your sound card.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=USB_Midi_Keyboards&oldid=205118"
+"https://wiki.archlinux.org/index.php?title=USB_Midi_Keyboards&oldid=289764"
 
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 21 December 2013, at 11:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

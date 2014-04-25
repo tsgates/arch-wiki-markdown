@@ -10,13 +10,7 @@ via config.h, and line drawing.
 Installation
 ------------
 
-Download the st or st-git package from the AUR. Then, as a non-root
-user, run:
-
-    $ makepkg -i
-
-while in the directory of the saved PKGBUILD. All the files will be
-retrieved, and the package will be built and installed.
+Download the st or st-git package from the AUR.
 
 Configuration
 -------------
@@ -27,9 +21,24 @@ is included with the source.
 Consider maintaining your own PKGBUILD with sources and md5sums for your
 own configuration file.
 
+Weird glitches/Visual bugs
+--------------------------
+
+Vim: Background colour of the text in Vim will not fill in anything that
+wasn't a character.
+
+Solution: set TERM variable to screen-256color in your config.h file.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=St&oldid=252582"
+"https://wiki.archlinux.org/index.php?title=St&oldid=302570"
 
 Category:
 
 -   Terminal emulators
+
+-   This page was last modified on 1 March 2014, at 01:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

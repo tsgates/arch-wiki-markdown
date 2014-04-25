@@ -17,47 +17,43 @@ tiled on several physical screens.
 For more information, please visit the xmonad website:
 http://xmonad.org/
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Development version (xmonad-darcs)                           |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Starting xmonad                                              |
-|     -   2.2 Configuring xmonad                                           |
-|     -   2.3 Exiting xmonad                                               |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Complementary applications                                   |
-|     -   3.2 Increase the number of workspaces                            |
-|     -   3.3 Making room for Conky or tray apps                           |
-|     -   3.4 Using xmobar with xmonad                                     |
-|         -   3.4.1 Option 1: Quick, less flexible                         |
-|         -   3.4.2 Option 2: More Configurable                            |
-|         -   3.4.3 Verify XMobar Config                                   |
-|                                                                          |
-|     -   3.5 Controlling xmonad with external scripts                     |
-|     -   3.6 Launching another window manager within xmonad               |
-|     -   3.7 Example configurations                                       |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 GNOME 3 and xmonad                                           |
-|         -   4.1.1 Compositing in GNOME and Xmonad                        |
-|                                                                          |
-|     -   4.2 GDM 2.x/KDM cannot find xmonad                               |
-|     -   4.3 Missing xmonad-i386-linux or xmonad-x86_64-linux             |
-|     -   4.4 Problems with Java applications                              |
-|     -   4.5 Empty space at the bottom of gvim or terminals               |
-|     -   4.6 Chromium/Chrome will not go fullscreen                       |
-|     -   4.7 Multitouch / touchegg                                        |
-|     -   4.8 Keybinding issues with an azerty keyboard layout             |
-|     -   4.9 GNOME 3 mod4+p changes display configuration instead of      |
-|         launching dmenu                                                  |
-|                                                                          |
-| -   5 Other Resources                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Development version (xmonad-darcs)
+-   2 Configuration
+    -   2.1 Starting xmonad
+    -   2.2 Configuring xmonad
+    -   2.3 Exiting xmonad
+-   3 Tips and tricks
+    -   3.1 X-Selection-Paste
+    -   3.2 Complementary applications
+    -   3.3 Increase the number of workspaces
+    -   3.4 Making room for Conky or tray apps
+    -   3.5 Using xmobar with xmonad
+        -   3.5.1 Option 1: Quick, less flexible
+        -   3.5.2 Option 2: More Configurable
+        -   3.5.3 Verify XMobar Config
+    -   3.6 Controlling xmonad with external scripts
+    -   3.7 Launching another window manager within xmonad
+    -   3.8 Example configurations
+-   4 Troubleshooting
+    -   4.1 GNOME 3 and xmonad
+        -   4.1.1 Compositing in GNOME and Xmonad
+    -   4.2 GDM 2.x/KDM cannot find xmonad
+    -   4.3 XFCE 4 and xmonad
+    -   4.4 Missing xmonad-i386-linux or xmonad-x86_64-linux
+    -   4.5 Problems with Java applications
+    -   4.6 Empty space at the bottom of gvim or terminals
+    -   4.7 Chromium/Chrome will not go fullscreen
+    -   4.8 Multitouch / touchegg
+    -   4.9 Keybinding issues with an azerty keyboard layout
+    -   4.10 GNOME 3 mod4+p changes display configuration instead of
+        launching dmenu
+    -   4.11 Problems with focused border in VirtualBox
+    -   4.12 Steam games (Half-Life, Left 4 Dead, …) and xmonad
+-   5 Other Resources
 
 Installation
 ------------
@@ -115,8 +111,7 @@ directory in your home directory. If not, create it:
 
      mkdir ~/.xmonad
 
-See xinitrc for details, such as preserving the logind (and/or
-consolekit) session.
+See xinitrc for details, such as preserving the logind session.
 
 > Configuring xmonad
 
@@ -151,8 +146,7 @@ This is achieved by writing an xmonad.hs like this:
 
      import XMonad
      
-     main = do
-       xmonad $ defaultConfig
+     main = xmonad defaultConfig
          { terminal    = "urxvt"
          , modMask     = mod4Mask
          , borderWidth = 3
@@ -227,8 +221,21 @@ the Alt key.
 Tips and tricks
 ---------------
 
+> X-Selection-Paste
+
 The keyboard-centered operation in Xmonad can be further supported with
 a keyboard shortcut for X-Selection-Paste.
+
+Also, there exists a function "pasteSelection" in XMonad.Util.Paste that
+can be bound to a key using a line like:
+
+    xmonad.hs
+
+      -- X-selection-paste buffer
+      , ((0, xK_Insert), pasteSelection)
+
+Pressing the "Insert" key will now paste the mouse buffer in the active
+window.
 
 > Complementary applications
 
@@ -242,7 +249,7 @@ The most common of these include:
 -   gmrun
 -   Unclutter - a small utility to hide the mouse pointer
 -   XMonad-log-applet - a GNOME applet for the gnome-panel (the package
-    is in the Official Repositories)
+    is in the Official repositories)
 
 > Increase the number of workspaces
 
@@ -527,6 +534,23 @@ For KDM, you will need to create the file here as
 
 Official documentation can be found here: Haskell Documentation Page
 
+> XFCE 4 and xmonad
+
+Use xfceConfig instead of defaultConfig after importing
+XMonad.Config.Xfce in ~/.xmonad/xmonad.hs, e.g. adapting the minimal
+config above:
+
+    import XMonad
+    import XMonad.Config.Xfce
+
+    main = xmonad xfceConfig
+        { terminal    = "urxvt"
+        , modMask     = mod4Mask
+        }
+
+Also add an entry to Settings->Session and Startup->Application
+Autostart that runs xmonad --replace.
+
 > Missing xmonad-i386-linux or xmonad-x86_64-linux
 
 Xmonad should automatically create the xmonad-i386-linux file (in
@@ -617,6 +641,27 @@ gnome-control-center, just execute
 
 as your user, to disable the xrandr plugin which grabs Super+p.
 
+> Problems with focused border in VirtualBox
+
+A known issue with Virtualbox (Ticket #6479) can cause problems with the
+focused window border. A solution can be found by installing a
+compositing manager like xcompmgr which overrides the incorrect behavior
+of vboxvideo.
+
+> Steam games (Half-Life, Left 4 Dead, …) and xmonad
+
+There seems to be some trouble with Source engine based game (like
+Half-Life). If they don't start or get stuck with a black screen a
+workaround it to start them in window mode: right click on the game in
+your library and choose properties, click on launch options and enter
+
+    -windowed
+
+That should fix the issue.
+
+Source:
+http://steamcommunity.com/app/221410/discussions/0/864960353968561426/
+
 Other Resources
 ---------------
 
@@ -631,8 +676,15 @@ Other Resources
 -   xmonad hacking thread
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xmonad&oldid=255538"
+"https://wiki.archlinux.org/index.php?title=Xmonad&oldid=305732"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 20 March 2014, at 01:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

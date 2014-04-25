@@ -10,17 +10,14 @@ traffic by delaying data.
 
 Also trickle runs entirely in userspace.[1]
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-|     -   2.1 Modifying other systemd services                             |
-|                                                                          |
-| -   3 Daemon configuration                                               |
-|     -   3.1 Systemd integration                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 Modifying other systemd services
+-   3 Daemon configuration
+    -   3.1 Systemd integration
 
 Installation
 ------------
@@ -33,7 +30,7 @@ accessible!
 Warning:Trickle can only limit traffic of programs that do not fork, so
 shaping a FTP server's traffic won't really work that way!
 
-Install trickle from Official Repositories.
+Install trickle from Official repositories.
 
 Usage
 -----
@@ -140,8 +137,15 @@ Create the following two files and customize them to your needs.
     TRICKLE_SLENGTH=10
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Trickle&oldid=233490"
+"https://wiki.archlinux.org/index.php?title=Trickle&oldid=302666"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

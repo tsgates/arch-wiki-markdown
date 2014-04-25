@@ -38,3 +38,10 @@ Retrieved from
 Category:
 
 -   Terminal emulators
+
+-   This page was last modified on 1 February 2013, at 18:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

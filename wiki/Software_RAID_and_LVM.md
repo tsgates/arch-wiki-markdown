@@ -1,68 +1,51 @@
 Software RAID and LVM
 =====================
 
-> Summary
+Related articles
+
+-   RAID
+-   LVM
+-   Installing with Fake RAID
+-   Convert a single drive system to RAID
 
 This article will provide an example of how to install and configure
-Arch Linux with a software RAID or Logical Volume Manager (LVM).
+Arch Linux with a software RAID or Logical Volume Manager (LVM). The
+combination of RAID and LVM provides numerous features with few caveats
+compared to just using RAID.
 
-Required software
+Contents
+--------
 
-[ Software]
-
-> Related
-
-RAID
-
-LVM
-
-Installing with Fake RAID
-
-Convert a single drive system to RAID
-
-The combination of RAID and LVM provides numerous features with few
-caveats compared to just using RAID.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 Swap space                                                   |
-|     -   1.2 MBR vs. GPT                                                  |
-|     -   1.3 Boot loader                                                  |
-|                                                                          |
-| -   2 Installation                                                       |
-|     -   2.1 Load kernel modules                                          |
-|     -   2.2 Prepare the hard drives                                      |
-|         -   2.2.1 Install gdisk                                          |
-|         -   2.2.2 Partition hard drives                                  |
-|         -   2.2.3 Clone partitions with sgdisk                           |
-|                                                                          |
-|     -   2.3 RAID installation                                            |
-|         -   2.3.1 Synchronization                                        |
-|         -   2.3.2 Data Scrubbing                                         |
-|                                                                          |
-|     -   2.4 LVM installation                                             |
-|         -   2.4.1 Create physical volumes                                |
-|         -   2.4.2 Create the volume group                                |
-|         -   2.4.3 Create logical volumes                                 |
-|                                                                          |
-|     -   2.5 Update RAID configuration                                    |
-|     -   2.6 Prepare hard drive                                           |
-|     -   2.7 Configure system                                             |
-|         -   2.7.1 /etc/mkinitcpio.conf                                   |
-|                                                                          |
-|     -   2.8 Conclusion                                                   |
-|     -   2.9 Install the bootloader on the Alternate Boot Drives          |
-|         -   2.9.1 Syslinux                                               |
-|         -   2.9.2 Grub Legacy                                            |
-|                                                                          |
-|     -   2.10 Archive your Filesystem Partition Scheme                    |
-|                                                                          |
-| -   3 Management                                                         |
-| -   4 Additional Resources                                               |
-+--------------------------------------------------------------------------+
+-   1 Introduction
+    -   1.1 Swap space
+    -   1.2 MBR vs. GPT
+    -   1.3 Boot loader
+-   2 Installation
+    -   2.1 Load kernel modules
+    -   2.2 Prepare the hard drives
+        -   2.2.1 Install gdisk
+        -   2.2.2 Partition hard drives
+        -   2.2.3 Clone partitions with sgdisk
+    -   2.3 RAID installation
+        -   2.3.1 Synchronization
+        -   2.3.2 Scrubbing
+            -   2.3.2.1 General Notes on Scrubbing
+            -   2.3.2.2 RAID1 and RAID10 Notes on Scrubbing
+    -   2.4 LVM installation
+        -   2.4.1 Create physical volumes
+        -   2.4.2 Create the volume group
+        -   2.4.3 Create logical volumes
+    -   2.5 Update RAID configuration
+    -   2.6 Prepare hard drive
+    -   2.7 Configure system
+        -   2.7.1 mkinitcpio.conf
+    -   2.8 Conclusion
+    -   2.9 Install the bootloader on the Alternate Boot Drives
+        -   2.9.1 Syslinux
+        -   2.9.2 GRUB legacy
+    -   2.10 Archive your filesystem partition scheme
+-   3 Management
+-   4 See also
 
 Introduction
 ------------
@@ -127,19 +110,18 @@ beginning of each disk for GRUB2 (see: GPT specific instructions).
 
 > Boot loader
 
-This tutorial will use SYSLINUX instead of GRUB2. GRUB2 when used in
+This tutorial will use SYSLINUX instead of GRUB. GRUB when used in
 conjunction with GPT requires an additional BIOS Boot Partition.
-Additionally, the 2011.08.19 Arch Linux installer does not support
-GRUB2.
+Additionally, the 2011.08.19 Arch Linux installer does not support GRUB.
 
-GRUB2 supports the default style of metadata currently created by mdadm
+GRUB supports the default style of metadata currently created by mdadm
 (i.e. 1.2) when combined with an initramfs, which has replaced in Arch
 Linux with mkinitcpio. SYSLINUX only supports version 1.0, and therefore
 requires the --metadata=1.0 option.
 
-Some boot loaders (e.g. GRUB, LILO) will not support any 1.x metadata
-versions, and instead require the older version, 0.90. If you would like
-to use one of those boot loaders make sure to add the option
+Some boot loaders (e.g. GRUB Legacy, LILO) will not support any 1.x
+metadata versions, and instead require the older version, 0.90. If you
+would like to use one of those boot loaders make sure to add the option
 --metadata=0.90 to the /boot array during RAID installation.
 
 Installation
@@ -170,18 +152,17 @@ volumes. This can be achieved with alternative partitioning software
 Each hard drive will have a 100MB /boot partition, 2048MB /swap
 partition, and a / partition that takes up the remainder of the disk.
 
-The boot partition must be RAID1, because GRUB does not have RAID
-drivers. Any other level will prevent your system from booting.
-Additionally, if there is a problem with one boot partition, the boot
-loader can boot normally from the other two partitions in the /boot
-array. Finally, the partition you boot from must not be striped (i.e.
-RAID5, RAID0).
+The boot partition must be RAID1; i.e it cannot be striped (RAID0) or
+RAID5, RAID6, etc.. This is because GRUB does not have RAID drivers. Any
+other level will prevent your system from booting. Additionally, if
+there is a problem with one boot partition, the boot loader can boot
+normally from the other two partitions in the /boot array.
 
 Install gdisk
 
-Since most disk partitioning software does not support GPT (i.e. fdisk,
-sfdisk) you will need to install gptfdisk to set the partition type of
-the boot loader partitions.
+Since most disk partitioning software (i.e. fdisk and sfdisk) does not
+support GPT you will need to install gptfdisk to set the partition type
+of the boot loader partitions.
 
 Update the pacman database:
 
@@ -191,9 +172,7 @@ Refresh the package list:
 
     $ pacman -Syy
 
-Install gptfdisk:
-
-    $ pacman -S gdisk
+Install gptfdisk.
 
 Partition hard drives
 
@@ -208,7 +187,7 @@ drives (i.e. /dev/sda, /dev/sdb, /dev/sdc):
 
 Open gdisk with the first hard drive:
 
-    $ gdisk /dev/sda
+    # gdisk /dev/sda
 
 and type the following commands at the prompt:
 
@@ -240,10 +219,15 @@ table from /dev/sda to the other two hard drives:
     $ sgdisk --load-backup=table /dev/sdb
     $ sgdisk --load-backup=table /dev/sdc
 
+Note: When using this method to clone the partition table of an active
+drive onto a replacement drive for the same system (e.g. RAID drive
+replacement), use  sgdisk -G /dev/<newDrive> to re-randomise the UUID of
+the disk and partitions to ensure they are unique.
+
 > RAID installation
 
 After creating the physical partitions, you are ready to setup the
-/boot, /swap, and / arrays with mdadm. It is an advanced tool for RAID
+/boot, '/swap, and / arrays with mdadm. It is an advanced tool for RAID
 management that will be used to create a /etc/mdadm.conf within the
 installation environment.
 
@@ -254,6 +238,12 @@ Create the / array at /dev/md0:
 Create the /swap array at /dev/md1:
 
     # mdadm --create /dev/md1 --level=1 --raid-devices=3 /dev/sd[abc]2
+
+Note:If the only reason you are using RAID is to prevent stored data
+loss (i.e. you're not concerned about some running applications crashing
+in the event of a disk failure), then there is no reason to RAID the
+swap partitions -- you can use them as multiple individual swap
+partitions.
 
 Note:If you plan on installing a boot loader that does not support the
 1.x version of RAID metadata make sure to add the --metadata=0.90 option
@@ -274,8 +264,8 @@ refreshing the output of /proc/mdstat ten times per second with:
 
     # watch -n .1 cat /proc/mdstat
 
-Tip:Follow the synchronization in another TTY terminal by typing ALT +
-F3 and then execute the above command.
+Tip:Follow the synchronization in another TTY terminal by typing Alt+F3
+and then execute the above command.
 
 Further information about the arrays is accessible with:
 
@@ -290,26 +280,76 @@ Note:Since the RAID synchronization is transparent to the file-system
 you can proceed with the installation and reboot your computer when
 necessary.
 
-Data Scrubbing
+Scrubbing
 
 It is good practice to regularly run data scrubbing to check for and fix
-errors, especially on RAID 5 type volumes. See the Gentoo Wiki on Data
-Scrubbing for details.
+errors.
 
-In short, the following will trigger a data scrub:
+Note:Depending on the size/configuration of the array, a scrub may take
+multiple hours to complete.
 
-    # echo check >> /sys/block/mdX/md/sync_action
+To initiate a data scrub:
 
-The progress can be watched with:
+    # echo check > /sys/block/md0/md/sync_action
 
-    # watch -n 1 cat /proc/mdstat
+As with many tasks/items relating to mdadm, the status of the scrub can
+be queried:
+
+    # cat /proc/mdstat
+
+Example:
+
+    $ cat /proc/mdstat
+
+    Personalities : [raid6] [raid5] [raid4] [raid1] 
+    md0 : active raid1 sdb1[0] sdc1[1]
+          3906778112 blocks super 1.2 [2/2] [UU]
+          [>....................]  check =  4.0% (158288320/3906778112) finish=386.5min speed=161604K/sec
+          bitmap: 0/30 pages [0KB], 65536KB chunk
 
 To stop a currently running data scrub safely:
 
-    # echo idle >> /sys/block/mdX/md/sync_action
+    # echo idle > /sys/block/md0/md/sync_action
 
-It is a good idea to set up a cron job as root to schedule a weekly
+When the scrub is complete, admins may check how many blocks (if any)
+have been flagged as bad:
+
+    # cat /sys/block/md0/md/mismatch_cnt
+
+The check operation scans the drives for bad sectors and automatically
+repairs them. If it finds good sectors that contain bad data (the data
+in a sector does not agree with what the data from another disk
+indicates that it should be, for example the parity block + the other
+data blocks would cause us to think that this data block is incorrect),
+then no action is taken, but the event is logged (see below). This "do
+nothing" allows admins to inspect the data in the sector and the data
+that would be produced by rebuilding the sectors from redundant
+information and pick the correct data to keep.
+
+General Notes on Scrubbing
+
+Note:Users may alternatively echo repair to
+/sys/block/md0/md/sync_action but this is ill-advised since if a
+mismatch in the data is encountered, it would be automatically updated
+to be consistent. The danger is that we really don't know whether it's
+the parity or the data block that's correct (or which data block in case
+of RAID1). It's luck-of-the-draw whether or not the operation gets the
+right data instead of the bad data.
+
+It is a good idea to set up a cron job as root to schedule a periodic
 scrub. See raid-check which can assist with this.
+
+RAID1 and RAID10 Notes on Scrubbing
+
+Due to the fact that RAID1 and RAID10 writes in the kernel are
+unbuffered, an array can have non-0 mismatch counts even when the array
+is healthy. These non-0 counts will only exist in transient data areas
+where they don't pose a problem. However, since we can't tell the
+difference between a non-0 count that is just in transient data or a
+non-0 count that signifies a real problem. This fact is a source of
+false positives for RAID1 and RAID10 arrays. It is however recommended
+to still scrub to catch and correct any bad sectors there might be in
+the devices.
 
 > LVM installation
 
@@ -322,7 +362,8 @@ sure you read the LVM Introduction section.
 Create physical volumes
 
 Make the RAIDs accessible to LVM by converting them into physical
-volumes (PVs):
+volumes (PVs) using the following command. Repeat this action for each
+of the RAID arrays created above.
 
     # pvcreate /dev/md0
 
@@ -411,10 +452,10 @@ optimum performance (see: Optimum RAID).
 Warning:Follow the steps in the LVM Important section before proceeding
 with the installation.
 
-/etc/mkinitcpio.conf
+mkinitcpio.conf
 
 mkinitcpio can use a hook to assemble the arrays on boot. For more
-information see mkinitpcio Using RAID.
+information see mkinitcpio Using RAID.
 
 1.  Add the dm_mod module to the MODULES list in /etc/mkinitcpio.conf.
 2.  Add the mdadm_udev and lvm2 hooks to the HOOKS list in
@@ -455,7 +496,7 @@ the members of the RAID array:
     Installed MBR (/usr/lib/syslinux/gptmbr.bin) to /dev/sda
     Installed MBR (/usr/lib/syslinux/gptmbr.bin) to /dev/sdb
 
-Grub Legacy
+GRUB legacy
 
 Log in to your new system as root and do:
 
@@ -468,7 +509,7 @@ Log in to your new system as root and do:
     grub> setup (hd0)
     grub> quit
 
-> Archive your Filesystem Partition Scheme
+> Archive your filesystem partition scheme
 
 Now that you are done, it is worth taking a second to archive off the
 partition state of each of your drives. This guarantees that it will be
@@ -486,8 +527,8 @@ Management
 For further information on how to maintain your software RAID or LVM
 review the RAID and LVM aritcles.
 
-Additional Resources
---------------------
+See also
+--------
 
 -   Setup Arch Linux on top of raid, LVM2 and encrypted partitions by
     Yannick Loth
@@ -495,18 +536,22 @@ Additional Resources
 -   What is better LVM on RAID or RAID on LVM? on Server Fault
 -   Managing RAID and LVM with Linux (v0.5) by Gregory Gulik
 -   Gentoo Linux x86 with Software Raid and LVM2 Quick Install Guide
-
-Forum threads
-
 -   2011-09-08 - Arch Linux - LVM & RAID (1.2 metadata) + SYSLINUX
 -   2011-04-20 - Arch Linux - Software RAID and LVM questions
 -   2011-03-12 - Arch Linux - Some newbie questions about installation,
     LVM, grub, RAID
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Software_RAID_and_LVM&oldid=255249"
+"https://wiki.archlinux.org/index.php?title=Software_RAID_and_LVM&oldid=302408"
 
 Categories:
 
 -   Getting and installing Arch
 -   File systems
+
+-   This page was last modified on 28 February 2014, at 15:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

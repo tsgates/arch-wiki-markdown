@@ -1,20 +1,16 @@
 DeveloperWiki:dbscripts
 =======================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Usage                                                              |
-|     -   1.1 Add or update packages                                       |
-|     -   1.2 Remove packages                                              |
-|     -   1.3 Move packages                                                |
-|         -   1.3.1 Moving packages from [testing] to [core] and [extra]   |
-|                                                                          |
-|     -   1.4 Cleanup old packages                                         |
-|                                                                          |
-| -   2 Development                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Usage
+    -   1.1 Add or update packages
+    -   1.2 Remove packages
+    -   1.3 Move packages
+        -   1.3.1 Moving packages from [testing] to [core] and [extra]
+    -   1.4 Cleanup old packages
+-   2 Development
 
 Usage
 -----
@@ -87,3 +83,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 6 December 2012, at 00:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

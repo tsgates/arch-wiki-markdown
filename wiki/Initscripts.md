@@ -18,8 +18,9 @@ Initscripts
                            document them. (Discuss) 
   ------------------------ ------------------------ ------------------------
 
-Note:Arch uses systemd by default, and initscripts is no longer
-supported.
+Warning:Arch only supports systemd. Arch's old initscripts package as
+described on this page is obsolete and is no longer supported. All Arch
+users need to migrate to systemd.
 
 This article is intended to give a chronological overview of the
 initscripts process and the system files and processes involved,
@@ -34,22 +35,18 @@ offers are lost. See Adding Runlevels for a way to hack some SysV-like
 capabilities into Arch. See Wikipedia:init for more on the distinctions
 between SysV and BSD style.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 init and boot scripts                                              |
-|     -   1.1 /etc/rc.sysinit                                              |
-|     -   1.2 /etc/rc.single                                               |
-|     -   1.3 /etc/rc.multi                                                |
-|     -   1.4 /etc/rc.local                                                |
-|                                                                          |
-| -   2 Custom hooks                                                       |
-|     -   2.1 Example                                                      |
-|                                                                          |
-| -   3 init: Login                                                        |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 init and boot scripts
+    -   1.1 /etc/rc.sysinit
+    -   1.2 /etc/rc.single
+    -   1.3 /etc/rc.multi
+    -   1.4 /etc/rc.local
+-   2 Custom hooks
+    -   2.1 Example
+-   3 init: Login
+-   4 See also
 
 init and boot scripts
 ---------------------
@@ -150,7 +147,7 @@ necessary. In single-user mode, users can continue with the standard
 rc.sysinit to rc.multi because rc.multi also uses /etc/rc.d/functions
 for handling output. This script:
 
-1.  runs sysctl to apply the settings in /etc/sysctl.conf, modifying
+1.  runs sysctl to apply the settings in /etc/sysctl.d/, modifying
     kernel parameters at runtime; Arch has very few of these by default
     (mainly networking settings).
 2.  starts the daemons, as per the DAEMONS array in rc.conf.
@@ -237,7 +234,7 @@ InnoDB files).
     /etc/rc.d/functions.d/hd_settings
 
     hd_settings() {
-        /sbin/hdparm -W0 /dev/sdb
+        /usr/bin/hdparm -W0 /dev/sdb
     }
     add_hook sysinit_udevsettled hd_settings
     add_hook single_udevsettled  hd_settings
@@ -268,7 +265,7 @@ allows for auto-login and automatically running commands and programs,
 e.g. the always useful htop.
 
 The majority of users wishing to start an X server during the boot
-process should install a display manager (see Display Manager for
+process should install a display manager (see Display manager for
 details).
 
 See also
@@ -280,8 +277,15 @@ See also
 -   Search the forum for rc.local examples
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Initscripts&oldid=250824"
+"https://wiki.archlinux.org/index.php?title=Initscripts&oldid=301300"
 
 Category:
 
 -   Boot process
+
+-   This page was last modified on 24 February 2014, at 11:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

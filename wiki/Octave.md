@@ -1,7 +1,7 @@
 Octave
 ======
 
-> Summary
+Summary help replacing me
 
 This article contains information about the installation, configuration
 and use of GNU Octave.
@@ -25,21 +25,19 @@ its interactive command line interface, but it can also be used to write
 non-interactive programs. The Octave language is quite similar to Matlab
 so that most programs are easily portable.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Octave-Forge                                                       |
-|     -   2.1 Packaging                                                    |
-|     -   2.2 Using Octave's installer                                     |
-|                                                                          |
-| -   3 Plotting                                                           |
-| -   4 Graphical interfaces                                               |
-| -   5 Reading Microsoft Excel Spreadsheets                               |
-|     -   5.1 Converting to an open format                                 |
-|     -   5.2 Reading xls files directly from Octave                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Octave-Forge
+    -   2.1 Using Octave's installer
+    -   2.2 Using the AUR
+-   3 Plotting
+-   4 Graphical interfaces
+-   5 Reading Microsoft Excel Spreadsheets
+    -   5.1 Converting to an open format
+    -   5.2 Reading xls files directly from Octave
+        -   5.2.1 Steps necessary to make Java Interface available
 
 Installation
 ------------
@@ -51,56 +49,22 @@ Octave-Forge
 ------------
 
 Octave provides a set of packages, similar to Matlab's Toolboxes,
-through Octave-Forge. Some of these packages may be found in the AUR
-(search packages). A non-exhaustive list:
+through Octave-Forge. The complete list of packages is here.
 
--   Image — Provides functions for processing images.
-
-http://octave.sourceforge.net/image/index.html || octave-image
-
--   Statistics — Provides additional statistical functions.
-
-http://octave.sourceforge.net/statistics/index.html || octave-statistics
-
--   IO — Provides input and output in external formats such as XML, CSV
-    or XLS.
-
-http://octave.sourceforge.net/io/index.html || octave-io
-
--   Signal — Provides functions for processing images
-
-http://octave.sourceforge.net/image/index.html || octave-signal
-
--   Multicore — Provides functions for parallel processing on multiple
-    cores.
-
-http://octave.sourceforge.net/multicore/index.html || octave-multicore
-
-A complete list can be found on Octave-Forge.
-
-> Packaging
-
-Creating an Octave-forge package for Arch is easy using the Octave-forge
-helper scripts for Archlinux.
+Packages can be installed directly in Octave, or from the AUR. See
+below.
 
 > Using Octave's installer
 
-Packages can also be managed using Octave's installer. To install a
+Packages can be managed using Octave's installer. They are installed to
+~/octave, or in a system directory with the -global option. To install a
 package:
 
-1.  Download the .tar.gz package from Octave-Forge.
-2.  Install it from Octave as user by executing:
-
-    octave:1> pkg install packagename.tar.gz
-
-Packages have dependencies which you have to install before installing
-your package, if you want to bypass this use:
-
-    octave:2> pkg install -no-deps packagename.tar.gz
+    octave:1> pkg install -forge packagename
 
 To uninstall a package:
 
-    octave:3> pkg uninstall packagename.tar.gz
+    octave:3> pkg uninstall packagename
 
 Some packages get loaded automatically by Octave, for those which do
 not:
@@ -113,6 +77,23 @@ or
 
 To see which packages have been loaded use pkg list, the packages with
 an asterisk are the ones that are already loaded.
+
+  
+ A way to make sure that all packages gets loaded at Octave startup:
+
+    /usr/share/octave/site/m/startup/octaverc
+
+    ## System-wide startup file for Octave.
+    ##
+    ## This file should contain any commands that should be executed each
+    ## time Octave starts for every user at this site. 
+     pkg load all
+
+> Using the AUR
+
+Some packages may be found in the AUR (search packages). New
+Octave-forge packages for Arch can be created semi-automatically using
+the Octave-forge helper scripts for Archlinux.
 
 Plotting
 --------
@@ -129,18 +110,24 @@ http://www.gnuplot.info/ || gnuplot
 http://www.gnu.org/software/octave/ || octave
 
 Note:To enable the FLTK backend, you need to install the fltk package.
+This package now comes as a dependency of octave.
 
-GnuPlot is still the default, but it can be changed by:
+FLTK is now the default plotting utility, but due to some serious
+problems with the experimental interface, you may want to re-enable
+gnuplot.
 
-    octave:1> graphics_toolkit("fltk");
+    octave:1> graphics_toolkit("gnuplot");
 
 To make this change permanent add it to your ~/.octaverc file.
 
 Graphical interfaces
 --------------------
 
-There are very few graphical interfaces for Octave and none of them are
-official:
+Since Octave 3.8, Octave has it's own (experimental) GUI based on QT.
+Unfortunately it's not in Arch Linux repos yet. So you have to build it
+for your own. To start the GUI, run octave --force-gui
+
+The following GUIs are unofficial.
 
 -   Cantor — A graphical user interface that delegates its mathematical
     operations to one of several back ends (Scilab, Maxima, Octave and
@@ -183,8 +170,12 @@ If you must work with XLS files and you cannot convert them to CSV or
 ODS, for whatever reason, you can use the xlsread function from the
 octave-io package.
 
-xlsread is Java-based and as such requires some Java libraries to enable
-support for XLS files.
+Since octave-io version 1.2.5., an interface called 'OCT' was added,
+which perform reading .xlsx (not .xls!), ods and .gnumeric without any
+dependencies. However, the Java-based interface still exist (special for
+reading .xls files and writing those file formats).
+
+Steps necessary to make Java Interface available
 
 The steps necessary to make it work are:
 
@@ -244,8 +235,15 @@ To make this permanent add the javaaddpath commands to your ~/.octaverc
 file.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Octave&oldid=229881"
+"https://wiki.archlinux.org/index.php?title=Octave&oldid=303807"
 
 Category:
 
 -   Mathematics and science
+
+-   This page was last modified on 9 March 2014, at 16:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

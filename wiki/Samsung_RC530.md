@@ -73,16 +73,13 @@ flexpriority ept vpid cpufreq <nowki> - Intel Wireless
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Samsung Tools - fan-control and power-management                   |
-|     -   1.1 Description                                                  |
-|                                                                          |
-| -   2 Laptop Mode Tools                                                  |
-| -   3 Optimus                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Samsung Tools - fan-control and power-management
+    -   1.1 Description
+-   2 Laptop Mode Tools
+-   3 Optimus
 
 Samsung Tools - fan-control and power-management
 ------------------------------------------------
@@ -125,3 +122,10 @@ Retrieved from
 Category:
 
 -   Samsung
+
+-   This page was last modified on 3 December 2012, at 04:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

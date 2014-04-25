@@ -19,22 +19,19 @@ standard and simple structure for Eclipse plugin PKGBUILDs, so that the
 filesystem structure can remain consistent between all plugins without
 having the packager to start again for every new package.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Eclipse plugin structure and installation                          |
-| -   2 Packaging                                                          |
-|     -   2.1 Sample PKGBUILD                                              |
-|     -   2.2 How to customize the build                                   |
-|     -   2.3 In-depth PKGBUILD review                                     |
-|         -   2.3.1 Package naming                                         |
-|         -   2.3.2 Files                                                  |
-|             -   2.3.2.1 Extraction                                       |
-|             -   2.3.2.2 Locations                                        |
-|                                                                          |
-|         -   2.3.3 The build() function                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Eclipse plugin structure and installation
+-   2 Packaging
+    -   2.1 Sample PKGBUILD
+    -   2.2 How to customize the build
+    -   2.3 In-depth PKGBUILD review
+        -   2.3.1 Package naming
+        -   2.3.2 Files
+            -   2.3.2.1 Extraction
+            -   2.3.2.2 Locations
+        -   2.3.3 The build() function
 
 Eclipse plugin structure and installation
 -----------------------------------------
@@ -169,3 +166,10 @@ Retrieved from
 Category:
 
 -   Package development
+
+-   This page was last modified on 13 June 2012, at 13:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

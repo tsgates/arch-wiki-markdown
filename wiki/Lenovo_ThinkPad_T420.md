@@ -4,37 +4,32 @@ Lenovo ThinkPad T420
 This article covers the installation and configuration of Arch Linux on
 a Lenovo T420 laptop.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Hardware                                                           |
-|     -   2.1 Fingerprint reader                                           |
-|     -   2.2 Some Media Keys                                              |
-|     -   2.3 Untested                                                     |
-|                                                                          |
-| -   3 Laptop Settings                                                    |
-|     -   3.1 ACPI                                                         |
-|     -   3.2 Tp_smapi                                                     |
-|     -   3.3 CPU Frequency Scaling                                        |
-|     -   3.4 Fans                                                         |
-|     -   3.5 Laptop Mode Tools                                            |
-|     -   3.6 Synaptics                                                    |
-|     -   3.7 NVIDIA Optimus                                               |
-|     -   3.8 Optional kernel boot arguments                               |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Media Keys                                                   |
-|     -   4.2 Rebind Forward and Back keys                                 |
-|     -   4.3 Turn touchpad on and off                                     |
-|     -   4.4 Volume up/down not changing volume                           |
-|     -   4.5 Shutdown on Battery                                          |
-|     -   4.6 Hang on Reboot                                               |
-|     -   4.7 No Backlight Controls                                        |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Hardware
+    -   2.1 Fingerprint reader
+    -   2.2 Some Media keys
+    -   2.3 Untested
+-   3 Laptop Settings
+    -   3.1 ACPI
+    -   3.2 Tp_smapi
+    -   3.3 CPU frequency scaling
+    -   3.4 Fans
+    -   3.5 Laptop Mode Tools
+    -   3.6 Synaptics
+    -   3.7 NVIDIA Optimus
+    -   3.8 Optional kernel boot arguments
+-   4 Troubleshooting
+    -   4.1 Media Keys
+    -   4.2 Rebind Forward and Back keys
+    -   4.3 Turn touchpad on and off
+    -   4.4 Volume up/down not changing volume
+    -   4.5 Shutdown on battery
+    -   4.6 Hang on reboot
+    -   4.7 No backlight controls
+-   5 See also
 
 Installation
 ------------
@@ -43,8 +38,8 @@ This laptop supports UEFI as well as the traditional BIOS.
 
 There are no issues with installing Arch Linux with the latest Archiso.
 
-The rest of the installation process can be followed with the official
-install guide.
+The rest of the installation process can be followed with the
+Installation guide.
 
 Hardware
 --------
@@ -58,9 +53,9 @@ fingerprint-gui recommended).
 
 See Fprint#Setup_fingerprint-gui for more information.
 
-> Some Media Keys
+> Some Media keys
 
--   See below
+-   See Media Keys
 
 > Untested
 
@@ -93,11 +88,11 @@ Manually set the thresholds by calling
     perl /usr/lib/perl5/vendor_perl/tpacpi-bat -v startChargeThreshold 0 40
     perl /usr/lib/perl5/vendor_perl/tpacpi-bat -v stopChargeThreshold 0 80
 
-The example values 40 and 80 given here are in percent of the full
-battery capacity. Adjust them to your own needs. You may also want to
-write a simple set-battery.service and enable it to set them at startup.
-While these values should be permanent, they will be reset any time the
-battery is removed.
+The example values 40 and 80 given here represent the percentage of full
+battery capacity remaining. Adjust them to your own needs. You may also
+want to write a simple set-battery.service and enable it to set them at
+startup. While these values should be permanent, they will be reset any
+time the battery is removed.
 
     [Unit]
     Description=Set battery capacity
@@ -118,41 +113,52 @@ When using systemd, you may want to blacklist the tp_smapi module if
 your systemd-modules-load.service fails, as new ThinkPads handle
 everything over acpi.
 
-> CPU Frequency Scaling
+> CPU frequency scaling
 
 CPU frequency scaling is fully supported with all of the available
 processor models with this laptop.
 
 > Fans
 
-The thinkpad_acpi kernel module needs to be configured so user space
-programs can control the fan speed.
+Install thinkfan from the AUR. It will automatically create the
+necessary acpi configuration file in
+"/usr/lib/modprobe.d/thinkpad_acpi.conf".
 
-    /etc/modprobe.d/thinkpad_acpi.conf
+Copy the example sensor settings file from
+"/usr/share/doc/thinkfan/examples/thinkfan.conf.simple" to
+"/etc/thinkfan.conf".
 
-    options thinkpad_acpi fan_control=1
+    sudo cp /usr/share/doc/thinkfan/examples/thinkfan.conf.simple /etc/thinkfan.conf
 
-The thinkfan configuration file also needs to know how to set the fan
-speed. Replace the default sensor settings with the following.
+Aftwards replace the default sensor in the settings file
+"/etc/thinkfan.conf" with the following.
 
-    /etc/thinkfan.conf
+    sudo nano /etc/thinkfan.conf
 
     sensor /sys/devices/virtual/thermal/thermal_zone0/temp
 
-You can add or remove services by editing the DAEMONS array in your
-/etc/rc.conf file. It will initially look something like this:
+In the same configuration file replace the default fan level settings
+with your needs (the last lines of the file). Usefull values are
 
-    DAEMONS=(...@thinkfan...)
+    (0,	0,	42)
+    (1,	40,	47)
+    (2,	45,	52)
+    (3,	50,	57)
+    (4,	55,	62)
+    (5,	60,	67)
+    (6,	65,	72)
+    (7,	70,	77)
+    (127,	75,	32767)
 
-Or, if you are using systemd, simply type
+Finally enable systemd daemon thinkfan.
 
-    # systemctl enable thinkfan.service
+    sudo systemctl enable thinkfan
 
 > Laptop Mode Tools
 
 No significant issues were found using Laptop Mode Tools.
 
-Possible bug with Lenovo_ThinkPad_T420#Shutdown on Battery
+Possible bug with #Shutdown on Battery
 
 tlp From the AUR is an alternative tool that can replace
 laptop-mode-tools.
@@ -192,14 +198,13 @@ following two files to your /etc/X11/xorg.conf.d/ directory:
 
 Adjust to your own needs. Read Touchpad Synaptics for more information.
 
-To adjust the speed/sensitivity of the TrackPoint add these lines in
-your /etc/rc.local script:
+To adjust the speed/sensitivity of the TrackPoint add these lines in a
+systemd tmpfile:
 
-    /etc/rc.local
+    /etc/tmpfiles.d/local.conf
 
-    TPDEV=/sys/devices/platform/i8042/serio1
-    echo -n 180 > $TPDEV/speed
-    echo -n 200 > $TPDEV/sensitivity
+    w /sys/devices/platform/i8042/serio1/speed - - - - 180
+    w /sys/devices/platform/i8042/serio1/sensitivity - - - - 200
 
 Possible range of values are 1-255.
 
@@ -216,10 +221,6 @@ Using the following kernel boot parameters reduces battery drain:
     i915.lvds_downclock=1 
     i915.semaphores=1
 
-Note: With the current 3.6.x kernels, there appears to be a power
-regression with an unknown cause. It is yet to be fixed in any 3.7
-versions of the kernel.
-
 Troubleshooting
 ---------------
 
@@ -235,7 +236,7 @@ Media keys that work out of the box:
 Media Keys that Do Not work out of the box:
 
 -   Volume keys (Works out-of-the-box in Gnome)
--   Microphone mute (Will most likely require a custom kernel patch)
+-   Microphone mute (Requires a custom kernel patch)
 
 You must find a workaround and bind the keys yourself for the rest of
 them.
@@ -262,9 +263,10 @@ Home/End:
     keysym XF86AudioNext = End
     keysym XF86AudioPrev = Home
 
-Note:You have to log out for the changes to take effect.
+> Note:
 
-Note:The keys should work out of the box, at least on KDE.
+-   You have to log out for the changes to take effect.
+-   The keys should work out of the box, at least on KDE.
 
 > Turn touchpad on and off
 
@@ -275,7 +277,7 @@ This binds Fn+F8 to 'toggle the touchpad on and off'. (Tested in i3wm
 and xfce4, where normal Fn+F8 does not toggle the touchpad)
 
     # Toggle the Touchpad on|off
-    "synclient TouchpadOff=`synclient -l | grep -ce TouchpadOff.*0`"
+    "synclient TouchpadOff=$(synclient -l | grep -ce TouchpadOff.*0)"
        m:0x0 + c:199
        XF86TouchpadToggle
 
@@ -302,7 +304,7 @@ Also, while the mute button works, I rebound it to interface with ALSA.
        m:0x0 + c:121
        XF86AudioMute
 
-> Shutdown on Battery
+> Shutdown on battery
 
 Some users have reported that the T420 was rebooting on shutdown on
 battery power. There have been quite a few attempts to fix this. Three
@@ -321,18 +323,23 @@ shutdown. Turning off the laptop-mode daemon causes battery life to
 suffer, so when on the move and in need of a simple way to shutdown,
 this seems to work better.
 
-> Hang on Reboot
+> Hang on reboot
 
 This is a problem on many laptops and can be fixed by blacklisting the
 e1000e kernel module.
 
-> No Backlight Controls
+> No backlight controls
 
 One user has reported that the brightness controls (fn+home, fn+end) did
 not work in some desktop environments. This could be fixed by adding the
 following kernel options:
 
     acpi_backlight=vendor acpi_osi=Linux
+
+Also try to adjust the display in the console and not in X windows. If
+you don't have the keybindings correct in X, it will cause a problem.
+This can be bypassed if you use a virtual console to adjust the
+brightness.
 
 See also
 --------
@@ -341,8 +348,15 @@ See also
 -   Arch Linux on ThinkPad T420i
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_T420&oldid=247933"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_T420&oldid=302087"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 25 February 2014, at 18:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

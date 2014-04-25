@@ -1,36 +1,39 @@
 Fujitsu Siemens Lifebook P7010
 ==============================
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: please use the   
+                           first argument of the    
+                           template to provide a    
+                           brief explanation.       
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 The Fujitsu-Siemens P7010(D) is a neat little laptop with a 10"
 widescreen. It weighs little more than a kilo, has a relatively long
 battery life and sports many things that low-weight laptops normally
 lack.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-|     -   1.1 System Specifications                                        |
-|     -   1.2 What works/What does not                                     |
-|                                                                          |
-| -   2 Video                                                              |
-| -   3 Audio                                                              |
-| -   4 Wireless Network                                                   |
-| -   5 Card Readers                                                       |
-|     -   5.1 PCMCIA                                                       |
-|     -   5.2 Compact Flash                                                |
-|     -   5.3 Secure Digital                                               |
-|                                                                          |
-| -   6 Important Config files                                             |
-|     -   6.1 Kernel Config                                                |
-|     -   6.2 xorg.conf                                                    |
-|     -   6.3 cpufreqd.conf                                                |
-|     -   6.4 rc.conf (modules array)                                      |
-|                                                                          |
-| -   7 Other Tweaks                                                       |
-| -   8 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+    -   1.1 System Specifications
+    -   1.2 What works/What does not
+-   2 Video
+-   3 Audio
+-   4 Wireless Network
+-   5 Card Readers
+    -   5.1 PCMCIA
+    -   5.2 Compact Flash
+    -   5.3 Secure Digital
+-   6 Important Config files
+    -   6.1 cpufreqd.conf
+    -   6.2 rc.conf (modules array)
+-   7 Other Tweaks
+-   8 External Links
 
 Overview
 --------
@@ -100,20 +103,10 @@ consequently the VBIOS needs to be patched with Alain Poirier's software
 Video
 -----
 
-relevant modules:
+Note:relevant modules:
 
 -   intel-agp
 -   i915
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: please use the   
-                           first argument of the    
-                           template to provide a    
-                           brief explanation.       
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
 
 In order to get the video working fine at 1280x768 you need to patch the
 VBIOS with Alain Poirier's 855resolution for which there is a PKGBUILD
@@ -169,7 +162,7 @@ in xorg.conf. This is done in the monitor section
 Audio
 -----
 
-relevant modules:
+Note:relevant modules:
 
 -   snd-intel8x0
 
@@ -182,7 +175,7 @@ the sound.
 Wireless Network
 ----------------
 
-relevant modules:
+Note:relevant modules:
 
 -   ipw2200
 
@@ -200,7 +193,7 @@ Card Readers
 
 > PCMCIA
 
-relevant modules:
+Note:relevant modules:
 
 -   yenta_socket
 
@@ -222,212 +215,6 @@ https://aur.archlinux.org/packages.php?do_Details=1&ID=9884.
 
 Important Config files
 ----------------------
-
-> Kernel Config
-
-Throughout most of Linux days I have been using morph-sources, but
-recently I have been starting to use archck. Here is a config file for
-the kernel that can be used as a base. There are doubtless changes you
-should do, but it is always nice to have something to start off from. [I
-realise that I cannot post the config file since it is so large...
-perhaps if it could be uploaded somehow and linked to :-/]
-
-> xorg.conf
-
-Xorg 6.8.2 has loses direct rendering after resume from either
-suspend-to-disk or suspend-to-ram. I am therefore using a snapshot of
-the upcoming xorg release, which has this issue solved. If you decide
-the to use the snapshot remember that you will not need to load the
-glcore module, so you can comment that in the xorg.conf.
-
-I have been playing around a lot to get the TV-out working, but alas! (I
-am actually keeping a Win-partition in order to be able to use the
-TV-out - it feels like a complete waste of gigabytes of my precious
-harddrive!). The setup you see here is for an internal monitor. If you
-alter the ServerLayout section so that you have InternalScreen commented
-instead of ExternalScreen, X should work with an external screen. There
-was some issue with xorg 6.8.2 that prevented it from showing image on
-internal and external screens simultaneously, but that is allegedly
-solved now. I have not updated my xorg.conf, however, to reflect those
-changes.
-
-    Section "ServerLayout"
-    	Identifier     "Work in Progress"
-    #	Screen	0	"ExternalScreen" 0 0
-    	Screen  0	"InternalScreen" 0 0
-    #	Screen	1	"ExternalScreen" RightOf "InternalScreen"
-    	InputDevice    "Keyboard" "CoreKeyboard"
-            InputDevice    "Synaptics TouchPad" "AlwaysCore"
-            InputDevice    "USB Mouse" "CorePointer"
-    EndSection
-
-    Section "ServerFlags"
-    	Option "AllowMouseOpenFail"  "true"
-    # 	Option  "BlankTime"  "7"  # Blank the screen after 10 minutes (Fake)
-    #	Option  "StandbyTime"  "10"  # Turn off screen after 15 minutes (DPMS)
-    #	Option  "SuspendTime"  "15"  # Full suspend after 20 minutes
-    	Option  "OffTime"  "20"  # Turn off after half an hour
-    EndSection
-
-    Section "Files"
-    	RgbPath      "/usr/X11R6/lib/X11/rgb"
-    	ModulePath   "/usr/X11R6/lib/modules"
-        FontPath 	"/usr/X11R6/lib/X11/fonts/misc:unscaled"
-        FontPath 	"/usr/X11R6/lib/X11/fonts/75dpi:unscaled"
-        FontPath 	"/usr/X11R6/lib/X11/fonts/100dpi:unscaled"
-        FontPath 	"/usr/X11R6/lib/X11/fonts/cyrillic"
-        FontPath 	"/usr/X11R6/lib/X11/fonts/Type1"
-        FontPath 	"/usr/local/share/fonts"
-    EndSection
-
-    Section "Module"
-            Load  "ddc"  # ddc probing of monitor
-    	Load  "GLcore"
-    	Load  "dbe"
-    	Load  "dri"
-    	Load  "extmod"
-    	Load  "glx"
-            Load  "bitmap" # bitmap-fonts
-    	Load  "type1"
-    	Load  "freetype"
-    	Load  "record"
-    EndSection
-
-    Section "InputDevice"
-    	Identifier  "Keyboard"
-    	Driver      "kbd"
-            Option      "CoreKeyboard"
-    	Option "XkbRules" "xfree86"
-    	Option "XkbModel" "pc105"
-    	Option "XkbLayout" "se"
-
-    EndSection
-
-    Section "InputDevice"
-            Identifier      "USB Mouse"
-            Driver          "mouse"
-            Option          "Device"                "/dev/input/mice"
-    	Option		"SendCoreEvents"	"true"
-            Option          "Protocol"              "IMPS/2"
-            Option          "ZAxisMapping"          "4 5"
-            Option          "Buttons"               "5"
-    EndSection
-
-    Section "InputDevice"
-            Identifier      "Synaptics TouchPad"
-            Driver          "synaptics"
-            Option          "Device"                "/dev/psaux"
-            Option          "Protocol"              "auto-dev"
-            Option          "LeftEdge"              "1700"
-            Option          "RightEdge"             "5300"
-            Option          "TopEdge"               "1700"
-            Option          "BottomEdge"            "4200"
-            Option          "FingerLow"             "25"
-            Option          "FingerHigh"            "30"
-            Option          "MaxTapTime"            "180"
-            Option          "MaxTapMove"            "220"
-            Option          "VertScrollDelta"       "100"
-            Option          "MinSpeed"              "0.06"
-            Option          "MaxSpeed"              "0.12"
-            Option          "AccelFactor"           "0.0010"
-            Option          "SHMConfig"             "on"
-            Option          "Repeater"              "/dev/ps2mouse"
-    EndSection
-
-    Section "Monitor"
-    	Identifier	"InternalMonitor"
-    	Option	"DPMS"
-    	HorizSync    28.0 - 96.0
-    	VertRefresh  50.0 - 75.0
-    	Modeline "1280x768" 80.14 1280 1344 1480 1680 768 769 772 795
-    	Modeline "1024x768" 65.00 1024 1047 1183 1343 768 770 776 805
-    EndSection
-
-    Section "Monitor"
-    	Identifier "ExternalMonitor"
-    	Option "DPMS" "true"
-    	HorizSync	30.0-83.0
-    	VertRefresh	56.0-76.0
-    	Modeline "1280x1024"  138.54  1280 1368 1504 1728  1024 1025 1028 1069
-    EndSection
-
-    Section "Monitor"
-      Identifier   "Television"
-      HorizSync    30-68
-      VertRefresh  50-120
-    # fbset -fb /dev/fb1 -x
-      Mode "720x576"
-        # D: 42.600 MHz, H: 45.127 kHz, V: 74.963 Hz
-        DotClock 42.601
-        HTimings 720 760 832 944
-        VTimings 576 577 580 602
-        Flags    "-HSync" "-VSync"
-      EndMode
-    EndSection
-
-
-    Section "Device"
-    	Identifier  "Intel"
-    	Driver      "i810"
-    #	BusID		"PCI:0:2:0"
-    #	Option		"MonitorLayout" "TV,LFP"
-    #	BusID       "PCI:1:0:0"
-    # VideoRam	65536
-    EndSection
-
-    Section "Screen"
-    	Identifier "InternalScreen"
-    	Device     "Intel"
-    	Monitor    "InternalMonitor"
-    	DefaultColorDepth 24
-    	SubSection "Display"
-    		Depth     16
-    		Modes "1280x768" "1024x768" "800x600" "640x480"
-    	EndSubSection
-    	SubSection "Display"
-    		Depth     24
-    		Modes "1280x768" "1024x768" "800x600" "640x480"
-    		ViewPort	0 0
-    	EndSubSection
-    	SubSection "Display"
-    		Depth     32
-    		Modes "1280x768" "1024x768" "800x600" "640x480"
-    	EndSubSection
-    EndSection
-
-    Section "Screen"
-    	Identifier	"ExternalScreen"
-    	Device	"Intel"
-    	Monitor	"ExternalMonitor"
-    	DefaultColorDepth 24
-    	SubSection "Display"
-    		Depth	24
-    		Modes "1280x1024"
-    		ViewPort	0 0
-    	EndSubsection
-    EndSection
-
-    Section "Screen"
-        Identifier  "TVScreen"
-        Device      "Intel"
-        Monitor     "Television"
-        DefaultDepth 24
-        Subsection "Display"
-            Depth   24
-            Modes   "768x576"
-            ViewPort 0 0
-        EndSubsection
-    EndSection
-
-
-    Section "DRI"
-    	Mode 0666
-    EndSection
-
-    Section "Extensions"
-    	Option "Composite" "Enable"
-    	Option "RENDER" "Enable"
-    EndSection
 
 > cpufreqd.conf
 
@@ -552,14 +339,21 @@ few other things. Information on how to use my repository can be found
 here
 
 External Links
-==============
+--------------
 
 -   This report is listed at the TuxMobil: Linux Laptop and Notebook
     Installation Guides Survey: Fujitsu-Siemens - FSC.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fujitsu_Siemens_Lifebook_P7010&oldid=196606"
+"https://wiki.archlinux.org/index.php?title=Fujitsu_Siemens_Lifebook_P7010&oldid=273948"
 
 Category:
 
 -   Fujitsu
+
+-   This page was last modified on 1 September 2013, at 16:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

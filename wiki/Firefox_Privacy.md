@@ -1,7 +1,7 @@
 Firefox Privacy
 ===============
 
-> Summary
+Summary help replacing me
 
 Configuration and installation of recommended add-ons to the Firefox
 browser to improve privacy
@@ -23,18 +23,17 @@ Speed-up Firefox using tmpfs: Caching the profile in RAM
 This article overviews some useful extensions which enhance security and
 privacy while using the Firefox web browser.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 HTTPS Everywhere                                                   |
-| -   2 Adblock Plus                                                       |
-| -   3 Ghostery                                                           |
-| -   4 NoScript                                                           |
-| -   5 Cookie Monster                                                     |
-| -   6 RefControl                                                         |
-| -   7 RequestPolicy                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 HTTPS Everywhere
+-   2 Adblock Plus
+-   3 Disconnect
+-   4 Ghostery
+-   5 NoScript
+-   6 Cookie Monster
+-   7 RefControl
+-   8 RequestPolicy
 
 HTTPS Everywhere
 ----------------
@@ -70,15 +69,30 @@ EasyPrivacy is a supplementary subscription for EasyList which removes
 all forms of tracking from the internet, including web bugs, tracking
 scripts and information collectors.
 
+Disconnect
+----------
+
+Disconnect is a open source project aimed at stopping 2,000 third-party
+sites from tracking a user. It encrypts data sent to popular sites and
+claims to loads web pages 27 percent faster. Disconnect shows its users,
+in real time, how many tracking attempts from Google, Twitter, Facebook,
+and more are stopped. It categorizes tracking attempts into advertising,
+analytical, social, and content, which makes it easy to monitor how one
+is being tracked.
+
+Disconnect can also stop side-jacking, which utilizes stolen cookies to
+steal personal data. It's easy to use and well supported. It can be
+added to Firefox at the official website.
+
 Ghostery
 --------
 
-Ghostery is a project to track businesses which employ the use of
-website trackers. From the website:
+Ghostery is similar to Disconnect, but is a proprietary project to track
+businesses which employ the use of website trackers. From the website:
 
 Ghostery tracks over 1,000 trackers and gives you a roll-call of the ad
-networks, behavioral data providers, web publishers, and other companies
-interested in your activity.
+networks, behavioural data providers, web publishers, and other
+companies interested in your activity.
 
 Ghostery can be installed from the official website. Once installed
 Ghostery can be configured from:
@@ -153,8 +167,15 @@ For more information on cross-site requests and RequestPolicy visit
 here.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Firefox_Privacy&oldid=236636"
+"https://wiki.archlinux.org/index.php?title=Firefox_Privacy&oldid=271616"
 
 Category:
 
 -   Web Browser
+
+-   This page was last modified on 18 August 2013, at 19:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

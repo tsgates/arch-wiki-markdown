@@ -7,25 +7,22 @@ here.
 
 So far Arch is working very well on this laptop.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Partioning                                                         |
-| -   3 Base install                                                       |
-|     -   3.1 Connect to the network                                       |
-|     -   3.2 Installing packages                                          |
-|         -   3.2.1 Synchronize pacman                                     |
-|         -   3.2.2 Wireless adapter                                       |
-|         -   3.2.3 Sound                                                  |
-|         -   3.2.4 DSLR Camera (Canon EOS Rebel XTI)                      |
-|         -   3.2.5 Multimdedia                                            |
-|                                                                          |
-| -   4 Working                                                            |
-| -   5 Need Fixing / Polishing                                            |
-| -   6 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Partioning
+-   3 Base install
+    -   3.1 Connect to the network
+    -   3.2 Installing packages
+        -   3.2.1 Synchronize pacman
+        -   3.2.2 Wireless adapter
+        -   3.2.3 Sound
+        -   3.2.4 DSLR Camera (Canon EOS Rebel XTI)
+        -   3.2.5 Multimdedia
+-   4 Working
+-   5 Need Fixing / Polishing
+-   6 External links
 
 Hardware
 ========
@@ -182,3 +179,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 23 April 2012, at 12:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,7 +1,7 @@
 Installing Arch Using Old Installation Media
 ============================================
 
-> Summary
+Summary help replacing me
 
 This article give additional steps to the official installation guide,
 to allow installing Arch using an old media cd using the Arch Install
@@ -9,22 +9,22 @@ Scripts instead of AIF.
 
 > Related
 
-Installation Guide: You should still follow the official guide steps.
+Installation guide: You should still follow the official guide steps.
 
 Note:This guide is only for installation media version 2011.08.19 and
 older. For more recent versions, just follow the regular Installation
-Guide
+guide
 
 In the past, it didn't really matter what version of the installation
 media was used to install arch, as long remote repos were used, the
 result was an updated arch installation.
 
 That is still true, but several changes have occurred in arch, including
-pacman4 and the systemd adoption, that may do difficult the installation
-using the media iso 2011.08.19 and older.
+pacman4 and the systemd adoption, that may make the installation
+difficult using the media iso 2011.08.19 and older.
 
 The goal of this article is to provide few additional steps to the
-Installation Guide, in order to allow you to use an old installation
+Installation guide, in order to allow you to use an old installation
 media to install arch, using the new Arch Install Scripts instead of
 AIF.
 
@@ -38,20 +38,18 @@ This is useful in situations like this:
     arch at any given moment.
 
 Again, this are only additional steps. You should still follow the
-Installation Guide.
+Installation guide.
 
 This steps have been tested using 2010.05 and 2011.08.19 installation
-media cds.
+media CDs.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install the Arch Install Scripts                                   |
-| -   2 Install haveged                                                    |
-| -   3 Edit the fstab file                                                |
-| -   4 Fixing Pacman                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Install the Arch Install Scripts
+-   2 Install haveged
+-   3 Edit the fstab file
+-   4 Fixing Pacman
 
 Install the Arch Install Scripts
 --------------------------------
@@ -116,8 +114,15 @@ That is not necessary for 2011.08.19 media.
 -   Do the rest of the steps normally.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Installing_Arch_Using_Old_Installation_Media&oldid=244521"
+"https://wiki.archlinux.org/index.php?title=Installing_Arch_Using_Old_Installation_Media&oldid=305784"
 
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 20 March 2014, at 02:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

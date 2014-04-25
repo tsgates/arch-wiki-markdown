@@ -5,16 +5,14 @@ OpenVPN Checklist Guide
  This article summarizes the install process required for OpenVPN. See
 OpenVPN instead for a walkthrough.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install                                                            |
-| -   2 Prepare data                                                       |
-| -   3 Generate the certificates                                          |
-| -   4 Setting up the Server                                              |
-| -   5 Setting up the Clients                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Install
+-   2 Prepare data
+-   3 Generate the certificates
+-   4 Setting up the server
+-   5 Setting up the clients
 
 Install
 -------
@@ -61,7 +59,7 @@ start all over by doing a ./clean-all
 
 Copy to each client the ca.crt, and their respective crt and key files.
 
-Setting up the Server
+Setting up the server
 ---------------------
 
 -   Create /etc/openvpn/myvpnserver.conf with a content like this:
@@ -96,7 +94,7 @@ Setting up the Server
 
 Read Daemon for more information.
 
-Setting up the Clients
+Setting up the clients
 ----------------------
 
 -   Create a .conf file for each client like this:
@@ -127,8 +125,15 @@ is openvpn@a-client-conf-file.service)
 Read Daemon for more information.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=OpenVPN_Checklist_Guide&oldid=243267"
+"https://wiki.archlinux.org/index.php?title=OpenVPN_Checklist_Guide&oldid=305748"
 
 Category:
 
 -   Virtual Private Network
+
+-   This page was last modified on 20 March 2014, at 01:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

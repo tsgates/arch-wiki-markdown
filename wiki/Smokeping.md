@@ -1,38 +1,30 @@
 Smokeping
 =========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-|     -   2.1 Prerequisites                                                |
-|         -   2.1.1 Optional Prerequisites                                 |
-|                                                                          |
-|     -   2.2 Installing Packages                                          |
-|     -   2.3 Downloading Smokeping                                        |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Editing Scripts                                              |
-|     -   3.2 Editing the config file                                      |
-|                                                                          |
-| -   4 Setup                                                              |
-| -   5 Testing                                                            |
-| -   6 Deployment                                                         |
-|     -   6.1 Proxied                                                      |
-|         -   6.1.1 nginx                                                  |
-|                                                                          |
-|     -   6.2 FastCGI                                                      |
-|                                                                          |
-| -   7 Advanced Configuration                                             |
-|     -   7.1 Idiosyncracies                                               |
-|                                                                          |
-| -   8 Bugs                                                               |
-|     -   8.1 Tr.cgi                                                       |
-|     -   8.2 Cropper                                                      |
-|     -   8.3 CPU Crunch                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+    -   2.1 Prerequisites
+        -   2.1.1 Optional Prerequisites
+    -   2.2 Installing Packages
+    -   2.3 Downloading Smokeping
+-   3 Configuration
+    -   3.1 Editing Scripts
+    -   3.2 Editing the config file
+-   4 Setup
+-   5 Testing
+-   6 Deployment
+    -   6.1 Proxied
+        -   6.1.1 nginx
+    -   6.2 FastCGI
+-   7 Advanced Configuration
+    -   7.1 Idiosyncracies
+-   8 Bugs
+    -   8.1 Tr.cgi
+    -   8.2 Cropper
+    -   8.3 CPU Crunch
 
 Introduction
 ------------
@@ -502,8 +494,15 @@ one. This could be caused by a race condition in the Smokeping module. I
 have not really tried to track it down.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Smokeping&oldid=198374"
+"https://wiki.archlinux.org/index.php?title=Smokeping&oldid=304887"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 16 March 2014, at 08:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,43 +1,36 @@
 Automated Package Build System
 ==============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What is an Automated Build System                                  |
-| -   2 Naming                                                             |
-| -   3 Design Proposal                                                    |
-|     -   3.1 Proposed Features                                            |
-|                                                                          |
-| -   4 Programming Language                                               |
-| -   5 Builder Process                                                    |
-| -   6 Component Build Out                                                |
-|     -   6.1 Master Server Components                                     |
-|         -   6.1.1 Core Loop                                              |
-|         -   6.1.2 Determine Packages Which are Ready to be Built         |
-|         -   6.1.3 Maintain Package Repositories                          |
-|         -   6.1.4 Package Parsers                                        |
-|             -   6.1.4.1 SVN Parser                                       |
-|                                                                          |
-|         -   6.1.5 Package Manipulators                                   |
-|                                                                          |
-|     -   6.2 Build Server Components                                      |
-|         -   6.2.1 Master Queries                                         |
-|         -   6.2.2 Peer Review System                                     |
-|         -   6.2.3 Main Loop                                              |
-|         -   6.2.4 Chroot Builders                                        |
-|                                                                          |
-|     -   6.3 Builder Considerations                                       |
-|         -   6.3.1 Threading                                              |
-|         -   6.3.2 Builder Security                                       |
-|                                                                          |
-|     -   6.4 Standalone Components                                        |
-|         -   6.4.1 Https Server                                           |
-|         -   6.4.2 Pacman Module                                          |
-|         -   6.4.3 PKGBUILD Parser                                        |
-|         -   6.4.4 Standard Utils Module                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 What is an Automated Build System
+-   2 Naming
+-   3 Design Proposal
+    -   3.1 Proposed Features
+-   4 Programming Language
+-   5 Builder Process
+-   6 Component Build Out
+    -   6.1 Master Server Components
+        -   6.1.1 Core Loop
+        -   6.1.2 Determine Packages Which are Ready to be Built
+        -   6.1.3 Maintain Package Repositories
+        -   6.1.4 Package Parsers
+            -   6.1.4.1 SVN Parser
+        -   6.1.5 Package Manipulators
+    -   6.2 Build Server Components
+        -   6.2.1 Master Queries
+        -   6.2.2 Peer Review System
+        -   6.2.3 Main Loop
+        -   6.2.4 Chroot Builders
+    -   6.3 Builder Considerations
+        -   6.3.1 Threading
+        -   6.3.2 Builder Security
+    -   6.4 Standalone Components
+        -   6.4.1 Https Server
+        -   6.4.2 Pacman Module
+        -   6.4.3 PKGBUILD Parser
+        -   6.4.4 Standard Utils Module
 
 What is an Automated Build System
 ---------------------------------
@@ -335,9 +328,27 @@ Standard Utils Module
 That anoying module that sets up logging and other more globally needed
 functions.
 
+  
+
+* * * * *
+
+Links:
+
+-   https://github.com/asdil12/aurbs - An automated build system for the
+    AUR, written in python3 - added for code reference
+-   https://github.com/archlinuxarm/plugbuild - An automated distributed
+    build system used to build archlinux-arm, written in perl
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Automated_Package_Build_System&oldid=207017"
+"https://wiki.archlinux.org/index.php?title=Automated_Package_Build_System&oldid=276495"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 24 September 2013, at 09:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -21,46 +21,41 @@ production servers. Archlinux.org is one such example. On the desktop, a
 properly configured and maintained Arch installation can offer excellent
 stability.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setting Up Arch                                                    |
-|     -   1.1 Arch Specific Tips                                           |
-|         -   1.1.1 Set up a large /var partition and keep old packages    |
-|         -   1.1.2 Use recommended configurations                         |
-|         -   1.1.3 Be careful with unofficial and less tested packages    |
-|         -   1.1.4 Use up-to-date mirrors                                 |
-|         -   1.1.5 Avoid development packages                             |
-|         -   1.1.6 Install the linux-lts package                          |
-|                                                                          |
-|     -   1.2 Generic Best Practices                                       |
-|         -   1.2.1 Use the package manager to install software            |
-|         -   1.2.2 Use proven, mainstream software packages               |
-|         -   1.2.3 Choose open-source drivers                             |
-|                                                                          |
-| -   2 Maintaining Arch                                                   |
-|     -   2.1 Arch Specific Tips                                           |
-|         -   2.1.1 Upgrade entire system with reasonable frequency        |
-|         -   2.1.2 Read before upgrading the system                       |
-|         -   2.1.3 Act on alerts during an upgrade                        |
-|         -   2.1.4 Deal promptly with .pacnew, .pacsave, and .pacorig     |
-|             files                                                        |
-|         -   2.1.5 Consider using pacmatic                                |
-|         -   2.1.6 Avoid certain pacman commands                          |
-|         -   2.1.7 Revert package upgrades that cause instability         |
-|         -   2.1.8 Regularly backup a list of installed packages          |
-|         -   2.1.9 Regularly backup the pacman database                   |
-|             -   2.1.9.1 Systemd Automation                               |
-|                                                                          |
-|     -   2.2 Generic Best Practices                                       |
-|         -   2.2.1 Subscribe to NVD/CVE alerts and only upgrade on a      |
-|             security alert                                               |
-|         -   2.2.2 Test updates on a non-critical system                  |
-|         -   2.2.3 Always backup config files before editing              |
-|         -   2.2.4 Regularly backup the /etc, /home, /srv, and /var       |
-|             directories                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setting Up Arch
+    -   1.1 Arch Specific Tips
+        -   1.1.1 Keeping old packages in a large /var partition
+        -   1.1.2 Use recommended configurations
+        -   1.1.3 Be careful with unofficial and less tested packages
+        -   1.1.4 Use up-to-date mirrors
+        -   1.1.5 Avoid development packages
+        -   1.1.6 Install the linux-lts package
+    -   1.2 Generic Best Practices
+        -   1.2.1 Use the package manager to install software
+        -   1.2.2 Use proven, mainstream software packages
+        -   1.2.3 Choose open-source drivers
+-   2 Maintaining Arch
+    -   2.1 Arch Specific Tips
+        -   2.1.1 Upgrade entire system with reasonable frequency
+        -   2.1.2 Read before upgrading the system
+        -   2.1.3 Act on alerts during an upgrade
+        -   2.1.4 Deal promptly with .pacnew, .pacsave, and .pacorig
+            files
+        -   2.1.5 Consider using pacmatic
+        -   2.1.6 Avoid certain pacman commands
+        -   2.1.7 Revert package upgrades that cause instability
+        -   2.1.8 Regularly back up a list of installed packages
+        -   2.1.9 Regularly back up the pacman database
+            -   2.1.9.1 Systemd Automation
+    -   2.2 Generic Best Practices
+        -   2.2.1 Subscribe to NVD/CVE alerts and only upgrade on a
+            security alert
+        -   2.2.2 Test updates on a non-critical system
+        -   2.2.3 Always back up config files before editing
+        -   2.2.4 Regularly back up the /etc, /home, /srv, and /var
+            directories
 
 Setting Up Arch
 ---------------
@@ -71,16 +66,16 @@ choices will impact overall system stability.
 
 > Arch Specific Tips
 
-Set up a large /var partition and keep old packages
+Keeping old packages in a large /var partition
 
-When setting up partitions during installation, always be sure to
-allocate plenty of space for a large, separate /var partition. A /var
-partition should have a generous 6 to 8 GB of space - more for some
-server uses. Pacman archives all of the previously installed packages in
-/var/cache/pacman/pkg, which requires significant amounts of storage
-space. Retaining these packages is helpful if a recent package upgrade
-causes instability, requiring a downgrade to an older, archived package.
-See the section below entitled, #Revert package upgrades that cause
+Pacman archives all of the previously installed packages in
+/var/cache/pacman/pkg, which over time may grow to a few GB in size. If
+you are setting up separate partitions during installation, always be
+sure to allocate plenty of space for a large /var partition. 4 to 8 GB
+should do, although more may be required for some server uses. Retaining
+these packages is helpful in case a recent package upgrade causes
+instability, requiring a downgrade to an older, archived package. See
+the section below entitled, #Revert package upgrades that cause
 instability.
 
 Use recommended configurations
@@ -153,7 +148,7 @@ namcap to check the final .tar.gz or PKGBUILD file.
 Install the linux-lts package
 
 The linux-lts package is an alternative Arch kernel package based upon
-Linux kernel 3.0 and is available in the [core] repository. This
+Linux kernel 3.10 and is available in the [core] repository. This
 particular kernel version enjoys long-term support (LTS) from upstream,
 including security fixes and some feature backports, especially useful
 for Arch users seeking to use such a kernel on a server, or who want a
@@ -172,17 +167,17 @@ linux package and edit the Fallback entry to use the LTS kernel.
 
 Use the package manager to install software
 
-The package manager (in Arch: pacman) does a much better job than you at
-keeping track of files. If you install things manually you will, sooner
-or later forget what you did, where you installed to, install
-conflicting stuff, install to wrong locations etc.
+Pacman does a much better job than you at keeping track of files. If you
+install things manually you will, sooner or later forget what you did,
+where you installed to, install conflicting software, install to the
+wrong locations, etc.
 
 From a stability standpoint you should try to avoid unsupported package
 and custom software, but if you really need such things making a package
 is better than manually compiling and installing.
 
-You should also disable make install command (which is typical for
-beginning of all problems) in /root/.bashrc
+You could also add an alias to disable make install command in
+/root/.bashrc:
 
      make() {
        [ "$1" == 'install' ] &&
@@ -239,8 +234,8 @@ Read before upgrading the system
 Before upgrading Arch, always read the latest Arch News to find out if
 there are any major software or configuration changes with the latest
 packages. Before upgrading fundamental software, such as the kernel,
-xorg, or glibc to a new version; look over the appropriate webforum to
-see if there have been any reported problems.
+xorg, or glibc to a new version, look over the appropriate forum to see
+if there have been any reported problems.
 
 Act on alerts during an upgrade
 
@@ -261,8 +256,9 @@ under special circumstances, a .pacorig file is created. Pacman provides
 notice when these files are written.
 
 Users must deal with these files promptly when pacman creates them, in
-order to ensure optimum system stability. Users are referred to the
-Pacnew and Pacsave Files wiki page for detailed instructions.
+order to ensure optimum system stability. The pacdiff tool, provided by
+pacman, can assist with this. Users are referred to the Pacnew and
+Pacsave Files wiki page for detailed instructions.
 
 Consider using pacmatic
 
@@ -325,23 +321,23 @@ section of pacman.conf, until the difficulty with the updated package is
 resolved. Consult the Arch wiki and/or webforums for advice, and file a
 bug report if necessary.
 
-Regularly backup a list of installed packages
+Regularly back up a list of installed packages
 
 At regular intervals, create a list of installed packages and store a
 copy on one or more offline media, such as a USB stick, external hard
 drive, or CD-R. Use the following command to create a pkglist:
 
-    pacman -Qqe | grep -vx "$(pacman -Qqm)" > /path/to/chosen/directory/pkg.list
+    pacman -Qqne > /path/to/chosen/directory/pkg.list
 
 In the event of a catastrophic system failure requiring a complete
 re-installation, these packages can be quickly reinstalled using the
 command:
 
-    xargs -a /path/to/chosen/directory/pkg.list pacman -S --needed
+    pacman -S --needed $(< /path/to/chosen/directory/pkg.list )
 
-Regularly backup the pacman database
+Regularly back up the pacman database
 
-The following command can be used to backup the local pacman database,
+The following command can be used to back up the local pacman database,
 and can be run as a cronjob:
 
     tar -cjf /path/to/chosen/directory/pacman-database.tar.bz2 /var/lib/pacman/local
@@ -361,7 +357,7 @@ Consult the Arch wikipage, How To Restore Pacman's Local Database.
 
 Systemd Automation
 
-You can configure systemd to backup the pacman database everytime a new
+You can configure systemd to back up the pacman database everytime a new
 package is installed or updated, save and run the following scripts. See
 here.
 
@@ -381,13 +377,17 @@ stable configuration. However, reviewing the frequent CVE Alerts to see
 if any apply to installed Arch packages can be tedious and time
 consuming.
 
+Warning:Partial updates are not supported by Arch Linux, the whole
+system should be upgraded when upgrading a component. Infrequent system
+updates could potentially complicate the update process.
+
 Test updates on a non-critical system
 
 If possible, test changes to configuration files, as well as updates to
 software packages, on a non-critical duplicate system first. Then, if no
 problems arise, roll out the changes to the production system.
 
-Always backup config files before editing
+Always back up config files before editing
 
 Before editing any configuration file, always back up a known working
 version of that config file. In the event that changes in the config
@@ -395,23 +395,23 @@ file cause problems, one can revert to the previous stable config file.
 Do this from a text editor by first saving the file to a backup copy
 before making any alterations; or execute the following command:
 
-    cp config config.bak
+    cp config config~
 
-Using .bak will ensure there is a readily distinguishable human-made
-backup conf file if pacman creates a .pacnew, .pacsave, or .pacorig file
-using the active config file.
+Using ~ will ensure there is a readily distinguishable human-made backup
+conf file if pacman creates a .pacnew, .pacsave, or .pacorig file using
+the active config file.
 
 etckeeper can help dealing with config files. It keeps the whole /etc
 directory in a version control.
 
-Regularly backup the /etc, /home, /srv, and /var directories
+Regularly back up the /etc, /home, /srv, and /var directories
 
 Since /etc, /home, /srv and /var directories contain important system
-files and configs, it is advisable to keep backup of these folders on a
-regular interval. The following is a simple guide line on how to go
-about it.
+files and configs, it is advisable to make backups of these folders at
+regular intervals. The following is a simple guide on how to go about
+it.
 
--   /etc: Backup the /etc directory by executing the following command
+-   /etc: Back up the /etc directory by executing the following command
     as root or as a cronjob:
 
     tar -cjf /path/to/chosen/directory/etc-backup.tar.bz2 /etc
@@ -429,7 +429,7 @@ root, execute the following command:
 
     tar -xvjf etc-backup.tar.bz2
 
--   /home: At regular intervals, backup the /home directory to an
+-   /home: At regular intervals, back up the /home directory to an
     external hard drive, Network Attached Server, or online backup
     service. Occasionally verify the integrity of the backup process by
     comparing original files and directories with their backups.
@@ -440,11 +440,11 @@ root, execute the following command:
 -   /var: Additional directories in /var, such a /var/spool/mail or
     /var/lib, which also require backup and occasional verification.
 
-If you want to backup much faster (using parallel compression, SMP), you
-should use pbzip2 (Parallel bzip2). The steps are slightly different,
-but not by much.
+If you want to back up much faster (using parallel compression, SMP),
+you should use pbzip2 (Parallel bzip2). The steps are slightly
+different, but not by much.
 
-First we will backup the files to a plain tarball with no compression:
+First we will back up the files to a plain tarball with no compression:
 
     tar -cvf /path/to/chosen/directory/etc-backup.tar /etc
 
@@ -456,8 +456,15 @@ install it with pacman -S pbzip2)
 and that's it. Your files should be backing up using all of your cores.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Enhancing_Arch_Linux_Stability&oldid=254858"
+"https://wiki.archlinux.org/index.php?title=Enhancing_Arch_Linux_Stability&oldid=301544"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 24 February 2014, at 11:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

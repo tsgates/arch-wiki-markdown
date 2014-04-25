@@ -1,78 +1,53 @@
 Tor
 ===
 
-> Summary
+Related articles
 
-This article will explain how to install and configure Tor alongside
-HTTP proxies like Privoxy and Polipo.
-
-Required software
-
-Tor
-
-Privoxy
-
-Polipo
-
-> Related
-
-Gnunet
-
-I2P
-
-Freenet
+-   Gnunet
+-   I2P
+-   Freenet
 
 Tor is an open source implementation of 2nd generation onion routing
 that provides free access to an anonymous proxy network. Its primary
 goal is to enable online anonymity by protecting against traffic
 analysis attacks.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-| -   4 Usage                                                              |
-| -   5 Web browsing                                                       |
-|     -   5.1 Firefox                                                      |
-|     -   5.2 Chromium                                                     |
-|     -   5.3 Luakit                                                       |
-|                                                                          |
-| -   6 HTTP Proxy                                                         |
-|     -   6.1 Firefox                                                      |
-|     -   6.2 Polipo                                                       |
-|     -   6.3 Privoxy                                                      |
-|                                                                          |
-| -   7 Instant Messaging                                                  |
-|     -   7.1 Pidgin                                                       |
-|                                                                          |
-| -   8 Irssi                                                              |
-| -   9 Pacman                                                             |
-| -   10 Running a Tor Server                                              |
-|     -   10.1 Running a Tor bridge                                        |
-|         -   10.1.1 Configuration                                         |
-|         -   10.1.2 Troubleshooting                                       |
-|                                                                          |
-|     -   10.2 Running a "Middleman" relay                                 |
-|         -   10.2.1 Configuration                                         |
-|                                                                          |
-|     -   10.3 Running a Tor Exit Node                                     |
-|         -   10.3.1 Configuration                                         |
-|                                                                          |
-| -   11 TorDNS                                                            |
-|     -   11.1 Using TorDNS for all DNS queries                            |
-|         -   11.1.1 SysV                                                  |
-|         -   11.1.2 systemd                                               |
-|                                                                          |
-| -   12 Torify                                                            |
-| -   13 Troubleshooting                                                   |
-|     -   13.1 Problem with User value                                     |
-|     -   13.2 Daemon fails on restart                                     |
-|                                                                          |
-| -   14 See Also                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+-   3 Configuration
+-   4 Running Tor in a Chroot
+-   5 Usage
+-   6 Web browsing
+    -   6.1 Firefox
+    -   6.2 Chromium
+    -   6.3 Luakit
+-   7 HTTP proxy
+    -   7.1 Firefox
+    -   7.2 Polipo
+    -   7.3 Privoxy
+-   8 Instant messaging
+    -   8.1 Pidgin
+-   9 Irssi
+-   10 Pacman
+-   11 Running a Tor server
+    -   11.1 Running a Tor bridge
+        -   11.1.1 Configuration
+        -   11.1.2 Troubleshooting
+    -   11.2 Running a "Middleman" relay
+        -   11.2.1 Configuration
+    -   11.3 Running a Tor exit node
+        -   11.3.1 Configuration
+-   12 TorDNS
+    -   12.1 Using TorDNS for all DNS queries
+-   13 Torify
+-   14 Transparent Torification
+-   15 Troubleshooting
+    -   15.1 Problem with user value
+    -   15.2 Daemon fails on restart
+-   16 See also
 
 Introduction
 ------------
@@ -129,22 +104,66 @@ By default Tor logs to stdout with a log-level of "notice". If system
 logging is enabled in the torrc configuration file, it will default to
 /usr/local/var/log/tor/.
 
+The "RunAsDaemon" setting conflicts with the default runtype of "simple"
+in the service file. You should not need to enable it. systemd handles
+the daemonization of tor. If you do enable it for whatever reason, you
+will need to override the service file to change the runtype to
+"Type=forking" so systemd allows tor to fork itself.
+
+Running Tor in a Chroot
+-----------------------
+
+For security purposes, it may be desirable to run Tor in a chroot. The
+following script will create an appropriate chroot in /opt/torchroot:
+
+    ~/torchroot-setup.sh
+
+    #!/bin/bash
+    export TORCHROOT=/opt/torchroot
+
+    mkdir -p $TORCHROOT
+    mkdir -p $TORCHROOT/etc/tor
+    mkdir -p $TORCHROOT/dev
+    mkdir -p $TORCHROOT/usr/bin
+    mkdir -p $TORCHROOT/usr/lib
+    mkdir -p $TORCHROOT/usr/share/tor
+    mkdir -p $TORCHROOT/var/lib
+
+    ln -s /usr/lib  $TORCHROOT/lib
+    cp /etc/hosts           $TORCHROOT/etc/
+    cp /etc/host.conf       $TORCHROOT/etc/
+    cp /etc/localtime       $TORCHROOT/etc/
+    cp /etc/nsswitch.conf   $TORCHROOT/etc/
+    cp /etc/resolv.conf     $TORCHROOT/etc/
+    cp /etc/tor/torrc       $TORCHROOT/etc/tor/
+
+    cp /usr/bin/tor         $TORCHROOT/usr/bin/
+    cp /usr/share/tor/geoip* $TORCHROOT/usr/share/tor/
+    cp /lib/libnss* /lib/libnsl* /lib/ld-linux.so* /lib/libresolv* /lib/libgcc_s.so* $TORCHROOT/usr/lib/
+    cp $(ldd /usr/bin/tor | awk '{print $3}'|grep --color=never "^/") $TORCHROOT/usr/lib/
+    cp -r /var/lib/tor      $TORCHROOT/var/lib/
+    chown -R tor:tor $TORCHROOT/var/lib/tor
+
+    sh -c "grep --color=never ^tor /etc/passwd > $TORCHROOT/etc/passwd"
+    sh -c "grep --color=never ^tor /etc/group > $TORCHROOT/etc/group"
+
+    mknod -m 644 $TORCHROOT/dev/random c 1 8
+    mknod -m 644 $TORCHROOT/dev/urandom c 1 9
+    mknod -m 666 $TORCHROOT/dev/null c 1 3
+
+    if [[ "$(uname -m)" == "x86_64" ]]; then
+      cp /usr/lib/ld-linux-x86-64.so* $TORCHROOT/usr/lib/.
+      ln -sr /usr/lib64 $TORCHROOT/lib64
+      ln -s $TORCHROOT/usr/lib ${TORCHROOT}/usr/lib64
+    fi
+
+After running the script as root, Tor can be launched in the chroot with
+the command: # chroot --userspec=tor:tor /opt/torchroot /usr/bin/tor
+
 Usage
 -----
 
-Tor runs as a daemon. To launch it, use:
-
-> SysV
-
-    /etc/rc.d/tor start
-
-(add it to the DAEMONS array to have it launch at startup)
-
-> systemd
-
-    systemctl start tor
-
-(use systemctl enable tor to have it launch at startup)
+Start/enable tor.service using systemd.
 
 Alternatively, you can launch it from the vidalia interface.
 
@@ -157,8 +176,18 @@ websites.
 Web browsing
 ------------
 
-Tor primarily supports Firefox, but can also be used with Chromium and
-other browsers.
+The Tor Project currently only supports web browsing with tor through
+the Tor Browser Bundle, which can be downloaded from the AUR. It is
+built with a patched version of the Firefox extended support releases.
+Tor can also be used with regular Firefox, Chromium and other browsers,
+but this is not recommended by the Tor Project.
+
+Tip:For makepkg to verify the signature on the AUR source tarball
+download for TBB, signing keys from the Tor Project (currently
+0x63FEE659) must be downloaded from the keyservers and added to the user
+gpg keyring with:
+
+    $ gpg --recv-keys 0x63FEE659
 
 > Firefox
 
@@ -168,18 +197,14 @@ about:config into the address bar and void your warranty. Change
 network.proxy.socks_remote_dns to true and restart the browser. This
 channels all DNS requests through TOR's socks proxy.
 
-Alternatively, install the Tor Browser Bundle (tor-browser-en) from the
-AUR. This will allow you to toggle very easily between Tor navigation
-and normal navigation instead of changing the preferences.
-
 > Chromium
 
 You can simply run:
 
     $ chromium --proxy-server="socks://localhost:9050"
 
-As for Firefox you can setup a fast switch for example through Proxy
-SwitchySharp.
+Just as with Firefox, you can setup a fast switch for example through
+Proxy SwitchySharp.
 
 Once installed enter in its configuration page. Under the tab Proxy
 Profiles add a new profile Tor, if ticked untick the option Use the same
@@ -196,7 +221,7 @@ You can simply run:
 
     $ torify luakit
 
-HTTP Proxy
+HTTP proxy
 ----------
 
 Tor can be used with an HTTP proxy like Polipo or Privoxy, however the
@@ -232,7 +257,7 @@ point your application at Tor (i.e. 127.0.0.1:9050). A problem with this
 method though is that applications doing DNS resolves by themselves may
 leak information. Consider using Socks4A (e.g. with Privoxy) instead.
 
-Instant Messaging
+Instant messaging
 -----------------
 
 In order to use an IM client with tor, we do not need an http proxy like
@@ -243,7 +268,7 @@ port 9050 by default.
 
 You can set up Pidgin to use Tor globally, or per account. To use Tor
 globally, go to Tools -> Preferences -> Proxy. To use Tor for specific
-accounts, go to Accounts -> Manage Accounts, select the desired account,
+accounts, go to Accounts > Manage Accounts, select the desired account,
 click Modify, then go to the Proxy tab. The proxy settings are as
 follows:
 
@@ -288,11 +313,11 @@ Load the script that will employ the SASL mechanism.
 Set your identification to nickserv, which will be read when connecting.
 Supported mechanisms are PLAIN and DH-BLOWFISH.
 
-    /sasl set <network> <username> <password> <mechanism>
+    /sasl set network username password mechanism
 
 Connect to Freenode:
 
-    /connect -network <network> 10.40.40.40
+    /connect -network network 10.40.40.40
 
 For more information check Accessing freenode Via Tor and the SASL
 README at freenode.net or the IRC/SILC Wiki article at torproject.org.
@@ -321,7 +346,7 @@ packages and verify new public keys by out-of-band means.
     XferCommand = /usr/bin/curl --socks5-hostname localhost:9050 -C - -f %u > %o
     ...
 
-Running a Tor Server
+Running a Tor server
 --------------------
 
 The Tor network is reliant on people contributing bandwidth. There are
@@ -345,7 +370,7 @@ be just these four lines:
 Troubleshooting
 
 If you get "Could not bind to 0.0.0.0:443: Permission denied" errors on
-startup, you'll need to pick a higher ORPort (e.g. 8080), or perhaps
+startup, you will need to pick a higher ORPort (e.g. 8080), or perhaps
 forward the port in your router.
 
 > Running a "Middleman" relay
@@ -358,7 +383,7 @@ Configuration
 
 You should at least share 20KiB/s:
 
-    Nickname <tornickname>
+    Nickname tornickname
     ORPort 9001
     BandwidthRate 20 KB            # Throttle traffic to 20KB/s
     BandwidthBurst 50 KB           # But allow bursts up to 50KB/s
@@ -367,7 +392,7 @@ Run Tor as middleman ( a relay):
 
     ExitPolicy reject *:*
 
-> Running a Tor Exit Node
+> Running a Tor exit node
 
 Any requests from a Tor user to the regular internet obviously need to
 exit the network somewhere, and exit nodes provide this vital service.
@@ -402,9 +427,9 @@ daemon:
 
     /etc/tor/torrc
 
-     DNSPort 9053
-     AutomapHostsOnResolve 1
-     AutomapHostsSuffixes .exit,.onion
+    DNSPort 9053
+    AutomapHostsOnResolve 1
+    AutomapHostsSuffixes .exit,.onion
 
 This will allow Tor to accept DNS requests (listening on port 9053 in
 this example) like a regular DNS server, and resolve the domain via the
@@ -434,17 +459,15 @@ than traditional DNS servers. The following instructions will show how
 to set up dnsmasq for this purpose.
 
 Change the tor setting to listen for the DNS request in port 9053 and
-install dnsmasq (available in the [extra] respository):
-
-    # pacman -S dnsmasq
+install dnsmasq.
 
 Modify its configuration file so that it contains:
 
     /etc/dnsmasq.conf
 
-     no-resolv
-     server=127.0.0.1#9053
-     listen-address=127.0.0.1
+    no-resolv
+    server=127.0.0.1#9053
+    listen-address=127.0.0.1
 
 These configurations set dnsmasq to listen only for requests from the
 local computer, and to use TorDNS at its sole upstream provider. It is
@@ -453,17 +476,9 @@ only the dnsmasq server.
 
     /etc/resolv.conf
 
-     nameserver 127.0.0.1
+    nameserver 127.0.0.1
 
-Start the dns server with
-
-SysV
-
-    # rc.d start dnsmasq
-
-systemd
-
-    # systemctl start dnsmasq
+Start the dnsmasq daemon.
 
 Finally if you use dhcpd you would need to change its settings to that
 it does not alter the resolv configuration file. Just add this line in
@@ -471,7 +486,7 @@ the configuration file:
 
     /etc/dhcpcd.conf
 
-     nohook resolv.conf
+    nohook resolv.conf
 
 If you already have an nohook line, just add resolv.conf separated with
 a comma.
@@ -498,13 +513,106 @@ above). In this case, the procedure for the first of the above examples
 would look like this:
 
     $ tor-resolve checkip.dyndns.org
+
     208.78.69.70
+
     $ torify elinks 208.78.69.70
+
+Transparent Torification
+------------------------
+
+In some cases it is more secure and often easier to transparently torify
+an entire system instead of configuring individual applications to use
+Tor's socks port, not to mention preventing DNS leaks. Transparent
+torification can be done with iptables in such a way that all outbound
+packets are redirected through Tor's TransPort, except the Tor traffic
+itself. Once in place, applications do not need to be configured to use
+Tor, though Tor's SocksPort will still work. This also works for DNS via
+Tor's DNSPort, but realize that Tor only supports TCP, thus UDP packets
+other than DNS cannot be sent through Tor and therefore must be blocked
+entirely to prevent leaks. Using iptables to transparently torify a
+system affords comparatively strong leak protection, but it is not a
+substitute for virtualized torification applications such as Whonix, or
+TorVM[1]. Transparent torification also will not protect against
+fingerprinting attacks on its own, so it is recommended to use it in
+conjunction with the Tor Browser(AUR: tor-browser-en) or to use an
+amnesic solution like Tails instead. Applications can still learn your
+computer's hostname, MAC address, serial number, timezone, etc. and
+those with root privileges can disable the firewall entirely. In other
+words, transparent torification with iptables protects against
+accidental connections and DNS leaks by misconfigured software, it is
+not sufficient to protect against malware or software with serious
+security vulnerabilities.
+
+To enable transparent torification, use the following file for
+iptables-restore and ip6tables-restore (internally used by systemd's
+iptables.service and ip6tables.service).
+
+    /etc/iptables/iptables.rules
+
+    #This file uses the nat table to force outgoing connections through the TransPort or DNSPort, and blocks anything it cannot torrify.
+    #Note: Now using --ipv6 and --ipv4 for protocol specific changes. iptables-restore and ip6tables-restore can now use the same file.
+    #       Where --ipv6 or --ipv4 is explicitly defined, ip*tables-restore will ignore the rule if it is not for the correct protocol.
+    #Note: ip6tables does not support --reject-with
+    #Make sure your torrc contains the following lines:
+    #       SocksPort 9050
+    #       DNSPort 5353
+    #       TransPort 9040
+    #See iptables(8)
+
+    *nat
+    :PREROUTING ACCEPT [6:2126]
+    :INPUT ACCEPT [0:0]
+    :OUTPUT ACCEPT [17:6239]
+    :POSTROUTING ACCEPT [6:408]
+    -A PREROUTING ! -i lo -p udp -m udp --dport 53 -j REDIRECT --to-ports 5353
+    -A PREROUTING ! -i lo -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports 9040
+    -A OUTPUT -o lo -j RETURN
+    --ipv4 -A OUTPUT -d 192.168.0.0/16 -j RETURN
+    -A OUTPUT -m owner --uid-owner "tor" -j RETURN
+    -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports 5353
+    -A OUTPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports 9040
+    COMMIT
+
+    *filter
+    :INPUT DROP [0:0]
+    :FORWARD DROP [0:0]
+    :OUTPUT DROP [0:0]
+    -A INPUT -i lo -j ACCEPT
+    -A INPUT -p icmp -j ACCEPT
+    -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+    --ipv4 -A INPUT -p tcp -j REJECT --reject-with tcp-reset
+    --ipv4 -A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable
+    --ipv4 -A INPUT -j REJECT --reject-with icmp-proto-unreachable
+    --ipv6 -A INPUT -j REJECT
+    --ipv4 -A OUTPUT -d 127.0.0.0/8 -j ACCEPT
+    --ipv4 -A OUTPUT -d 192.168.0.0/16 -j ACCEPT
+    --ipv6 -A OUTPUT -d ::1/8 -j ACCEPT
+    -A OUTPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+    -A OUTPUT -m owner --uid-owner "tor" -j ACCEPT
+    --ipv4 -A OUTPUT -j REJECT --reject-with icmp-port-unreachable
+    --ipv6 -A OUTPUT -j REJECT
+    COMMIT
+
+This file also works for ip6tables-restore, so you may symlink it:
+
+    ln -s /etc/iptables/iptables.rules /etc/iptables/ip6tables.rules
+
+Then make sure Tor is running, and start iptables and ip6tables:
+
+    systemctl {enable,start} tor iptables ip6tables
+
+You may want to add Requires=iptables.service and
+Requires=ip6tables.service to whatever systemd unit logs your user in
+(most likely a display manager), to prevent any user processes from
+being started before the firewall up. See systemd.
+
+  
 
 Troubleshooting
 ---------------
 
-> Problem with User value
+> Problem with user value
 
 If the tor daemon failed to start, then run the following command as
 root (or use sudo)
@@ -538,9 +646,40 @@ command to this:
 
 Tor should now start up correctly.
 
+Still if you cannot start the tor service, run the service using root
+(this will switch back to the tor user). To do this, change the user
+name in the /etc/tor/torrc file:
+
+    User tor
+
+Now modify the systemd's tor service file
+/usr/lib/systemd/system/tor.service as follows
+
+    [Service]
+    User=root
+    Group=root
+    Type=simple
+
+The process will be run as tor user. For this purpose change user and
+group ID to tor and also make it writable:
+
+    # chown -R tor:tor /var/lib/tor/
+    # chmod -R 755 /var/lib/tor
+
+Now save changes and run the daemon:
+
+    # systemctl --system daemon-reload
+    # systemctl start tor.service
+
 > Daemon fails on restart
 
-If after issuing /etc/rc.d/tor restart you have log entries similar to
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: rc.d? (Discuss)  
+  ------------------------ ------------------------ ------------------------
+
+If after issuing a daemon restart you have log entries similar to
 
     Interrupt: we have stopped accepting new connections, and will shut down in 30 seconds. Interrupt again to exit now
 
@@ -561,7 +700,7 @@ example:
 This will allow Tor to shutdown cleanly, and restart after a safe period
 of time. Remember that this file may be overwritten by upgrades.
 
-See Also
+See also
 --------
 
 -   Running the Tor client on Linux/BSD/Unix
@@ -570,9 +709,16 @@ See Also
 -   How to set up a Tor Hidden Service
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tor&oldid=253355"
+"https://wiki.archlinux.org/index.php?title=Tor&oldid=305565"
 
 Categories:
 
--   Internet Applications
+-   Internet applications
 -   Proxy servers
+
+-   This page was last modified on 19 March 2014, at 08:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

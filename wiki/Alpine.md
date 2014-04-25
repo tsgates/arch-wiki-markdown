@@ -12,33 +12,26 @@ Alpine to use a remote mailserver with IMAP.
 As of August 26 2008 the development of Alpine seems to have ended.
 Another fork called re-alpine has been made to continue the project.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration for use with IMAP                                    |
-|     -   2.1 Saving the password                                          |
-|                                                                          |
-| -   3 Setting up other IMAP folders                                      |
-| -   4 Setting up a proper return address                                 |
-| -   5 Built in help                                                      |
-| -   6 What else can you configure?                                       |
-| -   7 External links                                                     |
-| -   8 Printing from alpine                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration for use with IMAP
+    -   2.1 Saving the password
+-   3 Setting up other IMAP folders
+-   4 Setting up a proper return address
+-   5 Built in help
+-   6 What else can you configure?
+-   7 Printing from alpine
+-   8 See also
 
 Installation
 ------------
 
-Alpine is a package in Extra with some light dependencies, libldap,
-heimdal>=1.2, and gettext but you can grab them all with:
+Install re-alpine from the official repositories.
 
-    pacman -S re-alpine
-
-You might also want to grab something to check your spelling, like:
-
-    pacman -S aspell
+You might also want to grab something to check your spelling, like
+aspell.
 
 Configuration for use with IMAP
 -------------------------------
@@ -49,10 +42,9 @@ configuration tools (which are pretty comprehensive anyway). You can
 also create a system wide pinerc file if you want to, but that's beyond
 the scope of this page.
 
-To start alpine call up a console or a terminal emulator and type, you
-guessed it:
+To start alpine call up a console or a terminal emulator and type:
 
-    alpine
+    $ alpine
 
 You will see the main menu for alpine, you can select various sub-menus
 by moving your cursor with the arrow keys. You should also note that a
@@ -155,14 +147,10 @@ setup menu, but this time pick "L" for collectionLists.
 Enter your mailserver info below using the format you should be getting
 used to by now:
 
-  
-
     Nickname  : My Mailserver
     Server    : mailserver.org:993/user=jimbob123/ssl
     Path      : ~/mail/
     View      :
-
-  
 
        Fill in the fields above to add a Folder Collection to your
        COLLECTION LIST screen.
@@ -215,42 +203,44 @@ Pressing "W" allows you to quickly search for options. Messages can be
 listed in localtime by enabling the option "Convert Dates to Localtime".
 Toggling options can be done using the enter key.
 
-External links
---------------
-
-Official Alpine Page this page includes links to un-official Alpine
-pages that have some handy tutorials (argue better than the one I've
-provided here), hit "C" to open the config menu.
-
 Printing from alpine
 --------------------
 
-"See also: CUPS"
-
-printing from Alpine directly to lpr does not work with special
+Printing from Alpine directly to lpr does not work with special
 characters like German Umlauts in the Mail to be printed. The a2ps
-program does help:
-
-    pacman -S a2ps
-
-You can then edit ~/.pinerc:
+program does help. You can then edit ~/.pinerc:
 
     # Your default printer selection
-    printer=<YOURPRINTER> [] a2ps -q --center-title --footer -P<YOURPRINTER>
+    printer=YOURPRINTER [] a2ps -q --center-title --footer -PYOURPRINTER
 
     # List of special print commands
-    personal-print-command=<YOURPRINTER> [] a2ps -q --center-title --footer -P<YOURPRINTER>
+    personal-print-command=YOURPRINTER [] a2ps -q --center-title --footer -PYOURPRINTER
 
     # Which category default print command is in
     personal-print-category=3
 
-Replace <YOURPRINTER> with the name of your printer. Note that these
+Replace YOURPRINTER with the name of your printer. Note that these
 settings can also be applied in the setup UI of Alpine. See the manpage
 of a2ps for more configuration options.
 
+See also
+--------
+
+-   http://www.washington.edu/alpine/ - Official Alpine Page. This page
+    includes links to un-official Alpine pages that have some handy
+    tutorials (argue better than the one provided here), hit C to open
+    the config menu.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Alpine&oldid=239071"
+"https://wiki.archlinux.org/index.php?title=Alpine&oldid=285930"
 
 Category:
 
 -   Email Client
+
+-   This page was last modified on 2 December 2013, at 21:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

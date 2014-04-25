@@ -1,33 +1,42 @@
 USB 3G Modem
 ============
 
+Related articles
+
+-   wvdial
+-   Direct Modem Connection
+-   3G and GPRS modems with pppd
+-   HCL/Modems
+-   Category:Modems
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
+  g]                       is poorly written.       g]
+                           Reason: does not conform 
+                           to Help:Style (Discuss)  
+  ------------------------ ------------------------ ------------------------
+
 A number of mobile telephone networks around the world offer mobile
 internet connections over UMTS (or EDGE or GSM) using a portable USB
 modem device.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Remove the PIN                                                     |
-| -   2 Device identification                                              |
-| -   3 Mode switching                                                     |
-| -   4 Connection                                                         |
-|     -   4.1 Network Manager                                              |
-|     -   4.2 wvdial                                                       |
-|     -   4.3 sakis3g                                                      |
-|     -   4.4 Low connection speed                                         |
-|         -   4.4.1 QoS parameter                                          |
-|         -   4.4.2 Baud parameter                                         |
-|                                                                          |
-|     -   4.5 Monitor used bandwith                                        |
-|                                                                          |
-| -   5 Reading SMS                                                        |
-|     -   5.1 command line script                                          |
-|                                                                          |
-| -   6 Fix image quality                                                  |
-| -   7 Related Articles                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Remove the PIN
+-   2 Device identification
+-   3 Mode switching
+-   4 Connection
+    -   4.1 Network Manager
+    -   4.2 wvdial
+    -   4.3 sakis3g
+    -   4.4 Low connection speed
+        -   4.4.1 QoS parameter
+        -   4.4.2 Baud parameter
+    -   4.5 Monitor used bandwith
+-   5 Reading SMS
+    -   5.1 command line script
+-   6 Fix image quality
 
 Remove the PIN
 --------------
@@ -38,11 +47,7 @@ request if present. If the SIM card asks the PIN wvdial won't work.
 Device identification
 ---------------------
 
-Install usbutils
-
-    pacman -S usbutils
-
-and then examine the output of
+Examine the output of
 
     $ lsusb
 
@@ -94,9 +99,16 @@ modemmanager to make the modem work with NetworkManager:
 
     # pacman -S modemmanager
 
-After you restart the NetworkManager-applet and plug the modem in again
-NetworkManager should recognize the modem in the menu without further
-configuration. Setting up the modem in NetworkManager is
+Make sure both NetworkManager and ModemManager services are running.
+
+    # systemctl enable NetworkManager.service
+
+    # systemctl enable ModemManager.service
+
+A system restart might be necessary for ModemManager to detect the USB
+modem. After you restart the NetworkManager-applet and plug the modem in
+again NetworkManager should recognize the modem in the menu without
+further configuration. Setting up the modem in NetworkManager is
 self-explanatory, you should only need the login-information provided by
 your network provider.
 
@@ -240,8 +252,8 @@ may be difficult to keep an overview about overall consumed bandwidth.
 
 A number of tools are available to help with that. Two console tools are
 vnstat, which allows to keep track of bandwith over time, and iftop to
-monitor bandwidth of individual sessions. If you are a KDE user, KNemo
-might help. All are available in the community repository.
+monitor bandwidth of individual sessions. If you are a KDE user, knemo
+might help. All are available in the official repositories.
 
 Reading SMS
 -----------
@@ -310,7 +322,7 @@ mobile broadband connection with the hints "shift+r improves the quality
 of this image" and "shift+a improves the quality of all images on this
 page", follow these instructions:
 
-    pacman -Sy tinyproxy
+Install tinyproxy, available in the official repositories.
 
 Edit /etc/tinyproxy/tinyproxy.conf and insert the following two lines:
 
@@ -319,30 +331,23 @@ Edit /etc/tinyproxy/tinyproxy.conf and insert the following two lines:
 
 Start tinyproxy:
 
-    /etc/rc.d/tinyproxy start
+    systemctl start tinyproxy
 
 Configure your browser to use localhost:8888 as a proxy server and
 you're all done. This is especially useful if you're using, for example,
 Google Chrome which, unlike Firefox, doesn't allow you to modify the
 Pragma and Cache-Control headers.
 
-Related Articles
-----------------
-
-Huawei E220  
- Allow users to dial with wvdial  
- Idea_netsetter(Huawei_EG162G)  
- ZTE MF110/MF190  
- ZTE MF636  
- Internet key Momo Design  
- Dialup_without_a_dialer_HOWTO  
- 3G and GPRS modems with pppd alone  
- Huawei E1550 3G modem  
- Huawei E173s
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=USB_3G_Modem&oldid=254360"
+"https://wiki.archlinux.org/index.php?title=USB_3G_Modem&oldid=301766"
 
 Category:
 
 -   Modems
+
+-   This page was last modified on 24 February 2014, at 15:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

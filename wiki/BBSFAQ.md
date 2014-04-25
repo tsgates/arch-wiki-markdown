@@ -22,25 +22,23 @@ BBSFAQ
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Frequently asked questions                                         |
-|     -   1.1 How to use BBS                                               |
-|     -   1.2 Automount                                                    |
-|     -   1.3 Pacman                                                       |
-|     -   1.4 32/64 bit                                                    |
-|     -   1.5 Upgrade                                                      |
-|         -   1.5.1 Many things break after upgrade                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Frequently asked questions
+    -   1.1 How to use BBS
+    -   1.2 Automount
+    -   1.3 Pacman
+    -   1.4 32/64 bit
+    -   1.5 Upgrade
+        -   1.5.1 Many things break after upgrade
 
 Frequently asked questions
 --------------------------
 
 > How to use BBS
 
-Forum Etiquette
+Forum etiquette
 
 Before you post a problem on the forum, you should do the following:
 
@@ -86,8 +84,15 @@ Many things break after upgrade
 1.  Think before you upgrade
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=BBSFAQ&oldid=242072"
+"https://wiki.archlinux.org/index.php?title=BBSFAQ&oldid=299636"
 
 Category:
 
 -   About Arch
+
+-   This page was last modified on 22 February 2014, at 02:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

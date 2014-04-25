@@ -1,23 +1,19 @@
 Snapshot Release
 ================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 Objective                                                    |
-|     -   1.2 Rationale                                                    |
-|                                                                          |
-| -   2 New Branch                                                         |
-| -   3 Pacman                                                             |
-|     -   3.1 An example of pacman.conf                                    |
-|     -   3.2 Adding new functions to pacman                               |
-|                                                                          |
-| -   4 Arch Releases                                                      |
-| -   5 Status                                                             |
-| -   6 Related Projects                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+    -   1.1 Objective
+    -   1.2 Rationale
+-   2 New Branch
+-   3 Pacman
+    -   3.1 An example of pacman.conf
+    -   3.2 Adding new functions to pacman
+-   4 Arch Releases
+-   5 Status
+-   6 Related Projects
 
 Introduction
 ------------
@@ -121,3 +117,10 @@ Retrieved from
 Category:
 
 -   Arch development
+
+-   This page was last modified on 23 April 2012, at 11:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

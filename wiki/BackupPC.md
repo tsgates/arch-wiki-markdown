@@ -11,77 +11,47 @@ server's local disk or network storage. For some sites this might be the
 complete backup solution. For other sites additional permanent archives
 could be created by periodically backing up the server to tape.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Additional Packages                                          |
-|     -   1.2 Start BackupPC                                               |
-|     -   1.3 Make BackupPC run at startup                                 |
-|                                                                          |
-| -   2 Apache Configuration                                               |
-|     -   2.1 Install Apache and mod_perl                                  |
-|     -   2.2 Edit Apache configuration                                    |
-|     -   2.3 Starting BackupPC and Apache manually                        |
-|     -   2.4 Starting both on boot                                        |
-|                                                                          |
-| -   3 Alternative lighttpd Configuration                                 |
-| -   4 Accessing the admin page                                           |
-| -   5 The webserver user and the suid problem                            |
-| -   6 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Apache configuration
+    -   2.1 Edit Apache configuration
+-   3 Alternative lighttpd configuration
+-   4 Accessing the admin page
+-   5 The webserver user and the suid problem
+-   6 See also
 
 Installation
 ------------
 
-BackupPC is part of the official repos. You can simply install it with
-pacman:
+Install backuppc from the official repositories. Install rsync and
+perl-file-rsyncp if you want to use rsync as a transport.
 
-    # pacman -S backuppc
+Start backuppc systemd daemon and, if you wish to have running at boot
+time enable it.
 
-> Additional Packages
-
-Install rsync & perl-file-rsyncp if you want to use rsync as a transport
-
-> Start BackupPC
-
-To manually start BackupPC issue this command.
-
-    # systemctl start backuppc
-
-> Make BackupPC run at startup
-
-To make BackupPC load at startup:
-
-    # systemctl enable backuppc
-
-Apache Configuration
+Apache configuration
 --------------------
 
 BackupPC has a web interface that allows you to easily control it. You
 can access it using Apache and mod_perl but other webservers like
-lighttpd works too.
-
-> Install Apache and mod_perl
-
-    # pacman -S apache mod_perl
+lighttpd works too. Install apache and mod_perl from the official
+repositories.
 
 > Edit Apache configuration
 
-Edit the Apache configuration file...
+Edit the Apache configuration file to load mod_perl, tell Apache to run
+as user backuppc and to include /etc/httpd/conf/extra/backuppc.conf:
 
-    # nano -w /etc/httpd/conf/httpd.conf
+    /etc/httpd/conf/httpd.conf
 
-...to load mod_perl, tell Apache to run as user backuppc and to include
-/etc/httpd/conf/extra/backuppc.conf
+     LoadModule perl_module modules/mod_perl.so
+     User backuppc
+     Group backuppc
+     Include conf/extra/backuppc.conf
 
-    LoadModule perl_module modules/mod_perl.so
-    User backuppc
-    Group backuppc
-    Include conf/extra/backuppc.conf
-
-Edit /etc/backuppc/config.pl. Set administrator name
+Edit /etc/backuppc/config.pl. Set administrator name:
 
     $Conf{CgiAdminUsers} = 'admin'; 
 
@@ -89,70 +59,55 @@ Next, we need to add a users file and set the admin password:
 
     # htpasswd -c /etc/backuppc/backuppc.users admin
 
-Note:The BackupPC-Webfrontend is initially configured, that you can only
+The BackupPC-Webfrontend is initially configured, that you can only
 access it from the localhost. If you want to access it from all machines
-in your network, you have to edit /etc/httpd/conf/extra/backuppc.conf:
-
-    # nano -w /etc/httpd/conf/extra/backuppc.conf
-
-Edit the line
+in your network, you have to edit /etc/httpd/conf/extra/backuppc.conf.
+Edit the line:
 
     allow from 127.0.0.1
 
-to
+to:
 
     allow from 127.0.0.1 192.168.0
 
 where you have to replace 192.168.0 to your corresponding IP-Adresses
-you want to gain access from.
+you want to gain access from. Then just start Apache service.
 
-> Starting BackupPC and Apache manually
-
-    # systemctl start backuppc
-    # systemctl start httpd
-
-> Starting both on boot
-
-    # systemctl enable backuppc
-    # systemctl enable apache
-
-Alternative lighttpd Configuration
+Alternative lighttpd configuration
 ----------------------------------
 
-/etc/lighttpd/lighttpd.conf
+    /etc/lighttpd/lighttpd.conf
 
-    server.port             = 81
-    server.username         = "backuppc"
-    server.groupname        = "backuppc"
-    server.document-root    = "/srv/http"
-    server.errorlog         = "/var/log/lighttpd/error.log"
-    dir-listing.activate    = "enable"
-    index-file.names        = ( "index.html", "index.php", "index.cgi" )
-    mimetype.assign         = ( ".html" => "text/html", ".txt" => "text/plain", ".jpg" => "image/jpeg", ".png" => "image/png", "" => "application/octet-stream" )
+     server.port             = 81
+     server.username         = "backuppc"
+     server.groupname        = "backuppc"
+     server.document-root    = "/srv/http"
+     server.errorlog         = "/var/log/lighttpd/error.log"
+     dir-listing.activate    = "enable"
+     index-file.names        = ( "index.html", "index.php", "index.cgi" )
+     mimetype.assign         = ( ".html" => "text/html", ".txt" => "text/plain", ".jpg" => "image/jpeg", ".png" => "image/png", "" => "application/octet-stream" )
+     
+     server.modules = ("mod_alias", "mod_cgi", "mod_auth", "mod_access" )
+     
+     alias.url               = ( "/BackupPC_Admin" => "/usr/share/backuppc/cgi-bin/BackupPC_Admin" )
+     alias.url               += ( "/backuppc" => "/usr/share/backuppc/html" )
+     
+     cgi.assign              += ( ".cgi" => "/usr/bin/perl" )
+     cgi.assign              += ( "BackupPC_Admin" => "/usr/bin/perl" )
+     
+     auth.backend = "plain"
+     auth.backend.plain.userfile = "/etc/lighttpd/passwd"
+     auth.require = ( "/BackupPC_Admin" => ( "method" => "basic", "realm" => "BackupPC", "require" => "user=admin" ) )
 
-    server.modules = ("mod_alias", "mod_cgi", "mod_auth", "mod_access" )
+    /etc/lighttpd/passwd
 
-    alias.url               = ( "/BackupPC_Admin" => "/usr/share/backuppc/cgi-bin/BackupPC_Admin" )
-    alias.url               += ( "/backuppc" => "/usr/share/backuppc/html" )
-
-    cgi.assign              += ( ".cgi" => "/usr/bin/perl" )
-    cgi.assign              += ( "BackupPC_Admin" => "/usr/bin/perl" )
-
-    auth.backend = "plain"
-    auth.backend.plain.userfile = "/etc/lighttpd/passwd"
-    auth.require = ( "/BackupPC_Admin" => ( "method" => "basic", "realm" => "BackupPC", "require" => "user=admin" ) )
-
-/etc/lighttpd/passwd
-
-    admin:yourpasswordgoeshere
-
-  
+     admin:yourpassword
 
 Accessing the admin page
 ------------------------
 
 Browse to http://localhost/BackupPC_Admin respectively
-http://YOUR_BACKUPPC_SERVER_IP/BackupPC_Admin
+http://your_backuppc_server_ip/BackupPC_Admin.
 
 The webserver user and the suid problem
 ---------------------------------------
@@ -175,7 +130,7 @@ the backuppc cgi to another place.
 Save the C code to a file named wrapper.c (please update the cgi path if
 needed) and compile it with:
 
-    gcc -o BackupPC_Admin wrapper.c
+    $ gcc -o BackupPC_Admin wrapper.c
 
 The wrapper C code:
 
@@ -188,26 +143,33 @@ The wrapper C code:
        return 0;
     }
 
-move the real cgi (/usr/share/backuppc/cgi-bin/BackupPC_Admin) to the
-lib dir (/usr/share/backuppc/lib/real-BackupPC_Admin.cgi) , place the
-new binary BackupPC_Admin on the cgi-bin folder and chown the binary cgi
-to backuppc:http and set the suid bit:
+move the real cgi /usr/share/backuppc/cgi-bin/BackupPC_Admin to the lib
+directory /usr/share/backuppc/lib/real-BackupPC_Admin.cgi , place the
+new binary BackupPC_Admin in the cgi-bin directory and chown the binary
+cgi to backuppc:http and set the suid bit:
 
-    chown backuppc:http /usr/share/backuppc/cgi-bin/BackupPC_Admin
-    chmod 4750 /usr/share/backuppc/cgi-bin/BackupPC_Admin.
+    # chown backuppc:http /usr/share/backuppc/cgi-bin/BackupPC_Admin
+    # chmod 4750 /usr/share/backuppc/cgi-bin/BackupPC_Admin.
 
 keep your web server with its usual user and backup should now be able
-to run correctly
+to run correctly.
 
-Resources
----------
+See also
+--------
 
--   BackupPC Home Page
--   BackupPC Documentation
+-   BackupPC Home page
+-   BackupPC documentation
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=BackupPC&oldid=254314"
+"https://wiki.archlinux.org/index.php?title=BackupPC&oldid=275285"
 
 Category:
 
 -   System recovery
+
+-   This page was last modified on 13 September 2013, at 11:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

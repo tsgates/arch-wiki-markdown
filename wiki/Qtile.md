@@ -9,23 +9,20 @@ own layouts, widgets, and built-in commands.It is written and configured
 entirely in Python, which means you can leverage the full power and
 flexibility of the language to make it fit your needs.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Starting Qtile                                                     |
-| -   3 Configuration                                                      |
-|     -   3.1 Groups                                                       |
-|     -   3.2 Keys                                                         |
-|     -   3.3 Screens and Bars                                             |
-|     -   3.4 Widgets                                                      |
-|     -   3.5 Startup                                                      |
-|     -   3.6 Sound                                                        |
-|                                                                          |
-| -   4 Debugging                                                          |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Starting Qtile
+-   3 Configuration
+    -   3.1 Groups
+    -   3.2 Keys
+    -   3.3 Screens and Bars
+    -   3.4 Widgets
+    -   3.5 Startup
+    -   3.6 Sound
+-   4 Debugging
+-   5 See Also
 
 Installing
 ----------
@@ -196,10 +193,19 @@ See Also
 -   The official documentation
 -   Comparison of Tiling Window Managers
 -   xinitrc
+-   tilenol - A window manager inspired by Qtile. Written in Python3,
+    while Qtile in Python2.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Qtile&oldid=251737"
+"https://wiki.archlinux.org/index.php?title=Qtile&oldid=301846"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 24 February 2014, at 16:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

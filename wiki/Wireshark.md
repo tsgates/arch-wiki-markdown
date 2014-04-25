@@ -6,17 +6,15 @@ network troubleshooting, analysis, software and communications protocol
 development, and education. Originally named Ethereal, in May 2006 the
 project was renamed Wireshark due to trademark issues.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Capturing as normal user                                           |
-| -   3 A few capturing techniques                                         |
-|     -   3.1 Filtering TCP packets                                        |
-|     -   3.2 Filtering UDP packets                                        |
-|     -   3.3 Filter packets to a specific IP Address                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Capturing as normal user
+-   3 A few capturing techniques
+    -   3.1 Filtering TCP packets
+    -   3.2 Filtering UDP packets
+    -   3.3 Filter packets to a specific IP Address
 
 Installation
 ------------
@@ -36,10 +34,11 @@ Capturing as normal user
 Running Wireshark as root is insecure.
 
 Arch Linux uses method from Wireshark wiki to separate privileges. When
-wireshark-gtk is installed, install script sets /usr/bin/dumpcap
+wireshark-cli is installed, install script sets /usr/bin/dumpcap
 capabilities.
 
-    $ getcap /usr/bin/dumpcap 
+    $ getcap /usr/bin/dumpcap
+
     /usr/bin/dumpcap = cap_net_admin,cap_net_raw+eip
 
 /usr/bin/dumpcap is the only process that has privileges to capture
@@ -89,9 +88,16 @@ If you want to see all the current UDP packets, type udp into the
     address the incoming traffic is being sent to.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Wireshark&oldid=233889"
+"https://wiki.archlinux.org/index.php?title=Wireshark&oldid=287298"
 
 Categories:
 
 -   Security
 -   Networking
+
+-   This page was last modified on 8 December 2013, at 21:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

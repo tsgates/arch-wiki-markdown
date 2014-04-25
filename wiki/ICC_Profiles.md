@@ -1,60 +1,48 @@
 ICC Profiles
 ============
 
-  Summary
+  Summary help replacing me
   --------------------------------------------------------------------------------------------------------------------------------------------------------
   This article attempts to introduce available methods to install and load ICC profiles for the benefit of color management across desktop applications.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Profile Generation                                                 |
-|     -   2.1 File Transfer                                                |
-|     -   2.2 LPROF ICC Profiler                                           |
-|         -   2.2.1 Monitor Calibration                                    |
-|             -   2.2.1.1 Contrast/Brightness                              |
-|             -   2.2.1.2 Color Temperature                                |
-|                                                                          |
-|         -   2.2.2 Monitor Profiling                                      |
-|         -   2.2.3 Additional Resources                                   |
-|                                                                          |
-|     -   2.3 Argyll CMS                                                   |
-|     -   2.4 ThinkPad                                                     |
-|                                                                          |
-| -   3 Loading ICC Profiles                                               |
-|     -   3.1 xcalib                                                       |
-|         -   3.1.1 Xinitrc Example                                        |
-|         -   3.1.2 JWM <StartupCommand> Example                           |
-|                                                                          |
-|     -   3.2 dispwin                                                      |
-|         -   3.2.1 Xinitrc Example                                        |
-|         -   3.2.2 JWM <StartupCommand> Example                           |
-|                                                                          |
-| -   4 Additional Resources                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Profile Generation
+    -   2.1 File Transfer
+    -   2.2 Gnome Color Manager
+    -   2.3 LPROF ICC Profiler
+        -   2.3.1 Monitor Calibration
+            -   2.3.1.1 Contrast/Brightness
+            -   2.3.1.2 Color Temperature
+        -   2.3.2 Monitor Profiling
+    -   2.4 Argyll CMS
+    -   2.5 ThinkPads
+-   3 Loading ICC Profiles
+    -   3.1 xcalib
+        -   3.1.1 Xinitrc Example
+        -   3.1.2 JWM <StartupCommand> Example
+    -   3.2 dispwin
+        -   3.2.1 Xinitrc Example
+        -   3.2.2 JWM <StartupCommand> Example
+-   4 Additional Resources
 
 Introduction
-============
+------------
 
 As it pertains to general desktop use, an ICC profile is a binary file
 which contains precise data regarding the color attributes of an input,
-or output device. [1] Single, or multiple profiles can be applied across
-a system and its devices to produce consistent and repeatable results
-for graphic and document editing and publishing. ICC profiles are
-typically calibrated with a (tristimulus) colorimeter, or a
+or output device (Source). Single, or multiple profiles can be applied
+across a system and its devices to produce consistent and repeatable
+results for graphic and document editing and publishing. ICC profiles
+are typically calibrated with a (tristimulus) colorimeter, or a
 spectrophotometer when absolute color accuracy is required.
 
-[1] ICC Profile. Wikipedia, The Free Encyclopedia. Wikimedia Foundation,
-Inc. 23 Aug. 2010. Web. 6 July 2010.
-<http://en.wikipedia.org/wiki/ICC_profile>.
-
 Profile Generation
-==================
+------------------
 
-File Transfer
--------------
+> File Transfer
 
 Profile generation on a Windows 7/Vista/XP, or Mac OS X system is one of
 the easiest and most widely recommended methods to obtain a ICC monitor
@@ -63,12 +51,12 @@ they are compatible across operating systems. Transferring profiles from
 one OS to another can be used as a workaround for the lack of support
 for certain spectrophotometers, or colorimeters under Linux: one can
 simply produce a profile on a different OS and then use it in a Linux
-workflow. 2 Recommended colorimeters include the X-Rite i1Display 2 and
-the Spyder3 Pro. Note that the system on which the profile is generated
-must host the exact same video card and monitor for which the profile is
-to be used. Once generation of an ICC profile, or a series of profiles
-is complete on a Windows 7/Vista/XP system, copy the file(s) from the
-default path:
+workflow (Source). Recommended colorimeters include the X-Rite i1Display
+2, the Spyder3 Pro and the open Source Hardware ColorHug. Note that the
+system on which the profile is generated must host the exact same video
+card and monitor for which the profile is to be used. Once generation of
+an ICC profile, or a series of profiles is complete on a Windows
+7/Vista/XP system, copy the file(s) from the default path:
 
     C:\WINDOWS\System32\spool\drivers\color
 
@@ -89,12 +77,14 @@ Note:Ensure that the calibrated contrast, brightness and RGB settings of
 the monitor do not change between the time of calibration and the
 loading of the ICC profile.
 
-2 Linux Color Management. Wikipedia, The Free Encyclopedia. Wikimedia
-Foundation, Inc. 23 Aug. 2010. Web. 22 Aug. 2010.
-<http://en.wikipedia.org/wiki/Linux_color_management>
+> Gnome Color Manager
 
-LPROF ICC Profiler
-------------------
+On Gnome, an ICC profile can easily by created by using
+gnome-color-manager. Under Gnome, this is accessible via the Control
+Center and is pretty straightforward to use. You'll need a colorimeter
+device to use this feature.
+
+> LPROF ICC Profiler
 
 LPROF is an ICC profiler with a graphical user interface listed under
 lprof in the Arch User Repository (AUR).
@@ -102,7 +92,7 @@ lprof in the Arch User Repository (AUR).
 Note:The following walkthrough has been modified from the ArchWiki
 article Using LPROF to Profile Monitors.
 
-> Monitor Calibration
+Monitor Calibration
 
 Contrast/Brightness
 
@@ -153,7 +143,7 @@ display the white square on a pure black background.
 Take your time with the steps described above. It is essential to get it
 right.
 
-> Monitor Profiling
+Monitor Profiling
 
 Start lprof. You will be presented by a fairly large window with
 multiple tabs on the right.
@@ -191,15 +181,7 @@ After you are all done, click on the '...' button next to Output Profile
 File box. Enter the name of your profile: somemonitor.icc. Click Create
 Profile button, and you are done.
 
-> Additional Resources
-
--   Review the ArchWiki article Using LPROF to Profile Monitors for
-    additional details on how to profile monitors.
--   Review the official LPROF Main Help Window for details on how to
-    profile additional devices, including printers and scanners.
-
-Argyll CMS
-----------
+> Argyll CMS
 
 The Argyll Color Management System is a complete suite of command-line
 profile creation and loading tools listed under argyllcms in the Arch
@@ -208,19 +190,28 @@ User Repository (AUR).
 -   Review the official Argyll CMS documentation for details on how to
     profile selected devices.
 
-ThinkPad
---------
+> ThinkPads
 
 See color profiles for IBM/Lenovo ThinkPad notebook monitor profile
 (generic) support.
 
 Loading ICC Profiles
-====================
+--------------------
 
-Make sure you use only one ICC loader - either xcalib, dispwin,
-dispcalGUI-apply-profiles or others, otherwise you easily end up with
-uncontrolled environment. (The most recently run loader set the
-calibration, and the earlier loaded calibration is overwritten.)
+ICC profiles are loaded either by the session daemon or by a dedicated
+ICC loader. Both Gnome and KDE have daemons capable of loading ICC
+profiles from colord. If you use colord in combination with either
+gnome-settings-daemon or colord-kde, the profile will be loaded
+automagically. If you're not using neither Gnome nor KDE, you may
+install an independent daemon, xiccd, which does the same but does not
+depend on your desktop environment. Do not start two ICC-capable daemons
+(e.g. gnome-settiongs-daemon and xiccd) at the same time.
+
+If you're not using any ICC-capable session daemon, make sure you use
+only one ICC loader - either xcalib, dispwin, dispcalGUI-apply-profiles
+or others, otherwise you easily end up with uncontrolled environment.
+(The most recently run loader set the calibration, and the earlier
+loaded calibration is overwritten.)
 
 Before using a particular ICC loader, you should understand that some
 tools set only the calibration curves (e.g. xcalib), other tools set
@@ -228,14 +219,13 @@ only the display profile to X.org _ICC_PROFILE atom (e.g. xicc) and
 other tools do both tasks at once (e.g. dispwin,
 dispcalGUI-apply-profiles).
 
-xcalib
-------
+> xcalib
 
 -   xcalib is a lightweight monitor calibration loader which can load an
     ICC monitor profile to be shared across desktop applications. xcalib
     is part of the Arch User Repository (AUR).
 
-> Xinitrc Example
+Xinitrc Example
 
 Load profile P221W-sRGB.icc in /usr/share/color/icc on display host:0
 when X server starts
@@ -244,19 +234,18 @@ when X server starts
 
     /usr/bin/xcalib -d :0 /usr/share/color/icc/P221W-sRGB.icc
 
-> JWM <StartupCommand> Example
+JWM <StartupCommand> Example
 
 Load profile P221W-Native.icc in /usr/local/share/color/icc on display
 host:0 when JWM starts
 
      <StartupCommand>xcalib -d :0 /usr/local/share/color/icc/P221W-Native.icc</StartupCommand>
 
-dispwin
--------
+> dispwin
 
 -   dispwin is a part of argyllcms in the Arch User Repository (AUR).
 
-> Xinitrc Example
+Xinitrc Example
 
 Load profile 906w-6500K.icc in /home/arch/.color/icc on display 0 when X
 server starts
@@ -265,7 +254,7 @@ server starts
 
     /usr/bin/dispwin -d0 /home/arch/.color/icc/906w-6500K.icc
 
-> JWM <StartupCommand> Example
+JWM <StartupCommand> Example
 
 Load Argyll calibration file 906w-7000K.cal in
 /usr/local/share/color/icc on display 1 when JWM starts
@@ -273,14 +262,24 @@ Load Argyll calibration file 906w-7000K.cal in
      <StartupCommand>dispwin -d1 /usr/local/share/color/icc/906w-7000K.cal</StartupCommand>
 
 Additional Resources
-====================
+--------------------
 
+-   Using LPROF to Profile Monitors - Additional details on how to
+    profile monitors
 -   Linux Color Management - Wikipedia
 -   Argyll Color Management System - Official Site
+-   LPROF Main Help Window - Details on profiling printers and scanners
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ICC_Profiles&oldid=218530"
+"https://wiki.archlinux.org/index.php?title=ICC_Profiles&oldid=284815"
 
 Category:
 
 -   Graphics and desktop publishing
+
+-   This page was last modified on 27 November 2013, at 07:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -10,21 +10,17 @@ then ccache is perfect. While it may take a few seconds longer to
 compile a program the first time with ccache, subsequent compiles will
 be much, much faster.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Enable ccache for makepkg                                    |
-|     -   1.2 Enable for command line                                      |
-|     -   1.3 Enable with colorgcc                                         |
-|                                                                          |
-| -   2 Misc                                                               |
-|     -   2.1 Change the cache directory                                   |
-|     -   2.2 CLI                                                          |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Enable ccache for makepkg
+    -   1.2 Enable for command line
+    -   1.3 Enable with colorgcc
+-   2 Misc
+    -   2.1 Change the cache directory
+    -   2.2 CLI
+-   3 See also
 
 Installation
 ------------
@@ -106,8 +102,15 @@ See also
 -   ccache manual
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ccache&oldid=245445"
+"https://wiki.archlinux.org/index.php?title=Ccache&oldid=280805"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 1 November 2013, at 13:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -24,15 +24,13 @@ PyTyle is a tiling manager that works with EWMH-compliant window
 managers (like Openbox and KWin) to provide functions for tiling
 windows. Both Xmonad and Musca have influenced the feature set.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Execution                                                          |
-| -   3 Configuration                                                      |
-| -   4 Gaps between terminals                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Execution
+-   3 Configuration
+-   4 Gaps between terminals
 
 Installation
 ------------
@@ -106,8 +104,15 @@ rxvt-unicode-noinc from the AUR. Using Terminator, disable the "Window
 Geometry Hint" checkbox in the main options.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PyTyle&oldid=235332"
+"https://wiki.archlinux.org/index.php?title=PyTyle&oldid=273613"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 1 September 2013, at 10:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -7,15 +7,13 @@ device and as such works out-of-the-box in most cases, but if you want
 to maximize the usefulness of this device on Arch Linux you'll need to
 do some magic.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Usage Scenario                                                     |
-| -   2 Capture Software                                                   |
-| -   3 Building the Software                                              |
-| -   4 Registering Camera Controls                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Usage Scenario
+-   2 Capture Software
+-   3 Building the Software
+-   4 Registering Camera Controls
 
 Usage Scenario
 --------------
@@ -80,9 +78,15 @@ to use the cameras full feature set, including autofocus, even as a
 regular user.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Logitech_Quickcam_Pro_9000&oldid=210247"
+"https://wiki.archlinux.org/index.php?title=Logitech_Quickcam_Pro_9000&oldid=306024"
 
-Categories:
+Category:
 
 -   Imaging
--   Other hardware
+
+-   This page was last modified on 20 March 2014, at 17:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

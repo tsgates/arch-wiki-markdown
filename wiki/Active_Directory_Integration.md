@@ -1,6 +1,16 @@
 Active Directory Integration
 ============================
 
+Related articles
+
+-   Samba
+-   Samba/Tips and tricks
+-   Samba/Troubleshooting
+-   Samba/Advanced file sharing with KDE4
+-   Samba Domain Controller
+-   Samba 4 Active Directory Domain Controller
+-   OpenChange Server
+
 Warning:Because Arch Linux is a rolling release distribution, it is
 possible that some of the information in this article could be outdated
 due to package or configuration changes made by the maintainers. Never
@@ -45,42 +55,48 @@ rights within the domain to: query users and add computer accounts
 This document is not an intended as a complete guide to Active Directory
 nor Samba. Refer to the resources section for additional information.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Terminology                                                        |
-| -   2 Configuration                                                      |
-|     -   2.1 Active Directory Configuration                               |
-|         -   2.1.1 Updating the GPO                                       |
-|                                                                          |
-|     -   2.2 Linux Host Configuration                                     |
-|     -   2.3 Installation                                                 |
-|     -   2.4 Updating DNS                                                 |
-|     -   2.5 Configuring NTP                                              |
-|     -   2.6 Kerberos                                                     |
-|         -   2.6.1 Creating a Kerberos Ticket                             |
-|         -   2.6.2 Validating the Ticket                                  |
-|                                                                          |
-|     -   2.7 Samba                                                        |
-|                                                                          |
-| -   3 Starting and testing services                                      |
-|     -   3.1 Starting Samba                                               |
-|     -   3.2 Join the Domain                                              |
-|     -   3.3 Restart Samba                                                |
-|     -   3.4 Testing Winbind                                              |
-|     -   3.5 Testing nsswitch                                             |
-|     -   3.6 Testing Samba commands                                       |
-|                                                                          |
-| -   4 Configuring PAM                                                    |
-|     -   4.1 Testing login                                                |
-|     -   4.2 /etc/pam.d/gdm                                               |
-|     -   4.3 Sudo                                                         |
-|                                                                          |
-| -   5 Configuring Shares                                                 |
-| -   6 See also                                                           |
-|     -   6.1 Commercial Solutions                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Terminology
+-   2 Configuration
+    -   2.1 Active Directory Configuration
+        -   2.1.1 Updating the GPO
+    -   2.2 Linux Host Configuration
+    -   2.3 Installation
+    -   2.4 Updating DNS
+    -   2.5 Configuring NTP
+    -   2.6 Kerberos
+        -   2.6.1 Creating a Kerberos Ticket
+        -   2.6.2 Validating the Ticket
+    -   2.7 pam_winbind.conf
+    -   2.8 Samba
+-   3 Starting and testing services
+    -   3.1 Starting Samba
+    -   3.2 Join the Domain
+    -   3.3 Restart Samba
+    -   3.4 Testing Winbind
+    -   3.5 Testing nsswitch
+    -   3.6 Testing Samba commands
+-   4 Configuring PAM
+    -   4.1 Testing login
+    -   4.2 /etc/pam.d/gdm
+    -   4.3 /etc/pam.d/kde
+    -   4.4 Sudo
+-   5 Configuring Shares
+-   6 Adding a machine keytab file and activating password-free
+    kerberized ssh to the machine
+    -   6.1 Creating a machine key tab file
+    -   6.2 Enabling keytab authentication
+    -   6.3 Preparing sshd on server
+    -   6.4 Adding necessary options on client
+    -   6.5 Testing the setup
+    -   6.6 Nifty fine-tuning for complete password-free kerberos
+        handling.
+-   7 Generating user Keytabs which are accepted by AD
+    -   7.1 Nice to know
+-   8 See also
+    -   8.1 Commercial Solutions
 
 Terminology
 -----------
@@ -128,10 +144,9 @@ will need root or sudo access to complete these steps.
 
 Install the following packages:
 
--   samba
--   pam-krb5 ---- error: does not exist in latest version or arch linux!
--   pam_pwcheck
--   openntpd (or) ntp
+-   samba, see also Samba
+-   pam-krb5 from the AUR
+-   ntp or openntpd, see also NTPd or OpenNTPD
 
 > Updating DNS
 
@@ -243,6 +258,24 @@ similar to:
      02/04/12 21:27:47 02/05/12 07:27:42 krbtgt/EXAMPLE.COM@EXAMPLE.COM
              renew until 02/05/12 21:27:47
 
+> pam_winbind.conf
+
+If you get errors stating that /etc/security/pam_winbind.conf was not
+found, create the file and add the following:
+
+    /etc/security/pam_winbind.conf
+
+    debug=no
+    debug_state=no
+    try_first_pass=yes
+    krb5_auth=yes
+    krb5_cache_type=FILE
+    cached_login=yes
+    silent=no
+    mkhomedir=yes
+
+  
+
 > Samba
 
 Samba is a free software re-implementation of the SMB/CIFS networking
@@ -266,10 +299,9 @@ shares.
       security = ads
       encrypt passwords = yes
       password server = pdc.example.com
-      idmap uid = 10000-20000
-      idmap gid = 10000-20000
-     
-      #idmap backend = rid
+
+      idmap config * : backend = rid
+      idmap config * : range = 10000-20000
 
       winbind use default domain = Yes
       winbind enum users = Yes
@@ -277,7 +309,6 @@ shares.
       winbind nested groups = Yes
       winbind separator = +
       winbind refresh tickets = yes
-      winbind gid = 10000-20000
 
       template shell = /bin/bash
       template homedir = /home/%D/%U
@@ -361,7 +392,7 @@ See screenshot of Active Directory Users and Computers [[1]]
 winbindd failed to start on the first try because we were not yet a
 domain.
 
-Restart the samba service and winbind should fire up as well.
+Restart the Samba service and winbind should fire up as well.
 
 NSSwitch tells the Linux host how to retrieve information from various
 sources and in which order to do so. In this case, we are appending
@@ -491,7 +522,7 @@ And for groups:
 
 > Testing Samba commands
 
-Try out some net commands to see if samba can communicate with AD:
+Try out some net commands to see if Samba can communicate with AD:
 
     # net ads info
 
@@ -597,10 +628,9 @@ will be created automatically.
     account         required        pam_time.so
     account         sufficient      pam_unix.so
     account         sufficient      pam_winbind.so use_first_pass use_authtok
-    password        required        pam_pwcheck.so
     password        sufficient      pam_unix.so
     password        sufficient      pam_winbind.so use_first_pass use_authtok
-    #password       required        pam_cracklib.so difok=2 minlen=8 dcredit=2 ocredit=2 retry=3
+    password        required        pam_cracklib.so retry=3
     #password       required        pam_unix.so sha512 shadow use_authtok
     session         required        pam_mkhomedir.so skel=/etc/skel/ umask=0022
     session         sufficient      pam_unix.so
@@ -634,7 +664,44 @@ least one session!
 
 > /etc/pam.d/gdm
 
-TODO
+The only way I could get gdm to accept winbind logons was to install
+authconfig. This created a system-auth considerably different to the KDE
+example.
+
+> /etc/pam.d/kde
+
+to login in graphical session using KDM, you need to update your related
+pam configuration file : /etc/pam.d/system-auth.
+
+in fact, the /etc/pam.d/kde include /etc/pam.d/system-login which
+include /etc/pam.d/system-auth.
+
+the logic in this file is to put
+pam_winbind.so use_first_pass use_authtok after pam_unix.so, and make
+sure that pam_unix.so is sufficient, and pam_winbind.so is required.
+
+    /etc/pam.d/system-auth
+
+    #%PAM-1.0
+    auth            required        pam_securetty.so
+    auth            requisite       pam_nologin.so
+    auth            sufficient      pam_unix.so nullok
+    auth            required        pam_winbind.so use_first_pass use_authtok
+    auth            required        pam_tally.so onerr=succeed file=/var/log/faillog
+    # use this to lockout accounts for 10 minutes after 3 failed attempts
+    # #auth           required        pam_tally.so deny=2 unlock_time=600 onerr=succeed file=/var/log/faillog
+    account         required        pam_access.so
+    account         required        pam_time.so
+    account         sufficient      pam_unix.so
+    account         sufficient      pam_winbind.so use_first_pass use_authtok
+    #
+
+    password        sufficient      pam_unix.so
+    password        sufficient      pam_winbind.so use_first_pass use_authtok
+
+
+    session         include         system-login
+    session       optional                        pam_winbind.so
 
 > Sudo
 
@@ -672,11 +739,258 @@ you want available on the windows network.
       browseable = yes
       valid users = @NETWORK+"Domain Admins" NETWORK+test.user
 
-In the above example, the keywork NETWORK is to be used. Do not
+In the above example, the keyword NETWORK is to be used. Do not
 mistakenly substitute this with your domain name. For adding groups,
 prepend the '@' symbol to the group. Note that Domain Admins is
 encapsulated in quotes so Samba correctly parses it when reading the
 configuration file.
+
+  
+
+Adding a machine keytab file and activating password-free kerberized ssh to the machine
+---------------------------------------------------------------------------------------
+
+This explains how to generate a machine keytab file which you will need
+e.g. to enable password-free kerberized ssh to your machine from other
+machines in the domain. The scenario in mind is that you have a bunch of
+systems in your domain and you just added a server/workstation using the
+above description to your domain onto which a lot of users need to ssh
+in order to work - e.g. GPU workstation or an OpenMP compute node, etc.
+In this case you might not want to type your password every time you log
+in. On the other hand the key authentication used by many users in this
+case can not give you the necessary credentials to e.g. mount kerberized
+NFSv4 shares. So this will help you to enable password-free logins from
+your clients to the machine in question using kerberos ticket
+forwarding.
+
+> Creating a machine key tab file
+
+run 'net ads keytab create -U administrator' as root to create a machine
+keytab file in /etc/krb5.keytab. It will promt you with a warning that
+we need to enable keytab authentication in our configuration file, so we
+will do that in the next step. In my case it had problems when a key tab
+file is already in place - the command just did not come back it hang
+... In that case you should rename the existing /etc/krb5.keytab and run
+the command again - it should work now.
+
+    # net ads keytab create -U administrator
+
+verify the content of your keytab by running:
+
+    # klist -k /etc/krb5.keytab
+
+    Keytab name: FILE:/etc/krb5.keytab
+    KVNO Principal
+    ---- --------------------------------------------------------------------------
+       4 host/myarchlinux.example.com@EXAMPLE.COM
+       4 host/myarchlinux.example.com@EXAMPLE.COM
+       4 host/myarchlinux.example.com@EXAMPLE.COM
+       4 host/myarchlinux.example.com@EXAMPLE.COM
+       4 host/myarchlinux.example.com@EXAMPLE.COM
+       4 host/MYARCHLINUX@EXAMPLE.COM
+       4 host/MYARCHLINUX@EXAMPLE.COM
+       4 host/MYARCHLINUX@EXAMPLE.COM
+       4 host/MYARCHLINUX@EXAMPLE.COM
+       4 host/MYARCHLINUX@EXAMPLE.COM
+       4 MYARCHLINUX$@EXAMPLE.COM
+       4 MYARCHLINUX$@EXAMPLE.COM
+       4 MYARCHLINUX$@EXAMPLE.COM
+       4 MYARCHLINUX$@EXAMPLE.COM
+       4 MYARCHLINUX$@EXAMPLE.COM
+
+> Enabling keytab authentication
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: The option "use  
+                           kerberos keytab" no      
+                           longer exists, and       
+                           should be replaced by    
+                           "kerberos method". See   
+                           https://lists.samba.org/ 
+                           archive/samba/2012-Janua 
+                           ry/165640.html           
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+Now you need to tell winbind to use the file by adding this line to the
+/etc/samba/smb.conf:
+
+use kerberos keytab = true
+
+It should look sth. like this:
+
+    /etc/samba/smb.conf
+
+    [Global]
+      netbios name = MYARCHLINUX
+      workgroup = EXAMPLE
+      realm = EXAMPLE.COM
+      server string = %h ArchLinux Host
+      security = ads
+      encrypt passwords = yes
+      password server = pdc.example.com
+      use kerberos keytab = true
+
+      idmap config * : backend = tdb
+      idmap config * : range = 10000-20000
+
+      winbind use default domain = Yes
+      winbind enum users = Yes
+      winbind enum groups = Yes
+      winbind nested groups = Yes
+      winbind separator = +
+      winbind refresh tickets = yes
+
+      template shell = /bin/bash
+      template homedir = /home/%D/%U
+       
+      preferred master = no
+      dns proxy = no
+      wins server = pdc.example.com
+      wins proxy = no
+
+      inherit acls = Yes
+      map acl inherit = Yes
+      acl group control = yes
+
+      load printers = no
+      debug level = 3
+      use sendfile = no
+
+Restart the winbind.service using 'systemctl restart winbind.service'
+with root privileges.
+
+    # systemctl restart winbind.service
+
+Check if everything works by getting a machine ticket for your system by
+running
+
+    # kinit MYARCHLINUX$ -kt /etc/krb5.keytab
+
+This should not give you any feedback but running 'klist' should show
+you sth like:
+
+    # klist
+
+     Ticket cache: FILE:/tmp/krb5cc_0
+     Default principal: MYARCHLINUX$@EXAMPLE.COM
+     
+     Valid starting    Expires           Service principal 
+     02/04/12 21:27:47 02/05/12 07:27:42 krbtgt/EXAMPLE.COM@EXAMPLE.COM
+             renew until 02/05/12 21:27:47
+
+Some common mistakes here are a) forgetting the trailing $ or b)
+ignoring case sensitivity - it needs to look exactly like the entry in
+the keytab (usually you cannot to much wrong with all capital)
+
+> Preparing sshd on server
+
+All we need to do is add some options to our sshd_config and restart the
+sshd.service.
+
+Edit /etc/ssh/sshd_config to look like this in the appropriate places:
+
+    # /etc/ssh/sshd_config
+
+
+    ...
+
+    # Change to no to disable s/key passwords
+    ChallengeResponseAuthentication no
+
+    # Kerberos options
+    KerberosAuthentication yes
+    #KerberosOrLocalPasswd yes
+    KerberosTicketCleanup yes
+    KerberosGetAFSToken yes
+
+    # GSSAPI options
+    GSSAPIAuthentication yes
+    GSSAPICleanupCredentials yes
+
+    ...
+
+Restart the sshd.service using:
+
+    # systemctl restart sshd.service
+
+> Adding necessary options on client
+
+First we need to make sure that the tickets on our client are
+forwardable. This is usually standard but we better check anyways. You
+have to look for the forwardable option and set it to 'true'
+
+    forwardable     =       true
+
+Secondly we need to add the options
+
+     GSSAPIAuthentication yes
+     GSSAPIDelegateCredentials yes
+
+to our .ssh/config file to tell ssh to use this options - alternatively
+they can be invoked using the -o options directly in the ssh command
+(see 'man ssh' for help).
+
+> Testing the setup
+
+On Client:
+
+make sure you have a valid ticket - if in doubt run 'kinit'
+
+then use ssh to connect to you machine
+
+    ssh myarchlinux.example.com 
+
+you should get connected without needing to enter your password.
+
+if you have key authentication additionally activated then you should
+perform
+
+    ssh -v myarchlinux.example.com 
+
+to see which authentication method it actually uses.
+
+For debugging you can enable DEBUG3 on the server and look into the
+journal using journalctl
+
+> Nifty fine-tuning for complete password-free kerberos handling.
+
+In case your clients are not using domain accounts on their local
+machines (for whatever reason) it can be hard to actually teach them to
+kinit before ssh to the workstation. Therefore I came up with a nice
+workaround:
+
+Generating user Keytabs which are accepted by AD
+------------------------------------------------
+
+On a system let the user run:
+
+    ktutil
+    addent -password -p username@EXAMPLE.COM -k 1 -e RC4-HMAC
+    - enter password for username -
+    wkt username.keytab
+    q
+
+Now test the file by invoking:
+
+    kinit -kt username.keytab
+
+It should not promt you to give your password nor should it give any
+other feedback. If it worked you are basically done - just put the line
+above into your ~./bashrc - you can now get kerberos tickets without
+typing a password and with that you can connect to your workstation
+without typing a password while being completely kerberized and able to
+authenticate against NFSv4 and CIFS via tickets - pretty neat.
+
+> Nice to know
+
+The file 'username.keytab' is not machinespecific and can therefore be
+copied around. E.g. we created the files on a linux machine and copied
+them to our Mac clients as the commands on Macs are different ...
+
+  
 
 See also
 --------
@@ -694,8 +1008,15 @@ See also
 -   Likewise
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Active_Directory_Integration&oldid=249934"
+"https://wiki.archlinux.org/index.php?title=Active_Directory_Integration&oldid=305923"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 20 March 2014, at 17:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

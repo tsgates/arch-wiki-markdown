@@ -7,19 +7,17 @@ modern Linux distribution that uses kernel 2.6.39 or later. Feel free to
 contact the author with problems or suggestions (lagagnon at gmail.com ,
 English or Spanish).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Specifications                                                     |
-| -   2 What Works Without Configuration?                                  |
-| -   3 What Requires Configuration?                                       |
-| -   4 What Does Not Work?                                                |
-| -   5 Not Tested                                                         |
-| -   6 Configurations                                                     |
-| -   7 Considerations                                                     |
-| -   8 BIOS Flashing Concerns                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Specifications
+-   2 What Works Without Configuration?
+-   3 What Requires Configuration?
+-   4 What Does Not Work?
+-   5 Not Tested
+-   6 Configurations
+-   7 Considerations
+-   8 BIOS Flashing Concerns
 
 Specifications
 --------------
@@ -211,3 +209,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 23 April 2012, at 12:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

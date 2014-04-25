@@ -3,44 +3,42 @@ Webcam Setup
 
 This is a guide to setting up your webcam in Arch Linux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Linux webcam support                                               |
-| -   2 Identify your webcam                                               |
-|     -   2.1 pwc                                                          |
-|     -   2.2 qc-usb                                                       |
-|     -   2.3 qc-usb-messenger                                             |
-|     -   2.4 zr364xx                                                      |
-|     -   2.5 sn9c102                                                      |
-|     -   2.6 gspca                                                        |
-|     -   2.7 stv680                                                       |
-|     -   2.8 linux-uvc                                                    |
-|     -   2.9 ov51x-jpeg                                                   |
-|     -   2.10 r5u870 (Ricoh)                                              |
-|     -   2.11 stk11xx (Syntek)                                            |
-|                                                                          |
-| -   3 Make sure the module is loaded for your webcam                     |
-| -   4 Permissions                                                        |
-|     -   4.1 udev                                                         |
-|     -   4.2 devfs                                                        |
-|                                                                          |
-| -   5 Webcam configuration                                               |
-| -   6 Get software to use your webcam                                    |
-|     -   6.1 Cheese                                                       |
-|     -   6.2 GTK+ UVC Viewer (guvcview)                                   |
-|     -   6.3 Kopete                                                       |
-|     -   6.4 Kamoso                                                       |
-|     -   6.5 xawtv                                                        |
-|     -   6.6 VLC                                                          |
-|     -   6.7 MPlayer                                                      |
-|     -   6.8 FFmpeg                                                       |
-|     -   6.9 ekiga                                                        |
-|     -   6.10 Sonic-snap                                                  |
-|     -   6.11 Skype                                                       |
-|     -   6.12 Motion                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Linux webcam support
+-   2 Identify your webcam
+    -   2.1 pwc
+    -   2.2 qc-usb
+    -   2.3 qc-usb-messenger
+    -   2.4 zr364xx
+    -   2.5 sn9c102
+    -   2.6 gspca
+    -   2.7 stv680
+    -   2.8 linux-uvc
+    -   2.9 ov51x-jpeg
+    -   2.10 r5u870 (Ricoh)
+    -   2.11 stk11xx (Syntek)
+-   3 Make sure the module is loaded for your webcam
+-   4 Permissions
+    -   4.1 udev
+    -   4.2 devfs
+-   5 Webcam configuration
+-   6 Get software to use your webcam
+    -   6.1 Cheese
+    -   6.2 GTK+ UVC Viewer (guvcview)
+    -   6.3 Kopete
+    -   6.4 Kamoso
+    -   6.5 xawtv
+    -   6.6 VLC
+    -   6.7 MPlayer
+    -   6.8 FFmpeg
+    -   6.9 ekiga
+    -   6.10 Sonic-snap
+    -   6.11 Skype
+    -   6.12 Motion
+-   7 Troubleshooting
+    -   7.1 Microsoft Lifecam Studio/Cinema
 
 Linux webcam support
 --------------------
@@ -85,9 +83,11 @@ work, add the name of the webcam and the driver you used to the list!
 
 It is now in the community repo.
 
-Note: If qc-usb-messenger does not work use the gspca module, by
-installing the gspcav1 package.  
- Note: Now this driver is a module included in kernel 2.6.27
+> Note:
+
+-   If qc-usb-messenger does not work use the gspca module, by
+    installing the gspcav1 package.
+-   Now this driver is a module included in kernel 2.6.27.
 
 > zr364xx
 
@@ -111,7 +111,7 @@ PKGBUILD for this driver in the AUR.
 
 An extensive list of supported webcams is available [1].
 
-Note: This driver does not have V4L1 support.
+Note:This driver does not have V4L1 support.
 
 > stv680
 
@@ -150,12 +150,13 @@ You can find a full list of supported UVC devices here.
 As of kernel 2.6.26 linux-uvc is part of the kernel. Just load the
 uvcvideo module.
 
-Note:This driver does not have V4L1 support.
+> Note:
 
-Note:With WebCam SCB-0385N (usb ID 2232:1005), WebCam SC-0311139N (usb
-ID 2232:1020) and WebCam SC-03FFL11939N (usb ID 2232:1028), you might
-need to add some configuration to the module if the usage of the camera
-makes the system freeze :
+-   This driver does not have V4L1 support.
+-   With WebCam SCB-0385N (usb ID 2232:1005), WebCam SC-0311139N (usb ID
+    2232:1020) and WebCam SC-03FFL11939N (usb ID 2232:1028), you might
+    need to add some configuration to the module if the usage of the
+    camera makes the system freeze :
 
     /etc/modprobe.d/uvcvideo.conf
 
@@ -210,9 +211,9 @@ Make sure the module is loaded for your webcam
 Add your webcam's module in /etc/modules-load.d/webcam.conf so it will
 be loaded into the kernel during init stage bootstrapping.
 
-Note: If your webcam is USB, the kernel should automatically load the
-proper driver. If this is the case, check dmesg after you plug your
-webcam in. You should see something like this:
+If your webcam is USB, the kernel should automatically load the proper
+driver. If this is the case, check dmesg after you plug your webcam in.
+You should see something like this:
 
     $ dmesg|tail
 
@@ -261,7 +262,6 @@ rules for Writing udev rules.
 Add the following to your /etc/devfsd.conf. This will give normal users
 permission to use /dev/video0 (your webcam).
 
-    # Give normal users access to webcam
     REGISTER        video0       PERMISSIONS     root.users 0660
 
 Webcam configuration
@@ -270,7 +270,7 @@ Webcam configuration
 If you want to configure brightness, color and other webcam parameters
 (e.g. in the case when out-of-the-box colors are too
 bluish/reddish/greenish) you may use GTK+ UVC Viewer (guvcview),
-available in the Official Repositories as package guvcview. Just install
+available in the Official repositories as package guvcview. Just install
 it and launch, and it will present you a list of configurable settings.
 Changing these settings will affect all applications (e.g. Skype).
 
@@ -327,8 +327,8 @@ Booth in Mac OS X. It is in the official repositories.
 
 In addition to being a convenient way to configure your webcam, guvcview
 also allows capturing (with sound!) and viewing video from devices
-supported by the Linux UVC driver. Available in the Official
-Repositories as package guvcview. Just install it and launch, and it
+supported by the Linux UVC driver. Available in the official
+repositories as package guvcview. Just install it and launch, and it
 will present you a list of configurable settings. Changing these
 settings will affect all applications (e.g. Skype).
 
@@ -347,11 +347,7 @@ Available in the AUR: kamoso.
 
 This is a basic v4l device viewer, and although it is intended for use
 with TV tuner cards, it works well with webcams. It will display what
-your webcam sees in a window. Install it using
-
-    # pacman -S xawtv
-
-Run it with
+your webcam sees in a window. Install it (xawtv) and run it with:
 
     $ xawtv -c /dev/video0
 
@@ -404,9 +400,9 @@ From here you have to press s to take the snapshot. The snapshot will be
 saved in your current folder as shotXXXX.png. If you want to record
 continuous video:
 
-    $ mencoder tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0:forceaudio:adevice=/dev/dsp -ovc lavc -oac mp3lame -lameopts cbr:br=64:mode=3 -o <filename>.avi
+    $ mencoder tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0:forceaudio:adevice=/dev/dsp -ovc lavc -oac mp3lame -lameopts cbr:br=64:mode=3 -o filename.avi
 
-Press Ctrl+C to end the recording.
+Press Ctrl+c to end the recording.
 
 > FFmpeg
 
@@ -431,11 +427,8 @@ screen. Install the skype package. If you get green/disorted picture
 with skype read the section Webcam_Setup#Get software to use your webcam
 above.
 
-If your running x86-64 you might actually need to
-
-    # pacman -S multilib/lib32-v4l-utils
-
-and then run skype with
+If your running x86-64 you might actually need to install
+lib32-v4l-utils and then run skype with
 
     LD_PRELOAD=/usr/lib32/libv4l/v4l1compat.so skype
 
@@ -457,12 +450,33 @@ to find a suitable palette.
 
 Tip:If you need to load webcams in order (i.e. get the /dev/video0..n
 device order) or set ownership or permissions, take a look at writing
-rules for Writing udev rules.
+rules for writing udev rules.
+
+Troubleshooting
+---------------
+
+> Microsoft Lifecam Studio/Cinema
+
+Under certain configurations, the Microsoft lifecam studio/cinema may
+request too much usb bandwidth and fail see Uvcvideo FAQ. In this case
+try loading the uvcvideo driver with quirks=0x80. Add it to
+/etc/modprobe.d/uvcvideo.conf :
+
+    /etc/modprobe.d/uvcvideo.conf
+
+    ## fix bandwidth issue for lifecam studio/cinema
+    options uvcvideo quirks=0x80
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Webcam_Setup&oldid=252422"
+"https://wiki.archlinux.org/index.php?title=Webcam_Setup&oldid=303582"
 
-Categories:
+Category:
 
 -   Imaging
--   Other hardware
+
+-   This page was last modified on 8 March 2014, at 10:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

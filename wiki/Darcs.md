@@ -27,3 +27,10 @@ Retrieved from
 Category:
 
 -   Version Control System
+
+-   This page was last modified on 1 February 2013, at 04:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

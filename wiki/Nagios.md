@@ -1,7 +1,7 @@
 Nagios
 ======
 
-  Summary
+  Summary help replacing me
   ----------------------------------------------------------------------------------------------------
   A short installation and configuration guide for the service and network monitoring program Nagios
 
@@ -10,25 +10,22 @@ It monitors specified hosts and services, alerting you to any developing
 issues, errors or improvements. This article describes the installation
 and configuration of Nagios.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Features                                                           |
-| -   2 Webserver                                                          |
-| -   3 Installation                                                       |
-| -   4 Nagios Configuration                                               |
-| -   5 Apache Configuration                                               |
-| -   6 PHP Configuration                                                  |
-| -   7 Final Steps                                                        |
-| -   8 Plugin check_rdiff                                                 |
-|     -   8.1 Download and Install                                         |
-|     -   8.2 Enable sudo for user nagios                                  |
-|     -   8.3 Integrate check_rdiff plugin into nagios                     |
-|                                                                          |
-| -   9 Forks                                                              |
-| -   10 See also                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Features
+-   2 Webserver
+-   3 Installation
+-   4 Nagios Configuration
+-   5 Apache Configuration
+-   6 PHP Configuration
+-   7 Final Steps
+-   8 Plugin check_rdiff
+    -   8.1 Download and Install
+    -   8.2 Enable sudo for user nagios
+    -   8.3 Integrate check_rdiff plugin into nagios
+-   9 Forks
+-   10 See also
 
 Features
 --------
@@ -107,18 +104,17 @@ Apache Configuration
 Edit /etc/httpd/conf/httpd.conf, add the following to the end of the
 file:
 
+    LoadModule php5_module modules/libphp5.so
+
     # Nagios
     Include "conf/extra/nagios.conf"
 
     # PHP
     Include "conf/extra/php5_module.conf"
 
-Note: As of 3.4.1-4 the example conf is in
-etc/webapps/nagios/apache.example.conf
+Copy configure file:
 
-To fix this run:
-
-     cp /etc/webapps/nagios/apache.example.conf /etc/httpd/conf/extra/nagios.conf
+    # cp /etc/webapps/nagios/apache.example.conf /etc/httpd/conf/extra/nagios.conf
 
 Add the apache user http to the group nagios, otherwise you will get the
 following error when using nagios:
@@ -142,11 +138,11 @@ Final Steps
 
 Start/Restart nagios:
 
-    /etc/rc.d/nagios restart
+    # systemctl restart nagios
 
 Start/Restart apache:
 
-    /etc/rc.d/httpd restart
+    # systemctl restart httpd
 
 Now you should be able to access nagios through your webbrowser using
 the username and password you have created above using htpasswd:
@@ -215,7 +211,7 @@ if the backup doesn't start in time.
 
 Finally, restart nagios:
 
-    /etc/rc.d/nagios restart
+    # systemctl restart nagios
 
 You can now see the rdiff-backup status by clicking on Services on the
 left side of the nagios web interface control panel.
@@ -236,8 +232,15 @@ See also
 -   NagiosForge a repository for ad
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Nagios&oldid=243168"
+"https://wiki.archlinux.org/index.php?title=Nagios&oldid=257625"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 18 May 2013, at 14:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

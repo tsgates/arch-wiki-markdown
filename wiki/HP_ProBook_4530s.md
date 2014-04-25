@@ -13,37 +13,32 @@ HP ProBook 4530s
   Function Keys   Working   hp_wmi
   --------------- --------- ----------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Device information                                                 |
-|     -   1.1 lspci                                                        |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Network                                                      |
-|     -   2.2 Bluetooth                                                    |
-|         -   2.2.1 hciconfig -a                                           |
-|                                                                          |
-|     -   2.3 Graphics                                                     |
-|         -   2.3.1 Brightness                                             |
-|                                                                          |
-|     -   2.4 Touchpad                                                     |
-|     -   2.5 Miscellaneous hardware                                       |
-|         -   2.5.1 Card reader                                            |
-|         -   2.5.2 Function keys                                          |
-|         -   2.5.3 Camera                                                 |
-|                                                                          |
-|     -   2.6 Power                                                        |
-|     -   2.7 Suspend/hibernation                                          |
-|         -   2.7.1 Sensors                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Device information
+    -   1.1 lspci
+-   2 Configuration
+    -   2.1 Network
+    -   2.2 Bluetooth
+        -   2.2.1 hciconfig -a
+    -   2.3 Graphics
+        -   2.3.1 Brightness
+    -   2.4 Touchpad
+    -   2.5 Miscellaneous hardware
+        -   2.5.1 Card reader
+        -   2.5.2 Function keys
+        -   2.5.3 Camera
+        -   2.5.4 HP DriveGuard
+    -   2.6 Power
+    -   2.7 Suspend and hibernation
+        -   2.7.1 Sensors
 
 Device information
 ------------------
 
 This model has many hardware configurations. Mine has an i3 processor,
-Intel HD3000 video card, and an Atheros AR9285 Wi-Fi card.
+Intel HD Graphics 3000 video card, and an Atheros AR9285 Wi-Fi card.
 
 > lspci
 
@@ -73,18 +68,19 @@ Configuration
 
 > Network
 
-Both wired and wireless network works out-of-the-box. Atheros card
-requires ath9k module, Realtek ethernet card requires r8169 module. More
-information on Wireless Setup#ath9k
+Both the wired and wireless network cards works out-of-the-box. The
+Atheros card requires the ath9k module, and the Realtek Ethernet card
+requires the r8169 module. More information can be found at Wireless
+network configuration#ath9k
 
-Note:With some revisions of this Realtek ethernet card, one may find
-better performance from the Realtek provided r8168 module, available in
-the official repositories.
+Note:With some revisions of this Realtek Ethernet card, better
+performance may be obtained with the Realtek provided r8168 module,
+available in the official repositories.
 
 > Bluetooth
 
-Sending/receiving files, switching bluetooth on/off works. Requires
-ath3k module.
+Sending/receiving files and switching Bluetooth on/off works. The ath3k
+module is required.
 
 hciconfig -a
 
@@ -107,24 +103,24 @@ hciconfig -a
 
 > Graphics
 
-Intel HD3000 card is supported by open-source xf86-video-intel driver.
-Dual-head with HDMI works.
-
-    pacman -S xf86-video-intel
+Intel HD Graphics 3000 is supported by the open-source xf86-video-intel
+driver. Dual-head with HDMI works. If using hybrid graphics in
+conjunction with AMD, AMD Catalyst works well regarding GPU power
+management. Switching, however, requires a system reboot. AMD Catalyst
+should be installed along with xf86-video-intel to support hybrid
+(Intel) GPU.
 
 Brightness
 
-Controlling brightness with Fn+F2 and Fn+F3 buttons works in Gnome 3,
-did not test in other DEs.
+Controlling screen brightness with the keystrokes Fn+F2 and Fn+F3 works
+in Gnome 3, KDE and MATE and has not been tested in other desktop
+environments.
 
 > Touchpad
 
-Works with xf86-input-synaptics package. Could not get it to switch off
-while double tapped in top-left corner, like it worked in Suse Linux
-Enterprise Desktop, which was factory OS. Tested tapping, two- and
-three-finger tapping and two-finger scrolling.
-
-    pacman -S xf86-input-synaptics
+Touchpad function works with xf86-input-synaptics package. Disabling
+touchpad using the top-left corner double tap works with
+xf86-input-synaptics-led package found in the AUR.
 
 > Miscellaneous hardware
 
@@ -142,14 +138,18 @@ works as intended.
 Function keys
 
 Module hp-wmi is likely to be required for the keys to work. In Gnome 3
-every Fn+F* key works. Fn-F6 key requires gnome-power-manager installed.
-Keys above numeric keypad are also recognized. The Web key has a
-XF86HomePage symbol (opens home page) and Wi-Fi key has NoSymbol and
-does nothing.
+and MATE every Fn+F* key works. Fn-F6 key requires gnome-power-manager
+installed. Keys above numeric keypad are also recognized. The Web key
+has a XF86HomePage symbol (opens home page) and Wi-Fi key has NoSymbol
+and does nothing.
 
 Camera
 
 Works with uvcvideo module.
+
+HP DriveGuard
+
+Works with hpfall package.
 
 > Power
 
@@ -159,32 +159,30 @@ Frequency Scaling.
 
 Note:i915 module parameter i915_enable_rc6 can give up to 2 hours of
 additional battery life. However it is considered unstable and might
-cause crashes and graphical glitches. Add i915.i915_enable_rc6=1 to your
-kernel line in bootloader to try it.
+cause crashes and graphical glitches. Add i915.i915_enable_rc6=1 to the
+kernel command line of your bootloader to try it.
 
-Note:With laptop-mode-tools, tune from powertop2 and i915_enable_rc6
-parameter I was able to get about 5:30h of estimated battery life.
+-   With laptop-mode-tools, tune from powertop2 and i915_enable_rc6
+    parameter I was able to get about 5:30h of estimated battery life.
+-   Keep in mind that the powertop "good/bad" parameters will not
+    survive a reboot. As of 3.4.x rc6 is enabled by default for Ivy
+    Bridge and Sandy Bridge processors. The default (marked -1) is
+    equivalent of i915_enable_rc6=3 which enables rc6 and rc6p. An
+    additional, lower power state can also be enabled by using
+    i915_enable_rc6=7, though this has been reported to sometimes come
+    at the cost of stability. Also, as of 2011Q4 the i915 module in
+    Sandy Bridge and Ivy Bridge also have framebuffer compression
+    enabled by default.
 
-Note:Keep in mind that the powertop "good/bad" parameters will not
-survive a reboot. As of 3.4.x rc6 is enabled by default for Ivy Bridge
-and Sandy Bridge processors. The default (marked -1) is equivalent of
-i915_enable_rc6=3 which enables rc6 and rc6p. An additional, lower power
-state can also be enabled by using i915_enable_rc6=7, though this has
-been reported to sometimes come at the cost of stability. Also, as of
-2011Q4 the i915 module in Sandy Bridge and Ivy Bridge also have
-framebuffer compression enabled by default.
-
-> Suspend/hibernation
+> Suspend and hibernation
 
 Both suspend and hibernation work with pm-utils and kernel backend.
 
 Sensors
 
-Lm-sensors shows one acpitz-virtual device with 4 working temperature
+lm_sensors shows one acpitz-virtual device with 4 working temperature
 readings and coretemp-isa device which has one sensor for each CPU core.
 It does not show any info about fans RPMs.
-
-    pacman -S lm_sensors
 
     acpitz-virtual-0
     Adapter: Virtual device
@@ -204,8 +202,15 @@ It does not show any info about fans RPMs.
     Core 1:         +50.0°C  (high = +80.0°C, crit = +85.0°C)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=HP_ProBook_4530s&oldid=234917"
+"https://wiki.archlinux.org/index.php?title=HP_ProBook_4530s&oldid=305779"
 
 Category:
 
 -   HP
+
+-   This page was last modified on 20 March 2014, at 02:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

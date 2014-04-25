@@ -3,29 +3,25 @@ Acer Timeline 3830
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-|     -   1.1 Acer TimelineX 3830TG-6412                                   |
-|         -   1.1.1 cpuinfo                                                |
-|         -   1.1.2 lspci                                                  |
-|         -   1.1.3 lsusb                                                  |
-|                                                                          |
-| -   2 Exact hardware model (for me at least)                             |
-| -   3 Really issues, hardware problems                                   |
-|     -   3.1 Sound card issue                                             |
-|     -   3.2 Screen backlight issue                                       |
-|     -   3.3 Wireless                                                     |
-|     -   3.4 GPU switch issue                                             |
-|                                                                          |
-| -   4 Lighter issues                                                     |
-|     -   4.1 Other Wireless                                               |
-|     -   4.2 CPU frequency scaling                                        |
-|     -   4.3 Fn + buttons                                                 |
-|     -   4.4 ACPI events                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+    -   1.1 Acer TimelineX 3830TG-6412
+        -   1.1.1 cpuinfo
+        -   1.1.2 lspci
+        -   1.1.3 lsusb
+-   2 Exact hardware model (for me at least)
+-   3 Really issues, hardware problems
+    -   3.1 Sound card issue
+    -   3.2 Screen backlight issue
+    -   3.3 Wireless
+    -   3.4 GPU switch issue
+-   4 Lighter issues
+    -   4.1 Other Wireless
+    -   4.2 CPU frequency scaling
+    -   4.3 Fn + buttons
+    -   4.4 ACPI events
 
 Hardware
 --------
@@ -340,7 +336,7 @@ Lighter issues
 
 > Other Wireless
 
-See Wireless Setup.
+See Wireless network configuration.
 
 TODO: create some profiling (and some iptables stuff also would be nice
 for that network profiling)
@@ -372,8 +368,15 @@ and On/Off. The total number is 4 combinations.
 > ACPI events
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Timeline_3830&oldid=215209"
+"https://wiki.archlinux.org/index.php?title=Acer_Timeline_3830&oldid=297884"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 15 February 2014, at 15:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

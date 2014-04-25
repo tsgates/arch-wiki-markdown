@@ -6,22 +6,19 @@ well on the latest Wine. This article outlines a few workarounds
 necessary to using Ventrilo naturally on Linux.
 
 Note:Running Ventrilo under Wine is no longer necessary; Mangler is a
-stable open-source client in the AUR that connects to Ventrilo 3.0
-servers.
+stable open-source client in the community repository (mangler) that
+connects to Ventrilo 3.0 servers.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Global Push to Talk Hotkey                                         |
-|     -   1.1 Finding the input device                                     |
-|     -   1.2 Startup Script                                               |
-|     -   1.3 Example Ventrilo Startup Script                              |
-|     -   1.4 Allowing sudo for ventriloctrl                               |
-|                                                                          |
-| -   2 Mangler and ALSA                                                   |
-| -   3 Additional Resources                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Global Push to Talk Hotkey
+    -   1.1 Finding the input device
+    -   1.2 Startup Script
+    -   1.3 Example Ventrilo Startup Script
+    -   1.4 Allowing sudo for ventriloctrl
+-   2 Mangler and ALSA
+-   3 Additional Resources
 
 Global Push to Talk Hotkey
 --------------------------
@@ -179,9 +176,16 @@ Additional Resources
 -   Ubuntu Forums Source
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ventrilo&oldid=238253"
+"https://wiki.archlinux.org/index.php?title=Ventrilo&oldid=305687"
 
 Categories:
 
 -   Telephony and Voice
 -   Wine
+
+-   This page was last modified on 19 March 2014, at 23:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

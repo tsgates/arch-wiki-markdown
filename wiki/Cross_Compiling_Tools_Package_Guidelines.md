@@ -9,29 +9,23 @@ CLR – Cross – Eclipse – Free Pascal – GNOME – Go – Haskell – Java 
 – Kernel – Lisp – MinGW – Nonfree – OCaml – Perl – Python – Ruby – VCS –
 Web – Wine
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Important note                                                     |
-| -   2 Version compatibility                                              |
-| -   3 Building a Cross Compiler                                          |
-| -   4 Package naming                                                     |
-| -   5 File Placement                                                     |
-| -   6 Example                                                            |
-| -   7 Hows and whys                                                      |
-|     -   7.1 Q: Why not installing into /opt?                             |
-|     -   7.2 Q: What is that out-of-path executables thing?               |
-|                                                                          |
-| -   8 Troubleshooting                                                    |
-|     -   8.1 Q: What to do if compilation fails without clear message?    |
-|     -   8.2 Q: What does this error [error message] means?               |
-|     -   8.3 Q: Why do files get installed in wrong places?               |
-|                                                                          |
-| -   9 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-  
+-   1 Important note
+-   2 Version compatibility
+-   3 Building a cross compiler
+-   4 Package naming
+-   5 File placement
+-   6 Example
+-   7 Hows and whys
+    -   7.1 Q: Why not installing into /opt?
+    -   7.2 Q: What is that out-of-path executables thing?
+-   8 Troubleshooting
+    -   8.1 Q: What to do if compilation fails without clear message?
+    -   8.2 Q: What does this error [error message] means?
+    -   8.3 Q: Why do files get installed in wrong places?
+-   9 See also
 
 Tip:As alternative for creation of cross-compiler packages you could use
 crosstool-ng and create you own toolchain in fully automated way.
@@ -42,30 +36,29 @@ crosstool-ng can be found on crosstool-ng
 Important note
 --------------
 
-This page describes new way of doing things, inspired by follwing
-packages in [community]:
+This page describes the new way of doing things, inspired by the
+following packages in [community]:
 
 -   mingw32-gcc and other packages from mingw32-* series
--   arm-elf-gcc-base and other packages from arm-elf-* series
+-   arm-none-eabi-gcc and other packages from arm-elf-* series
 -   arm-wince-cegcc-gcc and other packages from arm-wince-cegcc-* series
 
 Version compatibility
 ---------------------
 
-Warning:Using incompatible version of packages for toolchain compilation
-leads to inevitable failures. By default consider all versions
-incompatible.
+Warning:Using incompatible versions of packages for toolchain
+compilation leads to inevitable failures. By default consider all
+versions incompatible.
 
-Following strategies allows to select compatible vesions of gcc,
+The following strategies allows you to select compatible vesions of gcc,
 binutils, kernel and C library:
 
 -   General rules:
-    -   there is correlation between gcc and binutils releases, use
+    -   there is a correlation between gcc and binutils releases, use
         simultaneously released versions;
     -   it is better to use latest kernel headers to compile libc but
         use --enable-kernel switch (specific to glibc, other C libraries
         may use different conventions) to enforce work on older kernels;
-
 -   Official repositories: you may have to apply additional fixes and
     hacks, but versions used by Arch Linux (or it's
     architecture-specific forks) most probably can be made to work
@@ -74,12 +67,11 @@ binutils, kernel and C library:
     documenting things like minimal required versions of dependencies;
 -   Other distributions: they too do cross-compilation
     -   Gentoo crossdev lists some working combinations.
-
 -   http://cross-lfs.org covers steps, necessary for building
     cross-compiler and mentions somewhat up-to-date versions of
     dependencies.
 
-Building a Cross Compiler
+Building a cross compiler
 -------------------------
 
 The general approach to building a cross compiler is:
@@ -119,7 +111,7 @@ vendor field; example: arm-linux-gnueabihf-gcc. If shorter naming
 convention exists (e.g. mips-gcc), it may be used, but this is not
 recommended.
 
-File Placement
+File placement
 --------------
 
 Latest versions of gcc and binutils use non-conflicting paths for
@@ -150,9 +142,9 @@ This is PKGBUILD for binutils for MinGW. Things worth noticing are:
     # cross toolchain build order: binutils, headers, gcc (pass 1), w32api, mingwrt, gcc (pass 2)
 
     _target=i686-pc-mingw32
-    _sysroot=/usr/lib/cross-${_target}
+    _sysroot=/usr/lib/${_target}
 
-    pkgname=cross-${_target}-binutils
+    pkgname=${_target}-binutils
     _pkgname=binutils
     pkgver=2.19.1
     pkgrel=1
@@ -257,8 +249,15 @@ See also
 http://wiki.osdev.org/GCC_Cross-Compiler
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Cross_Compiling_Tools_Package_Guidelines&oldid=249001"
+"https://wiki.archlinux.org/index.php?title=Cross_Compiling_Tools_Package_Guidelines&oldid=297769"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 15 February 2014, at 14:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

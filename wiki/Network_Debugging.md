@@ -1,7 +1,7 @@
 Network Debugging
 =================
 
-> Summary
+Summary help replacing me
 
 Basic network debugging
 
@@ -9,56 +9,35 @@ Basic network debugging
 
 VLAN
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with Network     
+                           Configuration.           
+                           Notes: already           
+                           duplicates part of its   
+                           content (Discuss)        
+  ------------------------ ------------------------ ------------------------
+
 This article handles the steps needed for basic network troubleshooting.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 iproute2                                                           |
-| -   2 Network Interfaces                                                 |
-| -   3 Link status                                                        |
-| -   4 IP address                                                         |
-| -   5 Route table                                                        |
-| -   6 DNS Servers                                                        |
-| -   7 Ping & Tracepath/Traceroute                                        |
-+--------------------------------------------------------------------------+
-
-iproute2
+Contents
 --------
 
-Many users are familiar with tools like ifconfig and route, but the
-related package (net-tools) has been deprecated for a while. All its
-functionalities can now be found in the replacement iproute2 package,
-included in a standard Arch Linux core installation and required by
-tools like netcfg and networkmanager.
+-   1 Network Interfaces
+-   2 Link status
+    -   2.1 RTNETLINK answers: Cannot assign requested address
+-   3 IP address
+-   4 Route table
+-   5 DNS Servers
+-   6 Ping & Tracepath/Traceroute
 
 Network Interfaces
 ------------------
 
 The first step in troubleshooting network issues will be to identify
-which network interfaces are present on the system. This can be done by
-issuing the command:
-
-    $ ip a
-
-This will provide an output among the lines of:
-
-    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 16436 qdisc noqueue state UNKNOWN 
-       link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-       inet 127.0.0.1/8 scope host lo
-       inet6 ::1/128 scope host 
-          valid_lft forever preferred_lft forever
-    2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
-       link/ether 70:5a:b6:8a:a0:87 brd ff:ff:ff:ff:ff:ff
-       inet 192.168.1.143/24 brd 192.168.1.255 scope global eth0
-       inet6 fe80::725a:b6ff:fe8a:a087/64 scope link 
-          valid_lft forever preferred_lft forever
-    3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP qlen 1000
-       link/ether 00:26:82:5a:6f:d9 brd ff:ff:ff:ff:ff:ff
-       inet 192.168.1.148/24 brd 192.168.1.255 scope global wlan0
-       inet6 fe80::226:82ff:fe5a:6fd9/64 scope link 
-          valid_lft forever preferred_lft forever
+which network interfaces are present on the system. See Network
+configuration#Get current device names for details.
 
 Link status
 -----------
@@ -68,7 +47,7 @@ it can also be displayed by running:
 
     $ ip link show dev eth0
 
-This will provide an output among the lines of:
+This will provide an output along the lines of:
 
     2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state DOWN qlen 1000
        link/ether 70:5a:b6:8a:a0:87 brd ff:ff:ff:ff:ff:ff
@@ -76,6 +55,12 @@ This will provide an output among the lines of:
 Bringing up an interface can be done by issueing:
 
     # ip link set dev eth0 up
+
+RTNETLINK answers: Cannot assign requested address
+
+If you get this error when trying to set an interface up, its most
+probably because you've got an invalid MAC adress. To set a working MAC,
+see MAC Address Spoofing.
 
 IP address
 ----------
@@ -85,7 +70,7 @@ displayed. But it can also be displayed by running:
 
     $ ip addr show dev eth0
 
-This will provide an output among the lines of:
+This will provide an output along the lines of:
 
      2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
        link/ether 70:5a:b6:8a:a0:87 brd ff:ff:ff:ff:ff:ff
@@ -112,7 +97,7 @@ Route table for a specific interface:
 
     $ ip route show dev eth0
 
-This will provide an output among the lines of:
+This will provide an output along the lines of:
 
     default via 192.168.1.1  proto static 
     192.168.1.0/24  proto kernel  scope link  src 192.168.1.143
@@ -210,8 +195,15 @@ Traceroute also used ICMP to determine the path and hence there can be
 "no reply" answers as well when ICMP traffic is blocked.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Network_Debugging&oldid=239025"
+"https://wiki.archlinux.org/index.php?title=Network_Debugging&oldid=297759"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 15 February 2014, at 12:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

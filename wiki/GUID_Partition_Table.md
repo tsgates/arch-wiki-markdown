@@ -1,62 +1,47 @@
 GUID Partition Table
 ====================
 
-> Summary
+Related articles
 
-An overview of the GUID Partition Table.
-
-> Overview
-
-In order to boot Arch Linux, a Linux-capable boot loader such as
-GRUB(2), Syslinux, LILO or GRUB Legacy must be installed to the Master
-Boot Record or the GUID Partition Table. The boot loader is responsible
-for loading the kernel and initial ramdisk before initiating the boot
-process.
-
-> Related
-
-Unified Extensible Firmware Interface
-
-Master Boot Record
-
-Arch Boot Process
+-   Arch Boot Process
+-   Master Boot Record
+-   Unified Extensible Firmware Interface
+-   Partitioning
 
 GUID Partition Table (GPT) is a new style of partitioning which is part
 of the Unified Extensible Firmware Interface Specification, using the
 globally unique identifier for devices. It is different from the Master
-Boot Record (the more commonly used partitioning style) in many aspects
-and has many advantages.
+Boot Record (the most commonly used partitioning style in the BIOS era)
+in many aspects and has many advantages.
+
+Warning:If you are dual-booting Windows in the same drive, remember that
+Windows cannot boot from GPT disk in BIOS mode. If you have already
+installed Windows in MBR drive which boots via BIOS, do not convert the
+drive to GPT as Windows will fail to boot, irrespective of the
+bootloader used to chainload Windows. You need to install Windows in
+UEFI mode and use one of the UEFI Bootloaders to chainload Windows if
+you are booting from GPT drive. This is a limitation in Windows.
 
 To understand GPT, it is important to understand what MBR is and what
 its disadvantages are.
 
-For any partitioning style, the number of partitions that can be defined
-is based on the total space allotted for the partition table and the
-space required for storing the information of a single partition.
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Master Boot Record                                                 |
-|     -   1.1 Problems with MBR                                            |
-|                                                                          |
-| -   2 GUID Partition Table                                               |
-|     -   2.1 Advantages of GPT                                            |
-|     -   2.2 Kernel Support                                               |
-|                                                                          |
-| -   3 Bootloader Support                                                 |
-|     -   3.1 UEFI systems                                                 |
-|     -   3.2 BIOS systems                                                 |
-|                                                                          |
-| -   4 Partitioning Utilities                                             |
-|     -   4.1 GPT fdisk                                                    |
-|         -   4.1.1 Convert from MBR to GPT                                |
-|                                                                          |
-|     -   4.2 GNU Parted                                                   |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+-   1 Master Boot Record
+    -   1.1 Problems with MBR
+-   2 GUID Partition Table
+    -   2.1 Advantages of GPT
+    -   2.2 Kernel Support
+-   3 Bootloader Support
+    -   3.1 UEFI systems
+    -   3.2 BIOS systems
+-   4 Partitioning Utilities
+    -   4.1 GPT fdisk
+        -   4.1.1 Convert from MBR to GPT
+    -   4.2 Util-linux fdisk
+    -   4.3 GNU Parted
+-   5 See also
 
 Master Boot Record
 ------------------
@@ -146,20 +131,24 @@ Bootloader Support
 > UEFI systems
 
 All UEFI Bootloaders support GPT disks since GPT is a part of UEFI
-Specification and thus mandatory for UEFI boot. See UEFI_Bootloaders for
-more info.
+Specification and thus mandatory for UEFI boot. See Boot Loaders for
+more information.
 
 > BIOS systems
 
-Note:Some BIOS systems may not boot from GPT disks. See
+Note:Some BIOS systems like Intel Desktop Board motherboards may not
+boot from GPT disks unless the protective MBR partition has its Boot
+flag set. In such BIOS systems, using MBR (aka msdos partitioning) is
+recommended over GPT for compatibility. See
 http://mjg59.dreamwidth.org/8035.html and
 http://rodsbooks.com/gdisk/bios.html for more info and possible
 workarounds.
 
--   GRUB requires a 1007 KiB BIOS Boot Partition (EF02 type code in
-    gdisk and bios_grub flag in GNU Parted) in BIOS systems to embed its
-    core.img file due to lack of post-MBR embed gap in GPT disks.
-    Runtime GPT support in GRUB is provided by the part_gpt module.
+-   GRUB requires a BIOS Boot Partition (2 MiB, no filesystem, EF02 type
+    code in gdisk or bios_grub flag in GNU Parted) in BIOS systems to
+    embed its core.img file due to lack of post-MBR embed gap in GPT
+    disks. Runtime GPT support in GRUB is provided by the part_gpt
+    module, and is not related to the BIOS Boot Partition requirement.
 
 -   Syslinux requires the partition containing
     /boot/syslinux/ldlinux.sys (irrespective whether /boot is a separate
@@ -169,20 +158,7 @@ workarounds.
     gptmbr.bin. See Syslinux#GUID Partition Table aka GPT for more
     information. It is equivalent to "boot" flag in MBR disks.
 
--   GRUB Legacy, does not support GPT disks. Fedora's heavily patched
-    GRUB Legacy fork grub-legacy-fedora-git contains GPT patches from
-    Intel (tested in Fedora, not tested in Arch). This fork is no longer
-    maintained sicne Fedora already uses GRUB as its default BIOS
-    bootloader since F16. Users are recommended to switch to GRUB or
-    Syslinux instead.
-
-Note:Some Intel Desktop Board motherboards will only boot a GPT disk if
-the protective MBR partition has its Boot flag set. This can be done
-safely with fdisk/cfdisk without damaging the GPT (but have backups /
-double-check the integrity of the GPT afterwards anyway).
-
--   LILO's GPT support has not been tested so it is unclear whether it
-    has issues booting in GPT disks.
+-   GRUB Legacy and LILO do not support GPT.
 
 Partitioning Utilities
 ----------------------
@@ -193,10 +169,6 @@ GPT fdisk is a set of text-mode utilities for editing GPT disks. It
 consists of gdisk, sgdisk and cgdisk which are equivalent to respective
 tools from util-linux fdisk (used for MBR disks). It is available in the
 [extra] repository as gptfdisk.
-
-Note:The fdisk partitioning utilities from util-linux (i.e. fdisk,
-cfdisk and sfdisk) do not support GPT, and may damage the GPT header and
-partition table if used on a GPT disk.
 
 Convert from MBR to GPT
 
@@ -214,18 +186,32 @@ http://www.rodsbooks.com/gdisk/mbr2gpt.html for more info. After
 conversion, the bootloaders will need to be reinstalled to configure
 them to boot from GPT.
 
-Note:Remember that GPT stores a secondary table at the end of disk. You
-must make sure that the last 1 MiB of the disk is not used by any
-partition.
+> Note:
 
-Note:Keep in mind that if your Boot-Manager is GRUB, it needs a BIOS
-Boot Partition. If your MBR Partitioning Layout isn't too old, there is
-a good chance that the first partition starts at sector 2048 for
-alignment reasons. That means at the beginning will be 1007KiB of empty
-space where this bios-boot partition can be created. To do this, first
-do the mbr->gpt conversion with gdisk as described above. Afterwards,
-create a new partition with gdisk and manually specify its position to
-be sectors 34 - 2047, and set the EF02 partition type.
+-   Remember that GPT stores a secondary table at the end of disk. This
+    data structure consumes 33 512-byte sectors by default. MBR doesn't
+    have a similar data structure at its end, which means that the last
+    partition on an MBR disk sometimes extends to the very end of the
+    disk and prevents complete conversion. If this happens to you, you
+    must abandon the conversion, resize the final partition, or convert
+    everything but the final partition.
+-   Keep in mind that if your Boot-Manager is GRUB, it needs a BIOS Boot
+    Partition. If your MBR Partitioning Layout isn't too old, there is a
+    good chance that the first partition starts at sector 2048 for
+    alignment reasons. That means at the beginning will be 1007 KiB of
+    empty space where this bios-boot partition can be created. To do
+    this, first do the mbr->gpt conversion with gdisk as described
+    above. Afterwards, create a new partition with gdisk and manually
+    specify its position to be sectors 34 - 2047, and set the EF02
+    partition type.
+
+> Util-linux fdisk
+
+The fdisk utility from util-linux (based on util-linux internal
+libfdisk) partially supports GPT, but it is still in beta stage (as on
+07 October 2013). The related utilities cfdisk and sfdisk do not yet
+support GPT, and may damage the GPT header and partition table if used
+on a GPT disk.
 
 > GNU Parted
 
@@ -253,8 +239,15 @@ See also
 8.  Microsoft's Windows and GPT FAQ
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GUID_Partition_Table&oldid=255304"
+"https://wiki.archlinux.org/index.php?title=GUID_Partition_Table&oldid=304860"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 16 March 2014, at 08:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

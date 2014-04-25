@@ -7,19 +7,19 @@ access the contacts on this server with only a web browser.
 
 This guide shows you how to install carddavmate to use with davical
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Password Protection                                          |
-|     -   2.2 configuring the carddav server                               |
-|     -   2.3 configuring apache                                           |
-|     -   2.4 Testing                                                      |
-|     -   2.5 Troubleshooting                                              |
-|     -   2.6 Security                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Password Protection
+    -   2.2 configuring the carddav server
+    -   2.3 configuring the carddav server without insecure user clear
+        passwords
+    -   2.4 configuring apache
+    -   2.5 Testing
+    -   2.6 Troubleshooting
+    -   2.7 Security
 
 Installation
 ------------
@@ -59,6 +59,16 @@ var globalSettings=[{href:
 'https://carddav.example.com:443/caldav.php/joe/', userAuth: {userName:
 'joe', userPassword: 'secret', serverPassword: false}, timeOut: 14000}];
 
+> configuring the carddav server without insecure user clear passwords
+
+add the carddav server to your config by editing
+/srv/http/carddavmate/config.js
+
+A better example, without insecure user clear passwords:
+
+var globalSettings=[{href:
+'https://carddav.example.com:443/caldav.php/USER'}];
+
 > configuring apache
 
 To "serve" the /srv/http/carddavmate directory properly, you need to
@@ -97,8 +107,15 @@ in the browser and can be easily seen. To avoid issues, clear your
 browser cache to delete the compromising files after you are done.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Carddavmate&oldid=207164"
+"https://wiki.archlinux.org/index.php?title=Carddavmate&oldid=256927"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 13 May 2013, at 08:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

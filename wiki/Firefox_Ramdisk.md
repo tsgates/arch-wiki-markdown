@@ -1,66 +1,81 @@
 Firefox Ramdisk
 ===============
 
-Assuming that there is memory to spare, caching all, or part of
-Firefox's profile to RAM using tmpfs offers significant advantages. Even
-though opting for the partial route is an improvement by itself, the
-latter can make Firefox even more responsive compared to its stock
-configuration. Benefits include, among others:
+Assuming that there is memory to spare, placing Firefox's cache or
+complete profile to RAM offers significant advantages. Even though
+opting for the partial route is an improvement by itself, the latter can
+make Firefox even more responsive compared to its stock configuration.
+Benefits include, among others:
 
--   reduced disk read/writes
--   heightened responsive feel
+-   reduced drive read/writes;
+-   heightened responsive feel;
 -   many operations within Firefox, such as quick search and history
-    queries, are nearly instantaneous
+    queries, are nearly instantaneous.
 
-Both of previously mentioned options make use of tmpfs.
+To do so we can make use of a tmpfs.
 
-Because data placed therein cannot survive a shutdown, a script used
-when moving the whole profile to RAM overcomes this limitation by
-syncing back to disk prior system shut down, whereas only relocating the
-cache is a quick, less inclusive solution.
+Because data placed therein cannot survive a shutdown, a script
+responsible for syncing back to drive prior to system shutdown is
+necessary if persistence is desired (whick is likely in the case of
+profile relocation). On the other hand, only relocating the cache is a
+quick, less inclusive solution that will slightly speeds up experience
+while emptying Firefox cache on every reboot.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Method 1: Use RAM-only cache                                       |
-| -   2 Method 2: Use PKG from the AUR                                     |
-| -   3 Method 3: Build your own system                                    |
-|     -   3.1 Relocating only the cache to RAM                             |
-|     -   3.2 Relocating the entire profile to RAM                         |
-|         -   3.2.1 Before you start                                       |
-|         -   3.2.2 The script                                             |
-|         -   3.2.3 Automation                                             |
-|             -   3.2.3.1 cron job                                         |
-|             -   3.2.3.2 Sync at login/logout                             |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Note:Cache is stored separately from Firefox default profiles' folder
+(/home/$USER/.mozilla/firefox/): it is found by default in
+/home/$USER/.cache/mozilla/firefox/<profile>. This is similar to what
+Chromium and other browsers do. Therefore, sections 2 and 3.2 don't deal
+with cache relocating and syncing but only with profile adjustments. See
+the note at Profile-sync-daemon#Benefits_of_psd for more details.
+Anything-sync-daemon may be used to achieve the same thing as Option 2
+for cache folders.
 
-Method 1: Use RAM-only cache
-----------------------------
+Contents
+--------
 
-Firefox can be configured to use only RAM as cache storage.
-Configuration files, bookmarks, extensions etc. will be written to
-harddisk/SSD as usual. For this
+-   1 Relocate cache only to RAM
+-   2 Place entire profile in RAM
+-   3 Manual method
+    -   3.1 Relocating only the cache to RAM
+    -   3.2 Relocating the entire profile to RAM
+        -   3.2.1 Before you start
+        -   3.2.2 The script
+        -   3.2.3 Automation
+            -   3.2.3.1 cron job
+            -   3.2.3.2 Sync at login/logout
+-   4 See also
+
+Relocate cache only to RAM
+--------------------------
+
+When a page is loaded, it can be cached so it doesn't need to be
+downloaded to be redisplayed. For e-mail and news, messages and
+attachments are cached as well. Firefox can be configured to use only
+RAM as cache storage. Configuration files, bookmarks, extensions etc.
+will be written to drive as usual. For this:
 
 -   open about:config in the address bar
 -   set browser.cache.disk.enable to "false" (double click the line)
--   set browser.cache.memory.enable to "true" (double click the line)
--   set browser.cache.memory.max_entry_size to the ammount of KB you'd
-    like to spare, to -1 for automatic cache size selection
+-   verify that browser.cache.memory.enable is set to "true" (default
+    value)
+-   set browser.cache.memory.max_entry_size to the amount of KB you'd
+    like to spare, or to -1 for automatic cache size selection.
 
-Main disadvantages of this method are that your tabs won't survive a
-browser crash, and that you need to configure the settings each user
-individually. On the other hand on a personal system it probably is the
-easiest method to implement.
+Main disadvantages of this method are that the content of currently
+browsed webpages is lost if browser crashes or after a reboot, and that
+the settings need to be configured for each user individually.
 
-Method 2: Use PKG from the AUR
-------------------------------
+A workaround for the first drawback is to use anything-sync-daemon or
+similar periodically-syncing script so that cache gets copied over to
+the drive on a regular basis.
 
-Relocate the browser profile to tmpfs filesystem, including /tmp for
-improvements in application response as the the entire profile is now
-stored in RAM. Another benefit is a reduction in disk read and write
+  
+
+Place entire profile in RAM
+---------------------------
+
+Relocate the browser profile to tmpfs so as to globally improve
+browser's responsiveness. Another benefit is a reduction in drive I/O
 operations, of which SSDs benefit the most.
 
 Use an active management script for maximal reliability and ease of use.
@@ -68,13 +83,27 @@ Several are available from the AUR.
 
 -   profile-sync-daemon - refer to the Profile-sync-daemon wiki article
     for additional info on it;
--   firefox-tmpfs-daemon
 -   firefox-sync
 
-Method 3: Build your own system
--------------------------------
+Manual method
+-------------
 
 > Relocating only the cache to RAM
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: This sections    
+                           mentions the             
+                           /home/<user>/.mozilla/fi 
+                           refox/default/Cache      
+                           folder, which doesn't    
+                           exist as of 2014.02 and  
+                           has been superseded by   
+                           /home/$USER/.cache/mozil 
+                           la/firefox/<profile>.    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 Adapted from this forum post
 
@@ -192,9 +221,16 @@ See also
 -   Fstab#tmpfs
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Firefox_Ramdisk&oldid=238382"
+"https://wiki.archlinux.org/index.php?title=Firefox_Ramdisk&oldid=296227"
 
 Categories:
 
 -   Scripts
 -   Web Browser
+
+-   This page was last modified on 4 February 2014, at 20:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

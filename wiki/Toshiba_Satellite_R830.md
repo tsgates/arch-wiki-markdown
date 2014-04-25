@@ -25,4 +25,15 @@ There is another solution here:
 https://bbs.archlinux.org/viewtopic.php?id=132044
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Toshiba_Satellite_R830&oldid=254112"
+"https://wiki.archlinux.org/index.php?title=Toshiba_Satellite_R830&oldid=256814"
+
+Category:
+
+-   Toshiba
+
+-   This page was last modified on 12 May 2013, at 10:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

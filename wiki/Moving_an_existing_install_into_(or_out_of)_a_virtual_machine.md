@@ -1,20 +1,12 @@
 Moving an existing install into (or out of) a virtual machine
 =============================================================
 
-> Summary
+Related articles
 
-Instructions on transferring your current install in or out of a virtual
-machine.
-
-> Related
-
-VirtualBox
-
-VMware
-
-QEMU
-
-Migrate installation to new hardware
+-   VirtualBox
+-   VMware
+-   QEMU
+-   Migrate installation to new hardware
 
 This article describes how to transfer your current Arch Linux
 installation in or out of a virtual environment (i.e. QEMU, VirtualBox,
@@ -26,33 +18,29 @@ possibly adjusting the fstab – especially if it's an SSD.
 While any Linux filesystem should work, it's recommended that you go
 with ext4, at least at first, until you get the hang of it.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Moving out of a VM                                                 |
-|     -   1.1 Set up a shared folder                                       |
-|     -   1.2 Transfer the system                                          |
-|     -   1.3 Chroot and reinstall the bootloader                          |
-|     -   1.4 Adjust the fstab                                             |
-|     -   1.5 Re-generate the initramfs image                              |
-|                                                                          |
-| -   2 Moving into a VM                                                   |
-|     -   2.1 Create the container                                         |
-|     -   2.2 Transfer the system                                          |
-|     -   2.3 Convert the container to a compatible format                 |
-|     -   2.4 Chroot and reinstall the bootloader                          |
-|     -   2.5 Adjust the fstab                                             |
-|     -   2.6 Disable any Xorg-related files                               |
-|     -   2.7 Re-generate the initramfs image                              |
-|                                                                          |
-| -   3 Troubleshoot                                                       |
-|     -   3.1 "mount: special device /dev/loop5p1 does not exist"          |
-|     -   3.2 "Waiting 10 seconds for device /dev/sda1; ERROR: Unable to   |
-|         find root device '/dev/sda1'"                                    |
-|     -   3.3 "Missing operating system. FATAL: INT18: BOOT FAILURE"       |
-|     -   3.4 I'm asked for the root password, for maintenance             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Moving out of a VM
+    -   1.1 Set up a shared folder
+    -   1.2 Transfer the system
+    -   1.3 Chroot and reinstall the bootloader
+    -   1.4 Adjust the fstab
+    -   1.5 Re-generate the initramfs image
+-   2 Moving into a VM
+    -   2.1 Create the container
+    -   2.2 Transfer the system
+    -   2.3 Convert the container to a compatible format
+    -   2.4 Chroot and reinstall the bootloader
+    -   2.5 Adjust the fstab
+    -   2.6 Disable any Xorg-related files
+    -   2.7 Re-generate the initramfs image
+-   3 Troubleshoot
+    -   3.1 "mount: special device /dev/loop5p1 does not exist"
+    -   3.2 "Waiting 10 seconds for device /dev/sda1; ERROR: Unable to
+        find root device '/dev/sda1'"
+    -   3.3 "Missing operating system. FATAL: INT18: BOOT FAILURE"
+    -   3.4 I'm asked for the root password, for maintenance
 
 Moving out of a VM
 ------------------
@@ -116,7 +104,11 @@ Moving into a virtual environment takes a little more effort.
 
 > Create the container
 
-This will create a 10 GB raw image:
+This will create a 10 GB raw image (fallocate is faster):
+
+    # fallocate -l 10GB -o 1024 /media/Backup/backup.img
+
+or
 
     # dd if=/dev/zero of=/media/Backup/backup.img bs=1024 count=10482381
 
@@ -142,6 +134,10 @@ Tip:If you want, you can add however many partitions you want: home,
 boot, var, tmp, whatever floats your boat. Of course, it will add a
 layer of complexity, but it's doable. The point is that you don't
 necessarily need another container.
+
+Note:If you use the command-line parted instead of gparted, don't forget
+to leave 1 or 2 megabytes of unpartitioned space at the start of the
+disk for GRUB's embedded partition.
 
 > Transfer the system
 
@@ -284,9 +280,16 @@ this case, create one from scratch), and they likely do not match. Check
 with blkid.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Moving_an_existing_install_into_(or_out_of)_a_virtual_machine&oldid=229506"
+"https://wiki.archlinux.org/index.php?title=Moving_an_existing_install_into_(or_out_of)_a_virtual_machine&oldid=306169"
 
 Categories:
 
 -   Getting and installing Arch
 -   Virtualization
+
+-   This page was last modified on 20 March 2014, at 20:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

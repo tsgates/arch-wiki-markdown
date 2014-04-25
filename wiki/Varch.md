@@ -1,21 +1,19 @@
 Varch
 =====
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Why Do We Need Varch?                                              |
-| -   2 How Does Varch Work?                                               |
-| -   3 Installation                                                       |
-| -   4 Using Varch                                                        |
-|     -   4.1 Generic Image Support                                        |
-|     -   4.2 Virtualbox Specific Images                                   |
-|     -   4.3 Application of a File Overlay                                |
-|     -   4.4 Startup Script Generation                                    |
-|         -   4.4.1 KVM Startup Script                                     |
-|         -   4.4.2 Libvirt Startup Script                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Why Do We Need Varch?
+-   2 How Does Varch Work?
+-   3 Installation
+-   4 Using Varch
+    -   4.1 Generic Image Support
+    -   4.2 Virtualbox Specific Images
+    -   4.3 Application of a File Overlay
+    -   4.4 Startup Script Generation
+        -   4.4.1 KVM Startup Script
+        -   4.4.2 Libvirt Startup Script
 
 Why Do We Need Varch?
 ---------------------
@@ -56,7 +54,7 @@ the same files that configure AIF.
 Installation
 ------------
 
-Install the varch package from the official repositories.
+Install the varch package from the AUR.
 
 Using Varch
 -----------
@@ -139,8 +137,15 @@ machine generation:
     # varch -L
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Varch&oldid=206904"
+"https://wiki.archlinux.org/index.php?title=Varch&oldid=276159"
 
 Category:
 
 -   Virtualization
+
+-   This page was last modified on 20 September 2013, at 19:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

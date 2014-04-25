@@ -15,8 +15,8 @@ provides intelligence for business operation. Splunk is a horizontal
 technology used for application management, security and compliance, as
 well as business and web analytics.
 
-Splunk is licensed based on GB of data indexed per day. The free license
-allows up to 500GB of data per day, but it is missing a few features
+Splunk is licensed based on MB of data indexed per day. The free license
+allows up to 500 MB of data per day, but it is missing a few features
 such as access control, alerts / monitoring and PDF generation
 
 Splunk provides a fairly high-level search interface to data. Raw data
@@ -31,22 +31,19 @@ the search and configuration reference files. This article will focus on
 lesser known features or failures of Splunk, and how to run it healthily
 in Arch Linux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Running Splunk                                                     |
-| -   3 Performance                                                        |
-|     -   3.1 Search Semantics                                             |
-|     -   3.2 Distributed Environment                                      |
-|     -   3.3 Indexing                                                     |
-|                                                                          |
-| -   4 Debugging and Administration                                       |
-| -   5 Custom Commands                                                    |
-|     -   5.1 Configuration                                                |
-|     -   5.2 Library API                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Running Splunk
+-   3 Performance
+    -   3.1 Search Semantics
+    -   3.2 Distributed Environment
+    -   3.3 Indexing
+-   4 Debugging and Administration
+-   5 Custom Commands
+    -   5.1 Configuration
+    -   5.2 Library API
 
 Installation
 ------------
@@ -247,8 +244,15 @@ csv.Writer or csv.DictWriter to push resulting rows back into the Splunk
 search pipeline.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Splunk&oldid=218842"
+"https://wiki.archlinux.org/index.php?title=Splunk&oldid=256324"
 
 Category:
 
 -   Applications
+
+-   This page was last modified on 7 May 2013, at 16:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

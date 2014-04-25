@@ -1,27 +1,6 @@
 Powerpill
 =========
 
-  
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-| -   4 Using Reflector                                                    |
-| -   5 Using Rsync                                                        |
-| -   6 Basic Usage                                                        |
-|     -   6.1 System Updating                                              |
-|     -   6.2 Installation of packages                                     |
-|                                                                          |
-| -   7 External resources                                                 |
-+--------------------------------------------------------------------------+
-
-Introduction
-------------
-
 Powerpill is a Pacman wrapper that uses parallel and segmented
 downloading to try to speed up downloads for Pacman. Internally it uses
 Aria2 and Reflector to achieve this. Powerpill can also use Rsync for
@@ -40,10 +19,22 @@ A test of pacman vs. powerpill on one system revealed a 4x speed up in
 the above scenario where the pacman downloads averages 300 kB/sec and
 the powerpill downloads averaged 1.2 MB/sec.
 
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Using Reflector
+-   4 Using rsync
+-   5 Basic usage
+    -   5.1 System updating
+    -   5.2 Installation of packages
+-   6 See also
+
 Installation
 ------------
 
-You can get it from AUR powerpill or directly from Xyne's repos.
+You can get it from AUR powerpill or directly from Xyne's repository.
 
 Configuration
 -------------
@@ -60,9 +51,7 @@ current list of mirrors from the Arch Linux server's web API and use
 them for parallel downloads. This is to make sure that there are enough
 servers in the list for significant speed improvements.
 
-  
-
-Using Rsync
+Using rsync
 -----------
 
 Rsync support is available for some mirrors. When enabled, database
@@ -72,20 +61,30 @@ speeds up update checks and sometimes file transfers.
 
 To find a suitable mirror with rsync support, use reflector:
 
-     reflector -p rsync
+    $ reflector -p rsync
 
-Select the mirror nearest you (you may wish to use reflector's "-c"
-option to limit results to your country) and then update
-powerpill.json's rsync server field. After that, all official database
-and packages will be downloaded form the rsync server whenever possible.
+Alternatively, you can use this to filter the fastest n number of
+servers (option -f) as well as the m number of most recently updated
+servers (option -l):
 
-Basic Usage
+    $ reflector -p rsync -f n -l m
+
+Select the mirror(s) you want to use. The -c option may also be used to
+filter by your nationality (reflector --list-countries to see a complete
+list, use quotes around the name, and this is case-sensitive!). Once
+done, edit /etc/powerpill/powerpill.json, scroll down to the rsync
+section, and add as many servers as you would like to the server field.
+
+After that, all official database and packages will be downloaded from
+the rsync server whenever possible.
+
+Basic usage
 -----------
 
 For most operations, powerpill works just like pacman since it is a
 wrapper script for pacman.
 
-> System Updating
+> System updating
 
 To update your system (sync and update installed packages) using
 powerpill, simply pass the -Syu options to it as you would with pacman:
@@ -104,15 +103,22 @@ with pacman:
 
     # powerpill -S package1 package2 package3
 
-External resources
-------------------
+See also
+--------
 
--   Powerpill - the official project page
+-   Powerpill - official project page
 -   powerpill reborn - powerpill is back :)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Powerpill&oldid=239937"
+"https://wiki.archlinux.org/index.php?title=Powerpill&oldid=278608"
 
 Category:
 
 -   Package management
+
+-   This page was last modified on 13 October 2013, at 18:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

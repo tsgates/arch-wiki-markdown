@@ -1,7 +1,7 @@
 Mathics
 =======
 
-> Summary
+Summary help replacing me
 
 This article contains information about the installation, configuration
 and use of Mathics.
@@ -20,15 +20,13 @@ at achieving a Mathematica-compatible syntax and functions. It relies
 mostly on Sympy for most mathematical tasks and, optionally, Sage for
 more advanced stuff.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Using Mathics                                                      |
-|     -   2.1 Mathics CLI                                                  |
-|     -   2.2 Mathics web interface                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Using Mathics
+    -   2.1 Mathics CLI
+    -   2.2 Mathics web interface
 
 Installation
 ------------
@@ -63,3 +61,10 @@ Retrieved from
 Category:
 
 -   Mathematics and science
+
+-   This page was last modified on 16 March 2013, at 07:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

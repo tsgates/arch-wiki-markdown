@@ -1,21 +1,18 @@
 Habari
 ======
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Before You Install                                                 |
-| -   3 Installation                                                       |
-|     -   3.1 Step 1: Check PHP Configuration                              |
-|     -   3.2 Step 2: Prepare MySQL Database                               |
-|     -   3.3 Step 3: Check Apache Configuration                           |
-|     -   3.4 Step 4: Prepare Habari Directory                             |
-|     -   3.5 Step 5: Run The Installer                                    |
-|                                                                          |
-| -   4 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Before You Install
+-   3 Installation
+    -   3.1 Step 1: Check PHP Configuration
+    -   3.2 Step 2: Prepare MySQL Database
+    -   3.3 Step 3: Check Apache Configuration
+    -   3.4 Step 4: Prepare Habari Directory
+    -   3.5 Step 5: Run The Installer
+-   4 External Links
 
 Introduction
 ------------
@@ -145,8 +142,15 @@ External Links
 -   Habari Themes: http://wiki.habariproject.org/en/Available_Themes
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Habari&oldid=206382"
+"https://wiki.archlinux.org/index.php?title=Habari&oldid=286551"
 
 Category:
 
--   Networking
+-   Web Server
+
+-   This page was last modified on 6 December 2013, at 14:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

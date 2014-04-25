@@ -18,37 +18,29 @@ the instructions for installing the Oracle client.
 By using the install method 2 you will be able to finalize the long
 installation process with only a few steps.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install method 1 - manual                                          |
-|     -   1.1 Pre Installation                                             |
-|     -   1.2 Installing Desktop Environment                               |
-|         -   1.2.1 Required packages for Oracle database installation     |
-|         -   1.2.2 Configuration                                          |
-|                                                                          |
-|     -   1.3 Graphical Installation                                       |
-|         -   1.3.1 Installing Oracle database software                    |
-|                                                                          |
-|     -   1.4 Oracle Enterprise Manager installation (optional)            |
-|                                                                          |
-| -   2 Install method 2 - AUR                                             |
-|     -   2.1 Installation                                                 |
-|                                                                          |
-| -   3 Post Installation                                                  |
-|     -   3.1 Creating Initial Database                                    |
-|         -   3.1.1 Graphical                                              |
-|         -   3.1.2 Scripted                                               |
-|         -   3.1.3 Testing Database                                       |
-|                                                                          |
-|     -   3.2 Starting oracle during the boot                              |
-|     -   3.3 Setting Permissions for Normal Users                         |
-|                                                                          |
-| -   4 Transfer existing Oracle installation                              |
-| -   5 Troubleshooting                                                    |
-| -   6 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Install method 1 - manual
+    -   1.1 Pre installation
+    -   1.2 AUR helper
+        -   1.2.1 Required packages for Oracle database installation
+        -   1.2.2 Configuration
+    -   1.3 Graphical installation
+        -   1.3.1 Installing Oracle database software
+    -   1.4 Oracle Enterprise Manager installation (optional)
+-   2 Install method 2 - AUR
+    -   2.1 Installation
+-   3 Post installation
+    -   3.1 Creating initial database
+        -   3.1.1 Graphical
+        -   3.1.2 Scripted
+        -   3.1.3 Testing database
+    -   3.2 Starting oracle during the boot
+    -   3.3 Setting permissions for normal users
+-   4 Transfer existing Oracle installation
+-   5 Known issues
+-   6 See also
 
 Install method 1 - manual
 -------------------------
@@ -58,94 +50,35 @@ installation of archlinux. This is a general approach that has been
 tested with kernel 2.6.28.ARCH x86_64 and Oracle 11g R1 64-bit. This
 should in principle work with other versions of Oracle.
 
-> Pre Installation
+> Pre installation
 
-> Installing Desktop Environment
+> AUR helper
 
-    # pacman -Syu
-    # pacman -S python
+To ease the installation process you may find useful to install an AUR
+helper:
+
     # pacman -U ftp://ftp.berlios.de/pub/aurbuild/aurbuild-1.8.4-1-any.pkg.tar.gz
-
-Install and test Xorg.
-
-    # pacman -S xorg
-    # pacman -S hwd
-
-Since Xorg 7.4, xorg.conf isn't necessary anymore. This command is
-optional.
-
-    # hwd -x
-    # cp /etc/X11/xorg.conf.vesa /etc/X11/xorg.conf
-
-Check with startx (Should get mouse movement with X cursor -
-Ctrl-Alt-Backspace to exit.)
-
-    $ startx
-
-Install desktop environment, Gnome, KDE or Xfce. In this case Xfce4 will
-be installed:
-
-    # pacman -S xfce4
-    # pacman -S pcmanfm
-
-Run xfce:
-
-    $ startxfce4 
 
 Required packages for Oracle database installation
 
-Arch i686:
+Install packages unzip sudo base-devel icu gawk gdb libelf sysstat
+libstdc++5.
 
--   base-devel
--   java-runtime (jdk7-openjdk or jre jdk)
--   ksh, rpm, gawk, gdb, libaio, libelf, sysstat, unixodbc, libstdc++5
--   unzip, sudo
+Install a Java runtime environment, like jre7-openjdk and jdk7-openjdk.
 
-Arch x86_64:
-
--   base-devel
--   java-runtime (jdk7-openjdk or jre jdk)
--   ksh, rpm, gawk, gdb, libaio, libelf, sysstat, libstdc++5
--   unzip, sudo
-
-Install packages:
-
-    # pacman -S unzip sudo java-runtime base-devel
-
-Install ksh (problem with aurbuild -s ksh).
-
-    mkdir -p ABS/ksh
-    cd ABS/ksh
-    chmod 777 -R /software
-    wget --http-user "I accept www.opensource.org/licenses/cpl" --http-password "." http://www2.research.att.com/~gsf/download/tgz/INIT.2012-08-01.tgz
-    wget --http-user "I accept www.opensource.org/licenses/cpl" --http-password "." http://www2.research.att.com/~gsf/download/tgz/ast-ksh.2012-08-01.tgz
-    wget https://aur.archlinux.org/packages/ks/ksh/PKGBUILD
-    wget https://aur.archlinux.org/packages/ks/ksh/ksh.install
-    makepkg -c --asroot
-    makepkg -i --asroot
-
-    pacman -S icu
-    aurbuild -s beecrypt
-    aurbuild -s rpm
-    pacman -S gawk
-    pacman -S gdb
-    aurbuild -s libaio
-    pacman -S libelf
-    pacman -S sysstat
-    pacman -S libstdc++5
+From the AUR, install ksh (other implementations like these may work),
+beecrypt, rpm and libaio.
 
 Oracle database 32-bit requires unixodbc.
 
-    # pacman -S unixodbc
-
-Optional lib32 packages on x86_64:
-
-    # pacman -S lib32-libstdc++5 
-    # pacman -S lib32-glibc 
-    # pacman -S lib32-gcc-libs
+Optional lib32 packages on x86_64 are: lib32-libstdc++5 lib32-glibc
+lib32-gcc-libs.
 
 Oracle database require 32-bit libaio and unixodbc on x86_64 but is not
 necessary under Arch linux.
+
+Note:The following step is not required in newer Arch Linux installation
+after the binary directories merge
 
 Some prerequisite symbolic links for Oracle Universal Installer.
 
@@ -183,8 +116,8 @@ Add oracle to /etc/sudoers. This will give oracle super user privilege.
 
     oracle    ALL=(ALL) ALL
 
-Add these lines to /etc/sysctl.conf (Review Oracle documentation to
-adjust these settings).
+Add these lines to /etc/sysctl.d/99-sysctl.conf (Review Oracle
+documentation to adjust these settings).
 
     # oracle kernel settings
     fs.file-max = 6553600
@@ -212,10 +145,7 @@ Optional: You may reboot now if you want the changes to take effect.
 Create some directories for Oracle database. You can chose the directory
 path. Here is an example.
 
-    mkdir -p /oracle
-    mkdir -p /oracle/inventory
-    mkdir -p /oracle/recovery
-    mkdir -p /oracle/product/db
+    mkdir -p /oracle/inventory /oracle/recovery /oracle/product/db
 
 Set permissions for the directories.
 
@@ -235,7 +165,7 @@ of the oracle user settings.
     export EDITOR=nano
     export VISUAL=nano
 
-> Graphical Installation
+> Graphical installation
 
 Installing Oracle database software
 
@@ -349,12 +279,11 @@ Note: This installation method creates a database automatically. The
 Oracle database will therefore be ready to be used after the
 installation.
 
-Step 1. Download the Arch linux package from AUR:
-https://aur.archlinux.org/packages.php?ID=23730 Download the Oracle
-database 11gR1:
+Step 1. Download the Arch Linux package oracle from AUR. Download the
+Oracle database 11gR1:
 http://www.oracle.com/technology/software/products/database/index.html
 
-Step 2. Extract the Arch linux package into a directory. Copy the Oracle
+Step 2. Extract the Arch Linux package into a directory. Copy the Oracle
 database 11gR1 into that directory as well.
 
 INFO: The default install configuration in  ee.rsp.patch is:
@@ -381,14 +310,6 @@ Create the Oracle database package by using makepkg:
 Step 3. Install the package that makepkg has created by using pacman.
 You may get an error stating "/bin/ksh already exists", just remove that
 file and pacman will continue.
-
-Arch i686:
-
-    pacman -U oracle-11gR1-1-i686.pkg.tar.gz 
-
-Arch x86_64:
-
-    pacman -U oracle-11gR1-1-x86_64.pkg.tar.gz 
 
 Pacman will now install the Oracle database by executing Oracle's own
 installation script(./runInstaller -silent -ignoreSysPrereqs).
@@ -420,14 +341,10 @@ The installation script ends something like this:
 
 Step 4. Run these scripts as root:
 
-    [ahc@archlinux ~]$ su
-    Password: 
-
-    cd /home/oracle/oraInventory
-    ./orainstRoot.sh
-
-    cd /home/oracle/app/oracle/product/11.1.0/orarch
-    ./root.sh
+    # cd /home/oracle/oraInventory
+    # ./orainstRoot.sh
+    # cd /home/oracle/app/oracle/product/11.1.0/orarch
+    # ./root.sh
 
 Step 5. The default user for the Oracle database is "oracle". Since the
 password is not set for the user oracle, you need to run passwd as root:
@@ -488,10 +405,10 @@ Changing the password for the SYS user:
 
     SQL> quit
 
-Post Installation
+Post installation
 -----------------
 
-> Creating Initial Database
+> Creating initial database
 
 Graphical
 
@@ -543,7 +460,7 @@ Scripted
 This section walks you through doing a scripted initial database
 creation.
 
-Note: The scripts assume they are the first database to be installed on
+Note:The scripts assume they are the first database to be installed on
 this system. If this is not the case review the xdb-create.sh script and
 comment out the portions which deal with the *.ora files.
 
@@ -591,7 +508,7 @@ Install database from script (this will take a long time)
     su oracle
     sqlplus / as sysdba @/oracle/admin/xdb/scripts/xdb-create.sql
 
-Testing Database
+Testing database
 
 Login as the user oracle and run export ORACLE_SID="yourSID" etc., ie:
 
@@ -607,8 +524,7 @@ Running oraenv should confirm the exported configuration:
     The Oracle base for ORACLE_HOME=/oracle/product/db 
     is /oracle
 
-  
- Check if the database is shutting down or starting:
+Check if the database is shutting down or starting:
 
     sqlplus '/as sysdba'
 
@@ -655,7 +571,7 @@ path matches your current oracle directory in /etc/rc.d/oracledb:
 
     export ORACLE_HOME=/oracle/product/db
 
-    [oracle@archlinux orarch]$ pwd
+    $ pwd
     /oracle/product/db
 
 Test starting the daemon as root:
@@ -684,13 +600,13 @@ Install Method 2:
     oraenv
     sqlplus '/as sysdba'
 
-> Setting Permissions for Normal Users
+> Setting permissions for normal users
 
 Since there is only one user(oracle) that has access to the oracle
 database, you need to add your normal user to the group "dba". In this
 case "joe" is the normal user:
 
-    gpasswd -a joe dba
+    # gpasswd -a joe dba
 
 The group changes will take effect after you logout and login again. The
 user oracle has the permissions to access the oracle home directory, ie
@@ -755,15 +671,12 @@ Login to target system as root and unpack the tar
     chmod 755 -R /oracle
     chown -R oracle:dba /oracle
 
-Update system
+Update the system:
 
-    pacman -Syu
-    pacman -S python
+    pacman -Syu python unzip sudo
     pacman -U ftp://ftp.berlios.de/pub/aurbuild/aurbuild-1.8.4-1-any.pkg.tar.gz
-    pacman -S unzip
-    pacman -S sudo
 
-Install required package run Oracle database and required daemons.
+Install required package run Oracle database and required daemons
 
     aurbuild -s libaio
     pacman -S sysstat
@@ -780,22 +693,57 @@ Execute appropriate/desired post installation steps
 
     Oracle#Post_Installation
 
-Troubleshooting
----------------
+Known issues
+------------
 
-Known issue: The Oracle Universal Installer(ie, in silent mode) seems
-create errors when installing on other paths than "../app/oracle/..".
+The Oracle Universal Installer (ie, in silent mode) seems create errors
+when installing on other paths than "../app/oracle/..".
 
-More Resources
---------------
+Two consistent errors using the current libraries will occur. The first
+one can be ignored:
+
+    INFO: / usr/lib64/libstdc + + so.5:. Undefined reference to `memcpy@GLIBC_2.14 '
+    collect2: error: ld returned 1 exit status
+
+Ignore this message by clicking the "Continue" button.
+Unfortunately,this has the consequence of the Lexical Compiler not
+working. The Lexical Compiler is used to generate the Chinese and
+Japanese dictionaries.
+
+  
+ The second error needs to be fixed as it can cause the emconsole to
+fail eventually. Fortunately, the fix is easy:
+
+    su oracle
+    cd $ORACLE_HOME/sysman/lib
+    make -f ins_emagent.mk "agent"
+
+The last gcc call fails, which is what is causing the error. We need to
+add the -lnnz11 flag after the -lcore11 flag for this to make
+successfully, therefore, enter the following into the terminal:
+
+    gcc -o /oracle/product/db/sysman/lib/emdctl -L/oracle/product/db/lib/ -L/oracle/product/db/sysman/lib/  -L/oracle/product/db/lib/stubs/       `cat /oracle/product/db/lib/sysliblist` -Wl,-rpath,/oracle/product/db/lib -lm    `cat /oracle/product/db/lib/sysliblist` -ldl -lm   -L/oracle/product/db/lib /oracle/product/db/sysman/lib//s0nmectl.o -lnmectl -lclntsh -L/oracle/product/db/lib  -L/oracle/product/db/sysman/lib/ -lnmemso -lcore11 -lnnz11 -Wl,-rpath,/oracle/product/db/lib/:/oracle/product/db/sysman/lib/:/oracle/product/db/jdk/jre/lib/amd64/server:/oracle/product/db/jdk/jre/lib/amd64 -L/oracle/product/db/jdk/jre/lib/amd64/server -L/oracle/product/db/jdk/jre/lib/amd64 -z lazyload -ljava -ljvm -lverify -z nolazyload -Wl,-rpath,/oracle/product/db/lib/:/oracle/product/db/sysman/lib/:/oracle/product/db/jdk/jre/lib/amd64/server:/oracle/product/db/jdk/jre/lib/amd64 -Wl,--allow-shlib-undefined    `cat /oracle/product/db/lib/sysliblist` -ldl -lm
+
+The make will succeed and you can now choose continue in the Oracle
+installer.
+
+See also
+--------
 
 Most of the steps are based on this oracle installation guide for ubuntu
 users. This guide includes step by step graphical examples:
 http://www.pythian.com/blogs/1355/installing-oracle-11gr1-on-ubuntu-810-intrepid-ibex
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Oracle&oldid=250678"
+"https://wiki.archlinux.org/index.php?title=Oracle&oldid=292168"
 
 Category:
 
 -   Database management systems
+
+-   This page was last modified on 10 January 2014, at 00:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

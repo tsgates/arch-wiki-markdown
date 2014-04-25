@@ -1,31 +1,30 @@
 Feh
 ===
 
+Related articles
+
+-   Nitrogen
+-   sxiv
+
 feh is a lightweight and powerful image viewer that can also be used to
 manage the desktop wallpaper for standalone window managers lacking such
 features.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-|     -   2.1 As an image viewer                                           |
-|         -   2.1.1 File Browser Image Launcher                            |
-|                                                                          |
-|     -   2.2 As a desktop wallpaper manager                               |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Random background image                                      |
-|         -   3.1.1 Using a script                                         |
-|             -   3.1.1.1 For dual screen no-xinerama                      |
-|                                                                          |
-|         -   3.1.2 Using a cron job                                       |
-|         -   3.1.3 Using systemd user session                             |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 As an image viewer
+        -   2.1.1 File Browser Image Launcher
+    -   2.2 As a desktop wallpaper manager
+-   3 Tips and tricks
+    -   3.1 Random background image
+        -   3.1.1 Using a script
+            -   3.1.1.1 For dual screen no-xinerama
+        -   3.1.2 Using a cron job
+        -   3.1.3 Using systemd user session
+-   4 See also
 
 Installation
 ------------
@@ -141,6 +140,22 @@ Tips and tricks
 ---------------
 
 > Random background image
+
+You can have feh set a random wallpaper using the --randomize option
+with one of the --bg-foo options, for example:
+
+    $ feh --randomize --bg-fill ~/.wallpaper/*
+
+The above command tells feh to randomize the list of files in the
+~/.wallpaper/ directory and set the backgrounds for all available
+desktops to whichever images are at the front of the randomized list
+(one unique image for each desktop). You can also do this recursively,
+if you have your wallpapers divided into subfolders:
+
+    $ feh --recursive --randomize --bg-fill ~/.wallpaper
+
+To change wallpapers periodically, use a script, cron job, or systemd
+service to execute the command at the desired interval.
 
 Using a script
 
@@ -263,8 +278,15 @@ See also
 -   Forum post with original script for feh_browser
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Feh&oldid=244830"
+"https://wiki.archlinux.org/index.php?title=Feh&oldid=305726"
 
 Category:
 
 -   Graphics and desktop publishing
+
+-   This page was last modified on 20 March 2014, at 01:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

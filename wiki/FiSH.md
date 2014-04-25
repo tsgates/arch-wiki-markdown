@@ -10,15 +10,13 @@ FiSH
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About FiSH                                                         |
-| -   2 Adding FiSH to mIRC                                                |
-| -   3 Adding FiSH to xChat                                               |
-| -   4 Adding FiSH to Irssi                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 About FiSH
+-   2 Adding FiSH to mIRC
+-   3 Adding FiSH to xChat
+-   4 Adding FiSH to Irssi
 
 About FiSH
 ----------
@@ -59,3 +57,10 @@ Categories:
 
 -   Internet Relay Chat
 -   Security
+
+-   This page was last modified on 28 May 2012, at 11:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

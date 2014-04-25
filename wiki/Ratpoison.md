@@ -1,31 +1,33 @@
 Ratpoison
 =========
 
-Ratpoison is a minimalistic window manager which can be controlled 100%
-through keyboard. It behaves like the terminal-multiplexer GNU screen.
-Every window is maximized to fit the whole screen, no pixel is wasted on
-stuff like borders or other decoration. The user can also "split" the
-screen into two or more frames in order to display more than one window
-at the time. For more information check the official homepage at
-http://www.nongnu.org/ratpoison/.
+  
+ From the project home page:
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Using ratpoison                                                    |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Multiple workspaces                                          |
-|     -   4.2 urxvt and xterm                                              |
-|     -   4.3 Launch on Startup                                            |
-|     -   4.4 Wallpaper and Transparency                                   |
-|                                                                          |
-| -   5 Some more useful KeyCombos                                         |
-| -   6 Ratpoison and display managers                                     |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Ratpoison is a simple Window manager with no fat library dependencies,
+no fancy graphics, no window decorations, and no rodent dependence. It
+is largely modelled after GNU Screen which has done wonders in the
+virtual terminal market. The screen can be split into non-overlapping
+frames. All windows are kept maximized inside their frames to take full
+advantage of your precious screen real estate. All interaction with the
+window manager is done through keystrokes. ratpoison has a prefix map to
+minimize the key clobbering that cripples Emacs and other quality pieces
+of software.
+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Using ratpoison
+-   4 Tips and tricks
+    -   4.1 Multiple workspaces
+    -   4.2 urxvt and xterm
+    -   4.3 Launch on startup
+    -   4.4 Wallpaper and transparency
+-   5 Some more useful KeyCombos
+-   6 Ratpoison and display managers
+-   7 See also
 
 Installation
 ------------
@@ -52,9 +54,9 @@ Using ratpoison
 ---------------
 
 After X11 starts up you will see a black screen and a little textbox on
-the upper right of it that says "Welcome to Ratpoison" :) Now type
-Ctrl+t and then ? to get a list of keybindings. If you are used to GNU
-screen, you will feel at home very soon.
+the upper right of it that says "Welcome to Ratpoison". Now type Ctrl+t
+and then ? to get a list of keybindings. If you are used to GNU screen,
+you will feel at home very soon.
 
 You are able to define custom keystrokes and even override existing ones
 in ~/.ratpoisonrc
@@ -66,9 +68,9 @@ Example:
 
     bind f exec firefox
 
-So, if you type Ctrl+t and then f, ratpoison will fire up firefox.
+So, if you type Ctrl+t and then f, ratpoison will fire up Firefox.
 
-Here is another .ratpoisonrc i'm using on my Computers:
+Here is another .ratpoisonrc i'm using on my computers:
 
     exec xsetroot -cursor_name left_ptr
     startup_message off
@@ -76,7 +78,7 @@ Here is another .ratpoisonrc i'm using on my Computers:
     escape C-z
 
     # make a screenshot
-    alias sshot exec import -window root ~/screenshot-`date +%F`.jpg
+    alias sshot exec import -window root ~/screenshot-$(date +%F).jpg
     definekey top M-C-Print sshot
 
     #virtual desks
@@ -96,7 +98,7 @@ Here is another .ratpoisonrc i'm using on my Computers:
     #bind c exec aterm
 
     bind g exec gftp
-    bind f exec firefox2
+    bind f exec firefox
 
 Tips and tricks
 ---------------
@@ -110,7 +112,6 @@ Just edit your .ratpoisonrc, and add:
 
     ~/.ratpoisonrc
 
-    exec rpws -i
     exec /usr/bin/rpws init 6 -k
 
 That creates 6 workspaces. By default, you can access to them by using
@@ -149,9 +150,7 @@ then can be saved on the following files.
 If a combination cannot be found, you could try changing the font size
 and the font family also. (that changes the required border number)
 
-  
-
-> Launch on Startup
+> Launch on startup
 
 Examples for launching programs when ratpoison starts. File
 ~/.ratpoisonrc is executed by ratpoison on startup.
@@ -164,7 +163,7 @@ Examples for launching programs when ratpoison starts. File
 
     exec bash -c 'pidof chromium &>/dev/null || exec /usr/bin/chromium --disk-cache-dir=~/tmp/cache'
 
-> Wallpaper and Transparency
+> Wallpaper and transparency
 
 Example for setting transparency using xcompmgr and nitrogen. First
 start nitrogen and set the desired wallpaper. Then use this in your
@@ -178,21 +177,33 @@ start nitrogen and set the desired wallpaper. Then use this in your
 Some more useful KeyCombos
 --------------------------
 
-Ctrl+t ! <Program Name> Start any program  
- Ctrl+t q Quit ratpoison  
- Ctrl+t ? Show key bindings  
- Ctrl+t c Start an X terminal  
- Ctrl+t n Switch to next window  
- Ctrl+t p Switch to previous window  
- Ctrl+t 1-9 Switch to windows 1-9  
- Ctrl+t k Close the current window  
- Ctrl+t Shift+k XKill the current application  
- Ctrl+t s,Shift+s Split the current frame into two vertical,horizontal
-ones  
- Ctrl+t Tab, ←, ↑, →, ↓ Switch to the next, left. top, right, bottom
-frame.  
- Ctrl+t Shift+q Make the current frame the only one  
- Ctrl+t : Execute a ratpoison command  
+Ctrl+t ! <Program Name> Start any program
+
+Ctrl+t q Quit ratpoison
+
+Ctrl+t ? Show key bindings
+
+Ctrl+t c Start an X terminal
+
+Ctrl+t n Switch to next window
+
+Ctrl+t p Switch to previous window
+
+Ctrl+t 1-9 Switch to windows 1-9
+
+Ctrl+t k Close the current window
+
+Ctrl+t Shift+k XKill the current application
+
+Ctrl+t s,Shift+s Split the current frame into two vertical,horizontal
+ones
+
+Ctrl+t Tab, ←, ↑, →, ↓ Switch to the next, left. top, right, bottom
+frame.
+
+Ctrl+t Shift+q Make the current frame the only one
+
+Ctrl+t : Execute a ratpoison command
 
 Ratpoison and display managers
 ------------------------------
@@ -209,7 +220,7 @@ directory does not exist, create it as root.
 See also
 --------
 
--   The Ratpoison Wiki
+-   The Ratpoison wiki
 -   X11 Keys in Ratpoison
 -   Ratpoison config sample
 -   Share your Ratpoison (experience) forum thread
@@ -217,8 +228,15 @@ See also
 -   Stumpwm similar window manager but in Common lisp.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ratpoison&oldid=251747"
+"https://wiki.archlinux.org/index.php?title=Ratpoison&oldid=301138"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 24 February 2014, at 11:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -19,11 +19,18 @@ Problems
 
 > MP3 profile does not show up
 
-Install gstreamer0.10-ugly-plugins for lame.
+Install gst-plugins-ugly for lame and gnome-media.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SoundJuicer&oldid=205468"
+"https://wiki.archlinux.org/index.php?title=SoundJuicer&oldid=304242"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 13 March 2014, at 08:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

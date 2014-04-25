@@ -1,21 +1,24 @@
 LaTeX
 =====
 
-> Summary
+Related articles
 
-Implementations of LaTeX in Arch Linux.
-
-> Related
-
-TeX Live
-
-TeX Live FAQ
-
-TeX Live and CJK
+-   TeX Live
+-   TeX Live FAQ
+-   TeX Live and CJK
 
 LaTeX is a popular markup language and document preparation system,
 often used in the sciences. The current implementation in Arch Linux is
 TeX Live. See TeX Live for how to install and config it.
+
+Contents
+--------
+
+-   1 Editors and environments
+    -   1.1 GTK+
+    -   1.2 KDE
+    -   1.3 Other
+    -   1.4 Online tools
 
 Editors and environments
 ------------------------
@@ -25,13 +28,16 @@ edit LaTeX source in a specialized environment. The following editors,
 which use various toolkits, are all available in the official
 repositories and can be installed with pacman.
 
-GTK+
+See the Wikipedia article on this subject for more information:
+Comparison of TeX editors
+
+> GTK+
 
 -   gedit — Supports LaTeX syntax highlighting and also (via gedit-latex
     plugin) code-completion, compiling LaTeX documents and managing
     BibTeX bibliographies, it is included in gnome-extra.
 
-http://www.gnome.org/ || Gedit
+http://www.gnome.org/ || gedit
 
 -   Winefish — A very lightweight LaTeX editing suite. It supports
     highlighting and code completion, compile-from-editor, among other
@@ -42,7 +48,7 @@ http://developer.berlios.de/projects/winefish/ || winefish
 -   geany — An IDE that includes LaTeX syntax highlighting, building,
     and shows a list of environments/sections/labels in the sidebar.
 
-http://www.geany.org/ || Geany
+http://www.geany.org/ || geany
 
 -   gummi — Lightweight LaTeX editor. It features a continuous preview
     mode, integrated BibTeX support, extendable snippet interface and
@@ -50,7 +56,12 @@ http://www.geany.org/ || Geany
 
 http://dev.midnightcoding.org/projects/gummi/ || gummi
 
-KDE
+-   LaTeXila — LaTeX editor for the GNOME Desktop including support for
+    code completion, compiling and project management.
+
+https://projects.gnome.org/latexila/ || latexila
+
+> KDE
 
 -   Kile — A user friendly TeX/LaTeX front-end for KDE
 
@@ -73,8 +84,8 @@ https://www.gnu.org/software/emacs/ || emacs
 
 http://www.emacswiki.org/WhizzyTeX/ || emacs
 
--   Vim — Vim together with vim-latexsuite-git can be used as
-    customizable LaTeX environment.
+-   Vim — Vim together with vim-latexsuite or vim-latexsuite-git can be
+    used as customizable LaTeX environment.
 
 http://www.vim.org || vim
 
@@ -85,18 +96,20 @@ http://www.vim.org || vim
 
 http://www.xm1math.net/texmaker/ || texmaker
 
+-   TeXstudio — Fork of TeXMaker including support for code completion
+    of bibtex items, grammar check and automatic detection of the need
+    for multiple LaTeX runs.
+
+http://texstudio.sourceforge.net/ || texstudio
+
 -   LyX — An advanced open-source WYSIWYM document processor.
 
 http://www.lyx.org/ || lyx
 
 -   JabRef — Java GUI frontend for managing BibTeX and other
-    bibliographies. If you have issues with certain features not working
-    in JabRef (like the "Find" command), it may be an incompatibility
-    with Java 7. Try installing Java 6 (i.e. openjdk6). This will
-    uninstall jdk7-openjdk and jre7-openjdk, and all features in JabRef
-    should now work.
+    bibliographies.
 
-http://jabref.sourceforge.net/index.php || jabref-git
+http://jabref.sourceforge.net/index.php || jabref jabref-git
 
 -   Zotero — This is a free, easy-to-use tool to help you collect,
     organize, cite, and share your research sources. There is a
@@ -109,30 +122,34 @@ http://www.zotero.org/support/3.0/ || zotero
 
 http://www.texmacs.org || texmacs
 
-See the Wikipedia article on this subject for more information:
-Comparison of TeX editors
+> Online tools
 
-Updating babelbib language definitions
---------------------------------------
+-   ShareLaTeX — An open source online LaTeX editor. You can either run
+    your own local version where you can host, edit, collaborate in
+    real-time, and compile your LaTeX documents, or simply use the
+    version hosted on the official website.
 
-If you have the very specific problem of babelbib not having the latest
-language definitions that you need, and you don't want to recompile
-everything, you can get them manually from
-http://www.tug.org/texlive/devsrc/Master/texmf-dist/tex/latex/babelbib/
-and put them in /usr/share/texmf-dist/tex/latex/babelbib/. For example:
+https://www.sharelatex.com/ ||
 
-    # cd /usr/share/texmf-dist/tex/latex/babelbib/ 
-    # wget http://www.tug.org/texlive/devsrc/Master/texmf-dist/tex/latex/babelbib/romanian.bdf
-    # wget [...all-other-language-files...]
-    # wget http://www.tug.org/texlive/devsrc/Master/texmf-dist/tex/latex/babelbib/babelbib.sty
+-   writeLaTex — Online collaborative LaTeX editor with integrated
+    real-time preview.
 
-Afterwards, you need to run texhash to update the TeX database:
+https://www.writelatex.com/ ||
 
-    # texhash
+-   cloudTeX — Social TeX in the cloud.
+
+https://cloud-tex.com/ ||
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=LaTeX&oldid=254881"
+"https://wiki.archlinux.org/index.php?title=LaTeX&oldid=303169"
 
 Category:
 
 -   TeX
+
+-   This page was last modified on 4 March 2014, at 20:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

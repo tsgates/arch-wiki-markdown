@@ -3,21 +3,18 @@ Dell XPS 14z
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware state                                                     |
-| -   2 System Settings                                                    |
-| -   3 System Setup                                                       |
-|     -   3.1 Graphics                                                     |
-|         -   3.1.1 Nvidia card                                            |
-|         -   3.1.2 Intel card                                             |
-|                                                                          |
-|     -   3.2 Power management                                             |
-|     -   3.3 Special trick for acpid                                      |
-|     -   3.4 Other                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware state
+-   2 System Settings
+-   3 System Setup
+    -   3.1 Graphics
+        -   3.1.1 Nvidia card
+        -   3.1.2 Intel card
+    -   3.2 Power management
+    -   3.3 Special trick for acpid
+    -   3.4 Other
 
 Hardware state
 --------------
@@ -148,8 +145,15 @@ the Linux kernel is located in:
     SYMBOL: USB_XHCI_HCD
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_XPS_14z&oldid=196596"
+"https://wiki.archlinux.org/index.php?title=Dell_XPS_14z&oldid=304833"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 16 March 2014, at 07:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

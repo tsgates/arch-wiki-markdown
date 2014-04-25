@@ -20,15 +20,24 @@ Setting up
 ----------
 
 Monit can be installed with the monit package, available from the
-Official Repositories.
+Official repositories.
 
 Configure /etc/monitrc.
 
 Official documentation can be found at [1].
 
+gentoo monit wiki
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Monit&oldid=240532"
+"https://wiki.archlinux.org/index.php?title=Monit&oldid=301590"
 
 Category:
 
 -   Status monitoring and notification
+
+-   This page was last modified on 24 February 2014, at 11:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

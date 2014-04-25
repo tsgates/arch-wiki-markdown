@@ -7,7 +7,7 @@ it works with a different tablet.
 Installation
 ------------
 
-You need to install xf86-input-aiptek from the Official Repositories.
+You need to install xf86-input-aiptek from the Official repositories.
 
 Create /etc/udev/rules.d/20-aiptek.rules with the following content:
 
@@ -70,8 +70,15 @@ Edit -> Input Devices -> Aiptek
 -   X-Tilt, Y-Tilt and Wheel shouldn't matter
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Aiptek_Tablet&oldid=233691"
+"https://wiki.archlinux.org/index.php?title=Aiptek_Tablet&oldid=301658"
 
 Category:
 
--   Input devices
+-   Graphics tablet
+
+-   This page was last modified on 24 February 2014, at 12:02.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

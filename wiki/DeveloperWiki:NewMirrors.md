@@ -1,16 +1,14 @@
 DeveloperWiki:NewMirrors
 ========================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Adding a new mirror                                                |
-| -   2 2-tier mirroring scheme                                            |
-| -   3 For the mirror administrator                                       |
-| -   4 The Arch Linux side                                                |
-| -   5 Mirror size                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Adding a new mirror
+-   2 2-tier mirroring scheme
+-   3 For the mirror administrator
+-   4 The Arch Linux side
+-   5 Mirror size
 
 > Adding a new mirror
 
@@ -55,7 +53,6 @@ Please provide the following:
         rsync://rsync.las.ic.unicamp.br/pub/archlinux/
     -   c3sl.ufpr.br (Brazil) -
         rsync://archlinux.c3sl.ufpr.br/archlinux/
-
 -   An administrative contact email
 
 Please join the arch-mirrors mailing list.
@@ -105,3 +102,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 5 December 2012, at 23:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -10,22 +10,18 @@ phpVirtualBox was designed to allow users to administer VirtualBox in a
 headless environment - mirroring the VirtualBox GUI through its web
 interface.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 VirtualBox web service                                       |
-|     -   1.2 VirtualBox web interface (phpvirtualbox)                     |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Web service                                                  |
-|     -   2.2 Web interface                                                |
-|                                                                          |
-| -   3 Running                                                            |
-| -   4 Debugging                                                          |
-| -   5 External Resources                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 VirtualBox web service
+    -   1.2 VirtualBox web interface (phpvirtualbox)
+-   2 Configuration
+    -   2.1 Web service
+    -   2.2 Web interface
+-   3 Running
+-   4 Debugging
+-   5 External Resources
 
 Installation
 ------------
@@ -45,7 +41,7 @@ from AUR.
 
 > VirtualBox web interface (phpvirtualbox)
 
-Install phpvirtualbox from Official Repositories on a php-capable web
+Install phpvirtualbox from Official repositories on a php-capable web
 server of your choice (Apache is suitable choice).
 
 Configuration
@@ -186,8 +182,15 @@ External Resources
 -   systemd vboxweb.service mod when needing to start as non-root user
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PhpVirtualBox&oldid=254308"
+"https://wiki.archlinux.org/index.php?title=PhpVirtualBox&oldid=301582"
 
 Category:
 
 -   Virtualization
+
+-   This page was last modified on 24 February 2014, at 11:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

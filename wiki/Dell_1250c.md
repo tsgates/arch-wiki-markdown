@@ -3,16 +3,15 @@ Dell 1250c
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Download Printer drivers                                           |
-| -   3 Extracting the RPM files                                           |
-| -   4 Installing the driver and printer                                  |
-| -   5 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Download Printer drivers
+-   3 Extracting the RPM files
+-   4 Installing the driver and printer
+-   5 Troubleshooting
+-   6 See also
 
 Introduction
 ------------
@@ -74,9 +73,21 @@ For x86_64 installations, the cups 32bit client library is also needed
 
     # pacman -S lib32-libcups
 
+See also
+--------
+
+-   Tutorial for installing Dell 1250c on Arch-Linux (german)
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_1250c&oldid=245374"
+"https://wiki.archlinux.org/index.php?title=Dell_1250c&oldid=286096"
 
 Category:
 
 -   Printers
+
+-   This page was last modified on 3 December 2013, at 23:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

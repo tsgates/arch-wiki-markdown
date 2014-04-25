@@ -1,23 +1,20 @@
 ZFS
 ===
 
-> Summary
+Related articles
 
-This page provides basic guidelines for installing the native ZFS Linux
-kernel module.
-
-> Related
-
-Installing Arch Linux on ZFS
-
-ZFS on FUSE
+-   ZFS Installation
+-   Playing with ZFS
+-   Installing Arch Linux on ZFS
+-   ZFS on FUSE
 
 ZFS is an advanced filesystem created by Sun Microsystems (now owned by
 Oracle) and released for OpenSolaris in November 2005. Features of ZFS
 include: pooled storage (integrated volume management -- zpool),
 Copy-on-write, snapshots, data integrity verification and automatic
-repair (scrubbing), RAID-Z, and a maximum 16 Exabyte volume size. ZFS is
-licensed under the Common Development and Distribution License (CDDL).
+repair (scrubbing), RAID-Z, a maximum 16 Exabyte file size, and a
+maximum 256 Zettabyte volume size. ZFS is licensed under the Common
+Development and Distribution License (CDDL).
 
 Described as "The last word in filesystems" ZFS is stable, fast, secure,
 and future-proof. Being licensed under the GPL incompatible CDDL, it is
@@ -26,123 +23,59 @@ requirement, however, does not prevent a native Linux kernel module from
 being developed and distributed by a third party, as is the case with
 zfsonlinux.org (ZOL).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Building from AUR                                            |
-|     -   1.2 Unofficial repository                                        |
-|     -   1.3 Archzfs testing repository                                   |
-|     -   1.4 Archiso tracking repository                                  |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 mkinitramfs hook                                             |
-|     -   2.2 Automatic Start                                              |
-|                                                                          |
-| -   3 Systemd                                                            |
-| -   4 Create a storage pool                                              |
-| -   5 Usage                                                              |
-|     -   5.1 Scrub                                                        |
-|     -   5.2 Check zfs pool status                                        |
-|     -   5.3 Destroy a storage pool                                       |
-|     -   5.4 Export a storage pool                                        |
-|     -   5.5 Swap partition                                               |
-|                                                                          |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 does not contain an EFI label                                |
-|     -   6.2 No hostid found                                              |
-|     -   6.3 On boot the zfs pool does not mount stating: "pool may be in |
-|         use from other system"                                           |
-|                                                                          |
-| -   7 Tips and tricks                                                    |
-|     -   7.1 Emergency chroot repair with archzfs                         |
-|                                                                          |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+ZOL is a project funded by the Lawrence Livermore National Laboratory to
+develop a native Linux kernel module for its massive storage
+requirements and super computers.
+
+Contents
+--------
+
+-   1 Playing with ZFS
+-   2 Installation
+-   3 Configuration
+    -   3.1 Automatic Start
+-   4 Systemd
+-   5 Create a storage pool
+-   6 Tuning
+-   7 Usage
+    -   7.1 Scrub
+    -   7.2 Check zfs pool status
+    -   7.3 Destroy a storage pool
+    -   7.4 Export a storage pool
+    -   7.5 Rename a Zpool
+    -   7.6 Setting a Different Mount Point
+    -   7.7 Swap volume
+    -   7.8 Automatic snapshots
+-   8 Troubleshooting
+    -   8.1 does not contain an EFI label
+    -   8.2 No hostid found
+    -   8.3 On boot the zfs pool does not mount stating: "pool may be in
+        use from other system"
+        -   8.3.1 Unexported pool
+        -   8.3.2 Incorrect hostid
+-   9 Tips and tricks
+    -   9.1 Embed the archzfs packages into an archiso
+    -   9.2 Encryption in ZFS on linux
+    -   9.3 Emergency chroot repair with archzfs
+-   10 See also
+
+Playing with ZFS
+----------------
+
+The rest of this article cover basic setup and usage of ZFS on physical
+block devices (HDD and SSD for example). Users wishing to experiment
+with ZFS on virtual block devices (known in ZFS terms as VDEVs) which
+can be simple files like ~/zfs0.img ~/zfs1.img ~/zfs2.img etc. with no
+possibility of real data loss are encouraged to see the Playing_with_ZFS
+article. Common tasks like building a RAIDZ array, purposefully
+corrupting data and recovering it, snapshotting datasets, etc. are
+covered.
 
 Installation
 ------------
 
-> Building from AUR
-
-The ZFS kernel module is available in the AUR via zfs.
-
-Note:The ZFS and SPL (Solaris Porting Layer is a Linux kernel module
-which provides many of the Solaris kernel APIs) kernel modules are tied
-to a specific kernel version. It would not be possible to apply any
-kernel updates until updated packages are uploaded to AUR or the archzfs
-repository.
-
-Should you wish to update the core/linux package before the AUR/zfs and
-AUR/spl packages' dependency lists are updated, a possible work-around
-is to remove (uninstall) spl and zfs packages (the respective modules
-and file system may stay in-use), update the core/linux package, build +
-install zfs and spl packages - just do not forget to edit PKGBUILD and
-correct the core/linux version number in "depends" section to match the
-updated version). Finally, the system may be rebooted. [ This is only
-for the situation, when ZFS is not used for root filesystem. ]
-
-> Unofficial repository
-
-For fast and effortless installation and updates, the "archzfs" signed
-repository is available to add to your pacman.conf:
-
-    /etc/pacman.conf
-
-    [demz-repo-core]
-    Server = http://demizerone.com/$repo/$arch
-
-The repository and packages are signed with the maintainer's PGP key
-which is verifiable here: http://demizerone.com. This key is not trusted
-by any of the Arch Linux master keys, so it will need to be locally
-signed before use. See pacman-key.
-
-Add the maintainer's key,
-
-    # pacman-key -r 0EE7A126
-
-and locally sign to add it to the system's trust database,
-
-    # pacman-key --lsign-key 0EE7A126
-
-Once the key has been signed, it is now possible to update the package
-database,
-
-    # pacman -Syy
-
-and install ZFS packages:
-
-    # pacman -S archzfs
-
-> Archzfs testing repository
-
-If you have the testing repository active in pacman.conf then it is
-possible to use the archzfs repository that tracks the testing kernel.
-
-    # /etc/pacman.conf
-
-    [demz-repo-testing]
-    Server = http://demizerone.com/$repo/$arch
-
-> Archiso tracking repository
-
-ZFS can easily be used from within the archiso live environment by using
-the special archiso tracking repository for ZFS. This repository makes
-it easy to install Arch Linux on a root ZFS filesystem, or to mount ZFS
-pools from within an archiso live environment using an up-to-date live
-medium. To use this repository from the live environment, add the
-following server line to pacman.conf:
-
-    /etc/pacman.conf
-
-    [demz-repo-archiso]
-    Server = http://demizerone.com/$repo/$arch
-
-This repository and packages are also signed, so the key must be locally
-signed following the steps listed in the previous section before use.
-For a guide on how to install Arch Linux on to a root ZFS filesystem,
-see Installing Arch Linux on ZFS.
+The requisite packages are available in the AUR and in an unofficial
+repo. Details are provided on the ZFS Installation article.
 
 Configuration
 -------------
@@ -151,56 +84,19 @@ ZFS is considered a "zero administration" filesystem by its creators;
 therefore, configuring ZFS is very straight forward. Configuration is
 done primarily with two commands: zfs and zpool.
 
-> mkinitramfs hook
-
-If you are using ZFS on your root filesystem, then you will need to add
-the ZFS hook to mkinitcpio.conf; if you are not using ZFS for your root
-filesystem, then you do not need to add the ZFS hook.
-
-You will need to change your kernel parameters to include the dataset
-you want to boot. You can use zfs=bootfs to use the ZFS bootfs (set via
-zpool set bootfs=rpool/ROOT/arch rpool) or you can set the kernel
-parameters to zfs=<pool>/<dataset> to boot directly from a ZFS dataset.
-
-To see all available options for the ZFS hook:
-
-     $ mkinitcpio -H zfs
-
-To use the mkinitcpio hook, you will need to add zfs to your HOOKS in
-/etc/mkinitcpio.conf:
-
-    /etc/mkinitcpio.conf
-
-    ...
-    HOOKS="base udev autodetect modconf encrypt zfs filesystems usbinput"
-    ...
-
-Note:It is not necessary to use the "fsck" hook with ZFS. ZFS
-automatically fixes any errors that occur within the filesystem.
-However, if the hook is required for another filesystem used on the
-system, such as ext4, the current ZFS packaging implementation does not
-yet properly handle fsck requests from mkinitcpio and an error is
-produced when generating a new ramdisk.
-
-It is important to place this after any hooks which are needed to
-prepare the drive before it is mounted. For example, if your ZFS volume
-is encrypted, then you will need to place encrypt before the zfs hook to
-unlock it first.
-
-Recreate the ramdisk:
-
-     # mkinitcpio -p linux
+Note:The following section is ONLY needed if users wish to install their
+root filesystem to a ZFS volume. Users wishing to have a data partition
+with ZFS do NOT need to read the next section.
 
 > Automatic Start
 
 For ZFS to live by its "zero administration" namesake, the zfs daemon
 must be loaded at startup. A benefit to this is that it is not necessary
-to mount your zpool in /etc/fstab; the zfs daemon imports and mounts one
-zfs pool automatically. The daemon mounts a zfs pool reading the file
-/etc/zfs/zpool.cache, so the zfs pool that you want to automatically
-mounted must write the file there.
+to mount the zpool in /etc/fstab; the zfs daemon can import and mount
+zfs pools automatically. The daemon mounts the zfs pools reading the
+file /etc/zfs/zpool.cache.
 
-Set a pool as to be automatically mounted by the zfs daemon:
+For each pool you want automatically mounted by the zfs daemon execute:
 
     # zpool set cachefile=/etc/zfs/zpool.cache <pool>
 
@@ -209,29 +105,23 @@ Systemd
 
 Enable the service so it is automatically started at boot time:
 
-     # systemctl enable zfs.service
+     # systemctl enable zfs
 
 To manually start the daemon:
 
-     # systemctl start zfs.service
+     # systemctl start zfs
 
 Create a storage pool
 ---------------------
 
 Use  # parted --list to see a list of all available drives. It is not
-necessary to partition your drives before creating the zfs filesystem,
-this will be done automatically. However, if you feel the need to
-completely wipe your drive before creating the filesystem, this can be
-easily done with the dd command.
+necessary nor recommended to partition the drives before creating the
+zfs filesystem.
 
-     # dd if=/dev/zero of=/dev/<device>
-
-It should not have to be stated, but be careful with this command!
-
-Once you have the list of drives, it is now time to get the id's of the
-drives you will be using. The zfs on Linux developers recommend using
-device ids when creating ZFS storage pools of less than 10 devices. To
-find the id's for your device, simply:
+Having identified the list of drives, it is now time to get the id's of
+the drives to add to the zpool. The zfs on Linux developers recommend
+using device ids when creating ZFS storage pools of less than 10
+devices. To find the id's, simply:
 
      $ ls -lah /dev/disk/by-id/
 
@@ -251,25 +141,35 @@ Now, finally, create the ZFS pool:
 -   -f: Force creating the pool. This is to overcome the "EFI label
     error". See #does not contain an EFI label.
 
--   -m: The mount point of the pool. If this is not specified, than your
+-   -m: The mount point of the pool. If this is not specified, than the
     pool will be mounted to /<pool>.
 
--   pool: This is the name of the pool. Change it to whatever you like.
+-   pool: This is the name of the pool.
 
 -   raidz: This is the type of virtual device that will be created from
     the pool of devices. Raidz is a special implementation of raid5. See
     Jeff Bonwick's Blog -- RAID-Z for more information about raidz.
 
--   ids: The names of the drives or partitions that you want to include
-    into your pool. Get it from /dev/disk/by-id.
+-   ids: The names of the drives or partitions that to include into the
+    pool. Get it from /dev/disk/by-id.
 
 Here is an example for the full command:
 
      # zpool create -f -m /mnt/data bigdata raidz ata-ST3000DM001-9YN166_S1F0KDGY ata-ST3000DM001-9YN166_S1F0JKRR ata-ST3000DM001-9YN166_S1F0KBP8 ata-ST3000DM001-9YN166_S1F0JTM1
 
+In case Advanced Format disks are used which have a native sector size
+of 4096 bytes instead of 512 bytes, the automated sector size detection
+algorithm of ZFS might detect 512 bytes because the backwards
+compatibility with legacy systems. This would result in degraded
+performance. To make sure a correct sector size is used, the ashift=12
+option should be used (See the ZFS on Linux FAQ). The full command would
+in this case be:
+
+     # zpool create -f -o ashift=12 -m /mnt/data bigdata raidz ata-ST3000DM001-9YN166_S1F0KDGY ata-ST3000DM001-9YN166_S1F0JKRR ata-ST3000DM001-9YN166_S1F0KBP8 ata-ST3000DM001-9YN166_S1F0JTM1
+
 If the command is successful, there will be no output. Using the $ mount
-command will show that you pool is mounted. Using # zpool status will
-show that your pool has been created.
+command will show that the pool is mounted. Using # zpool status will
+show that the pool has been created.
 
     # zpool status
 
@@ -288,12 +188,52 @@ show that your pool has been created.
 
     errors: No known data errors
 
-At this point it would be good to reboot your computer to make sure your
+At this point it would be good to reboot the machine to ensure that the
 ZFS pool is mounted at boot. It is best to deal with all errors before
-transferring your data.
+transferring data.
+
+Tuning
+------
+
+Although many knobs are available on a zfs pool, there are two major
+ones user can consider:
+
+-   atime
+-   compression
+
+Atime is enabled by default but for most users, it represents
+superfluous writes to the zpool and it can be disabled using the zfs
+command:
+
+    # zfs set atime=off <pool>
+
+Compression is just that, transparent compression of data. Consult the
+man page for various options. A recent advancement is the lz4 algorithm
+which offers excellent compression and performance. Enable it (or any
+other) using the zfs command:
+
+    # zfs set compression=lz4 <pool>
+
+Other options for zfs can be displayed again, using the zfs command:
+
+    # sudo zfs get all <pool>
 
 Usage
 -----
+
+Users can optionally create a dataset under the zpool as opposed to
+manually creating directories under the zpool. Datasets allow for an
+increased level of control (quotas for example) in addition to
+snapshots. To be able to create and mount a dataset, a directory of the
+same name must not pre-exist in the zpool. To create a dataset, use:
+
+     # zfs create <nameofzpool>/<nameofdataset>
+
+It is then possible to apply ZFS specific attributes to the dataset. For
+example, one could assign a quota limit to a specific directory within a
+dataset:
+
+     # zfs set quota=20G <nameofzpool>/<nameofdataset>/<directory>
 
 To see all the commands available in ZFS, use :
 
@@ -305,11 +245,11 @@ or:
 
 > Scrub
 
-ZFS pools should be scrubbed at least once a week. To scrub your pool:
+ZFS pools should be scrubbed at least once a week. To scrub the pool:
 
      # zpool scrub <pool>
 
-To do automatic scrubbing once a week, set the following line in your
+To do automatic scrubbing once a week, set the following line in the
 root crontab:
 
     # crontab -e
@@ -318,11 +258,11 @@ root crontab:
     30 19 * * 5 zpool scrub <pool>
     ...
 
-Replace <pool> with the name of your ZFS storage pool.
+Replace <pool> with the name of the ZFS pool.
 
 > Check zfs pool status
 
-To print a nice table with statistics about your ZFS pool, including and
+To print a nice table with statistics about the ZFS pool, including and
 read/write errors, use
 
      # zpool status -v
@@ -341,35 +281,91 @@ And now when checking the status:
 
     no pools available
 
-To find the name of your pool, see #Check zfs pool status.
+To find the name of the pool, see #Check zfs pool status.
 
 > Export a storage pool
 
-If you are going to use the pool in a different system, or are doing
+If a storage pool is to be used on another system, it will first need to
+be exported. It is also necessary to export a pool if it has been
+imported from the archiso as the hostid is different in the archiso as
+it is in the booted system. The zpool command will refuse to import any
+storage pools that have not been exported. It is possible to force the
+import with the -f argument, but this is considered bad form.
 
-> Swap partition
+Any attempts made to import an un-exported storage pool will result in
+an error stating the storage pool is in use by another system. This
+error can be produced at boot time abruptly abandoning the system in the
+busybox console and requiring an archiso to do an emergency repair by
+either exporting the pool, or adding the zfs_force=1 to the kernel boot
+parameters (which is not ideal). See #On boot the zfs pool does not
+mount stating: "pool may be in use from other system"
 
-ZFS does not allow to use swapfiles, but you can use a ZFS volume as
-swap partition. It is importart to set the ZVOL block size to match the
-system page size, for x86_64 systems that is 4k.
+To export a pool,
 
-Create a 8gb zfs volume:
+     # zpool export bigdata
 
-     # zfs create -V 8gb -b 4K <pool>/swap
+> Rename a Zpool
+
+Renaming a zpool that is already created is accomplished in 2 steps:
+
+    # zpool export oldname
+    # zpool import oldname newname
+
+> Setting a Different Mount Point
+
+The mount point for a given zpool can be moved at will with one command:
+
+    # zfs set mountpoint=/foo/bar poolname
+
+> Swap volume
+
+ZFS does not allow to use swapfiles, but users can use a ZFS volume
+(ZVOL) as swap. It is importart to set the ZVOL block size to match the
+system page size, which can be obtained by the getconf PAGESIZE command
+(default on x86_64 is 4KiB). Other options useful for keeping the system
+running well in low-memory situations are keeping it always synced and
+not caching the zvol data.
+
+Create a 8GiB zfs volume:
+
+  
+
+     # zfs create -V 8G -b $(getconf PAGESIZE) \
+                  -o primarycache=metadata \
+                  -o sync=always \
+                  -o com.sun:auto-snapshot=false <pool>/swap
 
 Prepare it as swap partition:
 
-     # mkswap /dev/zvol/<pool>/maindisk/swap
+     # mkswap -f /dev/zvol/<pool>/swap
 
-Enable swap:
-
-     # swapon /dev/zvol/<pool>/maindisk/swap
-
-To make it permament you need to edit your /etc/fstab.
+To make it permanent, edit /etc/fstab. ZVOLs support discard, which can
+potentially help ZFS's block allocator and reduce fragmentation for all
+other datasets when/if swap is not full.
 
 Add a line to /etc/fstab:
 
-     /dev/zvol/<pool>/swap none swap defaults 0 0
+     /dev/zvol/<pool>/swap none swap discard 0 0
+
+Keep in mind the Hibernate hook must be loaded before filesystems, so
+using ZVOL as swap will not allow to use hibernate function. If you need
+hibernate, keep a partition for it.
+
+> Automatic snapshots
+
+The zfs-auto-snapshot-git package from AUR provides a shell script to
+automate the management of snapshots, with each named by date and label
+(hourly, daily, etc), giving quick and convenient snapshotting of all
+ZFS datasets. The package also installs cron tasks for quarter-hourly,
+hourly, daily, weekly, and monthly snapshots. Optionally adjust the
+--keep parameter from the defaults depending on how far back the
+snapshots are to go (the monthly script by default keeps data for up to
+a year).
+
+To prevent a dataset from being snapshotted at all, set
+com.sun:auto-snapshot=false on it. Likewise, set more fine-grained
+control as well by label, if, for example, no monthlies are to be kept
+on a snapshot, for example, set com.sun:auto-snapshot:monthly=false.
 
 Troubleshooting
 ---------------
@@ -391,9 +387,9 @@ initscript output:
      ZFS: No hostid found on kernel command line or /etc/hostid.
 
 This warning occurs because the ZFS module does not have access to the
-spl hosted. There are two solutions, for this. You can either place your
-spl hostid in the kernel parameters in your boot loader. For example,
-adding spl.spl_hostid=0x00bab10c.
+spl hosted. There are two solutions, for this. Either place the spl
+hostid in the kernel parameters in the boot loader. For example, adding
+spl.spl_hostid=0x00bab10c.
 
 The other solution is to make sure that there is a hostid in
 /etc/hostid, and then regenerate the initramfs image. Which will copy
@@ -403,36 +399,138 @@ the hostid into the initramfs image.
 
 > On boot the zfs pool does not mount stating: "pool may be in use from other system"
 
-You can always ignore the check adding zfs_force=1 in your kernel
-parameters, but it is not advisable as a permanent solution.
+Unexported pool
 
-First of all double check you actually exported the pool correctly.
-Exporting the zpool clears the hostid marking the ownership. So during
-the first boot the zpool should mount correctly. If it does not there is
-some other problem.
+If the new installation does not boot because the zpool cannot be
+imported, chroot into the installation and properly export the zpool.
+See ZFS#Emergency chroot repair with archzfs.
 
-Reboot again, if the zfs pool refuses to mount it means your hostid is
-not yet correctly set in the early boot phase and it confuses zfs. So
-you have to manually tell zfs the correct number, once the hostid is
-coherent across the reboots the zpool will mount correctly.
+Once inside the chroot environment, load the ZFS module and force import
+the zpool,
 
-Boot using zfs_force and write down your hostid. This one is just an
+    # zpool import -a -f
+
+now export the pool:
+
+    # zpool export <pool>
+
+To see the available pools, use,
+
+    # zpool status
+
+It is necessary to export a pool because of the way ZFS uses the hostid
+to track the system the zpool was created on. The hostid is generated
+partly based on the network setup. During the installation in the
+archiso the network configuration could be different generating a
+different hostid than the one contained in the new installation. Once
+the zfs filesystem is exported and then re-imported in the new
+installation, the hostid is reset. See Re: Howto zpool import/export
+automatically? - msg#00227.
+
+If ZFS complains about "pool may be in use" after every reboot, properly
+export pool as described above, and then rebuild ramdisk in normally
+booted system:
+
+    # mkinitcpio -p linux
+
+Incorrect hostid
+
+Double check that the pool is properly exported. Exporting the zpool
+clears the hostid marking the ownership. So during the first boot the
+zpool should mount correctly. If it does not there is some other
+problem.
+
+Reboot again, if the zfs pool refuses to mount it means the hostid is
+not yet correctly set in the early boot phase and it confuses zfs.
+Manually tell zfs the correct number, once the hostid is coherent across
+the reboots the zpool will mount correctly.
+
+Boot using zfs_force and write down the hostid. This one is just an
 example.
 
     % hostid
     0a0af0f8
 
-Follow the previous section to set it.
+Users can always ignore the check adding zfs_force=1 in the kernel
+parameters, but it is not advisable as a permanent solution.
 
 Tips and tricks
 ---------------
 
+> Embed the archzfs packages into an archiso
+
+It is a good idea make an installation media with the needed software
+included. Otherwise, the latest archiso installation media burned to a
+CD or a USB key is required.
+
+To embed zfs in the archiso, from an existing install, download the
+archiso package.
+
+    # pacman -S archiso
+
+Start the process:
+
+    # cp -r /usr/share/archiso/configs/releng /root/media
+
+Edit the packages.x86_64 file adding those lines:
+
+    spl-utils
+    spl
+    zfs-utils
+    zfs
+
+Edit the pacman.conf file adding those lines (TODO, correctly embed keys
+in the installation media?):
+
+    [demz-repo-archiso]
+    SigLevel = Never
+    Server = http://demizerone.com/$repo/$arch
+
+Add other packages in packages.both, packages.i686, or packages.x86_64
+if needed and create the image.
+
+    # ./build.sh -v
+
+The image will be in the /root/media/out directory.
+
+More informations about the process can be read in this guide or in the
+Archiso article.
+
+If installing onto a UEFI system, see Unified Extensible Firmware
+Interface#Create UEFI bootable USB from ISO for creating UEFI compatible
+installation media.
+
+> Encryption in ZFS on linux
+
+ZFS on linux does not support encryption directly, but zpools can be
+created in dm-crypt block devices. Since the zpool is created on the
+plain-text abstraction it is possible to have the data encrypted while
+having all the advantages of ZFS like deduplication, compression, and
+data robustness.
+
+dm-crypt, possibly via LUKS, creates devices in /dev/mapper and their
+name is fixed. So you just need to change zpool create commands to point
+to that names. The idea is configuring the system to create the
+/dev/mapper block devices and import the zpools from there. Since zpools
+can be created in multiple devices (raid, mirroring, striping, ...), it
+is important all the devices are encrypted otherwise the protection
+might be partially lost.
+
+  
+ For example, an encrypted zpool can be created using plain dm-crypt
+(without LUKS) with:
+
+    # cryptsetup --hash=sha512 --cipher=twofish-xts-plain64 --offset=0 --key-file=/dev/sdZ --key-size=512 open --type=plain /dev/sdX enc
+    # zpool create zroot /dev/mapper/enc
+
+Since the /dev/mapper/enc name is fixed no import errors will occur.
+
 > Emergency chroot repair with archzfs
 
-Here is how to use the archiso to get into your ZFS filesystem for
+Here is how to use the archiso to get into the ZFS filesystem for
 maintenance.
 
-Boot the latest archiso and bring up your network:
+Boot the latest archiso and bring up the network:
 
        # wifi-menu
        # ip link set eth0 up
@@ -445,7 +543,7 @@ Sync the pacman package database:
 
        # pacman -Syy
 
-(optional) Install your favorite text editor:
+(optional) Install a text editor:
 
        # pacman -S vim
 
@@ -454,6 +552,7 @@ Add archzfs archiso repository to pacman.conf:
     /etc/pacman.conf
 
     [demz-repo-archiso]
+    SigLevel = Required
     Server = http://demizerone.com/$repo/$arch
 
 Sync the pacman package database:
@@ -468,34 +567,34 @@ Load the ZFS kernel modules:
 
        # modprobe zfs
 
-Import your pool:
+Import the pool:
 
        # zpool import -a -R /mnt
 
-Mount your boot partitions (if you have them):
+Mount the boot partitions (if any):
 
        # mount /dev/sda2 /mnt/boot
        # mount /dev/sda1 /mnt/boot/efi
 
-Chroot into your ZFS filesystem:
+Chroot into the ZFS filesystem:
 
        # arch-chroot /mnt /bin/bash
 
-Check your kernel version:
+Check the kernel version:
 
        # pacman -Qi linux
        # uname -r
 
 uname will show the kernel version of the archiso. If they are
-different, you will need to run depmod (in the chroot) with the correct
-kernel version of your chroot installation:
+different, run depmod (in the chroot) with the correct kernel version of
+the chroot installation:
 
        # depmod -a 3.6.9-1-ARCH (version gathered from pacman -Qi linux)
 
 This will load the correct kernel modules for the kernel version
-installed in your chroot installation.
+installed in the chroot installation.
 
-Regenerate your ramdisk:
+Regenerate the ramdisk:
 
        # mkinitcpio -p linux
 
@@ -509,10 +608,39 @@ See also
 -   FreeBSD Handbook -- The Z File System
 -   Oracle Solaris ZFS Administration Guide
 -   Solaris Internals -- ZFS Troubleshooting Guide
+-   Pingdom details how it backs up 5TB of MySQL data every day with ZFS
+
+Aaron Toponce has authored a 17-part blog on ZFS which is an excellent
+read.
+
+1.  VDEVs
+2.  RAIDZ Levels
+3.  The ZFS Intent Log
+4.  The ARC
+5.  Import/export zpools
+6.  Scrub and Resilver
+7.  Zpool Properties
+8.  Zpool Best Practices
+9.  Copy on Write
+10. Creating Filesystems
+11. Compression and Deduplication
+12. Snapshots and Clones
+13. Send/receive Filesystems
+14. ZVOLs
+15. iSCSI, NFS, and Samba
+16. Get/Set Properties
+17. ZFS Best Practices
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ZFS&oldid=256001"
+"https://wiki.archlinux.org/index.php?title=ZFS&oldid=306052"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 20 March 2014, at 17:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -6,16 +6,14 @@ TeXLive instead of TeTeX (which is no longer maintained). For additional
 information about how to install TeXLive on Arch Linux, visit the
 TeXLive article.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Step 1: Install TeXLive                                            |
-| -   2 Step 2: Install Okular                                             |
-| -   3 Step 3: Install Kile                                               |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 pdfTeX warnings                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Step 1: Install TeXLive
+-   2 Step 2: Install Okular
+-   3 Step 3: Install Kile
+-   4 Troubleshooting
+    -   4.1 pdfTeX warnings
 
 Step 1: Install TeXLive
 -----------------------
@@ -77,3 +75,10 @@ Retrieved from
 Category:
 
 -   TeX
+
+-   This page was last modified on 3 October 2012, at 13:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

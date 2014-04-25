@@ -8,21 +8,13 @@ games.
 Installation
 ------------
 
-First, install hlds from the AUR. Before configuring the server, we need
-to add an user with restricted rights which will be only used for HLDS:
+First, install hlds from the AUR.
 
-    $ useradd hlds
+Now we begin download the game files, in this example for Counter-Strike
+1.6, by executing this command (where username and password is your
+steam one):
 
-And then assign the permissions to the program directory:
-
-    $ chown -R hlds:hlds /opt/hlds
-
-Now we change the user, switch the directory to /opt/hlds and begin
-download the game files, in this example for Counter-Strike 1.6, by
-executing this command (where username and password is your steam one):
-
-    $ su hlds && cd /opt/hlds
-    $ ./steam -command update -game cstrike -dir . -username <username> -password <password>
+    $ su hlds -C "/opt/hlds/steam -command update -game cstrike -dir /opt/hlds -username <username> -password <password>"
 
 Configuration
 -------------
@@ -51,8 +43,15 @@ To enable autostart, issue following command:
     $ systemctl enable hlds
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Hlds&oldid=247502"
+"https://wiki.archlinux.org/index.php?title=Hlds&oldid=306068"
 
 Category:
 
 -   Gaming
+
+-   This page was last modified on 20 March 2014, at 17:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

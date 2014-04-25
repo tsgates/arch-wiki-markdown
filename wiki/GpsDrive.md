@@ -17,37 +17,32 @@ step-by-step how to setup PostgreSQL with PostGIS support, import an
 OpenStreetMap database, and configure the GpsDrive<->Mapnik<->PostgreSQL
 connection.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Packages                                                |
-| -   2 Installing PostgreSQL                                              |
-|     -   2.1 Starting from Scratch                                        |
-|                                                                          |
-| -   3 Hardening PostgreSQL                                               |
-| -   4 Creating the PostgreSQL GIS user                                   |
-| -   5 Creating a PostGIS template database                               |
-| -   6 Wrapping Up the PostgreSQL setup                                   |
-| -   7 Importing an OSM File into the PostgreSQL database                 |
-| -   8 Testing the PostgreSQL connection with QuantumGIS                  |
-| -   9 World Boundaries                                                   |
-| -   10 Creating a customized osm.xml                                     |
-| -   11 Using GpsdDrive                                                   |
-| -   12 Displaying OpenStreetMap POIs                                     |
-| -   13 Troubleshooting                                                   |
-|     -   13.1 GpsDrive cannot find world boundaries                       |
-|     -   13.2 Paths                                                       |
-|                                                                          |
-| -   14 Other Information                                                 |
-|     -   14.1 Managing windows in XMonad                                  |
-|     -   14.2 Kismet Integration                                          |
-|     -   14.3 Optimizing PostgreSQL for OSM data                          |
-|     -   14.4 Merging SQLite databases of waypoints schema                |
-|     -   14.5 Scripts packaged with GpsDrive                              |
-|                                                                          |
-| -   15 Links/References                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing Packages
+-   2 Installing PostgreSQL
+    -   2.1 Starting from Scratch
+-   3 Hardening PostgreSQL
+-   4 Creating the PostgreSQL GIS user
+-   5 Creating a PostGIS template database
+-   6 Wrapping Up the PostgreSQL setup
+-   7 Importing an OSM File into the PostgreSQL database
+-   8 Testing the PostgreSQL connection with QuantumGIS
+-   9 World Boundaries
+-   10 Creating a customized osm.xml
+-   11 Using GpsdDrive
+-   12 Displaying OpenStreetMap POIs
+-   13 Troubleshooting
+    -   13.1 GpsDrive cannot find world boundaries
+    -   13.2 Paths
+-   14 Other Information
+    -   14.1 Managing windows in XMonad
+    -   14.2 Kismet Integration
+    -   14.3 Optimizing PostgreSQL for OSM data
+    -   14.4 Merging SQLite databases of waypoints schema
+    -   14.5 Scripts packaged with GpsDrive
+-   15 Links/References
 
 Installing Packages
 -------------------
@@ -238,7 +233,6 @@ Testing the PostgreSQL connection with QuantumGIS
         -   Database: "location"
         -   Port: 5432
         -   Username: gis
-
     -   Connect
     -   Select all four layers and add:
         -   planet_osm_line
@@ -420,8 +414,15 @@ Links/References
   -------------------------------------------------------------------------- ---------------------------------
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GpsDrive&oldid=245219"
+"https://wiki.archlinux.org/index.php?title=GpsDrive&oldid=304849"
 
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 16 March 2014, at 08:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

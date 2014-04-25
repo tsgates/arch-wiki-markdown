@@ -1,44 +1,36 @@
 Nouveau
 =======
 
-> Summary
+Related articles
 
-This article details the installation of the Nouveau Open Source 3D
-acceleration graphics driver for NVIDIA cards. The name of the project
-refers to the fact that "nouveau" means "new" in French.
-
-> Related
-
-NVIDIA
-
-Xorg
+-   NVIDIA
+-   Xorg
+-   Bumblebee
 
 This article covers installing and configuring the Nouveau open source
 driver for NVIDIA graphic cards. For information about the official
 proprietary driver, see NVIDIA.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Coming from the proprietary NVIDIA driver                          |
-| -   2 Installation                                                       |
-| -   3 Loading                                                            |
-|     -   3.1 KMS                                                          |
-|         -   3.1.1 Late start                                             |
-|         -   3.1.2 Early start                                            |
-|                                                                          |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Keep NVIDIA driver installed                                 |
-|     -   4.2 Installing the latest development packages                   |
-|     -   4.3 Tear-free compositing                                        |
-|     -   4.4 Dual Head                                                    |
-|     -   4.5 Setting console resolution                                   |
-|     -   4.6 Power Management                                             |
-|     -   4.7 Enable MSI (Message Signaled Interrupts)                     |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Coming from the proprietary NVIDIA driver
+-   2 Installation
+-   3 Loading
+    -   3.1 KMS
+        -   3.1.1 Late start
+        -   3.1.2 Early start
+-   4 Tips and tricks
+    -   4.1 Keep NVIDIA driver installed
+    -   4.2 Installing the latest development packages
+    -   4.3 Tear-free compositing
+    -   4.4 Dual Head
+    -   4.5 Setting console resolution
+    -   4.6 Power Management
+    -   4.7 Enable MSI (Message Signaled Interrupts)
+    -   4.8 Optimus
+-   5 Troubleshooting
+    -   5.1 Phantom Output Issue
 
 Coming from the proprietary NVIDIA driver
 -----------------------------------------
@@ -52,25 +44,30 @@ configuration to load the Nouveau driver instead of Nvidia.
 If you already installed the proprietary Nvidia driver, then remove it
 first:
 
-    # pacman -Rdds nvidia nvidia-utils
-    # pacman -S --asdeps libgl
+    # pacman -Rdds nvidia nvidia-utils nvidia-libgl libvdpau libcl
+
+You may have to replace nvidia with nvidia-304xx if you're using legacy
+branch.
 
 Be sure to also delete the /etc/X11/xorg.conf file that the Nvidia
 driver created (or undo the changes), or else X will fail to properly
 load the Nouveau driver.
 
+It is also recommended to reinstall xorg-server and mesa as the
+proprietary driver might change files provided by them.
+
 Installation
 ------------
 
-Before proceeding, have a look at the HardwareStatus to see what
-features are supported for a given architecture, and the list of
-codenames to determine the card's category. You could also consult
-Wikipedia for an even more detailed list. Also make sure you have Xorg
-properly installed.
+Before proceeding, figure out your card's codename (a more detailed list
+is available on Wikipedia) and have a look at the feature matrix to see
+what features are supported for your graphics card. Also make sure you
+have Xorg properly installed.
 
-Install the DDX driver with the xf86-video-nouveau package, which is
-available in the official repositories. It pulls in nouveau-dri as a
-dependency, providing the DRI driver for 3D acceleration.
+Install the xf86-video-nouveau package from the official repositories.
+It provides the DDX driver for 2D acceleration and it pulls in
+nouveau-dri as a dependency, providing the DRI driver for 3D
+acceleration.
 
 For 32-bit 3D support on x86_64, install lib32-nouveau-dri from the
 multilib repository.
@@ -93,7 +90,8 @@ If it does not happen, then:
 
 > KMS
 
-Tip:If you have problems with the resolution, check this page.
+Tip:If you have problems with the resolution, check Kernel Mode
+Setting#Forcing modes and EDID.
 
 Kernel Mode Setting (KMS) is required by the Nouveau driver. As the
 system boots, the resolution will likely change when KMS initializes the
@@ -185,8 +183,8 @@ You may install the latest -git packages, through AUR:
     performance.
 -   To get the latest Nouveau improvements, you should use the linux-git
     package from the AUR, edit the PKGBUILD and use Nouveau's own kernel
-    repository, which is currently located at:
-    git://anongit.freedesktop.org/nouveau/linux-2.6.
+    repository, which is currently located at
+    git://anongit.freedesktop.org/git/nouveau/xf86-video-nouveau.
 
 Upsteam driver sources can be found at the Nouveau Source page.
 
@@ -278,26 +276,63 @@ to /etc/mkinitcpio.conf, then re-generate kernel image:
 
 Reboot the system for the changes to take effect.
 
+> Optimus
+
+You have two solutions to use Optimus on a laptop (aka hybrid graphics,
+when you have two GPU on you laptop) : bumblebee and PRIME
+
 Troubleshooting
 ---------------
 
-Add the following to your kernel command line (if using grub hit e at
-the boot menu to edit) to turn on video debugging:
-
-    drm.debug=14 log_buf_len=16M
+Add drm.debug=14 and log_buf_len=16M to your kernel parameters to turn
+on video debugging:
 
 Create verbose Xorg log:
 
-    startx -- -logverbose 9 -verbose 9
+    $ startx -- -logverbose 9 -verbose 9
 
 View loaded video module parameters and values:
 
-    modinfo -p video
+    $ modinfo -p video
+
+Phantom Output Issue
+
+It is possible for the nouveau driver to detect "phantom" outputs. For
+example, both VGA-1 and LVDS-1 are shown as connected but only LVDS-1 is
+present.
+
+This causes display problems and a corrupted screen.
+
+The problem can be overcome by disabling the phantom output (VGA-1 in
+the examples given) on the kernel command line of your boot loader. This
+can be achieved by appending the following:
+
+    video=VGA-1:d
+
+Where d = disable.
+
+The phantom output can also be disabled in X by adding the following to
+/etc/X11/xorg.conf.d/20-nouveau.conf:
+
+    Section "Monitor"
+    Identifier "VGA-1"
+    Option "Ignore" "1"
+    EndSection
+
+Source:
+http://gentoo-en.vfose.ru/wiki/Nouveau#Phantom_and_unpopulated_output_connector_issues
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Nouveau&oldid=252291"
+"https://wiki.archlinux.org/index.php?title=Nouveau&oldid=293829"
 
 Categories:
 
 -   Graphics
 -   X Server
+
+-   This page was last modified on 21 January 2014, at 12:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

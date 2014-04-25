@@ -1,102 +1,123 @@
 Xdg user directories
 ====================
 
-User directories are a set of common directories such as downloads
-directory, music directory, documents directory, and so on. These
-directories can have special identifying icons and used internally by
-many applications such as Nautilus and Thunar to determine where to look
-for files to be passed to the Create Document context menu, whereas the
-desktop directory is used by Xfdesktop to find .desktop files to be
-shown on the Desktop.
+Related articles
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 The config file                                              |
-|     -   2.2 xdg-user-dirs-update                                         |
-|                                                                          |
-| -   3 xdg-user-dir                                                       |
-| -   4 External Resource                                                  |
-+--------------------------------------------------------------------------+
+-   xdg-menu
+-   xdg-open
+
+User directories are a set of common user directories located within the
+$HOME directory, including Documents, Downloads, Music, and Desktop.
+Identified by unique icons within a file manager, they will commonly be
+automatically sourced by numerous programs and applications.
+xdg-user-dirs is a program that will automatically generate these
+directories. See the freedesktop.org website for further information.
+
+Tip:This program will be especially helpful for those who wish to use a
+file manager to manage their desktop for a Window manager such as
+Openbox, as it will also automatically create a ~/Desktop directory.
+
+Contents
+--------
+
+-   1 Installation
+-   2 Creating default directories
+-   3 Creating custom directories
+-   4 Querying configured directories
 
 Installation
 ------------
 
-install package xdg-user-dirs from Official Repositories.
+Install package xdg-user-dirs from Official repositories.
 
-Configuration
--------------
+Creating default directories
+----------------------------
 
-> The config file
+To create a full suite of localized default user directories within the
+$HOME directory, enter the following command:
 
-xdg-user-dirs uses two files for configuration:
+    $ xdg-user-dirs-update
 
--   For all users : /etc/xdg/user-dirs.defaults.
--   For one specific user: ~/.config/user-dirs.dirs.
+Tip:To force the creation of English-named directories,
+LC_ALL=C xdg-user-dirs-update can be used.
 
-Its format is as follows:
+When executed, it will also automatically:
 
-     XDG_DIRNAME_DIR="$HOME/Dirname"
+-   Create a local ~/.config/user-dirs.dirs configuration file: used by
+    applications to find and use home directories specific to an
+    account.
+-   Create a global /etc/xdg/user-dirs.defaults configuration file: used
+    by applications to find and use home directories generally.
+-   Create a local ~/.config/user-dirs.locale configuration file: used
+    to set the language according to the locale in use.
 
-A complete file might contain multiple entries:
+Creating custom directories
+---------------------------
 
-     XDG_DESKTOP_DIR="$HOME/Desktop"
-     XDG_DOWNLOAD_DIR="$HOME/Downloads"
-     XDG_TEMPLATES_DIR="$HOME/Templates"
-     XDG_PUBLICSHARE_DIR="$HOME/Public"
-     XDG_DOCUMENTS_DIR="$HOME/Documents"
-     XDG_MUSIC_DIR="$HOME/Music"
-     XDG_PICTURES_DIR="$HOME/Pictures"
-     XDG_VIDEOS_DIR="$HOME/Videos"
+Note:As with any configuration file, local settings will always override
+global settings. It will also be necessary to manually create any new
+custom directories.
 
-Pointing any of the above variables to $HOME disables the respective
-directory (it won't be automatically created).
+Both the local ~/.config/user-dirs.dirs and global
+/etc/xdg/user-dirs.defaults configuration files use the following format
+to point to user directories:
 
-> xdg-user-dirs-update
+    XDG_DIRNAME_DIR="$HOME/directory_name"
 
-xdg-user-dirs-update is a desktop-independent tool for configuring the
-location of certain user directories. It is run very early in the login
-phase. This program reads a configuration file, and a set of default
-directories. It then creates localized versions of these directories in
-the users home directory and sets up a config file in
-$(XDG_CONFIG_HOME)/user-dirs.dirs (XDG_CONFIG_HOME defaults to
-~/.config) that applications can read to find these directories.
+A complete configuration file may also contain multiple entries:
 
-As an example, command
+    XDG_DESKTOP_DIR="$HOME/Desktop"
+    XDG_DOWNLOAD_DIR="$HOME/Downloads"
+    XDG_TEMPLATES_DIR="$HOME/Templates"
+    XDG_PUBLICSHARE_DIR="$HOME/Public"
+    XDG_DOCUMENTS_DIR="$HOME/Documents"
+    XDG_MUSIC_DIR="$HOME/Music"
+    XDG_PICTURES_DIR="$HOME/Pictures"
+    XDG_VIDEOS_DIR="$HOME/Videos"
 
-    xdg-user-dirs-update --set TEMPLATES ~/.templates
+As xdg-user-dirs will source the local configuration file to point to
+the appropriate user directories, it is therefore possible to edit it in
+order specify custom folders. For example, in the following example, a
+custom folder for the XDG_DOWNLOAD_DIR variable has been created called
+Internet, and ~/.config/user-dirs.dirs has been edited accordingly:
 
-will set the template directory to the specified directory with respect
-to the current user's $HOME:
+    XDG_DOWNLOAD_DIR="$HOME/Internet"
 
-     XDG_TEMPLATES_DIR="$HOME/.templates"
+When downloading files from a web-browser, the default folder used for
+downloading will now be Internet. Alternatively, it is also possible to
+specify custom folders using the command line. The syntax of this
+command is:
 
-If you want to revert to English, run the following:
+    $ xdg-user-dirs-update --set XDG_NAME path/to/custom_folder
 
-    $ LC_ALL=C xdg-user-dirs-update
+For example, the following command will produce the same results as the
+above configuration file edit:
 
-xdg-user-dir
-------------
+    $ xdg-user-dirs-update --set DOWNLOAD ~/Internet
+
+The names of the xdg templates are DESKTOP, DOWNLOAD, TEMPLATES,
+PUBLICSHARE, DOCUMENTS, MUSIC, PICTURES, and VIDEOS.
+
+Querying configured directories
+-------------------------------
 
 Once set, any user directory can be viewed with xdg-user-dir. For
-example:
+example, the following command will specify the location of the
+Templates directory, which of course corresponds to the
+XDG_TEMPLATES_DIR variable in the local configuration file:
 
     $ xdg-user-dir TEMPLATES
 
-will show the template directory, which of course corresponds to the
-XDG_TEMPLATES_DIR variable in the config file.
-
-External Resource
------------------
-
--   xdg-user-dirs - freedesktop.org
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xdg_user_directories&oldid=240295"
+"https://wiki.archlinux.org/index.php?title=Xdg_user_directories&oldid=301655"
 
 Category:
 
 -   Desktop environments
+
+-   This page was last modified on 24 February 2014, at 12:02.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

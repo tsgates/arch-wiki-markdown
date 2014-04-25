@@ -1,24 +1,20 @@
 Acer Aspire 5745g
 =================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Hardware                                                           |
-| -   3 Networking                                                         |
-|     -   3.1 Wireless                                                     |
-|                                                                          |
-| -   4 Power Management                                                   |
-|     -   4.1 CPU frequency scaling                                        |
-|         -   4.1.1 The laptop-mode-tools way                              |
-|         -   4.1.2 Another method                                         |
-|                                                                          |
-| -   5 Xorg                                                               |
-| -   6 Touchpad                                                           |
-| -   7 Hotkeys                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Hardware
+-   3 Networking
+    -   3.1 Wireless
+-   4 Power Management
+    -   4.1 CPU frequency scaling
+        -   4.1.1 The laptop-mode-tools way
+        -   4.1.2 Another method
+-   5 Xorg
+-   6 Touchpad
+-   7 Hotkeys
 
 Introduction
 ============
@@ -85,8 +81,8 @@ Wireless
 --------
 
 The brcm80211 driver is included in the kernel since 2.6.37. No further
-action is necessary on the part of the user. See Wireless Setup if you
-have problems.
+action is necessary on the part of the user. See Wireless network
+configuration if you have problems.
 
 You can manage your wireless connections with NetworkManager or Wicd.
 
@@ -180,8 +176,15 @@ then edit your ~/.xinitrc file and add
 somewhere before your exec line.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_5745g&oldid=238800"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_5745g&oldid=297877"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 15 February 2014, at 15:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

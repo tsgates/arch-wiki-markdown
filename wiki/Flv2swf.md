@@ -40,4 +40,15 @@ General information
             -V --version        Print versiom
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Flv2swf&oldid=225480"
+"https://wiki.archlinux.org/index.php?title=Flv2swf&oldid=256808"
+
+Category:
+
+-   Audio/Video
+
+-   This page was last modified on 12 May 2013, at 09:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

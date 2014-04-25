@@ -1,74 +1,63 @@
 MythTV Walkthrough
 ==================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About this document                                                |
-|     -   1.1 What is MythTV ?                                             |
-|     -   1.2 Why two entries in the Wiki ?                                |
-|     -   1.3 Localisation and Hardware variations                         |
-|     -   1.4 Getting the DVB EPG to work with MythTV (todo)               |
-|     -   1.5 My personal information                                      |
-|     -   1.6 My Hardware                                                  |
-|     -   1.7 My Location                                                  |
-|     -   1.8 Much easier for DVB-T                                        |
-|                                                                          |
-| -   2 Setting up the hardware                                            |
-|     -   2.1 Checking it exists                                           |
-|     -   2.2 Putting in the module                                        |
-|     -   2.3 Checking it works                                            |
-|                                                                          |
-| -   3 Getting the first digital signal                                   |
-|     -   3.1 What transmitter do I use ?                                  |
-|     -   3.2 What is the ukXXXX file ?                                    |
-|     -   3.3 How do I find it ?                                           |
-|     -   3.4 What is channels.conf ?                                      |
-|     -   3.5 Generating the channels.conf                                 |
-|                                                                          |
-| -   4 Getting the first picture                                          |
-|     -   4.1 Install and run Mplayer                                      |
-|     -   4.2 Making Mplayer work with DVB-T                               |
-|                                                                          |
-| -   5 Installing XMLTV                                                   |
-|     -   5.1 Installing XMLTV                                             |
-|     -   5.2 You can have it all, but you do not want to                  |
-|                                                                          |
-| -   6 Installing MythTV                                                  |
-|     -   6.1 Installing MySQL                                             |
-|     -   6.2 Installing MythTV                                            |
-|     -   6.3 Creating the Database                                        |
-|                                                                          |
-| -   7 Setting up MythTV                                                  |
-|     -   7.1 Select your preferred language                               |
-|     -   7.2 Section 1. General                                           |
-|     -   7.3 Section 2. Capture Cards                                     |
-|     -   7.4 Section 3. Video Sources                                     |
-|     -   7.5 Section 4. Input Connections                                 |
-|     -   7.6 Section 5. Channel Editor                                    |
-|     -   7.7 First run of MythTV                                          |
-|     -   7.8 It might not be working.                                     |
-|                                                                          |
-| -   8 Linking XMLTV and MythTV                                           |
-|     -   8.1 The shotgun wedding                                          |
-|     -   8.2 What you are trying to do, technically                       |
-|     -   8.3 Using MythTV                                                 |
-|     -   8.4 Using XMLTVDruid                                             |
-|     -   8.5 Doing it by MySQL Script or similar                          |
-|     -   8.6 Checking that it's worked                                    |
-|     -   8.7 Running mythfilldatabase                                     |
-|     -   8.8 Now go and play                                              |
-|                                                                          |
-| -   9 Extras                                                             |
-|     -   9.1 The Font sizes and the Theme                                 |
-|     -   9.2 Setting up the Icons                                         |
-|     -   9.3 Segmentation Fault                                           |
-|     -   9.4 Using the remote control                                     |
-|                                                                          |
-| -   10 MythTV-Setup Crashing                                             |
-|     -   10.1 How to fix it                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 About this document
+    -   1.1 What is MythTV ?
+    -   1.2 Why two entries in the Wiki ?
+    -   1.3 Localisation and Hardware variations
+    -   1.4 Getting the DVB EPG to work with MythTV (todo)
+    -   1.5 My personal information
+    -   1.6 My Hardware
+    -   1.7 My Location
+    -   1.8 Much easier for DVB-T
+-   2 Setting up the hardware
+    -   2.1 Checking it exists
+    -   2.2 Putting in the module
+    -   2.3 Checking it works
+-   3 Getting the first digital signal
+    -   3.1 What transmitter do I use ?
+    -   3.2 What is the ukXXXX file ?
+    -   3.3 How do I find it ?
+    -   3.4 What is channels.conf ?
+    -   3.5 Generating the channels.conf
+-   4 Getting the first picture
+    -   4.1 Install and run Mplayer
+    -   4.2 Making Mplayer work with DVB-T
+-   5 Installing XMLTV
+    -   5.1 Installing XMLTV
+    -   5.2 You can have it all, but you do not want to
+-   6 Installing MythTV
+    -   6.1 Installing MySQL
+    -   6.2 Installing MythTV
+    -   6.3 Creating the Database
+-   7 Setting up MythTV
+    -   7.1 Select your preferred language
+    -   7.2 Section 1. General
+    -   7.3 Section 2. Capture Cards
+    -   7.4 Section 3. Video Sources
+    -   7.5 Section 4. Input Connections
+    -   7.6 Section 5. Channel Editor
+    -   7.7 First run of MythTV
+    -   7.8 It might not be working.
+-   8 Linking XMLTV and MythTV
+    -   8.1 The shotgun wedding
+    -   8.2 What you are trying to do, technically
+    -   8.3 Using MythTV
+    -   8.4 Using XMLTVDruid
+    -   8.5 Doing it by MySQL Script or similar
+    -   8.6 Checking that it's worked
+    -   8.7 Running mythfilldatabase
+    -   8.8 Now go and play
+-   9 Extras
+    -   9.1 The Font sizes and the Theme
+    -   9.2 Setting up the Icons
+    -   9.3 Segmentation Fault
+    -   9.4 Using the remote control
+-   10 MythTV-Setup Crashing
+    -   10.1 How to fix it
 
 About this document
 ===================
@@ -913,3 +902,10 @@ Retrieved from
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 23 April 2012, at 16:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

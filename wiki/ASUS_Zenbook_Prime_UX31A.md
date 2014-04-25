@@ -20,58 +20,51 @@ See previous generation ASUS Zenbook UX31E page that has mostly
 orthogonal information to those here (may be only partially applicable
 to UX31A)
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Boot from USB medium                                         |
-|                                                                          |
-| -   2 Kernel Parameters                                                  |
-| -   3 Function keys                                                      |
-|     -   3.1 Screen backlight                                             |
-|         -   3.1.1 Screen backlight workarounds                           |
-|             -   3.1.1.1 Method 1                                         |
-|             -   3.1.1.2 Method 2                                         |
-|                                                                          |
-|         -   3.1.2 Screen backlight fix                                   |
-|             -   3.1.2.1 Getting the DIDL and CADL offsets                |
-|                                                                          |
-|     -   3.2 Keyboard backlight                                           |
-|         -   3.2.1 UPower Script                                          |
-|         -   3.2.2 Automatic Backlight Control                            |
-|                                                                          |
-| -   4 Solid State Drive                                                  |
-| -   5 Touchpad                                                           |
-|     -   5.1 Multitouch gestures                                          |
-|     -   5.2 Multitouch gestures in Gnome 3                               |
-|     -   5.3 Disable Touchpad While Typing                                |
-|                                                                          |
-| -   6 HDMI plugged at boot                                               |
-| -   7 Powersave management                                               |
-| -   8 Hardware and Modules                                               |
-|     -   8.1 PCI                                                          |
-|     -   8.2 Other Devices and Drivers                                    |
-|         -   8.2.1 mei                                                    |
-|         -   8.2.2 rdrand                                                 |
-|         -   8.2.3 watchdog                                               |
-|                                                                          |
-|     -   8.3 Issue with ACPI and gpio_ich                                 |
-|     -   8.4 Issue with USB and Laptop_Mode_Tools                         |
-|                                                                          |
-| -   9 Random kernel panics on boot                                       |
-| -   10 BIOS Version Issues                                               |
-| -   11 See also                                                          |
-| -   12 Additional resources                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Boot from USB medium
+    -   1.2 Grub2 Installation
+-   2 Kernel Parameters
+-   3 Function keys
+    -   3.1 Screen backlight
+        -   3.1.1 Screen backlight workarounds
+            -   3.1.1.1 Method 1
+            -   3.1.1.2 Method 2
+        -   3.1.2 Screen backlight fix
+            -   3.1.2.1 Getting the DIDL and CADL offsets
+    -   3.2 Keyboard backlight
+        -   3.2.1 UPower Script
+        -   3.2.2 Automatic Backlight Control
+-   4 Solid State Drive
+-   5 Touchpad
+    -   5.1 Multitouch gestures
+    -   5.2 Multi-tap, two-finger scrolling doesn't work
+    -   5.3 Multitouch gestures in Gnome 3
+    -   5.4 Disable Touchpad While Typing
+-   6 HDMI plugged at boot
+-   7 Powersave management
+-   8 Hardware and Modules
+    -   8.1 PCI
+    -   8.2 Other Devices and Drivers
+        -   8.2.1 mei
+        -   8.2.2 rdrand
+        -   8.2.3 watchdog
+    -   8.3 Problem with ACPI and gpio_ich
+    -   8.4 Problem with USB and Laptop_Mode_Tools
+-   9 Random kernel panics on boot
+-   10 BIOS Version Problems
+-   11 See also
+-   12 Additional resources
 
 Installation
 ------------
 
-To install Arch Linux on UX31A, you can follow the official
-Installation_Guide. Since the UX31A uses UEFI and GPT, make sure to also
-read the UEFI, GPT and UEFI_Bootloaders pages. It is recommended to use
-GRUB as a bootloader. To prepare an UEFI USB device, read
+To install Arch Linux on UX31A, you can follow the official Installation
+guide. Since the UX31A uses UEFI and GPT, make sure to also read the
+UEFI, GPT and UEFI_Bootloaders pages. It is recommended to use GRUB as a
+bootloader. To prepare a UEFI USB device, read
 UEFI#Create_UEFI_bootable_USB_from_ISO.
 
 > Boot from USB medium
@@ -83,6 +76,22 @@ appear in the menu.
 
 Select 'Boot Arch Linux (x86_64)" and press Enter. The installation
 system will be booted and you will end up with a terminal.
+
+> Grub2 Installation
+
+The UX31A should come with an EFI System Partition ("ESP", see
+UEFI#Booting_an_OS_using_UEFI). For an Arch-only installation, following
+normal install procedure without formatting that partition -- thus using
+Windows' bootloader -- will result in a bootable system. However,
+partitioning the disk from scratch, creating a new ESP, and installing
+Arch will result in a non bootable system, because Grub will not be
+added to the UEFI boot option menu (instead, the user will likely be
+dropped to the UEFI BIOS). To fix this, after following normal
+installation procedure, follow the instructions at
+GRUB_EFI_Examples#Z68_Family_and_U47_Family. (UX31A's BIOS has the
+"Launch EFI shell from filesystem device" option, so only follow the
+instructions for that specific case). You should now be able to boot
+into your newly installed system.
 
 Kernel Parameters
 -----------------
@@ -115,8 +124,8 @@ the BIOS level or if it needs a shortcut.
   Fn+F2      Turn off WLAN and Bluetooth   XF86WLAN & XF86Bluetooth   no
   Fn+F3      Dim keyboard backlight        XF86KbdBrightnessDown      yes
   Fn+F4      Brighten keyboard backlight   XF86KbdBrightnessUp        yes
-  Fn+F5      Dim LCD backlight             No recognized key          no
-  Fn+F6      Brighten LCD backlight        No recognized key          no
+  Fn+F5      Dim LCD backlight             XF86MonBrightnessDown      no
+  Fn+F6      Brighten LCD backlight        XF86MonBrightnessUp        no
   Fn+F7      Turn off LCD                  No named key               no
   Fn+F8      Toggle display                XF86Display                yes
   Fn+F9      Toggle touchpad               XF86TouchpadToggle         yes
@@ -131,9 +140,8 @@ the BIOS level or if it needs a shortcut.
 > Screen backlight
 
 Note: Since kernel 3.7.3 screen brightness keys are working out of the
-box (with boot parameter acpi_osi="!Windows 2012" - depending on the
-bootloader, it might be necessary to escape the doublequotes.), so this
-section is legacy and will soon be moved
+box with boot parameter acpi_osi= , so this section is legacy and will
+soon be moved
 
 Screen Brightness keymaps (Fn+F5, Fn+F6) does not work. It means the
 system does not get any keymap when the key combination is pressed. You
@@ -339,7 +347,18 @@ again, the backlight should now work (no guarantee).
 
 > Keyboard backlight
 
-Install asus-kbd-backlight from AUR. To allow users to change the
+Load the asus-nb-wmi kernel module:
+
+    # modprobe asus-nb-wmi
+
+You'll also want to create the file
+/etc/modules-load.d/asus-kbd-backlight.conf with the following content,
+to ensure that the module is loaded when the laptop is booted:
+
+    # Enable control of keyboard backlight using asus-kbd-backlight (https://aur.archlinux.org/packages/asus-kbd-backlight/)
+    asus-nb-wmi
+
+Next, install asus-kbd-backlight from AUR. To allow users to change the
 brightness, say:
 
     # asus-kbd-backlight allowusers
@@ -557,6 +576,12 @@ the autostart/startup applications functionality of your desktop
 environment. ~/.config/touchegg/touchegg.conf can then be configured as
 necessary.
 
+> Multi-tap, two-finger scrolling doesn't work
+
+Check "xinput list" and see whether the Elantech touchpad was recognized
+as an Elantech Click-pad. If so, brenix's comment in psmouse-elantech
+AUR fixed it for me.
+
 > Multitouch gestures in Gnome 3
 
 GNOME 3's gnome-shell does its own mouse-handling, which can interfere
@@ -573,12 +598,12 @@ within the Mouse & Touchpad section of System Settings to be ignored.
 One of the criticisms this laptop gets (see reviews at Amazon) is that
 the placement of the touchpad results in frequent touchpad brushing
 during typing. You should use whatever touchpad disabling method you
-prefer. See Touchpad_Synaptics#Disable_Trackpad_while_Typing.
+prefer. See Touchpad Synaptics#Disable trackpad while typing.
 
 HDMI plugged at boot
 --------------------
 
-There seems to be an issue whereby having an HDMI device plugged in at
+There seems to be a problem whereby having an HDMI device plugged in at
 boot results in the screens being switched and also the laptop screen
 not coming on. To make this more bearable you can automate switching
 HDMI on with the following udev rule and script:
@@ -604,6 +629,10 @@ And add the following udev rule:
 
     # echo 'ACTION=="change", SUBSYSTEM=="drm", RUN+="/usr/local/share/hdmi-plugged-startup"' >> /etc/udev/rules.d/10-local.rules
 
+Suspending, unplugging the HDMI cable, and resuming is a way to enable
+the Zenbook's screen without rebooting if it was booted with the cable
+plugged in.
+
 Powersave management
 --------------------
 
@@ -615,7 +644,7 @@ Hardware and Modules
 
 PCI
 
-This is output of lspci -nnn -k
+This is output of lspci -nnn -k:
 
   Description                                                                              PCI Id       Module
   ---------------------------------------------------------------------------------------- ------------ ---------------
@@ -733,7 +762,7 @@ Check after next boot:
     Oct 06 06:36:27 asarum systemd[1]: Hardware watchdog 'iTCO_wdt', version 0
     Oct 06 06:36:27 asarum systemd[1]: Set hardware watchdog to 30s.
 
-Issue with ACPI and gpio_ich
+Problem with ACPI and gpio_ich
 
 The gpio_ich module causes the following error:
 
@@ -769,9 +798,9 @@ and
 
          0500-057f : pnp 00:05
 
-So, net/net, there's no real issue.
+So, net/net, there's no real problem.
 
-Issue with USB and Laptop_Mode_Tools
+Problem with USB and Laptop_Mode_Tools
 
 USB mouse problems and hotplug does not working in some cases with
 messages in dmesg like:
@@ -786,12 +815,12 @@ The solution is to set "CONTROL_USB_AUTOSUSPEND" in
 Random kernel panics on boot
 ----------------------------
 
-If Archlinux boots without any issues sometimes, but locks up with a
+If Archlinux boots without any problems sometimes, but locks up with a
 kernel panic other times, the cause (as described by Whef in this
 thread: https://bbs.archlinux.org/viewtopic.php?pid=1169781#p1169781) is
 likely the 'btusb' module.
 
-To fix the issue, blacklist the 'btusb' module on the next boot by
+To fix the problem, blacklist the 'btusb' module on the next boot by
 running:
 
      sudo echo "blacklist btusb" > /etc/modprobe.d/disable_btusb.conf
@@ -801,20 +830,20 @@ Then use rc.local to load it at the end of the boot process by running:
      sudo echo "modprobe btusb" >> /etc/rc.local
 
 This appears to avoid whatever race condition conflict that causes the
-kernel to panic on boot, but if you're still having the same issue, try
-removing 'modprobe btusb' from /etc/rc.local to avoid the module
+kernel to panic on boot, but if you're still having the same problem,
+try removing 'modprobe btusb' from /etc/rc.local to avoid the module
 completely.
 
-BIOS Version Issues
--------------------
+BIOS Version Problems
+---------------------
 
-It seems that updating the BIOS to versions 215 and higher causes issues
-with ACPI handling of the battery charge levels. In particular it seems
-that one cannot charge the battery beyond 91%-93%. The issue does not
-seem to be present in Windows however. For further details please see
-the forum thread here. The most up to date BIOS version without any
-issues is 212. Unless it's absolutely necessary, refrain from updating
-your BIOS.
+It seems that updating the BIOS to versions 215 and higher causes
+problems with ACPI handling of the battery charge levels. In particular
+it seems that one cannot charge the battery beyond 91%-93%. The problem
+does not seem to be present in Windows however. For further details
+please see the forum thread here. The most up to date BIOS version
+without any problems is 212. Unless it's absolutely necessary, refrain
+from updating your BIOS.
 
 See also
 --------
@@ -826,11 +855,18 @@ Additional resources
 
 -   https://help.ubuntu.com/community/AsusZenbookPrime
 -   http://ubuntuforums.org/showthread.php?t=2005999
--   Wikipedia Zenbook#UX32.2C_UX42_and_UX52
+-   Wikipedia:Zenbook#UX32.2C_UX42_and_UX52
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Zenbook_Prime_UX31A&oldid=254735"
+"https://wiki.archlinux.org/index.php?title=ASUS_Zenbook_Prime_UX31A&oldid=304816"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 07:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

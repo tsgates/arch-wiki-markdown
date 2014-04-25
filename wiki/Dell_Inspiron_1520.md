@@ -3,34 +3,28 @@ Dell Inspiron 1520
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Intro                                                              |
-|     -   1.1 Summary                                                      |
-|     -   1.2 To do                                                        |
-|     -   1.3 Working                                                      |
-|     -   1.4 Unknown / Untested                                           |
-|                                                                          |
-| -   2 Installation                                                       |
-| -   3 Kernel                                                             |
-| -   4 X.org                                                              |
-|     -   4.1 NVIDIA GeForce 8600M GT                                      |
-|                                                                          |
-| -   5 Hardware                                                           |
-|     -   5.1 Microphone                                                   |
-|     -   5.2 lspci                                                        |
-|                                                                          |
-| -   6 Power Management                                                   |
-|     -   6.1 Suspend and Resume                                           |
-|     -   6.2 CPU Frequency Scaling                                        |
-|     -   6.3 ACPI                                                         |
-|                                                                          |
-| -   7 Links                                                              |
-|     -   7.1 General                                                      |
-|     -   7.2 Linux on a Dell Inspiron 1520                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Intro
+    -   1.1 Summary
+    -   1.2 To do
+    -   1.3 Working
+    -   1.4 Unknown / Untested
+-   2 Installation
+-   3 Kernel
+-   4 X.org
+    -   4.1 NVIDIA GeForce 8600M GT
+-   5 Hardware
+    -   5.1 Microphone
+    -   5.2 lspci
+-   6 Power Management
+    -   6.1 Suspend and Resume
+    -   6.2 CPU Frequency Scaling
+    -   6.3 ACPI
+-   7 Links
+    -   7.1 General
+    -   7.2 Linux on a Dell Inspiron 1520
 
 Intro
 -----
@@ -345,8 +339,15 @@ Links
 > Linux on a Dell Inspiron 1520
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Inspiron_1520&oldid=231856"
+"https://wiki.archlinux.org/index.php?title=Dell_Inspiron_1520&oldid=273529"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 1 September 2013, at 10:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

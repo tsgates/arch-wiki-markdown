@@ -10,24 +10,19 @@ a reasonable way."
 
 This article covers the installation and setup of disk quota.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Enabling                                                           |
-|     -   2.1 Journaled quota                                              |
-|                                                                          |
-| -   3 Configuring                                                        |
-| -   4 Managing                                                           |
-|     -   4.1 Basics                                                       |
-|     -   4.2 Copying quota settings                                       |
-|         -   4.2.1 Multiple users                                         |
-|                                                                          |
-|     -   4.3 Other commands                                               |
-|                                                                          |
-| -   5 More resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Enabling
+    -   2.1 Journaled quota
+-   3 Configuring
+-   4 Managing
+    -   4.1 Basics
+    -   4.2 Copying quota settings
+        -   4.2.1 Multiple users
+    -   4.3 Other commands
+-   5 More resources
 
 Installing
 ----------
@@ -75,6 +70,12 @@ Tip:If you end up with the output "[...]Quotafile $FILE was probably
 truncated. Cannot save quota settings..." you can try removing the
 previously created files aquota*
 
+Tip:If you get the output "quotacheck: Mountpoint (or device) /home not
+found or has no quota enabled.  
+ quotacheck: Cannot find filesystem to check or filesystem not mounted
+with quota option." and you are using a custom kernel, make sure quota
+support is enabled in your kernel.
+
 Tip:In Addition you can try to use "-F vfsold" and "-F vfsv0" afterwards
 NOTE: As of 3.1.6-1, Arch does not support "vfsv1"
 
@@ -82,8 +83,7 @@ NOTE: As of 3.1.6-1, Arch does not support "vfsv1"
 
      # quotaon -av
 
-Tip:to automatically enable quota on boot, add
-quotaon -a >/dev/null 2>&1 to /etc/rc.local.
+Consider adding this command to your start-up, see Autostarting.
 
 > Journaled quota
 
@@ -102,6 +102,8 @@ or aditionally enable the group quota mount option;
 
 Configuring
 -----------
+
+Note:To find out how many 1k blocks are there for a partition use # df
 
 Replace $USER as appropriate and edit the quota as root:
 
@@ -186,7 +188,7 @@ This applies the settings to users with a UID equal to or greater than
 There are several useful commands:
 
     repquota -a      # Shows the status on disk usage
-    warnquota        # Can be used to warn the users about their quota
+    warnquota        # Can be used to warn the users about their quota, configuration in /etc/warnquota.conf
     setquota         # Non-interactive quota setting--useful for scripting
 
 Lasty, quotastats is used to give thorough information about the quota
@@ -214,9 +216,16 @@ More resources
 -   http://www.redhat.com/docs/manuals/linux/RHL-8.0-Manual/admin-primer/s1-storage-quotas.html
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Disk_Quota&oldid=205393"
+"https://wiki.archlinux.org/index.php?title=Disk_Quota&oldid=284371"
 
 Categories:
 
 -   Security
 -   File systems
+
+-   This page was last modified on 24 November 2013, at 04:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

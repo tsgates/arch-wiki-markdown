@@ -4,24 +4,20 @@ Acer Aspire R3610
   
  This page contains information on the Acer Aspire Revo R3610 nettop.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Device information                                                 |
-|     -   1.1 lspci                                                        |
-|     -   1.2 aplay -l                                                     |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 ALSA                                                         |
-|         -   2.1.1 Analogue 2channel audio ouput                          |
-|         -   2.1.2 S/PDIF audio output                                    |
-|         -   2.1.3 HDMI audio output                                      |
-|                                                                          |
-|     -   2.2 Graphics                                                     |
-|         -   2.2.1 Proprietary driver                                     |
-|         -   2.2.2 Nouveau open source driver                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Device information
+    -   1.1 lspci
+    -   1.2 aplay -l
+-   2 Configuration
+    -   2.1 ALSA
+        -   2.1.1 Analogue 2channel audio ouput
+        -   2.1.2 S/PDIF audio output
+        -   2.1.3 HDMI audio output
+    -   2.2 Graphics
+        -   2.2.1 Proprietary driver
+        -   2.2.2 Nouveau open source driver
 
 Device information
 ==================
@@ -155,3 +151,10 @@ Retrieved from
 Category:
 
 -   Acer
+
+-   This page was last modified on 24 October 2012, at 01:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

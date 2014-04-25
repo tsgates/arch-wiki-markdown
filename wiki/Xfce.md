@@ -1,32 +1,14 @@
 Xfce
 ====
 
-> Summary
+Related articles
 
-Xfce is a lightweight desktop environment for Unix-like operating
-systems. It aims to be fast and lightweight, while still being visually
-appealing and user friendly. This article covers its installation,
-configuration, and troubleshooting.
-
-Xfce uses the GTK+ toolkit.
-
-> Overview
-
-The Xorg project provides an open source implementation of the X Window
-System – the foundation for a graphical user interface. Desktop
-environments such as Enlightenment, GNOME, KDE, LXDE, and Xfce provide a
-complete graphical environment. Various window managers offer
-alternative and novel environments, and may be used standalone to
-conserve system resources. Display managers provide a graphical login
-prompt.
-
-> Related
-
-Thunar
-
-Improve GTK Application Looks
-
-Autostart applications#Graphical
+-   Desktop environment
+-   Window manager
+-   Xfwm
+-   Thunar
+-   LXDE
+-   GNOME
 
 From Xfce - About:
 
@@ -36,196 +18,139 @@ full functionality one can expect of a modern desktop environment. They
 are packaged separately and you can pick among the available packages to
 create the optimal personal working environment.
 
-Xfce is a Desktop Environment, like GNOME or KDE. It contains a suite of
-apps like a root window app, window manager, file manager, panel, etc.
-Xfce is written using the GTK2 toolkit, and contains its own development
-environment (libraries, daemons, etc), similar to other big DEs.
-Features:
+Xfce is a lightweight and modular Desktop environment currently based
+upon GTK+ 2 though in the future it may be ported to GTK+ 3. Xfce
+contains a suite of applications such as a window manager, a file
+manager, and a panel to provide a complete user experience. Xfce is
+popular with many users, partly because it is lightweight but also
+because a large amount of settings are exposed in a GUI. This is in
+sharp contrast to desktops such as GNOME Shell which hide many settings
+from the user.
 
--   Lighter on resources than the other major DEs (KDE, GNOME).
--   Most settings are exposed via a GUI, Xfce does not try to hide stuff
-    from the user.
--   Xfwm has an optional built-in compositor which allows for true
-    transparency and all the benefits of GPU acceleration (minimizes
-    tearing, etc.).
--   It works great with multiple monitors.
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Starting Xfce                                                      |
-|     -   2.1 Automatically                                                |
-|     -   2.2 Manually                                                     |
-|     -   2.3 Automounting                                                 |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Xfconf settings                                              |
-|     -   3.2 Panel                                                        |
-|         -   3.2.1 xfce panel background                                  |
-|         -   3.2.2 'menu' panel replacement                               |
-|         -   3.2.3 Removing entries from the System menu                  |
-|             -   3.2.3.1 Method 1                                         |
-|             -   3.2.3.2 Method 2                                         |
-|             -   3.2.3.3 Method 3                                         |
-|             -   3.2.3.4 Method 4                                         |
-|                                                                          |
-|         -   3.2.4 Missing applications                                   |
-|         -   3.2.5 Panel autohide delay                                   |
-|         -   3.2.6 Panel at desktop level                                 |
-|                                                                          |
-|     -   3.3 Desktop                                                      |
-|         -   3.3.1 Transparent Background for Icon Titles                 |
-|         -   3.3.2 Hide Selected Partitions                               |
-|         -   3.3.3 Remove Thunar Options from Right-click                 |
-|         -   3.3.4 Kill Window Shortcut                                   |
-|                                                                          |
-|     -   3.4 XFWM4                                                        |
-|         -   3.4.1 Enabling the Compositor                                |
-|         -   3.4.2 Disable window roll-up                                 |
-|         -   3.4.3 Toggle Automatic Tiling of Windows at Edge of Screen   |
-|                                                                          |
-|     -   3.5 Settings Manager Commands                                    |
-|     -   3.6 Session                                                      |
-|         -   3.6.1 Custom Startup Applications                            |
-|         -   3.6.2 Switch between users                                   |
-|         -   3.6.3 Manually Modifying XML settings                        |
-|                                                                          |
-|     -   3.7 Removable Devices                                            |
-|     -   3.8 Look and Feel                                                |
-|         -   3.8.1 Add themes to XFCE                                     |
-|         -   3.8.2 Cursors                                                |
-|         -   3.8.3 Icons                                                  |
-|         -   3.8.4 Fonts                                                  |
-|                                                                          |
-|     -   3.9 Sound                                                        |
-|         -   3.9.1 Configuring xfce4-mixer                                |
-|         -   3.9.2 Xfce4-mixer and OSS4                                   |
-|         -   3.9.3 Keyboard Volume Buttons                                |
-|             -   3.9.3.1 ALSA                                             |
-|             -   3.9.3.2 OSS                                              |
-|             -   3.9.3.3 Xfce4-volumed                                    |
-|             -   3.9.3.4 Volumeicon                                       |
-|                                                                          |
-|         -   3.9.4 Adding startup/boot sound                              |
-|                                                                          |
-|     -   3.10 xdg-open integration (Preferred Applications)               |
-|     -   3.11 Screenshots                                                 |
-|         -   3.11.1 Print Screen key                                      |
-|                                                                          |
-|     -   3.12 Terminal color themes or pallets                            |
-|         -   3.12.1 Changing default color theme                          |
-|         -   3.12.2 Terminal tango color theme                            |
-|                                                                          |
-|     -   3.13 Colour management                                           |
-|         -   3.13.1 Loading a profile                                     |
-|         -   3.13.2 Creating a profile                                    |
-|                                                                          |
-|     -   3.14 Multiple Monitors                                           |
-|     -   3.15 XDG User Directories                                        |
-|     -   3.16 SSH Agents                                                  |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 xfce4-power-manager                                          |
-|     -   4.2 xfce4-xkb-plugin                                             |
-|     -   4.3 Locales ignored with GDM                                     |
-|     -   4.4 Restore default settings                                     |
-|     -   4.5 NVIDIA and xfce4-sensors-plugin                              |
-|     -   4.6 Session failure                                              |
-|     -   4.7 Preferred Applications preferences have no effect            |
-|     -   4.8 Action Buttons/Missing Icons                                 |
-|     -   4.9 Enable cedilla ç/Ç instead of ć/Ć                            |
-|     -   4.10 Non ASCII characters when mounting USB sticks               |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+-   1 Installation
+-   2 Starting Xfce
+    -   2.1 Graphical login
+    -   2.2 Virtual console
+-   3 Configuration
+    -   3.1 Xfconf settings
+        -   3.1.1 Graphical Settings Manager Commands
+    -   3.2 Menu
+        -   3.2.1 Menu applet replacement
+        -   3.2.2 Removing entries from the System menu
+            -   3.2.2.1 Method 1
+            -   3.2.2.2 Method 2
+            -   3.2.2.3 Method 3
+            -   3.2.2.4 Method 4
+            -   3.2.2.5 Method 5
+        -   3.2.3 Missing applications
+    -   3.3 Desktop
+        -   3.3.1 Transparent Background for Icon Titles
+        -   3.3.2 Hide Selected Partitions
+        -   3.3.3 Remove Thunar Options from Right-click
+        -   3.3.4 Kill Window Shortcut
+        -   3.3.5 Manage Keyboard Shortcuts
+    -   3.4 Window Manager
+        -   3.4.1 Enabling the Compositor
+        -   3.4.2 Window roll-up
+        -   3.4.3 Toggle Automatic Tiling of Windows at Edge of Screen
+        -   3.4.4 Replacing the native window manager
+            -   3.4.4.1 Re-enabling Compositing effects
+    -   3.5 Session
+        -   3.5.1 Custom Startup Applications
+            -   3.5.1.1 Via the Settings Menu
+            -   3.5.1.2 Startup Script
+        -   3.5.2 Lock the screen
+        -   3.5.3 User switching
+        -   3.5.4 Manually Modifying XML settings
+    -   3.6 Look and Feel
+        -   3.6.1 Add themes to XFCE
+        -   3.6.2 Application theme consistency
+        -   3.6.3 Cursors
+        -   3.6.4 Icons
+        -   3.6.5 Fonts
+    -   3.7 Sound
+        -   3.7.1 Configuring xfce4-mixer
+        -   3.7.2 Xfce4-mixer and OSS4
+        -   3.7.3 Keyboard Volume Buttons
+            -   3.7.3.1 ALSA
+            -   3.7.3.2 OSS
+            -   3.7.3.3 PulseAudio
+            -   3.7.3.4 Xfce4-volumed
+            -   3.7.3.5 Volumeicon
+            -   3.7.3.6 Extra keyboard keys
+        -   3.7.4 Adding startup/boot sound
+-   4 Tips & Tricks
+    -   4.1 xdg-open integration (Preferred Applications)
+    -   4.2 Screenshots
+        -   4.2.1 Print Screen key
+    -   4.3 Disable Terminal F1 and F11 shortcut
+    -   4.4 Terminal color themes or pallets
+        -   4.4.1 Changing default color theme
+        -   4.4.2 Terminal tango color theme
+    -   4.5 Colour management
+        -   4.5.1 Loading a profile
+        -   4.5.2 Creating a profile
+    -   4.6 Multiple Monitors
+    -   4.7 XDG User Directories
+    -   4.8 SSH Agents
+    -   4.9 Bluetooth functionality
+    -   4.10 Scroll a background window without shifting focus on it
+-   5 Troubleshooting
+    -   5.1 Getting "Not Authorized" when attempting to mount drives
+        with a file manager
+    -   5.2 xfce4-power-manager
+    -   5.3 xfce4 keeps blanking display
+    -   5.4 xfce4-xkb-plugin
+    -   5.5 Locales ignored with GDM
+    -   5.6 Restore default settings
+    -   5.7 Xfce desktop icons rearrange themselves
+    -   5.8 NVIDIA and xfce4-sensors-plugin
+    -   5.9 Session failure
+    -   5.10 Preferred Applications preferences have no effect
+    -   5.11 Action Buttons/Missing Icons
+    -   5.12 Enable cedilla ç/Ç instead of ć/Ć
+    -   5.13 Non ASCII characters when mounting USB sticks
+    -   5.14 Video tearing when Xfwm compositing is enabled
+    -   5.15 Blurred and distorted characters when compositing is
+        enabled (Intel graphics)
+    -   5.16 GTK themes not working with multiple monitors
+-   6 See also
 
 Installation
 ------------
 
-Before starting, make sure you have the X server installed and
-configured correctly.
-
-Note:Xfce is somewhat modular. That means there is no need for you to
-run every part, you can pick and choose some of them.
-
-The base Xfce system can be installed with the group xfce4, available in
-the Official Repositories. Pacman will ask you to select the packages to
-install, but you probably want to get them all by simply pressing Enter.
-Additional packages, like panel plugins, notifications, and system tools
-are available in the xfce4-goodies group.
-
-Tip:Installing Gamin (the successor of FAM) is highly recommended.
-
-Tip:Common tasks such as mounting removable drives and extracting
-archives can be accomplished with Thunar. If you do not install
-xfce4-goodies but still want these niceties, read the Thunar page.
+Xfce can be installed from the xfce4 group which is available in the
+official repositories. It is recommended that you install the
+xfce4-goodies group as well which includes extra plugins and a number of
+useful utilities such as the mousepad editor.
 
 Starting Xfce
 -------------
 
-> Automatically
+> Graphical login
 
-There are two methods to start Xfce (and in fact, any desktop or window
-manager) at boot time:
+Simply choose Xfce Session from the menu in your favourite display
+manager.
 
--   Run Xfce through a Display Manager
--   Run Xfce automatically using the xorg-xinit method at Start X at
-    Login combining with Automatic login to virtual console‎
+> Virtual console
 
-> Manually
+There are two methods to start Xfce manually:
 
-Note:See xinitrc for details, such as preserving the logind session.
+-   Run startxfce4 directly from the console.
+-   Configure ~/.xinitrc to exec startxfce4 and then run xinit or startx
+    from the console. See xinitrc for details.
 
-You can execute:
+Note:The proper command for launching Xfce is startxfce4, do not start
+xfce4-session directly.
 
-    $ startxfce4
+Tip:You can have Xfce started automatically at login by following Start
+X at Login.
 
-from the console, or configure xinitrc and use xinit or startx.
-
-If you have not created a ~/.xinitrc yet, do so with:
-
-    $ cp /etc/skel/.xinitrc ~/.xinitrc
-
-and add the following line:
-
-    exec startxfce4
-
-Example:
-
-    ~/.xinitrc
-
-    #!/bin/sh
-
-    if [ -d /etc/X11/xinit/xinitrc.d ]; then
-      for f in /etc/X11/xinit/xinitrc.d/*; do
-        [ -x "$f" ] && . "$f"
-      done
-      unset f
-    fi
-
-    exec startxfce4
-
-> Note:
-
--   In case you are wondering, dbus-launch will be launched by the
-    xinitrc.d code at the beginning of the file. dbus-launch starts a
-    dbus-daemon instance to provide communication with PolicyKit.
--   The proper command for launching Xfce is startxfce4: do not start
-    xfce4-session directly, since it is already run by startxfce4
-    itself.
-
-> Automounting
-
-See General Troubleshooting#Session permissions.
-
-If you have no problems shutting down and rebooting but cannot automount
-external media and disks, you may need to install gvfs. See the
-Removable Devices section.
-
-Tips and tricks
----------------
+Configuration
+-------------
 
 > Xfconf settings
 
@@ -254,31 +179,42 @@ another). There are several ways to modify these settings:
     hand. However, changes made here will not take effect immediately.
 -   For more information: Xfconf documentation
 
-> Panel
+Graphical Settings Manager Commands
 
-xfce panel background
+There is no official documentation for the commands executed. One must
+look at .desktop files /usr/share/applications/ folder. For the people
+who like to know exactly what is happening, here is a handy list to save
+the effort:
 
-Edit ~/.gtkrc-2.0. Note that you must place the image in the same
-directory as the configuration, which is ~/. You can not specify the
-path to the image, or it will not work.
+    xfce4-accessibility-settings
+    xfce4-power-manager-settings
+    xfce4-settings-editor
+    xfdesktop-settings
+    xfce4-display-settings
+    xfce4-keyboard-settings
+    xfce4-mouse-settings
+    xfce4-session-settings
+    xfce4-settings-manager
+    xfce4-appearance-settings
+    xfwm4-settings
+    xfwm4-tweaks-settings
+    xfwm4-workspace-settings
+    orage -p
 
-     style "panel-background" {
-       bg_pixmap[NORMAL]        = "foo.bar"
-       bg_pixmap[PRELIGHT]      = "foo.bar"
-       bg_pixmap[ACTIVE]        = "foo.bar"
-       bg_pixmap[SELECTED]      = "foo.bar"
-       bg_pixmap[INSENSITIVE]   = "foo.bar"
-     }
-     widget_class "*Panel*" style "panel-background"
+To review all the available setting manager commands run the following
+in a terminal:
 
-'menu' panel replacement
+    $ grep '^Exec=' /usr/share/applications/xfce*settings* | sed -e 's_^.*=_ _'
 
-The "Ubuntu System Panel" (GNOME) panel applet has similar features to
-those found in its KDE v4.2 equivalent. It can be added to an Xfce panel
-via the 'XfApplet' panel applet, which allows GNOME applets to be used
-in Xfce.
+> Menu
 
-It is available in the AUR as the usp2 package.
+Menu applet replacement
+
+Whisker Menu is a full-featured replacement for the default Xfce menu
+applet. Add it to your panel and optionally remove the built-in default
+menu.
+
+It is available in the AUR as the xfce4-whiskermenu-plugin package.
 
 Removing entries from the System menu
 
@@ -377,9 +313,23 @@ aforementioned Xfce wiki page.
 Method 4
 
 Alternatively a tool called xame can be used. XAME is a GUI tool written
-in Gambas designed specifically for editing menu entires in XFCE, it
+in Gambas designed specifically for editing menu entires in Xfce, it
 will NOT work in other DEs. XAME is available in the xame package from
-the AUR.
+the AUR. An alternative to XAME that works quite well with Xfce is
+menulibre.
+
+Method 5
+
+The GNOME menu editor alacarte mostly works with Xfce. Entries and
+submenus can be customised. The only problem with Alacarte is that menu
+items created from .desktop files which contain the line
+OnlyShowIn=Xfce; will not show up in the Alacarte editor. Also, menu
+items created from .desktop files which contain the line
+OnlyShowIn=GNOME; will not show in the Xfce menu even if it is selected
+as visible in Alacarte. There are two patched versions of Alacarte in
+the AUR: alacarte-xfce and alacarte-lxde. The latter package, despite
+its name, is not for LXDE only - it should work in most desktop
+environments.
 
 Missing applications
 
@@ -388,88 +338,24 @@ not be listed in /usr/share/applications. Shortcuts might be found in
 the category “Other” in this directory:
 ~/.local/share/applications/wine/.
 
-Panel autohide delay
-
-Add this to ~/.gtkrc-2.0.
-
-     style "xfce-panel-window-style"
-     {
-       # Time in miliseconds before the panel will unhide on an enter event
-       XfcePanelWindow::popup-delay = 225
-     
-       # Time in miliseconds before the panel will hide on a leave event
-       XfcePanelWindow::popdown-delay = 350
-     }
-     class "XfcePanelWindow" style "xfce-panel-window-style"
-
-Panel at desktop level
-
-If you want a panel at desktop level (i.e., other windows will stack
-over it) you need a little hack, ensure you have installed the wmctrl
-package from the Official Repositories.
-
-Create a script in ~/.config/xfce4/xfce4-fix-panel with this content and
-make it executable (you can use chmod 755 xfce4-fix-panel).
-
-    #!/bin/bash
-    set -e
-
-    function getPanelIdImpl() {
-      # get panel id
-      PANEL="`wmctrl -l | sed -n -e '/ xfce4-panel$/ s_ .*$__ p' | sed -n -e $1' p'`"
-    }
-
-    function getPanelId() {
-      # eventually await the panel to appear
-      getPanelIdImpl $1
-      while [ x = x$PANEL ] ;do
-        sleep 0.5s
-        getPanelIdImpl $1
-      done
-    }
-
-    function putPanelDown() {
-      PANEL=""
-      getPanelId $1
-      wmctrl -i -r $PANEL -b add,below
-    }
-
-    # call the program with a list of panel numbers as arguments
-    # for example, xfce4-fix-panel 1 2 3
-    # for the first three panels
-    for i in $* ;do
-      putPanelDown $i
-    done
-
-  
- Once wrote the script, and tested it, you need to auto-execute it at
-each login. You can use the Session and StartUp -> Application Autostart
-gui.
-
-This passage will put your panels at desktop level, but if your panel is
-sticking to a border the maximized windows will not stack over it. You
-can enable this behavior with the following command, fortunately you
-need to do this only once. (change the $ID with the panel number of
-interest)
-
-    xfconf-query -c xfce4-panel -p /panels/panel-$ID/disable-struts -n -t bool -s true
-
 > Desktop
 
 Transparent Background for Icon Titles
 
 To change the default white background of desktop icon titles to
-something more suitable, edit the .gtkrc-2.0 file in your home directory
-(or create the file if needed) and add the following:
+something more suitable, create or edit the GTK config file:
+
+    ~/.gtkrc-2.0
 
     style "xfdesktop-icon-view" {
-    XfdesktopIconView::label-alpha = 10
-    base[NORMAL] = "#000000"
-    base[SELECTED] = "#71B9FF"
-    base[ACTIVE] = "#71FFAD"
-    fg[NORMAL] = "#ffffff"
-    fg[SELECTED] = "#71B9FF"
-    fg[ACTIVE] = "#71FFAD" }
+        XfdesktopIconView::label-alpha = 10
+        base[NORMAL] = "#000000"
+        base[SELECTED] = "#71B9FF"
+        base[ACTIVE] = "#71B9FF"
+        fg[NORMAL] = "#fcfcfc"
+        fg[SELECTED] = "#ffffff"
+        fg[ACTIVE] = "#ffffff"
+    }
     widget_class "*XfdesktopIconView*" style "xfdesktop-icon-view"
 
 Hide Selected Partitions
@@ -506,20 +392,42 @@ make it executable (you can use chmod 755 killwindow.sh).
 
 Now associate a shortcut using Settings -> Keyboard to that script.
 
-> XFWM4
+Manage Keyboard Shortcuts
+
+Keyboard shortcuts can be managed with the Xfce Settings Manager
+application, which is available through the xfce4-settings package and
+the xfce4 group. The Settings Manager can be started from the
+application menu (click Settings -> Keyboard) or command line (run
+xfce4-keyboard-settings). The Xfce Docs include detailed instructions
+for using the Settings Manager.
+
+> Window Manager
+
+The default window manager for Xfce is Xfwm.
 
 Enabling the Compositor
 
-Xfce comes with a builtin compositor adding the option for fancy window
+Xfwm has a builtin compositor adding the option for fancy window
 effects, shadows and transparency and so on. It can be enabled in the
 Window Manager Tweaks and works on the fly. No additional settings are
 needed in your /etc/xorg.conf. To enable and adjust settings, go to:
 
     Menu  -->  Settings  -->  Window Manager Tweaks
 
-Disable window roll-up
+Tip:The built-in compositor for Xfwm (the Xfce window manager) often
+causes video tearing in applications. If you wish for a lightweight
+compositor with some minimal effects, consider using Compton.
 
-    xfconf-query -c xfwm4 -p /general/mousewheel_rollup -s false
+Window roll-up
+
+Double clicking on the titlebar or clicking on the window menu and
+choosing 'role window up' will cause the window's contents to disappear
+leaving only the titlebar. If you would like to disable this
+functionality you can do so graphically using the xconf editor or
+through the command line, as shown below, which achieves the same
+result.
+
+xfconf-query -c xfwm4 -p /general/mousewheel_rollup -s false
 
 Toggle Automatic Tiling of Windows at Edge of Screen
 
@@ -534,52 +442,108 @@ or:
     xfconf-query -c xfwm4 -p /general/tile_on_move -s false  # To disable
     xfconf-query -c xfwm4 -p /general/tile_on_move -s true   # To enable
 
-> Settings Manager Commands
+Replacing the native window manager
 
-There is no official documentation for the commands executed. One must
-look at .desktop files /usr/share/applications/ folder. For the people
-who like to know exactly what is happening, here is a handy list to save
-the effort:
+To replace xfwm4 with another Window manager you can use the syntax
+'name of window manager' '--replace' in a terminal.
 
-    xfce4-accessibility-settings
-    xfce4-power-manager-settings
-    xfce4-settings-editor
-    xfdesktop-settings
-    xfce4-display-settings
-    xfce4-keyboard-settings
-    xfce4-mouse-settings
-    xfce4-session-settings
-    xfce4-settings-manager
-    xfce4-appearance-settings
-    xfwm4-settings
-    xfwm4-tweaks-settings
-    xfwm4-workspace-settings
-    orage -p
+For example:
 
-To review all the available setting manager commands run the following
-in a terminal:
+-   For Openbox the command is: openbox --replace
+-   For Metacity the command is: metacity --replace
 
-    $ grep '^Exec=' /usr/share/applications/xfce*settings* | sed -e 's_^.*=_ _'
+To restore the native window manager again , first cancel the command by
+pressing CTRL and c, and then enter the following command:
+
+    $ xfwm4 --replace
+
+Once the other window manager has taken over you can simply save the
+session. The Save session for future logins option is available in the
+logout... dialog box. It is also important to note that where restoring
+xfwm4 during a session, the Save session for future logins option will
+have to be enabled on that occasion to make this change permanent. Not
+doing so may result in Openbox being restored again, as the previous
+saved session may be loaded instead. However, once xfwm4 has been
+restored, from the next session onwards there will no longer be any need
+to save future sessions.
+
+As an alternative you can add the window manager to the autostart list
+in Xfce. To do this, from the main menu, first select Settings Manager,
+and then session and startup. Once the application window opens, select
+the Application Autostart tab to show all autostarted applications and
+programs, and click the Add button to bring up the Add Application
+window.
+
+The following details can be entered for each field:
+
+-   Name: openbox-wm
+-   Description: openbox-wm
+-   Command: openbox --replace
+
+> Tip:
+
+-   The name and description fields are unimportant and are just there
+    to indicate what the entry does. The command section has the same
+    syntax as earlier e.g. 'Name of window manager' '--replace' as shown
+    in the entries above.
+-   Compiz may require commands different from the ones shown as there
+    are several different ways to start it. For more information please
+    see the Xfce section in the Compiz article.
+
+Once complete, click OK, ensure that the checkbox next to the openbox-wm
+entry is ticked, and then restart the session for the change to take
+place. The benefit of this method is that autostarted applications can
+be easily enabled and disabled at will via their autostart checkboxes.
+Consequently, to allow the native window manager - xfwm4 - to take back
+over, just clear the openbox-wm tickbox and restart the session.
+
+Re-enabling Compositing effects
+
+If you replace Xfwm with a window manager that does not have a composite
+manager then you can use a standalone composite manager such as Xcompmgr
+or Compton.
 
 > Session
 
 Custom Startup Applications
 
-This includes getting necessary environment variables into the GUI
-runtime.
+Via the Settings Menu
+
+To launch custom applications when Xfce starts up, click the
+Applications Menu -> Settings -> Settings Manager and then choose the
+"Session and Startup" option and click the tab "Application Autostart".
+You will see a list of programs that get launched on startup. To add an
+entry, click the "Add" button and fill out the form, specifying the path
+to an executable you want to run.
+
+Startup Script
+
+Alternatively you can use this method, to run a command line script to
+launch your applications. This includes getting necessary environment
+variables into the GUI runtime.
 
 -   Copy the file /etc/xdg/xfce4/xinitrc to ~/.config/xfce4/
 -   Edit this file. For example, you can add something like this
-    somehwere in the middle:
+    somewhere in the middle:
 
     source $HOME/.bashrc
     # start rxvt-unicode server
     urxvtd -q -o -f
 
-Switch between users
+Lock the screen
 
-Xfce4 allows this behavior under the 'action buttons' menu item.
-Currently, both gdm and lightdm provide this functionality.
+To lock an Xfce4 session (through xflock4) one of xscreensaver,
+gnome-screensaver, slock or xlockmore packages needs to be installed.
+Xscreensaver is the recommended option. Please consult its wiki page for
+more information.
+
+User switching
+
+Xfce4 has support for user switching when used with a Display manager
+that has this functionality - examples being lightdm and gdm. Please
+consult your display manager's wiki page for more information. When you
+have a display manager installed and configured correctly you can switch
+users from the 'action buttons' menu item in the panel.
 
 Manually Modifying XML settings
 
@@ -587,17 +551,6 @@ It may be useful, especially when upgrading, to manually edit .xml files
 in the ~/.config/xfce4/xfconf/ folder. For application keyboard
 shortcuts for example, the file is
 ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml.
-It is faster to copy and paste the XML keys that you want rather than
-using the GUI.
-
-> Removable Devices
-
-If you want an icon appearing on your desktop and in Thunar when you
-plug in external devices, make sure gvfs is installed. You could also
-need to install gvfs-afc (read this discussion). It is also a good idea
-to install thunar-volman (already included in the xfce4 base group).
-Additionally, udisks and a udisks wrapper are recommended if you want to
-automount optical and external drives easily.
 
 > Look and Feel
 
@@ -607,20 +560,43 @@ Add themes to XFCE
 around for a theme you want and click "Download".
 
 2. Go to the directory where you downloaded the tarball/file and extract
-it using Squeeze/Xarchiver/CLI.
+it using an archive manager such as file-roller
 
 3. Move the extracted folder to /usr/share/themes (for all users) or
 ~/.themes (for just you). Inside /usr/share/themes/abc, there is a
 folder that you create called xfwm4 that will contain whatever files
 that is included with that theme.
 
-4. GTK theme is available here:
+4. Selecting the theme.
+
+-   The GTK+ theme can be changed from:
 
     Menu --> Settings --> Appearance
 
-You select your xfwm theme in:
+-   The xfwm4 theme can be changed from:
 
     Menu --> Settings --> Window Manager
+
+Application theme consistency
+
+Applications do not always have a consistent look. There are two
+possible reasons for this:
+
+1. The application is based upon a toolkit that the current theme does
+not support. Applications based upon the GTK+ 2 toolkit will need a GTK+
+2 theme whilst applications based upon the GTK+ 3 toolkit will need a
+GTK+ 3 theme.
+
+2. The theme is out of date.
+
+To achieve a uniform look for all applications it is advisable to use an
+up to date GTK+ 3 theme such as Adwaita as GTK+ 3 themes have inbuilt
+support for GKT+ 2 applications. Adwaita can be installed from the
+gnome-themes-standard package. Applications based upon the Qt toolkit
+can mimic the current GTK+ theme using the qtconfig-qt4 dialogue.
+
+For information please consult these wiki pages: GTK+#GTK+ 3.x for gtk3
+and Uniform Look for Qt and GTK Applications for qt.
 
 Cursors
 
@@ -654,7 +630,7 @@ hicolor-icon-theme package if it was not already installed.
 Fonts
 
 If you find the standard fonts rather thick and or slightly out of focus
-open Settings>Appearence click on the Fonts tab and under Hinting:
+open Settings>Appearance click on the Fonts tab and under Hinting:
 change to Full
 
 You could also try using a custom DPI setting.
@@ -672,13 +648,11 @@ xfce4-mixer must be installed. Without one of these required plugins
 packages, the following error arises when clicking on the mixer panel
 item.
 
-     GStreamer was unable to detect any sound devices. Some sound system specific GStreamer packages may be missing. It may also be a permissions problem.
+     GStreamer was unable to detect any sound devices. Some sound system specific GStreamer packages may be missing. 
 
-(It is probably not a permissions problem. It is no longer required to
-add audio users to the "audio" group.) Which plugins are needed depends
-on the hardware. Most people should be fine with
-gstreamer0.10-base-plugins which can be installed from Official
-Repositories.
+Which plugins are needed depends on the hardware. Most people should be
+fine with gstreamer0.10-base-plugins which can be installed from
+Official repositories.
 
 If the xfce4-mixer panel item was already running before one of the
 plugins packages was installed, logout and login to see if it worked, or
@@ -686,6 +660,9 @@ just remove the mixer plugin from the panel and add it again. If that
 does not work, you might need more or different gstreamer plugins. Try
 to install package gstreamer0.10-good-plugins or
 gstreamer0.10-bad-plugins.
+
+If you had to change the soundcard in the audio mixer, then you should
+log out and back in to hear sound.
 
 For further details, for example how to set the default sound card, see
 Advanced Linux Sound Architecture. Alternatively you can use PulseAudio
@@ -709,10 +686,6 @@ edit the PKGBUILD, add --enable-oss.
 and then run makepkg -i.
 
      makepkg -i
-
-Still not working? Try this package in AUR
-gstreamer0.10-good-plugins-ossv4, modify the pkgver to the newest in the
-PKGBUILD, and it should work.
 
 Other LINKS: OSS forum
 
@@ -777,6 +750,23 @@ for the volume down button
 
 for the mute/unmute button
 
+PulseAudio
+
+For the raise volume button:
+
+    sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%"
+
+For the lower volume button:
+
+    sh -c "pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 -5%"
+
+For the mute button:
+
+    pactl set-sink-mute 0 toggle
+
+These settings assume the device you want to control has index 0. Use
+pactl list sinks short to list sinks.
+
 Xfce4-volumed
 
 xfce4-volumed daemon from the AUR automatically maps volume keys of your
@@ -784,25 +774,23 @@ keyboard to Xfce-mixer. Additionally you get OSD through Xfce4-notifyd
 when changing volume. Xfce4-volumed does not need any configuration and
 is started automatically with Xfce.
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
-  png]                     this article or section  png]
-                           is disputed.             
-                           Reason: There should be  
-                           a short explanation of   
-                           what this does and why   
-                           it fixes the problem     
-                           (bug?). (Discuss)        
-  ------------------------ ------------------------ ------------------------
-
-If you use pulseaudio and xfce4-volumed unmute does not work, try this:
-
-    $ xfconf-query -c xfce4-mixer -p /active-card -s `xfconf-query -c xfce4-mixer -p /sound-card`
+If you use pulseaudio and xfce4-volumed unmute does not work then change
+the keyboard commands to the pactl commands for pulseaudio as shown
+above in the pulseaudio section.
 
 Volumeicon
 
 volumeicon is an alternative to xfce4-volumed in the community repo also
 handling keybindings and notifications through xfce4-notifyd.
+
+Note:volumeicon can only handle ALSA keybindings. If you are using
+pulseaudio and volumeicon is handling the media keys you may notice
+issues such as not being able to unmute the volume.
+
+Extra keyboard keys
+
+If you are coming from another distro, you may be interested in enabling
+extra keys on your keyboard, see Extra Keyboard Keys.
 
 Adding startup/boot sound
 
@@ -814,6 +802,9 @@ Application Autostart settings:
 
 The file location and filename can be whatever you want, but naming it
 descriptively and putting it in /boot keeps things tidy.
+
+Tips & Tricks
+-------------
 
 > xdg-open integration (Preferred Applications)
 
@@ -859,23 +850,33 @@ other optional arguments.
 
 Alternatively, an independent screenshot program like scrot can be used.
 
+> Disable Terminal F1 and F11 shortcut
+
+The xfce terminal binds F1 and F11 to help and fullscreen, respectively,
+which can make using programs like htop difficult. To disable those
+shortcuts, create or edit its configuration file, then log out and log
+back in. F10 can disabled in the Preferences menu.
+
+    ~/.config/xfce4/terminal/accels.scm
+
+    (gtk_accel_path "<Actions>/terminal-window/fullscreen" "")
+    (gtk_accel_path "<Actions>/terminal-window/contents" "")
+
 > Terminal color themes or pallets
 
 Terminal color themes or pallets can be changed in GUI under Appearance
 tab in Preferences. These are the colors that are available to most
 console applications like Emacs, Vi and so on. Their settings are stored
 individually for each system user in ~/.config/xfce4/terminal/terminalrc
-file. There are also so many other themes to choose from. Check forums
-post [Colour Scheme Screenshots] for hundreds of available choices and
-themes.
+file. There are also so many other themes to choose from. Check forum
+thread Terminal Colour Scheme Screenshots for hundreds of available
+choices and themes.
 
 Changing default color theme
 
-XFCE's extra/terminal package comes with a darker color palette and
-colored text looks pretty horrid in default black background impeding
-user readability. Append the following in your terminalrc file for a
-lighter color theme, that is always visible in darker Terminal
-backgrounds.
+XFCE's extra/terminal package comes with a darker color palette. To
+change this, append the following in your terminalrc file for a lighter
+color theme, that is always visible in darker Terminal backgrounds.
 
     ~/.config/xfce4/terminal/terminalrc
 
@@ -919,6 +920,9 @@ xfce4-settings-manager does not yet have any colour management /
 calibration settings, nor is there any specific XFCE program to
 characterise your monitor.
 
+There is a very good article on how to do colour profiling with dispwin
+etc. under XFCE, below are the basics:
+
 Loading a profile
 
 If you wish to load an icc profile (that you have previously created or
@@ -941,7 +945,7 @@ Creating a profile
 If you wish to create an icc profile for your display (ie.
 characterising/profiling, e.g. with the ColorHug, or some other
 colorimeter, or a spectrophotometer, or "by eye"), the simplest option
-may be to install dispcalGUI from AUR.
+may be to install dispcalgui from AUR.
 
 Another option is to install gnome-settings-daemon and
 gnome-color-manager (available in extra). In order to start the
@@ -955,7 +959,8 @@ gcm-calibrate --device "xrandr-Lenovo Group Limited".
 
 Note:The reason you need gnome-settings-daemon running is because XFCE
 does not yet have a session component for colord:
-https://bugzilla.xfce.org/show_bug.cgi?id=8559
+https://bugzilla.xfce.org/show_bug.cgi?id=8559 . A lightweight daemon,
+xiccd, may (and probably should) be used instead.
 
 See ICC Profiles for more information.
 
@@ -1066,8 +1071,36 @@ will also disable gpg-agent and ssh-agent.
 
 Source: http://docs.xfce.org/xfce/xfce4-session/advanced
 
+> Bluetooth functionality
+
+Users have 3 options for using Bluetooth in Xfce:
+
+-   Blueman - this applet currently uses the, now unmaintained, Bluez4
+    bluetooth stack however a version of Blueman compatible with Bluez5
+    is in development.
+
+-   GNOME Bluetooth - this applet is compatible with Bluez5.
+
+-   You can use command line tools to access Bluetooth functionality.
+    Obex can be used for sending and receiving files and bluetoothctl
+    can be used for device pairings.
+
+> Scroll a background window without shifting focus on it
+
+Go to
+
+    Main Menu -> Settings -> Window Manager Tweaks -> Acessibility tab
+
+Uncheck Raise windows when any mouse button is pressed
+
 Troubleshooting
 ---------------
+
+> Getting "Not Authorized" when attempting to mount drives with a file manager
+
+A polkit Authentication Agent is required for this (alongside polkit and
+gvfs), but not included with Xfce. Make sure one is installed and
+autostarted on login, as explained in polkit#Authentication agents.
 
 > xfce4-power-manager
 
@@ -1081,20 +1114,33 @@ from /etc/systemd/logind.conf to give control to xfce4-power-manager.
     HandleHibernateKey=ignore
     HandleLidSwitch=ignore
 
-This also solves the issue when the computer registers multiple suspend
-events.
+This also solves the problem when the computer registers multiple
+suspend events.
+
+> xfce4 keeps blanking display
+
+Xfce4 (as of 4.12) does not seem to respect monitor power settings in
+xfce4-power-manager. It attempts to run the screensaver every 10
+minutes. You can check this by reading out the output of $ xset q. Run
+$ xset s noblank to stop it. Alternatively add the following
+configuration file to /etc/X11/xorg.conf.d/ ( I would save it as
+20-noblank.conf).
+
+    Section "ServerFlags"
+    	Option "BlankTime" "0"
+    EndSection
 
 > xfce4-xkb-plugin
 
-There is a bug in version xkb-plugin 0.5.4.1-1 which causes xkb-plugin
-to lose keyboard, layout switching and compose key settings. As a
-workaround you may enable Use system defaults option in keyboard
-settings. To do so run
+There is a bug in version xfce4-xkb-plugin 0.5.4.1-1 which causes
+xfce4-xkb-plugin to lose keyboard, layout switching and compose key
+settings. As a workaround you may enable Use system defaults option in
+keyboard settings. To do so run
 
     xfce4-keyboard-settings
 
 Go to Layout tab and set the Use system defaults flag, then reconfigure
-xkb-plugin.
+xfce4-xkb-plugin.
 
 > Locales ignored with GDM
 
@@ -1122,6 +1168,29 @@ renaming ~/.config/xfce4-session/ and ~/.config/xfce4/
 Logout and login for changes to take effect. If upon logging in you get
 an error window with the heading "Unable to load a failsafe session,"
 see the Session Failure section on this page.
+
+> Xfce desktop icons rearrange themselves
+
+You may find that at certain events (such as opening the panel settings
+dialog) the icons on the desktop rearrange themselves. This is because
+icon positions are determined by files in the ~/.config/xfce4/desktop/
+directory. Each time a change is made to the desktop (icons are added or
+removed or change position) a new file is generated in this directory
+and these files can conflict.
+
+To solve the problem, navigate to the directory and delete all the files
+other than the one which correctly defines the icon positions. You can
+determine which file defines the correct icon positions by opening it
+and examining the locations of the icons. The topmost row is defined as
+row 0 and the leftmost column is defined by col 0. Therefore an entry
+of:
+
+    [Firefox]
+    row=3
+    col=0
+
+means that the Firefox icon will be located on the 4th row of the
+leftmost column.
 
 > NVIDIA and xfce4-sensors-plugin
 
@@ -1154,7 +1223,7 @@ below the .cache folder:
 
 If you have set your preferred applications with
 exo-preferred-applications, but they do not seem to be taken into
-consideration, see Xfce#xdg-open integration (Preferred Applications)
+consideration, see #xdg-open integration (Preferred Applications)
 
 > Action Buttons/Missing Icons
 
@@ -1231,6 +1300,29 @@ up write ops, but make sure to use Eject option in Thunar to unmount the
 stick. Globally, mount options for storage devices present at boot can
 be set in fstab, and for other devices in udev rules.
 
+> Video tearing when Xfwm compositing is enabled
+
+This is a known problem. Consider using a standalone compositor like
+Compton or Xcompmgr. Alternatively, you could replace your window
+manager with something like Compiz or Kwin (kwin-standalone-git) which
+provide their own compositors.
+
+> Blurred and distorted characters when compositing is enabled (Intel graphics)
+
+Users with Intel graphics may find that text becomes blurred or
+distorted when compositing is enabled. This is due to the
+xf86-video-intel driver using the SNA acceleration backend by default.
+This bug can be corrected by changing the backend to the older UXA
+method. See the Intel Graphics page for further instruction.
+
+> GTK themes not working with multiple monitors
+
+Some configuration tools might corrupt displays.xml, which results in
+GTK themes under Applications Menu -> Settings -> Appearance ceasing to
+work. To fix the issue, delete
+~/.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml and reconfigure
+your screens.
+
 See also
 --------
 
@@ -1241,8 +1333,15 @@ See also
 -   Xfce Wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xfce&oldid=256110"
+"https://wiki.archlinux.org/index.php?title=Xfce&oldid=305925"
 
 Category:
 
 -   Desktop environments
+
+-   This page was last modified on 20 March 2014, at 17:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

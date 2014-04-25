@@ -1,7 +1,7 @@
 HandBrakeCLI
 ============
 
-  Summary
+  Summary help replacing me
   -----------------------------------------------------------------------------------------------------------------
   This article attempts to walk users through the installation and basic usage and configuration of HandBrakeCLI.
 
@@ -10,22 +10,19 @@ built-in libraries which enables the decoding, encoding and conversion
 of audio and video streams to MP4 (M4V) and MKV container formats with
 an emphasis on H.264/MPEG-4 AVC encoding through x264.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Package installation                                               |
-| -   2 Encoding examples                                                  |
-|     -   2.1 Single-pass x264 (very high-quality)                         |
-|     -   2.2 Two-pass x264 (very high-quality)                            |
-|                                                                          |
-| -   3 Adding subtitles                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Package installation
+-   2 Encoding examples
+    -   2.1 Single-pass x264 (very high-quality)
+    -   2.2 Two-pass x264 (very high-quality)
+-   3 Adding subtitles
 
 Package installation
 --------------------
 
-Install handbrake-cli from the Official Repositories.
+Install handbrake-cli from the Official repositories.
 
 Encoding examples
 -----------------
@@ -61,8 +58,15 @@ Adding subtitles
   ------------------------ ------------------------ ------------------------
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=HandBrakeCLI&oldid=207123"
+"https://wiki.archlinux.org/index.php?title=HandBrakeCLI&oldid=301609"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 24 February 2014, at 11:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

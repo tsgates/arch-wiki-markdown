@@ -1,15 +1,11 @@
 Downgrading Packages
 ====================
 
-> Summary
+Related articles
 
-Covers why and how to revert to older versions of packages.
-
-> Related
-
-Arch Build System
-
-pacman
+-   Arch Build System
+-   pacman
+-   Arch Rollback Machine
 
 This guide will show you how to downgrade a package to a previous
 version. Downgrading a package is not normally recommended and is often
@@ -26,26 +22,24 @@ Both we and the upstream developers would appreciate the effort. That
 extra bit of information could save hours of testing and debugging and
 may also help release more stable software.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Reason                                                             |
-| -   2 The details                                                        |
-| -   3 How to downgrade a package                                         |
-|     -   3.1 Downgrading the kernel                                       |
-|                                                                          |
-| -   4 Finding your older version                                         |
-|     -   4.1 Out-of-sync mirrors                                          |
-|     -   4.2 ARM                                                          |
-|     -   4.3 Recompile the package                                        |
-|                                                                          |
-| -   5 Change repositories                                                |
-| -   6 FAQ                                                                |
-|     -   6.1 Q: I can not downgrade a package, because of dependencies.   |
-|     -   6.2 Q: How do I stop pacman from upgrading downgraded packages?  |
-|     -   6.3 Q: I want to go back to how my system was yesterday.         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Reason
+-   2 The details
+-   3 How to downgrade a package
+    -   3.1 Official packages
+    -   3.2 Downgrading the kernel
+        -   3.2.1 Downgrading the kernel on a system using LVM on LUKS
+    -   3.3 AUR packages
+-   4 Finding your older version
+    -   4.1 Out-of-sync mirrors
+    -   4.2 Arch Rollback Machine
+    -   4.3 Recompile the package
+-   5 FAQ
+    -   5.1 Q: I cannot downgrade a package, because of dependencies.
+    -   5.2 Q: How do I stop pacman from upgrading downgraded packages?
+    -   5.3 Q: I want to go back to how my system was yesterday.
 
 Reason
 ------
@@ -90,9 +84,11 @@ incorporation into pacman. Once that occurs, this will become automated.
 How to downgrade a package
 --------------------------
 
--   Q: I just ran pacman -Syu and package XYZ was upgraded to version N
-    from version M. This package is causing problems on my computer, how
-    can I downgrade from version N to the older version M?
+> Official packages
+
+-   Q: I just ran pacman -Syu and package XYZ was upgraded from version
+    M to version N. Version N is causing problems on my computer; how
+    can I downgrade to version M?
 -   A: You may be able to downgrade the package trivially by visiting
     /var/cache/pacman/pkg on your system and seeing if the older version
     of the package is stored there. (If you have not run pacman -Scc
@@ -113,10 +109,10 @@ version you did not want in the first place.
 
 There is also a package in the AUR called downgrade. This is a simple
 Bash script which will look in your cache for older versions of
-packages. It will also search the A.R.M. if there is no package in your
-cache. You can then select a package to install. It basically just
-automates the processes outlined here. Check downgrade --help for usage
-information.
+packages. It will also search the Arch Rollback Machine if there is no
+package in your cache. You can then select a package to install. It
+basically just automates the processes outlined here. Check
+downgrade --help for usage information.
 
 One more powerful tool is named downgrader, and it works with pacman's
 log also, can downgrade packages from ARM, local cache, and work with
@@ -126,7 +122,7 @@ packages, and you unsure about package name)
 > Downgrading the kernel
 
 If you are unable to boot after a kernel update, then you can downgrade
-the kernel via a live cd. Use a fairly recent Arch Linux installation
+the kernel via a live CD. Use a fairly recent Arch Linux installation
 medium. When it has booted, mount the partition with your system on
 (e.g. /mnt) and if you have /boot or /var on separate partitions, mount
 them there, as well (e.g. mount /dev/sdc3 /mnt/boot). Then mount dev,
@@ -144,8 +140,54 @@ downgrade linux, linux-headers and any kernel modules. For example:
 
 Exit the chroot (with exit), reboot and you should be done.
 
-If you have a more exotic setup (lvm, encryption, ...), see this post:
+Downgrading the kernel on a system using LVM on LUKS
+
+Boot the Arch Linux installation ISO, and run the following commands to
+unlock the LUKS container and chroot into the system.
+
+Load the necessary kernel modules:
+
+    # modprobe dm_crypt
+    # modprobe dm_mod
+
+Unlock the LUKS container:
+
+    # cryptsetup luksOpen /dev/sdX crypt
+
+Scan for and activate LVM volumes:
+
+    # vgscan
+    # vgchange -ay
+
+Create a folder for mounting and mount the partitions. Adapt this as
+necessary for the given system.
+
+    # mkdir /mnt
+    # mount /dev/mapper/LVM-partition /root
+
+At this point, follow the instructions in the previous section
+#Downgrading the kernel.
+
+Source:
 http://sch1zo.github.com/blog/2012/05/08/downgrading-a-bad-kernel-on-arch-with-luks-and-lvm/
+
+> AUR packages
+
+For AUR packages, currently the only way to get the older PKGBUILDs is
+at http://pkgbuild.com/git/aur-mirror.git/ or check the Unofficial user
+repositories for precompiled binaries (they are sometimes out of date).
+If you want to use AUR-mirror, follow these steps:
+
+1.  Navigate to http://pkgbuild.com/git/aur-mirror.git/log/PACKAGENAME .
+2.  Click on the particular commit or date.
+3.  Download the AUR snapshot (aur-mirror-COMMIT.tar.xz) for that commit
+    (~100MB).
+4.  Unpack it with
+
+    tar xvJf aur-mirror-COMMIT.tar.xz
+
+And finally, browse to the package folder and use the procedure
+described in Arch User Repository#Installing packages.
 
 Finding your older version
 --------------------------
@@ -158,25 +200,10 @@ If you can not find older versions on your system, check if one of the
 mirrors is out of sync, and get it from there. Click here to see the
 status of mirrors.
 
-> ARM
+> Arch Rollback Machine
 
-The Arch Rollback Machine (ARM) contains archived snapshots of all the
-repos going back to 1 November 2009. The site is in a state of flux as
-of this date (21 November 2009), and now has lost the items back thru 1
-October 2008, as previously reported.
-
-If you are interested in ARM, it would be best to view the introductory
-forum announcement and discussion, so as to stay abreast of the current
-progress of the project. The introductory forum thread is here.
-
-It is said that the goal was to construct the urls in such a way as to
-facilitate easy wget+pacman scripting to "roll back" your system to a
-particular date. The automation process is not yet explained. To just
-manually search for a particular package, one can use the search page
-which has been provided at ARM Search.
-
-There is several tools available (via AUR) for automatically download
-old packages from ARM: downgrade, armh and pkgman.
+The Arch Rollback Machine is an everyday snapshot of official Archlinux
+mirror. For more information, please see Arch Rollback Machine.
 
 > Recompile the package
 
@@ -189,42 +216,10 @@ to downgrade. Once you find it, click "View Changes" and select "log".
 Locate the version you need and click on the path. Then just download
 the files located in that directory and build it with makepkg.
 
-For AUR packages, currently the only way to get the older PKGBUILDs is
-at http://pkgbuild.com/git/aur-mirror.git/ or check the Unofficial User
-Repositories for precompiled binaries (they are sometimes out of date).
-
-Change repositories
--------------------
-
-To change repository to ARM, remarks-out the old line and adds the
-appropriate directory location in the format:
-
-    [core]
-    #Server=http://mirrors.gigenet.com/archlinux/core/os/i686
-    Server=http://arm.konnichi.com/2009/11/01/core/os/i686
-
-In this example, the date section is taking whatever packages are
-available as of the date of November 1st, 2009. Please note that all
-repositories are snapshots of the official repositories. You need only
-change the mirror in /etc/pacman.d/mirrorlist, placing an ARM mirror at
-the top. For example, http://arm.konnichi.com/2009/11/01/$repo/os/i686
-to sync all official repositories listed in /etc/pacman.conf to the
-chosen ARM mirror then update with:
-
-    # pacman -Syy   #Refresh the sync databases.
-    # pacman -Suu   #Downgrade all packages with a lower version in the repos.
-
-This alone does not guarantee a seamless rollback as there are sometimes
-package conflicts with regards to version numbers, etc. If you know the
-repository it may be easier to visit the global mirror. For example,
-http://arm.konnichi.com/core/os/i686 (note the omission of the date).
-
-More information, please see pacman.
-
 FAQ
 ---
 
-Q: I can not downgrade a package, because of dependencies.
+Q: I cannot downgrade a package, because of dependencies.
 
 A: You can ignore dependencies when upgrading or removing, using the d
 flag. But this might break your system further.
@@ -250,8 +245,15 @@ Q: I want to go back to how my system was yesterday.
 A: It is easy if you have enabled periodic snapshots provided by LVM.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Downgrading_Packages&oldid=255536"
+"https://wiki.archlinux.org/index.php?title=Downgrading_Packages&oldid=297695"
 
 Category:
 
 -   Package management
+
+-   This page was last modified on 15 February 2014, at 11:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

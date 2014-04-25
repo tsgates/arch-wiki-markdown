@@ -1,41 +1,31 @@
 Guake
 =====
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
-  ng]                      needs expansion.         ng]
-                           Reason: please use the   
-                           first argument of the    
-                           template to provide a    
-                           brief explanation.       
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
+Summary help replacing me
 
-  Summary
-  -----------------------------------------------------
-  This article demonstrates the installation of Guake
+This article demonstrates the installation of Guake
+
+> Related
+
+GNOME
 
 Guake is a top-down terminal for GNOME (in the style of Yakuake for KDE,
 Tilda or the terminal used in Quake).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-| -   3 Autostartup                                                        |
-| -   4 Window width                                                       |
-| -   5 Dual monitor workaround                                            |
-| -   6 'Ctrl' Keybind Problem                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+-   3 Autostartup
+-   4 Window width
+-   5 Dual monitor workaround
+-   6 'Ctrl' Keybind Problem
 
 Installation
 ------------
 
 Install guake, available in the official repositories.
-
-Also the development version is available and in the AUR: guake-git.
 
 Usage
 -----
@@ -63,43 +53,46 @@ Window width
 
 Guake takes all the width of your display by default and there's no such
 option in "Preferences". To change width you can edit the program itself
-which is python script.
-
-    # nano /usr/bin/guake
-
-Find that string
+(/usr/bin/guake) which is python script. Find that string:
 
     width = 100
 
 It is width value in percents, change it to whatever you like.
 
 If you want to align new "narrowed" window left or right find string
+(just below the 'width' line above).
 
-    if halignment == ALIGN_CENTER:
+    halignment = self.client.get_int(KEY('/general/window_halignment'))
 
-and replace CENTER with LEFT or RIGHT.
+and replace the part after the '=' sign with "ALIGN_LEFT" or
+"ALIGN_RIGHT".
+
+To avoid overwrites on update, save it as /usr/local/bin/guake and
+remember to make it executable.
+
+Window alignment can also be set in gconf, under apps > guake > general
+> halignment. 0 sets it to center, 1 to right, 2 to left. (However, the
+width setting in gconf seems to have no effect and still requires
+editing the python script as explained above.)
 
 Dual monitor workaround
 -----------------------
 
 The traditional patch for dual monitors is no longer available, but a
-workaround is to define the start points for the window.
+workaround is to define the start points for the window. Edit
+/usr/bin/guake. Find that string
 
-    # nano /usr/bin/guake
-
-Find that string
-
-    window_rect.y = 0 
+    window_rect.y = 0
 
 is the default point in Y coordinate if you need change for the width of
 top desktop bar (or the long from the top of the bar to below), if you
 use it, and add the default x coordinate in the line below, for
-positioned the window I use
+positioned the window I use:
 
-                      window_rect.x = total_width - window_rect.width
-            window_rect.y = 24 
-            window_rect.x = 1024 
-            return window_rect
+           window_rect.x = total_width - window_rect.width
+           window_rect.y = 24 
+           window_rect.x = 1024 
+           return window_rect
 
 My first window is 1024 pixels and my second window is 1280 pixels, so
 guake get size of the first window from left to right which is why I
@@ -109,10 +102,13 @@ Find that string
 
     width = 100
 
-Change de value 100 for a more greater, in my case 125 ( 1280 divided by
-1024 and multiplicated by 100)
+Change de value 100 for a more greater, in my case 125 (1280 divided by
+1024 and multiplicated by 100.
 
-  
+If the window width identified wrong, try to change the display number
+in
+
+    window_rect = screen.get_monitor_geometry(0)
 
 'Ctrl' Keybind Problem
 ----------------------
@@ -164,8 +160,15 @@ with <Control> in the /apps/guake/keybindings/global/show_hide string:
     fi
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Guake&oldid=240326"
+"https://wiki.archlinux.org/index.php?title=Guake&oldid=303113"
 
 Category:
 
 -   Terminal emulators
+
+-   This page was last modified on 4 March 2014, at 02:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

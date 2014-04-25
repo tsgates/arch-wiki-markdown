@@ -1,20 +1,12 @@
 Kernels
 =======
 
-> Summary
+Related articles
 
-This article discusses kernels in Arch, kernel patches and kernel
-compilation.
-
-> Related
-
-Kernel modules
-
-Kernel Panics
-
-Linux-ck
-
-sysctl
+-   Kernel modules
+-   Kernel Panics
+-   Linux-ck
+-   sysctl
 
 From Wikipedia:
 
@@ -31,57 +23,51 @@ There is also a description of patches that can be applied to the
 system's kernel. The article ends with an overview of custom kernel
 compilation with links to various methods.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Precompiled kernels                                                |
-|     -   1.1 Official packages                                            |
-|     -   1.2 AUR packages                                                 |
-|                                                                          |
-| -   2 Patches and Patchsets                                              |
-|     -   2.1 How to install                                               |
-|     -   2.2 Major patchsets                                              |
-|         -   2.2.1 -ck                                                    |
-|         -   2.2.2 -rt                                                    |
-|         -   2.2.3 -bld                                                   |
-|         -   2.2.4 -grsecurity                                            |
-|         -   2.2.5 Tiny-Patches                                           |
-|         -   2.2.6 -pf                                                    |
-|                                                                          |
-|     -   2.3 Individual patches                                           |
-|         -   2.3.1 Reiser4                                                |
-|         -   2.3.2 Gensplash/fbsplash                                     |
-|                                                                          |
-| -   3 Compilation                                                        |
-|     -   3.1 Using the Arch Build System                                  |
-|     -   3.2 Traditional                                                  |
-|     -   3.3 Proprietary NVIDIA driver                                    |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Precompiled kernels
+    -   1.1 Official packages
+    -   1.2 AUR packages
+-   2 Patches and Patchsets
+    -   2.1 How to install
+    -   2.2 Major patchsets
+        -   2.2.1 -ck
+        -   2.2.2 -rt
+        -   2.2.3 -bld
+        -   2.2.4 -grsecurity
+        -   2.2.5 Tiny-Patches
+        -   2.2.6 -pf
+    -   2.3 Individual patches
+        -   2.3.1 Reiser4
+        -   2.3.2 fbsplash
+-   3 Compilation
+    -   3.1 Using the Arch Build System
+    -   3.2 Traditional
+    -   3.3 Proprietary NVIDIA driver
+-   4 See also
 
 Precompiled kernels
 -------------------
 
 > Official packages
 
-linux 
+ linux 
     The Linux kernel and modules from the [core] repository. Vanilla
-    kernel with three patches applied.
+    kernel with a few patches applied.
 
-linux-lts 
+ linux-lts 
     Long term support (LTS) Linux kernel and modules from the [core]
     repository.
 
 > AUR packages
 
-linux-bfs 
+ linux-bfs 
     Linux kernel and modules with the Brain Fuck Scheduler (BFS) -
     created by Con Kolivas for desktop computers with fewer than 4096
     cores, with BFQ I/O scheduler as optional.
 
-linux-ck 
+ linux-ck 
     Linux Kernel built with Con Kolivas' ck1 patchset.
     Additional options which can be toggled on/off in the PKGBUILD
     include: BFQ scheduler, nconfig, localmodconfig and use running
@@ -92,49 +78,56 @@ linux-ck
     For further information and installation instructions, please read
     the linux-ck main article.
 
-linux-eee-ck 
+ linux-eee-ck 
     The Linux Kernel and modules for the Asus Eee PC 701, built with Con
     Kolivas' ck1 patchset.
 
-linux-fbcondecor 
+ linux-fbcondecor 
     The Linux Kernel and modules with fbcondecor support.
 
-linux-grsec 
-    The Linux Kernel and modules with grsecurity and PaX patches for
-    increased security.
+ linux-grsec 
+    The Linux Kernel and modules with Grsecurity Patchset and PaX
+    patches for increased security.
 
-linux-ice 
-    The Linux Kernel and modules with gentoo-sources patchset and
-    TuxOnIce support.
+ linux-mainline 
+    The Mainline Linux Kernel and modules.
 
-linux-lqx 
-    Liquorix is a distro kernel replacement built using the best
-    configuration and kernel sources for desktop, multimedia, and gaming
-    workloads, often used as a Debian Linux performance replacement
-    kernel. damentz, the maintainer of the Liquorix patchset, is a
-    developer for the Zen patchset as well, so many of the improvements
-    there are found in this patchset.
-
-linux-pax 
+ linux-pax 
     The Linux Kernel and modules with PaX patches for increased
     security.
 
-linux-pf 
-    Linux kernel and modules with the pf-kernel patchset [-ck patchset
-    (BFS included), TuxOnIce, BFQ], aufs2 and squashfs-lzma.
+ linux-ice 
+    The Linux Kernel and modules with gentoo-sources patchset and
+    TuxOnIce support.
 
-linux-zen 
-    The Zen Kernel is a the result of a collaborative effort of kernel
+ linux-lqx 
+    Liquorix is a distro kernel replacement built using a
+    Debian-targeted configuration and the ZEN kernel sources. Designed
+    for desktop, multimedia, and gaming workloads, it is often used as a
+    Debian Linux performance replacement kernel. Damentz, the maintainer
+    of the Liquorix patchset, is a developer for the ZEN patchset as
+    well.
+
+ linux-pf 
+    Linux kernel and modules with the pf-kernel patch [-ck patchset (BFS
+    included), TuxOnIce, BFQ] and aufs3.
+
+ linux-zen 
+    The ZEN Kernel is a the result of a collaborative effort of kernel
     hackers to provide the best Linux kernel possible for every day
-    systems.
+    systems. Builds of a ZEN kernel are available in this repository.
 
-kernel-netbook 
+ kernel-netbook 
     Static kernel for netbooks with Intel Atom N270/N280/N450/N550 such
     as the Eee PC with the add-on of external firmware (broadcom-wl) and
     patchset (BFS + TuxOnIce + BFQ optional) - Only Intel GPU
 
-linux-lts-tresor 
+ linux-lts-tresor 
     The stable LTS Linux Kernel and modules with integrated TRESOR
+
+ linux-git 
+    Linux kernel and modules built using sources from Linus Torvalds'
+    Git repository.
 
 Patches and Patchsets
 ---------------------
@@ -150,13 +143,13 @@ the architecture and processor type. For this reason using pre-packaged
 versions of custom kernels with generic architecture settings is not
 recommended or really worth it. A further benefit is that you can reduce
 the size of your kernel (and therefore build time) by not including
-support for things you do not have or use. For example, I always start
-with the stock kernel config when a new kernel version is released and I
+support for things you do not have or use. For example, you might start
+with the stock kernel config when a new kernel version is released and
 remove support for things like bluetooth, video4linux, 1000Mbit
-ethernet, etc. Stuff I know I won't use before I build my next kernel!
-However, this page is not about customizing your kernel config but I
-would recommend that as a first step to be combined with a patchset
-later.
+ethernet, etc.; functionality you know you will not require for your
+specific machine. Although this page is not about customizing your
+kernel config, it is recommended as a first step--before moving on to
+using a patchset once you have grasped the fundamentals involved.
 
 > How to install
 
@@ -166,13 +159,16 @@ consult the following articles: Arch Build System and Creating Packages.
 
 If you haven't actually patched or customized a kernel before it is not
 that hard and there are many PKGBUILDs on the forum for individual
-patchsets. However, I would advise you to start from scratch with a bit
-of research on the benefits of each patchset rather than jumping on the
-nearest bandwagon! This way you'll learn much more about what you are
-doing rather than just choosing a kernel at startup and wondering what
-it actually does.
+patchsets. However, you are advised to start from scratch with a bit of
+research on the benefits of each patchset, rather than just arbitrarily
+picking one. This way you'll learn much more about what you are doing
+rather than just choosing a kernel at startup and then be left wondering
+what it actually does.
 
 See #Compilation.
+
+Note:Don't forget to change the boot options in your bootloader, e.g.
+grub, to use the new kernel.
 
 > Major patchsets
 
@@ -196,7 +192,7 @@ stability or reliability are implied by inclusion on this page.
 
 -ck
 
-These are patches designed to improve system responsiveness with
+Linux-ck contains patches designed to improve system responsiveness with
 specific emphasis on the desktop, but suitable to any workload. The
 patches are created and maintained by Con Kolivas, his site is at
 http://users.on.net/~ckolivas/kernel/. Con maintains a full set but also
@@ -218,7 +214,7 @@ independently maintained.
 
 [as said from the Real-Time Linux Wiki]
 
-patch at http://www.kernel.org/pub/linux/kernel/projects/rt/
+patch at https://www.kernel.org/pub/linux/kernel/projects/rt/
 
 -bld
 
@@ -242,9 +238,7 @@ balancing. At the time of try_to_wake_up picking the idlest runqueue is
 topmost priority but it has been done as per domain basis to utilize CPU
 cache properly and it's an area where more concentration is requires.
 
-Google code Webpage: http://code.google.com/p/bld/
-
-Patches are only available for 3.3-rc3, 3.4-rc4 and 3.5.0.
+Google Code web page: https://code.google.com/p/bld/
 
 -grsecurity
 
@@ -255,7 +249,7 @@ would receive the greatest benefit. Some applications are incompatible
 with the additional security measures implemented by this patchset. If
 this occurs, consider using a lower security level.
 
-The -grsecurity patches can be found at http://grsecurity.net
+The -grsecurity patches can be found at https://grsecurity.net
 
 Tiny-Patches
 
@@ -287,9 +281,9 @@ Reiser4
 
 Reiser4
 
-Gensplash/fbsplash
+fbsplash
 
-Gensplash - http://dev.gentoo.org/~spock/projects/
+fbsplash
 
 Compilation
 -----------
@@ -307,13 +301,13 @@ See Kernels/Compilation/Arch Build System.
 
 > Traditional
 
-This method involves manually downloading a source tarball, and building
-in your home directory as normal user. Once configured, two
-compilation/installation methods are offered; the traditional manual
-method as well as makepkg/pacman.
+This involves manually downloading a source tarball, and compiling in
+your home directory as a normal user. Once configured, two installation
+methods are available; the traditional manual method, or with Makepkg +
+Pacman.
 
-An advantage of the traditional method is that it will work on other
-Linux distributions.
+An advantage of learning the traditional method is that it is not
+distribution-specific.
 
 See Kernels/Compilation/Traditional.
 
@@ -328,8 +322,15 @@ See also
 -   O'Reilly - Linux Kernel in a Nutshell (free ebook)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Kernels&oldid=251911"
+"https://wiki.archlinux.org/index.php?title=Kernels&oldid=299036"
 
 Category:
 
 -   Kernel
+
+-   This page was last modified on 20 February 2014, at 07:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

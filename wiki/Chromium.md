@@ -1,388 +1,175 @@
 Chromium
 ========
 
-> Summary
+Related articles
 
-General information, installation and troubleshooting for Chromium.
+-   Chromium tweaks
+-   Browser plugins
+-   Firefox
+-   Opera
 
-> Related
+Chromium is an open-source graphical web browser from Google, based on
+the Blink rendering engine.
 
-Chromium Tips and Tweaks
+Contents
+--------
 
-Browser Plugins
-
-Firefox
-
-Opera
-
-Chromium is an open source graphical web browser from Google, based on
-the WebKit rendering engine.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 File associations                                            |
-|     -   2.2 Font Rendering                                               |
-|         -   2.2.1 Non-Latin characters                                   |
-|                                                                          |
-|     -   2.3 Default browser                                              |
-|     -   2.4 Flash Player                                                 |
-|     -   2.5 Google Play & Flash                                          |
-|     -   2.6 Open PDF files inside Chromium                               |
-|         -   2.6.1 Using Google Chrome's libpdf                           |
-|             -   2.6.1.1 Using packages from AUR                          |
-|             -   2.6.1.2 Manual method                                    |
-|                                                                          |
-|         -   2.6.2 Using mozplugger                                       |
-|         -   2.6.3 Using the KParts plugin                                |
-|                                                                          |
-|     -   2.7 Certificates                                                 |
-|                                                                          |
-| -   3 Tips and Tricks                                                    |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Proxy Settings                                               |
-|     -   4.2 Default profile                                              |
-|     -   4.3 WebGL                                                        |
-|     -   4.4 Pulseaudio & PA-Alsa-Bridge & Pepper-Flash                   |
-|                                                                          |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Set Chromium as default browser
+    -   2.2 File associations
+    -   2.3 Font rendering
+    -   2.4 Flash Player plugin
+        -   2.4.1 Adobe Flash Player (Netscape plugin API)
+        -   2.4.2 Adobe Flash Player (Pepper plugin API)
+    -   2.5 PDF viewer plugin
+        -   2.5.1 libpdf
+        -   2.5.2 Using mozplugger
+        -   2.5.3 Using the KParts plugin
+    -   2.6 Print preview
+    -   2.7 Certificates
+-   3 Tips and tricks
+-   4 Troubleshooting
+    -   4.1 Constant freezes under KDE
+    -   4.2 Cracking Sound
+    -   4.3 Proxy settings
+    -   4.4 Default profile
+    -   4.5 WebGL
+    -   4.6 Google Play and Flash
+    -   4.7 Force 3D acceleration in Pepper Flash Player and i.g. the
+        browser with radeon driver
+    -   4.8 speech-dispatcher dumps core
+-   5 See also
 
 Installation
 ------------
 
-Chromium can be installed with the package chromium, available in the
-official repositories.
+The open source project, Chromium, can be installed with the package
+chromium, available in the official repositories. In the AUR you can
+also find:
 
-In the AUR you can also find:
+-   chromium-dev - the development version (binary version:
+    chromium-browser-bin)
 
--   chromium-dev - a development version of the Chromium browser.
--   chromium-update - an update. script for Chromium nighly builds,
-    pre-compiled on the Chromium buildbot server.
--   chromium-browser-bin - a binary version of the latest Chromium
-    build.
--   iron-bin - a binary version of Chromium without Google's 'tracking
-    features'
+The modified browser, Google Chrome, bundled with Flash Player and PDF
+Reader, can be installed with the package google-chrome, available in
+the AUR. In the AUR you can also find:
 
-Note:Compiling chromium-dev takes at least as long as compiling the
-Linux kernel.
+-   google-chrome-beta - the beta version
+-   google-chrome-dev - the development version
 
-Various versions of the modified Google Chrome browser can be found in
-the AUR:
-
--   google-chrome
--   google-chrome-beta
--   google-chrome-dev
-
-See these two articles for an explanation of the differences between
-Stable/Beta/Dev, as well as Chromium vs. Chrome and the version numbers.
+Tip:See these two articles for an explanation of the differences between
+Stable/Beta/Dev, as well as Chromium vs. Chrome and an explanation of
+the version numbering.
 
 Configuration
 -------------
 
+> Set Chromium as default browser
+
+This behaviour is related to xdg-open: see xdg-open#set the default
+browser. For more information about the topic in general, see Default
+applications.
+
 > File associations
 
-Unlike Firefox, Chromium does not maintain its own database of
-mimetype-to-application associations. Instead, it relies on xdg-open to
-open files and other mime types, for example, magnet links.
+This behaviour is related to xdg-open: see xdg-open#Configuration. For
+more information about the topic in general, see Default applications.
 
-There are exceptions to this rule though. In the case of mailto URIs,
-Chromium calls out to xdg-email which is similar to xdg-open. Other
-protocol handlers may have equivalent scripts so check /usr/bin/xdg*.
+> Font rendering
 
-The behaviour of xdg-* tools is managed automatically in environments
-such as GNOME, KDE, Xfce or LXDE, but does not work in others. Usually
-this behaviour can be fixed by tricking them into thinking that they are
-operating in one of the supported desktop environments. Depending on
-your environment one may work and another will not so trying each is
-recommended. You can set the desktop environment with the following
-variable:
+Note:Chromium bug 55458 seems to be affecting Arch Linux, causing
+overlapping text sometimes.
 
-    export DE=INSERT_DE_HERE
+Chromium (and Google Chrome) will use the settings in
+~/.config/fontconfig/fonts.conf. For possibly better rendering you may
+try the following. Create the file if it does not already exist.
 
-where the recognised desktop environments are: gnome, kde, xfce and
-lxde. For the variable to be always set, put it somewhere like
-~/.xinitrc or ~/.bashrc.
+    ~/.config/fontconfig/fonts.conf
 
-An alternative is to edit the xdg-open or xdg-email scripts and
-hard-code a useful DE. At the bottom of the file you will see something
-like this:
-
-    /usr/bin/xdg-open
-
-    detectDE
-
-    if [ x"$DE" = x"" ]; then
-        DE=generic
-    fi
-
-    DEBUG 2 "Selected DE $DE"
-
-    # if BROWSER variable is not set, check some well known browsers instead
-    if [ x"$BROWSER" = x"" ]; then
-        BROWSER=links2:elinks:links:lynx:w3m
-        if [ -n "$DISPLAY" ]; then
-            BROWSER=x-www-browser:firefox:seamonkey:mozilla:epiphany:konqueror:chromium-browser:google-chrome:$BROWSER
-        fi
-    fi
-
-    case "$DE" in
-        kde)
-        open_kde "$url"
-        ;;
-
-        gnome*)
-        open_gnome "$url"
-        ;;
-
-        mate)
-        open_mate "$url"
-        ;;
-
-        xfce)
-        open_xfce "$url"
-        ;;
-
-        lxde)
-        open_lxde "$url"
-        ;;
-
-        generic)
-        open_generic "$url"
-        ;;
-
-        *)
-        exit_failure_operation_impossible "no method available for opening '$url'"
-        ;;
-    esac
-
-change the third line: DE=generic to one of the supported desktop
-environments (e.g. DE=gnome).
-
-Note:These changes are lost when any of the utilities are upgraded.
-
-An approach which is less useful is to place the required application in
-the default browser list:
-
-       BROWSER=links2:links:lynx:w3m
-       if [ -n "$DISPLAY" ]; then
-           BROWSER=firefox:mozilla:epiphany:konqueror:chromium-browser:google-chrome:$BROWSER
-       fi
-
-xdg-open and xdg-email fall back to this list of browsers and will use
-the first that they find to attempt to open the URI. You could add the
-name of the application to the beginning of the list. However there is
-no guarantee that the application will be called correctly to meet your
-needs, e.g. your mail client will open but it will not correctly receive
-the mailto address. Also it will only work for one application.
-
-A fourth option is to make a softlink from your preferred application to
-one of the names on the browser list. This approach has the same
-problems as the previous work around. For more discussion on these ideas
-see this forum thread.
-
-> Font Rendering
-
-Chromium is now supposed to use the settings in ~/.fonts.conf, though
-you may have to edit it manually (see Font Configuration). If your fonts
-setting are stored in another place, create ~/.fonts.conf and add these
-lines:
-
-    ~/.fonts.conf
-
-     <match target="font">
-        <edit name="autohint" mode="assign">
-          <bool>true</bool>
-        </edit>
-        <edit name="hinting" mode="assign">
-          <bool>true</bool>
-        </edit>
-        <edit mode="assign" name="hintstyle">
-          <const>hintslight</const>
-        </edit>
-      </match>
+    <match target="font">
+      <edit mode="assign" name="autohint"><bool>true</bool></edit>
+      <edit mode="assign" name="hinting"><bool>true</bool></edit>
+      <edit mode="assign" name="hintstyle"><const>hintslight</const></edit>
+    </match>
 
 If the fonts are still rendered badly, you can use Xft settings as
-suggested here. Create ~/.Xresources if it does not exist and add in:
+suggested here:
 
     ~/.Xresources
 
-    ...
+    [...]
     ! Xft settings ---------------------------------------------------------------
     Xft.dpi:        96
     Xft.antialias:  true
     Xft.rgba:       rgb
     Xft.hinting:    true
     Xft.hintstyle:  hintslight
-    ...
+    [...]
 
 Then update the X Resources database using:
 
-    xrdb -merge ~/.Xresources
+    $ xrdb -merge ~/.Xresources
 
 Note:These settings will affect any application that uses X Resources
-for font settings; one example is rxvt-unicode.
+for font settings; e.g. rxvt-unicode.
 
-Non-Latin characters
+> Flash Player plugin
 
-Install needed fonts to correctly display Chinese, Japanese, Korean
-characters. For examples of recommended fonts for various languages see
-Font Packages.
+Adobe Flash Player (Netscape plugin API)
 
-For the Arch Wiki, one only needs the ttf-arphic-uming package.
-
-> Default browser
-
-The simplest way to make Chromium the default browser is to set variable
-$BROWSER=chromium in ~/.profile
-
-    if [ -n "$DISPLAY" ]; then
-         BROWSER=chromium
-    fi
-
-To test if this was applied successfully, try to open an URL with
-xdg-open as follows:
-
-    $ xdg-open http://google.com/
-
-If everything went well, either a new tab inside Chromium, or a new
-window would open and display the Google homepage, depending on your
-settings.
-
-Another option, when using mimeo, is to associate "http://" links with
-Chromium:
-
-    ~/.config/mimeo.conf
-
-    /usr/bin/chromium
-      ^http://
-
-If all of that still does not get it working, you can try adding the
-following to the [Added Associations] list in
-~/.local/share/applications/mimeapps.list:
-
-    x-scheme-handler/http=chromium.desktop
-
-If even that didn't work, try this:
-
-    $ xdg-mime default chromium.desktop x-scheme-handler/http
-    $ xdg-mime default chromium.desktop x-scheme-handler/https
-
-For more info, see Xdg-open.
-
-> Flash Player
+Warning:This version will not be updated (except for security updates),
+and is stuck at version 11.2. It will be completely disabled by April
+2014.[1]
 
 The Adobe Flash plugin can be installed with the package flashplugin,
 available in the official repositories.
 
-While the classic Flash plugin will not be updated for Linux, Chromium
-can use the Flash plugin from Google Chrome (that uses the new Pepper
-API). This plugin is available in the AUR with the chromium-pepper-flash
-or chromium-pepper-flash-stable packages.
+Adobe Flash Player (Pepper plugin API)
 
-Note:Make sure to enable the Flash plugin with location
-/usr/lib/PepperFlash/libpepflashplayer.so in chrome://plugins and
-disable the plugin with location
-/usr/lib/mozilla/plugins/libflashplayer.so.
+While the classic Flash plugin will not be updated for Linux, an updated
+Flash Player is included with Google Chrome. It is compatible with
+Chromium.
 
-If Pepper Flash doesn't show up in the plugins list (as is the case for
-Iron) then disable libflashplayer.so and start with the following
-command.
+The easiest way to install pepper-flash for Chromium is using one of the
+packages provided in the AUR:
 
-    iron --ppapi-flash-path=/usr/lib/PepperFlash/libpepflashplayer.so --ppapi-flash-version=11.5.31.101
+-   chromium-pepper-flash for the stable version.
+-   chromium-pepper-flash-dev for a development version.
 
-Enable only one flash player at a time by going to chrome://plugins ->
-details -> Adobe Flash Player
+Note:If you have still flashplugin installed, in order for Chromium to
+use this new Pepper Flash plugin, please make sure the plugin location
+from /usr/lib/mozilla/plugins/libflashplayer.so is disabled and
+/usr/lib/PepperFlash/libpepflashplayer.so is enabled in
+chrome://plugins.
 
-> Google Play & Flash
-
-DRM content on Flash still requires HAL to play. This is readily
-apparent with Google Play Movies. If one attempts to play a Google Play
-movie without HAL, they will receive a youtube like screen but the video
-will not play.
-
-Note : Chromium-pepper-flash doesn't work with this method, the user
-must ensure they are using flashplugin.
-
-As per "Watching movies from Google Play on Arch Linux"; install hal and
-hal-info. Then run the following bash code :
-
-    cd ~/.adobe/Flash_Player;                       ## enter the adobe Flash player directory
-    rm -rf NativeCache AssetCache APSPrivateData2;  ## remove cache
-
-Start the HAL daemon and one will be able to watch Google Play Movie
-content.
-
-    # systemctl start hal.service
-
-Alternately one can just save the following bash script below and run it
-before they want to watch Google Play Movie content.
-
-    #!/bin/bash
-
-    ## written by Mark Lee <bluerider>
-    ## using information from <https://wiki.archlinux.org/index.php/Chromium#Google_Play_.26_Flash>
-
-    ## Start and stop Hal service on command for Google Play Movie service
-
-    function main () {  ## run the main insertion function
-    clear-cache;  ## remove adobe cache
-    start-hal;  ## start the hal daemon
-    read -p "Press 'enter' to stop hal";  ## pause the command line with a read line
-    stop-hal;  ## stop the hal daemon
-    }
-
-    function clear-cache () {  ## remove adobe cache
-    cd ~/.adobe/Flash_Player;  ## go to Flash player user directory
-    rm -rf NativeCache AssetCache APSPrivateData2;  ## remove cache
-    }
-
-    function start-hal () {  ## start the hal daemon
-    sudo systemctl start hal.service && ( ## systemd : start hal daemon
-     echo "Started hal service..."
-     ) || (
-     echo "Failed to start hal service!"
-     ) 
-    }
-
-    function stop-hal () {  ## stop the hal daemon
-    sudo systemctl stop hal.service && (  ## systemd : stop hal daemon
-     echo "Stopped hal service..."
-     ) || (
-     echo "Failed to stop hal service!"
-     )
-    }
-
-    main;  ## run the main insertion function
-
-> Open PDF files inside Chromium
+> PDF viewer plugin
 
 There are multiple ways of enabling PDF support in Chromium that are
 detailed below.
 
-Using Google Chrome's libpdf
+libpdf
 
-libpdf is Google's own implementation of a PDF renderer. While
-compatible, it is currently only part of Chrome releases, not Chromium
-ones.
+libpdf is Google's own implementation of a PDF renderer included with
+Google Chrome. It is compatible with Chromium. It runs in the
+NaCl/Pepper sandbox.
 
-Note:chromium-dev includes development versions of libpdf and
-PepperFlash.
-
-Using packages from AUR
-
-The easiest way to install libpdf for chromium is using one of the
+The easiest way to install libpdf for Chromium is using one of the
 packages provided in the AUR:
 
--   chromium-libpdf-stable for the stable version.
--   chromium-libpdf for a development version.
+-   chromium-libpdf for the stable version.
+-   chromium-libpdf-dev for a development version.
 
-Note:To install libpdf for other Chromium packages, edit the PKGBUILD of
-chromium-libpdf-stable to install libpdf.so into correct path. For
-example, to install it for chromium-browser-bin, replace
+Enable the plugin in chrome://plugins.
+
+> Note:
+
+-   As a new version of Chromium will not update libpdf.so, it may
+    become incompatible. Thus it is advisable to update both at the same
+    time.
+-   To install libpdf for other Chromium packages, edit the PKGBUILD of
+    chromium-libpdf to install libpdf.so into correct path. For example,
+    to install it for chromium-browser-bin, replace
 
     install -m644 opt/google/chrome/libpdf.so "${pkgdir}/usr/lib/chromium"
 
@@ -390,62 +177,46 @@ with
 
     install -m644 opt/google/chrome/libpdf.so "${pkgdir}/opt/chromium-browser"
 
-Manual method
-
-To do it manually, download a Google Chrome release that corresponds to
-the version of Chromium you use:
-
-    $ wget https://dl-ssl.google.com/linux/direct/google-chrome-stable_current_i386.deb
-    $ wget https://dl-ssl.google.com/linux/direct/google-chrome-unstable_current_i386.deb
-
-    $ wget https://dl-ssl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    $ wget https://dl-ssl.google.com/linux/direct/google-chrome-unstable_current_amd64.deb
-
-Extract the deb file with
-
-    $ ar vx <deb-file>
-
-Extract LZMA archive with
-
-    $ tar -xJf <lzma-file>
-
-Move libpdf.so from opt/google/chrome/ to the appropriate directory as
-stated above. A change of its file permissions and ownership may be
-necessary (the permission of libpdf.so should be 755).
-
-To verify that the installation went correctly: start Chromium, open
-about:plugins and check if "Chrome PDF Viewer" is available (it may need
-to be enabled).
-
-Note:As a new version of Chromium will not update libpdf.so, it may
-become incompatible. Thus and with respect to possible security fixes it
-is advisable to update both at the same time.
-
 Using mozplugger
 
-See the main article: Browser Plugins#MozPlugger
-
-For information about the installation see Browser Plugins#PDF viewer.
+See the main article: Browser plugins#MozPlugger
 
 Using the KParts plugin
 
-See the main article: Browser Plugins#kpartsplugin
+See the main article: Browser plugins#kpartsplugin
+
+> Print preview
+
+The print preview feature is disabled by default in Chromium, unlike
+Google Chrome. Enabling it requires passing --enable-print-preview with
+the #PDF viewer plugin installed.
 
 > Certificates
 
 Chromium uses NSS for the certificate management. Certificates can be
-managed (including added) by going to Settings, clicking the Show
-advanced settings.. link and then Manage Certificates.
+managed in Settings → Show advanced settings... →
+Manage Certificates....
 
-Tips and Tricks
+Tips and tricks
 ---------------
 
-See the main article: Chromium Tips and Tweaks
+See the main article: Chromium tweaks
 
 Troubleshooting
 ---------------
 
-> Proxy Settings
+> Constant freezes under KDE
+
+Uninstall libcanberra-pulse. See: BBS#1228558.
+
+> Cracking Sound
+
+There have been reports of cracking sound with chromium over hdmi audio.
+Start chromium with a different audio buffer size to fix the issue:
+
+    $ chromium --audio-buffer-size=2048
+
+> Proxy settings
 
 There have been many situations in which proxy settings do not work
 properly, especially if set through the KDE interface. A good method as
@@ -458,13 +229,14 @@ If you cannot get your default profile when you try to run Chromium and
 get a similar error instead:
 
     $ chromium
+
     [2630:2630:485325611:FATAL:chrome/browser/browser_main.cc(755)] Check failed: profile. 
     Cannot get default profile. Trace/breakpoint trap
 
-you have to set the correct owner of the directory ~/.config/chromium as
+You have to set the correct owner of the directory ~/.config/chromium as
 following:
 
-    $ sudo chown -R yourusername:yourusergroup /home/yourusername/.config/chromium
+    # chown -R yourusername:yourusergroup ~/.config/chromium
 
 > WebGL
 
@@ -475,52 +247,60 @@ by passing the command line flag --enable-webgl to Chromium in the
 terminal.
 
 There is also the possibility that your graphics card has been
-blacklisted by Chromium. To override this, pass the flag
---ignore-gpu-blacklist when starting Chromium, alternatively, go to
-about:flags and enable Override software rendering list.
+blacklisted by Chromium. To override this use the --ignore-gpu-blacklist
+flag or go to about:flags and enable Override software rendering list.
 
-> Pulseaudio & PA-Alsa-Bridge & Pepper-Flash
+If you're using Chromium with Bumblebee, WebGL might crash due to GPU
+sand-boxing. In this case, you can disable GPU sand-boxing with
+optirun chromium --disable-gpu-sandbox.
 
-Given a certain version of Chrome (23.x seem to exhibit this problem)
-and Pepper-Flash (11.x) while using the PA-Alsa-Bridge, sound may not
-play, become distorted, start skipping or outright keep crashing the
-PA-Alsa-Bridge continously. See [1] for the bugreport.
+> Google Play and Flash
 
-A possible workaround is to use pasuspender to suspend Pulseaudio and
-force Chrome to use Alsa directly.
+DRM content on Flash still requires HAL to play. This is readily
+apparent with Google Play Movies. If one attempts to play a Google Play
+movie without HAL, they will receive a YouTube-like screen, but the
+video will not play. See Flash DRM content for more information.
 
-First, create an ~/.asoundrc file to default Alsa to your real hardware
-instead of Pulseaudio. See Alsa and [2] for more information. Exemplary
-~/.asoundrc:
+Note:It is necessary to use flashplugin since chromium-pepper-flash does
+not work with this method.
 
-    ~/.asoundrc
+> Force 3D acceleration in Pepper Flash Player and i.g. the browser with radeon driver
 
-    pcm. !default {
-        type hw
-        card 0
-        device 0
-    }
+To force 3D rendering there is an option "Override software rendering
+list" in chrome://flags, also you would have to export video
+acceleration variables, see ATI#Enabling_video_acceleration. You could
+check if it is working in chrome://gpu.
 
-Then use pasuspender to suspend Pulseaudio and force Chrome to use Alsa
-which now uses your real hardware.
+> speech-dispatcher dumps core
 
-    pasuspender -- google-chrome
+Note:This was reported as bug FS#38456.
 
-The problem might be related to the tsched=0 option in Pulseaudio. See
-Pulseaudio#Glitches, skips or crackling and comment #27 in [3].
+Chromium installs speech-dispatcher as a dependency. The latter is an
+independent layer for speech synthesis interface and by default uses
+festival as its back end. If you are frequently receiving core dumps, it
+is likely caused by not having installed festival. To resolve the error
+message, either install festival or change the back end used by
+speech-dispatcher.
 
-See Also
+See also
 --------
 
--   Chromium Homepage
--   Google Chrome Release Notes
--   Chrome Web Store
+-   Chromium homepage
+-   Google Chrome release notes
+-   Chrome web store
 -   Differences between Chromium and Google Chrome
 -   List of Chromium command-line switches
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Chromium&oldid=253210"
+"https://wiki.archlinux.org/index.php?title=Chromium&oldid=305082"
 
 Category:
 
 -   Web Browser
+
+-   This page was last modified on 16 March 2014, at 12:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -6,39 +6,34 @@ board has basic 3D capabilites. Its support on Linux is poor but exists.
 This page is a walkthrough to setup Mach 64 graphics chipsets (including
 ATI Rage Pro) and obtain direct rendering on some of them.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing the basic features                                      |
-| -   2 3D acceleration and direct rendering                               |
-| -   3 Configuration                                                      |
-| -   4 Testing direct rendering                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing the basic features
+-   2 3D acceleration and direct rendering
+-   3 Configuration
+-   4 Testing direct rendering
 
 Installing the basic features
 -----------------------------
 
-2D and Xv acceleration in X can be achieved with xf86-video-mach64:
-
-    # pacman -S xf86-video-mach64
+2D and Xv acceleration in X can be achieved installing xf86-video-mach64
+from the official repositories.
 
 3D acceleration and direct rendering
 ------------------------------------
 
-Warning: You may experience crashes if using the Mach 64 DRM module.
+Warning:You may experience crashes if using the Mach 64 DRM module.
 Direct rendering on Mach 64 is not very reliable because it never got
 much support.
 
 On Linux, the Mach 64 chip uses the DRI/DRM system for direct rendering.
-The DRI part is available in [community], but the DRM module is not
-included in the mainline kernel. So we have to build it separately. A
-package in the AUR simplifies this task: mach64drm.
+The DRI part is available in the official repositories, but the DRM
+module is not included in the mainline kernel. So we have to build it
+separately. A package in the AUR simplifies this task: mach64drm.
 
 As soon as the DRM module is built and installed, make sure you
-installed the DRI part:
-
-    # pacman -S mach64-dri
+installed the DRI part mach64-dri.
 
 Configuration
 -------------
@@ -135,9 +130,16 @@ If OpenGL renderer string says "Software Rasterizer", DRI is not
 working, even if direct rendering says "yes".
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mach64&oldid=245345"
+"https://wiki.archlinux.org/index.php?title=Mach64&oldid=258565"
 
 Categories:
 
 -   Graphics
 -   X Server
+
+-   This page was last modified on 24 May 2013, at 12:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

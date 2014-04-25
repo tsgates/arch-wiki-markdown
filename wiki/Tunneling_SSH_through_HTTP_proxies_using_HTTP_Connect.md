@@ -3,15 +3,13 @@ Tunneling SSH through HTTP proxies using HTTP Connect
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Creating the tunnel                                                |
-| -   3 Using the tunnel                                                   |
-| -   4 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Creating the tunnel
+-   3 Using the tunnel
+-   4 See Also
 
 Introduction
 ============
@@ -59,3 +57,10 @@ Retrieved from
 Category:
 
 -   Secure Shell
+
+-   This page was last modified on 6 December 2012, at 01:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

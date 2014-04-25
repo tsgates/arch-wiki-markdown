@@ -1,17 +1,13 @@
 Cairo Compmgr
 =============
 
-> Summary
+Summary help replacing me
 
 Describes the installation and usage of Cairo Composite Manager.
 
 Related articles
 
 Xcompmgr
-
-Composite
-
-AIGLX
 
 Xorg
 
@@ -25,29 +21,11 @@ Like Xcompmgr, it does not replace an existing window manager, which
 makes it ideal for users of lightweight window managers, like Openbox
 and Fluxbox, who seek a more elegant desktop.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-| -   2 Installation                                                       |
-| -   3 Configuration                                                      |
-| -   4 Additional Resources                                               |
-+--------------------------------------------------------------------------+
-
-Prerequisites
--------------
-
-To make use of Cairo Composite Manager, it requires the following:
-
--   Xorg must be installed, configured and running
--   Composite must be enabled via graphics drivers, AIGLX
-
 Installation
 ------------
 
-cairo-compmgr from [community] is no longer available, but you can
-install cairo-compmgr-git development version from the AUR.
+Cairo Compmgr is no longer available in the official repositories. The
+development version is available as cairo-compmgr-git from the AUR.
 
 There are no errors on compile with removed gconf, and it runs fine.
 However, it is not possible to remove dependency on vala as it will not
@@ -60,6 +38,11 @@ Configuration
 To start Cairo Composite Manager, simply run:
 
     $ cairo-compmgr 
+
+If it runs for a few seconds and then crashes taking the terminal with
+it, open the Cairo Composite Manager and disable the 'Freeze' plugin:
+
+    $ cairo-compmgr --configure
 
 To have it load every time you start X, you can add it to your
 ~/.xinitrc :
@@ -76,18 +59,23 @@ plugin, it might stall your screen for a moment.
 Additional Resources
 --------------------
 
--   AIGLX
--   Composite -- A Xorg extension required by composite managers
 -   Xcompmgr -- A simple composite manager capable of drop shadows and
     primitive transparency
--   Compiz Fusion -- A composite and window manager offering a rich 3D
+-   Compiz -- A composite and window manager offering a rich 3D
     accelerated desktop environment
 -   Wikipedia:Compositing window manager
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Cairo_Compmgr&oldid=237697"
+"https://wiki.archlinux.org/index.php?title=Cairo_Compmgr&oldid=280681"
 
 Categories:
 
 -   X Server
 -   Eye candy
+
+-   This page was last modified on 31 October 2013, at 13:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

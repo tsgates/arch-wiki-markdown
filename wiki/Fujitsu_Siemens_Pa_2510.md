@@ -1,35 +1,30 @@
 Fujitsu Siemens Pa 2510
 =======================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 LAPTOP SPECS                                                       |
-| -   2 XORG CONFIGURATION                                                 |
-|     -   2.1 using the ATI catalyst driver                                |
-|     -   2.2 using the open source driver                                 |
-|                                                                          |
-| -   3 SOUND                                                              |
-| -   4 TOUCHPAD                                                           |
-| -   5 ACCESS TO DEVICES                                                  |
-| -   6 WIRELESS LAN                                                       |
-|     -   6.1 Madwifi                                                      |
-|                                                                          |
-| -   7 The easy way:                                                      |
-| -   8 A bit more complicated but also working (only for 32bit systems):  |
-|     -   8.1 Ndiswrapper                                                  |
-|                                                                          |
-| -   9 ETHERNET                                                           |
-| -   10 USB                                                               |
-| -   11 MONITOR OUT                                                       |
-| -   12 HOTKEYS, SPECIAL BUTTONS                                          |
-| -   13 CARD SLOTS                                                        |
-| -   14 Powersave                                                         |
-| -   15 Suspend                                                           |
-|     -   15.1 to ram                                                      |
-|     -   15.2 to disk                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 LAPTOP SPECS
+-   2 XORG CONFIGURATION
+    -   2.1 using the ATI catalyst driver
+    -   2.2 using the open source driver
+-   3 SOUND
+-   4 TOUCHPAD
+-   5 ACCESS TO DEVICES
+-   6 WIRELESS LAN
+    -   6.1 Madwifi
+-   7 The easy way:
+-   8 A bit more complicated but also working (only for 32bit systems):
+    -   8.1 Ndiswrapper
+-   9 ETHERNET
+-   10 USB
+-   11 MONITOR OUT
+-   12 HOTKEYS, SPECIAL BUTTONS
+-   13 CARD SLOTS
+-   14 Powersave
+-   15 Suspend
+    -   15.1 to ram
+    -   15.2 to disk
 
 LAPTOP SPECS
 ------------
@@ -191,3 +186,10 @@ Retrieved from
 Category:
 
 -   Fujitsu
+
+-   This page was last modified on 6 December 2012, at 00:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

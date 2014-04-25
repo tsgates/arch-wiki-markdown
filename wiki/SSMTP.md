@@ -1,15 +1,6 @@
 SSMTP
 =====
 
-Note:This program still works as of 11-14-2009 but note that SSMTP is no
-longer being developed. You might want to consider an alternative like
-MSMTP.
-
-Note:22 Feb 2010: SSMTP seems to be maintained. SSMTP 2.6.4-1 was put in
-the Arch Linux packages at 2009-11-26. And in Debian unstable version
-2.6.4-3 was put in their unstable repository on 2010-02-09 and move to
-testing just 10 days later: http://packages.qa.debian.org/s/ssmtp.html
-
 SSMTP is a program to deliver an email from a local computer to a
 configured mailhost (mailhub). It is not a mail server (like
 feature-rich mail server sendmail) and does not receive mail, expand
@@ -17,23 +8,18 @@ aliases or manage a queue. One of its primary uses is for forwarding
 automated email (like system alerts) off your machine and to an external
 email address.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Forward to a Gmail Mail Server                                     |
-|     -   2.1 Attachments                                                  |
-|                                                                          |
-| -   3 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Forward to a Gmail Mail Server
+    -   2.1 Attachments
+-   3 References
 
 Installation
 ------------
 
-To install SSMTP:
-
-    pacman -S ssmtp
+Install the package ssmtp from the official repositories.
 
 Forward to a Gmail Mail Server
 ------------------------------
@@ -48,7 +34,7 @@ To configure SSMTP, you will have to edit its configuration file
     # See also http://mail.google.com/support/bin/answer.py?answer=78799
     mailhub=smtp.gmail.com:587
 
-    # The address where the mail appears to come from for user authentification.
+    # The address where the mail appears to come from for user authentication.
     rewriteDomain=gmail.com
 
     # The full hostname
@@ -98,11 +84,11 @@ If you receive the error
 
 be sure the user is a member of the "mail" group.
 
-Change the 'From' text by editing /etc/passwd to receive mail from
-'root@myhostname' instead of just 'root'.
+Change the 'From' text by editing /etc/passwd to receive mail from 'root
+at myhost' instead of just 'root'.
 
-    chfn -f root@myhostname root
-    chfn -f mainuser@myhostname mainuser
+    chfn -f 'root at myhost' root
+    chfn -f 'mainuser at myhost' mainuser
 
 Which changes /etc/passwd to:
 
@@ -141,8 +127,15 @@ References
 -   GMail Support - Configuring other mail clients
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SSMTP&oldid=238358"
+"https://wiki.archlinux.org/index.php?title=SSMTP&oldid=303515"
 
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 7 March 2014, at 19:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

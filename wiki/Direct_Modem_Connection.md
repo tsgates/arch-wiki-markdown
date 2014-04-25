@@ -1,7 +1,7 @@
 Direct Modem Connection
 =======================
 
-> Summary
+Summary help replacing me
 
 This article describes how one can connect directly to the Internet from
 an Arch Linux box using an internal modem or external modem in bridge
@@ -17,18 +17,15 @@ Internet with a dialup line requires a lot of manual setup. If at all
 possible, set up a dedicated router which can be used as a default
 gateway on the Arch box.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Analog Modem                                                       |
-| -   2 ISDN                                                               |
-|     -   2.1 Install and Configure Hardware                               |
-|     -   2.2 Install and configure the ISDN utilities                     |
-|                                                                          |
-| -   3 DSL (PPPoE)                                                        |
-| -   4 Dial-up without a dialer                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Analog Modem
+-   2 ISDN
+    -   2.1 Install and Configure Hardware
+    -   2.2 Install and configure the ISDN utilities
+-   3 DSL (PPPoE)
+-   4 Dial-up without a dialer
 
 Analog Modem
 ------------
@@ -220,8 +217,15 @@ Now you can connect by running dial from a terminal and disconnect with
 hang.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Direct_Modem_Connection&oldid=254318"
+"https://wiki.archlinux.org/index.php?title=Direct_Modem_Connection&oldid=281508"
 
 Category:
 
 -   Modems
+
+-   This page was last modified on 5 November 2013, at 09:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

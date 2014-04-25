@@ -12,26 +12,21 @@ is still a well built and quite durable machine. If you are reading this
 with the intention of ordering yourself this machine, do yourself a
 favor and opt for the Intel WiFi card for the extra ~$20. The default
 Realtek works, albiet with a bit of coaxing. Ergo, this article is meant
-to suppliment the current Installation Guide or Beginners Guide.
+to suppliment the current Installation guide or Beginners' guide.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Hardware                                                           |
-|     -   2.1 Wireless                                                     |
-|     -   2.2 SD Card Reader                                               |
-|     -   2.3 GPU                                                          |
-|                                                                          |
-| -   3 Fingerprint Reader                                                 |
-| -   4 Trackpoint                                                         |
-| -   5 Fans                                                               |
-| -   6 Linux-pf                                                           |
-| -   7 Device information                                                 |
-|     -   7.1 lspci output                                                 |
-|     -   7.2 lsusb output                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Hardware
+    -   2.1 Wireless
+    -   2.2 SD Card Reader
+    -   2.3 GPU
+-   3 Fingerprint Reader
+-   4 Trackpoint
+-   5 Fans
+-   6 Linux-pf
+-   7 Device information
 
 Installation
 ------------
@@ -55,7 +50,7 @@ to install the module to facilitate the Arch installation.
 Hardware
 --------
 
-As of Kernel 3.4.6-1
+As of kernel 3.4.6-1
 
   Device                                                     Works
   ---------------------------------------------------------- -----------------------
@@ -67,10 +62,6 @@ As of Kernel 3.4.6-1
   Camera                                                     Yes
   Finger Print Reader                                        Yes (Fingerprint-gui)
   Card Reader (Realtek RTS5229)                              Yes*
-
-  
-
-  
 
 > Wireless
 
@@ -185,13 +176,13 @@ http://www.thinkwiki.org/wiki/How_to_configure_the_TrackPoint . Keep in
 mind that your Trackpoint might be identified by a different
 "MatchProduct", so you may want to determine the exact indentifier. The
 easiest way to do this is with the hwinfo package available in the
-Official Repositories. Simply run 'hwinfo' as a normal user or root and
+official repositories. Simply run 'hwinfo' as a normal user or root and
 look for the PS/2 information.
 
 Fans
 ----
 
-Warning: Thinkfan has been reported to not work on this model currently.
+Warning:Thinkfan has been reported to not work on this model currently.
 Tread lightly.
 
 The thinkpad_acpi kernel module needs to be configured so user space
@@ -220,10 +211,6 @@ settings can be displayed like so:
 
     $ cat /proc/acpi/ibm/fan
 
-  
-
-  
-
 Linux-pf
 --------
 
@@ -233,17 +220,14 @@ Kconfig/menuconfig, you can select "Intel Core 3rd Gen AVX" as processor
 family to set the right -march -mtune flags, to get right and best
 optimisations for your CPU.
 
-  
-
 Note:I ordered my computer with a camera but I never use those things.
 Other reports I have come across seem to indicate these work without
 issue, though a bit of configuration is needed.
 
 Device information
-==================
+------------------
 
-lspci output
-------------
+    lspci
 
     00:00.0 Host bridge: Intel Corporation 2nd Generation Core Processor Family DRAM Controller (rev 09)
     00:01.0 PCI bridge: Intel Corporation Xeon E3-1200/2nd Generation Core Processor Family PCI Express Root Port (rev 09)
@@ -265,8 +249,7 @@ lspci output
     03:00.0 Network controller: Broadcom Corporation BCM4313 802.11b/g/n Wireless LAN Controller (rev 01)
     0c:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168B PCI Express Gigabit Ethernet controller (rev 07)
 
-lsusb output
-------------
+    lsusb
 
     Bus 003 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
     Bus 004 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
@@ -279,8 +262,15 @@ lsusb output
     Bus 004 Device 003: ID 05ca:1823 Ricoh Co., Ltd
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_Edge_E530&oldid=253191"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_Edge_E530&oldid=305781"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 20 March 2014, at 02:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

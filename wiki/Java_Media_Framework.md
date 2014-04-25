@@ -9,29 +9,24 @@ playback, stream, and transcode multiple media formats, extends the Java
 providing a powerful toolkit to develop scalable, cross-platform
 technology."
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 JMFRegistry                                                  |
-|                                                                          |
-| -   3 Adding audio/video codecs support to JMF                           |
-|     -   3.1 Sun MP3 Plugin                                               |
-|     -   3.2 JFFMpeg                                                      |
-|         -   3.2.1 Reinstalling JMF and JffMpeg                           |
-|                                                                          |
-| -   4 Testing JMF capabilities                                           |
-| -   5 Adding media support to OpenOffice.org                             |
-|     -   5.1 Testing media capabilities in OpenOffice.org                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 JMFRegistry
+-   3 Adding audio/video codecs support to JMF
+    -   3.1 Sun MP3 Plugin
+    -   3.2 JFFMpeg
+        -   3.2.1 Reinstalling JMF and JffMpeg
+-   4 Testing JMF capabilities
+-   5 Adding media support to OpenOffice.org
+    -   5.1 Testing media capabilities in OpenOffice.org
 
 Installation
 ------------
 
-The JMF PKGBUILD can be downloaded from AUR JMF Package Run makepkg and
-install the package
+Install jmf from AUR.
 
 Configuration
 -------------
@@ -71,14 +66,11 @@ FFMPEG project, supporting a number of codecs in pure Java code. Where
 codecs have not yet been ported, a JNI wrapper allows calls directly
 into the full FFMPEG code."
 
-The JFFMpeg PKGBUILD can be downloaded from AUR JFFMpeg Package
-
-Run makepkg and install the package.
+Install jffmpeg from AUR.
 
 The install script will register the plugins and associate the mimetypes
-in the JMF registry
-
-The uninstall script will unregister the plugins from the JMF registry
+in the JMF registry and the uninstall script will unregister the plugins
+from the JMF registry.
 
 Reinstalling JMF and JffMpeg
 
@@ -133,8 +125,15 @@ documents and presentations, you must:
     will be played
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Java_Media_Framework&oldid=239225"
+"https://wiki.archlinux.org/index.php?title=Java_Media_Framework&oldid=280830"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 1 November 2013, at 14:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

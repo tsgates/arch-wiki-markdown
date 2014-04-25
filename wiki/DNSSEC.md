@@ -22,32 +22,29 @@ DNSSEC
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Facts                                                              |
-| -   2 DNSSEC Packages                                                    |
-| -   3 Howto enable DNSSEC in specific software                           |
-|     -   3.1 OpenSSH (fixes only weak point in SSH design)                |
-|     -   3.2 Firefox (secure browsing - enchancment of HTTPS)             |
-|     -   3.3 Chromium/Google Chrome (secure browsing - enchancment of     |
-|         HTTPS)                                                           |
-|     -   3.4 BIND (serving signed DNS zones)                              |
-|     -   3.5 Postfix (fight spam and frauds)                              |
-|     -   3.6 jabberd (fight spam and frauds)                              |
-|     -   3.7 Thunderbird (secure logins)                                  |
-|     -   3.8 lftp (secure downloads and logins)                           |
-|     -   3.9 wget (secure downloads)                                      |
-|     -   3.10 proftpd                                                     |
-|     -   3.11 Sendmail (fight spam and frauds)                            |
-|     -   3.12 LibSPF                                                      |
-|     -   3.13 ncftp (secure downloads and logins)                         |
-|     -   3.14 libpurple (pidgin + finch -> secure messaging)              |
-|                                                                          |
-| -   4 DNSSEC Hardware                                                    |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Facts
+-   2 DNSSEC Packages
+-   3 Howto enable DNSSEC in specific software
+    -   3.1 OpenSSH (fixes only weak point in SSH design)
+    -   3.2 Firefox (secure browsing - enchancment of HTTPS)
+    -   3.3 Chromium/Google Chrome (secure browsing - enchancment of
+        HTTPS)
+    -   3.4 BIND (serving signed DNS zones)
+    -   3.5 Postfix (fight spam and frauds)
+    -   3.6 jabberd (fight spam and frauds)
+    -   3.7 Thunderbird (secure logins)
+    -   3.8 lftp (secure downloads and logins)
+    -   3.9 wget (secure downloads)
+    -   3.10 proftpd
+    -   3.11 Sendmail (fight spam and frauds)
+    -   3.12 LibSPF
+    -   3.13 ncftp (secure downloads and logins)
+    -   3.14 libpurple (pidgin + finch -> secure messaging)
+-   4 DNSSEC Hardware
+-   5 See Also
 
 Facts
 -----
@@ -56,7 +53,6 @@ Facts
 -   http://www.dnssec.net/
     -   http://www.dnssec.net/practical-documents
     -   http://www.dnssec.net/rfc
-
 -   https://www.iana.org/dnssec/
 -   https://www.dnssec-tools.org/
 -   http://linux.die.net/man/1/sshfp
@@ -81,7 +77,6 @@ DNSSEC Packages
     -   essential package contains keys to internet from IANA stored in
         /usr/share/dnssec-trust-anchors/
     -   VERY important!
-
 -   ldns
     -   DNS(SEC) library libldns
     -   drill tool (like dig with DNSSEC support)
@@ -89,39 +84,31 @@ DNSSEC Packages
             -   Should success (return 0):
                 -   drill -TD nic.cz #valid DNSSEC key
                 -   drill -TD google.com #not signed domain
-
             -   Should fail (simulating fraudent DNS records):
                 -   drill -TD rhybar.cz
                 -   drill -TD badsign-a.test.dnssec-tools.org
-
             -   to use root-zone trust anchor add option -k
                 /usr/share/dnssec-trust-anchors/root-anchor.key
-
 -   dnssec-tools (package is very experimental and volatile right now)
     -   https://www.dnssec-tools.org/
     -   another good library libval which can add DNSSEC support to lots
         of programs
         -   https://www.dnssec-tools.org/wiki/index.php/DNSSEC_Applications
-
     -   some tools
         https://www.dnssec-tools.org/wiki/index.php/DNSSEC-Tools_Components
         -   https://www.dnssec-tools.org/wiki/index.php/Applications
-
     -   libval-shim LD_PRELOAD library to enable DNSSEC for lots of
         DNSSEC unaware programs
         http://www.dnssec-tools.org/docs/tool-description/libval_shim.html
     -   PERL API
-
 -   openssh-dnssec
     -   see lower on this page
-
 -   sshfp
     -   Generates DNS SSHFP-type records from SSH public keys from
         public keys from a known_hosts file or from scanning the host's
         sshd daemon.
     -   not directly related to DNSSEC, but i guess this will become
         very popular because of DNSSEC
-
 -   opendnssec
     -   Signs DNS zones to be later published by a DNS server (bind,
         nsd, etc.)
@@ -145,24 +132,19 @@ use DNSSEC validation. It can be done using several ways:
 -   patches
     -   https://www.dnssec-tools.org/wiki/index.php/DNSSEC_Applications
     -   https://www.dnssec-tools.org/wiki/index.php/DNSSEC_Application_Development
-
 -   plugins, extensions, wrappers
 -   universal LD_PRELOAD wrapper
     -   overriding calls to: gethostbyname(3), gethostbyaddr(3),
         getnameinfo(3), getaddrinfo(3), res_query(3)
     -   libval-shim from dnssec-tools:
         http://www.dnssec-tools.org/docs/tool-description/libval_shim.html
-
 -   DNS proxy
-
-  
 
 > OpenSSH (fixes only weak point in SSH design)
 
 -   dnssec-tools + patch:
     https://www.dnssec-tools.org/wiki/index.php/Ssh
     -   http://www.dnssec-tools.org/readme/README.ssh
-
 -   openssh-dnssec wrapper
     -   DNSSEC (ldns) wrapper for OpenSSH client.
     -   instantly adds minimal DNSSEC support to ssh (no SSHFP support).
@@ -176,7 +158,6 @@ use DNSSEC validation. It can be done using several ways:
     http://nlnetlabs.nl/projects/drill/drill_extension.html
     -   you need ldns and dnssec-root-zone-trust-anchors packages for
         this plugin
-
 -   dnssec-tools + firefox patch:
     https://www.dnssec-tools.org/wiki/index.php/Firefox
 
@@ -196,7 +177,6 @@ use DNSSEC validation. It can be done using several ways:
         (configuration template!)
     -   http://www.bind9.net/manuals
     -   http://www.bind9.net/BIND-FAQ
-
 -   http://blog.techscrawl.com/2009/01/13/enabling-dnssec-on-bind/
 -   Or use an external mechanisms such as OpenDNSSEC (fully-automatic
     key rollover)
@@ -240,13 +220,14 @@ use DNSSEC validation. It can be done using several ways:
 > libpurple (pidgin + finch -> secure messaging)
 
 -   no patches yet
+
 -   Vote for #12413
 
 DNSSEC Hardware
 ---------------
 
 You can check if your router, modem, AP, etc. supports DNSSEC (many
-different features) using dnssec-tester (Python & GTK+ based app) to
+different features) using dnssec-tester (Python and GTK+ based app) to
 know if it is DNSSEC-compatible, and using this tool you can also upload
 gathered data to a server, so other users and manufacturers can be
 informed about compatibility of their devices and eventualy fix the
@@ -261,9 +242,16 @@ See Also
 -   AppArmor
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DNSSEC&oldid=238720"
+"https://wiki.archlinux.org/index.php?title=DNSSEC&oldid=282321"
 
 Categories:
 
 -   Security
 -   Domain Name System
+
+-   This page was last modified on 11 November 2013, at 12:02.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

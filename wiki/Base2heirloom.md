@@ -87,3 +87,10 @@ Retrieved from
 Category:
 
 -   Command shells
+
+-   This page was last modified on 4 November 2012, at 17:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

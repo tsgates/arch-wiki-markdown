@@ -1,17 +1,10 @@
 Glftpd
 ======
 
-> Summary
+Related articles
 
-This article discusses the installation and configuration of the
-GreyLine FTP daemon on Arch Linux systems. An extensive administrative
-example is provided at the end.
-
-> Related
-
-vsftpd
-
-Proftpd
+-   vsftpd
+-   Proftpd
 
 This article describes the installation of the GreyLine FTP daemon on
 Arch Linux.
@@ -19,47 +12,40 @@ Arch Linux.
 GLFTPD is a secure FTP service for Unix-like operating systems which
 does not require system accounts.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Historic                                                           |
-| -   2 Installation                                                       |
-|     -   2.1 Preperation                                                  |
-|     -   2.2 installgl.sh                                                 |
-|         -   2.2.1 TCDP Setup                                             |
-|         -   2.2.2 JAIL Setup                                             |
-|         -   2.2.3 GLFTPD BASE Setup                                      |
-|         -   2.2.4 SERVICE SETUP & MULTI-INSTALL                          |
-|         -   2.2.5 COMPILING SOURCES & COPYING LIBS                       |
-|         -   2.2.6 PORT AND SYSTEM SETUP                                  |
-|         -   2.2.7 SSL/TLS SETUP                                          |
-|         -   2.2.8 STARTING GLFTPD                                        |
-|         -   2.2.9 FINISH                                                 |
-|                                                                          |
-| -   3 Allowing access                                                    |
-|     -   3.1 xinetd                                                       |
-|     -   3.2 hosts.allow                                                  |
-|     -   3.3 local testing                                                |
-|                                                                          |
-| -   4 Server Configuration                                               |
-|     -   4.1 glftpd.conf                                                  |
-|         -   4.1.1 Basics                                                 |
-|         -   4.1.2 Folder rights                                          |
-|         -   4.1.3 Encrypted file transfers                               |
-|         -   4.1.4 Dupecheck                                              |
-|         -   4.1.5 Behind a router?                                       |
-|                                                                          |
-|     -   4.2 Adding and configuring users and groups                      |
-|         -   4.2.1 General tips                                           |
-|         -   4.2.2 Example                                                |
-|         -   4.2.3 Transfer credits                                       |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 System update killed glftpd                                  |
-|                                                                          |
-| -   6 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Historic
+-   2 Installation
+    -   2.1 Preparation
+    -   2.2 installgl.sh
+        -   2.2.1 TCDP Setup
+        -   2.2.2 JAIL Setup
+        -   2.2.3 GLFTPD BASE Setup
+        -   2.2.4 SERVICE SETUP & MULTI-INSTALL
+        -   2.2.5 COMPILING SOURCES & COPYING LIBS
+        -   2.2.6 PORT AND SYSTEM SETUP
+        -   2.2.7 SSL/TLS SETUP
+        -   2.2.8 STARTING GLFTPD
+        -   2.2.9 FINISH
+-   3 Allowing access
+    -   3.1 xinetd
+    -   3.2 hosts.allow
+    -   3.3 local testing
+-   4 Server Configuration
+    -   4.1 glftpd.conf
+        -   4.1.1 Basics
+        -   4.1.2 Folder rights
+        -   4.1.3 Encrypted file transfers
+        -   4.1.4 Dupecheck
+        -   4.1.5 Behind a router?
+    -   4.2 Adding and configuring users and groups
+        -   4.2.1 General tips
+        -   4.2.2 Example
+        -   4.2.3 Transfer credits
+-   5 Troubleshooting
+    -   5.1 System update killed glftpd
+-   6 External Links
 
 Historic
 --------
@@ -84,31 +70,17 @@ glFTPd comes with a well thought through installation script that will
 automatically create the required system groups, configure the most
 basic options and set-up /jail if you want to.
 
-Preperation
+Preparation
 
-Install the requirements from the Official Repositories:
+Install xinetd zip unzip openssl inetutils from the Official
+repositories and tcp_wrappers from the Arch User Repository
 
-    $ pacman -S xinetd zip unzip openssl inetutils
+Note:x86_64 users should also install lib32-glibc from the Official
+repositories#multilib
 
-  
- Install tcp_wrappers, available in the Arch User Repository:
+Start the xinetd daemon: # /etc/rc.d/xinetd start
 
--   tcp_wrappers
-
-  
-
-Note:x86_64 users sould also install lib32-glibc from the Multilib
-Repository Official_Repositories#.5Bmultilib.5D
-
-    $ sudo pacman -S lib32-glibc
-
-  
- Start the xinetd daemon
-
-    $ sudo /etc/rc.d/xinetd start
-
-Note:Systemd users may start xinetd as follows:
-$ sudo systemctl start xinetd.service
+Note:Systemd users may use xinetd.service
 
   
  Finally, prepare the installation files. Find a dir to work from, /tmp
@@ -132,7 +104,7 @@ installation procedure for you.
 
 run the installation script with root privilidges
 
-    $ sudo ./installgl.sh
+    # ./installgl.sh
 
 You will now be prompted with several questions, below is an example of
 a jailed set-up, answers are listed in bold.
@@ -936,8 +908,15 @@ External Links
 -   Ubuntu glFTPd Guide - Source for parts of this guide.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Glftpd&oldid=223243"
+"https://wiki.archlinux.org/index.php?title=Glftpd&oldid=301532"
 
 Category:
 
 -   File Transfer Protocol
+
+-   This page was last modified on 24 February 2014, at 11:51.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,68 +1,31 @@
 Hamachi
 =======
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
-  g]                       is poorly written.       g]
-                           Reason: Needs to be      
-                           updated for Help:Style   
-                           compliance. (Discuss)    
-  ------------------------ ------------------------ ------------------------
-
 Hamachi is a proprietary (closed source) commercial VPN software. With
 Hamachi you can organize two or more computers with an Internet
 connection into their own virtual network for direct secure
 communication.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Set Up Tun                                                   |
-|     -   2.2 Hamachi 2 (beta)                                             |
-|         -   2.2.1 Using the hamachi command line tool as a regular user  |
-|         -   2.2.2 Automatically setting a custom nickname                |
-|                                                                          |
-| -   3 Running Hamachi                                                    |
-|     -   3.1 Systemd                                                      |
-|                                                                          |
-| -   4 GUI                                                                |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Hamachi times out soon after launch                          |
-|     -   5.2 If you have problems connecting to some hosts                |
-|     -   5.3 /etc/init.d/logmein-hamachi is not found                     |
-|     -   5.4 Error when trying to run hamachi-init                        |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Hamachi 2 (beta)
+        -   2.1.1 Using the hamachi command line tool as a regular user
+        -   2.1.2 Automatically setting a custom nickname
+-   3 Running Hamachi
+    -   3.1 Systemd
+-   4 GUI
+-   5 See also
 
 Installation
 ------------
 
-Version 2 of the Linux Hamachi client exists and is currently in beta.
-It is available from the labs page on the Hamachi website; however, the
-vendor's tarball requires LSB and will not install correctly. You should
-use the logmein-hamachi package from the AUR instead.
+Install the logmein-hamachi package from the AUR.
 
 Configuration
 -------------
-
-> Set Up Tun
-
-Being as section above can only be applied for init.scripts, in order to
-install the module, as root run:
-
-    # modprobe tun
-
-Then add tun to the list of modules by using your favorite text editor
-and Create
-
-    /etc/modules-load.d/tun.conf 
-
-    #Load tun module at boot.
-    tun
 
 > Hamachi 2 (beta)
 
@@ -100,13 +63,7 @@ explained above) is probably easier.
 Running Hamachi
 ---------------
 
-Start up the (matt) daemon
-
-    $hamachi start
-
-or, if you use systemd
-
-    #systemctl start logmein-hamachi
+    # systemctl start logmein-hamachi
 
 Now you have a whole bunch of commands at your disposal. These are in no
 particular order and are fairly self explanatory.
@@ -122,7 +79,7 @@ To get a list of all the commands, run:
 
     $hamachi ?
 
-Note: Make sure you change the status of the channel(s) you are in to
+Note:Make sure you change the status of the channel(s) you are in to
 "online" if you want to perform any network actions on computers in
 there.
 
@@ -134,62 +91,19 @@ daemon.
 If you feel like it, you can set Hamachi to start at every boot with
 Systemd:
 
-    systemctl enable logmein-hamachi
+    # systemctl enable logmein-hamachi
 
 To start the Hamachi Daemon immediately, use this command:
 
-    systemctl start logmein-hamachi
-
-Note:If for some reason, hamachi doesn't have a Systemd daemon, you can
-use one from here.
+    # systemctl start logmein-hamachi
 
 GUI
 ---
 
-Various GUI frontends for Hamachi are available in the AUR.
+The following GUI frontends for Hamachi are available in the AUR:
 
-For Hamachi 1:
-
--   haguichi (Gtk2, mono)
--   ghamachi (Gtk2)
--   hamachi-gui (Gtk2)
-
-For Hamachi 2 (beta):
-
--   quamachi (Qt4)
--   haguichi (Gtk2, mono)
-
-Troubleshooting
----------------
-
-> Hamachi times out soon after launch
-
-If hamachi stops working after a short period of time it can be that the
-client is timing out. Create ~/.hamachi/config and add the following to
-it:
-
-    KeepAlive 10
-
-> If you have problems connecting to some hosts
-
-Check if they are using Hamachi 2. If that is the case, then it is a
-known issue with the Hamachi 2 client connecting to the Hamachi Linux
-client.
-
-> /etc/init.d/logmein-hamachi is not found
-
-Replace that path with /etc/rc.d/logmein-hamachi.
-
-> Error when trying to run hamachi-init
-
-If there is an error while trying to load libstdc++.so.5, you want to
-install it. This library can be found in the extra repository, so you
-can install it by running pacman -S libstdc++5.
-
-If you get an error while trying to load libcrypto.so.0.9.7, a temporary
-solution is to create a link from /usr/lib/libcrypto.so.0.9.7 to
-/usr/lib/libcrypto.so by running
-ln -s /usr/lib/libcrypto.so /usr/lib/libcrypto.so.0.9.7.
+-   quamachi (Qt4, Python)
+-   haguichi (Gtk2, Mono)
 
 See also
 --------
@@ -197,8 +111,15 @@ See also
 -   Project home page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Hamachi&oldid=253792"
+"https://wiki.archlinux.org/index.php?title=Hamachi&oldid=302716"
 
 Category:
 
 -   Virtual Private Network
+
+-   This page was last modified on 1 March 2014, at 11:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

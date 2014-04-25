@@ -6,47 +6,41 @@ incorporates automatic fetching of album art, lyrics fetching, Last.fm
 scrobbling, support for many portable media players, internet radio such
 as shoutcast, and tabbed playlists.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Enabling cover art, lyrics, and guitar tablature             |
-|     -   1.2 Playing audio CDs                                            |
-|                                                                          |
-| -   2 Enabling multimedia keys irrespective of DE/WM                     |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Progress bar stuck at 0:00                                   |
-|     -   3.2 "Playback error encountered! Configured audiosink bin0 is    |
-|         not working"                                                     |
-|     -   3.3 Playing from SMB share                                       |
-|     -   3.4 "Last.fm Loved Tracks" plugin not working                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Enabling cover art, lyrics, and guitar tablature
+    -   1.2 Playing audio CDs
+-   2 Enabling multimedia keys irrespective of DE/WM
+-   3 Troubleshooting
+    -   3.1 Progress bar stuck at 0:00
+    -   3.2 "Playback error encountered! Configured audiosink bin0 is
+        not working"
+    -   3.3 "Last.fm Loved Tracks" plugin not working
+-   4 Known issues
+    -   4.1 Playing from SMB share
 
 Installation
 ------------
 
-Exaile is available in the AUR.
+Install exaile from the AUR.
 
 If you use ALSA and want to use alsasink instead of the default one,
 install gstreamer0.10-base-plugins available in the Official
-Repositories. This may solve problem if no sound is heard after
+repositories. This may solve problem if no sound is heard after
 installation and also when trying to play several sources
 simultaneously.
 
 > Enabling cover art, lyrics, and guitar tablature
 
-While installing Exaile via Pacman will also install any needed runtime
-dependencies, two additional packages gnome-python-extras & libgtkhtml
-will be needed to enable the cover art, lyrics, guitar tablature, and
-wiki features of Exaile.
-
-    pacman -S gnome-python-extras libgtkhtml
+gnome-python-extras and libgtkhtml are needed to enable the cover art,
+lyrics, guitar tablature, and wiki features of Exaile.
 
 > Playing audio CDs
 
-Exaile requires 'python-cddb' to play audio cd's. The correct package
-for this is cddb-py.
+Exaile requires python-cddb to play audio cd's. The correct package for
+this is cddb-py.
 
 Enabling multimedia keys irrespective of DE/WM
 ----------------------------------------------
@@ -61,7 +55,7 @@ Then edit ~/.xinitrc and add the line xmodmap <file name> prior to the
 'exec' command (if there is one) for the DE/WM, where <file name> is the
 path to the text file created above.
 
-Finally, in Exaile, go to Edit → Preferences → Plugins, and enable the
+Finally, in Exaile, go to Edit > Preferences > Plugins, and enable the
 XKeys plugin. After a restart, multimedia keys should work.
 
 Troubleshooting
@@ -75,9 +69,7 @@ Try setting it to automatic first.
 
 If you're trying to listen to an MP3 file, try playing an audio file
 encoded in a different format, such as .ogg or .flac. If these play
-correctly then try installing gstreamer-ugly.
-
-    pacman -S gstreamer0.10-ugly gstreamer0.10-ugly-plugins
+correctly then try installing gstreamer-ugly-plugins.
 
 > "Playback error encountered! Configured audiosink bin0 is not working"
 
@@ -92,10 +84,6 @@ Flash may be blocking the use of ALSA even if an 'npviewer.bin' process
 is not running. In that case, refreshing the offending page while using
 a Flash blocking browser extension should fix the problem.
 
-> Playing from SMB share
-
-Unfortunately, Exaile does NOT support smb protocol.
-
 > "Last.fm Loved Tracks" plugin not working
 
 When launched from console, Exaile emits a warning in the command line:
@@ -104,9 +92,23 @@ When launched from console, Exaile emits a warning in the command line:
 
 You need to install the python2-pylast package from AUR.
 
+Known issues
+------------
+
+> Playing from SMB share
+
+Unfortunately, Exaile does not support smb protocol.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Exaile&oldid=247369"
+"https://wiki.archlinux.org/index.php?title=Exaile&oldid=301487"
 
 Category:
 
 -   Player
+
+-   This page was last modified on 24 February 2014, at 11:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

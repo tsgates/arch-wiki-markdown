@@ -1,60 +1,31 @@
 Lineak
 ======
 
-  
- Have you ever wanted to get your multimedia keys to work under linux?
-If so; then Lineak is the perfect program for you because it does
-exactly this, Plus more (if needed). Lineak is a utility designed to
-enable the use and configuration of those special keys on Internet, Easy
-Access and Multimedia keyboards in Linux.
+Have you ever wanted to get your multimedia keys to work under linux? If
+so; then Lineak is the perfect program for you because it does exactly
+this, Plus more (if needed). Lineak is a utility designed to enable the
+use and configuration of those special keys on Internet, Easy Access and
+Multimedia keyboards in Linux.
 
-Note:Lineak is not really an active project, you are encouraged to use
-keytouch instead or, even better, do not use any third-party program and
-see Extra Keyboard Keys for the universal way of mapping your keys.
+Warning:Lineak is not really an active project, you are encouraged to
+use keytouch instead, or even better, do not use any third-party program
+and see Extra Keyboard Keys for the universal way of mapping your keys.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Check to see if Lineak supports your keyboard                      |
-| -   2 Software Installation                                              |
-|     -   2.1 GUI Tools                                                    |
-|                                                                          |
-| -   3 Configuring Your Specific Keyboard                                 |
-| -   4 Share it                                                           |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Check to see if Lineak supports your keyboard
+-   2 Software Installation
+    -   2.1 GUI Tools
+-   3 Configuring Your Specific Keyboard
+-   4 Share it
+-   5 See also
 
 Check to see if Lineak supports your keyboard
 ---------------------------------------------
 
-To test if Lineak supports your keyboard, simply run the program:
-
-       xev
-
-in a terminal. You should get a window that pops up along with some
-terminal output. Now press one of your multimedia keys. It doesn't
-really matter which one at this point. You should get an output like the
-following:
-
-       KeyPress event, serial 32, synthetic NO, window 0x2600001,
-       root 0xea, subw 0x0, time 24644050, (143,-13), root: (548,770),
-       state 0x0, keycode 223 (keysym 0x0, NoSymbol), same_screen YES,
-       XLookupString gives 0 bytes:
-       XmbLookupString gives 0 bytes:
-
-       XFilterEvent returns: False
-       KeyRelease event, serial 32, synthetic NO, window 0x2600001,
-       root 0xea, subw 0x0, time 24644215, (143,-13), root: (548,770),
-       state 0x0, keycode 223 (keysym 0x0, NoSymbol), same_screen YES,
-       XLookupString gives 0 bytes:
-
-If you get something around these lines, then your keyboard will be
-supported. If you do not get anything, make sure the "Event Tester"
-window is the active one when you press the key and then try again. If
-you still do not get anything like the above then your keyboard is one
-of the few that aren't supported and won't ever be supported through
-Lineak. Even on Windows, these rare keyboards require special drivers.
+The keys on your keybord need to have a scancode and a keycode assigned
+to it. Use xev to test it, see Extra Keyboard Keys for details.
 
 Software Installation
 ---------------------
@@ -205,8 +176,15 @@ See also
 Lineak official site
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lineak&oldid=205451"
+"https://wiki.archlinux.org/index.php?title=Lineak&oldid=286535"
 
 Category:
 
--   Input devices
+-   Keyboards
+
+-   This page was last modified on 6 December 2013, at 14:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

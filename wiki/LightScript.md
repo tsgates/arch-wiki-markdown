@@ -7,15 +7,13 @@ it is lightweight, zlib-licensed and written by Fredrik Haikarainen.
 Warning:LightScript has now officially been deprecated, and replaced by
 its successor, and C-port, Light.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Features                                                           |
-| -   2 Installation                                                       |
-| -   3 Usage                                                              |
-| -   4 Bugs/Feedback                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Features
+-   2 Installation
+-   3 Usage
+-   4 Bugs/Feedback
 
 Features
 --------
@@ -82,3 +80,10 @@ Categories:
 
 -   Power management
 -   Scripts
+
+-   This page was last modified on 18 November 2012, at 15:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

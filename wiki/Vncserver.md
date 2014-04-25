@@ -1,54 +1,62 @@
 Vncserver
 =========
 
-> Summary
+Related articles
 
-Vncserver is a remote display daemon that allows users to run totally
-parallel sessions on a machine which can be accessed from anywhere. All
-applications running under the server continue to run, even when the
-user disconnects.
+-   x11vnc
 
-> Related
+Vncserver is a remote display daemon that allows users several remote
+functionalities including:
 
-x11vnc - Another flavor of VNC which allows connections to the root (:0)
-desktop.
+1.  Direct control of the local X session(s) (i.e. X running on the
+    physical monitor).
+2.  Parallel X sessions that run in the background (i.e. not on the
+    physical monitor but virtually) on a machine. All applications
+    running under the server may continue to run, even when the user
+    disconnects.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Running Vncserver                                                  |
-|     -   2.1 First Time Setup                                             |
-|         -   2.1.1 Create Environment and Password Files                  |
-|         -   2.1.2 Edit the xstartup File                                 |
-|         -   2.1.3 Permissions                                            |
-|                                                                          |
-| -   3 Running vncserver                                                  |
-| -   4 Connecting to vncserver                                            |
-|     -   4.1 Passwordless Authentication                                  |
-|     -   4.2 Example GUI-based Clients                                    |
-|                                                                          |
-| -   5 Securing VNC Server by SSH Tunnels                                 |
-|     -   5.1 On the Server                                                |
-|     -   5.2 On the Client                                                |
-|     -   5.3 Connecting to a VNC Server from Android device over SSH      |
-|                                                                          |
-| -   6 Starting and Stopping VNC Server at Bootup and Shutdown            |
-+--------------------------------------------------------------------------+
+  
+
+Contents
+--------
+
+-   1 Installation
+-   2 Running Vncserver
+    -   2.1 First time setup
+        -   2.1.1 Create environment and password files
+        -   2.1.2 Edit the xstartup File
+        -   2.1.3 Permissions
+    -   2.2 Starting the server
+-   3 Running vncserver on physical display (5900 Port)
+    -   3.1 Using TigerVNC's x0vncserver (Recommended)
+    -   3.2 Using x11vnc (Recommended)
+    -   3.3 Using a dirty hack (Not recommended)
+        -   3.3.1 Basic configuration
+        -   3.3.2 Patching xorg-server
+-   4 Connecting to vncserver
+    -   4.1 Passwordless authentication
+    -   4.2 Example GUI-based clients
+-   5 Securing VNC server by SSH tunnels
+    -   5.1 On the server
+    -   5.2 On the client
+    -   5.3 Connecting to a VNC Server from Android device over SSH
+-   6 Tips and Tricks
+    -   6.1 Starting and Stopping VNC Server at Bootup and Shutdown
+    -   6.2 Copying clipboard contents from the remote machine to the
+        local
+    -   6.3 Fix for no mouse cursor
 
 Installation
 ------------
 
-Vncserver is provided by tigervnc and tightvnc both of which can be
-installed from the official repositories.
+Vncserver is provided by tigervnc and also by tightvnc in the AUR.
 
 Running Vncserver
 -----------------
 
-> First Time Setup
+> First time setup
 
-Create Environment and Password Files
+Create environment and password files
 
 Vncserver will create its initial environment file and user password
 file the first time it is run:
@@ -89,12 +97,9 @@ environment is desired. For example, starting xfce4:
     export XKL_XMODMAP_DISABLE=1
     exec startxfce4
 
-Note:The XKL_XMODMAP_DISABLE line is known to correct problems
+Note: The XKL_XMODMAP_DISABLE line is known to correct problems
 associated with "scrambled" keystrokes when typing in terminals under
 some virtualized DEs.
-
-Note:As of 31-Oct-2012, usage of the command "exec ck-launch-session
-..." in ~/.vnc/xstartup is deprecated since Arch has dropped consolekit.
 
 Permissions
 
@@ -103,8 +108,7 @@ not a requirement. Execute the following to do so:
 
     $ chmod 700 ~/.vnc
 
-Running vncserver
------------------
+> Starting the server
 
 Vncserver offers flexibility via switches. The below example starts
 vncserver in a specific resolution, allowing multiple users to
@@ -117,9 +121,107 @@ Note:One need not use a standard monitor resolution for vncserver;
 1440x900 can be replaced with something odd like 1429x882 or 1900x200
 etc.
 
-For a complete list of options, pass the -badoption switch to vncserver.
+For a complete list of options, pass the -help switch to vncserver.
 
-    $ vncserver -badoption
+    $ vncserver -help
+
+Running vncserver on physical display (5900 Port)
+-------------------------------------------------
+
+> Using TigerVNC's x0vncserver (Recommended)
+
+TigerVNC provides the x0vncserver binary which has similar functionality
+to x11vnc e.g.
+
+    x0vncserver -display :0 -passwordfile ~/.vnc/passwd
+
+For more see
+
+    man x0vncserver
+
+> Using x11vnc (Recommended)
+
+Use the x11vnc package if remote control of the physical display is
+desired. For more, see X11vnc.
+
+> Using a dirty hack (Not recommended)
+
+Basic configuration
+
+Install xorg-server and tigervnc, and and load "vnc" in Xorg
+configuration.
+
+e.g. /etc/X11/xorg.conf.d/10-vnc.conf:
+
+    Section "Module"
+      Load "vnc"
+    EndSection
+
+    Section "Screen"
+      Identifier "Screen0"
+      Option "SecurityTypes" "None"
+    EndSection
+
+For password authentication, after running vncpasswd command, replace
+"Screen" section with below.
+
+    Section "Screen"
+      Identifier "Screen0"
+      Option "SecurityTypes" "VncAuth"
+      Option "UserPasswdVerifier" "VncAuth"
+      Option "PasswordFile" "/root/.vnc/passwd"
+    EndSection
+
+Patching xorg-server
+
+Unfortunately there is a bug with xorg-server package.(15/11/2013)
+Luckily fedora has got a patch for this.
+
+[http://pkgs.fedoraproject.org/cgit/xorg-x11-server.git/plain/0001-include-export-key_is_down-and-friends.patch?h=f19&id=06e94667faa0cd1f9f32cf54e9e447ef50fde635
+]
+
+Run abs command, place the patch file and edit the PKGBUILD.
+
+PKGBUILD example:
+
+    source = vnc.patch
+    sha256sums = '1bbbe70236dc70b5e35572f2197d163637100f8c58d0038bdc240df075eb5726'
+    prepare() {
+      cd "${pkgbase}-${pkgver}"
+      # patch for vnc module
+      patch -Np1 -i ../vnc.patch
+
+Patch (in case the link dies)
+
+    +++ b/include/input.h
+    @@ -244,12 +244,12 @@  typedef struct _InputAttributes {
+     #define KEY_POSTED 2
+     #define BUTTON_POSTED 2
+
+    -extern void set_key_down(DeviceIntPtr
+    diff --git a/include/input.h b/include/input.h
+    index 350daba..2d5e531 100644
+    --- a/include/input.h
+    +++ b/include/input.h
+    @@ -244,12 +244,12 @@  typedef struct _InputAttributes {
+     #define KEY_POSTED 2
+     #define BUTTON_POSTED 2
+
+    -extern void set_key_down(DeviceIntPtr pDev, int key_code, int type);
+    -extern void set_key_up(DeviceIntPtr pDev, int key_code, int type);
+    -extern int key_is_down(DeviceIntPtr pDev, int key_code, int type);
+    -extern void set_button_down(DeviceIntPtr pDev, int button, int type);
+    -extern void set_button_up(DeviceIntPtr pDev, int button, int type);
+    -extern int button_is_down(DeviceIntPtr pDev, int button, int type);
+    +extern _X_EXPORT void set_key_down(DeviceIntPtr pDev, int key_code, int type);
+    +extern _X_EXPORT void set_key_up(DeviceIntPtr pDev, int key_code, int type);
+    +extern _X_EXPORT int key_is_down(DeviceIntPtr pDev, int key_code, int type);
+    +extern _X_EXPORT void set_button_down(DeviceIntPtr pDev, int button, int type);
+    +extern _X_EXPORT void set_button_up(DeviceIntPtr pDev, int button, int type);
+    +extern _X_EXPORT int button_is_down(DeviceIntPtr pDev, int button, int type);
+
+    extern void InitCoreDevices(void);
+    extern void InitXTestDevices(void);
 
 Connecting to vncserver
 -----------------------
@@ -130,29 +232,29 @@ shorthand notation:
 
     $ vncviewer 10.1.10.2:1
 
-> Passwordless Authentication
+> Passwordless authentication
 
 The -passwd switch allows one to define the location of the server's
 ~/.vnc/passwd file. It is expected that the user has access to this file
-on the server through ssh or through physical access. In either case,
-place that file on the client's filesystem in a safe location, i.e. one
+on the server through SSH or through physical access. In either case,
+place that file on the client's file system in a safe location, i.e. one
 that has read access ONLY to the expected user.
 
     $ vncviewer -passwd /path/to/server-passwd-file
 
-> Example GUI-based Clients
+> Example GUI-based clients
 
--   extra/gtk-vnc
--   extra/kdenetwork-krdc
--   extra/rdesktop
--   extra/vinagre
--   community/remmina
--   community/vncviewer-jar
+-   gtk-vnc
+-   kdenetwork-krdc
+-   rdesktop
+-   vinagre
+-   remmina
+-   vncviewer-jar
 
-Securing VNC Server by SSH Tunnels
+Securing VNC server by SSH tunnels
 ----------------------------------
 
-> On the Server
+> On the server
 
 One wishing access to vncserver from outside the protection of a LAN
 should be concerned about plain text passwords and unencrypted traffic
@@ -167,7 +269,7 @@ the box!
 
     $ vncserver -geometry 1440x900 -alwaysshared -dpi 96 -localhost :1
 
-> On the Client
+> On the client
 
 With the server now only accepting connection from the localhost,
 connect to the box via ssh using the -L switch to enable tunnels. For
@@ -181,7 +283,7 @@ as a secured tunnel to/from server. To connect via vnc, open a second
 xterm and connect not to the remote IP address, but to the localhost of
 the client thus using the secured tunnel:
 
-    $ vncviewer localhost:8900
+    $ vncviewer localhost::8900
 
 From the ssh man page: -L [bind_address:] port:host:hostport
 
@@ -205,39 +307,41 @@ all interfaces.
 
 > Connecting to a VNC Server from Android device over SSH
 
-To connect to a VNC Server over SSH using your Android device you need:
+To connect to a VNC Server over SSH using an Android device:
 
-    1. SSH server running on the machine you want to connect to.
-    2. VNC server running on the machine you want to connect to. (You run server with -localhost flag as mentioned above)
-    3. SSH client on your Android device (ConnectBot is a popular choice and will be used in this guide as an example).
-    4. VNC client on your Android device (androidVNC).
+    1. SSH server running on the machine to connect to.
+    2. VNC server running on the machine to connect to. (Run server with -localhost flag as mentioned above)
+    3. SSH client on the Android device (ConnectBot is a popular choice and will be used in this guide as an example).
+    4. VNC client on the Android device (androidVNC).
 
-Also, if you don't have static IP, you might want to consider some
-dynamic DNS service.
+Consider some dynamic DNS service for targets that do not have static IP
+addresses.
 
-In ConnectBot, type in your IP and connect to the desired machine. Tap
+In ConnectBot, type in the IP and connect to the desired machine. Tap
 the options key, select Port Forwards and add a new port:
 
     Nickname: vnc
     Type: Local
     Source port: 5901
-    Destination: 127.0.0.1:5901 (it didn't work for me when I typed in 192.168.x.xxx here, I had to use 127.0.0.1)
+    Destination: 127.0.0.1:5901 (it did not work for me when I typed in 192.168.x.xxx here, I had to use 127.0.0.1)
 
 Save that.
 
 In androidVNC:
 
     Nickname: nickname
-    Password: the password you used to set up your VNC server
+    Password: the password used to set up the VNC server
     Address: 127.0.0.1 (we are in local after connecting through SSH)
     Port: 5901
 
 Connect.
 
-Starting and Stopping VNC Server at Bootup and Shutdown
--------------------------------------------------------
+Tips and Tricks
+---------------
 
-You can find this file in /usr/lib/systemd/system/vncserver.service
+> Starting and Stopping VNC Server at Bootup and Shutdown
+
+Find this file at /usr/lib/systemd/system/vncserver.service
 
     /etc/systemd/system/vncserver@:1.service
 
@@ -274,10 +378,40 @@ You can find this file in /usr/lib/systemd/system/vncserver.service
     [Install]
     WantedBy=multi-user.target
 
+> Copying clipboard contents from the remote machine to the local
+
+If copying from the remote machine to the local machine does not work,
+run autocutsel on the server, as mentioned below [reference]:
+
+    $ autocutsel -fork
+
+Now press F8 to display the VNC menu popup, and select
+Clipboard: local -> remote option.
+
+One can put the above command in ~/.vnc/xstartup to have it run
+automatically when vncserver is started.
+
+> Fix for no mouse cursor
+
+If no mouse cursor is visible when using x0vncserver, start vncviewer as
+follows:
+
+    $ vncviewer DotWhenNoCursor=1 <server>
+
+Or put DotWhenNoCursor=1 in the tigervnc configuration file, which is at
+~/.vnc/default.tigervnc by default.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Vncserver&oldid=254508"
+"https://wiki.archlinux.org/index.php?title=Vncserver&oldid=306063"
 
 Categories:
 
 -   Security
--   Virtual Network Computing
+-   Remote Desktop
+
+-   This page was last modified on 20 March 2014, at 17:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

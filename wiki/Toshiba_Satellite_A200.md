@@ -1,6 +1,16 @@
 Toshiba Satellite A200
 ======================
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: All information  
+                           is covered by Beginners' 
+                           guide and Laptop.        
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 This document covers installation and basic configuration Arch Linux on
 Toshiba Satellite A200-1GH. In general it should also apply to rest of
 A200 series.
@@ -8,38 +18,33 @@ A200 series.
 Feel free to contact me if any problems or suggestions (m4jkel at
 gmail.com) (English or Polish).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Specification                                                      |
-| -   2 Installation                                                       |
-| -   3 Graphics                                                           |
-|     -   3.1 AIGLX and BERYL                                              |
-|     -   3.2 Second screen                                                |
-|                                                                          |
-| -   4 Sound                                                              |
-| -   5 Networking                                                         |
-|     -   5.1 Ethernet                                                     |
-|     -   5.2 Modem                                                        |
-|     -   5.3 Wireless                                                     |
-|     -   5.4 Bluetooth                                                    |
-|         -   5.4.1 Kernels older than 2.6.33                              |
-|         -   5.4.2 2.6.33 kernels and above                               |
-|         -   5.4.3 Testing                                                |
-|                                                                          |
-| -   6 ACPI                                                               |
-|     -   6.1 Special buttons                                              |
-|     -   6.2 CPU frequency scaling                                        |
-|     -   6.3 Suspend2                                                     |
-|                                                                          |
-| -   7 Camera                                                             |
-| -   8 Optical drive                                                      |
-| -   9 Multimedia card reader                                             |
-| -   10 Touchpad                                                          |
-| -   11 Express Card                                                      |
-| -   12 Firewire                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Specification
+-   2 Installation
+-   3 Graphics
+    -   3.1 AIGLX and BERYL
+    -   3.2 Second screen
+-   4 Sound
+-   5 Networking
+    -   5.1 Ethernet
+    -   5.2 Modem
+    -   5.3 Wireless
+    -   5.4 Bluetooth
+        -   5.4.1 Kernels older than 2.6.33
+        -   5.4.2 2.6.33 kernels and above
+        -   5.4.3 Testing
+-   6 ACPI
+    -   6.1 Special buttons
+    -   6.2 CPU frequency scaling
+    -   6.3 Suspend2
+-   7 Camera
+-   8 Optical drive
+-   9 Multimedia card reader
+-   10 Touchpad
+-   11 Express Card
+-   12 Firewire
 
 Specification
 -------------
@@ -308,8 +313,15 @@ Firewire
 Unknown
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Toshiba_Satellite_A200&oldid=238821"
+"https://wiki.archlinux.org/index.php?title=Toshiba_Satellite_A200&oldid=302855"
 
 Category:
 
 -   Toshiba
+
+-   This page was last modified on 2 March 2014, at 08:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

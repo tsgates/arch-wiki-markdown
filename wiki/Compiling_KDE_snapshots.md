@@ -5,55 +5,48 @@ This article provides step-by-step guide how to compile your own KDE
 git/svn snapshot from sources using kde-snapshots scripts. These scripts
 are used for [kde-snapshots] repo.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Why?                                                               |
-| -   3 Preparations                                                       |
-|     -   3.1 Preparing build chroot                                       |
-|         -   3.1.1 pacman.conf                                            |
-|         -   3.1.2 makepkg.conf                                           |
-|         -   3.1.3 sudoers                                                |
-|                                                                          |
-|     -   3.2 Build scripts                                                |
-|     -   3.3 Folders Layout                                               |
-|     -   3.4 Getting KDE sources                                          |
-|     -   3.5 Setting KDE version                                          |
-|                                                                          |
-| -   4 Extra Packages                                                     |
-| -   5 Building KDE                                                       |
-|     -   5.1 Base packages                                                |
-|         -   5.1.1 kdesupport                                             |
-|         -   5.1.2 kdelibs                                                |
-|         -   5.1.3 kdepimlibs                                             |
-|         -   5.1.4 kdebase-runtime                                        |
-|         -   5.1.5 kdebindings                                            |
-|         -   5.1.6 kdebase-workspace                                      |
-|         -   5.1.7 kdebase                                                |
-|         -   5.1.8 kdegraphics                                            |
-|         -   5.1.9 kdeedu                                                 |
-|                                                                          |
-|     -   5.2 Optional Packages                                            |
-|         -   5.2.1 kdeaccessibility                                       |
-|         -   5.2.2 kdeartwork                                             |
-|         -   5.2.3 kdegames                                               |
-|         -   5.2.4 kdemultimedia                                          |
-|         -   5.2.5 kdenetwork                                             |
-|         -   5.2.6 kdepim                                                 |
-|         -   5.2.7 kdeplasma-addons                                       |
-|         -   5.2.8 kdesdk                                                 |
-|         -   5.2.9 kdetoys                                                |
-|         -   5.2.10 kdeutils                                              |
-|         -   5.2.11 kdewebdev                                             |
-|                                                                          |
-|     -   5.3 Final checks                                                 |
-|                                                                          |
-| -   6 Creating a repository                                              |
-|     -   6.1 Advanced Configuration                                       |
-|         -   6.1.1 packages file                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Why?
+-   3 Preparations
+    -   3.1 Preparing build chroot
+        -   3.1.1 pacman.conf
+        -   3.1.2 makepkg.conf
+        -   3.1.3 sudoers
+    -   3.2 Build scripts
+    -   3.3 Folders Layout
+    -   3.4 Getting KDE sources
+    -   3.5 Setting KDE version
+-   4 Extra Packages
+-   5 Building KDE
+    -   5.1 Base packages
+        -   5.1.1 kdesupport
+        -   5.1.2 kdelibs
+        -   5.1.3 kdepimlibs
+        -   5.1.4 kdebase-runtime
+        -   5.1.5 kdebindings
+        -   5.1.6 kdebase-workspace
+        -   5.1.7 kdebase
+        -   5.1.8 kdegraphics
+        -   5.1.9 kdeedu
+    -   5.2 Optional Packages
+        -   5.2.1 kdeaccessibility
+        -   5.2.2 kdeartwork
+        -   5.2.3 kdegames
+        -   5.2.4 kdemultimedia
+        -   5.2.5 kdenetwork
+        -   5.2.6 kdepim
+        -   5.2.7 kdeplasma-addons
+        -   5.2.8 kdesdk
+        -   5.2.9 kdetoys
+        -   5.2.10 kdeutils
+        -   5.2.11 kdewebdev
+    -   5.3 Final checks
+-   6 Creating a repository
+    -   6.1 Advanced Configuration
+        -   6.1.1 packages file
 
 Introduction
 ------------
@@ -141,9 +134,7 @@ makepkg.conf
 If you intend to use the packages only on your computer, you can change
 CFLAGS and CXXFLAGS to match your processor. There is a very nice page
 with safe CFLAGS for individual processors on Gentoo Wiki - Intel, AMD.
-
-See the Gentoo Linux Wiki article on this subject for more information:
-CFLAGS
+See also here.
 
 Also to speed up packaging, you can change PKGEXT to pkg.tar.gz.
 Gzipp'ed tarballs are bigger then XZ'ed, but it takes much less time to
@@ -433,10 +424,11 @@ quite simple:
     opt_pkg fails, the scripts will automatically proceed to next
     package. After all packages are compiled, you will be displayed list
     of broken packages.
--   ${pkgbase}_${scm}_pkgs is array of ${pkgbase}'s submodules located
-    in ${scm} (git or svn) repository. For example, all kdesupport
-    submodules are in git already, so the array kdesupport_git_pkgs will
-    fetch all submodules from git://anongit.kde.org/${submodule} to
+-   {pkgbase}_{scm}_pkgs is array of
+    {pkgbase}'s submodules located in {scm} (git or svn) repository. For
+    example, all kdesupport submodules are in git already, so the array
+    kdesupport_git_pkgs will fetch all submodules from
+    git://anongit.kde.org/${submodule} to
     ${srcdir}/${pkgbase}/${submodule}. When the submodule is named like
     ${submodule}:${alternative_name}, it will be cloned from
     git://anongit.kde.org/${submodule} to
@@ -447,8 +439,15 @@ quite simple:
     provided in the submodules.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Compiling_KDE_snapshots&oldid=249452"
+"https://wiki.archlinux.org/index.php?title=Compiling_KDE_snapshots&oldid=301049"
 
 Category:
 
--   Desktop environments
+-   KDE
+
+-   This page was last modified on 24 February 2014, at 03:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,13 +1,16 @@
 uShare
 ======
 
-> Summary
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: initscripts are  
+                           deprecated (Discuss)     
+  ------------------------ ------------------------ ------------------------
 
-An introduction to the uShare UPnP Media Server developed by GeeXboX.
+Related articles
 
-> Related
-
-Streaming media
+-   Streaming media
 
 Note:As uShare is unmaintained, users may wish to use MiniDLNA, which is
 actively developed and just as simple to set up, and does not require
@@ -20,19 +23,16 @@ as FUPPES, ps3mediaserver, MediaTomb and MiniDLNA (each of which are
 available in [community] or the AUR if you so choose), uShare is
 relatively easy to configure and works well out of the box.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Shortcomings                                                       |
-| -   2 Installation                                                       |
-| -   3 Starting uShare                                                    |
-| -   4 Configuration                                                      |
-|     -   4.1 Firewall                                                     |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 xvid/divx                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Shortcomings
+-   2 Installation
+-   3 Starting uShare
+-   4 Configuration
+    -   4.1 Firewall
+-   5 Troubleshooting
+    -   5.1 xvid/divx
 
 Shortcomings
 ------------
@@ -174,8 +174,15 @@ be to change mime types from avi files from
 blog post and this mail.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=UShare&oldid=206076"
+"https://wiki.archlinux.org/index.php?title=UShare&oldid=290868"
 
 Category:
 
--   Networking
+-   Streaming
+
+-   This page was last modified on 30 December 2013, at 08:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

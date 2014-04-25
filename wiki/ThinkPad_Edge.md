@@ -4,7 +4,7 @@ ThinkPad Edge
 Note:This article will be updated from time to time and is currently (as
 of 2010/09/5) processed by User:ProfWho
 
-> Summary
+Summary help replacing me
 
 How to setup archlinux on Lenovo ThinkPad Edge 13
 
@@ -19,30 +19,28 @@ ThinkPad Edge AMD version with ATI-graphics.
 
 This article was written to assist you with getting archlinux run on the
 Lenovo ThinkPad Edge 13. It is meant to be help you with some tricky
-points aside to the Beginners' Guide: A guide through the whole process
+points aside to the Beginners' guide: A guide through the whole process
 of installing and configuring Arch Linux; written for new or
 inexperienced users.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisits                                                       |
-|     -   1.1 BIOS-Update:                                                 |
-|     -   1.2 Creating an installation medium                              |
-|                                                                          |
-| -   2 Installation                                                       |
-|     -   2.1 WLAN driver installation                                     |
-|         -   2.1.1 Deauthentication Issues                                |
-|                                                                          |
-|     -   2.2 Audio                                                        |
-|     -   2.3 Video                                                        |
-|     -   2.4 Touchpad                                                     |
-|     -   2.5 Frequency scaling                                            |
-|     -   2.6 Fan control                                                  |
-|     -   2.7 Webcam                                                       |
-|     -   2.8 Suspend                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequisits
+    -   1.1 BIOS-Update:
+    -   1.2 Creating an installation medium
+-   2 Installation
+    -   2.1 WLAN driver installation
+        -   2.1.1 Deauthentication Issues
+    -   2.2 Audio
+    -   2.3 Video
+    -   2.4 Touchpad
+    -   2.5 Frequency scaling
+    -   2.6 Fan control
+    -   2.7 Webcam
+    -   2.8 Suspend
+-   3 Troubleshooting
+    -   3.1 High power consumption
 
 Prerequisits
 ------------
@@ -102,20 +100,25 @@ Installation
 ------------
 
 After that it is recommended to follow the usual installation procedure
-described in the Beginners' Guide up to the part 2, as the installation
+described in the Beginners' guide up to the part 2, as the installation
 of the wireless lan card needs some further work.
 
 > WLAN driver installation
 
-See Wireless Setup#rtl8192s.
+See Wireless network configuration#rtl8192s.
 
 Deauthentication Issues
 
 If you are using the rtl8192ce module, you may experience some
-intermittant deauthentication issues with newer kernels (tested on
-3.4.4-2-ARCH). If this is the case, you need to add some options to
-/etc/modprobe.d/rtl8192ce.conf (courtesy of Lord_Lizard in this thread
-[2])
+intermittent deauthentication issues with newer kernels (tested on
+3.4.4-2-ARCH). The reason is because the BIOS is turning off the
+wireless card when the BIOS deems it to be "inactive." This is the case
+if dmesg reports
+
+    [  285.140301] wlan0: deauthenticating from MAC by local choice (reason=3)
+
+A simple solution to this problem is to enter the BIOS setup and disable
+PCI Express power management.
 
 > Audio
 
@@ -213,9 +216,30 @@ follows my /etc/pm/sleep.d/100wifiworkaround.sh script for automation
          ;;
      esac
 
+Troubleshooting
+---------------
+
+> High power consumption
+
+In some cases you may experience high power consumption despite of all
+BIOS powersaving functions turned on.
+
+This is because the BIOS settings do not really disable the dedicated
+video card, they just force the notebook to use the integrated graphics.
+
+The solution is simple: enable video card switching and use system means
+(vgaswitcheroo?) to disable dedicated graphics.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ThinkPad_Edge&oldid=250565"
+"https://wiki.archlinux.org/index.php?title=ThinkPad_Edge&oldid=298065"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 16 February 2014, at 07:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

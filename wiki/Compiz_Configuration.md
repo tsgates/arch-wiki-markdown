@@ -21,100 +21,6 @@ Compiz Configuration
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 General                                                            |
-|     -   1.1 edge bindings                                                |
-|                                                                          |
-| -   2 Workspace                                                          |
-|     -   2.1 Desktop Plane                                                |
-|     -   2.2 Expo                                                         |
-|     -   2.3 Widget Layer                                                 |
-|                                                                          |
-| -   3 Accessibility                                                      |
-|     -   3.1 Magnifier                                                    |
-|                                                                          |
-| -   4 window management                                                  |
-|     -   4.1 Grid                                                         |
-|     -   4.2 Scale                                                        |
-|                                                                          |
-| -   5 Sample Configurations                                              |
-+--------------------------------------------------------------------------+
-
-General
--------
-
-> edge bindings
-
-While there are many things you can do with the edge bindings (not
-wasting key combinations / mouse-buttons for short-cuts), the standard
-settings of some plug-ins might be rather annoying or confusing. If you
-notice any seemingly random view-port changes, plug-in activations or
-just "stuff moving away and around wtf!?", check your activated plug-ins
-for edge bindings.
-
-Workspace
----------
-
-> Desktop Plane
-
-While many seem to switch to Compiz in the first place because of having
-seen the Desktop Cube, some might find the Plane more attractive, as it
-offers some work-flow enhancements like being able to drag windows up or
-down from the current Desktop to Desktop-2 / Desktop+2
-
-> Expo
-
-Can be used to see all your Desktops at once. Also if you do not like
-using a window decorator, it is a good way to drag your windows around
-on a or between viewpoints (just put expo on a mouse button, if you got
-one to spare). Blends in especially good with Desktop plane, as 2x2 (/
-3x3) view-ports enable it to use to full screen without deforming them.
-
-  
-
-> Widget Layer
-
-As quite a few auto-hiding applications do not seem to work that well
-with compiz, the widget plug-in comes in handy. You can set it to show
-all windows you defined as widgets using the same screen border /
-mouse-over. Resizing (maximized) windows when adding/removing a dock
-seems to be more painless with widget layer than with built-in auto-hide
-for most docks / panels (well - the ones I tried).
-
-Accessibility
--------------
-
-> Magnifier
-
-The magnifier comes in especially handy if you use your Desktop from a
-bigger Desktop (p.E. as media-centre). Using the fish eye mode with a
-big radius might be most effective while trying to do minor "menu / file
-navigation" and setting zoom in/out to <TopEdge>Button4 / 5 lets you
-easily zoom with mouse only without wasting a mouse button (mouse wheel
-@ very top of screen).
-
-window management
------------------
-
-> Grid
-
-Part of the compiz-fusion unsupported plug-in package available from the
-AUR; use keys (standard: ctrl+alt+[numpad]) to resize and arrange
-windows to an imaginary grid. Works & looks best without window
-decorations as sort of "tiling window manager".
-
-> Scale
-
-The scale Add-on lets you easily choose a window from thumbnails to
-switch to, to close, or to switch it to the current view-port (see
-utilities / scale extensions) offering an efficient window chooser if
-you do not have too many open at once (10 per screen work fine for me).
-This one might be especially useful on a mouse button, too, if you've
-got one to spare.
-
 Sample Configurations
 ---------------------
 
@@ -224,9 +130,16 @@ Compiz as tiling window manager without window decorations:
     as_prev_all_key = Disabled
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Compiz_Configuration&oldid=198075"
+"https://wiki.archlinux.org/index.php?title=Compiz_Configuration&oldid=305656"
 
 Categories:
 
 -   Eye candy
 -   Stacking WMs
+
+-   This page was last modified on 19 March 2014, at 19:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

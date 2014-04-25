@@ -17,23 +17,21 @@ ASUS N55SF
   Power management   Working, see below   
   ------------------ -------------------- ----------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Configuration                                                      |
-|     -   2.1 CPU                                                          |
-|     -   2.2 Video                                                        |
-|         -   2.2.1 Intel                                                  |
-|         -   2.2.2 Nvidia                                                 |
-|         -   2.2.3 Outputs                                                |
-|                                                                          |
-|     -   2.3 Audio                                                        |
-|     -   2.4 Touchpad                                                     |
-|     -   2.5 Webcam                                                       |
-|     -   2.6 Power management                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Configuration
+    -   2.1 CPU
+    -   2.2 Video
+        -   2.2.1 Intel
+        -   2.2.2 Nvidia
+        -   2.2.3 Outputs
+    -   2.3 Audio
+    -   2.4 Touchpad
+    -   2.5 Webcam
+    -   2.6 Bluetooth
+    -   2.7 Power management
 
 Hardware
 --------
@@ -97,10 +95,10 @@ instructions for setting up bumblebee in our wiki.
 
 Outputs
 
-VGA working.
-
-HDMI not working, but still testing. I'm not sure if it can work on this
-laptop. See [Bumblebee FAQ]
+VGA out works fine out of the box. Since the NVIDIA chip is wired to the
+HDMI out, you can get this working using Bumblebee with
+xf86-video-intel-virtual-crtc and hybrid-screenclone. See [Bumblebee
+FAQ]
 
 > Audio
 
@@ -139,13 +137,25 @@ Follow the Synaptics guide.
 
 Working.
 
+> Bluetooth
+
+Should be working out of the box - just remember to install
+bluez-firmware.
+
 > Power management
 
 The USB unbind hook is no longer necessary as of Linux 3.5.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_N55SF&oldid=234406"
+"https://wiki.archlinux.org/index.php?title=ASUS_N55SF&oldid=270788"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 11 August 2013, at 20:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

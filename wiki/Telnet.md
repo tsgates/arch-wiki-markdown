@@ -11,28 +11,17 @@ server.
 Installation
 ------------
 
-To use telnet only to connect to other machines, install inetutils (if
-not already installed):
+To use telnet only to connect to other machines, install inetutils.
 
-    # pacman -S inetutils
-
-To configure a telnet server, install xinetd as well:
-
-    # pacman -S xinetd
+To configure a telnet server, install xinetd as well.
 
 Configuration
 -------------
 
-1. To allow telnet connections in xinetd, edit /etc/xinetd.d/telnet and
-change 'disable = yes' to 'disable = no'
+To allow telnet connections in xinetd, edit /etc/xinetd.d/telnet, change
+disable = yes to disable = no and restart xinetd service.
 
-2. Add xinetd to the DAEMONS array of your rc.conf:
-
-    DAEMONS=(... xinetd)
-
-3. Reboot or restart xinetd:
-
-    # /etc/rc.d/xinetd restart
+Enable systemd xinetd service if you wish to start it at boot time.
 
 > Testing the setup
 
@@ -43,8 +32,15 @@ Try opening a telnet connection to your server:
 Note that you can not login as root.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Telnet&oldid=240585"
+"https://wiki.archlinux.org/index.php?title=Telnet&oldid=260024"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 1 June 2013, at 10:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

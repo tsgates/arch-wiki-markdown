@@ -12,64 +12,41 @@ UMID SE
 
 This guide assumes that you are experienced in installing Archlinux. If
 you are not experienced, please read this guide in parallel with the
-Beginners' Guide or the Official Installation Guide. No assumptions are
-made on your desired environment (DE/WM). Note that the SSD will
-completely be wiped if you follow this guide without alterations.
+Beginners' guide or the Installation guide. No assumptions are made on
+your desired environment (DE/WM). Note that the SSD will completely be
+wiped if you follow this guide without alterations.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Archlinux                                               |
-|     -   1.1 Wireless connection                                          |
-|     -   1.2 SSD partitining                                              |
-|     -   1.3 Running the installer                                        |
-|     -   1.4 Installing the bootloader                                    |
-|                                                                          |
-| -   2 Configuring the system                                             |
-|     -   2.1 Power saving and thermal monitoring                          |
-|     -   2.2 Graphics driver                                              |
-|     -   2.3 X                                                            |
-|     -   2.4 Screen brightness                                            |
-|     -   2.5 Touch screen                                                 |
-|     -   2.6 Optical Mouse                                                |
-|     -   2.7 Keyboard                                                     |
-|         -   2.7.1 Special keys                                           |
-|         -   2.7.2 Capacitive stripe                                      |
-|                                                                          |
-|     -   2.8 Suspend and hibernation                                      |
-|     -   2.9 Webcam                                                       |
-|                                                                          |
-| -   3 Additional Information                                             |
-|     -   3.1 BIOS password recovery                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing Archlinux
+    -   1.1 SSD partitining
+    -   1.2 Running the installer
+    -   1.3 Installing the bootloader
+-   2 Configuring the system
+    -   2.1 Power saving and thermal monitoring
+    -   2.2 Graphics driver
+    -   2.3 X
+    -   2.4 Screen brightness
+    -   2.5 Touchscreen
+    -   2.6 Optical mouse
+    -   2.7 Keyboard
+        -   2.7.1 Special keys
+        -   2.7.2 Capacitive stripe
+    -   2.8 Suspend and hibernation
+    -   2.9 Webcam
+-   3 Additional Information
+    -   3.1 BIOS password recovery
 
 Installing Archlinux
 --------------------
 
-Boot the archlinux installer from the USB medium and log in as root.
-
-> Wireless connection
-
-Since you don't have any ethernet, you'll need to manually configure
-your network before starting the setup. Here, we assume that the wlan is
-not encrypted:
-
-    ip link set wlan0 up
-    iwconfig wlan0 essid "your_wlan_essid"
-    dhcpcd wlan0
-
-If your wlan is encrypted, follow the instructions in the Beginner's
-Guide. If it's not encrypted but requires you to login at a captive
-portal, you can use elinks to enter your credentials.
-
 > SSD partitining
 
 You'll also need to manually format the SSD before using the installer.
-Use GPT as described in the SSD Article. This ensures that your
-partitions are properly aligned. Install and run it:
+Install GPT tools from gptfdisk as described in the SSD Article. This
+ensures that your partitions are properly aligned. Run it:
 
-    pacman -Sy gptfdisk
     gdisk /dev/sda
 
 Type o to clear out the partition table and then create at least 3
@@ -98,37 +75,37 @@ Progress through the installer as usual, but mind these things:
     filesystems, you can select ext2 for the BIOS boot partition. For
     the root and any other regular partitions ext4 is a good choice.
 -   You absolutely have to select wireless-tools from core to be
-    installed in order to be able to connect to the wlan in your freshly
-    installed system. You may also want to select netcfg.
+    installed in order to be able to connect to the wifi network in your
+    freshly installed system. You may also want to select netctl.
 -   When editing the config files, edit /etc/fstab and add the
     noatime,nodiratime,discard options to your ext4 partitions. Also
-    remove network from the DAEMONS array in /etc/rc.conf.
--   Skip the bootloader installation, exit the installer and DO NOT
-    REBOOT!
+    remove disable network daemon.
+-   Skip the bootloader installation, exit the installer but do not
+    reboot!
 
 > Installing the bootloader
 
 After exiting the installer, do this while still running from the
 install medium. Prepare the environment:
 
-    cp /etc/resolv.conf /tmp/install/etc/resolv.conf
-    modprobe dm-mod
-    mount -o bind /dev /mnt/dev
-    mount -t proc /proc /mnt/proc/
-    mount -t sysfs /sys /mnt/sys/
+    # cp /etc/resolv.conf /tmp/install/etc/resolv.conf
+    # modprobe dm-mod
+    # mount -o bind /dev /mnt/dev
+    # mount -t proc /proc /mnt/proc/
+    # mount -t sysfs /sys /mnt/sys/
 
 Chroot into your fresh installation:
 
-    chroot /mnt bash
+    # chroot /mnt bash
 
-Install grub2:
+Install GRUB:
 
-    pacman-db-upgrade
-    pacman -Syy
-    rm -rf /boot/grub
-    pacman -S grub2-bios
-    grub-install --directory=/usr/lib/grub/i386-pc --target=i386-pc --boot-directory=/boot --recheck --debug /dev/sda
-    grub-mkconfig -o /boot/grub/grub.cfg
+    # pacman-db-upgrade
+    # pacman -Syy
+    # rm -rf /boot/grub
+    # pacman -S grub2-bios
+    # grub-install --directory=/usr/lib/grub/i386-pc --target=i386-pc --boot-directory=/boot --recheck --debug /dev/sda
+    # grub-mkconfig -o /boot/grub/grub.cfg
 
 Now you're ready to reboot!
 
@@ -153,7 +130,7 @@ performance (for playing videos for example) will nevertheless be awful
 but it works well for regular work. Install it as follows: Add psb_gfx
 to MODULES in /etc/mkinitcpio.conf and rebuild the kernel initramfs:
 
-    mkinitcpio -p linux
+    # mkinitcpio -p linux
 
 Install the xf86-video-fbdev driver.
 
@@ -175,13 +152,13 @@ script for changing the brightness using keyboard shortcuts.
     #increase or decrease the brightness by about 10%
     current="$(cat /sys/class/backlight/psb-bl/brightness)"
     if [[ "$1" == "up" ]]; then
-        current=$((current+((current/10+1))))
-        [[ $current -ge 100 ]] && current=100
+            current=$((current+((current/10+1))))
+            [[ $current -ge 100 ]] && current=100
     elif [[ "$1" == "down" ]]; then
-        current=$((current-((current/10+1))))
+            current=$((current-((current/10+1))))
     else
-        echo "1st argument should be 'up' or 'down'"
-        exit 1
+            echo "1st argument should be 'up' or 'down'"
+            exit 1
     fi
     echo "$current" > /sys/class/backlight/psb-bl/brightness
 
@@ -189,14 +166,14 @@ Place it in /usr/local/bin or similar, allow it to be run by regular
 users using visudo and then you can bind it to the brightnes key combo
 on your keyboard by whatever means, for example through your WM. You may
 want to write the new value to a file and reload it upon boot-up or you
-can just set it to a default upon boot-up by adding this to
-/etc/rc.local
+can just set it to a default upon boot-up by adding this to a systemd
+tmpfile:
 
-    echo 40 > /sys/class/backlight/psb-bl/brightness &
+    w /sys/class/backlight/psb-bl/brightness - - - - 40
 
-> Touch screen
+> Touchscreen
 
-At the time of writing, the touch screen works out of the box as a
+At the time of writing, the touchscreen works out of the box as a
 relative "touch-pad-like" pointer device. After some correspondence with
 EETI, the following can be said:
 
@@ -204,15 +181,15 @@ EETI, the following can be said:
     work up until xorg 1.8.
 -   The newer "eGTouch daemon driver" does not support the PS/2
     interface used in the UMID SE.
--   I've been given an update driver via email but I cannot disclose it
-    at this time. Feel free to contact EETI through the email address
+-   I have been given an update driver via email but I cannot disclose
+    it at this time. Feel free to contact EETI through the email address
     mentioned at EETI and ask for the updated egalax_drv.so for Xorg
     1.11.
 
-When you have the updated egalax_drv.so, do the following. Add this to
-/etc/rc.local, enabling raw access to the device at /dev/serio_raw0:
+When you have the updated egalax_drv.so, do the following. Add this to a
+systemd tmpfile, enabling raw access to the device at /dev/serio_raw0:
 
-    echo -n serio_raw>/sys/bus/serio/devices/serio1/drvctl 
+    w /sys/bus/serio/devices/serio1/drvctl - - - - serio_raw
 
 The following kernel options must supposedly be enabled by adding them
 in /etc/default/grub:
@@ -248,7 +225,7 @@ Use the following /etc/X11/xorg.conf
 Reboot. You can now run TKCal to calibrate your touchscreen and it
 should work as a proper absolute pointing device.
 
-> Optical Mouse
+> Optical mouse
 
 Not working. A bug has been filed at the Kernel bug tracker.
 
@@ -304,8 +281,6 @@ You can now use the area as a hotkey like any other key. It's quite
 sensible though and may fire unintentionally, which is why it best left
 unused.
 
-  
-
 > Suspend and hibernation
 
 Should work in theory when using the psb_gfx driver for Poulsbo and
@@ -325,8 +300,15 @@ The AMI BIOS of the UMID SE can be read out and decrypted using cmospwd
 which is in AUR.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=UMID_SE&oldid=231014"
+"https://wiki.archlinux.org/index.php?title=UMID_SE&oldid=298268"
 
 Category:
 
 -   Laptops
+
+-   This page was last modified on 16 February 2014, at 07:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

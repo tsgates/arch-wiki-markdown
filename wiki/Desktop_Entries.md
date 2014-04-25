@@ -26,33 +26,30 @@ There are roughly three types of desktop entries:
 The following sections will roughly explain how these are created and
 validated.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Application entry                                                  |
-|     -   1.1 File example                                                 |
-|     -   1.2 Key definition                                               |
-|         -   1.2.1 Deprecation                                            |
-|                                                                          |
-| -   2 Icons                                                              |
-|     -   2.1 Common image formats                                         |
-|     -   2.2 Converting icons                                             |
-|     -   2.3 Obtaining icons                                              |
-|                                                                          |
-| -   3 Tools                                                              |
-|     -   3.1 gendesk                                                      |
-|         -   3.1.1 How to use                                             |
-|                                                                          |
-| -   4 More resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Application entry
+    -   1.1 File example
+    -   1.2 Key definition
+        -   1.2.1 Deprecation
+-   2 Icons
+    -   2.1 Common image formats
+    -   2.2 Converting icons
+    -   2.3 Obtaining icons
+-   3 Tools
+    -   3.1 gendesk
+        -   3.1.1 How to use
+-   4 See also
 
 Application entry
 -----------------
 
 Desktop entries for applications or .desktop files are generally a
 combination of meta information resources and a shortcut of an
-application. These files usually reside in /usr/share/applications.
+application. These files usually reside in /usr/share/applications for
+systemwide installed applications or ~/.local/share/applications for
+user specific applications.
 
 > File example
 
@@ -72,6 +69,11 @@ found in the freedesktop.org specification.
     Categories=Education;Languages;Java;      # Describes the categories in which this entry should be shown
 
 > Key definition
+
+All Desktop recognized desktop entries can be found on the site of the
+project Freedesktop.org site on the following link. For example the Type
+key defines 3 types of desktop entries: Application (type 1), Link (type
+2) and Directory (type 3).
 
 -   Version key does not stand for the version of the application, but
     for the version of the desktop entry specification to which this
@@ -250,37 +252,49 @@ Tools
 
 > gendesk
 
-gendesk is a Arch Linux-specific tool for generating .desktop files from
-PKGBUILD files. Most of the information is fetched directly from the
-PKGBUILD.
+gendesk started as an Arch Linux-specific tool for generating .desktop
+files by fetching the needed information directly from PKGBUILD files.
+Now it is a general tool that takes command-line arguments.
 
-Icons are downloaded from fedora, if available. The source for icons can
-easily be changed in the future.
+Icons can be automatically downloaded from openiconlibrary, if
+available. (The source for icons can easily be changed in the future).
 
 How to use
 
 -   Add gendesk to makedepends
 
--   Start the build() function with:
+-   Start the prepare() function with:
 
-    cd "$srcdir"
-    gendesk
-    # And then the rest
+    gendesk --pkgname "$pkgname" --pkgdesc "$pkgdesc"
 
--   Add _name=('Program Name') to the PKGBUILD to choose a name for the
-    menu entry. There are other options available too, like
-    _exec=('someapp --with-ponies').
+-   Alternatively, if an icon is already provided ($pkgname.png, for
+    instance). The -n flag is for not downloading an icon or using the
+    default icon. Example:
 
--   Use gendesk -n if you wish to generate a .desktop file, but not
-    download any icon
+    gendesk -n --pkgname "$pkgname" --pkgdesc "$pkgdesc"
 
--   See the gendesk source for more information. (Patches and pull
-    requests are welcome).
+-   $srcdir/$pkgname.desktop will be created and can be installed in the
+    package() function with:
 
-More resources
---------------
+    install -Dm644 "$pkgname.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
 
+-   The icon can be installed with:
+
+    install -Dm644 "$pkgname.png" "$pkgdir/usr/share/pixmaps/$pkgname.png"
+
+-   Use --name='Program Name' for choosing a name for the menu entry.
+
+-   Use --exec='/opt/some_app/elf --with-ponies' for setting the exec
+    field.
+
+-   See the gendesk project for more information.
+
+See also
+--------
+
+-   DeveloperWiki:Removal of desktop files
 -   desktop wikipedia article
+-   recognized desktop entry keys
 -   freedesktop.org desktop entry specification
 -   freedesktop.org icon theme specification
 -   freedesktop.org menu specification
@@ -288,8 +302,15 @@ More resources
 -   information for developers
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Desktop_Entries&oldid=221417"
+"https://wiki.archlinux.org/index.php?title=Desktop_Entries&oldid=304819"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 16 March 2014, at 07:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

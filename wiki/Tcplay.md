@@ -1,15 +1,11 @@
 tcplay
 ======
 
-> Summary
+Related articles
 
-Setup and usage of tcplay.
-
-> Related
-
-Disk Encryption
-
-TrueCrypt
+-   Disk Encryption
+-   TrueCrypt
+-   Tomb
 
 tcplay is a free (BSD-licensed), pretty much fully featured (including
 multiple keyfiles, cipher cascades, etc.) and stable TrueCrypt
@@ -17,20 +13,18 @@ implementation.
 
 Source: github project home
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Encrypting a file as a virtual volume                              |
-| -   3 Mounting an existing container for a user                          |
-| -   4 Related links                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Encrypting a file as a virtual volume
+-   3 Mounting an existing container for a user
+-   4 See also
 
 Installation
 ------------
 
-Install tcplay-git from the AUR.
+Install tcplay or tcplay-git from the AUR.
 
 Encrypting a file as a virtual volume
 -------------------------------------
@@ -89,8 +83,8 @@ To reverse them:
      # dmsetup remove foo.tc
      # losetup -d /dev/loop0
 
-Related links
--------------
+See also
+--------
 
 -   Manual page for tcplay
 -   Jason Ryan: Replacing TrueCrypt
@@ -100,9 +94,16 @@ Related links
 -   There is a good chance the CIA has a backdoor? (via wp)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tcplay&oldid=253535"
+"https://wiki.archlinux.org/index.php?title=Tcplay&oldid=296528"
 
 Categories:
 
 -   Security
 -   File systems
+
+-   This page was last modified on 8 February 2014, at 02:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

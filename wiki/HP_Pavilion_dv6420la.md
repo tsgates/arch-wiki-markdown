@@ -1,20 +1,18 @@
 HP Pavilion dv6420la
 ====================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About this laptop                                                  |
-| -   2 Foreword                                                           |
-| -   3 Video                                                              |
-| -   4 Webcam                                                             |
-| -   5 Sound                                                              |
-| -   6 Ports and drives                                                   |
-| -   7 Power management                                                   |
-| -   8 Input devices                                                      |
-| -   9 Networking                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 About this laptop
+-   2 Foreword
+-   3 Video
+-   4 Webcam
+-   5 Sound
+-   6 Ports and drives
+-   7 Power management
+-   8 Input devices
+-   9 Networking
 
 About this laptop
 -----------------
@@ -113,6 +111,15 @@ And the kernel I'm using at the moment:
 Foreword
 --------
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: All info refer   
+                           to ancient kernel        
+                           version. (Discuss)       
+  ------------------------ ------------------------ ------------------------
+
 Apparently this laptop has issues with APIC, booting without any
 parameters seems to lead to some lockups. this guy wrote a nice list of
 possible boot parameters and their effects, I'll quote them just in case
@@ -171,14 +178,7 @@ on kpowersave.
 Webcam
 ------
 
-It also has 1.3 MP webcam, it's listed on lsusb:
-
-    Bus 002 Device 003: ID 0c45:62c0 Microdia
-
-Works perfectly with the driver linux-uvc (pacman -S linux-uvc-svn)
-Tested with amsn, kopete, skype and currently using ucview to take pics
-with it, sadly, cheese the photobooth-like app for linux doesn't work
-with it but seems like they're working on it though.
+See Webcam Setup.
 
 Sound
 -----
@@ -247,8 +247,15 @@ Wireless card also works flawlessly with broadcom-wl module from the
 AUR.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=HP_Pavilion_dv6420la&oldid=196641"
+"https://wiki.archlinux.org/index.php?title=HP_Pavilion_dv6420la&oldid=296165"
 
 Category:
 
 -   HP
+
+-   This page was last modified on 4 February 2014, at 13:03.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

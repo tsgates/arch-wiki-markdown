@@ -11,42 +11,10 @@ Realtime process management
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-  Summary
-  ------------------------------------------------------------------------------------------
-  Some information about and a short how-to guide on realtime process thread prioritizing.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 pam                                                          |
-|     -   2.2 /etc/security/limits.conf                                    |
-|     -   2.3 Example limits.conf                                          |
-|     -   2.4 Arch Linux limits.conf Default                               |
-|     -   2.5 Add user to audio group                                      |
-|                                                                          |
-| -   3 History                                                            |
-| -   4 Hard and Soft realtime                                             |
-| -   5 Power is Nothing without Control                                   |
-| -   6 Tips and Tricks                                                    |
-|     -   6.1 PAM-enabled Login                                            |
-|     -   6.2 Console/Autologin                                            |
-|                                                                          |
-| -   7 Reference                                                          |
-|     -   7.1 RLIMIT Definitions                                           |
-|     -   7.2 Scheduling Policies                                          |
-|     -   7.3 Scheduling Classes                                           |
-|                                                                          |
-| -   8 Applications                                                       |
-|     -   8.1 JACK                                                         |
-|                                                                          |
-| -   9 External Links                                                     |
-+--------------------------------------------------------------------------+
-
-Introduction
-------------
+This article provides information on prioritizing process threads in
+real time, as opposed to at startup only. It shows how you can control
+CPU, memory, and other resource utilization of individual processes, or
+all processes run by a particular group.
 
 While many recent processors are powerful enough to play a dozen video
 or audio streams simultaneously, it is still possible that another
@@ -64,86 +32,59 @@ values and start processes at a lower nice value than 0. This protects
 the normal user from underpowering processes which are essential to the
 system. This can be especially important on multi-user machines.
 
+Contents
+--------
+
+-   1 Configuration
+    -   1.1 pam
+    -   1.2 Configuring PAM
+-   2 History
+-   3 Hard and soft realtime
+-   4 Power is nothing without control
+-   5 Tips and tricks
+    -   5.1 PAM-enabled login
+    -   5.2 Console/autologin
+-   6 Reference
+    -   6.1 RLIMIT Definitions
+    -   6.2 Scheduling policies
+    -   6.3 Scheduling classes
+-   7 See also
+
 Configuration
 -------------
 
-To enable real-time prioritizing, some settings must be enabled.
+By default, real-time prioritizing is enabled on Arch, however its
+configuration is simplistic and open to editing by the user. For
+example, in order to allow users to set nice priorities below 0, we need
+to tweak the default hard limit provided by PAM.
 
 > pam
 
-Use the latest pam package.
+The pam package from the official repositories provides the pluggable
+authentication modules for the linux kernel.
 
-    # pacman -S pam
+Note: If you are running a custom kernel, ensure you have enabled
+"preemptible kernel" settings. The stock Arch kernel needs no
+modifications.
 
-Note:To all kernel compilers: First of all, make sure your kernel is
-compiled with "preemptible kernel" settings. As /boot/kconfig26 tells
-you, the standard Arch Linux kernel is configured that way.
+> Configuring PAM
 
-> /etc/security/limits.conf
+The /etc/security/limits.conf file provides configuration for the
+pam_limits PAM module, which sets limits on system resources. It lets
+you do things like define the default nice level for all processes,
+individual groups, the maximum locked-in memory address space, and more.
 
-Edit your /etc/security/limits.conf file.
+There are two types of resource limits that pam_limits provides: hard
+limits and soft limits. Hard limits are set by root and enforced by the
+kernel, while soft limits may be configured by the user within the range
+allowed by the hard limits. By default, Arch uses the - limit, which
+refers to both hard and soft limits.
 
-    pacman -Q --owns /etc/security/limits.conf/etc/security/limits.conf is owned by pam 1.1.1-1
-
-    # /etc/security/limits.conf (08-02-2010)
-    #
-    #Each line describes a limit for a user in the form:
-    #
-    #<domain>        <type>  <item>  <value>
-    #
-    #Where:
-    #<domain> can be:
-    #        - an user name
-    #        - a group name, with @group syntax
-    #        - the wildcard *, for default entry
-    #        - the wildcard %, can be also used with %group syntax,
-    #                 for maxlogin limit
-    #
-    #<type> can have the two values:
-    #        - "soft" for enforcing the soft limits
-    #        - "hard" for enforcing hard limits
-    #
-    #<item> can be one of the following:
-    #        - core - limits the core file size (KB)
-    #        - data - max data size (KB)
-    #        - fsize - maximum filesize (KB)
-    #        - memlock - max locked-in-memory address space (KB)
-    #        - nofile - max number of open files
-    #        - rss - max resident set size (KB)
-    #        - stack - max stack size (KB)
-    #        - cpu - max CPU time (MIN)
-    #        - nproc - max number of processes
-    #        - as - address space limit (KB)
-    #        - maxlogins - max number of logins for this user
-    #        - maxsyslogins - max number of logins on the system
-    #        - priority - the priority to run user process with
-    #        - locks - max number of file locks the user can hold
-    #        - sigpending - max number of pending signals
-    #        - msgqueue - max memory used by POSIX message queues (bytes)
-    #        - nice - max nice priority allowed to raise to values: [-20, 19]
-    #        - rtprio - max realtime priority
-
-> Example limits.conf
-
-    #
-    #<domain>      <type>  <item>         <value>
-    #
-
-    #*               soft    core            0
-    #*               hard    rss             10000
-
-    #@student        hard    nproc           20
-
-    #@faculty        soft    nproc           20
-    #@faculty        hard    nproc           50
-
-    #ftp             hard    nproc           0
-
-    #@student        -       maxlogins       4
-
-> Arch Linux limits.conf Default
-
-Arch Linux comes with sane standards.
+The default Arch Linux settings set the maximum real-time priority
+allowed for non-priveleged processes to 0, the maximum nice priority
+allowed to raise to 0, and some custom settings for the audio group.
+Finally, the memlock item sets the maximum locked-in memory address
+space to 40,000 KiB. These defaults are shown below:
 
     *               -       rtprio          0
     *               -       nice            0
@@ -151,18 +92,22 @@ Arch Linux comes with sane standards.
     @audio          -       nice           -10
     @audio          -       memlock         40000
 
-> Add user to audio group
-
-    $ sudo gpasswd -a username audio
-
-The standard settings are enough to get jack-server running with
-hydrogen or ardour. For some other applications it might be necessary to
-redefine the values for rt_prio from 65 to 80 or even higher!
-
-The following settings work for me also with ardour:
+An example for why one might want to alter these settings is to get
+high-performance audio working. The defaults are permissive enough to
+get jack-server running with hydrogen or ardour. However, for higher
+performance audio applications it might be necessary to redefine the
+values for rt_prio from 65 to 80 or even higher! The following settings
+work well with ardour:
 
     @audio          -       rtprio          70
     @audio          -       memlock         250000
+
+See Pro Audio for more on professional audio configuration of an Arch
+system.
+
+There are an infinite variety of possible PAM limits configurations.
+While an overview is provided here, it is highly advisable to read the
+man 5 limits.conf page in order to better understand these functions.
 
 History
 -------
@@ -177,7 +122,7 @@ loaded can cause trouble. As of kernel-2.6.12, the so called rlimits
 patch has been accepted in the mainstream kernel and is now the desired
 way to provide normal users with realtime capabilities.
 
-Hard and Soft realtime
+Hard and soft realtime
 ----------------------
 
 Realtime is a synonym for a process which has the capability to run in
@@ -189,7 +134,7 @@ Hard realtime is usually not so much desired as it is needed. An example
 could be made for car's ABS (anti-lock braking system). This can not be
 "rendered" and there is no second chance.
 
-Power is Nothing without Control
+Power is nothing without control
 --------------------------------
 
 The realtime-lsm module granted the right to get higher capabilities to
@@ -203,38 +148,46 @@ PAM's concept makes it imaginable that there will be ways in the future
 to grant rights on a per application level; however, this is not yet
 possible.
 
-Tips and Tricks
+Tips and tricks
 ---------------
 
-> PAM-enabled Login
+> PAM-enabled login
 
-See: Start X at Login
+See Start X at Login.
 
-To activate the settings in /etc/security/limits.conf you have to use a
-pam-enabled login method/manager. Nearly all graphical login managers
-are pam-enabled. You can check that by looking for the related line/file
-in /etc/pam.d:
+For your system to use PAM limits settings you have to use a pam-enabled
+login method/manager. Nearly all graphical login managers are
+pam-enabled, and it now appears that the default Arch login is
+pam-enabled as well. You can confirm this by searching /etc/pam.d:
 
     $ grep pam_limits.so /etc/pam.d/*
 
 If you get nothing, you are whacked. But you will, as long as you have a
-login manager (and now PolicyKit). The line we are looking for is:
+login manager (and now PolicyKit). We want an output like this one:
 
-    session           required        pam_limits.so
+    /etc/pam.d/crond:session   required    pam_limits.so
+    /etc/pam.d/login:session		required	pam_limits.so
+    /etc/pam.d/polkit-1:session         required        pam_limits.so
+    /etc/pam.d/system-auth:session   required  pam_limits.so
+    /etc/pam.d/system-services:session   required    pam_limits.so
 
-> Console/Autologin
+So we see that login, PolicyKit, and the others all require the
+pam_limits.so module. This is a good thing, and means PAM limits will be
+enforced.
 
-See: Automatic VC Login
+> Console/autologin
+
+See: Automatically login some user to a virtual console on startup
 
 If you prefer to not have a graphical login, you still have a way. You
 need to edit the pam stuff for su (from coreutils):
 
-    $ /etc/pam.d/su
-    ...
-    session              required        pam_limits.so
+    /etc/pam.d/su
 
-Source (thanks to jochen and dunc):
-https://bbs.archlinux.org/viewtopic.php?pid=387214
+     ...
+     session              required        pam_limits.so
+
+Source [1].
 
 Reference
 ---------
@@ -362,7 +315,7 @@ Reference
     limit, a SIGSEGV signal is generated. To handle this signal, a
     process must employ an alternate signal stack (sigaltstack(2)).
 
-> Scheduling Policies
+> Scheduling policies
 
 CFS implements three scheduling policies:
 
@@ -377,7 +330,7 @@ CFS implements three scheduling policies:
     scheduler in order to avoid to get into priority inversion problems
     which would deadlock the machine.
 
-> Scheduling Classes
+> Scheduling classes
 
  IOPRIO_CLASS_RT
     This is the realtime io class. The RT scheduling class is given
@@ -415,29 +368,25 @@ CFS implements three scheduling policies:
     scheduling class does not take a priority argument. The idle class
     has no class data, since it doesn’t really apply here.
 
-  
+See also
+--------
 
-Applications
-------------
-
-> JACK
-
-See: Pro Audio
-
-  
-
-External Links
---------------
-
--   IO Benchmarking: How, Why and With What
--   CGROUPS Kernel Doc
--   Optimizing Servers and Processes for Speed with ionice, nice, ulimit
--   SYSSTAT Utilities Home Page
--   Multitasking from the Linux Command Line + Process Prioritization
+-   IO Benchmarking: How, why and with what
+-   CGROUPS Kernel documentation
+-   Optimizing servers and processes for speed with ionice, nice, ulimit
+-   SYSSTAT utilities home page
+-   Multitasking from the Linux command line and process prioritization
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Realtime_process_management&oldid=246166"
+"https://wiki.archlinux.org/index.php?title=Realtime_process_management&oldid=290064"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 23 December 2013, at 08:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

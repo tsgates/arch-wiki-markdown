@@ -12,18 +12,16 @@ shell and a text editor. Based on a rolling-release model, Arch strives
 to stay bleeding edge, and typically offers the latest stable versions
 of most software.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 History                                                            |
-| -   2 Simplicity                                                         |
-| -   3 Modernity                                                          |
-| -   4 Software Packaging                                                 |
-| -   5 Source Integrity                                                   |
-| -   6 Community                                                          |
-| -   7 Summary                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 History
+-   2 Simplicity
+-   3 Modernity
+-   4 Software Packaging
+-   5 Source Integrity
+-   6 Community
+-   7 Summary
 
 History
 -------
@@ -65,8 +63,8 @@ command, an Arch system is kept up-to-date and on the bleeding edge.
 
 Arch incorporates many of the newer features available to GNU/Linux
 users, including the systemd init system, modern filesystems (Ext2/3/4,
-Reiser, XFS, JFS, BTRFS), LVM2/EVMS, software RAID, udev support and
-initcpio (with mkinitcpio), as well as the latest available kernels.
+Reiser, XFS, JFS, BTRFS), LVM2, software RAID, udev support and initcpio
+(with mkinitcpio), as well as the latest available kernels.
 
 Software Packaging
 ------------------
@@ -79,7 +77,7 @@ to make it easy to build and install packages from source, which can
 also be synchronized with one command. You can even rebuild your entire
 system with one command.
 
-Supporting i686 and x86-64 architectures, Arch's Official Repositories
+Supporting i686 and x86-64 architectures, Arch's Official repositories
 provide several thousands of high-quality packages to meet your software
 demands. In addition, Arch encourages community growth and contribution
 by offering the Arch User Repository, which contains many thousands of
@@ -104,13 +102,13 @@ are encouraged to participate and contribute to the distribution, be it
 helping with the development of the core software, maintaining packages,
 reporting or fixing bugs, improving the ArchWiki documentation, helping
 other users solving problems or just exchanging opinions in the forums,
-mailing lists, IRC Channels, or sharing one's knowledge or even
+mailing lists, IRC channels, or sharing one's knowledge or even
 self-developed applications. Arch Linux is the operating system of
 choice for many people around the globe, and there exist several
 international communities that offer help and provide documentation in
 many different languages.
 
-See Getting Involved if you feel you want to become an active member of
+See Getting involved if you feel you want to become an active member of
 the community.
 
 Summary
@@ -125,8 +123,15 @@ to use it freely, get involved, and contribute to the community. Welcome
 to Arch!
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_Linux&oldid=238744"
+"https://wiki.archlinux.org/index.php?title=Arch_Linux&oldid=304001"
 
 Category:
 
 -   About Arch
+
+-   This page was last modified on 11 March 2014, at 11:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

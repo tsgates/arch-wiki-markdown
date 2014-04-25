@@ -4,39 +4,39 @@ Gitweb
 Gitweb is the default web interface provided with git itself and is the
 basis for other git scripts like cgit, gitosis and others.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Apache                                                       |
-|     -   2.2 Lighttpd                                                     |
-|     -   2.3 Nginx                                                        |
-|     -   2.4 Gitweb config                                                |
-|     -   2.5 Syntax highlighting                                          |
-|                                                                          |
-| -   3 Adding repositories                                                |
-| -   4 Thanks to...                                                       |
-+--------------------------------------------------------------------------+
+gitweb actually supports fcgi natively, so you don't need to wrap it as
+a cgi script
+http://repo.or.cz/w/alt-git.git?a=blob_plain;f=gitweb/INSTALL
+https://sixohthree.com/1402/running-gitweb-in-fastcgi-mode
+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Apache
+        -   2.1.1 Apache 2.4
+    -   2.2 Lighttpd
+    -   2.3 Nginx
+    -   2.4 Gitweb config
+    -   2.5 Syntax highlighting
+-   3 Adding repositories
+-   4 See also
 
 Installation
 ------------
 
 To install gitweb you first have to install git and a webserver. For
-this example we use apache but you can also use others:
-
-    pacman -S git apache
+this example we use apache but you can also use nginx, lighttpd or
+others.
 
 Next you need to link the current gitweb default to your webserver
 location. In this example I use the default folder locations:
 
-    ln -s /usr/share/gitweb /srv/http/gitweb
+    # ln -s /usr/share/gitweb /srv/http/gitweb
 
 Note:You may want to double check the server directory to make sure the
 symbolic links were made.
-
-That's it for the "installation". Next is the configuration.
 
 Configuration
 -------------
@@ -70,11 +70,40 @@ If using a virtualhosts configuration, add this to
            Allow from all
            AddHandler cgi-script cgi
            DirectoryIndex gitweb.cgi
-       </Directory
+       </Directory>
     </VirtualHost>
 
 You could also put the configuration in it's own config file in
 /etc/httpd/conf/extra/ but that's up to you to decide.
+
+Apache 2.4
+
+For Apache 2.4 you need to install mod_perl along with git and apache.
+
+Create /etc/httpd/conf/extra/httpd-gitweb.conf
+
+    <IfModule mod_perl.c>
+        Alias /gitweb "/usr/share/gitweb"
+        <Directory "/usr/share/gitweb">
+            DirectoryIndex gitweb.cgi
+            Require all granted
+            Options ExecCGI
+            AddHandler perl-script .cgi
+            PerlResponseHandler ModPerl::Registry
+            PerlOptions +ParseHeaders
+            SetEnv  GITWEB_CONFIG  /etc/conf.d/gitweb
+        </Directory>
+    </IfModule>
+
+Add the following line to the modules section of
+/etc/httpd/conf/httpd.conf
+
+    LoadModule perl_module modules/mod_perl.so
+
+Add the following line to the end of /etc/httpd/conf/httpd.conf
+
+    # gitweb configuration
+    Include conf/extra/httpd-gitweb.conf
 
 > Lighttpd
 
@@ -94,18 +123,44 @@ line for GitWeb to display properly.
 
 > Nginx
 
-Considering your Nginx document root is /var/www, append this location
-to your configuration, e.g. /etc/nginx/nginx.conf:
+Consider you've symlinked ln -s /usr/share/gitweb /var/www, append this
+location to your nginx configuration:
+
+    /etc/nginx/nginx.conf
 
     location /gitweb/ {
-           index index.cgi;
-           include fastcgi_params;
-           gzip off;
-           if ($uri ~ "/gitweb/index.cgi") {
-                   fastcgi_param   GITWEB_CONFIG  /etc/conf.d/gitweb.conf
-                   fastcgi_pass 127.0.0.1:9001;
-           }
+            index gitweb.cgi;
+            include fastcgi_params;
+            gzip off;
+            fastcgi_param   GITWEB_CONFIG  /etc/conf.d/gitweb.conf;
+            if ($uri ~ "/gitweb/gitweb.cgi") {
+                    fastcgi_pass    unix:/var/run/fcgiwrap.sock;
+            }
     }
+
+Additionally, we have to install fcgiwrap and spawn-fcgi and modify the
+fcgiwrap service file:
+
+    /usr/lib/systemd/system/fcgiwrap.service
+
+    [Unit]
+    Description=Simple server for running CGI applications over FastCGI
+    After=syslog.target network.target
+
+    [Service]
+    Type=forking
+    Restart=on-abort
+    PIDFile=/var/run/fcgiwrap.pid
+    ExecStart=/usr/bin/spawn-fcgi -s /var/run/fcgiwrap.sock -P /var/run/fcgiwrap.pid -u http -g http -- /usr/sbin/fcgiwrap
+    ExecStop=/usr/bin/kill -15 $MAINPID
+
+    [Install]
+    WantedBy=multi-user.target
+
+In the end, enable and restart the services:
+
+    systemctl enable nginx fcgiwrap
+    systemctl start nginx fcgiwrap
 
 > Gitweb config
 
@@ -132,17 +187,14 @@ apache:
 
     systemctl restart httpd 
 
-  
- Or for lighttpd:
+Or for lighttpd:
 
     systemctl restart lighttpd
 
 > Syntax highlighting
 
 To enable syntax highlighting with Gitweb, you have to first install the
-highlight package from [community]:
-
-    pacman -S highlight
+highlight package:
 
 When highlight has been installed, simply add this line to your
 gitweb.conf:
@@ -161,9 +213,9 @@ like so:
     git init --bare my_repository.git/
     cd my_repository.git/
     touch git-daemon-export-ok
-    echo "Short project's description" > description
+    echo "Short project's description" > .git/description
 
-Next open the "config" file and add this:
+Next open the .git/config file and add this:
 
     [gitweb]
             owner = Your Name
@@ -180,17 +232,24 @@ http://localhost/gitweb (assuming everything went fine). You do not need
 to restart apache for new repositories since the gitweb cgi script
 simply reads your repository folder.
 
-Thanks to...
-------------
+See also
+--------
 
 This howto was mainly based on the awesome howto from howtoforge:
-http://www.howtoforge.com/how-to-install-a-public-git-repository-on-a-debian-server
+http://www.howtoforge.com/how-to-install-a-public-git-repository-on-a-debian-server.
 I only picked the parts that are needed to get it working and left the
 additional things out.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Gitweb&oldid=255544"
+"https://wiki.archlinux.org/index.php?title=Gitweb&oldid=304613"
 
 Category:
 
 -   Version Control System
+
+-   This page was last modified on 15 March 2014, at 15:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

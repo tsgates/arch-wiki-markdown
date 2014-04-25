@@ -12,7 +12,6 @@ To add a new user:
 -   adduser on nymeria
     -   Delete the user's password (passwd -d)
     -   Upload the user's public ssh key
-
 -   add to dev
 -   upgrade to a "developer" on flyspray
 -   upgrade to a "developer" on the forums
@@ -46,3 +45,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 15 February 2013, at 16:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

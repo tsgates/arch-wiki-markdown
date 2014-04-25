@@ -1,7 +1,7 @@
 Sup
 ===
 
-  Summary
+  Summary help replacing me
   ------------------------------------------------------------------------------
   An overview of the text-based mail client known for tagging and fast search.
 
@@ -10,30 +10,33 @@ of mail. It can be viewed as a cross between Mutt and Gmail, with very
 fast operation and search, tagging, automatic contact management,
 support for a wide variety of accounts at once, and more.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuring Sup                                                    |
-| -   3 Using Sup                                                          |
-| -   4 Backing-up and Restoring Sup                                       |
-| -   5 List of Keybindings                                                |
-|     -   5.1 Keybindings from inbox-mode                                  |
-|     -   5.2 Keybindings from thread-index-mode                           |
-|     -   5.3 Keybindings from thread-view-mode                            |
-|     -   5.4 Keybindings from contact-list-mode                           |
-|     -   5.5 Keybindings from line-cursor-mode                            |
-|     -   5.6 Keybindings from scroll-mode                                 |
-|     -   5.7 Global keybindings                                           |
-|                                                                          |
-| -   6 More Information                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuring Sup
+-   3 Using Sup
+-   4 Backing-up and Restoring Sup
+-   5 List of Keybindings
+    -   5.1 Keybindings from inbox-mode
+    -   5.2 Keybindings from thread-index-mode
+    -   5.3 Keybindings from thread-view-mode
+    -   5.4 Keybindings from contact-list-mode
+    -   5.5 Keybindings from line-cursor-mode
+    -   5.6 Keybindings from scroll-mode
+    -   5.7 Global keybindings
+-   6 Crashing with: Illegal instruction (core dumped)
+-   7 More Information
 
 Installation
 ------------
 
-Install sup from the AUR.
+Install sup-git from the AUR. Although the developers suggest that you
+install Sup via
+
+       gem install sup
+
+As you get the latest version directly from the developers.
 
 Configuring Sup
 ---------------
@@ -51,24 +54,27 @@ follows:
 5.  Add sources for your mail, including:
     1.  mbox files
     2.  maildir directories
-    3.  remote mbox files over SSH
-    4.  IMAP servers
 
-After this is done, sup-config will execute the sup-sync command to
-import mail into your mailbox.
+Support for remote sources (POP3, IMAP, IMAPS, and mbox+ssh) was removed
+in the 0.12 release.
 
-If you use POP3 or another mail service (not IMAP) and you do not have
-any external programs installed to handle mail retrieval, use a guide
-such as the one on the Mutt#POP3 wiki page, then select the mbox or
-maildir delivery option when configuring Sup. Sup is for the most part
-only an MUA (mail user agent) and, with the exception of IMAP, cannot
-handle downloading mail on its own.
+Sup is for the most part only an MUA (mail user agent) and cannot handle
+downloading mail on its own. You can use tools like offlineimap,
+fetchmail, and rsync to transfer email to the local system mbox or
+maildir folders.
+
+The sup wiki has an example for configuring a gmail+imap source using
+offlineimap. The Mutt#POP3 subsection shows some additional mail
+transfer methods.
+
+After the email sources have been added, sup-config will execute the
+sup-sync command to import mail into your mailbox.
 
 Using Sup
 ---------
 
-Execute the sup or sup-mail command to start the Sup mail client. The
-program should show the messages imported by sup-config.
+Execute the sup command to start the Sup mail client. The program should
+show the messages imported by sup-config.
 
 The most important key for new users to remember is the "?" key. This
 will display a full list of keyboard commands at any point, reminding
@@ -102,7 +108,7 @@ results.
 
 To star a thread, press the "*" key. To mark a thread as spam, press the
 "S" key. Sup doesn't have any built-in spam filter; for that, consider a
-program such as SpamAssassin.
+program such as spamassassin.
 
 To tag a thread, press the "t" key. To label the messages in a thread,
 press the "l" key. To search labels, press the "L" key. Enter a label
@@ -252,6 +258,56 @@ Global keybindings
       ^G : Do nothing
        R : Edit most recent draft message
 
+Crashing with: Illegal instruction (core dumped)
+------------------------------------------------
+
+sup uses a search engine called Xapian which is being compiled to use
+SSE2 instructions. If your CPU does not support SSE2 instructions you
+will encounter the error message:
+
+       Illegal instruction (core dumped)
+
+To solve this you have to compile Xapian with the flag --disable-sse.
+
+1. Looking at the PKGBUILD for ruby-xapian-ruby you can see that it
+downloads a gem from https://rubygems.org/gems/xapian-ruby. Download the
+gem.
+
+2. run these commands
+
+       gem unpack xapian-ruby.gem
+       gem unpack --spec xapian-ruby.gem
+       mv xapian-ruby.gemspec xapian-ruby/
+       cd xapian-ruby
+
+3. You are suppose to edit the Rakefile. Your goal is to change the 2
+lines where it runs the config changes. All you have to do is to append
+--disable-sse to the end of those configuration commands:
+
+       system! "./configure --prefix=#{prefix} --exec-prefix=#{prefix} --disable-sse"
+       system! "./configure --prefix=#{prefix} --exec-prefix=#{prefix} --with-ruby --disable-sse"
+
+And save those changes.
+
+4. run
+
+       gem build xapian-ruby.gemspec
+       gem install --local xapian-ruby.gem
+
+This should solve the problem with Xapian not running on old CPUs. It
+should also be mentioned that if it is your first time you run
+sup-config and you have done everything correctly but still end up wih
+the error message
+
+       This Sup version expects a v4 index, but you have an existing v0 index. Please run sup-dump to save your labels, move /home/user/.sup/xapian out of the way, and run sup-sync --restore. (RuntimeError)
+       Rats, that failed. You may have to do it manually.
+
+it is possible that you also have this issue, try to run the other
+executables such as sup or sup-dump to see if you get the Illegal
+instruction (core dumped) error message.
+
+  
+
 More Information
 ----------------
 
@@ -259,8 +315,15 @@ Sup has a website with a README, a new user guide, a FAQ, and a
 philosophical statement, as well as a wiki.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sup&oldid=197470"
+"https://wiki.archlinux.org/index.php?title=Sup&oldid=305391"
 
 Category:
 
 -   Email Client
+
+-   This page was last modified on 18 March 2014, at 00:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

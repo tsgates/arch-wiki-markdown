@@ -50,3 +50,10 @@ Retrieved from
 Category:
 
 -   Package management
+
+-   This page was last modified on 16 December 2012, at 10:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -10,26 +10,22 @@ runlevel changes (including the initial boot).
 See G. Pape's Runit Page for a complete description, but follow the
 installation instructions below for your Arch system.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Using runit                                                        |
-|     -   2.1 The Tools                                                    |
-|     -   2.2 The Extras                                                   |
-|     -   2.3 Run Levels and Service Directories                           |
-|     -   2.4 General Use                                                  |
-|                                                                          |
-| -   3 User Level Services                                                |
-|     -   3.1 Add a user level service tree                                |
-|     -   3.2 Create an X session service for a user                       |
-|                                                                          |
-| -   4 Advanced Recipes                                                   |
-|     -   4.1 Running a read-only Postgresql Slave database in-memory      |
-|         -   4.1.1 Requirements                                           |
-|         -   4.1.2 Instructions                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Using runit
+    -   2.1 The Tools
+    -   2.2 The Extras
+    -   2.3 Run Levels and Service Directories
+    -   2.4 General Use
+-   3 User Level Services
+    -   3.1 Add a user level service tree
+    -   3.2 Create an X session service for a user
+-   4 Advanced Recipes
+    -   4.1 Running a read-only Postgresql Slave database in-memory
+        -   4.1.1 Requirements
+        -   4.1.2 Instructions
 
 Installation
 ------------
@@ -263,7 +259,7 @@ Replace the 'stumpwm' with the command to launch your window manager or
 desktop environment.
 
 Requires the 'keychain' and 'ssh-askpass-fullscreen' packages, or you
-could replace 'eval $(keychain)' with 'eval $(ssh-agent) and replace
+could replace 'eval (keychain)' with 'eval (ssh-agent) and replace
 ssh-askpass-fullscreen with any ssh passphrase asker. The fullscreen
 version guarantees protection of your desktop, so we prefer that. This
 also exports your key to all your x apps, so you do not need another
@@ -367,9 +363,16 @@ published on port 5434, in read-only mode from the memory space utilized
 from /dev/shm.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Runit&oldid=249830"
+"https://wiki.archlinux.org/index.php?title=Runit&oldid=306012"
 
 Categories:
 
 -   Boot process
 -   Daemons and system services
+
+-   This page was last modified on 20 March 2014, at 17:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

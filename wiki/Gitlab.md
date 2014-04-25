@@ -1,7 +1,7 @@
 Gitlab
 ======
 
-> Summary
+Summary help replacing me
 
 This page gives guidelines for the installation and configuration of
 Gitlab on Archlinux.
@@ -12,561 +12,485 @@ Gitolite
 
 Ruby on Rails
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
-                           is a candidate for       
-                           merging with Gitlab2.    
-                           Notes: Most of the       
-                           article is duplicated.   
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: As of version    
-                           5.0,Gitlab will no       
-                           longer depend on         
-                           gitolite. Also redis is  
-                           replaced by sidekiq. A   
-                           rewrite is scheduled     
-                           when 5.0 comes out on    
-                           March 22nd. (Discuss)    
-  ------------------------ ------------------------ ------------------------
-
 Gitlab is a free git repository management application based on Ruby on
-Rails and Gitolite. It is distributed under the MIT License and its
-source code can be found on Github. It is a very active project with a
-monthly release cycle and ideal for businesses that want to keep their
-code private. Consider it as a self hosted Github but open source. You
-can try a demo page here.
+Rails. It is distributed under the MIT License and its source code can
+be found on Github. It is a very active project with a monthly release
+cycle and ideal for businesses that want to keep their code private.
+Consider it as a self hosted Github but open source. You can try a demo
+here.
 
-Note:Throughout the article, sudo is heavily used, assuming that the
-user that is running the commands is root or someone with equal
-privileges. There is no need to edit the sudoers file whatsoever. It is
-only used to change to the appropriate user. For more info read
-man sudo.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Required packages                                                  |
-| -   2 Create user accounts                                               |
-| -   3 Gitolite                                                           |
-| -   4 Gitlab                                                             |
-|     -   4.1 Installation                                                 |
-|     -   4.2 Basic configuration                                          |
-|         -   4.2.1 Web application specific settings                      |
-|         -   4.2.2 Email used for notification                            |
-|         -   4.2.3 Application specific settings                          |
-|         -   4.2.4 Git Hosting configuration                              |
-|         -   4.2.5 Git settings                                           |
-|                                                                          |
-|     -   4.3 Database selection                                           |
-|         -   4.3.1 MySQL                                                  |
-|                                                                          |
-|     -   4.4 Install gems                                                 |
-|     -   4.5 Start redis server                                           |
-|     -   4.6 Populate the database                                        |
-|     -   4.7 Setup gitlab hooks                                           |
-|     -   4.8 Check status                                                 |
-|     -   4.9 Server testing and resque process                            |
-|                                                                          |
-| -   5 Web server configuration                                           |
-|     -   5.1 Unicorn only                                                 |
-|     -   5.2 Nginx and unicorn                                            |
-|     -   5.3 Apache and unicorn                                           |
-|         -   5.3.1 Configure Unicorn                                      |
-|         -   5.3.2 Create a virtual host for Gitlab                       |
-|         -   5.3.3 Enable host and start unicorn                          |
-|                                                                          |
-| -   6 SystemD support                                                    |
-| -   7 Useful Tips                                                        |
-|     -   7.1 Hook into /var                                               |
-|     -   7.2 Hidden options                                               |
-|     -   7.3 Backup and restore                                           |
-|     -   7.4 Update Gitlab                                                |
-|     -   7.5 Migrate from sqlite to mysql                                 |
-|                                                                          |
-| -   8 Troubleshooting                                                    |
-| -   9 See also                                                           |
-+--------------------------------------------------------------------------+
-
-Required packages
------------------
-
-Install the packages below as they are needed to proceed further.
-
-    # pacman -Syu --needed sudo git wget curl checkinstall libxml2 libxslt mysql++ base-devel zlib icu redis openssh python2 python2-pygments python2-pip libyaml ruby libpqxx
-
-Create user accounts
---------------------
-
-Add git and gitlab user. git is a system user that will be used for
-gitolite. gitlab user will be used for Gitlab and is part of group git.
-
-    # usermod -d /home/git git
-    # mkdir -pv /home/git
-    # chown -R git:git /home/git
-    # useradd --user-group --shell /bin/bash --comment 'gitlab system' --create-home --groups git gitlab
-
-Note that the user git must have its initial group set to git (not
-users). If the initial group is not git, then all files created by the
-git user will be owned by git:users which will prevent gitlab from
-showing you a newly created repo (it will get stucked at the page where
-it tells you how to push to the new repo). Running sudo usermod -g git
-git will set the git user's initial group.
-
-Gitolite
+Contents
 --------
 
-Clone the gitolite repository from Gitlab's fork. Note that it's version
-3.
+-   1 Installation
+-   2 Configuration
+    -   2.1 Notes Before Configuring
+    -   2.2 Basic configuration
+    -   2.3 Database backend
+        -   2.3.1 MariaDB
+        -   2.3.2 PostgreSQL
+        -   2.3.3 Initialize Gitlab database
+-   3 Start and test GitLab
+-   4 Advanced Configuration
+    -   4.1 HTTPS/SSL
+        -   4.1.1 Change GitLab configs
+        -   4.1.2 Configure HTTPS server of choice
+            -   4.1.2.1 Apache
+            -   4.1.2.2 Node.js
+    -   4.2 Web server configuration
+        -   4.2.1 Nginx and unicorn
+        -   4.2.2 Apache and unicorn
+            -   4.2.2.1 Configure Unicorn
+            -   4.2.2.2 Create a virtual host for Gitlab
+            -   4.2.2.3 Enable host and start unicorn
+-   5 Useful Tips
+    -   5.1 Fix Rake Warning
+    -   5.2 Hook into /var
+    -   5.3 Hidden options
+    -   5.4 Backup and restore
+    -   5.5 Migrate from sqlite to mysql
+    -   5.6 Running GitLab with rvm
+-   6 Troubleshooting
+    -   6.1 HTTPS is not green (gravatar not using https)
+-   7 See also
 
-    # cd /home/git
-    # sudo -H -u git git clone -b gl-v304 https://github.com/gitlabhq/gitolite.git /home/git/gitolite
+Installation
+------------
 
-Generate Gitlab's ssh key to be used with gitolite:
+Note:If you want to use rvm be sure to check out Gitlab#Running GitLab
+with rvm before starting with the installation
 
- # sudo -H -u gitlab ssh-keygen -q -N '' -t rsa -f /home/gitlab/.ssh/id_rsa
+Note:This guide covers installing and configuring GitLab without
+HTTPS/SSL at first, just to get GitLab up and running. After getting
+GitLab up and running, see #Advanced Configuration to set up SSL.
 
-Add the following path to git's .bash_profile:
+Installing gitlab from the AUR instead of manually has the added benefit
+that lots of steps have been taken care of for you (e.g. permissions and
+ownership for files, etc).
 
-    # sudo -u git sh -c 'echo "export PATH=/home/git/bin:$PATH" >> /home/git/.bash_profile'
-    # sudo -u git sh -c 'mkdir /home/git/bin'
-    # sudo -u git -H sh -c "export PATH=/home/git/bin:$PATH; /home/git/gitolite/install -ln"
+Make sure you perform a system upgrade (pacman -Syu) before installing
+gitlab from AUR and that you have installed the base-devel group, or you
+may face problems installing gitlab because base-devel packages are not
+required to be listed as dependencies in PKGBUILD files.
 
-Copy Gitlab's public key to gitolite's home and change permissions:
+Also before installing the gitlab package from the AUR, you need to
+choose a database backend if you're planning to host GitLab it on the
+same machine as the database:
 
-    # cp /home/gitlab/.ssh/id_rsa.pub /home/git/gitlab.pub
-    # chmod 0444 /home/git/gitlab.pub
+-   Use Pacman to install mariadb and libmariadbclient from the official
+    repositories and start the daemon
+-   or install postgresql and libpqxx. Read
+    PostgreSQL#Installing_PostgreSQL to set it up and start the daemon.
 
-Install gitolite:
+In order to receive mail notifications, make sure to install a mail
+server. By default, Archlinux does not ship with one. The recommended
+mail server is postfix, but you can use others such as SSMTP, msmtp,
+sendmail, etc.
 
-    # sudo -u git -H sh -c "export PATH=/home/git/bin:$PATH; /home/git/gitolite/src/gitolite setup -pk /home/git/gitlab.pub"
+Configuration
+-------------
 
-    Example output
+> Notes Before Configuring
 
-    creating gitolite-admin...
-    Initialized empty Git repository in /home/git/repositories/gitolite-admin.git/
-    creating testing...
-    Initialized empty Git repository in /home/git/repositories/testing.git/
-    [master (root-commit) 012fdf5] start
-     2 files changed, 6 insertions(+)
-     create mode 100644 conf/gitolite.conf
-     create mode 100644 keydir/gitlab.pub
-
-Change permissions:
-
-    # chmod -R g+rwX /home/git/repositories/
-    # chmod g+x /home/git
-    # chown -R git:git /home/git/repositories/
-
-Note: The next step is important to succeed. If not, do not try to
-proceed any further.
-
-Note: If you obtain an error like "Permission denied (publickey)" for
-the next command, one reason can be that "UsePAM" is not activated in
-ssh. Set "UsePAM yes" in /etc/ssh/sshd_config" and restart the ssh
-server.
-
-Add Gitlab's ssh key to known hosts:
-
-    # sudo -u gitlab -H git clone git@localhost:gitolite-admin.git /tmp/gitolite-admin
-
-Answer yes. At this point you should be able to clone the gitolite-admin
-repository.
-
-    Example output
-
-    Cloning into '/tmp/gitolite-admin'...
-    The authenticity of host 'localhost (::1)' can't be established.
-    ECDSA key fingerprint is 5a:50:69:47:1f:1c:61:79:08:a8:2c:fa:a1:fb:48:bf.
-    Are you sure you want to continue connecting (yes/no)? yes
-    Warning: Permanently added 'localhost' (ECDSA) to the list of known hosts.
-    remote: Counting objects: 6, done.
-    remote: Compressing objects: 100% (4/4), done.
-    Receiving objects: 100% (6/6), 712 bytes, done.
-    remote: Total 6 (delta 0), reused 0 (delta 0)
-
-If the repository is cloned successfully, it is safe to remove it:
-
-    # rm -rf /tmp/gitolite-admin
-
-Gitlab
-------
-
-> Installation
-
-Tip: If you do not want to download any documentation, add
-gem: --no-rdoc --no-ri to /home/gitlab/.gemrc. Be sure to add it as the
-gitlab user in order to acquire the appropriate permissions.
-
-Add ruby to Gitlab's PATH:
-
-    # sudo -u gitlab -H sh -c 'echo "export PATH=$(ruby -rubygems -e "puts Gem.user_dir")/bin:$PATH" >> /home/gitlab/.bashrc'
-
-Install bundler and charlock_holmes:
-
-    # sudo -u gitlab -H gem install charlock_holmes --version '0.6.9'
-    # sudo -u gitlab -H gem install bundler
-
-Note:When installing charlock_holmes don't mind any errors that might
-occur, that's normal.
-
-Because systemd requires full path to binaries to launch (the path is
-not enough), create a symbolic link in /home/gitlab/bin/ that points to
-the **bundle** executable. We'll also add the folder to gitlab's PATH:
-
-    # sudo -u gitlab -H mkdir /home/gitlab/bin
-    # sudo -u gitlab -H sh -c "ln -s \$(ruby -rubygems -e 'puts Gem.user_dir')/bin/bundle /home/gitlab/bin/"
-    # sudo -u gitlab -H sh -c 'echo "export PATH=/home/gitlab/bin:$PATH" >> /home/gitlab/.bashrc'
+The gitlab package from AUR organizes GitLab's files in a manner that
+more closely follows standard linux conventions rather than installing
+everything in /home/git as you are told to do by GitLab's official
+install guide.
 
   
- Clone Gitlab's stable repository:
+ After you've installed gitlab from AUR, the config file
+/etc/webapps/gitlab/shell.yml corresponds to the file
+/home/git/gitlab-shell/config.yml that is mentioned in GitLab's official
+install guide when installing gitlab-shell. The config file
+/etc/webapps/gitlab/gitlab.yml corresponds to the file
+/home/git/gitlab/config/gitlab.yml that is mentioned in GitLab's
+official install guide when configuring GitLab.
 
-    # cd /home/gitlab
-    # sudo -H -u gitlab git clone -b stable git://github.com/gitlabhq/gitlabhq.git gitlab
-    # cd gitlab
-    # sudo -H -u gitlab git checkout v3.1.0
-    # sudo -u gitlab mkdir -pv tmp
+  
+ Another key difference between gitlab from AUR and the GitLab install
+guide is that GitLab from AUR uses the gitlab user with /var/lib/gitlab
+as the home folder instead of the git user with /home/git as the home
+folder. This keeps the /home area clean so it contains only real user
+homes.
+
+Tip:If you are familiar with the Arch Build System you can edit the
+PKGBUILD and relevant files to change gitlab's home directory to a place
+of your liking.
 
 > Basic configuration
 
-First we need to rename the example file.
+Open up /etc/webapps/gitlab/shell.yml and set gitlab_url: to the url
+where you intend to host GitLab (note the 'http://' and trailing slash).
+For example, if you will host GitLab at 'yourdomain.com', then it'd look
+like this:
 
-    # sudo -u gitlab cp config/gitlab.yml.example config/gitlab.yml
+    Snippet from /etc/webapps/gitlab/shell.yml
 
-The options are pretty straightforward. You can skip this part as it is
-quite detailed. Open /home/gitlab/gitlab/config/gitlab.yml with your
-favorite editor and check the settings below.
+    # GitLab user. git by default
+    user: gitlab
 
-Web application specific settings
+    # Url to gitlab instance. Used for api calls. Should end with a slash.
+    gitlab_url: "http://yourdomain.com/" # <<-- right here
 
-    /home/gitlab/gitlab/config/gitlab.yml
+    http_settings:
+    #  user: someone
+    #  password: somepass
+    ...
 
-    host: myhost.example.com
-    port: 80
-    https: false
+  
+ Open up /etc/webapps/gitlab/gitlab.yml and edit where needed. In the
+gitlab: section set host: (replacing localhost) to 'yourdomain.com',
+your fully qualified domin name (no 'http://' or trailing slash). port:
+can be confusing. This is not the port that the gitlab server (unicorn)
+runs on; it's the port that users will initially access through in their
+browser. Basically, if you intend for users to visit 'yourdomain.com' in
+their browser, without appending a port number to the domain name, leave
+port: as 80. If you intend your users to type something like
+'yourdomain.com:3425' into their browsers, then you'd set port: to 3425
+(you'll also have to configure your server (apache, nginx, etc) to
+listen on that port). Those are the minimal changes needed for a working
+GitLab install. The adventurous may read on in the comment and customize
+as needed. For example:
 
--   host: Enter your Fully Qualified Domain Name.
+    Snippet from /etc/webapps/gitlab/gitlab.yml
 
-Email used for notification
+    ...
+      ## GitLab settings
+      gitlab:
+        ## Web server settings
+        host: yourdomain.com
+        port: 80
+        https: false
+    ...
 
-    /home/gitlab/gitlab/config/gitlab.yml
+> Database backend
 
-    from: notify@example.com
+A Database backend will be required before Gitlab can be run. Currently
+GitLab supports MariaDB and PostgreSQL. By default, GitLab assumes you
+will use MySQL. Extra work is needed if you plan to use PostgreSQL.
 
-This is how the mail address will be shown for mail notifications.
-Gitlab needs the sendmail command in order to send emails (for things
-like lost password recovery, new user addition etc). This command is
-provided by packages such as msmtp, postfix, sendmail etc, but you can
-only have one of them installed. First, check whether you already have
-the sendmail command:
+Note:Don't forget to replace your_username_here and your_password_here
+with your chosen values in the following examples.
 
-    # ls /usr/sbin/sendmail
+MariaDB
 
-If you get a ‘cannot access /usr/bin/sendmail’ then install one of the
-above packages.
+To set up MySQL (MariaDB) you need to create a database called
+gitlabhq_production along with a user who has full priviledges to the
+database. You might do it via command line as in the following example.
 
-Application specific settings
+    mysql -u root -p
 
-    /home/gitlab/gitlab/config/gitlab.yml
+    mysql> CREATE DATABASE IF NOT EXISTS `gitlabhq_production`;
+    mysql> CREATE USER 'your_username_here'@'localhost' IDENTIFIED BY 'your_password_here';
+    mysql> GRANT SELECT, LOCK TABLES, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER ON `gitlabhq_production`.* TO 'your_username_here'@'localhost';
+    mysql> \q
 
-    default_projects_limit: 10
-    # backup_path: "/vol/backups"   # default: Rails.root + backups/
-    # backup_keep_time: 604800      # default: 0 (forever) (in seconds)
+Now try connecting to the new database with the new user to verify you
+did it correctly:
 
--   default_projects_limit: As the name suggests, this integer defines
-    the default number of projects new users have. The number can change
-    from within Gitlab by an administrator.
--   backup_path: The path where backups are stored. Default location is
-    /home/gitlab/gitlab/backups. The backups folder is created
-    automatically after first backup.
--   backup_keep_time: Time to preserve backups. The default option is to
-    never be deleted.
+    mysql -u your_username_here -p -D gitlabhq_production
 
-Also check Backup and restore.
+Next you'll need to open up /etc/webapps/gitlab/database.yml and set
+username: and password: for the gitlabhq_production database to
+your_username_here and your_password_here, respectively. You need not
+worry about the info for the gitlabhq_development and gitlan_test
+databases, as those are not required for our purposes (unless you're
+feeling adventurous at your own risk). For example:
 
-Git Hosting configuration
+    Snippet from /etc/webapps/gitlab/database.yml
 
-    /home/gitlab/gitlab/config/gitlab.yml
+    #
+    # PRODUCTION
+    #
+    production:
+      adapter: mysql2
+      encoding: utf8
+      reconnect: false
+      database: gitlabhq_production
+      pool: 10
+      username: your_username_here
+      password: "your_password_here"
+      # host: localhost
+      # socket: /tmp/mysql.sock
+    ...
 
-    admin_uri: git@localhost:gitolite-admin
-    base_path: /home/git/repositories/
-    hooks_path: /home/git/share/gitolite/hooks/
-    # host: localhost
-    git_user: git
-    upload_pack: true
-    receive_pack: true
-    # port: 22
+That's all for MySQL configuration.
 
--   admin_uri: Do not change it. Leave as is.
--   base_path: The path where gitolite's repositories reside. If the
-    repositories directory is different than the default one, change it
-    here.
--   hooks_path: change default setting to
-    /home/git/share/gitolite/hooks/
--   host: Should point to your FQDN.
--   git_user: Name of the git user we created.
--   upload_pack:
--   receive_pack:
+For more info and other ways to create/manage MySQL databases, see the
+MariaDB documentation, the GitLab official (generic) install guide, and
+phpMyAdmin.
 
--   port: ssh port which git should use. Default one is 22. If you want
-    to change it for safety reasons, do not forget to also add the port
-    number to .ssh/config.
+PostgreSQL
 
-    /home/gitlab/gitlab/.ssh/config
+Login to PostgreSQL and create the gitlabhq_production database with
+along with it's user. Remember to change your_username_here and
+your_password_here to the real values:
 
-    Host localhost
-    Port 5000
+    psql -d template1
 
-Git settings
+    template1=# CREATE USER your_username_here WITH PASSWORD 'your_password_here';
+    template1=# CREATE DATABASE gitlabhq_production OWNER your_username_here;
+    template1=# \q
 
-    /home/gitlab/gitlab/config/gitlab.yml
+Try connecting to the new database with the new user to verify it works:
 
-    path: /usr/bin/git
-    git_max_size: 5242880 # 5.megabytes
-    git_timeout: 10
+    psql -d gitlabhq_production
 
--   git_max_size: Max size of git objects like commits, in bytes,.This
-    value can be increased if you have very large commits.
--   git_timeout: git timeout to read commit, in seconds.
+Copy the PostgreSQL template file before configuring it (overwriting the
+default MySQL configuration file):
 
-> Database selection
+    cp /usr/share/doc/gitlab/database.yml.postgresql /etc/webapps/gitlab/database.yml
 
-SQLite support in Gitlab is now deprecated. See this bug report.
+Open up the new /etc/webapps/gitlab/database.yml and set the values for
+username: and password:. For example:
 
-MySQL
+    Snippet from the new /etc/webapps/gitlab/database.yml
 
-Install mysql from the official repositories and start the daemon.
-Create the database and do not forget to replace your_password_here with
-a real one.
+    #
+    # PRODUCTION
+    #
+    production:
+      adapter: postgresql
+      encoding: unicode
+      database: gitlabhq_production
+      pool: 10
+      username: your_username_here
+      password: "your_password_here"
+      # host: localhost
+      # port: 5432 
+      # socket: /tmp/postgresql.sock
+    ...
 
-    # mysql -u root -p
+For our purposes (unless you know what you're doing), you don't need to
+worry about configuring the other databases listed in
+/etc/webapps/gitlab/database.yml. We only need to set up the production
+database to get GitLab working.
 
-    mysql> create database gitlabhq_production;
-    mysql> create user 'gitlab'@'localhost' identified by 'your_password_here';
-    mysql> grant all privileges on gitlabhq_production.* to 'gitlab'@'localhost' with grant option;
-    mysql> exit;
+Finally, open up /usr/lib/systemd/system/gitlab.target change all
+instances of mysql.service to postgresql.service. For example:
 
-Copy the example configuration file and make sure to update
-username/password in config/database.yml at production section:
+    Snippet from /usr/lib/systemd/system/gitlab.target
 
-    # sudo -u gitlab cp config/database.yml.mysql config/database.yml
+    ...
+    [Unit]
+    Description=GitLab - Self Hosted Git Management
+    Requires=redis.service postgresql.service
+    After=redis.service postgresql.service syslog.target network.target
 
-> Install gems
+    [Install]
+    WantedBy=multi-user.target
 
-This could take a while as it installs all required libraries.
+Initialize Gitlab database
 
-    # cd /home/gitlab/gitlab
-    # export PATH=/home/gitlab/bin:$PATH
-    # sudo -u gitlab -H bundle install --deployment
+Finally, initialize the database and activate advanced features:
 
-Note:Using "--without development test" in bundle command line will
-ignore required packages for database backup and restore
+    $ cd /usr/share/webapps/gitlab
+    $ sudo -u gitlab bundle exec rake gitlab:setup RAILS_ENV=production
 
-> Start redis server
-
-Start the daemon. If you are using initscripts you might want to add
-redis to your DAEMONS array in rc.conf.
-
-Note:redis might already be running, causing a FAIL message to appear.
-Check if it is already running with rc.d list redis.
-
-If you have switched to systemd, there is a service file included in the
-official package. See daemon how to enable it.
-
-> Populate the database
-
-    # sudo -u gitlab bundle exec rake gitlab:app:setup RAILS_ENV=production
-
-> Setup gitlab hooks
-
-    # cp ./lib/hooks/post-receive /home/git/.gitolite/hooks/common/post-receive
-    # chown git:git /home/git/.gitolite/hooks/common/post-receive
-
-> Check status
+Start and test GitLab
+---------------------
 
 With the following commands we check if the steps we followed so far are
-configured properly. Before running the first command you must edit
-/home/gitlab/gitlab/lib/tasks/gitlab/info.rake. The script cannot
-determine OS version; simply replace os_name.squish! with
-os_name = "Arch Linux".
+configured properly.
 
-    # sudo -u gitlab -H bundle exec rake gitlab:env:info RAILS_ENV=production
-    # sudo -u gitlab -H bundle exec rake gitlab:check RAILS_ENV=production
+    $ cd /usr/share/webapps/gitlab
+    $ sudo -u gitlab bundle exec rake gitlab:env:info RAILS_ENV=production
+    $ sudo -u gitlab bundle exec rake gitlab:check RAILS_ENV=production
 
-    Example output
+Note:These gitlab:env:info and gitlab:check commands will show a fatal
+error related to git. This is OK.
+
+    Example output of sudo -u gitlab bundle exec rake gitlab:env:info RAILS_ENV=production
+
+    fatal: Not a git repository (or any of the parent directories): .git
 
     System information
-    System:         Arch Linux
-    Current User:   gitlab
-    Using RVM:      no
-    Ruby Version:   1.9.3p362
-    Gem Version:    1.8.23
-    Bundler Version:1.2.3
-    Rake Version:   10.0.1
+    System:		Arch Linux
+    Current User:	git
+    Using RVM:	yes
+    RVM Version:	1.20.3
+    Ruby Version:	2.0.0p0
+    Gem Version:	2.0.0
+    Bundler Version:1.3.5
+    Rake Version:	10.0.4
 
     GitLab information
-    Version:        4.0.0
-    Revision:       8ef7b9b
-    Directory:      /home/gitlab/gitlab
-    DB Adapter:     mysql2
-    URL:            http://example.com
-    HTTP Clone URL: http://example.com/some-project.git
-    SSH Clone URL:  git@example.com:some-project.git
-    Using LDAP:     no
-    Using Omniauth: no
+    Version:	5.2.0.pre
+    Revision:	
+    Directory:	/home/git/gitlab
+    DB Adapter:	mysql2
+    URL:		http://gitlab.arch
+    HTTP Clone URL:	http://gitlab.arch/some-project.git
+    SSH Clone URL:	git@gitlab.arch:some-project.git
+    Using LDAP:	no
+    Using Omniauth:	no
 
-    Gitolite information
-    Version:        v3.04-4-g4524f01
-    Admin URI:      git@example.com:gitolite-admin
-    Admin Key:      gitlab
-    Repositories:   /home/git/repositories/
-    Hooks:          /home/git/.gitolite/hooks/
-    Git:            /usr/bin/git
+    GitLab Shell
+    Version:	1.4.0
+    Repositories:	/home/git/repositories/
+    Hooks:		/home/git/gitlab-shell/hooks/
+    Git:		/usr/bin/git
 
-> Server testing and resque process
+Note: gitlab:check will complain about missing initscripts. Don't worry,
+we will use ArchLinux's systemd to manage server start during boot
+(which GitLab does not recognize).
 
-Resque is a Redis-backed library for creating background jobs, placing
-those jobs on multiple queues, and processing them later. For the
-backstory, philosophy, and history of Resque's beginnings, please see
-this blog post.
+    Example output of sudo -u gitlab bundle exec rake gitlab:check RAILS_ENV=production
 
-Run resque process for processing queue:
+    fatal: Not a git repository (or any of the parent directories): .git
+    Checking Environment ...
 
-    # sudo -u gitlab bundle exec rake environment resque:work QUEUE=* RAILS_ENV=production BACKGROUND=yes
+    Git configured for gitlab user? ... yes
+    Has python2? ... yes
+    python2 is supported version? ... yes
 
-or use Gitlab's start script:
+    Checking Environment ... Finished
 
-    # sudo -u gitlab ./resque.sh
+    Checking GitLab Shell ...
 
-Note:If you run this as root,
-/home/gitlab/gitlab/tmp/pids/resque_worker.pid will be owned by root
-causing the resque worker not to start via init script on next
-boot/service restart
+    GitLab Shell version >= 1.7.9 ? ... OK (1.8.0)
+    Repo base directory exists? ... yes
+    Repo base directory is a symlink? ... no
+    Repo base owned by gitlab:gitlab? ... yes
+    Repo base access is drwxrws---? ... yes
+    update hook up-to-date? ... yes
+    update hooks in repos are links: ... can't check, you have no projects
+    Running /srv/gitlab/gitlab-shell/bin/check
+    Check GitLab API access: OK
+    Check directories and files:
+            /srv/gitlab/repositories: OK
+            /srv/gitlab/.ssh/authorized_keys: OK
+    Test redis-cli executable: redis-cli 2.8.4
+    Send ping to redis server: PONG
+    gitlab-shell self-check successful
 
-Gitlab application can be started with the next command:
+    Checking GitLab Shell ... Finished
 
-    # sudo -u gitlab bundle exec rails s -e production
+    Checking Sidekiq ...
 
-Open localhost:3000 with your favorite browser and you should see
-Gitlab's sign in page. In case you missed it, the default login/password
-are:
+    Running? ... yes
+    Number of Sidekiq processes ... 1
 
-    login.........admin@local.host
-    password......5iveL!fe
+    Checking Sidekiq ... Finished
 
-Since this is a thin web server, it is only for test purposes. You may
-close it with Ctrl+c. Follow instructions below to make Gitlab run with
-a real web server.
+    Checking LDAP ...
 
-Web server configuration
-------------------------
+    LDAP is disabled in config/gitlab.yml
 
-> Unicorn only
+    Checking LDAP ... Finished
 
-Edit /home/gitlab/gitlab/config/unicorn.rb uncomment:
+    Checking GitLab ...
 
-    listen 8080 # listen to port 8080 on all TCP interfaces
+    Database config exists? ... yes
+    Database is SQLite ... no
+    All migrations up? ... fatal: Not a git repository (or any of the parent directories): .git
+    yes
+    GitLab config exists? ... yes
+    GitLab config outdated? ... no
+    Log directory writable? ... yes
+    Tmp directory writable? ... yes
+    Init script exists? ... no
+      Try fixing it:
+      Install the init script
+      For more information see:
+      doc/install/installation.md in section "Install Init Script"
+      Please fix the error above and rerun the checks.
+    Init script up-to-date? ... can't check because of previous errors
+    projects have namespace: ... can't check, you have no projects
+    Projects have satellites? ... can't check, you have no projects
+    Redis version >= 2.0.0? ... yes
+    Your git bin path is "/usr/bin/git"
+    Git version >= 1.7.10 ? ... yes (1.8.5)
 
-Create /etc/rc.d/unicorn-gitlab.
+    Checking GitLab ... Finished
 
-    #!/bin/bash
+Make systemd see your new daemon unit files:
 
-    . /etc/rc.conf
-    . /etc/rc.d/functions
+    $ systemctl daemon-reload
 
+After starting the database backend (in this case MySQL), we can start
+Gitlab with its webserver (Unicorn):
 
-    PID=`pidof -o %PPID /usr/bin/ruby`
-    case "$1" in
-      start)
-        stat_busy "Starting unicorn"
-        [ -z "$PID" ] && sudo -u gitlab bash  -c  "source /home/gitlab/.bash_profile && cd /home/gitlab/gitlab/ && bundle exec unicorn_rails -c config/unicorn.rb -E production -D"
-        if [ $? -gt 0 ]; then
-          stat_fail
-        else
-          add_daemon unicorn
-          stat_done
-        fi
-        ;;
-      stop)
-        stat_busy "Stopping unicorn"
-        [ ! -z "$PID" ]  && kill $PID &> /dev/null
-        if [ $? -gt 0 ]; then
-          stat_fail
-        else
-          rm_daemon unicorn
-          stat_done
-        fi
-        ;;
-      restart)
-        $0 stop
-        sleep 1
-        $0 start
-        ;;
-      *)
-        echo "usage: $0 {start|stop|restart}"
-    esac
-    exit 0
+    $ systemctl start redis mysqld gitlab-sidekiq gitlab-unicorn
 
-Start unicorn:
+Replace mysqld with postgresql in the above command if you're using
+PostgreSQL.
 
-    # /etc/rc.d/unicorn-gitlab start
+To automatically launch GitLab at startup, run:
 
-Test it http://localhost:8080
+    $ systemctl enable gitlab.target gitlab-sidekiq gitlab-unicorn
 
-Add it to DAEMONS array in /etc/rc.conf
+Now test your Gitlab instance by visiting http://localhost:8080 or
+http://yourdomain.com and login with the default credentials:
 
-Redirect http port to unicorn server
+    username: admin@local.host
+    password: 5iveL!fe
 
-    # iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+That's it. GitLab should now be up and running.
 
-And test again, now http://localhost
+Advanced Configuration
+----------------------
 
-> Nginx and unicorn
+> HTTPS/SSL
+
+Change GitLab configs
+
+Modify /etc/webapps/gitlab/shell.yml so the url to your GitLab site
+starts with https://. Modify /etc/webapps/gitlab/gitlab.yml so that
+https: setting is set to true.
+
+Configure HTTPS server of choice
+
+Apache
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
+                           Notes: info needed       
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+Node.js
+
+You can easily set up an http proxy on port 443 to proxy traffic to the
+GitLab application on port 8080 using http-master for Node.js. After
+you've creates your domain's OpenSSL keys and have gotten you CA
+certificate (or self signed it), then go to
+https://github.com/CodeCharmLtd/http-master to learn how easy it is to
+proxy requests to GitLab using HTTPS. http-master is built on top of
+node-http-proxy.
+
+> Web server configuration
+
+If you want to integrate Gitlab into a running web server instead of
+using its build-in http server Unicorn, then follow these instructions.
+
+Nginx and unicorn
 
 Install nginx from the official repositories.
 
 Run these commands to setup nginx:
 
-    # wget https://raw.github.com/gitlabhq/gitlab-recipes/master/nginx/gitlab -P /etc/nginx/sites-available/
-    # ln -s /etc/nginx/sites-available/gitlab /etc/nginx/sites-enabled/gitlab 
+    ln -s /etc/nginx/sites-available/gitlab /etc/nginx/sites-enabled/gitlab
 
 Edit /etc/nginx/sites-enabled/gitlab and change YOUR_SERVER_IP and
 YOUR_SERVER_FQDN to the IP address and fully-qualified domain name of
-the host serving Gitlab. As you can see nginx needs to access
-/home/gitlab/gitlab/tmp/sockets/gitlab.socket socket file. You have to
-be able to run
-sudo -u http ls /home/gitlab/gitlab/tmp/sockets/gitlab.socket
-successfully. Otherwise setup access to the directory:
+the host serving Gitlab.
 
-    # chgrp http /home/gitlab
-    # chmod u=rwx,g=rx,o= /home/gitlab
+Restart gitlab.target, resque.service and nginx.
 
-Restart gitlab.service, resque.service and nginx.
-
-Unicorn is an HTTP server for Rack applications designed to only serve
-fast clients on low-latency, high-bandwidth connections and take
-advantage of features in Unix/Unix-like kernels. First we rename the
-example file and then we start unicorn:
-
-    # cd /home/gitlab/gitlab
-    # sudo -u gitlab cp config/unicorn.rb.orig config/unicorn.rb
-    # sudo -u gitlab bundle exec unicorn_rails -c config/unicorn.rb -E production -D
-
-> Apache and unicorn
+Apache and unicorn
 
 Install apache from the official repositories.
 
 Configure Unicorn
 
+Note:If the default path is not /home/git for your installation, change
+the below path accordingly
+
 As the official installation guide instructs, copy the unicorn
 configuration file:
 
-    # sudo -u gitlab -H cp /home/gitlab/gitlab/config/unicorn.rb.example /home/gitlab/gitlab/config/unicorn.rb
+    # sudo -u git -H cp /home/git/gitlab/config/unicorn.rb.example /home/git/gitlab/config/unicorn.rb
 
 Now edit config/unicorn.rb and add a listening port by uncommenting the
 following line:
@@ -584,143 +508,31 @@ you do not need it, remove it. Notice that the SSL virtual host needs a
 specific IP instead of generic. Also if you set a custom port for
 Unicorn, do not forget to set it at the BalanceMember line.
 
-    # mkdir -pv /etc/httpd/conf/vhosts/
-
-    /etc/httpd/conf/vhosts/gitlab
-
-    <VirtualHost *:80>
-      ServerName gitlab.myserver.com
-      ServerAlias www.gitlab.myserver.com
-      DocumentRoot /home/gitlab/gitlab/public
-      ErrorLog /var/log/httpd/gitlab_error_log
-      CustomLog /var/log/httpd/gitlab_access_log combined
-
-      <Proxy balancer://unicornservers>
-          BalancerMember http://127.0.0.1:8080
-      </Proxy>
-
-      <Directory /home/gitlab/gitlab/public>
-        AllowOverride All
-        Options -MultiViews
-      </Directory>
-
-      RewriteEngine on
-      RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
-      RewriteRule ^/(.*)$ balancer://unicornservers%{REQUEST_URI} [P,QSA,L]
-
-      ProxyPass /uploads !
-      ProxyPass / balancer://unicornservers/
-      ProxyPassReverse / balancer://unicornservers/
-      ProxyPreserveHost on
-
-       <Proxy *>
-          Order deny,allow
-          Allow from all
-       </Proxy>
-    </VirtualHost>
-
-    <VirtualHost MY_IP:443>
-      ServerName gitlab.myserver.com
-      ServerAlias www.gitlab.myserver.com
-      DocumentRoot /home/gitlab/gitlab/public
-      ErrorLog /var/log/httpd/gitlab_error_log
-      CustomLog /var/log/httpd/gitlab_access_log combined
-
-      <Proxy balancer://unicornservers>
-          BalancerMember http://127.0.0.1:8080
-      </Proxy>
-
-      <Directory /home/gitlab/gitlab/public>
-        AllowOverride All
-        Options -MultiViews
-      </Directory>
-
-      RewriteEngine on
-      RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
-      RewriteRule ^/(.*)$ balancer://unicornservers%{REQUEST_URI} [P,QSA,L]
-
-      ProxyPass /uploads !
-      ProxyPass / balancer://unicornservers/
-      ProxyPassReverse / balancer://unicornservers/
-      ProxyPreserveHost on
-
-       <Proxy *>
-          Order deny,allow
-          Allow from all
-       </Proxy>
-
-      SSLEngine on
-      SSLCertificateFile /home/gitlab/gitlab/ssl.cert
-      SSLCertificateKeyFile /home/gitlab/gitlab/ssl.key
-    </VirtualHost>
-
 Enable host and start unicorn
 
 Enable your Gitlab virtual host and reload Apache:
 
     /etc/httpd/conf/httpd.conf
 
-    Include conf/vhosts/gitlab
+     Include /etc/httpd/conf/extra/gitlab.conf
 
 Finally start unicorn:
 
-    # cd /home/gitlab/gitlab
-    # sudo -u gitlab bundle exec unicorn_rails -c config/unicorn.rb -E production -D
-
-SystemD support
----------------
-
-Note that you don't need the systemd units to launch shell scripts as
-suggested by the gitlab authors. Just make sure the ExecStart line
-points to the full path of the **bundle** executable.
-
-Create:
-
-    /etc/systemd/system/gitlab.service
-
-    [Unit]
-    Description=Gitlab Unicorn Rails server
-
-    [Service]
-    Type=simple
-    SyslogIdentifier=gl-unicorn
-    User=gitlab
-    PIDFile=/home/gitlab/gitlab/tmp/pids/unicorn.pid
-    WorkingDirectory=/home/gitlab/gitlab
-    TimeoutStartSec=600
-
-    ExecStart=/home/gitlab/bin/bundle exec unicorn_rails -c /home/gitlab/gitlab/config/unicorn.rb -E production -D
-    ExecReload=/bin/kill -HUP $MAINPID
-    ExecStop=/bin/kill -QUIT $MAINPID
-
-    [Install]
-    WantedBy=multi-user.target
-
-    /etc/systemd/system/resque.service
-
-
-    [Unit]
-    Description=Gitlab Resque
-
-    [Service]
-    Type=simple
-    SyslogIdentifier=gl-resque
-    User=gitlab
-    PIDFile=/home/gitlab/gitlab/tmp/pids/resque_worker.pid
-    WorkingDirectory=/home/gitlab/gitlab
-    TimeoutStartSec=600
-
-    ExecStart=/home/gitlab/bin/bundle exec rake environment resque:work QUEUE=post_receive,mailer,system_hook RAILS_ENV=production PIDFILE=tmp/pids/resque_worker.pid
-    ExecReload=/bin/kill -HUP $MAINPID
-    ExecStop=/bin/kill -QUIT $MAINPID
-
-    [Install]
-    WantedBy=multi-user.target
-
-Also see: https://github.com/gitlabhq/gitlab-recipes/issues/14
+    systemctl start gitlab-unicorn
 
 Useful Tips
 -----------
+
+> Fix Rake Warning
+
+When running rake tasks for the gitlab project, this error will occur:
+fatal: Not a git repository (or any of the parent directories): .git.
+This is a bug in bundler, and it can be safely ignored. However, if you
+want to git rid of the error, the following method can be used:
+
+     cd /usr/share/webapps/gitlab
+     sudo -u gitlab git init
+     sudo -u gitlab git commit -m "initial commit" --allow-empty
 
 > Hook into /var
 
@@ -735,7 +547,7 @@ Useful Tips
 
 Go to Gitlab's home directory
 
-    # cd /home/gitlab/gitlab
+    # cd /usr/share/webapps/gitlab
 
 and run
 
@@ -764,13 +576,8 @@ Restore the previously created backup file
 
     # sudo -u gitlab -H rake RAILS_ENV=production gitlab:backup:restore BACKUP=/home/gitlab/gitlab/tmp/backups/20130125_11h35_1359131740
 
-Note: Backup folder is set in conig.yml. Check
-#Application_specific_settings.
-
-> Update Gitlab
-
-When a new version is out follow the instructions at Github wiki. A new
-release is out every 22nd of a month.
+Note: Backup folder is set in config/gitlab.yml. GitLab backup and
+restore is documented here.
 
 > Migrate from sqlite to mysql
 
@@ -787,26 +594,93 @@ Finally restore old data.
 
     # sudo -u gitlab bundle exec rake db:data:load RAILS_ENV=production
 
+> Running GitLab with rvm
+
+To run gitlab with rvm first you have to set up an rvm:
+
+     curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3
+
+Note:Version 1.9.3 is currently recommended to avoid some compatibility
+issues.
+
+For the complete installation you will want to be the final user (e.g.
+git) so make sure to switch to this user and activate your rvm:
+
+     su - git
+     source "$HOME/.rvm/scripts/rvm"
+
+Then continue with the installation instructions from above. However,
+the systemd scripts will not work this way, because the environment for
+the rvm is not activated. The recommendation here is to create to
+separate shell scripts for puma and sidekiq to activate the environment
+and then start the service:
+
+    gitlab.sh
+
+    #!/bin/sh
+    source `/home/git/.rvm/bin/rvm 1.9.3 do rvm env --path`
+    RAILS_ENV=production bundle exec puma -C "/home/git/gitlab/config/puma.rb"
+
+    sidekiq.sh
+
+    #!/bin/sh
+    source `/home/git/.rvm/bin/rvm 1.9.3 do rvm env --path`
+    case $1 in
+        start)
+            bundle exec rake sidekiq:start RAILS_ENV=production
+            ;;
+        stop)
+            bundle exec rake sidekiq:stop RAILS_ENV=production
+            ;;
+        *)
+            echo "Usage $0 {start|stop}"
+    esac
+
+Then modify the above systemd files so they use these scripts. Modify
+the given lines:
+
+    gitlab.service
+
+    ExecStart=/home/git/bin/gitlab.sh
+
+    sidekiq.service
+
+    ExecStart=/home/git/bin/sidekiq.sh start
+    ExecStop=/home/git/bin/sidekiq.sh stop
+
 Troubleshooting
 ---------------
 
 Sometimes things may not work as expected. Be sure to visit the Trouble
 Shooting Guide.
 
+> HTTPS is not green (gravatar not using https)
+
+Redis caches gravatar images, so if you've visited your GitLab with
+http, then enabled https, gravatar will load up the non-secure images.
+You can clear the cache by doing
+
+    cd /usr/share/webapps/gitlab; bundle exec rake cache:clear
+
+as the gitlab user.
+
 See also
 --------
 
 -   Official Documentation
--   Gitlab recipes for setup on different platforms, update etc.
--   GitLab on an Ubuntu 10.04 server with Apache
--   Setting up gitlab on Debian 6
--   Installing Gitlab on CentOS 6
--   Gist: Install Gitlab on Debian Squeeze
--   Gist: Install Gitlab on Archlinux
+-   Gitlab recipes with further documentation on running it with several
+    webservers
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Gitlab&oldid=253911"
+"https://wiki.archlinux.org/index.php?title=Gitlab&oldid=306053"
 
 Category:
 
 -   Version Control System
+
+-   This page was last modified on 20 March 2014, at 17:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

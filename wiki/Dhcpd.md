@@ -1,21 +1,23 @@
-Dhcpd
+dhcpd
 =====
+
+Related articles
+
+-   dhcpcd
 
 dhcpd is the Internet Systems Consortium DHCP Server. It is useful for
 instance on a machine acting as a router on a LAN.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Tips and Tricks                                                    |
-|     -   3.1 Listening on only one interface                              |
-|                                                                          |
-| -   4 Notes                                                              |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Tips and Tricks
+    -   3.1 Listening on only one interface
+        -   3.1.1 Configuring dhcpd
+        -   3.1.2 Service file
+-   4 See also
 
 Installation
 ------------
@@ -32,7 +34,8 @@ those of another interface.
     # ip link set up dev eth0
     # ip addr add 139.96.30.100/24 dev eth0 # arbitrary address
 
-To have your static ip assigned at boot, you can use netcfg.
+To have your static ip assigned at boot, see Network
+configuration#Static IP address.
 
 The default dhcpd.conf contains many uncommented examples, so relocate
 it
@@ -52,10 +55,8 @@ Edit the configuration file to contain:
       range 139.96.30.150 139.96.30.250;
     }
 
-Start, and optionally, enable for autostart on boot, the dhcpd4.service
-daemon.
-
-Read Daemons for more information.
+Start the dhcpd daemon with dhcpd4.service using systemctl. Optionally,
+enable it to start automatically on boot.
 
 Now, any computer you connect over ethernet will be assigned an IPv4
 address (from 139.96.30.150 to 139.96.30.250 in this example).
@@ -67,31 +68,47 @@ Tips and Tricks
 
 If your computer is already part of one or several networks, it could be
 a problem if your computer starts giving ip addresses to machines from
-the other networks.
+the other networks. It can be done by either configuring dhcpd or
+starting it as a daemon with systemctl.
 
-In order to force the DHCP server to listen only on one of the network
-interfaces, you need to specify it in the dhcpd command line.
+Configuring dhcpd
 
-This is done by editing the configuration file:
+In order to exclude an interface, you must create an empty declartion
+for the subnet that will be configured on that interface.
 
-    /etc/conf.d/dhcp
+This is done by editing the configuration file (for example):
 
-    # Assuming the device of your lan is eth1
-    DHCP4_ARGS="-q eth1"
+    /etc/dhcpd.conf
 
-Another step is to tell the routing table on which interface to listen
-to for the 255.255.255.255 broadcasts:
+    # No DHCP service in DMZ network (192.168.2.0/24)
+    subnet 192.168.2.0 netmask 255.255.255.0 {
+    }
 
-    # ip route add 255.255.255.255 dev eth1
+Service file
 
-Now, the clients on eth1 will be managed by your DHCP server without
-having any impact on any client / server on any other ntework interface.
+There is no service files provided by default to use dhcpd only on one
+interface so yo need to create one:
 
-Notes
------
+     /etc/systemd/system/dhcpd4@.service
 
-You will see configuration files, etc. related to dhcpcd. That one is
-the DHCP client executable and has nothing to do with dhcpd.
+    [Unit]
+    Description=IPv4 DHCP server on %I
+    Wants=network.target
+    After=network.target
+
+    [Service]
+    Type=forking
+    PIDFile=/run/dhcpd4.pid
+    ExecStart=/usr/bin/dhcpd -4 -q -pf /run/dhcpd4.pid %I
+    KillSignal=SIGINT
+
+    [Install]
+    WantedBy=multi-user.target
+
+Now you can start dhcpd as a daemon which only listen to a specific
+interface, for exemple eth0.
+
+    # systemctl start dhcpd4@eth0.service
 
 See also
 --------
@@ -99,8 +116,15 @@ See also
 -   Dhcpcd
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dhcpd&oldid=241614"
+"https://wiki.archlinux.org/index.php?title=Dhcpd&oldid=305641"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 19 March 2014, at 18:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,24 +1,32 @@
 Rip Audio CDs
 =============
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with Optical     
+                           Disc Drive.              
+                           Notes: There's already   
+                           Optical Disc Drive#DVD   
+                           ripping. (Discuss)       
+  ------------------------ ------------------------ ------------------------
+
 CD rippers are designed to extract ("rip") the raw digital audio (in a
 format commonly called CDDA) from a compact disc to a file or other
 output. Most CD rippers also support burning audio to a CD and
 transcoding it on-the-fly.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Ripping                                                            |
-|     -   2.1 Using a CD ripper                                            |
-|     -   2.2 Using a simple shell script                                  |
-|                                                                          |
-| -   3 Post-processing                                                    |
-|     -   3.1 Tag Editors                                                  |
-|     -   3.2 Converting to other formats                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Ripping
+    -   2.1 Using a CD ripper
+    -   2.2 Using a simple shell script
+-   3 Post-processing
+    -   3.1 Tag editors
+    -   3.2 Converting to other formats
+-   4 See also
 
 Introduction
 ------------
@@ -41,7 +49,7 @@ Ripping
 
 > Using a CD ripper
 
-For some examples of CD rippers see: Common Applications#CD Ripping.
+For some examples of CD rippers see: List of Applications#CD Ripping.
 
 > Using a simple shell script
 
@@ -58,7 +66,7 @@ vorbis-tools packages, all available in the official repositories.
     CREATE_FLAC="false";
     CREATE_MKA="false";
 
-    WORKING_DIRECTORY=`pwd`
+    WORKING_DIRECTORY=$(pwd)
 
     function usage() 
     { 
@@ -82,7 +90,6 @@ vorbis-tools packages, all available in the official repositories.
       # remove selected special characters
       echo "$OUTPUT_STRING" | sed "s/\(.*\)[\\]\(.*\)/\1\2/g"
     }
-
 
     # store command line parameters
     if  [[ "$#" = "2" ]] ; then
@@ -164,9 +171,9 @@ vorbis-tools packages, all available in the official repositories.
 Post-processing
 ---------------
 
-> Tag Editors
+> Tag editors
 
-For some examples of audio tag editors see: Common Applications#Audio
+For some examples of audio tag editors see: List of Applications#Audio
 tag editors.
 
 > Converting to other formats
@@ -174,11 +181,24 @@ tag editors.
 If the CD ripper you used does not support the format you wanted to
 convert to you can use other encoders/decoders such as FFmpeg or
 MEncoder. Some simple scripts to convert from flac or other formats to
-mp3 can also be found on the wiki.
+MP3 can also be found on the wiki.
+
+See also
+--------
+
+-   RIAA and actual laws allow backup of physically obtained media under
+    these conditions RIAA - The Law.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Rip_Audio_CDs&oldid=243991"
+"https://wiki.archlinux.org/index.php?title=Rip_Audio_CDs&oldid=275558"
 
 Category:
 
 -   Optical
+
+-   This page was last modified on 15 September 2013, at 03:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

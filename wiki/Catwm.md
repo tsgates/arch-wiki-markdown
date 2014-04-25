@@ -1,24 +1,20 @@
 Catwm
 =====
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About                                                              |
-| -   2 Installation                                                       |
-|     -   2.1 Method 1                                                     |
-|     -   2.2 Method 2                                                     |
-|     -   2.3 Starting catwm when X is started                             |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Add Custom Keybindings                                       |
-|     -   3.2 Set Volume Up/Down Hotkeys                                   |
-|     -   3.3 Set Next/Previous Song Hotkeys                               |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 My volume hotkeys do not work!                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 About
+-   2 Installation
+    -   2.1 Method 1
+    -   2.2 Method 2
+    -   2.3 Starting catwm when X is started
+-   3 Configuration
+    -   3.1 Add Custom Keybindings
+    -   3.2 Set Volume Up/Down Hotkeys
+    -   3.3 Set Next/Previous Song Hotkeys
+-   4 Troubleshooting
+    -   4.1 My volume hotkeys do not work!
 
 About
 -----
@@ -133,9 +129,64 @@ would be:
     previously defined to use. In our case, it was thunarcmd[]. so we
     would do {.com = thunarcmd}. The .com stands for command.
 
+    { MOD, XK_Down, spawn, {.com = voldown}},
+    { MOD, XK_Up, spawn, {.com = volup}},
+
+That would set hotkeys that make Mod+Down lower the volume and Mod+Up
+raise the volume according to whatever volup and voldown are set to.
+
+To change what percentage the volume is incremented/decremented by, edit
+voldown and volup. For example, to make it 2% increments/decrements, you
+would do:
+
+    const char* voldown[] = {"amixer","set","PCM","2\%-",NULL};
+    const char* volup[] = {"amixer","set","PCM","2\%+",NULL};
+
+> Set Next/Previous Song Hotkeys
+
+NOTE: This requires mpd, and mpd software such as ncmpcpp or mpc,
+capable of changing songs from the command line.
+
+You must set hotkeys in config.h to point to next and prev. Here is an
+example:
+
+    { MOD|ShiftMask, XK_Right, spawn, {.com = next}},
+    { MOD|ShiftMask, XK_Left, spawn, {.com = prev}},
+
+This would set MOD+Shift+Right to go to the next song and MOD+Shift+Left
+to go to the previous song.
+
+Troubleshooting
+---------------
+
+> My volume hotkeys do not work!
+
+Make sure you have the right device defined in volup and voldown. Two
+common ones are "Master" and "PCM".
+
+    const char* voldown[] = {"amixer","set","Master","5\%-",NULL};
+    const char* volup[] = {"amixer","set","Master","5\%+",NULL};
+
+    const char* voldown[] = {"amixer","set","PCM","5\%-",NULL};
+    const char* volup[] = {"amixer","set","PCM","5\%+",NULL};
+
+If both of those do not work, try to use one of the devices outputted by
+the amixer command. Also make sure you have the alsa-utils package
+installed.
+
+If all of that still doesn't work, check to see if the device is not
+muted in alsamixer.
+
 Retrieved from
 "https://wiki.archlinux.org/index.php?title=Catwm&oldid=237974"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 3 December 2012, at 14:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

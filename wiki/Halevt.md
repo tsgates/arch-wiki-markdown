@@ -4,15 +4,13 @@ Halevt
 This document describes a method to configure halevt and traydevice in
 order to mount removable media.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Tips and Tricks                                                    |
-| -   4 Alternatives                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Tips and Tricks
+-   4 Alternatives
 
 Installation
 ------------
@@ -88,3 +86,10 @@ Retrieved from
 Category:
 
 -   Hardware detection and troubleshooting
+
+-   This page was last modified on 4 December 2012, at 16:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

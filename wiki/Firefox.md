@@ -1,58 +1,49 @@
 Firefox
 =======
 
-> Summary
+Related articles
 
-Installing and troubleshooting the Firefox browser and plugins
-
-> Related
-
-Browser Plugins
-
-Firefox Tweaks
-
-Chromium
-
-Opera
+-   Browser plugins
+-   Firefox tweaks
+-   Chromium
+-   Opera
 
 Firefox is a popular open-source graphical web browser from Mozilla.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Add-ons                                                            |
-| -   3 Plugins                                                            |
-|     -   3.1 GNOME Keyring integration                                    |
-|     -   3.2 KDE integration                                              |
-|     -   3.3 Dictionaries for spell checking                              |
-|     -   3.4 Adding Firefox search engines                                |
-|         -   3.4.1 arch-firefox-search                                    |
-|                                                                          |
-| -   4 Firefox derivatives                                                |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Setting your e-mail client                                   |
-|     -   5.2 Open containing folder problems (GNOME 3)                    |
-|     -   5.3 Open containing folder problems (KDE)                        |
-|     -   5.4 Firefox keeps creating ~/Desktop even when this is not       |
-|         desired                                                          |
-|     -   5.5 Make plugins respect blocked pop-ups                         |
-|     -   5.6 Middle-click errors                                          |
-|     -   5.7 Backspace does not work as the 'Back' button                 |
-|     -   5.8 Firefox does not remember login information                  |
-|     -   5.9 Unreadable input fields with dark GTK+ themes                |
-|     -   5.10 File association problems                                   |
-|     -   5.11 "I'm Feeling Lucky" Mode                                    |
-|     -   5.12 "Do you want Firefox to save your tabs for the next time it |
-|         starts?" dialog does not appear                                  |
-|     -   5.13 Firefox uses ugly fonts for its interface                   |
-|     -   5.14 Firefox uses ugly fonts on certain web pages                |
-|     -   5.15 Solve some Firefox font issues with Google Fonts            |
-|     -   5.16 The menu cannot pop-up after updating to Firefox 13         |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+    -   1.1 Firefox variants
+-   2 Add-ons
+-   3 Plugins
+    -   3.1 GNOME Keyring integration
+    -   3.2 KDE integration
+    -   3.3 Dictionaries for spell checking
+    -   3.4 Adding search engines
+        -   3.4.1 arch-firefox-search
+    -   3.5 Enable HTML5 H264 playback
+-   4 Troubleshooting
+    -   4.1 Setting your e-mail client
+    -   4.2 Open containing folder problems (GNOME 3)
+    -   4.3 Open containing folder problems (KDE)
+    -   4.4 Firefox keeps creating ~/Desktop even when this is not
+        desired
+    -   4.5 Make plugins respect blocked pop-ups
+    -   4.6 Middle-click errors
+    -   4.7 Backspace does not work as the 'Back' button
+    -   4.8 Firefox does not remember login information
+    -   4.9 Unreadable input fields with dark GTK+ themes
+    -   4.10 File association problems
+    -   4.11 "Do you want Firefox to save your tabs for the next time it
+        starts?" dialog does not appear
+    -   4.12 Firefox uses ugly fonts for its interface
+    -   4.13 Firefox uses ugly fonts on certain web pages
+        -   4.13.1 Terminus & Dina
+    -   4.14 Solve some Firefox font issues with Google Fonts
+    -   4.15 The menu cannot pop-up after updating to Firefox 13
+    -   4.16 HTML5 MP3 audio
+-   5 See also
 
 Installing
 ----------
@@ -70,6 +61,29 @@ If Firefox does not anti-alias and/or hint your fonts, try to install
 ttf-win7-fonts (preferred) or ttf-ms-fonts and take a look at Font
 Configuration.
 
+> Firefox variants
+
+-   Iceweasel — Fork of Firefox that is being developed by Debian. The
+    main difference is that it does not include any trademarked Mozilla
+    artwork.
+
+http://wiki.debian.org/Iceweasel || iceweasel
+
+Note:For some more information about Iceweasel's existance see this blog
+post.
+
+-   GNU IceCat — Web browser distributed by the GNU Project. It is made
+    entirely of free software and is compatible with the GNU/Linux
+    operating system and almost all of Firefox's addons.
+
+http://www.gnu.org/software/gnuzilla/ || icecat
+
+-   Firefox KDE — Version of Firefox that incorporates an OpenSUSE patch
+    for better KDE integration than is possible through simple Firefox
+    plugins.
+
+http://gitorious.org/firefox-kde-opensuse || firefox-kde-opensuse
+
 Add-ons
 -------
 
@@ -79,12 +93,12 @@ Firefox. You can find new add-ons or manage installed add-ons with
 Firefox's "Add-ons Manager."
 
 For a list of popular add-ons, see Mozilla's add-on list sorted by
-popularity.
+popularity. See also List of Firefox extensions on Wikipedia.
 
 Plugins
 -------
 
-See the main article: Browser Plugins
+See the main article: Browser plugins
 
 To find out what plugins are installed/enabled, enter:
 
@@ -96,20 +110,26 @@ Menu and select the Plugins tab.
 > GNOME Keyring integration
 
 Install firefox-gnome-keyring from the AUR to integrate Firefox with
-GNOME Keyring.
+GNOME Keyring. To make firefox-gnome-keyring use your login keychain,
+set extensions.gnome-keyring.keyringName to "login" (without the double
+quotes) in about:config. Note the lowercase 'l' despite the the keychain
+name having an uppercase 'L' in Seahorse.
 
 > KDE integration
+
+-   To bring the KDE look to GTK apps (including Firefox), install
+    oxygen-gtk2 and kde-gtk-config. After that, go to System Settings ->
+    Application Appearance -> GTK. Be sure to choose 'oxygen-gtk' in
+    'Select a GTK2 Theme' and check 'Show icons in GTK buttons' and
+    'Show icons in GTK menus'.
 
 -   To use KDE's KPart technology with Firefox, by embedding different
     KDE file viewers into the browser, you can install kpartsplugin.
 
--   To get further integration with KDE's Oxygen theme, you can install
-    Oxygen KDE, a very comprehensive theme that also has color scheme
-    detection, support for Firefox's Persona themes, support for both
-    the Oxygen and Faenza icons and various other customizations.
-
 -   For integration with KDE’s mime type system and file dialogs, one
-    can use a version of firefox with OpenSUSE’s patches applied.
+    can use firefox-kde-opensuse variant from AUR with OpenSUSE’s
+    patches applied, or firefox-kde-global-menu for that and appmenu
+    integration.
 
 > Dictionaries for spell checking
 
@@ -126,7 +146,12 @@ official repositories. You also need to install dictionaries for your
 language, such as hunspell-fr (for the French language) or hunspell-he
 (for Hebrew).
 
-> Adding Firefox search engines
+By default, Firefox will try to symlink all your hunspell dictionaries
+in /usr/lib/firefox/dictionaries. If you want to have less dictionaries
+offered to you in Firefox, you can remove some of those links. Be aware
+that it may not stand an upgrade of Firefox.
+
+> Adding search engines
 
 Search engines can be added to Firefox through normal add-ons, see this
 page for a list of available search engines.
@@ -138,8 +163,8 @@ search bar from any web site, by simply right clicking on the site's
 search field and selecting Add to Search Bar...
 
 If you want a manual solution, take a look at
-~/.mozilla/firefox/xxx.default/searchplugins/ (where xxx is your profile
-ID).
+~/.mozilla/firefox/xxxxxxxx.default/searchplugins/ (where xxxxxxxx is
+your profile ID).
 
 arch-firefox-search
 
@@ -147,29 +172,13 @@ Install the arch-firefox-search package, available in the official
 repositories, to add Arch-specific searches (AUR, wiki, forum, etc, as
 specified by user) to the Firefox search toolbar.
 
-Firefox derivatives
--------------------
+> Enable HTML5 H264 playback
 
--   Iceweasel — A fork of Firefox that is being developed by Debian. The
-    main difference is that it does not include any trademarked Mozilla
-    artwork.
-
-http://wiki.debian.org/Iceweasel || iceweasel
-
-Note:For some more information about Iceweasel's existance see this blog
-post.
-
--   GNU IceCat — A web browser distributed by the GNU Project. It is
-    made entirely of free software and is compatible with the GNU/Linux
-    operating system and almost all of Firefox's addons.
-
-http://www.gnu.org/software/gnuzilla/ || icecat
-
--   Firefox KDE — A version of Firefox that incorporates an OpenSUSE
-    patch for better KDE integration than is possible through simple
-    Firefox plugins.
-
-http://gitorious.org/firefox-kde-opensuse || firefox-kde-opensuse
+For Firefox >= 26, install the gstreamer0.10-ffmpeg package from the
+official repositories. Restart Firefox, and go to YouTube's HTML5 page
+or this page to verify that it is correctly installed and is in use. If
+it is still not working, try to install gstreamer0.10-ugly-plugins, or
+in last resort the whole gstreamer0.10-plugins group.
 
 Troubleshooting
 ---------------
@@ -179,7 +188,7 @@ Troubleshooting
 Firefox is usually set to open mailto links with a web application such
 as Gmail or Yahoo Mail. To set your e-mail client in Firefox to use with
 mailto links, go to Preferences > Applications and modify the action
-column corresponding to the mailto content type. You have set this to
+column corresponding to the mailto content type. You have to set this to
 the exact location of your e-mail client (e.g. /usr/bin/kmail for
 Kmail).
 
@@ -190,18 +199,18 @@ Folder" option in the Downloads manager, but Thunar or Wine Explorer
 launches instead, check these two lines in your user's
 ~/.local/share/applications/defaults.list:
 
-     inode/directory=<someprogram>.desktop
-     x-directory/normal=<someprogram>.desktop
+    inode/directory=someprogram.desktop
+    x-directory/normal=someprogram.desktop
 
-If <someprogram> is not nautilus, change them to be so.
+If someprogram is not nautilus, change them to be so.
 
 > Open containing folder problems (KDE)
 
 If Firefox launches something other than your preferred file manager
 when using the "Open Containing Folder" option in the Downloads manager,
-make sure you select your file manager of choice (e.g. Dolphin) in KDE's
-System Settings under Workspace Appearance and Behavior > Default
-Applications > File Manager.
+make sure you select your file manager of choice (e.g. kdebase-dolphin)
+in KDE's System Settings under Workspace Appearance and Behavior >
+Default Applications > File Manager.
 
 If Firefox is still not opening your file manager of choice, modify your
 user's ~/.local/share/applications/defaults.list to include these two
@@ -216,16 +225,16 @@ Firefox uses ~/Desktop as the default place for download and upload
 files. To set it to another folder, create ~/.config/user-dirs.dirs and
 add:
 
-    XDG_DESKTOP_DIR="/home/<user>/"
-    XDG_DOWNLOAD_DIR="/home/<user>/<dir>"
-    XDG_TEMPLATES_DIR="/home/<user>/<dir>"
-    XDG_PUBLICSHARE_DIR="/home/<user>/<dir>"
-    XDG_DOCUMENTS_DIR="/home/<user>/<dir>"
-    XDG_MUSIC_DIR="/home/<user>/<dir>"
-    XDG_PICTURES_DIR="/home/<user>/<dir>"
-    XDG_VIDEOS_DIR="/home/<user>/<dir>"
+    XDG_DESKTOP_DIR="/home/user/"
+    XDG_DOWNLOAD_DIR="/home/user/dir"
+    XDG_TEMPLATES_DIR="/home/user/dir"
+    XDG_PUBLICSHARE_DIR="/home/user/dir"
+    XDG_DOCUMENTS_DIR="/home/user/dir"
+    XDG_MUSIC_DIR="/home/user/dir"
+    XDG_PICTURES_DIR="/home/user/dir"
+    XDG_VIDEOS_DIR="/home/user/dir"
 
-Change <user> and <dir> to the actual directory.
+Change user and dir to the actual directory.
 
 > Make plugins respect blocked pop-ups
 
@@ -356,28 +365,9 @@ If you are using KDE you can also do the following:
 From now on Firefox should use the applications which are explicitly set
 in KDE.
 
-> "I'm Feeling Lucky" Mode
-
-Some search engines have a feeling lucky feature. For example Google has
-"I'm Feeling Lucky" and DuckDuckGo has "I'm Feeling Ducky".
-
-To activate them:
-
-1.  Type about:config in the address bar.
-2.  Search for the string keyword.url.
-3.  Modify its value (if any) to the URL of the search engine.
-
-For Google, set it to:
-
-    http://www.google.com/search?btnI=I%27m+Feeling+Lucky&q=
-
-For DuckDuckGo, set it to:
-
-    https://duckduckgo.com/?q=\
-
 > "Do you want Firefox to save your tabs for the next time it starts?" dialog does not appear
 
-From the Mozilla Support site:
+From the Mozilla support site:
 
 1.  Type about:config in the address bar.
 2.  Set browser.warnOnQuit to true.
@@ -399,7 +389,34 @@ http://i.imgur.com/SMVdi.png vs http://i.imgur.com/jNmxU.png
 
 To fix that, just disable bitmap fonts for X:
 
-    $ sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+    # ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+
+Terminus & Dina
+
+To disable all bitmap fonts but Terminus create a fonts.conf as below:
+
+    ~/.config/fontconfig/fonts.conf
+
+    <?xml version="1.0"?>
+    <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+    <fontconfig>
+        <!-- reject all bitmap fonts, with the exception of 'terminus' & 'dina' -->
+        <selectfont>
+            <acceptfont>
+                <pattern>
+                    <patelt name="family"> <string>Terminus</string> </patelt>
+                </pattern>
+                <pattern>
+                    <patelt name="family"> <string>Dina</string> </patelt>
+                </pattern>
+            </acceptfont>
+            <rejectfont>
+                <pattern>
+                    <patelt name="scalable"> <bool>false</bool> </patelt>
+                </pattern>
+            </rejectfont>
+        </selectfont>
+    </fontconfig>
 
 > Solve some Firefox font issues with Google Fonts
 
@@ -424,18 +441,38 @@ discouraged and you should set:
 
 For more information see the Fcitx page.
 
+> HTML5 MP3 audio
+
+Firefox experiences problems with playback of MP3 files inside HTML5
+<audio> elements. You can verify this by checking for these messages in
+the debug console:
+
+     Media resource http://www.jorickvanhees.com/SoundTest/brothersinarms320.mp3 could not be decoded.
+
+A workaround to make sites like SoundCloud use the Adobe Flash Player
+instead of relying on HTML5 audio is to set media.gstreamer.enabled to
+false in your about:config. According to this bug, it should be fixed
+with FF 26, but it still appears to be a problem for some users.
+
 See also
 --------
 
--   Official Website
+-   Official website
 -   Mozilla Foundation
--   Firefox Wiki
+-   Firefox wiki
 -   Firefox Add-ons
--   Firefox Persona Themes
+-   Firefox themes
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Firefox&oldid=255442"
+"https://wiki.archlinux.org/index.php?title=Firefox&oldid=305071"
 
 Category:
 
 -   Web Browser
+
+-   This page was last modified on 16 March 2014, at 12:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

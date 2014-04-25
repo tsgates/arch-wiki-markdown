@@ -11,15 +11,13 @@ available interfaces to access any of the available networks. The
 central application, giftd, uses a plugin-based architecture capable of
 using multiple networks simultaneously through a single user interface."
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Troubleshooting                                                    |
-| -   4 External resources                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Troubleshooting
+-   4 External resources
 
 Installation
 ------------
@@ -112,8 +110,15 @@ External resources
 -   For any questions, e-mail at dauoalagio@gmail.com
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Gift&oldid=205770"
+"https://wiki.archlinux.org/index.php?title=Gift&oldid=302637"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

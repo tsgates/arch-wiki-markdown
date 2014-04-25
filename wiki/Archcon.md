@@ -19,7 +19,6 @@ Toronto, Canada. July 22/23
 -   ArchCon Blog
 -   ArchCon Registration
 -   Archcon extra activities
--   Archcon Room Share
 
 ArchCon 2011 PL
 ---------------
@@ -29,8 +28,15 @@ Warsaw, Poland, July 23
 -   ArchCon 2011 PL
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Archcon&oldid=239020"
+"https://wiki.archlinux.org/index.php?title=Archcon&oldid=261117"
 
 Category:
 
 -   Events
+
+-   This page was last modified on 4 June 2013, at 14:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

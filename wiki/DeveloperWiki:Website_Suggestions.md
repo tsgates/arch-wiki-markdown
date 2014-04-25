@@ -1,19 +1,17 @@
 DeveloperWiki:Website Suggestions
 =================================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Ideas and Suggestions                                              |
-|     -   2.1 Reorganize link structure                                    |
-|     -   2.2 OpenID                                                       |
-|     -   2.3 Developer/Fellows profiles                                   |
-|     -   2.4 Navbar for internal Arch sites                               |
-|     -   2.5 Embed Ads by Google into content                             |
-|     -   2.6 URI Linking                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Ideas and Suggestions
+    -   2.1 Reorganize link structure
+    -   2.2 OpenID
+    -   2.3 Developer/Fellows profiles
+    -   2.4 Navbar for internal Arch sites
+    -   2.5 Embed Ads by Google into content
+    -   2.6 URI Linking
 
 Introduction
 ============
@@ -82,3 +80,10 @@ Retrieved from
 Category:
 
 -   Arch development
+
+-   This page was last modified on 9 November 2012, at 19:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

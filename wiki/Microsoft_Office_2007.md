@@ -11,82 +11,96 @@ Microsoft Office 2007
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-But it is still useful!
+Contents
+--------
+
+-   1 Install
+    -   1.1 Office 2007 SP3
+    -   1.2 Office 2007 Fonts
+    -   1.3 Winetricks
 
 Install
 -------
 
-(21/3/2012)
+Note: To work with JPG images (i.e. in PowerPoint) install lib32-lcms.
 
-Note: To work with JPG images (i.e. in PowerPoint) install lib32-lcsm.
+The following has been reported to work, using wine-1.5.0. See these
+forum posts for details:
 
-(21/3/2012)
+-   https://bbs.archlinux.org/viewtopic.php?id=138082
+-   https://bbs.archlinux.org/viewtopic.php?id=86436
 
-The following worked for me, using wine-1.5.0. The instructions below
-and the instructions on WineHQ
-(http://appdb.winehq.org/objectManager.php?sClass=version&iId=4992)
-didnt.
+Or have a look at the install instructions on Wine's Application
+Database
 
-https://bbs.archlinux.org/viewtopic.php?id=138082
+-   http://appdb.winehq.org/objectManager.php?sClass=version&iId=4992
 
-(10.25.11)
+Warning: You should never run Wine commands as root. Only run Wine as
+your user.
 
-This works great:
+To get office 2007 working, install bin32-wine, winetricks. This is
+necessary if you are running a x64 Arch, but are using a 32bit Office
+installer
 
-From forum post: https://bbs.archlinux.org/viewtopic.php?id=86436
+    # pacman -S wine winetricks wine_gecko wine-mono
 
-Note: You should never run wine commands as root. Run it as your user.
-
-...to get office 2007 working for me I installed bin32-wine, winetricks
-and then ran:
+Then run:
 
     $ WINEARCH=win32 WINEPREFIX=~/win32 winecfg
-    and set windows to xp and then ran:
 
-Note: See winetricks section below!!!
+A pop up will appear, set it to Windows XP, then run: (this download is
+~1gb so be prepared)
 
     $ WINEPREFIX=~/win32 winetricks msxml3  gdiplus riched20 riched30 vcrun2005sp1 allfonts
-    $ WINEPREFIX=~/win32 wine setup.exe
-    and then to actually use any of the executables you must cd to the directory. IE:
+
+Mount the installation image, then run:
+
+    $ WINEPREFIX=~/win32 wine /path/to/office2007image/setup.exe
+
+  
+ To actually use any of the executables you must cd to the directory.
+IE:
+
     $ cd ~/win32/drive_c/Program Files/Microsoft Office/Office12
     $ WINEPREFIX=~/win32 wine ./EXCEL.EXE
 
-You could set WINEPREFIX in your bash_profile, or make 32bit wine your
-default (then you only have to do WINEARCH=win32 winecfg). Anyway the
-two main problems I had were accidentally emulating 64bit (I know Wine
-Is Not Emulation) windows instead of 32 bit. Also I found that the
-programs hang if I didn't cd into the directory, probably because the
-dlls are linked with the local directory. Anyway everything works this
-way.
+You could set WINEPREFIX in your .bash_profile, or make 32bit wine your
+default (then you only have to do WINEARCH=win32 winecfg). Two reported
+issues are accidentally emulating 64bit Windows instead of 32 bit and
+that the programs hang if you don't cd into the directory, probably
+because the dlls are linked with the local directory.
 
-Note: I did not have to run via command or script like the guy does
-though. To execute the software I could just open it from the
-applicaiton menu.
+> Office 2007 SP3
 
-> Office 2k7 SP2
+To upgrade to Service Pack 3
 
 Download from:
-http://www.microsoft.com/download/en/confirmation.aspx?id=5
+http://www.microsoft.com/en-us/download/details.aspx?id=27838
 
 Install with:
 
-    WINEPREFIX=~/win32 wine office2007sp2-kb953195-fullfile-en-us.exe
+    WINEPREFIX=~/win32 wine office2007sp3-kb2526086-fullfile-en-us.exe
+
+> Office 2007 Fonts
+
+To install the Office 2007 Fonts, (this probably isn't necessary)
+
+First download ttf-office-2007-fonts from the AUR
+
+Change to the directory you will be building the package, then run
+
+    $ cabextract --filter *.TTF /path/to/office2007image/Enterprise.WW/EnterWW.cab
+
+Then proceed to install the package as usual.
+
+See MS Fonts for more details
 
 > Winetricks
 
-The droid font downloader in winetricks is broken. The url is part of
-the google git project atm. Either the maintainer of winetricks will
-update or kernel.org will change. I just chose to remove the droid font
-install from the winetricks script. I think you could create a .netrc
-file with password information in it but I did not test it or do it this
-way.
-
-If you visit:
-http://android.git.kernel.org/?p=platform/frameworks/base.git;a=blob_plain;f=data/fonts/
-and generate a password in a webbrowser then put it in ~/.netrc , then
-run the script without comments...might work.
-
-This is what I did:
+The droid font downloader in winetricks is broken. The URL is part of
+the google git project. Either the maintainer of winetricks will update
+or kernel.org will change. You can elect to remove the droid font
+install from the winetricks script.
 
     sudo nano -w /usr/bin/winetricks
 
@@ -140,9 +154,16 @@ Comment it out with:
 Save then execute the command from the installation section.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Microsoft_Office_2007&oldid=251876"
+"https://wiki.archlinux.org/index.php?title=Microsoft_Office_2007&oldid=303126"
 
 Categories:
 
 -   Office
 -   Wine
+
+-   This page was last modified on 4 March 2014, at 08:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

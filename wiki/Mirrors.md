@@ -1,65 +1,54 @@
 Mirrors
 =======
 
-> Summary
+Related articles
 
-Updating and managing package mirrors
-
-> Related
-
-Mirroring
-
-pacman
-
-reflector
+-   Mirroring
+-   pacman
+-   reflector
 
 This page is a guide to selecting and configuring your mirrors, and a
 listing of current available mirrors.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Enabling a specific mirror                                         |
-|     -   1.1 Force pacman to refresh the package lists                    |
-|                                                                          |
-| -   2 Mirror status                                                      |
-| -   3 Sorting mirrors                                                    |
-|     -   3.1 List by speed                                                |
-|     -   3.2 Combined listing by speed and status                         |
-|     -   3.3 Script to automate use of Pacman Mirrorlist Generator        |
-|     -   3.4 Using Reflector                                              |
-|     -   3.5 Choosing a local mirror                                      |
-|                                                                          |
-| -   4 Official mirrors                                                   |
-|     -   4.1 IPv6-ready mirrors                                           |
-|                                                                          |
-| -   5 Unofficial mirrors                                                 |
-|     -   5.1 Global                                                       |
-|     -   5.2 TOR Network                                                  |
-|     -   5.3 Singapore                                                    |
-|     -   5.4 Bulgaria                                                     |
-|     -   5.5 Viet Nam                                                     |
-|     -   5.6 China                                                        |
-|     -   5.7 France                                                       |
-|     -   5.8 Germany                                                      |
-|     -   5.9 Indonesia                                                    |
-|     -   5.10 Kazakhstan                                                  |
-|     -   5.11 Lithuania                                                   |
-|     -   5.12 Malaysia                                                    |
-|     -   5.13 New Zealand                                                 |
-|     -   5.14 Poland                                                      |
-|     -   5.15 Russia                                                      |
-|     -   5.16 South Africa                                                |
-|     -   5.17 United States                                               |
-|     -   5.18 Hyperboria                                                  |
-|                                                                          |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 Out-of-sync mirrors: corrupted packages/file not found       |
-|         -   6.1.1 Using all mirrors                                      |
-|                                                                          |
-| -   7 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Enabling a specific mirror
+    -   1.1 Force pacman to refresh the package lists
+-   2 Mirror status
+-   3 Sorting mirrors
+    -   3.1 List by speed
+    -   3.2 Combined listing by speed and status
+    -   3.3 Script to download from Mirrorlist Generator
+    -   3.4 Using Reflector
+    -   3.5 Choosing a local mirror
+-   4 Official mirrors
+    -   4.1 IPv6-ready mirrors
+-   5 Unofficial mirrors
+    -   5.1 Global
+    -   5.2 TOR Network
+    -   5.3 Austria
+    -   5.4 Bulgaria
+    -   5.5 China
+    -   5.6 France
+    -   5.7 Germany
+    -   5.8 India
+    -   5.9 Indonesia
+    -   5.10 Japan
+    -   5.11 Kazakhstan
+    -   5.12 Malaysia
+    -   5.13 New Zealand
+    -   5.14 Poland
+    -   5.15 Russia
+    -   5.16 Singapore
+    -   5.17 South Africa
+    -   5.18 United States
+    -   5.19 Viet Nam
+    -   5.20 Hyperboria
+-   6 Troubleshooting
+    -   6.1 Out-of-sync mirrors: corrupted packages/file not found
+        -   6.1.1 Using all mirrors
+-   7 See Also
 
 Enabling a specific mirror
 --------------------------
@@ -120,8 +109,7 @@ Mirror status
 -------------
 
 Check the status of the Arch mirrors and how updated they are by
-visiting http://www.archlinux.de/?page=MirrorStatus or
-https://www.archlinux.org/mirrors/status/.
+visiting https://www.archlinux.org/mirrors/status/.
 
 You can generate an up to date mirrorlist here, automate the process
 with a script, or install Reflector, a utility that generates a
@@ -162,7 +150,7 @@ with rankmirrors.
 
 Optionally run the following sed line to uncomment every mirror:
 
-    # sed '/^#\S/ s|#||' -i /etc/pacman.d/mirrorlist.backup
+    # sed -i 's/^#//' /etc/pacman.d/mirrorlist.backup
 
 Finally, rank the mirrors. Operand -n 6 means only output the 6 fastest
 mirrors:
@@ -188,46 +176,13 @@ When having mirror issues the above should be repeated. Or repeat once
 in a while even if not having mirror problems, to keep
 /etc/pacman.d/mirrorlist up to date.
 
-> Script to automate use of Pacman Mirrorlist Generator
+> Script to download from Mirrorlist Generator
 
-You can use the following shell script to update your mirrors based on
-the rankings produced by the Pacman Mirrorlist Generator. If you do not
-live in the United States, you can change the country variable.
-
-    updatemirrors.sh
-
-    #!/bin/sh
-
-    [ "$UID" != 0 ] && su=sudo
-
-    country='US'
-    url="https://www.archlinux.org/mirrorlist/?country=$country&protocol=ftp&protocol=http&ip_version=4&use_mirror_status=on"
-
-    tmpfile=$(mktemp --suffix=-mirrorlist)
-
-    # Get latest mirror list and save to tmpfile
-    wget -qO- "$url" | sed 's/^#Server/Server/g' > "$tmpfile"
-
-    # Backup and replace current mirrorlist file (if new file is non-zero)
-    if [ -s "$tmpfile" ]
-    then
-      { echo " Backing up the original mirrorlist..."
-        $su mv -i /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig; } &&
-      { echo " Rotating the new list into place..."
-        $su mv -i "$tmpfile" /etc/pacman.d/mirrorlist; }
-    else
-      echo " Unable to update, could not download list."
-    fi
-
-    # allow global read access (required for non-root yaourt execution)
-    chmod +r /etc/pacman.d/mirrorlist
-
-  
-
-Note:You will need to copy the text above, place it into a file, and run
-chmod +x on the file. If you are not currently logged in as root, the
-script will invoke sudo for you when it needs to rotate the new
-mirrorlist into place.
+The following shell script can be used to create a mirror list based on
+the rankings produced by the Pacman Mirrorlist Generator (the country
+variable will need to be changed if not living in the United States). It
+can be downloaded by invoking:
+curl http://pastebin.ca/raw/2404700 -o pacmrr, (view script).
 
 > Using Reflector
 
@@ -238,13 +193,13 @@ mirrors, sort them by speed and overwrite the file
 
 > Choosing a local mirror
 
-The simple way is to edit mirrorlist file by placing a local mirror at
-the top of the list. pacman will then use this mirror for preference.
+The simple way is to edit the mirrorlist file by placing a local mirror
+at the top of the list. pacman will then use this mirror for preference.
 
-Alternativley the pacman.conf file can be edited by placing a local
-mirror before the line sourcing the mirrorlist file, i.e. where it says
-"add your preferred servers here". It is safer if you use the same
-server for each repository.
+Alternatively /etc/pacman.conf can be edited by placing a local mirror
+before the line sourcing the mirrorlist file, i.e. where it says "add
+your preferred servers here". It is safer if you use the same server for
+each repository.
 
 Official mirrors
 ----------------
@@ -296,20 +251,16 @@ These mirrors are not listed in /etc/pacman.d/mirrorlist.
 -   http://cz2jqg7pj2hqanw7.onion/archlinux
 -   ftp://mirror:mirror@cz2jqg7pj2hqanw7.onion/archlinux
 
-> Singapore
+> Austria
 
--   http://mirror.nus.edu.sg/archlinux/
+-   http://gd.tuwien.ac.at/opsys/linux/archlinux/ - Vienna University of
+    Technology
+-   ftp://gd.tuwien.ac.at/opsys/linux/archlinux/
 
 > Bulgaria
 
 -   http://mirror.telepoint.bg/archlinux/
 -   ftp://mirror.telepoint.bg/archlinux/
-
-> Viet Nam
-
-FPT TELECOM
-
--   http://mirror-fpt-telecom.fpt.net/archlinux/
 
 > China
 
@@ -323,6 +274,7 @@ CHINA UNICOM
 
 > Cernet
 
+-   http://mirrors.zju.edu.cn/archlinux/ - Zhejian University
 -   http://ftp.sjtu.edu.cn/archlinux/ - Shanghai Jiaotong University
 -   ftp://ftp.sjtu.edu.cn/archlinux/
 -   http://mirrors.ustc.edu.cn/archlinux/ - University of Science and
@@ -332,6 +284,8 @@ CHINA UNICOM
 -   http://mirrors.4.tuna.tsinghua.edu.cn/archlinux/ (ipv4 only)
 -   http://mirrors.6.tuna.tsinghua.edu.cn/archlinux/ (ipv6 only)
 -   http://mirror.lzu.edu.cn/archlinux/ - Lanzhou University
+-   http://mirrors.huste.du.cn/archlinux - Huazhong University of
+    Science and Technology
 
 > France
 
@@ -348,6 +302,12 @@ CHINA UNICOM
 -   ftp://ftp.u-tx.net/archlinux/
 -   http://mirror.michael-eckert.net/archlinux/
 -   http://linux.rz.rub.de/archlinux/
+-   http://mirror.k42.ch/archlinux/
+
+> India
+
+-   http://ftp.iitm.ac.in/archlinux/
+-   ftp://ftp.iitm.ac.in/archlinux/
 
 > Indonesia
 
@@ -355,16 +315,18 @@ CHINA UNICOM
 -   http://kambing.ui.ac.id/archlinux/
 -   http://repo.ukdw.ac.id/archlinux/
 
+> Japan
+
+-   http://ftp.nara.wide.ad.jp/pub/Linux/archlinux/ - NAra Institute of
+    Science and Technology
+-   http://ftp.kddilabs.jp/Linux/packages/archlinux/
+-   http://srv2.ftp.ne.jp/Linux/packages/archlinux/
+
 > Kazakhstan
 
 -   http://archlinux.kz/
 -   http://mirror.neolabs.kz/archlinux/
 -   http://mirror-kt.neolabs.kz/archlinux/
-
-> Lithuania
-
--   http://edacval.homelinux.org/mirrors/archlinux/ - Only from LT,
-    without ISO
 
 > Malaysia
 
@@ -389,11 +351,12 @@ CHINA UNICOM
 -   http://mirrors.krasinfo.ru/archlinux/ - Krasnoyarsk,
     Classica-Service Ltd
 
+> Singapore
+
+-   http://mirror.nus.edu.sg/archlinux/
+
 > South Africa
 
--   http://ftp.sun.ac.za/ftp/pub/mirrors/archlinux/ - Stellenbosch
-    University
--   ftp://ftp.sun.ac.za/pub/mirrors/archlinux/
 -   http://ftp.leg.uct.ac.za/pub/linux/arch/ - University of Cape Town
 -   ftp://ftp.leg.uct.ac.za/pub/linux/arch/
 -   http://mirror.ufs.ac.za/archlinux/ - University of the Free State
@@ -408,7 +371,15 @@ CHINA UNICOM
 
 -   http://archlinux.linuxfreedom.com - Contains numerous ISO images but
     does not contain the ISO dated 2011.08.19
+-   http://mirror.clarkson.edu/archlinux/
 -   http://mirror.pointysoftware.net/archlinux/
+-   http://mirrors.acm.wpi.edu/archlinux/
+
+> Viet Nam
+
+FPT TELECOM
+
+-   http://mirror-fpt-telecom.fpt.net/archlinux/
 
 > Hyperboria
 
@@ -470,9 +441,16 @@ See Also
 -   MirUp – pacman mirrorlist downloader/checker
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mirrors&oldid=254002"
+"https://wiki.archlinux.org/index.php?title=Mirrors&oldid=299536"
 
 Categories:
 
 -   About Arch
 -   Package management
+
+-   This page was last modified on 21 February 2014, at 22:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

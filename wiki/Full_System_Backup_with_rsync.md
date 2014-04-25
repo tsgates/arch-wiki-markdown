@@ -1,17 +1,10 @@
 Full System Backup with rsync
 =============================
 
-> Summary
+Related articles
 
-Instructions on backing up the root tree, creating a bootable copy of
-your system, or for transferring your system to a new drive or
-partition.
-
-> Related
-
-Backup Programs
-
-rsync
+-   Backup Programs
+-   rsync
 
 This article is about using rsync to transfer a copy of your "/" tree,
 excluding a few select folders. This approach is considered to be better
@@ -25,29 +18,45 @@ going to take a while, you may freely browse the web during this time.
 Worst case scenario you won't get the same opened tabs when you restore
 the backup (or boot from it) because they weren't saved. Not a big deal.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 With a single command                                              |
-| -   2 Using a script                                                     |
-| -   3 Boot requirements                                                  |
-|     -   3.1 Update the fstab                                             |
-|     -   3.2 Update the bootloader's configuration file                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 With a single command
+-   2 Using a script
+-   3 Boot requirements
+    -   3.1 Update the fstab
+    -   3.2 Update the bootloader's configuration file
+-   4 First boot
+-   5 See also
 
 With a single command
 ---------------------
 
 As root, run:
 
-Note:If you plan on backing up your system somewhere other than /mnt or
-/media, don't forget to add it to the list, to avoid an infinite loop.
-
     # rsync -aAXv /* /path/to/backup/folder --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found}
 
 For information on why these folders were excluded, read the next
 section.
+
+Note:If you are heavy user of hardlinks, you might consider using
+additionally -H rsync's option, which by default is turned off as memory
+expensive during rsync run, but nowadays it should be no problem on most
+of modern machines. There are a lot of hard links below the /usr folder
+which save disk space.
+
+Note:If you plan on backing up your system somewhere other than /mnt or
+/media, don't forget to add it to the list, to avoid an infinite loop.
+Also, if there are any bind mounts in the system they should be excluded
+as well, as not to copy the bind mounted contents twice. The example
+below is a good place to start and excludes all the necessary
+directories that are typically common to all users of Arch Linux. Your
+system may have additional areas which you may also want to exclude. Use
+the mount command to list system mounts for additional insight on what
+to exclude.
+
+Note:You may want to add rsync's --delete option if you are running this
+multiple times to the same backup folder
 
 Using a script
 --------------
@@ -64,6 +73,9 @@ Note:Again, if you plan on backing up your system somewhere other than
 /mnt or /media, don't forget to add it to the list, to avoid an infinite
 loop.
 
+Note:You may want to add rsync's --delete option if you are running this
+multiple times to the same backup folder
+
     $ cd ~/Scripts
     $ nano backup.sh
 
@@ -75,14 +87,28 @@ loop.
     elif [ $# -gt 1 ]; then
         echo "Too many arguments. Usage: $0 destination" >&2
         exit 1
+    elif [ ! -d "$1" ]; then
+       echo "Invalid path: $1" >&2
+       exit 1
+    elif [ ! -w "$1" ]; then
+       echo "Directory not writable: $1" >&2
+       exit 1
     fi
+
+    case "$1" in
+      "/mnt") ;;
+      "/mnt/"*) ;;
+      "/media") ;;
+      "/media/"*) ;;
+      *) echo "Destination not allowed." >&2 
+         exit 1 
+         ;;
+    esac
 
     START=$(date +%s)
     rsync -aAXv /* $1 --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/var/lib/pacman/sync/*}
     FINISH=$(date +%s)
-    echo "total time: $(( ($FINISH-$START) / 60 )) minutes, $(( ($FINISH-$START) % 60 )) seconds"
-
-    touch $1/"Backup from $(date '+%A, %d %B %Y, %T')"
+    echo "total time: $(( ($FINISH-$START) / 60 )) minutes, $(( ($FINISH-$START) % 60 )) seconds" | tee $1/"Backup from $(date '+%A, %d %B %Y, %T')"
 
     $ chmod +x backup.sh
 
@@ -92,8 +118,9 @@ created), /lost+found is filesystem-specific. For Arch Linux,
 /var/lib/pacman/sync/* can also be excluded. This can save a lot of time
 on every backup since the directory contains many small files that tend
 to change quite often. These are description files for every package
-from the repositories and can be re-generated with pacman -Syu.
-Additionally, you may also want to skip /home/*/.thumbnails/*,
+from the repositories and can be re-generated with pacman -Syu.Also
+/var/log/journal/* may be skipped as it contains large number of systemd
+logs. Additionally, you may also want to skip /home/*/.thumbnails/*,
 /home/*/.mozilla/firefox/*.default/Cache/* and
 /home/*/.cache/chromium/*.
 
@@ -170,9 +197,49 @@ grub.cfg file:
     # pacman -S os-prober
     # grub-mkconfig -o /boot/grub/grub.cfg
 
+Also verify the new menu entry in /boot/grub/grub.cfg. Make sure the
+UUID is matching the good partition, or else it could still boot on the
+old system.
+
+First boot
+----------
+
+Reboot the computer and select the right entry in the bootloader. This
+will load the system for the first time. All peripherals should be
+detected and the empty folders in / will be populated.
+
+Now you can re-edit /etc/fstab to add the previously removed partitions
+and mount points.
+
+If you transferred the data from HDD to SSD (solid state drive), don't
+forget to activate TRIM. Also consider using HDD and tmpfs mount points
+to reduce SSD wearing - see Relocate files to tmpfs and Tips for
+Minimizing SSD Read & Writes.
+
+Note:You may have to reboot again in order to get all services and
+daemons working correctly. Personally, pulseaudio would not initialise
+because of a module loading error. I restarted the dbus.service to make
+it work.
+
+See also
+--------
+
+1.  Howto – local and remote snapshot backup using rsync with hard links
+    Includes file deduplication with hard-links, MD5 integrity
+    signature, 'chattr' protection, filter rules, disk quota, retention
+    policy with exponential distribution (backups rotation while saving
+    more recent backups than older)
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Full_System_Backup_with_rsync&oldid=255907"
+"https://wiki.archlinux.org/index.php?title=Full_System_Backup_with_rsync&oldid=299518"
 
 Category:
 
 -   System recovery
+
+-   This page was last modified on 21 February 2014, at 22:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

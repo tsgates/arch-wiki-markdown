@@ -22,82 +22,61 @@ GNOME Tips
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 XDG User Directories                                               |
-| -   2 Configuration Tips                                                 |
-|     -   2.1 Add/Edit GDM Sessions                                        |
-|     -   2.2 GDM appearance                                               |
-|         -   2.2.1 GDM wallpaper                                          |
-|                                                                          |
-|     -   2.3 Default applications                                         |
-|     -   2.4 Enable Volume Control as tray notification                   |
-|     -   2.5 Fonts Seem Skewed                                            |
-|     -   2.6 Change the Default Background Image                          |
-|     -   2.7 Change the Default Background Color, Opacity, etc.           |
-|     -   2.8 Disable confirmation window when closing gnome-terminal      |
-|                                                                          |
-| -   3 Miscellaneous Tips                                                 |
-|     -   3.1 Screen Lock                                                  |
-|     -   3.2 Nautilus Tips                                                |
-|         -   3.2.1 Change Browser Mode (Spatial View)                     |
-|         -   3.2.2 Music Information Columns in List View (bit rate,      |
-|             etc.)                                                        |
-|         -   3.2.3 Stop Nautilus drawing the desktop                      |
-|         -   3.2.4 Thumbnails                                             |
-|         -   3.2.5 Turn off Authentication needed to mount internal drive |
-|             in Nautilus                                                  |
-|                                                                          |
-|     -   3.3 Speed Up Panel Autohide                                      |
-|         -   3.3.1 panel_show_delay / panel_hide_delay                    |
-|         -   3.3.2 Panel animation_speed                                  |
-|                                                                          |
-|     -   3.4 GNOME Menu Tips                                              |
-|         -   3.4.1 Speed Tweak                                            |
-|         -   3.4.2 Menu Editing                                           |
-|             -   3.4.2.1 User menus                                       |
-|             -   3.4.2.2 Group menus, System menus                        |
-|                                                                          |
-|         -   3.4.3 Change the GNOME Foot Icon to an Arch Icon             |
-|         -   3.4.4 Change the GNOME Foot Icon to an Arch Icon (without    |
-|             root access)                                                 |
-|         -   3.4.5 Custom Icon using gconf-editor                         |
-|         -   3.4.6 Removing default icons from desktop                    |
-|                                                                          |
-|     -   3.5 Disabling scroll in taskbar                                  |
-|     -   3.6 Custom transitioning background                              |
-|         -   3.6.1 Manual                                                 |
-|         -   3.6.2 Automatic                                              |
-|         -   3.6.3 GUI                                                    |
-|                                                                          |
-|     -   3.7 Change default size of gnome-terminal                        |
-|         -   3.7.1 Method 1                                               |
-|         -   3.7.2 Method 2                                               |
-|                                                                          |
-|     -   3.8 Install a cursor theme                                       |
-|     -   3.9 Autostart programs                                           |
-|                                                                          |
-| -   4 gnome-screensaver                                                  |
-|     -   4.1 Leave message feature in gnome-screensaver                   |
-|     -   4.2 Change gnome-screensaver background                          |
-|                                                                          |
-| -   5 Toolbar style in GTK applications                                  |
-| -   6 Missing icons in System Menu                                       |
-| -   7 Nautilus location entry                                            |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-XDG User Directories
---------------------
+-   1 Configuration tips
+    -   1.1 Add/edit GDM eessions
+    -   1.2 GDM appearance
+        -   1.2.1 GDM wallpaper
+    -   1.3 Default applications
+    -   1.4 Fonts seem skewed
+    -   1.5 Change the default background color, opacity, etc.
+    -   1.6 Disable confirmation window when closing gnome-terminal
+    -   1.7 Start application with another language
+-   2 Miscellaneous tips
+    -   2.1 Nautilus tips
+        -   2.1.1 Change browser mode (spatial view)
+        -   2.1.2 Music information columns in list view (bit rate,
+            etc.)
+        -   2.1.3 Thumbnails
+        -   2.1.4 Turn off Authentication needed to mount internal drive
+            in Nautilus
+    -   2.2 Speed up panel autohide
+        -   2.2.1 panel_show_delay / panel_hide_delay
+        -   2.2.2 Panel animation_speed
+    -   2.3 GNOME menu tips
+        -   2.3.1 Speed tweak
+        -   2.3.2 Menu editing
+            -   2.3.2.1 User menus
+            -   2.3.2.2 Group menus, System menus
+        -   2.3.3 Change the GNOME foot icon to an Arch icon
+        -   2.3.4 Change the GNOME foot icon to an Arch icon (without
+            root access)
+        -   2.3.5 Custom icon using gconf-editor
+        -   2.3.6 Removing default icons from desktop
+    -   2.4 Disabling scroll in taskbar
+    -   2.5 Custom transitioning background
+        -   2.5.1 Manual
+        -   2.5.2 Automatic
+        -   2.5.3 GUI
+    -   2.6 Change default size of gnome-terminal
+        -   2.6.1 Method 1
+        -   2.6.2 Method 2
+    -   2.7 Install a cursor theme
+    -   2.8 Autostart programs
+-   3 gnome-screensaver
+    -   3.1 Leave message feature in gnome-screensaver
+    -   3.2 Change gnome-screensaver background
+-   4 Toolbar style in GTK+ applications
+-   5 Missing icons in System Menu
+-   6 Nautilus location entry
+-   7 See also
 
-See Xdg user directories.
-
-Configuration Tips
+Configuration tips
 ------------------
 
-> Add/Edit GDM Sessions
+> Add/edit GDM eessions
 
 Each session is a .desktop file located at /usr/share/xsessions/.
 
@@ -141,7 +120,7 @@ them executable. An example of running these scripts appears below.
     /usr/local/bin/prep-gdm-vars
 
     #  This script must be run using '.' or 'source'
-    `dbus-launch | sed "s/^/export /"`
+    $(dbus-launch | sed "s/^/export /")
 
     /usr/local/bin/show-avail-gdm-bkgd
 
@@ -150,7 +129,7 @@ them executable. An example of running these scripts appears below.
     #  Specify any folder within /usr/share/backgrounds.
     #  If you omit the folder, you'll be shown available choices.
     file_part="/usr/share/backgrounds/"
-    if ! [ $1 ]; then
+    if ! [ $1 ]; then
       echo -en \\n  Please specify one of these directories:\\n\\n\\040
       ls $file_part; echo; exit 1; fi
     ls ${file_part}/$1
@@ -175,9 +154,6 @@ using the scripts listed above. It starts with a normal user's terminal
 and assumes he is able to open a bash session as root. The root user
 then opens a session as "gdm" and changes the wallpaper.
 
-    $ su -
-    Password: 
-
     # xhost +
     access control disabled, clients can connect from any host
     # su - gdm -s /bin/bash
@@ -196,7 +172,6 @@ then opens a session as "gdm" and changes the wallpaper.
     -bash-4.2$ logout
 
     # logout
-    $
 
 Script revise-gdm-bkgd may also be used to change your normal user
 background from the command prompt. Admittedly, the script name does not
@@ -216,43 +191,23 @@ If you want to do everything manually, create
 /usr/share/applications/defaults.list with the following format:
 
     [Default Applications]
-    application/pdf=evince.desktop
-    image/jpeg=eog.desktop
-    ...
+     application/pdf=evince.desktop
+     image/jpeg=eog.desktop
+     ...
 
-> Enable Volume Control as tray notification
-
-Some users will have noticed that there is no volume control by default.
-It either can be added as an object to the panel or as a notification
-icon in the systray. To do the last one you have to replace gnome-media
-with gnome-media-pulse. This will install the volume control manager
-developed by Red Hat and used in distributions such as Ubuntu or Fedora.
-
-> Fonts Seem Skewed
+> Fonts seem skewed
 
 You can alter the DPI of your fonts in GNOME with right-click on the
-desktop → Change desktop background → Fonts → Details → Resolution
+desktop > Change desktop background > Fonts > Details > Resolution.
 
-> Change the Default Background Image
-
-The default background is that zoomed in picture of a green leaf. It
-appears for newly created users, but more importantly, this is the image
-shown when the screen is locked. As of 25-Apr-2009, you can find this
-image here
-
-    /usr/share/pixmaps/backgrounds/gnome/background-default.jpg
-
-To change it, simply copy your favorite image to this location (as root)
-and rename it.
-
-> Change the Default Background Color, Opacity, etc.
+> Change the default background color, opacity, etc.
 
 The default background color is green. You might want to change it if
 you're using a transparent PNG as background.
 
     $ sudo gconf-editor
 
-Go to File → New Defaults Window and edit the keys
+Go to File > New Defaults Window and edit the keys
 
     /desktop/gnome/background/primary_color
 
@@ -270,29 +225,32 @@ start gconf-editor and disable confirmation_window_close variable in
 /apps/gnome-terminal/global. Please note that although this setting is
 not set via dconf-editor it also works in the GNOME Shell.
 
-Miscellaneous Tips
+> Start application with another language
+
+If you want to start an application with another language as the
+system's default one, you can change the application's desktop file in
+~/.local/share/applications'' for yourself or in /usr/share/applications
+for everyone like shown below.
+
+Find the desktop file of the application which you want to start with
+another language. Go to theExec row: (here for Empathy):
+
+    Exec=empathy %f
+
+and change it to:
+
+    Exec=env LANG=de_DE.UTF-8 empathy %f
+
+From now on that application will start with the chosen language.
+
+Miscellaneous tips
 ------------------
 
-> Screen Lock
-
-1.  Make sure that dbus is running (probably a good idea to add it to
-    the daemons array in /etc/rc.conf).
-2.  Install xscreensaver.
-3.  Go to Desktop -> Preferences -> Screensaver
-4.  Enable one or more screensavers
-5.  Lock Screen will now start your screensaver and require your
-    password to stop it.
-
-or you can install gnome-screensaver.
-
-Also you can find here how to replace gnome-screensaver with
-xscreensaver.
-
-> Nautilus Tips
+> Nautilus tips
 
 Get a certain path in spatial view? Just press Ctrl+l.
 
-Change Browser Mode (Spatial View)
+Change browser mode (spatial view)
 
 1.  Start gconf-editor
 2.  Browse to apps/nautilus/preferences
@@ -302,11 +260,11 @@ Change Browser Mode (Spatial View)
 
 Or you can do this through the preferences:
 
-1.  In a Nautilus window go to Edit>>Preferences
+1.  In a Nautilus window go to Edit > Preferences
 2.  Change to the Behaviour tab
 3.  Check (or uncheck) Always Open in Browser Windows
 
-Music Information Columns in List View (bit rate, etc.)
+Music information columns in list view (bit rate, etc.)
 
 Nautilus lacks the ability to display metadata for music files in list
 view mode. A Python script was written to add columns for:
@@ -316,32 +274,22 @@ view mode. A Python script was written to add columns for:
 -   Track Title
 -   Bit Rate
 
-First, install the package mutagen.
-
-And, from the AUR, install python-nautilus.
+First, install the mutagen and python-nautilus-git.
 
 Now, create a directory called python-extensions in ~/.nautilus. Place
 the following script, named bsc.py, in this newly created folder. You
 may download the script here: [bsc.py] (please drop --stefanwilkens a
-line if this goes down)  
- Mirror: [bsc.py]
+line if this goes down)
+
+Mirror: [bsc.py]
 
 bas-v2.py adds fixes and more media support (link at bottom of 4th
-post).  
- Mirror: bsc-v2.py
+post).
+
+Mirror: bsc-v2.py
 
 Restart nautilus. You can now configure this new functionallity in Edit
 -> Preferences -> List Columns
-
-Stop Nautilus drawing the desktop
-
-You need to open the gconf-editor:
-
-    apps>nautilus>preferences untick "show_desktop"
-
-In breezy you also need to go to:
-
-    desktop>gnome>background and untick "draw_background"
 
 Thumbnails
 
@@ -365,8 +313,23 @@ Turn off Authentication needed to mount internal drive in Nautilus
 
 In Ubuntu and other distros you are allowed to mount internal drives by
 clicking on them without the need for entering a password. To get this
-behaviour in stock GNOME, just create the following file in PolicyKit
-Local Authority:
+behaviour in stock GNOME, just create the following JavaScript rule:
+
+    /etc/polkit-1/rules.d/10-auth.rules
+
+    polkit.addRule(function(action, subject) {
+                   if (action.id="org.freedesktop.udisks2.filesystem-mount-system" && subject.isInGroup("storage")) {
+                           return polkit.Result.YES;
+                       }
+                   }
+               );
+
+Note: this adds very broad permissions. To only add the same permissions
+for internal filesystems as for external filesystems, use
+https://gist.github.com/grawity/3886114#file-udisks2-allow-mount-internal-js
+
+Older Polkit versions will require the following file in PolicyKit Local
+Authority instead:
 
     /etc/polkit-1/localauthority/50-local.d/50-filesystem-mount-system-internal.pkla
 
@@ -375,7 +338,7 @@ Local Authority:
     Action=org.freedesktop.udisks2.filesystem-mount-system
     ResultActive=yes
 
-> Speed Up Panel Autohide
+> Speed up panel autohide
 
 panel_show_delay / panel_hide_delay
 
@@ -396,7 +359,7 @@ Panel animation_speed
 Now that the panel show/hide delay has the panels beginning to appear in
 a reasonable length of time, why does it take the panel so long to
 actually pop up? There is one more setting you need to add/change to
-make the panel behavior crisp. The setting: animation_speed This setting
+make the panel behavior crisp. The setting animation_speed: ihis setting
 can be applied globally or on a per-panel basis just like the
 panel_show_delay and panel_hide_delay. The official description is:
 
@@ -417,22 +380,20 @@ for example:
 -   /apps/panel/toplevels/panel_0/ (usually the default name for the
     first additional panel)
 
-Note: the key panel_amination_speed is deprecated, use: animation_speed.
+{Note|The key panel_amination_speed is deprecated, use:
+animation_speed.}}
 
-> GNOME Menu Tips
+> GNOME menu tips
 
-Speed Tweak
+Speed tweak
 
-You can remove the delay in GNOME menus by running this command:
+You can remove the delay in GNOME menus by appending
+"gtk-menu-popup-delay = 0" to ~/.gtkrc-2.0.
 
-    echo "gtk-menu-popup-delay = 0" >> ~/.gtkrc-2.0
-
-Or just add "gtk-menu-popup-delay = 0" to .gtkrc-2.0
-
-However, this setting is reported to crash banshee, and possibly other
+However, this setting is reported to crash Banshee, and possibly other
 programs.
 
-Menu Editing
+Menu editing
 
 Most GNOME users complain about the menu. Changing menu entries
 system-wide or for one or several users alone is poorly documented.
@@ -481,18 +442,17 @@ Here is an example how a Scite menu entry definition file could look:
     Categories=GNOME;Application;Development;
     StartupNotify=true
 
-Change the GNOME Foot Icon to an Arch Icon
+Change the GNOME foot icon to an Arch icon
 
-Note:Thanks to arkham who posted this method in [this forum post] which
-I have typed up here.
+Note:Thanks to arkham who posted this method in this forum post.
 
--   Download [this Arch icon] (filename is starthere.png)
+-   Download this Arch icon (filename is starthere.png)
 -   Alternatively get the artwork package by installing
     archlinux-artwork, this puts all artwork in the /usr/share/archlinux
     directory, and resize your desired logo to 24x24px
--   Figure out which icon set you are using (right-click desktop>Change
-    Background Image>Theme>Customize>Icon). For example, Crux, *GNOME,
-    High Contrast, High Contrast Inverse, Mist, etc.)
+-   Figure out which icon set you are using (right-click desktop >
+    Change Background Image > Theme > Customize > Icon). For example,
+    Crux, *GNOME, High Contrast, High Contrast Inverse, Mist, etc.)
 -   Now make a backup of your current GNOME icon in the correct
     directory. In the example below, I am using the GNOME icons but
     adjust the directory structure accordingly for your icon set:
@@ -508,35 +468,29 @@ I have typed up here.
 
     $ pkill gnome-panel
 
-Note:To get this to work (gnome 2.28) I had to delete the
-icon-theme.cache file in /usr/share/icons/gnome.
+Change the GNOME foot icon to an Arch icon (without root access)
 
-Change the GNOME Foot Icon to an Arch Icon (without root access)
-
--   Figure out which icon set you're using (right-click desktop>Change
-    Background Image>Theme>Customize>Icon). For example, Crux, *GNOME,
-    High Contrast, High Contrast Inverse, Mist, etc.)
+-   Figure out which icon set you're using (right-click on desktop >
+    Change Background Image > Theme > Customize > Icon). For example,
+    Crux, *GNOME, High Contrast, High Contrast Inverse, Mist, etc.)
 -   Duplicate that icon set's directory structure for 24x24/places in
     your home directory under .icons
 
-    $ mkdir -p ~/.icons/<your-icon-set>/24x24/places
+    $ mkdir -p ~/.icons/your_icon_set/24x24/places
 
 -   Download this Arch icon into that directory as 'start-here.png'
 
-    $ wget -O ~/.icons/<your-icon-set>/24x24/places/start-here.png http://img23.imageshack.us/img23/9679/starthere.png
+    $ wget -O ~/.icons/your_icon_set/24x24/places/start-here.png http://img23.imageshack.us/img23/9679/starthere.png
 
--   Alternatively get the artwork package using "pacman -S
-    archlinux-artwork", this puts all artwork in the
-    /usr/share/archlinux directory, and resize your desired logo to
-    24x24px and copy it into that directory as 'start-here.png'
+-   Alternatively get the artwork package using archlinux-artwork
+    package, this puts all artwork in the /usr/share/archlinux
+    directory, and resize your desired logo to 24x24px and copy it into
+    that directory as 'start-here.png'
 -   Restart your gnome-panels and the new Arch logo should be displayed
 
     $ pkill gnome-panel
 
-Note:To get this to work (gnome 2.28) I had to delete the
-icon-theme.cache file in /usr/share/icons/gnome.
-
-Custom Icon using gconf-editor
+Custom icon using gconf-editor
 
 1.  Open the configuration editor in GNOME (it should be in System Tools
     of your main menu) or run gconf-editor
@@ -557,8 +511,8 @@ is how to remove home folder, computer and trash from desktop:
 
 1.  Open terminal
 2.  On terminal type: gconf-editor
-3.  Configuration Editor opens. From there navigate to: apps -->
-    nautilus --> desktop
+3.  Configuration Editor opens. From there navigate to: apps > nautilus
+    > desktop
 4.  Untick all the icons you dont want to see
 5.  You are done, the icons should disappear immediately
 
@@ -578,7 +532,7 @@ described here [2].
 This bug will be probably never fixed, but we have the Arch Build
 System, so we can build custom software. Install abs (+70Mb), then
 
-    cp -r /var/abs/extra/libwnck /home/{your name}/Desktop/somewhere
+    cp -r /var/abs/extra/libwnck ~/Desktop/somewhere
 
 Navigate to that directory, then
 
@@ -659,83 +613,8 @@ Automatic
 
 There is also a script which automates this process:
 
-    #!/bin/sh
-    #This script creates XML files that can act as dynamic wallpapers for GNOME by referring to multiple wallpapers
-    #Coded by David J Krajnik
-
-    if [ "$*" = "" ]; then
-      echo "This script creates XML files that can act as dynamic backgrounds for GNOME by referring to multiple wallpapers";
-      echo "Usage: mkwlppr target-file.xml [duration] pic1 pic2 [pic3 .. picN]";
-    else
-      files=$*;
-      #Grab the name of the target xml file
-      xmlfile=`echo $files | cut -d " " -f 1`;
-      #remove the first item from $files
-      files=`echo $files | sed 's/^\<[^ ]*\>//'`;
-      if [ "`echo $xmlfile | grep '\.xml$'`" = "" ]; then
-        echo "Your target file must be an XML file";
-      else
-        inputIsValid="true";
-        firstItem=`echo $files | cut -d " " -f 1`;
-        duration="1795.0";#set the default duration
-        if [ "`echo $firstItem | grep '^[0-9]\+\.[0-9]\+$'`" != "" ]; then
-          echo "The duration must be an integer";
-          files=`echo $files | sed 's/^\<[^ ]*\>//'`;
-          inputIsValid="";
-        elif [ "`echo $firstItem | grep '^[0-9]\+$'`" != "" ]; then
-          #If the item is a number, then use it as the duration for each wallpaper image
-          duration="`expr $firstItem - 5`.0";
-          #remove the duration from the list of files
-          files=`echo $files | sed 's/^\<[^ ]*\>//'`;
-        fi
-        if [ "$files" = "" ]; then
-          echo "You must enter image files to associate with the XML file";
-        else
-          for file in $files
-          do
-            if [ ! -f $file ]; then
-    	  echo "\"$file\" does not exist";
-    	  inputIsValid="";
-            elif [ "`echo $file | sed 's/^.*\.\(jpg\|jpeg\|bmp\|png\|gif\|tif\|tiff\|jif\|jfif\|jp2\|jpx\|j2k\|j2c\)$//'`" != "" ]; then
-    	  echo "\"$file\" is not an image file";
-    	  inputIsValid="";
-    	fi
-          done
-          if [ $inputIsValid ]; then
-            currDir=`pwd`;
-            echo "<background>" >> $xmlfile
-            echo "  <starttime>\n    <year>2009</year>\n    <month>08</month>\n    <day>04</day>" >> $xmlfile;
-            echo "    <hour>00</hour>\n    <minute>00</minute>\n    <second>00</second>\n  </starttime>" >> $xmlfile;
-            echo "  <!-- This animation will start at midnight. -->" >> $xmlfile;
-            firstFile=`echo $files | cut -d " " -f 1`;#grab the first item
-            if [ "`echo $firstFile | sed 's/\(.\).*/\1/'`" != "/" ]; then
-              #If the first character in the filename is not '/', then it is a relative path and must have the current directory's path appended
-              firstFile="$currDir/$firstFile";
-            fi
-            firstFile=`echo $firstFile | sed 's/[^/]\+\/\.\.\/\?//g'`;#Remove occurrences of ".." from the filepath
-            files=`echo $files | sed 's/^\<[^ ]*\>//'`;#remove the first item
-            prevFile=$firstFile;
-            currFile="";
-            #TODO add absolute path to the filenames
-            #if $currFile =~ "^/.*" then the file needs to path appended
-            echo "  <static>\n    <duration>$duration</duration>\n    <file>$firstFile</file>\n  </static>" >> $xmlfile;
-            for currFile in $files
-            do
-              if [ "`echo $currFile | sed 's/\(.\).*/\1/'`" != "/" ]; then
-                #If the first character in the filename is not '/', then it is a relative path and must have the current directory's path appended
-                currFile="$currDir/$currFile";
-              fi
-              currFile=`echo $currFile | sed 's/[^/]\+\/\.\.\/\?//g'`;#Remove occurrences of ".." from the filepath
-              echo "  <transition>\n    <duration>5.0</duration>\n    <from>$prevFile</from>\n    <to>$currFile</to>\n  </transition>" >> $xmlfile;
-              echo "  <static>\n    <duration>$duration</duration>\n    <file>$currFile</file>\n  </static>" >> $xmlfile;
-              prevFile=$currFile;
-            done
-            echo "  <transition>\n    <duration>5.0</duration>\n    <from>$currFile</from>\n    <to>$firstFile</to>\n  </transition>" >> $xmlfile;
-            echo "</background>" >> $xmlfile;
-          fi
-        fi
-      fi
-    fi
+     sed 's/^\<[^ ]*\>//')
+      if [ "$(echo $xmlfile 
 
 Copy the code for the script above into a file called mkwlppr (short for
 "make wallpaper"). Make the script executable by typing:
@@ -745,30 +624,32 @@ Copy the code for the script above into a file called mkwlppr (short for
 Move the file so that you can run it from any directory by just using
 its name:
 
-    sudo mv mkwlppr /bin
+    sudo mv mkwlppr /usr/local/bin
 
 Execute the script; it will tell you what input it requires from you.
 Use the script with input to create as many wallpaper XML files as you
 want.
 
-Notes: Since this script is not interactive, you can use Unix's
-wildcards with it if you want to use all files in a directory and/or if
-you do not care about the order of the images. You can specify paths
-relative to your current directory, and the script will put the files'
-absolute paths into the XML file for you; so you can create the XML file
-anywhere you want and move it afterward without rendering it useless. If
-you want to run the script inside the /usr/share/backgrounds/ directory,
-you might have problems with permissions unless you run the command with
-sudo like this: sudo mkwlppr -parameters If you do not know what
-duration to specify for the images, simply do not provide a number in
-the input, and the progam will use the default values of 29 minutes and
-55 seconds per image and a 5 second transition. For more information,
-please see this page.
+> Note:
+
+Since this script is not interactive, you can use Unix's wildcards with
+it if you want to use all files in a directory and/or if you do not care
+about the order of the images. You can specify paths relative to your
+current directory, and the script will put the files' absolute paths
+into the XML file for you; so you can create the XML file anywhere you
+want and move it afterward without rendering it useless. If you want to
+run the script inside the /usr/share/backgrounds/ directory, you might
+have problems with permissions unless you run the command with sudo like
+this: sudo mkwlppr -parameters If you do not know what duration to
+specify for the images, simply do not provide a number in the input, and
+the progam will use the default values of 29 minutes and 55 seconds per
+image and a 5 second transition. For more information, please see this
+page.
 
 GUI
 
-If you prefer using a GUI, you can install CreBS from the AUR, which is
-a PyGTK app for creating background slideshows for GNOME.
+If you prefer using a GUI, you can use Wallpapoz or install crebs from
+the AUR, which are apps for creating background slideshows for GNOME.
 
 > Change default size of gnome-terminal
 
@@ -779,15 +660,19 @@ default size nor does remember the last size. In order to set the
 default size consider the following steps:
 
 1.  Change the following line in /usr/share/vte/termcap/xterm
-    accordingly:  
-    :co#80:it#8:li#24:  
-    Here 80 stands for the number of columns (i.e. width in characters)
-    and 24 for the number of lines (i.e. height in characters).
-2.  To prevent pacman from overwriting this file when upgrading the
-    package vte, make enter the following in /etc/pacman.conf  
+    accordingly:
+
+    :co#80:it#8:li#24:
+
+Here 80 stands for the number of columns (i.e. width in characters) and
+24 for the number of lines (i.e. height in characters). 2. To prevent
+pacman from overwriting this file when upgrading the package vte, make
+enter the following in /etc/pacman.conf:
+
     NoUpgrade = usr/share/vte/termcap/xterm
-3.  Terminate all gnome-terminal processes to let the changes take
-    effect.
+
+3. Terminate all gnome-terminal processes to let the changes take
+effect.
 
 Method 2
 
@@ -800,7 +685,7 @@ gnome-terminal --geometry 105x25+100+20).
 
 The default cursor theme of Xorg looks pretty outdated. See X11 Cursors
 for easy instructions on installing new cursor themes. Then go to to the
-desktop -> right click -> Change background -> Theme tab -> customise ->
+desktop > right click > Change background > Theme tab > customise >
 cursor to apply them.
 
 > Autostart programs
@@ -820,24 +705,23 @@ notification-daemon to make this work.
 
 > Change gnome-screensaver background
 
-There isn't any option to change the screensaver's default background.
-The only way is to:
+There is no option to change the screensaver's default background. The
+only way is do as root:
 
-       su
-       cd /usr/share/pixmaps/backgrounds/gnome
-       rm background-default.jpg
-       ln -s /home/user/my_background.jpg background-default.jpg
+    # cd /usr/share/pixmaps/backgrounds/gnome
+    # rm background-default.jpg
+    # ln -s /home/user/my_background.jpg background-default.jpg
 
-Note: You can save your wallpaper to a static path like
+Note:You can save your wallpaper to a static path like
 /home/user/wall.jpg and configure gdm, gnome-desktop and
 gnome-screensaver to point at it. This way you can have the same
 wallpaper on each of them.
 
-Toolbar style in GTK applications
----------------------------------
+Toolbar style in GTK+ applications
+----------------------------------
 
 The default setting in GNOME 2.30 displays text next to icons in the
-toolbar of GTK applications. This means labels will only appear near
+toolbar of GTK+ applications. This means labels will only appear near
 buttons that the developer marks as "important". To have labels always
 show under the buttons in the toolbar:
 
@@ -856,7 +740,7 @@ Missing icons in System Menu
 
 The default setting under 2.30 does not display the usual icons under
 the System menu. In the 2.28 version, they could be enabled from System
->> Preferences >> Appearance >> Interface. This case is not possible
+> Preferences > Appearance > Interface. This case is not possible
 anymore. Now this can be enabled from:
 
     gconftool-2 --set --type boolean  /desktop/gnome/interface/menus_have_icons true
@@ -876,8 +760,15 @@ See also
 -   GNOME
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GNOME_Tips&oldid=251541"
+"https://wiki.archlinux.org/index.php?title=GNOME_Tips&oldid=294515"
 
 Category:
 
--   Desktop environments
+-   GNOME
+
+-   This page was last modified on 26 January 2014, at 11:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

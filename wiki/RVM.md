@@ -1,6 +1,12 @@
 RVM
 ===
 
+Related articles
+
+-   Rbenv
+-   Chruby
+-   Ruby
+
 RVM (Ruby Version Manager) is a command line tool which allows us to
 easily install, manage and work with multiple Ruby environments from
 interpreters to sets of gems.
@@ -8,49 +14,39 @@ interpreters to sets of gems.
 There exists a similar application that you may also want to consider:
 rbenv.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing RVM                                                     |
-|     -   1.1 Pre-requisites                                               |
-|     -   1.2 Single-user installation                                     |
-|     -   1.3 Multi-user installation                                      |
-|         -   1.3.1 A cautionary action                                    |
-|                                                                          |
-| -   2 Post Installation                                                  |
-|     -   2.1 Some extras                                                  |
-|                                                                          |
-| -   3 Using RVM                                                          |
-|     -   3.1 Rubies                                                       |
-|         -   3.1.1 Installing environments                                |
-|         -   3.1.2 Switching environments                                 |
-|         -   3.1.3 System ruby                                            |
-|         -   3.1.4 Listing environments                                   |
-|                                                                          |
-|     -   3.2 Gemsets                                                      |
-|         -   3.2.1 Creating                                               |
-|         -   3.2.2 Using                                                  |
-|             -   3.2.2.1 Notes                                            |
-|                                                                          |
-|         -   3.2.3 Gems!                                                  |
-|         -   3.2.4 Listing                                                |
-|         -   3.2.5 Deleting                                               |
-|         -   3.2.6 Emptying                                               |
-|                                                                          |
-|     -   3.3 RVM                                                          |
-|         -   3.3.1 Updating                                               |
-|         -   3.3.2 Uninstalling                                           |
-|                                                                          |
-|     -   3.4 Further Reading                                              |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 "data definition has no type or storage class"               |
-|     -   4.2 Ruby 1.8.x won't compile with RVM                            |
-|     -   4.3 Ruby 1.9.1 won't compile with RVM                            |
-|                                                                          |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing RVM
+    -   1.1 Pre-requisites
+    -   1.2 Single-user installation
+    -   1.3 Multi-user installation
+        -   1.3.1 A cautionary action
+-   2 Post Installation
+    -   2.1 Some extras
+-   3 Using RVM
+    -   3.1 Rubies
+        -   3.1.1 Installing environments
+        -   3.1.2 Switching environments
+        -   3.1.3 System ruby
+        -   3.1.4 Listing environments
+    -   3.2 Gemsets
+        -   3.2.1 Creating
+        -   3.2.2 Using
+            -   3.2.2.1 Notes
+        -   3.2.3 Gems!
+        -   3.2.4 Listing
+        -   3.2.5 Deleting
+        -   3.2.6 Emptying
+    -   3.3 RVM
+        -   3.3.1 Updating
+        -   3.3.2 Uninstalling
+    -   3.4 Further Reading
+-   4 Troubleshooting
+    -   4.1 "data definition has no type or storage class"
+    -   4.2 Ruby 1.8.x won't compile with RVM
+    -   4.3 Ruby 1.9.1 won't compile with RVM
+-   5 See Also
 
 Installing RVM
 --------------
@@ -152,9 +148,9 @@ shell has picked up the new group membership of your user)
 
   
 
-Note:Remember to change the line [ [ -s $HOME/.rvm/scripts/rvm ] ] &&
-source $HOME/.rvm/scripts/rvm to the system-wide location changing $HOME
-to /usr/local/
+Note:Remember to change the line [ [ -s
+HOME/.rvm/scripts/rvm ] ] && source HOME/.rvm/scripts/rvm to the
+system-wide location changing $HOME to /usr/local/
 
   
  RVM will be automatically configured for every user on the system (in
@@ -409,8 +405,8 @@ rdoc and ri to install for each gem, you can disable them for gem
 installs and updates. Just add these two lines to your ~/.gemrc or
 /etc/gemrc:
 
-    install: --no-rdoc --no-ri
-    update: --no-rdoc --no-ri
+    install: --no-document
+    update: --no-document
 
 Listing
 
@@ -548,8 +544,15 @@ See Also
 -   The Perfect Rails Setup.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=RVM&oldid=246701"
+"https://wiki.archlinux.org/index.php?title=RVM&oldid=301990"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 25 February 2014, at 08:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,51 +1,90 @@
 Multihead
 =========
 
-> Summary
+Summary help replacing me
 
-This article offers some hints and tips to get the most out of Arch
-Linux on a computer with more than one attached monitor.
+This article describes configuration methods applicable when more than
+one display device is attached.
 
 > Related
 
 Xorg
 
-DualScreen
+xrandr
 
-Having multiple screens is still somewhat uncommon, many programs are
-not written to handle a system with multiple screens and display
-incorrectly. This article covers both advanced configuration of a so
-called multihead system, as well as various workarounds for those
-programs which need help to work correctly in a multihead environment.
+GPU-specific instructions
+
+NVIDIA#Multiple monitors
+
+Nouveau#Dual Head
+
+AMD Catalyst#Double Screen (Dual Head / Dual Screen / Xinerama)
+
+ATI#Dual Head setup
+
+Multi-head, multi-screen, multi-display or multi-monitor represent a
+setup when multiple display devices are attached to a computer. This
+article provides general description of multiple multi-head setup
+methods, and provides some examples of configuration.
 
 Note:The terms used in this article are very specific to avoid
-confusion. Monitor refers to a physical display device, such as an LCD
-panel. Screen refers to an X-Windows screen, that is a monitor attached
-to a display. Display refers to a collection of screens that are in use
-at the same time showing parts of a single desktop. You can drag windows
-among all screens in a single display.
+confusion:
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Xinerama, TwinView and separate screens                            |
-|     -   1.1 Separate screens                                             |
-|     -   1.2 Xinerama                                                     |
-|     -   1.3 TwinView                                                     |
-|                                                                          |
-| -   2 Full screen games                                                  |
-| -   3 Applications                                                       |
-| -   4 Window managers                                                    |
-+--------------------------------------------------------------------------+
+-   Monitor refers to a physical display device, such as an LCD panel.
+-   Screen refers to an X-Window screen (that is: a monitor attached to
+    a display).
+-   Display refers to a collection of screens that are in use at the
+    same time showing parts of a single desktop (you can drag windows
+    among all screens in a single display).
 
-Xinerama, TwinView and separate screens
----------------------------------------
+Contents
+--------
 
-When configuring a multihead X-Windows workstation, a decision needs to
-be made about how each screen will be configured.
+-   1 Historical background
+-   2 Separate screens
+-   3 Xinerama
+-   4 TwinView
+-   5 RandR
+    -   5.1 Configuration using xrandr
+        -   5.1.1 VGA1 left of HDMI1 at their preferred resolutions
+        -   5.1.2 VGA1 right of HDMI1 at fixed resolutions
+    -   5.2 Configuration using xorg.conf
+        -   5.2.1 Example: dualhead configuration using relative
+            coordinates
+        -   5.2.2 Example: dualhead configuration using absolute
+            coordinates
+-   6 Application support
+    -   6.1 Window managers
+    -   6.2 Display managers
+    -   6.3 Full screen games
+-   7 See also
 
-> Separate screens
+Historical background
+---------------------
+
+X Window System is the underlying graphical interface of most if not all
+Unix/Linux computers providing a GUI. It was developed in 1984 at MIT.
+After about 35 years of development, tweaking and adding of new features
+and ideas, it is generally acknowledged to be a bit of a beast. It
+should be remembered that the common configuration at time of
+development was a single running X providing individual views to
+Xterminals in a time-sharing system. Nowadays the standard is X
+providing a single screen on a desktop or laptop.
+
+Note:There is still a rare configuration often called Zaphod display,
+which allows multiple users of a single computer to each have an
+independent set of display, mouse, and keyboard, as though they were
+using separate computers, but at a lower per-seat cost.
+
+All of this means that there are many ways of achieving the same thing
+and many slightly different things that can meet the same purpose. In
+modern X versions sometimes you can get away with limited or no
+configuration. In the last few years the boast is that X is self
+configuring. Certainly the best practice rule of thumb is less
+configuration is better - that is only configure what is wrong.
+
+Separate screens
+----------------
 
 This is the original way of configuring multiple monitors with X, and it
 has been around for decades. Each physical monitor is assigned as an X
@@ -75,21 +114,20 @@ Working this way does have certain advantages, such as windows popping
 up on one screen won't steal the focus away from you if you are working
 on another screen - each screen is quite independent.
 
-> Xinerama
+Xinerama
+--------
 
-This is the official way of doing genuine multihead X. Screens are
-configured as separate X screens like in the previous section, but
-Xinerama combines all screens into a single display (:0) making it
-possible to drag windows between screens.
+Warning:As of August 2013, Xinerama is broken when using the proprietary
+NVIDIA driver from 319 upwards. Users wishing to use Xinerama with the
+NVIDIA driver should use the NVIDIA 313 driver, which works only with
+Linux kernels earlier than 3.10. See this thread for more information.
 
-This is the only way to get complex multihead support, such as being
-able to move windows between screens that are connected to different
-video cards, possibly from different manufacturers, with some in
-landscape and others in portrait mode.
+Xinerama is the old way of doing genuine multihead X. Xinerama combines
+all monitors into a single screen (:0) making it possible to drag
+windows between screens.
 
-Simple Xinerama layouts can be configured with xrandr however for more
-complex control, custom X configuration files must be created. Here are
-some examples.
+Xinerama is configured via custom X configuration files. Here are some
+examples:
 
 This is a ServerLayout section which controls where each monitor sits
 relative to the others.
@@ -222,7 +260,8 @@ total of four monitors.
       Option      "DynamicTwinView"    "FALSE"
     EndSection
 
-> TwinView
+TwinView
+--------
 
 TwinView is nVidia's extension which makes two monitors attached to a
 video card appear as a single screen. TwinView provides Xinerama
@@ -234,17 +273,141 @@ in this situation TwinView may offer slightly better performance.)
 
 If you wish to attach more than two monitors or monitors attached to
 other video cards, you will need to use Xinerama instead of TwinView.
-Likewise at the time of writing, both monitors must be in the same
-orientation - you cannot have one in landscape and the other in portrait
-mode.
+Likewise as of April 2012, both monitors must be in the same orientation
+- you cannot have one in landscape and the other in portrait mode.
 
 In the past, TwinView was the only way to get OpenGL acceleration with
 nVidia cards while being able to drag windows between screens. However
 modern versions of the nVidia closed-source driver are able to provide
 OpenGL acceleration even when using Xinerama.
 
-Full screen games
------------------
+See NVIDIA#TwinView for an example configuration.
+
+RandR
+-----
+
+RandR (Rotate and Resize) is an X Window System extension, which allows
+clients to dynamically change (e.g. resize, rotate, reflect) screens. In
+most cases, it can fully replace the old Xinerama setup. See an
+explanation why RandR is better than Xinerama.
+
+RandR can be configured via the xrandr tool or an xorg.conf file.
+
+Note:There are multiple ways to configure the same thing, you might have
+to experiment a little before you find the best configuration.
+
+> Configuration using xrandr
+
+Note:This section assumes that you have read the xrandr page for basic
+info about xrandr.
+
+You may arrange your screens either relatively to each other (using the
+--right-of, --left-of, --above, --below options), or by absolute
+coordinates (using the --pos option; note that in this case you usually
+need to know resolutions of your monitors). See man xrandr for details.
+Some frequently used settings are described below.
+
+VGA1 left of HDMI1 at their preferred resolutions
+
+    $ xrandr --output VGA1 --auto --output HDMI1 --auto --right-of VGA1
+
+--right-of places the previous screen (HDMI1) to the right of the
+specified screen (VGA1).
+
+VGA1 right of HDMI1 at fixed resolutions
+
+    $ xrandr --output VGA1 --mode 1024x768 --pos 1920x0 --output HDMI1 --mode 1920x1080 --pos 0x0
+
+or
+
+    $ xrandr --output VGA1 --mode 1024x768 --output HDMI1 --mode 1920x1080 --left-of VGA1
+
+--left-of places the previous screen (HDMI1) to the left of the
+specified screen (VGA1).
+
+> Configuration using xorg.conf
+
+This is similar to using xrandr, separate Monitor section is needed for
+each screen. As an Identifier, the same value as reported by xrandr -q
+is used (i.e. Identifier "VGA1" is used instead of --output VGA1).
+
+The examples below are self-explanatory:
+
+Example: dualhead configuration using relative coordinates
+
+    /etc/X11/xorg.conf
+
+    Section "Monitor"
+        Identifier  "VGA1"
+        Option      "Primary" "true"
+    EndSection
+
+    Section "Monitor"
+        Identifier  "HDMI1"
+        Option      "RightOf" "VGA1"
+    EndSection
+
+Example: dualhead configuration using absolute coordinates
+
+    /etc/X11/xorg.conf
+
+    Section "Monitor"
+        Identifier  "VGA1"
+        Option      "PreferredMode" "1024x768"
+        Option      "Position" "1920 0"
+    EndSection
+
+    Section "Monitor"
+        Identifier  "HDMI1"
+        Option      "PreferredMode" "1920x1080"
+        Option      "Position" "0 0"
+    EndSection
+
+Application support
+-------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: This section     
+                           contains outdated        
+                           information, mostly      
+                           specific to Xinerama.    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+This section lists tips for individual applications.
+
+-   mplayer: use -xineramascreen 1 to make the video play on screen #1
+    (the second screen.) Add xineramascreen=1 to ~/.mplayer/config to
+    make permanent.
+-   Xonotic: if you are playing across multiple screens and you are
+    unable to turn left/right properly, set vid_stick_mouse to 1 in
+    ~/.xonotic/data/config.cfg
+
+> Window managers
+
+This section lists window managers and how they cope with multiple
+monitors.
+
+-   Awesome - Works
+-   FVWM - Works. Has support for Xinerama and multi-screen display,
+    such as Single Logical Screen.
+-   KDE - Works
+-   MATE - Works
+-   i3 - Works
+-   XMonad - Works (screens are different workspaces, both accessible
+    and switching is possible by both keyboard and mouse) - as of 1th
+    March 2013
+
+> Display managers
+
+-   GDM: gdm is not configured by gnome display settings, resulting in
+    the login screen not being displayed on the primary monitor. A
+    workaround is explained here. It just consists in copying the user
+    monitor configuration file to gdm's.
+
+> Full screen games
 
 Many games require their window to appear at (0,0) when running in
 full-screen. If the screen you have at (0,0) - the left-most one - is
@@ -269,11 +432,11 @@ unchanged from and shared with the normal configuration:
 
     /etc/X11/xorg.conf.d/91-serverlayout-gaming.conf
 
-     # New screen layout only using a single screen called "Primary"
-     Section "ServerLayout"
-       Identifier   "Gaming"
-       Screen       0 "Primary" Absolute 0 0
-     EndSection
+    # New screen layout only using a single screen called "Primary"
+    Section "ServerLayout"
+        Identifier   "Gaming"
+        Screen       0 "Primary" Absolute 0 0
+    EndSection
 
 Tip:While it's easiest to just reuse the existing screen definitions,
 you can of course define new ones if you wish to have a different set of
@@ -300,36 +463,21 @@ Note that:
     or equivalent there will be an empty desktop with no window manager
     running.
 
-Applications
-------------
+See also
+--------
 
-This section lists tips for individual applications.
-
--   mplayer: use -xineramascreen 1 to make the video play on screen #1
-    (the second screen.) Add xineramascreen=1 to ~/.mplayer/config to
-    make permanent.
--   Xonotic: if you are playing across multiple screens and you are
-    unable to turn left/right properly, set vid_stick_mouse to 1 in
-    ~/.xonotic/data/config.cfg
-
-Window managers
----------------
-
-This section lists window managers and how they cope with multiple
-monitors.
-
--   Awesome - works
--   KDE - does not work properly, second monitor seen as virtual
-    desktop, inaccessible (2012-10-15)
--   MATE - works
--   i3 - works
--   XMonad - works (screens are different workspaces, both accessible
-    and switching is possible by both keyboard and mouse) - as of 1th
-    March 2013
+-   'How I got Dual Monitors with Nouveau Driver' forums thread
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Multihead&oldid=248828"
+"https://wiki.archlinux.org/index.php?title=Multihead&oldid=303967"
 
 Category:
 
 -   X Server
+
+-   This page was last modified on 11 March 2014, at 02:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

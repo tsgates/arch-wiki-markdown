@@ -16,28 +16,21 @@ getting the Acer Aspire 3000 Series of Laptops running fast and smooth.
 Specifically for the Acer Aspire 3000 ZL5 and based off the article for
 the Acer Aspire 3003 WLMi
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Drivers                                                            |
-| -   2 Internet                                                           |
-| -   3 Sound                                                              |
-| -   4 Xorg                                                               |
-|     -   4.1 /home/user/.xinitrc                                          |
-|     -   4.2 /etc/X11/xorg.conf                                           |
-|     -   4.3 /etc/rc.local                                                |
-|                                                                          |
-| -   5 Kernel                                                             |
-|     -   5.1 /etc/mkinitcpio.conf                                         |
-|     -   5.2 sisfb                                                        |
-|                                                                          |
-| -   6 Hardware                                                           |
-|     -   6.1 lspci                                                        |
-|     -   6.2 lsusb                                                        |
-|                                                                          |
-| -   7 Related articles                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Drivers
+-   2 Internet
+-   3 Sound
+-   4 Xorg
+    -   4.1 /home/user/.xinitrc
+    -   4.2 /etc/rc.local
+-   5 Kernel
+    -   5.1 sisfb
+-   6 Hardware
+    -   6.1 lspci
+    -   6.2 lsusb
+-   7 Related articles
 
 Drivers
 -------
@@ -50,7 +43,7 @@ Internet
 --------
 
 To get the wireless working you need the b43-fwcutter tool and firmware
-module: Wireless_Setup#b43
+module: Wireless network configuration#b43
 
 What I did was download all the broadcom tarballs, extract them, and
 then ran this:
@@ -93,71 +86,6 @@ command uses.
     #exec startxfce4
     exec ratpoison
 
-> /etc/X11/xorg.conf
-
-    Section "ServerLayout"
-      Identifier     "X.org Configured"
-      Screen      0  "Screen0" 0 0
-      InputDevice    "Mouse0" "CorePointer"
-      InputDevice    "Keyboard0" "CoreKeyboard"
-    EndSection
-
-    Section "Files"
-      ModulePath   "/usr/lib/xorg/modules"
-      FontPath     "/usr/share/fonts/misc/"
-      FontPath     "/usr/share/fonts/TTF/"
-      FontPath     "/usr/share/fonts/Type1/"
-      FontPath     "/usr/share/fonts/100dpi/"
-      FontPath     "/usr/share/fonts/75dpi/"
-    EndSection
-
-    Section "Module"
-      Load  "dri2"
-      Load  "glx"
-      Load  "dbe"
-      Load  "dri"
-      Load  "record"
-      Load  "extmod"
-    EndSection
-
-    Section "InputDevice"
-      Identifier  "Keyboard0"
-      Driver      "kbd"
-    EndSection
-
-    Section "InputDevice"
-      Identifier  "Mouse0"
-      Driver      "mouse"
-      Option	    "Protocol" "auto"
-      Option	    "Device" "/dev/input/mice"
-      Option	    "ZAxisMapping" "4 5 6 7"
-    EndSection
-
-    Section "Monitor"
-      Identifier   "Monitor0"
-      VendorName   "Monitor Vendor"
-      ModelName    "Monitor Model"
-    EndSection
-
-    Section "Device"
-      Identifier  "Card0"
-      Driver      "fbdev"
-      VendorName  "Silicon Integrated Systems [SiS]"
-      BoardName   "661/741/760 PCI/AGP or 662/761Gx PCIE VGA Display Adapter"
-      BusID       "PCI:1:0:0"
-    EndSection
-
-    Section "Screen"
-     Identifier "Screen0"
-     Device     "Card0"
-     Monitor    "Monitor0"
-     DefaultDepth 24
-     SubSection "Display"
-       Depth 24
-       Modes "1280x800" "1024x768" "832x624" "800x600" "720x400" "640x480"
-     EndSubSection
-    EndSection
-
 > /etc/rc.local
 
     fbset -a -depth 32
@@ -165,18 +93,13 @@ command uses.
 Kernel
 ------
 
-A customized kernel is beyond the scope of this doc, but to build a
-custom kernel that contains the modules used by your acer 3000 ZL5 for
-faster boots (among other benefits) you just need to modify your
-mkinitcpio.conf file and reinstall the kernel26 package.
+If you want to compile a custom kernel that contains the modules used by
+your acer 3000 ZL5 for faster boots (among other benefits), see
+Kernels#Compilation.
 
-> /etc/mkinitcpio.conf
+Here is the list of modules:
 
     MODULES="sisfb ac battery button processor thermal cdrom agpgart amd64-agp sis-agp tpm_bios tpm tpm_tis k8temp i2c-sis96x i2c-core evdev pcspkr psmouse serio_raw mmc_core pci_hotplug shpchp rtc-cmos rtc-core rtc-lib ssb ac97_bus snd-mixer-oss snd-pcm-oss snd snd-page-alloc snd-pcm snd-timer snd-ac97-codec snd-intel8x0 snd-intel8x0m soundcore pata_sis scsi_mod mii sis900 pcmcia_core pcmcia rsrc_nonstatic yenta_socket usb-storage usbcore ehci-hcd ohci-hcd option usbserial sd_mod sr_mod st b43"
-
-    HOOKS="base udev autodetect pata scsi sata usb filesystems consolefont"
-
-    COMPRESSION="bzip2"
 
 > sisfb
 
@@ -232,7 +155,7 @@ Related articles
 ----------------
 
 -   xf86-video-sis
--   Wireless_Setup#b43
+-   Wireless network configuration#b43
 -   Touchpad Synaptics
 -   Misc.
     -   CPU Frequency Scaling
@@ -241,8 +164,15 @@ Related articles
     -   Wacom Tablet
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_3000_ZL5&oldid=254486"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_3000_ZL5&oldid=297860"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 15 February 2014, at 15:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

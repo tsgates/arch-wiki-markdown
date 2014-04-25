@@ -3,18 +3,20 @@ FOSDEM
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 2012                                                               |
-|     -   1.1 Attendees                                                    |
-|     -   1.2 Meetup info                                                  |
-|         -   1.2.1 Meeting points                                         |
-|         -   1.2.2 Meetups                                                |
-|                                                                          |
-|     -   1.3 restaurants under consideration                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 2012
+    -   1.1 Attendees
+    -   1.2 Meetup info
+        -   1.2.1 Meeting points
+        -   1.2.2 Meetups
+    -   1.3 restaurants under consideration
+-   2 2014
+    -   2.1 Attendees
+    -   2.2 Meetup info
+        -   2.2.1 Meeting points
+        -   2.2.2 Meetups
 
 2012
 ----
@@ -92,7 +94,6 @@ Meetups
         -   Anntoin Wilkinson
         -   Thomas (no healthy food whatsoever)
         -   Tom Gundersen
-
     -   ByteNight, a party for FOSDEM organized by the local hackerspace
         (with food & drinks)
         -   Romain Schmitz
@@ -106,9 +107,34 @@ and a fast food place?
 -   http://www.bigmama.be/ recommended by a guy on IRC. various dishes.
 -   pizzahut @ beursplein
 
+2014
+----
+
+> Attendees
+
+> Confirmed
+
+-   prometheus (fri,sat,sun)
+
+> Meetup info
+
+Meeting points
+
+-   downtown meeting point: entrance of "galerie ravenstein", at the
+    central station.
+
+Meetups
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=FOSDEM&oldid=196191"
+"https://wiki.archlinux.org/index.php?title=FOSDEM&oldid=294614"
 
 Category:
 
 -   Events
+
+-   This page was last modified on 27 January 2014, at 11:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

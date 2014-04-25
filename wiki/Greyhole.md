@@ -1,7 +1,7 @@
 Greyhole
 ========
 
-> Summary
+Summary help replacing me
 
 Installing and configuring Greyhole
 
@@ -14,16 +14,13 @@ all your available hard drives (whatever their size, however they are
 connected), and allows you to create redundant copies of the files you
 store, in order to prevent data loss when part of your hardware fails.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Install from AUR                                             |
-|     -   1.2 Manual Installation                                          |
-|                                                                          |
-| -   2 Configuration                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Install from AUR
+    -   1.2 Manual Installation
+-   2 Configuration
 
 Installation
 ------------
@@ -205,13 +202,24 @@ Finally, uncomment
 
     extension=mysql.so
 
+and
+
+    extension=pdo_mysql.so
+
 7. Start the Greyhole service
 
     # rc.d start greyhole
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Greyhole&oldid=207141"
+"https://wiki.archlinux.org/index.php?title=Greyhole&oldid=271729"
 
 Category:
 
 -   Storage
+
+-   This page was last modified on 19 August 2013, at 11:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,7 +1,7 @@
 Installing VMWare vCLI
 ======================
 
-> Summary
+Summary help replacing me
 
 Installing vCLI for managing vSphere environments
 
@@ -17,49 +17,19 @@ the "supported platforms"; the installation process is relatively
 straightforward. We have a two method's of VMWare vCLI installation.
 It's a build package from AUR, or manually installation.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation from AUR                                              |
-|     -   1.1 Download files for building package                          |
-|     -   1.2 Building package                                             |
-|     -   1.3 Package installation                                         |
-|                                                                          |
-| -   2 Manually installation                                              |
-|     -   2.1 Download location                                            |
-|     -   2.2 Dependencies                                                 |
-|     -   2.3 Installation                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation from AUR
+-   2 Manually installation
+    -   2.1 Download location
+    -   2.2 Dependencies
+    -   2.3 Installation
 
 Installation from AUR
 ---------------------
 
-> Download files for building package
-
-AUR package url is https://aur.archlinux.org/packages/vmware-vcli/.
-
-You can download files from AUR via yaourt:
-
-    yaourt -G vmware-vcli
-
-Next step is downloading
-VMware-vSphere-CLI-5.1.0-780721.{your_arch}.tar.gz file from
-https://my.vmware.com/group/vmware/details?downloadGroup=VSP510-VCLI-510&productId=285
-and place to PKGBUILD directory.
-
-> Building package
-
-Next cd to PKGBUILD directory, and make package:
-
-    cd vmware-vcli
-    makepkg
-
-> Package installation
-
-Login as root, and install package by pacman -U:
-
-    pacman -U vmware-vcli-5.1.0-1-{your_arch}.pkg.tar.xz
+Install vmware-vcli from AUR.
 
 Manually installation
 ---------------------
@@ -79,7 +49,7 @@ https://my.vmware.com/group/vmware/details?downloadGroup=VSP510-VCLI-510&product
 vCLI has quite a few dependencies which can easily be managed via
 pacman:
 
-    pacman -S e2fsprogs openssl libxml2 perl libxml-perl perl-xml-sax perl-crypt-ssleay \ 
+    pacman -S e2fsprogs openssl libxml2 perl perl-libxml perl-xml-sax perl-crypt-ssleay \ 
     perl-archive-zip perl-html-parser perl-data-dump perl-soap-lite perl-uri \ 
     perl-lwp-protocol-https perl-class-methodmaker perl-net-ssleay perl-xml-libxml
 
@@ -119,8 +89,15 @@ Fire up the installation:
 Potential warnings about rpm and versions can be safely ignored.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Installing_VMWare_vCLI&oldid=254340"
+"https://wiki.archlinux.org/index.php?title=Installing_VMWare_vCLI&oldid=304231"
 
 Category:
 
 -   Virtualization
+
+-   This page was last modified on 13 March 2014, at 05:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

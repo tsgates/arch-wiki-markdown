@@ -1,18 +1,16 @@
 DeveloperWiki:Build machines
 ============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Server Information                                                 |
-|     -   2.1 Server address                                               |
-|     -   2.2 Server purpose                                               |
-|     -   2.3 Development tools                                            |
-|     -   2.4 Server admin                                                 |
-|     -   2.5 Gaining access                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Server Information
+    -   2.1 Server address
+    -   2.2 Server purpose
+    -   2.3 Development tools
+    -   2.4 Server admin
+    -   2.5 Gaining access
 
 Introduction
 ------------
@@ -62,3 +60,10 @@ Retrieved from
 Category:
 
 -   Arch development
+
+-   This page was last modified on 2 June 2012, at 19:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

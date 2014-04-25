@@ -6,31 +6,25 @@ netbook. It does not cover the entire installation process, but rather
 any quirks that are above and beyond what you might encounter during a
 routine Arch installation.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware Specifications                                            |
-|     -   1.1 Base Components                                              |
-|     -   1.2 Additional Options                                           |
-|     -   1.3 lspci output                                                 |
-|                                                                          |
-| -   2 Installation                                                       |
-|     -   2.1 Dual Boot Windows/Linux                                      |
-|     -   2.2 Kernel Modules (Drivers)                                     |
-|     -   2.3 AHCI SATA Mode                                               |
-|                                                                          |
-| -   3 Advanced Configuration                                             |
-|     -   3.1 Touchpad                                                     |
-|     -   3.2 Hotkeys                                                      |
-|     -   3.3 Webcam Usage                                                 |
-|     -   3.4 Hard Drive Clicking/Ticking                                  |
-|                                                                          |
-| -   4 Tips & Tricks                                                      |
-|     -   4.1 More on Hotkeys                                              |
-|                                                                          |
-| -   5 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware Specifications
+    -   1.1 Base Components
+    -   1.2 Additional Options
+    -   1.3 lspci output
+-   2 Installation
+    -   2.1 Dual Boot Windows/Linux
+    -   2.2 Kernel Modules (Drivers)
+    -   2.3 AHCI SATA Mode
+-   3 Advanced Configuration
+    -   3.1 Touchpad
+    -   3.2 Hotkeys
+    -   3.3 Webcam Usage
+    -   3.4 Hard Drive Clicking/Ticking
+-   4 Tips & Tricks
+    -   4.1 More on Hotkeys
+-   5 More Resources
 
 Hardware Specifications
 -----------------------
@@ -151,7 +145,7 @@ Advanced Configuration
 > Touchpad
 
 For touchpad functionality, install the Synaptics touchpad drivers as
-per the Beginners Guide and Touchpad Synaptics articles.
+per the Beginners' guide and Touchpad Synaptics articles.
 
 > Hotkeys
 
@@ -264,8 +258,15 @@ More Resources
     includes forums and a wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=MSI_Wind_U120&oldid=225342"
+"https://wiki.archlinux.org/index.php?title=MSI_Wind_U120&oldid=298322"
 
 Category:
 
 -   MSI
+
+-   This page was last modified on 16 February 2014, at 07:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

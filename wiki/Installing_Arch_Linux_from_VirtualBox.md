@@ -17,18 +17,16 @@ This HOWTO will guide you through the process of installing Arch Linux
 from a host machine on a raw disk using VirtualBox. This method offers
 the ability to continue to work with the computer while installing.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Step 1: Installing VirtualBox                                      |
-| -   2 Step 2: Creating a raw disk .vmdk image                            |
-| -   3 Step 3: Downloading an Archlinux install image                     |
-| -   4 Step 4: Creating a virtual machine                                 |
-| -   5 Step 5: Installing the system                                      |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 It doesn't boot on real hardware!                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Step 1: Installing VirtualBox
+-   2 Step 2: Creating a raw disk .vmdk image
+-   3 Step 3: Downloading an Archlinux install image
+-   4 Step 4: Creating a virtual machine
+-   5 Step 5: Installing the system
+-   6 Troubleshooting
+    -   6.1 It doesn't boot on real hardware!
 
 Step 1: Installing VirtualBox
 -----------------------------
@@ -96,7 +94,7 @@ mounted installation media. Remember that inside the virtual machine,
 your disk will be named /dev/sda. Now you can loosely continue with one
 of these guides:
 
--   Official Arch Linux Install Guide
+-   Installation guide
 -   Installing Arch Linux on a USB key
 
 Troubleshooting
@@ -114,9 +112,16 @@ run:
 to regenerate the initramfs image.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Installing_Arch_Linux_from_VirtualBox&oldid=237762"
+"https://wiki.archlinux.org/index.php?title=Installing_Arch_Linux_from_VirtualBox&oldid=298289"
 
 Categories:
 
 -   Getting and installing Arch
 -   Virtualization
+
+-   This page was last modified on 16 February 2014, at 07:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

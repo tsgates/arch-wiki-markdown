@@ -8,34 +8,29 @@ from Samsung NC10 netbook wiki.
 A lot of the information is derived from the NC10 Arch Forum and N120
 Arch Forum and several hints scattered around in the ArchWiki.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prior to Installation, current state and Common Issues You Should  |
-|     Be Aware Of                                                          |
-| -   2 Installation                                                       |
-| -   3 Configure your installation                                        |
-|     -   3.1 Network                                                      |
-|         -   3.1.1 Ethernet                                               |
-|         -   3.1.2 Wireless                                               |
-|                                                                          |
-|     -   3.2 Video                                                        |
-|     -   3.3 Initial Brightness                                           |
-|     -   3.4 Graphics Adapter                                             |
-|         -   3.4.1 External VGA                                           |
-|                                                                          |
-|     -   3.5 Audio                                                        |
-|     -   3.6 Suspend and Hibernate                                        |
-|     -   3.7 Fn Keys                                                      |
-|         -   3.7.1 Fix Fn + key combinations does not produce key release |
-|             events                                                       |
-|                                                                          |
-|     -   3.8 Power saving                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prior to Installation, current state and Common Issues You Should
+    Be Aware Of
+-   2 Installation
+-   3 Configure your installation
+    -   3.1 Network
+        -   3.1.1 Ethernet
+        -   3.1.2 Wireless
+    -   3.2 Video
+    -   3.3 Initial Brightness
+    -   3.4 Graphics Adapter
+        -   3.4.1 External VGA
+    -   3.5 Audio
+    -   3.6 Suspend and Hibernate
+    -   3.7 Fn Keys
+        -   3.7.1 Fix Fn + key combinations does not produce key release
+            events
+    -   3.8 Power saving
 
 Prior to Installation, current state and Common Issues You Should Be Aware Of
-=============================================================================
+-----------------------------------------------------------------------------
 
 Following information is based on kernel 2.6.32 (2010.04.08).
 
@@ -54,60 +49,33 @@ Following information is based on kernel 2.6.32 (2010.04.08).
     acpi=off to the kernel parameters.
 
 Installation
-============
+------------
 
 You can use the usb image provided at the official download locations or
 the iso, if you have an external optical drive. If installation fails
 try to add acpi=off to the kernel parameters.
 
 Configure your installation
-===========================
+---------------------------
 
-Network
--------
+> Network
 
-> Ethernet
+Ethernet
 
 Works out-of-the-box with stock kernel module sky2.
 
-> Wireless
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
-  png]                     this article or section  png]
-                           is disputed.             
-                           Reason: needs to be      
-                           confirmed that the       
-                           firmware still isn't     
-                           provided (Discuss)       
-  ------------------------ ------------------------ ------------------------
+Wireless
 
 -   With devices based on Atheros chip use the stock kernel module
     ath5k.
 -   With Realtek based devices wireless works with stock kernel module
     r8192e_pci.
 
-    02:00.0 Network controller: Realtek Semiconductor Co., Ltd. Device 8192 (rev 01)
+See Wireless network configuration for more information.
 
-You can use rtl8192e-firmware-git from AUR to install the firmware files
-or get pre-created package from here:
-rtl8192e-firmware-git-20100424-1-any.pkg.tar.xz.
+> Video
 
-The driver needs firmware files that are not currently included in
-linux-firmware, so grab them as follows:
-
-    cd /tmp
-    git clone git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/firmware.git
-    # run these as root:
-    cp -av firmware/RTL8192E /lib/firmware/
-    depmod -a
-    modprobe r8192e_pci
-
-Video
------
-
-Initial Brightness
-------------------
+> Initial Brightness
 
 The full brightness can be set with the following command
 
@@ -118,8 +86,7 @@ range 00..FF. Don't set it too low because your backlight will turn off!
 I tried different parameters and optimal are F.4B=45 or F.4B=50. I added
 setpci -s 00:02.1 F4.B=40 to my /etc/rc.local.
 
-Graphics Adapter
-----------------
+> Graphics Adapter
 
 The Video controller is a typical Intel chipset that works with the
 xf86-video-intel driver (or xf86-video-intel-new from AUR)
@@ -137,7 +104,7 @@ could be an option.
     BusID "PCI:0:2:0"
     EndSection
 
-> External VGA
+External VGA
 
 External VGA works out of the box with xrandr
 
@@ -149,10 +116,9 @@ along with the mode, for example :
 
 You can also use randr frontend, lxrandr for example.
 
-Dual head positioning works also perfectly : Xorg#Multi-monitor_setups
+Dual head positioning works also perfectly : Xorg#Multiple monitors
 
-Audio
------
+> Audio
 
 The audio device is an Intel HD. Since alsa 1.0.19 distributed in
 archlinux extra repository, you do not need to manually install alsa
@@ -185,8 +151,7 @@ alsa source folder
     4.get alsa-utils with pacman
     5.configure sound volume with alsamixer , reboot , and enjoy :)
 
-Suspend and Hibernate
----------------------
+> Suspend and Hibernate
 
 Pm-suspend should work correctly without any quirks at the moment.
 
@@ -216,19 +181,17 @@ Right after resume you may notice (i.e. in powertop) lost support for C2
 and C4 CPU states. Don't panic. Those modes are likely to return in
 several minutes.
 
-Fn Keys
--------
+> Fn Keys
 
 You need at least kernel 2.6.28.4 to get the Fn keys to work correctly.
 
 (Volume Controls worked out of the box in kdemod 4.2)
 
-To bind the Fn keys to action, read Extra_Keyboard_Keys#The_quick_way
-and also Extra Keyboard Keys in Xorg. The suspend key (Fn+ESC) and
-disable touchpad (Fn+F10) keys should work out of the box. Note, that
-suspend key is handled in /etc/acpi/handler.sh (see "power/sleep" case
-entry). If you use pm-utils, you should substitute the default action
-with the call to pm-suspend or pm-hibernate.
+To bind the Fn keys to action, read Extra Keyboard Keys. The suspend key
+(Fn+ESC) and disable touchpad (Fn+F10) keys should work out of the box.
+Note, that suspend key is handled in /etc/acpi/handler.sh (see
+"power/sleep" case entry). If you use pm-utils, you should substitute
+the default action with the call to pm-suspend or pm-hibernate.
 
 This tweak taken from Ubuntu wiki. To get volume and brightness Fn keys
 work in Gnome you have to make sure that gnome-power-manager is running
@@ -243,8 +206,7 @@ becomes
     <match key="/org/freedesktop/Hal/devices/computer:system.hardware.product" 
     contains_outof="SP55S;SQ45S70S;SX60P;R59P/R60P/R61P;Q310;X05;N120">
 
-  
- Also you can play with xbindkey. As an example, here is how to bind the
+Also you can play with xbindkey. As an example, here is how to bind the
 keys for volume control :
 
 1) install xbindkeys (and xbacklight from package xorg-server-utils for
@@ -304,7 +266,7 @@ mode)
 Alternatively, you can add needed broghtness level on the boot, simply
 add line setpci -s 00:02.1 F4.B=FF (00..FF) to your /etc/rc.local.
 
-> Fix Fn + key combinations does not produce key release events
+Fix Fn + key combinations does not produce key release events
 
 Run and add following command to /etc/rc.local to fix Fn-key behavior
 (14052):
@@ -314,14 +276,20 @@ Run and add following command to /etc/rc.local to fix Fn-key behavior
 For example the brightness controls (Fn+Up/Down) should now work as
 expected.
 
-Power saving
-------------
+> Power saving
 
 See power saving.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Samsung_N120&oldid=238263"
+"https://wiki.archlinux.org/index.php?title=Samsung_N120&oldid=297848"
 
 Category:
 
 -   Samsung
+
+-   This page was last modified on 15 February 2014, at 15:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

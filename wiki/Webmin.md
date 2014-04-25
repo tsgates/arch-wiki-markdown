@@ -1,29 +1,28 @@
 Webmin
 ======
 
-  Summary
-  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Webmin is a web-based interface for system administration for Unix. Using any modern web browser, you can setup user accounts, Apache, DNS, file sharing and much more. Webmin removes the need to manually edit Unix configuration files like /etc/passwd, and lets you manage a system from the console or remotely.
+From the project home page:
 
-Webmin runs as a service. Using webmin, you can administer other
-services and server configuration using a web browser, either from the
-server or remotely.
+Webmin is a web-based interface for system administration for Unix.
+Using any modern web browser, you can setup user accounts, Apache, DNS,
+file sharing and much more. Webmin removes the need to manually edit
+Unix configuration files like /etc/passwd, and lets you manage a system
+from the console or remotely. See the standard modules page for a list
+of all the functions built into Webmin, or check out the screenshots.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Starting                                                           |
-| -   4 Using                                                              |
-| -   5 Errors                                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Starting
+-   4 Usage
+-   5 Troubleshooting
 
 Installation
 ------------
 
-You can install webmin from the Official Repositories. Webmin requires
+You can install webmin from the official repositories. Webmin requires
 perl-net-ssleay to enable access via https.
 
 Configuration
@@ -41,12 +40,10 @@ access Webmin.
 Starting
 --------
 
-Start webmin using systemd:
+Start webmin service using systemd. Enable it if you wish to load webmin
+at boot.
 
-    # systemctl enable webmin.service
-    # systemctl start webmin.service
-
-Using
+Usage
 -----
 
 In a web browser, enter the https address of the server with the port
@@ -57,17 +54,26 @@ https://192.168.1.1:10000 -or- https://myserver.example.net:10000
 You will need to enter the root password of the server running Webmin to
 use the Webmin interface and administer the server.
 
-Errors
-------
+Troubleshooting
+---------------
 
 If you get a an error similar to
-Can't locate timelocal.pl in @INC (@INC contains: /opt/webmin /usr/lib/perl5/site_perl /usr/share/perl5/site_perl /usr/lib/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib/perl5/core_perl /usr/share/perl5/core_perl . /opt/webmin/ ..) at /opt/webmin/useradmin/edit_user.cgi line 6.,
+
+    Can't locate timelocal.pl in @INC (@INC contains: /opt/webmin /usr/lib/perl5/site_perl /usr/share/perl5/site_perl /usr/lib/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib/perl5/core_perl /usr/share/perl5/core_perl . /opt/webmin/ ..) at /opt/webmin/useradmin/edit_user.cgi line 6.
+
 for example, when adding a new system user through Webmin, you need to
 install perl-perl4-corelibs.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Webmin&oldid=252692"
+"https://wiki.archlinux.org/index.php?title=Webmin&oldid=265273"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 6 July 2013, at 10:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

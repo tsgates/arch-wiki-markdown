@@ -10,30 +10,22 @@ Sawfish
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 Starting Sawfish                                                   |
-| -   4 Customization                                                      |
-|     -   4.1 Themes                                                       |
-|         -   4.1.1 Adding new                                             |
-|                                                                          |
-|     -   4.2 Menus                                                        |
-|         -   4.2.1 xfce4-menu-to-sawfish.xslt                             |
-|                                                                          |
-| -   5 Additional resources                                               |
-+--------------------------------------------------------------------------+
-
-Introduction
-------------
-
 Sawfish is a highly customizable window manager. Formerly it has been
 the standard Window manager of the GNOME desktop, but because of a
 change of maintainership this is no longer true. This article will show
-you how to install and configure it for standalone use (w/o GNOME).
+you how to install and configure it for standalone use (without GNOME).
+
+Contents
+--------
+
+-   1 Installation
+-   2 Starting Sawfish
+-   3 Customization
+    -   3.1 Themes
+        -   3.1.1 Adding new
+    -   3.2 Menus
+        -   3.2.1 Menu example
+-   4 Additional resources
 
 Installation
 ------------
@@ -76,40 +68,21 @@ Arch doesn't provide an automatic menu generator for Sawfish, but you
 can generate the menus using the XFCE4 ones. Here are the necessary
 steps:
 
-1. Create the directory ~/.sawfish/lisp/. This is where custom Sawfish
-scripts are stored; the menu will be one of them.
+Create the directory ~/.sawfish/lisp/. This is where custom Sawfish
+scripts are stored; the menu will be one of them. Install libxslt, copy
+the xslt stylesheet example, paste it into a file named
+xfce4-menu-to-sawfish.xslt. Now you need a XFCE4 menu. You may have one
+already or you can generate one with menumaker or xdg_menu.
 
-2. Install libxslt
-
-    # pacman -S libxslt
-
-3. Copy the xslt stylesheet below; paste it into a file named
-xfce4-menu-to-sawfish.xslt.
-
-4. Now you need a XFCE4 menu. Maybe you have one already (where?) or you
-can generate one with menumaker or xdg_menu.
-
-4.1. If want to use menumaker...
-
-4.1.1. Install it...
-
-    # pacman -S menumaker
-
-4.1.2. Generate the menu:
+-   If want to use menumaker:
 
     $ mmaker -c xfce4 | xsltproc xfce4-menu-to-sawfish.xslt - > ~/.sawfish/lisp/arch-menu.jl
 
-4.2. If you want to use xdg_menu...
-
-4.2.1. Install it...
-
-    # pacman -S archlinux-xdg-menu
-
-4.2.2. Generate the menu:
+-   If you want to use archlinux-xdg-menu:
 
     $  xdg_menu --format xfce4 --root-menu /etc/xdg/menus/arch-applications.menu | xsltproc xfce4-menu-to-sawfish.xslt - > ~/.sawfish/lisp/arch-menu.jl
 
-5. Now you have a script ~/.sawfish/lisp/arch-menu.jl that defines a
+Now you have a script ~/.sawfish/lisp/arch-menu.jl that defines a
 variable arch-menu with a list of your applications. You need to link to
 it from the root menu. You need to write the code for that to happen in
 ~/.sawfishrc. So, start your favorite editor, create ~/.sawfishrc, and
@@ -123,11 +96,13 @@ type:
     ; 3. Replace Sawfish's apps-menu with ours
     (setq apps-menu arch-menu)
 
-6. And that's it. Restart Sawfish to effect the changes.
+Restart Sawfish to effect the changes.
 
-xfce4-menu-to-sawfish.xslt
+Menu example
 
-    <?xml version="1.0" encoding="UTF-8" ?>
+    xfce4-menu-to-sawfish.xslt
+
+    <?xml version="1.0" encoding="UTF-8" ?>
     <xsl:stylesheet version="1.0"
                     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       <xsl:output method="text"/>
@@ -173,12 +148,18 @@ xfce4-menu-to-sawfish.xslt
 Additional resources
 --------------------
 
--   Sawfish wiki --- The official website
--   info sawfish --- Local documentation
+-   Sawfish wiki - Official website
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sawfish&oldid=216333"
+"https://wiki.archlinux.org/index.php?title=Sawfish&oldid=259490"
 
 Category:
 
 -   Dynamic WMs
+
+-   This page was last modified on 29 May 2013, at 13:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

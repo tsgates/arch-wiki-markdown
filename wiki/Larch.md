@@ -21,19 +21,17 @@ a root overlay for maximum customization.
 Full documentation is available on the project's website (see #External
 Resources below).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Project Setup                                                      |
-| -   3 Install Tab                                                        |
-| -   4 Adding AUR packages                                                |
-| -   5 Larchify                                                           |
-| -   6 Make medium                                                        |
-| -   7 Pro-tips                                                           |
-| -   8 External Resources                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Project Setup
+-   3 Install Tab
+-   4 Adding AUR packages
+-   5 Larchify
+-   6 Make medium
+-   7 Pro-tips
+-   8 External Resources
 
 Installation
 ------------
@@ -89,7 +87,7 @@ Once you have installed you are going to want to configure, tune, tweak
 and customize your install. The edit root overlay will open a root
 overlay (part of your profile in ~/.config/larch/profiles/) to add
 config files. You will probably want to adapt things from here
-Beginners' Guide. Make sure all packages you need are added in the
+Beginners' guide. Make sure all packages you need are added in the
 installation tab.
 
 Tip:You probably do not want to use a desktop manager, and instead go
@@ -140,8 +138,15 @@ External Resources
 -   Arch Linux Forums - The original Larch thread
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Larch&oldid=205728"
+"https://wiki.archlinux.org/index.php?title=Larch&oldid=305716"
 
 Category:
 
 -   Live Arch systems
+
+-   This page was last modified on 20 March 2014, at 01:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

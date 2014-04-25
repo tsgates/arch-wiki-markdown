@@ -47,3 +47,10 @@ Retrieved from
 Category:
 
 -   Office
+
+-   This page was last modified on 27 March 2013, at 02:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

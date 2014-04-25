@@ -5,24 +5,20 @@ Fbsplash (formerly gensplash) is a userspace implementation of a splash
 screen for Linux systems. It provides a graphical environment during
 system boot using the Linux framebuffer layer.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Fbsplash                                                     |
-|     -   1.2 Scripts                                                      |
-|     -   1.3 Themes                                                       |
-|     -   1.4 Suspend to Disk                                              |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Kernel Command Line                                          |
-|     -   2.2 Configuration Files                                          |
-|                                                                          |
-| -   3 Starting Fbsplash early in the initcpio                            |
-| -   4 Console backgrounds                                                |
-| -   5 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Fbsplash
+    -   1.2 Scripts
+    -   1.3 Themes
+    -   1.4 Suspend to Disk
+-   2 Configuration
+    -   2.1 Kernel Command Line
+    -   2.2 Configuration Files
+-   3 Starting Fbsplash early in the initcpio
+-   4 Console backgrounds
+-   5 Links
 
 Installation
 ------------
@@ -50,11 +46,9 @@ Note:The package fbsplash does not contain a default theme.
 > Suspend to Disk
 
 If you want suspend to disk with Uswsusp using Fbsplash, install the
-uswsusp-fbsplash package from the AUR. For more info have a look at
-Pm-utils#Using_another_sleep_backend_.28like_uswsusp.29 or
-Suspend_to_Disk#Uswsusp_method (hibernate-script). Additionally there is
-limited support for using Fbsplash in the tuxonice-userui package for
-those using a kernel with the TuxOnIce patch.
+uswsusp-fbsplash package from the AUR. Additionally there is limited
+support for using Fbsplash in the tuxonice-userui package for those
+using a kernel with the TuxOnIce patch.
 
 Configuration
 -------------
@@ -62,8 +56,8 @@ Configuration
 > Kernel Command Line
 
 You now need to set something like
-quiet loglevel=3 logo.nologo vga=790 console=tty1 splash=silent,fadein,fadeout,theme:arch-banner-icons
-as you kernel command line parameters in your bootloader. See Kernel
+quiet loglevel=3 logo.nologo gfxpayload=keep console=tty1 splash=silent,fadein,fadeout,theme:arch-banner-icons
+as your kernel command line parameters in your bootloader. See Kernel
 parameters for more info.
 
 The parameter loglevel=3 prevents kernel messages from garbling the
@@ -125,6 +119,13 @@ mkinitcpio.conf.
 Console backgrounds
 -------------------
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Systemd. No      
+                           rc.conf. (Discuss)       
+  ------------------------ ------------------------ ------------------------
+
 If you have a kernel that supports Fbcondecor (eg. linux-fbcondecor),
 you can get nice graphical console backgrounds beside the splash screen.
 Just search the AUR for fbsplash-theme.
@@ -152,8 +153,15 @@ Links
 -   http://dev.gentoo.org/~spock/projects/fbcondecor/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fbsplash&oldid=243160"
+"https://wiki.archlinux.org/index.php?title=Fbsplash&oldid=287746"
 
 Category:
 
 -   Bootsplash
+
+-   This page was last modified on 12 December 2013, at 20:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

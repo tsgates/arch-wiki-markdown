@@ -1,10 +1,6 @@
 fbpad
 =====
 
-  Summary
-  ---------------------------------------------------------
-  Information on installing, configuring, and using fbpad
-
 fbpad is a small framebuffer terminal that manages many terminals
 through single character tags. It is exceptionally lightweight, being
 written in C and using its own font format, tinyfont, which avoids xorg
@@ -12,23 +8,19 @@ font dependencies. fbpad optionally supports 256 colors, bold fonts, and
 saving the framebuffer contents to memory, all which combined make fbpad
 a viable alternative to the X server for many purposes.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Tag Colors                                                   |
-|     -   2.2 Fonts                                                        |
-|     -   2.3 Color Support                                                |
-|                                                                          |
-| -   3 Usage                                                              |
-|     -   3.1 Copying Text                                                 |
-|     -   3.2 Watching YouTube                                             |
-|                                                                          |
-| -   4 Recommended Programs                                               |
-| -   5 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Tag Colors
+    -   2.2 Fonts
+    -   2.3 Color Support
+-   3 Usage
+    -   3.1 Copying Text
+    -   3.2 Watching YouTube
+-   4 Recommended Programs
+-   5 External Links
 
 Installation
 ------------
@@ -244,8 +236,15 @@ External Links
 -   litcave, the homepage of Ali Gholami Rudi's software projects
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fbpad&oldid=236436"
+"https://wiki.archlinux.org/index.php?title=Fbpad&oldid=289863"
 
 Category:
 
 -   Terminal emulators
+
+-   This page was last modified on 22 December 2013, at 02:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

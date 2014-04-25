@@ -7,20 +7,17 @@ this square box hardware. This one will not be a guide to get a fancy
 eyecandy-full machine, but fast (considering the hardware) geeky
 machine, which does the job efficiently.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System specs                                                       |
-| -   2 The installation                                                   |
-|     -   2.1 Config Files (found int /etc/ dir)                           |
-|                                                                          |
-| -   3 Powersaving and ACPI                                               |
-| -   4 Programs that ease CLI life                                        |
-| -   5 X.org and friends                                                  |
-|     -   5.1 Desktop Manager                                              |
-|     -   5.2 awesomewm and desktop interaction stuff                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 System specs
+-   2 The installation
+    -   2.1 Config Files (found int /etc/ dir)
+-   3 Powersaving and ACPI
+-   4 Programs that ease CLI life
+-   5 X.org and friends
+    -   5.1 Desktop Manager
+    -   5.2 awesomewm and desktop interaction stuff
 
 System specs
 ------------
@@ -51,7 +48,7 @@ System specs
 The installation
 ----------------
 
-Well the basic installation can be found in the Beginner's Guide.
+Well the basic installation can be found in the Beginners' guide.
 However, there was done a lot of customization to suit my need and here
 I will try to list them.
 
@@ -96,8 +93,15 @@ the case that is more customizable as well.
 > awesomewm and desktop interaction stuff
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IBM_ThinkPad_T43p&oldid=196665"
+"https://wiki.archlinux.org/index.php?title=IBM_ThinkPad_T43p&oldid=298124"
 
 Category:
 
 -   IBM
+
+-   This page was last modified on 16 February 2014, at 07:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

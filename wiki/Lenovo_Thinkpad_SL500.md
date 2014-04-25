@@ -7,30 +7,26 @@ pretty much everything works fine. I am very happy with this machine!
 While this guide if for the Thinkpad SL500, the steps should be easily
 applicable to the SL300 and SL400 models.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Wireless                                                           |
-| -   3 Sound                                                              |
-| -   4 lenovo-sl-laptop Kernel Module                                     |
-|     -   4.1 Configuration                                                |
-|     -   4.2 Building Manually                                            |
-|                                                                          |
-| -   5 USB and SD auto mounting                                           |
-| -   6 xD-Picture Card                                                    |
-| -   7 Other notes                                                        |
-| -   8 Untested                                                           |
-| -   9 Power management                                                   |
-|     -   9.1 Modules array                                                |
-|     -   9.2 /etc/rc.local                                                |
-|     -   9.3 /etc/acpid/handler.sh                                        |
-|     -   9.4 /etc/pm/sleep.d/60rc.local                                   |
-|     -   9.5 /path/to/powermanagement.sh                                  |
-|                                                                          |
-| -   10 References                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Wireless
+-   3 Sound
+-   4 lenovo-sl-laptop Kernel Module
+    -   4.1 Configuration
+    -   4.2 Building Manually
+-   5 USB and SD auto mounting
+-   6 xD-Picture Card
+-   7 Other notes
+-   8 Untested
+-   9 Power management
+    -   9.1 Modules array
+    -   9.2 /etc/rc.local
+    -   9.3 /etc/acpid/handler.sh
+    -   9.4 /etc/pm/sleep.d/60rc.local
+    -   9.5 /path/to/powermanagement.sh
+-   10 References
 
 Introduction
 ------------
@@ -335,8 +331,15 @@ Thread on the forums concerning configuration of Arch Linux on the SL
 series
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_Thinkpad_SL500&oldid=238320"
+"https://wiki.archlinux.org/index.php?title=Lenovo_Thinkpad_SL500&oldid=298046"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 16 February 2014, at 07:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,22 +1,20 @@
 Rdesktop
 ========
 
-[rdesktop] is a free, open source client for Microsoft's proprietary RDP
+rdesktop is a free, open source client for Microsoft's proprietary RDP
 protocol released under the GNU General Public License. Use rdesktop to
 connect to Windows 2000/XP/Vista/Win7 RDP server to remotely
 administrate the Windows box.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Features                                                           |
-| -   2 Installation                                                       |
-| -   3 Usage                                                              |
-| -   4 Automatic Scaling of Geometry                                      |
-| -   5 remote desktop using netbios names instead of using IP address     |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Features
+-   2 Installation
+-   3 Usage
+-   4 Automatic scaling of geometry
+-   5 Remote desktop using NetBIOS names instead of using IP address
+-   6 See also
 
 Features
 --------
@@ -44,16 +42,13 @@ not yet been implemented.
 Installation
 ------------
 
-The packages for rdesktop are available in the extra repo; to install
-simply use pacman as you would any other package
-
-    # pacman -S rdesktop
+Install rdesktop from the official repositories.
 
 Usage
 -----
 
 For a complete listing of options see the rdesktop man page. Here is a
-typical line
+typical line:
 
     $ rdesktop -g 1440x900 -P -z -x l -r sound:off -u windowsuser 98.180.102.33:3389
 
@@ -69,7 +64,7 @@ Reading form left to right:
   98.180.102.33:3389   This is the IP address and port number of the target machine
   -------------------- ----------------------------------------------------------------------------------
 
-Automatic Scaling of Geometry
+Automatic scaling of geometry
 -----------------------------
 
 In order to automatically scale the geometry to fit the screen, pass
@@ -82,31 +77,40 @@ Another options is to use is to use the "-g" flag
 
      $ rdesktop -g 100% -P -z 98.180.102.33:3389
 
-remote desktop using netbios names instead of using IP address
+Remote desktop using NetBIOS names instead of using IP address
 --------------------------------------------------------------
 
-If you don't know the IP address of a windows computer in a network, you
-have to enable wins support. To do so, you have to install samba.
-Enabaling wins in samba is surprisingly easy: just edit the
+If you do not know the IP address of a Windows computer in a network,
+you have to enable wins support. To do so, you have to install samba.
+Enabling wins in samba is surprisingly easy: just edit the
 /etc/samba/smb.conf and add the following line to it, or uncomment the
 appropriate line:
 
-wins support = yes
+    wins support = yes
 
-then you have to install winbind and edit the /etc/nsswitch.conf and add
-the "wins" to the list of hosts.
+Then you have to install winbind, then edit the /etc/nsswitch.conf and
+add the "wins" to the list of hosts.
 
-restart smbd and nmbd services and test your success by pinging a
-windows netbios host.
+Restart smbd and nmbd services and test your success by pinging a
+Windows NetBIOS host.
 
 See also
 --------
 
 -   xrdp a daemon creating an RDP interface to the X server
+-   freerdp a rdesktop fork that supports RDP 7.1 features including
+    network level authentication (NLA)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Rdesktop&oldid=248106"
+"https://wiki.archlinux.org/index.php?title=Rdesktop&oldid=304895"
 
 Category:
 
--   Remote Desktop Protocol
+-   Remote Desktop
+
+-   This page was last modified on 16 March 2014, at 09:02.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

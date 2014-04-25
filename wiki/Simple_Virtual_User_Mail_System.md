@@ -1,10 +1,18 @@
 Simple Virtual User Mail System
 ===============================
 
-  
- This article describes how to set up a complete virtual user mail
-system on an Arch Linux system in the simplest manner possible. However,
-since a mail system consists of many complex components, quite a bit of
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with Postfix.    
+                           Notes: both articles     
+                           cover the exact same     
+                           setup (Discuss)          
+  ------------------------ ------------------------ ------------------------
+
+This article describes how to set up a complete virtual user mail system
+on an Arch Linux system in the simplest manner possible. However, since
+a mail system consists of many complex components, quite a bit of
 configuration will still be necessary. Roughly, the components used in
 this article are Postfix, Dovecot, PostfixAdmin and Roundcube.
 
@@ -25,31 +33,28 @@ mentioned will be required.
 Should any unforeseen problems occur, feel free to use the discussion
 page to voice your problems and I will try to answer.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 User                                                         |
-|     -   2.2 Database                                                     |
-|     -   2.3 Postfix                                                      |
-|     -   2.4 Dovecot                                                      |
-|     -   2.5 PostfixAdmin                                                 |
-|     -   2.6 Roundcube                                                    |
-|     -   2.7 systemd                                                      |
-|                                                                          |
-| -   3 Fire it up                                                         |
-| -   4 Optional Items                                                     |
-|     -   4.1 SpamAssassin                                                 |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-| -   6 Tips and Tricks                                                    |
-|     -   6.1 When sending email with Postfix, how can I hide the sender’s |
-|         IP and username in the Received header                           |
-|                                                                          |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 User
+    -   2.2 Database
+    -   2.3 Postfix
+    -   2.4 Dovecot
+    -   2.5 PostfixAdmin
+    -   2.6 Roundcube
+    -   2.7 systemd
+-   3 Fire it up
+-   4 Optional Items
+    -   4.1 SpamAssassin
+        -   4.1.1 SpamAssassin combined with Dovecot LDA / Sieve
+            (Mailfiltering)
+-   5 Troubleshooting
+-   6 Tips and Tricks
+    -   6.1 When sending email with Postfix, how can I hide the sender’s
+        IP and username in the Received header
+-   7 See also
 
 Installation
 ------------
@@ -91,7 +96,7 @@ proper permissions.
 
 > Postfix
 
-There are basically 2 ways for of doing SMTPS.
+There are basically 2 ways of doing SMTPS.
 
 One is using the wrapper mode which enables even old/odd clients like
 Outlook to use TLS. The wrapper mode uses the system service "smtps"
@@ -124,8 +129,7 @@ For the proper variant uncomment this in /etc/postfix/master.cf:
       -o smtpd_tls_security_level=encrypt
       -o smtpd_sasl_auth_enable=yes
 
-  
- To /etc/postfix/main.cf append:
+To /etc/postfix/main.cf append:
 
     relay_domains = *
     virtual_alias_maps = proxy:mysql:/etc/postfix/virtual_alias_maps.cf
@@ -154,6 +158,10 @@ For the proper variant uncomment this in /etc/postfix/master.cf:
     smtpd_sasl_local_domain = $mydomain
     broken_sasl_auth_clients = yes
     smtpd_tls_loglevel = 1
+
+Warning:relay_domains = * might be a bad idea (see
+http://www.postfix.org/BASIC_CONFIGURATION_README.html#relay_to). You
+usually do not want postfix to forward mail from strangers.
 
 This references a lot of files that do not even exist yet. Let's create
 them.
@@ -220,7 +228,7 @@ In /etc/dovecot/dovecot.conf we'll need to do quite some configuration:
         driver = sql
         args = /etc/dovecot/dovecot-sql.conf
     }
-    userdb sql {
+    userdb {
         driver = sql
         args = /etc/dovecot/dovecot-sql.conf
     }
@@ -239,6 +247,11 @@ In /etc/dovecot/dovecot.conf we'll need to do quite some configuration:
 
     ssl_cert = </etc/ssl/private/server.crt
     ssl_key = </etc/ssl/private/server.key
+
+Note: you may want to replace the whole content of the file with this
+one since the default configuration file imports the content of
+conf.d/*.conf. Those files call other files that aren't present in our
+configuration. You can alternatively remove conf.d/.
 
 See http://wiki2.dovecot.org/Variables for the docevot variables %d
 and %u.
@@ -260,37 +273,26 @@ referenced in the config above. Go ahead and create a
 
 > PostfixAdmin
 
-To install PostfixAdmin, we need to manually get its upstream package
-and extract it to our web root (or other desired directory). You should
-use the most recent version available at the time. This article will use
-the most recent version at the time of writing.
+To install PostfixAdmin, we can use the postfixadmin package from the
+official repositories.
 
-    cd /srv/http/
-    wget http://sourceforge.net/projects/postfixadmin/files/postfixadmin/postfixadmin-2.3.5/postfixadmin-2.3.5.tar.gz/download
-    tar xzf postfixadmin-2.3.5.tar.gz
-    cd postfixadmin-2.3.5
-
-Next, PostfixAdmin needs to be configured. First edit the config.inc.php
-file :
+Next, PostfixAdmin needs to be configured. First edit the
+/etc/webapps/postfixadmin/config.inc.php file:
 
     $CONF['configured'] = true;
     // correspond to dovecot maildir path /home/vmail/%d/%u 
     $CONF['domain_path'] = 'YES';
     $CONF['domain_in_mailbox'] = 'YES';
-
     $CONF['database_type'] = 'mysql';
     $CONF['database_host'] = 'localhost';
     $CONF['database_user'] = 'postfix_user';
     $CONF['database_password'] = 'hunter2';
     $CONF['database_name'] = 'postfix_db';
 
-  
- Then assuming localhost is the hostname of the machine you are
-installing this on, navigate to
-http://localhost/postfixadmin-2.3.5/setup.php. The setup will guide you
-through the remaining steps to set up PostfixAdmin.
-
-  
+Then assuming localhost is the hostname of the machine you are
+installing this on, navigate to http://localhost/postfixAdmin/setup.php.
+The setup will guide you through the remaining steps to set up
+PostfixAdmin.
 
 Note:For a detailed section on setting up domains and mailboxes in
 PostfixAdmin see the related [Gentoo wiki article]
@@ -379,6 +381,9 @@ matching patterns.
 
     /usr/bin/vendor_perl/sa-update
 
+Note: If you want to combine Spamassassin and Dovecot Mail Filtering you
+have to ignore the next two lines and continue further down instead.
+
 Edit /etc/postfix/master.cf and add the content filter under smtp.
 
     smtp       inet  n       -       n       -       -       smtpd
@@ -388,6 +393,19 @@ Also add the following service entry for spamassassin
 
     spamassassin   unix   -     n       n      -       -       pipe
            user=spamd argv=/usr/bin/vendor_perl/spamc -f -e /usr/sbin/sendmail -oi -f ${sender} ${recipient}
+
+SpamAssassin combined with Dovecot LDA / Sieve (Mailfiltering)
+
+-   Set up LDA and the Sieve-Plugin which is descriped in Dovecot#Sieve.
+    But ignore the last line mailbox_command... 
+-   Instead add a pipe in /etc/postfix/master.cf
+
+     dovecot   unix  -       n       n       -       -       pipe
+           flags=DRhu user=vmail:vmail argv=/usr/bin/vendor_perl/spamc -f -u spamd -e /usr/lib/dovecot/dovecot-lda -f ${sender} -d ${recipient}
+
+-   And activate it in Postfix main.cf
+
+     virtual_transport = dovecot
 
 Enable and start the service with systemctl
 
@@ -448,8 +466,15 @@ See also
 -   OpenDKIM
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Simple_Virtual_User_Mail_System&oldid=255255"
+"https://wiki.archlinux.org/index.php?title=Simple_Virtual_User_Mail_System&oldid=304155"
 
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 12 March 2014, at 13:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,28 +1,14 @@
 makepkg
 =======
 
-> Summary
+Related articles
 
-makepkg is a script used to compile and package software for use with
-pacman. This article details its configuration and usage.
-
-> Overview
-
-Packages in Arch Linux are built using makepkg and a custom build script
-for each package (known as a PKGBUILD). Once packaged, software can be
-installed and managed with pacman. PKGBUILDs for software in the
-official repositories are available from the ABS tree; thousands more
-are available from the (unsupported) Arch User Repository.
-
-> Related
-
-Creating Packages
-
-> Resources
-
-makepkg(8) Manual Page
-
-makepkg.conf(5) Manual Page
+-   Creating Packages
+-   PKGBUILD
+-   Arch User Repository
+-   pacman
+-   Official repositories
+-   Arch Build System
 
 makepkg is used for compiling and building packages suitable for
 installation with pacman, Arch Linux's package manager. makepkg is a
@@ -33,25 +19,23 @@ customizations, generate meta-info, and package everything together.
 
 makepkg is provided by the pacman package.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Configuration                                                      |
-|     -   1.1 Architecture, compile flags                                  |
-|         -   1.1.1 MAKEFLAGS                                              |
-|                                                                          |
-|     -   1.2 Package output                                               |
-|     -   1.3 Signature checking                                           |
-|                                                                          |
-| -   2 Usage                                                              |
-| -   3 Tips and Tricks                                                    |
-|     -   3.1 Generate new md5sums                                         |
-|     -   3.2 Makepkg source PKGBUILD twice                                |
-|     -   3.3 WARNING: Package contains reference to $srcdir               |
-|                                                                          |
-| -   4 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Configuration
+    -   1.1 Architecture, compile flags
+        -   1.1.1 MAKEFLAGS
+    -   1.2 Package output
+    -   1.3 Signature checking
+-   2 Usage
+-   3 Tips and Tricks
+    -   3.1 Improving compile times
+    -   3.2 Generate new checksums
+    -   3.3 Makepkg source PKGBUILD twice
+    -   3.4 WARNING: Package contains reference to $srcdir
+    -   3.5 Create uncompressed packages
+    -   3.6 Speed up packaging on multi-core CPUs
+-   4 See also
 
 Configuration
 -------------
@@ -208,19 +192,19 @@ or you are otherwise distributing your packages to other users.
 
 The following procedure is not necessary for compiling with makepkg, for
 your initial configuration proceed to #Usage. To temporarily disable
-signature checking call the makepkg command with the --skippgpcheck
+signature checking, call the makepkg command with the --skippgpcheck
 option. If a signature file in the form of .sig is part of the PKGBUILD
 source array, makepkg validates the authenticity of source files. For
 example, the signature pkgname-pkgver.tar.gz.sig is used to check the
 integrity of the file pkgname-pkgver.tar.gz with the gpg program. If
-desired, signatures by other developers can be manually added to the gpg
+desired, signatures by other developers can be manually added to the GPG
 keyring. Look into the GnuPG article for further information.
 
 Note:The signature checking implemented in makepkg does not use pacman's
-keyring. Configure gpg as explained below to allow makepkg reading
+keyring. Configure GPG, as explained below, to allow makepkg to read
 pacman's keyring.
 
-The gpg keys are expected to be stored in the user's
+The GPG keys are expected to be stored in the user's
 ~/.gnupg/pubring.gpg file. In case it does not contain the given
 signature, makepkg shows a warning.
 
@@ -233,14 +217,14 @@ signature, makepkg shows a warning.
         Please make sure you really trust them.
     [...]
 
-To show the current list of gpg keys use the gpg command.
+To show the current list of GPG keys, use the gpg command.
 
     gpg --list-keys
 
-If the pubring.gpg file does not exist it will be created for you
-immediatly. You can now proceed with configuring gpg to allow compiling
+If the pubring.gpg file does not exist, it will be created for you
+immediately. You can now proceed with configuring gpg to allow compiling
 AUR packages submitted by Arch Linux developers with successful
-signature checking. Add the following line to the end of your gpg
+signature checking. Add the following line to the end of your GPG
 configuration file to include the pacman keyring in your user's personal
 keyring.
 
@@ -264,8 +248,8 @@ PKGBUILD files. Install the "base-devel" group by issuing (as root):
 
 Note:Before complaining about missing (make) dependencies, remember that
 the base group is assumed to be installed on all Arch Linux systems. The
-group "base-devel" is assumed to be installed when building with
-makepkg.
+group "base-devel" is assumed to be installed when building with makepkg
+or when using AUR helpers.
 
 To build a package, one must first create a PKGBUILD, or build script,
 as described in Creating Packages, or obtain one from the ABS tree, Arch
@@ -312,11 +296,62 @@ pacman -U pkgname-pkgver.pkg.tar.xz, as in:
 Tips and Tricks
 ---------------
 
-> Generate new md5sums
+> Improving compile times
 
-Since pacman 4.1 makepkg -g >> PKGBUILD is no longer required as
-pacman-contrib was merged along with the updpkgsums script that will
-generate new checksums and replace them in the PKGBUILD:
+As an I/O intensive task, the use of a tmpfs for compiling packages may
+bring significant improvements in build times. Relevant option in
+/etc/makepkg.conf is to be found at the end of the BUILD ENVIRONMENT
+section:
+
+    /etc/makepkg.conf
+
+    [...]
+
+    #########################################################################
+    # BUILD ENVIRONMENT
+    #########################################################################
+    #
+    # Defaults: BUILDENV=(fakeroot !distcc color !ccache check !sign)
+    #  A negated environment option will do the opposite of the comments below.
+    #
+    #-- fakeroot: Allow building packages as a non-root user
+    #-- distcc:   Use the Distributed C/C++/ObjC compiler
+    #-- color:    Colorize output messages
+    #-- ccache:   Use ccache to cache compilation
+    #-- check:    Run the check() function if present in the PKGBUILD
+    #-- sign:     Generate PGP signature file
+    #
+    BUILDENV=(fakeroot !distcc color !ccache check !sign)
+    #
+    #-- If using DistCC, your MAKEFLAGS will also need modification. In addition,
+    #-- specify a space-delimited list of hosts running in the DistCC cluster.
+    #DISTCC_HOSTS=""
+    #
+    #-- Specify a directory for package building.
+    #BUILDDIR=/tmp
+
+    [...]
+
+Uncommenting the BUILDDIR=/tmp line and setting it to e.g.
+BUILDDIR=/tmp/builds (or leaving it to its default value) will make use
+of Arch default /tmp tmpfs.
+
+Note:The tmpfs folder needs to be mounted without the noexec option,
+else it will prevent build scripts or utilities from being executed.
+Also, as stated in fstab#tmpfs, its default size is half of the
+available RAM so you may run out of space.
+
+Please be reminded that any package compiled in tmpfs will not persist
+across reboot. Therefore, such packages should be installed
+consecutively to building or be moved to another (persistent) directory.
+
+> Generate new checksums
+
+Since pacman 4.1, makepkg -g >> PKGBUILD is no longer required because
+pacman-contrib was merged into upstream pacman, including the updpkgsums
+script that will generate new checksums and/or replace them in the
+PKGBUILD. In the same directory as the PKGBUILD file, run the following
+command:
 
     $ updpkgsums
 
@@ -338,16 +373,42 @@ directory:
 
 Link to discussion thread.
 
-See Also
+> Create uncompressed packages
+
+If you only want to install packages locally, you can speed up the
+process by avoiding compression and subsequent decompression. In
+makepkg.conf, change PKGEXT='.pkg.tar.xz' to PKGEXT='.pkg.tar'.
+
+> Speed up packaging on multi-core CPUs
+
+xz nowaways did not support SMP on compression. You can accelerate
+compression with p7zip, which supports the xz format. Edit file:
+
+    /etc/makepkg.conf
+
+    [...]
+    COMPRESSXZ=(7z a dummy -txz -si -so)
+    [...]
+
+See also
 --------
 
--   gcccpuopt: A script to print the gcc cpu specific options tailored
+-   makepkg(8) Manual Page
+-   makepkg.conf(5) Manual Page
+-   gcccpuopt: A script to print the GCC CPU-specific options tailored
     for the current CPU
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Makepkg&oldid=253354"
+"https://wiki.archlinux.org/index.php?title=Makepkg&oldid=305365"
 
 Categories:
 
 -   Package development
 -   About Arch
+
+-   This page was last modified on 17 March 2014, at 19:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

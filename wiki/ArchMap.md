@@ -4,18 +4,17 @@ ArchMap
 The ArchMap project creates a map of Arch Linux users all over the
 world.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 History                                                            |
-| -   2 Google Maps                                                        |
-| -   3 Google Earth Map                                                   |
-|     -   3.1 Screenshots                                                  |
-|                                                                          |
-| -   4 List yourself                                                      |
-|     -   4.1 Finding your coordinates                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 History
+    -   1.1 Screenshots
+-   2 Maps
+    -   2.1 OpenStreetMap
+    -   2.2 Google Maps
+    -   2.3 Google Earth
+-   3 List yourself
+    -   3.1 Finding your coordinates
 
 History
 -------
@@ -26,48 +25,49 @@ maintain them anymore, so he dropped the project.
 
 When Google Earth for Linux was released, brain0 recreated the project.
 
-The third version of ArchMap is based on Google Maps. This project is
-still active.
+The third version of ArchMap was based on Google Maps.
 
-Google Maps
------------
+ArchMap is now developed in the open on GitHub, this iteration was
+started by alux.
 
-You can find it here: ArchMap  
- ArchMap should always be up-to-date. Scripts on server regenerate KML
-file daily. Obviously you can download this file and load it in Google
-Earth.
+> Screenshots
 
-If you have any suggestions please post them here.
+Here's a screenshot of how it used to look:
 
-Google Earth Map
-----------------
+-   South America
 
-ArchMap is now available as Google Earth .kmz file maintained by brain0.
-You can download it here (last updated 02.09.2009, but it doesn't work -
-I hadn't updated this since 2009, if anyone can figure out what's wrong,
-tell me FIX: The Problem was the "&" in the entry from
-Bosnia&Herzegovina. I fixed the entry to "Bosnia and Herzegovina" on the
-wiki, now you just need to regenerate the kml from that).
+Maps
+----
+
+All of the code to generate your own .geojson file is up on GitHub. The
+repo also contains pre-generated .geojson and .kml files, these files
+are used to make the maps below.
+
+If you have any suggestions please post them here or create an issue in
+the repo.
+
+> OpenStreetMap
+
+One rendering of the map is hosted by MapBox, this to be updated
+manually by alux importing the .geojson file.
+
+> Google Maps
+
+To display the coordinates in Google Maps, enter this link to the .kml
+file into the search bar. Here is that search.
+
+> Google Earth
 
 You can add the coordinates to Google Earth permanently:
 
 -   Right click on "My Places"
 -   Go to Add -> Network Link
--   Enter ArchMap into the Name field and put the above link into the
-    URL field. Then press OK.
+-   Enter ArchMap into the Name field and put
+    https://raw.githubusercontent.com/maelstrom59/ArchMap/master/markers.kml
+    into the Link field. Then press OK.
 
 You can refresh the data by right-clicking the ArchMap folder and
 selecting "Refresh".
-
-> Screenshots
-
-These are some screenshots to demonstrate how it looks:
-
--   Europe
--   US
--   South America
-
-Of course, to view everything you will still need Google Earth.
 
 List yourself
 -------------
@@ -93,8 +93,15 @@ US Residents may also use
 -   census.gov (go to bottom and enter zipcode)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ArchMap&oldid=238735"
+"https://wiki.archlinux.org/index.php?title=ArchMap&oldid=305204"
 
 Category:
 
 -   About Arch
+
+-   This page was last modified on 16 March 2014, at 20:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

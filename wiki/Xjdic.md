@@ -19,18 +19,15 @@ set the correct encoding. That "something" may look good (if you're
 lucky), awful or be just empty spaces — the latter two meaning you lack
 some required fonts.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Terminal setup                                                     |
-|     -   1.1 rxvt-unicode                                                 |
-|     -   1.2 kterm                                                        |
-|     -   1.3 xterm                                                        |
-|                                                                          |
-| -   2 Misc notes                                                         |
-| -   3 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Terminal setup
+    -   1.1 rxvt-unicode
+    -   1.2 kterm
+    -   1.3 xterm
+-   2 Misc notes
+-   3 External links
 
 Terminal setup
 --------------
@@ -133,3 +130,10 @@ Retrieved from
 Category:
 
 -   Internationalization
+
+-   This page was last modified on 23 April 2012, at 17:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -33,33 +33,27 @@ detailed tests
 Netbook works flawlessly with Arch Linux (if you encounter freezes see
 Troubleshooting below)
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 HDD important issue                                                |
-| -   2 Graphics                                                           |
-|     -   2.1 Nvidia's Closed-Source Driver                                |
-|     -   2.2 Open-Source Driver                                           |
-|                                                                          |
-| -   3 Wireless                                                           |
-| -   4 ACPI Functions                                                     |
-|     -   4.1 Function Keys                                                |
-|                                                                          |
-| -   5 Power Management with Laptop Mode Tools                            |
-|     -   5.1 Super Hybrid Engine                                          |
-|     -   5.2 Wifi Power Management                                        |
-|     -   5.3 Suspend2RAM                                                  |
-|     -   5.4 Hibernate                                                    |
-|     -   5.5 LCD brightness                                               |
-|                                                                          |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 Machine does not resume after suspend2ram                    |
-|     -   6.2 After suspending the machine immediately resumes             |
-|                                                                          |
-| -   7 Tips                                                               |
-|     -   7.1 1366x768 in console with NVIDIA proprietary driver           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 HDD important issue
+-   2 Graphics
+    -   2.1 Nvidia's Closed-Source Driver
+    -   2.2 Open-Source Driver
+-   3 Wireless
+-   4 ACPI Functions
+    -   4.1 Function Keys
+-   5 Power Management with Laptop Mode Tools
+    -   5.1 Super Hybrid Engine
+    -   5.2 Wifi Power Management
+    -   5.3 Suspend2RAM
+    -   5.4 Hibernate
+    -   5.5 LCD brightness
+-   6 Troubleshooting
+    -   6.1 Machine does not resume after suspend2ram
+    -   6.2 After suspending the machine immediately resumes
+-   7 Tips
+    -   7.1 1366x768 in console with NVIDIA proprietary driver
 
 HDD important issue
 ===================
@@ -312,8 +306,15 @@ Reboot
 Load kernel with parameters acpi_osi=Linux vga=0x034d
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1201NL&oldid=208397"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1201NL&oldid=304866"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 08:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

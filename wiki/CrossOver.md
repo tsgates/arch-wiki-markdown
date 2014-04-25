@@ -1,13 +1,9 @@
 CrossOver
 =========
 
-> Summary
+Related articles
 
-Configuring and installing CrossOver on Archlinux.
-
-> Related
-
-Wine
+-   Wine
 
 CrossOver is the paid, commercialized version of Wine which provides
 more comprehensive end-user support. It includes scripts, patches, a
@@ -30,7 +26,7 @@ Installing Crossover Linux
 
 Tested with trial install-crossover-11.2.1.bin
 
--   Ensure python-dbus-common, pygtk and python2-dbus are installed.
+-   Ensure dbus-python-common, pygtk and dbus-python2 are installed.
 
 -   Run # ln -sf /usr/bin/python2 /usr/bin/python
 
@@ -53,9 +49,16 @@ Tip: If you get a registration failure, try:
 valid for all users on the system.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=CrossOver&oldid=253519"
+"https://wiki.archlinux.org/index.php?title=CrossOver&oldid=290075"
 
 Categories:
 
 -   Wine
 -   Gaming
+
+-   This page was last modified on 23 December 2013, at 09:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

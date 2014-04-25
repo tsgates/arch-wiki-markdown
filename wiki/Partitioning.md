@@ -1,31 +1,19 @@
 Partitioning
 ============
 
-> Summary
+Related articles
 
-An overview of disk partitioning tools, best practices, and additional
-considerations.
-
-> Related
-
-fstab
-
-LVM
-
-Swap
-
-Format a device
-
-File Systems
+-   fstab
+-   LVM
+-   Swap
+-   File Systems
 
 Partitioning a hard drive allows one to logically divide the available
 space into sections that can be accessed independently of one another.
-Partition information is stored within a hard drive's GUID Partition
-Table or Master Boot Record.
 
 An entire hard drive may be allocated to a single partition, or one may
 divide the available storage space across multiple partitions. A number
-of scenarios require creation multiple partitions: dual- or
+of scenarios require creating multiple partitions: dual- or
 multi-booting, for example, or maintaining a swap partition. In other
 cases, partitioning is used as a means of logically separating data,
 such as creating separate partitions for audio and video files. Common
@@ -34,49 +22,50 @@ partitioning schemes are discussed in detail below.
 Each partition should be formatted to a file system type before being
 used.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Partition type                                                     |
-|     -   1.1 On MBR                                                       |
-|     -   1.2 On GPT                                                       |
-|                                                                          |
-| -   2 Partition scheme                                                   |
-|     -   2.1 Single root partition                                        |
-|     -   2.2 Discrete partitions                                          |
-|     -   2.3 Mount points                                                 |
-|         -   2.3.1 / (root)                                               |
-|         -   2.3.2 /boot                                                  |
-|         -   2.3.3 /home                                                  |
-|         -   2.3.4 /var                                                   |
-|         -   2.3.5 /tmp                                                   |
-|         -   2.3.6 Swap                                                   |
-|         -   2.3.7 How big should my partitions be?                       |
-|                                                                          |
-| -   3 Partitioning tools                                                 |
-| -   4 Partition Alignment                                                |
-|     -   4.1 High-level Overview                                          |
-|     -   4.2 Choosing between GPT and MBR                                 |
-|     -   4.3 Using GPT - Modern Method                                    |
-|         -   4.3.1 Gdisk Usage Summary                                    |
-|                                                                          |
-|     -   4.4 Using MBR - Legacy Method                                    |
-|         -   4.4.1 Fdisk Usage Summary                                    |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Partition type
---------------
+-   1 Partition table
+    -   1.1 Master Boot Record
+    -   1.2 GUID Partition Table
+    -   1.3 Btrfs Partitioning
+    -   1.4 Choosing between GPT and MBR
+-   2 Partition scheme
+    -   2.1 Single root partition
+    -   2.2 Discrete partitions
+    -   2.3 Mount points
+        -   2.3.1 Root partition
+        -   2.3.2 /boot
+        -   2.3.3 /home
+        -   2.3.4 /var
+        -   2.3.5 /tmp
+        -   2.3.6 Swap
+        -   2.3.7 How big should my partitions be?
+-   3 Partitioning tools
+-   4 SSD partition alignment
+-   5 Using GPT - modern method
+    -   5.1 Gdisk usage summary
+-   6 Using MBR - legacy method
+    -   6.1 Fdisk usage summary
+-   7 See also
 
-Partitioning a hard disk drive defines specific memory storage areas.
-These are called partitions. Each partition behaves as a separate disk
-and is formatted with a specific filesystem type (see below).
+Partition table
+---------------
 
-> On MBR
+Partition information is stored in the partition table; today, there are
+2 main formats in use: the classic Master Boot Record, and the modern
+GUID Partition Table. The latter is an improved version that does away
+with several limitations of MBR style.
 
-There are 3 types of disk partitions:
+> Master Boot Record
+
+See the Wikipedia article on this subject for more information: Master
+boot record
+
+MBR originally only supported up to 4 partitions. Later on, extended and
+logical partitions were introduced to get around this limitation.
+
+There are 3 types of partitions:
 
 -   Primary
 -   Extended
@@ -98,10 +87,42 @@ The customary numbering scheme is to create primary partitions sda1
 through sda3 followed by an extended partition sda4. The logical
 partitions on sda4 are numbered sda5, sda6, etc.
 
-> On GPT
+> GUID Partition Table
 
-There is only one type of partition, Primary. The amount of partitions
+See the Wikipedia article on this subject for more information: GUID
+Partition Table
+
+There is only one type of partition, primary. The amount of partitions
 per disk or RAID volume is unlimited.
+
+> Btrfs Partitioning
+
+See the Wikipedia article on this subject for more information: Btrfs
+
+Btrfs can occupy an entire data storage device and replace the MBR or
+GPT partitioning schemes. See the Btrfs Partitioning instructions for
+details.
+
+> Choosing between GPT and MBR
+
+GUID Partition Table (GPT) is an alternative, contemporary partitioning
+style. It is intended to replace the old Master Boot Record (MBR)
+system. GPT has several advantages over MBR, which has quirks dating
+back to MS-DOS times. With recent developments to the formatting tools
+fdisk (MBR) and gdisk (GPT), it is equally easy to use GPT or MBR and
+get maximum performance.
+
+The choice basically boils down to this:
+
+-   If using GRUB legacy as the bootloader, one must use MBR.
+-   To dual-boot with Windows (both 32-bit and 64-bit) using Legacy
+    BIOS, one must use MBR.
+-   To dual-boot Windows 64-bit using UEFI instead of BIOS, one must use
+    GPT.
+-   If none of the above apply, choose freely between GPT and MBR. Since
+    GPT is more modern, it is recommended in this case.
+-   It is recommended to use always GPT for UEFI boot as some UEFI
+    firmwares do not allow UEFI-MBR boot.
 
 Partition scheme
 ----------------
@@ -114,13 +135,18 @@ is essentially personal preference. If you would like to dual boot Arch
 Linux and a Windows operating system please see Windows and Arch Dual
 Boot.
 
+Warning:Don't forget to allow space for the boot-loader. This was not an
+issue for MBR and GRUB-Legacy, but more modern schemes may require a
+special, small partition.
+
 > Single root partition
 
 This scheme is the simplest and should be enough for most use cases. A
 swapfile can be created and easily resized as needed. It usually makes
 sense to start by considering a single / partition and then separate out
-others based on specific use cases like raid, encryption, a shared media
-partition, etc.
+others based on specific use cases like RAID, encryption, a shared media
+partition, etc. Note that installing GRUB on a BIOS system partitioned
+with GPT requires an additional BIOS boot partition.
 
 > Discrete partitions
 
@@ -133,22 +159,22 @@ partition, they can also be shared between operating systems.
 The following mount points are possible choices for separate partitions,
 you can make your decision based on actual needs.
 
-/ (root)
+Root partition
 
 The root directory is the top of the hierarchy, the point where the
 primary filesystem is mounted and from which all other filesystems stem.
-All files and directories appear under the root directory/, even if they
-are stored on different physical devices. The contents of the root
+All files and directories appear under the root directory /, even if
+they are stored on different physical devices. The contents of the root
 filesystem must be adequate to boot, restore, recover, and/or repair the
-system. Therefore, certain directories under/are not candidates for
+system. Therefore, certain directories under / are not candidates for
 separate partitions.
 
 The / partition or root partition is necessary and it is the most
 important. The other partitions can be replaced by it.
 
-Warning:Directories essential for booting (not /boot) must be on the
-same partition as / or mounted in early userspace by the initramfs.
-These essential directories are: /bin, /etc, /lib, /sbin and /usr[1].
+Warning:Directories essential for booting (except for /boot) must be on
+the same partition as / or mounted in early userspace by the initramfs.
+These essential directories are: /etc and /usr [1].
 
 /boot
 
@@ -184,12 +210,13 @@ etc. It is used, for example, for caching and logging, and hence
 frequently read or written. Keeping it in a separate partition avoids
 running out of disk space due to flunky logs, etc.
 
-It exists to make it possible to mount/usras read-only. Everything that
-historically went into/usrthat is written to during system operation (as
-opposed to installation and software maintenance) must reside under/var.
+It exists to make it possible to mount /usr as read-only. Everything
+that historically went into /usr that is written to during system
+operation (as opposed to installation and software maintenance) must
+reside under /var.
 
-Note:/var contains many small files. The choice of filesystem type (see
-below) should consider this fact if a separate partition is used.
+Note:/var contains many small files. The choice of file system type
+should consider this fact if a separate partition is used.
 
 /tmp
 
@@ -198,19 +225,11 @@ mounted as tmpfs by systemd.
 
 Swap
 
-A swap partition provides memory that can be used as virtual RAM. A
-swapfile should be considered too, as they have almost no performance
+A swap partition provides memory that can be used as virtual RAM. A swap
+file should be considered too, as they have almost no performance
 overhead compared to a partition but are much easier to resize as
 needed. A swap partition can potentially be shared between operating
 systems, but not if hibernation is used.
-
-Note:The old rule of matching the swap partition size with the available
-RAM when using suspend-to-disk no longer applies. The default suspend
-method uses an image the size of 40% of the currently available RAM by
-default. Even with TuxOnIce the atomic copy generally only takes about
-70% after compression.[2]
-
-  
 
 How big should my partitions be?
 
@@ -220,27 +239,26 @@ dictating partition size.
 The size of the partitions depends on personal preference, but the
 following information may be helpful:
 
- /boot — 200 MB 
-    A /boot partition requires only about 100 MB, but if multiple
-    kernels/boot images are likely to be in use, 200 or 300 MB is a
-    better choice.
- / — 15-20 GB 
-    The root filesystem (/) must contain the /usr directory, which can
-    grow significantly depending upon how much software is installed.
-    15-20 GB should be sufficient for most users with modern hard disks.
- /var — 8-12 GB 
-    The /var filesystem will contain, among other data, the ABS tree and
-    the pacman cache. Keeping cached packages is useful and versatile as
-    it provides the ability to downgrade. As a result, /var tends to
-    grow in size. The pacman cache in particular will grow as the system
-    is expanded and updated. It can, however, be safely cleared if space
+ /boot - 200 MB 
+    It requires only about 100 MB, but if multiple kernels/boot images
+    are likely to be in use, 200 or 300 MB is a better choice.
+ / - 15-20 GB 
+    It traditionally contains the /usr directory, which can grow
+    significantly depending upon how much software is installed. 15-20
+    GB should be sufficient for most users with modern hard disks.
+ /var - 8-12 GB 
+    It will contain, among other data, the ABS tree and the pacman
+    cache. Keeping cached packages is useful and versatile as it
+    provides the ability to downgrade. As a result, /var tends to grow
+    in size. The pacman cache in particular will grow as the system is
+    expanded and updated. It can, however, be safely cleared if space
     becomes an issue. 8-12 GB on a desktop system should be sufficient
     for /var, depending on how much software will be installed.
- /home — [varies] 
-    The /home filesystem is typically where user data, downloads, and
-    multimedia reside. On a desktop system, /home is typically the
-    largest filesystem on the drive by a large margin.
- swap — [varies] 
+ /home - [varies] 
+    It is typically where user data, downloads, and multimedia reside.
+    On a desktop system, /home is typically the largest filesystem on
+    the drive by a large margin.
+ swap - [varies] 
     Historically, the general rule for swap partition size was to
     allocate twice the amount of physical RAM. As computers have gained
     ever larger memory capacities, this rule has become deprecated. On
@@ -249,7 +267,9 @@ following information may be helpful:
     possible to have a smaller swap partition or even eliminate it. With
     more than 2 GB of physical RAM, one can generally expect good
     performance without a swap partition.
- /data — [varies] 
+    Note:If you plan to hibernate into a swap partition/file, you should
+    see Suspend and Hibernate#About swap partition/file size.
+ /data - [varies] 
     One can consider mounting a "data" partition to cover various files
     to be shared by all users. Using the /home partition for this
     purpose is fine as well.
@@ -272,7 +292,7 @@ https://www.kernel.org/ || util-linux
 Warning:The first partition created by cfdisk starts at sector 63,
 instead of the usual 2048. This can lead to reduced performance on SSD
 and advanced format (4k sector) drives. It will cause problems with
-GRUB2. grub-legacy and syslinux should work fine.
+GRUB2. GRUB legacy and Syslinux should work fine.
 
 -   gdisk — GPT version of fdisk.
 
@@ -298,25 +318,25 @@ http://sourceforge.net/projects/partitionman/ || partitionmanager
 
 http://qtparted.sourceforge.net/ || qtparted
 
-Partition Alignment
--------------------
+SSD partition alignment
+-----------------------
 
-> High-level Overview
+  ------------------------ ------------------------ ------------------------
+  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
+  png]                     this article or section  png]
+                           is disputed.             
+                           Reason: Manual SSD       
+                           alignment may no longer  
+                           be necessary. See        
+                           discussion for more      
+                           information. (Discuss)   
+  ------------------------ ------------------------ ------------------------
 
 Proper partition alignment is essential for optimal performance and
 longevity. The key to alignment is partitioning to (at least) the EBS
 (erase block size) of the SSD.
 
-Note:The EBS is largely vendor specific; a Google search on the model of
-interest would be a good idea! The Intel X25-M for example is thought to
-have an EBS of 512 KiB, but Intel has yet to publish anything officially
-to this end.
-
-Note:If one does not know the EBS of one's SSD, use a size of 512 KiB.
-Those numbers are greater or equal than almost all of the current EBS.
-Aligning partitions for such an EBS will result in partitions also
-aligned for all lesser sizes. This is how Windows 7 and Ubuntu
-"optimize" partitions to work with SSD.
+Note:The EBS is largely vendor specific.
 
 If the partitions are not aligned to begin at multiples of the EBS (512
 KiB for example), aligning the file system is a pointless exercise
@@ -328,39 +348,26 @@ the axial position of the data respectively. With LBA (logical block
 addressing), this is no longer the case. Instead, the entire hard drive
 is addressed as one continuous stream of data.
 
-> Choosing between GPT and MBR
+Using GPT - modern method
+-------------------------
 
-GUID Partition Table (GPT) is an alternative, contemporary partitioning
-style. It is intended to replace the old Master Boot Record (MBR)
-system. GPT has several advantages over MBR, which has quirks dating
-back to MS-DOS times. With recent developments to the formatting tools
-fdisk (MBR) and gdisk (GPT), it is equally easy to use GPT or MBR and
-get maximum performance.
-
-The choice basically boils down to this:
-
--   If using GRUB Legacy as the bootloader, one must use MBR.
--   To dual-boot with Windows, one must use MBR.
-    -   A special exception to this rule: dual-booting Windows 64-bit
-        using UEFI instead of BIOS, one must use GPT.
-
--   If none of the above apply, choose freely between GPT and MBR. Since
-    GPT is more modern, it is recommended in this case.
-
-> Using GPT - Modern Method
-
-Gdisk Usage Summary
+> Gdisk usage summary
 
 Using GPT, the utility for editing the partition table is called gdisk.
 It can perform partition alignment automatically on a 2048 sector (or
 1024KiB) block size base which should be compatible with the vast
 majority of SSDs if not all. GNU parted also supports GPT, but is less
-user-friendly for aligning partitions. A summary of the typical usage of
-gdisk:
+user-friendly for aligning partitions. The environment provided by the
+Arch install ISO includes the gdisk command. If you need it later on in
+the installed system, gdisk is available in the gptfdisk package.
 
--   Install gdisk through the gptfdisk package from the extra
-    repository.
--   Start gdisk against your drive.
+A summary of the typical usage of gdisk:
+
+-   Start gdisk against your drive as root (disk-device may be e.g.
+    /dev/sda):
+
+    # gdisk disk-device
+
 -   If the drive is brand new or if you are wanting to start over,
     create a new empty GUID partition table with the o command.
 -   Create a new partition with the n command (primary type/1st
@@ -373,37 +380,40 @@ gdisk:
     This is to ensure a 2048-sectors alignment (as a sector is 512B,
     this is a 1024KiB alignment which should fit any SSD NAND erase
     block).
--   Use the +x{M,G} format to extend the partition x megabytes or
-    gigabytes, if choosing a size that is not a multiple of the
+-   Use the +x{M,G} format to extend the partition x mebibytes or
+    gibibytes, if choosing a size that is not a multiple of the
     alignment size (1024kiB), gdisk will shrink the partition to the
-    nearest inferior multiple.
--   Select the partition's type id, the default, Linux/Windows data
-    (code 0700), should be fine for most use. Press L to show the codes
-    list. If planning to use LVM select Linux LVM (8e00).
+    nearest inferior multiple. For example, if you want to create a
+    15GiB partition, you would enter +15G
+-   Select the partition's type id, the default, Linux filesystem (code
+    8300), should be fine for most use. Press L to show the codes list.
+    If planning to use LVM select Linux LVM (8e00).
 -   Assign other partitions in a like fashion.
 -   Write the table to disk and exit via the w command.
 -   Format the new partitions with a file system.
 
-Warning:To boot from a GPT partitioned disk on a BIOS based system you
-have to create, preferably at the disk's beginning, a BIOS boot
-partition with no filesystem and with the partition type as BIOS boot or
-bios_grub partition (gdisk type code EF02) for booting from the disk
-using GRUB. For Syslinux, you do not need to create this bios_grub
-partition, but you need to have separate /boot partition and enable
-Legacy BIOS Bootable partition attribute for that partition (using
-gdisk).
+> Note:
 
-Warning:GRUB Legacy does not support GPT, users must use BURG, GRUB or
-Syslinux.
+-   To boot from a GPT partitioned disk on a BIOS based system you have
+    to create, preferably at the disk's beginning, a BIOS boot partition
+    with no filesystem and with the partition type as BIOS boot or
+    bios_grub partition (gdisk type code EF02) for booting from the disk
+    using GRUB. For Syslinux, you do not need to create this bios_grub
+    partition, but you need to have separate /boot partition and enable
+    Legacy BIOS Bootable partition attribute for that partition (using
+    gdisk).
+-   GRUB Legacy does not support GPT, users must use BURG, GRUB or
+    Syslinux.
 
 Warning:If planning to dual boot with Windows in BIOS mode (this is the
 only available option for 32-bit Windows versions and 64-bit Windows
-XP), do NOT use GPT since Windows does NOT support booting from a GPT
-disk in BIOS systems! You will need to use MBR partitioning and boot in
+XP), do not use GPT since Windows does not support booting from a GPT
+disk in BIOS systems. You will need to use MBR partitioning and boot in
 BIOS mode, as described below. This limitation does not apply if booting
 a modern 64-bit Windows version in UEFI mode.
 
-> Using MBR - Legacy Method
+Using MBR - legacy method
+-------------------------
 
 Using MBR, the utility for editing the partition table is called fdisk.
 Recent versions of fdisk have abandoned the deprecated system of using
@@ -420,14 +430,19 @@ around 2008-2009 making a big deal out of getting everything correct.
 With the latest fdisk, things are much simpler, as reflected in this
 guide.
 
-Fdisk Usage Summary
+> Fdisk usage summary
 
--   Start fdisk against your drive.
+-   Start fdisk against your drive as root (disk-device may be e.g.
+    /dev/sda):
+
+    # fdisk disk-device
+
 -   If the drive is brand new or if you are wanting to start over,
     create a new empty DOS partition table with the o command.
 -   Create a new partition with the n command (primary type/1st
     partition).
--   Use the +xG format to extend the partition x gigabytes.
+-   Use the +xG format to extend the partition x gibibytes. For example,
+    if you want to create a 15GiB partition, you would enter +15G
 -   Change the partition's system id from the default type of Linux
     (type 83) to the desired type via the t command. This is an optional
     step should the user wish to create another type of partition for
@@ -442,10 +457,18 @@ See also
 
 -   Creating ext4 partitions from scratch
 -   Wikipedia:Disk partitioning
+-   Manually Partitioning Your Hard Drive with fdisk
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Partitioning&oldid=253526"
+"https://wiki.archlinux.org/index.php?title=Partitioning&oldid=291406"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 3 January 2014, at 00:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

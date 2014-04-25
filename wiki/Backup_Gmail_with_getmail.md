@@ -7,16 +7,14 @@ Emails will be backed-up in Maildir format, meaning that each email will
 be a separate text file, readable with any email client, or even with a
 text editor.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing getmail                                                 |
-| -   2 Creating required files and folders                                |
-| -   3 Configuring getmail                                                |
-| -   4 Running getmail and adding a cron job                              |
-| -   5 Migrating emails, importing old emails                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing getmail
+-   2 Creating required files and folders
+-   3 Configuring getmail
+-   4 Running getmail and adding a cron job
+-   5 Migrating emails, importing old emails
 
 Installing getmail
 ------------------
@@ -36,7 +34,7 @@ need to create them.
 
 We also need to create the folder where the emails will be backed-up:
 
-    $ mkdir ~/bak/mail
+    $ mkdir -p ~/bak/mail
     $ cd ~/bak/mail
     $ mkdir cur new tmp
 
@@ -64,6 +62,14 @@ The retriever section tells getmail where to connect. It uses IMAP to
 connect to the server. For POP3 we can use the type
 SimplePOP3SSLRetriever, but we'll also have to modify the server field.
 The mailbox which we backup will be All Mail.
+
+Note that Gmail was called Google Mail in some countries like Germany.
+Even if all GMail accounts are migrated to the new name, the IMAP-Server
+still assumes Google Mail as the mail box directory. The mailboxes
+variable must be set to ("[Google Mail]/All Mail",) in those cases.
+Also, you might need to replace 'All Mail' by whatever GMail calls that
+directory in the language of your Google account. (For example, for
+Dutch users, it's "[GMail]/Alle berichten".)
 
 The username and password fields need to be changed to your own.
 
@@ -127,8 +133,15 @@ http://bitbucket.org/wooptoo/appendmail/get/tip.zip It needs PHP to run,
 and you need to modify the username and password to yours.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Backup_Gmail_with_getmail&oldid=206894"
+"https://wiki.archlinux.org/index.php?title=Backup_Gmail_with_getmail&oldid=304341"
 
 Category:
 
 -   Email Client
+
+-   This page was last modified on 13 March 2014, at 19:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

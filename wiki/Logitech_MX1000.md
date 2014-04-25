@@ -7,22 +7,20 @@ Panic). For later releases, your mileage may vary. In the true spirit of
 a Wiki, if you determine that this content needs to be updated for a
 later release, please go ahead and do so!
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Quick Overview                                                     |
-| -   2 Get, Install evdev                                                 |
-| -   3 Modify xorg.conf to Use evdev as Your Mouse Driver                 |
-| -   4 Modify Xorg ServerLayout to Use Your evdev Mouse                   |
-| -   5 Map The Mouse Buttons to the Desired Functions                     |
-| -   6 A Brief Digression - Moving Functions Amongst Mouse Buttons        |
-| -   7 Enable Thumb Button Forward and Back                               |
-| -   8 Enable Scroll Wheel Tilt Horizontal Scrolling                      |
-| -   9 Enable Scroll Wheel Front, Back Button Scrolling                   |
-| -   10 One Button Left                                                   |
-| -   11 Summary                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Quick Overview
+-   2 Get, Install evdev
+-   3 Modify xorg.conf to Use evdev as Your Mouse Driver
+-   4 Modify Xorg ServerLayout to Use Your evdev Mouse
+-   5 Map The Mouse Buttons to the Desired Functions
+-   6 A Brief Digression - Moving Functions Amongst Mouse Buttons
+-   7 Enable Thumb Button Forward and Back
+-   8 Enable Scroll Wheel Tilt Horizontal Scrolling
+-   9 Enable Scroll Wheel Front, Back Button Scrolling
+-   10 One Button Left
+-   11 Summary
 
 Quick Overview
 --------------
@@ -367,3 +365,10 @@ Retrieved from
 Category:
 
 -   Mice
+
+-   This page was last modified on 13 June 2012, at 11:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

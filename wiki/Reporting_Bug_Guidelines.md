@@ -1,6 +1,12 @@
 Reporting Bug Guidelines
 ========================
 
+Related articles
+
+-   General Troubleshooting
+-   Step By Step Debugging Guide
+-   Debug - Getting Traces
+
 Opening (and closing) bug reports on the Arch Linux Bugtracker is one of
 many possible ways to help the community. However, poorly-formed bug
 reports can be counter-productive. When bugs are incorrectly reported,
@@ -10,37 +16,31 @@ reporting and hunting bugs.
 
 See also: How to Report Bugs Effectively by Simon Tatham
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Before reporting                                                   |
-|     -   1.1 Search for duplicates                                        |
-|     -   1.2 Upstream or Arch?                                            |
-|     -   1.3 Bug or feature?                                              |
-|         -   1.3.1 Reasons for not being a bug                            |
-|         -   1.3.2 Reasons for not being a feature                        |
-|                                                                          |
-|     -   1.4 Gather useful information                                    |
-|         -   1.4.1 See also                                               |
-|                                                                          |
-| -   2 Opening a bug                                                      |
-|     -   2.1 Creating an account                                          |
-|     -   2.2 Projects and categories                                      |
-|     -   2.3 Summary                                                      |
-|     -   2.4 Severity                                                     |
-|     -   2.5 Including relevant information                               |
-|                                                                          |
-| -   3 Following up on bugs                                               |
-|     -   3.1 Voting and Watching                                          |
-|     -   3.2 Answering additional information requests                    |
-|     -   3.3 Updating the bug report when a new version of the related    |
-|         software is out                                                  |
-|     -   3.4 Closing when solved                                          |
-|     -   3.5 More about bug status                                        |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Before reporting
+    -   1.1 Search for duplicates
+    -   1.2 Upstream or Arch?
+    -   1.3 Bug or feature?
+        -   1.3.1 Reasons for not being a bug
+        -   1.3.2 Reasons for not being a feature
+    -   1.4 Gather useful information
+        -   1.4.1 See also
+-   2 Opening a bug
+    -   2.1 Creating an account
+    -   2.2 Projects and categories
+    -   2.3 Summary
+    -   2.4 Severity
+    -   2.5 Including relevant information
+-   3 Following up on bugs
+    -   3.1 Voting and Watching
+    -   3.2 Answering additional information requests
+    -   3.3 Updating the bug report when a new version of the related
+        software is out
+    -   3.4 Closing when solved
+    -   3.5 More about bug status
+-   4 See also
 
 Before reporting
 ----------------
@@ -405,7 +405,7 @@ During its life a bug goes through several states :
     in the bug report. But usually we need more than one person to fix a
     bug : having several experienced people on a bug helps a lot.
 
--   Waiting on customer and Requires testing : The one who reported a
+-   Waiting on Response and Requires testing : The one who reported a
     bug is asked to provide more information or to try a proposed
     solution, but he/she did not give a feedback yet. Those status are
     rarely used at Arch and should be used more often. However it is
@@ -417,7 +417,7 @@ During its life a bug goes through several states :
     but you may find some bug reports with such a notification. This
     indicates that somebody requested a closure for the bug. A reason is
     added to the request most of the time. It is upon the assignee
-    developer to decided whether he/she will accept the closure or not.
+    developer to decide whether he/she will accept the closure or not.
 
 -   Closed : Either this is not a valid bug (see Reasons for not being a
     bug) or a solution has been found and released.
@@ -431,11 +431,17 @@ See also
 -   Bug Day
 -   Midyear Cleanup
 -   Christmas Cleanup
--   Step By Step Debugging Guide
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Reporting_Bug_Guidelines&oldid=242019"
+"https://wiki.archlinux.org/index.php?title=Reporting_Bug_Guidelines&oldid=298694"
 
 Category:
 
 -   Arch development
+
+-   This page was last modified on 18 February 2014, at 13:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

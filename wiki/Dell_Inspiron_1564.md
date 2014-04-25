@@ -4,16 +4,14 @@ Dell Inspiron 1564
 This page is about my experiences with a Dell Inspiron 1564, using Arch
 i686.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Specs                                                       |
-| -   2 Hardware Details                                                   |
-| -   3 What Works                                                         |
-| -   4 What Does Not Work                                                 |
-| -   5 What Has Not Been Tested                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 System Specs
+-   2 Hardware Details
+-   3 What Works
+-   4 What Does Not Work
+-   5 What Has Not Been Tested
 
 System Specs
 ------------
@@ -120,3 +118,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 26 October 2012, at 23:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

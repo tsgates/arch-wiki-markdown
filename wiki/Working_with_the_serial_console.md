@@ -17,28 +17,23 @@ Minicom, for example).
 The configuration instructions below will enable GRUB menu selection,
 boot messages, and terminal forwarding to the serial console.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Configuration                                                      |
-|     -   1.1 Configure console access on the target machine               |
-|         -   1.1.1 GRUB2 and systemd                                      |
-|             -   1.1.1.1 Without GRUB2, systemd only                      |
-|                                                                          |
-|         -   1.1.2 GRUB v1 and No systemd                                 |
-|                                                                          |
-| -   2 Making Connections                                                 |
-|     -   2.1 Connect using a terminal emulator program                    |
-|         -   2.1.1 Minicom                                                |
-|         -   2.1.2 Screen                                                 |
-|         -   2.1.3 Serialclient                                           |
-|         -   2.1.4 Windows Options                                        |
-|                                                                          |
-| -   3 Installing Arch Linux using the serial console                     |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Ctrl-C and Minicom                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Configuration
+    -   1.1 Configure console access on the target machine
+        -   1.1.1 GRUB2 and systemd
+            -   1.1.1.1 Without GRUB2, systemd only
+        -   1.1.2 GRUB v1 and No systemd
+-   2 Making Connections
+    -   2.1 Connect using a terminal emulator program
+        -   2.1.1 Minicom
+        -   2.1.2 Screen
+        -   2.1.3 Serialclient
+        -   2.1.4 Windows Options
+-   3 Installing Arch Linux using the serial console
+-   4 Troubleshooting
+    -   4.1 Ctrl-C and Minicom
 
 Configuration
 -------------
@@ -81,10 +76,10 @@ steps.
   
  You can check to see the speed getty is useing with systemctl, but
 should be 38400 8N1  
-  systemctl status getty@ttyS0.service   
+  systemctl status serial-getty@ttyS0.service   
   
  2. To have getty listening on /dev/ttyS0 every boot create this symlink
- ln -s /usr/lib/systemd/system/getty@.service   /etc/systemd/system/getty.target.wants/getty@ttyS0.service
+ ln -s /usr/lib/systemd/system/serial-getty@.service   /etc/systemd/system/getty.target.wants/serial-getty@ttyS0.service
   
   
  Now after reboot getty will be listening on device /dev/ttyS0 with
@@ -192,8 +187,13 @@ standard 9600 speed port without options.
 
     screen /dev/ttyS0
 
+A different baud rate (e.g. 115200) may be specified on the commmand
+line.
+
+    screen /dev/ttyS0 115200
+
 If needed, see the section "WINDOW TYPES" in the screen man page for
-details on setting the baud rate.
+details on setting other connection parameters.
 
 Serialclient
 
@@ -246,8 +246,15 @@ you need to switch off hardware flow control in the device settings
 (minicom -s), which then enables the break.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Working_with_the_serial_console&oldid=237234"
+"https://wiki.archlinux.org/index.php?title=Working_with_the_serial_console&oldid=301973"
 
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 25 February 2014, at 00:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

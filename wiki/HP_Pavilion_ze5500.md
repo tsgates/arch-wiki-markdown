@@ -1,28 +1,22 @@
 HP Pavilion ze5500
 ==================
 
-  
- This install is written specifically with a HP Pavilion ze5570
-notebook, however all notebooks in the series have pretty much the same
-hardware. Manufactured in 2003 and 2004, the Pavilion 5500 series are
-older computers but with some lovin' can do pretty well. It's got a
-Pentium 4 so it's able to run Arch i686 (50786 chip technically but
-really i686).
+This install is written specifically with a HP Pavilion ze5570 notebook,
+however all notebooks in the series have pretty much the same hardware.
+Manufactured in 2003 and 2004, the Pavilion 5500 series are older
+computers but with some lovin' can do pretty well. It's got a Pentium 4
+so it's able to run Arch i686 (50786 chip technically but really i686).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Specifications                                                     |
-| -   2 Likes/Dislikes                                                     |
-| -   3 Multimedia keys                                                    |
-| -   4 Network                                                            |
-| -   5 Touchpad                                                           |
-| -   6 Video                                                              |
-| -   7 Suspend                                                            |
-| -   8 ACPID and CPU Frequency Scaling                                    |
-| -   9 Post Install Thoughts                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Specifications
+-   2 What does not work
+-   3 Multimedia keys
+-   4 Network
+-   5 Touchpad
+-   6 Video
+-   7 Suspend
 
 Specifications
 --------------
@@ -35,32 +29,13 @@ Specifications
   Hard Drive   Fujitsu MHT2060A ATA 60GB
   CD Drive     Samsung SN-324F CDRW/DVD
   Ethernet     National Semiconductor DP83815 10/100 Mb/s Ethernet Controller
-  Wireless     Broadcom BCM4306 802.11 b/g
+  Wireless     Broadcom BCM4306 802.11b/g
   Sound        Sound Blaster Pro-compatible 16-bit
   Trackpad     Synaptics with dedicated vertical scroll
   Display      13.3 inch XGA TFT (1024x769)
 
-Likes/Dislikes
---------------
-
-What I like:
-
--   Video processor for being seven years old can still do most of what
-    I want.
--   Battery life is good, I'm guessing about four hours.
--   Screen brightness, not quite of today's values but definitely has a
-    good brightness.
--   Touchpad has a button for disabling/enabling... nice.
--   Disk drive - Using JFS works great and new hard drive. Also editing
-    swap values helped out a bit.
-
-What I dislike
-
--   Heavy - not quite like those old cell-phones though :).
--   Legacy power management.
--   Compositing with the open-source driver still needs work.
-
-What doesn't work
+What does not work
+------------------
 
 Everything pretty much works with little or no configuration. The
 wireless network card will require special firmware but everything else
@@ -89,19 +64,12 @@ working you'll need to install Broadcoms' firmware
 Touchpad
 --------
 
-Touchpad works great. However to get a nice clean setup (i.e. without
-all the default [and crazy] options pre-set) you'll need a
-configuration. Here is a full-optioned one.
+Touchpad works great.
 
 Video
 -----
 
-ATi drivers suck. OK, that's harsh. Really like the open source effort
-going in the the ATi drivers, but they just aren't running smooth yet
-(2010-03-03). The catalyst drivers are broke and have been for some
-time. With the open source drivers, composting is slow and have a few
-other glitches, nonetheless they do alright if a couple options are
-enabled in the config.
+See ATI.
 
 Suspend
 -------
@@ -115,27 +83,16 @@ hibernation I had to suspend the USB 1.0 module before hibernating:
 
     echo 'SUSPEND_MODULES="button uhci_hcd"' >> /etc/pm/config.d/config
 
-ACPID and CPU Frequency Scaling
--------------------------------
-
-To Do.
-
-Haven't bothered with ACPID as KDE 4 has it's own event detection
-implementation. Haven't got a chance to install CPU Frequency utilities.
-
-Post Install Thoughts
----------------------
-
-Good computer, maybe though KDE 4 might not be right for it. It does ok
-but with the disk just crashed on there, it can have some bad hiccups at
-times. I think it might actually be OK if I put more RAM in it (448MB
-just isn't enough for KDE) will have to see, or if I could find a way to
-lower system disk I/O amount (to allow better balance of system parts).
-Nonetheless, liking it does ok, liking it very much.
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=HP_Pavilion_ze5500&oldid=196649"
+"https://wiki.archlinux.org/index.php?title=HP_Pavilion_ze5500&oldid=304872"
 
 Category:
 
 -   HP
+
+-   This page was last modified on 16 March 2014, at 08:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

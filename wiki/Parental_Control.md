@@ -1,19 +1,18 @@
 Parental Control
 ================
 
-  Summary
+  Summary help replacing me
   -----------------------------------------------------------------------------------------------------------
   Some tools and methods for parental control, protecting and limiting children's activity on the computer.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Timekpr                                                            |
-| -   2 Timeoutd                                                           |
-| -   3 Logkeys                                                            |
-| -   4 Whitelist with Tinyproxy and Firehol                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Timekpr
+-   2 Timeoutd
+-   3 Logkeys
+-   4 Whitelist with Tinyproxy and Firehol
+-   5 OpenDNS Parental Control
 
 Timekpr
 -------
@@ -81,9 +80,36 @@ accessed by selected users. A silly example:
 
 where myaccount is my account that should no be filtered by Tinyproxy.
 
+OpenDNS Parental Control
+------------------------
+
+OpenDNS provides free DNS services that can be used as alternative to
+your ISP's default servers. What's more, they provide blacklist
+filtering capabilities by registering. Different levels of filtering is
+possible. Read more about it on their home page.
+
+If you have dynamic IP address, it is a good idea to keep it updated on
+OpenDNS. Just use community/ddclient and edit
+/etc/ddclient/ddclient.conf like this:
+
+    # OpenDNS.com account-configuration
+    use=web, web=myip.dnsomatic.com
+    server=updates.opendns.com
+    protocol=dyndns2
+    login=myopendns@email.address
+    password=myopendnspassword
+    myhostname
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Parental_Control&oldid=232458"
+"https://wiki.archlinux.org/index.php?title=Parental_Control&oldid=306004"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 20 March 2014, at 17:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

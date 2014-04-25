@@ -4,171 +4,257 @@ Dynamic Kernel Module Support
 Dynamic Kernel Module Support allows one to compile and install kernel
 modules without recompiling the entire kernel.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Usage                                                              |
-| -   4 Guidelines                                                         |
-|     -   4.1 Package name                                                 |
-|     -   4.2 Where should source go?                                      |
-|     -   4.3 Where should patches be applied?                             |
-|     -   4.4 Should the .install file attempt to modprobe/rmmod the       |
-|         module?                                                          |
-|     -   4.5 How to create .install / dkms.conf files?                    |
-|     -   4.6 DKMS breaks the ABS                                          |
-|     -   4.7 namcap issues                                                |
-|                                                                          |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Enabling on boot
+-   3 Usage
+-   4 Submitting my first DKMS package
+    -   4.1 Package name
+    -   4.2 Dependencies
+    -   4.3 Sources location
+    -   4.4 Patching
+    -   4.5 Loading/reloading modules automatically in .install?
+    -   4.6 Namcap output
+    -   4.7 Example files
+        -   4.7.1 PKGBUILD
+        -   4.7.2 dkms.conf
+        -   4.7.3 .install
+-   5 Disadvantages
+    -   5.1 DKMS breaks the Pacman database
+-   6 See Also
 
 Installation
 ------------
 
-Install package dkms in the Official Repositories.
+Install dkms from the official repositories.
 
-After installing the DKMS, you still need to install a DKMS package such
-as nvidia-dkms, otherwise having DKMS installed is just wasting your
-disk space.
+After installation, you still need package(s) that take advantage of it.
+Some of these packages include:
 
-Configuration
--------------
+-   Catalyst version: catalyst-dkms
+-   Nvidia version: nvidia-dkms
+-   VMware modules version: vmware-modules-dkms
 
-To get modules get rebuilt automatically after a kernel upgrade, enable
-the dkms service. This service will build DKMS modules if they were not
-already available and then exit. For systemd:
+Enabling on boot
+----------------
+
+To have modules automatically rebuilt after each kernel upgrade, enable
+the dkms service:
 
     # systemctl enable dkms.service
 
-Sometimes, a program depends on the module. If that program is started
-before the DKMS module is built, you often need to reboot (or restart
-that program). An example are the proprietary graphics drivers such as
-nvidia and catalyst.
+If a userspace component (such as Nvidia or Catalyst X driver) is
+started before the DKMS module is rebuilt, you often need to reboot (or
+restart the component).
 
 Usage
 -----
 
-If you have just upgraded your kernel and want to avoid a reboot, you
-can trigger a rebuild for all modules by executing
-dkms autoinstall -k NEW_KERNEL_VERSION as root. This will build and
-install DKMS modules for all available kernel versions if they have not
-been built before.
+To rebuild all DKMS modules for a kernel (e.g. after an upgrade), use:
 
-Forcing a build of a specific module for a specific kernel version is
-also possible, for example:
+    # dkms autoinstall -k 3.13.6-1-ARCH
 
-    # dkms install -m nvidia -v 304.51 -k 3.6.2-1-ARCH
+Building a specific module is also possible (e.g. for current kernel):
 
-Hint: use tab completion to get the module and kernel version.
+    # dkms install -m nvidia -v 334.21 -k $(uname -r)
 
-Guidelines
-----------
+or simply:
 
-Here are some guidelines to follow.
+    # dkms install nvidia/334.21 -k $(uname -r)
+
+To build a module for all kernels, use:
+
+    # dkms install nvidia/334.21 --all
+
+Tip:Tab completion for module and kernel versions is available.
+
+Submitting my first DKMS package
+--------------------------------
+
+Here are some guidelines to follow for creating and submitting your
+first DKMS package to the AUR.
 
 > Package name
 
-DKMS packages are named by appending -dkms to their non-DKMS counterpart
-(or the module name if no counterpart can be found).
+DKMS packages are named by appending "-dkms" to their names. Those
+beginning with "dkms-" should be renamed to follow this format.
 
-> Where should source go?
+A variable for $pkgname minus the "-dkms" suffix ($_pkgname or
+$_pkgbase) is usually helpful in keeping the package in sync with the
+non-DKMS version.
 
-DKMS by default uses /usr/src/, but [namcap] complains that is a
-non-standard directory. (Even though the FHS reference namcap uses
-states that /usr/src is "optional". One could place the source in
-/opt/<package> and then sym-link it (which is what some non-DKMS
-packages do.)
+> Dependencies
 
-Sources should go into /usr/src/<package>-<package version> which is the
-default directory that DKMS commands use. <package> is the "true package
-name" (which is usually the PKGBUILD $_pkgname variable, which is the
-$pkgname minus the "dkms-" prefix). <package version> refers to the
-PACKAGE_VERSION field in dkms.conf. By convention, PKGBUILDs $pkgver
-should have the same value.
+Dependencies can be taken straight from the non-DKMS version. dkms
+should then be added and linux-headers removed (dkms already lists it as
+optional).
 
-> Where should patches be applied?
+> Sources location
 
-One could patch the source either in the PKGBUILD or through DKMS. Since
-non-DKMS packages patch from the PKGBUILD, and to keep the DKMS PKGBUILD
-as close to the non-DKMS version, I am patching in the PKGBUILD.
+Sources should go into /usr/src/PACKAGE_NAME-PACKAGE_VERSION/, which is
+the default path for DKMS commands. PACKAGE_NAME and PACKAGE_VERSION are
+both set in dkms.conf.
 
-> Should the .install file attempt to modprobe/rmmod the module?
+-   PACKAGE_NAME - the actual project name (usually $_pkgname or
+    $_pkgbase).
 
-No, it should not. Consider a module that crashes when loaded. That
-could halt a pacman upgrade or installation which has more severe
-consequences.
+-   PACKAGE_VERSION - by convention this should also be the $pkgver.
 
-Loading/ removing modules is a task for the user.
+> Patching
 
-> How to create .install / dkms.conf files?
+The sources can be patched either directly in the PKGBUILD or through
+dkms.conf.
 
-Try to avoid updating things like version numbers in multiple files. Try
-to avoid cluttering up PKGBUILDs/.install files with DKMS-specific
-stuff. (This keeps them closer to the non-DKMS files).
+For simplicity it can be preferable to keep the DKMS PKGBUILD as close
+to the non-DKMS version as possible and apply patches in the PKGBUILD.
 
-I've just started using a simple bash script to create the dkms.conf
-file and to replace text in an install.template file. This leads to much
-cleaner and easier to understand files.
+> Loading/reloading modules automatically in .install?
 
-You should not run depmod in your .install script, this is done
-automatically by dkms install. Running dkms install depends on
-dkms build which depends on dkms add and are executed automatically.
-Thus, you only need to put the sources in /usr/src/MODULE-VERSION and
-run dkms install in your .install script.
+Loading and unloading modules should be left to the user.
 
-Example for a module put in /usr/src/MODULE-VERSION (substitute MODULE
-and PACKAGE_NAME accordingly):
+Consider a case where a module crashes when loaded. That could end up
+halting the entire system, which is pretty severe.
+
+> Namcap output
+
+We have written this great utility called Namcap, which attempts to
+check for common mistakes and non-standard decisions in your packages.
+It's a good practice to have it run at least once on any package,
+however, it isn't perfect and has not been updated for DKMS specific
+guidelines.
+
+For example, DKMS uses /usr/src/ by default, but Namcap believes this to
+be a non-standard directory, even though its reference states /usr/src
+as optional (Filesystem Hierarchy Standard (FHS)).
+
+> Example files
+
+Here's an example package that edits dkms.conf according to the package
+name and version.
+
+PKGBUILD
+
+    PKGBUILD
+
+    # Maintainer: foo <foo(at)gmail(dot)com>
+    # Contributor: bar <bar(at)gmai(dot)com>
+
+    _pkgbase=amazing
+    pkgname=amazing-dkms
+    pkgver=1
+    pkgrel=1
+    pkgdesc="The Amazing kernel modules (DKMS)"
+    arch=('i686' 'x86_64')
+    url="https://www.amazing.com/"
+    license=('GPL2')
+    depends=('dkms')
+    conflicts=("${_pkgbase}")
+    install=${pkgname}.install
+    source=("${url}/files/tarball.tar.gz"
+            'dkms.conf'
+            'linux-3.14.patch')
+    md5sums=(use 'updpkgsums')
+
+    build() {
+      cd ${_pkgbase}-${pkgver}
+
+      # Patch
+      patch -p1 -i "${srcdir}"/linux-3.14.patch
+
+      # Build
+      msg2 "Starting ./configure..."
+      ./configure
+
+      msg2 "Starting make..."
+      make
+    }
+
+    package() {
+      # Install
+      make DESTDIR="${pkgdir}" install
+
+      # Copy dkms.conf
+      install -Dm644 dkms.conf "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
+
+      # Set name and version
+      sed -e "s/@_PKGBASE@/${_pkgbase}/" \
+          -e "s/@PKGVER@/${pkgver}/" \
+          -i "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
+
+      # Copy sources (including Makefile)
+      cp -r ${_pkgbase}/* "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/
+    }
+
+dkms.conf
+
+    dkms.conf
+
+    PACKAGE_NAME="@_PKGBASE@"
+    PACKAGE_VERSION="@PKGVER@"
+    MAKE[0]="make --uname_r=$kernelver"
+    CLEAN="make clean"
+    BUILT_MODULE_NAME[0]="@_PKGBASE@"
+    DEST_MODULE_LOCATION[0]="/kernel/drivers/misc"
+    AUTOINSTALL="yes"
+
+.install
+
+Instead of depmod we can now use dkms install (depends on dkms build,
+which depends on dkms add):
+
+    amazing-dkms.install
+
+    # old version (without -$pkgrel): ${1%%-*}
+    # new version (without -$pkgrel): ${2%%-*}
 
     post_install() {
-        dkms install -m MODULE -v ${1%%-*}
+        dkms install amazing/${1%%-*}
     }
+
     pre_upgrade() {
-        local curver=${2%%-*}
-        # $2 is unset due to a bug. See, https://bugs.archlinux.org/task/32278
-        # Query current version using pacman as fallback
-        [ -n "$curver" ] || curver=$(pacman -Q PACKAGE_NAME | cut -d' ' -f2)
-        pre_remove $curver
+        pre_remove ${2%%-*}
     }
+
     post_upgrade() {
         post_install ${1%%-*}
     }
+
     pre_remove() {
-        dkms remove -m MODULE -v ${1%%-*} --all
+        dkms remove amazing/${1%%-*} --all
     }
 
-> DKMS breaks the ABS
+Tip:To keep DKMS packages closer to their non-DKMS counterparts: avoid
+cluttering up package files with DKMS-specific stuff (e.g. version
+numbers that need updating).
 
-Sort of, yes. The problem is that the resulting modules don't belong to
-the package, so pacman can't track or report on them.
+Disadvantages
+-------------
 
-I don't think that's a show-stopper, but it probably puts DKMS out on
-the fringe a bit. There is some talk about pacman adding similar support
-through pacman hooks. [1]. I think you could "fake" the ownership, by
-installing the module as normal (or even a "dummy" file) and just
-letting DKMS overwrite it.
+> DKMS breaks the Pacman database
 
-> namcap issues
+The problem is that the resulting modules don't belong to the package
+anymore, so Pacman can't track them.
 
-As mentioned earlier, namcap complains if you put source in /usr/src.
-Also, namcap can not detect that dkms is a dependency. (I guess maybe
-it's not technically a dependency, but...)
-
-Basically, take the dependencies of the non-DKMS version, add 'dkms' and
-remove 'linux-headers' (since dkms optdepends on that)
+Support could be added through hooks (see: FS#2985).
 
 See Also
 --------
 
--   Dell's DKMS man page Official site.
--   Ubuntu's DKMS man page (Documents some officially un-documented
-    bits.)
--   Exploring Dynamic Kernel Module Support
+-   Ubuntu's man page
+-   Linux Journal: Exploring Dynamic Kernel Module Support
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dynamic_Kernel_Module_Support&oldid=253370"
+"https://wiki.archlinux.org/index.php?title=Dynamic_Kernel_Module_Support&oldid=306186"
 
 Category:
 
 -   Kernel
+
+-   This page was last modified on 20 March 2014, at 21:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

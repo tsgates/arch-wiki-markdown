@@ -1,21 +1,18 @@
 DeveloperWiki:Linux Conferences
 ===============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 LinuxTag                                                     |
-|     -   1.2 FISL                                                         |
-|     -   1.3 FrOSCon                                                      |
-|     -   1.4 FOSDEM                                                       |
-|     -   1.5 Linux Bier Wanderung                                         |
-|     -   1.6 Linux-Kongress                                               |
-|     -   1.7 SCaLE                                                        |
-|                                                                          |
-| -   2 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+    -   1.1 LinuxTag
+    -   1.2 FISL
+    -   1.3 FrOSCon
+    -   1.4 FOSDEM
+    -   1.5 Linux Bier Wanderung
+    -   1.6 Linux-Kongress
+    -   1.7 SCaLE
+-   2 More Resources
 
 Introduction
 ============
@@ -133,3 +130,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2011, at 18:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

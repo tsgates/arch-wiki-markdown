@@ -1,25 +1,31 @@
 Tetrinet
 ========
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: This article     
+                           lists keys in a          
+                           videogame... (Discuss)   
+  ------------------------ ------------------------ ------------------------
+
 Tetrinet is a multiplayer version of the famous game Tetris, a game can
 be played with 1 to 6 players in teams or not. Linux version of Tetrinet
 is GTetrinet, it is available in AUR
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install                                                            |
-| -   2 Game                                                               |
-|     -   2.1 Objective                                                    |
-|     -   2.2 Connecting                                                   |
-|     -   2.3 Playing                                                      |
-|     -   2.4 Control                                                      |
-|     -   2.5 Specials                                                     |
-|         -   2.5.1 Effects                                                |
-|                                                                          |
-|     -   2.6 Strategy                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Install
+-   2 Game
+    -   2.1 Objective
+    -   2.2 Connecting
+    -   2.3 Playing
+    -   2.4 Control
+    -   2.5 Specials
+        -   2.5.1 Effects
+    -   2.6 Strategy
 
 Install
 -------
@@ -100,8 +106,15 @@ Here are my strategys for playing Tetrinet :
 -   Look at your opponents fields
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tetrinet&oldid=206157"
+"https://wiki.archlinux.org/index.php?title=Tetrinet&oldid=301943"
 
 Category:
 
 -   Gaming
+
+-   This page was last modified on 24 February 2014, at 21:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

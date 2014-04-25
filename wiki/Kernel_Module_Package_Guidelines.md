@@ -19,18 +19,15 @@ Web – Wine
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Package Separation                                                 |
-|     -   1.1 Guideline                                                    |
-|     -   1.2 Rationale                                                    |
-|                                                                          |
-| -   2 File Placement                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Package Separation
+-   1 Package separation
+    -   1.1 Guidelines
+    -   1.2 Rationale
+-   2 File placement
+
+Package separation
 ------------------
 
 Packages that contain kernel modules should be treated specially, to
@@ -41,7 +38,7 @@ When packaging software containing a kernel module and other non-module
 supporting files/utilities, it is important to separate the kernel
 modules from the supporting files.
 
-> Guideline
+> Guidelines
 
 When packaging such software (using the NVIDIA drivers as an example)
 the convention is:
@@ -78,7 +75,7 @@ The separation of modules and accompanying files allows multiple kernel
 module packages to be installed for multiple kernels on the same system
 while sharing the supporting files among them in the expected location.
 
-File Placement
+File placement
 --------------
 
 If a package includes a kernel module that is meant to override an
@@ -87,9 +84,16 @@ existing module of the same name, such module should be placed in the
 in this directory will take precedence.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Kernel_Module_Package_Guidelines&oldid=205936"
+"https://wiki.archlinux.org/index.php?title=Kernel_Module_Package_Guidelines&oldid=259119"
 
 Categories:
 
 -   Package development
 -   Kernel
+
+-   This page was last modified on 27 May 2013, at 15:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

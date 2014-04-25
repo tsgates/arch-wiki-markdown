@@ -3,37 +3,33 @@ Xmobar
 
 xmobar is a lightweight, text-based, status bar written in Haskell. It
 was originally designed to be used together with Xmonad, but it is also
-usable with any other Window Manager. While xmobar is written in
+usable with any other window manager. While xmobar is written in
 Haskell, no knowledge of the language is required to install and use it.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Running xmobar                                                     |
-| -   3 Configuration                                                      |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Gmail integration                                            |
-|     -   4.2 MPD integration                                              |
-|     -   4.3 Conky-Cli integration                                        |
-|     -   4.4 Simple conky-cli integration                                 |
-|                                                                          |
-| -   5 More resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Running
+-   3 Configuration
+-   4 Tips and tricks
+    -   4.1 GMail integration
+    -   4.2 MPD integration
+    -   4.3 Conky-Cli integration
+    -   4.4 Simple conky-cli integration
+-   5 See also
 
 Installation
 ------------
 
-xmobar is in the community repository and can be installed with pacman:
+Install xmobar from the official repositories. Available variants are:
 
-    # pacman -S xmobar
+-   xmobar-git - Development version.
+-   xmobar-gmail - GMail monitoring.
+-   xmobar-gmail-darcs - GMail monitoring version.
 
-The development version xmobar-git and the gmail monitoring version
-xmobar-gmail-darcs can be found in the AUR.
-
-Running xmobar
---------------
+Running
+-------
 
 If the configuration file is saved as ~/.xmobarrc:
 
@@ -62,8 +58,7 @@ given command line option will override the corresponding option in the
 configuration file. This can be useful to test new configurations
 without having to edit a configuration file.
 
-  
- Following is an example ~/.xmobarrc file, followed by a description of
+Following is an example ~/.xmobarrc file, followed by a description of
 each option. Note that each option has a corresponding command line
 option.
 
@@ -79,11 +74,11 @@ option.
                         , Run Memory ["-t","Mem: <usedratio>%"] 10
                         , Run Swap [] 10
                         , Run Com "uname" ["-s","-r"] "" 36000
-                        , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                        , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                         ]
            , sepChar = "%"
            , alignSep = "}{"
-           , template = "%cpu% | %memory% * %swap% | %eth0% - %eth1% }{ <fc=#ee9a00>%date%</fc>| %EGPF% | %uname%"
+           , template = "%cpu% | %memory% * %swap% | %eth0% - %eth1% }{ <fc=#ee9a00>%date%</fc>| %EGPF% | %uname%"
            }
 
 -   font - The name of the font to use. If XFT fonts are enabled, prefix
@@ -104,7 +99,6 @@ Example:
         TopW/BottomW takes 2 arguments:
         -   Alignment: Left, Center or Right aligned.
         -   Width: An integer for the width of the bar in percentage.
-
     -   Static - A fixed position on the screen, with a fixed width.
         Static takes 4 arguments:
         -   xpos: Horisontal position in pixels, starting at the upper
@@ -155,10 +149,11 @@ there are plugins for disk usage, ram, cpu, battery status, weather
 report and network activity. A detailed description of each plugin, its
 dependencies and how to configure it is on the project website.
 
-> Gmail integration
+> GMail integration
 
-Assuming you have xmobar-gmail-darcs installed, you can configure
-.xmobarrc as follows. Add the gmail plugin to the commands list:
+Assuming you have either xmobar-gmail-darcs or xmobar-gmail installed,
+you can configure .xmobarrc as follows. Add the GMail plugin to the
+commands list:
 
     , Run GMail "gmail.username" "GmailPassword" ["-t", "Mail: <count>"] 3000
 
@@ -188,8 +183,9 @@ top and system messages, by piping the information from conky into a
 text file and read the contents from it. Following is a bash script to
 use with xmobar for this purpose.
 
+    ~/.xmonad/conkyscript
+
     #!/bin/bash
-    # Filename: ~/.xmonad/conkyscript
     conky -c ~/.conkyclirc -i1 -q > conkystat &
     sleep 4
     killall -q conky
@@ -217,17 +213,24 @@ Just place this code:
 
 in your .xmobarrc.
 
-More resources
---------------
+See also
+--------
 
 -   xmobar hackage
 -   xmobar project
 -   dzen and xmobar hacking thread
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xmobar&oldid=222353"
+"https://wiki.archlinux.org/index.php?title=Xmobar&oldid=274918"
 
 Categories:
 
 -   Eye candy
 -   Application launchers
+
+-   This page was last modified on 10 September 2013, at 14:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

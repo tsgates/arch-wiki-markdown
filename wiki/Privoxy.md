@@ -1,22 +1,11 @@
 Privoxy
 =======
 
-> Summary
+Related articles
 
-This article explains how to install and configure Privoxy alongside the
-Tor network.
-
-Required software
-
-Tor
-
-Privoxy
-
-> Related
-
-Tor
-
-Polipo
+-   Tor
+-   Polipo
+-   Hostsblock
 
 Privoxy is a filtering proxy for the HTTP protocol, frequently used in
 combination with Tor. Privoxy is a web proxy with advanced filtering
@@ -28,23 +17,21 @@ networks.
 Using Privoxy is necessary when they use a SOCKS proxy directly because
 browsers leak your DNS requests, which reduces your anonymity.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation and setup                                             |
-| -   2 Ad Blocking with Privoxy                                           |
-| -   3 Usage                                                              |
-| -   4 Troubleshooting                                                    |
-| -   5 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation and setup
+-   2 Tips
+    -   2.1 Privoxy and Polipo
+-   3 Ad Blocking with Privoxy
+-   4 Usage
+-   5 Troubleshooting
+-   6 See also
 
 Installation and setup
 ----------------------
 
-As root install the privoxy package from [community].
-
-    # pacman -S privoxy
+Install the privoxy package from the official repositories.
 
 When Privoxy is used in conjunction with Tor the two applications need
 to exchange information through a chain, which requires the
@@ -55,10 +42,14 @@ to edit /etc/privoxy/config. In fact, chaining to an invalid target will
 prevent your browser from opening any website.
 
 Edit your /etc/privoxy/config file and add this line at the end (be sure
-to include the . at the end and preserve the file owner and group
-permissions as privoxy):
+to include the . at the end
 
     forward-socks5 / localhost:9050 .
+
+Preserve the file owner and group permissions of /etc/privoxy/config as
+privoxy):
+
+    chown privoxy:privoxy /etc/privoxy/config
 
 This example uses the default port used by Tor. If you changed the port
 number modify the example accordingly. The same basic example is valid
@@ -66,10 +57,6 @@ for other targets. If you plan on chaining to another proxy specify the
 method (here SOCKS5) and the port to suit your needs. Refer to section 5
 of the manual inside /etc/privoxy/config for a complete list of options
 and examples.
-
-Additionally, make sure your /etc/hosts file is correctly set up by
-comparing the hostname listed in /etc/hosts with /etc/rc.conf, which the
-hostname is set. For further information see: Set the hostname.
 
 The above will forward all browser traffic through Tor. To only forward
 .onion sites through Tor, use this instead:
@@ -90,6 +77,17 @@ For example:
 
     listen-address 192.168.1.1:8118
 
+Tips
+----
+
+> Privoxy and Polipo
+
+If you like to use a small and fast caching web proxy with Privoxy, you
+can use Polipo. Then you have to forward Privoxie's traffic to Polipo by
+forwarding all traffic to Polipo's port 8123:
+
+    forward / localhost:8123 .
+
 Ad Blocking with Privoxy
 ------------------------
 
@@ -98,9 +96,9 @@ time. Additionally, extensions like AdBlock Plus are not supported by
 all browsers. A useful alternative is to install system-wide ad blocking
 by setting a proxy address in your preferred browser.
 
-Once Privoxy has been installed download and install an AdBlock Plus
-easylist importer from AUR (i.e. privoxy-blocklist). You can optionally
-use an AUR Helper to do so.
+Once Privoxy has been installed download and install the Opera urlfilter
+importer from AUR (i.e. blocklist-to-privoxy). You can optionally use an
+AUR Helper to do so.
 
 To block tracking via embedded Facebook "Like" button, Twitter "follow",
 and Google Plus "+1", edit /etc/privoxy/user.action and add these lines
@@ -116,11 +114,11 @@ Usage
 
 Start the Privoxy service:
 
-    # rc.d start privoxy
+    # systemctl start privoxy.service
 
-Add privoxy to your DAEMONS array in /etc/rc.conf
+Enable the Privoxy service at boot:
 
-    DAEMONS=(... privoxy ...)
+    # systemctl enable privoxy.service
 
 Configure your program to use Privoxy. The default address is:
 
@@ -147,15 +145,23 @@ following after /bin/bash in /etc/rc.d/privoxy and then restart privoxy.
        chown -R privoxy:adm /var/log/privoxy
     fi
 
-External Links
---------------
+See also
+--------
 
--   Official Website
--   Blocking ads with Privoxy by Mike Stegeman
+-   Privoxy Official Website
+-   Tor Official Website
+-   Blocking Ads on Arch Linux with Privoxy
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Privoxy&oldid=243795"
+"https://wiki.archlinux.org/index.php?title=Privoxy&oldid=303039"
 
 Category:
 
 -   Proxy servers
+
+-   This page was last modified on 3 March 2014, at 16:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

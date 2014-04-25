@@ -10,7 +10,7 @@ Advanced Traffic Control
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-> Summary
+Summary help replacing me
 
 This article gives an introduction to traffic shaping and control by
 using queueing disciplines.
@@ -20,7 +20,7 @@ using queueing disciplines.
 After reading this, reading the "Linux Advanced Routing and Traffic
 Control" article is highly recommended
 
-One of the advanced and least know network features from the linux
+One of the advanced and least known network features from the linux
 kernel, is the ability to control and shape the traffic. While is common
 for users know the basic use of iproute2 by using the ip command, is
 very common to ignore other powerful features like the ones offered by
@@ -37,23 +37,20 @@ network.
 This is an advanced article; you are expected to have certain knowledge
 of network devices, iptables, etc.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Queueing                                                           |
-|     -   1.1 Classless Qdiscs                                             |
-|         -   1.1.1 fifo_fast                                              |
-|         -   1.1.2 Token Bucket Filter (TBF)                              |
-|         -   1.1.3 Stochastic Fairness Queueing (SFQ)                     |
-|                                                                          |
-|     -   1.2 Classful Qdiscs                                              |
-|         -   1.2.1 Hierarchical Token Bucket (HTB)                        |
-|                                                                          |
-| -   2 Filters                                                            |
-|     -   2.1 Using tc only                                                |
-|     -   2.2 Using tc + iptables                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Queueing
+    -   1.1 Classless Qdiscs
+        -   1.1.1 fifo_fast
+        -   1.1.2 Token Bucket Filter (TBF)
+        -   1.1.3 Stochastic Fairness Queueing (SFQ)
+        -   1.1.4 CoDel and Fair Queueing CoDel
+    -   1.2 Classful Qdiscs
+        -   1.2.1 Hierarchical Token Bucket (HTB)
+-   2 Filters
+    -   2.1 Using tc only
+    -   2.2 Using tc + iptables
 
 Queueing
 --------
@@ -151,6 +148,25 @@ it to perturb (alter) its hashing algorithm every 10 seconds.
 
     tc qdisc add dev eth0 root sfq perturb 10
 
+CoDel and Fair Queueing CoDel
+
+CoDel (Controlled Delay) is an attempt to limit buffer bloating and
+minimize latency in saturated network links by distinguishing good
+queues (that empty quickly) from bad queues that stay saturated and
+slow. The fair queueing Codel utilizes fair queues to more readily
+distribute available bandwidth between Codel flows. The configuration
+options are limited intentionally, since the algorithm is designed to
+work with dynamic networks, and there are some corner cases to consider
+that are discussed on the bufferbloat wiki concerning Codel, including
+issues on very large switches and sub megabit connections. Additional
+information is available in:
+
+     man tc-codel
+     man tc-fq_codel
+
+Warning:Make sure your ethernet driver supports Byte Queue Limits before
+using CoDel. Here is a list of drivers supported as of kernel 3.6
+
 > Classful Qdiscs
 
 Classful qdiscs are very useful if you have different kinds of traffic
@@ -234,8 +250,15 @@ You can then use the regular way of iptables to match packages and then
 use fwmark to mark them.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Advanced_Traffic_Control&oldid=236788"
+"https://wiki.archlinux.org/index.php?title=Advanced_Traffic_Control&oldid=268497"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 28 July 2013, at 04:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

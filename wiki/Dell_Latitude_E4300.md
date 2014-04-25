@@ -2,38 +2,34 @@ Dell Latitude E4300
 ===================
 
   ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: please use the   
-                           first argument of the    
-                           template to provide a    
-                           brief explanation.       
-                           (Discuss)                
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: Out of date.     
+                           Covered by Beginners'    
+                           guide. (Discuss)         
   ------------------------ ------------------------ ------------------------
 
 This article will tell you how to get the basic components of the laptop
 running with Arch.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Hardware                                                           |
-| -   3 Configuration                                                      |
-|     -   3.1 Video                                                        |
-|     -   3.2 Audio                                                        |
-|     -   3.3 Wireless                                                     |
-|     -   3.4 Hotkeys                                                      |
-|     -   3.5 Bluetooth                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Hardware
+-   3 Configuration
+    -   3.1 Video
+    -   3.2 Wi-Fi
+    -   3.3 Hotkeys
+    -   3.4 Bluetooth
 
 Installation
 ============
 
 Remember to back up the restore partition if you plan to restore it, or
-leave it. The Official Arch Linux Install Guide should get you running
-without a problem.
+leave it. The Installation guide should get you running without a
+problem.
 
 Hardware
 ========
@@ -50,7 +46,8 @@ The Dell E4300 comes with the following hardware:
 -   Harddisk: 80GB or 160GB 5200rpm, 160GB or 250GB 7200RPM w/free-fall
     sensor
 -   Battery: 6 cell (60Whr) or
--   Optional: Modem, Bluetooth, Webcam, SSD, and WWAN card
+-   Optional: Modem, Bluetooth, Webcam, SSD, Smart Card Reader, WWAN
+    card and Expansion Bay for second disk.
 
     [serrghi@arch ~ ]lspci -nn
     00:00.0 Host bridge [0600]: Intel Corporation Mobile 4 Series Chipset Memory Controller Hub [8086:2a40] (rev 07)
@@ -142,16 +139,8 @@ The laptop comes with integrated Intel graphics.
 
     pacman -S xf86-video-intel
 
-Audio
+Wi-Fi
 -----
-
-To enable microphone and other audio stuff, you need to tell alsa what
-driver to load.
-
-    options snd-hda-intel model=dell-laptop
-
-Wireless
---------
 
 -   Broadcom: See Broadcom wireless.
 -   Intel wireless cards: Installing iwl-5000-ucode should do the trick.
@@ -183,15 +172,29 @@ properly.
 Bluetooth
 ---------
 
-    pacman -S bluez
+1.  Make sure that BT is enabled in BIOS and that the blue LED is lit up
+    (just right of the WiFi indicator)
 
-If you'r running *Box and you want a nice GUI, get Blueman from
+    modprobe rfkill # 
+    modprobe uinput #
+    pacman -S bluez # for utils
+    pacman -S bluez-hid2hci # for turning BT hub out of keyboard-mode
+    bluetoothctl power on
+
+If you're running *Box and you want a nice GUI, get Blueman from
 community repo. Everyone else should refeer to the wiki page for
 Bluetooth.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Latitude_E4300&oldid=253566"
+"https://wiki.archlinux.org/index.php?title=Dell_Latitude_E4300&oldid=302921"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 2 March 2014, at 14:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

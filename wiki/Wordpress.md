@@ -1,7 +1,7 @@
 Wordpress
 =========
 
-> Summary
+Summary help replacing me
 
 Wordpress is an easy to setup and administer FLOSS content management
 system featuring a strong and vibrant community with thousands of
@@ -17,12 +17,12 @@ MySQL
 
 phpMyAdmin
 
-Wordpress is the goto Free Libre Open Source Software (FLOSS) content
-management system (CMS) created by Matt Mullenweg and first released in
-2003. Wordpress has a vast and vibrant community that provides tens of
-thousands of free plugins and themes to allow the user to easily
-customize the appearance and function of their Wordpress CMS. Wordpress
-is licensed under the GPLv2.
+Wordpress is a free and open source content management system (CMS)
+created by Matt Mullenweg and first released in 2003. Wordpress has a
+vast and vibrant community that provides tens of thousands of free
+plugins and themes to allow the user to easily customize the appearance
+and function of their Wordpress CMS. Wordpress is licensed under the
+GPLv2.
 
 The biggest feature of Wordpress is its ease in configuration and
 administration. Setting up a Wordpress site takes five minutes. The
@@ -30,40 +30,35 @@ Wordpress administration panel allows users to easily configure almost
 every aspect of their website including fetching and installing plugins
 and themes. Wordpress provides effortless automatic updates.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Installation using pacman                                    |
-|     -   1.2 Manual install                                               |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Host config                                                  |
-|     -   2.2 Configure apache                                             |
-|     -   2.3 Configure MySQL                                              |
-|         -   2.3.1 Using phpMyAdmin                                       |
-|                                                                          |
-| -   3 Wordpress Installation                                             |
-| -   4 Usage                                                              |
-|     -   4.1 Installing a theme                                           |
-|         -   4.1.1 Using the admin panel                                  |
-|                                                                          |
-|     -   4.2 Installing a plugin                                          |
-|     -   4.3 Updating                                                     |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Appearance is broken (no styling)                            |
-|                                                                          |
-| -   6 Tips and tricks                                                    |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Installation using pacman
+    -   1.2 Manual install
+-   2 Configuration
+    -   2.1 Host config
+    -   2.2 Configure apache
+    -   2.3 Configure MySQL
+        -   2.3.1 Using phpMyAdmin
+-   3 Wordpress Installation
+-   4 Usage
+    -   4.1 Installing a theme
+        -   4.1.1 Using the admin panel
+    -   4.2 Installing a plugin
+    -   4.3 Updating
+-   5 Troubleshooting
+    -   5.1 Appearance is broken (no styling)
+-   6 Tips and tricks
+-   7 See also
 
 Installation
 ------------
 
-Wordpress also requires PHP and MySQL to be installed and configured.
-See the LAMP wiki article for more information.
+Wordpress requires PHP and MySQL to be installed and configured. See the
+LAMP wiki article for more information. During configuation, be aware
+that some WordPress features require PHP extensions that may not be
+turned on by default.
 
 Note:As of August 2012, this article does not support using Wordpress
 with PostrgreSQL. Wordpress was designed to be used with mysql only. It
@@ -75,7 +70,7 @@ through the use of a plugin and a bit of work.
 Install wordpress from the official repositories.
 
 Warning:While it is easier to let pacman manage updating your Wordpress
-install, this is not necessary. Wordpress has functinality built-in for
+install, this is not necessary. Wordpress has functionality built-in for
 managing updates, themes, and plugins. If you decide to install the
 official community package, you will not be able to install plugins and
 themes using the Wordpress admin panel without a needlessly complex
@@ -117,6 +112,10 @@ install Wordpress, otherwise your website will appear broken #Appearance
 is broken (no styling).
 
 > Configure apache
+
+Note:You will need to have Apache configured to run with PHP. Check the
+LAMP#PHP page for instructions. Make sure to enable the mysql.so
+extension.
 
 You will need to create a config file for apache to find your Wordpress
 install. Create the following file and edit it your favorite text
@@ -284,8 +283,15 @@ See also
 -   Content management system
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Wordpress&oldid=255623"
+"https://wiki.archlinux.org/index.php?title=Wordpress&oldid=305649"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 19 March 2014, at 18:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -6,16 +6,14 @@ ssd and hdd into a single logical volume (sold as Fusion). We need to
 remove this volume, so we can reinstall OSx to the hdd without using the
 ssd.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Boot into recovery                                                 |
-| -   2 Destroy CoreStorage and prepare new volumes                        |
-| -   3 Install OSX on hdd                                                 |
-| -   4 Proceed installing Archlinux                                       |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Boot into recovery
+-   2 Destroy CoreStorage and prepare new volumes
+-   3 Install OSX on hdd
+-   4 Proceed installing Archlinux
+-   5 See also
 
 Boot into recovery
 ------------------
@@ -75,7 +73,7 @@ Proceed installing Archlinux
 ----------------------------
 
 Installing Archlinux requires no special tricks; follow the Installation
-Guide; mount /dev/sda1 (the first partition of the hdd is the UEFI
+guide; mount /dev/sda1 (the first partition of the hdd is the UEFI
 partition) on /boot/efi; install grub-efi-x86_64 and you should be good
 to go! Since you will be installing on the Solid_State_Drives, use
 parted and created aligned partitions. I use this scheme:
@@ -115,8 +113,15 @@ See also
 -   http://arstechnica.com/apple/2012/11/achieving-fusion-with-a-service-training-doc-ars-tears-open-apples-fusion-drive/2/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IMac_Fusion&oldid=253594"
+"https://wiki.archlinux.org/index.php?title=IMac_Fusion&oldid=298255"
 
 Category:
 
 -   Apple
+
+-   This page was last modified on 16 February 2014, at 07:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

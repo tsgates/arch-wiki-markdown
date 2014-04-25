@@ -2,6 +2,18 @@ Rubymine
 ========
 
   ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: openjdk6 is not  
+                           in the repos anymore; if 
+                           there are issues with    
+                           OpenJDK7, the bug should 
+                           be reported upstream.    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
   [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
                            Notes: please use the    
                            first argument of the    
@@ -32,8 +44,15 @@ Install Sun/Oracle JDK:
     # pacman -S jdk
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Rubymine&oldid=207013"
+"https://wiki.archlinux.org/index.php?title=Rubymine&oldid=299383"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 21 February 2014, at 13:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

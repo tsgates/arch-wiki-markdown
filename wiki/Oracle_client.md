@@ -7,16 +7,14 @@ running on other machines. If you want to host Oracle databases for
 others to use, see the instructions for setting up an Oracle database
 server.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Method 1: Unofficial repository                                    |
-| -   2 Method 2: AUR                                                      |
-|     -   2.1 Relevant packages                                            |
-|     -   2.2 Installing each package                                      |
-|     -   2.3 Installation paths                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Method 1: Unofficial repository
+-   2 Method 2: AUR
+    -   2.1 Relevant packages
+    -   2.2 Installing each package
+    -   2.3 Installation paths
 
 Method 1: Unofficial repository
 -------------------------------
@@ -27,7 +25,7 @@ other program in the Arch repositories.
 
 In order to use this method, you must agree to the Oracle Technology
 Network Development and Distribution License Terms for Instant Client
-and also trust the person who created these unofficial packages :-)
+and also trust the person who created these unofficial packages.
 
 Add the following lines to /etc/pacman.conf:
 
@@ -35,18 +33,14 @@ Add the following lines to /etc/pacman.conf:
     SigLevel = Optional TrustAll
     Server = http://linux.shikadi.net/arch/$repo/$arch/
 
-Refresh：
+Then synchronise and view the newly available packages:
 
-    $ pacman -Syy
+    $ pacman -Sys oracle
 
-Then install the packages:
-
-    $ pacman -S oracle
-
-After installing oracle-instantclient-basic you will need to re-source
-the profile script in any open shells, in order to pick up the newly
-added environment variables. Without this, some programs will complain
-that they cannot find the Oracle client.
+After upgrading your system, install oracle-instantclient-basic; then
+you will need to re-source the profile script in any open shells, in
+order to pick up the newly added environment variables. Without this,
+some programs will complain that they cannot find the Oracle client.
 
     source /etc/profile
 
@@ -122,8 +116,15 @@ any new shells opened after the install, courtesy of
 /etc/profile.d/oracle.sh.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Oracle_client&oldid=219655"
+"https://wiki.archlinux.org/index.php?title=Oracle_client&oldid=266723"
 
 Category:
 
 -   Database management systems
+
+-   This page was last modified on 17 July 2013, at 08:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

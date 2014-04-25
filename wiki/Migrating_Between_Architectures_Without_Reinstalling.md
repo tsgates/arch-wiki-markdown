@@ -9,40 +9,33 @@ uses a liveCD, the other modifies the system from within.
 Warning:Unless explicitly stated, all these methods are UNTESTED and may
 irreparably damage your system. Continue at your own risk.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 General preparation                                                |
-|     -   1.1 Confirm 64-bit architecture                                  |
-|     -   1.2 Disk space                                                   |
-|     -   1.3 Power supply                                                 |
-|     -   1.4 Fallback packages                                            |
-|                                                                          |
-| -   2 Method 1: Utilising the Arch LiveCD                                |
-| -   3 Method 2: From a running system                                    |
-|     -   3.1 Package preparation                                          |
-|         -   3.1.1 Cache old packages                                     |
-|         -   3.1.2 Change Pacman architecture                             |
-|         -   3.1.3 Download new packages                                  |
-|                                                                          |
-|     -   3.2 Package installation                                         |
-|         -   3.2.1 Install kernel (64-bit)                                |
-|         -   3.2.2 Console terminal                                       |
-|         -   3.2.3 Install Pacman                                         |
-|         -   3.2.4 Install remaining packages                             |
-|                                                                          |
-| -   4 Cleanup                                                            |
-|     -   4.1 Makepkg compiler flags                                       |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Busybox                                                      |
-|     -   5.2 Lib32-glibc                                                  |
-|     -   5.3 KDE doesn't start after switching from 32bit to 64bit        |
-|     -   5.4 Mutt issues with cache enabled                               |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 General preparation
+    -   1.1 Confirm 64-bit architecture
+    -   1.2 Disk space
+    -   1.3 Power supply
+    -   1.4 Fallback packages
+-   2 Method 1: using the Arch LiveCD
+-   3 Method 2: from a running system
+    -   3.1 Package preparation
+        -   3.1.1 Cache old packages
+        -   3.1.2 Change Pacman architecture
+        -   3.1.3 Download new packages
+    -   3.2 Package installation
+        -   3.2.1 Install kernel (64-bit)
+        -   3.2.2 Console terminal
+        -   3.2.3 Install Pacman
+        -   3.2.4 Install remaining packages
+-   4 Cleanup
+    -   4.1 Makepkg compiler flags
+-   5 Troubleshooting
+    -   5.1 Busybox
+    -   5.2 Lib32-glibc
+    -   5.3 KDE doesn't start after switching from 32bit to 64bit
+    -   5.4 Mutt issues with cache enabled
+-   6 See also
 
 General preparation
 -------------------
@@ -97,19 +90,15 @@ packages are migrated. More details about using them under
 
 One package is busybox, which can be used to revert changes. It is
 statically linked and does not depend on any libraries. The 32-bit
-(i686) version should be installed, using
-
-    # pacman -S busybox
+(i686) version should be installed.
 
 Another package is lib32-glibc, from the Multilib x86_64 repository. It
 is probably only useful when migrating away from 32 bits; in any case
 you may safely skip this package. You can use the package to run 32 bit
-programs by explicitly calling /lib/ld-linux.so.2. Install with:
+programs by explicitly calling /lib/ld-linux.so.2.
 
-    # pacman -S lib32-glibc
-
-Method 1: Utilising the Arch LiveCD
------------------------------------
+Method 1: using the Arch LiveCD
+-------------------------------
 
 1.  Download, burn and boot the 64-bit Arch ISO LiveCD
 2.  Configure your network on the LiveCD, then pacman to use your new
@@ -143,7 +132,7 @@ what 32-bit binaries you still have and reinstall them:
 
     find /usr/bin -type f -exec bash -c 'file {} | grep 32-bit' \;
 
-Method 2: From a running system
+Method 2: from a running system
 -------------------------------
 
 Ensure that your system is fully updated and functioning before
@@ -164,28 +153,12 @@ remove them using pacman -Rsn package_name.
 If you do not have all your installed packages in your cache, download
 them (for the old architecture) for fallback purposes.
 
-    # pacman -Sw $(comm -23 <(pacman -Qq|sort) <(pacman -Qmq|sort))
+    # pacman -Qqn | pacman -Sw -
 
 or use bacman from pacman package to generate them.
 
-The command above redownloads ALL packages, even the ones already in the
-cache. This script only downloads the ones not in the cache:
-
-    #!/bin/bash
-
-    cache=`pacman -v 2>/dev/null|grep "Cache Dirs"|cut -d ':' -f 2| sed 's/ //g'`
-
-    for pkg in `comm -23 <(pacman -Qq|sort) <(pacman -Qmq|sort)`
-    do
-            if ! ls $cache/`pacman -Q $pkg|sed 's/ /-/g'`* 2>/dev/null >&2;then
-                    echo 'Y'|pacman -Sw $pkg
-            fi
-    done
-
 If you are migrating away from 32 bits, now is the time to install
-32-bit Busybox:
-
-    # pacman -S busybox
+32-bit busybox.
 
 Change Pacman architecture
 
@@ -211,21 +184,14 @@ Download new packages
 Download the new architecture versions of all our currently installed
 packages:
 
-    # pacman -Sw $(pacman -Qq|sed '/^lib32-/ d')  # download new package versions
+    # pacman -Sw $(pacman -Qqn|sed '/^lib32-/ d')  # download new package versions
 
-If there are some packages, likely from the AUR, that cannot be
-downloaded, remove them from the list generated by pacman -Qq.
-
-    # pacman -Sw $(comm <(pacman -Qq|sed '/^lib32-/ d'|sort) <(pacman -Qqm|sort) -23)
-
-If migrating to 32 bits, install the 32-bit Busybox fallback now that
-Pacman has been configured with the 32-bit architecture:
-
-    # pacman -S busybox
+If migrating to 32 bits, install the 32-bit busybox fallback now that
+Pacman has been configured with the 32-bit architecture.
 
 Warning:Don't install the lib32-glibc package now. After a ldconfig,
 when you install linux, the generated image will have libraries like
-librt.so in /usr/lib32, where binaries during boot won't search,
+librt.so in '/usr/lib32, where binaries during boot won't search,
 resulting in a boot failure.
 
 > Package installation
@@ -237,14 +203,11 @@ bit and 64 bit applications run equally well under a 64-bit kernel. For
 migration away from 64 bits, leave the 64-bit kernel installed and
 running for now and skip this step.
 
-To install the standard Arch Linux kernel, use the following command:
-
-    # pacman -S linux
+Now install linux Arch package.
 
 Now is the time to install the lib32-glibc fallback (you will need to
-add the [multilib] repository in pacman.conf if you have not already):
-
-    # pacman -S lib32-glibc
+add the [multilib] repository in /etc/pacman.conf if you have not
+already):
 
 Note:If this fails due to an existing file of a differently named
 package, use pacman's -f flag.
@@ -286,7 +249,7 @@ Install all of the previously downloaded replacements for the new
 architecture. (Go get a drink and make a sandwich; this could take a
 while.)
 
-    # pacman -S $(pacman -Qq)
+    # pacman -Qqn | pacman -S -
 
 If some packages didn't install correctly, you should now be able to
 reinstall them successfully; if you're lazy, you can just re-run the
@@ -302,9 +265,7 @@ it should be safe to reboot the computer.
 Cleanup
 -------
 
-You are now free to remove Busybox and lib32-glibc.
-
-    # pacman -Rcn busybox lib32-glibc
+You are now free to remove busybox and lib32-glibc.
 
 Makepkg compiler flags
 
@@ -360,9 +321,16 @@ See also
 -   Migrate installation to new hardware
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Migrating_Between_Architectures_Without_Reinstalling&oldid=252950"
+"https://wiki.archlinux.org/index.php?title=Migrating_Between_Architectures_Without_Reinstalling&oldid=262581"
 
 Categories:
 
 -   Arch64
 -   Getting and installing Arch
+
+-   This page was last modified on 12 June 2013, at 20:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

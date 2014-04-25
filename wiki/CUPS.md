@@ -1,17 +1,11 @@
 CUPS
 ====
 
-> Summary
+Related articles
 
-Installing and configuring CUPS
-
-> Related
-
-CUPS printer sharing
-
-CUPS printer-specific problems
-
-Samba
+-   CUPS printer sharing
+-   CUPS printer-specific problems
+-   Samba
 
 From CUPS' site:
 
@@ -22,79 +16,81 @@ Although there are other printing packages such as LPRNG, the Common
 Unix Printing System is the most popular choice because of its relative
 ease of use.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 CUPS Linux Printing workflow                                       |
-| -   2 Installing the client package                                      |
-|     -   2.1 Optional advanced network setup                              |
-|                                                                          |
-| -   3 Installing the server packages                                     |
-|     -   3.1 Printer driver                                               |
-|         -   3.1.1 Download printer PPD                                   |
-|         -   3.1.2 Another source for printer drivers                     |
-|                                                                          |
-| -   4 Hardware support and configuration                                 |
-|     -   4.1 USB printers                                                 |
-|         -   4.1.1 Blacklisting usblp                                     |
-|                                                                          |
-|     -   4.2 Parallel port printers                                       |
-|     -   4.3 HP Printer                                                   |
-|                                                                          |
-| -   5 Configuring                                                        |
-|     -   5.1 CUPS daemon                                                  |
-|     -   5.2 Web interface and tool-kit                                   |
-|         -   5.2.1 CUPS administration                                    |
-|         -   5.2.2 Remote access to web interface                         |
-|                                                                          |
-|     -   5.3 Command-line configuration                                   |
-|     -   5.4 Alternative CUPS interfaces                                  |
-|         -   5.4.1 GNOME                                                  |
-|         -   5.4.2 KDE                                                    |
-|         -   5.4.3 Other                                                  |
-|                                                                          |
-| -   6 PDF virtual printer                                                |
-|     -   6.1 Print to PostScript                                          |
-|                                                                          |
-| -   7 Troubleshooting                                                    |
-|     -   7.1 Problems resulting from upgrades                             |
-|         -   7.1.1 CUPS stops working                                     |
-|         -   7.1.2 All jobs are "stopped"                                 |
-|         -   7.1.3 All jobs are "The printer is not responding"           |
-|         -   7.1.4 The PPD version is not compatible with gutenprint      |
-|                                                                          |
-|     -   7.2 Other                                                        |
-|         -   7.2.1 CUPS permission errors                                 |
-|         -   7.2.2 HPLIP printer sends "/usr/lib/cups/backend/hp failed"  |
-|             error                                                        |
-|         -   7.2.3 HPLIP printer claims job is complete but printer does  |
-|             nothing                                                      |
-|         -   7.2.4 hp-toolbox sends an error, "Unable to communicate with |
-|             device"                                                      |
-|         -   7.2.5 CUPS returns '"foomatic-rip" not available/stopped     |
-|             with status 3' with a HP printer                             |
-|         -   7.2.6 Printing fails with unauthorised error                 |
-|         -   7.2.7 Print button greyed-out in GNOME print dialogs         |
-|         -   7.2.8 Unknown supported format: application/postscript       |
-|         -   7.2.9 Finding URIs for Windows Print Servers                 |
-|         -   7.2.10 Print-Job client-error-document-format-not-supported  |
-|         -   7.2.11 /usr/lib/cups/backend/hp failed                       |
-|         -   7.2.12 Unable to get list of printer drivers                 |
-|         -   7.2.13 lp: Error - Scheduler Not Responding                  |
-|         -   7.2.14 CUPS prints only an empty and an error-message page   |
-|             on HP LaserJet                                               |
-|         -   7.2.15 "Using invalid Host" error message                    |
-|         -   7.2.16 Printer doesn't print with an "Filter failed" message |
-|             on CUPS web interface (HP printer)                           |
-|         -   7.2.17 HPLIP 3.13: Plugin is installed, but HP Device        |
-|             Manager complains it is not                                  |
-|         -   7.2.18 Printer is not recognized by CUPS                     |
-|                                                                          |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-CUPS Linux Printing workflow
+-   1 CUPS Linux printing workflow
+-   2 Installing the client package
+    -   2.1 Optional advanced network setup
+    -   2.2 Installing CUPS a 32 bit chroot environment
+-   3 Installing the server packages
+    -   3.1 Printer driver
+        -   3.1.1 Download printer PPD
+        -   3.1.2 Another source for printer drivers
+-   4 Hardware support and configuration
+    -   4.1 USB printers
+        -   4.1.1 Blacklisting usblp
+    -   4.2 Parallel port printers
+    -   4.3 HP Printer
+-   5 Configuring
+    -   5.1 CUPS daemon
+    -   5.2 Web interface and tool-kit
+        -   5.2.1 CUPS administration
+        -   5.2.2 Remote access to web interface
+    -   5.3 Command-line configuration
+    -   5.4 Alternative CUPS interfaces
+        -   5.4.1 GNOME
+        -   5.4.2 KDE
+        -   5.4.3 Other
+-   6 PDF virtual printer
+    -   6.1 Print to PostScript
+-   7 Troubleshooting
+    -   7.1 Problems resulting from upgrades
+        -   7.1.1 CUPS stops working
+        -   7.1.2 All jobs are "stopped"
+        -   7.1.3 All jobs are "The printer is not responding"
+        -   7.1.4 The PPD version is not compatible with gutenprint
+    -   7.2 Other
+        -   7.2.1 CUPS permission errors
+        -   7.2.2 HPLIP printer sends "/usr/lib/cups/backend/hp failed"
+            error
+        -   7.2.3 HPLIP printer claims job is complete but printer does
+            nothing
+        -   7.2.4 hp-setup asks to specify the PPD file for the
+            discovered printer
+        -   7.2.5 I have installed Qt, but hp-setup reports "Qt/PyQt 4
+            initialization failed"
+        -   7.2.6 hp-setup finds the printer automatically but reports
+            "Unable to communicate with device" when printing test page
+            immediately afterwards
+        -   7.2.7 hp-toolbox sends an error, "Unable to communicate with
+            device"
+        -   7.2.8 CUPS returns '"foomatic-rip" not available/stopped
+            with status 3' with a HP printer
+        -   7.2.9 Printing fails with unauthorised error
+        -   7.2.10 Print button greyed-out in GNOME print dialogs
+        -   7.2.11 Unknown supported format: application/postscript
+        -   7.2.12 Finding URIs for Windows print servers
+        -   7.2.13 Print-Job client-error-document-format-not-supported
+        -   7.2.14 /usr/lib/cups/backend/hp failed
+        -   7.2.15 Unable to get list of printer drivers
+        -   7.2.16 lp: Error - Scheduler Not Responding
+        -   7.2.17 CUPS prints only an empty and an error-message page
+            on HP LaserJet
+        -   7.2.18 "Using invalid Host" error message
+        -   7.2.19 Printer doesn't print with an "Filter failed" message
+            on CUPS web interface (HP printer)
+        -   7.2.20 Printer doesn't print with an "Filter failed" message
+            on CUPS web interface (HP printer connected over network)
+        -   7.2.21 HPLIP 3.13: Plugin is installed, but HP Device
+            Manager complains it is not
+        -   7.2.22 Printer is not recognized by CUPS
+        -   7.2.23 Can't load /etc/samba/smb.conf
+        -   7.2.24 CUPS' systemd service does not start even though it's
+            enabled
+-   8 See also
+
+CUPS Linux printing workflow
 ----------------------------
 
 As of cups version 1.5.3-3, Arch Linux makes use of the new full
@@ -113,7 +109,7 @@ Installing the client package
 -----------------------------
 
 The package libcups is the only required package. Install it from the
-Official repositories.
+official repositories.
 
 Then add your CUPS server's IP address or hostname into
 /etc/cups/client.conf. That is all you need. Every application should
@@ -131,25 +127,40 @@ that until 1.5.x cupsd was able to do printer browsing alone and now it
 can only browse its own shared printers.
 
 To get the local cupsd recognise other shared printers offered by a
-remote cupsd server you need a running local cups-browserd (supported
+remote cupsd server you need a running local cups-browsed (supported
 since cups-filters 1.0.26) instance using Avahi to discover unknown
 printers.
 
 There is good news in April 2013 (still has to be incorporated above).
 
+> Installing CUPS a 32 bit chroot environment
+
+If you have a 64 bit base installation with a 32 bit chroot environment,
+explicit installation of CUPS is not necessary in the 32 bit
+environment. To access installed CUPS printers from the chroot
+environment, one needs to bind the /var/run/cups directory to the same
+relative location in the chroot environment. Simply create the directory
+in the chroot (it probably doesn't exist), mount (with -o bind passed to
+the command}}, and printers should be available from 32 bit chroot
+applications immediately.
+
+    # mkdir /path/to/chroot/var/run/cups
+    # Example: # mkdir /opt/arch32/var/run/cups
+
+    # mount -o bind /var/run/cups /path/to/chroot/var/run/cups
+
 Installing the server packages
 ------------------------------
 
 The following packages and some printer drivers are needed. Install them
-from the Official repositories.
+from the official repositories.
 
 -   cups - the actual CUPS daemon
--   cups-filters - essential filters
 -   ghostscript - (optional) PostScript interpreter
 -   gsfonts - GhostScript standard Type1 fonts
 
 If you want to enable printer browsing through your network, also
-install avahi. Make sure avahi-daemon is started before cupsd.
+install avahi and enable avahi-daemon.service using systemd.
 
 If the system is connected to a networked printer using the Samba
 protocol or if the system is to be a print server for Windows clients,
@@ -163,26 +174,26 @@ on the printer:
 -   gutenprint - A collection of high quality drivers for Canon, Epson,
     Lexmark, Sony, Olympus, and PCL printers for use with GhostScript,
     CUPS, Foomatic, and the GIMP
--   foomatic-db, foomatic-db-engine, foomatic-db-nonfree, and
-    foomatic-filters - Foomatic is a database-driven system for
-    integrating free software printer drivers with common spoolers under
-    Unix. Installing foomatic-filters should solve problems if the cups
-    error_log is reporting "stopped with status 22!".
+-   foomatic-db, foomatic-db-engine and foomatic-db-nonfree - Foomatic
+    is a database-driven system for integrating free software printer
+    drivers with common spoolers under Unix.
 -   hplip - HP drivers for DeskJet, OfficeJet, Photosmart, Business
     Inkjet and some LaserJet printer models, as well as a number of
     Brother printers.
 -   splix - Samsung drivers for SPL (Samsung Printer Language) printers.
 
 -   foo2zjs - Drivers for ZjStream protocol printers such as the HP
-    Laserjet 1018. More info here. Package is available in the AUR.
+    Laserjet 1018. More info here. Package is available in the AUR. It
+    also includes drivers for HBPL protocol such as the Dell C1765 MFP.
+    More info here
 -   hpoj - If you are using an HP Officejet, you should also install
     this package and follow the instructions to avoid problems as in
     this thread. Package is available in the AUR.
 -   samsung-unified-driver - Unified Linux Driver for Samsung printers
     and scanners. Required for new printers such as the ML-2160. Package
     is available in the AUR.
--   ufr2 or cndrvcups-lb - Canon UFR2 driver with support for LBP, iR
-    and MF series printers. Package is available in the AUR.
+-   cndrvcups-lb - Canon UFR2 driver with support for LBP, iR and MF
+    series printers. Package is available in the AUR.
 
 -   cups-pdf - A package that allows one to setup a virtual PDF Printer
     that generates a PDF out of jobs sent to it
@@ -245,11 +256,10 @@ manufacturers like HP supply their own backends. Source: here.
 Blacklisting usblp
 
 Warning:As of cups version 1.6.0, you no longer need to blacklist the
-usblp kernel module.  
- If you find out this is the only way to fix a remaining issue please
-report this upstream to the CUPS bug tracker and maybe also get in
-contact with Till Kamppeter (Debian CUPS maintainer). See upstream bug
-for more.
+usblp kernel module. If you find out this is the only way to fix a
+remaining issue please report this upstream to the CUPS bug tracker and
+maybe also get in contact with Till Kamppeter (Debian CUPS maintainer).
+See upstream bug for more.
 
 If you have problems getting your USB printer to work, you can try
 blacklisting the usblp kernel module:
@@ -305,6 +315,11 @@ different connection type and then change DeviceID in
 
 > HP Printer
 
+Warning: The hplip tool stack uses python2. During hp-setup, you will
+get syntax errors because /usr/bin/python is symlinked to
+/usr/bin/python3. Temporarily relink /usr/bin/python to
+/usr/bin/python2. Ensure you revert it back after setup!
+
 HP printers can also be installed via HP's Linux setup tool. Install it
 by installing hplip from the official repositories.
 
@@ -316,10 +331,36 @@ To run with command line:
 
     # hp-setup -i
 
+To run systray spool manager:
+
+    $ hp-systray
+
 PPD files are in /usr/share/ppd/HP/.
 
+Note: If you get errors complaining about missing gobject/dbus
+dependencies, install python2-gobject2 and python2-dbus. For details see
+this bug report.
+
 For printers that require the proprietary HP plugin (like the Laserjet
-Pro P1102w), install the hplip-plugin package from AUR.
+Pro P1102w or 1020), install the hplip-plugin package from AUR.
+
+Warning: Due to a bug in hplip-setup, you might get error in sys tray or
+CUPS logs
+Print job failed - required plug-in not found. Please run hp-plugin even
+after you install the aforementioned hplip-plugin package from AUR. To
+fix, simply modify the printer in CUPS web interface and select the
+driver manually (preferably the en,en version). After that restart CUPS
+service.
+
+Note: hplip depends on foomatic-db-engine which prevents the drivers
+list from appearing when a printer is added to CUPS via the web user
+interface (following error : "Unable to get list of printer drivers").
+The workaround consists of installing hplip first, retrieving the
+corresponding PPD file from /usr/share/ppd/HP/, then, removing hplip
+entirely and the unnecessary dependencies. Finally, install the printer
+manually using the CUPS web ui, select the PPD file you retrieved then
+re-install hplip. After a reboot, you should have a fully working
+printer.
 
 Configuring
 -----------
@@ -341,7 +382,10 @@ effort.
 > CUPS daemon
 
 With the kernel modules installed, you can now start the cups and
-optionally, the cups-browsed daemons.
+optionally, the cups-browsed daemons, and enable them as required.
+
+    # systemctl start cups.service       # to start cupsd daemon
+    # systemctl enable cups.service      # to start daemon on boot
 
 > Web interface and tool-kit
 
@@ -363,16 +407,17 @@ then Print Test Page. If it does not print and there is certainty
 regarding the correctness of applied settings, then the problem is most
 likely due to missing a proper printer driver.
 
-Tip:See: #Alternative CUPS interfaces for other other front-ends.
+Tip:See: #Alternative CUPS interfaces for other front-ends.
 
-Note:When setting up a USB printer, you should see your printer listed
-on Add Printer page. If you can only see a "SCSI printer" option, it
-probably means that CUPS has failed to recognize your printer.
+> Note:
 
-Note:To enable wireless scanning on certain HP multi-function devices
-using the hplip package, you may need to add the printer as a Network
-Printer using the http:// protocol. To determine the proper URI to use,
-run the hp-makeuri command.
+-   When setting up a USB printer, you should see your printer listed on
+    Add Printer page. If you can only see a "SCSI printer" option, it
+    probably means that CUPS has failed to recognize your printer.
+-   To enable wireless scanning on certain HP multi-function devices
+    using the hplip package, you may need to add the printer as a
+    Network Printer using the HTTP protocol. To determine the proper URI
+    to use, run the hp-makeuri command.
 
 CUPS administration
 
@@ -381,15 +426,34 @@ in the web interface, such as: adding or removing printers, stopping
 print tasks, etc. The default username is the one assigned in the sys
 group, or root. Other admin groups (e.g. lpadmin or printadmin) may be
 added to the SystemGroup line in /etc/cups/cups-files.conf (you might
-have to add this line). See these instructions at cups.org. You might
-also want to read this post. Create the group[s] (man groupadd) and add
-the group[s] to users (man usermod). cupsd must be restarted and the
-user must re-login for these changes to take affect.
+have to add this line).
+
+     # Administrator user group, used to match @SYSTEM in cupsd.conf policy rules...
+    SystemGroup sys root 
+    SystemGroup printadmin
+
+Create the group[s] (man groupadd)
+
+    # groupadd printadmin 
+    # groupadd lp
+
+and add the users to the group(s) (man gpasswd).
+
+    # gpasswd -a username printadmin       # for printer administration
+    # gpasswd -a username lp               # for printing priviledges
+
+The cupsd daemon must be restarted and the user must re-login for these
+changes to take affect.
+
+    # systemctl restart cupsd.service
 
 If the root account has been locked (i.e. when using sudo), it is not
 possible to log in the CUPS administration interface with the default
-username (root) and password. Follow the instructions above to add other
-users as cups administrators.
+username (root) and password. Read this post to see how one user dealt
+with this issue. The above instructions, though, ought to be sufficient
+for this situation.
+
+Refer to the full cups documentation for further details.
 
 Remote access to web interface
 
@@ -477,51 +541,51 @@ List the drivers
 
 Add a new printer
 
-    # lpadmin -p <printer> -E -v <device> -P <ppd>
+    # lpadmin -p printer -E -v device -P ppd
 
-The <printer> is up to you. The device can be retrieved from the 'lpinfo
--i' command. Example:
+The printer is up to you. The device can be retrieved from the 'lpinfo
+-v' command. Example:
 
     # lpadmin -p HP_DESKJET_940C -E -v "usb://HP/DESKJET%20940C?serial=CN16E6C364BH"  -P /usr/share/ppd/HP/hp-deskjet_940c.ppd.gz
 
-In the following, the <printer> references the name you have used here
-to set up the printer.
+In the following, the printer references the name you have used here to
+set up the printer.
 
 Set the default printer
 
-    $ lpoptions -d <printer>
+    $ lpoptions -d printer
 
 Check the status
 
     $ lpstat -s
-    $ lpstat -p <printer>
+    $ lpstat -p printer
 
 Deactivate a printer
 
-    # cupsdisable <printer>
+    # cupsdisable printer
 
 Activate a printer
 
-    # cupsenable <printer>
+    # cupsenable printer
 
 Remove a printer
 
 First set it to reject all incoming entries:
 
-    # cupsreject <printer>
+    # cupsreject printer
 
 Then disable it.
 
-    # cupsdisable <printer>
+    # cupsdisable printer
 
 Finally remove it.
 
-    # lpadmin -x <printer>
+    # lpadmin -x printer
 
 Print a file
 
-    $ lpr <file>
-    $ lpr -# 17 <file>              # print the file 17 times
+    $ lpr file
+    $ lpr -# 17 file              # print the file 17 times
     $ echo "Hello, world!" | lpr -p # print the result of a command. The -p switch adds a header.
 
 Check the printing queue
@@ -538,29 +602,43 @@ Clear the printing queue
 
 GNOME
 
-If using GNOME, a possibility is to manage and configure the printer by
-installing system-config-printer.
+You can configure and manage printers by installing
+system-config-printer. This program does pull in some gnome
+dependencies.
 
-For system-config-printer to work as it should, running as root may be
-required, or alternatively set up a "normal" user to administer CUPS (if
-so follow steps 1-3).
+If your user does not have sufficient priviliges to administer the cups
+scheduler, system-config-printer will request the root password when it
+starts. You can avoid this by performing the following instructions.
 
-1. Create group, and add a user to it
+1. Create a group for administering the cups scheduler:
 
     # groupadd lpadmin
-    # usermod -aG lpadmin <username>
 
-2. Add lpadmin to this line in /etc/cups/cups-files.conf
+2. Add yourself to the newly created group:
 
-    SystemGroup sys root <insert here>
+    # usermod -aG lpadmin username
 
-3. Restart cups, log out and in again (or restart computer)
+3. Tell cups to respect the newly created group:
+
+    /etc/cups/cups-files.conf
+
+     ...
+     SystemGroup sys root lpadmin
+     ...
+
+4. Restart cups:
+
+    # systemctl restart cupsd
+
+5. Log out and log in again or restart your computer.
 
 KDE
 
-KDE users can modify their printers from the Control Center. Both should
-refer to those desktop environments' documentation for more information
-on how to use the interfaces.
+KDE users can modify their printers from the Control Center. The
+kdeutils-print-manager package may need be installed if the Printers
+interface isn't found in the Hardware group. KDE users should refer to
+the desktop environments' documentation for more information on how to
+use the interface.
 
 Other
 
@@ -569,12 +647,13 @@ There is also gtklp in the AUR.
 PDF virtual printer
 -------------------
 
-CUPS-PDF is a nice package that allows one to setup a virtual printer
-that will generate a PDF from anything sent to it. This package is not
-necessary, but it can be quite useful. It can be installed using the
-following command:
+Note: With GNOME, it is now possible to directly print into a PDF or
+Postscript file, therefore CUPS-PDF is no longer required on such
+system.
 
-    # pacman -S cups-pdf
+cups-pdf is a nice package that allows one to setup a virtual printer
+that will generate a PDF from anything sent to it. This package is not
+necessary, but it can be quite useful.
 
 After installing the package, set it up as if it were for any other
 printer by using the web interface. Access the cups print manager:
@@ -688,7 +767,7 @@ The PPD version is not compatible with gutenprint
 
 Run:
 
-    # /usr/sbin/cups-genppdupdate
+    # /usr/bin/cups-genppdupdate
 
 And restart CUPS (as pointed out in gutenprint's post-install message)
 
@@ -733,12 +812,28 @@ plugged in and switched on, then enter
 
     hp-firmware -n
 
+hp-setup asks to specify the PPD file for the discovered printer
+
+Install CUPS before running hp-setup.
+
+I have installed Qt, but hp-setup reports "Qt/PyQt 4 initialization failed"
+
+"hp-check -t" won't give you useful information to find the required
+package. You have to install all the "Dependent Packages" prefixed with
+"python2" in https://www.archlinux.org/packages/extra/x86_64/hplip/
+
+hp-setup finds the printer automatically but reports "Unable to communicate with device" when printing test page immediately afterwards
+
+This at least happens to hplip 3.13.5-2 for HP Officejet 6500A through
+local network connection. To solve the problem, specify the IP address
+of the HP printer for hp-setup to locate the printer.
+
 hp-toolbox sends an error, "Unable to communicate with device"
 
 If running hp-toolbox as a regular user results in:
 
     # hp-toolbox
-    # error: Unable to communicate with device (code=12): hp:/usb/<printer id>
+    # error: Unable to communicate with device (code=12): hp:/usb/printer id
 
 or, "Unable to communicate with device"", then it may be needed to add
 the user to the lp and sys groups.
@@ -750,7 +845,9 @@ packages, that lets one switch off the "Smart Drive" (udev rules
 included in said packages).
 
 This can also occur with network attached printers if the avahi-daemon
-is not running.
+is not running. Another possiblility is the specification of the
+printer's IP address in hp-setup fails to locate the printer because the
+IP address of the the printer changed due to DHCP.
 
 CUPS returns '"foomatic-rip" not available/stopped with status 3' with a HP printer
 
@@ -759,7 +856,7 @@ If receiving any of the following error messages in
 be processed while they all end up not being completed with their status
 set to 'stopped':
 
-    Filter "foomatic-rip" for printer "<printer_name>" not available: No such file or director
+    Filter "foomatic-rip" for printer printer_name not available: No such file or director
 
 or:
 
@@ -784,13 +881,11 @@ Source: I can't print from gnome applications. - Arch Forums
 
 Be sure the package: libgnomeprint is installed
 
-Edit /etc/cups/cupsd.conf and add
+Edit /etc/cups/cupsd.conf and add:
 
     # HostNameLookups Double
 
-Restart CUPS:
-
-    # systemctl restart cups
+Restart cups.service.
 
 Unknown supported format: application/postscript
 
@@ -804,7 +899,7 @@ from /etc/cups/mime.convs, and:
 
 in /etc/cups/mime.types.
 
-Finding URIs for Windows Print Servers
+Finding URIs for Windows print servers
 
 Sometimes Windows is a little less than forthcoming about exact device
 URIs (device locations). If having trouble specifying the correct device
@@ -841,11 +936,11 @@ Try installing the foomatic packages and use a foomatic driver.
 
 /usr/lib/cups/backend/hp failed
 
-Change
+Change:
 
      SystemGroup sys root
 
-to
+to:
 
      SystemGroup lp root
 
@@ -863,7 +958,8 @@ Unable to get list of printer drivers
 
     ServerName localhost:631
 
--   Try to remove Foomatic drivers.
+-   Try to remove Foomatic drivers or refer to #HP_Printer for a
+    workaround.
 
 lp: Error - Scheduler Not Responding
 
@@ -896,7 +992,7 @@ error message:
 
 In order to fix the issue, use the following command (as superuser):
 
-     lpadmin -p <printer> -o pdftops-renderer-default=pdftops
+     lpadmin -p printer -o pdftops-renderer-default=pdftops
 
 "Using invalid Host" error message
 
@@ -908,7 +1004,7 @@ Change the permissions of the printer USB port:
 
 Get the bus and device number from lsusb, then set the permission using:
 
-chmod 0666 /dev/bus/usb/<bus number>/<device number>
+    chmod 0666 /dev/bus/usb/bus number/device number
 
 To make the persistent permission change that will be triggered
 automatically each time the computer is rebooted, add the following
@@ -921,8 +1017,17 @@ line.
 Obtain the right information by using lsusb command, and don't forget to
 substitute Printer_idVendor & Printer_idProduct with the relevant ones.
 
-Each system may vary, so consult udev#List_attributes_of_a_device wiki
+    Bus 002 Device 002: ID xxxx:yyyy Hewlett-Packard DeskJet D1360
+
+xxxx is the Printer_idVendor yyyy is the Printer_idProduct
+
+  
+ Each system may vary, so consult udev#List_attributes_of_a_device wiki
 page.
+
+Printer doesn't print with an "Filter failed" message on CUPS web interface (HP printer connected over network)
+
+Start, enable and restart the avahi-daemon.
 
 HPLIP 3.13: Plugin is installed, but HP Device Manager complains it is not
 
@@ -937,38 +1042,91 @@ If your printer is not listed in the "Add Printers" page of the CUPS web
 interface, nor by lpinfo -v, try the following (suggested in this
 thread):
 
-1.  Remove usblp from blacklist
-2.  Load usblp module
+-   Remove usblp from blacklist
+-   Load usblp module
 
     modprobe usblp
 
-1.  Stop cups (sudo systemctl stop cups)
-2.  Add the following udev rule in the following new rule
+-   Stop cups
+-   Add the following udev rule in a new rule file:
+
     /etc/udev/rules.d/10-cups_device_link.rules
 
     KERNEL=="lp[0-9]", SYMLINK+="%k", GROUP="lp"
 
-1.  Reload udev rules
+-   Reload udev rules:
 
-    sudo udevadm control --reload-rules
+    # udevadm control --reload-rules
 
-1.  Unplug and re-plug the printer
-2.  Wait a few seconds and then start cups again (sudo systemctl start
-    cups)
+-   Unplug and re-plug the printer.
+-   Wait a few seconds and then start cups again.
+
+Can't load /etc/samba/smb.conf
+
+If you're printing to a remote printer over SMB and get this error
+message: "Can't load /etc/samba/smb.conf - run testparm to debug it",
+then create an empty smb.conf:
+
+    # mkdir /etc/samba
+    # touch /etc/samba/smb.conf
+
+and restart cupsd.
+
+CUPS' systemd service does not start even though it's enabled
+
+The systemd .service file provided by CUPS uses socket activation,
+meaning the service is only started when an application connects to
+CUPS' socket. However, the systemd .socket file provided by cups only
+works for the local /var/run/cups/cups.sock socket.
+
+In order to have cupsd start when initiating a print job over the
+network, create the following file:
+
+    /etc/systemd/system/cups.socket
+
+    .include /usr/lib/systemd/system/cups.socket
+
+    [Socket]
+    ListenDatagram=0.0.0.0:631
+
+Then reload systemd:
+
+    # systemctl --system daemon-reload
+
+Confirm that everything is working correctly:
+
+    # systemctl is-enabled cups.service || systemctl enable cups.service
+    # systemctl status cups.socket
+    cups.socket - CUPS Printing Service Sockets
+             Loaded: loaded (/etc/systemd/system/cups.socket; enabled)
+             Active: inactive (dead)
+             Listen: /var/run/cups/cups.sock (Stream)
+                     0.0.0.0:631 (Stream)
+                     0.0.0.0:631 (Datagram)
+
+CUPS should now start automatically when printing locally or over the
+network.
 
 See also
 --------
 
 -   Official CUPS documentation, locally installed
--   Official CUPS Website
+-   Official CUPS website
 -   Linux Printing, The Linux Foundation
--   Gentoo's Printing Guide, Gentoo Documentation Resources
--   Arch Linux User Forums
--   Install HP Printers Easy Way
+-   Gentoo's printing guide, Gentoo Documentation resources
+-   Arch Linux user forums
+-   Install HP printers easy way
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=CUPS&oldid=256101"
+"https://wiki.archlinux.org/index.php?title=CUPS&oldid=305606"
 
 Category:
 
 -   Printers
+
+-   This page was last modified on 19 March 2014, at 14:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

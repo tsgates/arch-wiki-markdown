@@ -12,20 +12,17 @@ Microchip mplab
 
 This page is a placeholder, I will expand it shortly
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 MPLABX vs MPLAB                                                    |
-| -   2 Installation                                                       |
-|     -   2.1 install wine                                                 |
-|     -   2.2 install winetrics                                            |
-|     -   2.3 install needed dll's                                         |
-|     -   2.4 install MPLAB                                                |
-|                                                                          |
-| -   3 Starting MPLAB                                                     |
-| -   4 known problems / troubleshooting                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 MPLABX vs MPLAB
+-   2 Installation
+    -   2.1 install wine
+    -   2.2 install winetrics
+    -   2.3 install needed dll's
+    -   2.4 install MPLAB
+-   3 Starting MPLAB
+-   4 known problems / troubleshooting
 
 MPLABX vs MPLAB
 ---------------
@@ -79,3 +76,10 @@ Retrieved from
 Category:
 
 -   Wine
+
+-   This page was last modified on 13 June 2012, at 15:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

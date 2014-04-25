@@ -1,26 +1,19 @@
 Slrn
 ====
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Configuration                                                      |
-|     -   2.1 User account                                                 |
-|     -   2.2 Signature                                                    |
-|     -   2.3 Encoding                                                     |
-|     -   2.4 Displaying all posts                                         |
-|                                                                          |
-| -   3 Managing usergroups                                                |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
-
-Overview
---------
-
 Slrn is a text-based news client. It runs through a textual user
 interface and is highly customizable. It uses the S-Lang library.
+
+Contents
+--------
+
+-   1 Configuration
+    -   1.1 User account
+    -   1.2 Signature
+    -   1.3 Encoding
+    -   1.4 Displaying all posts
+-   2 Managing usergroups
+-   3 See also
 
 Configuration
 -------------
@@ -98,8 +91,15 @@ See also
 -   slrn FAQ slrn frequently asked questions
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Slrn&oldid=222613"
+"https://wiki.archlinux.org/index.php?title=Slrn&oldid=302721"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 11:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

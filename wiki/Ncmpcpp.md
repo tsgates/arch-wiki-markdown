@@ -1,70 +1,59 @@
 Ncmpcpp
 =======
 
-> Summary
+Related articles
 
-Covers installation and usage of ncmpcpp (ncmpc++)
+-   mpd
 
-> Related
+Ncmpcpp or ncmpcpp is an mpd client (compatible with mopidy) with a UI
+very similar to ncmpc, but it provides new useful features such as
+support for regular expressions in search engine, extended song format,
+items filtering, last.fm support, ability to sort playlist, local
+filesystem browser and other minor functions.
 
-mpd - Music Player Daemon
+To use it, a functional mpd must be present on the system since
+ncmpcpp/mpd work together in a client/server relationship.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 (Very) Basic configuration                                         |
-| -   4 Enabling visualization                                             |
-| -   5 Basic Usage                                                        |
-|     -   5.1 Loading ncmpc++                                              |
-|     -   5.2 Remapping keys                                               |
-|     -   5.3 Different views                                              |
-|     -   5.4 Other UI keys                                                |
-|     -   5.5 Playback modes                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Introduction
-------------
-
-Ncmpcpp or ncmpc++ is an mpd client with a UI very similar to ncmpc, but
-it provides new useful features such as support for regular expressions
-in search engine, extended song format, items filtering, last.fm
-support, ability to sort playlist, local filesystem browser and other
-minor functions. To use it, a functional mpd must be present on the
-system since ncmpcpp/mpd work together in a client/server relationship.
-
-The shell "GUI" for ncmpcpp is highly customizable. Edit
-~/.ncmpcpp/config to your liking. For inspiration, see the following
-resources:
-
--   Show your .ncmpcpp/config with Screenshot forum thread
--   Project screenshots page
+-   1 Installation
+-   2 Basic configuration
+-   3 Enabling visualization
+-   4 Basic usage
+    -   4.1 Loading ncmpcpp
+    -   4.2 Different views
+    -   4.3 Other UI keys
+    -   4.4 Playback modes
+-   5 Remapping keys
+-   6 See also
 
 Installation
 ------------
 
-The official package resides in [community]
+Install ncmpcpp from the official repositories.
 
-    # pacman -S ncmpcpp
+Basic configuration
+-------------------
 
-(Very) Basic configuration
---------------------------
+The shell "GUI" for ncmpcpp is highly customizable. Edit
+~/.ncmpcpp/config to your liking. If, after installation,
+~/.ncmpcpp/config has not been created, you could copy the sample
+config, change owner and edit at the very least the following three
+configuration options:
 
-After installation a sample configuration file can be found in
-/usr/share/doc/ncmpcpp/config
+-   mpd_host - Should point to the host on which mpd resides, can be
+    "localhost" or "127.0.0.1" if on the same machine
+-   mpd_port - Unless you've changed the defaults of mpd, this should be
+    "6600"
+-   mpd_music_dir - The same directory value as specified in
+    "music_directory" in mpd.conf
 
-If, after installation, ~/.ncmpcpp/config has not been created, you
-could copy the sample config, change owner and edit at the very least
-the following three configuration options:
+For inspiration, see the following resources:
 
--   mpd_host (should point to the host on which mpd resides, can be
-    "localhost" or "127.0.0.1" if on the same machine)
--   mpd_port (unless you've changed the defaults of mpd, this should be
-    "6600")
--   mpd_music_dir (the same directory value as specified in
-    "music_directory" in mpd.conf)
+-   Sample configuration file in /usr/share/doc/ncmpcpp/config.
+-   Show your .ncmpcpp/config with screenshot forum thread
+-   Project screenshots page
 
 Enabling visualization
 ----------------------
@@ -83,32 +72,31 @@ Additional lines need to be added to ~/.ncmpcpp/config
 
     visualizer_fifo_path = "/tmp/mpd.fifo"
     visualizer_output_name = "my_fifo"
-    visualizer_sync_interval = "1"
+    visualizer_sync_interval = "30" 
+    visualizer_in_stereo = "yes"
     #visualizer_type = "wave" (spectrum/wave)
     visualizer_type = "spectrum" (spectrum/wave)
 
-Users can choose between either a spectrum analyzer or wave form.
+-   visualizer_sync_interval - Set the interval for synchronizing the
+    visualizer with the audio output from mpd. It should be set to
+    greater than 10 to avoid trying to synchronize too frequently, which
+    freezes the visualization. The recommended value is 30, but it can
+    be reduced if the audio becomes desynced with the visualization.
+-   visualizer_type - Set the visualization to either a spectrum
+    analyzer or wave form.
 
-Basic Usage
+Basic usage
 -----------
 
-> Loading ncmpc++
+> Loading ncmpcpp
 
-Load ncmpc++ in a shell
+Load ncmpcpp in a shell:
 
     $ ncmpcpp
 
-> Remapping keys
-
-A listing of keys and their respective functions is available from
-within npmpcpp itself via hitting 1. Users may remap any of the default
-keys simply by copying /usr/share/doc/ncmpcpp/keys to ~/.ncmpcpp/ and
-editing it. Ncmpcpp-git users have to copy
-/usr/share/doc/ncmpcpp/bindings instead.
-
 > Different views
 
-Partial list of views within ncmpc++
+Partial list of views within ncmpcpp:
 
 -   0 - Clock
 -   1 - Help
@@ -152,9 +140,30 @@ are:
 The final "-" is only active when the user forces an update to the
 datebase via u.
 
+Remapping keys
+--------------
+
+A listing of keys and their respective functions is available from
+within npmpcpp itself via hitting 1. Users may remap any of the default
+keys simply by copying /usr/share/doc/ncmpcpp/keys to ~/.ncmpcpp/ and
+editing it. ncmpcpp-git users have to copy
+/usr/share/doc/ncmpcpp/bindings instead.
+
+See also
+--------
+
+dotshare.it configurations
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Ncmpcpp&oldid=248502"
+"https://wiki.archlinux.org/index.php?title=Ncmpcpp&oldid=303315"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 6 March 2014, at 09:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

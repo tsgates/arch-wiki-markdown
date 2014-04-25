@@ -5,22 +5,19 @@ There are many cursor themes available besides the default black
 pointer. This guide will instruct you on where to get them, installing
 them, and configuring them.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Getting Mouse Cursor Themes                                        |
-| -   2 Installing Mouse Cursor Themes                                     |
-| -   3 Note on Cursor Themes not Working with Awesome Window Manager      |
-| -   4 Choosing and Configuring Cursor Themes                             |
-|     -   4.1 Using the XDG Icon Theme Specification                       |
-|     -   4.2 With Gnome 3.8                                               |
-|     -   4.3 Using X resources                                            |
-|                                                                          |
-| -   5 More information                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Getting Mouse Cursor Themes
+-   1 Getting mouse cursor themes
+-   2 Installing mouse cursor themes
+-   3 Note on cursor themes not working with awesome window manager
+-   4 Choosing and configuring cursor themes
+    -   4.1 Using the XDG Icon theme specification
+    -   4.2 With Gnome 3.8
+    -   4.3 Using X resources
+-   5 See also
+
+Getting mouse cursor themes
 ---------------------------
 
 First, check which themes you already have installed:
@@ -44,7 +41,7 @@ Here are links to where else you may download cursor:
 -   KDE Look
 -   Customize.org
 
-Installing Mouse Cursor Themes
+Installing mouse cursor themes
 ------------------------------
 
 This manual installation method is only required if you are not using
@@ -126,24 +123,25 @@ If the above links do not resolve the problem, look in
 /usr/share/icons/whiteglass/cursors for additional cursors your theme
 may be missing, and create links for them as well.
 
-Note on Cursor Themes not Working with Awesome Window Manager
+Note on cursor themes not working with awesome window manager
 -------------------------------------------------------------
 
-Xcursor does not work correctly with Awesome Window Manager. You may
+Xcursor does not work correctly with awesome window manager. You may
 notice all of the themed cursors work except the default cursor.
 
 For more information see this link
 http://awesome.naquadah.org/wiki/FAQ#How_to_change_the_cursor_theme.3F
 
-Choosing and Configuring Cursor Themes
+Choosing and configuring cursor themes
 --------------------------------------
 
 If you use some desktop environment like Gnome, you can use its GUIs to
-choose cursor themes.
+choose cursor themes. Alternatively you can use lxappearance to manage
+and apply cursor themes.
 
-> Using the XDG Icon Theme Specification
+> Using the XDG Icon theme specification
 
-Note:This method will also set both the X11 and Wayland cursor theme.
+Note:This method will set both the X11 and Wayland cursor theme.
 
 You can create a symlink "default" in ~/.icons, which points to your
 installed cursor theme:
@@ -184,8 +182,8 @@ That will change the theme of the user, but not the one used in GDM. To
 change the cursor theme in the greeter create the file
 /etc/dconf/db/gdm.d/10-cursor-settings with content:
 
-    [org/gnome/desktop/interface]
-    cursor-theme='foobar'
+     [org/gnome/desktop/interface]
+     cursor-theme='foobar'
 
 And run as root the following command:
 
@@ -202,7 +200,7 @@ your window manager. If it does not, you can force it to load prior your
 window manager by putting the following command in ~/.xinitrc or
 .xprofile (depending on your setup):
 
-    xrdb ~/.Xresources &
+    $ xrdb ~/.Xresources &
 
 You can optionally add this line to ~/.Xresources if your cursor theme
 supports multiple sizes:
@@ -214,17 +212,22 @@ this setting and let it choose the cursor size automatically.
 
 Refer to your window manager documentation for details.
 
-More information
-----------------
+See also
+--------
 
 For more information about cursors in X (supported directories, formats,
-compatibility, etc.) refer to the man page:
-
-    $ man Xcursor
+compatibility, etc.) refer to the manual page.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Cursor_Themes&oldid=255023"
+"https://wiki.archlinux.org/index.php?title=Cursor_Themes&oldid=294221"
 
 Category:
 
 -   X Server
+
+-   This page was last modified on 24 January 2014, at 08:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

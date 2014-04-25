@@ -1,14 +1,9 @@
 Polipo
 ======
 
-> Summary
+Related articles
 
-Polipo is a light weight http proxy server for your small network.
-Polipo caches web data.
-
-> Related
-
-Squid
+-   Squid
 
 From Polipo's site:
 
@@ -29,33 +24,27 @@ employing disk quota.
 
 The following covers installing and setting up Polipo.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Run polipo as different user (not nobody)                    |
-|                                                                          |
-| -   2 Starting the daemon                                                |
-|     -   2.1 Multiple instances                                           |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Browser                                                      |
-|     -   3.2 Tunneling                                                    |
-|     -   3.3 Privoxy                                                      |
-|     -   3.4 Tor                                                          |
-|     -   3.5 DansGuardian                                                 |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 DNS Error                                                    |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Run polipo as different user (not nobody)
+-   2 Starting the daemon
+    -   2.1 Multiple instances
+-   3 Configuration
+    -   3.1 Browser
+    -   3.2 Tunneling
+    -   3.3 Privoxy
+    -   3.4 Tor
+    -   3.5 DansGuardian
+-   4 Troubleshooting
+    -   4.1 DNS Error
+-   5 See also
 
 Installation
 ------------
 
-Install polipo, available in the Official Repositories.
+Install polipo, available in the Official repositories.
 
 Alternatively, install the newer development branch polipo-git from the
 AUR instead.
@@ -63,11 +52,9 @@ AUR instead.
 > Run polipo as different user (not nobody)
 
 Polipo should run as an unprivileged user. Such a user can either be
-created or reused. Lets create the polipo cache folder first
+created or reused.
 
-    # mkdir /var/cache/polipo
-
-Now we add the new polipo group
+Add the new polipo group
 
     # groupadd -r polipo
 
@@ -244,7 +231,7 @@ Troubleshooting
 > DNS Error
 
 If the network is started in background there could be a error like this
-(in the polipo log file):
+in the Polipo log file:
 
     Couldn't send DNS query: Connection refused
     Falling back on gethostbyname.
@@ -260,7 +247,7 @@ using DHCP). Solving this error is possible on three ways:
 -   Set dnsNameServer manually on the wanted DNS server.
 -   Or add sleep 10 (or more, it depends) near the beginning of the
     Polipo daemon script /etc/rc.d/polipo in the start section. This
-    will Polipo start after the network has initialised.
+    will make Polipo start after the network has initialised.
 
 See this thread for more information on this topic.
 
@@ -271,8 +258,15 @@ See also
 -   The Polipo Manual
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Polipo&oldid=255851"
+"https://wiki.archlinux.org/index.php?title=Polipo&oldid=305981"
 
 Category:
 
 -   Proxy servers
+
+-   This page was last modified on 20 March 2014, at 17:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

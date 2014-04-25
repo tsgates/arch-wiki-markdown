@@ -1,17 +1,11 @@
 TeX Live
 ========
 
-> Summary
+Related articles
 
-Introduce how install and use TeX Live.
-
-> Related
-
-TeX Live FAQ
-
-TeX Live and CJK
-
-LaTeX
+-   TeX Live FAQ
+-   TeX Live and CJK
+-   LaTeX
 
 TeX Live is an "easy way to get up and running with the TeX document
 production system. It provides a comprehensive TeX system with binaries
@@ -22,27 +16,23 @@ world."
 
 For more information see: Category:TeX
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 texlive-most                                                 |
-|     -   1.2 texlive-lang                                                 |
-|     -   1.3 Alternative: TeX Live network install                        |
-|                                                                          |
-| -   2 Important information                                              |
-|     -   2.1 Paper Size                                                   |
-|     -   2.2 Error with "formats not generated" upon update               |
-|     -   2.3 Fonts                                                        |
-|                                                                          |
-| -   3 TeXLive Local Manager                                              |
-|     -   3.1 Recent "langukenglish" errors                                |
-|                                                                          |
-| -   4 Install .sty files                                                 |
-|     -   4.1 Manual Installation                                          |
-|     -   4.2 Using PKGBUILDs                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 texlive-most
+    -   1.2 texlive-lang
+    -   1.3 Alternative: TeX Live network install
+-   2 Important information
+    -   2.1 Paper Size
+    -   2.2 Error with "formats not generated" upon update
+    -   2.3 Fonts
+-   3 TeXLive Local Manager
+    -   3.1 Recent "langukenglish" errors
+-   4 Install .sty files
+    -   4.1 Manual Installation
+    -   4.2 Using PKGBUILDs
+-   5 Updating babelbib language definitions
 
 Installation
 ------------
@@ -80,27 +70,26 @@ package, lookup the files:
 -   texlive-langgreek
 -   texlive-langextra
 
-Note: texlive-langextra replaced the African, Arab, Armenian, Croatian,
-Hebrew, Indic, Mongolian, Tibetan and Vietnamese packages.
+Note:texlive-langextra provides language support for African, Arabic,
+Armenian, Croatian, Hebrew, Indic, Mongolian, Tibetan and Vietnamese.
 
 > Alternative: TeX Live network install
 
 Installing TeX Live manually honors the Arch Way in that it gives you
-much more control and lets you understand the process. It's the only way
-you can get a full-featured LaTeX distribution under 100 MB that fits
-your needs without install a thousand of packages you will never use.
+much more control and lets you understand the process. It is the only
+way to get a full-featured LaTeX distribution under 100 MB without
+installing thousands of packages you may never use. For all those
+programs that require TeX Live to be installed (e.g. kile) you can use
+the texlive-dummy package from AUR.
 
 A detailed guide for TeX Live network install can be found on the LaTeX
 Wikibook.
 
-Information about making TeX Live network install :
-http://tug.org/texlive/doc/texlive-en/texlive-en.html#x1-140003
+Information about making TeX Live network install:
+https://tug.org/texlive/doc/texlive-en/texlive-en.html#x1-140003
 
 A discussion of the pros and cons of making the TeX Live network
 install.
-
-For all those programs that require texlive to be installed (e.g. kile)
-you can use the texlive-dummy package from AUR.
 
 Important information
 ---------------------
@@ -119,7 +108,7 @@ Important information
 
 -   The packages containing the documentation and sources are available
     in the [community] repository. You can also consult it online at
-    http://tug.org/texlive/Contents/live/doc.html or on CTAN.
+    https://tug.org/texlive/Contents/live/doc.html or on CTAN.
 
 -   TeX Live (upstream) now provides a tool for incremental updates of
     CTAN packages. On that basis, we also plan to update our packages on
@@ -130,8 +119,8 @@ Important information
     perl, and ruby.
 
 -   For help and information about TeX Live see:
-    http://tug.org/texlive/doc.html and
-    http://tug.org/texlive/doc/texlive-en/texlive-en.html
+    https://tug.org/texlive/doc.html and
+    https://tug.org/texlive/doc/texlive-en/texlive-en.html
 
 -   System-wide configuration files are under /usr/share/texmf-config.
     User-specific ones should be put under ~/.texlive/texmf-config.
@@ -142,14 +131,12 @@ Important information
 
 > Paper Size
 
-American users are advised to run
+If you would like to set the default page size to something other than
+A4 (such as "Letter"), run the following command:
 
     $ texconfig
 
-in order to set the default page size to "Letter", as opposed to A4, the
-current default. This command is also capable of changing other useful
-settings. Not changing this setting can result in slightly flawed
-output, as the right margin will be bigger than the left.
+This command is also capable of changing other useful settings.
 
 > Error with "formats not generated" upon update
 
@@ -254,7 +241,8 @@ texlive-localmanager-git in the AUR.
 
 > Recent "langukenglish" errors
 
-For issues involving this error when trying to run tllocalmgr commands,
+For problems involving this error when trying to run tllocalmgr
+commands,
 
     Can't get object for collection-langukenglish at /usr/bin/tllocalmgr line 103
 
@@ -275,15 +263,15 @@ TeX Live (and teTeX) uses its own directory indexes (files named ls-R),
 and you need to refresh them after you copy something into one of the
 TeX trees. Or TeX can not see them. Magic command:
 
-    mktexlsr
+    # mktexlsr
 
 or
 
-    texhash
+    # texhash
 
 or
 
-    texconfig[-sys] rehash
+    # texconfig[-sys] rehash
 
 A command line program to search through these indexes is
 
@@ -349,9 +337,34 @@ And the .install file:
 
 From the texlive-gantt package in the AUR.
 
+Updating babelbib language definitions
+--------------------------------------
+
+If you have the very specific problem of babelbib not having the latest
+language definitions that you need, and you do not want to recompile
+everything, you can get them manually from
+https://www.tug.org/texlive/devsrc/Master/texmf-dist/tex/latex/babelbib/
+and put them in /usr/share/texmf-dist/tex/latex/babelbib/. For example:
+
+    # cd /usr/share/texmf-dist/tex/latex/babelbib/ 
+    # wget https://www.tug.org/texlive/devsrc/Master/texmf-dist/tex/latex/babelbib/romanian.bdf
+    # wget [...all-other-language-files...]
+    # wget https://www.tug.org/texlive/devsrc/Master/texmf-dist/tex/latex/babelbib/babelbib.sty
+
+Afterwards, you need to run texhash to update the TeX database:
+
+    # texhash
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=TeX_Live&oldid=251936"
+"https://wiki.archlinux.org/index.php?title=TeX_Live&oldid=303193"
 
 Category:
 
 -   TeX
+
+-   This page was last modified on 5 March 2014, at 00:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

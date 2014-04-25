@@ -1,17 +1,15 @@
 DeveloperWiki:Ncurses Todo List
 ===============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Ncurses Rebuild List                                               |
-|     -   2.1 Stage 1                                                      |
-|     -   2.2 Stage 2                                                      |
-|     -   2.3 Stage 3                                                      |
-|     -   2.4 Stage 4                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Ncurses Rebuild List
+    -   2.1 Stage 1
+    -   2.2 Stage 2
+    -   2.3 Stage 3
+    -   2.4 Stage 4
 
 Introduction
 ============
@@ -206,3 +204,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2011, at 18:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

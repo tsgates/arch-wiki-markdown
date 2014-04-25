@@ -7,37 +7,32 @@ gapless playback, ReplayGain support, MP3 and Ogg streaming, live
 filtering, instant startup, customizable key-bindings, and vi-style
 default key-bindings.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Using cmus with alsa                                         |
-|                                                                          |
-| -   3 Usage                                                              |
-|     -   3.1 Starting Cmus                                                |
-|     -   3.2 Adding Music                                                 |
-|     -   3.3 Playing Tracks                                               |
-|     -   3.4 Keybindings                                                  |
-|     -   3.5 Remote Control                                               |
-|                                                                          |
-| -   4 Tabs                                                               |
-|     -   4.1 Library tab (1)                                              |
-|     -   4.2 Sorted library tab (2)                                       |
-|     -   4.3 Playlist tab (3)                                             |
-|     -   4.4 Play Queue tab (4)                                           |
-|     -   4.5 Browser (5)                                                  |
-|     -   4.6 Filters tab (6)                                              |
-|     -   4.7 Settings tab (7)                                             |
-|                                                                          |
-| -   5 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Using cmus with alsa
+-   3 Usage
+    -   3.1 Starting Cmus
+    -   3.2 Adding Music
+    -   3.3 Playing Tracks
+    -   3.4 Keybindings
+    -   3.5 Remote Control
+-   4 Tabs
+    -   4.1 Library tab (1)
+    -   4.2 Sorted library tab (2)
+    -   4.3 Playlist tab (3)
+    -   4.4 Play Queue tab (4)
+    -   4.5 Browser (5)
+    -   4.6 Filters tab (6)
+    -   4.7 Settings tab (7)
+-   5 Links
 
 Installation
 ============
 
-Install cmus, available in the Official Repositories.
+Install cmus, available in the Official repositories.
 
 Alternatively, there is also a development version available in the AUR
 called cmus-git.
@@ -236,8 +231,15 @@ Links
 2.  Website
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Cmus&oldid=243334"
+"https://wiki.archlinux.org/index.php?title=Cmus&oldid=301598"
 
 Category:
 
 -   Player
+
+-   This page was last modified on 24 February 2014, at 11:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,29 +1,26 @@
 Dell Precision M65
 ==================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-|     -   1.1 hwd output                                                   |
-|     -   1.2 lsusb                                                        |
-|     -   1.3 lspci                                                        |
-|                                                                          |
-| -   2 Configuration details                                              |
-|     -   2.1 SATA Controller                                              |
-|     -   2.2 Xorg.conf (including synaptics touchpad)                     |
-|     -   2.3 Bluetooth                                                    |
-|     -   2.4 Hard Drive                                                   |
-|     -   2.5 Display                                                      |
-|     -   2.6 Network                                                      |
-|     -   2.7 Audio                                                        |
-|     -   2.8 VGA                                                          |
-|     -   2.9 FireWire                                                     |
-|     -   2.10 Modem                                                       |
-|     -   2.11 Fn Keys                                                     |
-|     -   2.12 SmartCard Reader (under baterry cell)                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+    -   1.1 hwd output
+    -   1.2 lsusb
+    -   1.3 lspci
+-   2 Configuration details
+    -   2.1 SATA Controller
+    -   2.2 Xorg.conf (including synaptics touchpad)
+    -   2.3 Bluetooth
+    -   2.4 Hard Drive
+    -   2.5 Display
+    -   2.6 Network
+    -   2.7 Audio
+    -   2.8 VGA
+    -   2.9 FireWire
+    -   2.10 Modem
+    -   2.11 Fn Keys
+    -   2.12 SmartCard Reader (under baterry cell)
 
 Hardware
 ========
@@ -299,3 +296,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 23 April 2012, at 12:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,17 +1,9 @@
 dvdbackup
 =========
 
-> Summary
+Related articles
 
-An introduction to the dvdbackup utility, with examples.
-
-> Related
-
-DVD
-
-DVD Ripping
-
-DVD Burning
+-   Optical Disc Drive
 
 There are several ways to backup DVD videos; see DVD Ripping. Many
 methods are slow, and require several steps to accomplish. dvdbackup
@@ -19,28 +11,23 @@ provides a simpler method (with some help from dvdauthor). The dvdbackup
 program is elegant because it does not demux/remux/transcode/reformat
 the movie. This means the backup process is done in one step.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Examining the DVD                                                  |
-| -   3 Ripping the DVD                                                    |
-|     -   3.1 A single title                                               |
-|     -   3.2 The main feature                                             |
-|     -   3.3 The whole DVD                                                |
-|                                                                          |
-| -   4 Writing to disc                                                    |
-|     -   4.1 Creating an ISO                                              |
-|     -   4.2 Burning straight to DVD                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Examining the DVD
+-   3 Ripping the DVD
+    -   3.1 A single title
+    -   3.2 The main feature
+    -   3.3 The whole DVD
+-   4 Writing to disc
+    -   4.1 Creating an ISO
+    -   4.2 Burning straight to DVD
 
 Installation
 ------------
 
-dvdbackup is available in the community repository.
-
-    # pacman -S dvdbackup
+Install dvdbackup from the official repositories.
 
 dvdauthor is available in the official repositories, but it is only
 required if backing up specific titles or title sets.
@@ -101,8 +88,8 @@ Ripping the DVD
 
 Tip:dvdbackup reads the name of the DVD and creates a working directory
 for it. If dvdbackup decides the name of the DVD is too generic (like
-MOVIE, for instance), the user must specify a name, as it will refuse to
-run otherwise. Just use -n MOVIE_NAME to specify.
+"MOVIE", for instance), the user must specify a name, as it will refuse
+to run otherwise. Just use -n movie_name to specify.
 
 Note:If you receive an error such as
 "ERR:  no video format specified for VMGM" you must set the video format
@@ -116,8 +103,8 @@ The -t option allows you to extract a specific title:
     $ dvdbackup -i /dev/dvd -o ~ -t 1
 
 You will now see a number of VOB files on the hard drive (in
-~/MOVIE_NAME/VIDEO_TS). These files can be played in MPlayer or VLC, but
-are insufficient to create a DVD copy! This is where dvdauthor is
+~/movie_name/VIDEO_TS). These files can be played in MPlayer or VLC, but
+are insufficient to create a DVD copy. This is where dvdauthor is
 useful.
 
 A title set must now be created (e.g. VTS_01_0.IFO and VTS_01_0.BUP). Be
@@ -125,7 +112,7 @@ aware that the following command will make a copy of the entire movie.
 The original can be deleted right afterwards.
 
     $ mkdir ~/dvd
-    $ cd ~/MOVIE_NAME/VIDEO_TS
+    $ cd ~/movie_name/VIDEO_TS
     $ dvdauthor -t -o ~/dvd *.VOB
 
 dvdauthor will create a copy of the movie. If it outputs anything like
@@ -144,16 +131,16 @@ drive space:
 
 > The main feature
 
-The -F option automatically detects the main feature (though not always
-correctly!) and copies the entire title set:
+The -F option automatically detects the main feature, though not always
+correctly, and copies the entire title set:
 
     $ dvdbackup -i /dev/dvd -o ~ -F
 
 Now, table of contents files must be created (e.g. VIDEO_TS.IFO and
 VIDEO_TS.BUP):
 
-    $ cd ~/MOVIE_NAME/VIDEO_TS
-    $ dvdauthor -o ~/MOVIE_NAME -T
+    $ cd ~/movie_name/VIDEO_TS
+    $ dvdauthor -o ~/movie_name -T
 
 > The whole DVD
 
@@ -166,6 +153,18 @@ for most DVDs:
 Writing to disc
 ---------------
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with Optical     
+                           Disc Drive.              
+                           Notes: please use the    
+                           second argument of the   
+                           template to provide more 
+                           detailed indications.    
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 See DVD Writing.
 
 > Creating an ISO
@@ -176,9 +175,9 @@ is that the ISO consumes hard drive space.
 
     $ mkisofs -dvd-video -udf -o ~/dvd.iso ~/dvd # if a single title was extracted
 
-or
+or:
 
-    $ mkisofs -dvd-video -udf -o ~/dvd.iso ~/MOVIE_NAME
+    $ mkisofs -dvd-video -udf -o ~/dvd.iso ~/movie_name
 
 To test the image with MPlayer, simply:
 
@@ -188,6 +187,8 @@ If everything seems fine, burn the image:
 
     $ growisofs -Z /dev/dvd=~/dvd.iso
 
+Tip:growisofs is part of the dvd+rw-tools package.
+
 > Burning straight to DVD
 
 If confident in our skills, creating and testing an image is a waste of
@@ -196,13 +197,20 @@ growisofs command listed above:
 
     $ growisofs -dvd-video -udf -Z /dev/dvd ~/dvd # if a single title was extracted
 
-or
+or:
 
-    $ growisofs -dvd-video -udf -Z /dev/dvd ~/MOVIE_NAME
+    $ growisofs -dvd-video -udf -Z /dev/dvd ~/movie_name
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dvdbackup&oldid=223234"
+"https://wiki.archlinux.org/index.php?title=Dvdbackup&oldid=290079"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 23 December 2013, at 09:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -49,7 +49,6 @@ to use openjdk6, you'll need to alter the TOMCAT_JAVA_HOME variable in
         -   Uncomment the section entitled "PostgreSQL Configuration".
         -   Modify the database name (in connection.url), username, and
             password as desired.
-
 -   Create a role and database in PostgreSQL to match the hibernate
     configuration.
 -   Install postgresql-jdbc from the Arch User Repository.
@@ -86,8 +85,15 @@ Tomcat's server.xml file:
 -   Instruct Nginx to proxy to http://xwiki:8080/ instead.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=XWiki&oldid=207234"
+"https://wiki.archlinux.org/index.php?title=XWiki&oldid=256773"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 12 May 2013, at 09:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

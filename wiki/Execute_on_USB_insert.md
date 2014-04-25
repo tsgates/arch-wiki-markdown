@@ -9,17 +9,15 @@ was lost (The sysrq keys were not working).
 There is an added security feature so that only dongles with the correct
 key can run the program.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Setting up a USB dongle                                            |
-| -   3 Security                                                           |
-| -   4 exdongle script                                                    |
-| -   5 Disable Trackpad on Mouse Connection                               |
-| -   6 Notes                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Setting up a USB dongle
+-   3 Security
+-   4 exdongle script
+-   5 Disable Trackpad on Mouse Connection
+-   6 Notes
 
 Installation
 ------------
@@ -257,3 +255,10 @@ Retrieved from
 Category:
 
 -   Hardware detection and troubleshooting
+
+-   This page was last modified on 20 June 2012, at 15:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

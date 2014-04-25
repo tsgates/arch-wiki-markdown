@@ -14,17 +14,15 @@ Arch repositories. This means that at some point or another, more will
 likely appear. It is useful, therefore, to figure out now, while there
 are few packages, how they should be packaged.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Directory Structure and Naming                                     |
-| -   2 ASDF                                                               |
-| -   3 Lisp-specific packaging                                            |
-| -   4 Things you, the reader, can do                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Directory Structure and Naming
+-   1 Directory structure and naming
+-   2 ASDF
+-   3 Lisp-specific packaging
+-   4 Things you, the reader, can do
+
+Directory structure and naming
 ------------------------------
 
 There is at least one package in the base repository (libgpg-error) that
@@ -167,8 +165,15 @@ Things you, the reader, can do
 -   Translate this page and future updates to this page.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lisp_Package_Guidelines&oldid=248680"
+"https://wiki.archlinux.org/index.php?title=Lisp_Package_Guidelines&oldid=301508"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 24 February 2014, at 11:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

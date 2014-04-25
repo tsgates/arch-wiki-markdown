@@ -35,3 +35,10 @@ Retrieved from
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 23 April 2012, at 13:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

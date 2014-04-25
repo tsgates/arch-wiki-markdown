@@ -7,17 +7,15 @@ brightness up/down), which might be enough for most users. In order to
 use those notifications instead of the ones provided by TPB, map the
 keyboard-events of those keys to the proper keycodes.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Loading nvram at boot and give permission to access /dev/nvram     |
-| -   2 Setting a more readable color and better placement                 |
-| -   3 Starting with KDE                                                  |
-| -   4 Starting with Fluxbox                                              |
-| -   5 Play a sound on volume change                                      |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Loading nvram at boot and give permission to access /dev/nvram
+-   2 Setting a more readable color and better placement
+-   3 Starting with KDE
+-   4 Starting with Fluxbox
+-   5 Play a sound on volume change
+-   6 See also
 
 Loading nvram at boot and give permission to access /dev/nvram
 --------------------------------------------------------------
@@ -101,3 +99,10 @@ Retrieved from
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 20 February 2013, at 06:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

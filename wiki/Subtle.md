@@ -12,30 +12,24 @@ Subtle is configured with Ruby for Xorg.
 Note:This article only explain the basics of Subtle. In depth
 information and tutorials exist at the Subtle project page.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Starting Subtle                                                    |
-| -   3 Basic function                                                     |
-| -   4 Configuration                                                      |
-| -   5 Sublets                                                            |
-|     -   5.1 Installing sublets                                           |
-|     -   5.2 Enabling sublets                                             |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Starting Subtle
+-   3 Basic function
+-   4 Configuration
+-   5 Sublets
+    -   5.1 Installing sublets
+    -   5.2 Enabling sublets
+-   6 See also
 
 Installing
 ----------
 
 The subtle package is available in the official repositories. It can be
-installed with pacman.
-
-    # pacman -S subtle
-
-A developer snapshot is available in the AUR named subtle-hg.
+installed with pacman. A developer snapshot is available in the AUR
+named subtle-hg.
 
 Starting Subtle
 ---------------
@@ -69,8 +63,8 @@ in reverse order. Gravity, tag then view.
 Configuration
 -------------
 
-Subtle will search for subtle.rb in your $XDG_CONFIG_HOME path. If it is
-non-existant it will load a default file from your $XDG_CONFIG_DIRS
+Subtle will search for subtle.rb in your
+XDG_CONFIG_HOME path. If it is non-existant it will load a default file from your XDG_CONFIG_DIRS
 path. It is preferable to copy this file to your $XDG_CONFIG_HOME/subtle
 directory instead of using the default.
 
@@ -105,8 +99,9 @@ installed under the user.
 
 > Enabling sublets
 
-After installation you need to enable it in subtle.rb. Look for a series
-of lines similar to the ones below:
+By default all sublets are displayed in the top right corner. You can
+change this behavior in subtle.rb by removing :sublets from the screen
+config and adding your sublets like this:
 
     screen 1 do
      top [ :title, :spacer, :views ]
@@ -129,11 +124,18 @@ See also
 -   Share your Subtle desktop!
 -   xinitrc
 -   Start X at Login
--   Window Manager
+-   Window manager
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Subtle&oldid=242780"
+"https://wiki.archlinux.org/index.php?title=Subtle&oldid=305735"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 20 March 2014, at 01:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

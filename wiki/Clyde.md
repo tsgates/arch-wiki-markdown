@@ -1,7 +1,7 @@
 Clyde
 =====
 
-> Summary
+Summary help replacing me
 
 Overview and a comprehensive FAQ for clyde, the package manager
 
@@ -30,25 +30,23 @@ backend. It is intended to be a unified replacement for other package
 management utilities (specifically it intends to replace powerpill (now
 discontinued) and Yaourt).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Using Clyde                                                        |
-| -   3 FAQ                                                                |
-|     -   3.1 Who is Clyde?!                                               |
-|     -   3.2 I hate typing sudo every time.                               |
-|     -   3.3 I changed my pacman.conf but Clyde seems to ignore it        |
-|     -   3.4 Does Clyde build packages with root permission?              |
-|     -   3.5 I found a bug, where is the bugtracker?                      |
-|     -   3.6 Clyde not working behind a proxy                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Using Clyde
+-   3 FAQ
+    -   3.1 Who is Clyde?!
+    -   3.2 I hate typing sudo every time.
+    -   3.3 I changed my pacman.conf but Clyde seems to ignore it
+    -   3.4 Does Clyde build packages with root permission?
+    -   3.5 I found a bug, where is the bugtracker?
+    -   3.6 Clyde not working behind a proxy
 
 Installation
 ------------
 
-You can find clyde in AUR. For installation help read this page.
+You can find clyde-git in the AUR.
 
 Using Clyde
 -----------
@@ -130,9 +128,16 @@ edit tsocks' configuration file and then run:
 Alternatively you can try proxychains, which is a similar program.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Clyde&oldid=238330"
+"https://wiki.archlinux.org/index.php?title=Clyde&oldid=285402"
 
 Categories:
 
 -   Package management
 -   Arch User Repository
+
+-   This page was last modified on 30 November 2013, at 11:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

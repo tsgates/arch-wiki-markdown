@@ -5,34 +5,27 @@ This article links to various methods to launch scripts or applications
 automatically when some particular event is taking place, like system
 startup or shutdown, shell login or logout and so on.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Daemons                                                            |
-|     -   1.1 Systemd                                                      |
-|     -   1.2 Runit                                                        |
-|                                                                          |
-| -   2 Shells                                                             |
-|     -   2.1 /etc/profile                                                 |
-|     -   2.2 See also                                                     |
-|                                                                          |
-| -   3 Graphical                                                          |
-|     -   3.1 X session startup                                            |
-|     -   3.2 X Desktop Group                                              |
-|     -   3.3 GNOME, KDE, Xfce                                             |
-|         -   3.3.1 KDE (Legacy)                                           |
-|                                                                          |
-|     -   3.4 LXDE                                                         |
-|     -   3.5 Fluxbox                                                      |
-|     -   3.6 Openbox                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Daemons
+    -   1.1 Systemd
+    -   1.2 Runit
+-   2 Cron
+-   3 Shells
+    -   3.1 /etc/profile
+-   4 Graphical
+    -   4.1 X session startup
+    -   4.2 Desktop Application Autostart
+    -   4.3 GNOME, KDE, Xfce
+    -   4.4 LXDE
+    -   4.5 Fluxbox
+    -   4.6 Openbox
 
 Daemons
 -------
 
-You can easily start your scripts or applications as daemons, see
-Daemon.
+You can start your scripts or applications as daemons, see Daemon.
 
 > Systemd
 
@@ -50,75 +43,86 @@ dependency system, and boot times that don't incur the penalty of dbus.
 The root-level services are symlinks in /service with the actual service
 directories in /etc/sv. See the Runit page for more information.
 
+Cron
+----
+
+Cron can be used to autostart non-GUI system setup tasks.
+
 Shells
 ------
 
-To autostart programs in console you can use shell startup
-files/directories. Read the documentation for your shell, or its
-ArchWiki article, e.g. Bash or Zsh.
+To autostart programs in console or upon login, you can use shell
+startup files/directories. Read the documentation for your shell, or its
+ArchWiki article, e.g. Bash#Configuration file sourcing order at startup
+or Zsh#Autostarting applications.
+
+See also Wikipedia:Unix shell#Configuration files for shells.
 
 > /etc/profile
 
 /etc/profile is sourced by all Bourne-compatible shells upon login: it
-sets up an environment upon login and application-specific
-(/etc/profile.d/*.sh) settings.
-
-Each time /etc/profile is executed, it sources the following scripts if
-they exist:
-
--   /etc/profile.d/*.sh
--   /etc/bash.bashrc (if shell is bash)
--   /etc/bash_completion
-
-> See also
-
--   INVOCATION section of man bash
--   STARTUP/SHUTDOWN FILES section of man zsh
--   Wikipedia:Unix_shell#Configuration files for shells
+sets up an environment upon login and application-specific settings by
+sourcing any readable /etc/profile.d/*.sh scripts.
 
 Graphical
 ---------
 
 You can autostart programs automatically when you login into your Window
-Manager or Desktop Environment.
+manager or Desktop environment.
 
 > X session startup
 
 See xinitrc and xprofile.
 
-> X Desktop Group
+> Desktop Application Autostart
 
-$XDG_CONFIG_DIRS/autostart/: In this folder are .desktop files. These
-files determine which programs are loaded for which desktop environment.
+The following folders contain *.desktop files, which are executed every
+time an X session starts, determining which programs are loaded for
+which desktop environment:
+
+-   $XDG_CONFIG_DIRS/autostart/ (/etc/xdg/autostart/ by default)
+-   /usr/share/gnome/autostart/ (GNOME only)
+-   $XDG_CONFIG_HOME/autostart/ (~/.config/autostart/ by default)
+
+Users can override system-wide *.desktop files by copying them into the
+user-specific ~/.config/autostart/ folder.
+
 For an explanation of the desktop file standard refer to Desktop Entry
-Specification.
+Specification. For a more specific description of directories used,
+Desktop Application Autostart Specification.
+
+Note that this method is supported only by XDG-compliant desktop
+environments. Tools like dapper, dex-git, or fbautostart can be used to
+offer XDG autostart in unsupported desktop environments as long as some
+other autostart mechanism exists.
 
 > GNOME, KDE, Xfce
 
 GNOME, KDE and Xfce all have a dedicated GUI for autostart settings, see
 the respective articles.
 
-You can also directly put .desktop files in ~/.config/autostart/
-
-KDE (Legacy)
-
-KDE also has a specific folder: ~/.kde/Autostart or ~/.kde4/Autostart
-
 > LXDE
 
-See LXDE#Autostart_Programs.
+See LXDE#Autostart programs.
 
 > Fluxbox
 
-See Fluxbox#Autostarting Applications.
+See Fluxbox#Autostart programs.
 
 > Openbox
 
 See Openbox#Startup programs.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Autostarting&oldid=253790"
+"https://wiki.archlinux.org/index.php?title=Autostarting&oldid=305997"
 
 Category:
 
 -   Boot process
+
+-   This page was last modified on 20 March 2014, at 17:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

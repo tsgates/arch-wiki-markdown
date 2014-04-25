@@ -1,27 +1,21 @@
 Twm
 ===
 
-  Summary
-  ---------------------------------------------------------------------------------------------------
-  This wiki page details installation and configuration of the twm window manager under Arch Linux.
-
 Twm is a window manager for X11. It is a small program, being built
 against Xlib rather than using a widget library, and as such, it is very
 light on system resources. Though simple, it is highly configurable;
 fonts, colours, border widths, title bar buttons, etc. can all be set by
 the user.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Twm creation and name                                              |
-| -   2 Installation                                                       |
-| -   3 Start twm with X                                                   |
-| -   4 Configuration (editing your .twmrc)                                |
-| -   5 Resources                                                          |
-| -   6 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Twm creation and name
+-   2 Installation
+-   3 Start twm with X
+-   4 Configuration (editing your .twmrc)
+-   5 Resources
+-   6 References
 
 > Twm creation and name
 
@@ -95,16 +89,23 @@ References
 2.  "UWM (computing)", Wikipedia. Retrieved October 22, 2009.
 3.  "Twm", Wikipedia. Retrieved October 22, 2009.
 4.  "Twm man page", linux.die.net. Retrieved October 22, 2009.
-5.  "Sample .twmrc file", physics.wm.edu. Retrieved October 22, 2009.
+5.  "Sample twmrc", custompc.plus.com. Retrieved August 12, 2013.
 6.  "Window Managers for X: TWM/VTWM", xwinman.org. Retrieved October
     22, 2009.
-7.  "Google search for twmrc", Google. Retrieved October 22, 2009.
-8.  Kask, Eeri. "TWM -- Revised Edition -- Again", xorg mailing list,
-    January 3, 2010.
+7.  "Google search for twmrc", google.com. Retrieved October 22, 2009.
+8.  Kask, Eeri. "TWM -- Revised Edition -- Again", lists.x.org, January
+    3, 2010.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Twm&oldid=253457"
+"https://wiki.archlinux.org/index.php?title=Twm&oldid=305765"
 
 Category:
 
 -   Stacking WMs
+
+-   This page was last modified on 20 March 2014, at 02:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

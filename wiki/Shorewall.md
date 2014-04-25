@@ -14,22 +14,18 @@ gateway/router/server or on a standalone GNU/Linux system. Shorewall
 does not use Netfilter's ipchains compatibility mode and can thus take
 advantage of Netfilter's connection state tracking capabilities.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 /etc/shorewall/interfaces                                    |
-|     -   2.2 /etc/shorewall/policy                                        |
-|     -   2.3 /etc/shorewall/rules                                         |
-|         -   2.3.1 SSH                                                    |
-|         -   2.3.2 Port forwarding (DNAT)                                 |
-|                                                                          |
-|     -   2.4 /etc/shorewall/shorewall.conf                                |
-|                                                                          |
-| -   3 Start                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 /etc/shorewall/interfaces
+    -   2.2 /etc/shorewall/policy
+    -   2.3 /etc/shorewall/rules
+        -   2.3.1 SSH
+        -   2.3.2 Port forwarding (DNAT)
+    -   2.4 /etc/shorewall/shorewall.conf
+-   3 Start
 
 Installation
 ------------
@@ -40,17 +36,17 @@ Configuration
 -------------
 
 These settings are based on the two-interface documentation on the
-shorewall website.
+Shorewall web site.
 
 Use the some example configuration files that come with the shorewall
 package
 
-    # cp /usr/share/shorewall/Samples/two-interfaces/* /etc/shorewall/
+    # cp /usr/share/doc/shorewall/Samples/two-interfaces/* /etc/shorewall/
 
 > /etc/shorewall/interfaces
 
-Change the interface settings to match the names used for our ethernet
-devices and to allow dhcp traffic on the local network. Edit
+Change the interface settings to match the names used for our Ethernet
+devices and to allow DHCP traffic on the local network. Edit
 /etc/shorewall/interfaces
 
 original
@@ -90,7 +86,7 @@ new
 
 > /etc/shorewall/rules
 
-DNS lookups are handled (actually forwarded) by dnsmasq, so shorewall
+DNS look-ups are handled (actually forwarded) by dnsmasq, so Shorewall
 needs to allow those connections. Add these lines to
 /etc/shorewall/rules
 
@@ -137,8 +133,15 @@ Start
     # systemctl start shorewall
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Shorewall&oldid=254867"
+"https://wiki.archlinux.org/index.php?title=Shorewall&oldid=305741"
 
 Category:
 
 -   Firewalls
+
+-   This page was last modified on 20 March 2014, at 01:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

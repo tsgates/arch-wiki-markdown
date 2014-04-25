@@ -1,14 +1,6 @@
 Pacaur
 ======
 
-> Summary
-
-How to install and use pacaur.
-
-> Related
-
-AUR Helpers
-
 Pacaur is an Arch User Repository (AUR) helper aiming at speed and
 simplicity, designed to minimize user prompt interaction and to use an
 uncluttered interface. It is written in Bash and built upon the well
@@ -18,31 +10,25 @@ Note:Pacaur is targeted at advanced users who want some degree of
 automation for repetitive tasks. As such, the user is expected to be
 familiar with the manual build process.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Philosophy                                                         |
-| -   2 Installation                                                       |
-| -   3 Usage                                                              |
-|     -   3.1 Userbase target                                              |
-|     -   3.2 Example                                                      |
-|                                                                          |
-| -   4 Configuration                                                      |
-|     -   4.1 Config files                                                 |
-|     -   4.2 Sudo configuration                                           |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Host name error                                              |
-|     -   5.2 Using gvim as editor                                         |
-|                                                                          |
-| -   6 Improving pacaur                                                   |
-|     -   6.1 Internationalization                                         |
-|     -   6.2 Bug reports                                                  |
-|     -   6.3 Feature requests                                             |
-|                                                                          |
-| -   7 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Philosophy
+-   2 Installation
+-   3 Usage
+    -   3.1 Userbase target
+    -   3.2 Example
+-   4 Configuration
+    -   4.1 Config files
+    -   4.2 Sudo configuration
+-   5 Troubleshooting
+    -   5.1 Host name error
+    -   5.2 Using gvim as editor
+-   6 Improving pacaur
+    -   6.1 Internationalization
+    -   6.2 Bug reports
+    -   6.3 Feature requests
+-   7 See also
 
 Philosophy
 ----------
@@ -58,36 +44,27 @@ Fast
 
 -   It minimizes user interaction.
 -   It has very good performance with a small memory footprint.
--   It retrieves and edits sall PKGBUILDs, solves all conflicts and asks
+-   It retrieves and edits all PKGBUILDs, solves all conflicts and asks
     about providers before building anything.
 
-  
- Simple
+Simple
 
 -   It does not add a lot of features, but simply extends pacman to
     manage the AUR.
--   It does not reinvent the wheel, but is built upon existing tools
-    (cower, expac, sudo).
--   It is a small bash script using tiny C libraries.
+-   It is a small bash script using existing tiny libraries.
 -   It is based on the libalpm C interface directly maintained by a
     pacman developer.
 
-  
- Powerful
+Powerful
 
 -   It can be used as a separate AUR frontend, or a single tool to
     manage official and AUR packages.
+-   It prompts automatically for sudo password.
 -   It searches with regex support (through cower).
--   It provides binary and AUR package names completion.
--   It passes arguments to pacman when appropriate.
 -   It shows current and available versions when checking for updates.
-
-  
- Secure
-
--   It does not source PKGBUILDs unecessarily.
--   It detects and warns of possible malicious pseudocode in PKGBUILDs.
--   It disposes of an additional full secured mode for paranoid people.
+-   It provides binary and AUR package names completion.
+-   It detects possible malicious pseudocode in PKGBUILDs, and disposes
+    of an additional full secured mode for paranoid people.
 
 Installation
 ------------
@@ -232,6 +209,8 @@ coffee while waiting the build to finish), disable it in your sudoers:
 
     Defaults passwd_timeout=0
 
+Alternatively, enable the sudoloop option in the config file.
+
 Troubleshooting
 ---------------
 
@@ -269,30 +248,36 @@ When reporting problems, please:
     install packages, the PKGBUILD must be corrected by its maintainer
     if makepkg fails.
 -   check that the problem is reproducible, and is not caused by a
-    misconfiguration of
-    pacman.conf/makepkg.conf/pacaur.conf/sudoers/etc.
--   post the ouput of "bash -x pacaur <your command>" here or on github
-    to help me debug the issue.
+    misconfiguration of pacaur/pacman/makepkg/sudoers/etc.
+-   post the ouput of "bash -x pacaur <your command>" in the forum
+    thread or on github to help me debug the issue.
 
 > Feature requests
 
-Pacaur is considered as "features complete" and most probably will not
-include new features. However, any feature request or patch will be
-considered, and might be implemented as long as the objectives of speed,
-simplicity, fast workflow, uncluttered interface and the Arch way are
-respected.
+Pacaur is considered as being "feature complete" and will most probably
+not include any new features. However, any improvement request or patch
+will be considered, and might be implemented as long as the objectives
+of speed, simplicity, fast workflow, uncluttered interface and the Arch
+way are respected.
 
-External Links
---------------
+See also
+--------
 
 -   Project page
 -   Forum page
 -   pacaur's github page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pacaur&oldid=255808"
+"https://wiki.archlinux.org/index.php?title=Pacaur&oldid=303226"
 
 Categories:
 
 -   Package management
 -   Arch User Repository
+
+-   This page was last modified on 5 March 2014, at 13:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

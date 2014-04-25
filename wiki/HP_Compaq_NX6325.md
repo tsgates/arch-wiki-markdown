@@ -4,20 +4,16 @@ HP Compaq NX6325
 This article describes specific steps to configure hardware on the
 notebook model HP Compaq NX6325.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Wireless                                                           |
-| -   2 Power management                                                   |
-| -   3 Audio                                                              |
-|     -   3.1 Multimedia keys                                              |
-|                                                                          |
-| -   4 Video                                                              |
-|     -   4.1 Xorg.conf                                                    |
-|                                                                          |
-| -   5 Fingerprint, card slots, etc.                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Wireless
+-   2 Power management
+-   3 Audio
+    -   3.1 Multimedia keys
+-   4 Video
+    -   4.1 Xorg.conf
+-   5 Fingerprint, card slots, etc.
 
 Wireless
 ========
@@ -92,3 +88,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 23 April 2012, at 12:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

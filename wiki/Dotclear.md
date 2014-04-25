@@ -12,17 +12,15 @@ Dotclear
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Before You Install                                                 |
-| -   3 Installation                                                       |
-|     -   3.1 Step 1: Check PHP Configuration                              |
-|     -   3.2 Step 2: Prepare MySQL Database                               |
-|     -   3.3 Step 3 : Install dotclear                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Before You Install
+-   3 Installation
+    -   3.1 Step 1: Check PHP Configuration
+    -   3.2 Step 2: Prepare MySQL Database
+    -   3.3 Step 3 : Install dotclear
 
 Introduction
 ============
@@ -75,8 +73,15 @@ Step 3 : Install dotclear
 Package is in AUR : https://aur.archlinux.org/packages.php?ID=31467
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dotclear&oldid=197520"
+"https://wiki.archlinux.org/index.php?title=Dotclear&oldid=286555"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 6 December 2013, at 14:16.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

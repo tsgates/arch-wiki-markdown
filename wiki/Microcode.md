@@ -1,46 +1,44 @@
 Microcode
 =========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What is a Microcode update                                         |
-| -   2 Updating microcode                                                 |
-| -   3 How to tell if a microcode update is needed                        |
-| -   4 Which CPUs accept microcode updates                                |
-|     -   4.1 AMD CPUs                                                     |
-|     -   4.2 Intel CPUs                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-What is a Microcode update
+-   1 What is a microcode update
+-   2 Updating microcode
+-   3 How to tell if a microcode update is needed
+-   4 Which CPUs accept microcode updates
+    -   4.1 AMD CPUs
+    -   4.2 Intel CPUs
+
+What is a microcode update
 --------------------------
 
 Processor microcode is akin to processor firmware. The kernel is able to
 update the processor's firmware without the need to update it via a BIOS
 update.
 
-The blobs can be downloaded from Intel's website. 20130222 is their
-latest release.
-
-"The microcode data file contains the latest microcode definitions for
+The microcode data file contains the latest microcode definitions for
 all Intel processors. Intel releases microcode updates to correct
 processor behavior as documented in the respective processor
 specification updates. While the regular approach to getting this
 microcode update is via a BIOS upgrade, Intel realizes that this can be
-an administrative hassle. The Linux Operating System and VMware ESX
+an administrative hassle. The Linux operating system and VMware ESX
 products have a mechanism to update the microcode after booting. For
 example, this file will be used by the operating system mechanism if the
-file is placed in the /etc/firmware directory of the Linux system."
+file is placed in the /etc/firmware directory of the Linux system.
+~Intel
 
-Note:Arch Linux does not use /etc/firmware to process the update.
+Note:Arch Linux does not use /etc/firmware to process the update,
+instead firmware binaries are made available in /usr/lib/firmware/*.
 
 Updating microcode
 ------------------
 
-Install either intel-ucode OR amd-ucode, depending on your processor
-vendor, and specify it to load unconditionally at boot in
-/etc/modules-load.d/. See Kernel Modules#Loading
+For Intel processors, install intel-ucode.
+
+For AMD processors the microcode updates are available in
+linux-firmware, which is installed as part of the base system.
 
 Reboot your machine and then execute:
 
@@ -50,19 +48,19 @@ The output of this command should indicate the current version of your
 processor's microcode and whether any additional update was applied to
 it.
 
-Note:Microcode updates via software are not persistent. In other words,
-one needs to apply them at each boot which is why it is specified in
-/etc/modules-load.d/.
+    [    9.890103] microcode: CPU0: patch_level=0x05000101
+    [   10.254972] microcode: CPU0: new patch_level=0x0500010d
+    [   10.255002] microcode: CPU1: patch_level=0x05000101
+    [   10.261101] microcode: CPU1: new patch_level=0x0500010d
+    [   10.261287] microcode: Microcode Update Driver: v2.00 <tigran@aivazian.fsnet.co.uk>, Peter Oruba
 
-Note:With udev/systemd-tools 185-1 & kernel 3.4.2 microcode was loaded
-automatically on my AMD opteron system and i didn't have to add it
-manually to MODULES array.
+> Note:
 
-  
-
-Note:If you were a previous user of the microcode_ctl package, remove
-microcode from the DAEMONS array in /etc/rc.conf. microcode_ctl is no
-longer in Arch's repositories.
+-   Microcode updates via software are not persistent. In other words,
+    one needs to apply them at each boot.
+-   As of Linux 3.4.2, the microcode update module is loaded
+    automatically if your processor support it, no user interaction is
+    required.
 
 How to tell if a microcode update is needed
 -------------------------------------------
@@ -74,7 +72,7 @@ microcode update. First load the microcode module using modprobe.
 
 Then inspect dmesg, if it reports that an update was applied, the
 microcode in the BIOS of your motherboard predates the one in either
-intel-ucode or amd-ucode. Users should therefore use the microcode
+intel-ucode or linux-firmware. Users should therefore use the microcode
 update!
 
 Examples, note that in each case, the BIOS on the motherboard is the
@@ -121,10 +119,13 @@ Which CPUs accept microcode updates
 
 > AMD CPUs
 
-According to AMD's Operating System Research Center, these CPUs support
-microcode updates:
+According to AMD's Operating System Research Center, these AMD processor
+families support microcode updates:
 
--   AMD processor families 10h, 11h, 12h, 14h, and 15h
+-   10h (Barcelona)
+-   11h (Turion X2 Ultra/Llano)
+-   12h (Fusion), 14h (Bobcat)
+-   15h (Bulldozer)
 
 > Intel CPUs
 
@@ -178,8 +179,15 @@ microcode updates:
 -   Mobile Intel® Pentium® 4 Processors - M
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Microcode&oldid=254923"
+"https://wiki.archlinux.org/index.php?title=Microcode&oldid=299968"
 
 Category:
 
 -   CPU
+
+-   This page was last modified on 23 February 2014, at 01:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

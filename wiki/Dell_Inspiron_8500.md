@@ -1,33 +1,27 @@
 Dell Inspiron 8500
 ==================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Intro                                                              |
-|     -   1.1 Summary                                                      |
-|     -   1.2 To do                                                        |
-|     -   1.3 Working                                                      |
-|     -   1.4 Partially Working                                            |
-|     -   1.5 Not Working                                                  |
-|                                                                          |
-| -   2 Kernel                                                             |
-| -   3 X.org                                                              |
-|     -   3.1 nVidia Geforce4 4200 Go (64 Mb)                              |
-|     -   3.2 ATI Mobility Raedon 9600                                     |
-|                                                                          |
-| -   4 Hardware                                                           |
-|     -   4.1 Infrared receiver                                            |
-|                                                                          |
-| -   5 Power Management                                                   |
-|     -   5.1 CPU Scaling                                                  |
-|     -   5.2 ACPI                                                         |
-|                                                                          |
-| -   6 See also                                                           |
-|     -   6.1 General                                                      |
-|     -   6.2 Linux on a Dell Inspiron 8500                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Intro
+    -   1.1 Summary
+    -   1.2 To do
+    -   1.3 Working
+    -   1.4 Partially Working
+    -   1.5 Not Working
+-   2 Kernel
+-   3 X.org
+    -   3.1 nVidia Geforce4 4200 Go (64 Mb)
+    -   3.2 ATI Mobility Raedon 9600
+-   4 Hardware
+    -   4.1 Infrared receiver
+-   5 Power Management
+    -   5.1 CPU Scaling
+    -   5.2 ACPI
+-   6 See also
+    -   6.1 General
+    -   6.2 Linux on a Dell Inspiron 8500
 
 Intro
 -----
@@ -375,3 +369,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 6 December 2012, at 00:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

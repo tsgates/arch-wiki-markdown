@@ -1,18 +1,16 @@
 DeveloperWiki:GNOME Guidelines
 ==============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Gnome profile initialization                                       |
-| -   3 GConf schemas:                                                     |
-| -   4 Scrollkeeper documentation                                         |
-| -   5 .desktop files                                                     |
-| -   6 GTK Icon cache                                                     |
-| -   7 .install files                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Gnome profile initialization
+-   3 GConf schemas:
+-   4 Scrollkeeper documentation
+-   5 .desktop files
+-   6 GTK Icon cache
+-   7 .install files
 
 Introduction
 ============
@@ -95,3 +93,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2011, at 18:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

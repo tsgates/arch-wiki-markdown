@@ -1,14 +1,9 @@
 CDM
 ===
 
-> Summary
-
-Describes installing, configuring and using CDM, minimalistic
-replacement for login-managers.
-
 Related articles
 
-Display Manager
+-   Display manager
 
 CDM is a minimalistic, yet full-featured replacement for login-managers
 like slim, kdm, gdm and qingy that provides a fast, dialog-based login
@@ -16,22 +11,16 @@ system without the overhead of the X Window System or the instability of
 qingy. Written in pure bash, CDM has almost no dependencies, yet
 supports multiple users/sessions and can start virtually any DE/WM.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Menu items                                                   |
-|     -   2.2 Theming                                                      |
-|     -   2.3 Starting X                                                   |
-|                                                                          |
-| -   3 Custom commands for power operations                               |
-|     -   3.1 ConsoleKit method                                            |
-|     -   3.2 systemd method                                               |
-|                                                                          |
-| -   4 More resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Menu items
+    -   2.2 Theming
+    -   2.3 Starting X
+-   3 Custom commands for power operations
+-   4 More resources
 
 Installation
 ------------
@@ -111,27 +100,25 @@ Custom commands for power operations
 ------------------------------------
 
 If you want to add entries for power operations, like shutdown, reboot
-etc., you can include them in binlist array.
-
-> ConsoleKit method
-
-If you use ConsoleKit for session authentication, see
-ConsoleKit#Use_dbus_for_power_operations.
-
-> systemd method
-
-If you use systemd, see Systemd#Power_Management.
+etc., you can include them in binlist array. See systemd#Power
+management for details.
 
 More resources
 --------------
 
 -   The Console Display Manager - Archlinux Forums thread about CDM
--   Aur package:cdm-git
 -   GitHub page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=CDM&oldid=252811"
+"https://wiki.archlinux.org/index.php?title=CDM&oldid=301306"
 
 Category:
 
 -   Display managers
+
+-   This page was last modified on 24 February 2014, at 11:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -13,22 +13,19 @@ Herbstluftwm
 Herbstluftwm is a manual tiling window manager for X11 using Xlib and
 Glib.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 First steps                                                        |
-| -   3 Configuration                                                      |
-|     -   3.1 Autostart file                                               |
-|     -   3.2 Commands                                                     |
-|     -   3.3 Multi-Monitor Support                                        |
-|     -   3.4 Scripts                                                      |
-|         -   3.4.1 Script to switch to the next empty tag                 |
-|         -   3.4.2 Script to cycle though paddings (or other settings)    |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 First steps
+-   3 Configuration
+    -   3.1 Autostart file
+    -   3.2 Commands
+    -   3.3 Multi-Monitor Support
+    -   3.4 Scripts
+        -   3.4.1 Script to switch to the next empty tag
+        -   3.4.2 Script to cycle though paddings (or other settings)
+-   4 See also
 
 Installation
 ------------
@@ -270,7 +267,7 @@ in /tmp.
 See also
 --------
 
--   The herbstwm homepage
+-   The herbstluftwm homepage
 -   The herbstluftwm thread
 -   /usr/share/doc/herbstluftwm/examples/ - various scripts
 -   /usr/share/doc/herbstluftwm/BUGS - bugs
@@ -280,8 +277,15 @@ See also
 -   #herbstluftwm - IRC channel at the irc.freenode.net
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Herbstluftwm&oldid=252756"
+"https://wiki.archlinux.org/index.php?title=Herbstluftwm&oldid=273973"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 1 September 2013, at 18:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

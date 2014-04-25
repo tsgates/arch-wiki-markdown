@@ -6,40 +6,36 @@ Correctly configured, it can significantly increase browsing speed on a
 broadband connection. Compared to bind or dnsmasq it can remember its
 cache after a reboot; "p" stands for persistent.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Initial preparation                                          |
-|     -   2.2 Format                                                       |
-|     -   2.3 DNS servers                                                  |
-|     -   2.4 OpenDNS                                                      |
-|     -   2.5 Security                                                     |
-|     -   2.6 Testing                                                      |
-|     -   2.7 System setup                                                 |
-|     -   2.8 Performance Settings For Home Broadband Users                |
-|     -   2.9 Additional Performance Settings                              |
-|         -   2.9.1 TTLs (Time-To-Live)                                    |
-|         -   2.9.2 Timeouts                                               |
-|         -   2.9.3 Debugging                                              |
-|         -   2.9.4 Cache Size                                             |
-|                                                                          |
-| -   3 Extras                                                             |
-|     -   3.1 Shared server for your LAN                                   |
-|     -   3.2 Name blocking                                                |
-|     -   3.3 pdnsd-ctl                                                    |
-|                                                                          |
-| -   4 FAQs                                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Initial preparation
+    -   2.2 Format
+    -   2.3 DNS servers
+        -   2.3.1 DNS servers with DHCP connections
+    -   2.4 OpenDNS
+    -   2.5 Security
+    -   2.6 Testing
+    -   2.7 System setup
+    -   2.8 Performance settings for home broadband users
+    -   2.9 Additional performance settings
+        -   2.9.1 TTLs (Time-To-Live)
+        -   2.9.2 Timeouts
+        -   2.9.3 Debugging
+        -   2.9.4 Cache size
+-   3 Extras
+    -   3.1 Shared server for your LAN
+    -   3.2 Name blocking
+    -   3.3 pdnsd-ctl
+-   4 Troubleshooting
+-   5 FAQs
 
 Installation
 ------------
 
-pdnsd is available in [community]:
-
-    # pacman -S pdnsd
+Install pdnsd from the official repositories.
 
 Configuration
 -------------
@@ -88,18 +84,42 @@ the second, leaving the other server sections commented out.
     pdnsd the addresses of DNS servers to use. Multiple addresses should
     be separated by a single comma, with optional whitespace before or
     after the comma. You can just copy the addresses from
-    etc/resolv.conf.
+    /etc/resolv.conf.
  file 
     The file option can be used instead of ip to specify a set of DNS
     server IPs. Its value is the path to a file with servers listed in
     resolv.conf format. The default dial-up configuration uses it
-    because the PPP client writes etc/ppp/resolv.conf with the addresses
-    it gets from the PPP server. You should not need to change it unless
-    you want to use a different DNS server than your ISP gives you by
-    default.
+    because the PPP client writes /etc/ppp/resolv.conf with the
+    addresses it gets from the PPP server. You should not need to change
+    it unless you want to use a different DNS server than your ISP gives
+    you by default.
 
 The rest of the server section will work without any more changes. For
 details on all the available options, see the pdnsd manual.
+
+DNS servers with DHCP connections
+
+When netctl is installed, pdnsd can be notified of the ip addresses of
+the name servers by resolvconf (see resolvconf(8) man page) and the
+notifications become dynamic when you use Automatic switching of
+profiles.
+
+To configure this feature, remove the broadband server section and
+update the dial-up server section with the following changes:
+
+       label = resolvconf;
+       file = /etc/pdnsd-resolv.conf;
+
+Edit /etc/resolvconf.conf to configure resolvconf with pdnsd as one of
+its subscribers:
+
+       name_servers=127.0.0.1
+       pdnsd_resolv=/etc/pdnsd-resolv.conf
+
+And run resolvconf -u to update /etc/pdnsd-resolv.conf with the
+addresses of the name servers (ignore the error message saying that the
+pdnsd socket cannot be accessed). This updating is only needed once
+before starting manually pdnsd.
 
 > OpenDNS
 
@@ -119,7 +139,7 @@ like google.navigation.opendns.com. For me, these addresses were
 208.67.216.230 and 208.67.216.231.
 
 Once you know the IPs, you can replace the pdnsd.conf’s already-existant
-rejected IPs inside the OpenDNS server { … } declaration. Make sure you
+rejected IPs inside the OpenDNS server { …} declaration. Make sure you
 retain the prefixes.
 
 OpenNIC is a reliable alternative to OpenDNS.
@@ -138,31 +158,29 @@ To avoid this risk, you should run pdnsd as a separate user. First you
 need to create it:
 
     # groupadd pdnsd
-    # useradd -r -d /var/cache/pdnsd -g pdnsd -s /bin/false pdnsd
+    # useradd -r -d /var/cache/pdnsd/ -g pdnsd -s /bin/false pdnsd
 
-/var/cache/pdnsd was chosen for the home directory because that is where
-pdnsd stores its data.
+/var/cache/pdnsd/ was chosen for the home directory because that is
+where pdnsd stores its data.
 
 Next, go back to pdnsd.conf. This time you will be editing the global
 section at the top of the file. Change run_as from nobody to pdnsd. You
 should also make sure the strict_setuid option is set to on for extra
-security (this is the default}}).
+security (this is the default).
 
 Now the server is too limited; it needs to write to a directory under
-/var/cache, but it cannot since it no longer has root privileges. Return
-some functionality:
+/var/cache/, but it cannot since it no longer has root privileges.
+Return some functionality:
 
-    # chown -R pdnsd:pdnsd /var/cache/pdnsd
-    # chmod 700 /var/cache/pdnsd
+    # chown -R pdnsd:pdnsd /var/cache/pdnsd/
+    # chmod 700 /var/cache/pdnsd/
     # chmod 600 /var/cache/pdnsd/pdnsd.cache
 
 Note:This needs to be redone upon every update.
 
 > Testing
 
-You should now have a working pdnsd daemon. Fire it up and find out:
-
-    # systemctl start pdnsd
+You should now have a working pdnsd daemon. Start it.
 
 You can test it with the nslookup utility (from the dnsutils package):
 
@@ -182,30 +200,26 @@ For the second time you look up the address, query time should be around
 
 Now it is time to point your system toward your brand-new DNS server.
 
-If you use DHCP to configure your network settings, you need to edit
-/etc/resolv.conf.head (otherwise, you should modify /etc/resolv.conf);
-add pdnsd before all of the other nameservers:
+If you use DHCP to configure your network settings and you use the old
+netcfg instead of netctl, you need to edit /etc/resolv.conf.head or
+/etc/resolv.conf by adding pdnsd before all of the other nameservers:
 
     # pdnsd cache @ localhost
     nameserver 127.0.0.1
 
 Make sure to enable pdnsd service.
 
-    # systemctl enable pdnsd
-
 pdnsd should start after network, as it depends on the network to run,
 and some services that use the network rely on working DNS.
 
-Restart the network (pdnsd should already be running):
-
-    # systemctl restart network.target
+Restart network.target (pdnsd should already be running):
 
 Retest the DNS query time, but this time use the system default DNS
 server:
 
     $ dig google.com | grep "Query time"
 
-> Performance Settings For Home Broadband Users
+> Performance settings for home broadband users
 
 Many users have broadband connections where the DNS server is slow or
 unreliable, and would like to use pdnsd as a caching server to minimize
@@ -215,13 +229,13 @@ improve the performance in this role:
 
 Under global settings:
 
-     neg_rrs_pol=on;
-     par_queries=1;
+    neg_rrs_pol=on;
+    par_queries=1;
 
 Under server settings:
 
-     proxy_only=on;
-     purge_cache=off;
+    proxy_only=on;
+    purge_cache=off;
 
 The neg_rrs_pol=on; policy means that when a negative response comes
 back for a query, pdnsd server will still cache the result even if the
@@ -260,7 +274,7 @@ servers that were already specified in the "server" section. Once again,
 this reduces the number of DNS queries you need to make, improving
 performance.
 
-The  purge_cache=off; setting tells pdnsd not to remove cache entries
+The purge_cache=off; setting tells pdnsd not to remove cache entries
 even if they have outlived the DNS record's time-to-live metric. This
 can be very useful when your ISP's DNS server goes down and you want to
 be able to access name lookups for domains you frequently use despite
@@ -268,7 +282,7 @@ the outage. Records will still be bumped out of the cache based on age
 once the cache becomes full (see man pdnsd.conf on how to set the size
 of the cache).
 
-> Additional Performance Settings
+> Additional performance settings
 
 TTLs (Time-To-Live)
 
@@ -291,8 +305,8 @@ Times are specified in seconds by default, or you may append an "m",
 min_ttl in the global settings sets a minimum TTL for cached records,
 causing pdnsd to ignore the default TTL in the record received from the
 server. On a slow connection or with a slow DNS server, you may want to
-set this to several hours to reduce the number of lookups. ( eg
-min_ttl=6h; )
+set this to several hours to reduce the number of lookups ( eg
+min_ttl=6h; ).
 
 neg_ttl in the global settings sets a minimum TTL for non-existent
 domains. If a server tells pdnsd that a domain does not exist, it will
@@ -334,15 +348,17 @@ To see what servers pdnsd is using for a particular lookup, how timeouts
 are working, and what default TTLs are being used by domains, turn debug
 on in the global settings:
 
-       debug=on;
+    debug=on;
 
-Restart pdnsd and monitor the file /var/cache/pdnsd/pdnsd.debug for
-changes.
+Restart pdnsd and monitor the pdnsd.service for changes with the systemd
+journal:
+
+    journalctl _SYSTEMD_UNIT=pdnsd.service
 
 Be sure to turn debug off for general use as leaving it on may degrade
 performance.
 
-Cache Size
+Cache size
 
 By default, pdnsd will automatically create authoritative records for
 all entries in /etc/hosts. If you have a lot of entries, for example if
@@ -411,6 +427,20 @@ Flush cache:
 
     # pdnsd-ctl empty-cache
 
+Troubleshooting
+---------------
+
+If you get the error result of uptest for 192.168.1.1: failed with
+journalctl -f _SYSTEMD_UNIT=pdnsd.service while you can successfully
+ping your ISP's dDNS server. Please check your interface naming in
+/etc/pdnsd.conf global section:
+
+    interface = any;
+
+or in the server section:
+
+    interface=enp2s0;
+
 FAQs
 ----
 
@@ -430,8 +460,15 @@ FAQs
     should be turned on if you use the DNS server provided by your ISP.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pdnsd&oldid=253238"
+"https://wiki.archlinux.org/index.php?title=Pdnsd&oldid=303051"
 
 Category:
 
 -   Domain Name System
+
+-   This page was last modified on 3 March 2014, at 17:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

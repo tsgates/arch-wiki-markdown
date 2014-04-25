@@ -6,8 +6,8 @@ originally coded long time ago, when the internet was a safer place, and
 back then, security didn't matter as much as does today. Therefore it
 used to have several security bugs and it got some bad reputation for
 that. But those bugs are long fixed and a recent sendmail version is as
-safe as any other SMTP server. If your top priority is security, you
-should probably use netqmail, however.
+safe as any other SMTP server. However, if your top priority is
+security, you should probably use netqmail.
 
 The goal of this article is to setup Sendmail for local users accounts,
 without using mysql or other database, and allowing also the creation of
@@ -17,25 +17,23 @@ This article only explains the required steps configuring Sendmail;
 after that, you probably want to add IMAP and POP3 access, so you could
 follow the Dovecot article.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 DNS Records                                                        |
-| -   3 Adding users                                                       |
-| -   4 Configuration                                                      |
-|     -   4.1 Create SSL certs                                             |
-|     -   4.2 sendmail.cf                                                  |
-|     -   4.3 local-host-names                                             |
-|     -   4.4 access.db                                                    |
-|     -   4.5 aliases.db                                                   |
-|     -   4.6 virtusertable.db                                             |
-|     -   4.7 Start on boot                                                |
-|                                                                          |
-| -   5 Tips and tricks                                                    |
-|     -   5.1 Forward all the mail of one domain to certain user           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 DNS Records
+-   3 Adding users
+-   4 Configuration
+    -   4.1 Create SSL certs
+    -   4.2 sendmail.cf
+    -   4.3 local-host-names
+    -   4.4 access.db
+    -   4.5 aliases.db
+    -   4.6 virtusertable.db
+    -   4.7 Start on boot
+    -   4.8 SASL authentication
+-   5 Tips and tricks
+    -   5.1 Forward all the mail of one domain to certain user
 
 Installation
 ------------
@@ -181,6 +179,12 @@ Enable and start the following services. Read Daemons for more datails.
 -   sendmail.service
 -   sm-client.service
 
+> SASL authentication
+
+-   Add a user to the SASL database for SMTP authentication.
+
+    # saslpasswd2 -c your-username
+
 Tips and tricks
 ---------------
 
@@ -196,8 +200,15 @@ Do not forget to process it again with
     # makemap hash /etc/mail/virtusertable.db < /etc/mail/virtusertable
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sendmail&oldid=243070"
+"https://wiki.archlinux.org/index.php?title=Sendmail&oldid=305782"
 
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 20 March 2014, at 02:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,10 +1,6 @@
 Man Page
 ========
 
-  Summary
-  ------------------------------------------------------------------------------------
-  Information on man pages, along with recommendations on how to improve their usage
-
 man pages (abbreviation for "manual pages") are the extensive
 documentation that comes preinstalled with almost all substantial
 UNIX-like operating systems, including Arch Linux. The command used to
@@ -16,28 +12,24 @@ pages when discussing related subjects. This is in sharp contrast with
 the hyperlink-aware info files, GNU's attempt at replacing the
 traditional man page format.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Accessing Man Pages                                                |
-| -   2 Format                                                             |
-| -   3 Searching manuals                                                  |
-| -   4 Colored man pages                                                  |
-|     -   4.1 Using less (Recommended)                                     |
-|     -   4.2 Using most (Not recommended)                                 |
-|     -   4.3 Colored man pages on xterm or rxvt-unicode                   |
-|         -   4.3.1 xterm                                                  |
-|         -   4.3.2 rxvt-unicode                                           |
-|                                                                          |
-| -   5 Reading man pages with a browser                                   |
-|     -   5.1 Using Local Man Pages                                        |
-|     -   5.2 Using Online Man Pages                                       |
-|                                                                          |
-| -   6 Viewing man pages as PDFs                                          |
-| -   7 Noteworthy manpages                                                |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Accessing Man Pages
+-   2 Format
+-   3 Searching manuals
+-   4 Colored man pages
+    -   4.1 Using less (Recommended)
+    -   4.2 Using most (Not recommended)
+    -   4.3 Colored man pages on xterm or rxvt-unicode
+        -   4.3.1 xterm
+        -   4.3.2 rxvt-unicode
+-   5 Reading local man pages
+    -   5.1 Converting to browser-readable HTML
+    -   5.2 Converting to PDF
+-   6 Online Man Pages
+-   7 Noteworthy manpages
+-   8 See also
 
 Accessing Man Pages
 -------------------
@@ -145,7 +137,7 @@ colored man pages: using less, or opting for most.
 
 > Using less (Recommended)
 
-Source: nion's blog - less colors for man pages
+Source: Less Colors For Man Pages | Linux Tidbits
 
 This method has the advantage that less has a bigger feature set than
 most, and is the default for viewing man pages.
@@ -155,15 +147,20 @@ Add the following to a shell configuration file. For Bash it would be:
     ~/.bashrc
 
     man() {
-        env LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-    	LESS_TERMCAP_md=$(printf "\e[1;31m") \
-    	LESS_TERMCAP_me=$(printf "\e[0m") \
-    	LESS_TERMCAP_se=$(printf "\e[0m") \
-    	LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-    	LESS_TERMCAP_ue=$(printf "\e[0m") \
-    	LESS_TERMCAP_us=$(printf "\e[1;32m") \
-    	man "$@"
+        env LESS_TERMCAP_mb=$'\E[01;31m' \
+        LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+        LESS_TERMCAP_me=$'\E[0m' \
+        LESS_TERMCAP_se=$'\E[0m' \
+        LESS_TERMCAP_so=$'\E[38;5;246m' \
+        LESS_TERMCAP_ue=$'\E[0m' \
+        LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+        man "$@"
     }
+
+To see the changes in your Man Pages (without restarting bash or linux),
+you may run:
+
+    # source ~/.bashrc
 
 To customize the colors, see Wikipedia:ANSI escape code for reference.
 
@@ -236,10 +233,10 @@ to 'J'):
 
 > Colored man pages on xterm or rxvt-unicode
 
-Source: XFree resources file for XTerm program
+Source: XFree resources file for XTerm program[dead link 2013-09-10]
 
 A quick way to add color to manual pages viewed on xterm/uxterm or
-rxvt-unicode can be made modifying ~/.Xresources or ~/.Xdefaults.
+rxvt-unicode is to modify ~/.Xresources.
 
 xterm
 
@@ -269,21 +266,29 @@ Launch a new xterm/uxterm or rxvt-unicode and you should see colorful
 man pages. This combination puts colors to bold and underlined words in
 xterm/uxterm or to bold, underlined, and italicized text in
 rxvt-unicode. You can play with different combinations of these
-attributes (see the sources of this item).
+attributes (see the sources[dead link 2013-09-10] of this item).
 
-Reading man pages with a browser
---------------------------------
+Reading local man pages
+-----------------------
 
 Instead of the standard interface, using browsers such as lynx and
 Firefox to view man pages allows users to reap info pages' main benefit:
-hyperlinked text. Additionally, KDE users can read man pages in
-Konqueror using:
+hyperlinked text.
+
+KDE users can read man pages in Konqueror using:
 
     man:<name>
 
-> Using Local Man Pages
+From the Official repositories come two other possibilities:
 
-First, install man2html from the Official Repositories.
+1. xorg-xman provides a categorized look at man pages in X.
+
+2. The GNOME Help Browser yelp is a more neat way but has some
+dependencies.
+
+> Converting to browser-readable HTML
+
+First, install man2html from the official repositories.
 
 Now, convert a man page:
 
@@ -301,30 +306,7 @@ ability to do this on its own:
 This will read your BROWSER environment variable to determine the
 browser. You can override this by passing the binary to the -H option.
 
-> Using Online Man Pages
-
-There are several online databases of man pages, including:
-
--   Debian GNU/Linux man pages
--   DragonFlyBSD manual pages
--   FreeBSD Hypertext Man Pages
--   Linux and Solaris 10 Man Pages
--   Linux/FreeBSD Man Pages with user comments
--   Linux man pages at die.net
--   The Linux man-pages project at kernel.org
--   Man-Wiki: Linux / Solaris / UNIX / BSD
--   NetBSD manual pages
--   Mac OS X Manual Pages
--   On-line UNIX manual pages
--   OpenBSD manual pages
--   Plan 9 Manual — Volume 1
--   Inferno Manual — Volume 1
--   Storage Foundation Man Pages
--   The UNIX and Linux Forums Man Page Repository
--   Ubuntu Manpage Repository
-
-Viewing man pages as PDFs
--------------------------
+> Converting to PDF
 
 man pages have always been printable: they are written in troff, which
 is fundamentally a typesetting language. If you have ghostscript
@@ -371,6 +353,29 @@ mupdf.
         #exec "acroread", $pdfpath;
     }
 
+Online Man Pages
+----------------
+
+There are several online databases of man pages, including:
+
+-   Man7.org. Upstream for Arch Linux's man-pages.
+-   Debian GNU/Linux man pages
+-   DragonFlyBSD manual pages
+-   FreeBSD Hypertext Man Pages
+-   Linux and Solaris 10 Man Pages
+-   Linux/FreeBSD Man Pages with user comments
+-   Linux man pages at die.net
+-   The Linux man-pages project at kernel.org
+-   NetBSD manual pages
+-   Mac OS X Manual Pages
+-   On-line UNIX manual pages
+-   OpenBSD manual pages
+-   Plan 9 Manual — Volume 1
+-   Inferno Manual — Volume 1
+-   Storage Foundation Man Pages
+-   The UNIX and Linux Forums Man Page Repository
+-   Ubuntu Manpage Repository
+
 Noteworthy manpages
 -------------------
 
@@ -411,11 +416,18 @@ Arch Linux specific pages:
 See also
 --------
 
--   General Recommendations - General Recommendations for Arch
+-   General recommendations - General recommendations for Arch
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Man_Page&oldid=255065"
+"https://wiki.archlinux.org/index.php?title=Man_Page&oldid=301553"
 
 Category:
 
 -   System administration
+
+-   This page was last modified on 24 February 2014, at 11:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

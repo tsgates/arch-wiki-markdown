@@ -25,22 +25,18 @@ monitor or log in. Or course, you can add the command to your
 session-autostart. You can also use Udev to automate this; more details
 to follow once I get it working myself.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Using nVidia's TwinView                                            |
-|     -   1.1 Get to know your system                                      |
-|         -   1.1.1 Your screen                                            |
-|         -   1.1.2 Your touch device                                      |
-|         -   1.1.3 Touch area                                             |
-|                                                                          |
-|     -   1.2 Calculate the Coordinate Transformation Matrix               |
-|     -   1.3 Apply the Matrix                                             |
-|                                                                          |
-| -   2 Troubleshooting                                                    |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Using nVidia's TwinView
+    -   1.1 Get to know your system
+        -   1.1.1 Your screen
+        -   1.1.2 Your touch device
+        -   1.1.3 Touch area
+    -   1.2 Calculate the Coordinate Transformation Matrix
+    -   1.3 Apply the Matrix
+-   2 Troubleshooting
+-   3 See also
 
 Using nVidia's TwinView
 -----------------------
@@ -149,3 +145,10 @@ Retrieved from
 Category:
 
 -   Input devices
+
+-   This page was last modified on 6 October 2012, at 20:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

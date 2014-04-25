@@ -1,74 +1,54 @@
 Lostfiles
 =========
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
+                           Notes: lostfiles is      
+                           mentioned in List of     
+                           Applications/Utilities#P 
+                           ackage                   
+                           management, this article 
+                           doesn't add anything     
+                           more, except for the     
+                           announcement at the      
+                           bottom about Graysky's   
+                           adoption; once this will 
+                           be old news, this page   
+                           could just redirect to   
+                           List of                  
+                           Applications/Utilities#P 
+                           ackage                   
+                           management, unless some  
+                           useful content is added  
+                           meanwhile. (Discuss)     
+  ------------------------ ------------------------ ------------------------
+
 Lostfiles is a script for detecting orphaned files (files which are not
 owned by any Arch Linux packages).
 
-The script ignores by default a series of directories where packages
-should not install files. Some files might appear as removed if they're
-placed in those directories which are not checked.
+An AUR package has been created for easy and convenience: lostfiles
 
-Script source
--------------
+The script generates a list of all files owned by installed packages and
+compares that against all files on the root filesystem showing the user
+the difference, i.e. files on the filesystem that are not owned by a
+package. Users can inspect the output and choose to leave any orphans
+alone or to backup and delete them.
 
-    #!/bin/bash
-
-    # LostFiles v0.2
-    # License: GPL v2.0 http://www.gnu.org/licenses/gpl.html
-
-    # Initially scripted by the Arch Linux Community
-    # Mircea Bardac (dev AT mircea.bardac.net)
-    # http://mircea.bardac.net/
-    # Modified by Jan Janssen
-
-    # Description:
-    # Search for files which are not part of installed Arch Linux packages
-
-    # Usage:
-    #  lostfiles > changes
-    # changes is a file containing a list of added/removed files
-
-    if [ $UID != "0" ]; then
-           echo "You must run this script as root." 1>&2
-           exit
-    fi
-    comm -3 \
-    	<(pacman -Qlq | sed -e 's|/$||' | sort -u) \
-    	<(find / -not \( \
-    		-wholename '/dev' -prune -o \
-    		-wholename '/etc/ssl' -prune -o \
-    		-wholename '/home' -prune -o \
-    		-wholename '/lost+found' -prune -o \
-    		-wholename '/media' -prune -o \
-    		-wholename '/mnt' -prune -o \
-    		-wholename '/proc' -prune -o \
-    		-wholename '/root' -prune -o \
-    		-wholename '/run' -prune -o \
-    		-wholename '/sys' -prune -o \
-    		-wholename '/tmp' -prune -o \
-    		-wholename '/usr/share/mime/application' -prune -o \
-    		-wholename '/usr/share/mime/audio' -prune -o \
-    		-wholename '/usr/share/mime/image' -prune -o \
-    		-wholename '/usr/share/mime/inode' -prune -o \
-    		-wholename '/usr/share/mime/interface' -prune -o \
-    		-wholename '/usr/share/mime/message' -prune -o \
-    		-wholename '/usr/share/mime/multipart' -prune -o \
-    		-wholename '/usr/share/mime/text' -prune -o \
-    		-wholename '/usr/share/mime/uri' -prune -o \
-    		-wholename '/usr/share/mime/video' -prune -o \
-    		-wholename '/usr/share/mime/x-content' -prune -o \
-    		-wholename '/var/abs' -prune -o \
-    		-wholename '/var/cache' -prune -o \
-    		-wholename '/var/lock' -prune -o \
-    		-wholename '/var/lib/pacman' -prune -o \
-    		-wholename '/var/run' -prune -o \
-    		-wholename '/var/tmp' -prune \) | sort -u \
-    		-wholename '/var/log' -prune \) | sort -u \
-    	) | sed -e 's|^\t||;'
+On 26-Oct-2013, User:Graysky assumed the duty of maintainer for the
+script, hosting it in this public github repo; any user wishing to
+modify the code is encouraged to submit a pull request.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lostfiles&oldid=253652"
+"https://wiki.archlinux.org/index.php?title=Lostfiles&oldid=279960"
 
-Category:
+Categories:
 
+-   Package management
 -   Scripts
+
+-   This page was last modified on 27 October 2013, at 02:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

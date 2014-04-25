@@ -1,90 +1,70 @@
 Fonts
 =====
 
+Related articles
+
+-   Font Configuration
+-   Java Runtime Environment Fonts
+-   MS Fonts
+
 From Wikipedia:
 
 A computer font (or font) is an electronic data file containing a set of
 glyphs, characters, or symbols such as dingbats.
 
-> Summary
+Note that certain font licenses may impose some legal limitations.
 
-Covers the selection and installation of fonts on Arch Linux
+Contents
+--------
 
-> Legal
-
-Certain font licenses may impose some legal limitations
-
-> Related
-
-Font Configuration: Font setup and beautification
-
-Java Runtime Environment Fonts: Fonts specific to Sun's Java machine
-
-MS Fonts: Adding Microsoft fonts and mimicking Windows' font settings
-
-KEYMAP: Information on keyboard layouts
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Font formats                                                       |
-|     -   1.1 Common extensions                                            |
-|     -   1.2 Other formats                                                |
-|                                                                          |
-| -   2 Installation                                                       |
-|     -   2.1 Pacman                                                       |
-|     -   2.2 Creating a package                                           |
-|     -   2.3 Manual installation                                          |
-|         -   2.3.1 Older applications                                     |
-|                                                                          |
-|     -   2.4 Pango Warnings                                               |
-|     -   2.5 Fonts with X.Org                                             |
-|                                                                          |
-| -   3 Console fonts                                                      |
-|     -   3.1 Previewing and testing                                       |
-|         -   3.1.1 Examples                                               |
-|                                                                          |
-|     -   3.2 Changing the default font                                    |
-|         -   3.2.1 Examples                                               |
-|         -   3.2.2 Boot Error                                             |
-|                                                                          |
-| -   4 Font packages                                                      |
-|     -   4.1 Braille                                                      |
-|     -   4.2 International users                                          |
-|         -   4.2.1 Arabic                                                 |
-|         -   4.2.2 Birman                                                 |
-|         -   4.2.3 Chinese, Japanese, Korean, Vietnamese                  |
-|             -   4.2.3.1 (Mainly) Chinese                                 |
-|             -   4.2.3.2 Japanese                                         |
-|             -   4.2.3.3 Korean                                           |
-|                                                                          |
-|         -   4.2.4 Cyrillic                                               |
-|         -   4.2.5 Greek                                                  |
-|         -   4.2.6 Hebrew                                                 |
-|         -   4.2.7 Indic                                                  |
-|         -   4.2.8 Khmer                                                  |
-|         -   4.2.9 Sinhala                                                |
-|         -   4.2.10 Tamil                                                 |
-|         -   4.2.11 Tibetan                                               |
-|                                                                          |
-|     -   4.3 Math                                                         |
-|     -   4.4 Microsoft fonts                                              |
-|     -   4.5 Apple Mac OS X fonts                                         |
-|     -   4.6 Monospaced                                                   |
-|         -   4.6.1 TrueType                                               |
-|         -   4.6.2 Bitmap                                                 |
-|                                                                          |
-|     -   4.7 Sans-serif                                                   |
-|     -   4.8 Script                                                       |
-|     -   4.9 Serif                                                        |
-|     -   4.10 Unsorted                                                    |
-|                                                                          |
-| -   5 Fallback font order with X11                                       |
-| -   6 Font alias                                                         |
-| -   7 Hints                                                              |
-|     -   7.1 Install fonts from official repositories                     |
-+--------------------------------------------------------------------------+
+-   1 Font formats
+    -   1.1 Common extensions
+    -   1.2 Other formats
+-   2 Installation
+    -   2.1 Pacman
+    -   2.2 Creating a package
+    -   2.3 Manual installation
+    -   2.4 Manual installation: advanced method
+    -   2.5 Older applications
+    -   2.6 Pango Warnings
+    -   2.7 Fonts with X.Org
+-   3 Console fonts
+    -   3.1 Previewing and testing
+    -   3.2 Changing the default font
+-   4 Font packages
+    -   4.1 Braille
+    -   4.2 International users
+        -   4.2.1 Arabic & Urdu
+        -   4.2.2 Birman
+        -   4.2.3 Chinese, Japanese, Korean, Vietnamese
+            -   4.2.3.1 (Mainly) Chinese
+            -   4.2.3.2 Japanese
+            -   4.2.3.3 Korean
+        -   4.2.4 Cyrillic
+        -   4.2.5 Greek
+        -   4.2.6 Hebrew
+        -   4.2.7 Indic
+        -   4.2.8 Khmer
+        -   4.2.9 Sinhala
+        -   4.2.10 Tamil
+        -   4.2.11 Tibetan
+    -   4.3 Math
+    -   4.4 Microsoft fonts
+    -   4.5 Apple Mac OS X fonts
+    -   4.6 Monospaced
+        -   4.6.1 TrueType
+        -   4.6.2 Bitmap
+    -   4.7 Sans-serif
+    -   4.8 Script
+    -   4.9 Serif
+    -   4.10 Unsorted
+-   5 Fallback font order with X11
+-   6 Font alias
+-   7 Hints
+    -   7.1 Install fonts from official repositories
+    -   7.2 List all installed fonts
+    -   7.3 Application-specific font cache
+-   8 See Also
 
 Font formats
 ------------
@@ -153,6 +133,18 @@ lines to ~/.xinitrc, the fonts can be used in X11:
     xset +fp /usr/share/fonts/local
     xset fp rehash
 
+In case the first command causes the following error
+
+    $ xset +fp /usr/share/fonts/local/
+    xset:  bad font path element (#0), possible causes are:
+        Directory does not exist or has wrong permissions
+        Directory missing fonts.dir
+        Incorrect font server address or syntax
+
+you'll have to run
+
+    # cd /usr/share/fonts/local;mkfontdir
+
 > Creating a package
 
 You should give pacman the ability to manage your fonts, which is done
@@ -163,10 +155,10 @@ learn more about building packages, read PKGBUILD.
     pkgname=ttf-fontname
     pkgver=1.0
     pkgrel=1
-    depends=('fontconfig' 'xorg-font-utils')
     pkgdesc="custom fonts"
     arch=('any')
-    source=(http://someurl.org/$pkgname.tar.bz2)
+    depends=('fontconfig' 'xorg-font-utils')
+    source=("http://someurl.org/$pkgname.tar.bz2")
     install=$pkgname.install
 
     package() {
@@ -194,6 +186,9 @@ cache:
       post_install
     }
 
+For a more convenient package creation from ttf-fonts you can also use
+makefontpkg from the AUR.
+
 > Manual installation
 
 The recommended way of adding fonts that are not in the repositories to
@@ -205,16 +200,107 @@ To install fonts system-wide (available for all users), move the folder
 to the /usr/share/fonts/ directory. To install fonts for only a single
 user, use ~/.fonts/ instead.
 
-Also you may need to update /etc/X11/xorg.conf or /etc/xorg.conf with
-the new directory. Search for FontPath to find the correct location
-within the file to add your new path. See #Fonts with X.Org for more
-detail.
+For Xserver to load fonts directly (as opposed to the use of a font
+server) the directory for your newly added font must be added with a
+FontPath entry. This entry is located in the Files section of your Xorg
+configuration file (e.g. /etc/X11/xorg.conf or /etc/xorg.conf). See
+#Fonts with X.Org for more detail.
 
 Then update the fontconfig font cache:
 
     $ fc-cache -vf
 
-Older applications
+> Manual installation: advanced method
+
+Manual installation and maintenance of your font resources may be
+especially useful if your collection is more specialized, e.g. if you
+use commercial fonts, if you use fonts in different formats, if you
+often install and remove font files, or if you just feel you need more
+control and better access than offered by the package manager. There are
+numerous benefits to such an approach:
+
+-   You can avoid installation of multiple copies of the same family in
+    different versions and formats (one of the most common reasons for
+    rendering issues).
+-   You can use multiple and non-standard physical sources of font files
+    (e.g. an additional hard drive, a separate partition).
+-   You can avoid relying on huge and cryptic local font sources which
+    possibly contain 5 families you need and 55 you don't need (TeX Live
+    & 09-texlive-fonts.conf, random font collections from the AUR, etc).
+-   You can avoid rendering issues because your fontconfig settings were
+    tuned to a different format but the one installed in your system.
+-   You can quickly verify which families in which format(s) are present
+    in the system and available for applications by visually inspecting
+    the content of the main font directory (as a result, you don't need
+    sophisticated and heavy-on-resources font management applications:
+    gtk2fontsel and basic CLI tools like fc-query from fontconfig
+    package will do the job even better and faster).
+-   When you install or upgrade a single font, the same version will be
+    available for all applications, including LaTeX related software.
+-   If necessary, you can quickly enable / disable a particular family
+    because you know where exactly it can be found (useful for
+    debugging).
+-   You don't need to worry about redundant
+    /etc/fonts/conf.avail/nn-foo.conf fontconfig files, potentially
+    conflicting with your rendering settings (especially when you are
+    using a customized font configuration and patched libraries).
+-   In the long run, you save time needed to resolve issues and
+    eliminate conflicts caused by careless use of the package manager.
+
+In practical terms, there are at least a few ways to achieve this,
+which, if necessary, can be adopted by any package manager. The one
+described below has proven to be very efficient and secure even with
+large font collections.
+
+-   We are going to separate font source locations (e.g.
+    /usr/share/fonts.avail: this is where our fonts will be stored) from
+    a directory containing symbolic links to the families in use
+    (/usr/share/fonts).
+
+-   Each family is going to be located in a separate, clearly named
+    subdirectory. The naming convention should be consistent and
+    unambiguous, for instance:
+
+    <ttf|otf|t1>-<optional_global_group_or_foundry_name>-<font_family_name>
+
+This way the content of the source directory will look like this:
+
+    $ ls /usr/share/fonts.avail
+
+    /usr/share/fonts.avail/otf-heuristica
+    /usr/share/fonts.avail/ttf-liberation
+    /usr/share/fonts.avail/ttf-ms-arial
+    ...
+
+-   We are not going to touch TeX Live font directories to avoid issues
+    with LaTeX software. Instead, since we can use multiple locations,
+    we will create symlinks in /usr/share/fonts, giving applications
+    access to particular families:
+
+    # cd /usr/share/fonts
+    # ln -s ../fonts.avail/otf-heuristica .
+    # ln -s /opt/texlive/texmf-dist/fonts/truetype/public/opensans ttf-texlive-open.sans
+
+The result:
+
+    $ ls /usr/share/fonts
+
+    ttf-liberation        -> ..fonts.avail/ttf-liberation
+    ttf-ms-arial          -> ..fonts.avail/ttf-ms-arial
+    otf-heuristica        -> ..fonts.avail/otf-heuristica
+    otf-texlive-tex.gyre  -> /opt/texlive/texmf-dist/fonts/opentype/public/tex-gyre
+    ttf-texlive-open.sans -> /opt/texlive/texmf-dist/fonts/truetype/public/opensans
+    ...
+
+Finally, you may want to run the usual:
+
+    # fc-cache && mkfontscale && mkfontdir
+
+A similar approach can be found in TeX Live Wiki article, but it's way
+simpler and describes a per-user scenario rather than a global
+implementation.
+
+> Older applications
 
 With older applications that do not support fontconfig (e.g. GTK+ 1.x
 applications, and xfontsel) the index will need to be created in the
@@ -269,6 +355,10 @@ You can test for a default font being set like so:
 
 > Fonts with X.Org
 
+Note:Many packages will automatically configure Xorg to use the font
+upon installation. If that is the case with your font, this step is not
+necessary.
+
 In order for Xorg to find and use your newly installed fonts, you must
 add the font paths to /etc/X11/xorg.conf (another X.Org configuration
 file may work too).
@@ -294,12 +384,11 @@ requirements.
 Console fonts
 -------------
 
-The console, meaning a terminal running with no X Window System, uses
-the ASCII character set as the default. This font and the keymap used
-are easily changed.
+The virtual console uses the kernel built-in font and ASCII character
+set by default, but both can be easily changed.
 
-A console font is limited to either 256 or 512 characters. The fonts are
-found in /usr/share/kbd/consolefonts/.
+A console font is limited to either 256 or 512 characters. Available
+fonts are saved in /usr/share/kbd/consolefonts/ directory.
 
 Keymaps, the connection between the key pressed and the character used
 by the computer, are found in the subdirectories of
@@ -307,50 +396,39 @@ by the computer, are found in the subdirectories of
 
 > Previewing and testing
 
-An organized library of images for previewing is available at
-http://alexandre.deverteuil.net/consolefonts/consolefonts.html.
+Tip:An organized library of images for previewing is available: Linux
+console fonts screenshots.
 
-Moreover, the user can use setfont to temporarily change the font and be
-able to consider its use as the default. The available glyphs, or
-letters in the font can also be viewed as a table with the command
-showconsolefont.
+The available glyphs or letters in the font can also be viewed as a
+table with using showconsolefont:
+
+    $ showconsolefont
+
+The setfont utility may be used to temporarily change the font, so that
+the user can consider its use as the default. Just pass the name of the
+font (they are located in /usr/share/kbd/consolefonts/):
+
+    $ setfont Lat2-Terminus16
+
+Optionally, you can specify character set to be used using the -m
+option:
+
+    $ setfont Lat2-Terminus16 -m 8859-2
 
 If the newly changed font is not suitable, a return to the default font
-is done by issuing the command setfont without any arguments. If the
-console display is totally unreadable, this command will still work—the
-user just types in setfont while "working blind."
-
-Note that setfont only works on the console currently being used. Any
-other consoles, active or inactive, remain unaffected.
-
-Examples
-
-Change the font. This example is distinctive:
-
-    $ setfont /usr/share/kbd/consolefonts/gr737b-9x16-medieval.psfu.gz
-
-Or change the font to one with 512 glyphs and set the keymap to ISO
-8859-5 using the -m option:
-
-    $ setfont /usr/share/kbd/consolefonts/LatArCyrHeb-16.psfu.gz -m 8859-5
-
-Then issue commands that send text to the display, perhaps view a
-manpage and try vi or nano, and view the table of glyphs with the
-command, showconsolefont.
-
-Return to the default font with:
+with the following command (even if the console display is totally
+unreadable, this command will still work - just type the command
+"blindly"):
 
     $ setfont
 
+Note:setfont only works on the console currently being used. Any other
+consoles, active or inactive, remain unaffected.
+
 > Changing the default font
 
-To change the default font, the FONT= and FONT_MAP= settings in
-/etc/vconsole.conf (this file may need to be created) must be altered.
-Again, the fonts can be found in /usr/share/kbd/consolefonts/ directory
-and keymaps can be found in the subdirectories of
-/usr/share/kbd/keymaps/.
-
-Examples
+The FONT and FONT_MAP variables in /etc/vconsole.conf are used to change
+the default font.
 
 For displaying characters such as Č, ž, đ, š or Ł, ę, ą, ś using the
 font lat2-16.psfu.gz:
@@ -358,44 +436,26 @@ font lat2-16.psfu.gz:
     FONT=lat2-16
 
 It means that second part of ISO/IEC 8859 characters are used with size
-16. You can change font size using other values like lat2-08...16. For
-the regions determined by 8859 specification, look at the Wikipedia. You
-can use a Terminus font which is recommended if you work a lot in
+16. You can change font size using other values (e.g. lat2-08). For the
+regions determined by 8859 specification, look at the Wikipedia table.
+You can use a Terminus font which is recommended if you work a lot in
 console without X server. ter-216b for example is latin-2 part, size 16,
 bold. ter-216n is the same but normal weight. Terminus fonts have sizes
 up to 32.
 
-Now, set the proper keymap, for lat2-16 it will be:
+Now, set the proper font mapping, for lat2-16 it will be:
 
     FONT_MAP=8859-2
 
-To use the specified font in early userspace, that is, early in the
-bootup process, add the consolefont hook to /etc/mkinitcpio.conf:
-
-    HOOKS="base udev autodetect modconf block filesystems keyboard fsck consolefont keymap"
-
-Then rebuild the image:
-
-    # mkinitcpio -p linux
-
-Note:The above steps must be repeated for each kernel if more than one
-kernel package is installed.
-
-See Mkinitcpio#HOOKS for more information.
+To use the specified font in early userspace, use the keymap hook in
+/etc/mkinitcpio.conf. See Mkinitcpio#HOOKS for more information.
 
 If the fonts seems to not change on boot, or change only temporarily, it
 is most likely that they got reset when graphics driver was initialized
 and console was switched to framebuffer. To avoid this, load your
-graphics driver earlier. See for example KMS#Early_KMS_start or other
-ways to setup your framebuffer before /etc/vconsole.conf gets applied.
-
-Boot Error
-
-If "Loading Console Font" fails at boot time, this is probably because
-you did not choose a valid font during your Arch Linux install.
-
-To get rid of this message, simply empty the CONSOLEFONT variable in
-/etc/rc.conf. It will fallback on default font at boot.
+graphics driver earlier. See for example Kernel Mode Setting#Early KMS
+start, [1] or other ways to setup your framebuffer before
+/etc/vconsole.conf is applied.
 
 Font packages
 -------------
@@ -415,7 +475,25 @@ all the fonts below.
 
 > International users
 
-Arabic
+Applications and browsers select and display fonts depending upon
+fontconfig preferences and available font glyph for Unicode text. To
+list installed fonts for a particular language, issue a command
+fc-list :lang="two letter language code". For instance, to list
+installed Arabic fonts or fonts supporting Arabic glyph:
+
+    $ fc-list :lang=ar | cut -d: -f1
+
+    /usr/share/fonts/TTF/FreeMono.ttf
+    /usr/share/fonts/TTF/DejaVuSansCondensed.ttf
+    /usr/share/fonts/truetype/custom/DroidKufi-Bold.ttf
+    /usr/share/fonts/TTF/DejaVuSansMono.ttf
+    /usr/share/fonts/TTF/FreeSerif.ttf
+
+To properly render fonts for multilingual websites like Wikipedia or
+this Arch Linux wiki, install these packages: ttf-freefont,
+ttf-arphic-uming, ttf-baekmuk
+
+Arabic & Urdu
 
 -   ttf-qurancomplex-fonts - Fonts by King Fahd Glorious Quran Printing
     Complex in al-Madinah al-Munawwarah (AUR)
@@ -451,7 +529,7 @@ Japanese
 
 -   otf-ipafont - Formal style Japanese Gothic (sans-serif) and Mincho
     (serif) fonts set; one of the highest quality open source font.
-    Default of openSUSE-ja. (AUR)
+    Default of openSUSE-ja.
 -   ttf-vlgothic - Japanese Gothic fonts. Default of Debian/Fedora/Vine
     Linux (AUR)
 -   ttf-mplus - Modern Gothic style Japanese outline fonts. It includes
@@ -477,7 +555,7 @@ Korean
 
 Cyrillic
 
-Also see #Monospace, #Sans and #Serif
+Also see #Monospaced, #Sans-serif and #Serif
 
 -   font-arhangai - Mongolian Cyrillic (AUR)
 -   ttf-pingwi-typography - PingWi Typography (PWT) fonts (AUR)
@@ -552,6 +630,11 @@ blog post: Top 10 Programming Fonts.
 Here is a long list of fonts by Trevor Lowing:
 http://www.lowing.org/fonts/.
 
+A comparison with images on Slant: What are the best programming fonts?
+
+And a Stack Overflow question with some images: Recommended fonts for
+programming
+
 TrueType
 
 -   Agave (ttf-agave)
@@ -572,10 +655,8 @@ TrueType
 -   Inconsolata (ttf-inconsolata) - Excellent programming font
 -   Inconsolata-g (ttf-inconsolata-g) - adds some programmer-friendly
     modifications
--   Anonymous-Pro (ttf-anonymous-pro)
 -   Liberation Mono (ttf-liberation) - Alternative to Courier New
     (metric-compatible)
--   Lucida Console (ttf-ms-fonts)
 -   Lucida Typewriter (included in package jre)
 -   Monaco (ttf-monaco) - Popular programming font on OSX/Textmate
 -   Monofur (ttf-monofur)
@@ -584,7 +665,7 @@ Bitmap
 
 -   Default 8x16
 -   Dina (dina-font)
--   Gohu (gohu-font)
+-   Gohu (gohufont)
 -   Lime (artwiz-fonts)
 -   ProFont (profont)
 -   Proggy Programming Fonts (proggyfonts)
@@ -659,7 +740,7 @@ Bitmap
     much smaller and leaner unofficial repository hosted on GitHub.
     (AUR)
 -   ttf-mph-2b-damase — Covers full plane 1 and several scripts
--   ttf-symbola — Provides emoji and many many other symbols. (AUR)
+-   ttf-symbola — Provides emoji and many many other symbols
 -   ttf-sil-fonts — Gentium, Charis, Doulos, Andika and Abyssinica from
     SIL (AUR)
 -   font-bh-ttf — X.Org Luxi fonts
@@ -698,19 +779,19 @@ like this:
      </alias>
     </fontconfig>
 
-You can add a section for Sans-serif and monospaced as well. For more
+You can add a section for Sans-serif and monospace as well. For more
 informations, have a look at the fontconfig manual.
 
 Font alias
 ----------
 
-In Linux there are several font aliases which represent other fonts in
-order that applications may use similar fonts. The most common aliases
-are: serif for a font of the serif type (e.g. DejaVu Serif); sans-serif
-for a font of the sans-serif type (e.g. DejaVu Sans); and monospace for
-a monospaced font (e.g. DejaVu Sans Mono). However, the fonts which
-these aliases represent may vary and the relationship is often not shown
-in font management tools such as those found in KDE and other desktop
+There are several font aliases which represent other fonts in order that
+applications may use similar fonts. The most common aliases are: serif
+for a font of the serif type (e.g. DejaVu Serif); sans-serif for a font
+of the sans-serif type (e.g. DejaVu Sans); and monospace for a
+monospaced font (e.g. DejaVu Sans Mono). However, the fonts which these
+aliases represent may vary and the relationship is often not shown in
+font management tools, such as those found in KDE and other desktop
 environments.
 
 To reverse an alias and find which font it is representing, run:
@@ -718,8 +799,8 @@ To reverse an alias and find which font it is representing, run:
     $ fc-match monospace
     DejaVuSansMono.ttf: "DejaVu Sans Mono" "Book"
 
-In this case DejaVuSansMono.ttf is the font represented by the monospace
-alias.
+In this case, DejaVuSansMono.ttf is the font represented by the
+monospace alias.
 
 Hints
 -----
@@ -731,17 +812,43 @@ Maybe you want to install all fonts available in official repositories.
 All fonts
     
 
-    $ pacman -S $(pacman -Ssq font)
+    # pacman -S $(pacman -Ssq font)
 
 All TrueType fonts
     
 
-    $ pacman -S $(pacman -Ssq ttf)
+    # pacman -S $(pacman -Ssq ttf)
+
+> List all installed fonts
+
+You can use the following command to list all installed fonts that are
+available on your system.
+
+    $ fc-list
+
+> Application-specific font cache
+
+Matplotlib (python-matplotlib or python2-matplotlib) uses its own font
+cache, so after updating fonts, be sure to remove
+$HOME/.matplotlib/fontList.cache so it will regenerate its cache and
+find the new fonts [2].
+
+See Also
+--------
+
+-   Font Configuration
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fonts&oldid=256148"
+"https://wiki.archlinux.org/index.php?title=Fonts&oldid=305424"
 
 Categories:
 
 -   Fonts
 -   Graphics and desktop publishing
+
+-   This page was last modified on 18 March 2014, at 10:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

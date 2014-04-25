@@ -14,44 +14,37 @@ refers to the ancient "current" repository. These scripts must not be
 confused with the ones provided by the devtools package which are the
 official tools used by developers for building packages in Arch Linux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Overview                                                           |
-|     -   2.1 apple                                                        |
-|     -   2.2 peach                                                        |
-|     -   2.3 strawberry                                                   |
-|     -   2.4 queuepackage.sh                                              |
-|                                                                          |
-| -   3 Running a build system                                             |
-|     -   3.1 Get an apple 'builder' account                               |
-|     -   3.2 Configure strawberry                                         |
-|                                                                          |
-| -   4 Submitting builds                                                  |
-|     -   4.1 Get an apple 'submitter' account                             |
-|     -   4.2 Configure queuepackage.sh                                    |
-|     -   4.3 Submit a build                                               |
-|     -   4.4 Checking build status                                        |
-|                                                                          |
-| -   5 Running an apple instance                                          |
-|     -   5.1 Configuring apple                                            |
-|     -   5.2 Adding data                                                  |
-|         -   5.2.1 Add an architecture                                    |
-|         -   5.2.2 Add a configuration                                    |
-|                                                                          |
-|     -   5.3 Adding users                                                 |
-|                                                                          |
-| -   6 Running peach web interface                                        |
-| -   7 Development to-do                                                  |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Overview
+    -   2.1 apple
+    -   2.2 peach
+    -   2.3 strawberry
+    -   2.4 queuepackage.sh
+-   3 Running a build system
+    -   3.1 Get an apple 'builder' account
+    -   3.2 Configure strawberry
+-   4 Submitting builds
+    -   4.1 Get an apple 'submitter' account
+    -   4.2 Configure queuepackage.sh
+    -   4.3 Submit a build
+    -   4.4 Checking build status
+-   5 Running an apple instance
+    -   5.1 Configuring apple
+    -   5.2 Adding data
+        -   5.2.1 Add an architecture
+        -   5.2.2 Add a configuration
+    -   5.3 Adding users
+-   6 Running peach web interface
+-   7 Development to-do
+-   8 See also
 
 Installation
 ------------
 
-Install pacbuild, available in the Official Repositories.
+Install pacbuild, available in the Official repositories.
 
 Overview
 --------
@@ -83,8 +76,8 @@ Running a build system
 ----------------------
 
 If you are interested in offering a system to build on (any architecture
-is welcome, but i686 is the most prevalent), contact Jason Chu at
-jason@archlinux.org and he will supply a username and password.
+is welcome, but i686 is the most prevalent), contact Jason Chu and he
+will supply a username and password.
 
 > Get an apple 'builder' account
 
@@ -345,9 +338,16 @@ See also
     (mirror of above blog post)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pacbuild&oldid=239104"
+"https://wiki.archlinux.org/index.php?title=Pacbuild&oldid=301405"
 
 Categories:
 
 -   Arch development
 -   Package development
+
+-   This page was last modified on 24 February 2014, at 11:44.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

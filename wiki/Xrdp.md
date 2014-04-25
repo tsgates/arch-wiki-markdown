@@ -4,45 +4,20 @@ Xrdp
 xrdp is a daemon that supports Microsoft's Remote Desktop Protocol
 (RDP). It uses Xvnc or X11rdp as a backend.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Fixing Problems in xrdp                                      |
-|     -   1.2 Autoboot at Startup                                          |
-|     -   1.3 Autoboot at Startup with Systemd                             |
-|     -   1.4 Running with Vino (Gnome VNC-Server for root session)        |
-|                                                                          |
-| -   2 Usage                                                              |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Fixing Problems in xrdp
+    -   1.2 Autoboot at Startup
+    -   1.3 Running with Vino (Gnome VNC-Server for root session)
+-   2 Usage
+-   3 See also
 
 Installation
 ------------
 
 Users can find install xrdp from the AUR : xrdp.
-
-Note, as of 1/15/2013 (automake 1.13); xrdp uses a deprecated
-"AM_CONFIG_HEADER" header. This must be changed to "AC_CONFIG_HEADERS"
-in "configure.ac" of the source files.
-
-An alternative is for the user to download a modified package build from
-
-    http://pastebin.com/GBiXcmi5
-
-This is modified to reflect the addition of a patch.
-
-The user must download the patch from :
-
-    http://pastebin.com/esryWSRk
-
-Replace the pkgbuild from the AUR with the new pkgbuild, and place the
-patch in the same directory. Run
-
-    makepkg -s
-
-to have pacman compile and install the package.
 
 > Fixing Problems in xrdp
 
@@ -66,13 +41,6 @@ symlink. If this file is missing, standard X11 colors are wrong (pink or
 blue instead of black) and Xterm is broken.
 
 > Autoboot at Startup
-
-When you installed xrdp-git you can just add rdpd to the DAEMONS section
-of /etc/rc.conf file.
-
-Otherwise you have to copy /etc/xrdp/xrdp.sh to /etc/rc.d and use that.
-
-> Autoboot at Startup with Systemd
 
 The aur xrdp package contains service files for systemd. Enable
 xrdp.service :
@@ -128,8 +96,15 @@ See also
 -   Vncserver - VNC, an alternative to RDP, also used as backend here
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xrdp&oldid=244016"
+"https://wiki.archlinux.org/index.php?title=Xrdp&oldid=302085"
 
 Category:
 
--   Remote Desktop Protocol
+-   Remote Desktop
+
+-   This page was last modified on 25 February 2014, at 17:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

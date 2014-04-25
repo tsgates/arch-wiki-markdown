@@ -1,21 +1,10 @@
 AMD Catalyst
 ============
 
-> Summary
+Related articles
 
-An overview of AMD's proprietary Linux "Catalyst" video card driver.
-
-> Related
-
-ATI
-
-Xorg
-
-> Resources
-
-cchtml.com - Unofficial Wiki for the ATI Linux Driver
-
-Unofficial ATI Linux Driver Bugzilla
+-   ATI
+-   Xorg
 
 Owners of ATI/AMD video cards have a choice between AMD's proprietary
 driver (catalyst) and the open source driver (xf86-video-ati). This
@@ -27,11 +16,11 @@ module retains its original fglrx.ko filename. Therefore, any mention of
 fglrx below is specifically in reference to the kernel module, not the
 package.
 
-As of April 26, 2013, Catalyst packages are no longer offered in the
-official repositories. In the past, Catalyst has been dropped from
-official Arch support because of dissatisfaction with the quality and
-speed of development. This time, it's the incompatibility with Xorg
-1.14.
+Catalyst packages are no longer offered in the official repositories. In
+the past, Catalyst has been dropped from official Arch support because
+of dissatisfaction with the quality and speed of development. After a
+brief return they were dropped again in April 2013 and they have not
+returned since.
 
 Compared to the open source driver, Catalyst performs worse in 2D
 graphics, but has a better support for 3D rendering and power
@@ -40,81 +29,75 @@ chipset R600 and newer (Radeon HD 2xxx and newer). See the Xorg decoder
 ring or this table, to translate model names (X1900, HD4850) to/from
 chip names (R580, RV770 respectively).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Installing the driver                                        |
-|         -   1.1.1 Installing from the unofficial repository              |
-|         -   1.1.2 Installing from the AUR                                |
-|         -   1.1.3 Installing directly from AMD                           |
-|                                                                          |
-|     -   1.2 Configuring the driver                                       |
-|         -   1.2.1 Configuring X                                          |
-|         -   1.2.2 Loading the module at boot                             |
-|         -   1.2.3 Disable kernel mode setting                            |
-|         -   1.2.4 Checking operation                                     |
-|                                                                          |
-|     -   1.3 Custom Kernels                                               |
-|     -   1.4 PowerXpress support                                          |
-|         -   1.4.1 Running two X servers (one using the Intel driver,     |
-|             another one using fglrx) simultaneously                      |
-|                                                                          |
-| -   2 Xorg repositories                                                  |
-|     -   2.1 [xorg113]                                                    |
-|     -   2.2 [xorg112]                                                    |
-|     -   2.3 [xorg111]                                                    |
-|                                                                          |
-| -   3 Tools                                                              |
-|     -   3.1 Catalyst-hook                                                |
-|     -   3.2 Catalyst-generator                                           |
-|     -   3.3 OpenCL and OpenGL development                                |
-|         -   3.3.1 amdapp-aparapi                                         |
-|         -   3.3.2 amdapp-sdk (formerly known as amdstream)               |
-|         -   3.3.3 amdapp-codexl                                          |
-|                                                                          |
-| -   4 Features                                                           |
-|     -   4.1 Tear Free Rendering                                          |
-|     -   4.2 Video acceleration                                           |
-|     -   4.3 GPU/Mem frequency, Temperature, Fan speed, Overclocking      |
-|         utilities                                                        |
-|     -   4.4 Double Screen (Dual Head / Dual Screen / Xinerama)           |
-|         -   4.4.1 Introduction                                           |
-|         -   4.4.2 ATI Catalyst Control Center                            |
-|         -   4.4.3 Installation                                           |
-|         -   4.4.4 Configuration                                          |
-|                                                                          |
-| -   5 Uninstallation                                                     |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 3D Wine applications freeze                                  |
-|     -   6.2 Problems with video colours                                  |
-|     -   6.3 KWin and composite                                           |
-|     -   6.4 Black screen with complete lockups and/or hangs after reboot |
-|         or startx                                                        |
-|         -   6.4.1 Faulty ACPI hardware calls                             |
-|                                                                          |
-|     -   6.5 KDM disappears after logout                                  |
-|     -   6.6 Direct Rendering does not work                               |
-|     -   6.7 Hibernate/Sleep Issues                                       |
-|         -   6.7.1 Video fails to resume from suspend2ram                 |
-|                                                                          |
-|     -   6.8 System Freezes/Hard locks                                    |
-|     -   6.9 Hardware Conflicts                                           |
-|     -   6.10 Temporary hangs when playing video                          |
-|     -   6.11 "aticonfig: No supported adapters detected"                 |
-|     -   6.12 WebGL support in Chromium                                   |
-|     -   6.13 Laggs/freezes when watching flash videos via Adobe's        |
-|         flashplugin                                                      |
-|     -   6.14 Laggs/slow windows movement in GNOME3                       |
-|     -   6.15 Not using fullscreen resolution at 1920x1080                |
-|         (underscanning)                                                  |
-|     -   6.16 Dual Screen Setup: general problems with acceleration,      |
-|         OpenGL, compositing, performance                                 |
-|     -   6.17 Disabling VariBright Feature                                |
-|     -   6.18 Hybrid/PowerXpress: turning off discrete GPU                |
-|     -   6.19 Switching from X session to TTYs gives blank screen         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Installing the driver
+        -   1.1.1 Installing from the unofficial repository
+        -   1.1.2 Installing from the AUR
+    -   1.2 Configuring the driver
+        -   1.2.1 Configuring X
+        -   1.2.2 Loading the module at boot
+        -   1.2.3 Disable kernel mode setting
+        -   1.2.4 Checking operation
+    -   1.3 Custom kernels
+    -   1.4 PowerXpress support
+        -   1.4.1 Running two X servers (one using the Intel driver,
+            another one using fglrx) simultaneously
+        -   1.4.2 Issues with PowerXpress laptops running in AMD mode
+            (pxp_switch_catalyst amd) with external / secondary monitor
+-   2 Xorg repositories
+    -   2.1 xorg114
+    -   2.2 xorg113
+    -   2.3 xorg112
+-   3 Tools
+    -   3.1 Catalyst-hook
+    -   3.2 Catalyst-generator
+    -   3.3 OpenCL and OpenGL development
+        -   3.3.1 amdapp-aparapi
+        -   3.3.2 amdapp-sdk (formerly known as amdstream)
+        -   3.3.3 amdapp-codexl
+-   4 Features
+    -   4.1 Tear Free Rendering
+    -   4.2 Video acceleration
+    -   4.3 GPU/Mem frequency, Temperature, Fan speed, Overclocking
+        utilities
+    -   4.4 Double Screen (Dual Head / Dual Screen / Xinerama)
+        -   4.4.1 Introduction
+        -   4.4.2 ATI Catalyst Control Center
+        -   4.4.3 Installation
+        -   4.4.4 Configuration
+-   5 Uninstallation
+-   6 Troubleshooting
+    -   6.1 3D Wine applications freeze
+    -   6.2 Problems with video colours
+    -   6.3 KWin and composite
+    -   6.4 Black screen with complete lockups and/or hangs after reboot
+        or startx
+        -   6.4.1 Faulty ACPI hardware calls
+    -   6.5 KDM disappears after logout
+    -   6.6 Direct Rendering does not work
+    -   6.7 Hibernate/Sleep issues
+        -   6.7.1 Video fails to resume from suspend2ram
+    -   6.8 System freezes/Hard locks
+    -   6.9 Hardware conflicts
+    -   6.10 Temporary hangs when playing video
+    -   6.11 "aticonfig: No supported adapters detected"
+    -   6.12 WebGL support in Chromium
+    -   6.13 Lag/freezes when watching flash videos via Adobe's
+        flashplugin
+    -   6.14 Lag/slow windows movement in GNOME3
+    -   6.15 Not using fullscreen resolution at 1920x1080
+        (underscanning, black borders around the screen)
+    -   6.16 Dual Screen Setup: general problems with acceleration,
+        OpenGL, compositing, performance
+    -   6.17 Disabling VariBright feature
+    -   6.18 Hybrid/PowerXpress: turning off discrete GPU
+    -   6.19 Switching from X session to TTYs gives a blank screen/low
+        resolution TTY
+    -   6.20 30 FPS / Tear-Free / V-Sync bug
+-   7 See also
 
 Installation
 ------------
@@ -143,7 +126,7 @@ Installing from the unofficial repository
 
 If you don't fancy building the packages from the AUR, this is the way
 to go. The repository is maintained by our unofficial Catalyst
-maintainer, Vi0L0. All packages are signed and are considered safe to
+maintainer, Vi0l0. All packages are signed and are considered safe to
 use. As you will see later on in this article, Vi0L0 is also responsible
 for many other packages that will help you get your system working with
 your ATI graphic cards.
@@ -151,86 +134,62 @@ your ATI graphic cards.
 Vi0L0 has three different Catalyst repositories, each having different
 drivers:
 
--   [catalyst]; for the regular Catalyst driver needed by Radeon HD 5xxx
-    and up, it contains the latest (stable or beta) Catalyst release;
--   [catalyst-stable]; for the regular Catalyst driver needed by Radeon
-    HD 5xxx and up, with the latest stable driver;
--   [catalyst-hd234k]; for the legacy Catalyst driver needed by Radeon
-    HD 2xxx, 3xxx and 4xxx cards.
+-   catalyst for the regular Catalyst driver needed by Radeon HD 5xxx
+    and up, it contains the latest (stable or beta) Catalyst release.
+-   catalyst-stable for the regular Catalyst driver needed by Radeon HD
+    5xxx and up, with the latest stable driver.
+-   catalyst-hd234k for the legacy Catalyst driver needed by Radeon HD
+    2xxx, 3xxx and 4xxx cards.
 
-Warning:The regular Catalyst driver does not support Xorg 1.14 for now.
-Support should be added by AMD in a century or two, but this could be
-sooner. Should you want to use this driver, see #Xorg repositories for
-instructions on how to roll back to or hold back Xorg 1.13.
+To enable one of these, follow the instructions in Unofficial user
+repositories. Remember to add the chosen repository above all other
+repositories in pacman.conf.
 
-Warning:The legacy Catalyst driver does not support Xorg 1.13. Should
-you want to use this driver, see #Xorg repositories for instructions on
-how to roll back to Xorg 1.12.
+Note:The catalyst and catalyst-stable repositories share the same URL.
+To enable catalyst-stable, follow the instructions for enabling catalyst
+and replace [catalyst] with [catalyst-stable] in pacman.conf. If you
+need to stick with an old version, there are also some versioned
+repositories using the same URL (for example catalyst-stable-13.4).
 
-To enable one of these, you will have to edit /etc/pacman.conf and add
-the repository of choice's information above all other repositories in
-/etc/pacman.conf.
+> Warning:
 
--   For [catalyst], add:
+-   The legacy Catalyst driver does not support Xorg Server 1.13. Should
+    you want to use this driver, see #Xorg repositories for instructions
+    on how to roll back to Xorg Server 1.12.
+-   Catalyst does not support Xorg Server 1.15, check out #Xorg
+    repositories and pick up xorg repository that you would like to use.
 
-    [catalyst]
-    Server = http://catalyst.wirephire.com/repo/catalyst/$arch
+Tip:Because catalyst.wirephire.com will go down if a certain bandwidth
+limit is exceeded (this happened in the past) or may be too slow at your
+location, repository mirrors are provided by yanom at [1] (USA) and
+rtsinformatique at [2] (France). These mirrors however come with no
+warranty and are not guaranteed to always be operational. Uncomment the
+line for the mirror closest to your location. It is also a good idea to
+keep alternatives in case of mirror downtime.
 
--   For [catalyst-stable], add:
+Repository mirroring can be easily achieved using
+rsync://mirror.rts-informatique.fr::archlinux-catalyst.
 
-    [catalyst-stable]
-    Server = http://catalyst.wirephire.com/repo/catalyst/$arch
+Once you have added some Catalyst repository, update pacman's database
+and install these packages (see #Tools for more information):
 
--   For [catalyst-hd234k], add:
+-   catalyst-hook
+-   catalyst-utils
+-   lib32-catalyst-utils - optional, needed for 32-bit OpenGL support on
+    64-bit systems
 
-    [catalyst-hd234k]
-    Server = http://catalyst.wirephire.com/repo/catalyst-hd234k/$arch
+If you are using a notebook with hybrid Intel/AMD graphics card, the set
+of packages will be slightly different:
 
-You must also add Vi0L0's GPG key so that pacman trusts the
-repositories.
-
-    # pacman-key --keyserver pgp.mit.edu --recv-keys 0xabed422d653c3094
-    # pacman-key --lsign-key 0xabed422d653c3094
-
-Once you have done this, update pacman's database and install the
-packages:
-
-    # pacman -Syu
-    # pacman -S catalyst catalyst-utils
+-   catalyst-hook
+-   catalyst-utils-pxp
+-   lib32-catalyst-utils-pxp - optional, needed for 32-bit OpenGL
+    support on 64-bit systems
 
 Note:If pacman asks you about removing libgl you can safely do so.
 
-Warning:Catalyst from Vi0L0's repository is compiled against one kernel
-and one kernel only. For Vi0L0, it's getting more and more difficult to
-keep up with kernel's pace and as such, we have seen a lot of users
-asking for what to do in the forums. Often, the solution is to a) wait
-for Vi0L0 to rebuilt the Catalyst package against those newer versions,
-b) do so yourself or c) hold back the Linux kernel update. The easiest
-solution is to do so yourself, not manually, but by using Vi0L0's
-excellent #Catalyst-hook.
-
-If you are on 64-bit and also need 32-bit OpenGL support:
-
-    # pacman -S lib32-catalyst-utils
-
-Repositories also contain other packages, that can replace the
-catalyst-hook package:
-
--   catalyst-generator; this package is able to generate fglrx modules
-    packed into pacman compliant packages - most secure and
-    KISS-compatible package in this side-note, although it has to be
-    operated manually. It's described in #Catalyst-generator
--   catalyst-hook; a systemd service which will automatically update the
-    fglrx module whilst the system shuts down or reboots. It's described
-    in #Catalyst-hook
-
-You will find more details about those packages in #Tools. Lastly, both
-repositories also contain the xvba-video package, which enables video
-acceleration, described in #Video acceleration, the AMDOverdriveCtrl
-package, which is a GUI to control over- and underclocking, also
-described in #GPU/Mem frequency, Temperature, Fan speed, Overclocking
-utilities, and a pack of tools for OpenCL/OpenGL developers, described
-in #OpenCL and OpenGL development
+Warning:catalyst package was removed from Vi0L0's repository, its place
+was taken by catalyst-hook.
 
 Installing from the AUR
 
@@ -247,64 +206,28 @@ fail to start.
 All packages mentioned above in Vi0L0's unofficial repository are also
 available on the AUR:
 
--   catalyst;
--   catalyst-generator;
--   catalyst-hook;
--   catalyst-utils;
--   lib32-catalyst-utils;
+-   catalyst
+-   catalyst-generator
+-   catalyst-hook
+-   catalyst-utils
+-   lib32-catalyst-utils
 
 The AUR also holds some packages that are not found in any of the
 repositories. These packages contain the so-called Catalyst-total
 packages and the beta versions:
 
--   catalyst-total;
--   catalyst-total-pxp;
--   catalyst-total-hd234k;
--   catalyst-test;
+-   catalyst-total
+-   catalyst-total-pxp
+-   catalyst-total-hd234k
+-   catalyst-test
 
 The catalyst-total packages are made to make the lives of AUR users
 easier. It builds the driver, the kernel utilities and the 32 bit kernel
-utilities. It also builds the catalyst-hook package, which is explained
-above.
+utilities. It also builds the catalyst-hook package, which described in
+#Tools.
 
 catalyst-total-pxp builds Catalyst with experimental powerXpress
 support.
-
-Installing directly from AMD
-
-Warning:Using the installer from ati.com/amd.com is not recommended! It
-may cause file conflicts and X failures and you will miss Arch-specific
-fixes. You must be familiar with booting to the command-line if you wish
-to attempt this.
-
-Note:If you have attempted a manual install from the official installer
-and cannot recover your desktop:
-
-    # /usr/share/ati/fglrx-uninstall.sh
-
-1. Download the installer from AMD or elsewhere (whereas *-* will be the
-version): ati-driver-installer-*-*-x86.x86_64.run
-
-2. Make sure it's executable: # chmod +x ati-driver*
-
-3. Ensure you're using a basic video driver like vesa and remove
-conflicting drivers (i.e. xf86-video-ati) with pacman.
-
-4. Symlink /usr/src/linux to /usr/src/{kernelsource}. 64-bit users also
-symlink/usr/lib64 to /usr/lib.
-
-5. Be sure to have your build environment setup:
-# pacman -Syu base-devel linux-headers
-
-6. Now run # ./ati-driver-installer-*-*-x86.86_64.run (Files will
-extract to a temporary folder and scripts will run...)
-
-7. Assuming nothing went horribly wrong, check
-/usr/share/ati/fglrx-install.log for issues. There should also be a
-/lib/modules/fglrx/make.{ker_version}.log
-
-Note:If you modify the make scripts, save to a different filename.
-Otherwise uninstall will not complete successfully.
 
 > Configuring the driver
 
@@ -323,20 +246,20 @@ options, run:
 
     # aticonfig --help | less
 
-Warning:Use the --output option before committing to /etc/X11 as an
-xorg.conf file will override anything in /etc/X11/xorg.conf.d
+Warning:Use the --output option before committing to /etc/X11/ as an
+xorg.conf file will override anything in /etc/X11/xorg.conf.d/
 
-Note:If you want to adhere to the new xorg.conf.d: Append your aticonfig
-string with --output so that you can adapt the Device section to
-/etc/X11/xorg.conf.d/20-radeon.conf. The drawback of this is that many
-aticonfig options rely on an xorg.conf, and thus will be unavailable.
+Note:To adhere to the new config location use # aticonfig [...] --output
+to adapt the Device section to /etc/X11/xorg.conf.d/20-radeon.conf. The
+drawback is that many aticonfig options rely on an xorg.conf, and will
+be unavailable.
 
 Now, to configure Catalyst. If you have only one monitor, run this:
 
     # aticonfig --initial
 
-Note: If you have PowerXpress problem you should probably install
-catalyst-utils-pxp
+Note: If you have a PowerXpress problem you should probably install
+catalyst-total-pxp.
 
 However, if you have two monitors and want to use both of them, you can
 run the command stated below. Note that this will generate a dual head
@@ -354,20 +277,22 @@ Although the current Xorg versions auto-detect most options when
 started, you may want to specify some in case the defaults change
 between versions.
 
-Here is an example (with notes) for reference. Entries with '#' should
-be required, add entries with '##' as needed:
+Here is an example (with notes) for reference. Entries with # should be
+required, add entries with ## as needed:
+
+    /etc/X11/xorg.conf
 
     Section "ServerLayout"
             Identifier     "Arch"
             Screen      0  "Screen0" 0 0          # 0's are necessary.
     EndSection
     Section "Module"
-            Load ...
-            ...
+            Load [...]
+            [...]
     EndSection
     Section "Monitor"
             Identifier   "Monitor0"
-            ...
+            [...]
     EndSection
     Section "Device"
             Identifier  "Card0"
@@ -411,31 +336,15 @@ Either add fglrx on a new line of an existing module file located under
 
 Disable kernel mode setting
 
+Note:Don't do this if you are using catalyst-utils-pxp or
+catalyst-total-pxp because intel driver needs it.
+
 Disabling kernel mode setting is important, as the driver doesn't take
 advantage of KMS yet. If you do not deactivate KMS, your system might
-freeze when trying to switch to a tty or even when shutting down via
+freeze when trying to switch to a TTY or even when shutting down via
 your DE.
 
 To disable kernel mode setting, add nomodeset to your kernel parameters.
-For example:
-
--   For GRUB Legacy, edit menu.lst and add nomodeset to the kernel line:
-
-    kernel /boot/vmlinuz-linux root=/dev/sda1 ro nomodeset
-
--   For GRUB, edit /etc/default/grub and add nomodeset to
-    GRUB_CMDLINE_LINUX:
-
-    GRUB_CMDLINE_LINUX="nomodeset"
-
-Then run, as root:
-
-    # grub-mkconfig -o /boot/grub/grub.cfg
-
--   For Syslinux, edit /boot/syslinux/syslinux.cfg and add nomodeset to
-    the APPEND line, e.g.:
-
-    APPEND root=/dev/sda2 ro nomodeset
 
 Checking operation
 
@@ -445,14 +354,14 @@ fglrx is running properly with the following commands:
     $ lsmod | grep fglrx
     $ fglrxinfo
 
-If you get output, it works. Finally, run X with startx or by using
+If you get output, it works. Finally, run X with $ startx or by using
 GDM/KDM and verify that direct rendering is enabled by running the
 following command in a terminal:
 
     $ glxinfo | grep "direct rendering"
 
 If it says "direct rendering: yes" then you're good to go! If the
-glxinfo command is not found install the mesa-demos package.
+$ glxinfo command is not found install the mesa-demos package.
 
 Note:You can also use:
 
@@ -462,18 +371,16 @@ as the fglrx alternative test to glxgears.
 
 Warning:In recent versions of Xorg, the paths of libs are changed. So,
 sometimes libGL.so cannot be correctly loaded even if it's installed.
-Check this if your GL is not working. Please read "Troubleshooting"
+Check this if your GL is not working. Please read #Troubleshooting
 section for details.
 
-If you have trouble, see #Troubleshooting.
+> Custom kernels
 
-> Custom Kernels
+Note:If you are at all uncomfortable or inexperienced with making
+packages, read up the ABS wiki page first so things go smoothly.
 
 To install catalyst for a custom kernel, you'll need to build your own
-catalyst-$kernel package.
-
-If you are at all uncomfortable or inexperienced with making packages,
-read up the ABS wiki page first so things go smoothly.
+catalyst-$kernel package:
 
 1.  Obtain the PKGBUILD and catalyst.install files from Catalyst.
 2.  Editing the PKGBUILD. Two changes need to be made here:
@@ -483,14 +390,15 @@ read up the ABS wiki page first so things go smoothly.
     2.  Change the dependency of linux to $kernel_name.
 
 3.  Build your package and install; run makepkg -i or makepkg followed
-    by pacman -U pkgname.pkg.tar.gz
+    by # pacman -U pkgname.pkg.tar.gz
 
-Note:If you run multiple kernels, you have to install the Catalyst-utils
-packages for all kernels. They won't conflict with one another.
+> Note:
 
-Note:Catalyst-generator is able to build catalyst-{kernver} packages for
-you so you do not actually need to perform all those steps manually. For
-more information, see Tools section.
+-   If you run multiple kernels, you have to install the catalyst-utils
+    packages for all kernels. They won't conflict with one another.
+-   catalyst-generator is able to build catalyst-{kernver} packages for
+    you so you do not actually need to perform all those steps manually.
+    For more information, see Tools section.
 
 > PowerXpress support
 
@@ -530,7 +438,7 @@ these commands:
     # aticonfig --px-dgpu    #for discrete GPU
 
 Just remember that fglrx needs /etc/X11/xorg.conf configured for AMD's
-card with 'fglrx' inside.
+card with fglrx inside.
 
 You can also use the pxp_switch_catalyst switching script that will
 perform some additional usefull operations:
@@ -549,15 +457,17 @@ Usage:
     # pxp_switch_catalyst intel
 
 If you have got problems when you try to run X on Intel's driver you may
-try to force "UXA" acceleration; just make sure that your xorg.conf for
-Intel's GPU got Option "AccelMethod" "uxa", like here:
+try to force "UXA" acceleration. Just make sure you got
+Option "AccelMethod" "uxa" in xorg.conf:
+
+    /etc/X11/xorg.conf
 
     Section "Device"
-       Identifier  "Intel Graphics"
-       Driver      "intel"
-       #Option      "AccelMethod"  "sna"
-       Option      "AccelMethod"  "uxa"
-       #Option      "AccelMethod"  "xaa"
+            Identifier  "Intel Graphics"
+            Driver      "intel"
+            #Option      "AccelMethod"  "sna"
+            Option      "AccelMethod"  "uxa"
+            #Option      "AccelMethod"  "xaa"
     EndSection
 
 Running two X servers (one using the Intel driver, another one using fglrx) simultaneously
@@ -583,50 +493,54 @@ The only disadvantage of this method is not having 3D acceleration using
 the Intel driver. 2D acceleration, however, is fully functional. Other
 than that, this will provide us with a completely stable desktop.
 
+Issues with PowerXpress laptops running in AMD mode (pxp_switch_catalyst amd) with external / secondary monitor
+
+When using a PowerXpress laptop in AMD-only mode (ie, setting the
+discrete card to render everything) you sometimes run into issues with
+artifacting/duplicating between displays. This is a known issue, and
+seems to effect 7xxxM series cards.
+
+The artifacting disappears when you transform one of the monitors by
+either rotating or scaling. So you can use xrandr to fix this:
+
+    xrandr --output HDMI1 --left-of LVDS1 --primary --scale 1x1 --output LVDS1 --scale 1.0001x1.0001
+
 Xorg repositories
 -----------------
 
 Catalyst is notorious for its slow update process. As such, it is common
 that a new Xorg version is pushed down from upstream that will break
 compatibility for Catalyst. This means that Catalyst users either have
-to hold the Xorg packages from updating, or use a backported repository
-that only contains the Xorg packages that should be hold back. Vi0L0 has
+to build Xorg packages on their own, or use a backported repository that
+only contains the Xorg packages that should be hold back. Vi0L0 has
 stepped in to fulfil this task and provides several backported
 repositories.
 
-If you want to use pacman to hold back packages from updating, see
-pacman#Skip package from being upgraded. Packages you should hold back,
-are:
+To enable one of these, follow the instructions in Unofficial user
+repositories (use the same PGP key as for the catalyst repository).
+Remember to add the chosen repository above all other repositories in
+pacman.conf, even above your catalyst repository, should you use one.
 
--   xorg-server-*
--   xf86-input-*
--   xf86-video-*
+> xorg114
 
-If you want to use the backported repositories, you have to edit
-/etc/pacman.conf and add the information of the repository above all
-other repositories, even above your Catalyst repository, should you use
-one.
+Catalyst < 14.1 doesn't support xorg-server 1.15.
 
-> [xorg113]
+    [xorg114]
+    Server = http://catalyst.wirephire.com/repo/xorg114/$arch
 
-Catalyst doesn't support xorg-server 1.14.
+> xorg113
+
+Catalyst < 13.6 doesn't support xorg-server 1.14.
 
     [xorg113]
     Server = http://catalyst.wirephire.com/repo/xorg113/$arch
 
-> [xorg112]
+> xorg112
 
 Catalyst < 12.10 and Catalyst Legacy do not support xorg-server 1.13.
 
     [xorg112]
     Server = http://catalyst.wirephire.com/repo/xorg112/$arch
-
-> [xorg111]
-
-Catalyst < 12.6 doesn't support xorg-server 1.12.
-
-    [xorg111]
-    Server = http://catalyst.wirephire.com/repo/xorg111/$arch
 
 Tools
 -----
@@ -639,9 +553,7 @@ necessary (e.g. after an update).
 
 Before using this package make sure that both the base-devel group and
 the linux-headers package (the one specific to the kernel you use) are
-installed:
-
-    # pacman -S base-devel linux-headers
+installed.
 
 To enable the automatic update, enable the catalyst-hook.service:
 
@@ -685,11 +597,11 @@ milliseconds to complete before it gets killed by systemd.
 
 > Catalyst-generator
 
-Catalyst-generator is a package that is able to build and install the
+catalyst-generator is a package that is able to build and install the
 fglrx module packed into pacman compliant catalyst-${kernver} packages.
-The basic difference from Catalyst-hook is that you will have to trigger
-this command manually, whereas Catalyst-hook will do this automatically
-at boot when a new kernel got installed.
+The basic difference from #Catalyst-hook is that you will have to
+trigger this command manually, whereas Catalyst-hook will do this
+automatically at boot when a new kernel got installed.
 
 It creates catalyst-${kernver} packages using makepkg and installs them
 with pacman. ${kernver} is the kernel version for which each package was
@@ -704,11 +616,11 @@ proceed to package installation.
 A short summary on how to use this package:
 
 1.  As root: catalyst_build_module remove. This will remove all unused
-    catalyst-{kernver}  packages.
+    catalyst-{kernver} packages.
 2.  As unprivileged user: catalyst_build_module ${kernver}, where
     ${kernver} is the version of the kernel to which you just updated.
     For example: catalyst_build_module 2.6.36-ARCH. You can also build
-    catalyst-${kernver} for all installed kernels by using
+    catalyst-{kernver} for all installed kernels by using
     catalyst_build_module all.
 3.  If you want to remove catalyst-generator, it's best to run this as
     root before removing catalyst-generator:
@@ -718,27 +630,24 @@ A short summary on how to use this package:
 Catalyst-generator isn't able to remove all those catalyst-{kernver}
 packages automatically while being removed because there can not be more
 than one instance of pacman running. If you forget to run
-catalyst_build_module remove_all before using
-pacman -R catalyst-generator catalyst-generator will tell you which
+# catalyst_build_module remove_all before using
+# pacman -R catalyst-generator catalyst-generator will tell you which
 catalyst-{kernver} packages you will have to remove manually after
 removing catalyst-generator itself.
 
 Catalyst-generator is most safe and KISS-friendly solution because:
 
-- you can use unprivileged user to build the package;
-
-- it's building modules in fakeroot environment;
-
-- it's not throwing files here and there, package manager always knows
-where they are;
-
-... all you have to do is to remember to use it
+1.  you can use unprivileged user to build the package;
+2.  it is building modules in a fakeroot environment;
+3.  it is not throwing files here and there, pacman always knows where
+    they are;
+4.  all you have to do is to remember to use it
 
 Note:If you see those warnings:
 
-WARNING: Package contains reference to $srcdir
+    WARNING: Package contains reference to $srcdir
 
-WARNING: '.pkg' is not a valid archive extension.
+    WARNING: '.pkg' is not a valid archive extension.
 
 while building catalyst-{kernver} package, do not be concerned, it's
 normal.
@@ -830,9 +739,11 @@ of AMD Radeons UVD2 chipsets via the XvBA (X-Video Bitstream
 Acceleration API designed by AMD) library.
 
 XvBA support and xvba-video is still under development, however it is
-working very well in most cases. Build the xvba-video package from AUR
-or soon, install it from [community] and install mplayer-vaapi and
-libva. Then just set your video player to use vaapi:gl as video output:
+working very well in most cases. Build (or install from Vi0L0's repo)
+the proprietary xvba-video package, or if you have problems with that
+version, install either xvba-video-open or libva-xvba-driver; and also
+install mplayer-vaapi and libva. Then just set your video player to use
+vaapi:gl as video output:
 
     $ mplayer -vo vaapi:gl movie.avi
 
@@ -848,7 +759,7 @@ For smplayer:
 
 Note:If Tear Free Desktop is enabled it's better to use:
 
-    Options -> Preferences -> General -> Video (tab) -> Output driver: vaapi
+    Options → Preferences → General → Video (tab) → Output driver: vaapi
 
 If Video Output vaapi:gl isn't working - please check:
 
@@ -886,8 +797,8 @@ Overclocking Utility, which is very simple and requires qt to work. It
 might be out of date/old, but you can get it here.
 
 Another, more complex utility to perform such operations is
-AMDOverdriveCtrl. Its homepage is here and you can build an Arch package
-from AUR or from Vi0L0's unofficial repositories.
+AMDOverdriveCtrl. Its homepage is here and you can build
+amdoverdrivectrl from the AUR or from Vi0L0's unofficial repositories.
 
 > Double Screen (Dual Head / Dual Screen / Xinerama)
 
@@ -961,8 +872,8 @@ resolution, especially if you have screens of different sizes. These
 resolutions have to be added in the "Screen" section:
 
     SubSection "Display"
-    Depth 24
-    Modes "X-resolution screen 1xY-resolution screen 1" "Xresolution screen 2xY-resolution screen 2"
+        Depth     24
+        Modes     "X-resolution screen 1xY-resolution screen 1" "Xresolution screen 2xY-resolution screen 2"
     EndSubSection
 
 From now on, instead of editing the xorg.conf file manually, let us use
@@ -986,25 +897,29 @@ rest.
 Uninstallation
 --------------
 
-If for any reason this driver is not working for you or if you somply
+If for any reason this driver is not working for you or if you simply
 want to try out the open source driver, remove the catalyst and
 catalyst-utils packages. Also you should remove catalyst-generator,
 catalyst-hook and lib32-catalyst-utils packages if they have been
 installed on your system.
 
-Warning:You may need to use pacman -Rdd to remove catalyst-utils (and/or
-lib32-catalyst-utils) because that package contains gl related files and
-many of your installed packages depend on them. These dependencies will
-be satisfied again when you install xf86-video-ati.
+> Warning:
 
-Warning:You may need to remove /etc/profile.d/ati-flgrx.sh and
-/etc/profile.d/lib32-catalyst (if it exists on your system), otherwise
-r600_dri.so will fail to load and you would not have 3D support.
+-   You may need to use # pacman -Rdd to remove catalyst-utils (and/or
+    lib32-catalyst-utils) because that package contains gl related files
+    and many of your installed packages depend on them. These
+    dependencies will be satisfied again when you install
+    xf86-video-ati.
+-   You may need to remove /etc/profile.d/ati-flgrx.sh and
+    /etc/profile.d/lib32-catalyst (if it exists on your system),
+    otherwise r600_dri.so will fail to load and you would not have 3D
+    support.
 
 Note:You should remove unofficial repositories from your
-/etc/pacman.conf and run pacman -Syu, because those repositories include
-out-dated Xorg packages to allow use of catalyst and the xf86-video-ati
-package needs up-to-date Xorg packages from the Official repositories.
+/etc/pacman.conf and run # pacman -Syu, because those repositories
+include out-dated Xorg packages to allow use of catalyst and the
+xf86-video-ati package needs up-to-date Xorg packages from the Official
+repositories.
 
 Also follow these steps:
 
@@ -1015,11 +930,8 @@ Also follow these steps:
 -   Make sure to remove or backup /etc/X11/xorg.conf.
 -   If you have installed the catalyst-hook package, make sure to
     disable the systemd service.
--   If you have installed the catalyst-generator package, make sure to
-    remove "fglrx" from the "MODULES" array of /etc/rc.conf in case if
-    post-removal script of the package don't work.
--   If you used the "nomodeset" option in your configuration file in
-    kernel parameters line and plan to use KMS, remove it.
+-   If you used the nomodeset option in your kernel parameters and plan
+    to use KMS, remove it.
 -   Reboot before installing another driver.
 
 Troubleshooting
@@ -1076,7 +988,7 @@ Ensure you have added the nomodeset option to the kernel options line in
 your bootloader (see #Disable kernel mode setting).
 
 If you are using the legacy driver (catalyst-hd234k) and get a black
-screen, try downgrading xorg-server to 1.11 by using the #xorg111
+screen, try downgrading xorg-server to 1.11 by using the #[xorg111]
 repository.
 
 Faulty ACPI hardware calls
@@ -1093,11 +1005,10 @@ If so, try to run this:
 
 If you are running Catalyst proprietary driver and you get a console
 (tty1) instead of the expected KDM greeting when you log out, you must
-instruct KDM to restart the X server after each logout:
+instruct KDM to restart the X server after each logout. Uncomment the
+following line under the section titled [X-:*-Core]
 
-    $ sudo nano /usr/share/config/kdm/kdmrc
-
-Uncomment the following line under the section titled [X-:*-Core]:
+    /usr/share/config/kdm/kdmrc
 
     TerminateServer=True
 
@@ -1125,9 +1036,9 @@ Common errors and their solutions, are:
 
 -   Ensure that you are loading the correct agp modules for your AGP
     chipset before you load the fglrx kernel module. To determine which
-    agp modules you'll need, run hwdetect --show-agp. Then open your
-    fglrx.conf file in /etc/modules-load.d and add the agp module on a
-    line before the fglrx line.
+    agp modules you'll need, run # hwdetect --show-agp. Then open your
+    /etc/modules-load.d/fglrx.conf and add the agp module on a line
+    before the fglrx line.
 
     libGL error: failed to open DRM: Operation not permitted
     libGL error: reverting to (slow) indirect rendering
@@ -1154,14 +1065,10 @@ Errors such as:
     fglrx: libGL version undetermined - OpenGL module is using glapi fallback
 
 could be caused by having multiple versions of libGL.so on your system.
-Run:
+The command below should return the following output:
 
-    $ sudo updatedb
-    $ locate libGL.so
+    $ locate libGL.s
 
-This should return the following output:
-
-    $ locate libGL.so
     /usr/lib/libGL.so
     /usr/lib/libGL.so.1
     /usr/lib/libGL.so.1.2
@@ -1176,20 +1083,18 @@ are using X11R7, make sure you do not have these files on your system:
     /usr/X11R6/lib/libGL.so.1.2
     /usr/X11R6/lib/libGL.so.1
 
-> Hibernate/Sleep Issues
+> Hibernate/Sleep issues
 
 Video fails to resume from suspend2ram
 
 ATI's proprietary Catalyst driver cannot resume from suspend if the
 framebuffer is enabled. To disable the framebuffer, add vga=0 to your
-kernel options in for example, Grub Legacy's /boot/grub/menu.lst:
-
-    kernel /vmlinuz-linux root=/dev/sda3 resume=/dev/sda2 ro quiet vga=0
+kernel kernel parameters.
 
 To see where you need to add this with other bootloaders, see #Disable
 kernel mode setting.
 
-> System Freezes/Hard locks
+> System freezes/Hard locks
 
 -   The radeonfb framebuffer drivers have been known in the past to
     cause problems of this nature. If your kernel has radeonfb support
@@ -1200,33 +1105,29 @@ kernel mode setting.
     suspend, switching to tty etc.) you probably forgot to deactivate
     KMS. (See #Disable kernel mode setting)
 
-> Hardware Conflicts
+> Hardware conflicts
 
 Radeon cards used in conjunction with some versions of the nForce3
 chipset (e.g. nForce 3 250Gb) won't have 3D acceleration. Currently the
 cause of this issue is unknown, but some sources indicate that it may be
 possible to get acceleration with this combination of hardware by
 booting Windows with the drivers from nVIDIA and then rebooting the
-system. This can be verified by issuing in a root console the following
-command:
+system. This can be verified by getting output something similar to this
+(using an nForce3-based system):
 
     $ dmesg | grep agp
 
-If you get something similar to this (using an nForce3-based system):
+    agpgart: Detected AGP bridge 0
+    agpgart: Setting up Nforce3 AGP.
+    agpgart: aperture base > 4G
 
-        agpgart: Detected AGP bridge 0
-        agpgart: Setting up Nforce3 AGP.
-        agpgart: aperture base > 4G
-
-and also if issuing this command...
+and also if issuing the following command gets you the following output:
 
     $ tail -n 100 /var/log/Xorg.0.log | grep agp
 
-...gets something similar to:
-
     (EE) fglrx(0): [agp] unable to acquire AGP, error "xf86_ENODEV"
 
-Then you have this bug.
+you have this bug.
 
 Some sources indicate that in some situations, downgrading the
 motherboard BIOS may help, but this cannot be verified in all cases.
@@ -1239,8 +1140,10 @@ See this bugreport for more information and a potential fix.
 This problem may occur when using the proprietary Catalyst.
 
 If you experience temporary hangs lasting from a few seconds to several
-minutes occuring randomly during playback with mplayer, check
-/var/log/messages.log for output like:
+minutes occuring randomly during playback with mplayer, check the system
+logs for output like:
+
+    /var/log/messages.log
 
     Nov 28 18:31:56 pandemonium [<c01c64a6>] ? proc_get_sb+0xc6/0x160
     Nov 28 18:31:56 pandemonium [<c01c64a6>] ? proc_get_sb+0xc6/0x160
@@ -1253,37 +1156,35 @@ minutes occuring randomly during playback with mplayer, check
     Nov 28 18:31:56 pandemonium [<c01c64a6>] ? proc_get_sb+0xc6/0x160
     Nov 28 18:31:56 pandemonium =======================
 
-Adding the nopat kernel option to your kernel options in your bootloader
-and rebooting fixed the problem at least for me. To see how to do this
-for different bootloaders, see #Disable kernel mode setting.
+Adding the nopat and/or nomodeset kernel parameters should work.
 
 > "aticonfig: No supported adapters detected"
 
-If when running
+If you get the following:
 
     # aticonfig --initial
 
-you get:
+    aticonfig: No supported adapters detected
 
-    aticonfig: No supported adaptaters detected
-
-But you do have an AMD GPU (or APU), it may still be possible to get
-Catalyst working by manually setting the device in your your
-etc/X11/xorg.conf file or by copying an older working /etc/ati/control
-file (preferred - this also fixes the watermark issue).
+It may still be possible to get Catalyst working by manually setting the
+device in your your etc/X11/xorg.conf file or by copying an older
+working /etc/ati/control file (preferred - this also fixes the watermark
+issue).
 
 To get an older control file, download a previous version of fglrx from
-AMD and run it with "--extract driver" parameter. You'll find the
-control file in driver/common/etc/ati/control. Copy the extracted file
-over the system file and restart Xorg. You can try different versions of
-the file.
+AMD and run it with --extract driver parameter. You'll find the control
+file in driver/common/etc/ati/control. Copy the extracted file over the
+system file and restart Xorg. You can try different versions of the
+file.
 
-To set your model in xorg.conf,edit the device section of
+To set your model in xorg.conf, edit the device section of
 /etc/X11/xorg.conf to:
 
+    /etc/X11/xorg.conf
+
     Section "Device"
-     Identifier "ATI radeon ****"
-     Driver "fglrx"
+            Identifier "ATI radeon ****"
+            Driver     "fglrx"
     EndSection
 
 Where **** should be replaced with your device's marketing number (e.g.
@@ -1297,19 +1198,20 @@ You can remove this watermark using the following script:
     #!/bin/sh
     DRIVER=/usr/lib/xorg/modules/drivers/fglrx_drv.so
     for x in $(objdump -d $DRIVER|awk '/call/&&/EnableLogo/{print "\\x"$2"\\x"$3"\\x"$4"\\x"$5"\\x"$6}'); do
-     sed -i "s/$x/\x90\x90\x90\x90\x90/g" $DRIVER
+       sed -i "s/$x/\x90\x90\x90\x90\x90/g" $DRIVER
     done
 
-and rebooting.
+and then reboot your machine.
 
 > WebGL support in Chromium
 
 Google has blacklisted Linux's Catalyst driver from supporting webGL in
 their Chromium/Chrome browsers.
 
-You can turn webGL on by editing
-/usr/share/applications/chromium.desktop file and adding
---ignore-gpu-blacklist flag into the Exec line so it looks like this:
+You can turn webGL on by editing and adding --ignore-gpu-blacklist flag
+into the Exec line so it looks like this:
+
+    /usr/share/applications/chromium.desktop
 
     Exec=chromium %U --ignore-gpu-blacklist
 
@@ -1320,22 +1222,24 @@ You can also run chromium from console with the same
 
 Warning:Catalyst does not support the GL_ARB_robustness extension, so it
 is possible that a malicious site could use WebGL to perform a DoS
-attack on your graphic card. For more info, read this.
+attack on your graphic card.
 
-> Laggs/freezes when watching flash videos via Adobe's flashplugin
+> Lag/freezes when watching flash videos via Adobe's flashplugin
 
-Edit /etc/adobe/mms.cfg and make it look like this:
+Edit:
+
+    /etc/adobe/mms.cfg
 
     #EnableLinuxHWVideoDecode=1
     OverrideGPUValidation=true
 
 If you are using KDE make sure that "Suspend desktop effects for
-fullscreen windows" is unchecked under System Settings->Workspace
-Appearance and Behaviour->Desktop Effects->Advanced.
+fullscreen windows" is unchecked under System Settings → Desktop Effects
+→ Advanced.
 
-> Laggs/slow windows movement in GNOME3
+> Lag/slow windows movement in GNOME3
 
-You can try this solution out, it's working for many people.
+You can try this solution, it is working for many people.
 
 Add this line into ~/.profile or into /etc/profile:
 
@@ -1343,17 +1247,23 @@ Add this line into ~/.profile or into /etc/profile:
 
 Restart X server or reboot your system.
 
-> Not using fullscreen resolution at 1920x1080 (underscanning)
+> Not using fullscreen resolution at 1920x1080 (underscanning, black borders around the screen)
+
+This usually happens when you use a HDMI connection to connect your
+monitor/TV to your computer.
 
 Using the amdcccle GUI you can select the display, go to adjustments,
 and set Underscan to 0% (aticonfig defaults to 15% underscan).
 
 Alternatively, you can use aticonfig to disable underscanning as well:
 
-    aticonfig --set-pcs-val=MCIL,DigitalHDTVDefaultUnderscan,0
+    # aticonfig --set-pcs-val=MCIL,DigitalHDTVDefaultUnderscan,0
 
 For newer version (for example, 12.11), if Catalyst control center
-repeatedly fails to save the overscan setting, edit /etc/ati/amdpcsdb:
+repeatedly fails to save the overscan setting, edit
+/etc/ati/amdpcsdb like so:
+
+    /etc/ati/amdpcsdb
 
     TVEnableOverscan=V0
 
@@ -1363,24 +1273,24 @@ Then logout and login.
 
 Try to disable xinerama and xrandr12. Check out ie. this way:
 
-As root type those commands:
+Type those commands:
 
-    aticonfig --initial
-    aticonfig --set-pcs-str="DDX,EnableRandR12,FALSE"
+    # aticonfig --initial
+    # aticonfig --set-pcs-str="DDX,EnableRandR12,FALSE"
 
 Then reboot your system. In /etc/X11/xorg.conf check that xinerama is
 disabled, if it's not disable it and reboot your system.
 
-Next run amdcccle and pick up amdcccle->display
-manager->multi-display->multidisplay desktop with display(s) 2.
+Next run amdcccle and pick up amdcccle → display manager → multi-display
+→ multidisplay desktop with display(s) 2.
 
 Reboot again and set up your display layout whatever you desire.
 
-> Disabling VariBright Feature
+> Disabling VariBright feature
 
-As root type command:
+Type the following command to disable VariBright:
 
-    aticonfig --set-pcs-u32=MCIL,PP_UserVariBrightEnable,0
+    # aticonfig --set-pcs-u32=MCIL,PP_UserVariBrightEnable,0
 
 > Hybrid/PowerXpress: turning off discrete GPU
 
@@ -1401,24 +1311,58 @@ script:
     libglx=$(/usr/lib/fglrx/switchlibglx query)
     modprobe acpi_call
     if [ "$libglx" = "intel" ]; then
-    echo '\_SB.PCI0.PEG0.PEGP._OFF' > /proc/acpi/call
+        echo '\_SB.PCI0.PEG0.PEGP._OFF' > /proc/acpi/call
     fi
 
-> Switching from X session to TTYs gives blank screen
+> Switching from X session to TTYs gives a blank screen/low resolution TTY
 
 Workaround for this "feature", which appeared in catalyst 13.2 betas, is
 to use vga= kernel option, like vga=792. You can get the list of
-supported resolutions with
+supported resolutions with the
 
-    hwinfo --framebuffer
+    $ hwinfo --framebuffer
 
-command. Pick up the one from the very bottom, and copy-paste it into
-kernel line of your bootloader, so it could look like ie. vga=0x03d4
+command. Get the one that corresponds to your wanted resolution, and
+copy-paste it into kernel line of your bootloader, so it could look like
+ie. vga=0x03d4
+
+> 30 FPS / Tear-Free / V-Sync bug
+
+Bug introduced in Catalyst 13.6 beta, not fixed till now (13.9).
+
+After enabling "Tear-Free" functionality every freshly started OpenGL
+application is lagging, often generates only 30 FPS, it also touches
+composited desktop.
+
+Workaround is pretty simple and was found by M132. Here are the steps,
+do everything in "AMD Catalyst Control Center" (amdcccle) application:
+
+    1. Enable Tear-Free, it will set 3D V-Sync option to "Always on".
+    2. Set 3D V-Sync to "Always Off".
+    3. Make sure Tear-Free is still on.
+    4. Restart X / Re-login.
+
+It is working well on KDE 4.11.x, but in case of problems M132 suggests:
+"Try disabling "Detect refresh rate" and specify monitor's refresh rate
+in the Composite plugin."
+
+See also
+--------
+
+-   Unofficial Wiki for the ATI Linux Driver
+-   Unofficial ATI Linux Driver Bugzilla
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=AMD_Catalyst&oldid=255977"
+"https://wiki.archlinux.org/index.php?title=AMD_Catalyst&oldid=305984"
 
 Categories:
 
 -   Graphics
 -   X Server
+
+-   This page was last modified on 20 March 2014, at 17:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -9,43 +9,38 @@ upload, download, system messages, and much more. It is extremely
 configurable, however, the configuration can be a little hard to
 understand. Conky is a fork of torsmo.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation and configuration                                     |
-| -   2 AUR packages                                                       |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Enable real transparency in KDE4 and XFCE4                   |
-|     -   3.2 Autostart with xfce4                                         |
-|     -   3.3 Prevent flickering                                           |
-|     -   3.4 Custom colors                                                |
-|     -   3.5 Dual Screen                                                  |
-|     -   3.6 Do not minimize on Show Desktop                              |
-|     -   3.7 Integrate with Gnome 3+                                      |
-|     -   3.8 Integrate with KDesktop                                      |
-|     -   3.9 Integrate with Razor-qt                                      |
-|     -   3.10 Display package update information                          |
-|     -   3.11 Display weather forecast                                    |
-|     -   3.12 Display RSS feeds                                           |
-|     -   3.13 Display Distrowatch Arch Linux ranking                      |
-|     -   3.14 Display rTorrent stats                                      |
-|     -   3.15 Display your WordPress blog stats                           |
-|     -   3.16 Display number of new emails (Gmail)                        |
-|         -   3.16.1 Other Methods                                         |
-|         -   3.16.2 Google Apps                                           |
-|                                                                          |
-|     -   3.17 Display new emails (IMAP + SSL)                             |
-|                                                                          |
-| -   4 User-contributed configuration examples                            |
-|     -   4.1 Graysky                                                      |
-|                                                                          |
-| -   5 A sample rings script with nvidia support:                         |
-| -   6 A note about symbolic fonts                                        |
-| -   7 Fonts appear smaller than they should                              |
-| -   8 Universal method to enable true transparency                       |
-| -   9 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation and configuration
+-   2 AUR packages
+-   3 Tips and tricks
+    -   3.1 Enable real transparency in KDE4 and Xfce4
+    -   3.2 Autostart with Xfce4
+    -   3.3 Prevent flickering
+    -   3.4 Custom colors
+    -   3.5 Dual Screen
+    -   3.6 Do not minimize on Show Desktop
+    -   3.7 Integrate with Gnome 3
+    -   3.8 Integrate with KDE
+    -   3.9 Integrate with Razor-qt
+    -   3.10 Display package update information
+    -   3.11 Display weather forecast
+    -   3.12 Display RSS feeds
+    -   3.13 Display Distrowatch Arch Linux ranking
+    -   3.14 Display rTorrent stats
+    -   3.15 Display your WordPress blog stats
+    -   3.16 Display number of new emails (Gmail)
+        -   3.16.1 Other Methods
+    -   3.17 Display new emails (IMAP + SSL)
+    -   3.18 Fix scrolling with UTF-8 multibyte characters
+-   4 User-contributed configuration examples
+    -   4.1 Graysky
+    -   4.2 A sample rings script with nvidia support
+-   5 A note about symbolic fonts
+-   6 Fonts appear smaller than they should
+-   7 Universal method to enable true transparency
+-   8 See also
 
 Installation and configuration
 ------------------------------
@@ -92,19 +87,29 @@ you will be able to redirect log messages with conky on your desktop.
 AUR packages
 ------------
 
-In addition to the basic conky package in the official repositories,
-there are various AUR packages available with extra compile options
-enabled.
+In addition to the basic conky package, there are various AUR packages
+available with extra compile options enabled:
 
--   Install conky-cli for conky without X11 dependencies
--   Install conky-nvidia for nvidia support.
--   Install conky-lua for lua support.
--   Install conky-lua-nv for both lua and nvidia support.
+-   conky-cli — Conky without X11 dependencies
+
+|| conky-cli
+
+-   conky-lua — Conky with Lua support
+
+|| conky-lua
+
+-   conky-lua-nv — Conky with both Lua and Nvidia support
+
+|| conky-lua-nv
+
+-   conky-nvidia — Conky with Nvidia support
+
+|| conky-nvidia
 
 Tips and tricks
 ---------------
 
-> Enable real transparency in KDE4 and XFCE4
+> Enable real transparency in KDE4 and Xfce4
 
 Since version 1.8.0, Conky suppports real transparency. To enable it add
 this line to ~/.conkyrc:
@@ -114,7 +119,7 @@ this line to ~/.conkyrc:
 The above option is not desired with the OWN_WINDOW_ARGB_VISUAL yes
 option. This replaces the feh method described below.
 
-> Autostart with xfce4
+> Autostart with Xfce4
 
 In .conkyrc file:
 
@@ -152,16 +157,6 @@ in Section "Module". The xorg.conf file has been replaced (1.8.x patch
 upwards) by /etc/X11/xorg.conf.d which contains the particular
 configuration files. DBE is loaded automatically.
 
-To verify:
-
-    $ grep dbe /var/log/Xorg.0.log
-
-Output (should be similar):
-
-    [  3286.101] (II) LoadModule: "dbe"
-    [  3286.101] (II) Loading /usr/lib/xorg/modules/extensions/libdbe.so
-    [  3286.111] (II) Module dbe: vendor="X.Org Foundation"
-
 To enable double-buffer check to have in ~/.conkyrc:
 
     # Place below the other options, not below TEXT or XY
@@ -172,8 +167,8 @@ To enable double-buffer check to have in ~/.conkyrc:
 Aside the classic preset colors (white, black, yellow...), you can set
 your own custom color using the color name code. To determine the code
 of a color, use a color selector app. The basic gcolor2 package in the
-official repositories will give you the color name. It is made of a
-series of letters and numbers. Add this line in your configuration file
+official repositories will give you the color name. It is made of six
+hexadecimal digits (0-9, A-F). Add this line in your configuration file
 for a custom color:
 
     color1     Colorname1
@@ -207,7 +202,15 @@ following line:
 
     own_window_type override
 
-> Integrate with Gnome 3+
+or
+
+    own_window_type desktop
+
+Refer to conkys man page for the exact differences. But the latter
+option enables you to snap windows to conkys border using resize
+key-binds in e.g. Openbox, which the first one does not.
+
+> Integrate with Gnome 3
 
 Some have experienced problems with Conky showing up under Gnome 3.
 
@@ -224,7 +227,7 @@ lines.
     own_window_argb_visual yes
     own_window_argb_value 255
 
-> Integrate with KDesktop
+> Integrate with KDE
 
 Conky with screenshot configuration generate problems with icons
 visualization. So there are some steps to follow.
@@ -241,59 +244,53 @@ visualization. So there are some steps to follow.
     minimum_size
 
 -   To automatically start Conky, create this symlink:
-
-    $ ln -s /usr/bin/conky ~/.kde/share/autostart/conkylink
-
-For KDE4 users:
+    -   KDE4:
 
     $ ln -s /usr/bin/conky ~/.kde4/Autostart/conkylink
+
+-   -   KDE3:
+
+    $ ln -s /usr/bin/conky ~/.kde/share/autostart/conkylink
 
 -   Install the feh package which is available in the official
     repositories.
 -   Make a script to allow transparency with the desktop
 
-For KDE3 users
-
-    $ nano -w ~/.kde/share/autostart/fehconky 
+In KDE4 edit ~/.kde4/Autostart/fehconky:
 
     #!/bin/bash
-    feh --bg-scale `dcop kdesktop KBackgroundIface currentWallpaper 1`
+    feh --bg-scale "$(sed -n 's/wallpaper=//p' ~/.kde4/share/config/plasma-desktop-appletsrc)"
 
-For KDE4 users
-
-    $ nano -w ~/.kde4/Autostart/fehconky
+In KDE3 edit ~/.kde/share/autostart/fehconky:
 
     #!/bin/bash
-    feh --bg-scale "`sed -n 's/wallpaper=//p' ~/.kde4/share/config/plasma-desktop-appletsrc`"
+    feh --bg-scale $(dcop kdesktop KBackgroundIface currentWallpaper 1)
 
 use --bg-center if you use a centered wallpaper.
 
--   Make it executable
-
-    $ chmod +x ~/.kde/share/autostart/fehconky
-
-KDE4
+-   Make it executable:
+    -   KDE4:
 
     $ chmod +x ~/.kde4/Autostart/fehconky
 
+-   -   KDE3:
+
+    $ chmod +x ~/.kde/share/autostart/fehconky
+
 -   Instead of using a script, you can add the corresponding line to the
     bottom of ~/.conkyrc
+    -   For KDE4
 
-For KDE3
+    ${exec feh --bg-scale "$(sed -n 's/wallpaper=//p' ~/.kde4/share/config/plasma-desktop-appletsrc)"}
 
-    ${exec feh --bg-scale `dcop kdesktop KBackgroundIface currentWallpaper 1`}
+-   -   For KDE3
 
-For KDE4
-
-    ${exec feh --bg-scale "`sed -n 's/wallpaper=//p' ~/.kde4/share/config/plasma-desktop-appletsrc`"}
+    ${exec feh --bg-scale $(dcop kdesktop KBackgroundIface currentWallpaper 1)}
 
 > Integrate with Razor-qt
 
 With Conky's default configuration, its window might disappear from the
-desktop when you click on the latter. Here's how to configure Conky to
-stick on your Razor-qt desktop:
-
--   Add these lines to:
+desktop when you click on the latter. Add these lines to:
 
     ~/.conkyrc
 
@@ -355,32 +352,34 @@ ConkyPress.
 Create a file named gmail.py in a convenient location (this example uses
 ~/.scripts/) with the following Python code:
 
+    gmail.py
+
     #!/usr/bin/env python
 
     from urllib.request import FancyURLopener
 
-    username = 'username'
-    password  = 'superlongandhardpassword'
+    email = 'your email' # @gmail.com can be left out
+    password  = 'your password'
 
-    url = 'https://%s:%s@mail.google.com/mail/feed/atom' % (username, password)
+    url = 'https://%s:%s@mail.google.com/mail/feed/atom' % (email, password)
 
     opener = FancyURLopener()
     page = opener.open(url)
 
     contents = page.read().decode('utf-8')
 
-
     ifrom = contents.index('<fullcount>') + 11
     ito   = contents.index('</fullcount>')
 
-    unread = contents[ifrom:ito]
+    fullcount = contents[ifrom:ito]
 
-    print(unread)
-
-as suggested here. A similar change can be made if using a Google App
-mail account (below).
+    print(fullcount + ' new')
 
 You can also use Python's urllib as follows.
+
+    gmail.py
+
+    #! /usr/bin/env python
 
     import urllib.request
     from xml.etree import ElementTree as etree
@@ -401,6 +400,7 @@ You can also use Python's urllib as follows.
     with urllib.request.urlopen(gmail) as source:
         tree = etree.parse(source)
     fullcount = tree.find(NS + 'fullcount').text
+
     print(fullcount + ' new')
 
 Add the following string to your ~/.conkyrc in order the check your
@@ -411,15 +411,11 @@ display:
 
 Other Methods
 
-The same way, but with using grep and sed for filtering output of wget:
+The same way, but with using curl, grep and sed:
 
-    $ wget -q -O - https://mail.google.com/a/domain/feed/atom \
-    >                                --http-user=login@domain \
-    >                                --http-password=password \ 
-    >                                --no-check-certificate | \
-    > grep fullcount | sed 's/<[^0-9]*>//g'
+    $ curl -s -u email:password https://mail.google.com/mail/feed/atom | grep fullcount | sed 's/<[^0-9]*>//g'
 
-instead of words login, domain, password you must type yours data.
+replace email and password with your data.
 
 Alternatively, you can use stunnel which is provided by the stunnel
 package.
@@ -450,27 +446,6 @@ The only thing left is our ~/.conkyrc:
 
 Here I used * as the password for Conky to ask for it at start, but you
 do not have to do it.
-
-Google Apps
-
-The above Python script did not work for me and my Google Apps account.
-I modified the script below to work with a Google App mail account
-Python code:
-
-    import os
-     
-    #Enter your domain, username and password below within double quotes
-    # eg. domain="yourdomain.com", username="username" and password="password"
-    domain="yourdomain.com"
-    username="username"
-    password="password"
-    com="wget -q -O - https://mail.google.com/a/"+domain+"/feed/atom --http-user="+username+"@"+domain+" --http-password="+password+" --no-check-certificate"
-    temp=os.popen(com)
-    msg=temp.read()
-    index=msg.find("<fullcount>")
-    index2=msg.find("</fullcount>")
-    fc=int(msg[index+11:index2])
-    print(str(fc)+" new")
 
 > Display new emails (IMAP + SSL)
 
@@ -523,23 +498,34 @@ Add to ~/.conkyrc:
 
 or wherever you saved the file.
 
+If you use Gmail you might need to generate an application specific
+password.
+
 Alternatively, you can use stunnel as shown above: Conky#How to display
 the number of new emails (Gmail) in Conky
+
+> Fix scrolling with UTF-8 multibyte characters
+
+The current version of conky (1.9.0) suffers from a bug
+(http://sourceforge.net/p/conky/bugs/341/) where scrolling text
+increments by byte, not by character, resulting in text containing
+multibyte characters to disappear and reappear while scrolling. A
+package with a patch fixing this bug can be found in the AUR:
+conky-utfscroll
 
 User-contributed configuration examples
 ---------------------------------------
 
 > Graysky
 
-[Screen shot]
+[Screenshot].
 
 [Here] it is - modify to fit your system. Optimized for a quad core chip
 w/ several hdds (although one of them is not connected for this
 screenshot) and an nvidia graphics card. You can easily modify this to a
 dual or single core system with one or whatever number of hdds.
 
-A sample rings script with nvidia support:
-------------------------------------------
+> A sample rings script with nvidia support
 
     # -- Conky settings -- #
     background no
@@ -618,7 +604,7 @@ A sample rings script with nvidia support:
     ${goto 222}${fs_used /home}
     ${goto 230}DISK
 
--   And the required lua.lua script:
+And the required lua.lua script:
 
     --[[
      Ring Meters by londonali1010 (2009)
@@ -964,13 +950,13 @@ Check xcompmgr documentation to help you decide which compositing
 options you would like to enable. The following is a common standard
 command.
 
-    xcompmgr -c -t-5 -l-5 -r4.2 -o.55 &
+    $ xcompmgr -c -t-5 -l-5 -r4.2 -o.55 &
 
 Make sure conky is running with conky &. Use transset-df to enable
 transparency on the Conky window. Set '.5' to any value in the range 0 -
 1.
 
-    transset-df .5 -n Conky
+    $ transset-df .5 -n Conky
 
 This should give your conky window true transparency. If you get an
 error like,
@@ -997,8 +983,8 @@ Use this in ~/.xinitrc to have transparent conky run when you startx.
     xcompmgr -c -t-5 -l-5 -r4.2 -o.55 &
     conky -d; sleep 1 && transset-df .5 -n Conky
 
-External links
---------------
+See also
+--------
 
 -   Official Conky Configuration Settings
 -   Conky Configs on arch forums
@@ -1009,8 +995,15 @@ External links
 -   FAQ
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Conky&oldid=256021"
+"https://wiki.archlinux.org/index.php?title=Conky&oldid=305724"
 
 Category:
 
 -   Status monitoring and notification
+
+-   This page was last modified on 20 March 2014, at 01:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

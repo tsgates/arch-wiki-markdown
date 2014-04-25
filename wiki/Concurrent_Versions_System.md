@@ -8,15 +8,13 @@ role to the free software RCS, PRCS, and Aegis packages."
 
 This is a quick guide on how to set up the latest CVS server.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Initialization                                                     |
-| -   3 Configuration                                                      |
-| -   4 Use                                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Initialization
+-   3 Configuration
+-   4 Use
 
 Installation
 ------------
@@ -137,3 +135,10 @@ Retrieved from
 Category:
 
 -   Version Control System
+
+-   This page was last modified on 17 April 2013, at 09:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

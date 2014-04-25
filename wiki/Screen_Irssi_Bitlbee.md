@@ -7,29 +7,27 @@ Instant Messenger. Via SSH, you can access this persistent chat suite
 from anywhere. Putting the pieces together is not difficult, and this
 page will guide you through it.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Components                                                         |
-|     -   1.1 GNU Screen                                                   |
-|     -   1.2 Irssi                                                        |
-|     -   1.3 Bitlbee                                                      |
-|     -   1.4 SSH                                                          |
-|                                                                          |
-| -   2 Setting it up                                                      |
-|     -   2.1 Installing                                                   |
-|     -   2.2 Configuring SSH                                              |
-|     -   2.3 Configuring bitlbee                                          |
-|     -   2.4 Using Irssi in Screen                                        |
-|         -   2.4.1 Connecting to Bitlbee                                  |
-|                                                                          |
-| -   3 Using It                                                           |
-|     -   3.1 Launching the Setup                                          |
-|     -   3.2 Doing More                                                   |
-|         -   3.2.1 Auto-away on screen detach                             |
-|             -   3.2.1.1 Modifying screen-away.pl for BitLBee             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Components
+    -   1.1 GNU Screen
+    -   1.2 Irssi
+    -   1.3 Bitlbee
+    -   1.4 SSH
+-   2 Setting it up
+    -   2.1 Installing
+    -   2.2 Configuring SSH
+    -   2.3 Configuring bitlbee
+    -   2.4 Using Irssi in Screen
+        -   2.4.1 Connecting to Bitlbee
+-   3 Using It
+    -   3.1 Launching the Setup
+    -   3.2 Doing More
+        -   3.2.1 Auto-away on screen detach
+            -   3.2.1.1 Modifying screen-away.pl for BitLBee
+        -   3.2.2 Persisting the chat client through suspends and
+            connectivity changes
 
 Components
 ==========
@@ -207,10 +205,26 @@ autoloaded, and set it active.
     /script load screen_away
     /set screen_away_active on
 
+> Persisting the chat client through suspends and connectivity changes
+
+If you use a laptop, you likely suspend and change wireless networks
+often, which causes your ssh client to lose connection. This can be
+annoying for a chat client you expect to always be available.
+
+To fix this, try Mosh, which is a shell that seamlessly deals with
+reconnection after resuming or changing wireless networks.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Screen_Irssi_Bitlbee&oldid=243273"
+"https://wiki.archlinux.org/index.php?title=Screen_Irssi_Bitlbee&oldid=302659"
 
 Categories:
 
--   Internet Applications
+-   Internet applications
 -   Internet Relay Chat
+
+-   This page was last modified on 1 March 2014, at 04:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

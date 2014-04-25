@@ -1,53 +1,43 @@
 KDE Packages
 ============
 
-> Summary
-
-An explanation of KDE package groups and meta-packages.
-
 Related articles
 
-KDE
+-   KDE
 
 Since KDE SC 4.3, separate (split) packages for each application are
 provided. This article describes the concepts of groups and
 meta-packages.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Terminology                                                        |
-| -   2 Using Package groups                                               |
-|     -   2.1 Why use groups?                                              |
-|         -   2.1.1 Advantages                                             |
-|         -   2.1.2 Disadvantages                                          |
-|                                                                          |
-|     -   2.2 Who is it for?                                               |
-|                                                                          |
-| -   3 Using Meta-Packages                                                |
-|     -   3.1 Why use meta-packages?                                       |
-|         -   3.1.1 Advantages                                             |
-|         -   3.1.2 Disadvantages                                          |
-|                                                                          |
-|     -   3.2 Who is it for?                                               |
-|                                                                          |
-| -   4 Listing the member packages                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Terminology
+-   2 Using Package groups
+    -   2.1 Why use groups?
+        -   2.1.1 Advantages
+        -   2.1.2 Disadvantages
+    -   2.2 Who is it for?
+-   3 Using Meta-Packages
+    -   3.1 Why use meta-packages?
+        -   3.1.1 Advantages
+        -   3.1.2 Disadvantages
+    -   3.2 Who is it for?
+-   4 Listing the member packages
 
 Terminology
 -----------
 
- module
+ module 
     The KDE software compilation source code is organized into several
     categories called modules. Examples include kdebase, kdeutils etc.
     The KDE project releases one source archive per module. See the
     Coordinator List for more details.
- package group
+ package group 
     A package group is simply a group of packages. Pacman is able to
     select multiple packages by their group(s) during installation or
     removal.
- meta-package
+ meta-package 
     A meta-package is an empty package which just connects several
     packages by using dependencies.
 
@@ -184,9 +174,15 @@ You could also use the web interface at archlinux.de to browse package
 groups.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=KDE_Packages&oldid=246688"
+"https://wiki.archlinux.org/index.php?title=KDE_Packages&oldid=299834"
 
-Categories:
+Category:
 
--   Arch development
--   Desktop environments
+-   KDE
+
+-   This page was last modified on 22 February 2014, at 15:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

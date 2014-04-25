@@ -1,21 +1,19 @@
 DeveloperWiki
 =============
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Policies                                                           |
-| -   2 Organization                                                       |
-| -   3 Packaging Guidelines                                               |
-| -   4 Packaging Reference                                                |
-| -   5 Important Public Information                                       |
-| -   6 Internals                                                          |
-| -   7 Future                                                             |
-| -   8 Artwork and Branding                                               |
-| -   9 Web Development                                                    |
-| -   10 Release Engineering                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Policies
+-   2 Organization
+-   3 Packaging Guidelines
+-   4 Packaging Reference
+-   5 Important Public Information
+-   6 Internals
+-   7 Future
+-   8 Artwork and Branding
+-   9 Web Development
+-   10 Release Engineering
 
 > Policies
 
@@ -36,7 +34,6 @@ DeveloperWiki
 -   World Domination Plans
     -   Moon Domination Plans
     -   Other celestial bodies?
-
 -   World Domination Status
 
 > Packaging Guidelines
@@ -99,16 +96,21 @@ DeveloperWiki
 
 > Release Engineering
 
--   DeveloperWiki:2009.08
--   DeveloperWiki:2010.05
 -   DeveloperWiki:iso building
 -   DeveloperWiki:releng testimages feedback
 -   DeveloperWiki:releng_roadmap
 -   DeveloperWiki:Release_process
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DeveloperWiki&oldid=220282"
+"https://wiki.archlinux.org/index.php?title=DeveloperWiki&oldid=293327"
 
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 17 January 2014, at 13:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

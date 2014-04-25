@@ -1,10 +1,6 @@
 VDR
 ===
 
-  Summary
-  -----------------------------------------------
-  Information on installing and configuring VDR
-
 VDR stands for Video Disk Recorder, an open source software application
 to turn any PC into a digital video recorder. These initials do not
 fully explain what VDR is capable of. VDR does also implement all the
@@ -26,61 +22,50 @@ Internet. The third part is about rather advanced features like how to
 automatically detect and mark commercial breaks in your recordings or
 how to stream VDR over the Internet.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Initial Steps                                                      |
-|     -   1.1 Hardware Requirements                                        |
-|     -   1.2 Installation                                                 |
-|         -   1.2.1 Prepare for compilation                                |
-|         -   1.2.2 Getting the pkgbuilds                                  |
-|         -   1.2.3 Install ttf-vdrsymbols                                 |
-|         -   1.2.4 start-stop-daemon                                      |
-|         -   1.2.5 vdr                                                    |
-|         -   1.2.6 libblueray                                             |
-|         -   1.2.7 xine-lib                                               |
-|         -   1.2.8 vdr-plugin-xineliboutput-git                           |
-|                                                                          |
-|     -   1.3 DVB Card Kernel Modules and Firmware                         |
-|     -   1.4 Starting VDR                                                 |
-|                                                                          |
-| -   2 Extending VDR                                                      |
-|     -   2.1 Plugins                                                      |
-|         -   2.1.1 How to Setup a Plugin                                  |
-|                                                                          |
-|     -   2.2 Remote Control                                               |
-|         -   2.2.1 LIRC                                                   |
-|         -   2.2.2 Remote Plugin                                          |
-|                                                                          |
-|     -   2.3 Configuring VDR                                              |
-|         -   2.3.1 Channel Scan                                           |
-|         -   2.3.2 Controlling and Displaying VDR                         |
-|             -   2.3.2.1 TVtime - Full-Featured Cards Only                |
-|             -   2.3.2.2 Xineliboutput - Full-Featured and Budget Cards   |
-|                 -   2.3.2.2.1 Configuring vdr-xineliboutput              |
-|                                                                          |
-| -   3 Special Features                                                   |
-|     -   3.1 Augment VDR's EPG                                            |
-|         -   3.1.1 xmltv2vdr                                              |
-|         -   3.1.2 vdraepg                                                |
-|                                                                          |
-|     -   3.2 Streaming VDR                                                |
-|         -   3.2.1 Over the Local Area Network (LAN)                      |
-|         -   3.2.2 Over the Internet                                      |
-|             -   3.2.2.1 StreamDev Plugin                                 |
-|                 -   3.2.2.1.1 Server                                     |
-|                 -   3.2.2.1.2 Client                                     |
-|                                                                          |
-|             -   3.2.2.2 VLC                                              |
-|                 -   3.2.2.2.1 Server                                     |
-|                 -   3.2.2.2.2 Client                                     |
-|                                                                          |
-|         -   3.2.3 Streaming to iPhone, iPad and iPod                     |
-|                                                                          |
-| -   4 Conclusion                                                         |
-| -   5 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Initial Steps
+    -   1.1 Hardware Requirements
+    -   1.2 Installation
+        -   1.2.1 Prepare for compilation
+        -   1.2.2 Getting the pkgbuilds
+        -   1.2.3 Install ttf-vdrsymbols
+        -   1.2.4 start-stop-daemon
+        -   1.2.5 vdr
+        -   1.2.6 libblueray
+        -   1.2.7 xine-lib
+        -   1.2.8 vdr-plugin-xineliboutput-git
+    -   1.3 DVB Card Kernel Modules and Firmware
+    -   1.4 Starting VDR
+-   2 Extending VDR
+    -   2.1 Plugins
+        -   2.1.1 How to Setup a Plugin
+    -   2.2 Remote Control
+        -   2.2.1 LIRC
+        -   2.2.2 Remote Plugin
+    -   2.3 Configuring VDR
+        -   2.3.1 Channel Scan
+        -   2.3.2 Controlling and Displaying VDR
+            -   2.3.2.1 TVtime - Full-Featured Cards Only
+            -   2.3.2.2 Xineliboutput - Full-Featured and Budget Cards
+                -   2.3.2.2.1 Configuring vdr-xineliboutput
+-   3 Special Features
+    -   3.1 Augment VDR's EPG
+        -   3.1.1 xmltv2vdr
+        -   3.1.2 vdraepg
+    -   3.2 Streaming VDR
+        -   3.2.1 Over the Local Area Network (LAN)
+        -   3.2.2 Over the Internet
+            -   3.2.2.1 StreamDev Plugin
+                -   3.2.2.1.1 Server
+                -   3.2.2.1.2 Client
+            -   3.2.2.2 VLC
+                -   3.2.2.2.1 Server
+                -   3.2.2.2.2 Client
+        -   3.2.3 Streaming to iPhone, iPad and iPod
+-   4 Conclusion
+-   5 References
 
 Initial Steps
 -------------
@@ -805,8 +790,15 @@ References
 -   German User Forum
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=VDR&oldid=239286"
+"https://wiki.archlinux.org/index.php?title=VDR&oldid=291105"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 31 December 2013, at 13:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

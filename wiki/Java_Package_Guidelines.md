@@ -16,17 +16,15 @@ to remedy this situation. These guidelines are flexible in order to
 cover the many different scenarios that arise when dealing with Java
 applications.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Structure of a Typical Java Application                            |
-| -   3 Arch Java Packaging                                                |
-|     -   3.1 Multiple API implementations                                 |
-|     -   3.2 Example Directory Structure                                  |
-|     -   3.3 Dependencies                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Structure of a typical Java application
+-   3 Java packaging on Arch Linux
+    -   3.1 Multiple API implementations
+    -   3.2 Example directory structure
+    -   3.3 Dependencies
 
 Introduction
 ------------
@@ -39,20 +37,20 @@ in /etc/profile. Others are placed in directories in /usr/share with
 scripts placed in /usr/bin. Many add unnecessary files to the system
 CLASSPATH and PATH.
 
-Structure of a Typical Java Application
+Structure of a typical Java application
 ---------------------------------------
 
 Most Desktop Java applications have a similar structure. They are
 installed from a system-independent (but package dependent!) installer.
 This usually installs everything in a single directory with
 subdirectories called bin, lib, jar, conf, etc. There is usually a main
-jar file containing the main executable classes. A shellscript is
+jar file containing the main executable classes. A shell script is
 usually provided to run the main class so users do not have to invoke
 the Java interpreter directly. This shell script is usually quite
-complex, as it is generic across distros, and often includes special
-cases for different systems (ie: CYGWIN).
+complex, as it is generic across distributions and often includes
+special cases for different systems (e.g., Cygwin).
 
-The lib directory, often contains bundled jar files that satisfy
+The lib directory often contains bundled jar files that satisfy
 dependencies of the Java application. This makes it simple for a user to
 install the program (all dependencies included), but is a package
 developer's nightmare. It is a waste of space when several packages
@@ -67,8 +65,8 @@ need to be run from within this directory (i.e. the shell script should
 cd into the directory), or an environment variable is set to indicate
 the directory's location.
 
-Arch Java Packaging
--------------------
+Java packaging on Arch Linux
+----------------------------
 
 Packaging Java applications in Arch is going to take quite a bit more
 work for packagers than it currently does. The effort will be worth it,
@@ -111,11 +109,11 @@ are usually very small and there is little point in refactoring them.
     /usr/bin. Libraries generally do not require shell scripts. Write
     the shell script from scratch, rather than using one that is bundled
     with the program. Remove code that tests for custom environments
-    (like CYGWIN), and code that tries to determine if JAVA_HOME has
+    (like Cygwin), and code that tries to determine if JAVA_HOME has
     been set (The J2RE package ensures JAVA_HOME has been properly set,
     so we do not need to test for it).
 
-such script should look like this for jars:
+such script should look like this for jar files:
 
     #!/bin/sh
     "$JAVA_HOME/bin/java" -jar '/usr/share/java/PROGRAMNAME/PROGRAMNAME.jar'
@@ -138,12 +136,12 @@ and like this for single class files:
     CP=$CP:/usr/share/java/dep1/dep1.jar
     java -cp $CP myprogram.java.MainClass
 
--   Make sure the shellscript is executable!
+-   Make sure the shell script is executable!
 
 -   Other files distributed with the package should be stored in a
     directory named after the package under /usr/share. You may need to
     set the location of this directory in a variable like MYPROJECT_HOME
-    inside the shellscript. This guideline assumes that the program
+    inside the shell script. This guideline assumes that the program
     expects all files to be in the same directory (as is standard with
     Java packages). If it seems more natural to put a configuration file
     elsewhere (for example, logs in /var/log), then feel free to do so.
@@ -162,15 +160,15 @@ home directory.
 
 > Multiple API implementations
 
-If your package distributes commonly used api implementation(like jdbc
-driver) you should place the library under /usr/share/java/apinam. So
+If your package distributes commonly used API implementation(like jdbc
+driver) you should place the library under /usr/share/java/apiname. So
 that applications that allow user to select from various implementations
 will know where to look for them. Use this location only for raw library
 packages. If such a implementation is part of distribution of
-application, do not place this jarfile under common location, but use
+application, do not place this jar file under common location but use
 ordinary package structure.
 
-> Example Directory Structure
+> Example directory structure
 
 To clarify, here is an example directory structure for a hypothetical
 program called foo. Since foo is a common name, the package is named
@@ -203,8 +201,15 @@ dependency provided by:
 -   jdk (non-free)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Java_Package_Guidelines&oldid=250668"
+"https://wiki.archlinux.org/index.php?title=Java_Package_Guidelines&oldid=279177"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 20 October 2013, at 13:26.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

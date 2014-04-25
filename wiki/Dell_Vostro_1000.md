@@ -6,35 +6,28 @@ Dell Vostro 1000
 
 Questions: IM diogo.urb@hotmail.com (MSN) .
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Problems                                                           |
-|     -   2.1 "Unknown Key Pressed"                                        |
-|     -   2.2 Legacy Kernels                                               |
-|     -   2.3 High Temperature                                             |
-|                                                                          |
-| -   3 Installation                                                       |
-| -   4 Xorg                                                               |
-|     -   4.1 Xorg 7.4                                                     |
-|         -   4.1.1 Sample xorg.conf                                       |
-|         -   4.1.2 Touchpad                                               |
-|         -   4.1.3 Function Keys                                          |
-|                                                                          |
-| -   5 Wireless                                                           |
-|     -   5.1 b43                                                          |
-|     -   5.2 wl                                                           |
-|     -   5.3 Ndiswrapper                                                  |
-|     -   5.4 Wicd                                                         |
-|                                                                          |
-| -   6 Suspend/Hibernate                                                  |
-|     -   6.1 Resume not working after suspend to RAM                      |
-|     -   6.2 Backlight doesn't come back after Resume                     |
-|                                                                          |
-| -   7 Adjust Brightness                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Problems
+    -   2.1 "Unknown Key Pressed"
+    -   2.2 High Temperature
+-   3 Installation
+-   4 Xorg
+    -   4.1 Xorg 7.4
+        -   4.1.1 Sample xorg.conf
+        -   4.1.2 Touchpad
+        -   4.1.3 Function Keys
+-   5 Wireless
+    -   5.1 b43
+    -   5.2 wl
+    -   5.3 Ndiswrapper
+    -   5.4 Wicd
+-   6 Suspend/Hibernate
+    -   6.1 Resume not working after suspend to RAM
+    -   6.2 Backlight doesn't come back after Resume
+-   7 Adjust Brightness
 
 Hardware
 ========
@@ -73,14 +66,6 @@ Problems
 
   
 
-Legacy Kernels
---------------
-
--   You must pass nolapic_timer as a boot option if you're using kernel
-    2.6.26 (not needed for 2.6.27)
-
-  
-
 High Temperature
 ----------------
 
@@ -107,7 +92,7 @@ Installation
 ============
 
 1.  Use installation disc 2008.03 or greater
-2.  Follow the Beginners_Guide
+2.  Follow the Beginners' guide
 
 Xorg
 ====
@@ -421,8 +406,15 @@ Adjust normally with the FN Keys if your using the kernel 2.6.24 or
 greater
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1000&oldid=226954"
+"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1000&oldid=298142"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 16 February 2014, at 07:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

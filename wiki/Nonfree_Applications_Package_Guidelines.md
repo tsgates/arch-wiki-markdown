@@ -29,24 +29,21 @@ pacman.
 Note:All information here is package-agnostic, for information specific
 to the most typical nonfree software see Wine PKGBUILD guidelines.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Rationale                                                          |
-| -   2 Common rules                                                       |
-|     -   2.1 Avoid nonfree software when possible                         |
-|     -   2.2 Use open source variants where possible                      |
-|     -   2.3 Keep it simple                                               |
-|                                                                          |
-| -   3 Package Naming                                                     |
-| -   4 File placement                                                     |
-| -   5 Missing files                                                      |
-| -   6 Advanced topics                                                    |
-|     -   6.1 Custom DLAGENTS                                              |
-|     -   6.2 Unpacking                                                    |
-|     -   6.3 Getting icons for .desktop files                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Rationale
+-   2 Common rules
+    -   2.1 Avoid nonfree software when possible
+    -   2.2 Use open source variants where possible
+    -   2.3 Keep it simple
+-   3 Package naming
+-   4 File placement
+-   5 Missing files
+-   6 Advanced topics
+    -   6.1 Custom DLAGENTS
+    -   6.2 Unpacking
+    -   6.3 Getting icons for .desktop files
 
 Rationale
 ---------
@@ -117,17 +114,17 @@ If the packaging of some program requires more effort and hacks than
 buying and using the original version - do the simplest thing, it is
 Arch!
 
-Package Naming
+Package naming
 --------------
 
 Before choosing a name on your own, search in AUR for existing versions
 of the software you want to package. Try to use established naming
 conversion (e.g. do not create something like gish-hb when there are
 already aquaria-hib-hg, penumbra-overture-hib and uplink-hib). Use
-suffix -bin always unless you are sure there will never be source-based
-package – its creator would have to ask you (or in worst case TUs) to
-orphan existing package for him and you both will end up with PKGBUILDs
-cluttered with additional replaces and conflicts.
+suffix -bin always unless you are sure there will never be a
+source-based package—its creator would have to ask you (or in worst case
+TUs) to orphan existing package for him and you both will end up with
+PKGBUILDs cluttered with additional replaces and conflicts.
 
 File placement
 --------------
@@ -225,7 +222,6 @@ sometimes do not even run in Wine. Following tools may be of some help:
     installers
     -   it even can extract single sections from common PE (.exe & .dll)
         files!
-
 -   upx is sometimes used to encrypt above-listed executables and can be
     used for decryption as well
 -   innoextract can unpack .exe installers created with Inno Setup (used
@@ -242,8 +238,15 @@ You can even do it on fly during build phase (example can be found in
 sugarsdelight).
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Nonfree_Applications_Package_Guidelines&oldid=247940"
+"https://wiki.archlinux.org/index.php?title=Nonfree_Applications_Package_Guidelines&oldid=306035"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 20 March 2014, at 17:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

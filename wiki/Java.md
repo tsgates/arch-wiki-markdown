@@ -1,13 +1,9 @@
 Java
 ====
 
-> Summary
+Related articles
 
-This article explains how to install and configure JRE/JDK.
-
-> Related
-
-Java Package Guidelines
+-   Java Package Guidelines
 
 "Java is a programming language originally developed by Sun Microsystems
 and released in 1995 as a core component of Sun Microsystems' Java
@@ -16,108 +12,95 @@ a simpler object model and fewer low-level facilities. Java applications
 are typically compiled to bytecode that can run on any Java virtual
 machine (JVM) regardless of computer architecture." — Wikipedia article
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 OpenJDK JVM                                                  |
-|         -   1.1.1 Flagging OpenJDK packages as out-of-date               |
-|                                                                          |
-|     -   1.2 Oracle JVM                                                   |
-|     -   1.3 Oracle JVM (Java 6)                                          |
-|     -   1.4 Kaffe (Discontinued)                                         |
-|     -   1.5 BEA JRockit JIT JVM (+JDK)                                   |
-|     -   1.6 VMkit LLVM-based JIT VM                                      |
-|     -   1.7 Parrot VM                                                    |
-|                                                                          |
-| -   2 Troubleshooting                                                    |
-|     -   2.1 MySQL                                                        |
-|     -   2.2 Java sound with Pulseaudio                                   |
-|     -   2.3 Impersonate Another Window Manager                           |
-|     -   2.4 Fonts are Illegible                                          |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Better font rendering                                        |
-|     -   3.2 GTK LookAndFeel                                              |
-|     -   3.3 Symlinks change                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 OpenJDK
+        -   1.1.1 Flagging packages as out-of-date
+    -   1.2 Oracle Java SE
+        -   1.2.1 Java SE 6
+        -   1.2.2 JDK-compat
+    -   1.3 Oracle JRockit
+    -   1.4 VMkit
+    -   1.5 Parrot VM
+-   2 Troubleshooting
+    -   2.1 MySQL
+    -   2.2 Java sound with PulseAudio
+    -   2.3 Impersonate another window manager
+    -   2.4 Illegible fonts
+-   3 Tips and tricks
+    -   3.1 Better font rendering
+    -   3.2 GTK LookAndFeel
+    -   3.3 Symlinks change
 
 Installation
 ------------
 
-The only JVM implementation in supported repositories is the open source
-OpenJDK. Additional Java implementations are available via the AUR. Keep
-in mind that the open-source and closed-source versions cannot be
-installed simultaneously. The open-source version is nearly perfect at
-the time of writing, and there is mostly no need anymore to install
-Oracle's proprietary version of Java.
+The only supported JVM implementation in Arch Linux is the open source
+OpenJDK. It is nearly perfect, and it should not be necessary to install
+Oracle's proprietary version of Java. If you want to install Oracle Java
+alongside OpenJDK, see #JDK-compat.
 
 Note:After installation, the Java environment will need recognized by
 the shell ($PATH variable and $JAVA_HOME). This can be done from the
 command line by sourcing /etc/profile, and for Desktop Environments it
 is likely a logout/login will be necessary.
 
-> OpenJDK JVM
+> OpenJDK
 
-To be able to run Java programs, you can install Java runtime with the
+The OpenJDK Java runtime environment (JRE) can be installed with the
 package jre7-openjdk, available in the official repositories. There is
-also a Java Development Kit in jdk7-openjdk. As of March 2013 openjdk6
-is no longer available.
+also a Java development kit (JDK) available with the package
+jdk7-openjdk. Sources are available with the package openjdk7-src.
 
-You will likely need the icedtea-web-java7 package for Java
-functionality in browsers, namely applets and Web Start (for more
-details see Browser Plugins#Java (IcedTea)).
+If you want Java functionality in browsers (Java applets and Java Web
+Start), install icedtea-web-java7. For more details see Browser
+plugins#Java (IcedTea).
 
-Flagging OpenJDK packages as out-of-date
+Flagging packages as out-of-date
 
-Please flag packages jre7-openjdk-headless, jre7-openjdk and
-jdk7-openjdk as out-of-date based on their IcedTea version (2.3.4)
-rather than on their Oracle version (u9). IcedTea-web projects (packages
-icedtea-web and icedtea-web-java7) have version numbers that are
-independant from the IcedTea one (packages jre7-openjdk-headless,
-jre7-openjdk and jdk7-openjdk) so please flag each package based on its
-right version number.
+-   jre7-openjdk, jdk7-openjdk and jre7-openjdk-headless should be
+    flagged as out-of-date based on the IcedTea version (e.g. 2.4.3),
+    rather than on their Oracle version (e.g. u45).
+-   icedtea-web-java7 should be flagged as out-of-date based on the
+    IcedTea Web version (e.g. 1.4.1). This is independent of the IcedTea
+    version.
 
-> Oracle JVM
+> Oracle Java SE
 
-Prior to the retirement of the Oracle DLJ, it was possible to simply
-install the jre and jdk packages from the repositories. However, now
-Arch Linux (and any other GNU/Linux distribution) can no longer package
-the Oracle implementation of Java. The OpenJDK packages are the
-recommended providers of java-runtime and java-environment.
+The Oracle implementations of JRE and JDK are available in the AUR: jre
+and jdk.
 
-> Oracle JVM (Java 6)
+Java SE 6
 
-AUR contains package for jre6 and jdk6, which are the Oracle
-implementations of Java SE 6. These packages conflict with the other
-java packages, so there are also jre6-compat and jdk6-compat which can
-be used along side other java installations.
+The AUR contains jre6 and jdk6, which are the Oracle implementations of
+Java SE 6.
 
-> Kaffe (Discontinued)
+JDK-compat
 
-Kaffe is another clean-room implementation of a Java VM without official
-endorsement from Sun/Oracle. A git package of Kaffe can be found in the
-AUR here: kaffe-git. The Kaffe VM is redistributed according to the GPL
-license.
+The Oracle JDK (6 and 7) can also be installed in parallel with another
+Java installation (for example OpenJDK). The packages can be found in
+the AUR: jdk6-compat and jdk7-compat.
 
-> BEA JRockit JIT JVM (+JDK)
+> Oracle JRockit
 
-JRockit is JIT version of Java, provided by Oracle and available from
-the AUR here: jrockit.
+JRockit is a JIT version of Java, provided by Oracle and available as
+jrockit from the AUR.
 
-> VMkit LLVM-based JIT VM
+> VMkit
 
 VMkit is an LLVM-based framework for JIT virtual machines. J3 is a JVM
-running on VMkit. The webpage can be found here: [vmkit]. J3 depends on
+running on VMkit. The webpage can be found here: vmkit. J3 depends on
 the GNU classpath libraries, but may also work with the Apache class
 path libraries.
 
 > Parrot VM
 
-The Parrot VM offers experimental support for Java through two different
-methods: Either as a Java VM bytecode translator or as a Java compiler
-targeting the Parrot VM. Available in the AUR package parrot-git.
+Parrot is a VM that offers experimental support for Java through two
+different methods: Either as a Java VM bytecode translator or as a Java
+compiler targeting the Parrot VM. parrot is available in the official
+repositories and parrot-git in the AUR.
 
 Troubleshooting
 ---------------
@@ -131,12 +114,12 @@ the fact that they are possibly running on the same host, Thus, to use
 JDBC and MySQL you should enable remote access to MySQL, following
 instructions in MySQL article.
 
-> Java sound with Pulseaudio
+> Java sound with PulseAudio
 
 Note:This procedure is likely to be relevant for previous version of
 Java (Java 6) only.
 
-By default, Java and Pulseaudio do not get along very well with each
+By default, Java and PulseAudio do not get along very well with each
 other, but this is easy to fix using padsp.
 
 (These paths are correct for Sun's Java, you will need to change the
@@ -159,31 +142,31 @@ You will need to redo this process on each update of Java.
 
 You can also try replacing padsp with aoss, which can also fix it under
 standard ALSA as well as in Pulse, do what works best. I must warn
-everyone that these hacks sometimes work perfect, but are sometimes very
-unstable as well.
+everyone that these hacks sometimes work perfectly, but are sometimes
+very unstable as well.
 
-> Impersonate Another Window Manager
+> Impersonate another window manager
 
 You may use the wmname from suckless.org to make the JVM believe you are
 running a different window manager. This may solve a rendering issue of
-Java GUIs occuring in window managers like Awesome or Dwm.
+Java GUIs occurring in window managers like Awesome or Dwm.
 
     $ wmname LG3D
 
-(You must restart the application in question after issuing the wmname
-command.)
+You must restart the application in question after issuing the wmname
+command.
 
-This works because the JVM contains a hard-coded list of known
-non-re-parenting window managers. For maximum irony, many users prefer
-to impersonate “LG3D,” the non-re-parenting window manager written by
-Sun, in Java.
+This works because the JVM contains a hard-coded list of known,
+non-re-parenting window managers. For maximum irony, some users prefer
+to impersonate LG3D, the non-re-parenting window manager written by Sun,
+in Java.
 
-> Fonts are Illegible
+> Illegible fonts
 
-In addition to the suggestions mentioned below in [tips and tricks] some
-fonts may still not be legible afterwards. If this is the case there is
-a good chance ms-fonts are being used. Install ttf-ms-fonts from the
-AUR.
+In addition to the suggestions mentioned below in
+#Better_font_rendering, some fonts may still not be legible afterwards.
+If this is the case, there is a good chance Microsoft fonts are being
+used. Install ttf-ms-fonts from the AUR.
 
 Tips and tricks
 ---------------
@@ -216,13 +199,13 @@ swing.aatext=true
 
 If your Java programs look ugly, you may want to set up the default look
 and feel for the swing components:
--Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel.
+swing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel.
 
 Some stubborn Java programs insist on using the cross platform Metal
 look and feel. In some of these cases you can force these apps to use
 the GTK look and feel by setting the following property:
 
--Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel.
+swing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel.
 
 > Symlinks change
 
@@ -232,8 +215,15 @@ javac ... etc. If you want to change these symlinks to any other JDK
 script might be handy for you.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Java&oldid=255866"
+"https://wiki.archlinux.org/index.php?title=Java&oldid=305944"
 
 Category:
 
 -   Programming language
+
+-   This page was last modified on 20 March 2014, at 17:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

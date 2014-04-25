@@ -1,19 +1,17 @@
 DeveloperWiki:Goals
 ===================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Current Suggestions                                                |
-|     -   2.1 James Rayner                                                 |
-|     -   2.2 Roman Kyrylych                                               |
-|     -   2.3 Paul Mattal                                                  |
-|     -   2.4 Aaron Griffin                                                |
-|     -   2.5 eliott                                                       |
-|     -   2.6 Phil                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Current Suggestions
+    -   2.1 James Rayner
+    -   2.2 Roman Kyrylych
+    -   2.3 Paul Mattal
+    -   2.4 Aaron Griffin
+    -   2.5 eliott
+    -   2.6 Phil
 
 Introduction
 ============
@@ -138,3 +136,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 20 March 2010, at 16:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

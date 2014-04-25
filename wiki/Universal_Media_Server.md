@@ -28,9 +28,15 @@ UMS can be run on a per-user basis. Run the executable at
 UMS.conf are especially noteworthy.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Universal_Media_Server&oldid=246426"
+"https://wiki.archlinux.org/index.php?title=Universal_Media_Server&oldid=261403"
 
-Categories:
+Category:
 
--   Audio/Video
--   Networking
+-   Streaming
+
+-   This page was last modified on 6 June 2013, at 04:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

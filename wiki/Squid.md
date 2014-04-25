@@ -23,39 +23,33 @@ While squid works wonderfully in large corporations and schools, it can
 also benefit the home user too. However, if you're looking for a more
 lightweight single-user proxy, you should try Polipo.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Accessing services on local hostnames                              |
-| -   4 Starting                                                           |
-| -   5 Content Filtering                                                  |
-| -   6 Frontend                                                           |
-| -   7 Ad blocking with adzapper                                          |
-|     -   7.1 Installation                                                 |
-|     -   7.2 Configuration                                                |
-|                                                                          |
-| -   8 Anti-virus layer                                                   |
-|     -   8.1 Installing dependencies                                      |
-|     -   8.2 Configuration                                                |
-|     -   8.3 Testing                                                      |
-|                                                                          |
-| -   9 Transparent web proxy                                              |
-|     -   9.1 iptables                                                     |
-|     -   9.2 Shorewall                                                    |
-|                                                                          |
-| -   10 HTTP Authentication                                               |
-|     -   10.1 NTLM                                                        |
-|                                                                          |
-| -   11 Additional Resources                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Accessing services on local hostnames
+-   4 Starting
+-   5 Content Filtering
+-   6 Frontend
+-   7 Ad blocking with adzapper
+    -   7.1 Installation
+    -   7.2 Configuration
+-   8 Anti-virus layer
+    -   8.1 Installing dependencies
+    -   8.2 Configuration
+    -   8.3 Testing
+-   9 Transparent web proxy
+    -   9.1 iptables
+    -   9.2 Shorewall
+-   10 HTTP Authentication
+    -   10.1 NTLM
+-   11 Additional Resources
 
 Installation
 ------------
 
-Install squid available in the Official Repositories.
+Install squid available in the Official repositories.
 
 Configuration
 -------------
@@ -227,11 +221,8 @@ to interface it with ClamAV.
 
 > Installing dependencies
 
-Follow this link to install ClamAV on your system.
-
-Once ClamAV is installed, install HAVP from AUR. Details on installing
-an AUR package can be found here, and the HAVP package can be found
-here.
+Follow ClamAV to install ClamAV on your system. When it is installed,
+install havp from AUR.
 
 > Configuration
 
@@ -379,9 +370,16 @@ Additional Resources
 -   Elite Proxy Config Example
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Squid&oldid=255463"
+"https://wiki.archlinux.org/index.php?title=Squid&oldid=301492"
 
 Categories:
 
 -   Security
 -   Proxy servers
+
+-   This page was last modified on 24 February 2014, at 11:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

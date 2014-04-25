@@ -2,19 +2,18 @@ OpenDKIM
 ========
 
 DomainKeys Identified Mail is a digital email signing/verification
-technology, which is already supported by some common mail providers.
-(For example yahoo, google, etc).
+technology, which is already supported by some common mail providers
+(for example yahoo, google, etc).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 The idea                                                           |
-| -   2 Installation                                                       |
-| -   3 Basic configuration                                                |
-| -   4 Postfix integration                                                |
-| -   5 Notes                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 The idea
+-   2 Installation
+-   3 Basic configuration
+-   4 Postfix integration
+-   5 Security
+-   6 Notes
 
 The idea
 --------
@@ -38,33 +37,40 @@ Installation
 
 Install the package opendkim from the Official repositories.
 
-You may add an user for opendkim or use existing one (for example:
-postfix)
-
 Basic configuration
 -------------------
 
--   Generate key (server1 is the selector that is specified in the conf
-    file below):
+-   To generate a secret signing key, you need to specify the domain
+    used to send mails and a selector which is used to refer to the key.
+    You may choose anything you like, see the RFC for details, but
+    alpha-numeric strings should be OK:
 
-    opendkim-genkey -r -s server1 -d example.com
+    opendkim-genkey -r -s myselector -d example.com
 
--   Create /etc/opendkim/opendkim.conf (see example in the same
-    directory)
-
-Minimal config:
+-   Copy/move the sample configuration file
+    /etc/opendkim/opendkim.conf.sample to /etc/opendkim/opendkim.conf
+    and change the following options:
 
     /etc/opendkim/opendkim.conf
 
     Domain                  example.com
     KeyFile                 /path/to/keys/server1.private
-    Selector                server1
+    Selector                myselector
     Socket                  inet:8891@localhost
     UserID                  opendkim
 
 -   Add a DNS TXT record with your selector and public key. The correct
     record is generated with the private key and can be found in
-    server1.txt in the same location as the private key.
+    myselector.txt in the same location as the private key. Example:
+
+    myselector._domainkey   IN	 TXT	"v=DKIM1; k=rsa; s=email; p=...................."
+
+Check that your DNS record has been correctly updated:
+
+    host -t TXT myselector._domainkey.example.com
+
+You may also check that your DKIM DNS record is properly formated using
+one of the DKIM Key checker available on the web.
 
 -   Enable and start the opendkim.service. Read Daemons for more
     information.
@@ -72,17 +78,12 @@ Minimal config:
 Postfix integration
 -------------------
 
-Just add
+Either add the following lines to main.cf:
 
      non_smtpd_milters=inet:127.0.0.1:8891
-
-and/or
-
      smtpd_milters=inet:127.0.0.1:8891
 
-into main.cf or smtpd options in master.cf
-
-master.cf example:
+Or change smtpd options in master.cf:
 
     smtp      inet  n       -       n       -       -       smtpd
       -o smtpd_client_connection_count_limit=10
@@ -96,6 +97,57 @@ master.cf example:
       -o cyrus_sasl_config_path=/etc/sasl2
       -o smtpd_milters=inet:127.0.0.1:8891
 
+Security
+--------
+
+The default configuration for the OpenDKIM daemon is less than ideal
+from a security point of view (all those are minor security issues):
+
+-   The opendkim user is created with an incorrect default shell. You
+    may want to change it to /bin/false or /sbin/login (bug report).
+-   The OpenDKIM daemon does not need to run as root at all (the
+    configuration suggested earlier will have OpenDKIM drop root
+    privileges by himself but systemd can do this too and much earlier).
+-   If your mail daemon is on the same host as the OpenDKIM daemon,
+    there is no need for localhost tcp sockets and unix sockets may be
+    used instead, allowing classic user/group access controls.
+-   OpenDKIM is using the /tmp folder by default whereas it could use
+    its own folder with additional access restrictions.
+
+The following configurations files will fix most of those issues
+(assuming you're using Postfix) and drop some unnecessary options in the
+systemd service unit:
+
+    /etc/tmpfiles.d/opendkim.conf
+
+    D /run/opendkim 0750 opendkim postfix
+
+    /etc/opendkim/opendkim.conf
+
+    BaseDirectory           /var/lib/opendkim
+    Domain                  example.com
+    KeyFile                 /etc/opendkim/myselector.private
+    Selector                myselector
+    Socket                  local:/run/opendkim/socket
+    Syslog                  Yes
+    TemporaryDirectory      /run/opendkim
+    UMask                   002
+
+    /etc/systemd/system/opendkim.service
+
+    [Unit]
+    Description=OpenDKIM daemon
+    After=network.target remote-fs.target nss-lookup.target
+
+    [Service]
+    Type=forking
+    User=opendkim
+    Group=postfix
+    ExecStart=/usr/bin/opendkim -x /etc/opendkim/opendkim.conf
+
+    [Install]
+    WantedBy=multi-user.target
+
 Notes
 -----
 
@@ -105,8 +157,15 @@ basically means adding a DNS Record stating which servers are authorized
 to send email for your domain.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=OpenDKIM&oldid=254737"
+"https://wiki.archlinux.org/index.php?title=OpenDKIM&oldid=304451"
 
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 14 March 2014, at 14:02.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

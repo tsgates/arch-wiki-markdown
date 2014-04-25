@@ -1,7 +1,7 @@
 Emacs Mediawiki
 ===============
 
-> Summary
+Summary help replacing me
 
 Emacs Mediawiki Mode is an emacs major mode which is evolved from an old
 copy of mediawiki mode frome wikipedia.org. It helps to edit remote wiki
@@ -13,19 +13,16 @@ Emacs
 
 ArchWiki:About
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Usage                                                              |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Autofill off                                                 |
-|     -   4.2 Specifying the browser                                       |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Usage
+-   4 Tips and tricks
+    -   4.1 Autofill off
+    -   4.2 Specifying the browser
+-   5 See also
 
 Installation
 ------------
@@ -129,8 +126,15 @@ See also
 -   launchpad project page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Emacs_Mediawiki&oldid=245114"
+"https://wiki.archlinux.org/index.php?title=Emacs_Mediawiki&oldid=273666"
 
 Category:
 
 -   Text editors
+
+-   This page was last modified on 1 September 2013, at 11:01.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

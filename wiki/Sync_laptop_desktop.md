@@ -11,18 +11,15 @@ Sync laptop desktop
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Keeping laptop in sync                                             |
-| -   2 Solutions                                                          |
-|     -   2.1 Unison                                                       |
-|         -   2.1.1 Caveats                                                |
-|                                                                          |
-|     -   2.2 rsync                                                        |
-|     -   2.3 rdiff-backup                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Keeping laptop in sync
+-   2 Solutions
+    -   2.1 Unison
+        -   2.1.1 Caveats
+    -   2.2 rsync
+    -   2.3 rdiff-backup
 
 Keeping laptop in sync
 ----------------------
@@ -220,8 +217,15 @@ I used to use this tool with the following backup script:
     umount /mnt/win
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sync_laptop_desktop&oldid=225274"
+"https://wiki.archlinux.org/index.php?title=Sync_laptop_desktop&oldid=302663"
 
 Category:
 
--   Networking
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

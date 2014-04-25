@@ -8,24 +8,22 @@ control, GUI designer, profiler and many more tools. It focuses on
 providing simple and usable user interface, yet powerful for efficient
 development.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Features                                                           |
-|     -   2.1 User Interface                                               |
-|     -   2.2 Plugins                                                      |
-|     -   2.3 File Manager                                                 |
-|     -   2.4 Project Manager                                              |
-|     -   2.5 Project wizards                                              |
-|     -   2.6 Source Code Editor                                           |
-|     -   2.7 Integrated Glade UI Designer                                 |
-|     -   2.8 Integrated Debugger                                          |
-|     -   2.9 Integrated Devhelp API help browser                          |
-|     -   2.10 Symbols view and navigation                                 |
-|     -   2.11 Class generator and file wizard                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Features
+    -   2.1 User Interface
+    -   2.2 Plugins
+    -   2.3 File Manager
+    -   2.4 Project Manager
+    -   2.5 Project wizards
+    -   2.6 Source Code Editor
+    -   2.7 Integrated Glade UI Designer
+    -   2.8 Integrated Debugger
+    -   2.9 Integrated Devhelp API help browser
+    -   2.10 Symbols view and navigation
+    -   2.11 Class generator and file wizard
 
 Installing
 ----------
@@ -272,3 +270,10 @@ Retrieved from
 Category:
 
 -   Development
+
+-   This page was last modified on 13 June 2012, at 15:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

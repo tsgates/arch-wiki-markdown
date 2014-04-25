@@ -4,23 +4,21 @@ Atomic Bomberman
 Atomic Bomberman is a PC game developed by Interplay and released in
 1997. It can be played on Arch using Wine.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Environment                                                        |
-| -   2 Installing Atomic bomberman                                        |
-| -   3 Playing Atomic Bomberman                                           |
-| -   4 Troubleshooting                                                    |
-| -   5 References and Resources                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Environment
+-   2 Installing Atomic bomberman
+-   3 Playing Atomic Bomberman
+-   4 Troubleshooting
+-   5 References and Resources
 
 Environment
 -----------
 
 Tested with Wine 1.3.7 successfully
 
-For network play, you need to install IPX. It can be found in aur:[1]
+For network play, you need to install IPX. It can be found in aur: ipx
 
 -   After this, ipx can be added to your network card like this:
 
@@ -36,7 +34,7 @@ For network play, you need to install IPX. It can be found in aur:[1]
 Installing Atomic bomberman
 ---------------------------
 
-Download from here: [2]
+Download from here: [1]
 
 Then extract the zip file, then extract the rar files. For example to
 c:\bomber:
@@ -76,13 +74,20 @@ via wireless
 References and Resources
 ------------------------
 
--   aur:ipx 1.1-2
+-   AUR package: ipx
 -   WineHQ - Atomic Bomberman 1.0
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Atomic_Bomberman&oldid=250567"
+"https://wiki.archlinux.org/index.php?title=Atomic_Bomberman&oldid=277254"
 
 Categories:
 
 -   Gaming
 -   Wine
+
+-   This page was last modified on 1 October 2013, at 19:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

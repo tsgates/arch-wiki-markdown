@@ -1,51 +1,42 @@
 iPod
 ====
 
-> Summary
+Related articles
+
+-   Audiobook
 
 The purpose of this article is to demonstrate the use of an
 iPod/idevices under Arch Linux.
 
-> Related
+Contents
+--------
 
-Audiobook
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Changing iPod Mountpoint                                           |
-| -   2 Importing videos and pictures                                      |
-|     -   2.1 HTML5 videos                                                 |
-|     -   2.2 Importing pictures and deleting them                         |
-|                                                                          |
-| -   3 Converting video for iPod                                          |
-|     -   3.1 Gen 5/5.5                                                    |
-|     -   3.2 Handbrake                                                    |
-|         -   3.2.1 DVD to iPod                                            |
-|         -   3.2.2 Video File to iPod                                     |
-|                                                                          |
-|     -   3.3 More Advanced/Configurable Methods                           |
-|         -   3.3.1 Avidemux                                               |
-|         -   3.3.2 Mencoder                                               |
-|         -   3.3.3 FFMpeg                                                 |
-|                                                                          |
-| -   4 iPhone/iPod Touch                                                  |
-|     -   4.1 Introduction                                                 |
-|     -   4.2 Making Friends with the Device                               |
-|         -   4.2.1 The SSHFS Way                                          |
-|         -   4.2.2 The iFuse Way                                          |
-|         -   4.2.3 Generating HashInfo file                               |
-|                                                                          |
-|     -   4.3 Unobfuscating the Database                                   |
-|     -   4.4 Syncing                                                      |
-|     -   4.5 The iFuse Way - iPhone OS 3.x and 4.x                        |
-|     -   4.6 Rhythmbox                                                    |
-|                                                                          |
-| -   5 iPod Classic/Nano3g                                                |
-| -   6 iPod management apps                                               |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+-   1 Changing iPod Mountpoint
+-   2 Importing videos and pictures
+    -   2.1 HTML5 videos
+    -   2.2 Importing pictures and deleting them
+-   3 Converting video for iPod
+    -   3.1 Gen 5/5.5
+    -   3.2 Handbrake
+        -   3.2.1 DVD to iPod
+        -   3.2.2 Video File to iPod
+    -   3.3 More Advanced/Configurable Methods
+        -   3.3.1 Avidemux
+        -   3.3.2 Mencoder
+        -   3.3.3 FFMpeg
+-   4 iPhone/iPod Touch
+    -   4.1 Introduction
+    -   4.2 Making Friends with the Device
+        -   4.2.1 The SSHFS Way
+        -   4.2.2 The iFuse Way
+        -   4.2.3 Generating HashInfo file
+    -   4.3 Unobfuscating the Database
+    -   4.4 Syncing
+    -   4.5 The iFuse Way - iPhone OS 3.x and 4.x
+    -   4.6 Rhythmbox
+-   5 iPod Classic/Nano3g
+-   6 iPod management apps
+-   7 See also
 
 Changing iPod Mountpoint
 ------------------------
@@ -153,7 +144,7 @@ iPod or iPhone.
 
 Avidemux
 
-Install the avidemux package from the official repositories.
+Install avidemux-gtk or avidemux-qt from the official repositories.
 
 This can convert to mp4 files. If you enforce a hard max of bit rate @
 700ish and keep the video size to 720x480 or 320x240 than it works fine
@@ -543,8 +534,15 @@ See also
     -   Apple trailers downloader script
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IPod&oldid=242784"
+"https://wiki.archlinux.org/index.php?title=IPod&oldid=305953"
 
 Category:
 
 -   Sound
+
+-   This page was last modified on 20 March 2014, at 17:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,26 +1,23 @@
 Activating Numlock on Bootup
 ============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Console                                                            |
-|     -   1.1 Using a separate service                                     |
-|     -   1.2 Extending getty@.service                                     |
-|     -   1.3 Bash alternative                                             |
-|                                                                          |
-| -   2 X.org                                                              |
-|     -   2.1 startx                                                       |
-|     -   2.2 KDM                                                          |
-|     -   2.3 KDE4 Users                                                   |
-|         -   2.3.1 Alternate Method                                       |
-|                                                                          |
-|     -   2.4 GDM                                                          |
-|     -   2.5 GNOME                                                        |
-|     -   2.6 SLiM                                                         |
-|     -   2.7 OpenBox                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Console
+    -   1.1 Using a separate service
+    -   1.2 Extending getty@.service
+    -   1.3 Bash alternative
+-   2 X.org
+    -   2.1 startx
+    -   2.2 KDM
+    -   2.3 KDE4 Users
+        -   2.3.1 Alternate Method
+        -   2.3.2 Alternate Method 2
+    -   2.4 GDM
+    -   2.5 GNOME
+    -   2.6 SLiM
+    -   2.7 OpenBox
 
 Console
 -------
@@ -29,8 +26,8 @@ Console
 
 Install the package systemd-numlockontty from the AUR.
 
-Now you should enable the numLockOnTty.service daemon. Read Daemons for
-more details.
+Now you should enable the numLockOnTty daemon. Read Daemons for more
+details.
 
 > Extending getty@.service
 
@@ -95,14 +92,29 @@ you will find an option to select the behavior of NumLock.
 
 Alternate Method
 
-Alternatively, add the script the ~/.kde4/Autostart/numlockx containing:
+Alternatively, add the script the ~/.kde4/Autostart/numlockx.sh
+containing:
 
     #!/bin/sh
     numlockx on
 
 And make it executable:
 
-    $ chmod +x ~/.kde4/Autostart/numlockx
+    $ chmod +x ~/.kde4/Autostart/numlockx.sh
+
+Alternate Method 2
+
+This method enables num lock in KDM login screen (e.g. numeric password)
+
+1) Disable "Themed Greeter" in System Settings -> Login Screen
+
+2) in file /usr/share/config/kdm/kdmrc find section
+
+     [X-*-Greeter]
+
+Right after that line, add this:
+
+     NumLock=On
 
 > GDM
 
@@ -151,10 +163,16 @@ In the file ~/.config/openbox/autostart add the line:
 And then save the file.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Activating_Numlock_on_Bootup&oldid=254196"
+"https://wiki.archlinux.org/index.php?title=Activating_Numlock_on_Bootup&oldid=305919"
 
 Categories:
 
 -   Boot process
--   Desktop environments
 -   Keyboards
+
+-   This page was last modified on 20 March 2014, at 17:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

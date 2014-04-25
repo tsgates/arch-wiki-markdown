@@ -44,3 +44,10 @@ Categories:
 
 -   Sound
 -   Audio/Video
+
+-   This page was last modified on 13 June 2012, at 11:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

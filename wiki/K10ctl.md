@@ -8,19 +8,16 @@ Lowering the voltage saves energy and leads to less heat and noise.
 
 Warning:USE THIS PROGRAM AT YOU OWN RISK. IT MAY DAMAGE YOUR HARDWARE.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 k10ctl.conf                                                  |
-|     -   2.2 Pre-Configuration                                            |
-|     -   2.3 How to calculate values                                      |
-|     -   2.4 rc.conf                                                      |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 k10ctl.conf
+    -   2.2 Pre-Configuration
+    -   2.3 How to calculate values
+    -   2.4 Enable k10ctl permanently
+-   3 Tips and tricks
 
 Installation
 ------------
@@ -29,8 +26,6 @@ k10ctl is available in the AUR: k10ctl
 
 Configuration
 -------------
-
-Note:cpufreq must be configured properly.
 
 > k10ctl.conf
 
@@ -83,7 +78,7 @@ Tip:The important lines are "P-State 0" - "P-State X".
 When you are sure everything is correct, set "CONFIGURATED" to "true"
 and restart k10ctl:
 
-    # /etc/rc.d/k10ctl start
+    # systemctl start k10ctl
 
 Up to now k10ctl should work with the default values of your CPU.
 
@@ -110,28 +105,32 @@ Note:All arrays in the config must have the same size.
 
 Restart k10ctl and check "k10ctl 0-3" again.
 
-    # /etc/rc.d/k10ctl start
+    # systemctl start k10ctl
 
     # k10ctl 0-3
 
-> rc.conf
+> Enable k10ctl permanently
 
-Add cpufreq + k10ctl to DAEMONS=() and msr to MODULES=().
+    # systemctl enable k10ctl
+
+For the module 'msr' take a look at Kernel_modules#Loading.
 
 Tips and tricks
 ---------------
 
 Use mprime to test the stability of your computer.
 
-If it's stable, decrease the values, else increase them.
-
-If your computer freezes and you can't adjust the values, start the
-Fallback kernel and modify the config.
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=K10ctl&oldid=237316"
+"https://wiki.archlinux.org/index.php?title=K10ctl&oldid=264143"
 
 Categories:
 
 -   Power management
 -   CPU
+
+-   This page was last modified on 24 June 2013, at 19:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

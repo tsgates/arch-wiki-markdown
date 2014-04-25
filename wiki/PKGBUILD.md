@@ -1,37 +1,18 @@
 PKGBUILD
 ========
 
-> Summary
+Related articles
 
-This article provides an explanation of PKGBUILD variables used when
-creating packages. A PKGBUILD is a script that describes how software is
-to be compiled and packaged. Writing installation functions and general
-packaging information is covered in Creating Packages and other package
-development articles
-
-> Overview
-
-Packages in Arch Linux are built using makepkg and a custom build script
-for each package (known as a PKGBUILD). Once packaged, software can be
-installed and managed with pacman. PKGBUILDs for software in the
-official repositories are available from the ABS tree; thousands more
-are available from the (unsupported) Arch User Repository.
-
-> Related
-
-Arch Packaging Standards
-
-Creating Packages
-
-Custom local repository
-
-pacman Tips
-
-PKGBUILD Templates
-
-> Resources
-
-PKGBUILD(5) Manual Page
+-   Arch Packaging Standards
+-   Arch Build System
+-   Creating Packages
+-   Category:Package development
+-   Custom local repository
+-   pacman Tips
+-   PKGBUILD Templates
+-   Arch User Repository
+-   makepkg
+-   pacman
 
 A PKGBUILD is an Arch Linux package build description file (actually it
 is a shell script) used when creating packages.
@@ -43,46 +24,51 @@ to either compile or otherwise acquire the files to build a package file
 (pkgname.pkg.tar.xz). The resulting package contains binary files and
 installation instructions, readily installed with pacman.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Variables                                                          |
-|     -   1.1 pkgname                                                      |
-|     -   1.2 pkgver                                                       |
-|     -   1.3 pkgrel                                                       |
-|     -   1.4 pkgdir                                                       |
-|     -   1.5 epoch                                                        |
-|     -   1.6 pkgbase                                                      |
-|     -   1.7 pkgdesc                                                      |
-|     -   1.8 arch                                                         |
-|     -   1.9 url                                                          |
-|     -   1.10 license                                                     |
-|     -   1.11 groups                                                      |
-|     -   1.12 depends                                                     |
-|     -   1.13 makedepends                                                 |
-|     -   1.14 checkdepends                                                |
-|     -   1.15 optdepends                                                  |
-|     -   1.16 provides                                                    |
-|     -   1.17 conflicts                                                   |
-|     -   1.18 replaces                                                    |
-|     -   1.19 backup                                                      |
-|     -   1.20 options                                                     |
-|     -   1.21 install                                                     |
-|     -   1.22 changelog                                                   |
-|     -   1.23 source                                                      |
-|     -   1.24 noextract                                                   |
-|     -   1.25 md5sums                                                     |
-|     -   1.26 sha1sums                                                    |
-|     -   1.27 sha256sums, sha384sums, sha512sums                          |
-|                                                                          |
-| -   2 See also                                                           |
-+--------------------------------------------------------------------------+
+This article discusses the variables used in PKGBUILDs. For information
+on the PKGBUILD functions, refer to
+Creating_Packages#PKGBUILD_Functions.
+
+Contents
+--------
+
+-   1 Variables
+    -   1.1 pkgname
+    -   1.2 pkgver
+    -   1.3 pkgrel
+    -   1.4 pkgdir
+    -   1.5 epoch
+    -   1.6 pkgbase
+    -   1.7 pkgdesc
+    -   1.8 arch
+    -   1.9 url
+    -   1.10 license
+    -   1.11 groups
+    -   1.12 depends
+    -   1.13 optdepends
+    -   1.14 makedepends
+    -   1.15 checkdepends
+    -   1.16 provides
+    -   1.17 conflicts
+    -   1.18 replaces
+    -   1.19 backup
+    -   1.20 options
+    -   1.21 install
+    -   1.22 changelog
+    -   1.23 source
+    -   1.24 noextract
+    -   1.25 md5sums
+    -   1.26 sha1sums
+    -   1.27 sha256sums, sha384sums, sha512sums
+-   2 See also
 
 Variables
 ---------
 
 The following are variables that can be filled out in the PKGBUILD file.
+pkgname, pkgver, pkgrel, and arch are all mandatory. license is not
+strictly necessary to build a package, but it is recommended for any
+PKGBUILDS you might want to share with others. makepkg produces warnings
+if it isn't present.
 
 It is common practice to define the variables in the PKGBUILD in same
 order as given here. However, this is not mandatory, as long as correct
@@ -109,7 +95,7 @@ an underscore. For instance, if the version is 0.99-10, it should be
 changed to 0.99_10. If the pkgver variable is used later in the PKGBUILD
 then the underscore can easily be substituted for a dash on usage e.g.:
 
-    source=($pkgname-${pkgver//_/-}.tar.gz)
+    source=("$pkgname-${pkgver//_/-}.tar.gz")
 
 > pkgrel
 
@@ -123,17 +109,21 @@ release number resets to 1.
 
 > pkgdir
 
-Don't worry about this. It defaults to the location where makepkg is
-being executed.
+This variable reflects the root directory of what will be put into the
+package. It is commonly used in make DESTDIR="$pkgdir" install.
 
 > epoch
 
-An integer value, specific to Arch Linux, representing what 'lifetime'
-to compare version numbers against. This value allows overrides of the
-normal version comparison rules for packages that have inconsistent
-version numbering, require a downgrade, change numbering schemes, etc.
-By default, packages are assumed to have an epoch value of 0. Do not use
-this unless you know what you are doing.
+Used to force the package to be seen as newer than any previous versions
+with a lower epoch, even if the version number would normally not
+trigger such an upgrade. This value is required to be a positive
+integer; the default value if left unspecified is 0. This is useful when
+the version numbering scheme of a package changes (or is alphanumeric),
+breaking normal version comparison logic. See pacman(8) for more
+information on version comparisons.
+
+Warning:Do not use epoch unless fully aware of the implications of doing
+so.
 
 > pkgbase
 
@@ -170,9 +160,9 @@ architecture-independent packages.
 You can access the target architecture with the variable $CARCH during a
 build, and even when defining variables. See also FS#16352. Example:
 
-    depends=(foobar)
+    depends=('foobar')
     if test "$CARCH" == x86_64; then
-      depends+=(lib32-glibc)
+      depends+=('lib32-glibc')
     fi
 
 > url
@@ -215,7 +205,6 @@ done:
     -   (L)GPL - (L)GPLv2 or any later version
     -   (L)GPL2 - (L)GPL2 only
     -   (L)GPL3 - (L)GPL3 or any later version
-
 -   If after researching the issue no license can be determined,
     PKGBUILD.proto suggests using unknown. However, upstream should be
     contacted about the conditions under which the software is (and is
@@ -235,13 +224,40 @@ kdebase package, it installs all packages that belong in the kde group.
 > depends
 
 An array of package names that must be installed before this software
-can be run. If a software requires a minimum version of a dependency,
-the >= operator should be used to point this out, e.g.
-depends=('foobar>=1.8.0'). You do not need to list packages that your
-software depends on if other packages your software depends on already
-have those packages listed in their dependency. For instance, gtk2
-depends on glib2 and glibc. However, glibc does not need to be listed as
-a dependency for gtk2 because it is a dependency for glib2.
+can be run. Version restrictions can be specified with comparison
+operators, e.g. depends=('foobar>=1.8.0'); if multiple restrictions are
+needed, the dependency can be repeated for each of them [1], e.g.
+depends=('foobar>=1.8.0' 'foobar<2.0.0'). You do not need to list
+packages that your software depends on if other packages your software
+depends on already have those packages listed in their dependency. For
+instance, gtk2 depends on glib2 and glibc. However, glibc does not need
+to be listed as a dependency for gtk2 because it is a dependency for
+glib2.
+
+Warning:The group base-devel is assumed to be already installed when
+building with makepkg. Members of "base-devel" should not be included in
+depends arrays.
+
+> optdepends
+
+An array of package names that are not needed for the software to
+function but provides additional features. A short description of what
+each package provides should also be noted. An optdepends may look like
+this:
+
+    optdepends=(
+      'cups: printing support'
+      'sane: scanners support'
+      'libgphoto2: digital cameras support'
+      'alsa-lib: sound support'
+      'giflib: GIF images support'
+      'libjpeg: JPEG images support'
+      'libpng: PNG images support'
+    )
+
+Warning:The group base-devel is assumed to be already installed when
+building with makepkg. Members of "base-devel" should not be included in
+optdepends arrays.
 
 > makedepends
 
@@ -252,8 +268,8 @@ format as the depends array.
 
 Note:Specifying packages that are already in depends is not necessary.
 
-Warning:The group base-devel is assumed already installed when building
-with makepkg . Members of "base-devel" should not be included in
+Warning:The group base-devel is assumed to be already installed when
+building with makepkg. Members of "base-devel" should not be included in
 makedepends arrays.
 
 > checkdepends
@@ -263,20 +279,9 @@ are not needed at runtime. Packages in this list follow the same format
 as depends. These dependencies are only considered when the check()
 function is present and is to be run by makepkg.
 
-> optdepends
-
-An array of package names that are not needed for the software to
-function but provides additional features. A short description of what
-each package provides should also be noted. An optdepends may look like
-this:
-
-    optdepends=('cups: printing support'
-    'sane: scanners support'
-    'libgphoto2: digital cameras support'
-    'alsa-lib: sound support'
-    'giflib: GIF images support'
-    'libjpeg: JPEG images support'
-    'libpng: PNG images support')
+Warning:The group base-devel is assumed to be already installed when
+building with makepkg. Members of "base-devel" should not be included in
+checkdepends arrays.
 
 > provides
 
@@ -289,13 +294,13 @@ dependencies may be affected by it. For instance, if you are providing a
 modified qt package named qt-foobar version 3.3.8 which provides qt then
 the provides array should look like provides=('qt=3.3.8'). Putting
 provides=('qt') will cause to fail those dependencies that require a
-specific version of qt. Do not add pkgname to your provides array, this
+specific version of qt. Do not add pkgname to your provides array; this
 is done automatically.
 
 > conflicts
 
 An array of package names that may cause problems with this package if
-installed. Package with this name and all packages which provides
+installed. A package with this name and all packages which provides
 virtual packages with this name will be removed. You can also specify
 the version properties of the conflicting packages in the same format as
 the depends array.
@@ -339,6 +344,7 @@ array:
     helpful to disable this option.
 -   docs - Save /doc directories.
 -   libtool - Leave libtool (.la) files in packages.
+-   staticlibs - Leave static library (.a) files in packages
 -   emptydirs - Leave empty directories in packages.
 -   zipman - Compress man and info pages with gzip.
 -   purge - Remove files specified by the PURGE_TARGETS variable from
@@ -373,9 +379,9 @@ following functions which run at different times:
 -   pre_upgrade - The script is run right before files are extracted.
     Two arguments are passed in the following order: new package
     version, old package version.
--   post_upgrade - The script is run after files are extracted. Two
-    arguments are passed in the following order: new package version,
-    old package version.
+-   post_upgrade - The script is run right after files are extracted.
+    Two arguments are passed in the following order: new package
+    version, old package version.
 -   pre_remove - The script is run right before files are removed. One
     argument is passed: old package version.
 -   post_remove - The script is run right after files are removed. One
@@ -385,6 +391,7 @@ Each function is run chrooted inside the pacman install directory. See
 this thread.
 
 Tip:A prototype .install is provided at /usr/share/pacman/proto.install.
+For a web-based prototype, refer to pacman's gitweb page.
 
 > changelog
 
@@ -402,33 +409,35 @@ An array of files which are needed to build the package. It must contain
 the location of the software source, which in most cases is a full HTTP
 or FTP URL. The previously set variables pkgname and pkgver can be used
 effectively here (e.g.
-source=(http://example.com/$pkgname-$pkgver.tar.gz))
+source=("https://example.com/$pkgname-$pkgver.tar.gz"))
 
 Note:If you need to supply files which are not downloadable on the fly,
 e.g. self-made patches, you simply put those into the same directory
-where your PKGBUILD file is in and add the filename to this array. Any
+where your PKGBUILD file is in and add the file name to this array. Any
 paths you add here are resolved relative to the directory where the
 PKGBUILD lies. Before the actual build process is started, all of the
 files referenced in this array will be downloaded or checked for
 existence, and makepkg will not proceed if any are missing.
 
-Tip:You can specify a different name for the downloaded file - if the
-downloaded file has a different name for some reason like the URL had a
-GET parameter - using the following syntax: filename::fileuri, for
-example
-$pkgname-$pkgver.zip::http://199.91.152.193/7pd0l2tpkidg/jg2e1cynwii/Warez_collection_16.4.exe
+Tip:You can specify a different name for the downloaded file — if the
+downloaded file has a different name for some reason, like the URL had a
+GET parameter — using the following syntax: filename::fileuri
+
+For example:
+
+    source=("${pkgname}::hg+https://googlefontdirectory.googlecode.com/hg/")
 
 > noextract
 
 An array of files listed under the source array which should not be
 extracted from their archive format by makepkg. This most commonly
-applies to certain zip files which cannot be handled by /usr/bin/bsdtar
-because libarchive processes all files as streams rather than random
-access as unzip does. In these situations unzip should be added in the
-makedepends array and the first line of the build() function should
-contain:
+applies to archives which cannot be handled by /usr/bin/bsdtar because
+libarchive processes all files as streams rather than random access as
+unzip does. In these situations, the alternative unarchiving tool (e.g.,
+unzip, p7zip, etc.) should be added in the makedepends array and the
+first line of the prepare() function should extract the source archive
+manually; for example:
 
-    cd "$srcdir/$pkgname-$pkgver"
     unzip [source].zip
 
 Note that while the source array accepts URLs, noextract is just the
@@ -436,16 +445,15 @@ file name portion. So, for example, you would do something like this
 (simplified from grub2's PKGBUILD):
 
     source=("http://ftp.archlinux.org/other/grub2/grub2_extras_lua_r20.tar.xz")
-    noextract=("grub2_extras_lua_r20.tar.xz")
+    noextract=('grub2_extras_lua_r20.tar.xz')
 
 To extract nothing, you can do something fancy like this (taken from
 firefox-i18n):
 
-    noextract=(${source[@]##*/})
+    noextract=("${source[@]%%::*}")
 
-Note:More conservative Bash substitution would include quotes, or
-possibly even a loop that calls basename. If you have read this far, you
-should get the idea.
+Note:More conservative Bash substitution would possibly include a loop
+that calls basename. If you have read this far, you should get the idea.
 
 > md5sums
 
@@ -454,38 +462,49 @@ all files in the source array are available, an MD5 hash of each file
 will be automatically generated and compared with the values of this
 array in the same order they appear in the source array. While the order
 of the source files itself does not matter, it is important that it
-matches the order of this array since makepkg cannot guess which
+matches the order of this array because makepkg cannot guess which
 checksum belongs to what source file. You can generate this array
-quickly and easily using the commands updpkgsums or makepkg -g in the
-directory that contains the PKGBUILD file. Note that the MD5 algorithm
-is known to have weaknesses, so you should consider using a stronger
-alternative.
+quickly and easily using the command updpkgsums in the directory that
+contains the PKGBUILD file.
+
+Note:The MD5 algorithm is known to have weaknesses; you should consider
+using a stronger alternative from the SHA-2 family of hash algorithms,
+such as SHA-256.
 
 > sha1sums
 
-An array of SHA-1 160-bit checksums. This is an alternative to md5sums
-described above, but it is also known to have weaknesses, so you should
-consider using a stronger alternative. To enable use and generation of
-these checksums, be sure to set up the INTEGRITY_CHECK option in
-/etc/makepkg.conf. See man makepkg.conf.
+An array of 160-bit SHA-1 checksums. This is an alternative to md5sums
+described above. To enable use and generation of these checksums, set up
+the INTEGRITY_CHECK option in /etc/makepkg.conf. See man makepkg.conf.
+
+Note:The SHA-1 algorithm is known to have weaknesses; you should
+consider using a stronger alternative from the SHA-2 family of hash
+algorithms, such as SHA-256.
 
 > sha256sums, sha384sums, sha512sums
 
-An array of SHA-2 checksums with digest sizes 256, 384 and 512 bits
-respectively. These are alternatives to md5sums described above and are
-generally believed to be stronger. To enable use and generation of these
-checksums, be sure to set up the INTEGRITY_CHECK option in
-/etc/makepkg.conf. See man makepkg.conf.
+An array of SHA-2 checksums with digest sizes 256, 384, and 512 bits,
+respectively. These are alternatives to md5sums and sha1sums described
+above and have fewer known weaknesses. To enable use and generation of
+these checksums, set up the INTEGRITY_CHECK option in /etc/makepkg.conf.
+See man makepkg.conf.
 
 See also
 --------
 
+-   PKGBUILD(5) Manual Page
 -   Example PKGBUILD file
--   Example .install file
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PKGBUILD&oldid=253211"
+"https://wiki.archlinux.org/index.php?title=PKGBUILD&oldid=299578"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 22 February 2014, at 00:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

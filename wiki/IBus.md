@@ -1,82 +1,70 @@
 IBus
 ====
 
-> Summary
+Related articles
 
-This article discusses the installation, configuration, and
-troubleshooting steps associated with the usage of IBus.
+-   Fcitx
+-   SCIM
+-   UIM
 
-> Related
+IBus (Intelligent Input Bus) is an input method framework, a system for
+entering foreign characters. IBus functions similarly to Fcitx, SCIM and
+UIM.
 
-Fcitx
+Contents
+--------
 
-SCIM
-
-UIM
-
-IBus ("Intelligent Input Bus") is an input method framework, a system
-for entering foreign characters. IBus functions similarly to Fcitx, SCIM
-and UIM.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Input Method Engines                                         |
-|     -   1.2 Initial Setup                                                |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Ibus                                                         |
-|     -   2.2 Ibus-rime                                                    |
-|         -   2.2.1 Installation                                           |
-|         -   2.2.2 Configuration                                          |
-|         -   2.2.3 Usage                                                  |
-|             -   2.2.3.1 Basic configuration access                       |
-|             -   2.2.3.2 Chinese punctuation                              |
-|             -   2.2.3.3 Advanced                                         |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Pinyin usage                                                 |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Kimpanel                                                     |
-|     -   4.2 rxvt-unicode                                                 |
-|     -   4.3 GTK applications                                             |
-|     -   4.4 Chinese Input                                                |
-|     -   4.5 LibreOffice                                                  |
-+--------------------------------------------------------------------------+
+-   1 Installation
+    -   1.1 Input method engines
+    -   1.2 Initial setup
+    -   1.3 GNOME
+-   2 Configuration
+    -   2.1 IBus
+    -   2.2 Ibus-rime
+        -   2.2.1 Usage
+            -   2.2.1.1 Basic configuration access
+            -   2.2.1.2 Chinese punctuation
+            -   2.2.1.3 Advanced
+-   3 Tips and tricks
+    -   3.1 Pinyin usage
+-   4 Troubleshooting
+    -   4.1 Kimpanel
+    -   4.2 rxvt-unicode
+    -   4.3 GTK+ applications
+    -   4.4 Chinese input
+    -   4.5 LibreOffice
 
 Installation
 ------------
 
-Install the ibus package from the Official Repositories.
+Install the ibus package from the official repositories.
 
 Additionally, to enable IBus for Qt applications, install the ibus-qt
 library.
 
-> Input Method Engines
+> Input method engines
 
 You will need at least one input method, corresponding to the language
 you wish to type. Available input methods include:
 
--   ibus-anthy: A Japanese IME, based on anthy.
--   ibus-pinyin: An intelligent Chinese Phonetic IME for Hanyu pinyin
-    and Zhuyin (Bopomofo) users. Designed by IBus main author and has
-    many advance features such as English spell checking.
--   ibus-rime: A powerful and smart Chinese input method for Chinese
+-   ibus-anthy - Japanese IME, based on anthy.
+-   ibus-pinyin - Intelligent Chinese Phonetic IME for Hanyu pinyin and
+    Zhuyin (Bopomofo) users. Designed by IBus main author and has many
+    advance features such as English spell checking. Package currently
+    not maintained and partly broken with latest ibus base. Use
+    ibus-libpinyin instead.
+-   ibus-rime - Powerful and smart Chinese input method for Chinese
     (pinyin, zhuyin, with or without tones, double pinyin, Jyutping,
     Wugniu, Cangjie5 and Wubi 86).
--   ibus-chewing: An intelligent Chinese Phonetic IME for Zhuyin
+-   ibus-chewing - Intelligent Chinese Phonetic IME for Zhuyin
     (Bopomofo) users, based on libchewing.
--   ibus-hangul: A Korean IME, based on libhangul.
--   ibus-unikey: An IME for typing Vietnamese characters.
--   ibus-table: An IME that accommodates table-based IMs.
--   ibus-m17n: A m17n IME which allows input of many languages using the
+-   ibus-hangul - Korean IME, based on libhangul.
+-   ibus-unikey - IME for typing Vietnamese characters.
+-   ibus-table - IME that accommodates table-based IMs.
+-   ibus-m17n - M17n IME which allows input of many languages using the
     input methods from m17n-db.
--   ibus-keymagic: A complex smart input method, designed to work with
-    all kind of languages by using keyboard layouts(km2) generated by
-    layout script(kms).
+-   ibus-mozc - Japanese IME, based on Mozc. Part of mozc package.
+-   ibus-kkc - Japanese IME, based on libkkc.
 
 To see all available input methods:
 
@@ -84,70 +72,74 @@ To see all available input methods:
 
 Others packages are also available in the AUR.
 
-> Initial Setup
+> Initial setup
 
-Now, run ibus-setup (as the user who will use IBus):
-
-    $ ibus-setup
-
-It will start the daemon and give you this message:
+Now, run  $ ibus-setup (as the user who will use IBus). It will start
+the daemon and give you this message:
 
     IBus has been started! If you cannot use IBus, please add below lines in $HOME/.bashrc, and relogin your desktop.
-      export GTK_IM_MODULE=ibus
-      export XMODIFIERS=@im=ibus
-      export QT_IM_MODULE=ibus
+    export GTK_IM_MODULE=ibus
+    export XMODIFIERS=@im=ibus
+    export QT_IM_MODULE=ibus
 
-Note:Although IBus uses a daemon, it is not the sort of daemon managed
-by the DAEMONS array in /etc/rc.conf: it runs as an ordinary user and
-will be started for you when you login.
+> Note:
 
-Note:If, however, ibus is not autostarted upon login, then move the
-“export …” lines above to $HOME/.xprofile instead, and append this line
-to the same file: “ibus-daemon -drx”, and relogin your desktop.
+-   Although IBus uses a daemon, it is not the sort of daemon managed by
+    systemd: it runs as an ordinary user and will be started for you
+    when you login.
+-   If, however, IBus is not autostarted upon login, then move the
+    “export …” lines above to $HOME/.xprofile instead, and append this
+    line to the same file: ibus-daemon -drx, and relogin your desktop.
+    You can also try adding ibus-daemon -drx after the export ... lines
+    in $HOME/.bashrc.
 
 You will then see a configuration screen; you can access this screen
 whenever IBus is running by right-clicking the icon in the system tray
-and choosing "Preferences". See Configuration.
+and choosing Preferences. See Configuration.
 
 If IBus doesn't work in Qt/KDE applications, ensure that the ibus-qt
 library is installed and define IBus as the default IME in the Qt
 configuration editor:
 
-    $ qtconfig
+    $ qtconfig-qt4
 
-In "Interface" -> "Default Input Method", select ibus instead of xim.
+In Interface > Default Input Method, select ibus instead of xim.
+
+> GNOME
+
+GNOME includes IBus by default, so you should only need to install the
+package specific to your language. To enable input in your language, add
+it to the Input Sources section of the Region & Language settings. After
+you add your input sources, GNOME will show the input switcher icon in
+the tray. The default keyboard shortcut to switch to the next input
+method in GNOME is Super+space; disregard the next input method shortcut
+set in ibus-setup.
 
 Configuration
 -------------
 
-> Ibus
+> IBus
 
-Note:You need to have East Asian fonts installed if you want to enter
+Note:You need to have east Asian fonts installed if you want to enter
 Chinese, Japanese, Korean or Vietnamese characters.
 
-The default "General" settings should be fine, but go to "Input Methods"
-and select your input method(s) in the drop down box, then press "Add".
-You can use multiple input methods if you wish. Once IBus is set up, you
-can press Ctrl+Space to use it (multiple times to cycle through
-available input methods). IBus will remember which input method you are
-using in each window, so you will have to reactivate it for each new
-window. You can override this behavior by right clicking the system tray
-icon, selecting "Preferences", and going to the "Advanced" tab.
+The default General settings should be fine, but go to Input Methods and
+select your input method(s) in the drop down box, then press Add. You
+can use multiple input methods if you wish. Once IBus is set up, you can
+press Super+space to use it (multiple times to cycle through available
+input methods). IBus will remember which input method you are using in
+each window, so you will have to reactivate it for each new window. You
+can override this behavior by right clicking the system tray icon,
+selecting Preferences, and going to the Advanced tab.
 
 > Ibus-rime
-
-Installation
 
 If you have decided to use the great ibus-rime IME, here are some help
 to install it and to configure it.
 
-First, you should install it from [community] : ibus-rime.
-
 In order to work, Rime is based on schemas that should be edited by the
 user. However, it comes installed with a default pinyin input schema so
 you can use it as it.
-
-Configuration
 
 If you want it for another input method, here they are:
 
@@ -180,7 +172,7 @@ replace the schema list with a list that only contains Terra Pinyin.
 
 Eventually, if the changes aren't taken automatically, run:
 
-    rm ~/.config/ibus/rime/default.yaml && ibus-daemon -drx
+    $ rm ~/.config/ibus/rime/default.yaml && ibus-daemon -drx
 
 Note: Tones are optionals but you can type them to filter the list very
 well. Here are how to type them:
@@ -247,7 +239,7 @@ little table showing you how to type some of them:
 Advanced
 
 Rime allows you to change everything you can imagine and more examples
-are provided on the website of the project: (in Chinese)
+are provided on the website of the project (in Chinese):
 https://code.google.com/p/rimeime/wiki/CustomizationGuide
 
 Tips and tricks
@@ -274,107 +266,22 @@ Troubleshooting
 
 > Kimpanel
 
-IBus main interface is currently only available in GTK, but Kimpanel
+IBus main interface is currently only available in GTK+, but Kimpanel
 provides a native Qt/KDE input interface. The package
-kdeplasma-addons-applets-kimpanel is compiled to support ibus, but ibus
+kdeplasma-addons-applets-kimpanel is compiled to support IBus, but IBus
 needs to be launched as following to be able to communicate with the
 panel:
 
     $ ibus-daemon --xim --panel=/usr/lib/kde4/libexec/kimpanel-ibus-panel
 
 To get a menu entry for launching ibus this way, save the following file
-to ~/.local/share/applications/ibus-kimpanel.desktop
+to ~/.local/share/applications/ibus-kimpanel.desktop:
 
     [Desktop Entry]
     Encoding=UTF-8
     Name=IBus (KIMPanel)
-    Name[ar]=IBus (KIMPanel)
-    Name[as]=IBus (KIMPanel)
-    Name[bn_IN]=IBus (KIMPanel)
-    Name[ca]=IBus (KIMPanel)
-    Name[da]=IBus (KIMPanel)
-    Name[de]=IBus (KIMPanel)
-    Name[en_GB]=IBus (KIMPanel)
-    Name[es]=IBus (KIMPanel)
-    Name[fr]=IBus (KIMPanel)
-    Name[gu]=IBus (KIMPanel)
-    Name[hi]=IBus (KIMPanel)
-    Name[hu]=IBus (KIMPanel)
-    Name[it]=IBus (KIMPanel)
-    Name[ja]=IBus (KIMPanel)
-    Name[kn]=IBus (KIMPanel)
-    Name[ko]=IBus (KIMPanel)
-    Name[ml]=IBus (KIMPanel)
-    Name[mr]=IBus (KIMPanel)
-    Name[nl]=IBus (KIMPanel)
-    Name[or]=IBus (KIMPanel)
-    Name[pa]=IBus (KIMPanel)
-    Name[pl]=iBus (KIMPanel)
-    Name[pt_BR]=IBus (KIMPanel)
-    Name[ru]=IBus (KIMPanel)
-    Name[sr]=IBus (KIMPanel)
-    Name[sr@latin]=IBus (KIMPanel)
-    Name[ta]=IBus (KIMPanel)
-    Name[te]=IBus (KIMPanel)
-    Name[uk]=IBus (KIMPanel)
-    Name[vi]=IBus (KIMPanel)
-    Name[zh_CN]=IBus (KIMPanel)
-    Name[zh_HK]=IBus (KIMPanel)
-    Name[zh_TW]=IBus (KIMPanel)
     GenericName=Input Method Framework
-    GenericName[as]=ইনপুট পদ্ধতি গাথনি
-    GenericName[bn_IN]=ইনপুট পদ্ধতির পরিকাঠামো
-    GenericName[da]=Framework for inputmetode
-    GenericName[de]=Eingabemethode-Framework
-    GenericName[en_GB]=Input Method Framework
-    GenericName[es]=Marco de trabajo para métodos de entrada
-    GenericName[fr]=Framework de méthode de saisie
-    GenericName[gu]=ઇનપુટ પદ્દતિ ફ્રેમવર્ક
-    GenericName[hi]=IBus विधि फ्रेमवर्क
-    GenericName[it]=Framework del metodo di input
-    GenericName[ja]=インプットメソッドフレームワーク
-    GenericName[kn]=IBus ವಿಧಾನದ ಫ್ರೇಮ್‌ವರ್ಕ್
-    GenericName[ko]=입력 방식 프레임워크
-    GenericName[ml]=ഇന്‍പുട്ട് മെഥേഡ് ആകൃതി
-    GenericName[mr]=इन्पुट पद्धत फ्रेमवर्क
-    GenericName[nl]=Invoer methode kader
-    GenericName[or]=ନିବେଶ ପ୍ରଣାଳୀ ଫ୍ରେମୱର୍କ
-    GenericName[pa]=ਇੰਪੁੱਟ ਢੰਗ ਫਰੇਮਵਰਕ
-    GenericName[pl]=Struktura metody wprowadzania
-    GenericName[pt_BR]=Framework do método de entrada
-    GenericName[ru]=Система методов ввода
-    GenericName[ta]=உள்ளீடு முறை ஃபிரேம்வொர்க்
-    GenericName[te]=ఇన్‌పుట్ పద్ధతి ఫ్రేమ్‌వర్క్
-    GenericName[uk]=Оболонка способів введення
-    GenericName[zh_CN]=输入法框架
-    GenericName[zh_TW]=輸入法框架
     Comment=Start IBus Input Method Framework
-    Comment[as]=IBus ইনপুট পদ্ধতি গাথনি আৰম্ভ কৰা
-    Comment[bn_IN]=IBus ইনপুট পদ্ধতির পরিকাঠামো আরম্ভ করা হবে
-    Comment[da]=Start IBus, framework for inputmetode
-    Comment[de]=IBus-Eingabemethode-Framework starten
-    Comment[en_GB]=Start IBus Input Method Framework
-    Comment[es]=Inicie el marco de trabajo para métodos de entrada IBus
-    Comment[fr]=Démarrer le framework de méthode de saisie IBus
-    Comment[gu]=IBus ઇનપુટ પદ્દતિ ફ્રેમવર્કને શરૂ કરો
-    Comment[hi]=IBus इनपुट विधि फ्रेमवर्क आरंभ करें
-    Comment[it]=Avvia il framework del metodo di input di IBus
-    Comment[ja]=IBus インプットメソッドフレームワークを起動
-    Comment[kn]=IBus ಇನ್‌ಪುಟ್ ವಿಧಾನದ ಫ್ರೇಮ್‌ವರ್ಕ್ ಅನ್ನು ಆರಂಭಿಸು
-    Comment[ko]=IBus 입력 방식 프레임워크 시작
-    Comment[ml]=IBus ഇന്‍പുട്ട് മെഥേഡ് ആകൃതി ആരംഭിയ്ക്കുക
-    Comment[mr]=IBus इन्पुट पद्धती फ्रेमवर्क सुरू करा
-    Comment[nl]=Start IBus invoer methode kader
-    Comment[or]=IBus ନିବେଶ ପ୍ରଣାଳୀ ଫ୍ରେମୱର୍କକୁ ଆରମ୍ଭ କରନ୍ତୁ
-    Comment[pa]=ਆਈਬਸ ਇੰਪੁੱਟ ਢੰਗ ਫਰੇਮਵਰਕ ਸ਼ੁਰੂ ਕਰੋ
-    Comment[pl]=Uruchomienie struktury metody wprowadzania iBus
-    Comment[pt_BR]=Iniciar Framework do método de entrada IBus
-    Comment[ru]=Запустить систему методов ввода IBus
-    Comment[ta]=IBus உள்ளீடு முறை ஃபிரேம்வொர்க்கை துவக்கு
-    Comment[te]=IBus ఇన్‌పుట్ పద్ధతి ఫ్రేమ్‌వర్కును ప్రారంభించుము
-    Comment[uk]=Запуск оболонки способів введення IBus
-    Comment[zh_CN]=启动IBus 输入法框架
-    Comment[zh_TW]=啟動 IBus 輸入法框架
     Exec=ibus-daemon --xim --panel=/usr/lib/kde4/libexec/kimpanel-ibus-panel
     Icon=ibus
     Terminal=false
@@ -392,57 +299,56 @@ Choose Application dialog.
 
 > rxvt-unicode
 
-If anyone has any issues with iBus and rxvt-unicode, the following steps
+If anyone has any issues with IBus and rxvt-unicode, the following steps
 should solve it.
 
-Add the following to your .Xdefaults (possibly not required -- try first
+Add the following to your ~/.Xdefaults (possibly not required, first try
 without):
 
-      URxvt.inputMethod: ibus
-      URxvt.preeditType: OverTheSpot
+    URxvt.inputMethod: ibus
+    URxvt.preeditType: OverTheSpot
 
-And start ibus with:
+And start IBus with:
 
-      ibus-daemon --xim
+    $ ibus-daemon --xim
 
 If you start ibus-daemon automatically (e.g. in ~/.xinitrc or
-~/.xsession) but used to use `ibus-daemon &' without the `--xim' option,
+~/.xsession) but used to use ibus-daemon & without the --xim option,
 make sure to kill the existing process before testing the new command.
 
-> GTK applications
+> GTK+ applications
 
 Some users have had problems using Input Methods with GTK applications,
-because it seems that the gtk.immodules file can't be found. Adding
+because it seems that the gtk.immodules file can't be found. Adding:
 
-     (gtk2) export GTK_IM_MODULE_FILE=/etc/gtk-2.0/gtk.immodules
-     (gtk3) export GTK_IM_MODULE_FILE=/usr/lib/gtk-3.0/3.0.0/immodules.cache
+    export GTK_IM_MODULE_FILE=/etc/gtk-2.0/gtk.immodules
 
-in addition to the three lines above in your $HOME/.bashrc seems to fix
-the problem.
+for GTK+ 2, or:
 
-Note:If you set it to gtk2, then you can't use gtk3 applications like
-gedit, if you set it to gtk3, then you can't use gtk2 applications like
-xfce
+    export GTK_IM_MODULE_FILE=/usr/lib/gtk-3.0/3.0.0/immodules.cache
 
-> Chinese Input
+for GTK+ 3, in addition to the three lines above in your $HOME/.bashrc
+seems to fix the problem.
 
-If you encounter problems when using chinese input, check your locale
-settting. For example in Hong Kong, export LANG=zh_HK.utf8.
+Note:If you set it to GTK+ 2, then you can't use GTK+ 3 applications
+like gedit, if you set it to GTK+ 3, then you can't use GTK+ 2
+applications like Xfce.
 
-Note: There are large revisions after ibus1.4, you might not be able to
-input chinese words with ibus-pinyin or ibus-sunpinyin, which are
-written in C. So the solution is:
+> Chinese input
 
--   Install ibus-libpinyin.
+If you encounter problems when using Chinese input, check your locale
+setting. For example in Hong Kong, export LANG=zh_HK.utf8.
 
-You can install ibus-libpinyin.
+Note:There are large revisions after IBus 1.4, you might not be able to
+input Chinese words with ibus-pinyin or ibus-sunpinyin, which are
+written in C. So the solution is to install ibus-libpinyin.
 
-To start ibus with gnome, add this in ~/.profile and restart the gnome.
+To start ibus with GNOME, add this in ~/.profile and restart the GNOME.
 
-       export GTK_IM_MODULE=ibus
-       export XMODIFIERS=@im=ibus
-       export QT_IM_MODULE=ibus
-       ibus-daemon -d -x
+    export GTK_IM_MODULE=ibus
+    export XMODIFIERS=@im=ibus
+    export QT_IM_MODULE=ibus
+    ibus-daemon -d -x
 
 Chinese users can refer to this page for detailed solution concerning
 this bug.
@@ -454,7 +360,7 @@ this line to ~/.bashrc:
 
     export XMODIFIERS=@im=ibus
 
-And then, you need to start ibus with "--xim -d", for example, add this
+And then, you need to start ibus with --xim -d, for example, add this
 line to ~/.xinitrc:
 
     ibus-daemon --xim -d
@@ -463,17 +369,24 @@ But the horrible thing is that you need to start LibreOffice in
 terminal.
 
 If you're using KDE and the above doesn't work, install
-"libreoffice-gnome" and add this line to ~/.xprofile if you don't mind
-running LibreOffice in GTK2 mode:
+libreoffice-gnome and add this line to ~/.xprofile if you don't mind
+running LibreOffice in GTK+ 2 mode:
 
     export OOO_FORCE_DESKTOP="gnome"
 
-That'll make IBus work with LibreOffice, and you can start LibreOffice
-from anywhere -- not just the terminal.
+That will make IBus work with LibreOffice, and you can start LibreOffice
+from anywhere, not just the terminal.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IBus&oldid=246822"
+"https://wiki.archlinux.org/index.php?title=IBus&oldid=304578"
 
 Category:
 
 -   Internationalization
+
+-   This page was last modified on 15 March 2014, at 07:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

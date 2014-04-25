@@ -14,18 +14,16 @@ suspected.S.M.A.R.T. can help with determining that.
 
 Right now this article is only written for JFS and EXT filesystems.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Finding Bad Blocks                                                 |
-| -   2 Debug the Filesystem (JFS)                                         |
-| -   3 Find Damaged Files (JFS/Universal)                                 |
-| -   4 Debug the Filesystem (EXT(2/3/4))                                  |
-| -   5 Find Damaged Files (EXT(2/3/4))                                    |
-| -   6 Force the disk to reallocate bad block                             |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Finding Bad Blocks
+-   2 Debug the Filesystem (JFS)
+-   3 Find Damaged Files (JFS/Universal)
+-   4 Debug the Filesystem (EXT(2/3/4))
+-   5 Find Damaged Files (EXT(2/3/4))
+-   6 Force the disk to reallocate bad block
+-   7 See also
 
 Finding Bad Blocks
 ------------------
@@ -187,7 +185,7 @@ containing the bad sector:
 Finally, use the testb command to get information about the block in
 question (in this example block 1000):
 
-    debugfs:  testb inodenumber
+    debugfs:  testb blocknumber
 
   
  Note: If debugfs says that block isn't in use then that means the block
@@ -196,7 +194,7 @@ good thing as it means nothing important was damaged.
 
 If the block is in use then run this command to get the inode number
 
-    icheck inodenumber
+    icheck blocknumber
 
 This will return two numbers. The block number and the inode number.
 
@@ -272,8 +270,15 @@ See also
 EXT2/3 badblocks howto
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Find_File_that_Owns_a_Given_Block&oldid=210772"
+"https://wiki.archlinux.org/index.php?title=Find_File_that_Owns_a_Given_Block&oldid=285858"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 2 December 2013, at 09:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,6 +1,15 @@
 ASUS Eee PC 1015PX
 ==================
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: Already covered  
+                           by Beginners' guide.     
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
   --------------- --------- ---------------
   Device          Status    Module
   Ethernet        Working   atl1c
@@ -16,19 +25,16 @@ This article is in reference too the Asus Eee PC 1015PX however
 configuration will most likely be almost identical for its sister models
 like the 1015PN and 1015PE.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Ethernet                                                           |
-| -   3 Wireless                                                           |
-| -   4 Video                                                              |
-|     -   4.1 Xorg                                                         |
-|     -   4.2 Brightness                                                   |
-|                                                                          |
-| -   5 Function Keys                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Ethernet
+-   3 Wireless
+-   4 Video
+    -   4.1 Xorg
+    -   4.2 Brightness
+-   5 Function Keys
 
 Installation
 ------------
@@ -136,8 +142,15 @@ Function Keys
   -------------- --------------------- ------------------------------
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1015PX&oldid=253583"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1015PX&oldid=302895"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 2 March 2014, at 12:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

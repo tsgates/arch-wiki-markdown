@@ -1,7 +1,7 @@
 NFS Troubleshooting
 ===================
 
-> Summary
+Summary help replacing me
 
 Dedicated article for common problems and solutions.
 
@@ -9,50 +9,43 @@ Dedicated article for common problems and solutions.
 
 NFS - Main NFS article.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Server-side Issues                                                 |
-|     -   1.1 exportfs: /etc/exports:2: syntax error: bad option list      |
-|     -   1.2 Group/gid permissions issues                                 |
-|     -   1.3 "Permission denied" when trying to write files               |
-|                                                                          |
-| -   2 Client-side Issues                                                 |
-|     -   2.1 mount.nfs4: No such device                                   |
-|     -   2.2 mount.nfs4: access denied by server while mounting           |
-|     -   2.3 Unable to connect from OS X clients                          |
-|     -   2.4 Unreliable connection from OS X clients                      |
-|     -   2.5 Lock problems                                                |
-|                                                                          |
-| -   3 Performance Issues                                                 |
-|     -   3.1 Diagnose the problem                                         |
-|     -   3.2 Server Threads                                               |
-|     -   3.3 Close-to-Open / Flush-on-Close                               |
-|         -   3.3.1 The nocto mount option                                 |
-|         -   3.3.2 The async export option                                |
-|                                                                          |
-|     -   3.4 Buffer Cache Size and MTU                                    |
-|                                                                          |
-| -   4 Other Issues                                                       |
-|     -   4.1 Permissions Issues                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Server-side Issues
-==================
+-   1 Server-side issues
+    -   1.1 exportfs: /etc/exports:2: syntax error: bad option list
+    -   1.2 Group/GID permissions issues
+    -   1.3 "Permission denied" when trying to write files
+-   2 Client-side issues
+    -   2.1 mount.nfs4: No such device
+    -   2.2 mount.nfs4: access denied by server while mounting
+    -   2.3 Unable to connect from OS X clients
+    -   2.4 Unreliable connection from OS X clients
+    -   2.5 Lock problems
+    -   2.6 mount.nfs: Operation not permitted
+-   3 Performance issues
+    -   3.1 Diagnose the problem
+    -   3.2 Server threads
+    -   3.3 Close-to-open/flush-on-close
+        -   3.3.1 The nocto mount option
+        -   3.3.2 The async export option
+    -   3.4 Buffer cache size and MTU
+-   4 Other issues
+    -   4.1 Permissions issues
 
-exportfs: /etc/exports:2: syntax error: bad option list
--------------------------------------------------------
+Server-side issues
+------------------
+
+> exportfs: /etc/exports:2: syntax error: bad option list
 
 Delete all space from the option list in /etc/exports
 
-Group/gid permissions issues
-----------------------------
+> Group/GID permissions issues
 
 If NFS shares mount fine, and are fully accessible to the owner, but not
 to group members; check the number of groups that user belongs to. NFS
 has a limit of 16 on the number of groups a user can belong to. If you
-have users with more then this, you need to enable the --manage-gids
+have users with more than this, you need to enable the --manage-gids
 start-up flag for rpc.mountd on the NFS server.
 
     /etc/conf.d/nfs-server.conf
@@ -64,20 +57,18 @@ start-up flag for rpc.mountd on the NFS server.
 
     MOUNTD_OPTS="--manage-gids"
 
-"Permission denied" when trying to write files
-----------------------------------------------
+> "Permission denied" when trying to write files
 
 -   If you need to mount shares as root, and have full r/w access from
     the client, add the no_root_squash option to the export in
     /etc/exports:
 
-        /var/cache/pacman/pkg 192.168.1.0/24(rw,no_subtree_check,no_root_squash)
+    /var/cache/pacman/pkg 192.168.1.0/24(rw,no_subtree_check,no_root_squash)
 
-Client-side Issues
-==================
+Client-side issues
+------------------
 
-mount.nfs4: No such device
---------------------------
+> mount.nfs4: No such device
 
 Check that you have loaded the nfs module
 
@@ -85,23 +76,26 @@ Check that you have loaded the nfs module
 
 and if previous returns empty or only nfsd-stuff, do
 
-    modprobe nfs
+    # modprobe nfs
 
-mount.nfs4: access denied by server while mounting
---------------------------------------------------
+> mount.nfs4: access denied by server while mounting
+
+NFS shares have to reside in /srv - check your /etc/exports file and if
+necessary create the proper folder structure as described in the
+NFS#File_system page.
 
 Check that the permissions on your client's folder are correct. Try
 using 755.
 
-Unable to connect from OS X clients
------------------------------------
+or try "exportfs -rav" reload /etc/exports file.
+
+> Unable to connect from OS X clients
 
 When trying to connect from a OS X client, you will see that everything
 is ok at logs, but MacOS X refuses to mount your NFS share. You have to
 add insecure option to your share and re-run exportfs -r.
 
-Unreliable connection from OS X clients
----------------------------------------
+> Unreliable connection from OS X clients
 
 OS X's NFS client is optimized for OS X Servers and might present some
 issues with Linux servers. If you are experiencing slow performance,
@@ -110,8 +104,7 @@ default mount options by adding the line
 nfs.client.mount.options = intr,locallocks,nfc to /etc/nfs.conf on your
 Mac client. More information about the mount options can be found here.
 
-Lock problems
--------------
+> Lock problems
 
 If you got error such as this:
 
@@ -122,17 +115,31 @@ If you got error such as this:
 To fix this, you need to change the "NEED_STATD" value in
 /etc/conf.d/nfs-common.conf to YES.
 
-Remember to start all the required services (see NFS or NFSv3), not just
-the nfs service.
+Remember to start all the required services (see NFS), not just the nfs
+service.
 
-Performance Issues
-==================
+> mount.nfs: Operation not permitted
+
+After updating to nfs-utils 1.2.1-2 or higher, mounting NFS shares
+stopped working. Henceforth, nfs-utils uses NFSv4 per default instead of
+NFSv3. The problem can be solved by using either mount option 'vers=3'
+or 'nfsvers=3' on the command line:
+
+    # mount.nfs remote target directory -o ...,vers=3,...
+    # mount.nfs remote target directory -o ...,nfsvers=3,...
+
+or in /etc/fstab:
+
+    remote target directory nfs ...,vers=3,... 0 0
+    remote target directory nfs ...,nfsvers=3,... 0 0
+
+Performance issues
+------------------
 
 This NFS Howto page has some useful information regarding performance.
 Here are some further tips:
 
-Diagnose the problem
---------------------
+> Diagnose the problem
 
 -   Htop should be your first port of call. The most obvious symptom
     will be a maxed-out CPU.
@@ -141,8 +148,7 @@ Diagnose the problem
     particular, is the CPU spending most of its time responding to IRQs,
     or in Wait-IO (wio)?
 
-Server Threads
---------------
+> Server threads
 
 Symptoms: Nothing seems to be very heavily loaded, but some operations
 on the client take a long time to complete for no apparent reason.
@@ -153,6 +159,7 @@ server to handle the quantity of queries. To check if this is the case,
 run the following command on one or more of the clients:
 
     # nfsstat -rc
+
     Client rpc stats:
     calls      retrans    authrefrsh
     113482     0          113484
@@ -177,8 +184,7 @@ retrans values are non-zero, but you can see nfsd threads on the server
 doing no work, something different is now causing your bottleneck, and
 you'll need to re-diagnose this new problem.
 
-Close-to-Open / Flush-on-Close
-------------------------------
+> Close-to-open/flush-on-close
 
 Symptoms: Your clients are writing many small files. The server CPU is
 not maxed out, but there is very high wait-IO, and the server disk seems
@@ -198,10 +204,10 @@ See this excellent article or the nfs manpage for more details on the
 close-to-open policy. There are several approaches to solving this
 problem:
 
-> The nocto mount option
+The nocto mount option
 
-Note:The linux kernel doesn't seem to honour this option properly. Files
-are still flushed when they're closed.
+Note:The linux kernel does not seem to honour this option properly.
+Files are still flushed when they're closed.
 
 Does your situation match these conditions?
 
@@ -217,7 +223,7 @@ If you're happy with the above conditions, you can use the nocto mount
 option, which will disable the close-to-open behaviour. See the nfs
 manpage for details.
 
-> The async export option
+The async export option
 
 Does your situation match these conditions?
 
@@ -226,7 +232,6 @@ Does your situation match these conditions?
     -   Immediately visible on all the other clients.
     -   Safely stored on the server, even if the client crashes
         immediately after closing the file.
-
 -   It's not important to you that if the server crashes:
     -   You may loose the files that were most recently written by
         clients.
@@ -234,12 +239,11 @@ Does your situation match these conditions?
         recent files exist, even though they were actually lost.
 
 In this situation, you can use async instead of sync in the server's
-/etc/exports file for those specific exports. See the exports manpage
-for details. In this case, it does not make sense to use the nocto mount
-option on the client.
+/etc/exports file for those specific exports. See the exports manual
+page for details. In this case, it does not make sense to use the nocto
+mount option on the client.
 
-Buffer Cache Size and MTU
--------------------------
+> Buffer cache size and MTU
 
 Symptoms: High kernel or IRQ CPU usage, a very high packet count through
 the network card.
@@ -266,13 +270,12 @@ are on a separate subnet (e.g. for a Beowulf cluster), it may be safe to
 configure all of the network cards to use a high MTU. This should be
 done in very-high-bandwidth environments.
 
-See also the nfs manpage for more about rsize and wsize.
+See also the nfs manual page for more about rsize and wsize.
 
-Other Issues
-============
+Other issues
+------------
 
-Permissions Issues
-------------------
+> Permissions issues
 
 If you find that you cannot set the permissions on files properly, make
 sure the user/group you are chowning are on both the client and server.
@@ -280,13 +283,20 @@ sure the user/group you are chowning are on both the client and server.
 If all your files are owned by nobody, and you are using NFSv4, on both
 the client and server, you should:
 
+-   For systemd, ensure that the rpc-idmapd service has been started.
 -   For initscripts, ensure that NEED_IDMAPD is set to YES in
     /etc/conf.d/nfs-common.conf.
--   For systemd, ensure that the rpc-idmapd service has been started.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=NFS_Troubleshooting&oldid=247992"
+"https://wiki.archlinux.org/index.php?title=NFS_Troubleshooting&oldid=305826"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 20 March 2014, at 10:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

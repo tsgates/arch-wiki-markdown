@@ -6,21 +6,17 @@ JDownloader
 download normal files, but also files from online file hosting services
 like Rapidshare.com.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Requirements                                                 |
-|     -   1.2 Installing                                                   |
-|     -   1.3 Running                                                      |
-|                                                                          |
-| -   2 Configuration                                                      |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Making JDownloader faster                                    |
-|                                                                          |
-| -   4 Alternatives                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Requirements
+    -   1.2 Installing
+    -   1.3 Running
+-   2 Configuration
+-   3 Tips and tricks
+    -   3.1 Making JDownloader faster
+-   4 Alternatives
 
 Installation
 ------------
@@ -30,7 +26,7 @@ Installation
 For running JDownloader you need Java installed. I recommend OpenJDK, it
 works flawless with jDownloader.
 
-    # pacman -S openjdk6
+    # pacman -S jre7-openjdk
 
 > Installing
 
@@ -73,17 +69,28 @@ you're using GNOME).
 Alternatives
 ------------
 
-pyLoad available in AUR.
+Tucan Manager available in the official repositories through the tucan
+package.
 
-Tucan Manager available in community
+uGet available in the official repositories through the uget package
+(GTK).
+
+pyLoad available in AUR.
 
 plowshare available in AUR (CLI).
 
-uGet available in AUR (GTK).
+FreeRapid Downloader available in AUR (Java).
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=JDownloader&oldid=238848"
+"https://wiki.archlinux.org/index.php?title=JDownloader&oldid=302644"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

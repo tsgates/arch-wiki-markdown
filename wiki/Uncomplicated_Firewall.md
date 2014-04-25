@@ -1,39 +1,34 @@
 Uncomplicated Firewall
 ======================
 
-Uncomplicated Firewall (ufw) is a simple frontend for iptables that is
-designed to be easy to use.
+From the project home page:
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Basic Configuration                                                |
-| -   3 Adding Other Applications                                          |
-| -   4 Deleting Applications                                              |
-| -   5 Rate Limiting with ufw                                             |
-| -   6 GUI frontends                                                      |
-|     -   6.1 Gufw                                                         |
-|     -   6.2 kcm-ufw                                                      |
-|                                                                          |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Ufw stands for Uncomplicated Firewall, and is a program for managing a
+netfilter firewall. It provides a command line interface and aims to be
+uncomplicated and easy to use.
+
+Contents
+--------
+
+-   1 Installation
+-   2 Basic configuration
+-   3 Adding other applications
+-   4 Deleting applications
+-   5 Rate limiting with ufw
+-   6 GUI frontends
+    -   6.1 Gufw
+    -   6.2 kcm-ufw
+-   7 See also
 
 Installation
 ------------
 
 ufw can be installed from the official repositories.
 
-Start ufw as systemd service:
+Start ufw as systemd service to have it running and enable it to make it
+available after boot.
 
-    # systemctl start ufw
-
-Make it available after boot:
-
-    # systemctl enable ufw
-
-Basic Configuration
+Basic configuration
 -------------------
 
 A very simplistic configuration which will deny all by default, allow
@@ -46,9 +41,11 @@ incoming Deluge and SSH traffic from anywhere:
     # ufw allow SSH
 
 The next line is only needed once the first time you install the
-package. From there on out, enable ufw through systemctl:
+package:
 
     # ufw enable
+
+Follow that by enabling ufw with systemctl.
 
 Finally, query the rules being applied via the status command:
 
@@ -72,16 +69,16 @@ may be used, as well as further reports listed in the manpage. Since
 these reports also summarize traffic, they may be somewhat difficult to
 read. Another way to check for accepted traffic:
 
-    # iptables -S |grep ACCEPT
+    # iptables -S | grep ACCEPT
 
 While this works just fine for reporting, keep in mind not to enable the
 iptables service as long as you use ufw for managing it.
 
 Note:If special network variables are set on the system in
-/etc/sysctl.conf, it may be necessary to update /etc/ufw/sysctl.conf
+/etc/sysctl.d/*, it may be necessary to update /etc/ufw/sysctl.conf
 accordingly since this configuration overrides the default settings.
 
-Adding Other Applications
+Adding other applications
 -------------------------
 
 The PKG comes with some defaults based on the default ports of many
@@ -109,7 +106,7 @@ Example, deluge with custom tcp ports that range from 20202-20205:
 
 Should you require to define both tcp and udp ports for the same
 application, simply separate them with a pipe as shown: this app opens
-tcp ports 10000-10002 and udp port 10003
+tcp ports 10000-10002 and udp port 10003:
 
     ports=10000:10002/tcp|10003/udp
 
@@ -117,9 +114,9 @@ One can also use a comma to define ports if a range is not desired. This
 example opens tcp ports 10000-10002 (inclusive) and udp ports 10003 and
 10009
 
-     ports=10000:10002/tcp|10003,10009/udp
+    ports=10000:10002/tcp|10003,10009/udp
 
-Deleting Applications
+Deleting applications
 ---------------------
 
 Drawing on the Deluge/Deluge-my example above, the following will remove
@@ -131,7 +128,7 @@ the above example:
 
 Query the result via the status command:
 
-     # ufw status
+    # ufw status
 
     Status: active
     To                         Action      From
@@ -140,7 +137,7 @@ Query the result via the status command:
     SSH                        ALLOW       Anywhere
     Deluge-my                  ALLOW       Anywhere
 
-Rate Limiting with ufw
+Rate limiting with ufw
 ----------------------
 
 ufw has the ability to deny connections from an IP address that has
@@ -152,9 +149,10 @@ simply replace the allow parameter with the limit parameter. The new
 rule will then replace the previous.
 
     # ufw limit SSH
+
     Rule updated
 
-     # ufw status
+    # ufw status
 
     Status: active
     To                         Action      From
@@ -168,7 +166,7 @@ GUI frontends
 
 > Gufw
 
-Gufw is an easy to use Ubuntu / Linux firewall, powered by ufw.
+gufw is an easy to use Ubuntu/Linux firewall, powered by ufw.
 
 Gufw is an easy, intuitive, way to manage your Linux firewall. It
 supports common tasks such as allowing or blocking pre-configured,
@@ -177,8 +175,6 @@ powered by ufw, runs on Ubuntu, and anywhere else Python, GTK, and Ufw
 are available.
 
 > kcm-ufw
-
-Warning:Since the release of ufw 0.31-1, kcm-ufw no longer works.
 
 kcm-ufw is KDE4 control module for ufw. The following features are
 supported:
@@ -195,13 +191,19 @@ The module will appear under "Network and Connectivity" category.
 See also
 --------
 
--   Ubuntu UFW Documentation
+-   Ubuntu UFW documentation
 -   UFW manual
--   ArchWiki Firewalls page.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Uncomplicated_Firewall&oldid=255762"
+"https://wiki.archlinux.org/index.php?title=Uncomplicated_Firewall&oldid=302126"
 
 Category:
 
 -   Firewalls
+
+-   This page was last modified on 25 February 2014, at 23:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

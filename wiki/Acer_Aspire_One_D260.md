@@ -10,7 +10,7 @@ Acer Aspire One D260
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-  Summary
+  Summary help replacing me
   ----------------------------------------------------
   Information about configuring Arch on this netbook
 
@@ -47,3 +47,10 @@ Retrieved from
 Category:
 
 -   Acer
+
+-   This page was last modified on 23 April 2012, at 12:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

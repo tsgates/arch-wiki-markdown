@@ -16,31 +16,25 @@ laptop. Nvidia graphics work excellently with the Nvidia 8400GS with no
 real hacks. There have been some problems with the ethernet NIC, but it
 is possible for it to work correctly.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-|     -   1.1 Audio                                                        |
-|         -   1.1.1 OSS                                                    |
-|                                                                          |
-|     -   1.2 Video                                                        |
-|         -   1.2.1 Nvidia GeForce 8400M GS                                |
-|         -   1.2.2 Intel X3100                                            |
-|                                                                          |
-|     -   1.3 Network                                                      |
-|         -   1.3.1 Ethernet                                               |
-|         -   1.3.2 Wireless                                               |
-|             -   1.3.2.1 mini Dell Wireless / Broadcom based cards        |
-|             -   1.3.2.2 Intel based cards                                |
-|             -   1.3.2.3 Bluetooth                                        |
-|                                                                          |
-|     -   1.4 Webcam                                                       |
-|                                                                          |
-| -   2 Power Management                                                   |
-|     -   2.1 CPU                                                          |
-|     -   2.2 Hibernate/Suspend                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+    -   1.1 Audio
+        -   1.1.1 OSS
+    -   1.2 Video
+        -   1.2.1 Nvidia GeForce 8400M GS
+        -   1.2.2 Intel X3100
+    -   1.3 Network
+        -   1.3.1 Ethernet
+        -   1.3.2 Wireless
+            -   1.3.2.1 mini Dell Wireless / Broadcom based cards
+            -   1.3.2.2 Intel based cards
+            -   1.3.2.3 Bluetooth
+    -   1.4 Webcam
+-   2 Power Management
+    -   2.1 CPU
+    -   2.2 Hibernate/Suspend
 
 Hardware
 --------
@@ -194,8 +188,15 @@ found in /usr/share/hal/fdi/policy/10osvendor/ and must be copied to
 -   Restart the HAL service or your machine for the change take affect.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1310&oldid=196589"
+"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1310&oldid=297836"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 15 February 2014, at 15:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

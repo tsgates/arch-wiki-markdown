@@ -11,16 +11,14 @@ This article will give an overview of some methods available for
 creating your own Arch Linux-based live media. Please refer to the
 respective article for detailed information.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Archiso                                                            |
-| -   2 larch                                                              |
-| -   3 poison-livecd-creator                                              |
-| -   4 Linux-pf                                                           |
-| -   5 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Archiso
+-   2 larch
+-   3 poison-livecd-creator
+-   4 Linux-pf
+-   5 See Also
 
 Archiso
 -------
@@ -41,14 +39,13 @@ larch
 larch aims to provide a more desktop-based approach, and it does not
 require an Arch Linux host system.
 
-larch.
+> Note:
 
-Note:As of version 2.6.39, the vanilla kernel no longer supports aufs,
-making a custom kernel a necessity.
-
-Note:There is an AUFS version of the arch kernel in AUR(linkplz), and
-larch maintains an i686 build, you need not compile anything unless you
-want 64 bit
+-   As of version 2.6.39, the vanilla kernel no longer supports aufs,
+    making a custom kernel a necessity.
+-   There is an AUFS version of the arch kernel in AUR -
+    linux-aufs_friendly, and larch maintains an i686 build, you need not
+    compile anything unless you want 64 bit.
 
 poison-livecd-creator
 ---------------------
@@ -80,9 +77,16 @@ See Also
 -   Linux Live Kit
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Building_a_Live_CD&oldid=248527"
+"https://wiki.archlinux.org/index.php?title=Building_a_Live_CD&oldid=281742"
 
 Categories:
 
 -   Arch development
 -   Live Arch systems
+
+-   This page was last modified on 6 November 2013, at 22:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

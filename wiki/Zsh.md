@@ -3,56 +3,50 @@ Zsh
 
 Zsh is a powerful shell that operates as both an interactive shell and
 as a scripting language interpreter. While being compatible with Bash
-(not by default, only if you issue "emulate sh"), it offers many
+(not by default, only if issuing "emulate sh"), it offers many
 advantages such as:
 
--   Faster
+-   Speed
 -   Improved tab completion
 -   Improved globbing
 -   Improved array handling
 -   Fully customisable
 
-The Zsh FAQ offers more reasons to use Zsh as your shell.
+The Zsh FAQ offers more reasons to use Zsh.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Initial configuration                                        |
-|     -   1.2 Making Zsh your default shell                                |
-|                                                                          |
-| -   2 Configuration files                                                |
-| -   3 ~/.zshrc configuration                                             |
-|     -   3.1 Simple .zshrc                                                |
-|     -   3.2 Command Completion                                           |
-|     -   3.3 The "command not found" hook                                 |
-|     -   3.4 Key Bindings                                                 |
-|     -   3.5 History search                                               |
-|     -   3.6 Prompts                                                      |
-|     -   3.7 Customizing your prompt                                      |
-|         -   3.7.1 Prompt variables                                       |
-|             -   3.7.1.1 General                                          |
-|             -   3.7.1.2 Times                                            |
-|             -   3.7.1.3 Directories                                      |
-|             -   3.7.1.4 Formatting                                       |
-|             -   3.7.1.5 Colors                                           |
-|                                                                          |
-|         -   3.7.2 Example                                                |
-|                                                                          |
-|     -   3.8 Sample .zshrc files                                          |
-|                                                                          |
-| -   4 Global configuration                                               |
-|     -   4.1 Autostarting applications                                    |
-|                                                                          |
-| -   5 Uninstallation                                                     |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Initial configuration
+    -   1.2 Making Zsh your default shell
+-   2 Configuration files
+-   3 ~/.zshrc configuration
+    -   3.1 Simple .zshrc
+    -   3.2 Configuring $PATH
+    -   3.3 Command completion
+    -   3.4 The "command not found" hook
+    -   3.5 Prevent from putting duplicate lines in the history
+    -   3.6 Key bindings
+        -   3.6.1 Alternative method without using terminfo
+        -   3.6.2 Bind key to ncurses application
+    -   3.7 History search
+    -   3.8 Prompts
+    -   3.9 Customizing the prompt
+        -   3.9.1 Prompt variables
+        -   3.9.2 Example
+    -   3.10 Dirstack
+    -   3.11 Sample .zshrc files
+-   4 Global configuration
+    -   4.1 Autostarting applications
+-   5 Uninstallation
+-   6 See also
 
 Installation
 ------------
 
-Before starting you may want to see what shell is currently being used:
+Before starting users may want to see what shell is currently being
+used:
 
     $ echo $SHELL
 
@@ -66,7 +60,10 @@ in a terminal:
     $ zsh
 
 You should now see zsh-newuser-install, which will walk you through some
-basic configuration. If you want to skip this, press q.
+basic configuration. If you want to skip this, press q. If you did not
+see it, you can invoke it manually with
+
+    $ zsh /usr/share/zsh/functions/Newuser/zsh-newuser-install -f
 
 > Making Zsh your default shell
 
@@ -79,19 +76,18 @@ Change the default shell for the current user:
 
     $ chsh -s $(which zsh)
 
-Note:You have to log out and log back in, in order to start using Zsh as
-your default shell.
+Note:Log out and log back in, in order to start using Zsh as the default
+shell.
 
-After logging back in, you should notice Zsh's prompt, which by default
-looks different from Bash's. However you can verify that Zsh is the
-current shell by issuing:
+After logging back in, notice Zsh's prompt, which by default looks
+different from Bash's. Also verify that Zsh is the current shell by
+issuing:
 
     $ echo $SHELL
 
-Tip:If you are replacing bash, you may want to move some code from
-~/.bashrc to ~/.zshrc (e.g. the prompt and the aliases) and from
-~/.bash_profile to ~/.zprofile (e.g. the code that starts your X Window
-System).
+Tip:If replacing bash, users may want to move some code from ~/.bashrc
+to ~/.zshrc (e.g. the prompt and the aliases) and from ~/.bash_profile
+to ~/.zprofile (e.g. the code that starts the X Window System).
 
 Configuration files
 -------------------
@@ -128,44 +124,55 @@ of user's scripts.
     for Zsh, but is sourced from /etc/zsh/zprofile in the zsh package.
     Users should take note that /etc/profile sets the $PATH variable
     which will overwrite any $PATH variable set in ~/.zshenv. To prevent
-    this, either replace the /etc/zsh/zprofile file with your own, or
-    set your $PATH variable from ~/.zshrc.
+    this, either replace the /etc/zsh/zprofile file with a custom one,
+    or set the $PATH variable from ~/.zshrc.
 
 ~/.zshrc configuration
 ----------------------
 
 Although Zsh is usable out of the box, it is almost certainly not set up
-the way you would like to use it, but due to the sheer amount of
-customisation available in Zsh, configuring Zsh can be a daunting and
+the way most users would like to use it, but due to the sheer amount of
+customization available in Zsh, configuring Zsh can be a daunting and
 time-consuming experience.
-
-Included below is a sample configuration file, it provides a decent set
-of default options as well as giving examples of many ways that Zsh can
-be customised. In order to use this configuration save it as a file
-named .zshrc. You can then apply the changes without needing to logout
-and then back in by running:
-
-    $ source ~/.zshrc
 
 > Simple .zshrc
 
-Here is a simple .zshrc, that should be sufficient to get you started:
+Included below is a sample configuration file, it provides a decent set
+of default options as well as giving examples of many ways that Zsh can
+be customized. In order to use this configuration save it as a file
+named .zshrc. Apply the changes without needing to logout and then back
+in by running:
+
+    $ source ~/.zshrc
+
+Here is a simple .zshrc:
 
     ~/.zshrc
 
     autoload -U compinit promptinit
     compinit
     promptinit
-     
+
     # This will set the default prompt to the walters theme
     prompt walters
 
-> Command Completion
+> Configuring $PATH
+
+Information about setting up the system path per user in zsh can be
+found here: http://zsh.sourceforge.net/Guide/zshguide02.html#l24
+
+In short, put the following in ~/.zshenv:
+
+    ~/.zshenv
+
+    typeset -U path
+    path=(~/bin /other/things/in/path $path)
+
+> Command completion
 
 Perhaps the most compelling feature of Zsh is its advanced
-autocompletion abilities. At the very least, you will want to enable
-autocompletion in your .zshrc. To enable autocompletion, add the
-following to:
+autocompletion abilities. At the very least, enable autocompletion in
+.zshrc. To enable autocompletion, add the following to:
 
     ~/.zshrc
 
@@ -173,19 +180,19 @@ following to:
     compinit
 
 The above configuration includes ssh/scp/sftp hostnames completion but
-in order for this feature to work you will need to prevent ssh from
+in order for this feature to work, users need to prevent ssh from
 hashing hosts names in ~/.ssh/known_hosts.
 
-Warning:This makes your computer vulnerable to "Island-hopping" attacks.
+Warning:This makes the computer vulnerable to "Island-hopping" attacks.
 In that intention, comment the following line or set the value to no:
 
     /etc/ssh/ssh_config
 
     #HashKnownHosts yes
 
-And move your ~/.ssh/known_hosts somewhere else so that ssh creates a
-new one with un-hashed hostnames (previously known hosts will thus be
-lost).
+And move ~/.ssh/known_hosts somewhere else so that ssh creates a new one
+with un-hashed hostnames (previously known hosts will thus be lost). For
+more information, see the SSH readme for hashed-hosts.
 
 For autocompletion with an arrow-key driven interface, add the following
 to:
@@ -205,40 +212,24 @@ following to:
 
 > The "command not found" hook
 
-The pkgfile package includes a "command not found" hook that will
-automatically search the official repositories when you enter an
-unrecognized command. Then it will display something like this:
+See Pkgfile/"Command not found" hook.
 
-    $ abiword
+> Prevent from putting duplicate lines in the history
 
-    abiword may be found in the following packages:
-      extra/abiword 2.8.6-7	usr/bin/abiword
+It is very convinient to ignore duplicate lines in the history. To do
+so, put the following:
 
-An alternative "command not found" hook is also provided by the AUR
-package command-not-found, which will generate an output like the
-following:
+    ~/.zshrc
 
-    $ abiword
+    setopt HIST_IGNORE_DUPS
 
-    The command 'abiword' is been provided by the following packages:
-    abiword (2.8.6-7) from extra
-    	[ abiword ]
-    abiword (2.8.6-7) from staging
-    	[ abiword ]
-    abiword (2.8.6-7) from testing
-    	[ abiword ]
-
-for it to work, add the following to a zshrc:
-
-    [ -r /etc/profile.d/cnf.sh ] && . /etc/profile.d/cnf.sh
-
-> Key Bindings
+> Key bindings
 
 Zsh does not use readline, instead it uses its own and more powerful
-zle. It does not read /etc/inputrc or ~/.inputrc. zle has an emacs mode
-and a vi mode. By default, it tries to guess whether you want emacs or
-vi keys from the $EDITOR environment variable. If it is empty, it will
-default to emacs. You can change this with bindkey -v or bindkey -e.
+zle. It does not read /etc/inputrc or ~/.inputrc. Zle has an emacs mode
+and a vi mode. By default, it tries to guess whether emacs or vi keys
+from the $EDITOR environment variable are desired. If it is empty, it
+will default to emacs. Change this with bindkey -v or bindkey -e.
 
 To get some special keys working:
 
@@ -261,14 +252,16 @@ To get some special keys working:
     key[PageDown]=${terminfo[knp]}
 
     # setup key accordingly
-    [[ -n "${key[Home]}"    ]]  && bindkey  "${key[Home]}"    beginning-of-line
-    [[ -n "${key[End]}"     ]]  && bindkey  "${key[End]}"     end-of-line
-    [[ -n "${key[Insert]}"  ]]  && bindkey  "${key[Insert]}"  overwrite-mode
-    [[ -n "${key[Delete]}"  ]]  && bindkey  "${key[Delete]}"  delete-char
-    [[ -n "${key[Up]}"      ]]  && bindkey  "${key[Up]}"      up-line-or-history
-    [[ -n "${key[Down]}"    ]]  && bindkey  "${key[Down]}"    down-line-or-history
-    [[ -n "${key[Left]}"    ]]  && bindkey  "${key[Left]}"    backward-char
-    [[ -n "${key[Right]}"   ]]  && bindkey  "${key[Right]}"   forward-char
+    [[ -n "${key[Home]}"     ]]  && bindkey  "${key[Home]}"     beginning-of-line
+    [[ -n "${key[End]}"      ]]  && bindkey  "${key[End]}"      end-of-line
+    [[ -n "${key[Insert]}"   ]]  && bindkey  "${key[Insert]}"   overwrite-mode
+    [[ -n "${key[Delete]}"   ]]  && bindkey  "${key[Delete]}"   delete-char
+    [[ -n "${key[Up]}"       ]]  && bindkey  "${key[Up]}"       up-line-or-history
+    [[ -n "${key[Down]}"     ]]  && bindkey  "${key[Down]}"     down-line-or-history
+    [[ -n "${key[Left]}"     ]]  && bindkey  "${key[Left]}"     backward-char
+    [[ -n "${key[Right]}"    ]]  && bindkey  "${key[Right]}"    forward-char
+    [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   beginning-of-buffer-or-history
+    [[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" end-of-buffer-or-history
 
     # Finally, make sure the terminal is in application mode, when zle is
     # active. Only then are the values from $terminfo valid.
@@ -285,11 +278,46 @@ To get some special keys working:
 
 Note:To get the proper sequences for certain key combinations, start cat
 or read without any parameters and press them; they should then be
-printed in the terminal. Both can be closed again via Ctrl+C.
+printed in the terminal. Both can be closed again via Ctrl+c.
+
+Alternative method without using terminfo
+
+Run autoload zkbd followed by just zkbd. If users cannot press the key
+it asks for (e.g.  F11 maximizes the window), press space to skip it.
+After finishing with zkbd, add the following to ~/.zshrc:
+
+    ~/.zshrc
+
+    autoload zkbd
+    source ~/.zkbd/$TERM-:0.0 # may be different - check where zkbd saved the configuration:
+
+    [[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
+    [[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
+    [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+    [[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
+    [[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
+    [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+    [[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
+    [[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
+    [[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
+    [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
+    [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
+
+Bind key to ncurses application
+
+Bind a ncurses application to a keystoke, but it will not accept
+interaction. Use BUFFER variable to make it work. The following example
+lets users open ncmpcpp using Alt+\:
+
+    ~/.zshrc
+
+    ncmpcppShow() { BUFFER="ncmpcpp"; zle accept-line; }
+    zle -N ncmpcppShow
+    bindkey '^[\' ncmpcppShow
 
 > History search
 
-You can add these lines to your .zshrc
+Add these lines to .zshrc
 
     ~/.zshrc
 
@@ -302,7 +330,7 @@ have been shown.
 > Prompts
 
 There is a quick and easy way to set up a colored prompt in Zsh. Make
-sure that prompt is set to autoload in your .zshrc. This can be done by
+sure that prompt is set to autoload in .zshrc. This can be done by
 adding these lines to:
 
     ~/.zshrc
@@ -310,116 +338,156 @@ adding these lines to:
     autoload -U promptinit
     promptinit
 
-You can now see available prompts by running the command:
+Available prompts are listed by running the command:
 
     $ prompt -l
 
 To try one of the commands that is listed, use the command prompt
-followed by the name of the prompt you like. For example, to use the
-walters prompt, you would enter:
+followed by the name of the prompt to explore. For example, to use the
+walters prompt, enter:
 
     $ prompt walters
 
-> Customizing your prompt
+To preview all available themes, use this command:
 
-In case you are dissatisfied with the prompts mentioned above(or want to
-expand their usefulness), zsh offers the possibility to build your own
-custom prompt. Zsh supports a left- and right-sided prompt additional to
-the single, left-sided prompt that is common to all shells. You can
-customize it by using PROMPT= with the following variables:
+    $ prompt -p
+
+> Customizing the prompt
+
+For users who are dissatisfied with the prompts mentioned above(or want
+to expand their usefulness), Zsh offers the possibility to build a
+custom custom prompt. Zsh supports a left- and right-sided prompt
+additional to the single, left-sided prompt that is common to all
+shells. Customize it by using PROMPT= with the following variables:
 
 Prompt variables
 
+Command
+
+Description
+
+Comment
+
 General
 
- %n 
-    The username
- %m 
-    The computer's hostname(truncated to the first period)
- %M 
-    The computer's hostname
- %l 
-    The current tty
- %? 
-    The return code of the last-run application.
- %# 
-    The prompt based on user privileges (# for root and % for the rest)
+%n
+
+The username
+
+%m
+
+The computer's hostname(truncated to the first period)
+
+%M
+
+The computer's hostname
+
+%l
+
+The current tty
+
+%?
+
+The return code of the last-run application.
+
+%#
+
+The prompt based on user privileges (# for root and % for the rest)
 
 Times
 
- %T 
-    System time(HH:MM)
- %* 
-    System time(HH:MM:SS)
- %D 
-    System date(YY-MM-DD)
+%T
+
+System time(HH:MM)
+
+%*
+
+System time(HH:MM:SS)
+
+%D
+
+System date(YY-MM-DD)
 
 Directories
 
- %~ 
-    The current working directory. If you are in you are in your $HOME,
-    this will be replaced by ~.
- %d 
-    The current working directory.
+%d
 
-For the options mentioned above: You can prefix an integer to show only
-certain parts of your working path. If you entered %1d and found
-yourself in /usr/bin it would show bin. This can also be done with
-negative integers: %-1d using the same directory as above would show /.
+The current working directory.
+
+Prefix an integer to show only certain parts of the working path. If
+users entered %1d and were in /usr/bin it would show bin. This can also
+be done with negative integers: %-1d using the same directory as above
+would show /.
+
+%~
+
+The current working directory. If in $HOME or its subdirectory, $HOME
+part will be replaced by ~.
 
 Formatting
 
- %U [...] %u 
-    Begin and end underlined print
- %B [...] %b 
-    Begin and end bold print
- %{ [...] %} 
-    Begin and enter area that will not be printed. Useful for setting
-    colors.
-    In fact, this tag forces Zsh to ignore anything inside them when
-    making indents for the prompt as well.
-    As such, not to use it can have some weird effects on the margins
-    and indentation of the prompt.
+%U [...] %u
+
+Begin and end underlined print
+
+%B [...] %b
+
+Begin and end bold print
+
+%{ [...] %}
+
+Begin and enter area that will not be printed. Useful for setting
+colors. In fact, this tag forces Zsh to ignore anything inside them when
+making indents for the prompt as well. As such, not to use it can have
+some weird effects on the margins and indentation of the prompt.
 
 Colors
 
-Zsh has a different approach to setting colors on the terminal than the
-one depicted here. First you write before PROMPT= in your .zshrc:
+$fg[color]
 
-    autoload -U colors && colors
+will set the text color (red, green, blue, etc. - defaults to bold)
 
-Following commands would now produce the color escape sequence needed to
-set the requested color when the prompt is printed:
+Zsh sets colors differently than Bash. Add autoload -U colors && colors
+before PROMPT= in .zshrc to use them. Usually you will want to put these
+inside %{ [...] %}  so the cursor does not move.
 
- $fg[color] 
-    will set the text color (red, green, blue, etc. - defaults to bold)
- $fg_no_bold[color]
-    will set the non-bold text color
- $fg_bold[color]
-    will set the bold text color
- $reset_color 
-    will reset the text color to white
+$fg_no_bold[color]
 
-It is useful to put these color commands inside %{ [...] %} , so the
-shell knows there is no output from these sequences and the cursor
-hasn't moved.
+will set the non-bold text color
+
+$fg_bold[color]
+
+will set the bold text color
+
+$reset_color
+
+will reset the text color to the default color
 
 Possible color values
 
-  ------- ---------
-  black   red
-  green   yellow
-  blue    magenta
-  cyan    white
-  ------- ---------
+black
 
-Note that bold text doesn't necessarily use the same colors as normal
-text. For example, $fg['yellow'] looks brown or a very dark yellow,
-while $fg_no_bold['yellow'] looks like bright or regular yellow.
+red
+
+green
+
+yellow
+
+blue
+
+magenta
+
+cyan
+
+white
+
+Note: Bold text does not necessarily use the same colors as normal text.
+For example, $fg['yellow'] looks brown or a very dark yellow, while
+$fg_no_bold['yellow'] looks like bright or regular yellow.
 
 Example
 
-To have a two-sided prompt you could write:
+To have a two-sided promptcould write:
 
     PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg_no_bold[yellow]%}%1~ %{$reset_color%}%#"
     RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}]"
@@ -428,20 +496,53 @@ It would equal(without colors):
 
     username@host ~ %                                                         [0]
 
+> Dirstack
+
+Zsh can be configured to remember the DIRSTACKSIZE last visited folders.
+This can then be used to cd them very quickly. You need to add some
+lines to you configuration file:
+
+    .zshrc
+
+    DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+    if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+      dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+      [[ -d $dirstack[1] ]] && cd $dirstack[1]
+    fi
+    chpwd() {
+      print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+    }
+
+    DIRSTACKSIZE=20
+
+    setopt autopushd pushdsilent pushdtohome
+
+    ## Remove duplicate entries
+    setopt pushdignoredups
+
+    ## This reverts the +/- operators.
+    setopt pushdminus
+
+Now use
+
+    dirs -v
+
+to print the dirstack. Use cd -<NUM> to go back to a visited folder. Use
+autocompletion after the dash. This proves very handy if using the
+autocompletion menu.
+
 > Sample .zshrc files
 
-Here is a list of .zshrc files. Feel free to add your own:
+Here is a list of .zshrc files:
 
 -   Prezto - Instantly Awesome Zsh (AUR package: prezto-git) is a
     configuration framework for Zsh. It comes with modules, enriching
     the command line interface environment with sane defaults, aliases,
     functions, auto completion, and prompt themes.
--   Oh-my-zsh Plugin and Theme system for Zsh can help you manage your
-    zshrc file and has a huge community of over 2000 forks on github;
 -   Basic setup, with dynamic prompt and window title/hardinfo =>
     http://github.com/MrElendig/dotfiles-alice/blob/master/.zshrc;
 -   An Arch package named grml-zsh-config comes from http://grml.org/zsh
-    and provides a zshrc file that includes many tweaks for your zshell.
+    and provides a zshrc file that includes many tweaks for Zshell.
 -   https://github.com/slashbeast/things/blob/master/configs/DOTzshrc -
     zshrc with multiple features, be sure to check out comments into it.
     Notable features: confirm function to ensure that user wnat to run
@@ -452,16 +553,16 @@ Here is a list of .zshrc files. Feel free to add your own:
 Global configuration
 --------------------
 
-Occasionally you might want to have some settings applied globally to
-all zsh users. The zsh wiki tells us that there are some global
+Occasionally users might want to have some settings applied globally to
+all Zsh users. The Zsh wiki tells us that there are some global
 configuration files, for example /etc/zshrc. This however is slightly
 different on ArchLinux, since it has been compiled with flags
 specifically to target /etc/zsh/ instead.
 
 So, for global configuration use /etc/zsh/zshrc, not /etc/zshrc. The
 same goes for /etc/zsh/zshenv, /etc/zsh/zlogin and /etc/zsh/zlogout.
-Note that these files are not installed by default, so you need to
-create them yourself if you want to use them.
+Note that these files are not installed by default, so create them if
+desired.
 
 The only exception is zprofile, use /etc/profile instead.
 
@@ -475,15 +576,16 @@ then $ZDOTDIR/.zprofile. Then, if the shell is interactive, commands are
 read from /etc/zsh/zshrc and then $ZDOTDIR/.zshrc. Finally, if the shell
 is a login shell, /etc/zsh/zlogin and $ZDOTDIR/.zlogin are read.
 
+See also the STARTUP/SHUTDOWN FILES section of man zsh.
+
 Uninstallation
 --------------
 
-If you decide that Zsh is not the shell for you and you want to return
-to Bash, you must first change the default shell, before removing the
-Zsh package.
+Change the default shell back to bash or csh or whatever, before
+removing the Zsh package.
 
-Warning: Failure to follow the below procedures will result in all kinds
-of problems.
+Warning:Failure to follow the below procedures will result in all kinds
+of problems: users will no longer have a working shell program.
 
 Paste the following command in terminal as root:
 
@@ -491,12 +593,12 @@ Paste the following command in terminal as root:
 
 Use it for every user using Zsh.
 
-Now you can safely remove the Zsh package.
+Now the Zsh package can be removed.
 
-If you did not follow the above, you can still change the default shell
-back to Bash by editing /etc/passwd as root.
+Alternatively, change the default shell back to Bash by editing
+/etc/passwd as root.
 
-Warning: It is strongly recommended to use vipw when editing user
+Warning:It is strongly recommended to use vipw when editing user
 information as it prevents badly formatted entries.
 
 For example:
@@ -512,24 +614,31 @@ to:
 See also
 --------
 
--   Zsh Introduction
--   Users Guide
--   Zsh Docs (you can choose a different format for the doc in
+-   Zsh introduction
+-   Users guide
+-   Zsh Docs (choose a different format for the doc in
     http://zsh.sourceforge.net/Doc/)
 -   Zsh FAQ
--   Zsh Wiki
+-   Zsh wiki
 -   Zsh-lovers
 -   Bash2Zsh Reference Card
 -   Oh My Zshell by Robby Russell
--   Gentoo Linux Documentation -- zsh Configuration and Installation
-    Guide
--   Setting up the zsh prompt
+-   Gentoo Linux Documentation -- Zsh configuration and installation
+    guide
+-   Setting up the Zsh prompt
 
 -   IRC channel: #zsh at irc.freenode.org
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Zsh&oldid=256103"
+"https://wiki.archlinux.org/index.php?title=Zsh&oldid=305706"
 
 Category:
 
 -   Command shells
+
+-   This page was last modified on 20 March 2014, at 01:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -6,19 +6,23 @@ Installing Arch Linux with EVMS
 (including the root-filesystem) managed by Enterprise Volume Management
 System (EVMS).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Disclaimer                                                         |
-| -   2 Introduction                                                       |
-| -   3 Storage plan                                                       |
-| -   4 Installing Arch Linux on the temporary partition                   |
-| -   5 Install EVMS in Arch Linux                                         |
-| -   6 Create EVMS-volumes                                                |
-| -   7 Copy the installation to the right volumes                         |
-| -   8 Links                                                              |
-+--------------------------------------------------------------------------+
+  
+
+Note: EVMS is no longer being developed. The last stable version was
+released in 2006. An alternative to EVMS is LVM. Also many of the
+features in EVMS were added to LVM.
+
+Contents
+--------
+
+-   1 Disclaimer
+-   2 Introduction
+-   3 Storage plan
+-   4 Installing Arch Linux on the temporary partition
+-   5 Install EVMS in Arch Linux
+-   6 Create EVMS-volumes
+-   7 Copy the installation to the right volumes
+-   8 Links
 
 Disclaimer
 ----------
@@ -70,7 +74,7 @@ minimal Arch Linux install; 500MB should be enough.
 Installing Arch Linux on the temporary partition
 ------------------------------------------------
 
-Install Arch Linux using the Official Arch Linux Install Guide.
+Install Arch Linux using the Installation guide.
 
 -   Partition the hard drives to match your design from the previous
     step; for our example, it is as follows:
@@ -106,8 +110,8 @@ Glib is needed for evmsn, the Ncurses interface to EVMS
 
 Edit /etc/mkinicpio.conf:
 
-    - HOOKS=“base udev autodetect pata scsi sata keymap filesystems”
-    + HOOKS=“base udev evms pata scsi sata keymap filesystems”
+    - HOOKS=“base udev autodetect block keymap filesystems”
+    + HOOKS=“base udev evms block keymap filesystems”
 
 Edit /lib/initcpio/install/evms (FS#8895):
 
@@ -251,7 +255,6 @@ to use with RAID and/or LVM
 
 -   Create RAID1 array on sda2 and sdb2
     -   repeat the previous step
-
 -   Create LVM container 'main' on md/md1 and sda5
 
     Actions » Create » container...
@@ -509,9 +512,16 @@ Links
 -   EVMS User Guide
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Installing_Arch_Linux_with_EVMS&oldid=225301"
+"https://wiki.archlinux.org/index.php?title=Installing_Arch_Linux_with_EVMS&oldid=298283"
 
 Categories:
 
 -   Getting and installing Arch
 -   File systems
+
+-   This page was last modified on 16 February 2014, at 07:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

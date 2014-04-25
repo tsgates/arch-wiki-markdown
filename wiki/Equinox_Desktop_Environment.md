@@ -15,18 +15,15 @@ toolkit. It's especially fit for systems with little RAM or for users
 who want to completely customize their system and need a GUI that is not
 already bloated with functions and applications.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Installation (packages)                                      |
-|     -   1.2 Installation (AUR)                                           |
-|                                                                          |
-| -   2 Starting the DE                                                    |
-| -   3 Applications                                                       |
-|     -   3.1 Some recommendations                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Installation (packages)
+    -   1.2 Installation (AUR)
+-   2 Starting the DE
+-   3 Applications
+    -   3.1 Some recommendations
 
 Installation
 ------------
@@ -41,6 +38,7 @@ To enable EDE's repository, just add the following lines to your
 /etc/pacman.conf:
 
     [ede]
+    SigLevel = Optional
     Server = http://www.equinox-project.org/repos/arch/$arch
 
 Next update the database files:
@@ -70,7 +68,7 @@ the actual DE.
 Starting the DE
 ---------------
 
-To bring up EDE you can either use a Display Manager or use startx. If
+To bring up EDE you can either use a Display manager or use startx. If
 you choose the later, just write the following to the .xinitrc of your
 user:
 
@@ -96,8 +94,15 @@ for example.
 -   Terminal emulator: Xterm
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Equinox_Desktop_Environment&oldid=241293"
+"https://wiki.archlinux.org/index.php?title=Equinox_Desktop_Environment&oldid=306059"
 
 Category:
 
 -   Desktop environments
+
+-   This page was last modified on 20 March 2014, at 17:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

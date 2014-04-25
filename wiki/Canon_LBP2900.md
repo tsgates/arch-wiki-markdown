@@ -11,25 +11,22 @@ Canon LBP2900
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Requirements                                                       |
-|     -   2.1 Additional requirements on Arch64                            |
-|                                                                          |
-| -   3 Driver                                                             |
-| -   4 Installation                                                       |
-| -   5 Restart cups                                                       |
-| -   6 Add cups daemon in /etc/rc.conf                                    |
-| -   7 Make folowing directories and fifo0                                |
-| -   8 Register printer                                                   |
-| -   9 Make udev rule for your printer                                    |
-| -   10 Start printer daemon and print                                    |
-| -   11 Turboprint                                                        |
-| -   12 Related Links/Additional Information                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Requirements
+    -   2.1 Additional requirements on Arch64
+-   3 Driver
+-   4 Installation
+-   5 Restart cups
+-   6 Add cups daemon in /etc/rc.conf
+-   7 Make folowing directories and fifo0
+-   8 Register printer
+-   9 Make udev rule for your printer
+-   10 Start printer daemon and print
+-   11 Turboprint
+-   12 Related Links/Additional Information
 
 Introduction
 ============
@@ -78,8 +75,8 @@ Driver
 -   http://gdlp01.c-wss.com/gds/4/0900007724/11/Linux_CAPT_PrinterDriver_V230_uk_EN.tar.gz
 
 Also you can search in http://software.canon-europe.com/ for your
-printer driver, newest version is v240 at least for the lbp-3200
-(checked april 2012).
+printer driver, newest version is v260 at least for the lbp-3200
+(november 2013).
 
 For information about setting up cups, refer to CUPS.
 
@@ -206,8 +203,15 @@ https://help.ubuntu.com/community/HardwareSupportComponentsPrinters/CanonPrinter
 - A guide for setting up the printer on ubuntu
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Canon_LBP2900&oldid=245123"
+"https://wiki.archlinux.org/index.php?title=Canon_LBP2900&oldid=285208"
 
 Category:
 
 -   Printers
+
+-   This page was last modified on 29 November 2013, at 15:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,36 +1,25 @@
 Tmsu
 ====
 
-> Summary
-
-tmsu allows to tag files and folders and to categorise these by a label
-structure rather than a hierarchical file system structure.
-
-> Related
-
-Beagle
-
 tmsu is a tool for tagging your files. It provides a simple command-line
 tool for applying tags and a virtual file-system so that you can get a
 tagged based view of your files from within any other program.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Quick tour                                                         |
-| -   3 Obstacles                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+-   3 Obstacles
+-   4 See also
 
 Installation
 ------------
 
-tmsu can be installed from the tmsu.
+tmsu can be installed with the tmsu or tmsu-bin packages.
 
-Quick tour
-----------
+Usage
+-----
 
 The tmsu website provides an excellent short quick tour on the basic
 usage.
@@ -52,9 +41,16 @@ See also
 -   tmsu extensions
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tmsu&oldid=250248"
+"https://wiki.archlinux.org/index.php?title=Tmsu&oldid=301734"
 
 Categories:
 
 -   Search
 -   File systems
+
+-   This page was last modified on 24 February 2014, at 13:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

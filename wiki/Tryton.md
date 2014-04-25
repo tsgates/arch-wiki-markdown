@@ -3,7 +3,7 @@ Tryton
 
   
 
-  Summary
+  Summary help replacing me
   ------------------------------------------------------------------------------------------------------------------------------------------------------
   Covers installation and configuration of Tryton – an application platform for businesses that allow you to setup a central server for invoices, etc.
 
@@ -41,3 +41,10 @@ Retrieved from
 Category:
 
 -   Web Server
+
+-   This page was last modified on 13 June 2012, at 14:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -23,46 +23,37 @@ to make the required changes, without losing data.
 -   Wipe the old disk and add it to the new RAID-1 array
 
 Warning: Make a backup first. Even though our aim is to convert to a
-RAID setup without losing data, there's no guarantees the process will
-be perfect, and there is a high risk of accidents happening.
+RAID setup without losing data, there's no guarantee the process will be
+perfect, and there is a high risk of accidents happening.
 
-  
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Assumptions                                                        |
-| -   2 Create new RAID array                                              |
-|     -   2.1 Partition the Disk                                           |
-|     -   2.2 Create the RAID device                                       |
-|     -   2.3 Make file systems                                            |
-|                                                                          |
-| -   3 Copy data                                                          |
-|     -   3.1 Mount the array                                              |
-|     -   3.2 Copy the data                                                |
-|     -   3.3 Update GRUB legacy                                           |
-|     -   3.4 Update Grub2                                                 |
-|     -   3.5 Alter fstab                                                  |
-|     -   3.6 Rebuild initcpio or initramfs                                |
-|         -   3.6.1 First chroot into the RAID system                      |
-|         -   3.6.2 Record mdadm's config                                  |
-|         -   3.6.3 For Arch Linux: Rebuild initcpio                       |
-|         -   3.6.4 For Ubuntu or Debian: Rebuild initramfs                |
-|                                                                          |
-|     -   3.7 Install GRUB on the RAID array                               |
-|                                                                          |
-| -   4 Verify success                                                     |
-| -   5 Add original disk to array                                         |
-|     -   5.1 Partition original disk                                      |
-|         -   5.1.1 Note                                                   |
-|                                                                          |
-|     -   5.2 Add disk partition to array                                  |
-|     -   5.3 Add second swap partition                                    |
-|     -   5.4 Verify that email alerts are working                         |
-|                                                                          |
-| -   6 Automatic conversion tool alternative - Raider                     |
-+--------------------------------------------------------------------------+
+-   1 Assumptions
+-   2 Create new RAID array
+    -   2.1 Partition the Disk
+    -   2.2 Create the RAID device
+    -   2.3 Make file systems
+-   3 Copy data
+    -   3.1 Mount the array
+    -   3.2 Copy the data
+    -   3.3 Update GRUB legacy
+    -   3.4 Update GRUB
+    -   3.5 Alter fstab
+    -   3.6 Rebuild initcpio or initramfs
+        -   3.6.1 First chroot into the RAID system
+        -   3.6.2 Record mdadm's config
+        -   3.6.3 For Arch Linux: rebuild initcpio
+        -   3.6.4 For Ubuntu or Debian: rebuild initramfs
+    -   3.7 Install GRUB on the RAID array
+-   4 Verify success
+-   5 Add original disk to array
+    -   5.1 Partition original disk
+        -   5.1.1 Note
+    -   5.2 Add disk partition to array
+    -   5.3 Add second swap partition
+    -   5.4 Verify that email alerts are working
+-   6 Automatic conversion tool alternative - Raider
 
 Assumptions
 -----------
@@ -96,15 +87,15 @@ the total swap you want (the other half will go on the other disk).
 
 Drop to single user mode:
 
-    telinit 1
+    # telinit 1
 
 To see the current partitions:
 
-    fdisk -l
+    # fdisk -l
 
 To partition the new disk
 
-    fdisk /dev/sdb
+    # fdisk /dev/sdb
 
 Then the fdisk commands to partition the new disk. Note that everything
 after the "#" is an explanation of what the command is doing:
@@ -139,7 +130,7 @@ attributes -> partition# -> '2': legacy BIOS bootable.
 At the end of partitioning, your partitions should look something like
 this:
 
-    [root@arch ~]# fdisk -l /dev/sdb
+    # fdisk -l /dev/sdb
     Disk /dev/sdb: 80.0 GB, 80025280000 bytes
     255 heads, 63 sectors/track, 9729 cylinders
     Units = cylinders of 16065 * 512 = 8225280 bytes
@@ -158,33 +149,28 @@ Next, create the single-disk RAID-1 array. Note the "missing" keyword is
 specified as one of our devices. We are going to fill this missing
 device later.
 
-    [root@arch ~]# mdadm --create /dev/md0 --level=1 --raid-devices=2 missing /dev/sdb2
+    # mdadm --create /dev/md0 --level=1 --raid-devices=2 missing /dev/sdb2
     mdadm: array /dev/md0 started.
 
 Note: If the above command causes mdadm to say "no such device
 /dev/sdb2", then reboot, and run the command again.
 
-If you want to use Grub 0.97 (default in the Arch Linux 2010.05 release)
-on RAID 1, you need to specify an older version of metadata than the
-default. Add the option "--metadata=0.90" to the above command.
-Otherwise Grub will respond with "Filesystem type unknown, partition
-type 0xfd" and refuse to install. This is supposedly not necessary with
-Grub 2.
+    # mdadm --create /dev/md0 --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sdb2
 
-    [root@arch ~]# mdadm --create /dev/md0 --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sdb2
-    mdadm: array /dev/md0 started.
+     mdadm: array /dev/md0 started.
 
 If you want to use Syslinux, you need to specify --metadata=1.0 (for the
 boot partition) as of Sept. 2011
 
 Make sure the array has been created correctly by checking /proc/mdstat:
 
-    [root@arch ~]# cat /proc/mdstat
-    Personalities : [linear] [raid0] [raid1] [raid5] [multipath] [raid6] [raid10]
-    md0 : active raid1 sdb2[1]
-         40064 blocks [2/1] [_U]
+    # cat /proc/mdstat
 
-    unused devices: <none>
+     Personalities : [linear] [raid0] [raid1] [raid5] [multipath] [raid6] [raid10]
+     md0 : active raid1 sdb2[1]
+          40064 blocks [2/1] [_U]
+     
+     unused devices: <none>
 
 The devices are intact, however in a degraded state. (Because it's
 missing half the array!)
@@ -219,9 +205,10 @@ guide.
 
 Make a file system on the swap partition:
 
-    [root@arch ~]# mkswap -L NEW-SWAP /dev/sdb1
-    Setting up swapspace version 1, size = 271314 kB
-    LABEL=NEW-SWAP, UUID=9d746813-2d6b-4706-a56a-ecfd108f3fe9
+    # mkswap -L NEW-SWAP /dev/sdb1
+
+     Setting up swapspace version 1, size = 271314 kB
+     LABEL=NEW-SWAP, UUID=9d746813-2d6b-4706-a56a-ecfd108f3fe9
 
 Copy data
 ---------
@@ -232,20 +219,20 @@ system
 
 > Mount the array
 
-    [root@arch ~]# mkdir /mnt/new-raid
-    [root@arch ~]# mount /dev/md0 /mnt/new-raid
+    # mkdir /mnt/new-raid
+    # mount /dev/md0 /mnt/new-raid
 
 > Copy the data
 
-    [root@arch ~]# rsync -avxHAXS --delete --progress / /mnt/new-raid
+    # rsync -avxHAXS --delete --progress / /mnt/new-raid
 
 Note that by using the -x option you are limiting rsync to a single file
 system. If you have a more traditional file system layout, with
 different partitions for /boot, /home, and perhaps others, you will need
 to rsync those file systems separately. For example:
 
-    [root@arch ~]# rsync -avxHAXS --delete --progress /boot /mnt/new-raid/boot
-    [root@arch ~]# rsync -avxHAXS --delete --progress /home /mnt/new-raid/home
+    # rsync -avxHAXS --delete --progress /boot /mnt/new-raid/boot
+    # rsync -avxHAXS --delete --progress /home /mnt/new-raid/home
 
 Alternatively, you can use tar instead of the above rsync command if you
 prefer. rsync will, however, be quicker if you are only copying over
@@ -284,14 +271,14 @@ applying distribution kernel updates easier:
     - # kopt=root=UUID=fbafab1a-18f5-4bb9-9e66-a71c1b00977e ro
     + # kopt=root=/dev/md0 ro md=0,/dev/sda2,/dev/sdb2
 
-    ## default grub root device
+    ## default GRUB root device
     ## e.g. groot=(hd0,0)
     - # groot=(hd0,0)
     + # groot=(hd0,1)
 
-> Update Grub2
+> Update GRUB
 
-Please refer to https://wiki.archlinux.org/index.php/GRUB2#Other_Options
+Please refer to GRUB article.
 
 > Alter fstab
 
@@ -301,30 +288,31 @@ partition detection order changes or a drive gets removed.
 
 To find the UUID to use:
 
-    [root@arch ~]# blkid
-    /dev/sda1: TYPE="swap" UUID="34656682b-34ad-8ed5-9233-dfab42272212" 
-    /dev/sdb1: UUID="9ff5682b-d5a1-4ed5-8d63-d1df911e0142" TYPE="swap" LABEL="NEW-SWAP" 
-    /dev/md0: UUID="6f2ea3d3-d7be-4c9d-adfa-dbeeedaf128e" SEC_TYPE="ext2" TYPE="ext3" LABEL="RAID-ONE" 
-    /dev/sda2: UUID="13dd2227-6592-403b-931a-7f3e14a23e1f" TYPE="ext2" 
-    /dev/sdb2: UUID="b28813e7-15fc-d4aa-dc8a-e2c1de641df1" TYPE="mdraid" 
+    # blkid
+
+    /dev/sda1: TYPE="swap" UUID="34656682b-34ad-8ed5-9233-dfab42272212"
+    /dev/sdb1: UUID="9ff5682b-d5a1-4ed5-8d63-d1df911e0142" TYPE="swap" LABEL="NEW-SWAP"
+    /dev/md0: UUID="6f2ea3d3-d7be-4c9d-adfa-dbeeedaf128e" SEC_TYPE="ext2" TYPE="ext3" LABEL="RAID-ONE"
+    /dev/sda2: UUID="13dd2227-6592-403b-931a-7f3e14a23e1f" TYPE="ext2"
+    /dev/sdb2: UUID="b28813e7-15fc-d4aa-dc8a-e2c1de641df1" TYPE="mdraid"
 
 Look for the partition labeled "NEW-SWAP", on /dev/sdb1, that we created
 above. Copy your swap partition's UUID into the new fstab, as shown
 below. Of course we also add /dev/md0, as our root mount point.
 
-    [root@arch ~]# cat /mnt/new-raid/etc/fstab
-    /dev/md0    /    ext3     defaults   0 1
-    UUID=9ff5682b-d5a1-4ed5-8d63-d1df911e0142 none swap sw 0 0
+    # cat /mnt/new-raid/etc/fstab
+
+     /dev/md0    /    ext3     defaults   0 1
+     UUID=9ff5682b-d5a1-4ed5-8d63-d1df911e0142 none swap sw 0 0
 
 > Rebuild initcpio or initramfs
 
 First chroot into the RAID system
 
-    [root@arch ~]# mount --bind /sys /mnt/new-raid/sys
-    [root@arch ~]# mount --bind /proc /mnt/new-raid/proc
-    [root@arch ~]# mount --bind /dev /mnt/new-raid/dev
-    [root@arch ~]# chroot /mnt/new-raid/
-    [root /]# 
+    # mount --bind /sys /mnt/new-raid/sys
+    # mount --bind /proc /mnt/new-raid/proc
+    # mount --bind /dev /mnt/new-raid/dev
+    # chroot /mnt/new-raid/
 
 If the chroot command gives you an error like
 chroot: failed to run command `/bin/zsh': No such file or directory,
@@ -336,10 +324,10 @@ every other step is identical, regardless of the Linux variant).
 
 Record mdadm's config
 
-For Arch Linux, use "/etc/mdadm.conf", for Ubuntu or Debian, use
-"/etc/mdadm/mdadm.conf"
+For Arch Linux, use /etc/mdadm.conf, for Ubuntu or Debian, use
+/etc/mdadm/mdadm.conf}
 
-    nano /etc/mdadm.conf
+    # nano /etc/mdadm.conf
 
 ... and change the "MAILADDR" line to be your email address, if you want
 emailed alerts of problems with the RAID-1.
@@ -348,36 +336,36 @@ Then save the array configuration with UUIDs to make it easier for the
 system to find /dev/md0 on boot-up. If you do not do this, you can get
 an "ALERT! /dev/md0 does not exist" error when booting :
 
-    mdadm --detail --scan >> /etc/mdadm.conf
+    # mdadm --detail --scan >> /etc/mdadm.conf
 
-For Arch Linux: Rebuild initcpio
+For Arch Linux: rebuild initcpio
 
 Edit /etc/mkinitcpio.conf to include mdadm in the HOOKS array. Place it
 after autodetect, sata, scsi and pata (whichever is appropriate for your
 hardware).
 
-    [root /]# mkinitcpio -p linux
-    [root /]# exit
+    # mkinitcpio -p linux
+    # exit
 
-For Ubuntu or Debian: Rebuild initramfs
+For Ubuntu or Debian: rebuild initramfs
 
 Then rebuild initramfs, incorporating the two above changes:
 
-    update-initramfs -k `uname -r` -c -t
+    # update-initramfs -k $(uname -r) -c -t
 
 This will rebuild your running version - to rebuild others, this will
 show a listing (in Ubuntu):
 
-    ls /boot/ | perl -lne "/^[A-z\.\-]+/m && print $'" | egrep -e 'openvz$|generic$|server$' | sort -u
+    $ ls /boot/ | perl -lne "/^[A-z\.\-]+/m && print $'" | egrep -e 'openvz$|generic$|server$' | sort -u
 
 Then substitute/script in these others so that all are available for use
 with the new RAID setup.
 
 > Install GRUB on the RAID array
 
-Start grub:
+Start GRUB:
 
-    [root@arch ~]# grub --no-floppy
+    # grub --no-floppy
 
 Then we find our two partitions - the current one (hd0,0) (I.e. first
 disk, first partition), and (hd1,1) (i.e. the partition we just added
@@ -388,7 +376,7 @@ results here:
     (hd0,0)
     (hd1,1)
 
-Then we tell grub to assume the new second drive is (hd0), i.e. the
+Then we tell GRUB to assume the new second drive is (hd0), i.e. the
 first disk in the system (when it is not currently the case). If your
 first disk fails, however, and you remove it, or you change the order
 disks are detected in the BIOS so that you can boot from your second
@@ -427,22 +415,24 @@ Verify you have booted from the RAID array by looking at the output of
 mount. Also check mdstat again only to confirm which disk is in the
 array.
 
-    [root@arch ~]# mount
-    /dev/md0 on / type ext3 (rw)
+    # mount
 
-    [root@arch ~]# cat /proc/mdstat
-    Personalities : [linear] [raid0] [raid1] [raid5] [multipath] [raid6] [raid10]
-    md0 : active raid1 sdb2[1]
-         40064 blocks [2/1] [_U]
+     /dev/md0 on / type ext3 (rw)
 
-    unused devices: <none>
+    # cat /proc/mdstat
 
-  
- Also swapon -s:
+     Personalities : [linear] [raid0] [raid1] [raid5] [multipath] [raid6] [raid10]
+     md0 : active raid1 sdb2[1]
+          40064 blocks [2/1] [_U]
+     
+     unused devices: <none>
 
-    [root@arch ~]# swapon -s
-    Filename                Type           Size    Used    Priority
-    /dev/sdb1               partition      4000144 16      -1
+Also:
+
+    # swapon -s
+
+     Filename                Type           Size    Used    Priority
+     /dev/sdb1               partition      4000144 16      -1
 
 Note it is the swap partition on sdb that is in use, nothing from sda.
 
@@ -460,25 +450,25 @@ Copy the partition table from /dev/sdb (newly implemented RAID disk) to
 /dev/sda (second disk we are adding to the array) so that both disks
 have exactly the same layout.
 
-    [root@arch ~]# sfdisk -d /dev/sdb | sfdisk /dev/sda
+    # sfdisk -d /dev/sdb | sfdisk /dev/sda
 
 Alternate method - this will output the /dev/sdb partition layout to a
 file, then it's used as input for partitioning /dev/sda.
 
-    [root@arch ~]# sfdisk -d /dev/sdb > raidinfo-partitions.sdb
-    [root@arch ~]# sfdisk /dev/sda < raidinfo-partitions.sdb
+    # sfdisk -d /dev/sdb > raidinfo-partitions.sdb
+    # sfdisk /dev/sda < raidinfo-partitions.sdb
 
 Use the --force if needed.
 
-    [root@arch ~]# sfdisk --force /dev/sda < raidinfo-partitions.sdb
+    # sfdisk --force /dev/sda < raidinfo-partitions.sdb
 
 Verify that the partitioning is identical:
 
-    [root@arch ~]# fdisk -l
+    # fdisk -l
 
 Note
 
-If you get an error when attempting to add the parition to the array:
+If you get an error when attempting to add the partition to the array:
 
     mdadm: /dev/sda1 not large enough to join array
 
@@ -488,80 +478,88 @@ fix this, then try adding again to the array.
 
 > Add disk partition to array
 
-    [root@arch ~]# mdadm /dev/md0 -a /dev/sda2
-    mdadm: hot added /dev/sda2
+    # mdadm /dev/md0 -a /dev/sda2
+
+     mdadm: hot added /dev/sda2
 
 Verify that the RAID array is being rebuilt.
 
-    [root@arch ~]# cat /proc/mdstat
-    Personalities : [linear] [raid0] [raid1] [raid5] [multipath] [raid6] [raid10]
-    md0 : active raid1 sda2[2] sdb2[1]
-          80108032 blocks [2/1] [_U]
-          [>....................]  recovery =  1.2% (1002176/80108032) finish=42.0min speed=31318K/sec
+    # cat /proc/mdstat
 
-    unused devices: <none>
+     Personalities : [linear] [raid0] [raid1] [raid5] [multipath] [raid6] [raid10]
+     md0 : active raid1 sda2[2] sdb2[1]
+           80108032 blocks [2/1] [_U]
+           [>....................]  recovery =  1.2% (1002176/80108032) finish=42.0min speed=31318K/sec
+     
+     unused devices: <none>
 
-  
- Syncing can take a while. If the machine is not needed for other tasks
+Syncing can take a while. If the machine is not needed for other tasks
 the speed limit can be increased.
 
-    [root@arch ~]# cat /proc/mdstat 
-    Personalities : [raid1] 
-    md0 : active raid1 sda3[2] sdb3[1]
-          155042219 blocks super 1.2 [2/1] [_U]
-          [>....................]  recovery =  0.0% (77696/155042219) finish=265.8min speed=9712K/sec
-          
-    unused devices: <none>
+    # cat /proc/mdstat
+
+     Personalities : [raid1] 
+     md0 : active raid1 sda3[2] sdb3[1]
+           155042219 blocks super 1.2 [2/1] [_U]
+           [>....................]  recovery =  0.0% (77696/155042219) finish=265.8min speed=9712K/sec
+           
+     unused devices: <none>
 
 Check the current speed limit.
 
-    [root@arch ~]# cat /proc/sys/dev/raid/speed_limit_min 
+    # cat /proc/sys/dev/raid/speed_limit_min
+
     1000
-    [root@arch ~]# cat /proc/sys/dev/raid/speed_limit_max
+
+    # cat /proc/sys/dev/raid/speed_limit_max
+
     200000
 
 Increase the limits.
 
-    [root@arch ~]# echo 400000 >/proc/sys/dev/raid/speed_limit_min
-    [root@arch ~]# echo 400000 >/proc/sys/dev/raid/speed_limit_max
+    # echo 400000 >/proc/sys/dev/raid/speed_limit_min
+    # echo 400000 >/proc/sys/dev/raid/speed_limit_max
 
 Then check out the syncing speed and estimated finish time.
 
-    [root@arch ~]# cat /proc/mdstat 
-    Personalities : [raid1] 
-    md0 : active raid1 sda3[2] sdb3[1]
-          155042219 blocks super 1.2 [2/1] [_U]
-          [>....................]  recovery =  1.3% (2136640/155042219) finish=158.2min speed=16102K/sec
-         
-    unused devices: <none>
+    # cat /proc/mdstat
+
+     Personalities : [raid1] 
+     md0 : active raid1 sda3[2] sdb3[1]
+           155042219 blocks super 1.2 [2/1] [_U]
+           [>....................]  recovery =  1.3% (2136640/155042219) finish=158.2min speed=16102K/sec
+          
+     unused devices: <none>
 
 > Add second swap partition
 
 The partition was created with sfdisk, but it still has to be formatted
 for swap.
 
-    [root@arch ~]# mkswap -L SWAP /dev/sda1
-    Setting up swapspace version 1, size = 271314 kB
-    LABEL=SWAP, UUID=1acd55dc-f73f-4639-94bc-3f30c33710c9
+    # mkswap -L SWAP /dev/sda1
+
+     Setting up swapspace version 1, size = 271314 kB
+     LABEL=SWAP, UUID=1acd55dc-f73f-4639-94bc-3f30c33710c9
 
 Then add this UUID to the fstab exactly like the other one earlier. When
 done, it should look similar to this:
 
-    [root@arch ~]# cat /mnt/new-raid/etc/fstab
-    /dev/md0    /    ext3     defaults   0 1
-    UUID=1acd55dc-f73f-4639-94bc-3f30c33710c9 none swap sw 0 0
-    UUID=9ff5682b-d5a1-4ed5-8d63-d1df911e0142 none swap sw 0 0
+    # cat /mnt/new-raid/etc/fstab
+
+     /dev/md0    /    ext3     defaults   0 1
+     UUID=1acd55dc-f73f-4639-94bc-3f30c33710c9 none swap sw 0 0
+     UUID=9ff5682b-d5a1-4ed5-8d63-d1df911e0142 none swap sw 0 0
 
 It can be activated immediately:
 
-    [root@arch ~]# swapon /dev/sda1
+    # swapon /dev/sda1
 
 > Verify that email alerts are working
 
 If you run this command, then you should get a notification email
 showing the contents of /proc/mdstat :
 
-    [root@arch ~]# mdadm --monitor --test --oneshot /dev/md0
+    # mdadm --monitor --test --oneshot /dev/md0
 
 Check that you get the test email notification. This way you can be
 aware if one of the disks in the array fails (otherwise it may fail
@@ -578,11 +576,17 @@ a single disk in to a Raid system (1, 4, 5, 6 or 10) with a two-pass
 command.
 
 -   Website: http://raider.sourceforge.net/
--   It is also available in AUR: Raider
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Convert_a_single_drive_system_to_RAID&oldid=234467"
+"https://wiki.archlinux.org/index.php?title=Convert_a_single_drive_system_to_RAID&oldid=291628"
 
 Category:
 
 -   File systems
+
+-   This page was last modified on 4 January 2014, at 21:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

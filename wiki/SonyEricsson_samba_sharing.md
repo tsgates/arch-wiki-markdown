@@ -5,15 +5,13 @@ You can have acess to Sony Ericsson phones and phone cards via samba
 sharing. It works even with old firmware and you have still full
 functional phone, not like USB mass storage mode.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Supported Phones                                                   |
-| -   2 Setting Up Phone                                                   |
-| -   3 Setting Up Computer                                                |
-| -   4 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Supported Phones
+-   2 Setting Up Phone
+-   3 Setting Up Computer
+-   4 External Links
 
 Supported Phones
 ----------------
@@ -68,3 +66,10 @@ Retrieved from
 Category:
 
 -   Mobile devices
+
+-   This page was last modified on 14 March 2013, at 01:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

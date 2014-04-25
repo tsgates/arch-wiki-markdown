@@ -5,10 +5,10 @@ Installation Guide Troubleshooting
   [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
                            is a candidate for       
                            merging with             
-                           Installation Guide.      
+                           Installation guide.      
                            Notes: This page should  
                            be a part of             
-                           Installation Guide       
+                           Installation guide       
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
@@ -19,7 +19,7 @@ Errors when running pacstrap
 
 > (PGP)Key "..." could not be imported
 
-error: linux-api-headers: key "F990EB20FAEsomhing" is unknown 
+error: linux-api-headers: key "F990EB20FAEsomhing" is unknown
 
 Import PGP key EAE999BD, "Allan McRae <me@allanmcrae.com>", created on
 2011-06-03? [Y/n]
@@ -36,4 +36,16 @@ SigLevel = PackageRequired to SigLevel = Optional TrustAll But that
 would decrease security by a lot.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Installation_Guide_Troubleshooting&oldid=251577"
+"https://wiki.archlinux.org/index.php?title=Installation_Guide_Troubleshooting&oldid=298317"
+
+Categories:
+
+-   About Arch
+-   Getting and installing Arch
+
+-   This page was last modified on 16 February 2014, at 07:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

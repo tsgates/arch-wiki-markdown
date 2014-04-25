@@ -25,29 +25,25 @@ Simply put, Munin allows you to make graphs about system statistics. You
 can check out University of Oslo's Munin install to see some examples of
 what it can do.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 munin and munin-node                                         |
-|     -   1.2 Optional web server                                          |
-|     -   1.3 IPv6                                                         |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Daemon                                                       |
-|     -   2.2 Plugins                                                      |
-|     -   2.3 Directories                                                  |
-|     -   2.4 Customization                                                |
-|     -   2.5 Cron                                                         |
-|     -   2.6 Permissions                                                  |
-|                                                                          |
-| -   3 Testing                                                            |
-| -   4 Plugins                                                            |
-|     -   4.1 Adding                                                       |
-|     -   4.2 Removing                                                     |
-|     -   4.3 Debugging                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 munin and munin-node
+    -   1.2 Optional web server
+    -   1.3 IPv6
+-   2 Configuration
+    -   2.1 Daemon
+    -   2.2 Plugins
+    -   2.3 Directories
+    -   2.4 Customization
+    -   2.5 Cron
+    -   2.6 Permissions
+-   3 Testing
+-   4 Plugins
+    -   4.1 Adding
+    -   4.2 Removing
+    -   4.3 Debugging
 
 Installation
 ------------
@@ -177,7 +173,7 @@ Testing
 Munin should be able to run now. To make sure everything works, start
 munin-node:
 
-    #/etc/rc.d/munin-node start
+    # systemctl start munin-node
 
 Then run munin-cron manually to generate the HTML and graph images:
 
@@ -224,7 +220,7 @@ plugin, munin-run should be able to figure it out:
 
 And restart munin-node:
 
-    # /etc/rc.d/munin-node restart
+    # systemctl restart munin-node
 
 Finally, refresh the web page.
 
@@ -253,8 +249,15 @@ function could not be found. To resolve the problem simply install the
 missing library in this case "perl-libwww".
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Munin&oldid=253149"
+"https://wiki.archlinux.org/index.php?title=Munin&oldid=271776"
 
 Category:
 
 -   Status monitoring and notification
+
+-   This page was last modified on 20 August 2013, at 00:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

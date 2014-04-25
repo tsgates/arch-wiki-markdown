@@ -11,32 +11,27 @@ Arch Handbook
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Notice                                                             |
-| -   2 Getting Started                                                    |
-|     -   2.1 Introduction                                                 |
-|     -   2.2 Installing Arch Linux                                        |
-|     -   2.3 Linux Basics                                                 |
-|     -   2.4 Installing, removing, updating and managing software: pacman |
-|     -   2.5 Graphical Desktop Environments                               |
-|                                                                          |
-| -   3 Common Tasks                                                       |
-|     -   3.1 Desktop Applications                                         |
-|     -   3.2 Multimedia                                                   |
-|     -   3.3 Printing                                                     |
-|                                                                          |
-| -   4 System Administration                                              |
-|     -   4.1 Configuration and Tuning                                     |
-|     -   4.2 Users and Basic Account Management                           |
-|                                                                          |
-| -   5 Networking                                                         |
-|     -   5.1 Network Configuration                                        |
-|     -   5.2 Servers                                                      |
-|     -   5.3 Firewalls                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Notice
+-   2 Getting Started
+    -   2.1 Introduction
+    -   2.2 Installing Arch Linux
+    -   2.3 Linux Basics
+    -   2.4 Installing, removing, updating and managing software: pacman
+    -   2.5 Graphical Desktop Environments
+-   3 Common Tasks
+    -   3.1 Desktop Applications
+    -   3.2 Multimedia
+    -   3.3 Printing
+-   4 System Administration
+    -   4.1 Configuration and Tuning
+    -   4.2 Users and Basic Account Management
+-   5 Networking
+    -   5.1 Network Configuration
+    -   5.2 Servers
+    -   5.3 Firewalls
 
 Notice
 ------
@@ -62,7 +57,7 @@ repository. See the pages in this category
 
 The full install guide is here and the install CDs are available here.
 If you would like a more detailed installation guide, please see the
-Beginners' Guide.
+Beginners' guide.
 
 > Linux Basics
 
@@ -85,13 +80,13 @@ e.g.
 
     mkdir /home/archuser/newfolder
 
-How to remove an (empty) directory:
+How to remove an empty directory:
 
     rmdir /path/to/empty/directory
 
-How to remove a non-empty directory:
+How to remove a directory and all its content:
 
-    rmdir --ignore-fail-on-non-empty /path/to/non_empty/directory
+    rm -r /path/to/directory
 
 How to list files in a directory:
 
@@ -176,13 +171,7 @@ See pacman.
 
 > Graphical Desktop Environments
 
-The Xorg project provides an open source implementation of the X Window
-System – the foundation for a graphical user interface. Desktop
-environments such as Enlightenment, GNOME, KDE, LXDE, and Xfce provide a
-complete graphical environment. Various window managers offer
-alternative and novel environments, and may be used standalone to
-conserve system resources. Display managers provide a graphical login
-prompt.
+See Desktop environment.
 
 Common Tasks
 ------------
@@ -210,7 +199,7 @@ Systemd is used for most administrative tasks.
 
 Creating and managing users with command-line utilities.
 
-Users are created with useradd. See Users and Groups for more
+Users are created with useradd. See Users and groups for more
 information.
 
 Networking
@@ -226,11 +215,19 @@ Mail, web, SSH server installation and configuration.
 
 > Firewalls
 
-See Firewalls, iptables, Simple Stateful Firewall.
+See Firewalls, iptables, Simple stateful firewall.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch_Handbook&oldid=244381"
+"https://wiki.archlinux.org/index.php?title=Arch_Handbook&oldid=302035"
 
-Category:
+Categories:
 
 -   Getting and installing Arch
+-   System administration
+
+-   This page was last modified on 25 February 2014, at 13:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

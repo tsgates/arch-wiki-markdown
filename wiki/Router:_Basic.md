@@ -3,25 +3,21 @@ Router: Basic
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 DRAFT                                                              |
-| -   2 Description                                                        |
-| -   3 Ethernet Devices                                                   |
-|     -   3.1 Installation                                                 |
-|     -   3.2 Names                                                        |
-|     -   3.3 IP Settings                                                  |
-|                                                                          |
-| -   4 LAN Setup                                                          |
-|     -   4.1 dnsmasq                                                      |
-|     -   4.2 Static-Route                                                 |
-|                                                                          |
-| -   5 IP Masquerading and Firewall                                       |
-|     -   5.1 Kernel Settings                                              |
-|     -   5.2 Shorewall                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 DRAFT
+-   2 Description
+-   3 Ethernet Devices
+    -   3.1 Installation
+    -   3.2 Names
+    -   3.3 IP Settings
+-   4 LAN Setup
+    -   4.1 dnsmasq
+    -   4.2 Static-Route
+-   5 IP Masquerading and Firewall
+    -   5.1 Kernel Settings
+    -   5.2 Shorewall
 
 DRAFT
 =====
@@ -164,7 +160,8 @@ the LAN clients:
 
     echo 1 > /proc/sys/net/ipv4/ip_forward
 
-To permanently set this, enable ip forwarding in /etc/sysctl.conf:
+To permanently set this, enable ip forwarding in
+/etc/sysctl.d/40-ip-forward.conf:
 
     net.ipv4.ip_forward=1
 
@@ -174,8 +171,15 @@ Shorewall
 See Shorewall.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Router:_Basic&oldid=250491"
+"https://wiki.archlinux.org/index.php?title=Router:_Basic&oldid=282632"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 13 November 2013, at 12:21.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

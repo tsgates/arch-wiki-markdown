@@ -1,11 +1,9 @@
 Change username
 ===============
 
-> Summary
+Related articles
 
-> Related
-
-Users and Groups
+-   Users and groups
 
 Changing a username under Arch (or any flavor of Linux) is safe and easy
 when done properly. You can also change the associated groupname for the
@@ -13,20 +11,18 @@ user if you wish. Following the procedure below will do just this
 retaining your UID/GID for the affected user thus not roaching any file
 permissions you have setup.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Procedure                                                          |
-|     -   1.1 Change A User's Login                                        |
-|     -   1.2 Change A User's $HOME                                        |
-|     -   1.3 Change A User's $HOME and Move Contents                      |
-|     -   1.4 Change Group Name                                            |
-|     -   1.5 Manually With /etc/passwd                                    |
-|         -   1.5.1 /etc/passwd File Format                                |
-|                                                                          |
-| -   2 Gotchas                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Procedure
+    -   1.1 Change A User's Login
+    -   1.2 Change the Real Name
+    -   1.3 Change A User's $HOME
+    -   1.4 Change A User's $HOME and Move Contents
+    -   1.5 Change Group Name
+    -   1.6 Manually With /etc/passwd
+        -   1.6.1 /etc/passwd File Format
+-   2 Gotchas
 
 Procedure
 ---------
@@ -40,6 +36,12 @@ or as another user and su to root.
 This will change only the user's login name.
 
     # usermod -l newname oldname
+
+> Change the Real Name
+
+This will change the real name of the username.
+
+    # usermod -c "New Real Name" username
 
 > Change A User's $HOME
 
@@ -125,8 +127,9 @@ Gotchas
     /var/spool/cron from the old to the new name, and then opening
     crontab -e to change any relevant paths and have it adjust the file
     permissions accordingly.
--   Wine's personal folder in ~/.wine/drive_c/users needs to be manually
-    renamed.
+-   Wine's personal folders/files' contents in ~/.wine/drive_c/users,
+    ~/.local/share/applications/wine/Programs and possibly more need to
+    be manually renamed/edited.
 -   The procedure to enable spell checking in Firefox may need to be
     redone, or else the check-as-you-type spelling might not work after
     renaming the user.
@@ -143,8 +146,15 @@ Gotchas
     grep command this way: # grep -r {old_user} *
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Change_username&oldid=252841"
+"https://wiki.archlinux.org/index.php?title=Change_username&oldid=301831"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 24 February 2014, at 16:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -10,22 +10,19 @@ probably interested in the ArchAudio repositories.
 Read on if you are looking to contribute to the project, or are just
 plain bored.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Repositories                                                       |
-| -   2 Packaging                                                          |
-|     -   2.1 Getting Started                                              |
-|         -   2.1.1 Password Hashing                                       |
-|         -   2.1.2 Buildscript Contributor                                |
-|         -   2.1.3 Binary Contributor                                     |
-|             -   2.1.3.1 Committing Packages                              |
-|             -   2.1.3.2 Building Packages                                |
-|                                                                          |
-|     -   2.2 Subversion Maintenance                                       |
-|     -   2.3 Guidelines                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Repositories
+-   2 Packaging
+    -   2.1 Getting Started
+        -   2.1.1 Password Hashing
+        -   2.1.2 Buildscript Contributor
+        -   2.1.3 Binary Contributor
+            -   2.1.3.1 Committing Packages
+            -   2.1.3.2 Building Packages
+    -   2.2 Subversion Maintenance
+    -   2.3 Guidelines
 
 Repositories
 ------------
@@ -234,8 +231,15 @@ will complain that it is missing since it's not aware of the removal.
     smoothly
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ArchAudio&oldid=252949"
+"https://wiki.archlinux.org/index.php?title=ArchAudio&oldid=298696"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 18 February 2014, at 13:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

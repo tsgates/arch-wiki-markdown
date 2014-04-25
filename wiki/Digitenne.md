@@ -11,123 +11,54 @@ Digitenne
 This page describes the procedure to watch encrypted DVB-T broadcasts in
 the Netherlands
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Environment                                                        |
-|     -   1.1 You need Kernel <= 2.6.36 or kernel>=2.6.38                  |
-|                                                                          |
-| -   2 Used Hardware                                                      |
-| -   3 testing the DVB-T receiver                                         |
-|     -   3.1 Check device nodes                                           |
-|     -   3.2 Testing the DVB-T receiver with vlc                          |
-|     -   3.3 Test the DVB-T receiver with tzap and mplayer                |
-|         -   3.3.1 Install mplayer and tzap                               |
-|         -   3.3.2 Scan channels                                          |
-|         -   3.3.3 Tune the DVB-T receiver                                |
-|         -   3.3.4 Play the captured datastream                           |
-|                                                                          |
-| -   4 Cardreader                                                         |
-|     -   4.1 Plugin cardreader                                            |
-|     -   4.2 Install oscam from aur                                       |
-|     -   4.3 Oscam configuration                                          |
-|         -   4.3.1 /etc/oscam/oscam.conf                                  |
-|         -   4.3.2 /etc/oscam/oscam.server                                |
-|         -   4.3.3 /etc/oscam/oscam.services                              |
-|         -   4.3.4 /etc/oscam/oscam.user                                  |
-|                                                                          |
-|     -   4.4 Starting Oscam                                               |
-|                                                                          |
-| -   5 Softcam (sasc-ng)                                                  |
-|     -   5.1 Install sasc-ng from aur                                     |
-|     -   5.2 Configure Sasc-ng                                            |
-|         -   5.2.1 /etc/conf.d/sasc-ng                                    |
-|         -   5.2.2 /etc/camdir/cardclient.conf                            |
-|         -   5.2.3 /etc/rc.d/sasc-ng                                      |
-|                                                                          |
-|     -   5.3 Starting Sasc-ng                                             |
-|     -   5.4 Testing Softcam with tzap and mplayer                        |
-|     -   5.5 Expanding for 2 or more DVB-T tuners                         |
-|                                                                          |
-| -   6 VDR Integration                                                    |
-|     -   6.1 VDR installation                                             |
-|     -   6.2 install vdr-plugin-sc-hg from aur                            |
-|     -   6.3 VDR - oscam connection                                       |
-|         -   6.3.1 /var/lib/vdr/plugins/sc/cardclient.conf                |
-|                                                                          |
-|     -   6.4 Scanning channels                                            |
-|     -   6.5 Watch TV                                                     |
-|                                                                          |
-| -   7 Mythtv Integration                                                 |
-|     -   7.1 Mythtv-setup                                                 |
-|         -   7.1.1 1. General                                             |
-|         -   7.1.2 2. Capture cards                                       |
-|         -   7.1.3 3. Video sources                                       |
-|         -   7.1.4 4. Input connections                                   |
-|         -   7.1.5 5. Channel Editor                                      |
-|         -   7.1.6 6. Storage Directories                                 |
-|         -   7.1.7 7. System events                                       |
-|                                                                          |
-|     -   7.2 Start mythtv                                                 |
-|                                                                          |
-| -   8 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Environment
------------
-
-You need Kernel <= 2.6.36 or kernel>=2.6.38
-
-With kernel 2.6.37 sasc-ng will crash, showing the following errors in
-dmesg:
-
-    INFO: task sasc-ng:4563 blocked for more than 120 seconds.
-    "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-    sasc-ng D f0adbdac 0 4563 1 0x00000000
-    f0adbdbc 00000082 00000002 f0adbdac 00000213 4ee701f2 0004a040 00000000
-    00000000 f6006340 f0adbd34 c100a208 f0adbd88 c1068173 d03da3f7 c14b6340
-    f0f97810 c14b6340 c14b6340 f0f979d4 c14b6340 c14b6340 f6206340 f0f97810
-    Call Trace:
-    [<c100a208>] ? sched_clock+0x8/0x10
-    [<c1068173>] ? sched_clock_local+0xd3/0x1c0
-    [<c103dca2>] ? enqueue_entity+0x102/0x170
-    [<c131439d>] __mutex_lock_slowpath+0x10d/0x2b0
-    [<c131454b>] mutex_lock+0xb/0x20
-    [<fa348119>] dvb_device_open+0x19/0x290 [dvb_core]
-    [<c110717f>] chrdev_open+0x13f/0x240
-    [<c1101979>] __dentry_open+0xe9/0x310
-    [<c1102b2e>] nameidata_to_filp+0x5e/0x70
-    [<c1107040>] ? chrdev_open+0x0/0x240
-    [<c110f5df>] do_last+0x3ff/0x630
-    [<c110f9e4>] do_filp_open+0x1d4/0x510
-    [<c1102b95>] do_sys_open+0x55/0xf0
-    [<f80bca30>] ? dvblb_read+0x0/0x340 [dvbloopback]
-    [<c1102c59>] sys_open+0x29/0x40
-    [<c100391f>] sysenter_do_call+0x12/0x28
-    INFO: task sasc-ng:4563 blocked for more than 120 seconds.
-    "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-    sasc-ng D f0adbdac 0 4563 1 0x00000000
-    f0adbdbc 00000082 00000002 f0adbdac 00000213 4ee701f2 0004a040 00000000
-    00000000 f6006340 f0adbd34 c100a208 f0adbd88 c1068173 d03da3f7 c14b6340
-    f0f97810 c14b6340 c14b6340 f0f979d4 c14b6340 c14b6340 f6206340 f0f97810
-    Call Trace:
-    [<c100a208>] ? sched_clock+0x8/0x10
-    [<c1068173>] ? sched_clock_local+0xd3/0x1c0
-    [<c103dca2>] ? enqueue_entity+0x102/0x170
-    [<c131439d>] __mutex_lock_slowpath+0x10d/0x2b0
-    [<c131454b>] mutex_lock+0xb/0x20
-    [<fa348119>] dvb_device_open+0x19/0x290 [dvb_core]
-    [<c110717f>] chrdev_open+0x13f/0x240
-    [<c1101979>] __dentry_open+0xe9/0x310
-    [<c1102b2e>] nameidata_to_filp+0x5e/0x70
-    [<c1107040>] ? chrdev_open+0x0/0x240
-    [<c110f5df>] do_last+0x3ff/0x630
-    [<c110f9e4>] do_filp_open+0x1d4/0x510
-    [<c1102b95>] do_sys_open+0x55/0xf0
-    [<f80bca30>] ? dvblb_read+0x0/0x340 [dvbloopback]
-    [<c1102c59>] sys_open+0x29/0x40
-    [<c100391f>] sysenter_do_call+0x12/0x28
+-   1 Used Hardware
+-   2 testing the DVB-T receiver
+    -   2.1 Check device nodes
+    -   2.2 Testing the DVB-T receiver with vlc
+    -   2.3 Test the DVB-T receiver with tzap and mplayer
+        -   2.3.1 Install mplayer and tzap
+        -   2.3.2 Scan channels
+        -   2.3.3 Tune the DVB-T receiver
+        -   2.3.4 Play the captured datastream
+-   3 Cardreader
+    -   3.1 Plugin cardreader
+    -   3.2 Install oscam from aur
+    -   3.3 Oscam configuration
+        -   3.3.1 /etc/oscam/oscam.conf
+        -   3.3.2 /etc/oscam/oscam.server
+        -   3.3.3 /etc/oscam/oscam.services
+        -   3.3.4 /etc/oscam/oscam.user
+    -   3.4 Starting Oscam
+-   4 Softcam (sasc-ng)
+    -   4.1 Install sasc-ng from aur
+    -   4.2 Configure Sasc-ng
+        -   4.2.1 /etc/conf.d/sasc-ng
+        -   4.2.2 /etc/camdir/cardclient.conf
+        -   4.2.3 /etc/rc.d/sasc-ng
+    -   4.3 Starting Sasc-ng
+    -   4.4 Testing Softcam with tzap and mplayer
+    -   4.5 Expanding for 2 or more DVB-T tuners
+-   5 VDR Integration
+    -   5.1 VDR installation
+    -   5.2 install vdr-plugin-sc-hg from aur
+    -   5.3 VDR - oscam connection
+        -   5.3.1 /var/lib/vdr/plugins/sc/cardclient.conf
+    -   5.4 Scanning channels
+    -   5.5 Watch TV
+-   6 Mythtv Integration
+    -   6.1 Mythtv-setup
+        -   6.1.1 1. General
+        -   6.1.2 2. Capture cards
+        -   6.1.3 3. Video sources
+        -   6.1.4 4. Input connections
+        -   6.1.5 5. Channel Editor
+        -   6.1.6 6. Storage Directories
+        -   6.1.7 7. System events
+    -   6.2 Start mythtv
+-   7 References
 
 Used Hardware
 -------------
@@ -620,70 +551,71 @@ CPU. Then it can only be killed by
 Disable therefore the internal logging like this: Now the messages of
 sasc-ng end up in /var/log/everything.log
 
-    #!/bin/bash
-
-    . /etc/rc.conf
-    . /etc/rc.d/functions
-
-    [ -f /etc/conf.d/sasc-ng ] && . /etc/conf.d/sasc-ng
-
-    PID=$(pidof -o %PPID /usr/sbin/sasc-ng)
-
-    case $1 in
-    start)
-            stat_busy "Loading dvbloopback kernel module"
-
-             -z $DVBLOOPBACK_ARGS  && stat_die 1
-
-            modprobe dvbloopback $DVBLOOPBACK_ARGS
-            sleep 1
-
-            stat_done
-
-            stat_busy "Starting SASC-NG daemon"
-
-             -z $SASCNG_ARGS  && stat_die 2
-             -z $CAMDIR  && stat_die 3
-             -z $LOGDIR  && stat_die 4
-
-            # -z $PID  && /usr/sbin/sasc-ng -D $SASCNG_ARGS --cam-dir=$CAMDIR -l $LOGDIR/sasc-ng.log
-    	 -z $PID  && /usr/sbin/sasc-ng -D $SASCNG_ARGS --cam-dir=$CAMDIR
-            if [ $? -gt 0 ]; then
-                    stat_die 5
-            else
-                    add_daemon sasc-ng
-                    stat_done
-            fi
-            ;;
-    stop)
-            stat_busy "Stoping SASC-NG daemon"
-             ! -z $PID  && kill $PID &> /dev/null
-
-            if [ $? -gt 0 ]; then
-                    stat_die 6
-            else
-                    rm_daemon sasc-ng
-                    stat_done
-            fi
-
-            stat_busy "Unloading dvbloopback kernel module"
-
-            sleep 2
-            modprobe -r dvbloopback
-
-            stat_done
-            ;;
-
-    restart)
-            $0 stop
-            sleep 1
-            $0 start
-            ;;
-
-    *)
-            echo "usage: $0 {start|stop|restart}" >&2
-            exit 1
-    esac
+     #!/bin/bash
+     
+     . /etc/rc.conf
+     . /etc/rc.d/functions
+     
+     [ -f /etc/conf.d/sasc-ng ] && . /etc/conf.d/sasc-ng
+     
+     PID=$(pidof -o %PPID /usr/sbin/sasc-ng)
+     
+     case $1 in
+     start)
+             stat_busy "Loading dvbloopback kernel module"
+     
+             [[ -z $DVBLOOPBACK_ARGS ]] && stat_die 1
+     
+             modprobe dvbloopback $DVBLOOPBACK_ARGS
+             sleep 1
+     
+             stat_done
+     
+             stat_busy "Starting SASC-NG daemon"
+     
+             [[ -z $SASCNG_ARGS ]] && stat_die 2
+             [[ -z $CAMDIR ]] && stat_die 3
+             [[ -z $LOGDIR ]] && stat_die 4
+     
+             #[[ -z $PID ]] && /usr/sbin/sasc-ng -D $SASCNG_ARGS --cam-dir=$CAMDIR -l $LOGDIR/sasc-ng.log
+     	[[ -z $PID ]] && /usr/sbin/sasc-ng -D $SASCNG_ARGS --cam-dir=$CAMDIR
+             if [ $? -gt 0 ]; then
+                     stat_die 5
+             else
+                     add_daemon sasc-ng
+                     stat_done
+             fi
+             ;;
+     stop)
+             stat_busy "Stoping SASC-NG daemon"
+             [[ ! -z $PID ]] && kill $PID &> /dev/null
+     
+             if [ $? -gt 0 ]; then
+                     stat_die 6
+             else
+                     rm_daemon sasc-ng
+                     stat_done
+             fi
+     
+             stat_busy "Unloading dvbloopback kernel module"
+     
+             sleep 2
+             modprobe -r dvbloopback
+     
+             stat_done
+             ;;
+     
+     restart)
+             $0 stop
+             sleep 1
+             $0 start
+             ;;
+     
+     *)
+             echo "usage: $0 {start|stop|restart}" >&2
+             exit 1
+     esac
+     
 
 > Starting Sasc-ng
 
@@ -1170,8 +1102,15 @@ http://www.sat4all.com/forums/ubbthreads.php/topics/1967886/digitenne_kijken_via
 (Dutch link)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Digitenne&oldid=207043"
+"https://wiki.archlinux.org/index.php?title=Digitenne&oldid=257788"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 19 May 2013, at 13:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

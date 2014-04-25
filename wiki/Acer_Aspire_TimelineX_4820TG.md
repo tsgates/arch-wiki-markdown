@@ -7,19 +7,16 @@ it a powerful 14-inch laptop. ArchLinux works mostly works out of box,
 but there are few tweaks required to make the hardware fully compatible
 with ArchLinux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 PowerSmart / Battery Optimization                                  |
-|     -   2.1 Switchable Graphics                                          |
-|     -   2.2 Enable CPU Frequency Scaling                                 |
-|     -   2.3 Power Usage                                                  |
-|     -   2.4 Sensors                                                      |
-|                                                                          |
-| -   3 Synaptics Touchpad                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 PowerSmart / Battery Optimization
+    -   2.1 Switchable Graphics
+    -   2.2 Enable CPU Frequency Scaling
+    -   2.3 Power Usage
+    -   2.4 Sensors
+-   3 Synaptics Touchpad
 
 Hardware
 --------
@@ -202,8 +199,15 @@ The default configuration is available at
 For more information check Touchpad_Synaptics
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_TimelineX_4820TG&oldid=246396"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_TimelineX_4820TG&oldid=301589"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 24 February 2014, at 11:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

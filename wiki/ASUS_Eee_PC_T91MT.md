@@ -16,26 +16,23 @@ ASUS Eee PC T91MT
   TV tuner                  Not working   
   ------------------------- ------------- ---------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Arch                                                    |
-|     -   1.1 Ethernet                                                     |
-|     -   1.2 Sound                                                        |
-|     -   1.3 Video                                                        |
-|     -   1.4 Wireless                                                     |
-|     -   1.5 Multi Touchscreen                                            |
-|                                                                          |
-| -   2 Suspend                                                            |
-| -   3 Hardware                                                           |
-| -   4 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing Arch
+    -   1.1 Ethernet
+    -   1.2 Sound
+    -   1.3 Video
+    -   1.4 Wireless
+    -   1.5 Multi Touchscreen
+-   2 Suspend
+-   3 Hardware
+-   4 More Resources
 
 Installing Arch
 ===============
 
-This wiki page supplements these pages: Beginners Guide, the Official
+This wiki page supplements these pages: Beginners' guide, the Official
 Install Guide, and Installing Arch Linux on the Asus EEE PC. Please
 refer to those guides first before following the eeepc-specific pointers
 on this page.
@@ -48,7 +45,7 @@ Ethernet works "out of the box" with no additional configuration.
 Sound
 -----
 
-Sound works as per the Beginners Guide instructions.
+Sound works as per the Beginners' guide instructions.
 
 Video
 -----
@@ -59,7 +56,7 @@ and libva-freeworld.
 Wireless
 --------
 
-Wireless works as described in the Beginners Guide with the 2.6.33
+Wireless works as described in the Beginners' guide with the 2.6.33
 kernel. Unencrypted, WEP, WPA-PSK and WPA2 connections are confirmed
 working.
 
@@ -127,8 +124,15 @@ Ubuntu T91MT Howto lots of detailed information, most of it applicable
 to Arch
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_T91MT&oldid=208431"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_T91MT&oldid=304852"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 08:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,6 +1,11 @@
 acpid
 =====
 
+Related articles
+
+-   ACPI modules
+-   DSDT
+
 acpid is a flexible and extensible daemon for delivering ACPI events. It
 listens on /proc/acpi/event and when an event occurs, executes programs
 to handle the event. These events are triggered by certain actions, such
@@ -11,53 +16,35 @@ as:
 -   (Un)Plugging an AC power adapter from a notebook
 -   (Un)Plugging phone jack etc.
 
-acpid can be used by itself, or combined with a more robust system such
-as pm-utils and cpufrequtils to provide a more complete power management
-solution.
+Note:Desktop environments, such as GNOME, systemd login manager and some
+extra key handling daemons may implement own event handling schemes,
+independent of acpid. Running more than one system at the same time may
+lead to unexpected behaviour, such as suspending two times in a row
+after one sleep button press. You should be aware of this and only
+activate desirable handlers.
 
-> Note:
+Contents
+--------
 
--   desktop environments, such as GNOME, systemd login manager and some
-    extra key handling daemons may implement own event handling schemes,
-    independent of acpid. Running more than one system at the same time
-    may lead to unexpected behaviour, such as suspending two times in a
-    row after one sleep button press. You should be aware of this and
-    only activate desirable handlers.
--   Since by default the script provided by acpid, /etc/acpi/handler.sh,
-    will override your desktop environment's power button functionality,
-    you most likely want to change acpid's power off routine to avoid
-    shutting down the system suddenly when you press the power button
-    (see instructions below).
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Alternative configuration                                    |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Extending acpid with pm-utils                                |
-|     -   3.2 Example Events                                               |
-|     -   3.3 Enabling volume control                                      |
-|     -   3.4 Enabling backlight control                                   |
-|     -   3.5 Enabling Wi-fi toggle                                        |
-|     -   3.6 Laptop Monitor Power Off                                     |
-|     -   3.7 Getting user name of the current display                     |
-|     -   3.8 ACPI hotkey                                                  |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Alternative configuration
+-   3 Tips and tricks
+    -   3.1 Example events
+    -   3.2 Enabling volume control
+    -   3.3 Enabling backlight control
+    -   3.4 Enabling Wi-fi toggle
+    -   3.5 Laptop monitor power off
+    -   3.6 Getting user name of the current display
+    -   3.7 ACPI hotkey
+-   4 See also
 
 Installation
 ------------
 
 Install the acpid package, available in the official repositories.
 
-To have it start on boot using systemd, run
-
-    # systemctl enable acpid
+To have acpid started on boot, enable acpid.service.
 
 Configuration
 -------------
@@ -87,7 +74,7 @@ and on another as SBTN.
 To determine how your buttons or Fn shortcuts are recognized, run the
 following command from a terminal as root:
 
-    # tail -f /var/log/messages.log
+    # journalctl -f
 
 Now press the Power button and/or Sleep button (e.g. Fn+Esc) on your
 machine. The result should look something this:
@@ -141,16 +128,16 @@ As root, create the following file:
     /etc/acpi/events/sleep-button
 
     event=button sleep.*
-    action=/etc/acpi/actions/sleep-button.sh "%e"
+    action=/etc/acpi/actions/sleep-button.sh %e
 
 Now create the following file:
 
     /etc/acpi/actions/sleep-button.sh
 
     #!/bin/sh
-    case "$2" in
-        SLPB) echo -n mem >/sys/power/state ;;
-        *)    logger "ACPI action undefined: $2" ;;
+    case "$3" in
+        SLPB) echo -n mem >/sys/power/state ;;
+        *)    logger "ACPI action undefined: $3" ;;
     esac
 
 Finally, make the script executable:
@@ -167,17 +154,7 @@ Tip:Some of actions, described here, such as Wi-Fi toggle and backlight
 control, may already be managed directly by driver. You should consult
 documentation of corresponding kernel modules, when this is the case.
 
-> Extending acpid with pm-utils
-
-Although acpid can provide basic suspend2ram out-of-the-box, a more
-robust system may be desired. pm-utils provides a very flexible
-framework for suspend2ram (suspend) and suspend2disk (hibernate)
-operations, including common fixes for stubborn hardware and drivers
-(e.g. fglrx module). pm-utils provides two scripts, pm-suspend and
-pm-hibernate, both of which can be inserted as events into acpid. For
-more information, check the pm-utils wiki.
-
-> Example Events
+> Example events
 
 The following are examples of events that can be used in the
 /etc/acpi/handler.sh script. These examples should be modified so that
@@ -203,17 +180,8 @@ closed:
         case $3 in
             close)
                 #echo "LID switched!">/dev/tty5
-    	     /usr/sbin/pm-suspend &
+    	     /usr/bin/pm-suspend &
     	     DISPLAY=:0.0 su -c - username /usr/bin/slimlock
-                ;;
-
-Execute pm-suspend when the sleep button is pressed:
-
-    button/sleep)
-        case "$2" in
-            SBTN) 
-    	     #echo -n mem >/sys/power/state
-                /usr/sbin/pm-suspend
                 ;;
 
 To set the laptop screen brightness when plugged in power or not (the
@@ -279,8 +247,8 @@ backlight. To achieve this you write some handler, like this:
     step=1
 
     case $1 in
-      -) echo $((`cat $bl_dev/brightness` - $step)) >$bl_dev/brightness;;
-      +) echo $((`cat $bl_dev/brightness` + $step)) >$bl_dev/brightness;;
+      -) echo $(($(< $bl_dev/brightness) - $step)) >$bl_dev/brightness;;
+      +) echo $(($(< $bl_dev/brightness) + $step)) >$bl_dev/brightness;;
     esac
 
 and again, connect keys to ACPI events:
@@ -312,19 +280,18 @@ and its' handler:
     #!/bin/sh
     rf=/sys/class/rfkill/rfkill0
 
-    case `cat $rf/state` in
+    case $(< $rf/state) in
       0) echo 1 >$rf/state;;
       1) echo 0 >$rf/state;;
     esac
 
-> Laptop Monitor Power Off
+> Laptop monitor power off
 
 Adapted from the Gentoo Wiki comes this little gem. Add this to the
-bottom of /etc/acpi/actions/lm_lid.sh or to the button/lid section
-/etc/acpi/handler.sh. This will turn off the LCD back-light when the lid
-is closed, and restart when the lid is opened.
+button/lid section of /etc/acpi/handler.sh. This will turn off the LCD
+back-light when the lid is closed, and restart when the lid is opened.
 
-    case $(cat /proc/acpi/button/lid/LID0/state | awk '{print $2}') in
+    case $(awk '{print $2}' /proc/acpi/button/lid/LID0/state) in
         closed) XAUTHORITY=$(ps -C xinit -f --no-header | sed -n 's/.*-auth //; s/ -[^ ].*//; p') xset -display :0 dpms force off ;;
         open)   XAUTHORITY=$(ps -C xinit -f --no-header | sed -n 's/.*-auth //; s/ -[^ ].*//; p') xset -display :0 dpms force on  ;;
     esac
@@ -336,9 +303,9 @@ and write access to the X server, display, and any input devices.
 
 Here is another script not using XAUTHORITY but sudo:
 
-    case $(cat /proc/acpi/button/lid/LID0/state | awk '{print $2}') in
-        closed) sudo -u `ps -o ruser= -C xinit` xset -display :0 dpms force off ;;
-        open)   sudo -u `ps -o ruser= -C xinit` xset -display :0 dpms force on  ;;
+    case $(awk '{print $2}' /proc/acpi/button/lid/LID0/state) in
+        closed) sudo -u $(ps -o ruser= -C xinit) xset -display :0 dpms force off ;;
+        open)   sudo -u $(ps -o ruser= -C xinit) xset -display :0 dpms force on  ;;
     esac
 
 With certain combinations of Xorg and stubborn hardware,
@@ -346,7 +313,7 @@ xset dpms force off only blanks the display leaving the backlight turned
 on. This can be fixed using vbetool from the official repositories.
 Change the LCD section to:
 
-    case $(cat /proc/acpi/button/lid/LID0/state | awk '{print $2}') in
+    case $(awk '{print $2}' /proc/acpi/button/lid/LID0/state) in
         closed) vbetool dpms off ;;
         open)   vbetool dpms on  ;;
     esac
@@ -362,8 +329,8 @@ display:
 
     getuser ()
         {
-         export DISPLAY=`echo $DISPLAY | cut -c -2`
-         user=`who | grep " $DISPLAY" | awk '{print $1}' | tail -n1`
+         export DISPLAY=$(echo $DISPLAY | cut -c -2)
+         user=$(who | grep " $DISPLAY" | awk '{print $1}' | tail -n1)
          export XAUTHORITY=/home/$user/.Xauthority
          eval $1=$user
         }
@@ -382,8 +349,7 @@ and want to shutdown KDE properly:
         esac
         ;;
 
-  
- On newer systems using systemd, X11 logins are no longer necessarily
+On newer systems using systemd, X11 logins are no longer necessarily
 displayed in who, so the getuser function above does not work. An
 alternative is to use loginctl to obtain the required information, e.g.
 using xuserrun.
@@ -431,7 +397,7 @@ Also, the exailectl script is a brief shell script I created for
 controlling Exaile music player. As the ACPID is run from root, you will
 need to use
 
-    sudo -u (username) exaile
+    $ sudo -u username exaile
 
 for example, otherwise it will not detect your user-level program and
 recreate another.
@@ -440,13 +406,18 @@ See also
 --------
 
 -   http://acpid.sourceforge.net/ - acpid homepage
--   http://www.gentoo-wiki.info/ACPI/Configuration - RIP Gentoo wiki
-    entry - New Gentoo Wiki Archives
--   ACPI hotkeys
+-   http://www.gentoo-wiki.info/ACPI/Configuration - Gentoo wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acpid&oldid=254184"
+"https://wiki.archlinux.org/index.php?title=Acpid&oldid=298830"
 
 Category:
 
 -   Power management
+
+-   This page was last modified on 18 February 2014, at 22:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,7 +1,7 @@
 Midori
 ======
 
-> Summary
+Summary help replacing me
 
 This article contains information about the installation and
 configuration of the Midori browser, as well as various tips and trick.
@@ -30,23 +30,20 @@ Some of its features are:
 -   Customizable and extensible interface.
 -   Common extensions such as AdBlock, form history, a speed dial, etc.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Extensions                                                         |
-|     -   2.1 AdBlock                                                      |
-|     -   2.2 Search engines                                               |
-|     -   2.3 User scripts                                                 |
-|     -   2.4 Flash Plugin                                                 |
-|                                                                          |
-| -   3 Tips and Tricks                                                    |
-|     -   3.1 Flash Block                                                  |
-|     -   3.2 Personal AdBlock filters                                     |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Extensions
+    -   2.1 AdBlock
+    -   2.2 Search engines
+    -   2.3 User scripts
+    -   2.4 Flash plugin
+-   3 Tips and tricks
+    -   3.1 Flash Block
+    -   3.2 Personal AdBlock filters
+    -   3.3 Fix Pixelated Fonts
+-   4 See also
 
 Installation
 ------------
@@ -56,8 +53,8 @@ available in the official repositories.
 
 Development versions are available in the AUR:
 
--   midori-gtk2-git - for the GTK+ 2 version.
--   midori-git - for the GTK+ 3 and WebKitGTK3-based version.
+-   midori-gtk2-bzr - GTK+ 2 development version.
+-   midori-bzr - GTK+ 3 and WebKitGTK3-based development version.
 
 Extensions
 ----------
@@ -93,7 +90,7 @@ Another example can be to add a shortcut for an URL shortener:
 -   set a token for it (sh here).
 -   get the short URL for any link by typing:
 
-    sh [link]
+    sh link
 
 in the address bar.
 
@@ -109,13 +106,13 @@ For manual installation, you have to create the folder
 will be automatically picked up by Midori and any compatible scripts
 will be loaded.
 
-> Flash Plugin
+> Flash plugin
 
 To get the Flash plugin working in Midori you can install the
 midori-flash package from AUR or follow the instructions at
 Epiphany#Flash.
 
-Tips and Tricks
+Tips and tricks
 ---------------
 
 > Flash Block
@@ -162,14 +159,30 @@ For this:
 
     file://.local/share/midori/filters/myadblockfilters.txt
 
+> Fix Pixelated Fonts
+
+Some websites such as github.com tend to use bitmap font from X11, named
+Clean.
+
+Easy fix is to disable bitmap fonts, run:
+
+    # ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+
 See also
 --------
 
 -   Midori FAQ
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Midori&oldid=232792"
+"https://wiki.archlinux.org/index.php?title=Midori&oldid=293498"
 
 Category:
 
 -   Web Browser
+
+-   This page was last modified on 18 January 2014, at 21:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

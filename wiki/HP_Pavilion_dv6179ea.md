@@ -5,21 +5,19 @@ Work in progress, this might take a while - by Grimn
 
 Currently using Arch Core Dump (2.6.23 kernel).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Arch Installation                                                  |
-| -   2 Kernel                                                             |
-| -   3 Touchpad                                                           |
-| -   4 cpufreq                                                            |
-| -   5 Sound                                                              |
-| -   6 Wireless                                                           |
-| -   7 Webcam                                                             |
-| -   8 Quickplay buttons                                                  |
-| -   9 Card Reader                                                        |
-| -   10 Sensors                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Arch Installation
+-   2 Kernel
+-   3 Touchpad
+-   4 cpufreq
+-   5 Sound
+-   6 Wireless
+-   7 Webcam
+-   8 Quickplay buttons
+-   9 Card Reader
+-   10 Sensors
 
 > Arch Installation
 
@@ -120,3 +118,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 23 April 2012, at 12:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

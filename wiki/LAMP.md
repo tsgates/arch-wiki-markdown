@@ -1,22 +1,13 @@
 LAMP
 ====
 
-> Summary
+Related articles
 
-This page explains the installation and configuration of a complete LAMP
-server.
-
-> Related
-
-MariaDB
-
-PhpMyAdmin
-
-Adminer
-
-Xampp
-
-mod_perl
+-   MariaDB
+-   PhpMyAdmin
+-   Adminer
+-   Xampp
+-   mod_perl
 
 LAMP refers to a common combination of software used in many web
 servers: Linux, Apache, MySQL/MariaDB, and PHP. This article describes
@@ -27,26 +18,25 @@ in the Apache server.
 If you only need a web server for development and testing, Xampp might
 be a better and easier option.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Apache                                                       |
-|         -   2.1.1 User directories                                       |
-|         -   2.1.2 SSL                                                    |
-|         -   2.1.3 Virtual Hosts                                          |
-|         -   2.1.4 Advanced Options                                       |
-|                                                                          |
-|     -   2.2 PHP                                                          |
-|         -   2.2.1 Advanced options                                       |
-|         -   2.2.2 Using php5 with apache2-mpm-worker and mod_fcgid       |
-|                                                                          |
-|     -   2.3 MariaDB                                                      |
-|                                                                          |
-| -   3 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Apache
+        -   2.1.1 User directories
+        -   2.1.2 SSL
+        -   2.1.3 Virtual Hosts
+            -   2.1.3.1 Managing lots of virtual hosts
+        -   2.1.4 Advanced Options
+        -   2.1.5 Troubleshooting
+    -   2.2 PHP
+        -   2.2.1 Advanced options
+        -   2.2.2 Using php5 with php-fpm, mod_proxy_fcgi and
+            mod_proxy_handler
+        -   2.2.3 Using php5 with apache2-mpm-worker and mod_fcgid
+    -   2.3 MariaDB
+-   3 External links
 
 Installation
 ------------
@@ -69,288 +59,214 @@ in /etc/httpd/conf/httpd.conf. The default is user http and it is
 created automatically during installation.
 
 Change httpd.conf and optionally extra/httpd-default.conf to your liking
-and start the httpd daemon using systemd.
+and start httpd.service using systemd.
 
 Apache should now be running. Test by visiting http://localhost/ in a
 web browser. It should display a simple Apache test page.
 
 User directories
 
--   User directories are available by default through
-    http://localhost/~user/ and show the contents of ~/public_html (this
-    can be changed in /etc/httpd/conf/extra/httpd-userdir.conf).
+User directories are available by default through
+http://localhost/~yourusername/ and show the contents of ~/public_html
+(this can be changed in /etc/httpd/conf/extra/httpd-userdir.conf).
 
--   If you do not want user directories to be available on the web,
-    comment out the following line in /etc/httpd/conf/httpd.conf:
+If you do not want user directories to be available on the web, comment
+out the following line in /etc/httpd/conf/httpd.conf:
 
     Include conf/extra/httpd-userdir.conf
 
--   You must make sure that your home directory permissions are set
-    properly so that Apache can get there. Your home directory and
-    ~/public_html/ must be executable for others ("rest of the world").
-    This seems to be enough:
+You must make sure that your home directory permissions are set properly
+so that Apache can get there. Your home directory and ~/public_html/
+must be executable for others ("rest of the world"). This seems to be
+enough:
 
     $ chmod o+x ~
     $ chmod o+x ~/public_html
 
--   A more secure way to share your home folder with Apache is to add
-    the http user to the group that owns your home folder. For example,
-    if your home folder and other sub-folders in your home folder belong
-    to group piter, all you have to do is following:
-
-    # usermod -aG piter http
-
--   Of course, you have to give read and execute permissions on ~/,
-    ~/public_html, and all other sub-folders in ~/public_html to the
-    group members (group piter in our case). Do something like the
-    following (modify the commands for your specific case):
-
-    $ chmod g+xr-w /home/yourusername
-    $ chmod -R g+xr-w /home/yourusername/public_html
-
-Note:This way you do not have to give access to your folder to every
-single user in order to give access to http user. Only the http user and
-other potential users that are in the piter group will have access to
-your home folder.
-
-Restart httpd to apply any changes.
+Restart httpd.service to apply any changes.
 
 SSL
 
--   Create a self-signed certificate (you can change the key size and
-    the number of days of validity):
+To use SSL, you will need to install openssl.
+
+Create a self-signed certificate (you can change the key size and the
+number of days of validity):
 
     # cd /etc/httpd/conf
-    # openssl genrsa -out server.key 2048
+    # openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out server.key
     # chmod 600 server.key
     # openssl req -new -key server.key -out server.csr
     # openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
--   Then, in /etc/httpd/conf/httpd.conf, uncomment the line containing:
+Then, in /etc/httpd/conf/httpd.conf, uncomment the following three
+lines:
 
+    LoadModule ssl_module modules/mod_ssl.so
+    LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
     Include conf/extra/httpd-ssl.conf
 
-Restart httpd to apply any changes.
+Restart httpd.service to apply any changes.
 
 Virtual Hosts
 
--   If you want to have more than one host, uncomment the following line
-    in /etc/httpd/conf/httpd.conf:
+If you want to have more than one host, uncomment the following line in
+/etc/httpd/conf/httpd.conf:
 
     Include conf/extra/httpd-vhosts.conf
 
--   In /etc/httpd/conf/extra/httpd-vhosts.conf set your virtual hosts
-    according the example, e.g.:
+In /etc/httpd/conf/extra/httpd-vhosts.conf set your virtual hosts. The
+default file contains an elaborate example that should help you get
+started.
 
-    /etc/httpd/conf/extra/httpd-vhosts.conf
-
-    NameVirtualHost *:80
-
-    #this first virtualhost enables: http://127.0.0.1, or: http://localhost, 
-    #to still go to /srv/http/*index.html(otherwise it will 404_error).
-    #the reason for this: once you tell httpd.conf to include extra/httpd-vhosts.conf, 
-    #ALL vhosts are handled in httpd-vhosts.conf(including the default one),
-    # E.G. the default virtualhost in httpd.conf is not used and must be included here, 
-    #otherwise, only domainname1.dom & domainname2.dom will be accessible
-    #from your web browser and NOT http://127.0.0.1, or: http://localhost, etc.
-    #
-
-    <VirtualHost *:80>
-        DocumentRoot "/srv/http"
-        ServerAdmin root@localhost
-        ErrorLog "/var/log/httpd/127.0.0.1-error_log"
-        CustomLog "/var/log/httpd/127.0.0.1-access_log" common
-        <Directory /srv/http/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          Allow from all
-        </Directory>
-    </VirtualHost>
-
-    <VirtualHost *:80>
-        ServerAdmin your@domainname1.dom
-        DocumentRoot "/home/username/yoursites/domainname1.dom/www"
-        ServerName domainname1.dom
-        ServerAlias domainname1.dom
-        <Directory /home/username/yoursites/domainname1.dom/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          Allow from all
-    </Directory>
-    </VirtualHost>
-
-    <VirtualHost *:80>
-        ServerAdmin your@domainname2.dom
-        DocumentRoot "/home/username/yoursites/domainname2.dom/www"
-        ServerName domainname2.dom
-        ServerAlias domainname2.dom
-        <Directory /home/username/yoursites/domainname2.dom/www/>
-          DirectoryIndex index.htm index.html
-          AddHandler cgi-script .cgi .pl
-          Options ExecCGI Indexes FollowSymLinks MultiViews +Includes
-          AllowOverride None
-          Order allow,deny
-          Allow from all
-    </Directory>
-    </VirtualHost>
-
--   Add your virtual host names to your /etc/hosts file (not necessary
-    if a DNS server is serving these domains already, but will not hurt
-    to do it anyway):
+To test the virtual hosts on you local machine, add the virtual names to
+your /etc/hosts file:
 
     127.0.0.1 domainname1.dom 
     127.0.0.1 domainname2.dom
 
-Restart httpd to apply any changes.
+If you want to use SSL on vhosts, copy the file httpd-ssl.conf to a
+custom named *.conf file, copy the <VirtualHost .. </VirtualHost> block
+to the number of vhosts, edit the file so it matches with the
+httpd-vhosts.conf file and change line SSL
+Include conf/extra/httpd-ssl.conf inside /etc/httpd/conf/httpd.conf:
 
--   If you setup your virtual hosts to be in your user directory,
-    sometimes it interferes with Apache's Userdir settings. To avoid
-    problems disable Userdir by comment the following line in:
+    cp -R /etc/httpd/conf/extra/httpd-ssl.conf /etc/httpd/conf/extra/httpd-ssl-vhosts.conf
 
-    #Include conf/extra/httpd-userdir.conf
+Restart httpd.service to apply any changes.
 
--   As said above, ensure that you have the proper permissions:
+Managing lots of virtual hosts
 
-    # chmod 0775 /home/yourusername/
+If you have a huge amount of virtual hosts, you may want to easily
+disable and enable them. It is recommended to create one configuration
+file per virtual host and store them all in one folder, eg:
+/etc/httpd/conf/vhosts.
 
--   If you have a huge amount of virtual hosts, you may want to easily
-    disable and enable them. It is recommended to create one
-    configuration file per virtual host and store them all in one
-    folder, eg: /etc/httpd/conf/vhosts.
-
--   First create the folder:
+First create the folder:
 
     # mkdir /etc/httpd/conf/vhosts
 
--   Then place the single configuration files in it:
+Then place the single configuration files in it:
 
     # nano /etc/httpd/conf/vhosts/domainname1.dom
     # nano /etc/httpd/conf/vhosts/domainname2.dom
     ...
 
--   In the last step, Include the single configurations in your
-    /etc/httpd/conf/httpd.conf:
+In the last step, Include the single configurations in your
+/etc/httpd/conf/httpd.conf:
 
     #Enabled Vhosts:
     Include conf/vhosts/domainname1.dom
     Include conf/vhosts/domainname2.dom
 
--   You can enable and disable single virtual hosts by commenting or
-    uncommenting them.
+You can enable and disable single virtual hosts by commenting or
+uncommenting them.
 
 Advanced Options
 
 These options in /etc/httpd/conf/httpd.conf might be interesting for
-you.
+you:
 
-    # Listen 80
+    Listen 80
 
--   This is the port Apache will listen to. For Internet-access with
-    router, you have to forward the port.
+This is the port Apache will listen to. For Internet-access with router,
+you have to forward the port.
 
-If you setup Apache for local development you may want it to be only
-accessible from your computer. Then change this line to:
+If you want to setup Apache for local development you may want it to be
+only accessible from your computer. Then change this line to
+Listen 127.0.0.1:80.
 
-    # Listen 127.0.0.1:80
+    ServerAdmin you@example.com
 
--   This is the admin's email address which can be found on e.g. error
-    pages:
+This is the admin's email address which can be found on e.g. error
+pages.
 
-    # ServerAdmin you@example.com
+    DocumentRoot "/srv/http"
 
--   This is the directory where you should put your web pages:
-
-    # DocumentRoot "/srv/http"
+This is the directory where you should put your web pages.
 
 Change it, if you want to, but do not forget to also change
+<Directory "/srv/http"> to whatever you changed your DocumentRoot too,
+or you will likely get a 403 Error (lack of privileges) when you try to
+access the new document root. Do not forget to change the
+Require all denied line, otherwise you will get a 403 Error.
 
-    <Directory "/srv/http">
+    AllowOverride None
 
-to whatever you changed your DocumentRoot too, or you will likely get a
-403 Error (lack of privileges) when you try to access the new document
-root. Do not forget to change the Deny from all line, otherwise you will
-get a 403 Error.
+This directive in <Directory> sections causes Apache to completely
+ignore .htaccess files. If you intend to use mod_rewrite or other
+settings in .htaccess files, you can allow which directives declared in
+that file can override server configuration. For more info refer to the
+Apache documentation.
 
-    # AllowOverride None
+Tip:If you have issues with your configuration you can have Apache check
+the configuration with: apachectl configtest
 
--   This directive in <Directory> sections causes Apache to completely
-    ignore .htaccess files. If you intend to use mod_rewrite or other
-    settings in .htaccess files, you can allow which directives declared
-    in that file can override server configuration. For more info refer
-    to the Apache documentation.
+More settings can be found in /etc/httpd/conf/extra/httpd-default.conf:
 
-Note:If you have issues with your configuration you can have Apache
-check the configuration with: apachectl configtest
-
--   More settings in /etc/httpd/conf/extra/httpd-default.conf:
-
--   To turn off your server's signature:
+To turn off your server's signature:
 
     ServerSignature Off
 
--   To hide server information like Apache and PHP versions:
+To hide server information like Apache and PHP versions:
 
     ServerTokens Prod
 
+Troubleshooting
+
+If you encounter Error: PID file /run/httpd/httpd.pid not readable
+(yet?) after start.
+
+Comment out the unique_id_module:
+
+     #LoadModule unique_id_module modules/mod_unique_id.so
+
 > PHP
 
--   To enable PHP, add these lines to /etc/httpd/conf/httpd.conf:
+Note:libphp5.so included with php-apache does not work with
+mod_mpm_event (FS#39218). You'll have to use mod_mpm_prefork instead.
+Otherwise you will get the following error:
 
-Place this in the LoadModule list anywhere after
-LoadModule dir_module modules/mod_dir.so:
+    Apache is running a threaded MPM, but your PHP Module is not compiled to be threadsafe.  You need to recompile PHP.
+    AH00013: Pre-configuration failed
+    httpd.service: control process exited, code=exited status=1
 
-     LoadModule php5_module modules/libphp5.so
+To use mod_mpm_prefork, open /etc/httpd/conf/httpd.conf and replace
 
-Place this at the end of the Include list:
+    LoadModule mpm_event_module modules/mod_mpm_event.so
 
-     Include conf/extra/php5_module.conf
+with
 
-Make sure that the following line is uncommented in the
-<IfModule mime_module> section:
+    LoadModule mpm_prefork_module modules/mod_mpm_prefork.so
 
-     TypesConfig conf/mime.types
+As an alternative, you can use mod_proxy_handler (see #Using php5 with
+php-fpm, mod_proxy_fcgi and mod_proxy_handler below).
 
-Uncomment the following line (optional):
+To enable PHP, add these lines to /etc/httpd/conf/httpd.conf:
 
-     MIMEMagicFile conf/magic
+-   Place this in the LoadModule list anywhere after
+    LoadModule dir_module modules/mod_dir.so:
 
--   Add this line in /etc/httpd/conf/mime.types:
+    LoadModule php5_module modules/libphp5.so
 
-     application/x-httpd-php       php    php5
+-   Place this at the end of the Include list:
 
-Note:If you do not see libphp5.so in the Apache modules directory
-(/etc/httpd/modules), you may have forgotten to install php-apache.
+    Include conf/extra/php5_module.conf
 
--   If your DocumentRoot is not /srv/http, add it to open_basedir in
-    /etc/php/php.ini as such:
+If your DocumentRoot is not /srv/http, add it to open_basedir in
+/etc/php/php.ini as such:
 
-     open_basedir=/srv/http/:/home/:/tmp/:/usr/share/pear/:/path/to/documentroot
+    open_basedir=/srv/http/:/home/:/tmp/:/usr/share/pear/:/path/to/documentroot
 
--   Restart the httpd daemon.
+Restart httpd.service using systemd
 
--   To test whether PHP was correctly configured: create a file called
-    test.php in your Apache DocumentRoot directory (e.g. /srv/http/ or
-    ~/public_html) and inside it put:
+To test whether PHP was correctly configured: create a file called
+test.php in your Apache DocumentRoot directory (e.g. /srv/http/ or
+~/public_html) with the following contents:
 
     <?php phpinfo(); ?>
 
 To see if it works go to: http://localhost/test.php or
 http://localhost/~myname/test.php
-
-If the PHP code is not executed (you see plain text in test.php), check
-that you have added Includes to the Options line for your root directory
-in /etc/httpd/conf/httpd.conf. Moreover, check that
-TypesConfig conf/mime.types is uncommented in the <IfModule mime_module>
-section, you may also try adding the following to the
-<IfModule mime_module> in httpd.conf:
-
-    AddHandler application/x-httpd-php .php
 
 Advanced options
 
@@ -366,8 +282,6 @@ Advanced options
 
 -   If you want the libGD module, install php-gd and uncomment
     extension=gd.so in /etc/php/php.ini:
-
-Note:php-gd requires libpng, libjpeg-turbo, and freetype2.
 
     extension=gd.so
 
@@ -385,11 +299,45 @@ you want to uncomment.
 
     DirectoryIndex index.php index.phtml index.html
 
+Using php5 with php-fpm, mod_proxy_fcgi and mod_proxy_handler
+
+Note:Unlike the widespread setup with ProxyPass, the proxy configuration
+with mod_proxy_handler and SetHandler respects other Apache directives
+like DirectoryIndex. This ensures a better compatibility with software
+designed for libphp5, mod_fastcgi and mod_fcgid. If you still want to
+try ProxyPass, experiment with a line like this:
+
+    ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/srv/http/$1
+
+-   Install php-fpm and mod_proxy_handler
+
+-   Set listen in /etc/php/php-fpm.conf like this:
+
+    ; use ip/port instead of unix socket, mod_proxy_fcgi does not support it
+    listen = 127.0.0.1:9000
+    ;listen = /run/php-fpm/php-fpm.sock
+
+    listen.allowed_clients = 127.0.0.1
+
+-   Append following to /etc/httpd/conf/httpd.conf:
+
+    LoadModule proxy_handler_module modules/mod_proxy_handler.so
+    <FilesMatch \.php$>
+        SetHandler "proxy:fcgi://127.0.0.1:9000/"
+    </FilesMatch>
+    <IfModule dir_module>
+        DirectoryIndex index.php index.html
+    </IfModule>
+
+-   Restart the restart apache php-fpm daemon again.
+
+    # systemctl restart httpd.service php-fpm.service
+
 Using php5 with apache2-mpm-worker and mod_fcgid
 
 -   Uncomment following in /etc/conf.d/apache:
 
-    HTTPD=/usr/sbin/httpd.worker
+    HTTPD=/usr/bin/httpd.worker
 
 -   Uncomment following in /etc/httpd/conf/httpd.conf:
 
@@ -413,7 +361,6 @@ Using php5 with apache2-mpm-worker and mod_fcgid
     	SharememPath /var/run/httpd/fcgid_shm
             # If you don't allow bigger requests many applications may fail (such as WordPress login)
             FcgidMaxRequestLen 536870912
-            PHP_Fix_Pathinfo_Enable 1
             # Path to php.ini – defaults to /etc/phpX/cgi
             DefaultInitEnv PHPRC=/etc/php/
             # Number of PHP childs that will be launched. Leave undefined to let PHP decide.
@@ -437,32 +384,30 @@ Using php5 with apache2-mpm-worker and mod_fcgid
     LoadModule fcgid_module modules/mod_fcgid.so
     Include conf/extra/php5_fcgid.conf
 
--   Make sure /etc/php/php.ini has the directive enabled:
-
-    cgi.fix_pathinfo=1
-
 and restart httpd.
 
-Note:As of Apache 2.4 (the apache24 package is available in the AUR) you
-can now use mod_proxy_fcgi (part of the official distribution) with
-PHP-FPM (and the new event MPM). See this configuration example.
+Note:As of Apache 2.4 you can now use mod_proxy_fcgi (part of the
+official distribution) with PHP-FPM (and the new event MPM). See this
+configuration example.
 
 > MariaDB
 
--   Configure MySQL/MariaDB as described in MariaDB.
+Configure MySQL/MariaDB as described in MariaDB.
 
--   Uncomment at least one of the following lines in /etc/php/php.ini:
+Uncomment at least one of the following lines in /etc/php/php.ini:
 
     extension=pdo_mysql.so
     extension=mysqli.so
-    extension=mysql.so
 
--   You can add minor privileged MySQL users for your web scripts. You
-    might also want to edit /etc/mysql/my.cnf and uncomment the
-    skip-networking line so the MySQL server is only accessible by the
-    localhost. You have to restart MySQL for changes to take effect.
+Warning:As of PHP 5.5, mysql.so is deprecated and will fill up your log
+files.
 
--   Restart the httpd daemon.
+You can add minor privileged MySQL users for your web scripts. You might
+also want to edit /etc/mysql/my.cnf and uncomment the skip-networking
+line so the MySQL server is only accessible by the localhost. You have
+to restart MySQL for changes to take effect.
+
+Restart httpd.service using systemd
 
 Tip:You may want to install a tool like phpMyAdmin, Adminer or
 mysql-workbench to work with your databases.
@@ -477,8 +422,15 @@ External links
 -   Apache Wiki Troubleshooting
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=LAMP&oldid=254986"
+"https://wiki.archlinux.org/index.php?title=LAMP&oldid=305909"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 20 March 2014, at 17:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

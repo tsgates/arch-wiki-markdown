@@ -11,28 +11,24 @@ ASUS G1
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Configuration                                                      |
-|     -   2.1 CPU                                                          |
-|     -   2.2 Video                                                        |
-|         -   2.2.1 Xorg                                                   |
-|                                                                          |
-|     -   2.3 Audio                                                        |
-|     -   2.4 Wi-Fi                                                        |
-|     -   2.5 Webcam                                                       |
-|     -   2.6 Bluetooth                                                    |
-|     -   2.7 Pointer                                                      |
-|     -   2.8 Leds & ACPI upgrade                                          |
-|     -   2.9 OLED Display                                                 |
-|         -   2.9.1 Function Keys                                          |
-|                                                                          |
-|     -   2.10 Utilities                                                   |
-|         -   2.10.1 The Lapsus daemon & KDE applet                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Configuration
+    -   2.1 CPU
+    -   2.2 Video
+        -   2.2.1 Xorg
+    -   2.3 Audio
+    -   2.4 Wi-Fi
+    -   2.5 Webcam
+    -   2.6 Bluetooth
+    -   2.7 Pointer
+    -   2.8 Leds & ACPI upgrade
+    -   2.9 OLED Display
+        -   2.9.1 Function Keys
+    -   2.10 Utilities
+        -   2.10.1 The Lapsus daemon & KDE applet
 
 Hardware
 --------
@@ -47,7 +43,6 @@ Hardware
         Video Intelligent Technology
     -   TFT 15.4" WSXGA+ (1680x1050) ColorShine TFT-LCD, Asus Splendid
         Video Intelligent Technology
-
 -   Video: NVIDIA GeForce Go 7700 512MB
 -   Audio: Scheda Intel High Definition Audio
 -   Wi-Fi: 802.11a/b/g
@@ -67,12 +62,10 @@ Hardware
     -   1 x RJ11 Modem jack for phone line
     -   1 x RJ45 LAN Jack for LAN insert
     -   1 x TV-out(S-Video)
-
 -   Card Reader: MMC, SD, MS, MS-Pro
 -   Dimension and Weight:
     -   324mm * 284mm * 37.4 mm(W x D x H)
     -   3.1 Kg (8-cell)
-
 -   Pointer: Touch pad
 
   
@@ -113,7 +106,8 @@ Follow the official documentation: ALSA
 
 > Wi-Fi
 
-To enable wireless follow the official guide: Wireless Setup
+To enable wireless follow the official guide: Wireless network
+configuration
 
 Please note that the Asus G1 needs the ipw3945 driver.
 
@@ -121,39 +115,15 @@ NetworkManager is also a cool option.
 
 > Webcam
 
-Since there is no official support for the G1 Webcam, you need to
-install separate drivers.
-
-The best one (and the only one for Linux) is syntekdriver.
-
-The installation is really simple:
-
-    Download and unpackage the sources.
-    make clean
-    make
-    modprobe videodev
-    insmod stk11xx.ko
-
-That's all. Now the webcam is working.
-
-Please note:
-
--   There is a problem loading the driver about the "/sys" file system.
-    This isn't dangerous but will prevent the boot of Arch if you put
-    the stk11xx driver in your loading modules (so do not do it).
--   V4L is better than V4L2 right now. In future releases this may
-    change, but for now use V4L.
-
-Update:
-
--   new Asus G1S-B1 (and G1S-A1) laptops ship with the Chicony
-    Electronics webcam which the 'linux-uvc-svn' package contains the
-    driver for
+See Webcam Setup.
 
 > Bluetooth
 
-Works out of the box? I do not own any bluetooth device, but the
-controller is detected and configured automatically.
+Internal bluetooth module is supported. Install bluez and bluez-utils
+from the official repositories to get started.
+
+For more information, go to:
+https://wiki.archlinux.org/index.php/bluetooth
 
 > Pointer
 
@@ -227,6 +197,11 @@ asusoled area. To do this :
 1.  install asus_oled-clock-svn from the AUR.
 2.  add 'asusoled-clock' in the daemons array of your rc.conf
 
+  
+ There are also some interesting utilities available to control and
+utilize the OLED display over here:
+https://bitbucket.org/SysGhost/asus-oled-command-line-utility.git
+
 Function Keys
 
 WiP -- Use Lapsus
@@ -262,8 +237,15 @@ daemon: /etc/rc.d/lapsusd start. You can add it into DAEMONS array in
 Finally add the lapsus applet to KDE kicker.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_G1&oldid=208437"
+"https://wiki.archlinux.org/index.php?title=ASUS_G1&oldid=297813"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 15 February 2014, at 15:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

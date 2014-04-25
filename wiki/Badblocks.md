@@ -20,27 +20,22 @@ This can be done in a destructive write-mode that effectively wipes the
 device (do Backup!) or in non-destructive read-write (Backup advisable
 as well!) and read-only modes.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Usage                                                              |
-| -   2 Storage Device Fidelity                                            |
-| -   3 Comparisons with Other Programs                                    |
-| -   4 Testing for Bad Sectors                                            |
-|     -   4.1 read-write Test                                              |
-|         -   4.1.1 define specific test pattern                           |
-|             -   4.1.1.1 random pattern                                   |
-|                                                                          |
-|     -   4.2 read-write Test (non-destructive)                            |
-|                                                                          |
-| -   5 Have File System Incorporate Bad Sectors                           |
-|     -   5.1 During Filesystem Check                                      |
-|     -   5.2 Before Filesystem Creation                                   |
-|         -   5.2.1 Block size                                             |
-|                                                                          |
-| -   6 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Usage
+-   2 Storage Device Fidelity
+-   3 Comparisons with Other Programs
+-   4 Testing for Bad Sectors
+    -   4.1 read-write Test
+        -   4.1.1 define specific test pattern
+            -   4.1.1.1 random pattern
+    -   4.2 read-write Test (non-destructive)
+-   5 Have File System Incorporate Bad Sectors
+    -   5.1 During Filesystem Check
+    -   5.2 Before Filesystem Creation
+        -   5.2.1 Block size
+-   6 References
 
 Usage
 -----
@@ -131,7 +126,7 @@ Options:
 
 define specific test pattern
 
-From the manpage:"The <test_pattern> may either be a numeric value
+From the manpage: "The <test_pattern> may either be a numeric value
 between 0 and ULONG_MAX-1 inclusive [...]."
 
   ------------------------ ------------------------ ------------------------
@@ -250,7 +245,7 @@ Then (re-)create the file system with the information:
 
     # mkfs.<filesystem-type> -l /root/<badblocks.txt> /dev/<device>
 
-Note:The means of 0/0/527405 errors is <number of read errors>/<number
+Note:The meaning of 0/0/527405 errors is <number of read errors>/<number
 of write errors>/<number of corruption errors>.
 
 Block size
@@ -286,8 +281,15 @@ References
 -   My hard disk has bad sectors or is developing bad sectors over time
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Badblocks&oldid=243779"
+"https://wiki.archlinux.org/index.php?title=Badblocks&oldid=289023"
 
 Category:
 
 -   Hardware detection and troubleshooting
+
+-   This page was last modified on 17 December 2013, at 20:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

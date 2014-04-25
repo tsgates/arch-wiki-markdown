@@ -1,48 +1,36 @@
 fdm
 ===
 
-> Summary
+Related articles
 
-A guide on using fdm for the purpose of local mail delivery.
+-   Alpine
+-   msmtp
+-   Mutt
+-   Postfix
+-   SSMTP
 
-> Related
-
-Alpine
-
-msmtp
-
-Mutt
-
-Postfix
-
-SSMTP
-
-fdm, or fetch and deliver mail, is a simple program for delivering and
+fdm (fetch and deliver mail), is a simple program for delivering and
 filtering mail. Comparing it to other same-purposed applications shows
 that it has similarities with Mutt's very focused design principles.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Configuring                                                        |
-|     -   2.1 mbox                                                         |
-|     -   2.2 maildir                                                      |
-|     -   2.3 Final setup                                                  |
-|                                                                          |
-| -   3 Testing                                                            |
-| -   4 Extended usage                                                     |
-|     -   4.1 Additional Filtering                                         |
-|     -   4.2 Automation with cron                                         |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Configuring
+    -   2.1 mbox
+    -   2.2 maildir
+    -   2.3 Final setup
+-   3 Testing
+-   4 Extended usage
+    -   4.1 Additional filtering
+    -   4.2 Automation with cron
+-   5 See also
 
 Installing
 ----------
 
-Install fdm from the Official Repositories.
+Install fdm from the official repositories.
 
 Configuring
 -----------
@@ -118,9 +106,9 @@ mail that was just delivered.
 Extended usage
 --------------
 
-Non-essential features that add to fdm's usability
+Non-essential features that add tofdm's usability
 
-> Additional Filtering
+> Additional filtering
 
 If you want to have mail from a certain account go to a specific
 mailbox, you could add the following lines to your fdm.conf file. From
@@ -128,14 +116,14 @@ the config file above, if you wanted to filter the mail from
 bar@gmail.com into it's own folder bar-mail, you would add this below
 the existing "action" line:
 
-    action "bar-deliver" mbox "%h/mail/bar-mail"
+    action bar-deliver mbox "%h/mail/bar-mail"
 
 Change the mbox to maildir if needed, also make sure the path is
 correct.
 
 To activate the new action, add this before the existing "match" line:
 
-    match account "bar" action "bar-deliver"
+    match account bar action bar-deliver
 
 Then all mail to bar@gmail.com will be put into the bar-mail mail
 folder.
@@ -155,8 +143,15 @@ See also
 -   fdm-users mailing list
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fdm&oldid=249686"
+"https://wiki.archlinux.org/index.php?title=Fdm&oldid=294831"
 
 Category:
 
 -   Email Client
+
+-   This page was last modified on 29 January 2014, at 04:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -136,8 +136,15 @@ More Resources
 -   MindTouch Community Portal
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=MindTouch&oldid=207227"
+"https://wiki.archlinux.org/index.php?title=MindTouch&oldid=256757"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 12 May 2013, at 08:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

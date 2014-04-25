@@ -7,27 +7,25 @@ your Linux box through either a RS-232 or USB serial connection. In the
 event of a prolonged power outage, should the APC UPS lose most of its
 battery capacity, it can tell the Linux box to perform a safe shutdown.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install the package                                                |
-| -   2 Configure APC UPS                                                  |
-| -   3 Test                                                               |
-|     -   3.1 Congratulations!                                             |
-|                                                                          |
-| -   4 Hibernating instead of shutting down                               |
-|     -   4.1 Create the hibernate script                                  |
-|     -   4.2 Link the hibernate script for apcupsd to use it              |
-|     -   4.3 Make apcupsd kill UPS power once the hibernate is done       |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Install the package
+-   2 Configure APC UPS
+-   3 Test
+-   4 Hibernating instead of shutting down
+    -   4.1 Create the hibernate script
+    -   4.2 Link the hibernate script for apcupsd to use it
+    -   4.3 Make apcupsd kill UPS power once the hibernate is done
+-   5 Troubleshooting
+    -   5.1 The desktop environment will also sense the UPS if connected
+        by USB cable
+-   6 See also
 
 Install the package
 -------------------
 
-    # pacman -S apcupsd
+Install apcupsd from the official repositories.
 
 Configure APC UPS
 -----------------
@@ -57,9 +55,10 @@ After:
 Test
 ----
 
-First, start the daemon:
+First, enable and start the systemd service.
 
-    # systemctl start apcupsd
+    systemctl enable apcupsd.service
+    systemctl start apcupsd.service
 
 Next, wait about a minute and confirm the daemon is running and properly
 monitoring the battery:
@@ -102,17 +101,16 @@ monitoring the battery:
 
 To fully test your setup:
 
-1.  Change TIMEOUT form 0 to 1 in the /etc/apcupsd/apcupsd.conf file
-2.  Remove wall power from the UPS
-3.  Observe that your Linux box powers down, in short order
-4.  Plug the UPS back into the wall
-5.  Power on your Linux box
+1.  Change TIMEOUT form 0 to 1 in the /etc/apcupsd/apcupsd.conf file.
+2.  Remove wall power from the UPS.
+3.  Observe that your Linux box powers down, in short order.
+4.  Plug the UPS back into the wall.
+5.  Power on your Linux box.
 6.  Change TIMEOUT from 1 back to 0 in the /etc/apcupsd/apcupsd.conf
-    file
+    file.
 
-> Congratulations!
-
-Now all that's left to do is enable the apcupsd service.
+When everything is ok, all that's left to do is enable the apcupsd
+service.
 
 Hibernating instead of shutting down
 ------------------------------------
@@ -130,13 +128,14 @@ Create this in /usr/local/bin/hibernate as root:
     # interactively or from any script to cause a hibernate.
 
     # Do the hibernate
-    /usr/sbin/pm-hibernate
+    /usr/bin/systemctl hibernate
+
     # At this point system should be hibernated - when it comes back, we resume this script here
 
     # On resume, tell controlling script (/etc/apcupsd/apccontrol) NOT to continue with default action (i.e. shutdown).
     exit 99
 
-Make it executable by running
+Make it executable by running:
 
     # chmod +x /usr/local/bin/hibernate
 
@@ -158,44 +157,90 @@ wish to add:
 
 > Make apcupsd kill UPS power once the hibernate is done
 
-Once the PC has hibernated successfully, it's better for the UPS to be
-switched off in order to conserver battery charge, and prevent full
-battery drain. This can be achieved very easily! Create a file
-/etc/pm/sleep.d/99apc and put the following contents in it
+Once the PC has hibernated successfully, it is common practice to switch
+off the UPS in order to conserve battery charge and prevent full battery
+drain. This can be achieved through a power suspend event in systemd.
+
+Create the following file:
+
+    /usr/lib/systemd/system-sleep/ups-kill
+
+/usr/lib/systemd/system-sleep/ups-kill and put the following contents in
+it:
 
     #!/bin/bash
-    case $1 in
-        hibernate)
-            # See if this is a powerfail situation.                            # ***apcupsd***
-            if [ -f /etc/apcupsd/powerfail ]; then                             # ***apcupsd***
-            echo                                                               # ***apcupsd***
-            echo "APCUPSD will now power off the UPS"                          # ***apcupsd***
-            echo                                                               # ***apcupsd***
-            /etc/apcupsd/apccontrol killpower                                  # ***apcupsd***
-            echo                                                               # ***apcupsd***
-            echo "Please ensure that the UPS has powered off before rebooting" # ***apcupsd***
-            echo "Otherwise, the UPS may cut the power during the reboot!!!"   # ***apcupsd***
-            echo                                                               # ***apcupsd***
-            fi                                                                 # ***apcupsd***
-            ;;
+
+    case $2 in
+
+      # In the event the computer is hibernating.
+      hibernate)
+        case $1 in
+
+           # Going into a hibernate state.
+           pre)
+
+             # See if this is a powerfail situation.
+             if [ -f /etc/apcupsd/powerfail ]; then
+               echo
+               echo "ACPUPSD will now power off the UPS"
+               echo
+               /etc/apcupsd/apccontrol killpower
+               echo
+               echo "Please ensure that the UPS has powered off before rebooting"
+               echo "Otherwise, the UPS may cut the power during the reboot!!!"
+               echo
+             fi
+           ;;
+
+           # Coming out of a hibernate state.
+           post)
+
+             # If there are remnants from a powerfail situation, remove them.
+             if [ -f /etc/apcupsd/powerfail ]; then
+               rm /etc/apcupsd/powerfail
+             fi
+
+    	 # Restart the daemon; otherwise it may be unresponsive in a
+             # second powerfailure situation.
+    	 systemctl restart apcupsd
+           ;;
+        esac
+      ;;
     esac
 
-Make the script executable by doing
+Make the script executable by doing:
 
-    # chmod +x /etc/pm/sleep.d/99apc
+    # chmod +x /usr/lib/systemd/system-sleep/ups-kill
 
 Now you can test your setup.
+
+Troubleshooting
+---------------
+
+> The desktop environment will also sense the UPS if connected by USB cable
+
+For example, the default KDE setting is to put the computer in sleep if
+it has been on UPS battery for more than 10 minutes and the mouse has
+not moved. On many computers this causes a crash. This can be changed
+from KDE System Settings->Power Management->On battery.
 
 See also
 --------
 
--   Apcupsd a daemon for controlling APC UPSes
+-   Apcupsd home page
 -   Forcing hibernate
 -   apcupsd manual
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=APC_UPS&oldid=253352"
+"https://wiki.archlinux.org/index.php?title=APC_UPS&oldid=271750"
 
 Category:
 
 -   Power management
+
+-   This page was last modified on 19 August 2013, at 16:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

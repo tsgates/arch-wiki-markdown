@@ -1,32 +1,28 @@
 Learning Resources
 ==================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Programming/Scripting                                              |
-|     -   1.1 General Material                                             |
-|         -   1.1.1 Video                                                  |
-|                                                                          |
-|     -   1.2 Languages                                                    |
-|         -   1.2.1 Bash/Shell                                             |
-|         -   1.2.2 C                                                      |
-|         -   1.2.3 C++                                                    |
-|         -   1.2.4 Erlang                                                 |
-|         -   1.2.5 Haskell                                                |
-|         -   1.2.6 Java                                                   |
-|         -   1.2.7 JavaScript                                             |
-|         -   1.2.8 Lua                                                    |
-|         -   1.2.9 Perl                                                   |
-|         -   1.2.10 PHP                                                   |
-|         -   1.2.11 Python                                                |
-|         -   1.2.12 Ruby                                                  |
-|                                                                          |
-| -   2 Typesetting/Markup Languages                                       |
-|     -   2.1 (X)HTML                                                      |
-|     -   2.2 LaTeX                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Programming/Scripting
+    -   1.1 General Material
+        -   1.1.1 Video
+    -   1.2 Languages
+        -   1.2.1 Bash/Shell
+        -   1.2.2 C
+        -   1.2.3 C++
+        -   1.2.4 Erlang
+        -   1.2.5 Haskell
+        -   1.2.6 Java
+        -   1.2.7 JavaScript
+        -   1.2.8 Lua
+        -   1.2.9 Perl
+        -   1.2.10 PHP
+        -   1.2.11 Python
+        -   1.2.12 Ruby
+-   2 Typesetting/Markup Languages
+    -   2.1 (X)HTML
+    -   2.2 LaTeX
 
 Programming/Scripting
 ---------------------
@@ -110,8 +106,15 @@ Typesetting/Markup Languages
 > LaTeX
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Learning_Resources&oldid=207193"
+"https://wiki.archlinux.org/index.php?title=Learning_Resources&oldid=279560"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 24 October 2013, at 09:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

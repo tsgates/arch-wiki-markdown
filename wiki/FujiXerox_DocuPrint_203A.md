@@ -3,23 +3,21 @@ FujiXerox DocuPrint 203A
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Summary                                                            |
-| -   2 Prerequisites                                                      |
-| -   3 Download FujiXerox DocuPrint 203A drivers                          |
-| -   4 Extracting the RPM files                                           |
-| -   5 Editing files to make them work with Arch                          |
-| -   6 Installing the driver and printer                                  |
-| -   7 Regional Settings                                                  |
-| -   8 Alternate Method using pacman                                      |
-|     -   8.1 Install the CUPS                                             |
-|     -   8.2 Install the foomatic printer library                         |
-|     -   8.3 Install the hplip library                                    |
-|     -   8.4 Start the CUPS printing system                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Summary
+-   2 Prerequisites
+-   3 Download FujiXerox DocuPrint 203A drivers
+-   4 Extracting the RPM files
+-   5 Editing files to make them work with Arch
+-   6 Installing the driver and printer
+-   7 Regional Settings
+-   8 Alternate Method using pacman
+    -   8.1 Install the CUPS
+    -   8.2 Install the foomatic printer library
+    -   8.3 Install the hplip library
+    -   8.4 Start the CUPS printing system
 
 Summary
 =======
@@ -150,3 +148,10 @@ Retrieved from
 Category:
 
 -   Printers
+
+-   This page was last modified on 23 April 2012, at 13:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

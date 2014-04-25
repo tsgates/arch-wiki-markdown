@@ -44,8 +44,15 @@ it as you to do so.
 Now, try to play on your midi keyboard!
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Connecting_usb_midi_keyboard&oldid=206816"
+"https://wiki.archlinux.org/index.php?title=Connecting_usb_midi_keyboard&oldid=262386"
 
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 11 June 2013, at 17:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -13,9 +13,8 @@ Installation
 ------------
 
 CDemu can be installed with the package cdemu-client, available in the
-official repositories. To enable the daemon in systemd run:
-
-    # systemctl enable cdemu-daemon.service
+official repositories which contains also a handy systemd service called
+cdemu-daemon.service.
 
 > GUI
 
@@ -98,8 +97,15 @@ Displaying daemon and library version:
     # cdemu version
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=CDemu&oldid=246797"
+"https://wiki.archlinux.org/index.php?title=CDemu&oldid=260658"
 
 Category:
 
 -   Optical
+
+-   This page was last modified on 2 June 2013, at 17:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

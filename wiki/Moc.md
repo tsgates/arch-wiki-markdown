@@ -3,30 +3,27 @@ Moc
 
 Music On Console is a lightweight music player. It consists of 2 parts,
 a server (Moc) and the player/interface (Mocp). This is similar to mpd,
-but unlike mpd, Moc comes with an interface.
+but unlike mpd, Moc comes with an interface, although its server doesn't
+support access through net.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Usage                                                              |
-| -   4 Development versions                                               |
-| -   5 last.fm support                                                    |
-| -   6 Front-ends                                                         |
-| -   7 Troubleshooting                                                    |
-|     -   7.1 moc fails to start                                           |
-|                                                                          |
-| -   8 Additional resources                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Usage
+-   4 Development versions
+-   5 last.fm support
+-   6 Front-ends
+-   7 Troubleshooting
+    -   7.1 MOC fails to start
+    -   7.2 Strange characters
+-   8 Additional resources
 
 Installation
 ------------
 
-Sync and install with pacman:
-
-    # pacman -S moc
+Install moc from the official repositories.
 
 Configuration
 -------------
@@ -103,39 +100,10 @@ last.fm support
 ---------------
 
 If you want scrobble songs to last.fm (moc >= 2.5.0 needed), install
-lastfmsubmitd. It is a daemon which is available in the "community"
-repository. First edit /etc/lastfmsubmitd.conf and enable both services
-lastfmsubmitd and lastmp with systemctl.
+lastfmsubmitd. First edit /etc/lastfmsubmitd.conf and enable
+lastfmsubmitd with systemctl.
 
-If services do not exists create them first:
-
-create /etc/systemd/system/lastmp.service file and add following in it:
-
-    [Unit]
-    Description=LastMP
-    After=mpd.service
-
-    [Service]
-    ExecStart=/usr/bin/lastmp --no-daemon
-
-    [Install]
-    WantedBy=multi-user.target
-
-create /etc/systemd/system/lastfmsubmitd.service file and add following
-in it:
-
-    [Unit]
-    Description=LastFM Submit daemon
-    After=network.target
-
-    [Service]
-    ExecStart=/usr/bin/lastfmsubmitd --no-daemon
-
-    [Install]
-    WantedBy=multi-user.target
-
-  
- Now add the following line to the moc configuration file:
+Now add the following line to the moc configuration file:
 
     ~/.moc/config
 
@@ -157,10 +125,18 @@ Front-ends
 Troubleshooting
 ---------------
 
-> moc fails to start
+> MOC fails to start
 
-If moc fails to start, it's most probably because of something wrong in
+If MOC fails to start, it's most probably because of something wrong in
 ~/.moc/. You can try to fix it, or simply delete the whole folder.
+
+> Strange characters
+
+If you see strange-like characters displayed in moc instead of the
+normal lines (vertical lines to separate space, etc.) likely you've a
+font set which MOC doesn't play nice with. You can either change the
+font you have selected for your terminal or edit the MOC config file
+(search config file for something about use ASII only).
 
 Additional resources
 --------------------
@@ -168,8 +144,15 @@ Additional resources
 -   Official documentation
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Moc&oldid=253619"
+"https://wiki.archlinux.org/index.php?title=Moc&oldid=298804"
 
 Category:
 
 -   Player
+
+-   This page was last modified on 18 February 2014, at 18:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

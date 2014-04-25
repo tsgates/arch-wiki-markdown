@@ -3,23 +3,20 @@ HP Mini 2140
 
 The HP Mini 2140 is a 10.2" Netbook PC released in early 2009.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware Compatibility                                             |
-|     -   1.1 Video                                                        |
-|     -   1.2 Touchpad                                                     |
-|     -   1.3 Wireless                                                     |
-|     -   1.4 Ethernet                                                     |
-|     -   1.5 Bluetooth                                                    |
-|     -   1.6 CPU Scaling                                                  |
-|     -   1.7 Webcam                                                       |
-|     -   1.8 Sound                                                        |
-|     -   1.9 Suspend                                                      |
-|                                                                          |
-| -   2 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware Compatibility
+    -   1.1 Video
+    -   1.2 Touchpad
+    -   1.3 Wireless
+    -   1.4 Ethernet
+    -   1.5 Bluetooth
+    -   1.6 CPU Scaling
+    -   1.7 Webcam
+    -   1.8 Sound
+    -   1.9 Suspend
+-   2 See also
 
 Hardware Compatibility
 ----------------------
@@ -115,3 +112,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 13 March 2013, at 09:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

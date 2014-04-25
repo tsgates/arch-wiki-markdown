@@ -1,23 +1,20 @@
 Huawei E1550 3G modem
 =====================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Prepare device                                                     |
-|     -   2.1 Switch into modem mode                                       |
-|     -   2.2 Driver loading                                               |
-|     -   2.3 Optional: device naming                                      |
-|                                                                          |
-| -   3 Connecting internet                                                |
-| -   4 AT commands                                                        |
-| -   5 Sending SMS                                                        |
-| -   6 USSD Requests                                                      |
-| -   7 Success Stories                                                    |
-| -   8 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Prepare device
+    -   2.1 Switch into modem mode
+    -   2.2 Driver loading
+    -   2.3 Optional: device naming
+-   3 Connecting internet
+-   4 AT commands
+-   5 Sending SMS
+-   6 USSD Requests
+-   7 Success Stories
+-   8 References
 
 Introduction
 ------------
@@ -52,7 +49,7 @@ modifications, just install it.
 Also you can create udev's config:
 /etc/udev/rules.d/15-huawei-e1550.rules
 
-     SUBSYSTEM=="usb", SYSFS{idProduct}=="1446", SYSFS{idVendor}=="12d1", RUN+="/lib/udev/usb_modeswitch --vendor 0x12d1 --product 0x1446 --type option-zerocd"
+    ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="12d1", ATTRS{idProduct}=="1446", RUN+="/lib/udev/usb_modeswitch --vendor 0x12d1 --product 0x1446 --type option-zerocd"
 
 After that, modem changes its USB IDs to 12d1:140c and
 /proc/bus/usb/devices shows new USB endpoints.
@@ -72,14 +69,21 @@ or put options into /etc/modprobe.d/modprobe.conf
 
 > Optional: device naming
 
-You can rename ttyUSB port using following udev rules:
+You can generate symlinks to the ttyUSB* ports for a more human readable
+configuration with udev rules.
 
-     UBSYSTEMS=="usb", ATTRS{modalias}=="usb:v12D1p1001*", KERNEL=="ttyUSB*", ATTRS{bInterfaceNumber}=="00", ATTRS{bInterfaceProtocol}=="ff", NAME="ttyUSB_utps_modem"
-     SUBSYSTEMS=="usb", ATTRS{modalias}=="usb:v12D1p1001*", KERNEL=="ttyUSB*", ATTRS{bInterfaceNumber}=="01", ATTRS{bInterfaceProtocol}=="ff", NAME="ttyUSB_utps_diag"
-     SUBSYSTEMS=="usb", ATTRS{modalias}=="usb:v12D1p1001*", KERNEL=="ttyUSB*", ATTRS{bInterfaceNumber}=="02", ATTRS{bInterfaceProtocol}=="ff", NAME="ttyUSB_utps_pcui"
+For a Huawei device which identifies with the USB ID 12D1:1001 after
+modeswitching and has 3 serial ports:
 
-     SUBSYSTEMS=="usb", ATTRS{modalias}=="usb:v12D1p1003*", KERNEL=="ttyUSB*", ATTRS{bInterfaceNumber}=="00", ATTRS{bInterfaceProtocol}=="ff", NAME="ttyUSB_utps_modem"
-     SUBSYSTEMS=="usb", ATTRS{modalias}=="usb:v12D1p1003*", KERNEL=="ttyUSB*", ATTRS{bInterfaceNumber}=="01", ATTRS{bInterfaceProtocol}=="ff", NAME="ttyUSB_utps_pcui"
+     UBSYSTEMS=="usb", ATTRS{modalias}=="usb:v12D1p1001*", KERNEL=="ttyUSB*", ATTRS{bInterfaceNumber}=="00", ATTRS{bInterfaceProtocol}=="ff", SYMLINK+="ttyUSB_utps_modem"
+     SUBSYSTEMS=="usb", ATTRS{modalias}=="usb:v12D1p1001*", KERNEL=="ttyUSB*", ATTRS{bInterfaceNumber}=="01", ATTRS{bInterfaceProtocol}=="ff", SYMLINK+="ttyUSB_utps_diag"
+     SUBSYSTEMS=="usb", ATTRS{modalias}=="usb:v12D1p1001*", KERNEL=="ttyUSB*", ATTRS{bInterfaceNumber}=="02", ATTRS{bInterfaceProtocol}=="ff", SYMLINK+="ttyUSB_utps_pcui"
+
+For a Huawei device which identifies with the USB ID 12D1:1003 after
+modeswitching and has 2 serial ports:
+
+     SUBSYSTEMS=="usb", ATTRS{modalias}=="usb:v12D1p1003*", KERNEL=="ttyUSB*", ATTRS{bInterfaceNumber}=="00", ATTRS{bInterfaceProtocol}=="ff", SYMLINK+="ttyUSB_utps_modem"
+     SUBSYSTEMS=="usb", ATTRS{modalias}=="usb:v12D1p1003*", KERNEL=="ttyUSB*", ATTRS{bInterfaceNumber}=="01", ATTRS{bInterfaceProtocol}=="ff", SYMLINK+="ttyUSB_utps_pcui"
 
 Connecting internet
 -------------------
@@ -210,8 +214,15 @@ References
 -   Huawei_E220
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Huawei_E1550_3G_modem&oldid=207409"
+"https://wiki.archlinux.org/index.php?title=Huawei_E1550_3G_modem&oldid=283438"
 
 Category:
 
 -   Modems
+
+-   This page was last modified on 17 November 2013, at 15:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

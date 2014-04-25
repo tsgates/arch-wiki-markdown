@@ -1,14 +1,14 @@
 Console TDM
 ===========
 
-> Summary
+Summary help replacing me
 
 Describes installing, configuring and using Console TDM, a tiny
 extension for Xorg-xinit.
 
 Related articles
 
-Display Manager
+Display manager
 
 Console TDM is an extension for xorg-xinit written in pure bash. It is
 inspired by CDM, which aimed to be a replacement of display managers
@@ -60,8 +60,15 @@ More resources
 -   Google Code page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Console_TDM&oldid=253728"
+"https://wiki.archlinux.org/index.php?title=Console_TDM&oldid=301381"
 
 Category:
 
 -   Display managers
+
+-   This page was last modified on 24 February 2014, at 11:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

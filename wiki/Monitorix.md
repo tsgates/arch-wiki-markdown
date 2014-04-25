@@ -1,58 +1,47 @@
 Monitorix
 =========
 
-> Summary
+Related articles
 
-Installation and configuration of Monitorix.
-
-> Related
-
-Anything-sync-daemon
-
-lm_sensors
-
-hddtemp
+-   Anything-sync-daemon
+-   lm_sensors
+-   hddtemp
 
 Monitorix is an open source, lightweight system monitoring tool designed
 to monitor as many services and system resources as possible. It has
 been created to be used under production UNIX/Linux servers, but due to
 its simplicity and small size many use it on embedded devices as well.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation of Monitorix                                          |
-| -   2 Configuration of Monitorix                                         |
-| -   3 Start Monitorix                                                    |
-| -   4 Viewing Monitorix Data                                             |
-| -   5 Configure an External Webserver                                    |
-|     -   5.1 Lighttpd                                                     |
-|     -   5.2 Apache                                                       |
-|                                                                          |
-| -   6 Using tmpfs to Store RRD Databases                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation of Monitorix
+-   2 Configuration of Monitorix
+-   3 Start Monitorix
+-   4 Viewing Monitorix Data
+-   5 Configure an External Webserver
+    -   5.1 Lighttpd
+    -   5.2 Apache
+-   6 Using tmpfs to Store RRD Databases
 
 Installation of Monitorix
 -------------------------
 
-Visit the AUR and grab the tarball for the monitorix package and
-build/install it.
+A package for monitorix can be found in the AUR.
 
-Note: Depending on which font packages are installed on your system, it
-might been necessary to install the terminus-font package. For now,
-proceed without it, once monitorix is configured and running, users will
-know very quickly if they are missing the correct font as the graphs
-will not contain any text at which point, go ahead and install the
-terminus-font package via pacman.
+Note: Depending on which font packages are installed, it might been
+necessary to install the terminus-font package. For now, proceed without
+it, once monitorix is configured and running, users will know very
+quickly if they are missing the correct font as the graphs will not
+contain any text at which point, go ahead and install the terminus-font
+package via pacman.
 
 Configuration of Monitorix
 --------------------------
 
-Before starting the monitorix daemon, be sure to adjust the
-/etc/monitorix.conf to your liking. For a complete list of options and
-features, see the [official website] or the included man page for
-monitor.conf.
+Edit /etc/monitorix.conf to match graphing options and system-specific
+variables. For a complete list of options and features, see the
+[official website] or the included man page for monitor.conf.
 
 Most if not all of the user settings are self explanatory based on the
 commented text within the conf file itself.
@@ -108,8 +97,15 @@ makes use of tmpfs to store RRD Databases for Monitorix. Doing so will
 greatly reduce hdd reads/writes.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Monitorix&oldid=254856"
+"https://wiki.archlinux.org/index.php?title=Monitorix&oldid=293675"
 
 Category:
 
--   Web Server
+-   Status monitoring and notification
+
+-   This page was last modified on 20 January 2014, at 06:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

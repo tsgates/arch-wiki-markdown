@@ -1,18 +1,13 @@
 Redmine
 =======
 
-> Summary
+Related articles
 
-This page gives guidelines for the installation and configuration of
-Redmine on Archlinux.
-
-> Related
-
-Ruby on Rails
-
-RVM
-
-MariaDB
+-   Ruby on Rails
+-   RVM
+-   MariaDB
+-   Apache
+-   Nginx
 
 Redmine is a free and open source, web-based project management and
 bug-tracking tool. It includes a calendar and Gantt charts to aid visual
@@ -23,59 +18,55 @@ tracking, and support for various version control systems.
 Redmine is written using the Ruby on Rails framework. It is
 cross-platform and cross-database.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-|     -   1.1 Ruby                                                         |
-|     -   1.2 Database                                                     |
-|         -   1.2.1 MariaDB 5.0 or higher (recommended)                    |
-|         -   1.2.2 MySQL 5.0 or higher                                    |
-|         -   1.2.3 PostgreSQL 8.2 or higher                               |
-|         -   1.2.4 Microsoft SQL Server                                   |
-|         -   1.2.5 SQLite 3                                               |
-|                                                                          |
-|     -   1.3 Web Server                                                   |
-|         -   1.3.1 Phusion Passenger (recommended)                        |
-|         -   1.3.2 Apache                                                 |
-|         -   1.3.3 Mongrel                                                |
-|         -   1.3.4 Unicorn                                                |
-|         -   1.3.5 nginx                                                  |
-|         -   1.3.6 Apache Tomcat                                          |
-|                                                                          |
-| -   2 Optional Prerequisites                                             |
-|     -   2.1 SCM (Source Code Management)                                 |
-|     -   2.2 ImageMagick                                                  |
-|     -   2.3 Ruby OpenID Library                                          |
-|                                                                          |
-| -   3 Installation                                                       |
-|     -   3.1 Build and Installation                                       |
-|     -   3.2 Database Configuration                                       |
-|         -   3.2.1 Database Creation                                      |
-|         -   3.2.2 Database Access Configuration                          |
-|                                                                          |
-|     -   3.3 Ruby gems                                                    |
-|         -   3.3.1 Adding Additional Gems (Optional)                      |
-|         -   3.3.2 Check previously installed gems                        |
-|         -   3.3.3 Gems Installation                                      |
-|                                                                          |
-|     -   3.4 Session Store Secret Generation                              |
-|     -   3.5 Database Structure Creation                                  |
-|     -   3.6 Database Population with Default Data                        |
-|     -   3.7 File System Permissions                                      |
-|     -   3.8 Test the installation                                        |
-|                                                                          |
-| -   4 Updating (ToDo)                                                    |
-|     -   4.1 Checkout SVN Source                                          |
-|     -   4.2 User accounts                                                |
-|                                                                          |
-| -   5 Test server                                                        |
-|     -   5.1 Unicorn server                                               |
-|                                                                          |
-| -   6 Start redmine on boot                                              |
-| -   7 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequisites
+    -   1.1 Ruby
+    -   1.2 Database
+        -   1.2.1 MariaDB 5.0 or higher (recommended)
+        -   1.2.2 MySQL 5.0 or higher
+        -   1.2.3 PostgreSQL 8.2 or higher
+        -   1.2.4 Microsoft SQL Server
+        -   1.2.5 SQLite 3
+    -   1.3 Web Server
+        -   1.3.1 Apache
+        -   1.3.2 Mongrel
+        -   1.3.3 Unicorn
+        -   1.3.4 Nginx
+        -   1.3.5 Apache Tomcat
+-   2 Optional Prerequisites
+    -   2.1 SCM (Source Code Management)
+    -   2.2 ImageMagick
+    -   2.3 Ruby OpenID Library
+-   3 Installation
+    -   3.1 Build and Installation
+    -   3.2 Database Configuration
+        -   3.2.1 Database Creation
+        -   3.2.2 Database Access Configuration
+    -   3.3 Ruby gems
+        -   3.3.1 Adding Additional Gems (Optional)
+        -   3.3.2 Check previously installed gems
+        -   3.3.3 Gems Installation
+    -   3.4 Session Store Secret Generation
+    -   3.5 Database Structure Creation
+    -   3.6 Database Population with Default Data
+    -   3.7 File System Permissions
+    -   3.8 Test the installation
+    -   3.9 Configure the production server
+-   4 Updating
+-   5 Troubleshooting
+    -   5.1 RMagick gem without support for High Dynamic Range in
+        ImageMagick
+    -   5.2 Runtime error complaining that RMagick was configured with
+        older version
+    -   5.3 Error when installing gems: Cannot load such file --
+        mysql2/mysql2
+    -   5.4 Apache 2.4 Updating
+    -   5.5 Checkout SVN Source
+    -   5.6 Automating The Update Process
+    -   5.7 Creating a Systemd Unit
+-   6 See Also
 
 Prerequisites
 -------------
@@ -103,29 +94,37 @@ Rails version used
 
 Supported RubyGems versions
 
-2.3.0
+2.5.0
 
 ruby 1.8.7, 1.9.2, 1.9.3, 2.0.0
 
-Rails 3.2.13
+Rails 3.2
 
 RubyGems <= 1.8
 
-jruby 1.6.7, 1.7.2
+jruby 1.7.6
 
-  
- There are two simple ways to install Ruby: installing the ruby package
+There are two simple ways to install Ruby: installing the ruby package
 as described in ruby or installing RVM as described in RVM
 (recommended).
 
-Note:If you use RVM, pay attention to the single and multiple user
+Note:Ruby MRI 1.8.7 support has reached its EOL and its use is
+discouraged. See Important: Ruby 1.8.7 out of support and #14371 for
+additional information.
+
+Note:MRI 1.9.3p327 contains a bug breaking plugin loading under Windows
+which 1.9.3p194 or 1.9.3p392 haven't.
+
+Note:Ruby 2.1 on Rails 3.2 has a bug. See upstream bug track #16194.
+
+Warning:If you use RVM, pay attention to the single and multiple user
 differences! If you are not creating a hosting service, the multiple
 user (available for all users on the machine) should be the choice for
 simpler debuging.
 
 > Database
 
-Redmine Officially support many databases.
+Redmine supports many different databases.
 
 MariaDB 5.0 or higher (recommended)
 
@@ -153,7 +152,7 @@ Note:Some bugs in PostgreSQL 8.4.0 and 8.4.1 affect Redmine behavior
 Microsoft SQL Server
 
 Warning:Support is temporarily broken (with ruby 2.0.0 under Windows
-because of database adapter gems incompatibilities).
+because of database adapter gem incompatibility).
 
 SQLite 3
 
@@ -166,47 +165,74 @@ because of database adapter gems incompatibilities).
 
 > Web Server
 
-Phusion Passenger (recommended)
-
-TODO
-
 Apache
 
-TODO
+To install apache simply refer to Apache.
 
 Mongrel
 
-TODO
+To install Mongrel server (ruby gem) simply refer to
+Ruby_on_Rails#Mongrel.
 
 Unicorn
 
-Configure and start Unicorn using script provided in Ruby on
-Rails#Unicorn.
+To install Unicorn server (ruby gem) simply refer to
+Ruby_on_Rails#Unicorn.
 
-nginx
+Nginx
 
-See Nginx to install it.
+To install nginx simply refer to Nginx.
 
 Apache Tomcat
 
-See Ruby on Rails#Application_servers
+To install tomcat6 or tomcat7 simply refer to Tomcat.
 
 Optional Prerequisites
 ----------------------
 
 > SCM (Source Code Management)
 
-TODO: list all scm supported and how to install them...
++--------------------------+--------------------------+--------------------------+
+| SCM                      | Supported versions       | Comments                 |
++==========================+==========================+==========================+
+| Git                      | >=1.5.4.2                |                          |
++--------------------------+--------------------------+--------------------------+
+| Subversion               | 1.3, 1.4, 1.5, 1.6 & 1.7 | 1.3 or higher            |
+|                          |                          | required.                |
+|                          |                          | Doesn't support Ruby     |
+|                          |                          | Bindings for             |
+|                          |                          | Subversion.              |
+|                          |                          |                          |
+|                          |                          | Subversion 1.7.0 and     |
+|                          |                          | 1.7.1 contains bugs      |
+|                          |                          | #9541                    |
++--------------------------+--------------------------+--------------------------+
+| Mercurial                | >=1.6                    | Support bellow version   |
+|                          |                          | 1.6 is droped as seen in |
+|                          |                          | #9465.                   |
++--------------------------+--------------------------+--------------------------+
+| Bazaar                   | >= 2.0.4                 |                          |
++--------------------------+--------------------------+--------------------------+
+| Darcs                    | >=1.0.7                  |                          |
++--------------------------+--------------------------+--------------------------+
+| CVS                      | 1.12.12                  | 1.12 required.           |
+|                          |                          |  Won't work with CVSNT.  |
++--------------------------+--------------------------+--------------------------+
+
+  
+ More information can be read at Redmine Repositories Wiki.
 
 > ImageMagick
 
-TODO: to enable Gantt export to png image. link:
-http://www.imagemagick.org/
+ImageMagick is necessary to enable Gantt export to png image.
+
+To install imagemagick simply:
+
+    # pacman -S imagemagick
 
 > Ruby OpenID Library
 
-TODO: to enable OpenID support (version 2 or greater is required). link:
-http://openidenabled.com/ruby-openid/
+To enable OpenID support, is required a version >= 2 of the library.
 
 Installation
 ------------
@@ -365,10 +391,10 @@ bundle install:
 Check previously installed gems
 
 The Redmine devs included Bundler in Redmine, which can manage Gems just
-like pacman manages packages. Run the following command to assure
-Redmine all dependencies are met:
+like pacman manages packages. Run the following command to assure that
+all Redmine dependencies are met:
 
-    # bundle install --without development test rmagick postgresql sqlite
+    # bundle install --without development test
 
 This should output a list of gems Redmine needs.
 
@@ -489,24 +515,61 @@ functional. Use one of the many other guides in this wiki to setup
 redmine to use either Passenger (aka mod_rails), FCGI or a Rack server
 (Unicorn, Thin, Puma or hellip) to serve up your redmine.
 
-Updating (ToDo)
----------------
+> Configure the production server
+
+For Apache and Nginx, it is recommended to use Phusion Passenger.
+Passenger, also known as mod_rails, is a module available for Nginx and
+Apache.
+
+Start by installing the 'passenger' gem:
+
+    # gem install passenger
+
+Now you have to look at your passenger gem installation directory to
+continue. If you don't known where it is, type:
+
+    # gem env
+
+And look at the GEM PATHS to find where the gems are installed. If you
+followed this guide and installed RVM, you can have more than one path,
+look at the one you are using.
+
+For this guide so far, the gem path is
+/usr/local/rvm/gems/ruby-2.0.0-p247@global.
+
+    # cd /usr/local/rvm/gems/ruby-2.0.0-p247@global/gems/passenger-4.0.23
+
+If you are aiming to use Apache, run:
+
+    # passenger-install-apache2-module
+
+In case a rails application is deployed with a sub-URI, like
+http://example.com/yourapplication, some additional configuration is
+required, see the modrails documentation
+
+For Nginx:
+
+    # passenger-install-nginx-module
+
+And finally, the installer will provide you with further information
+regarding the installation (such as installing additional libraries).
+So, to setup your server, simply follow the output from the passenger
+installer.
+
+Updating
+--------
 
 Backup the files used in Redmine:
 
-    # cd /usr/share/webapps/redmine/files
-    # tar -czvf redmine_files.tar.gz *
-    # mv redmine_files.tar.gz /path/to/your/secure/location
+    # tar czvf ~/redmine_files.tar.gz -C /usr/share/webapps/redmine/ files
 
 Backup the plugins installed in Redmine:
 
-    # cd /usr/share/webapps/redmine/plugins
-    # tar -czvf redmine_plugins.tar.gz *
-    # mv redmine_plugins.tar.gz /path/to/your/secure/location
+    # tar czvf ~/redmine_plugins.tar.gz -C /usr/share/webapps/redmine/ plugins
 
 Backup the database:
 
-    # mysqldump -u root -p<password> <redmine_database> | gzip > /path/to/backup/db/redmine_`date +%y_%m_%d`.gz
+    # mysqldump -u root -p <redmine_database> | gzip > ~/redmine_db.sql.gz
 
 Update the package as normal (through AUR):
 
@@ -542,19 +605,18 @@ reinstall them all:
     # gem install bundler
     # bundle install --without development test
 
+Note:If you removed ALL the gems as above, and used a server that uses a
+gem, remember to reinstall the server gem: passenger (for Apache and
+Nginx), Mongrel or Unicorn. To do this, just follow the steps in the
+installation tutorial above.
+
 Copy the saved files:
 
-    # cd /path/to/your/secure/location
-    # mv redmine_files.tar.gz /usr/share/webapps/redmine/files
-    # cd /usr/share/webapps/redmine/files
-    # tar -zxpvf redmine_files.tar.gz
+    # tar xzvf ~/redmine_files.tar.gz -C /usr/share/webapps/redmine/
 
 Copy the installed plugins
 
-    # cd /path/to/your/secure/location
-    # mv redmine_plugins.tar.gz /usr/share/webapps/redmine/plugins
-    # cd /usr/share/webapps/redmine/plugins
-    # tar -zxpvf redmine_plugins.tar.gz
+    # tar xzvf ~/redmine_plugins.tar.gz -C /usr/share/webapps/redmine/
 
 Regenerate the secret token:
 
@@ -587,6 +649,89 @@ Restart the application server (e.g. puma, thin, passenger, etc). And
 finally go to "Admin -> Roles & permissions" to check/set permissions
 for the new features, if any.
 
+Troubleshooting
+---------------
+
+> RMagick gem without support for High Dynamic Range in ImageMagick
+
+As of ImageMagick 6.8.6.8-1, it is built with HDRI (High Dynamic Range
+Image) support, and this breaks the RMagick gem as seen in Arch bug
+#36518.
+
+The github rmagick is already patched, but the mantainer did not packed
+it for rubygems yet.
+
+To install this patched version download the git repository:
+
+    # git clone https://github.com/rmagick/rmagick.git
+
+Then, you need to build the gem:
+
+    # cd rmagick
+    # gem build rmagick.gemspec
+
+And finally install it:
+
+    # gem install rmagick-2.13.2.gem
+
+Note:It will show some complains like
+unable to convert "\xE0" from ASCII-8BIT to UTF-8 for ext/RMagick/RMagick2.so, skipping,
+but you can safelly ignore it.
+
+> Runtime error complaining that RMagick was configured with older version
+
+If you get the following runtime error after upgrading ImageMagick
+This installation of RMagick was configured with ImageMagick 6.8.7 but ImageMagick 6.8.8-1 is in use.
+then you only need to reinstall (or rebuild as shown above if is the
+case).
+
+Note:This is due to that when you install the RMagick gem it compiles
+some native extensions and they may need to be rebuilt after some
+ImageMagick upgrades.
+
+> Error when installing gems: Cannot load such file -- mysql2/mysql2
+
+If you see an error like  cannot load such file -- mysql2/mysql2, you
+are having a problem with the installation of the database gem. Probably
+a misconfiguration in the Database Access Configuration step. In this
+case you should verify the database.yml file.
+
+If no success, you can manually install the database gem by:
+
+    # gem install mysql2
+
+In last case, as suggested by Bobdog, you can try to comment the line of
+the database gem and add a new one as bellow:
+
+    <path-to-mysql2-gem-directory>/lib/mysql2/mysql2.rb
+
+
+     # require 'mysql2/mysql2'
+     require '<path-to-mysql2-gem-directory>/lib/mysql2/mysql2.so'
+
+> Apache 2.4 Updating
+
+When updating to Apache 2.4 will be necessary to remove and install all
+your gems to make sure all of them that need to build native extensions
+will be rebuilt against the new Apache server.
+
+So, for a clean gems environment, remove all the gems:
+
+    # for x in `gem list --no-versions`; do gem uninstall $x -a -x -I; done
+
+To reinstall the gems:
+
+    # cd /usr/share/webapps/redmine
+    # gem install bundler
+    # bundle install --without development test
+
+Remember to reinstall the RMagick gem as describe above in RMagick gem
+without support for High Dynamic Range in ImageMagick.
+
+And if you are using Passenger to serve your apps through Apache you
+will need to reinstall it as described above in Configure the production
+server.
+
 > Checkout SVN Source
 
 Get the Redmine source (Download instructions). Here is method of
@@ -597,23 +742,68 @@ installing Redmine directly from subversion in /srv/http/redmine/
     # svn checkout http://svn.redmine.org/redmine/branches/2.1-stable /srv/http/redmine
     # chown -R redmine: /srv/http/redmine
 
-> User accounts
+> Automating The Update Process
 
-Add redmine user and append redmine2 to git group.
+Example of an after-update script:
 
-    # useradd --user-group --shell /bin/bash --comment 'redmine2 system' --create-home --groups git redmine2
+    #!/usr/bin/bash
+    export RAILS_ENV=production
+    grep -E "^gem 'thin'" Gemfile || echo "gem 'thin'" >> Gemfile
+    bundle update && bundle exec rake generate_secret_token db:migrate redmine:plugins:migrate tmp:cache:clear tmp:sessions:clear
 
-Test server
------------
+Note: Note that this script uses Thin as application server, so you must
+change it to your needs.
 
-> Unicorn server
+> Creating a Systemd Unit
 
-    # sudo -u redmine2 unicorn -D -E production -c config/unicorn.rb
+If you want to automatic run you application server when system starts,
+you need to create a systemd unit file.
 
-Start redmine on boot
----------------------
+Note: This is not needed if you use apache or nginx with Passenger gem.
+Those servers already have their own unit file, so you have only to
+enable it.
 
-    #systemctl enable redmine
+Example of systemd unit file that starts redmine using Thin with redmine
+user and group:
+
+    # nano redmine.unit
+
+    [Unit]
+    Description=redmine
+    After=syslog.target network.target
+    [Service]
+    Type=oneshot
+    RemainAfterExit=yes
+    EnvironmentFile=/usr/share/webapps/redmine/.env
+    User=redmine
+    Group=redmine
+    WorkingDirectory=/usr/share/webapps/redmine
+    ExecStartPre=/usr/bin/mkdir -p -m 0770 /run/redmine
+    ExecStartPre=/usr/bin/chown redmine.http /run/redmine
+    ExecStart=/etc/init.d/redmine start
+    ExecReload=/etc/init.d/redmine restart
+    ExecStop=/etc/init.d/redmine stop
+    [Install]
+    WantedBy=multi-user.target
+
+Together with that, you need to create a init file as:
+
+    # nano /etc/init.d/redmine
+
+    #!/bin/sh
+    . ~/.env
+    bundle exec thin -s 2 -S /run/redmine/redmine.socket $1
+
+And finally, you need to set the necessary environment variables to the
+redmine user. If they are not already setted.
+
+    # nano ~/.env
+
+    PATH=$HOME/.gem/ruby/2.1.0/bin:/usr/bin
+    RAILS_ENV==production
+
+Note: This example shows a specific case, using Thin as application
+server, so you must change these files to your needs.
 
 See Also
 --------
@@ -621,8 +811,15 @@ See Also
 -   Official install guide from Redmine Wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Redmine&oldid=255980"
+"https://wiki.archlinux.org/index.php?title=Redmine&oldid=305585"
 
 Category:
 
 -   Version Control System
+
+-   This page was last modified on 19 March 2014, at 12:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

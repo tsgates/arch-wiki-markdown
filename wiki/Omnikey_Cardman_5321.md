@@ -5,20 +5,17 @@ This page will explain how to get the Omnikey Cardman 5321 SmartCard
 Reader up and running under Archlinux. This guide may work for other
 models to, but this has not been tested.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Packages                                                     |
-|         -   1.1.1 pcsclite                                               |
-|         -   1.1.2 pcsc-tools                                             |
-|         -   1.1.3 Driver                                                 |
-|                                                                          |
-| -   2 Usage                                                              |
-|     -   2.1 Start pcscd                                                  |
-|     -   2.2 Test with pcsc_scan                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Packages
+        -   1.1.1 pcsclite
+        -   1.1.2 pcsc-tools
+        -   1.1.3 Driver
+-   2 Usage
+    -   2.1 Start pcscd
+    -   2.2 Test with pcsc_scan
 
 Installation
 ============
@@ -48,12 +45,6 @@ Start pcscd
 -----------
 
 To start pcscd you have to run the following command:
-
-For legacy init systems:
-
-    # /etc/rc.d/pcscd start
-
-For systemd systems:
 
     # systemctl start pcscd.service
 
@@ -99,8 +90,15 @@ fine, you should get something like that:
     	New Zealand e-Passport
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Omnikey_Cardman_5321&oldid=245614"
+"https://wiki.archlinux.org/index.php?title=Omnikey_Cardman_5321&oldid=270871"
 
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 12 August 2013, at 13:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -29,47 +29,40 @@ laptops.
   Function Keys   Working             
   --------------- ------------------- ------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Xorg                                                               |
-|     -   2.1 Open source drivers                                          |
-|     -   2.2 Closed Catalyst drivers                                      |
-|     -   2.3 Switchable Graphics                                          |
-|     -   2.4 Touchpad                                                     |
-|     -   2.5 Keyboard                                                     |
-|                                                                          |
-| -   3 ACPI                                                               |
-|     -   3.1 Laptop Mode Tools                                            |
-|                                                                          |
-| -   4 Hardware                                                           |
-|     -   4.1 Bluetooth                                                    |
-|     -   4.2 Wi-Fi                                                        |
-|         -   4.2.1 TimelineX 5820                                         |
-|         -   4.2.2 TimelineX 4820TG                                       |
-|         -   4.2.3 TimelineX 3820TG                                       |
-|                                                                          |
-|     -   4.3 Camera                                                       |
-|     -   4.4 Card Reader                                                  |
-|     -   4.5 Display brightness control                                   |
-|                                                                          |
-| -   5 Info                                                               |
-|     -   5.1 lspci                                                        |
-|     -   5.2 lspci - TimelineX 4820TG (with Broadcom 4357 wifi)           |
-|     -   5.3 lspci - TimelineX 3820TG-5464G50iks                          |
-|                                                                          |
-| -   6 Issues                                                             |
-| -   7 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Xorg
+    -   2.1 Open source drivers
+    -   2.2 Closed Catalyst drivers
+    -   2.3 Switchable Graphics
+    -   2.4 Touchpad
+    -   2.5 Keyboard
+-   3 ACPI
+    -   3.1 Laptop Mode Tools
+-   4 Hardware
+    -   4.1 Bluetooth
+    -   4.2 Wi-Fi
+        -   4.2.1 TimelineX 5820
+        -   4.2.2 TimelineX 4820TG
+        -   4.2.3 TimelineX 3820TG
+    -   4.3 Camera
+    -   4.4 Card Reader
+    -   4.5 Display brightness control
+-   5 Info
+    -   5.1 lspci
+    -   5.2 lspci - TimelineX 4820TG (with Broadcom 4357 wifi)
+    -   5.3 lspci - TimelineX 3820TG-5464G50iks
+-   6 Issues
+-   7 Links
 
 Installation
 ------------
 
 There is a quirk if you want to install Arch Linux. You need to connect
 via wireless, as Ethernet hardware is supported only by Linux kernel
-2.6.34 and higher. Follow the Beginners' Guide for the rest.
+2.6.34 and higher. Follow the Beginners' guide for the rest.
 
 Xorg
 ----
@@ -431,8 +424,15 @@ Links
 2.  Usind acpi_call module to switch on/off
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_TimelineX&oldid=254489"
+"https://wiki.archlinux.org/index.php?title=Acer_TimelineX&oldid=304850"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 16 March 2014, at 08:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

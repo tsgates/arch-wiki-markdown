@@ -4,42 +4,38 @@ Xterm
 xterm is the standard terminal emulator for the X Window System. It is
 highly configurable and has many useful and some unusual features.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Basics                                                             |
-|     -   1.1 Resource file settings                                       |
-|         -   1.1.1 TERM Environmental Variable                            |
-|         -   1.1.2 UTF-8                                                  |
-|         -   1.1.3 Fix the 'Alt' key                                      |
-|                                                                          |
-|     -   1.2 Scrolling                                                    |
-|         -   1.2.1 The Scrollbar                                          |
-|                                                                          |
-|     -   1.3 Menus                                                        |
-|         -   1.3.1 Main Options menu                                      |
-|         -   1.3.2 VT Options menu                                        |
-|         -   1.3.3 VT Fonts menu                                          |
-|         -   1.3.4 Tek Options menu                                       |
-|                                                                          |
-|     -   1.4 Copy and paste                                               |
-|         -   1.4.1 PRIMARY or CLIPBOARD                                   |
-|         -   1.4.2 PRIMARY and CLIPBOARD                                  |
-|         -   1.4.3 Selecting text                                         |
-|                                                                          |
-| -   2 Colors                                                             |
-| -   3 Fonts                                                              |
-|     -   3.1 Default fonts                                                |
-|     -   3.2 Bold and underlined fonts                                    |
-|     -   3.3 CJK Fonts                                                    |
-|                                                                          |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Automatic transparency                                       |
-|     -   4.2 Enable bell urgency                                          |
-|     -   4.3 Remove black border                                          |
-|     -   4.4 Tek 4014 demonstration                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Basics
+    -   1.1 Resource file settings
+        -   1.1.1 TERM Environmental Variable
+        -   1.1.2 UTF-8
+        -   1.1.3 Fix the 'Alt' key
+    -   1.2 Scrolling
+        -   1.2.1 The Scrollbar
+    -   1.3 Menus
+        -   1.3.1 Main Options menu
+        -   1.3.2 VT Options menu
+        -   1.3.3 VT Fonts menu
+        -   1.3.4 Tek Options menu
+    -   1.4 Copy and paste
+        -   1.4.1 PRIMARY or CLIPBOARD
+        -   1.4.2 PRIMARY and CLIPBOARD
+        -   1.4.3 Selecting text
+-   2 Colors
+-   3 Fonts
+    -   3.1 Default fonts
+    -   3.2 Bold and underlined fonts
+    -   3.3 CJK Fonts
+-   4 Tips and tricks
+    -   4.1 Automatic transparency
+    -   4.2 Enable bell urgency
+    -   4.3 Font tips
+        -   4.3.1 Use color in place of bold and italics
+        -   4.3.2 Adjust line spacing
+    -   4.4 Remove black border
+    -   4.5 Tek 4014 demonstration
 
 Basics
 ------
@@ -229,9 +225,11 @@ Tek window.
 
 > Copy and paste
 
-Highlighting text using the mouse in an xterm will copy that text.
-Pasting into an xterm is accomplished by clicking the mouse
-middle-button or using the key combination Shift+Insert.
+First, highlighting text using the mouse in an xterm (or alternatively
+another application) will select the text to copy, then clicking the
+mouse middle-button with paste that highlighted text. Also the key
+combination Shift+Insert will paste highlighted text, but only within an
+xterm.
 
 PRIMARY or CLIPBOARD
 
@@ -294,6 +292,12 @@ background. The foreground and background colors can be reversed using
 the VT Options menu or with the -rv command line option.
 
     $ xterm -rv
+
+Alternatively, the same thing can be accomplished with the following X
+resources parameter (don't forget to reread the new resource
+afterwards!):
+
+    XTerm*reverseVideo: on
 
 Xterm's foreground color (the text color) and the background color may
 be set from the command line, using the options -fg and -bg
@@ -384,7 +388,8 @@ menu in the terminal window.
 
 > Bold and underlined fonts
 
-Italic fonts are shown as underlined characters in xterm.
+Italic fonts are shown as underlined characters when using XLFD names in
+xterm. TrueType fonts should use an oblique typeface.
 
 If you do not specify a bold font at the command line, -fb, or through
 the boldFont resource, xterm will attempt to find a bold font matching
@@ -431,6 +436,34 @@ Add the following line to your ~/.Xresources file:
 
     xterm*bellIsUrgent: true
 
+> Font tips
+
+Use color in place of bold and italics
+
+When using small font sizes, bold or italic characters may be difficult
+to read. One solution is to turn off bolding and underlining or italics
+and use color instead. This example does just that:
+
+    ! Forbid bold font faces; bold type is light blue.
+    XTerm*colorBDMode: true
+    XTerm*colorBD: rgb:82/a4/d3
+    ! Do not underscore text, underlined text is white.
+    XTerm*colorULMode: true
+    XTerm*colorUL: rgb:e4/e4/e4
+
+Adjust line spacing
+
+Lines of text can sometimes be too close together, or they may appear to
+be too widely spaced. For one example, using DejaVu Sans Mono,the low
+underscore glyph may butt against CJK glyphs or the cursor block in the
+line below. Line spacing, called leadingby typographers, can be adjusted
+using the scaleHeight resource. Here, the line spacing is widened:
+
+    XTerm*scaleHeight: 1.01
+
+Valid values for scaleHeight range from 0.9 to 1.5, with 1.0 being the
+default.
+
 > Remove black border
 
 Xterm has a black border in some cases, you can disable this by adding
@@ -457,8 +490,15 @@ files from that same directory. To close the Tek window, one can use the
 xterm menus.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xterm&oldid=255841"
+"https://wiki.archlinux.org/index.php?title=Xterm&oldid=296589"
 
 Category:
 
 -   Terminal emulators
+
+-   This page was last modified on 8 February 2014, at 14:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

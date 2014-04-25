@@ -1,43 +1,46 @@
 Step By Step Debugging Guide
 ============================
 
+Related articles
+
+-   General Troubleshooting
+-   Reporting Bug Guidelines
+-   Debug - Getting Traces
+-   Boot Debugging
+
 This page is mainly about how to gather more information in connection
 with bug reports. Even though the word "debug" is used, it's not
 intended as a guide for how to debug programs while developing.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 When an application fails                                          |
-|     -   1.1 Run it from the commandline                                  |
-|     -   1.2 Check if the application segfaults                           |
-|                                                                          |
-| -   2 How to investigate a segfault                                      |
-|     -   2.1 Technique #1 - gdb                                           |
-|     -   2.2 Technique #2 - even better gdb output                        |
-|                                                                          |
-| -   3 How to investigate missing files or libraries                      |
-|     -   3.1 Technique #1 - strace                                        |
-|     -   3.2 Technique #2 - LD_DEBUG                                      |
-|     -   3.3 Technique #3 - no such file or directory                     |
-|                                                                          |
-| -   4 If it's not written in C or C++, but perhaps in Python             |
-| -   5 Finally - report the bug                                           |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 When an application fails
+    -   1.1 Run it from the commandline
+    -   1.2 Check if the application segfaults
+-   2 How to investigate a segfault
+    -   2.1 Technique #1 - gdb
+    -   2.2 Technique #2 - even better gdb output
+    -   2.3 Technique #3 - valgrind
+-   3 How to investigate missing files or libraries
+    -   3.1 Technique #1 - strace
+    -   3.2 Technique #2 - LD_DEBUG
+    -   3.3 Technique #3 - readelf
+-   4 If it's not written in C or C++, but perhaps in Python
+-   5 Finally - report the bug
+-   6 See also
 
 When an application fails
 -------------------------
 
 > Run it from the commandline
 
-If an application suddenly crashes, try running it from the commandline.
-If you're new to the commandline and use GNOME, press Alt+F2 and type
-"gnome-terminal", then type in the name of the application in lowercase
-letters. If you don't know the name of the executable, only the name of
-the package, the following command can be useful to find the name of the
-executable. Replace "packagename" with the name of the package:
+If an application suddenly crashes, try running it from a terminal
+emulator like gnome-terminal or urxvt. Try typing in the name of the
+application in lowercase letters. If you don't know the name of the
+executable, only the name of the package, the following command can be
+useful to find the name of the executable. Replace "packagename" with
+the name of the package:
 
     for f in `pacman -Ql packagename | grep "/bin/" | cut -d" " -f2`; do file $f 2>/dev/null | grep -q executable && basename $f; done
 
@@ -77,13 +80,18 @@ with the name of your executable):
     bt full
 
 Now post the output to one of the many pastebin sites on the web and
-include the URL if you file a bugreport.
+include the URL in your bug report (if end up filing one).
 
 > Technique #2 - even better gdb output
 
-If you're able to, recompile the application in question with the -g,
--O0 and -fbuiltin flags, make sure "!strip" is in the options array in
-the PKGBUILD, install and try running it again with gdb, like above.
+First recompile the application in question with the -g, -O0 and
+-fbuiltin flags. Make sure "!strip" is in the options array in the
+PKGBUILD, then install the package and try running it again with gdb,
+like above.
+
+This is how the options line can look:
+
+     options=('!strip')
 
 One way of enabling -g, -O0 and -fbuiltin is to put these two lines at
 the very beginning of the build() function in the relevant PKGBUILD:
@@ -91,14 +99,38 @@ the very beginning of the build() function in the relevant PKGBUILD:
     export CFLAGS="$CFLAGS -O0 -fbuiltin -g"
     export CXXFLAGS="$CXXFLAGS -O0 -fbuiltin -g"
 
-Note that -g enables debug symbols and -O0 turns off optimizations. -O2
-is the normal choice, -O3 is usually overkill and -O4 and above behaves
-exactly like -O3.
+The meaning of the flags is the following: -g enables debug symbols and
+-O0 turns off optimizations. (-O2 is the most common optimization level.
+(-O3 is usually overkill and -O4 and above behaves exactly like -O3).
 
-If you have a "core" file, it can be used to get a backtrace:
+If you have a "core" file, it can be used together with gdb to get a
+backtrace:
 
     gdb appname core
     bt full
+
+> Technique #3 - valgrind
+
+Assuming you have an unstripped binary without inlined functions, it's
+usually a good idea to also run that program through valgrind. valgrind
+is a tool that emulates a CPU and can usually help you show where things
+go wrong or provide additional info on top of gdb's output.
+
+If you run
+
+    valgrind appname
+
+it will provide a lot of helpful debug output if there is a crash.
+Consider -v and --leak-check=full to get even more info.
+
+Alternatively, you can use
+
+    valgrind --tool=callgrind appname
+
+and run the output through kcachegrind to graphically explore the
+functions the program uses. This is especially useful if the program
+hangs somewhere as you can see where it spends all that time which makes
+it easier to pinpoint the error location.
 
 How to investigate missing files or libraries
 ---------------------------------------------
@@ -135,7 +167,7 @@ For more information about this:
 
     man ld-linux
 
-> Technique #3 - no such file or directory
+> Technique #3 - readelf
 
 If you get "no such file or directory" when running an application, try
 the following command:
@@ -186,17 +218,18 @@ the developers of an application.
 See also
 --------
 
--   Reporting Bug Guidelines for detailed information about how to
-    report bugs in a meaningful way.
--   Boot Debugging for debug options in bootloader configuration
--   Debug - Getting Traces for more information about collecting debug
-    information and stack traces.
--   General Troubleshooting
 -   Gentoo guide for getting useful backtraces
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Step_By_Step_Debugging_Guide&oldid=211841"
+"https://wiki.archlinux.org/index.php?title=Step_By_Step_Debugging_Guide&oldid=285361"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 30 November 2013, at 08:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

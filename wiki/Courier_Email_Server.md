@@ -17,17 +17,15 @@ Procmail, Fetchmail, SpamBayes, Courier-imap, Mutt, SquirrelMail)
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Packages                                                |
-| -   2 Using fetchmail                                                    |
-| -   3 Using procmail                                                     |
-| -   4 First Try with procmail and fetchmail working together             |
-| -   5 Configuring Courier Imap                                           |
-| -   6 Doing some cron-jobs                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing Packages
+-   2 Using fetchmail
+-   3 Using procmail
+-   4 First Try with procmail and fetchmail working together
+-   5 Configuring Courier Imap
+-   6 Doing some cron-jobs
 
 Installing Packages
 
@@ -113,3 +111,10 @@ Retrieved from
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 24 August 2012, at 03:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

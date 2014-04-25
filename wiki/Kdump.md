@@ -1,7 +1,7 @@
 Kdump
 =====
 
-> Summary
+Summary help replacing me
 
 Covers how to setup kdump.
 
@@ -9,7 +9,7 @@ Covers how to setup kdump.
 
 Kexec
 
-Kdump is a standrad Linux mechanism to dump machine memory content on
+Kdump is a standard Linux mechanism to dump machine memory content on
 kernel crash. Kdump is based on Kexec. Kdump utilizes two kernels:
 system kernel and dump capture kernel. System kernel is a normal kernel
 that is booted with special kdump-specific flags. We need to tell the
@@ -32,29 +32,25 @@ many kernel flags/drivers. While dump capture kernel goal is to be
 minimalistic and take as small amount of memory as possible, e.g. dump
 capture kernel can be compiled without network support if we store
 memory dump to disk only. But in this article we will simplify things
-and use the same kernel both as system and dump capture one. In means we
+and use the same kernel both as system and dump capture one. It means we
 will load the same kernel code twice - one as normal system kernel,
 another one to reserved memory area.
 
-  
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Compiling kernel                                                   |
-| -   2 Setup kdump kernel                                                 |
-| -   3 Testing crash                                                      |
-| -   4 Dump crashed kernel                                                |
-| -   5 Analyzing core dump                                                |
-| -   6 Additional information                                             |
-+--------------------------------------------------------------------------+
+-   1 Compiling kernel
+-   2 Setup kdump kernel
+-   3 Testing crash
+-   4 Dump crashed kernel
+-   5 Analyzing core dump
+-   6 Additional information
 
 Compiling kernel
 ----------------
 
 System/dump capture kernel requires some configuration flags that are
-not set by default. Please consult Kernels#Compilation for more
+not set by default. Please consult Kernel Compilation article for more
 information about compiling custom kernel in Arch. Here we will
 emphasize on Kdump specific configuration.
 
@@ -122,13 +118,13 @@ that will run kexec on boot:
     After=local-fs.target
 
     [Service]
-    ExecStart=/sbin/kexec -p [/boot/vmlinuz-linux-kdump] --initrd=[/boot/initramfs-linux-kdump.img] --append="root=[root-device] single irqpoll maxcpus=1 reset_devices"
+    ExecStart=/usr/bin/kexec -p [/boot/vmlinuz-linux-kdump] --initrd=[/boot/initramfs-linux-kdump.img] --append="root=[root-device] single irqpoll maxcpus=1 reset_devices"
     Type=oneshot
 
     [Install]
     WantedBy=multi-user.target
 
-Then enable the service
+Then enable the service :
 
     # systemctl enable kdump
 
@@ -145,7 +141,7 @@ If you want to test crash then you can use sysrq for this.
 Warning:kernel crash may corrupt data on your disks, run it at your own
 risk!
 
-    $ echo c | sudo tee /proc/sysrq-trigger
+    # echo c > /proc/sysrq-trigger
 
 Once crash happens kexec will load your dump capture kernel.
 
@@ -166,7 +162,7 @@ Analyzing core dump
 You can use either gdb tool or special gdb extension called crash that
 can be found in AUR. Run crash as
 
-    $ crash <vmlinux> <path>/crash.dump
+    $ crash vmlinux path/crash.dump
 
 Where vmlinux previously saved kernel binary with debug symbols.
 
@@ -176,15 +172,22 @@ for more information about debugging practices.
 Additional information
 ----------------------
 
--   Official kdump documentation
-    https://www.kernel.org/doc/Documentation/kdump/kdump.txt
--   The crash book
-    http://www.dedoimedo.com/computers/www.dedoimedo.com-crash-book.pdf
+-   https://www.kernel.org/doc/Documentation/kdump/kdump.txt - Official
+    kdump documentation
+-   http://www.dedoimedo.com/computers/www.dedoimedo.com-crash-book.pdf
+    - The crash book
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Kdump&oldid=255025"
+"https://wiki.archlinux.org/index.php?title=Kdump&oldid=274891"
 
 Categories:
 
 -   Boot process
 -   Kernel
+
+-   This page was last modified on 9 September 2013, at 22:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,7 +1,7 @@
 Rss2email
 =========
 
-  Summary
+  Summary help replacing me
   -----------------------------------------------------------------------------------------------
   An overview of the RSS feed reader program that lets users read RSS feeds from their inboxes.
 
@@ -13,24 +13,22 @@ People with lots of e-mail often have highly customized systems that let
 them process their mail efficiently; rss2email allows them to easily
 apply this system to their feeds as well.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Adding Feeds                                                       |
-| -   3 Getting RSS Feeds                                                  |
-| -   4 Managing rss2email                                                 |
-| -   5 Advanced Configuration                                             |
-| -   6 More Information                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Adding feeds
+-   3 Getting RSS feeds
+-   4 Managing rss2email
+-   5 Advanced configuration
+-   6 See also
 
 Installation
 ------------
 
 Install rss2email from the AUR.
 
-Adding Feeds
+Adding feeds
 ------------
 
 First, tell rss2email where it should send feeds by running the command:
@@ -52,7 +50,7 @@ every post. To avoid this behavior, after adding a new feed, run:
 
     $ r2e run --no-send
 
-Getting RSS Feeds
+Getting RSS feeds
 -----------------
 
 To get new stories, execute the command:
@@ -82,7 +80,7 @@ To change the default e-mail address, run:
 
     r2e email new_address@example.net
 
-Advanced Configuration
+Advanced configuration
 ----------------------
 
 The following configuration changes should be made in config.py, which
@@ -121,23 +119,31 @@ a new line.
 To send mail using an SMTP server rather than the local machine, use:
 
     SMTP_SEND = 1
-    SMTP_SERVER = "smtp.example.com:25"
+    SMTP_SERVER = smtp.example.com:25
 
 If the SMTP server requires authentication, set:
 
     AUTHREQUIRED = 1
-    SMTP_USER = "user@example.com"
-    SMTP_PASS = "password"
+    SMTP_USER = user@example.com
+    SMTP_PASS = password
 
-More Information
-----------------
+See also
+--------
 
-More information on rss2email can be found on its official getting
-started page as well as in this linux.com article.
+-   http://www.allthingsrss.com/rss2email/?page_id=31#unix - Official
+    getting started page
+-   http://www.linux.com/archive/feed/50469 - linux.com article.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Rss2email&oldid=238971"
+"https://wiki.archlinux.org/index.php?title=Rss2email&oldid=273430"
 
 Category:
 
 -   Email Client
+
+-   This page was last modified on 1 September 2013, at 08:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

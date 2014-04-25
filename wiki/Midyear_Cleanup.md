@@ -35,3 +35,10 @@ Categories:
 -   Arch development
 -   Package development
 -   Events
+
+-   This page was last modified on 16 October 2012, at 22:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

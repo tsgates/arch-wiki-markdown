@@ -1,10 +1,19 @@
 Installing Arch Linux in Virtual Server
 =======================================
 
-  
- I created some upated (16. Dec 2012) installation instructions on
-GitHub.com , because the referenced articles changed a lot since the
-creation of this article.
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Referenced       
+                           articles changed a lot   
+                           since the creation of    
+                           this article (March      
+                           2011), some updated (16. 
+                           Dec 2012) installation   
+                           instructions can be      
+                           found on GitHub.com      
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
 
 This page describes, how to install Arch Linux on a virtual server from
 a webhoster.
@@ -74,8 +83,15 @@ Note: I had problems using the current 2.6.37 kernel and switched back
 to 2.6.36.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Installing_Arch_Linux_in_Virtual_Server&oldid=240645"
+"https://wiki.archlinux.org/index.php?title=Installing_Arch_Linux_in_Virtual_Server&oldid=270280"
 
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 8 August 2013, at 08:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

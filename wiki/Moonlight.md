@@ -17,17 +17,14 @@ code from the rest of their application development to ensure "a great
 UI experience on every platform (Mac, Linux, Android, iOS, Windows and
 Web)" without being dependent on third party APIs."
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Mozilla Firefox                                              |
-|     -   1.2 Google Chrome                                                |
-|                                                                          |
-| -   2 Tips & Tricks                                                      |
-| -   3 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Mozilla Firefox
+    -   1.2 Google Chrome
+-   2 Tips and tricks
+-   3 See also
 
 Installation
 ------------
@@ -59,8 +56,8 @@ hidden since Chrome v21.
 Tip:An alternative download link, in case the Moonlight web site isn't
 responding.
 
-Tips & Tricks
--------------
+Tips and tricks
+---------------
 
 You may trick the Moonlight plugin to play supposedly unsupported
 content by editing the version number in libmoonpluginxpi.so.
@@ -77,17 +74,24 @@ The command $(sed -n 's/^Path=//p' ~/.mozilla/firefox/profiles.ini)
 finds out the default profile as stated in
 ~/.mozilla/firefox/profiles.ini.
 
-Note:DRM protected content is not supported.
+Note:DRM protected content is not supported, look at Pipelight for that.
 
-Resources
----------
+See also
+--------
 
--   Moonlight Project
+-   Moonlight project
 -   Get Moonlight
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Moonlight&oldid=252750"
+"https://wiki.archlinux.org/index.php?title=Moonlight&oldid=278846"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 16 October 2013, at 19:08.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

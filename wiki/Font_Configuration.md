@@ -1,22 +1,14 @@
 Font Configuration
 ==================
 
-> Summary
+Related articles
 
-An overview of font configuration options and various techniques for
-improving the readability of fonts
-
-> Related
-
-Fonts: Information on adding fonts and font recommendations
-
-Font Configuration/fontconfig Examples
-
-Java Runtime Environment Fonts: Fonts specific to Sun's Java machine
-
-MS Fonts: Adding Microsoft fonts and mimicking Windows' font settings
-
-X Logical Font Description: The older core font system for X
+-   Fonts
+-   Font Configuration/fontconfig Examples
+-   Infinality-bundle+fonts
+-   Java Runtime Environment Fonts
+-   MS Fonts
+-   X Logical Font Description
 
 Fontconfig is a library designed to provide a list of available fonts to
 applications, and also for configuration for how fonts get rendered. See
@@ -30,50 +22,45 @@ Logical Font Description.
 The font rendering packages on Arch Linux includes support for freetype2
 with the bytecode interpreter (BCI) enabled. Patched packages exist for
 better font rendering, especially with an LCD monitor. See #Patched
-packages below. The #Infinality package allows both auto-hinting and
+packages below. The Infinality package allows both auto-hinting and
 subpixel rendering, allows the LCD filter to be tweaked without
 recompiling, and allows the auto-hinter to work well with bold fonts.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Font paths                                                         |
-| -   2 Fontconfig configuration                                           |
-|     -   2.1 Presets                                                      |
-|     -   2.2 Anti-aliasing                                                |
-|     -   2.3 Hinting                                                      |
-|         -   2.3.1 Byte-Code Interpreter (BCI)                            |
-|         -   2.3.2 Autohinter                                             |
-|         -   2.3.3 Hint style                                             |
-|                                                                          |
-|     -   2.4 Subpixel rendering                                           |
-|         -   2.4.1 LCD filter                                             |
-|         -   2.4.2 Advanced LCD filter specification                      |
-|                                                                          |
-|     -   2.5 Disable auto-hinter for bold fonts                           |
-|     -   2.6 Enable anti-aliasing only for bigger fonts                   |
-|     -   2.7 Replace fonts                                                |
-|     -   2.8 Disable bitmap fonts                                         |
-|     -   2.9 Disable scaling of bitmap fonts                              |
-|     -   2.10 Create bold and italic styles for incomplete fonts          |
-|     -   2.11 Change rule overriding                                      |
-|     -   2.12 Example fontconfig configurations                           |
-|                                                                          |
-| -   3 Patched packages                                                   |
-|     -   3.1 Infinality: the generic way                                  |
-|     -   3.2 Infinality: the easy way                                     |
-|     -   3.3 Ubuntu                                                       |
-|     -   3.4 Reverting to unpatched packages                              |
-|                                                                          |
-| -   4 Applications without fontconfig support                            |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Distorted fonts                                              |
-|     -   5.2 Older GTK and QT applications                                |
-|     -   5.3 Applications overriding hinting                              |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Font paths
+-   2 Fontconfig configuration
+    -   2.1 Presets
+    -   2.2 Anti-aliasing
+    -   2.3 Hinting
+        -   2.3.1 Byte-Code Interpreter (BCI)
+        -   2.3.2 Autohinter
+        -   2.3.3 Hintstyle
+    -   2.4 Subpixel rendering
+        -   2.4.1 LCD filter
+        -   2.4.2 Advanced LCD filter specification
+    -   2.5 Disable auto-hinter for bold fonts
+    -   2.6 Enable anti-aliasing only for bigger fonts
+    -   2.7 Replace fonts
+    -   2.8 Disable bitmap fonts
+    -   2.9 Disable scaling of bitmap fonts
+    -   2.10 Create bold and italic styles for incomplete fonts
+    -   2.11 Change rule overriding
+    -   2.12 Example fontconfig configurations
+-   3 Patched packages
+    -   3.1 Infinality
+        -   3.1.1 Installation and configuration
+        -   3.1.2 Install from custom repository
+    -   3.2 Ubuntu
+    -   3.3 Reverting to unpatched packages
+-   4 Applications without fontconfig support
+-   5 Troubleshooting
+    -   5.1 Distorted fonts
+    -   5.2 Calibri, Cambria, Monaco, etc. not rendering properly
+    -   5.3 Older GTK and QT applications
+    -   5.4 Applications overriding hinting
+-   6 See also
 
 Font paths
 ----------
@@ -90,7 +77,7 @@ To see a list of known Fontconfig fonts:
 
     $ fc-list : file
 
-See man fc-list for more out put format.
+See man fc-list for more output formats.
 
 Check for Xorg's known font paths by reviewing its log:
 
@@ -120,7 +107,7 @@ package.
 Fontconfig configuration
 ------------------------
 
-Fontconfig is documented in the fonts.conf man page.
+Fontconfig is documented in the fonts-conf man page.
 
 Configuration can be done per-user through
 $XDG_CONFIG_HOME/fontconfig/fonts.conf, and globally with
@@ -128,14 +115,15 @@ $XDG_CONFIG_HOME/fontconfig/fonts.conf, and globally with
 precedence over the global configuration. Both these files use the same
 syntax.
 
-Note:Configuration files and directories: ~/.fonts.conf, ~/.fonts.conf.d
-and ~/.fontconfig/*.cache-* are deprecated since fontconfig 2.10.1
-(upstream commit) and will not be read by default in the future versions
-of package. Use instead $XDG_CONFIG_HOME/fontconfig/fonts.conf,
-$XDG_CONFIG_HOME/fontconfig/conf.d and
-$XDG_CACHE_HOME/fontconfig/*.cache-* respectively. If you use the second
-directory, the file must follow the naming convention NN-name.conf
-(where NN it's a two digit number like 00, 10, or 99).
+Note:Configuration files and directories: ~/.fonts.conf/,
+~/.fonts.conf.d/ and ~/.fontconfig/*.cache-* are deprecated since
+fontconfig 2.10.1 (upstream commit) and will not be read by default in
+the future versions of the package. New paths are
+$XDG_CONFIG_HOME/fontconfig/fonts.conf,
+$XDG_CONFIG_HOME/fontconfig/conf.d/NN-name.conf and
+$XDG_CACHE_HOME/fontconfig/*.cache-* respectively. If using the second
+location, make sure the naming is valid (where NN is a two digit number
+like 00, 10, or 99).
 
 Fontconfig gathers all its configurations in a central file
 (/etc/fonts/fonts.conf). This file is replaced during fontconfig updates
@@ -144,7 +132,9 @@ to know available fonts and how they get rendered. This file is a
 conglomeration of rules from the global configuration
 (/etc/fonts/local.conf), the configured presets in /etc/fonts/conf.d/,
 and the user configuration file
-($XDG_CONFIG_HOME/fontconfig/fonts.conf).
+($XDG_CONFIG_HOME/fontconfig/fonts.conf). fc-cache can be used to
+rebuild fontconfig's configuration, although changes will only be
+visible in newly launched applications.
 
 Note:For some desktop environments (such as GNOME and KDE) using the
 Font Control Panel will automatically create or overwrite the user font
@@ -193,24 +183,23 @@ resolution of font edges.
         </edit>
       </match>
 
-Note: some applications, like Gnome 3 may override default anti-alias
+Note:Some applications, like Gnome 3 may override default anti-alias
 settings.
 
 > Hinting
 
 Font hinting (also known as instructing) is the use of mathematical
 instructions to adjust the display of an outline font so that it lines
-up with a rasterized grid, such as the pixel grid in a display. Fonts
-will not line up correctly without hinting until displays have 300 DPI
-or greater. Two types of hinting are available.
+up with a rasterized grid, (i.e. the pixel grid of the display). Its
+intended effect is to make fonts appear more crisp so that they are more
+readable. Fonts will line up correctly without hinting when displays
+have around 300 DPI. Two types of hinting are available.
 
 Byte-Code Interpreter (BCI)
 
-Using normal hinting, TrueType hinting instructions in the font are
-interpreted by freetype's Byte-Code Interpreter. This works best for
-fonts with good hinting instructions.
-
-To enable normal hinting:
+Using BCI hinting, instructions in TrueType fonts fonts are rendered
+according to FreeTypes's interpreter. BCI hinting works well with fonts
+with good hinting instructions. To enable hinting:
 
       <match target="font">
         <edit name="hinting" mode="assign">
@@ -220,12 +209,14 @@ To enable normal hinting:
 
 Autohinter
 
-Auto-discovery for hinting. This looks worse than normal hinting for
-fonts with good instructions, but better for those with poor or no
-instructions. The autohinter and subpixel rendering are not designed to
-work together and should not be used in combination.
-
-To enable auto-hinting:
+The Autohinter attempts to do automatic hinting and disregards any
+existing hinting information. Originally it was the default because
+TrueType2 fonts were patent-protected but now that these patents have
+expired there's very little reason to use it. It does work better with
+fonts that have broken or no hinting information but it will be strongly
+sub-optimal for fonts with good hinting information. Generally common
+fonts are of the later kind so autohinter will not be useful. To enable
+auto-hinting:
 
       <match target="font">
         <edit name="autohint" mode="assign">
@@ -233,12 +224,14 @@ To enable auto-hinting:
         </edit>
       </match>
 
-Hint style
+Hintstyle
 
-Hint style is the amount of influence the hinting mode has. Hinting can
-be set to: hintfull, hintmedium, hintslight and hintnone. With BCI
-hinting, hintfull should work best for most fonts. With the autohinter,
-hintslight is recommended.
+Hintstyle is the amount of font reshaping done to line up to the grid.
+Hinting values are: hintnone, hintslight, hintmedium, and hintfull.
+hintslight will make the font more fuzzy to line up to the grid but will
+be better in retaining font shape, while hintfull will be a crisp font
+that aligns well to the pixel grid but will lose a greater amount of
+font shape. Preferences vary.
 
       <match target="font">
         <edit name="hintstyle" mode="assign">
@@ -246,21 +239,15 @@ hintslight is recommended.
         </edit>
       </match>
 
-Note: some applications, like Gnome 3 may override default hinting
+Note:Some applications, like Gnome 3 may override default hinting
 settings.
 
 > Subpixel rendering
 
-Subpixel rendering effectively triples the horizontal (or vertical)
-resolution for fonts by making use of subpixels. The autohinter and
-subpixel rendering are not designed to work together and should not be
-used in combination without the #Infinality patch set.
-
 Most monitors manufactured today use the Red, Green, Blue (RGB)
 specification. Fontconfig will need to know your monitor type to be able
-to display your fonts correctly.
-
-RGB (most common), BGR, V-RGB (vertical), or V-BGR
+to display your fonts correctly. Monitors are either: RGB (most common),
+BGR, V-RGB (vertical), or V-BGR. A monitor test can be found here).
 
 To enable subpixel rendering:
 
@@ -270,9 +257,10 @@ To enable subpixel rendering:
         </edit>
       </match>
 
-If you notice unusual colors around font's borders, the wrong subpixel
-arrangement might be configured. The Lagom subpixel layout test web page
-can help identify it.
+Note:Subpixel rendering effectively triples the horizontal (or vertical)
+resolution for fonts by making use of subpixels. The autohinter and
+subpixel rendering are not designed to work together and should not be
+used in combination without the Infinality patch set.
 
 LCD filter
 
@@ -324,8 +312,8 @@ Modify it as needed. Save the file, build and install the custom
 package:
 
     $ makepkg -e
-    $ sudo pacman -Rd freetype2
-    $ sudo pacman -U freetype2-VERSION-ARCH.pkg.tar.xz
+    # pacman -Rd freetype2
+    # pacman -U freetype2-VERSION-ARCH.pkg.tar.xz
 
 Reboot or restart X. The lcddefault filter should now render fonts
 differently.
@@ -348,8 +336,6 @@ the autohinter for bold fonts while leaving it on for the rest:
     ...
 
 > Enable anti-aliasing only for bigger fonts
-
-See also sharpfonts.co.cc for related information.
 
 Some users prefer the sharper rendering that anti-aliasing does not
 offer:
@@ -418,12 +404,65 @@ not placed by fontconfig by default):
     # rm 70-yes-bitmaps.conf
     # ln -s ../conf.avail/70-no-bitmaps.conf
 
+This oneliner should also work:
+
+    # ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+
 You may not need to remove 70-yes-bitmaps.conf if it does not exist. You
 can choose which fonts to replace bitmaps fonts with (Helvetica, Courier
 and Times bitmap mapts to TTF fonts) by:
 
-    # cd /etc/fonts/conf.d
-    # ln -s ../conf.avail/29-replace-bitmap-fonts.conf
+    ~/.config/fontconfig/conf.d/29-replace-bitmap-fonts.conf
+
+    <?xml version="1.0"?>
+    <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+    <fontconfig>
+        <!-- Replace generic bitmap font names by generic font families -->
+        <match target="pattern" name="family">
+            <test name="family" qual="any">
+                <string>Helvetica</string>
+            </test>
+            <edit mode="assign" name="family">
+                <string>Arial</string>
+                <string>Liberation Sans</string>
+                <string>sans-serif</string>
+            </edit>
+        </match>
+        <match target="pattern" name="family">
+            <test name="family" qual="any">
+                <string>Courier</string>
+            </test>
+            <edit mode="assign" name="family">
+                <string>Courier New</string>
+                <string>Liberation Mono</string>
+                <string>monospace</string>
+            </edit>
+        </match>
+        <match target="pattern" name="family">
+            <test name="family" qual="any">
+                <string>Times</string>
+            </test>
+            <edit mode="assign" name="family">
+                <string>Times New Roman</string>
+                <string>Liberation Serif</string>
+                <string>serif</string>
+            </edit>
+        </match>
+    </fontconfig>
+
+To disable embedded bitmap for all fonts:
+
+    ~/.config/fontconfig/conf.d/20-no-embedded.conf
+
+    <?xml version="1.0"?>
+    <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+    <fontconfig>
+      <match target="font">
+        <edit name="embeddedbitmap" mode="assign">
+          <bool>false</bool>
+        </edit>
+      </match>
+    </fontconfig>
 
 To disable embedded bitmap fonts for a specific font:
 
@@ -517,34 +556,31 @@ Example fontconfig configurations can be found on this page.
 
 A simple starting point:
 
-    /etc/fonts/local.conf
+    $XDG_CONFIG_HOME/fontconfig/fonts.conf
 
     <?xml version='1.0'?>
     <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
     <fontconfig>
-     <match target="font">
-      
-      <edit mode="assign" name="rgba">
-       <const>rgb</const>
-      </edit>
-
-      <edit mode="assign" name="hinting">
-       <bool>true</bool>
-      </edit>
-
-      <edit mode="assign" name="hintstyle">
-       <const>hintfull</const>
-      </edit>
-
-      <edit mode="assign" name="antialias">
-       <bool>true</bool>
-      </edit>
-
-      <edit mode="assign" name="lcdfilter">
-        <const>lcddefault</const>
-      </edit>
-     
-     </match>
+    	<match target="font">
+    		<edit mode="assign" name="antialias">
+    			<bool>true</bool>
+    		</edit>
+    		<edit mode="assign" name="embeddedbitmap">
+    			<bool>false</bool>
+    		</edit>
+    		<edit mode="assign" name="hinting">
+    			<bool>true</bool>
+    		</edit>
+    		<edit mode="assign" name="hintstyle">
+    			<const>hintslight</const>
+    		</edit>
+    		<edit mode="assign" name="lcdfilter">
+    			<const>lcddefault</const>
+    		</edit>
+    		<edit mode="assign" name="rgba">
+    			<const>rgb</const>
+    		</edit>
+    	</match>
     </fontconfig>
 
 Patched packages
@@ -557,13 +593,14 @@ These patched packages are available in the AUR. A few considerations:
 -   Applications which statically link to a library will not be affected
     by patches applied to the system library.
 
-> Infinality: the generic way
+> Infinality
 
 The infinality patchset aims to greatly improve freetype2 font
 rendering. It adds multiple new capabilities.
 
--   Home page.
--   Forum.
+-   Home page
+-   Forum
+-   Short article about infinality (contains screenshots)
 
 Infinality's settings are all configurable at runtime via environment
 variables in /etc/profile.d/infinality-settings.sh, and include the
@@ -595,17 +632,24 @@ following:
 A number of presets are included and can be used by setting the
 USE_STYLE variable in /etc/profile.d/infinality-settings.sh.
 
-Note:The user bohoomil maintains a very good configuration in his github
-repo which is available as a package in the AUR.
+Installation and configuration
 
-Note:Install grip-git from AUR to have a realtime preview.
+Tip:All AUR packages in this section can also be downloaded from
+bohoomil's custom repository. See the section below for how to enable
+this repository.
 
-freetype2-infinality can be installed from the AUR. Additionally, if you
-are using lib32-freetype2 from [multilib], replace it with
-lib32-freetype2-infinality from the AUR. The AUR also contains a Git
-version of freetype2 that builds the latest development snapshot of
-freetype2 with the Infinality patchset: freetype2-git-infinality,
-lib32-freetype2-git-infinality.
+Note:If you have been using fontconfig-infinality-ultimate < 2.11.0-2,
+you need to re-install (not upgrade!) fontconfig-infinality-ultimate
+package:
+
+     pacman -Rdd fontconfig-infinality-ultimate
+     pacman -S fontconfig-infinality-ultimate
+
+freetype2-infinality can be installed from the AUR. If you are a
+multilib user, also install lib32-freetype2-infinality from the AUR. The
+AUR also contains the latest development snapshot of freetype2 with the
+Infinality patchset: freetype2-infinality-git and
+lib32-freetype2-infinality-git.
 
 It is recommended to also install fontconfig-infinality to enable
 selection of predefined font substitution styles and antialiasing
@@ -617,79 +661,42 @@ with:
 
 If you set e.g. win7 or osx you need the corresponding fonts installed.
 
-Note:Default infinality settings can cause some programs to display
-fonts at 72 DPI instead of 96. If you notice a problem open
-/etc/fonts/infinality/infinality.conf search for the section on DPI and
-change 72 to 96. This problem can specifically affect conky causing the
-fonts to appear smaller than they should. Thus not aligning properly
-with images.
+> Note:
 
-Note:The README for fontconfig-infinality says that
-/etc/fonts/local.conf should either not exist, or have no
-infinality-related configurations in it. The local.conf is now obsolete
-and completely replaced by this configuration.
+-   The user bohoomil maintains a very good configuration in his github
+    repo which is available as fontconfig-infinality-ultimate-git in the
+    AUR.
+-   Install grip-git from the AUR to have a realtime font preview.
+-   Default infinality settings can cause some programs to display fonts
+    at 72 DPI instead of 96. If you notice a problem open
+    /etc/fonts/infinality/infinality.conf search for the section on DPI
+    and change 72 to 96. This problem can specifically affect conky
+    causing the fonts to appear smaller than they should. Thus not
+    aligning properly with images.
+-   The README for fontconfig-infinality says that /etc/fonts/local.conf
+    should either not exist, or have no infinality-related
+    configurations in it. The local.conf is now obsolete and completely
+    replaced by this configuration.
 
 for more information see this article:
 http://www.infinality.net/forum/viewtopic.php?f=2&t=77
 
--   Home page.
-
-> Infinality: the easy way
+Install from custom repository
 
 bohoomil also maintains infinality-bundle repository, offering three
 basic libraries (freetype2-infinality-ultimate,
 fontconfig-infinality-ultimate & cairo-infinality-ultimate) as
 pre-patched, pre-configured and pre-built binaries for all architectures
-(i686, x86_64, multilib). Using infinality-bundle makes the whole
-installation & configuration process dramatically simplified: all one
-has to do is install the three packages with
+(i686, x86_64, multilib). There is also an additional repository
+avaiable, infinality-bundle-fonts, offering a collection of entirely
+free, high quality typefaces, replacing common proprietary font
+families. Using infinality-bundle and infinality-bundle-fonts makes the
+whole installation and configuration process dramatically simplified
+(i.e., it lets you skip most steps necessary to install and configure
+fonts in your system).
 
-    # pacman -S foo-infinality-ultimate
-
-which will replace the corresponding, generic Arch libraries (i.e.
-freetype2-infinality-ultimate will be used instead of freetype2,
-fontconfig-infinality-ultimate instead of fontconfig and
-fontconfig-infinality-ultimate from the AUR, and
-cairo-infinality-ultimate instead of the regular cairo). The libraries
-are fully compatible with the Arch packages and are meant to be used as
-drop-in replacements for them. No post installation/upgrade steps are
-required for most use scenarios: everything should work out of the box.
-
-To use the repository, add
-
-    [infinality-bundle]
-    SigLevel = Never
-    Server = http://bohoomil.cu.cc/infinality-bundle/$arch
-
-to your /etc/pacman.conf and issue
-
-    # pacman -Syy
-
-If you want to have access to multilib versions, add the following, too:
-
-    [infinality-bundle-multilib]
-    SigLevel = Never
-    Server = http://bohoomil.cu.cc/infinality-bundle-multilib/$arch
-
-In case of server down times, there is always a backup copy of the
-repository available via Dropbox.
-
-When installing some packages (like libgdiplus), you may encounter an
-error:
-
-    :: cairo and cairo-infinality-ultimate are in conflict. Remove cairo-infinality-ultimate? [y/N] n
-    error: unresolvable package conflicts detected
-    error: failed to prepare transaction (conflicting dependencies)
-
-If this happens, install the new package with
-
-    # pacman -Sd foo
-
-instead.
-
-For more information, see infinality-bundle user notes.
-
-A support thread in the Forums is available here.
+Please, see Infinality-bundle+fonts for more information and
+installation instructions.
 
 > Ubuntu
 
@@ -700,13 +707,23 @@ Install the patched packages from the AUR, the package names are:
 freetype2-ubuntu fontconfig-ubuntu cairo-ubuntu.
 
 The global configuration will need to be added. See #Example fontconfig
-configurations for a starting point.
+configurations for a starting point. Ubuntu rendering works the best
+with hintslight option.
+
+Note that the *-ubuntu AUR packages need to be kept up-to-date by the
+user, and will not be updated by pacman along with other packages. The
+whole graphical system can become inoperable if the user-installed core
+graphical libraries become incompatible with the official repository
+applications.
 
 > Reverting to unpatched packages
 
 To restore the unpatched packages, reinstall the originals:
 
     # pacman -S --asdeps freetype2 cairo fontconfig
+
+Append 'lib32-cairo lib32-fontconfig lib32-freetype2' if you also
+installed 32 bit versions.
 
 Applications without fontconfig support
 ---------------------------------------
@@ -750,7 +767,7 @@ xdpyinfo (provided by the xorg-xdpyinfo package):
 
 If the DPI is detected incorrectly (usually due to an incorrect monitor
 EDID), you can specify it manually in the Xorg configuration, see
-Xorg#Display Size and DPI. This is the recommended solution, but it may
+Xorg#Display size and DPI. This is the recommended solution, but it may
 not work with buggy drivers.
 
 Fontconfig will default to the Xft.dpi variable if it is set. Xft.dpi is
@@ -771,6 +788,12 @@ used by fontconfig:
     </match>
     ...
 
+> Calibri, Cambria, Monaco, etc. not rendering properly
+
+Some scalable fonts have embedded bitmap versions which are rendered
+instead, mainly at smaller sizes. Force using scalable fonts at all
+sizes by #Disabling embedded bitmap.
+
 > Older GTK and QT applications
 
 Modern GTK apps enable Xft by default but this was not the case before
@@ -786,20 +809,29 @@ For older QT applications:
 > Applications overriding hinting
 
 Some applications may override default fontconfig hinting and
-anti-aliasing settings. This may happen with Gnome 3, for example. Use
-the specific configuration program for the application in such cases.
-For gnome, try gnome-tweak-tool.
+anti-aliasing settings. This may happen with Gnome 3, for example while
+you are using QT applications like vlc,smplayer. Use the specific
+configuration program for the application in such cases. For gnome, try
+gnome-tweak-tool and set the anti-aliasing to rgba instead of the
+default grayscale while using infinality.
 
 See also
 --------
 
 -   Fonts in X11R6.8.2 - Official Xorg font information
--   FreeType 2 Overview
+-   FreeType 2 overview
 -   Gentoo font-rendering thread
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Font_Configuration&oldid=256079"
+"https://wiki.archlinux.org/index.php?title=Font_Configuration&oldid=304196"
 
 Category:
 
 -   Fonts
+
+-   This page was last modified on 12 March 2014, at 20:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

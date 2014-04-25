@@ -65,3 +65,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki:Server Configuration
+
+-   This page was last modified on 23 September 2009, at 05:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

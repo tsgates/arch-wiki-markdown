@@ -15,23 +15,19 @@ systems make this task a little complex. In this guideline we will talk
 about Win32 binaries, since projects where source is available usually
 are ported to Linux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Things to check outright                                           |
-|     -   1.1 License                                                      |
-|     -   1.2 Installer                                                    |
-|     -   1.3 Portability and cleanness                                    |
-|                                                                          |
-| -   2 The guideline in short                                             |
-|     -   2.1 Installing                                                   |
-|     -   2.2 The /usr/bin script                                          |
-|     -   2.3 UnionFsFuse                                                  |
-|                                                                          |
-| -   3 One example                                                        |
-| -   4 Gecko                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Things to check outright
+    -   1.1 License
+    -   1.2 Installer
+    -   1.3 Portability and cleanness
+-   2 The guideline in short
+    -   2.1 Installing
+    -   2.2 The /usr/bin script
+    -   2.3 UnionFsFuse
+-   3 One example
+-   4 Gecko
 
 Things to check outright
 ------------------------
@@ -97,16 +93,16 @@ If the program has no installer, the installation is a mere
 decompression of a file; unpack it to "$pkgdir"/usr/share/$pkgname,
 making sure that the permissions are correct. These commands will do:
 
-    find "$pkgdir"/usr/share -type f -exec chmod 644 "{}" \;
-    find "$pkgdir"/usr/share -type d -exec chmod 755 "{}" \;
+    $ find "$pkgdir"/usr/share -type f -exec chmod 644 "{}" \;
+    $ find "$pkgdir"/usr/share -type d -exec chmod 755 "{}" \;
 
 If the program cannot be installed the easy way, you need to create a
 Wine environment:
 
-    install -m755 -d "$srcdir"/tmp "$srcdir"/tmp/env "$srcdir"/tmp/local
-    export WINEPREFIX="$srcdir"/tmp/env
-    export XDG_DATA_HOME="$srcdir"/tmp/local
-    wine "$srcdir"/installer.exe /silentoptions
+    $ install -m755 -d "$srcdir"/tmp "$srcdir"/tmp/env "$srcdir"/tmp/local
+    $ export WINEPREFIX="$srcdir"/tmp/env
+    $ export XDG_DATA_HOME="$srcdir"/tmp/local
+    $ wine "$srcdir"/installer.exe /silentoptions
 
 We have not discussed portability yet, but if your program does not need
 the registry keys it modified, you can just copy the directory from the:
@@ -159,12 +155,11 @@ If the application does not write settings at all, skip the if and start
 it from /usr/share.
 
 The task of preparing the environment may differ greatly between
-applications, but follow these rules of thumb:
+applications, but follow these rules of thumb: If the program:
 
--   if the program...
-    -   ...just needs to read a file, symlink it.
-    -   ...needs to write in a file, copy it.
-    -   ...does not use a file, ignore it.
+-   just needs to read a file, symlink it.
+-   needs to write in a file, copy it.
+-   does not use a file, ignore it.
 
 Of course the minimum is just starting
 WINEDEBUG=-all wine /usr/share/programname "$@".
@@ -188,9 +183,9 @@ an user can see a copy of the .torrent files she downloaded.
 
 > UnionFsFuse
 
-You can consider using the UnionFsFuse program (available in the
-community repository as unionfs-fuse). UnionFsFuse allows to keep the
-base directory in /usr/share and put a copy of the files the application
+You can consider using the UnionFsFuse program available in the official
+repositories as unionfs-fuse). UnionFsFuse allows to keep the base
+directory in /usr/share and put a copy of the files the application
 needed to write inside $HOME/.programname almost automatically.
 
 Using UnionFsFuse means an additional dependency and it requires the
@@ -265,37 +260,42 @@ made executable in /usr/bin.
 If you want to be more precise, you may add a message in the .install
 file telling the user that they should disable search history since wine
 messes up that menu. You may even provide a default config file with the
-best settings. And that's it... run makepkg, check the pkg folder to be
-sure, and install.
+best settings. And that's it... run $ makepkg, check the package folder
+to be sure, and install.
 
 Gecko
 -----
 
-Unless you know for sure, that software require browser of .Net runtime
-(if this is the case, install them using winetricks), default wine
-installation prompts for Gecko/Mono are undesirable.
+Unless you know for sure, that software require browser of .NET runtime
+(packages wine_gecko and wine-mono in official repositories), default
+wine installation prompts for Gecko/Mono are undesirable.
 
 To disable HTML rendering, bytecode support and the dialogs, you need to
-use a dlloverride in your script:
+use a dlloverride in your script. For Gecko:
 
     export WINEDLLOVERRIDES="mshtml="
 
-for Gecko,
+For Mono:
 
     export WINEDLLOVERRIDES="mscoree="
 
-for Mono and
+For both:
 
     export WINEDLLOVERRIDES="mscoree,mshtml="
-
-for both.
 
 You can also disable them via winecfg: just set mscoree/mshtml to
 Disable.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Wine_PKGBUILD_Guidelines&oldid=250977"
+"https://wiki.archlinux.org/index.php?title=Wine_PKGBUILD_Guidelines&oldid=290886"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 30 December 2013, at 11:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -4,31 +4,27 @@ Arch64 FAQ
 Below is a list of frequently asked questions about Arch Linux on
 64-bit.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 How do I determine if my processor is x86_64 compatible?           |
-|     -   1.1 Linux users                                                  |
-|     -   1.2 Windows users                                                |
-|                                                                          |
-| -   2 Should I use the 32 or 64 bit version of Arch?                     |
-| -   3 How can I install Arch64?                                          |
-| -   4 How complete is the port?                                          |
-| -   5 Will I have all the packages from my 32-bit Arch I am used to?     |
-| -   6 Why 64-bit?                                                        |
-| -   7 How can I file bugs?                                               |
-| -   8 What repositories should I set up for pacman to use?               |
-| -   9 How can I patch existing PKGBUILDs for use with Arch64?            |
-| -   10 What will I miss in Arch64?                                       |
-| -   11 Can I run 32-bit apps inside Arch64?                              |
-| -   12 Can I build 32-bit packages for i686 inside Arch64?               |
-|     -   12.1 Multilib Repository                                         |
-|     -   12.2 Chroot                                                      |
-|                                                                          |
-| -   13 Can I upgrade/switch my system from i686 to x86_64 without        |
-|     reinstalling?                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 How do I determine if my processor is x86_64 compatible?
+    -   1.1 Linux users
+    -   1.2 Windows users
+-   2 Should I use the 32 or 64 bit version of Arch?
+-   3 How can I install Arch64?
+-   4 How complete is the port?
+-   5 Will I have all the packages from my 32-bit Arch I am used to?
+-   6 Why 64-bit?
+-   7 How can I file bugs?
+-   8 What repositories should I set up for pacman to use?
+-   9 How can I patch existing PKGBUILDs for use with Arch64?
+-   10 What will I miss in Arch64?
+-   11 Can I run 32-bit apps inside Arch64?
+-   12 Can I build 32-bit packages for i686 inside Arch64?
+    -   12.1 Multilib repository
+    -   12.2 Chroot
+-   13 Can I upgrade/switch my system from i686 to x86_64 without
+    reinstalling?
 
 How do I determine if my processor is x86_64 compatible?
 --------------------------------------------------------
@@ -214,7 +210,7 @@ Yes. You can either use
     repository or
 -   an i686 chroot.
 
-> Multilib Repository
+> Multilib repository
 
 To use the [multilib] repository, edit your /etc/pacman.conf and
 uncomment following lines:
@@ -226,16 +222,19 @@ uncomment following lines:
 upgrade your system with pacman -Syu and install the gcc-multilib
 package.
 
-Note:If the system has the base-devel package group installed, users
-must replace the [extra] versions with the [mutlilib] versions as shown
-below.
+> Note:
 
-Note:gcc-multilib is capable of building 32-bit and 64-bit code. You can
-safely install multilib-devel to replace the packages shown below, but
-you still need base-devel for the other packages it includes. See
-https://bbs.archlinux.org/viewtopic.php?id=102828 for more information.
+-   If the system has the base-devel package group installed, users must
+    replace the [extra] versions with the [mutlilib] versions as shown
+    below.
+-   gcc-multilib is capable of building 32-bit and 64-bit code. You can
+    safely install multilib-devel to replace the packages shown below,
+    but you still need base-devel for the other packages it includes.
+    See https://bbs.archlinux.org/viewtopic.php?id=102828 for more
+    information.
 
     # pacman -S gcc-multilib
+
     resolving dependencies...
     warning: dependency cycle detected:
     warning: lib32-gcc-libs will be installed before its gcc-libs-multilib dependency
@@ -271,15 +270,6 @@ and invoking makepkg via the following
 
 > Chroot
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: This sections    
-                           mentions the "linux32"   
-                           package which does not   
-                           exist. (Discuss)         
-  ------------------------ ------------------------ ------------------------
-
 To use an i686 chroot (installation with i686 ISO "quickinstall" is
 recommended for the quick way to install it inside Arch64 or see Arch64
 Install bundled 32bit system), install "linux32" wrapper pkg from
@@ -304,10 +294,14 @@ to share sources from host to chroot system for pkg building used in
 Can I upgrade/switch my system from i686 to x86_64 without reinstalling?
 ------------------------------------------------------------------------
 
-No. However a forum thread has been created here which outlines steps
-taken to successfully migrate an install from 32 to 64 bit without
-losing any configs/settings/data. Note: A large external hard drive was
-used for the transfer.
+No. Strictly speaking any kind of migration implies that all packages or
+nearly all packages must be reinstalled for the newer architecture.
+However, it is possible to move your system without performing a fresh
+install, and even from within your current installation. A forum thread
+has been created here which outlines steps taken to successfully migrate
+an install from 32 to 64 bit without losing any
+configurations/settings/data. Note: A large external hard drive was used
+for the transfer.
 
 However, you can also start the system with the Arch64 installation CD,
 mount the disk, backup anything you may want to keep that is not a
@@ -317,8 +311,15 @@ You may also want to read Migrating Between Architectures Without
 Reinstalling.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Arch64_FAQ&oldid=244005"
+"https://wiki.archlinux.org/index.php?title=Arch64_FAQ&oldid=300739"
 
 Category:
 
 -   Arch64
+
+-   This page was last modified on 23 February 2014, at 16:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

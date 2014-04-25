@@ -42,17 +42,14 @@ To be safe, also regenerate your initramfs after finishing:
 
 There are two possible issues that might occur during this update.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Issue 1: glibc dependency errors                                   |
-| -   2 Issue 2: The final "pacman -Su" still has conflicts in /lib        |
-|     -   2.1 Packages that own files in /lib                              |
-|     -   2.2 Unpackaged files                                             |
-|                                                                          |
-| -   3 Success                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Issue 1: glibc dependency errors
+-   2 Issue 2: The final "pacman -Su" still has conflicts in /lib
+    -   2.1 Packages that own files in /lib
+    -   2.2 Unpackaged files
+-   3 Success
 
 Issue 1: glibc dependency errors
 --------------------------------
@@ -132,3 +129,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 30 October 2012, at 22:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

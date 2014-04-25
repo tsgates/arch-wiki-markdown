@@ -12,17 +12,14 @@ meaning that it runs very fast, and as it is compiled doesn't need a
 runtime environment-meaning no need to have Wirbel on your computer to
 run Wirbel compiled program.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Tips and Tricks                                                    |
-|     -   2.1 Example                                                      |
-|     -   2.2 Compilation                                                  |
-|                                                                          |
-| -   3 More Resources                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Tips and Tricks
+    -   2.1 Example
+    -   2.2 Compilation
+-   3 More Resources
 
 Installation
 ------------
@@ -71,3 +68,10 @@ Retrieved from
 Category:
 
 -   Programming language
+
+-   This page was last modified on 24 May 2012, at 12:26.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -12,24 +12,29 @@ JVM is installed, including Windows, Mac OS, Linux, and Solaris. A JDK
 is required for Java development functionality, but is not required for
 development in other programming languages."
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Tips and tricks                                                    |
-|     -   1.1 Font antialiasing in Netbeans                                |
-|         -   1.1.1 Netbeans Specifically                                  |
-|         -   1.1.2 Java Generally                                         |
-|                                                                          |
-|     -   1.2 GTK look and feel                                            |
-|                                                                          |
-| -   2 Troubleshooting                                                    |
-|     -   2.1 OpenJDK vs Sun's JDK                                         |
-|     -   2.2 Glassfish server - Can`t download Glassfish server I/O       |
-|         Exception                                                        |
-|     -   2.3 Netbeans doesn't start after its first start                 |
-|     -   2.4 Netbeans starts with a completely grey window                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Tips and tricks
+    -   2.1 Font antialiasing in Netbeans
+        -   2.1.1 Netbeans Specifically
+        -   2.1.2 Java Generally
+    -   2.2 Look and feel
+-   3 Integrate with tomcat
+-   4 Troubleshooting
+    -   4.1 OpenJDK vs Sun's JDK
+    -   4.2 Glassfish server - Can`t download Glassfish server I/O
+        Exception
+    -   4.3 Netbeans doesn't start after its first start
+    -   4.4 Netbeans starts with a completely grey window
+    -   4.5 Integrate Netbeans with kwallet
+
+Installation
+------------
+
+Install the netbeans package which is available in the official
+repositories.
 
 Tips and tricks
 ---------------
@@ -55,13 +60,52 @@ Java Generally
 
 See Java#Better font rendering.
 
-> GTK look and feel
+> Look and feel
 
-To change Netbeans look and feel to GTK add switch
---laf com.sun.java.swing.plaf.gtk.GTKLookAndFeel to IDE command line by
-appending it to ‘netbeans_default_options’ section of
-/usr/share/netbeans/etc/netbeans.conf or editing .desktop file with
+To change Netbeans look and feel, add switch --laf yourLookAndFeel to
+IDE command line by appending it to ‘netbeans_default_options’ section
+of /usr/share/netbeans/etc/netbeans.conf or editing .desktop file with
 which you launch Netbeans.
+
+For GTK: --laf com.sun.java.swing.plaf.gtk.GTKLookAndFeel
+
+For Nimbus: --laf com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
+
+Integrate with tomcat
+---------------------
+
+It is possible to debug web applications running on tomcat within
+netbeans:
+
+First install, tomcat.
+
+You will need to create a configuration and deployment folder for your
+user, for example in /home/USER_NAME/.tomcat7
+
+Copy /etc/tomcat7/ in /home/USER_NAME/.tomcat7/conf and check that you
+give read/write access to your user.
+
+    # sudo cp -r /etc/tomcat7/ /home/USER_NAME/.tomcat7/conf
+    # sudo chown -R USER_NAME:USER_NAME /home/USER_NAME/.tomcat7/conf
+
+Make sure to configure /home/USER_NAME/.tomcat7/conf/tomcat-users.xml
+with a user having tomcat admin permissions so that netbeans can deploy
+applications.
+
+Copy /var/lib/tomcat7/webapps in /home/USER_NAME/.tomcat7/webapps
+
+  
+
+Then, in netbeans go to Tools>Servers>Add Server and select Apache
+Tomcat.
+
+In server location specify /usr/share/tomcat7
+
+Check "Use Private Configuration Folder (Catalina Base)" and specify
+/home/USER_NAME/.tomcat7
+
+Finally, set the username and password you configured in
+/etc/tomcat7/tomcat-users.xml
 
 Troubleshooting
 ---------------
@@ -130,9 +174,29 @@ problem:
 
     $ _JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
 
+> Integrate Netbeans with kwallet
+
+Netbeans may need to store some passwords. It can do that in kwallet.
+See netbeans' wiki [[1]]
+
+However, you need to install and configure qtchooser so that netbeans
+find the qdbus command:
+
+    $ pacman -S qtchooser
+    $ ln -sf /etc/xdg/qtchooser/4.conf /etc/xdg/qtchooser/default.conf
+
+See forum discussion [[2]]
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Netbeans&oldid=233791"
+"https://wiki.archlinux.org/index.php?title=Netbeans&oldid=305523"
 
 Category:
 
 -   Development
+
+-   This page was last modified on 18 March 2014, at 19:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

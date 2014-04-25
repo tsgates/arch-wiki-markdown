@@ -1,59 +1,56 @@
 Bash
 ====
 
-> Summary
+Related articles
 
-Discussing and improving Bash's capabilities.
-
-> Related
-
-Readline
-
-Environment Variables
-
-Color Bash Prompt
+-   Readline
+-   Environment variables
+-   Color Bash Prompt
 
 Bash (Bourne-again Shell) is a shell/programming language by the GNU
 Project. Its name is a homaging reference to its predecessor: the
 long-deprecated Bourne shell. Bash can be run on most UNIX-like
 operating systems, including GNU/Linux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Invocation                                                         |
-|     -   1.1 Login shell                                                  |
-|     -   1.2 Interactive shell                                            |
-|     -   1.3 POSIX compliance                                             |
-|     -   1.4 Legacy mode                                                  |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Configuration file sourcing order at startup                 |
-|     -   2.2 Shell and environment variables                              |
-|                                                                          |
-| -   3 Command line                                                       |
-| -   4 Aliases                                                            |
-| -   5 Functions                                                          |
-| -   6 Tips and tricks                                                    |
-|     -   6.1 Prompt customization                                         |
-|     -   6.2 Tab completion                                               |
-|         -   6.2.1 Faster completion                                      |
-|         -   6.2.2 Manually                                               |
-|                                                                          |
-|     -   6.3 The "command not found" hook                                 |
-|     -   6.4 Display error codes                                          |
-|     -   6.5 Disable Ctrl+z in terminal                                   |
-|     -   6.6 Clear the screen after logging out                           |
-|     -   6.7 ASCII art, fortunes and cowsay                               |
-|     -   6.8 ASCII Historical Calendar                                    |
-|     -   6.9 Customise Title                                              |
-|     -   6.10 Fix line wrap on window resize                              |
-|     -   6.11 History completion                                          |
-|     -   6.12 Auto "cd" when entering just a path                         |
-|                                                                          |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Invocation
+    -   1.1 Login shell
+    -   1.2 Interactive shell
+    -   1.3 POSIX compliance
+    -   1.4 Legacy mode
+-   2 Configuration
+    -   2.1 Configuration file sourcing order at startup
+    -   2.2 Shell and environment variables
+-   3 Command line
+-   4 Aliases
+-   5 Functions
+    -   5.1 Compile and execute a C source on the fly
+    -   5.2 Extract
+    -   5.3 cd and ls in one
+    -   5.4 Simple note taker
+    -   5.5 Simple task utility
+    -   5.6 Docview
+    -   5.7 Calculator
+    -   5.8 Kingbash
+-   6 Tips and tricks
+    -   6.1 Prompt customization
+    -   6.2 Tab completion
+        -   6.2.1 Less-input completion
+        -   6.2.2 Manually
+    -   6.3 The "command not found" hook
+    -   6.4 Display error codes
+    -   6.5 Disable Ctrl+z in terminal
+    -   6.6 Clear the screen after logging out
+    -   6.7 ASCII art, fortunes and cowsay
+    -   6.8 ASCII historical calendar
+    -   6.9 Customise title
+    -   6.10 Fix line wrap on window resize
+    -   6.11 History completion
+    -   6.12 Auto "cd" when entering just a path
+    -   6.13 Mimic Zsh run-help ability
+-   7 See also
 
 Invocation
 ----------
@@ -76,7 +73,7 @@ error are connected to terminals.
 > POSIX compliance
 
 Bash can be run with enhanced POSIX compliance by starting Bash with the
---posix command-line option or executing ‘set -o posix’ while Bash is
+--posix command-line option or executing set -o posix while Bash is
 running.
 
 > Legacy mode
@@ -90,13 +87,19 @@ behavior of historical versions of sh.
 Configuration
 -------------
 
-The following files can be used to configure bash:
+The following files can be used to configure Bash:
 
 -   /etc/profile
 -   ~/.bash_profile
 -   ~/.bash_login
 -   ~/.profile
--   /etc/bash.bashrc (Non-standard: only some distros, Arch included)
+
+Note:/etc/bash.bashrc is non-standard, only some distributions like Arch
+Linux have this included because packagers have added a
+-DSYS_BASHRC="/etc/bash.bashrc" flag at compilation time, in order to
+have a system bashrc file.
+
+-   /etc/bash.bashrc
 -   ~/.bashrc
 -   ~/.bash_logout
 
@@ -105,21 +108,21 @@ These files are commonly used:
 -   /etc/profile is sourced by all Bourne-compatible shells upon login.
     It sets up an environment upon login and loads application-specific
     (/etc/profile.d/*.sh) settings.
--   ~/.profile is read and sourced by bash when an interactive login
+-   ~/.profile is read and sourced by Bash when an interactive login
     shell is started.
--   ~/.bashrc is read and sourced by bash when a non-login interactive
+-   ~/.bashrc is read and sourced by Bash when a non-login interactive
     shell is started, for example, when you open a virtual console from
     the desktop environment. This file is useful for setting up a
     user-specific shell environment.
 
 > Configuration file sourcing order at startup
 
-These files are sourced by bash in different circumstances.
+These files are sourced by Bash in different circumstances.
 
 -   if interactive + login shell → /etc/profile then the first readable
     of ~/.bash_profile, ~/.bash_login, and ~/.profile
-    -   Bash will source ~/.bash_logout upon exit.
-
+    -   Bash will source ~/.bash_logout and /etc/bash.bash_logout upon
+        exit.
 -   if interactive + non-login shell → /etc/bash.bashrc then ~/.bashrc
 -   if login shell + legacy mode → /etc/profile then ~/.profile
 
@@ -132,15 +135,18 @@ And by default in Arch:
 which means that /etc/bash.bashrc and ~/.bashrc will be executed for all
 interactive shells, whether they are login shells or not.
 
+The complete startup sequence for Bash is explained in the INVOCATION
+section of man 1 bash or in [1].
+
 > Shell and environment variables
 
-The behavior of bash and programs run by it can be influenced by a
-number of environment variable. Environment variables are used to store
+The behavior of Bash and programs run by it can be influenced by a
+number of environment variables. Environment variables are used to store
 useful values such as command search directories, or which browser to
 use. When a new shell or script is launched it inherits its parent's
-variables, thus starting with an internal set of shell variables[1].
+variables, thus starting with an internal set of shell variables[2].
 
-These shell variables in bash can be exported in order to become
+These shell variables in Bash can be exported in order to become
 environment variables:
 
     VARIABLE=content
@@ -153,7 +159,7 @@ or with a shortcut
 Environment variables are conventionally placed in ~/.profile or
 /etc/profile so that all bourne-compatible shells can use them.
 
-See Environment Variables for more general information.
+See Environment variables for more general information.
 
 Command line
 ------------
@@ -178,7 +184,7 @@ An example excerpt from ~/.bashrc covering several time-saving aliases:
 
     ~/.bashrc
 
-    # modified commands
+    ## Modified commands ## {{{
     alias diff='colordiff'              # requires colordiff package
     alias grep='grep --color=auto'
     alias more='less'
@@ -187,28 +193,31 @@ An example excerpt from ~/.bashrc covering several time-saving aliases:
     alias mkdir='mkdir -p -v'
     alias nano='nano -w'
     alias ping='ping -c 5'
-    alias ..='cd ..'
+    alias dmesg='dmesg -HL'
+    # }}}
 
-    # new commands
+    ## New commands ## {{{
     alias da='date "+%A, %B %d, %Y [%T]"'
     alias du1='du --max-depth=1'
-    alias hist='history | grep'      # requires an argument
+    alias hist='history | grep'         # requires an argument
     alias openports='ss --all --numeric --processes --ipv4 --ipv6'
-    alias pg='ps -Af | grep $1'         # requires an argument (note: /usr/bin/pg is installed by the util-linux package; maybe a different alias name should be used)
+    alias pgg='ps -Af | grep'           # requires an argument
+    alias ..='cd ..'
+    # }}}
 
-    # privileged access
+    # Privileged access
     if [ $UID -ne 0 ]; then
         alias sudo='sudo '
         alias scat='sudo cat'
-        alias svim='sudo vim'
-        alias root='sudo su'
+        alias svim='sudoedit'
+        alias root='sudo -s'
         alias reboot='sudo systemctl reboot'
         alias poweroff='sudo systemctl poweroff'
         alias update='sudo pacman -Su'
-        alias netcfg='sudo netcfg2'
+        alias netctl='sudo netctl'
     fi
 
-    # ls
+    ## ls ## {{{
     alias ls='ls -hF --color=auto'
     alias lr='ls -R'                    # recursive ls
     alias ll='ls -l'
@@ -217,37 +226,60 @@ An example excerpt from ~/.bashrc covering several time-saving aliases:
     alias lz='ll -rS'                   # sort by size
     alias lt='ll -rt'                   # sort by date
     alias lm='la | more'
+    # }}}
 
-    # safety features
+    ## Safety features ## {{{
     alias cp='cp -i'
     alias mv='mv -i'
     alias rm='rm -I'                    # 'rm -i' prompts for every file
+    # safer alternative w/ timeout, not stored in history
+    alias rm=' timeout 3 rm -Iv --one-file-system'
     alias ln='ln -i'
     alias chown='chown --preserve-root'
     alias chmod='chmod --preserve-root'
     alias chgrp='chgrp --preserve-root'
+    alias cls=' echo -ne "\033c"'       # clear screen for real (it does not work in Terminology)
+    # }}}
 
-    # pacman aliases (if necessary, replace 'pacman' with your favorite AUR helper and adapt the commands accordingly)
-    alias pac="sudo /usr/bin/pacman -S"		# default action	- install one or more packages
-    alias pacu="/usr/bin/pacman -Syu"		# '[u]pdate'		- upgrade all packages to their newest version
-    alias pacr="sudo /usr/bin/pacman -Rs"		# '[r]emove'		- uninstall one or more packages
-    alias pacs="/usr/bin/pacman -Ss"		# '[s]earch'		- search for a package using one or more keywords
-    alias paci="/usr/bin/pacman -Si"		# '[i]nfo'		- show information about a package
-    alias paclo="/usr/bin/pacman -Qdt"		# '[l]ist [o]rphans'	- list all packages which are orphaned
-    alias pacc="sudo /usr/bin/pacman -Scc"		# '[c]lean cache'	- delete all not currently installed package files
-    alias paclf="/usr/bin/pacman -Ql"		# '[l]ist [f]iles'	- list all files installed by a given package
-    alias pacexpl="/usr/bin/pacman -D --asexp"	# 'mark as [expl]icit'	- mark one or more packages as explicitly installed 
-    alias pacimpl="/usr/bin/pacman -D --asdep"	# 'mark as [impl]icit'	- mark one or more packages as non explicitly installed
+    ## Make Bash error tolerant ## {{{
+    alias :q=' exit'
+    alias :Q=' exit'
+    alias :x=' exit'
+    alias cd..='cd ..'
+    # }}}
 
-    # '[r]emove [o]rphans' - recursively remove ALL orphaned packages
-    alias pacro="/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rs \$(/usr/bin/pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
+See also Pacman Tips#Shortcuts for other useful aliases.
 
 Functions
 ---------
 
-Bash also supports functions. The following function will extract a wide
-range of compressed file types. Add the function to ~/.bashrc and use it
-with the syntax extract <file1> <file2> ...
+Bash also supports functions. Add the functions to ~/.bashrc, or a
+separate file which is sourced from ~/.bashrc. More Bash function
+examples can be found in BBS#30155.
+
+> Compile and execute a C source on the fly
+
+The following function will compile (within the /tmp/ directory) and
+execute the C source argument on the fly (and the execution will be
+without arguments). And finally, after program terminates, will remove
+the compiled file.
+
+    ~/.bashrc
+
+    # Compile and execute a C source on the fly
+    csource() {
+            [[ $1 ]]    || { echo "Missing operand" >&2; return 1; }
+            [[ -r $1 ]] || { printf "File %s does not exist or is not readable\n" "$1" >&2; return 1; }
+    	local output_path=${TMPDIR:-/tmp}/${1##*/};
+    	gcc "$1" -o "$output_path" && "$output_path";
+    	rm "$output_path";
+    	return 0;
+    }
+
+> Extract
+
+The following function will extract a wide range of compressed file
+types. and use it with the syntax extract <file1> <file2> ...
 
     ~/.bashrc
 
@@ -266,25 +298,24 @@ with the syntax extract <file1> <file2> ...
             fi
 
             case $i in
-            *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz)))))
-                   c='bsdtar xvf';;
-            *.7z)  c='7z x';;
-            *.Z)   c='uncompress';;
-            *.bz2) c='bunzip2';;
-            *.exe) c='cabextract';;
-            *.gz)  c='gunzip';;
-            *.rar) c='unrar x';;
-            *.xz)  c='unxz';;
-            *.zip) c='unzip';;
-            *)     echo "$0: unrecognized file extension: \`$i'" >&2
-                   continue;;
+                *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz)))))
+                       c=(bsdtar xvf);;
+                *.7z)  c=(7z x);;
+                *.Z)   c=(uncompress);;
+                *.bz2) c=(bunzip2);;
+                *.exe) c=(cabextract);;
+                *.gz)  c=(gunzip);;
+                *.rar) c=(unrar x);;
+                *.xz)  c=(unxz);;
+                *.zip) c=(unzip);;
+                *)     echo "$0: unrecognized file extension: \`$i'" >&2
+                       continue;;
             esac
 
-            command $c "$i"
-            e=$?
+            command "${c[@]}" "$i"
+            ((e = e || $?))
         done
-
-        return $e
+        return "$e"
     }
 
 Note:Make sure extglob is enabled: shopt -s extglob, by adding it to the
@@ -292,8 +323,13 @@ Note:Make sure extglob is enabled: shopt -s extglob, by adding it to the
 http://mywiki.wooledge.org/glob#Options_which_change_globbing_behavior).
 It is enabled by default, if using Bash completion.
 
-Another way to do this is to install the unp package from the AUR which
-contains a Perl script.
+Another way to do this is to install a specialized package. For example:
+
+-   unp - package from the AUR which contains a Perl script
+-   atool
+-   dtrx
+
+> cd and ls in one
 
 Very often changing to a directory is followed by the ls command to list
 its contents. Therefore it is helpful to have a second function doing
@@ -304,56 +340,165 @@ message if the specified directory does not exist.
 
     # cd and ls in one
     cl() {
-    if [ -d "$1" ]; then
-    	cd "$1"
-    	ls
-    	else
-    	echo "bash: cl: '$1': Directory not found"
-    fi
+        dir=$1
+        if [[ -z "$dir" ]]; then
+            dir=$HOME
+        fi
+        if [[ -d "$dir" ]]; then
+            cd "$dir"
+            ls
+        else
+            echo "bash: cl: '$dir': Directory not found"
+        fi
     }
 
 Of course the ls command can be altered to fit your needs, for example
-$ ls -hall --color=auto.
+ls -hall --color=auto.
 
-More Bash function examples can be found in BBS#30155.
+> Simple note taker
+
+    ~/.bashrc
+
+    note () {
+        # if file doesn't exist, create it
+        if [[ ! -f $HOME/.notes ]]; then
+            touch "$HOME/.notes"
+        fi
+
+        if ! (($#)); then
+            # no arguments, print file
+            cat "$HOME/.notes"
+        elif [[ "$1" == "-c" ]]; then
+            # clear file
+            > "$HOME/.notes"
+        else
+            # add all arguments to file
+            printf "%s\n" "$*" >> "$HOME/.notes"
+        fi
+    }
+
+> Simple task utility
+
+Inspired by #Simple note taker
+
+    ~/.bashrc
+
+    todo() {
+        if [[ ! -f $HOME/.todo ]]; then
+            touch "$HOME/.todo"
+        fi
+
+        if ! (($#)); then
+            cat "$HOME/.todo"
+        elif [[ "$1" == "-l" ]]; then
+            nl -b a "$HOME/.todo"
+        elif [[ "$1" == "-c" ]]; then
+            > $HOME/.todo
+        elif [[ "$1" == "-r" ]]; then
+            nl -b a "$HOME/.todo"
+            printf "----------------------------\n"
+            read -p "Type a number to remove: " number
+            ex -sc "${number}d" "$HOME/.todo"
+        else
+            printf "%s\n" "$*" >> "$HOME/.todo"
+        fi
+    }
+
+> Docview
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
+  png]                     this article or section  png]
+                           is disputed.             
+                           Reason: It is probably   
+                           best to configure        
+                           xdg-open correctly.      
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+    ~/.bashrc
+
+    docview () {
+        if [[ -f $1 ]] ; then
+            case $1 in
+                *.pdf)       xpdf     "$1" ;;
+                *.ps)        oowriter "$1" ;;
+                *.odt)       oowriter "$1" ;;
+                *.txt)       leafpad  "$1" ;;
+                *.doc)       oowriter "$1" ;;
+                *)           printf "don't know how to extract '%s'..." "$1" >&2; return 1 ;;
+            esac
+        else
+            printf "'%s' is not a valid file!\n" "$1" >&2
+            return 1;
+        fi
+    }
+
+> Calculator
+
+    ~/.bashrc
+
+    calc() {
+        echo "scale=3;$@" | bc -l
+    }
+
+> Kingbash
+
+Kingbash - menu driven auto-completion (see
+https://bbs.archlinux.org/viewtopic.php?id=101010).
+
+Install kingbash from the AUR, then insert the following into your
+~/.bashrc:
+
+    ~/.bashrc
+
+    function kingbash.fn() {
+        echo -n "KingBash> $READLINE_LINE" #Where "KingBash> " looks best if it resembles your PS1, at least in length.
+        OUTPUT=$(/usr/bin/kingbash "$(compgen -ab -A function)")
+        READLINE_POINT=$(echo "$OUTPUT" | tail -n 1)
+        READLINE_LINE=$(echo "$OUTPUT" | head -n -1)
+        echo -ne "\r\e[2K"
+    }
+    bind -x '"\t":kingbash.fn'
 
 Tips and tricks
 ---------------
 
 > Prompt customization
 
-The bash prompt is governed by the variable $PS1. To colorize the bash
+The Bash prompt is governed by the variable $PS1. To colorize the Bash
 prompt, use:
 
     ~/.bashrc
 
     #PS1='[\u@\h \W]\$ '  # To leave the default one
-    PS1='\[\e[0;31m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[0;31m\]\$ \[\e[m\]\[\e[0;32m\] '
+    #DO NOT USE RAW ESCAPES, USE TPUT
+    reset=$(tput sgr0)
+    red=$(tput setaf 1)
+    blue=$(tput setaf 4)
+    green=$(tput setaf 2)
 
-This $PS1 is useful for a root bash prompt, with red designation and
+    PS1='\[$red\]\u\[$reset\] \[$blue\]\w\[$reset\] \[$red\]\$ \[$reset\]\[$green\] '
+
+This $PS1 is useful for a root Bash prompt, with red designation and
 green console text. For more info, see: Color Bash Prompt.
 
 > Tab completion
 
 Tab completion allows for completing partially typed commands by
-pressing Tab twice.
+pressing Tab twice. Start a new shell and it will be automatically
+enabled by /etc/bash.bashrc.
 
-Despite Bash's native support for basic file name, command, and variable
-tab completion the package bash-completion (available in the Official
-repositories) extends functionality by adding it to a wide range of
-commands and their options.
-
-Start a new shell and it will be automatically enabled by
-/etc/bash.bashrc.
-
-Note:The normal expansions that you are used to like
-$ ls file.*<tab><tab> will not work unless you
+Note:Bash's native support of tab-completions for basic file name,
+command, and variables can be extended with the package
+bash-completion (available in the official repositories). It extends
+its' functionality by adding a wide range of commands and their options.
+The normal expansions that you are used to (such as
+$ ls file.*<tab><tab>) will not work unless you
 $ compopt -o bashdefault <prog> for all programs you want to fallback to
-the normal glob expansions. See
-https://bbs.archlinux.org/viewtopic.php?id=128471 and
-https://www.gnu.org/software/bash/manual/html_node/Programmable-Completion-Builtins.html
+the normal glob expansions. See [3] and [4].
 
-Faster completion
+Less-input completion
 
 For a single press of Tab to produce a list of all possible completions
 (both when a partial or no completion is possible):
@@ -372,39 +517,17 @@ possible:
 
 Manually
 
-For basic completion use lines in the form of complete -cf your_command:
+For basic completion use lines in the form of complete -cf your_command
+(Note: these will conflict with the bash-completion package settings):
 
     ~/.bashrc
 
     complete -cf sudo
     complete -cf man
 
-Note:These will conflict with bash-completion.
-
 > The "command not found" hook
 
-The pkgfile package includes a "command not found" hook that will
-automatically search the official repositories when you enter an
-unrecognized command. Then it will display something like this:
-
-    $ abiword
-
-    abiword may be found in the following packages:
-      extra/abiword 2.8.6-7	usr/bin/abiword
-
-An alternative "command not found" hook is also provided by the AUR
-package command-not-found, which will generate an output like the
-following:
-
-    $ abiword
-
-    The command 'abiword' is been provided by the following packages:
-    abiword (2.8.6-7) from extra
-    	[ abiword ]
-    abiword (2.8.6-7) from staging
-    	[ abiword ]
-    abiword (2.8.6-7) from testing
-    	[ abiword ]
+See pkgfile#"Command not found" hook.
 
 > Display error codes
 
@@ -456,7 +579,7 @@ fortune-mod.
     each shall come to a full stop, and neither shall proceed until the other has gone.
 
 Note:By default, fortune displays quotes and phrases that are rather
-innoccuous. However, the package does contain a set of comments some
+innocuous. However, the package does contain a set of comments some
 people will find offensive, located in /usr/share/fortune/off/. See the
 man page (man fortune) for more info on these.
 
@@ -543,9 +666,9 @@ Note:For full 256-colored cowsay-like art use ponysay (version 3.0 has
 422 ponies). The syntax is the same, meaning $ ponysay message to say
 something and ponysay -l for a complete list of ponies. To create more
 ponies use util-say-git and store them in ~/.local/share/ponysay/ponies
-and ~/.local/share/ponysay/ttyponies/ for desktop and TTY, respectively
+and ~/.local/share/ponysay/ttyponies/ for desktop and TTY, respectively.
 
-> ASCII Historical Calendar
+> ASCII historical calendar
 
 To install calendar files in your ~/.calendar directory you will need
 the rpmextract package installed. Then from your home directory, run the
@@ -559,7 +682,7 @@ This will then print out the calendar items:
 
     $ sed -n "/$(date +%m\\/%d\\\|%b\*\ %d)/p" $(find ~/.calendar /usr/share/calendar -maxdepth 1 -type f -name 'c*' 2>/dev/null);
 
-> Customise Title
+> Customise title
 
 The $PROMPT_COMMAND variable allows you to execute a command before the
 prompt. For example, this will change the title to your full current
@@ -628,30 +751,48 @@ You get:
     cd /etc
     [user@host etc]
 
+> Mimic Zsh run-help ability
+
+Zsh can invoke the manual for the written command pushing Alt+h. A
+similar behaviour is obtained in Bash by appending this line in your
+inputrc file:
+
+    /etc/inputrc
+
+    "\eh": "\C-a\eb\ed\C-y\e#man \C-y\C-m\C-p\C-p\C-a\C-d\C-e"
+
 See also
 --------
 
 -   Advanced Bash Scripting Guide - Very good resource regarding shell
-    scripting using bash
+    scripting using Bash
 -   An active and friendly IRC channel for Bash
 -   Bash Hackers Wiki - Excellent Bash Wiki
 -   Bash Reference Manual - Official reference (654K)
 -   Bash Scripting by Example
--   Bashscripts.org - A Forum for bashers.
+-   Bashscripts.org - A forum for bashers.
 -   Chakra Wiki: Startup files
 -   Completion Guide
 -   Custom Bash Commands & Functions
--   General Recommendations - General Recommendations for Arch
+-   General recommendations - General Recommendations for Arch
 -   Greg's Wiki - Highly recommended
 -   How to change the title of an xterm
--   man bash
+-   Bash manual page
 -   Quote Tutorial
+-   Introduction to Bash
 -   Readline Init File Syntax* The Bourne-Again Shell - The third
     chapter of The Architecture of Open Source Applications
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Bash&oldid=254806"
+"https://wiki.archlinux.org/index.php?title=Bash&oldid=305921"
 
 Category:
 
 -   Command shells
+
+-   This page was last modified on 20 March 2014, at 17:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -6,28 +6,24 @@ a good idea to have regular backups of important data, most notably
 configuration files (/etc/*) and the local pacman database (usually
 /var/lib/pacman/local/*).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Incremental backups                                                |
-|     -   2.1 Rsync-type backups                                           |
-|         -   2.1.1 Console                                                |
-|         -   2.1.2 Graphical                                              |
-|                                                                          |
-|     -   2.2 Other backups                                                |
-|         -   2.2.1 Console                                                |
-|         -   2.2.2 Graphical                                              |
-|                                                                          |
-| -   3 Cloud backups                                                      |
-| -   4 Non-incremental backups                                            |
-| -   5 Versioning systems                                                 |
-|     -   5.1 Version control systems                                      |
-|     -   5.2 VCS-based backups                                            |
-|                                                                          |
-| -   6 External Resources                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Incremental backups
+    -   2.1 Rsync-type backups
+        -   2.1.1 Console
+        -   2.1.2 Graphical
+    -   2.2 Other backups
+        -   2.2.1 Console
+        -   2.2.2 Graphical
+-   3 Cloud backups
+-   4 Cooperative storage cloud backups
+-   5 Non-incremental backups
+-   6 Versioning systems
+    -   6.1 Version control systems
+    -   6.2 VCS-based backups
+-   7 External Resources
 
 Introduction
 ------------
@@ -71,9 +67,12 @@ Console
 
 -   rsync — A file transfer program to keep remote files in sync.
     -   rsync almost always makes a mirror of the source.
-    -   Impossible to restore a full backup before the most recent
-        backup (but you can use --backup to keep old versions of the
-        files).
+    -   It is possible to restore a full backup before the most recent
+        backup if hardlinks are allowed in the backup file system. See
+        Back up your data with rsync for more information.
+    -   If hard links are not allowed, it is impossible to restore a
+        full backup before the most recent backup (but you can use
+        --backup to keep old versions of the files).
     -   Standard install on all distros.
     -   Can run over SSH (port 22) or native rsync protocol (port 873).
     -   Win32 version available.
@@ -113,7 +112,7 @@ http://www.rsnapshot.org/ || rsnapshot
 http://safekeep.sourceforge.net/ || safekeep
 
 -   Link-Backup — A tool similar to rsync based scripts, but which does
-    not use rsync.
+    not use rsync. NOTE: no upstream activity since 2008.
     -   Creates hard links between a series of backed-up trees
         (snapshots).
     -   Intelligently handles renames, moves, and duplicate files
@@ -136,10 +135,22 @@ http://www.scottlu.com/Content/Link-Backup.html || link-backup
 
 http://www.cis.upenn.edu/~bcpierce/unison/ || unison
 
--   oldtime — A highly customizable and configurable backup & restore
-    system.
+-   rsync-snapshot.sh — Another rsync shellscript with smart rotation
+    (non-linear distribution) of backups. Integrity protection, Quotas,
+    Rules and many more features.
 
-https://github.com/GutenYe/oldtime || not packaged? (search in AUR)
+http://blog.pointsoftware.ch/index.php/howto-local-and-remote-snapshot-backup-using-rsync-with-hard-links/
+|| not packaged? search in AUR
+
+-   oldtime — A bash script using rsync to provide a backup solution.
+
+https://github.com/GutenYe/oldtime || oldtime
+
+-   trinkup — A 60-lines bash script which holds specified amount of
+    incremental backups using rsync and "cp -al" to minimize amount of
+    disk operations.
+
+https://gist.github.com/ei-grad/7610406/raw/trinkup || trinkup
 
 Graphical
 
@@ -151,7 +162,8 @@ Graphical
     -   A new snapshot is created only if something changed since the
         last snapshot.
 
-http://backintime.le-web.org/ || backintime
+http://backintime.le-web.org/ || backintime or as a prebuild package
+from codercun's repo
 
 -   FlyBack — A clone of Apple's Time Machine, a backup utility for Mac
     OS X.
@@ -279,6 +291,19 @@ http://code.google.com/p/manent/ || manent
 
 http://viric.name/cgi-bin/btar || btar
 
+-   burp — Burp is a network backup and restore program
+    -   Uses librsync in order to save network traffic and to save on
+        the amount of space that is used by each backup.
+    -   It also uses VSS (Volume Shadow Copy Service) to make snapshots
+        when backing up Windows computers.
+    -   deduplication
+    -   SSL/TLS connections
+    -   automation the process of generating SSL certificates
+    -   data encryption
+    -   security models [1]
+
+http://burp.grke.org || burp-backup
+
 -   obnam — Easy, secure backup program
     -   Uses snapshots instead of full/incremental backups
 
@@ -286,16 +311,37 @@ http://liw.fi/obnam/ || obnam
 
 -   System Tar & Restore — A set of bash scripts for full system backup
     and restore
-    -   CLI and Dialog interfaces, Zenity wrappers
+    -   CLI and Dialog interfaces
     -   Easy backup and restore wizards
-    -   Uses tar to create and restore backups
-    -   Creates tar.gz or tar.xz archives
+    -   Uses tar / bsdtar to create and restore backups
+    -   Creates .tar.gz, .tar.bz2 or .tar.xz archives
     -   Uses rsync to transfer a running system
-    -   Generates fstab with UUIDS, supports Grub2 and auto-configures
-        Syslinux
+    -   Supports Grub2 and Syslinux
 
-http://code.google.com/p/system-tar-and-restore/ ||
+https://github.com/tritonas00/system-tar-and-restore ||
 system-tar-and-restore
+
+-   Packrat — A simple, modular backup system using DAR
+    -   Full or incremental backups stored locally, on a remote system
+        via SSH, or on Amazon S3
+
+http://www.zeroflux.org/projects || packrat
+
+-   Attic — A deduplicating backup program for efficient and secure
+    backups.
+    -   Space efficient storage: Variable block size deduplication is
+        used to reduce the number of bytes stored by detecting redundant
+        data.
+    -   Optional data encryption: All data can be protected using
+        256-bit AES encryption and data integrity and authenticity is
+        verified using HMAC-SHA256.
+    -   Off-site backups: Any data can be stored on any remote host
+        accessible over SSH (as long as Attic is installed).
+    -   Backups mountable as filesystems: Backup archives are mountable
+        as userspace filesystems for easy backup verification and
+        restores.
+
+https://github.com/jborg/attic/ || attic
 
 Graphical
 
@@ -328,6 +374,18 @@ http://synkron.sourceforge.net/ || synkron
 Cloud backups
 -------------
 
+See the Wikipedia article on this subject for more information:
+Comparison of online backup services
+
+-   Copy — A fair solution to shared folders.
+    -   15GB free.
+    -   Shared folders size are split between people.
+    -   Daemon to sync files between the cloud and the computer.
+    -   Almost any platform supported.
+    -   Offers AES-256 encryption.
+
+https://www1.copy.com/home/ || copy
+
 -   CrashPlan — An online/offsite backup solution.
     -   Unlimited online space for very reasonable pricing.
     -   Automatic and incremental backups to multiple destinations.
@@ -348,12 +406,36 @@ http://www.crashplan.com/ || crashplan
 
 http://www.getdropbox.com || dropbox nautilus-dropbox
 
+-   Google Drive — A file storage and synchronization service provided
+    by Google.
+    -   Provides cloud storage, file sharing and collaborative editing.
+    -   Multiple clients are available.
+
+https://drive.google.com || google-drive-ocamlfuse (free), insync
+(non-free)
+
 -   Jungle Disk — An online backup tool that stores its data in Amazon
     S3 or Rackspace Cloud Files.
     -   A Nautilus extension.
     -   Only paid plans available.
 
 http://www.jungledisk.com/ || nautilus-jungledisk
+
+-   MEGA — Successor to the MegaUpload file-sharing service.
+    -   Free accounts are 50GB with paid plans available for more space.
+    -   Offers encryption and de-duplication.
+    -   Usualy accessed through its web interface but other tools exist.
+
+https://mega.co.nz || megatools
+
+-   SpiderOak — An online backup tool for Windows, Mac and Linux users
+    to back up, share, sync, access and store their data.
+    -   Free and paid version available.
+    -   Free account holds 2GB.
+    -   Includes file sharing and a public directory.
+    -   Incremental backup and sync are both supported.
+
+https://spideroak.com/ || spideroak
 
 -   Tarsnap — A secure online backup service for BSD, Linux, OS X,
     Solaris and Windows (through Cygwin).
@@ -366,6 +448,15 @@ http://www.jungledisk.com/ || nautilus-jungledisk
 
 http://www.tarsnap.com || tarsnap
 
+-   Ubuntu One — An online storage service with sync and sharing across
+    platforms.
+    -   Free and paid versions available.
+    -   Free account with 5GB.
+    -   Mobile access.
+    -   Music streaming.
+
+https://one.ubuntu.com/services/ || ubuntuone-client
+
 -   Wuala — A secure online storage, file synchronization, versioning
     and backup service.
     -   Closed source, free and paid version available.
@@ -377,29 +468,32 @@ http://www.tarsnap.com || tarsnap
 
 http://www.wuala.com/ || wuala, wuala-daemon – to run as daemon
 
--   SpiderOak — An online backup tool for Windows, Mac and Linux users
-    to back up, share, sync, access and store[1] their data.
-    -   Free and paid version available.
-    -   Free account holds 2GB.
-    -   Includes file sharing and a public directory.
-    -   Incremental backup and sync are both supported.
+Cooperative storage cloud backups
+---------------------------------
 
-https://spideroak.com/ || spideroak
+A cooperative storage cloud is a decentralized model of networked online
+storage where data is stored on multiple computers, hosted by the
+participants cooperating in the cloud.
 
--   Ubuntu One — An online storage service with sync and sharing across
-    platforms.
-    -   Free and payed versions available.
-    -   Free account with 5GB.
-    -   Mobile access.
-    -   Music streaming.
+-   Symform — A peer-to-peer cloud backup service.
+    -   Unlimited free backup in exchange for 2:1 storage space
+        contribution with an always-connected device (at least 80%
+        uptime).
+    -   Payment options exist.
+    -   First 10GB of backup storage is free (no contribution needed).
+    -   In addition to paid support, support plans in exchange for
+        extended contribution (300GB+) exist.
+    -   Automatic and incremental backups.
+    -   Data is encrypted before leaving the computer, though keys are
+        also stored on the Symform's servers.
+    -   Customizable limits for bandwidth consumption.
+    -   Ability to have a local copy ("Hot Copy") of the backed up data
+        on a different disk or computer.
+    -   Ability to have synchronized folders between nodes
+        (Dropbox-like).
+    -   Closed source, using mono. Windows clients available.
 
-https://one.ubuntu.com/services/ || ubuntuone-client
-
--   Packrat — A simple, modular backup system that uses DAR to take full
-    or incremental backups of files and can store them locally, on a
-    remote system via SSH, or on Amazon S3.
-
-http://www.zeroflux.org/projects || packrat
+http://www.symform.com/ || symform
 
 Non-incremental backups
 -----------------------
@@ -434,7 +528,7 @@ http://partclone.nchc.org.tw/trac/ || partclone
     -   Is capable of bare-metal backup and recovery of disk partitions.
     -   Uses xPUD and Partclone for the backend.
 
-http://www.redobackup.org/ || not packaged? (search in AUR)
+http://www.redobackup.org/ || not packaged? search in AUR
 
 -   Clonezilla — A disaster recovery, disk cloning, disk imaging and
     deployment solution.
@@ -503,8 +597,6 @@ directory, it might be a good solution.
 
 See the Wikipedia article on this subject for more information:
 Comparison of revision control software
-
-.
 
 -   Git — A distributed revision control and source code management
     system with an emphasis on speed.
@@ -588,9 +680,16 @@ External Resources
 -   Mirroring an Entire Site using Rsync over SSH
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Backup_Programs&oldid=255683"
+"https://wiki.archlinux.org/index.php?title=Backup_Programs&oldid=306144"
 
 Categories:
 
 -   Data compression and archiving
 -   System recovery
+
+-   This page was last modified on 20 March 2014, at 18:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

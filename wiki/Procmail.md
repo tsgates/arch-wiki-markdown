@@ -12,25 +12,21 @@ requires) procmail. It also assumes you have at least basic knowledge on
 regular expressions. This article will give only a minimal explanation,
 for a complete manual, check the man procmailrc
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Assignments                                                  |
-|     -   2.2 Recipes                                                      |
-|         -   2.2.1 Flags and lockfile                                     |
-|         -   2.2.2 Conditions                                             |
-|         -   2.2.3 Action                                                 |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Spamassassin                                                 |
-|     -   3.2 ClamAV                                                       |
-|     -   3.3 Filtering mail to a different mailbox                        |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Assignments
+    -   2.2 Recipes
+        -   2.2.1 Flags and lockfile
+        -   2.2.2 Conditions
+        -   2.2.3 Action
+-   3 Tips and tricks
+    -   3.1 Spamassassin
+    -   3.2 ClamAV
+    -   3.3 Filtering mail to a different mailbox
+-   4 See also
 
 Installation
 ------------
@@ -184,8 +180,15 @@ See also
 -   Procmail Homepage
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Procmail&oldid=243148"
+"https://wiki.archlinux.org/index.php?title=Procmail&oldid=305764"
 
 Category:
 
 -   Email Client
+
+-   This page was last modified on 20 March 2014, at 02:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

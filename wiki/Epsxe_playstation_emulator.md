@@ -9,15 +9,13 @@ PSX emulator if you do not own a Sony PlayStation, Sony PSOne or Sony
 PlayStation 2 console. Owning the BIOS image without owning the actual
 console is a violation of copyright law. You have been warned.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Problems and Workarounds                                           |
-| -   4 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Problems and Workarounds
+-   4 Links
 
 Installation
 ------------
@@ -103,12 +101,18 @@ Links
 
 -   ePSXe - http://www.epsxe.com/
 -   Pete's PSX plugins - http://www.pbernert.com/index.htm
--   ePSXe on AUR - https://aur.archlinux.org/packages.php?ID=10745
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Epsxe_playstation_emulator&oldid=225277"
+"https://wiki.archlinux.org/index.php?title=Epsxe_playstation_emulator&oldid=277255"
 
 Categories:
 
 -   Gaming
 -   Emulators
+
+-   This page was last modified on 1 October 2013, at 19:27.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

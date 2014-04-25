@@ -14,26 +14,21 @@ This is based on my experience with arch on my Dell Inspiron 5100
 laptop. Most of this information should apply to other 5xxx series
 Inspiron laptops and similar generation laptops in general.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Kernel                                                             |
-|     -   2.1 Initrd                                                       |
-|                                                                          |
-| -   3 Networking                                                         |
-|     -   3.1 Wired                                                        |
-|     -   3.2 Wireless                                                     |
-|     -   3.3 Modem                                                        |
-|                                                                          |
-| -   4 Power Management                                                   |
-|     -   4.1 ACPI                                                         |
-|     -   4.2 CPU frequency scaling                                        |
-|                                                                          |
-| -   5 Xorg                                                               |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Kernel
+    -   2.1 Initrd
+-   3 Networking
+    -   3.1 Wired
+    -   3.2 Wireless
+    -   3.3 Modem
+-   4 Power Management
+    -   4.1 ACPI
+    -   4.2 CPU frequency scaling
+-   5 Xorg
+-   6 See also
 
 Hardware
 --------
@@ -238,3 +233,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 26 October 2012, at 23:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

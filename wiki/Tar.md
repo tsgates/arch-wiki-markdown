@@ -118,8 +118,15 @@ See Also
 -   GNU tar manual (Also available via info tar)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tar&oldid=206311"
+"https://wiki.archlinux.org/index.php?title=Tar&oldid=304909"
 
 Category:
 
 -   Data compression and archiving
+
+-   This page was last modified on 16 March 2014, at 09:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

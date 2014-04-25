@@ -3,81 +3,75 @@ Linux Containers
 
   ------------------------ ------------------------ ------------------------
   [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
-                           Notes: Currently just a  
-                           rough draft... I think I 
-                           will need to restructure 
-                           this a bit and I have    
-                           also noticed I have      
-                           become a bit too verbose 
-                           -_-;; I will be along    
-                           shortly to complete this 
-                           as well as clean it up.  
-                           (Discuss)                
+                           Notes: Some parts of     
+                           this are dated, ideally  
+                           this page would be a     
+                           summary of container     
+                           tools and discuss LXC,   
+                           chroot, systemd-nspawn,  
+                           and docker + the basics  
+                           required to get each     
+                           going, with a more       
+                           detailed subpage on      
+                           each. (Discuss)          
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 Synopsis                                                     |
-|     -   1.2 About this HowTo                                             |
-|     -   1.3 Less verbose tutorial                                        |
-|     -   1.4 Testing capabilities                                         |
-|                                                                          |
-| -   2 Host configuration                                                 |
-|     -   2.1 Control group filesystem                                     |
-|     -   2.2 Userspace tools                                              |
-|     -   2.3 Bridge device setup                                          |
-|     -   2.4 Starting a container on boot with Systemd                    |
-|                                                                          |
-| -   3 Container setup                                                    |
-|     -   3.1 Creating the filesystem                                      |
-|         -   3.1.1 Bootstrap                                              |
-|         -   3.1.2 Download existing                                      |
-|         -   3.1.3 Using the lxc tools                                    |
-|                                                                          |
-|     -   3.2 Creating the device nodes                                    |
-|                                                                          |
-| -   4 Container configuration                                            |
-|     -   4.1 Configuration file                                           |
-|         -   4.1.1 Basic settings                                         |
-|             -   4.1.1.1 Basic settings explained                         |
-|                                                                          |
-|         -   4.1.2 Terminal settings                                      |
-|             -   4.1.2.1 Host Virtual Consoles                            |
-|             -   4.1.2.2 Local Virtual Consoles                           |
-|             -   4.1.2.3 /dev/tty Device Files                            |
-|             -   4.1.2.4 Configuring Log-In Ability                       |
-|             -   4.1.2.5 Troubleshooting virtual consoles                 |
-|             -   4.1.2.6 Pseudo Terminals                                 |
-|                                                                          |
-|         -   4.1.3 Host device access settings                            |
-|             -   4.1.3.1 Host device access settings explained            |
-|                                                                          |
-|     -   4.2 Configuration file notes                                     |
-|         -   4.2.1 At runtime /dev/ttyX devices are recreated             |
-|         -   4.2.2 Containers have access to host's TTY nodes             |
-|             -   4.2.2.1 To access the container from a host TTY          |
-|             -   4.2.2.2 To prevent access to the host TTY                |
-|             -   4.2.2.3 To test this access                              |
-|                                                                          |
-|         -   4.2.3 Configuration troubleshooting                          |
-|             -   4.2.3.1 console access denied: Permission denied         |
-|             -   4.2.3.2 lxc-console does not provide a login prompt      |
-|                                                                          |
-|     -   4.3 Configuring fstab                                            |
-|                                                                          |
-| -   5 Container Creation and Destruction                                 |
-|     -   5.1 Creation                                                     |
-|     -   5.2 Destruction                                                  |
-|                                                                          |
-| -   6 Readying the host for virtualization                               |
-|     -   6.1 /etc/inittab                                                 |
-|     -   6.2 /etc/rc.sysinit replacement                                  |
-|     -   6.3 /etc/rc.conf cleanup                                         |
-|     -   6.4 TBC                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+    -   1.1 Synopsis
+    -   1.2 About this HowTo
+    -   1.3 Less verbose tutorial
+    -   1.4 Testing capabilities
+-   2 Host configuration
+    -   2.1 Control group filesystem
+    -   2.2 Userspace tools
+    -   2.3 Bridge device setup
+    -   2.4 NAT device setup
+    -   2.5 Starting a container on boot with Systemd
+-   3 Container setup
+    -   3.1 Creating the filesystem
+        -   3.1.1 Bootstrap
+        -   3.1.2 Download existing
+        -   3.1.3 Using the lxc tools
+    -   3.2 Creating the device nodes
+-   4 Container configuration
+    -   4.1 Configuration file
+        -   4.1.1 Basic settings
+            -   4.1.1.1 Basic settings explained
+        -   4.1.2 Terminal settings
+            -   4.1.2.1 Host Virtual Consoles
+            -   4.1.2.2 Local Virtual Consoles
+            -   4.1.2.3 /dev/tty Device Files
+            -   4.1.2.4 Configuring Log-In Ability
+            -   4.1.2.5 Troubleshooting virtual consoles
+            -   4.1.2.6 Pseudo Terminals
+        -   4.1.3 Host device access settings
+            -   4.1.3.1 Host device access settings explained
+    -   4.2 Configuration file notes
+        -   4.2.1 At runtime /dev/ttyX devices are recreated
+        -   4.2.2 Containers have access to host's TTY nodes
+            -   4.2.2.1 To access the container from a host TTY
+            -   4.2.2.2 To prevent access to the host TTY
+            -   4.2.2.3 To test this access
+        -   4.2.3 Configuration troubleshooting
+            -   4.2.3.1 console access denied: Permission denied
+            -   4.2.3.2 lxc-console does not provide a login prompt
+    -   4.3 Configuring fstab
+-   5 Container Creation and Destruction
+    -   5.1 Creation
+    -   5.2 Destruction
+-   6 Readying the host for virtualization
+    -   6.1 /etc/inittab
+    -   6.2 /etc/rc.sysinit replacement
+    -   6.3 /etc/rc.conf cleanup
+    -   6.4 TBC
+-   7 Known Problems
+    -   7.1 Using systemd inside a docker container results in a
+        segfault
+    -   7.2 Container cannot be shutdown if using systemd
+-   8 See Also
 
 Introduction
 ------------
@@ -129,42 +123,72 @@ yourself:
 
 > Userspace tools
 
-Install lxc from [community].
+Install lxc from [community]. For networking, you will probably need
+bridge-utils and netctl or openvpn.
 
 > Bridge device setup
 
-The package bridge-utils, which provides the brctl command, provides the
-ability to set up one or more network bridges to be used by LXC. You can
-use brctl directly to set up the bridges, but the process is archaic and
-probably best avoided.
+The preferred way to setup a Bridge in Arch is with netctl, and is
+explained in detail in the article: Bridge_with_netctl. In the config
+for your container, just specify the host interface as whatever you name
+your bridge (usually br0). You can find a skeleton implementation in
+/etc/netctl/examples/bridge.
 
-If using netcfg, you could try to refer to the netcfg wiki page, but the
-bridge related documentation has been removed. So when using netcfg, you
-will be mostly on your own.
+Alternatively, you can use an OpenVPN Bridge, which is useful if you are
+already familiar with or running it.
 
-OpenVPN has complete instructions for setting up a bridge, so it is
-probably your best option at the current. OpenVPN Bridge
+> NAT device setup
+
+If you don't have a device you can easily bridge (such as a wlan) you
+can instead NAT using netctl by using the same
+/etc/netctl/examples/bridge with the following changes:
+
+    BindsToInterfaces=()
+    IP=static
+    Address=192.168.100.1/24
+    FwdDelay=0
+
+Remember to copy the example to /etc/netctl and name it whatever you
+want. You can use any address range and subnet mask you want for the
+interface (make sure is one you are not already using). Once this
+interface is up with netctl start <profile> you need to have iptables
+put your external interface in masquerade and you need to enable ip
+forwarding with sysctl:
+
+    iptables -t nat -A POSTROUTING -o <external interface such as eth0 or wlan0> -j MASQUERADE
+    sysctl net.ipv4.ip_forward=1
+
+To have the nat prepared at boot, and to save the iptables and sysctl
+states:
+
+    netctl enable <profile>
+    iptables-save > /etc/iptables/iptables.rules
+    echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.d/40-ip-forward.conf
+
+In your container config file, you will need to assign an IP address:
+
+    lxc.network.ipv4 = 192.168.100.2/24
+
+When you enter your container, you must set the default gateway to the
+netctl address, which in this example was 192.168.100.1. In any
+container including ip the following command will work:
+
+    ip route add default via 192.168.100.1
+
+Or on distros such as Ubuntu that use /etc/network:
+
+    /etc/network/if-up.d/routes
+
+    #! /bin/sh
+    route add default gw 192.168.100.1
+    exit 0
 
 > Starting a container on boot with Systemd
 
 If you completed a container, starting it when the host boots is
-possible with the following systemd service template:
+possible with the following command:
 
-    [Unit]
-    Description=Linux Container
-    After=network.target
-
-    [Service]
-    Type=forking
-    ExecStartPre=/bin/mount --make-rprivate /
-    ExecStart=/usr/bin/lxc-start -dn CONTAINER_NAME
-    ExecStop=/usr/bin/lxc-stop -n CONTAINER_NAME
-
-    [Install]
-    WantedBy=multi-user.target
-
-Replace CONTAINER_NAME with the name of your container and save this
-file as /etc/systemd/system/lxc-CONTAINER_NAME.service
+    systemctl enable lxc@CONTAINER_NAME.service
 
 Container setup
 ---------------
@@ -201,6 +225,13 @@ Using the lxc tools
 
     /usr/bin/lxc-debian {create|destroy|purge|help}
     /usr/bin/lxc-fedora {create|destroy|purge|help}
+
+Nowadays you can create small and simple archlinux container
+
+    # lxc-create -n containername -t archlinux -- -P vim,dhclient
+
+with the template specific options -P you can add a list of packages to
+the installation.
 
 > Creating the device nodes
 
@@ -496,6 +527,29 @@ Though you are reaching a tty on the container, it most likely is not
 running a getty. You will want to double check that you have a getty
 defined in the container's /etc/inittab for the specific tty.
 
+If using systemd chances are that a problem with the getty@.service
+script will bite you. The script only starts a getty if /dev/tty0
+exists. And since this condition is not met in the container, you get no
+getty. Use this patch, to let lxc-console finally work.
+
+    --- /usr/lib/systemd/system/getty@.service.orig 2013-05-30 12:55:28.000000000 +0000
+    +++ /usr/lib/systemd/system/getty@.service      2013-06-16 23:05:49.827146901 +0000
+    @@ -20,7 +20,8 @@
+     # On systems without virtual consoles, don't start any getty. (Note
+     # that serial gettys are covered by serial-getty@.service, not this
+     # unit
+    -ConditionPathExists=/dev/tty0
+    +ConditionVirtualization=|lxc
+    +ConditionPathExists=|/dev/tty0
+     
+     [Service]
+     # the VT is cleared by TTYVTDisallocate
+
+For more than one getty you have to explicitly enable the needed service
+(and decrease lxc.tty in the container configuration). In the real
+system a configurable number of getty-services is automatically created
+from the systemd-logind.service
+
 > Configuring fstab
 
     none $CONTAINER_ROOTFS/dev/pts devpts defaults 0 0
@@ -519,8 +573,8 @@ Container Creation and Destruction
 
     lxc-create -f $CONTAINER_CONFIGPATH -n $CONTAINER_NAME
 
-lxc-create will create /var/lib/lxc/$CONTAINER_NAME with a new copy of
-the container configuration file found in $CONTAINER_CONFIGPATH.
+lxc-create will create
+/var/lib/lxc/CONTAINER_NAME with a new copy of the container configuration file found in CONTAINER_CONFIGPATH.
 
 As such, if you need to make modifications to the container's
 configuration file, it's advisable to modify only the original file and
@@ -581,10 +635,45 @@ want to remove the network daemon.
 
 > TBC
 
+Known Problems
+--------------
+
+> Using systemd inside a docker container results in a segfault
+
+See docker github issue, launching /usr/lib/systemd/systemd --system
+results in a segfault, last tested with systemd 208-10.
+
+> Container cannot be shutdown if using systemd
+
+lxc-shutdown should be used for clean shutdown or reboot of the
+container, but only the reboot is working out of the box when using
+systemd.
+
+Shutdown will be signalled to the container with SIGPWR but current
+systemd doesn't have any services in place to handle the sigpwr.target.
+But for the container we can simply reuse the poweroff.target and get
+exactly what we want.
+
+    # ln -s /usr/lib/systemd/system/poweroff.target ${CONTAINER_RFS}/etc/systemd/system/sigpwr.target
+
+See Also
+--------
+
+-   Arch systemd container
+-   LXC@developerWorks
+-   Docker Installation on ArchLinux
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Linux_Containers&oldid=252114"
+"https://wiki.archlinux.org/index.php?title=Linux_Containers&oldid=305444"
 
 Categories:
 
 -   Security
 -   Virtualization
+
+-   This page was last modified on 18 March 2014, at 13:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

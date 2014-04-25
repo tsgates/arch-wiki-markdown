@@ -1,30 +1,26 @@
 HP Pavilion dv5z
 ================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware Specifications                                            |
-|     -   1.1 Output of "dmidecode"                                        |
-|     -   1.2 Output of "lspci -k"                                         |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 AMD Turion X2 Ultra Processor                                |
-|     -   2.2 Radeon HD3450 (radeonhd)                                     |
-|     -   2.3 Radeon HD3450 (fglrx)                                        |
-|     -   2.4 Intel HD Audio                                               |
-|     -   2.5 Realtek LAN                                                  |
-|     -   2.6 Atheros 802.11n Wireless                                     |
-|     -   2.7 Broadcom Bluetooth                                           |
-|     -   2.8 Webcam                                                       |
-|     -   2.9 Fingerprint Reader                                           |
-|     -   2.10 Card Reader                                                 |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Framebuffer                                                  |
-|     -   3.2 ALSA                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware Specifications
+    -   1.1 Output of "dmidecode"
+    -   1.2 Output of "lspci -k"
+-   2 Configuration
+    -   2.1 AMD Turion X2 Ultra Processor
+    -   2.2 Radeon HD3450 (radeonhd)
+    -   2.3 Radeon HD3450 (fglrx)
+    -   2.4 Intel HD Audio
+    -   2.5 Realtek LAN
+    -   2.6 Atheros 802.11n Wireless
+    -   2.7 Broadcom Bluetooth
+    -   2.8 Webcam
+    -   2.9 Fingerprint Reader
+    -   2.10 Card Reader
+-   3 Troubleshooting
+    -   3.1 Framebuffer
+    -   3.2 ALSA
 
 Hardware Specifications
 =======================
@@ -246,3 +242,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 23 April 2012, at 12:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

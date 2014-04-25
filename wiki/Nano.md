@@ -9,50 +9,42 @@ type conversions, spellchecking and UTF-8 encoding. nano opened with an
 empty buffer typically occupies under 1.5 MB of resident memory. nano
 Screenshot.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Package installation                                               |
-| -   2 Configuration                                                      |
-|     -   2.1 Creating ~/.nanorc                                           |
-|     -   2.2 Syntax highlighting                                          |
-|         -   2.2.1 for PKGBUILD files                                     |
-|         -   2.2.2 Other definitions                                      |
-|                                                                          |
-|     -   2.3 Suggested configuration                                      |
-|         -   2.3.1 Suspension                                             |
-|         -   2.3.2 Do not wrap text                                       |
-|                                                                          |
-| -   3 nano usage                                                         |
-|     -   3.1 Special functions                                            |
-|         -   3.1.1 Shortcut lists overview                                |
-|         -   3.1.2 Selected toggle functions                              |
-|                                                                          |
-| -   4 Tips & tricks                                                      |
-|     -   4.1 Replacing vi with nano                                       |
-|         -   4.1.1 Method one                                             |
-|             -   4.1.1.1 Example usage                                    |
-|                                                                          |
-|         -   4.1.2 Method two                                             |
-|             -   4.1.2.1 Example .bash_profile                            |
-|                                                                          |
-|         -   4.1.3 Method three                                           |
-|             -   4.1.3.1 Symbolic linking                                 |
-|             -   4.1.3.2 Restoration of vi                                |
-|                                                                          |
-|         -   4.1.4 Method four                                            |
-|             -   4.1.4.1 Removal & symbolic linking                       |
-|             -   4.1.4.2 Restoration of vi                                |
-|                                                                          |
-| -   5 Additional resources                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Package installation
+-   2 Configuration
+    -   2.1 Creating ~/.nanorc
+    -   2.2 Syntax highlighting
+        -   2.2.1 for PKGBUILD files
+        -   2.2.2 Other definitions
+    -   2.3 Suggested configuration
+        -   2.3.1 Suspension
+        -   2.3.2 Do not wrap text
+-   3 nano usage
+    -   3.1 Special functions
+        -   3.1.1 Shortcut lists overview
+        -   3.1.2 Selected toggle functions
+-   4 Tips & tricks
+    -   4.1 Replacing vi with nano
+        -   4.1.1 Method one
+            -   4.1.1.1 Example usage
+        -   4.1.2 Method two
+            -   4.1.2.1 Example .bash_profile
+        -   4.1.3 Method three
+            -   4.1.3.1 Symbolic linking
+            -   4.1.3.2 Restoration of vi
+        -   4.1.4 Method four
+            -   4.1.4.1 Removal & symbolic linking
+            -   4.1.4.2 Restoration of vi
+-   5 Additional resources
 
 Package installation
 --------------------
 
-nano is part of the Arch Linux [core] repository, usually installed by
-default by AIF.
+You can install the nano package from the official repositories. It is
+likely that is already on your system, as it is included in the base
+group.
 
 Configuration
 -------------
@@ -63,18 +55,13 @@ The look, feel and function of nano is typically controlled by way of
 either command-line arguments, or configuration commands within the file
 ~/.nanorc.  
  A sample configuration file is installed upon program installation and
-is located at /etc/nanorc.The file ~/.nanorc must be first created by
-the user:
-
-    $ cd ~
-    $ touch .nanorc
-
-or
+is located at /etc/nanorc. To customize your nano configuration, first
+create a local copy at ~/.nanorc:
 
     $ cp /etc/nanorc ~/.nanorc
 
 Proceed to establish the nano console environment by setting and/or
-unsetting commands within .nanorc file.
+unsetting commands within ~/.nanorc file.
 
 Tip:NANORC details the complete list configuration commands available
 for nano.
@@ -135,11 +122,12 @@ This is another version from this forum thread.
     color brightred "\<(configure|make|cmake|scons)\>"
     color red "\<(DESTDIR|PREFIX|prefix|sysconfdir|datadir|libdir|includedir|mandir|infodir)\>"
 
-To use, save as /usr/share/nano/pkgbuild.nanorc and add:
+Save this file as (for example) /etc/nano/pkgbuild.nanorc.
 
-    include "/usr/share/nano/pkgbuild.nanorc"
+Then include the file in your ~/.nanorc or to /etc/nanorc by adding the
+following line:
 
-to your ~/.nanorc or to /etc/nanorc.
+    include "/etc/nano/pkgbuild.nanorc"
 
 Other definitions
 
@@ -292,6 +280,7 @@ The EDITOR variable can also be set within the following files for
 persistent use:
 
 -   ~/.bash_profile (login shell)
+-   ~/.profile (instead of `.bash_profile` ; see Environment Variables
 -   ~/.bashrc (interactive, non-login shell)
 -   /etc/profile (global settings for all system users except root)
 
@@ -373,8 +362,15 @@ Additional resources
 -   Better syntax highlighting definitions
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Nano&oldid=250879"
+"https://wiki.archlinux.org/index.php?title=Nano&oldid=302019"
 
 Category:
 
 -   Text editors
+
+-   This page was last modified on 25 February 2014, at 12:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

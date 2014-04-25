@@ -1,18 +1,16 @@
 Toshiba Satellite L775D S7340
 =============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Troubleshooting                                                    |
-|     -   2.1 Touchpad and keyboard are not working                        |
-|     -   2.2 Graphics                                                     |
-|     -   2.3 Audio                                                        |
-|     -   2.4 Webcam                                                       |
-|     -   2.5 Hibernate/Suspend                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Troubleshooting
+    -   2.1 Touchpad and keyboard are not working
+    -   2.2 Graphics
+    -   2.3 Audio
+    -   2.4 Webcam
+    -   2.5 Hibernate/Suspend
 
 Hardware
 --------
@@ -188,3 +186,10 @@ Retrieved from
 Category:
 
 -   Toshiba
+
+-   This page was last modified on 13 June 2012, at 15:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

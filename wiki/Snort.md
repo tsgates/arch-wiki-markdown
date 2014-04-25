@@ -22,28 +22,29 @@ Snort
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Snort is a lightweight Intrusion Detection System (IDS). According to
-their homepage, "Snort has become the de facto standard for IPS."
+From the project home page:
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Update the rules: Oinkmaster                                       |
-|     -   3.1 Oinkmaster setup                                             |
-|     -   3.2 Oinkmaster usage                                             |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Snort® is an open source network intrusion prevention and detection
+system (IDS/IPS) developed by Sourcefire. Combining the benefits of
+signature, protocol, and anomaly-based inspection, Snort is the most
+widely deployed IDS/IPS technology worldwide. With millions of downloads
+and nearly 400,000 registered users, Snort has become the de facto
+standard for IPS.
+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Update the rules: Oinkmaster
+    -   3.1 Oinkmaster setup
+    -   3.2 Oinkmaster usage
+-   4 See also
 
 Installation
 ------------
 
-snort is in [community]:
-
-    # pacman -S snort
+Install snort from the AUR.
 
 Configuration
 -------------
@@ -79,7 +80,14 @@ files were present.
     useradd -g snort -d /var/log/snort snort
     chown -R snort:snort /var/log/snort
 
-Note:Under review -- I am not sure about this yet.
+  ------------------------ ------------------------ ------------------------
+  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
+  png]                     this article or section  png]
+                           is disputed.             
+                           Reason: Under review --  
+                           I am not sure about this 
+                           yet. (Discuss)           
+  ------------------------ ------------------------ ------------------------
 
 Edit /etc/conf.d/snort:
 
@@ -107,7 +115,7 @@ release. Go ahead and register at Snort. If you really do not want to
 register, you can use the rules from BleedingSnort.com. They are
 bleeding edge, meaning they have not been tested thoroughly.
 
-A user has created a PKGBUILD for oinkmaster.
+oinkmaster is available as AUR package.
 
 > Oinkmaster setup
 
@@ -137,8 +145,15 @@ See also
 -   Router
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Snort&oldid=198677"
+"https://wiki.archlinux.org/index.php?title=Snort&oldid=269528"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 3 August 2013, at 01:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

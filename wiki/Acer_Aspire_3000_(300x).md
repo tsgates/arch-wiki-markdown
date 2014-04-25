@@ -2,26 +2,22 @@ Acer Aspire 3000 (300x)
 =======================
 
 This page was created using knowledge collected while playing with Acer
-Aspire 3003 WLMi, but i will be probably compatible with other 300x
+Aspire 3003 WLMi, but it will be probably compatible with other 300x
 Aspires. You can add your laptops to the compatibility list.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Compatibility list                                                 |
-| -   2 lspci                                                              |
-| -   3 /etc/X11/xorg.conf                                                 |
-| -   4 FBDev (SiSFB FrameBuffer)                                          |
-|     -   4.1 /boot/grub/menu.lst                                          |
-|         -   4.1.1 sisfb                                                  |
-|         -   4.1.2 vga                                                    |
-|                                                                          |
-|     -   4.2 /etc/rc.local                                                |
-|                                                                          |
-| -   5 /etc/mkinitcpio.conf                                               |
-| -   6 Related articles                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Compatibility list
+-   2 lspci
+-   3 /etc/X11/xorg.conf
+-   4 FBDev (SiSFB FrameBuffer)
+    -   4.1 /boot/grub/menu.lst
+        -   4.1.1 sisfb
+        -   4.1.2 vga
+    -   4.2 /etc/rc.local
+-   5 /etc/mkinitcpio.conf
+-   6 Related articles
 
 Compatibility list
 ------------------
@@ -109,7 +105,7 @@ configuration after reboot.
 
 If you are using kernel option video=sisfb:... instead of vga=... then
 you should add following line to /etc/rc.local, to get better colours in
-terminal (for example to have nicer images in links -g)...
+terminal (for example to have nicer images in 'links -g')...
 
     fbset -a -depth 32
 
@@ -133,7 +129,7 @@ Related articles
 ----------------
 
 -   xf86-video-sis
--   Wireless_Setup#b43
+-   Wireless network configuration#b43
 -   Touchpad Synaptics
 -   Misc.
     -   CPU Frequency Scaling
@@ -142,8 +138,15 @@ Related articles
     -   Wacom Tablet
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_3000_(300x)&oldid=254503"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_3000_(300x)&oldid=297841"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 15 February 2014, at 15:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,50 +1,40 @@
 MEncoder
 ========
 
-> Summary
+Related articles
 
-An overview of the video encoding/decoding tool provided by MPlayer.
+-   DVD Ripping
+-   Dvd2Avi
+-   MPlayer
+-   Video2dvdiso
 
-> Related
+An overview of Wikipedia:MEncoder, the video encoding/decoding tool
+provided by MPlayer as part of the mencoder package.
 
-DVD Ripping
+Contents
+--------
 
-Dvd2Avi
-
-MPlayer
-
-Video2dvdiso
-
-MEncoder is part of the mencoder package.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Basics                                                             |
-| -   2 Example                                                            |
-|     -   2.1 Ripping and encoding the video                               |
-|     -   2.2 Ripping and encoding the audio                               |
-|     -   2.3 Making the final .mkv file                                   |
-|     -   2.4 Encoding video mp4 for Nokia 5800 XM and Nokia N97           |
-|     -   2.5 Encoding a multi audio / multi language MKV video to an MP4  |
-|         with different audio streams                                     |
-|     -   2.6 Adding SubRip subtitles to a file                            |
-|         -   2.6.1 Two-pass x264 (very high-quality)                      |
-|         -   2.6.2 Single-pass x264 (very high-quality)                   |
-|         -   2.6.3 Two-pass xvid (very high-quality)                      |
-|         -   2.6.4 Three-pass lavc (very high-quality mpeg4)              |
-|         -   2.6.5 Single-pass lavc (very high-quality mpeg-2)            |
-|                                                                          |
-|     -   2.7 Adding VOBsub subtitles to a file                            |
-|         -   2.7.1 Two-pass x264 (very high-quality)                      |
-|         -   2.7.2 Testing subtitle muxing results                        |
-|             -   2.7.2.1 Single-pass x264 (low quality)                   |
-|                                                                          |
-|     -   2.8 mp2 vs. mp3lame vs. aac                                      |
-|                                                                          |
-| -   3 GUI frontends                                                      |
-+--------------------------------------------------------------------------+
+-   1 Basics
+-   2 Example
+    -   2.1 Ripping and encoding the video
+    -   2.2 Ripping and encoding the audio
+    -   2.3 Making the final .mkv file
+    -   2.4 Encoding video mp4 for Nokia 5800 XM and Nokia N97
+    -   2.5 Encoding a multi audio / multi language MKV video to an MP4
+        with different audio streams
+    -   2.6 Adding SubRip subtitles to a file
+        -   2.6.1 Two-pass x264 (very high-quality)
+        -   2.6.2 Single-pass x264 (very high-quality)
+        -   2.6.3 Two-pass xvid (very high-quality)
+        -   2.6.4 Three-pass lavc (very high-quality mpeg4)
+        -   2.6.5 Single-pass lavc (very high-quality mpeg-2)
+    -   2.7 Adding VOBsub subtitles to a file
+        -   2.7.1 Two-pass x264 (very high-quality)
+        -   2.7.2 Testing subtitle muxing results
+            -   2.7.2.1 Single-pass x264 (low quality)
+    -   2.8 mp2 vs. mp3lame vs. aac
+    -   2.9 dvdcopy
+-   3 GUI frontends
 
 Basics
 ------
@@ -78,12 +68,6 @@ Similarly, to list output audio codecs, run
 
 This information can also be found here where it better explained,
 although non-specific.
-
-There are many more options available (e.g. you can define bit rates and
-expected sizes).
-
-See the Gentoo Linux Wiki article on this subject for more information:
-Mencoder
 
 Example
 -------
@@ -119,12 +103,12 @@ values:
 This will create a video.avi file containing the video. You can play
 with the -x264encopts options and the -vf filters to improve the quality
 or reduce the file size. For example, a movie with a black border should
-be cropped with -vf crop=$X:$Y,scale=-1:-10,harddup with the proper
-values instead of $X and $Y (see cropdetect in the MEncoder manual). You
-may want to scale down the movie with -vf scale=$WIDTH:-10,harddup the
-width of the movie will become $WIDTH (keep $WIDTH a multiple of 16:
-640, 480, or 320 are usually fine), the height will be correctly
-calculated in order to keep the aspect ratio.
+be cropped with -vf crop=X:Y,scale=-1:-10,harddup with the proper values
+instead of $X and $Y (see cropdetect in the MEncoder manual). You may
+want to scale down the movie with -vf scale=$WIDTH:-10,harddup the width
+of the movie will become $WIDTH (keep $WIDTH a multiple of 16: 640, 480,
+or 320 are usually fine), the height will be correctly calculated in
+order to keep the aspect ratio.
 
 You can also use any other of the filters MEncoder has to offer, like
 pullup,softskip or you can change the frame rate using -ofps. (If you do
@@ -172,7 +156,7 @@ ensure great quality.
 Of course to make the work easier, you should write every command in a
 single file and execute it.
 
-See Dvd2Avi for a sample script.
+See Dvd2Avi for a sample bash script.
 
 > Encoding video mp4 for Nokia 5800 XM and Nokia N97
 
@@ -344,8 +328,16 @@ Single-pass x264 (low quality)
 -   mp3lame is recommended over FAAC (not fully developed) encoding at
     all bitrates.
 
+> dvdcopy
+
+dvdcopy is a more complex tool available in the AUR that backs up a DVD9
+to a DVD5. Has several options for modification.
+
 GUI frontends
 -------------
+
+The official MPlayer homepage has a comprehensive list of available
+front-ends here.
 
 -   ogmrip
     OGMRip is an application and a set of libraries for ripping and
@@ -371,7 +363,8 @@ GUI frontends
     to be a VirtualDub replacement for Linux. It is most useful for
     editing and encoding large high quality AVIs capped from TV. It
     allows cutting and merging at exact frames, applying any
-    MPlayer/MEncoder filter, with preview.
+    MPlayer/MEncoder filter, with preview. It's a little outdated now
+    (was built on Qt 3, so needs PKGBUILD update at least).
 -   kvideoencoder
     KVideoEncoder is a GUI for the mencoder and transcode.
 -   qvideoconverter
@@ -383,8 +376,15 @@ GUI frontends
     focus is on converting DVD into MPEG-4.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=MEncoder&oldid=211217"
+"https://wiki.archlinux.org/index.php?title=MEncoder&oldid=296601"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 8 February 2014, at 18:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

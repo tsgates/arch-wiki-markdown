@@ -2,15 +2,36 @@ Hp QuickPlay
 ============
 
   ------------------------ ------------------------ ------------------------
-  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
-                           is a candidate for       
-                           merging with Extra       
-                           Keyboard Keys.           
-                           Notes: please use the    
-                           second argument of the   
-                           template to provide more 
-                           detailed indications.    
-                           (Discuss)                
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: Copy-pasted from 
+                           Gentoo wiki years ago    
+                           (see note below and talk 
+                           page); does not add      
+                           anything new -           
+                           everything relevant is   
+                           already covered in Extra 
+                           Keyboard Keys (and other 
+                           pages from               
+                           Category:Keyboards); I   
+                           don't see anything       
+                           specific to HP           
+                           QuickPlay, which is why  
+                           I think this page should 
+                           be just deleted and not  
+                           redirected. (Discuss)    
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
+  g]                       is poorly written.       g]
+                           Reason: multiple         
+                           instructions are         
+                           specific to Gentoo (see  
+                           the note below): emerge, 
+                           scripts in /etc/conf.d/, 
+                           ... (Discuss)            
   ------------------------ ------------------------ ------------------------
 
 Note:This article is just an adaptation of
@@ -19,57 +40,49 @@ http://en.gentoo-wiki.com/wiki/Multimedia_Keys.
 Most modern keyboards are equipped with a number of multimedia keys.
 This article explains what needs to be done in order to use those keys.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Determine the keycodes                                             |
-|     -   1.1 xev                                                          |
-|     -   1.2 showkey                                                      |
-|     -   1.3 Using KeyTouch                                               |
-|     -   1.4 lineakd                                                      |
-|     -   1.5 Multiple application control                                 |
-|     -   1.6 Finding raw scan codes - PS/2 keyboards                      |
-|         -   1.6.1 Mapping raw scan codes to key codes                    |
-|         -   1.6.2 Finding raw scan codes - USB keyboards                 |
-|                                                                          |
-| -   2 Setting up xmodmap                                                 |
-|     -   2.1 Disabling auto-repeat                                        |
-|                                                                          |
-| -   3 Assigning keys to special functions                                |
-|     -   3.1 Native hotkey support                                        |
-|         -   3.1.1 Audacious                                              |
-|                                                                          |
-|     -   3.2 Window manager hotkey support                                |
-|         -   3.2.1 Non window manager specific - xbindkeys                |
-|         -   3.2.2 Blackbox                                               |
-|         -   3.2.3 Fluxbox                                                |
-|         -   3.2.4 Openbox                                                |
-|         -   3.2.5 IceWM                                                  |
-|         -   3.2.6 XFCE                                                   |
-|         -   3.2.7 KDE                                                    |
-|         -   3.2.8 GNOME                                                  |
-|         -   3.2.9 Window Maker                                           |
-|         -   3.2.10 Enlightenment DR16                                    |
-|         -   3.2.11 Ion 3                                                 |
-|         -   3.2.12 FVWM and FVWM-Crystal                                 |
-|                                                                          |
-|     -   3.3 User and session independent hotkey support                  |
-|                                                                          |
-| -   4 Sample: eMachines m68xx                                            |
-| -   5 Getting bizarre keyboards working                                  |
-| -   6 Command Line Functions to Control Common Applications              |
-|     -   6.1 Audacious                                                    |
-|     -   6.2 Rhythmbox                                                    |
-|     -   6.3 amarok                                                       |
-|     -   6.4 Quod Libet                                                   |
-|     -   6.5 MPD/MPC                                                      |
-|     -   6.6 ALSA                                                         |
-|     -   6.7 Banshee player                                               |
-|     -   6.8 Goggles Music Manager                                        |
-|                                                                          |
-| -   7 Getting illumination switching to work under X                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Determine the keycodes
+    -   1.1 xev
+    -   1.2 showkey
+    -   1.3 Using KeyTouch
+    -   1.4 lineakd
+    -   1.5 Multiple application control
+    -   1.6 Finding raw scan codes - PS/2 keyboards
+        -   1.6.1 Mapping raw scan codes to key codes
+        -   1.6.2 Finding raw scan codes - USB keyboards
+-   2 Setting up xmodmap
+    -   2.1 Disabling auto-repeat
+-   3 Assigning keys to special functions
+    -   3.1 Native hotkey support
+        -   3.1.1 Audacious
+    -   3.2 Window manager hotkey support
+        -   3.2.1 Non window manager specific - xbindkeys
+        -   3.2.2 Blackbox
+        -   3.2.3 Fluxbox
+        -   3.2.4 Openbox
+        -   3.2.5 IceWM
+        -   3.2.6 XFCE
+        -   3.2.7 KDE
+        -   3.2.8 GNOME
+        -   3.2.9 Window Maker
+        -   3.2.10 Enlightenment DR16
+        -   3.2.11 Ion 3
+        -   3.2.12 FVWM and FVWM-Crystal
+    -   3.3 User and session independent hotkey support
+-   4 Sample: eMachines m68xx
+-   5 Getting bizarre keyboards working
+-   6 Command Line Functions to Control Common Applications
+    -   6.1 Audacious
+    -   6.2 Rhythmbox
+    -   6.3 amarok
+    -   6.4 Quod Libet
+    -   6.5 MPD/MPC
+    -   6.6 ALSA
+    -   6.7 Banshee player
+    -   6.8 Goggles Music Manager
+-   7 Getting illumination switching to work under X
 
 Determine the keycodes
 ----------------------
@@ -764,9 +777,9 @@ determine the modifiers into FVWM, you can use the output of
 
     xmodmap -pm
 
-As $[Mod0] is defined as N (none) in Crystal and $[Mod1] as M for Meta
-(Alt), all that is needed is to replace all the occurrences of $[Mod0]
-by N and $[Mod1] by M:
+As [Mod0] is defined as N (none) in Crystal and [Mod1] as M for Meta
+(Alt), all that is needed is to replace all the occurrences of
+[Mod0] by N and [Mod1] by M:
 
     Key XF86AudioLowerVolume A N Mixer-Volume-Down
     Key XF86AudioRaiseVolume A N Mixer-Volume-Up
@@ -1208,8 +1221,15 @@ Then bind key XF86LightBulb to this command:
 like explained above and you are done.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Hp_QuickPlay&oldid=207088"
+"https://wiki.archlinux.org/index.php?title=Hp_QuickPlay&oldid=299803"
 
 Category:
 
 -   Input devices
+
+-   This page was last modified on 22 February 2014, at 15:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -19,17 +19,15 @@ tools. These tools are designed to run in a terminal to show information
 on your theme/system. Some of theme will even take the screenshot for
 you, provided you have the correct utilities installed.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 envee                                                              |
-| -   2 screenFetch                                                        |
-| -   3 Archey                                                             |
-| -   4 archey3 (Python3)                                                  |
-| -   5 Archinfo                                                           |
-| -   6 Screenfo                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 envee
+-   2 screenFetch
+-   3 Archey
+-   4 archey3 (Python3)
+-   5 Archinfo
+-   6 Screenfo
 
 envee
 -----
@@ -76,8 +74,15 @@ Screenfo
 -   AUR: screenfo-git
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Screenshot_Information_Tools&oldid=237996"
+"https://wiki.archlinux.org/index.php?title=Screenshot_Information_Tools&oldid=281191"
 
 Category:
 
 -   Graphics and desktop publishing
+
+-   This page was last modified on 3 November 2013, at 14:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

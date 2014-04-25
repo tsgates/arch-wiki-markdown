@@ -10,39 +10,36 @@ CLR – Cross – Eclipse – Free Pascal – GNOME – Go – Haskell – Java 
 Web – Wine
 
 Version control systems can be used for retrieval of source code for
-both usual statically versioned packages and latest (trunk) version of
-packages. This article covers both cases.
+both usual statically versioned packages and latest (trunk) version of a
+development branch. This article covers both cases.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prototypes                                                         |
-| -   2 Guidelines                                                         |
-|     -   2.1 VCS sources                                                  |
-|     -   2.2 The pkgver() function                                        |
-|         -   2.2.1 Git                                                    |
-|         -   2.2.2 Subversion                                             |
-|         -   2.2.3 Mercurial                                              |
-|         -   2.2.4 Bazaar                                                 |
-|         -   2.2.5 Fallback                                               |
-|                                                                          |
-| -   3 Tips                                                               |
-|     -   3.1 A sample Git PKGBUILD                                        |
-|     -   3.2 Removing VCS leftovers                                       |
-|     -   3.3 SVN packages that try to get their revision number           |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Bazaar limitation                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prototypes
+-   2 Guidelines
+    -   2.1 VCS sources
+    -   2.2 The pkgver() function
+        -   2.2.1 Git
+        -   2.2.2 Subversion
+        -   2.2.3 Mercurial
+        -   2.2.4 Bazaar
+        -   2.2.5 Fallback
+-   3 Tips
+    -   3.1 A sample Git PKGBUILD
+    -   3.2 Git Submodules
 
 Prototypes
 ----------
 
-The ABS package provides prototypes for cvs, svn, git, mercurial, and
-darcs PKGBUILDs. When abs is installed, you can find them in
-/usr/share/pacman. Latest versions can be found in the prototypes
-directory in the ABS Git repository.
+Warning:The prototype files provided in the abs package and in the ABS
+Git repository are significantly out-of-date. Do not consider the
+prototypes to be authoritative in any way. See FS#34485.
+
+The abs package for the Arch Build System provides prototypes for CVS,
+SVN, Git, Mercurial, and Darcs PKGBUILDs. When abs is installed, you can
+find them in /usr/share/pacman. Latest versions can be found in the
+prototypes directory in the ABS Git repository.
 
 Guidelines
 ----------
@@ -52,7 +49,7 @@ Guidelines
 
 -   If the resulting package is different after changing the
     dependencies, URL, sources, etc. increasing the pkgrel is mandatory.
-    Touching the pkgver isn't.
+    Touching the pkgver is not.
 
 -   --holdver can be used to prevent makepkg from updating the pkgver
     (see: makepkg(8))
@@ -93,7 +90,9 @@ The general format of a VCS source=() array is:
 -   vcs+ is needed for URLs that do not reflect the VCS type, e.g.
     git+http://some_repo.
 -   url is the URL to the distant or local repo
--   #fragment (optional) is needed to pull a specific branch or commit
+-   #fragment (optional) is needed to pull a specific branch or commit.
+    See man PKGBUILD for more information on the fragments available for
+    each VCS.
 
 An example Git source array:
 
@@ -103,70 +102,110 @@ An example Git source array:
 
 The pkgver autobump is now achieved via a dedicated pkgver() function.
 This allows for better control over the pkgver, and maintainers should
-favor a pkgver that makes sense. Following are some examples showing the
-intended output:
+favor a pkgver that makes sense.
+
+It is recommended to have following version format: RELEASE.rREVISION
+where REVISION is a monotonically increasing number that uniquely
+identifies the source tree (VCS revisions do this). The last VCS tag can
+be used for RELEASE. If there are no public releases and no repository
+tags then zero could be used as a release number or you can drop RELEASE
+completely and use version number that looks like rREVISION. If there
+are public releases but repo has no tags then developer should get the
+release version somehow e.g. by parsing the project files.
+
+Following are some examples showing the intended output:
 
 Git
 
-Using the tag of the last commit:
+Using the most recent annotated tag reachable from the last commit:
 
     pkgver() {
-      cd local_repo
-      git describe --always | sed 's|-|.|g'
+      cd "$srcdir/repo"
+      git describe --long | sed -r 's/([^-]*-g)/r\1/;s/-/./g'
     }
 
-    2.0.6
+    2.0.r6.ga17a017
 
-If there are no annotated tags:
+Using the most recent unannotated tag reachable from the last commit:
 
     pkgver() {
-      cd local_repo
-      echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+      cd "$srcdir/repo"
+      git describe --long --tags | sed -r 's/([^-]*-g)/r\1/;s/-/./g'
     }
 
-    1142.a17a017
+    0.71.r115.gd95ee07
+
+In case if the git tag does not contain dashes then one can use simpler
+sed expression sed 's/-/.r/; s/-/./'.
+
+If tag contains a prefix, like v or project name then it should be cut
+off:
+
+    pkgver() {
+      cd "$srcdir/repo"
+      # cutting off 'foo-' prefix that presents in the git tag
+      git describe --long | sed -r 's/^foo-//;s/([^-]*-g)/r\1/;s/-/./g'
+    }
+
+    6.1.r3.gd77e105
+
+If there are no tags then use number of revisions since beginning of the
+history:
+
+    pkgver() {
+      cd "$srcdir/repo"
+      printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+    }
+
+    r1142.a17a017
+
+Note:SHA1 (in this case a17a017) is not used in the version comparison
+and can be omitted, although it allows quick identification of the exact
+revision used and might be useful during debugging.
 
 Subversion
 
     pkgver() {
-      cd "$SRCDEST/local_repo"
-      svnversion | tr -d [A-z]
+      cd "$srcdir/repo"
+      local ver="$(svnversion)"
+      printf "r%s" "${ver//[[:alpha:]]}"
     }
 
-    8546
+    r8546
 
-Note:The copy in $srcdir is made using svn export which does not create
-working copies. Any svn related command has to be used in the local repo
-in $SRCDEST.
+Note:If the project has releases you should use them instead of the 0..
 
 Mercurial
 
     pkgver() {
-      cd local_repo
-      echo $(hg identify -n).$(hg identify -i)
+      cd "$srcdir/repo"
+      printf "r%s.%s" "$(hg identify -n)" "$(hg identify -i)"
     }
 
-    2813.75881cc5391e
+    r2813.75881cc5391e
 
 Bazaar
 
     pkgver() {
-      cd local_repo
-      bzr revno
+      cd "$srcdir/repo"
+      printf "r%s" "$(bzr revno)"
     }
 
-    830
+    r830
 
 Fallback
 
 The current date can be used, in case no satisfactory pkgver can be
-extracted from the repo:
+extracted from the repository:
 
     pkgver() {
       date +%Y%m%d
     }
 
     20130408
+
+Although it does not identify source tree state uniquely, so avoid it if
+possible.
 
 Tips
 ----
@@ -177,7 +216,6 @@ Tips
     # Contributor: William Giokas (KaiSforza) <1007380@gmail.com>
 
     pkgname=expac-git
-    _gitname=expac
     pkgver=0.0.0
     pkgrel=1
     pkgdesc="Pacman database extraction utility"
@@ -185,76 +223,61 @@ Tips
     url="https://github.com/falconindy/expac"
     license=('MIT')
     depends=('pacman')
-    makedepends=('git' 'perl')
+    makedepends=('git')
     conflicts=('expac')
     provides=('expac')
     # The git repo is detected by the 'git:' or 'git+' beginning. The branch
-    # 'pacman41' is then checked out upon cloning, expediating versioning:
+    # '$pkgname' is then checked out upon cloning, expediating versioning:
     #source=('git+https://github.com/falconindy/expac.git'
-    source=('git://github.com/falconindy/expac.git'
+    source=("$pkgname"::'git://github.com/falconindy/expac.git'
             'expac_icon.png')
     # Because the sources are not static, skip Git checksum:
     md5sums=('SKIP'
              '020c36e38466b68cbc7b3f93e2044b49')
 
     pkgver() {
-      cd $_gitname
+      cd "$srcdir/$pkgname"
       # Use the tag of the last commit
-      git describe --always | sed 's|-|.|g'
+      git describe --long | sed -E 's/([^-]*-g)/r\1/;s/-/./g'
     }
 
     build() {
-      cd $_gitname
+      cd "$srcdir/$pkgname"
       make
     }
 
     package() {
-      cd $_gitname
+      cd "$srcdir/$pkgname"
       make PREFIX=/usr DESTDIR="$pkgdir" install
       install -Dm644 "$srcdir/expac_icon.png" "$pkgdir/usr/share/pixmaps/expac.png"
     }
 
-> Removing VCS leftovers
+> Git Submodules
 
-To make sure that there are no VCS leftovers use the following at the
-end of the package() function (replacing .git with .svn, .hg, etc.):
+Git submodules are a little tricky to do. The idea is to add the URLs of
+the submodules themselves directly to the sources array and then
+reference them during prepare(). This could look like this:
 
-    find "$pkgdir" -type d -name .git -exec rm -r '{}' +
-
-> SVN packages that try to get their revision number
-
-If the build system for the program you are packaging calls svnversion
-or svn info to determine its revision number, you can add a prepare()
-function similar to this one to make it work:
+    source=("git://somewhere.org/something/something.git"
+            "git://somewhere.org/mysubmodule/mysubmodule.git")
 
     prepare() {
-      cp -a "$SRCDEST/$_svnmod/.svn" "$srcdir/$_svnmod/"
+        cd something
+        git submodule init
+        git config submodule.mysubmodule.url $srcdir/mysubmodule
+        git submodule update
     }
 
-Troubleshooting
----------------
-
-> Bazaar limitation
-
-Currently, only one type of bazaar URLs can be used in the source array,
-which format is specific to the host. For example, Launchpad URLs will
-need to start with http://bazaar.launchpad.net/, e.g.:
-
-    source=('project_name::bzr+http://bazaar.launchpad.net/~project_team/project_path')
-
-Also, lp: URLs are not supported at the moment. Failing to use the
-correct URL will prevent makepkg from updating the local repo. The
-correct URL for each host can be obtained by running:
-
-    $ bzr config parent_location
-
-inside the local repo.
-
-Note:These issues will be fixed in pacman 4.1.1.
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=VCS_PKGBUILD_Guidelines&oldid=255922"
+"https://wiki.archlinux.org/index.php?title=VCS_PKGBUILD_Guidelines&oldid=296261"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 5 February 2014, at 06:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

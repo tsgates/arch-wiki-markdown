@@ -1,15 +1,13 @@
 XFCE simple Network Monitor applet
 ==================================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Prerequisites                                                      |
-| -   3 Installation                                                       |
-| -   4 Configuration                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Prerequisites
+-   3 Installation
+-   4 Configuration
 
 Introduction
 ------------
@@ -29,7 +27,7 @@ look at the kbps/Mbps text).
 Prerequisites
 -------------
 
-It runs within the [xfce4-genmon-plugin]. This implies that it is re-run
+It runs within the xfce4-genmon-plugin. This implies that it is re-run
 continuously (typically each second) but this does not causes a
 performance penalty since it is not an script calling several programs,
 but a single native C++ application, and the binary will be cached by
@@ -319,15 +317,22 @@ example:
 
 In the Period(s) field select the refresh rate (1 second recommended).
 Uncheck the Label field. An excellent text font is Terminus
-([terminus-font] package required) but any monospace, fixed or courier
+(terminus-font package required) but any monospace, fixed or courier
 font will be ok.
 
 This picture resumes the settings. In case of several network
 interfaces, you can add as many instances as you want.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=XFCE_simple_Network_Monitor_applet&oldid=239072"
+"https://wiki.archlinux.org/index.php?title=XFCE_simple_Network_Monitor_applet&oldid=302677"
 
 Category:
 
--   Networking
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

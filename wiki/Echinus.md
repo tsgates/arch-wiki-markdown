@@ -1,7 +1,7 @@
 echinus
 =======
 
-> Summary
+Summary help replacing me
 
 Information on installing and configuring echinus
 
@@ -17,20 +17,17 @@ Unlike dwm, echinus does not need to be re-compiled after changes have
 been made to the config. It supports Xft (freetype) out of the box and
 has the option of configurable titlebars.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Configuring                                                        |
-|     -   2.1 Rules                                                        |
-|                                                                          |
-| -   3 Starting echinus                                                   |
-| -   4 Using echinus                                                      |
-|     -   4.1 Panels & Pagers                                              |
-|                                                                          |
-| -   5 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+-   2 Configuring
+    -   2.1 Rules
+-   3 Starting echinus
+-   4 Using echinus
+    -   4.1 Panels & Pagers
+-   5 Resources
+    -   5.1 Screenshots
 
 Installing
 ----------
@@ -38,8 +35,7 @@ Installing
 echinus is in AUR. You might also want to install ourico, a lightweight
 EWMH taskbar, originally designed for echinus (also in AUR), and dmenu.
 
-After successfully installing, copy all files from
-/usr/share/examples/echinus to /etc/xdg/echinus(for system) and/or
+After successfully installing, copy all files from /etc/xdg/echinus to
 ~/.echinus(for user).
 
 Configuring
@@ -104,12 +100,25 @@ Resources
 ---------
 
 -   echinus website
--   example config
--   screenshot
+-   GitHub repository
+
+> Screenshots
+
+-   http://www.flickr.com/photos/jasonwryan/5270660692/lightbox/
+-   http://plhk.ru/gallery/echinus-0.4.6.png
+-   http://plhk.ru/gallery/profont.png
+-   http://plhk.ru/gallery/echinus027.png
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Echinus&oldid=206936"
+"https://wiki.archlinux.org/index.php?title=Echinus&oldid=273615"
 
 Category:
 
 -   Dynamic WMs
+
+-   This page was last modified on 1 September 2013, at 10:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

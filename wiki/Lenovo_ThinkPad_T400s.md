@@ -1,72 +1,57 @@
 Lenovo ThinkPad T400s
 =====================
 
-> Summary
+Related articles
 
-Installation instructions for the Lenovo ThinkPad T400s
+-   Lenovo ThinkPad T400
 
-> Related
-
-Lenovo ThinkPad T400
-
-  
- Before reading, a good starting point for Arch Linux installation on
+Before reading, a good starting point for Arch Linux installation on
 notebooks is the main laptop article.
 
 The article describes the installation of Arch Linux on a ThinkPad
 T400s.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware identification                                            |
-|     -   1.1 2815-W3F                                                     |
-|         -   1.1.1 PCI devices                                            |
-|         -   1.1.2 USB devices                                            |
-|                                                                          |
-|     -   1.2 2815RH1                                                      |
-|         -   1.2.1 CPU architecture                                       |
-|         -   1.2.2 PCI devices                                            |
-|         -   1.2.3 USB devices                                            |
-|                                                                          |
-| -   2 Hardware configuration                                             |
-|     -   2.1 Graphics                                                     |
-|     -   2.2 Input devices                                                |
-|         -   2.2.1 Touchpad                                               |
-|         -   2.2.2 TrackPoint                                             |
-|                                                                          |
-|     -   2.3 Network                                                      |
-|         -   2.3.1 Bluetooth                                              |
-|         -   2.3.2 Ethernet                                               |
-|         -   2.3.3 UMTS                                                   |
-|             -   2.3.3.1 Activate the UMTS device                         |
-|             -   2.3.3.2 Restrict communication to GSM                    |
-|             -   2.3.3.3 Restrict communication to WCDMA                  |
-|             -   2.3.3.4 Deactivate the UMTS card                         |
-|             -   2.3.3.5 Setup the UMTS card as modem                     |
-|                 -   2.3.3.5.1 Setup the UMTS card as GPRS modem          |
-|                 -   2.3.3.5.2 Setup the UMTS card as CDC ethernet        |
-|                     interface                                            |
-|                                                                          |
-|             -   2.3.3.6 Setup the UMTS card as GPS receiver              |
-|                                                                          |
-|         -   2.3.4 Wireless                                               |
-|                                                                          |
-|     -   2.4 Web camera                                                   |
-|     -   2.5 Sound                                                        |
-|     -   2.6 5 in 1 card reader                                           |
-|     -   2.7 Fingerprint reader                                           |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 9 seconds reboot delay                                       |
-|                                                                          |
-| -   4 See also                                                           |
-|     -   4.1 General                                                      |
-|     -   4.2 References                                                   |
-|     -   4.3 Linux on a ThinkPad T400s                                    |
-|     -   4.4 Reviews                                                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware identification
+    -   1.1 2815-W3F
+        -   1.1.1 PCI devices
+        -   1.1.2 USB devices
+    -   1.2 2815RH1
+        -   1.2.1 CPU architecture
+        -   1.2.2 PCI devices
+        -   1.2.3 USB devices
+-   2 Hardware configuration
+    -   2.1 Graphics
+    -   2.2 Input devices
+        -   2.2.1 Touchpad
+        -   2.2.2 TrackPoint
+    -   2.3 Network
+        -   2.3.1 Bluetooth
+        -   2.3.2 Ethernet
+        -   2.3.3 UMTS
+            -   2.3.3.1 Activate the UMTS device
+            -   2.3.3.2 Restrict communication to GSM
+            -   2.3.3.3 Restrict communication to WCDMA
+            -   2.3.3.4 Deactivate the UMTS card
+            -   2.3.3.5 Setup the UMTS card as modem
+                -   2.3.3.5.1 Setup the UMTS card as GPRS modem
+                -   2.3.3.5.2 Setup the UMTS card as CDC ethernet
+                    interface
+            -   2.3.3.6 Setup the UMTS card as GPS receiver
+        -   2.3.4 Wireless
+    -   2.4 Web camera
+    -   2.5 Sound
+    -   2.6 5 in 1 card reader
+    -   2.7 Fingerprint reader
+-   3 Troubleshooting
+    -   3.1 9 seconds reboot delay
+-   4 See also
+    -   4.1 General
+    -   4.2 References
+    -   4.3 Linux on a ThinkPad T400s
+    -   4.4 Reviews
 
 Hardware identification
 -----------------------
@@ -220,7 +205,7 @@ Hardware configuration
 
 > Graphics
 
-Install xf86-video-intel, available in the Official Repositories.
+Install xf86-video-intel, available in the Official repositories.
 
 See Intel.
 
@@ -375,7 +360,7 @@ by iwlwifi. Use iwlagn kernel module.
 Also, wireless firmware for the Intel Wireless 5300 adapter is required.
 It is included in package linux-firmware.
 
-See Wireless Setup.
+See Wireless network configuration.
 
 > Web camera
 
@@ -453,7 +438,6 @@ See also
 -   Thinkpad OSD Guide
 -   Thinkpad Fingerprintreader Guide
 -   Thinkpad Smart API Guide
--   Laptop Init Script
 
 > Linux on a ThinkPad T400s
 
@@ -470,8 +454,15 @@ T400s.
 -   A german review by notebookcheck.com
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_T400s&oldid=238040"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_T400s&oldid=301549"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 24 February 2014, at 11:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

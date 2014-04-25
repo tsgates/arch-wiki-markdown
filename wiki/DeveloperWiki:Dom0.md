@@ -3,20 +3,18 @@ DeveloperWiki:Dom0
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Users                                                              |
-| -   2 Firewall                                                           |
-|     -   2.1 Incoming traffic to dom0 (INPUT chain)                       |
-|     -   2.2 Outgoing traffoc from dom0 (OUTPUT chain)                    |
-|     -   2.3 Incoming traffic to gerolde (FORWARD chain)                  |
-|     -   2.4 Incoming traffic to gudrun (FORWARD chain)                   |
-|     -   2.5 Traffic from gudrun to gerolde (FORWARD chain)               |
-|     -   2.6 Outgoing traffic from gerolde (FORWARD chain)                |
-|     -   2.7 Outgoing traffic from gudrun (FORWARD chain)                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Users
+-   2 Firewall
+    -   2.1 Incoming traffic to dom0 (INPUT chain)
+    -   2.2 Outgoing traffoc from dom0 (OUTPUT chain)
+    -   2.3 Incoming traffic to gerolde (FORWARD chain)
+    -   2.4 Incoming traffic to gudrun (FORWARD chain)
+    -   2.5 Traffic from gudrun to gerolde (FORWARD chain)
+    -   2.6 Outgoing traffic from gerolde (FORWARD chain)
+    -   2.7 Outgoing traffic from gudrun (FORWARD chain)
 
 Users
 -----
@@ -79,3 +77,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki:Server Configuration
+
+-   This page was last modified on 23 September 2009, at 05:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

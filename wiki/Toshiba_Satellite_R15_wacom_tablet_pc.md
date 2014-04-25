@@ -1,33 +1,35 @@
 Toshiba Satellite R15 wacom tablet pc
 =====================================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-|     -   1.1 Working                                                      |
-|     -   1.2 Not tested                                                   |
-|                                                                          |
-| -   2 CD/FTP Installation                                                |
-| -   3 Wireless Network                                                   |
-| -   4 Video                                                              |
-| -   5 Audio                                                              |
-| -   6 Power Management                                                   |
-|     -   6.1 Toshiba ACPI                                                 |
-|     -   6.2 CPU frequency scaling                                        |
-|     -   6.3 klaptop                                                      |
-|                                                                          |
-| -   7 Wacom/Tablet                                                       |
-+--------------------------------------------------------------------------+
-
-Overview
---------
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: Out of date. All 
+                           useful info already      
+                           covered by Beginners'    
+                           guide. (Discuss)         
+  ------------------------ ------------------------ ------------------------
 
 This document contains instructions for installing Arch Linux on a
 Toshiba Satellite R15 wacom tablet pc using the stock 2.6.17-ARCH
 kernel. It assumes that you have completed the installation as described
-in the Official Arch Linux Install Guide.
+in the Installation guide.
+
+Contents
+--------
+
+-   1 Working
+-   2 Not tested
+-   3 CD/FTP Installation
+-   4 Wireless Network
+-   5 Video
+-   6 Audio
+-   7 Power Management
+    -   7.1 Toshiba ACPI
+    -   7.2 CPU frequency scaling
+    -   7.3 klaptop
+-   8 Wacom/Tablet
 
 > Working
 
@@ -65,7 +67,7 @@ Wireless Network
 ----------------
 
 The Toshiba Satellite R15 uses the Intel Pro/Wireless network interface
-(ipw2200). See Wireless Setup#ipw2100 and ipw2200.
+(ipw2200). See Wireless network configuration#ipw2100 and ipw2200.
 
 Video
 -----
@@ -153,8 +155,15 @@ as operation as I need it, anyways. A bit anti-climatic, isn't it?
 Farewell, my friends. :)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Toshiba_Satellite_R15_wacom_tablet_pc&oldid=249590"
+"https://wiki.archlinux.org/index.php?title=Toshiba_Satellite_R15_wacom_tablet_pc&oldid=302850"
 
 Category:
 
 -   Mobile devices
+
+-   This page was last modified on 2 March 2014, at 08:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

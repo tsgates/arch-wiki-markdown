@@ -16,25 +16,18 @@ in Arch Linux.
 
 OpenI18N Diagram
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Fonts                                                              |
-| -   2 Locales                                                            |
-| -   3 Input methods                                                      |
-|     -   3.1 Outside X server                                             |
-|     -   3.2 Inside X server                                              |
-|         -   3.2.1 X input method                                         |
-|                                                                          |
-|     -   3.3 GTK immodule                                                 |
-|         -   3.3.1 Disabling GTK IM modules (without uninstalling)        |
-|                                                                          |
-|     -   3.4 QT immodule (> QT 4.0.0)                                     |
-|         -   3.4.1 Disabling QT IM modules (without uninstalling)         |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Fonts
+-   2 Locales
+-   3 Keyboard layouts
+-   4 Input methods in Xorg
+    -   4.1 GTK immodule
+        -   4.1.1 Disabling GTK IM modules (without uninstalling)
+    -   4.2 QT immodule (> QT 4.0.0)
+        -   4.2.1 Disabling QT IM modules (without uninstalling)
+-   5 See also
 
 Fonts
 -----
@@ -47,16 +40,14 @@ Locales
 
 See Locale
 
-Input methods
--------------
+Keyboard layouts
+----------------
 
-> Outside X server
+See Keyboard Configuration in Console and Keyboard Configuration in
+Xorg.
 
-The KEYMAP variable in rc.conf is used to set the keymap.
-
-> Inside X server
-
-X input method
+Input methods in Xorg
+---------------------
 
 -   gcin
 -   fcitx
@@ -146,8 +137,15 @@ See also
 -   Running and Debugging GTK+ Applications
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Internationalization&oldid=205161"
+"https://wiki.archlinux.org/index.php?title=Internationalization&oldid=275651"
 
 Category:
 
 -   Internationalization
+
+-   This page was last modified on 15 September 2013, at 12:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

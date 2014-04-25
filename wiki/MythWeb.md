@@ -3,23 +3,20 @@ MythWeb
 
 MythWeb is a web interface for MythTV
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Link to the Video Directory                                  |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 MythWeb                                                      |
-|     -   2.2 Apache                                                       |
-|     -   2.3 PHP                                                          |
-|                                                                          |
-| -   3 Using MythWeb                                                      |
-| -   4 Securing MythWeb                                                   |
-| -   5 Troubleshooting                                                    |
-| -   6 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Link to the Video Directory
+-   2 Configuration
+    -   2.1 MythWeb
+    -   2.2 Apache
+    -   2.3 PHP
+-   3 Set rights for mythtv dir and create the link to mythweb
+-   4 Using MythWeb
+-   5 Securing MythWeb
+-   6 Troubleshooting
+-   7 External Links
 
 Installation
 ------------
@@ -39,7 +36,7 @@ MythWeb looks in the video_dir directory for MythTV recordings. You will
 need to create a link to the folder where your MythTV recordings are
 stored.
 
-    # ln -s <recording_dir> /srv/http/mythweb/video_dir
+    # ln -s <recording_dir> /var/lib/mythtv/mythweb/video_dir
 
 Configuration
 -------------
@@ -49,10 +46,12 @@ Configuration
 Copy the MythWeb configuration file mythweb.conf to the Apache
 configuration directory.
 
-    # cp /srv/http/mythweb/mythweb.conf.apache   /etc/httpd/conf/extra/mythweb.conf
+    # cp /var/lib/mythtv/mythweb/mythweb.conf.apache   /etc/httpd/conf/extra/mythweb.conf
 
-Edit mythweb.conf to point it to the correct installation directory
-(near the beginning of the file).
+Edit mythweb.conf to point it to the directory where you'll be
+installing mythweb (near the beginning of the file).
+
+    <Directory "/srv/http/mythweb/data">
 
     <Directory "/srv/http/mythweb" >
 
@@ -69,7 +68,7 @@ following section.
 
 Edit the Apache configuration file /etc/httpd/conf/httpd.conf
 
-Uncomment (or add) the line
+Uncomment (or add) the line to the LoadModule section
 
     LoadModule php5_module modules/libphp5.so
 
@@ -88,15 +87,22 @@ Uncomment the following lines in the Dynamic extensions section.
     extension=mysql.so
     extension=posix.so
 
-Make sure open_basedir contains /srv/http/ to allow file operation in
-the MythWeb directory. Starting with MythTV 0.23, you will also need to
-permit access to /usr/share/mythtv/.
+Make sure open_basedir contains /srv/http/ and /var/lib/mythtv/mythweb
+to allow file operation in the MythWeb directory. Starting with MythTV
+0.23, you will also need to permit access to /usr/share/mythtv/.
 
-    open_basedir = /srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/share/mythtv/
+    open_basedir = /srv/http/:/home/:/tmp/:/usr/share/pear/:/var/lib/mythtv/mythweb:/usr/share/mythtv/
 
 Enable the allow_url_fopen option for MythWeb's status page to work.
 
     allow_url_fopen = On
+
+Set rights for mythtv dir and create the link to mythweb
+--------------------------------------------------------
+
+    chmod 755 /var/lib/mythtv/
+
+    ln -s /var/lib/mythtv/mythweb /srv/http/
 
 Using MythWeb
 -------------
@@ -104,7 +110,7 @@ Using MythWeb
 You can now start the Apache daemon, mythbackend must already be
 running.
 
-    /etc/rc.d/httpd start
+    systemctl start httpd.service
 
 Open MythWeb in your browser.
 
@@ -184,8 +190,15 @@ External Links
 -   MythTV Wiki page on MythWeb
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=MythWeb&oldid=197902"
+"https://wiki.archlinux.org/index.php?title=MythWeb&oldid=282872"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 15 November 2013, at 01:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

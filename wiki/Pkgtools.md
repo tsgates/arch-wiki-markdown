@@ -10,22 +10,19 @@ Pkgtools
                            for expansion. (Discuss) 
   ------------------------ ------------------------ ------------------------
 
-pkgtools is a package created by Daenyth that includes various useful
-package-related utilities. It is available in community, and
-pkgtools-git in AUR.
+pkgtools is a package that includes various useful package-related
+utilities. It is available in AUR, aswell as pkgtools-git.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 gem2arch                                                           |
-| -   2 maintpkg                                                           |
-| -   3 newpkg                                                             |
-| -   4 pkgconflict                                                        |
-| -   5 pkgfile                                                            |
-| -   6 spec2arch                                                          |
-| -   7 whoneeds                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 gem2arch
+-   2 maintpkg
+-   3 newpkg
+-   4 pkgconflict
+-   5 pkgfile
+-   6 spec2arch
+-   7 whoneeds
 
 > gem2arch
 
@@ -57,9 +54,16 @@ Converts an rpm .spec file into a PKGBUILD.
 Shows packages requiring the mentioned one.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pkgtools&oldid=218834"
+"https://wiki.archlinux.org/index.php?title=Pkgtools&oldid=278072"
 
 Categories:
 
 -   Package development
 -   Package management
+
+-   This page was last modified on 8 October 2013, at 23:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,15 +1,9 @@
 Time
 ====
 
-> Summary
+Related articles
 
-This article provides an introduction to the concept of keeping time on
-computers in general, and describes how clocks are configured and
-managed in Arch Linux.
-
-> Related
-
-Network Time Protocol
+-   Network Time Protocol
 
 In an operating system, the time (clock) is determined by four parts:
 time value, time standard, time zone, and Daylight Saving Time (DST) if
@@ -17,22 +11,20 @@ applicable. This article explains what they are and how to read/set
 them. To maintain accurate system time on a network see Network Time
 Protocol.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware clock and system clock                                    |
-|     -   1.1 Read clock                                                   |
-|     -   1.2 Set clock                                                    |
-|     -   1.3 RTC clock                                                    |
-|                                                                          |
-| -   2 Time standard                                                      |
-|     -   2.1 UTC in Windows                                               |
-|                                                                          |
-| -   3 Time zone                                                          |
-| -   4 Time skew                                                          |
-| -   5 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware clock and system clock
+    -   1.1 Read clock
+    -   1.2 Set clock
+    -   1.3 RTC clock
+-   2 Time standard
+    -   2.1 UTC in Windows
+-   3 Time zone
+-   4 Time skew
+-   5 Troubleshooting
+    -   5.1 Clock shows a value that is neither UTC nor local time
+-   6 See also
 
 Hardware clock and system clock
 -------------------------------
@@ -55,11 +47,12 @@ kernel keeps track of the system clock by counting timer interrupts.
 
 > Read clock
 
-To check the current hardware clock time and system clock time
-respectively (the hardware clock time is presented in localtime even if
-the hardware clock set to UTC):
+To check the current system clock time (presented both in local time and
+UTC):
 
     $ timedatectl status
+
+Run the same command as root to display also the hardware clock time.
 
 > Set clock
 
@@ -77,6 +70,8 @@ Standard behavior of most operating systems is:
 
 Time standard
 -------------
+
+Note:Systemd will use UTC for the hardware clock by default.
 
 There are two time standards: localtime and Coordinated Universal Time
 (UTC). The localtime standard is dependent on the current time zone,
@@ -104,14 +99,23 @@ You can check what you have set your Arch Linux install to use by:
 
     $ timedatectl status | grep local
 
-The hardware clock can be queried and set with the hwclock command. To
-change the hardware clock time standard to localtime use:
+The hardware clock can be queried and set with the timedatectl command.
+To change the hardware clock time standard to localtime, use:
 
-    # timedatectl set-local-rtc 1
+    # timedatectl set-local-rtc true
 
-And to set it to UTC use:
+If you want to revert to the hardware clock being in UTC, do:
 
-    # timedatectl set-local-rtc 0
+    # timedatectl set-local-rtc false
+
+Be warned that, if the hardware clock is set to localtime, dealing with
+daylight saving time is messy. If the DST changes when your computer is
+off, your clock will be wrong on next boot (there is a lot more to it).
+Recent kernels set the system time from the RTC directly on boot,
+assuming that the RTC is in UTC. This means that if the RTC is in local
+time, then the system time will first be set up wrongly and then
+corrected shortly afterwards on every boot. This is the root of certain
+weird bugs (time going backwards is rarely a good thing).
 
 These will generate /etc/adjtime automatically; no further configuration
 is required.
@@ -127,11 +131,21 @@ dependent on values in /etc/adjtime. Hence, having the hardware clock
 using localtime may cause some unexpected behavior during the boot
 sequence; e.g system time going backwards, which is always a bad idea.
 
+Note:The use of timedatectl requires an active dbus. Therefore, it may
+not be possible to use this command under a chroot (such as during
+installation). In these cases, you can revert back to the hwclock
+command.
+
 > UTC in Windows
 
-Note:The following method is not supported in Windows 8 and Windows
-Server 2012. Your only current option is to use localtime instead of
-UTC, as described above.
+One reason users often set the RTC in localtime to dual-boot with
+Windows (which uses localtime). However, Windows is able to deal with
+the RTC being in UTC with a simple registry fix. It is recommended to
+configure Windows to use UTC, rather than Linux to use localtime. If you
+make Windows use UTC, also remember to disable the "Internet Time
+Update" Windows feature, so that Windows does not mess with the hardware
+clock, trying to sync it with internet time. You should instead use NTP
+to modify the RTC and sync to internet time.
 
 Using regedit, add a DWORD value with hexadecimal value 1 to the
 registry:
@@ -160,9 +174,8 @@ The hardware clock and system clock time may need to be updated after
 setting this value.
 
 If you are having issues with the offset of the time, try reinstalling
-tzdata and then setting your time zone again.
+tzdata and then setting your time zone again:
 
-    # pacman -S tzdata
     # timedatectl set-timezone America/Los_Angeles
 
 It makes sense to disable time synchronization in Windows - otherwise it
@@ -181,7 +194,7 @@ To list available zones:
 
 To change your time zone:
 
-    # timedatectl set-timezone <Zone>/<SubZone>
+    # timedatectl set-timezone Zone/SubZone
 
 Example:
 
@@ -249,8 +262,29 @@ tools to improve software clock accuracy:
 -   adjtimex in the AUR can adjust kernel time variables like interrupt
     frequency to help improve the system clock time drift.
 
-Resources
----------
+Troubleshooting
+---------------
+
+> Clock shows a value that is neither UTC nor local time
+
+This might be caused by a number of reasons. For example, if your
+hardware clock is running on local time, but timedatectl is set to
+assume it is in UTC, the result would be that your timezone's offset to
+UTC effectively gets applied twice, resulting in wrong values for your
+local time and UTC.
+
+To force your clock to the correct time, and to also write the correct
+UTC to your hardware clock, follow these steps:
+
+-   Setup NTP (enabling it as a service is not necessary).
+-   Set your time zone correctly.
+-   Run ntpd -qg to manually synchronize your clock with the network,
+    ignoring large deviations between local UTC and network UTC.
+-   Run hwclock --systohc to write the current software UTC time to the
+    hardware clock.
+
+See also
+--------
 
 -   Linux Tips - Linux, Clocks, and Time
 -   Sources for Time Zone and Daylight Saving Time Data for tzdata
@@ -258,9 +292,16 @@ Resources
 -   Wikipedia:Time
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Time&oldid=255028"
+"https://wiki.archlinux.org/index.php?title=Time&oldid=287603"
 
 Categories:
 
 -   Mainboards and BIOS
 -   System administration
+
+-   This page was last modified on 11 December 2013, at 06:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

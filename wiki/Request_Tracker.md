@@ -1,20 +1,17 @@
 Request Tracker
 ===============
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Install the packages                                         |
-|     -   1.2 Configure Apache                                             |
-|     -   1.3 Create a MySQL database                                      |
-|     -   1.4 Configure RT                                                 |
-|                                                                          |
-| -   2 Using RT                                                           |
-|     -   2.1 Tweaking RT_SiteConfig.pm                                    |
-|     -   2.2 Further Reading                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Install the packages
+    -   1.2 Configure Apache
+    -   1.3 Create a MySQL database
+    -   1.4 Configure RT
+-   2 Using RT
+    -   2.1 Tweaking RT_SiteConfig.pm
+    -   2.2 Further Reading
 
 Installation
 ============
@@ -133,3 +130,10 @@ Categories:
 
 -   Development
 -   Web Server
+
+-   This page was last modified on 23 April 2012, at 16:51.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

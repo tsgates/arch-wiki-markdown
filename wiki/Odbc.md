@@ -2,10 +2,10 @@ Odbc
 ====
 
   ------------------------ ------------------------ ------------------------
-  [Tango-go-next.png]      This article or section  [Tango-go-next.png]
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
                            is a candidate for       
-                           moving to Open Database  
-                           Connectivity.            
+                           merging with Open        
+                           Database Connectivity.   
                            Notes: please use the    
                            second argument of the   
                            template to provide more 
@@ -21,26 +21,23 @@ This document shows how to set up unixODBC in Arch, first to access your
 database on your localhost and then extends the steps to configure MySQL
 to allow remote access through ODBC.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 MySQL, ODBC with OpenOffice Setup on LocalHost                     |
-|     -   1.1 Packages To Install                                          |
-|     -   1.2 Configure the ini Files                                      |
-|     -   1.3 Create A Symbolic Link                                       |
-|     -   1.4 Create A Test Database                                       |
-|     -   1.5 Testing the ODBC                                             |
-|     -   1.6 A Couple Useful Websites                                     |
-|                                                                          |
-| -   2 MySQL, ODBC with OpenOffice Setup on the Remote Server             |
-|     -   2.1 Edit odbc.ini                                                |
-|     -   2.2 Edit my.cnf                                                  |
-|     -   2.3 Verify Port 3306 is Listening                                |
-|     -   2.4 Permissions on MySQL for Remote Connection                   |
-|     -   2.5 Testing the ODBC                                             |
-|     -   2.6 Miscellaneous                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 MySQL, ODBC with OpenOffice Setup on LocalHost
+    -   1.1 Packages To Install
+    -   1.2 Configure the ini Files
+    -   1.3 Create A Symbolic Link
+    -   1.4 Create A Test Database
+    -   1.5 Testing the ODBC
+    -   1.6 A Couple Useful Websites
+-   2 MySQL, ODBC with OpenOffice Setup on the Remote Server
+    -   2.1 Edit odbc.ini
+    -   2.2 Edit my.cnf
+    -   2.3 Verify Port 3306 is Listening
+    -   2.4 Permissions on MySQL for Remote Connection
+    -   2.5 Testing the ODBC
+    -   2.6 Miscellaneous
 
 MySQL, ODBC with OpenOffice Setup on LocalHost
 ----------------------------------------------
@@ -206,9 +203,16 @@ Good luck and happy computing now that you can get OpenOffice to connect
 to you databases.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Odbc&oldid=248897"
+"https://wiki.archlinux.org/index.php?title=Odbc&oldid=299810"
 
 Categories:
 
 -   Networking
 -   Database management systems
+
+-   This page was last modified on 22 February 2014, at 15:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

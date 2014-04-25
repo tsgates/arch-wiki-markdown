@@ -10,16 +10,13 @@ distribution repositories such as shared libraries, automatic updates
 and digital signatures" A Zero Install package can be ran as a normal
 user without installing it on your system.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-|     -   2.1 Adding Software                                              |
-|                                                                          |
-| -   3 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 Adding Software
+-   3 See Also
 
 Installation
 ------------
@@ -60,3 +57,10 @@ Retrieved from
 Category:
 
 -   Package management
+
+-   This page was last modified on 22 December 2012, at 08:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

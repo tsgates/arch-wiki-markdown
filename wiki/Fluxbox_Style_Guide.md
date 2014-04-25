@@ -10,62 +10,56 @@ into a theme.cfg to get you started.
 
 This has been specially structured to group the relevant items
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 How the items work                                                 |
-|     -   1.1 {texture type}                                               |
-|     -   1.2 {color}                                                      |
-|     -   1.3 {filename}                                                   |
-|     -   1.4 {integer}                                                    |
-|     -   1.5 {boolean}                                                    |
-|     -   1.6 {alpha}                                                      |
-|     -   1.7 {round}                                                      |
-|     -   1.8 {justify}                                                    |
-|     -   1.9 {bullet}                                                     |
-|     -   1.10 {string}                                                    |
-|     -   1.11 {font}                                                      |
-|     -   1.12 Explanation of items that are a little confusing            |
-|     -   1.13 Notes for getting started                                   |
-|                                                                          |
-| -   2 Structured items                                                   |
-|     -   2.1 The toolbar                                                  |
-|         -   2.1.1 General settings                                       |
-|         -   2.1.2 The clock area                                         |
-|         -   2.1.3 The workspace title area                               |
-|         -   2.1.4 The iconbar                                            |
-|         -   2.1.5 Empty - when no windows are shown as icons             |
-|         -   2.1.6 Focused window icon                                    |
-|         -   2.1.7 Unfocused window icon                                  |
-|         -   2.1.8 The toolbar buttons for prevworkspace, nextworkspace,  |
-|             prevwindow and next window                                   |
-|                                                                          |
-|     -   2.2 The windows                                                  |
-|         -   2.2.1 General                                                |
-|                                                                          |
-|     -   2.3 Focused and unfocused window                                 |
-|         -   2.3.1 titlebar                                               |
-|         -   2.3.2 label                                                  |
-|         -   2.3.3 handle                                                 |
-|         -   2.3.4 grips                                                  |
-|         -   2.3.5 button                                                 |
-|         -   2.3.6 window buttons                                         |
-|         -   2.3.7 close                                                  |
-|         -   2.3.8 max                                                    |
-|         -   2.3.9 icon                                                   |
-|         -   2.3.10 stick                                                 |
-|         -   2.3.11 stuck                                                 |
-|                                                                          |
-|     -   2.4 The menu                                                     |
-|         -   2.4.1 general settings                                       |
-|         -   2.4.2 title - top of each menu                               |
-|         -   2.4.3 frame - menu body                                      |
-|         -   2.4.4 hilite                                                 |
-|         -   2.4.5 details                                                |
-|         -   2.4.6 set the wallpaper with an app...                       |
-|         -   2.4.7 The slit                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 How the items work
+    -   1.1 {texture type}
+    -   1.2 {color}
+    -   1.3 {filename}
+    -   1.4 {integer}
+    -   1.5 {boolean}
+    -   1.6 {alpha}
+    -   1.7 {round}
+    -   1.8 {justify}
+    -   1.9 {bullet}
+    -   1.10 {string}
+    -   1.11 {font}
+    -   1.12 Explanation of items that are a little confusing
+    -   1.13 Notes for getting started
+-   2 Structured items
+    -   2.1 The toolbar
+        -   2.1.1 General settings
+        -   2.1.2 The clock area
+        -   2.1.3 The workspace title area
+        -   2.1.4 The iconbar
+        -   2.1.5 Empty - when no windows are shown as icons
+        -   2.1.6 Focused window icon
+        -   2.1.7 Unfocused window icon
+        -   2.1.8 The toolbar buttons for prevworkspace, nextworkspace,
+            prevwindow and next window
+    -   2.2 The windows
+        -   2.2.1 General
+    -   2.3 Focused and unfocused window
+        -   2.3.1 titlebar
+        -   2.3.2 label
+        -   2.3.3 handle
+        -   2.3.4 grips
+        -   2.3.5 button
+        -   2.3.6 window buttons
+        -   2.3.7 close
+        -   2.3.8 max
+        -   2.3.9 icon
+        -   2.3.10 stick
+        -   2.3.11 stuck
+    -   2.4 The menu
+        -   2.4.1 general settings
+        -   2.4.2 title - top of each menu
+        -   2.4.3 frame - menu body
+        -   2.4.4 hilite
+        -   2.4.5 details
+        -   2.4.6 set the wallpaper with an app...
+        -   2.4.7 The slit
 
 How the items work
 ------------------
@@ -591,3 +585,10 @@ Categories:
 
 -   Eye candy
 -   Stacking WMs
+
+-   This page was last modified on 26 September 2012, at 14:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

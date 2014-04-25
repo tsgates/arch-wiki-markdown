@@ -1,13 +1,6 @@
 Firewalls
 =========
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
-  g]                       is poorly written.       g]
-                           Reason: convert to       
-                           Template:App (Discuss)   
-  ------------------------ ------------------------ ------------------------
-
 A firewall is a system designed to prevent unauthorized access to or
 from a private network (which could be just one machine). Firewalls can
 be implemented in only hardware or software, or a combination of both.
@@ -30,221 +23,156 @@ Note:Checks at Shields Up are only a valid measure of your router should
 you have one in the LAN. To accurately evaluate a software firewall, one
 needs to directly connect the box to the cable modem.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Firewall Guides & Tutorials                                        |
-|     -   1.1 External Firewall Tutorials                                  |
-|                                                                          |
-| -   2 iptables front-ends                                                |
-|     -   2.1 iptables                                                     |
-|     -   2.2 Arno's Firewall                                              |
-|     -   2.3 ferm                                                         |
-|     -   2.4 Firehol                                                      |
-|     -   2.5 Firetable                                                    |
-|     -   2.6 Shorewall                                                    |
-|     -   2.7 ufw                                                          |
-|     -   2.8 Vuurmuur                                                     |
-|                                                                          |
-| -   3 iptables GUIs                                                      |
-|     -   3.1 Firestarter                                                  |
-|     -   3.2 Guarddog                                                     |
-|     -   3.3 Uncomplicated Firewall (ufw) Frontends                       |
-|     -   3.4 KMyFirewall                                                  |
-|     -   3.5 firewalld                                                    |
-|                                                                          |
-| -   4 Firewall Builder                                                   |
-| -   5 Other                                                              |
-| -   6 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Firewall Guides & Tutorials
----------------------------
+-   1 Firewall guides and tutorials
+    -   1.1 External firewall tutorials
+-   2 iptables
+    -   2.1 console frontends
+    -   2.2 Graphic frontends
+-   3 Other
+-   4 See Also
 
--   Simple Stateful Firewall: Setting up a comprehensive firewall with
+Firewall guides and tutorials
+-----------------------------
+
+-   Simple stateful firewall - Setting up a comprehensive firewall with
     iptables.
-
--   Uncomplicated Firewall, the wiki page for the simple iptables
+-   Uncomplicated Firewall - the wiki page for the simple iptables
     frontend, ufw, provides a nice tutorial for a basic configuration.
-
--   Router Setup Guide. A tutorial for turning a computer into an
+-   Router Setup Guide - A tutorial for turning a computer into an
     internet gateway/router. It focuses on security and configuring your
     gateway to have as few insecure holes to the internet as possible.
 
-External Firewall Tutorials
+External firewall tutorials
 
 -   http://www.frozentux.net/documents/iptables-tutorial/ A complete and
-    simple tutorial to iptables
-
+    simple tutorial to iptables.
 -   http://tldp.org/HOWTO/Masquerading-Simple-HOWTO/IP Masq is a form of
     Network Address Translation or NAT that allows internally networked
     computers that do not have one or more registered Internet IP
     addresses to have the ability to communicate to the Internet via
     your Linux boxes single Internet IP address.
-
 -   http://tldp.org/HOWTO/Masquerading-Simple-HOWTO/ Masquerading,
     transparent proxying, port forwarding, and other forms of Network
     Address Translations with the 2.4 Linux Kernels.
 
-iptables front-ends
--------------------
+iptables
+--------
 
-> iptables
+The Linux kernel includes iptables as a built-in firewall solution.
+Configuration may be managed directly through the userspace utilities or
+by installing one of several GUI configuration tools.
 
--   Iptables — A powerful firewall built into the Linux kernel that is
-    part of the Netfilter project. Most firewalls, as described in this
-    section below, are usually just front-ends.
+> console frontends
 
-http://www.netfilter.org/projects/iptables/index.html || iptables
+-   Arno's firewall — Secure firewall for both single and multi-homed
+    machines. Very easy to configure, handy to manage and highly
+    customizable. Supports: NAT and SNAT, port forwarding, ADSL ethernet
+    modems with both static and dynamically assigned IPs, MAC address
+    filtering, stealth port scan detection, DMZ and DMZ-2-LAN
+    forwarding, protection against SYN/ICMP flooding, extensive user
+    definable logging with rate limiting to prevent log flooding, all IP
+    protocols and VPNs such as IPsec, plugin support to add extra
+    features.
 
-Also see the man pages: (man iptables) –
-http://unixhelp.ed.ac.uk/CGI/man-cgi?iptables+8
+http://rocky.eld.leidenuniv.nl/ || arno-iptables-firewall
 
-> Arno's Firewall
+-   ferm — Tool to maintain complex firewalls, without having the
+    trouble to rewrite the complex rules over and over again. It allows
+    the entire firewall rule set to be stored in a separate file, and to
+    be loaded with one command. The firewall configuration resembles
+    structured programming-like language, which can contain levels and
+    lists.
 
-Arno's IPTABLES Firewall Script is a secure firewall for both single and
-multi-homed machines.
+http://ferm.foo-projects.org/ || ferm
 
-The script:
+-   Firehol — Language to express firewalling rules, not just a script
+    that produces some kind of a firewall. It makes building even
+    sophisticated firewalls easy - the way you want it.
 
--   EASY to configure and highly customizable
--   daemon script included
--   a filter script that makes your firewall log more readable
+http://firehol.sourceforge.net/ || firehol
 
-Supports:
+-   Firetable — Firewall with "human readable" syntax.
 
--   NAT and SNAT
--   port forwarding
--   ADSL ethernet modems with both static and dynamically assigned IPs
--   MAC address filtering
--   stealth port scan detection
--   DMZ and DMZ-2-LAN forwarding
--   protection against SYN/ICMP flooding
--   extensive user definable logging with rate limiting to prevent log
-    flooding
--   all IP protocols and VPNs such as IPsec
--   plugin support to add extra features.
+http://projects.leisink.net/Firetable || firetable
 
-> ferm
+-   Shorewall — High-level tool for configuring Netfilter. You describe
+    your firewall/gateway requirements using entries in a set of
+    configuration files.
 
-ferm (which stands for "For Easy Rule Making") is a tool to maintain
-complex firewalls, without having the trouble to rewrite the complex
-rules over and over again. ferm allows the entire firewall rule set to
-be stored in a separate file, and to be loaded with one command. The
-firewall configuration resembles structured programming-like language,
-which can contain levels and lists.
+http://www.shorewall.net/ || shorewall
 
-> Firehol
+-   ufw — Simple front-end for iptables.
 
-FireHOL is a language to express firewalling rules, not just a script
-that produces some kind of a firewall. It makes building even
-sophisticated firewalls easy - the way you want it. The result is
-actually iptables rules.
+https://launchpad.net/ufw || ufw
 
-firehol is available in the official repositories.
+-   PeerGuardian Linux — Privacy oriented firewall application. It
+    blocks connections to and from hosts specified in huge block lists
+    (thousands or millions of IP ranges).
 
-> Firetable
+http://sourceforge.net/projects/peerguardian/ || pgl-cli
 
-Firetable is an iptables-based firewall with "human readable" syntax.
+-   Vuurmuur — Powerful firewall manager. It has a simple and easy to
+    learn configuration that allows both simple and complex
+    configurations. The configuration can be fully configured through an
+    ncurses GUI, which allows secure remote administration through SSH
+    or on the console. Vuurmuur supports traffic shaping, has powerful
+    monitoring features, which allow the administrator to look at the
+    logs, connections and bandwidth usage in realtime.
 
-firetable is available in the AUR.
+http://www.vuurmuur.org/ || vuurmuur
 
-> Shorewall
+> Graphic frontends
 
-The Shoreline Firewall, more commonly known as "Shorewall", is
-high-level tool for configuring Netfilter. You describe your
-firewall/gateway requirements using entries in a set of configuration
-files. See Shorewall page for how to install and configure it.
+-   Firestarter — Good GUI for iptables writen on GTK2, it has the
+    ability to use both white and black lists for regulating traffic, it
+    is very simple and easy to use, with good documentation available on
+    their website.
 
-> ufw
+http://www.fs-security.com/ || Firestarter
 
-ufw (uncomplicated firewall) is a simple front-end for iptables and is
-available in the official repositories.
+-   Firewall Builder — GUI firewall configuration and management tool
+    that supports iptables (netfilter), ipfilter, pf, ipfw, Cisco PIX
+    (FWSM, ASA) and Cisco routers extended access lists. The program
+    runs on Linux, FreeBSD, OpenBSD, Windows and Mac OS X and can manage
+    both local and remote firewalls.
 
-See Uncomplicated Firewall for more information.
+http://www.fwbuilder.org/ || fwbuilder
 
-> Vuurmuur
+-   firewalld — Daemon and graphical interface for configuring network
+    and firewall zones as well as setting up and configuring firewall
+    rules.
 
-Vuurmuur Vuurmuur is a powerful firewall manager built on top of
-iptables. It has a simple and easy to learn configuration that allows
-both simple and complex configurations. The configuration can be fully
-configured through an ncurses GUI, which allows secure remote
-administration through SSH or on the console. Vuurmuur supports traffic
-shaping, has powerful monitoring features, which allow the administrator
-to look at the logs, connections and bandwidth usage in realtime.
+https://fedoraproject.org/wiki/FirewallD || firewalld
 
-Vuurmuur is available in the AUR.
+-   Gufw — GTK-based front-end to ufw which happens to be a CLI
+    front-end to iptables (gufw->ufw->iptables), is super easy and super
+    simple to use.
 
-iptables GUIs
--------------
+http://gufw.org/ || gufw
 
-> Firestarter
+-   KMyFirewall — KDE3 GUI for iptables. Firewall editing capabilities
+    are simple enough to use to be suitable for beginners, but also
+    allow for sophisticated tweaking of the firewall settings.
 
-Firestarter is a good GUI for iptables writen on GTK2, it has the
-ability to use both white and black lists for regulating traffic, it is
-very simple and easy to use, with good documentation available on their
-website.
+http://kmyfirewall.sourceforge.net/ || kmyfirewall
 
-Firestarter has GNOME dependencies and is available in the AUR.
+-   PeerGuardian Linux — Privacy oriented firewall application. It
+    blocks connections to and from hosts specified in huge block lists
+    (thousands or millions of IP ranges).
 
-> Guarddog
+http://sourceforge.net/projects/peerguardian/ || pgl
 
-Guarddog is a really easy to use GUI for configuring iptables. After
-setting up a basic desktop configuration it passes all Shields Up tests
-perfectly.
+-   kcm-ufw — KDE alternative to Gufw.
 
-Guarddog requires kdelibs3 and is available in the AUR repository.
-
-To have the firewall settings applied at boot-up you must run
-/etc/rc.firewall from inside /etc/rc.local or something similar.
-
-> Uncomplicated Firewall (ufw) Frontends
-
-Gufw, a GTK-based front-end to ufw which happens to be a CLI front-end
-to iptables (gufw->ufw->iptables), is super easy and super simple to
-use.
-
-Note:Gufw is perhaps the simplest replacement for tcp_wrappers, which
-was discontinued recently
-
-kcm-ufw is a KDE alternative to Gufw.
-
-See Uncomplicated Firewall for more info.
-
-> KMyFirewall
-
-KMyFirewall is KDE3 GUI for iptables.
-
-Firewall editing capabilities are simple enough to use to be suitable
-for beginners, but also allow for sophisticated tweaking of the firewall
-settings.
-
-KMyFirewall requires kdelibs3 and is available in the AUR.
-
-> firewalld
-
-firewalld provides a daemon and graphical interface for configuring
-network and firewall zones as well as setting up and configuring
-firewall rules.
-
-firewalld is available in the official repositories.
-
-Firewall Builder
-----------------
-
-Firewall Builder is "a GUI firewall configuration and management tool
-that supports iptables (netfilter), ipfilter, pf, ipfw, Cisco PIX (FWSM,
-ASA) and Cisco routers extended access lists. [...] The program runs on
-Linux, FreeBSD, OpenBSD, Windows and Mac OS X and can manage both local
-and remote firewalls." Source: http://www.fwbuilder.org/
-
-fwbuilder is available in the official repositories.
+http://kde-apps.org/content/show.php?content=137789 || kcm-ufw
 
 Other
 -----
 
--   EtherApe — A graphical network monitor for various OSI layers and
+-   EtherApe — Graphical network monitor for various OSI layers and
     protocols.
 
 http://etherape.sourceforge.net/ || etherape
@@ -257,11 +185,18 @@ http://www.fail2ban.org/ || fail2ban
 See Also
 --------
 
-Debian Wiki's list of Firewalls: http://wiki.debian.org/Firewalls
+-   http://wiki.debian.org/Firewalls - Debian Wiki's list of firewalls
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Firewalls&oldid=255759"
+"https://wiki.archlinux.org/index.php?title=Firewalls&oldid=302030"
 
 Category:
 
 -   Firewalls
+
+-   This page was last modified on 25 February 2014, at 13:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

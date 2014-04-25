@@ -12,7 +12,7 @@ ABS FAQ
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-> Summary
+Summary help replacing me
 
 Very simple answers to questions about the Arch Build System and making
 your own Arch Linux packages.
@@ -29,23 +29,21 @@ pacman
 
 PKGBUILD
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What is the ABS?                                                   |
-| -   2 What do people mean when they say "Use ABS"?                       |
-| -   3 How do the Arch Linux developers create all of those binary        |
-|     packages that I install using pacman?                                |
-| -   4 Can I get a copy of the PKGBUILD files that the Arch Linux         |
-|     developers use?                                                      |
-| -   5 What do I do to make a package?                                    |
-| -   6 What are all of those other files under /var/abs?                  |
-| -   7 How do I install the package I just made?                          |
-| -   8 How do I make my own PKGBUILD file?                                |
-| -   9 Can somebody make a PKGBUILD file for me for a piece of software I |
-|     want to use?                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 What is the ABS?
+-   2 What do people mean when they say "Use ABS"?
+-   3 How do the Arch Linux developers create all of those binary
+    packages that I install using pacman?
+-   4 Can I get a copy of the PKGBUILD files that the Arch Linux
+    developers use?
+-   5 What do I do to make a package?
+-   6 What are all of those other files under /var/abs?
+-   7 How do I install the package I just made?
+-   8 How do I make my own PKGBUILD file?
+-   9 Can somebody make a PKGBUILD file for me for a piece of software I
+    want to use?
 
 What is the ABS?
 ----------------
@@ -122,7 +120,7 @@ How do I install the package I just made?
 
 Use pacman:
 
-    # pacman -U yourpackagename.pkg.tar.gz
+    # pacman -U yourpackagename.pkg.tar.xz
 
 The actual name of the file depends on the name of the package, the
 version number, and what processor architecture you are using.
@@ -141,9 +139,16 @@ User Repository. You will find PKGBUILD files that other Arch Linux
 users made. You can also submit PKGBUILD files that you make yourself.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ABS_FAQ&oldid=251286"
+"https://wiki.archlinux.org/index.php?title=ABS_FAQ&oldid=267466"
 
 Categories:
 
 -   Package development
 -   About Arch
+
+-   This page was last modified on 21 July 2013, at 23:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

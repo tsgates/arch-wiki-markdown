@@ -2,6 +2,16 @@ High Performance Firewall
 =========================
 
   ------------------------ ------------------------ ------------------------
+  [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
+  g]                       is poorly written.       g]
+                           Reason: please use the   
+                           first argument of the    
+                           template to provide a    
+                           brief explanation.       
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
   [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
                            is a candidate for       
                            merging with Router.     
@@ -21,17 +31,14 @@ This page introduce how to create High Performance Firewall / Nat with
 iptables and VLANs and iproute2. Then you can share internet to a really
 BIG numbers of hosts, and maintain a good performance.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 VLAN support                                                       |
-|     -   1.1 The round robin NAT                                          |
-|     -   1.2 tips                                                         |
-|                                                                          |
-| -   2 The High Performance                                               |
-| -   3 The iproute2                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 VLAN support
+    -   1.1 The round robin NAT
+    -   1.2 tips
+-   2 The High Performance
+-   3 The iproute2
 
 VLAN support
 ------------
@@ -148,13 +155,14 @@ hashsize=1048576' increase the numbers of the hashsize (increase the
 kernel memory designated to NAT connections) (need reboot or reload
 module :-) see with dmesg | grep conntrack)
 
-And the next is put some similar to the /etc/sysctrl.conf file
+And the next is put some similar to the /etc/sysctl.d/99-sysctl.conf:
+file
 
     ...
     net.netfilter.nf_conntrack_max = 1048576
     ...
 
-And do the sysctl -p command
+And do the sysctl --system command
 
 In my case is the same number, that means that I have 1 connection for
 bucket!!!! I do not need more!!!! by default NetFilter put rate of 1:8.
@@ -216,8 +224,15 @@ to PRO_3
 Put this before the <NET>/21
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=High_Performance_Firewall&oldid=250487"
+"https://wiki.archlinux.org/index.php?title=High_Performance_Firewall&oldid=282803"
 
 Category:
 
 -   Firewalls
+
+-   This page was last modified on 14 November 2013, at 12:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,25 +1,22 @@
 ASUS A7SN
 =========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Configuration                                                      |
-|     -   2.1 CPU                                                          |
-|     -   2.2 Video                                                        |
-|         -   2.2.1 Xorg                                                   |
-|                                                                          |
-|     -   2.3 Audio                                                        |
-|     -   2.4 Wi-Fi                                                        |
-|     -   2.5 Webcam                                                       |
-|     -   2.6 TV tuner                                                     |
-|     -   2.7 Bluetooth                                                    |
-|     -   2.8 Pointer                                                      |
-|     -   2.9 Hotkeys Keys                                                 |
-|     -   2.10 Utilities                                                   |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Configuration
+    -   2.1 CPU
+    -   2.2 Video
+        -   2.2.1 Xorg
+    -   2.3 Audio
+    -   2.4 Wi-Fi
+    -   2.5 Webcam
+    -   2.6 TV tuner
+    -   2.7 Bluetooth
+    -   2.8 Pointer
+    -   2.9 Hotkeys Keys
+    -   2.10 Utilities
 
 Hardware
 --------
@@ -32,7 +29,6 @@ Hardware
 -   Display:
     -   TFT 17.1" WXGA (1440x900) WXGA+/WUXGA Wide Screen,Color-Shine
         (Glare-type),Asus Splendid Video Intelligent Technology
-
 -   Video: NVIDIA® GeForce® 9500M GS, 256MB VRAM (GDDR III type VRAM
     support)
 -   Audio: Scheda Intel High Definition Audio
@@ -57,12 +53,10 @@ Hardware
     -   1 x SIR-115.2Kbps supported
     -   1 x CIR for remote controller
     -   1 x AV-in
-
 -   Card Reader: MMC, SD, MS, MS-Pro
 -   Dimension and Weight:
     -   40.5 x 31.4 x 3.82 cm (W x D x H)
     -   4.1 kg with 8 cell battery pack
-
 -   Pointer: Touch pad
 
 Configuration
@@ -130,3 +124,10 @@ Retrieved from
 Category:
 
 -   ASUS
+
+-   This page was last modified on 14 June 2012, at 00:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

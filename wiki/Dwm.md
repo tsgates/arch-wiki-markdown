@@ -1,17 +1,10 @@
 dwm
 ===
 
-> Summary
+Related articles
 
-Information on installing and configuring dwm
-
-> Related
-
-dmenu
-
-dunst
-
-wmii
+-   dmenu
+-   wmii
 
 dwm is a dynamic window manager for X. It manages windows in tiled,
 stacked, and full-screen layouts, as well as many others with the help
@@ -21,51 +14,41 @@ extremely lightweight and fast, written in C and with a stated design
 goal of remaining under 2000 source lines of code. It provides
 multi-head support for xrandr and Xinerama.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-|     -   1.1 Method 1: makepkg + ABS (recommended)                        |
-|     -   1.2 Method 2: official repos (easier, but not configurable)      |
-|                                                                          |
-| -   2 Starting dwm                                                       |
-|     -   2.1 Starting a customized dwm from a display manager             |
-|                                                                          |
-| -   3 Basic usage                                                        |
-|     -   3.1 Using dmenu                                                  |
-|     -   3.2 Controlling windows                                          |
-|         -   3.2.1 Giving another tag to a window                         |
-|         -   3.2.2 Closing a window                                       |
-|         -   3.2.3 Window layouts                                         |
-|                                                                          |
-|     -   3.3 Exiting dwm                                                  |
-|                                                                          |
-| -   4 Configuring                                                        |
-|     -   4.1 Method 1: ABS rebuild (recommended)                          |
-|         -   4.1.1 Customizing config.h                                   |
-|         -   4.1.2 Notes                                                  |
-|                                                                          |
-|     -   4.2 Method 2: Git (advanced)                                     |
-|                                                                          |
-| -   5 Statusbar configuration                                            |
-|     -   5.1 Basic statusbar                                              |
-|     -   5.2 Conky statusbar                                              |
-|                                                                          |
-| -   6 Extended usage                                                     |
-|     -   6.1 Patches & additional tiling modes                            |
-|         -   6.1.1 Enable one layout per tag                              |
-|                                                                          |
-|     -   6.2 Fixing gaps around terminal windows                          |
-|     -   6.3 Space around font in dwm's bar                               |
-|     -   6.4 Restart dwm without logging out or closing programs          |
-|     -   6.5 Make the right Alt key work as if it were Mod4 (Windows Key) |
-|     -   6.6 Disable focus follows mouse behaviour                        |
-|     -   6.7 Adding custom keybinds/shortcuts                             |
-|     -   6.8 Fixing misbehaving Java applications                         |
-|                                                                          |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+    -   1.1 Method 1: makepkg + ABS (recommended)
+    -   1.2 Method 2: official repos (easier, but not configurable)
+-   2 Starting dwm
+    -   2.1 Starting a customized dwm from a display manager
+    -   2.2 Systemd user sessions
+-   3 Basic usage
+    -   3.1 Using dmenu
+    -   3.2 Controlling windows
+        -   3.2.1 Giving another tag to a window
+        -   3.2.2 Closing a window
+        -   3.2.3 Window layouts
+    -   3.3 Exiting dwm
+-   4 Configuring
+    -   4.1 Method 1: ABS rebuild (recommended)
+        -   4.1.1 Customizing config.h
+        -   4.1.2 Notes
+    -   4.2 Method 2: Git (advanced)
+-   5 Statusbar configuration
+    -   5.1 Examples of statusbar configuration
+    -   5.2 Conky statusbar
+-   6 Extended usage
+    -   6.1 Patches & additional tiling modes
+        -   6.1.1 Enable one layout per tag
+    -   6.2 Fixing gaps around terminal windows
+    -   6.3 Space around font in dwm's bar
+    -   6.4 Restart dwm without logging out or closing programs
+    -   6.5 Make the right Alt key work as if it were Mod4 (Windows Key)
+    -   6.6 Disable focus follows mouse behaviour
+    -   6.7 Adding custom keybinds/shortcuts
+    -   6.8 Fixing misbehaving Java applications
+-   7 See also
 
 Installing
 ----------
@@ -136,7 +119,7 @@ problem is to make a start script, for example /usr/bin/dwm-personalized
 and make an alternative xsession .desktop file
 (/usr/share/xsessions/dwm-personalized.desktop).
 
-Example of /usr/share/xsessions/dwm-personalized
+Example of /usr/share/xsessions/dwm-personalized.desktop
 
     [Desktop Entry]
     Encoding=UTF-8
@@ -161,6 +144,27 @@ Example of /usr/bin/dwm-personalized
     #Set status bar & start DWM
     conky | while read -r; do xsetroot -name "$REPLY"; done &
     exec dwm
+
+> Systemd user sessions
+
+If you use a systemd user session configuration, as described on that
+page to manage your session, then the following service file may be used
+to start dwm:
+
+    [Unit]
+    Description=Lightweight tiling window manager
+    Before=mystuff.target
+    After=xorg.target
+    Requires=xorg.target
+
+    [Service]
+    Environment=DISPLAY=:0
+    ExecStart=/usr/bin/dwm
+    Restart=always
+    RestartSec=10
+     
+    [Install]
+    WantedBy=wm.target
 
 Basic usage
 -----------
@@ -191,7 +195,7 @@ the window. [Mod1] is, by default, the Alt key.
 
 Closing a window
 
-To cleanly close a window using dwm, simply press Shift + Mod1 + C.
+To cleanly close a window using dwm, simply press Shift + Mod1 + c.
 
 Window layouts
 
@@ -220,7 +224,7 @@ looks like this: []= .
 
 > Exiting dwm
 
-To cleanly exit dwm, press Shift + Mod1 + Q.
+To cleanly exit dwm, press Shift + Mod1 + q.
 
 Source: dwm tutorial.
 
@@ -251,6 +255,10 @@ Once changes have been made, pipe the new md5sums into the PKGBUILD:
 
     $ makepkg -g >> PKGBUILD
 
+or
+
+    $ updpkgsums
+
 This will eliminate a checksum mismatch between the official config.h
 and the new revised copy.
 
@@ -276,7 +284,7 @@ And after adding a few lines to dwm's start-up script, it is possible to
 restart dwm without logging out or closing programs.
 
 Tip:To recompile easily, make an alias by putting
-(alias redwm='cd ~/dwm; makepkg -g >> PKGBUILD; makepkg -efi --noconfirm; killall dwm')
+(alias redwm='cd ~/dwm; updpkgsums; makepkg -efi --noconfirm; killall dwm')
 in your .bashrc.
 
 > Method 2: Git (advanced)
@@ -306,23 +314,43 @@ And the the X11 lib directory:
 Statusbar configuration
 -----------------------
 
-dwm uses the root window's name to display information in its statusbar,
-which can be changed with xsetroot -name.
+Dwm reads the name of the root window and redirects it to the statusbar.
+The root window is a big window whithin which all other windows are
+drawn and arranged by a window manager; like any other window, the root
+window has a title or a name, but it is usually undefined because the
+root window always runs in the background.
 
-> Basic statusbar
+So whatever you want dwm to show in the statusbar should be defined with
+xsetroot -name "" command in ~/.xinitrc or ~/.Xclients (to set up GDM-3
+properly, see the discussion of this page). For example:
 
-This example prints the date in ISO 8601 format. Add it to files
-~/.xinitrc or ~/.Xclients or see this page's discussion for more details
-about the GDM-3 case :
+    xsetroot -name "Thanks for all the fish!"
 
+Dynamically updated information should be put in a loop which is forked
+to background. This is how the script may look like:
+
+    # Statusbar loop
     while true; do
        xsetroot -name "$( date +"%F %R" )"
        sleep 1m    # Update time every minute
     done &
+
+    # Autostart section
+    pcmanfm & 
+
     exec dwm
 
-Here is an example intended for laptops that depends on the acpi package
-for showing battery information:
+In this case the date is shown in ISO 8601 format and pcmanfm is
+launched at startup.
+
+Note:It isn't recommended to set update interval equal to zero or remove
+the "sleep" line entirely since the system is likely to get overloaded
+in this case (you can assess its effect with top and powertop).
+
+> Examples of statusbar configuration
+
+This example shows battery state (mind that it depends on the acpi
+package):
 
     while true ; do
         xsetroot -name "$(acpi -b | awk 'sub(/,/,"") {print $3, $4}')"
@@ -330,63 +358,72 @@ for showing battery information:
     done &
     exec dwm
 
-The script displays the amount of battery remaining besides its charging
-status by using the awk command to trim away the unneeded text from
-acpi, and tr to remove the commas.
-
-An alternative to the above is to selectively show the battery status
-depending on the current charging state:
-
-    while true; do
-    	batt=$(LC_ALL=C acpi -b)
-
-    	case $batt in
-    	*Discharging*)
-    		batt="${batt#* * * }"
-    		batt="${batt%%, *} "
-    		;;
-    	*)
-    		batt=""
-    		;;
-    	esac
-
-    	xsetroot -name "$batt$(date +%R)"
-
-    	sleep 60
-    done &
-
-    exec dwm
-
-Finally, make sure there is only one instance of dwm in ~/.xinitrc or
-~/.Xclients, so combining everything together should resemble this:
-
-    ~/.setbg
-    autocutsel &
-    termirssi &
-    urxvt &
-
-    while true; do
-       xsetroot -name "$(date +"%F %R")"
-       sleep 1m    # Update time every minute
-    done &
-    exec dwm
-
 Here is another example that displays also the alsa volume and the
-battery state. The latter only when the system is off-line.
+battery state. The latter is displayed only when the system is off-line.
 
     #set statusbar
-    while true
-    do
-       if acpi -a | grep off-line > /dev/null; then
-           xsetroot -name "Bat. $(awk 'sub(/,/,"") {print $3, $4}' <(acpi -b)) \
-           | Vol. $(awk '/dB/ { gsub(/[\[\]]/,""); print $5}' <(amixer get Master)) \
-           | $(date +"%a, %b %d %R")"
-       else
-           xsetroot -name "Vol. $(awk '/dB/ { gsub(/[\[\]]/,""); print $5}' <(amixer get Master)) \
-           | $(date +"%a, %b %d %R")"
-       fi
-       sleep 1s   
+     while true
+     do
+        if acpi -a | grep off-line > /dev/null; then
+            xsetroot -name "Bat. $(awk 'sub(/,/,"") {print $3, $4}' <(acpi -b)) \
+            | Vol. $(awk '/dB/ { gsub(/[\[\]]/,""); print $5}' <(amixer get Master)) \
+            | $(date +"%a, %b %d %R")"
+        else
+            xsetroot -name "Vol. $(awk '/dB/ { gsub(/[\[\]]/,""); print $5}' <(amixer get Master)) \
+            | $(date +"%a, %b %d %R")"
+        fi
+        sleep 1s   
+     done &
+
+Another way is to create variables for each kind of data, so that the
+script is easier to read and correct whenever necessary:
+
+    while true; do
+
+    # Power/Battery Status
+    if [ "$( cat /sys/class/power_supply/AC0/online )" -eq "1" ]; then
+            DWM_BATTERY="AC";
+            DWM_RENEW_INT=3;
+    else
+            DWM_BATTERY=$(( `cat /sys/class/power_supply/BAT0/energy_now` * 100 / `cat /sys/class/power_supply/BAT0/energy_full` ));
+            DWM_RENEW_INT=30;
+    fi;
+
+    # Wi-Fi eSSID
+    if [ "$( cat /sys/class/net/eth1/rfkill1/state )" -eq "1" ]; then
+    		  DWM_ESSID=$( /sbin/iwgetid -r ); 
+    else
+    		  DWM_ESSID="OFF";
+    fi;
+
+    # Keyboard layout
+    if [ "`xset -q | awk -F \" \" '/Group 2/ {print($4)}'`" = "on" ]; then 
+    		  DWM_LAYOUT="ru"; 
+    else 
+    		  DWM_LAYOUT="en"; 
+    fi; 
+
+    # Volume Level
+    DWM_VOL=$( amixer -c1 sget Master | awk -vORS=' ' '/Mono:/ {print($6$4)}' );
+
+    # Date and Time
+    DWM_CLOCK=$( date '+%e %b %Y %a | %k:%M' );
+
+    # Overall output command
+    DWM_STATUS="WiFi: [$DWM_ESSID] | Lang: [$DWM_LAYOUT] | Power: [$DWM_BATTERY] | Vol: $DWM_VOL | $DWM_CLOCK";
+    xsetroot -name "$DWM_STATUS";
+    sleep $DWM_REFRESH_INT;
+
     done &
+
+The output looks like this:
+
+    WiFi: [OFF] | Lang: [en] | Power: [96] | Vol: [on][31%]  | 10 Jan 2014 Fri | 23:01
+
+Note:In the script above the "sleep" interval is adjusted automatically
+depending on whether your laptop is running on battery or not. Of
+course, it isn't necessary if you work on a desktop computer which is
+plugged in all the time.
 
 > Conky statusbar
 
@@ -408,6 +445,8 @@ several stats:
 
     TEXT
     $mpd_smart :: ${cpu cpu1}% / ${cpu cpu2}%  ${loadavg 1} ${loadavg 2 3} :: ${acpitemp}c :: $memperc% ($mem) :: ${downspeed eth0}K/s ${upspeed eth0}K/s :: ${time %a %b %d %I:%M%P}
+
+For icons and color options, see dzen.
 
 Extended usage
 --------------
@@ -571,8 +610,15 @@ See also
 -   dwm: Tags are not workspaces
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dwm&oldid=255124"
+"https://wiki.archlinux.org/index.php?title=Dwm&oldid=302693"
 
 Category:
 
 -   Dynamic WMs
+
+-   This page was last modified on 1 March 2014, at 08:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

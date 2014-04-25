@@ -31,10 +31,7 @@ Check the homepage out at: http://www.nickgravgaard.com/windowlab/
 Installation
 ------------
 
-Windowlab is now in [community] [1]. You can install it by typing (as
-the root user):
-
-    # pacman -S windowlab
+Install windowlab from Official repositories.
 
 Configuration
 -------------
@@ -87,8 +84,15 @@ lot about phpWiki, so I ended up creating new pages, and couldn't keep
 myself from writing stuff in them :D
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=WindowLab&oldid=204956"
+"https://wiki.archlinux.org/index.php?title=WindowLab&oldid=301383"
 
 Category:
 
 -   Stacking WMs
+
+-   This page was last modified on 24 February 2014, at 11:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

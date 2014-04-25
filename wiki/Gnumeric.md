@@ -10,14 +10,14 @@ Gnumeric
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-Gnumeric is the most powerful spreadsheet application which can import
-and export in various formats including csv, HTML, LaTeX, Lotus 1-2-3,
+Gnumeric is a powerful spreadsheet application which can import and
+export in various formats including csv, HTML, LaTeX, Lotus 1-2-3,
 OpenDocument Spreadsheet and Microsoft Excel.
 
 Installing
 ----------
 
-Install gnumeric from the Official Repositories.
+Install gnumeric from the Official repositories.
 
 Optional dependencies are psiconv (for Psion 5 file support),
 python2-gobject2 (for python plugin support) and yelp (for viewing the
@@ -44,8 +44,15 @@ External Resources
 -   Gnumeric Official Website
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Gnumeric&oldid=207063"
+"https://wiki.archlinux.org/index.php?title=Gnumeric&oldid=301595"
 
 Category:
 
 -   Office
+
+-   This page was last modified on 24 February 2014, at 11:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

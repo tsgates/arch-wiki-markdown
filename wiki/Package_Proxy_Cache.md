@@ -7,22 +7,19 @@ packages every time from the internet. This article shows you how to
 setup a Squid proxy that only caches arch packages and can be used with
 aif/pacman/wget/etc with minimal configuration on the client system.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Install Squid                                                      |
-| -   2 Configure Squid                                                    |
-|     -   2.1 Cache Rules                                                  |
-|     -   2.2 Maximum Filesize                                             |
-|     -   2.3 Cache Directory                                              |
-|     -   2.4 Shutdown Lifetime                                            |
-|                                                                          |
-| -   3 Start Squid                                                        |
-| -   4 Follow Squid access log                                            |
-| -   5 Manual Arch Install                                                |
-| -   6 Automatic Arch Install                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Install Squid
+-   2 Configure Squid
+    -   2.1 Cache Rules
+    -   2.2 Maximum Filesize
+    -   2.3 Cache Directory
+    -   2.4 Shutdown Lifetime
+-   3 Start Squid
+-   4 Follow Squid access log
+-   5 Manual Arch Install
+-   6 Automatic Arch Install
 
 Install Squid
 -------------
@@ -191,3 +188,10 @@ Retrieved from
 Category:
 
 -   Package management
+
+-   This page was last modified on 13 June 2012, at 14:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

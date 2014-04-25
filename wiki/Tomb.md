@@ -1,16 +1,13 @@
 Tomb
 ====
 
-> Summary
+Related articles
 
-Information on installing and configuring Tomb
+-   Disk Encryption
+-   TrueCrypt
+-   Tcplay
 
-> Related
-
-TrueCrypt
-
-  
- From the official website:
+From the official website:
 
 Tomb is 100% free and open source software to make strong encryption
 easy to use.
@@ -28,24 +25,21 @@ steganography.
 
 You can install tomb from the Arch User Repository.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Bleeding edge                                                |
-|                                                                          |
-| -   2 Using tomb                                                         |
-| -   3 Tomb Usage                                                         |
-| -   4 Advanced features                                                  |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Bleeding edge
+-   2 Using tomb
+-   3 Tomb Usage
+-   4 Advanced features
+-   5 See also
 
 Installation
 ------------
 
-tomb is not present in the official repositories, but has his own
-repository:
+tomb is not present in the official repositories, but has his own (out
+of date) repository:
 
     [crypto]
     SigLevel = Required
@@ -117,12 +111,12 @@ Advanced features
 
 -   steganography (to hide the key inside a jpeg/wav file)
 -   bind hooks: can mount some of its subdirectories as "bind" to some
-    other. Suppose, for example, you'd like to encrypt your .Mail,
+    other. Suppose, for example, you would like to encrypt your .Mail,
     .firefox and Documents directories. Then you can create a tomb which
     contains these subdirectories (and others too, if you want) and
     create a simple configuration file inside the tomb itself; when you
     run tomb open it will automatically bind that directories into the
-    right places. This way you'll easily get an encrypted firefox
+    right places. This way you will easily get an encrypted firefox
     profile, or maildir.
 -   post hooks: commands that are run when the tomb is open, or closed.
     You can imagine lot of things for this: open files inside the tomb,
@@ -138,8 +132,15 @@ See also
 -   advanced features
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tomb&oldid=254259"
+"https://wiki.archlinux.org/index.php?title=Tomb&oldid=302169"
 
 Category:
 
 -   Security
+
+-   This page was last modified on 26 February 2014, at 05:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

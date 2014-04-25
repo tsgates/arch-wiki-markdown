@@ -7,40 +7,33 @@ also supports other media types. Combined with a nice, quiet computer
 and a decent TV, it makes an excellent centerpiece to a home theater
 system.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Structure                                                          |
-|     -   1.1 mythbackend                                                  |
-|     -   1.2 mythfrontend                                                 |
-|                                                                          |
-| -   2 Requirements                                                       |
-| -   3 Getting Started                                                    |
-| -   4 Make a "mythtv" User                                               |
-| -   5 Installing MythTV                                                  |
-|     -   5.1 Backend setup                                                |
-|         -   5.1.1 Setting up the database                                |
-|         -   5.1.2 Setting up the master backend                          |
-|                                                                          |
-|     -   5.2 Security                                                     |
-|     -   5.3 Troubleshooting                                              |
-|                                                                          |
-| -   6 Frontend setup                                                     |
-|     -   6.1 Nvidia XvMC Setup                                            |
-|                                                                          |
-| -   7 MythTV Plugins                                                     |
-|     -   7.1 MythWeb                                                      |
-|     -   7.2 Mythweather                                                  |
-|                                                                          |
-| -   8 Environment Variables                                              |
-| -   9 Hints to a Happy Myth System                                       |
-|     -   9.1 Using GDM to autologin your Mythfrontend                     |
-|     -   9.2 Using XDM to Automically Login to your MythFrontend          |
-|     -   9.3 Optmize your system                                          |
-|                                                                          |
-| -   10 References                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Structure
+    -   1.1 mythbackend
+    -   1.2 mythfrontend
+-   2 Requirements
+-   3 Getting Started
+-   4 Make a "mythtv" User
+-   5 Installing MythTV
+    -   5.1 Backend setup
+        -   5.1.1 Setting up the database
+        -   5.1.2 Setting up the master backend
+        -   5.1.3 Enable the mythbackend daemon
+    -   5.2 Security
+    -   5.3 Troubleshooting
+-   6 Frontend setup
+    -   6.1 Nvidia XvMC Setup
+-   7 MythTV Plugins
+    -   7.1 MythWeb
+    -   7.2 Mythweather
+-   8 Environment Variables
+-   9 Hints to a Happy Myth System
+    -   9.1 Using GDM to autologin your Mythfrontend
+    -   9.2 Using XDM to Automically Login to your MythFrontend
+    -   9.3 Optmize your system
+-   10 References
 
 Structure
 ---------
@@ -113,6 +106,8 @@ A working Xorg (graphical) environment is necessary.
 Make a "mythtv" User
 --------------------
 
+Note:mythtv package installation creates mythtv user.
+
 If the purpose of the box is a stand-alone system, consider making a
 dedicated user for this purpose. For the rest of the guide, this
 username is "mythtv."
@@ -157,9 +152,13 @@ Setting up the database
 Note:This is a quick and dirty walk through of MySQL. Be sure you read
 the MySQL article for more details.
 
-Install and run MySQL:
+Install MariaDB:
 
-    # pacman -S mysql
+    # pacman -S mariadb
+
+and run MySQL daemon:
+
+    # systemctl start mysqld
 
 If other machines in the LAN are expected to connect to the
 masterbackend server, comment out the "skip-networking" line in
@@ -190,17 +189,32 @@ To add them, simply execute the following:
 Some setups refuse frontends from remote machines. To fix this:
 
     # mysql -u root -p
-    mysql> grant all on *.* to mythtv@'192.168.0.2' identified by 'mythtv';
+    mysql> GRANT ALL ON mythconverg.* TO 'user'@'host.net' IDENTIFIED BY 'password';
+    Query OK, 0 rows affected (0.00 sec)
     mysql> FLUSH PRIVILEGES;
+    Query OK, 0 rows affected (0.00 sec)
 
--   Replace 'mythtv' in the word mythtv@ with the username running on
-    the fronend
--   Replace the IP address with that of the remote box needed access
+-   Replace user with the user name running on the frontend (default:
+    mythtv).
+-   Replace host.net with the host name or IP address of the remote box
+    needing access. Other common values are %.local and 192.168.1.%.
+-   Replace password with a suitable password (default: mythtv).
+
+Example:
+
+    # mysql -u root -p
+    mysql> GRANT ALL ON mythconverg.* TO 'mythtv'@'192.168.0.%' IDENTIFIED BY 'mythtv';
+    Query OK, 0 rows affected (0.00 sec)
+    mysql> FLUSH PRIVILEGES;
+    Query OK, 0 rows affected (0.00 sec)
 
 Setting up the master backend
 
 Load up your WM (lxde is a good choice for light-weight builds, but
 anything will work.)
+
+Note:Users wishing to just demo the software and those without capture
+card/hardware may follow this guide.
 
 Now run the mythtv-setup program
 
@@ -261,6 +275,10 @@ This menu is safe to ignore
 
 This should populate your mysql database with TV listings for the next
 two weeks (or so).
+
+Enable the mythbackend daemon
+
+    # systemctl enable mythbackend.service
 
 > Security
 
@@ -372,7 +390,7 @@ But not full articles (yet)
 
 > Using GDM to autologin your Mythfrontend
 
-Display Manager
+Display manager
 
 In your /etc/gdm/custom.conf add the following statements under the
 [daemon] heading:
@@ -423,8 +441,15 @@ References
     uses Arch Linux]
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=MythTV&oldid=242397"
+"https://wiki.archlinux.org/index.php?title=MythTV&oldid=301272"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 24 February 2014, at 11:25.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

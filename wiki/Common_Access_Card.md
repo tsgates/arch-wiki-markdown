@@ -2,64 +2,51 @@ Common Access Card
 ==================
 
 This page explains how to setup Arch to use a US Department of Defense
-Common Access Card (CAC). It was tested with an SCR331 USB card reader
-which is a very common one. Others may work...or not.
+Common Access Card (CAC). It was tested with a Dell Smart Card Reader
+Keyboard. Others may work...or not.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Software Installation                                              |
-| -   2 Configuring Firefox                                                |
-|     -   2.1 Enabling Firefox to use the CAC Reader                       |
-|     -   2.2 Importing the DoD Certificates                               |
-|                                                                          |
-| -   3 Testing                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Software Installation
----------------------
+-   1 Installation
+-   2 Enable pcscd
+-   3 Configure browser
+    -   3.1 Firefox
+        -   3.1.1 Load security device
+        -   3.1.2 Import the DoD Certificates
+-   4 Testing
+-   5 Debugging
 
-1.  Install pcsclite and ccid from [community] and install cackey.
-2.  Enable pcscd sudo systemctl enable pcscd
-3.  Reboot -or- type sudo systemctl start pcscd in a terminal to enable
-    the smart card reader.
-4.  Install the latest version of cackey
-    (https://software.forge.mil/sf/go/projects.community_cac/frs.cackey)
-5.  Install the latest version of the DoD Configuration extension for
-    Firefox. (http://www.forge.mil/Resources-Firefox.html)
-6.  Plug in the card reader without a card inserted. The SCR331's light
-    should turn on (not flashing).
-7.  Put a CAC into the reader and make sure (at least on the SCR331)
-    that the light starts flashing. If it does, it's set up correctly.
+Installation
+------------
 
-NOTE: You must log in using a CAC card to access the cackey file. This
-may require you to download it on a seperate computer and transfer the
-file.
+The following packages should be installed from [community]:
 
-Configuring Firefox
--------------------
+-   pcsclite
+-   ccid
+-   opensc
 
-> Enabling Firefox to use the CAC Reader
+There are two places in /etc/opensc.conf that comment out
+enable_pinpad = false. If you card reader does not have a pin pad,
+uncomment these lines.
 
-Insert CAC into reader - the green light should flash on the SCR331.
+Enable pcscd
+------------
 
-Add CAC Reader to Firefox as a Security Device
+    $ sudo systemctl enable pcscd
+    $ sudo systemctl start pcscd
 
-1.  Go to Edit->Preferences on the toolbar.
-2.  Click on Advanced
-3.  Click on the Encryption Tab
-4.  Click on the Security Devices Button
-5.  Click on the Load Button
-6.  Enter CAC Reader as the module name, and browse to
-    /usr/local/lib/libcackey.so then click Open.
+Configure browser
+-----------------
 
-> Importing the DoD Certificates
+> Firefox
 
-If you have installed the DoD Configuration extension for Firefox you
-can use it to import the appropriate certificates.
+Load security device
 
-Tools > Addons > Extensions > DoD Configuration > Preferences
+Navigate to Edit -> Preference -> Advanced -> Certificates -> Security
+Devices and load a module using /usr/lib/opensc-pkcs11.so.
+
+Import the DoD Certificates
 
 If you're using a branded version of Firefox you should be able to go to
 http://dodpki.c3pki.chamb.disa.mil/rootca.html and click on the
@@ -96,9 +83,69 @@ Visit your favorite CAC secured web page and you should be asked for the
 Master Password for your certificate. Enter it and if you get in, you
 know it's working.
 
+Debugging
+---------
+
+The pcsc-tools package is also availabe in [community]. The program
+pcsc_scan may be helpful
+
+    [cceleri@ender ~]$ pcsc_scan 
+    PC/SC device scanner
+    V 1.4.21 (c) 2001-2011, Ludovic Rousseau <ludovic.rousseau@free.fr>
+    Compiled with PC/SC lite version: 1.8.6
+    Using reader plug'n play mechanism
+    Scanning present readers...
+    0: Dell Dell Smart Card Reader Keyboard 00 00
+
+    Thu Sep  5 10:41:53 2013
+    Reader 0: Dell Dell Smart Card Reader Keyboard 00 00
+      Card state: Card removed, 
+
+    Thu Sep  5 10:41:58 2013
+    Reader 0: Dell Dell Smart Card Reader Keyboard 00 00
+      Card state: Card inserted, 
+      ATR: 3B DB 96 00 80 1F 03 00 31 C0 64 B0 F3 10 00 07 90 00 80
+
+    ATR: 3B DB 96 00 80 1F 03 00 31 C0 64 B0 F3 10 00 07 90 00 80
+    + TS = 3B --> Direct Convention
+    + T0 = DB, Y(1): 1101, K: 11 (historical bytes)
+      TA(1) = 96 --> Fi=512, Di=32, 16 cycles/ETU
+        250000 bits/s at 4 MHz, fMax for Fi = 5 MHz => 312500 bits/s
+      TC(1) = 00 --> Extra guard time: 0
+      TD(1) = 80 --> Y(i+1) = 1000, Protocol T = 0 
+    -----
+      TD(2) = 1F --> Y(i+1) = 0001, Protocol T = 15 - Global interface bytes following 
+    -----
+      TA(3) = 03 --> Clock stop: not supported - Class accepted by the card: (3G) A 5V B 3V 
+    + Historical bytes: 00 31 C0 64 B0 F3 10 00 07 90 00
+      Category indicator byte: 00 (compact TLV data object)
+        Tag: 3, len: 1 (card service data byte)
+          Card service data byte: C0
+            - Application selection: by full DF name
+            - Application selection: by partial DF name
+            - EF.DIR and EF.ATR access services: by GET RECORD(s) command
+            - Card with MF
+        Tag: 6, len: 4 (pre-issuing data)
+         Data: B0 F3 10 00
+        Mandatory status indicator (3 last bytes)
+          LCS (life card cycle): 07 (Operational state (activated))
+          SW: 9000 (Normal processing.)
+    + TCK = 80 (correct checksum)
+
+    Possibly identified card (using /usr/share/pcsc/smartcard_list.txt):
+    3B DB 96 00 80 1F 03 00 31 C0 64 B0 F3 10 00 07 90 00 80
+    	DoD CAC, Oberthur ID One 128 v5.5 Dual
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Common_Access_Card&oldid=248345"
+"https://wiki.archlinux.org/index.php?title=Common_Access_Card&oldid=274543"
 
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 6 September 2013, at 14:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

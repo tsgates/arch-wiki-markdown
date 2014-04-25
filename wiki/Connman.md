@@ -1,14 +1,18 @@
 Connman
 =======
 
-> Summary
+Related articles
 
-Covers installation and configuration of ConnMan – an alternative to
-NetworkManager.
+-   Network configuration
+-   Wireless network configuration
 
-> Related
-
-Wireless Setup
+  ------------------------ ------------------------ ------------------------
+  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
+  ng]                      needs expansion.         ng]
+                           Reason: Only WiFi plugin 
+                           is described in #Usage   
+                           section. (Discuss)       
+  ------------------------ ------------------------ ------------------------
 
 ConnMan is an alternative to NetworkManager and Wicd and was created by
 Intel and the Moblin project for use with embedded devices. ConnMan is
@@ -23,28 +27,30 @@ ConnMan currently has plugins available for:
 -   WiMAX
 -   VPN's (Through the connman-vpn.service)
 
-It is Typically used for Wireless networking and being plugin based it
-is extremely fast at resolving connections. After setup You may wish to
-check for yourself with systemd-analyze blame To see the difference in
-performance VS other Network Managers.
+It is typically used for wireless networking and is extremely fast at
+resolving connections. After setup you may wish to check for yourself
+with systemd-analyze blame to see the difference in performance compared
+to other network managers.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuring                                                        |
-| -   3 Using ConnMan                                                      |
-|     -   3.1 Desktop Clients/Applets                                      |
-|     -   3.2 Using the Command Line Client                                |
-|         -   3.2.1 Settings                                               |
-|         -   3.2.2 Hardware                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuring
+-   3 Usage
+    -   3.1 Desktop clients
+    -   3.2 Using the command line client
+        -   3.2.1 Connecting to an open access point
+        -   3.2.2 Connecting to a protected access point
+        -   3.2.3 Settings
+        -   3.2.4 Hardware
+-   4 Automatic switching between wired and wireless
+-   5 See also
 
 Installation
 ------------
 
-Install from community
+Install connman from the official repositories.
 
 Configuring
 -----------
@@ -60,41 +66,47 @@ Note:This is now implemented in the current releases of ConnMan
            <allow send_interface="org.moblin.connman.Counter"/>
        </policy>
 
-Using ConnMan
--------------
+Usage
+-----
 
-First enable and start the connman service with systemctl.
+First enable and start the connman.service using systemctl. If present,
+disable and stop other networking services to prevent conflicts (e.g
+netctl.service).
 
-    # systemctl enable connman.service
-    # systemctl start connman.service
+> Desktop clients
 
-> Desktop Clients/Applets
+ConnMan only has two working panel applets and a dmenu client:
 
-Unfortunately, at the time of this writing, ConnMan only has two working
-panel applets and a dmenu client.To control ConnMan in other window
-managers / desktop environments, one can use the test scripts included
-in the source package.
+-   cmst — QT GUI for Connman.
 
--   econnman for the Enlightenment Desktop.
--   connman-ui-git A GTK client applet for use in most other Desktop
-    Environments.
--   connman_dmenu-git The client/frontend for dmenu. refer to this
-    thread https://bbs.archlinux.org/viewtopic.php?pid=1260787
+https://github.com/andrew-bibb/cmst || cmst
 
-Note:connman_dmenu-git requires connman-git in the AUR
+-   EConnman — Enlightenment desktop panel applet.
+
+http://www.enlightenment.org || econnman
+
+-   ConnMan-UI — GTK+ client applet.
+
+https://github.com/tbursztyka/connman-ui || connman-ui-git
+
+-   connman_dmenu — Client/frontend for dmenu.
+
+https://github.com/taylorchu/connman_dmenu || connman_dmenu-git
 
 Currently the GTK client is not 100% stable however it is good enough
-for day-to-day usage. To use it just add connman-ui-gtk to your startup.
+for day-to-day usage. To use it just add connman-ui-gtk to one of your
+startup files, e.g: autostart for Openbox.
 
-You need python and python-dbus to run these.
+> Using the command line client
 
-> Using the Command Line Client
+As of version 1.7 connman has a standard command line client connmanctl.
 
-Note:As of version 1.7 connman has a standard command line client
-connmanctl
+Connecting to an open access point
 
-Start connman and in a terminal, open the test directory in the source
-package.
+The commands in this section show how to run connmanctl in command mode.
+It is also possible to run connmanctl in interactive mode. An example of
+how to use connmanctl in interactive mode can be found in the next
+section.
 
 To scan the network connmanctl accepts simple names called technologies.
 To scan for nearby WiFi networks:
@@ -103,10 +115,10 @@ To scan for nearby WiFi networks:
 
 To list the available networks found after a scan run:
 
-Note:you will see something similar to this (Not actual results):
+Note:You will see something similar to this (not actual results):
 
-    ./test-connman services
     $ connmanctl services
+
     *AO MyNetwork               wifi_dc85de828967_68756773616d_managed_psk
         OtherNET                wifi_dc85de828967_38303944616e69656c73_managed_psk 
         AnotherOne              wifi_dc85de828967_3257495245363836_managed_wep
@@ -114,22 +126,60 @@ Note:you will see something similar to this (Not actual results):
         AnOpenNetwork           wifi_dc85de828967_4d6568657272696e_managed_none
 
 To connect to an open network simple use the enter the second field
-beginning with wifi_
+beginning with wifi_:
 
     $ connmanctl connect wifi_dc85de828967_4d6568657272696e_managed_none
 
-The code after the SSID is important. This identifies the network you
-want to connect to. To connect to this network first, enter your
-password by:
-
-    ./test-connman passphrase wifi_8945762986259dfgs9hsd9bgs9e_managed_wep PASSWORDHERE
-
-And connect using:
-
-    ./test-connman connect wifi_8945762986259dfgs9hsd9bgs9e_managed_wep
-
 You should now be connected to the network. Check using ip a or
 connmanctl state.
+
+Connecting to a protected access point
+
+To connect to a protected access point connmanctl needs to be run in
+interactive mode. For protected access points you will need to provide
+some information to the connman daemon, at the very least a password or
+a passphrase. In interactive mode we can register an agent to handle
+these user requests. To start simply type:
+
+    $ connmanctl
+
+The prompt will change to "connmanctl>" to indicate you are now in
+interactive mode. You then proceed almost as above, first scan for any
+wifi technologies:
+
+    connmanctl> scan wifi
+
+To list services:
+
+    connmanctl> services
+
+Now you need to register the agent. The command is:
+
+    connmanctl> agent on
+
+You now need to connect to one of the protected services. To do this it
+is very handy to have a terminal that allows cut and paste. If you were
+connecting to OtherNET in the example above you would type:
+
+    connmanctl> connect wifi_dc85de828967_38303944616e69656c73_managed_psk
+
+The agent will then ask you to provide any information the daemon needs
+to complete the connection. The information requested will vary
+depending on the type of network you are connecting to. The agent will
+also print additional data about the information it needs as shown in
+the example below.
+
+    Agent RequestInput wifi_dc85de828967_38303944616e69656c73_managed_psk
+      Passphrase = [ Type=psk, Requirement=mandatory ]
+      Passphrase?  
+
+Provide the information requested, in this example the passphrase, and
+then type:
+
+    connmanctl> quit
+
+If the information you provided is correct you should now be connected
+to the protected access point.
 
 Settings
 
@@ -147,9 +197,13 @@ Hardware
 
 Various hardware interfaces are referred to as Technologies by
 connmanctl. To interact with them one must refer to the technology by
-type. Technologies can be toggled On/Off with:
-$ connmanctl enable technology_type And
-$ connmanctl disable technology_type
+type. Technologies can be toggled on/off with:
+
+    $ connmanctl enable technology_type
+
+and:
+
+    $ connmanctl disable technology_type
 
 Example:
 
@@ -165,16 +219,42 @@ To list available technologies run:
 
 To get just the types by their name one can use this one liner.
 
-    $ connmanctl technology | grep "Type" | awk '{print $NF}'
+    $ connmanctl technologies | grep "Type" | awk '{print $NF}'
 
-  
- For further detailed information on ConnMan refer to this
-documentation:
+Automatic switching between wired and wireless
+----------------------------------------------
+
+Connman supports automatic switching of saved profiles with
+PreferredTechnologies option. This works great, but can leave you with
+both wireless and wired enabled at the same time. To circumvent this you
+need to enable the SingleConnectedTechnology option. The result of the
+new configuration file you need to add at /etc/connman/main.conf is:
+
+    [General]
+    PreferredTechnologies=ethernet,wifi
+    SingleConnectedTechnology=true
+
+And make sure to restart the connman.service.
+
+For testing purposes it is recommended to watch the journal and plug the
+network cable a few times to see the action.
+
+See also
+--------
+
+For further detailed information on ConnMan refer to this documentation:
 http://git.kernel.org/cgit/network/connman/connman.git/plain/doc/overview-api.txt?id=HEAD
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Connman&oldid=255746"
+"https://wiki.archlinux.org/index.php?title=Connman&oldid=305798"
 
 Category:
 
--   Wireless Networking
+-   Networking
+
+-   This page was last modified on 20 March 2014, at 06:03.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

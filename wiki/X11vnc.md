@@ -1,39 +1,35 @@
 X11vnc
 ======
 
-> Summary
+Related articles
+
+-   Vncserver
 
 x11vnc allows one to view remotely and interact with real X displays
 (i.e. a display corresponding to a physical monitor, keyboard, and
 mouse) with any VNC viewer. In this way it plays the role for Unix/X11
 that WinVNC plays for Windows.
 
-Related Articles
+Note:x11vnc is not the only way to accomplish a remote control of the
+real X display; x0vncserver is part of tigervnc and allows for the same
+operation.
 
-Vncserver - Remote display server that allows users to run parallel
-sessions while NOT controlling the root display.
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setting up x11vnc                                                  |
-|     -   1.1 Installation                                                 |
-|     -   1.2 Starting                                                     |
-|         -   1.2.1 Setting X authority                                    |
-|             -   1.2.1.1 Start X                                          |
-|             -   1.2.1.2 GDM                                              |
-|             -   1.2.1.3 SLIM                                             |
-|             -   1.2.1.4 LXDM                                             |
-|                                                                          |
-|         -   1.2.2 Setting a password                                     |
-|         -   1.2.3 Running constantly                                     |
-|                                                                          |
-|     -   1.3 Accessing                                                    |
-|                                                                          |
-| -   2 SSH Tunnel                                                         |
-| -   3 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+-   1 Setting up x11vnc
+    -   1.1 Installation
+    -   1.2 Starting
+        -   1.2.1 Setting X authority
+            -   1.2.1.1 Start X
+            -   1.2.1.2 GDM
+            -   1.2.1.3 SLIM
+            -   1.2.1.4 LXDM
+        -   1.2.2 Setting a password
+        -   1.2.3 Running constantly
+    -   1.3 Accessing
+-   2 SSH Tunnel
+-   3 Troubleshooting
 
 Setting up x11vnc
 -----------------
@@ -53,7 +49,7 @@ Another option is to place the x11vnc line in a script which is called
 at login.
 
     #!/bin/bash
-    /usr/bin/x11vnc -nap -wait 50 -noxdamage -passwd PASSWORD -display :0 -forever -o /var/log/x11vnc.log -bg
+    x11vnc -nap -wait 50 -noxdamage -passwd PASSWORD -display :0 -forever -o /var/log/x11vnc.log -bg
 
 Note:The password "PASSWORD" above is not secured; anyone who can run ps
 on the machine will see it. Also note that /var/log/x11vnc.log needs to
@@ -73,15 +69,15 @@ Start X
 
 If that fails, you may have to run (as root)
 
-    $ x11vnc -display :0 -auth /home/USER/.Xauthority
+    # x11vnc -display :0 -auth /home/user/.Xauthority
 
-Where USER is the username of the user who is running the X server.
+Where user is the username of the user who is running the X server.
 
 GDM
 
     # x11vnc -display :0 -auth /var/lib/gdm/:0.Xauth
 
-OR see Troubleshooting section below
+or see Troubleshooting section below
 
 SLIM
 
@@ -137,10 +133,9 @@ SSH Tunnel
 
 You need to have SSH installed and configured.
 
-Use the -localhost flag to x11vnc to have it bind to the local
-interface. Once that is done, you can use SSH to tunnel the port, and
-then connect to VNC through SSH. (I have not tried this) (confirmed
-working for me, thanks --bloodniece)
+Use the -localhost flag with x11vnc for it to bind to the local
+interface. Once that is done, you can use SSH to tunnel the port; then,
+connect to VNC through SSH.
 
 Simple example (from
 http://www.karlrunge.com/x11vnc/index.html#tunnelling ):
@@ -149,7 +144,7 @@ http://www.karlrunge.com/x11vnc/index.html#tunnelling ):
 
 where USER is the username of the user who is running the X server.
 
-(you will likely have to provide passwords/passphrases to login from
+(You will likely have to provide passwords/passphrases to login from
 your current location into your remote_host Unix account; we assume you
 have a login account on remote_host and it is running the SSH server)
 
@@ -183,13 +178,13 @@ exist, You can create one easily (Actually a symlink to actual one) by
 running command given below as normal user NOT ROOT OR USING Sudo as
 below:
 
-    $ ln -sv `dirname $(xauth info | awk '/Authority file/{print $3}')` /home/`whoami`/.Xauthority
+    $ ln -sv $(dirname $(xauth info | awk '/Authority file/{print $3}')) ~/.Xauthority
 
 then try above tunneling example and it should work fine. Further if you
 want this to be automatically done each time Xorg is restarted, create
 the Xprofile file & make is executable as below
 
-    $ ln -sf `dirname $(xauth info | awk '/Authority file/{print $3}')` /home/[ENTER_USERNAME_HERE]/.Xauthority
+    $ ln -sf $(dirname $(xauth info | awk '/Authority file/{print $3}')) ~/.Xauthority
 
 3.GNOME 3 and x11vnc
 
@@ -201,7 +196,7 @@ If you are using GNOME 3 and x11vnc and you get the following errors
 
 Try running x11vnc like
 
-    $ x11vnc -noxdamage -many -display :0 -auth /var/run/gdm/`sudo ls /var/run/gdm | grep \`whoami\``/database -forever -bg
+    $ x11vnc -noxdamage -many -display :0 -auth /var/run/gdm/$(sudo ls /var/run/gdm | grep $(whoami))/database -forever -bg
 
 Please update if this works / not works for any other display manager or
 desktop environment.
@@ -211,9 +206,16 @@ desktop environment.
 If screensaver starts every 1-2 second, start x11vnc with -nodpms key.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=X11vnc&oldid=246383"
+"https://wiki.archlinux.org/index.php?title=X11vnc&oldid=305877"
 
 Categories:
 
 -   Security
--   Virtual Network Computing
+-   Remote Desktop
+
+-   This page was last modified on 20 March 2014, at 15:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

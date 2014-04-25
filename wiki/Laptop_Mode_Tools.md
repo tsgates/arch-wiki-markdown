@@ -1,29 +1,15 @@
 Laptop Mode Tools
 =================
 
-> Summary
+Related articles
 
-Overview of the Laptop Mode Tools power management suite for notebooks.
-
-> Related
-
-acpid
-
-cpufrequtils
-
-pm-utils
-
-Laptop
-
-Powertop
-
-> Resources
-
-Laptop Mode Tools
-
-Mailing List Archives
-
-Less Watts - Official Site
+-   acpid
+-   systemd
+-   cpufrequtils
+-   pm-utils
+-   Laptop
+-   Powertop
+-   TLP
 
 Laptop Mode Tools is a laptop power saving package for Linux systems. It
 is the primary way to enable the Laptop Mode feature of the Linux
@@ -31,50 +17,47 @@ kernel, which lets your hard drive spin down. In addition, it allows you
 to tweak a number of other power-related settings using a simple
 configuration file.
 
-Combined with acpid, CPU frequency scaling, and pm-utils, LMT provides
-most users with a complete notebook power management suite.
+Combined with acpid and CPU frequency scaling, LMT provides most users
+with a complete notebook power management suite.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Hard disks                                                   |
-|     -   2.2 CPU frequency                                                |
-|     -   2.3 Device and bus                                               |
-|         -   2.3.1 Intel SATA                                             |
-|         -   2.3.2 USB autosuspend                                        |
-|                                                                          |
-|     -   2.4 Display and graphics                                         |
-|         -   2.4.1 LCD brightness                                         |
-|             -   2.4.1.1 ThinkPad T40/T42                                 |
-|             -   2.4.1.2 ThinkPad T60                                     |
-|                                                                          |
-|         -   2.4.2 Terminal blanking                                      |
-|                                                                          |
-|     -   2.5 Networking                                                   |
-|         -   2.5.1 Ethernet                                               |
-|         -   2.5.2 Wireless LAN                                           |
-|                                                                          |
-|     -   2.6 Audio                                                        |
-|         -   2.6.1 AC97                                                   |
-|         -   2.6.2 Intel HDA                                              |
-|                                                                          |
-| -   3 Tips and tricks                                                    |
-|     -   3.1 Aliases                                                      |
-|     -   3.2 lm-profiler                                                  |
-|     -   3.3 Disabling                                                    |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Laptop-mode-tools is not picking up events                   |
-|     -   4.2 Laptop-mode-tools does not disable on AC                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Hard disks
+        -   2.1.1 Solid state drives
+        -   2.1.2 Q: I have a solid-state disk (SSD) in my machine.
+            Should I enable any of the disk-related parts of
+            laptop-mode-tools, or are they irrelevant?
+    -   2.2 CPU frequency
+    -   2.3 Device and bus
+        -   2.3.1 Intel SATA
+        -   2.3.2 USB autosuspend
+    -   2.4 Display and graphics
+        -   2.4.1 LCD brightness
+            -   2.4.1.1 ThinkPad T40/T42
+            -   2.4.1.2 ThinkPad T60
+        -   2.4.2 Terminal blanking
+    -   2.5 Networking
+        -   2.5.1 Ethernet
+        -   2.5.2 Wireless LAN
+    -   2.6 Audio
+        -   2.6.1 AC97
+        -   2.6.2 Intel HDA
+-   3 Tips and tricks
+    -   3.1 Aliases
+    -   3.2 lm-profiler
+    -   3.3 Disabling
+-   4 Troubleshooting
+    -   4.1 Laptop-mode-tools is not picking up events
+    -   4.2 Laptop-mode-tools does not disable on AC
+-   5 See also
 
 Installation
 ------------
 
-laptop-mode-tools can be installed from the official repositories.
+laptop-mode-tools can be installed from the AUR.
 
 Configuration
 -------------
@@ -109,39 +92,42 @@ Spinning down the hard drive through hdparm -S values saves power and
 makes everything a lot more quiet. By using the readahead function you
 can allow the drives to spin down more often even though you are using
 the computer. LMT can also establish hdparm -B values. The maximum hard
-drive power saving is 1 and the minimum is 254. Set this value to 254
-when on AC and 1 when on battery. If you find that normal activity hangs
-often while waiting for the disk to spin up, it might be a good idea to
-set it to a higher value (eg. 128) which will make it spin down less
-often. hdparm -S and hdparm -B values are configured in
+drive power saving is 1 and the minimum is 254. For example, set this
+value to 254 when on AC and 20 when on battery. If you find that normal
+activity hangs often while waiting for the disk to spin up, it might be
+a good idea to set it to a higher value (e.g. 128) which will make it
+spin down less often. hdparm -S and hdparm -B values are configured in
 /etc/laptop-mode/laptop-mode.conf.
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
-  ng]                      needs expansion.         ng]
-                           Reason: Please can       
-                           someone add info on how  
-                           to treat SSD disks with  
-                           laptommode-tools? As, to 
-                           my knowledge, readahead  
-                           is useless for them      
-                           (zero read time, just    
-                           does wear out), and spin 
-                           down most likely as      
-                           well. (Discuss)          
-  ------------------------ ------------------------ ------------------------
+Warning:Spinning down a hard drive too frequently can shorten its
+lifespan. Take care when choosing a proper value.
 
 With the CONTROL_MOUNT_OPTIONS variable (default on), laptop-mode-tools
-automatically remounts your partitions, appending 'commit=600,noatime'
-in the mount options. This keeps the journaling program jbd2 from
-accessing your disc every few seconds, instead the disc journal gets
-updated every 10 minutes (BEWARE: with this setting you could lose up to
-10 minutes of work). Also be sure not to use the atime mount option, use
-noatime or relatime instead.
+automatically remounts your partitions, appending commit=600,noatime in
+the mount options. This keeps the journaling program jbd2 from accessing
+your disk every few seconds, instead the disk journal gets updated every
+10 minutes.
+
+Warning:With this setting you could lose up to 10 minutes of work. Also
+be sure not to use the atime mount option. Use noatime or relatime
+instead.
 
 Note:CONTROL_MOUNT_OPTIONS should not be turned on with nilfs2
-partitions (see this thread on the forum
-https://bbs.archlinux.org/viewtopic.php?id=134656)
+partitions. Refer to this thread on the forum:
+https://bbs.archlinux.org/viewtopic.php?id=134656
+
+Solid state drives
+
+From the official, upstream FAQ:
+
+Q: I have a solid-state disk (SSD) in my machine. Should I enable any of the disk-related parts of laptop-mode-tools, or are they irrelevant?
+
+A: They may be relevant, because (a) laptop mode will reduce the number
+of writes, which improves the lifetime of an SSD, and (b) laptop mode
+makes writes bursty, which enables power saving mechanisms like ALPM to
+kick in. However, your mileage may vary depending on the specific
+hardware involved. For some hardware, you will get no gain at all, for
+some the gain may be substantial.
 
 > CPU frequency
 
@@ -364,18 +350,15 @@ Troubleshooting
 
 > Laptop-mode-tools is not picking up events
 
-You need to install and enable acpid. Enable the acpid systemd service
-with:
-
-    # systemctl enable acpid.service
+Install acpid and enable its systemd service acpid.service.
 
 If that does not help, go through the laptop-mode configuration files
 and make sure that the service you want to enable is set to 1. Many
 services (including cpufreq control) are by default set to "auto", which
 may not enable them.
 
-I have experienced issues with bluetooth not working if i boot up with
-battery, and i fixed it with disabling runtime-pm.
+I have experienced issues with bluetooth not working if I boot up with
+battery, and I fixed it with disabling runtime-pm.
 
 > Laptop-mode-tools does not disable on AC
 
@@ -397,10 +380,23 @@ Note:Do not set the executable bit on that dummy-hook.
 Its recommended to disable any hook that has equivalent functionality in
 LMT.
 
+See also
+--------
+
+-   Laptop Mode Tools
+-   Mailing List Archives
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Laptop_Mode_Tools&oldid=255777"
+"https://wiki.archlinux.org/index.php?title=Laptop_Mode_Tools&oldid=301994"
 
 Categories:
 
 -   Laptops
 -   Power management
+
+-   This page was last modified on 25 February 2014, at 09:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

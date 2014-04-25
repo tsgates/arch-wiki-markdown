@@ -1,7 +1,7 @@
 Isatapd
 =======
 
-> Summary
+Summary help replacing me
 
 Using isatapd to connect to IPv6 network
 
@@ -11,18 +11,25 @@ Daemon
 
 IPv6_-_6in4_Tunnel
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: initscripts are  
+                           deprecated, isatapd      
+                           includes systemd service 
+                           file (Discuss)           
+  ------------------------ ------------------------ ------------------------
+
 isatapd is an ISATAP client. It is a daemon program to create and to
 maintain an ISATAP tunnel RFC 5214 in Linux.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Run                                                                |
-| -   4 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Run
+-   4 External links
 
 Installation
 ------------
@@ -62,8 +69,15 @@ External links
 -   isatapd homepage
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Isatapd&oldid=207076"
+"https://wiki.archlinux.org/index.php?title=Isatapd&oldid=271470"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 17 August 2013, at 20:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

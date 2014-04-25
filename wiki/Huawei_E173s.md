@@ -6,21 +6,18 @@ Linux. It involves switching the USB stick from CD-ROM mode to modem
 mode using usb_modeswitch, making a connection to the network with
 sakis3g and setting it up to run at system startup.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Activating the SIM                                                 |
-| -   2 Checking modem                                                     |
-| -   3 Set up usb_modeswitch                                              |
-| -   4 Check if the modem is switched                                     |
-| -   5 Connecting                                                         |
-| -   6 Connecting at system startup                                       |
-|     -   6.1 Creating a configuration file                                |
-|     -   6.2 Running sakis3g at system startup                            |
-|                                                                          |
-| -   7 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Activating the SIM
+-   2 Checking modem
+-   3 Set up usb_modeswitch
+-   4 Check if the modem is switched
+-   5 Connecting
+-   6 Connecting at system startup
+    -   6.1 Creating a configuration file
+    -   6.2 Running sakis3g at system startup
+-   7 External links
 
 Activating the SIM
 ------------------
@@ -166,3 +163,10 @@ Retrieved from
 Category:
 
 -   Modems
+
+-   This page was last modified on 24 October 2012, at 16:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

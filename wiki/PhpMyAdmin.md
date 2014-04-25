@@ -4,90 +4,94 @@ phpMyAdmin
 phpMyAdmin is a web-based tool to help manage MySQL databases using an
 Apache/PHP frontend. It requires a working LAMP setup.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Adjust access rights                                         |
-|     -   2.2 Review apache phpmyadmin configuration                       |
-|     -   2.3 Add blowfish_secret passphrase                               |
-|     -   2.4 Enabling Configuration Storage (optional)                    |
-|         -   2.4.1 creating phpMyAdmin database                           |
-|         -   2.4.2 creating phpMyAdmin database user                      |
-|                                                                          |
-| -   3 Accessing your phpMyAdmin installation                             |
-| -   4 Lighttpd Configuration                                             |
-| -   5 Nginx Configuration                                                |
-| -   6 Other (Older) information                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Apache
+    -   2.2 PHP
+    -   2.3 phpMyAdmin configuration
+    -   2.4 Add blowfish_secret passphrase
+    -   2.5 Enabling Configuration Storage (optional)
+        -   2.5.1 creating phpMyAdmin database
+        -   2.5.2 creating phpMyAdmin database user
+-   3 Accessing your phpMyAdmin installation
+-   4 Lighttpd Configuration
+-   5 Nginx Configuration
 
 Installation
 ------------
 
-Install the phpmyadmin and php-mcrypt packages:
-
-    # pacman -S phpmyadmin php-mcrypt
+Install the phpmyadmin and php-mcrypt packages from the official
+repositories.
 
 Configuration
 -------------
 
-Ensure you do not have an older copy of phpMyAdmin.
+> Apache
 
-    # rm -r /srv/http/phpMyAdmin
+Note:The following works (at least no obvious problems) with Apache 2.4
+and php-apache/mod_mpm_prefork or php-fpm/mod_proxy_handler
 
-Copy the example configuration file to your httpd configuration
-directory.
+Set up Apache to use php as outlined in the LAMP article.
 
-    # cp /etc/webapps/phpmyadmin/apache.example.conf /etc/httpd/conf/extra/httpd-phpmyadmin.conf
+Create the Apache configuration file:
 
-Add the following lines to /etc/httpd/conf/httpd.conf:
+    # /etc/httpd/conf/extra/httpd-phpmyadmin.conf
+
+    Alias /phpmyadmin "/usr/share/webapps/phpMyAdmin"
+    <Directory "/usr/share/webapps/phpMyAdmin">
+        DirectoryIndex index.html index.php
+        AllowOverride All
+        Options FollowSymlinks
+        Require all granted
+    </Directory>
+
+And include it in /etc/httpd/conf/httpd.conf:
 
     # phpMyAdmin configuration
     Include conf/extra/httpd-phpmyadmin.conf
 
-> Adjust access rights
+By default, everyone can see the phpMyAdmin page, to change this, edit
+/etc/httpd/conf/extra/httpd-phpmyadmin.conf to your liking. For example,
+if you only want to be able to access it from the same machine, replace
+Require all granted by Require local.
 
-To allow access from any host, edit /etc/webapps/phpmyadmin/.htaccess
-and change deny from all into
+> PHP
 
-    allow from all
-
-Alternatively, you can restrict access to localhost and your local
-network only. Replace 192.168.1.0/24 with your network's IP block.
-
-    deny from all
-    allow from localhost
-    allow from 127.0.0.1
-    allow from ::1
-    allow from 192.168.1.0/24
-
-Note:The ::1 is required when using IPv6. Otherwise you might get an
-error similar to "Error 403 - Access forbidden!" when you attempt to
-access your phpMyAdmin installation.
-
-> Review apache phpmyadmin configuration
-
-Your /etc/httpd/conf/extra/httpd-phpmyadmin.conf should have the
-following information:
-
-            Alias /phpmyadmin "/usr/share/webapps/phpMyAdmin"
-            <Directory "/usr/share/webapps/phpMyAdmin">
-                    AllowOverride All
-                    Options FollowSymlinks
-                    Order allow,deny
-                    Allow from all
-                    php_admin_value open_basedir "/srv/:/tmp/:/usr/share/webapps/:/etc/webapps:/usr/share/pear/"
-            </Directory>
-
-You need the mysqli and mcrypt (if you want phpMyAdmin internal
-authentication) modules, so uncomment the following in /etc/php/php.ini:
+You need to enable the mysqli and mcrypt (if you want phpMyAdmin
+internal authentication) extensions in PHP by editing /etc/php/php.ini
+and uncommenting the following lines:
 
     extension=mysqli.so
     extension=mcrypt.so
 
-Restart httpd.
+You need to make sure that PHP can access /etc/webapps. Add it to
+open_basedir in /etc/php/php.ini if necessary:
+
+    open_basedir = /srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/share/webapps/:/etc/webapps
+
+> phpMyAdmin configuration
+
+phpMyAdmin's configuration file is located at
+/etc/webapps/phpmyadmin/config.inc.php. If you have a local MySQL
+server, it should be usable without making any modifications.
+
+If your MySQL server is not on the localhost, uncomment and edit the
+following line:
+
+    $cfg['Servers'][$i]['host'] = 'localhost';
+
+If you would like to use phpMyAdmin setup script by calling
+http://localhost/phpmyadmin/setup you will need to create a config
+directory that's writeable by the httpd user in
+/usr/share/webapps/phpMyAdmin as follows:
+
+    # cd /usr/share/webapps/phpMyAdmin
+    # mkdir config
+    # chgrp http config
+    # chmod g+w config
 
 > Add blowfish_secret passphrase
 
@@ -137,17 +141,21 @@ Beneath the controluser setup section, uncomment these lines:
 
     /* Storage database and tables */
     // $cfg['Servers'][$i]['pmadb'] = 'phpmyadmin';
-    // $cfg['Servers'][$i]['bookmarktable'] = 'pma_bookmark';
-    // $cfg['Servers'][$i]['relation'] = 'pma_relation';
-    // $cfg['Servers'][$i]['table_info'] = 'pma_table_info';
-    // $cfg['Servers'][$i]['table_coords'] = 'pma_table_coords';
-    // $cfg['Servers'][$i]['pdf_pages'] = 'pma_pdf_pages';
-    // $cfg['Servers'][$i]['column_info'] = 'pma_column_info';
-    // $cfg['Servers'][$i]['history'] = 'pma_history';
-    // $cfg['Servers'][$i]['tracking'] = 'pma_tracking';
-    // $cfg['Servers'][$i]['designer_coords'] = 'pma_designer_coords';
-    // $cfg['Servers'][$i]['userconfig'] = 'pma_userconfig';
-    // $cfg['Servers'][$i]['recent'] = 'pma_recent';
+    // $cfg['Servers'][$i]['bookmarktable'] = 'pma__bookmark';
+    // $cfg['Servers'][$i]['relation'] = 'pma__relation';
+    // $cfg['Servers'][$i]['table_info'] = 'pma__table_info';
+    // $cfg['Servers'][$i]['table_coords'] = 'pma__table_coords';
+    // $cfg['Servers'][$i]['pdf_pages'] = 'pma__pdf_pages';
+    // $cfg['Servers'][$i]['column_info'] = 'pma__column_info';
+    // $cfg['Servers'][$i]['history'] = 'pma__history';
+    // $cfg['Servers'][$i]['table_uiprefs'] = 'pma__table_uiprefs';
+    // $cfg['Servers'][$i]['tracking'] = 'pma__tracking';
+    // $cfg['Servers'][$i]['designer_coords'] = 'pma__designer_coords';
+    // $cfg['Servers'][$i]['userconfig'] = 'pma__userconfig';
+    // $cfg['Servers'][$i]['recent'] = 'pma__recent';
+    // $cfg['Servers'][$i]['users'] = 'pma__users';
+    // $cfg['Servers'][$i]['usergroups'] = 'pma__usergroups';
+    // $cfg['Servers'][$i]['navigationhiding'] = 'pma__navigationhiding';
 
 Next, create the user with the above details. Don't set any permissions
 for it just yet.
@@ -186,7 +194,7 @@ In order to take advantage of the bookmark and relation features, you
 will also need to give pma some additional permissions:
 
 Note:as long as you did not change the value of
-$cfg['Servers'][$i]['pmadb'] in /etc/webapps/phpmyadmin/config.inc.php,
+cfg['Servers'][i]['pmadb'] in /etc/webapps/phpmyadmin/config.inc.php,
 then <pma_db> should be phpmyadmin
 
     GRANT SELECT, INSERT, UPDATE, DELETE ON <pma_db>.* TO 'pma'@'localhost';
@@ -197,40 +205,11 @@ message at the bottom of the main screen should now be gone.
 Accessing your phpMyAdmin installation
 --------------------------------------
 
-Finally your phpmyadmin installation is complete. Before you start using
-it you need to restart httpd (Apache)
+Your phpMyAdmin installation is now complete. Before you start using it
+you need to restart Apache.
 
-You can access your phpmyadmin installation using the following url:
-
-    http://localhost/phpmyadmin/
-
-If you want to access it using http://localhost/phpmyadmin, open
-'/etc/httpd/conf/extra/httpd-phpmyadmin.conf' and change:
-
-    Alias /phpmyadmin/ "/usr/share/webapps/phpMyAdmin/"
-
-to
-
-    Alias /phpmyadmin "/usr/share/webapps/phpMyAdmin"
-
-You should also read this thread.
-
-If you get the error "#2002 - The server is not responding (or the local
-MySQL server's socket is not correctly configured)" then you might want
-to change "localhost" in /etc/webapps/phpmyadmin/config.inc.php to your
-hostname:
-
-    $cfg['Servers'][$i]['host'] = 'localhost';
-
-If you would like to use phpmyadmin setup script by calling
-http://localhost/phpmyadmin/setup you will need to create a config
-directory that's writeable by the httpd in the
-/usr/share/webapps/phpmyadmin as follows:
-
-    cd /usr/share/webapps/phpMyAdmin
-    mkdir config
-    chgrp http config
-    chmod g+w config
+You can access your phpMyAdmin installation by going to
+http://localhost/phpmyadmin/
 
 Lighttpd Configuration
 ----------------------
@@ -257,50 +236,44 @@ Nginx Configuration
 Configurating Nginx is similar to Apache (and Lighttpd, for that
 matter). Make sure Nginx is setup to serve PHP files (see Nginx).
 
-Create a symbolic link to the /usr/share/webapps/phpmyadmin directory
-from whichever directory your vhost is serving files from, e.g.
-/srv/http/<domain>/public_html/
-
-     sudo ln -s /usr/share/webapps/phpMyAdmin /srv/http/<domain>/public_html/phpmyadmin
-
-You can also setup a sub domain with a server block like so (if using
-php-fpm):
+You can setup a sub domain (or domain) with a server block like so (if
+using php-fpm):
 
      server {
              server_name     phpmyadmin.<domain.tld>;
-             access_log      /srv/http/<domain>/logs/phpmyadmin.access.log;
-             error_log       /srv/http/<domain.tld>/logs/phpmyadmin.error.log;
      
-             location / {
-                     root    /srv/http/<domain.tld>/public_html/phpmyadmin;
-                     index   index.html index.htm index.php;
-             }
+             root    /usr/share/webapps/phpMyAdmin;
+             index   index.php;
      
              location ~ \.php$ {
-                     root            /srv/http/<domain.tld>/public_html/phpmyadmin;
-                     fastcgi_pass    unix:/var/run/php-fpm/php-fpm.sock;
-                     fastcgi_index   index.php;
-                     fastcgi_param   SCRIPT_FILENAME  /srv/http/<domain.tld>/public_html/phpmyadmin/$fastcgi_script_name;
-                     include         fastcgi_params;
+                     try_files      $uri =404;
+                     fastcgi_pass   unix:/var/run/php-fpm/php-fpm.sock;
+                     fastcgi_index  index.php;
+                     include        fastcgi.conf;
              }
      }
 
-Update open_basedir in /etc/php/php.ini and add "/usr/share/webapps/".
+To access this url on your localhost, you can simply add an entry in
+/etc/hosts:
+
+     127.0.0.1	phpmyadmin.<domain.tld>
+
+You need to update PHP's open_basedir option to add the appropriate
+directories. Either in /etc/php/php.ini:
 
      open_basedir = /srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/share/webapps/:/etc/webapps/
 
-You may run into some issues with phpmyadmin telling you "The
-Configuration File Now Needs A Secret Passphrase" and no matter what you
-enter, the error is still displayed. Try changing the ownership of the
-files to the NGINX specified user/group, e.g. nginx...
+Or if running php-fpm with a separate entry for phpmyadmin, you can
+overwrite this value in your pool definition (in /etc/php/fpm.d/<pool
+file>):
 
-     sudo chown -R http:http /usr/share/webapps/phpMyAdmin
+     php_admin_value[open_basedir] = /tmp/:/usr/share/webapps/:/etc/webapps/
 
 If the above doesn't fix it try adding the following to your NGINX
 Configuration below the other fastcgi_param (I think its something to do
 with the Suhosin-Patch)
 
-     fastcgi_param  PHP_ADMIN_VALUE  open_basedir="/srv/:/tmp/:/usr/share/webapps/:/etc/webapps:/usr/share/pear/";
+     fastcgi_param  PHP_ADMIN_VALUE  open_basedir="/srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/share/webapps/:/etc/webapps/";
 
 While you can enter anything for the blowfish password, you may want to
 choose a randomly generated string of characters (most likely for
@@ -315,109 +288,16 @@ fastcgi params):
 
      fastcgi_param HTTPS on;
 
-Other (Older) information
--------------------------
-
-This page holds a sample 'config.inc.php' file that you can place in the
-main phpMyAdmin directory so that it immediately starts working
-
-Things you should do first
-
-Create a 'controluser', so that phpmyadmin can read from the main mysql
-database.
-
-    mysql -u root -p YOURROOTPASSWORD
-    mysql> grant usage on mysql.* to controluser@localhost identified by 'CONTROLPASS';
-
-Where is phpmyadmin
-
-in phpmyadmin 3.2.2-3 the file is missing /srv/http/ create this symlik
-
-    ln -s /usr/share/webapps/phpMyAdmin/ /srv/http/phpmyadmin
-
-Things you should change
-
-controluser is set to controluser   
- controlpass is set to password   
- verbose is set to name_of_server
-
-Sample 'config.inc.php' file
-
-    <?php
-    /*
-     * Generated configuration file
-     * Generated by: phpMyAdmin 2.11.8.1 setup script by Michal Čihař <michal@cihar.com>
-     * Version: $Id: setup.php 11423 2008-07-24 17:26:05Z lem9 $
-     * Date: Mon, 01 Sep 2008 20:34:02 GMT
-     */
-
-    /* Servers configuration */
-    $i = 0;
-
-    /* Server ravi-test-mysql (http) [1] */
-    $i++;
-    $cfg['Servers'][$i]['host'] = 'localhost';
-    $cfg['Servers'][$i]['extension'] = 'mysql';
-    $cfg['Servers'][$i]['port'] = '3306';
-    $cfg['Servers'][$i]['connect_type'] = 'tcp';
-    $cfg['Servers'][$i]['compress'] = false;
-    $cfg['Servers'][$i]['controluser'] = 'controluser';
-    $cfg['Servers'][$i]['controlpass'] = 'password';
-    $cfg['Servers'][$i]['auth_type'] = 'http';
-    $cfg['Servers'][$i]['verbose'] = 'name_of_server';
-
-    /* End of servers configuration */
-
-    $cfg['LeftFrameLight'] = true;
-    $cfg['LeftFrameDBTree'] = true;
-    $cfg['LeftFrameDBSeparator'] = '_';
-    $cfg['LeftFrameTableSeparator'] = '__';
-    $cfg['LeftFrameTableLevel'] = 1;
-    $cfg['LeftDisplayLogo'] = true;
-    $cfg['LeftDisplayServers'] = false;
-    $cfg['DisplayServersList'] = false;
-    $cfg['DisplayDatabasesList'] = 'auto';
-    $cfg['LeftPointerEnable'] = true;
-    $cfg['DefaultTabServer'] = 'main.php';
-    $cfg['DefaultTabDatabase'] = 'db_structure.php';
-    $cfg['DefaultTabTable'] = 'tbl_structure.php';
-    $cfg['LightTabs'] = false;
-    $cfg['ErrorIconic'] = true;
-    $cfg['MainPageIconic'] = true;
-    $cfg['ReplaceHelpImg'] = true;
-    $cfg['NavigationBarIconic'] = 'both';
-    $cfg['PropertiesIconic'] = 'both';
-    $cfg['BrowsePointerEnable'] = true;
-    $cfg['BrowseMarkerEnable'] = true;
-    $cfg['ModifyDeleteAtRight'] = false;
-    $cfg['ModifyDeleteAtLeft'] = true;
-    $cfg['RepeatCells'] = 100;
-    $cfg['DefaultDisplay'] = 'horizontal';
-    $cfg['TextareaCols'] = 40;
-    $cfg['TextareaRows'] = 7;
-    $cfg['LongtextDoubleTextarea'] = true;
-    $cfg['TextareaAutoSelect'] = false;
-    $cfg['CharEditing'] = 'input';
-    $cfg['CharTextareaCols'] = 40;
-    $cfg['CharTextareaRows'] = 2;
-    $cfg['CtrlArrowsMoving'] = true;
-    $cfg['DefaultPropDisplay'] = 'horizontal';
-    $cfg['InsertRows'] = 2;
-    $cfg['EditInWindow'] = true;
-    $cfg['QueryWindowHeight'] = 310;
-    $cfg['QueryWindowWidth'] = 550;
-    $cfg['QueryWindowDefTab'] = 'sql';
-    $cfg['ForceSSL'] = false;
-    $cfg['ShowPhpInfo'] = false;
-    $cfg['ShowChgPassword'] = false;
-    $cfg['AllowArbitraryServer'] = false;
-    $cfg['LoginCookieRecall'] = 'something';
-    $cfg['LoginCookieValidity'] = 1800;
-    ?>
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PhpMyAdmin&oldid=248071"
+"https://wiki.archlinux.org/index.php?title=PhpMyAdmin&oldid=303728"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 9 March 2014, at 09:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

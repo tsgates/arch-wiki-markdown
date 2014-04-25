@@ -7,22 +7,20 @@ more information.
 Arch installs and runs flawlessly. Some specials features need tweaks,
 though.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Graphics                                                           |
-| -   2 Hibernation                                                        |
-| -   3 Fbsplash                                                           |
-| -   4 Power Saving                                                       |
-|     -   4.1 Fan control                                                  |
-|     -   4.2 TLP                                                          |
-|     -   4.3 Frequency Scaling                                            |
-|     -   4.4 Undervolting                                                 |
-|     -   4.5 Bootloader kernel options                                    |
-|         -   4.5.1 grub2                                                  |
-|         -   4.5.2 grub1                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Graphics
+-   2 Hibernation
+-   3 Fbsplash
+-   4 Power Saving
+    -   4.1 Fan control
+    -   4.2 TLP
+    -   4.3 Frequency Scaling
+    -   4.4 Undervolting
+    -   4.5 Bootloader kernel options
+        -   4.5.1 grub2
+        -   4.5.2 grub1
 
 Graphics
 --------
@@ -110,3 +108,10 @@ Retrieved from
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 26 March 2013, at 15:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

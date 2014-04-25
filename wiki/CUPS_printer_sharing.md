@@ -1,44 +1,34 @@
 CUPS printer sharing
 ====================
 
-> Summary
+Related articles
 
-Setting up printer sharing using CUPS
-
-> Related
-
-Samba
-
-CUPS
+-   Samba
+-   CUPS
 
 CUPS provides capabilities to set up printer sharing between different
 systems. Below you'll find instructions for common scenarios.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Between GNU/Linux systems                                          |
-|     -   1.1 Using the web interface                                      |
-|     -   1.2 Manual setup                                                 |
-|                                                                          |
-| -   2 Between GNU/Linux and Windows                                      |
-|     -   2.1 Linux server - Windows client                                |
-|         -   2.1.1 Sharing via IPP                                        |
-|         -   2.1.2 Sharing via Samba                                      |
-|                                                                          |
-|     -   2.2 Windows server - Linux client                                |
-|         -   2.2.1 Sharing via LPD                                        |
-|         -   2.2.2 Sharing via IPP                                        |
-|         -   2.2.3 Sharing via Samba                                      |
-|             -   2.2.3.1 Configuration using the web interface            |
-|             -   2.2.3.2 Manual configuration                             |
-|                                                                          |
-|     -   2.3 Troubleshooting                                              |
-|         -   2.3.1 Can't print with GTK applications                      |
-|                                                                          |
-| -   3 Other operating systems                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Between GNU/Linux systems
+    -   1.1 Using the web interface
+    -   1.2 Manual setup
+        -   1.2.1 Using a CUPS 1.6.x client with a <= 1.5.x server
+-   2 Between GNU/Linux and Windows
+    -   2.1 Linux server - Windows client
+        -   2.1.1 Sharing via IPP
+        -   2.1.2 Sharing via Samba
+    -   2.2 Windows server - Linux client
+        -   2.2.1 Sharing via LPD
+        -   2.2.2 Sharing via IPP
+        -   2.2.3 Sharing via Samba
+            -   2.2.3.1 Configuration using the web interface
+            -   2.2.3.2 Manual configuration
+    -   2.3 Troubleshooting
+        -   2.3.1 Can't print with GTK applications
+-   3 Other operating systems
 
 Between GNU/Linux systems
 -------------------------
@@ -108,6 +98,16 @@ Note:When adding the printer from the client, if using the Internet
 Printing Protocol (IPP), put the URI as
 ipp://192.168.0.101:631/printers/<name-of-printer>
 
+Using a CUPS 1.6.x client with a <= 1.5.x server
+
+As of CUPS version 1.6, the client defaults to IPP 2.0. If the server
+uses CUPS <= 1.5 / IPP <= 1.1, the client doesn't downgrade the protocol
+automatically and thus can't communicate with the server. A workaround
+(undocumented as of 2013-05-07, but see this bug report) is to put the
+following in /etc/cups/client.conf:
+
+    ServerName HOSTNAME-OR-IP-ADDRESS[:PORT]/version=1.1
+
 Between GNU/Linux and Windows
 -----------------------------
 
@@ -127,9 +127,27 @@ to enable browsing.
 On the Windows computer, go to the printer control panel and choose to
 'Add a New Printer'. Next, choose to give a URL. For the URL, type in
 the location of the printer:
-http://host_ip_address:631/printers/printer_name (where host_ip_address
-is the GNU/Linux server's IP address and printer_name is the name of the
-printer being connected to).
+
+    http://host_ip_address:631/printers/printer_name
+
+(where host_ip_address is the GNU/Linux server's IP address and
+printer_name is the name of the printer being connected to, you can also
+use the server's fully qualified domain name, if it has one, but you may
+need to set ServerAlias my_fully_qualified_domain_name in cupsd.conf for
+this to work).
+
+Note:The add printer dialog in windows is quite sensitive to the path to
+the printer, the dialogue box itself suggests:
+
+    http://servername:631/printers/printer_name/.printer
+
+which will work in a web-browser but not in the add printer dialogue.
+(At least, not when using cups as an ipp server). The syntax suggested
+above:
+
+    http://host_ip_address:631/printers/printer_name
+
+will work.
 
 After this, install the native printer drivers for your printer on the
 Windows computer. If the CUPS server is set up to use its own printer
@@ -203,6 +221,10 @@ Samba and CUPS documentation for more help. The smb.conf.example file
 also has some good samples that might warrant imitating.
 
 > Windows server - Linux client
+
+Warning:CUPS cannot handle spaces in printer URIs. If your Windows
+printer name or user passwords have spaces, CUPS will throw "lpadmin:
+Bad device-uri" error
 
 Sharing via LPD
 
@@ -326,8 +348,6 @@ which keeps printing new error messages as they occur.
 
 Note: You can also use the web interface to browse this error file.
 
-  
-
 Can't print with GTK applications
 
 If you get "getting printer information failed" when you try to print
@@ -343,8 +363,15 @@ found in the CUPS manual, e.g. on
 http://localhost:631/sam.html#PRINTING_OTHER
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=CUPS_printer_sharing&oldid=254822"
+"https://wiki.archlinux.org/index.php?title=CUPS_printer_sharing&oldid=297000"
 
 Category:
 
 -   Printers
+
+-   This page was last modified on 12 February 2014, at 10:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

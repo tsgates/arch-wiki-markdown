@@ -1,112 +1,103 @@
 NVIDIA
 ======
 
-> Summary
+Related articles
 
-Information on installing, configuring and troubleshooting the
-proprietary NVIDIA Drivers.
-
-> Related
-
-Nouveau
-
-Xorg
+-   Nouveau
+-   Bumblebee
+-   NVIDIA Optimus
+-   Xorg
 
 This article covers installing and configuring NVIDIA's proprietary
 graphic card driver. For information about the open-source drivers, see
-Nouveau.
+Nouveau. See instead NVIDIA Optimus if you have a laptop based on such
+technology.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-|     -   1.1 Alternate install: custom kernel                             |
-|     -   1.2 Automatic re-compilation of the NVIDIA module with every     |
-|         update of any kernel                                             |
-|                                                                          |
-| -   2 Configuring                                                        |
-|     -   2.1 Automatic configuration                                      |
-|     -   2.2 Minimal configuration                                        |
-|     -   2.3 Multiple monitors                                            |
-|         -   2.3.1 TwinView                                               |
-|             -   2.3.1.1 Automatic configuration                          |
-|             -   2.3.1.2 Manual CLI configuration with xrandr             |
-|                                                                          |
-|         -   2.3.2 Using NVIDIA Settings                                  |
-|         -   2.3.3 ConnectedMonitor                                       |
-|         -   2.3.4 Mosaic Mode                                            |
-|             -   2.3.4.1 Base Mosaic                                      |
-|             -   2.3.4.2 SLI Mosaic                                       |
-|                                                                          |
-| -   3 Tweaking                                                           |
-|     -   3.1 GUI: nvidia-settings                                         |
-|     -   3.2 Enabling MSI (Message Signaled Interrupts)                   |
-|     -   3.3 Advanced: 20-nvidia.conf                                     |
-|         -   3.3.1 Enabling desktop composition                           |
-|         -   3.3.2 Disabling the logo on startup                          |
-|         -   3.3.3 Enabling hardware acceleration                         |
-|         -   3.3.4 Overriding monitor detection                           |
-|         -   3.3.5 Enabling triple buffering                              |
-|         -   3.3.6 Using OS-level events                                  |
-|         -   3.3.7 Enabling power saving                                  |
-|         -   3.3.8 Enabling Brightness Control                            |
-|         -   3.3.9 Enabling SLI                                           |
-|         -   3.3.10 Forcing Powermizer performance level (for laptops)    |
-|             -   3.3.10.1 Letting the GPU set its own performance level   |
-|                 based on temperature                                     |
-|                                                                          |
-|         -   3.3.11 Disable vblank interrupts (for laptops)               |
-|         -   3.3.12 Enabling overclocking                                 |
-|             -   3.3.12.1 Setting static 2D/3D clocks                     |
-|                                                                          |
-| -   4 Tips and tricks                                                    |
-|     -   4.1 Fixing Terminal Resolution                                   |
-|     -   4.2 Enabling Pure Video HD (VDPAU/VAAPI)                         |
-|     -   4.3 Hardware accelerated video decoding with XvMC                |
-|     -   4.4 Using TV-out                                                 |
-|     -   4.5 X with a TV (DFP) as the only display                        |
-|     -   4.6 Check the power source                                       |
-|     -   4.7 Displaying GPU temperature in the shell                      |
-|         -   4.7.1 Method 1 - nvidia-settings                             |
-|         -   4.7.2 Method 2 - nvidia-smi                                  |
-|         -   4.7.3 Method 3 - nvclock                                     |
-|                                                                          |
-|     -   4.8 Set Fan Speed at Login                                       |
-|     -   4.9 Order of install/deinstall for changing drivers              |
-|     -   4.10 Switching between nvidia and nouveau drivers                |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Bad performance, e.g. slow repaints when switching tabs in   |
-|         Chrome                                                           |
-|     -   5.2 Gaming using Twinview                                        |
-|     -   5.3 Vertical sync using TwinView                                 |
-|     -   5.4 Old Xorg Settings                                            |
-|     -   5.5 Corrupted screen: "Six screens" issue                        |
-|     -   5.6 '/dev/nvidia0' Input/Output error                            |
-|     -   5.7 '/dev/nvidiactl' errors                                      |
-|     -   5.8 32 bit applications do not start                             |
-|     -   5.9 Errors after updating the kernel                             |
-|     -   5.10 Crashing in general                                         |
-|     -   5.11 Bad performance after installing a new driver version       |
-|     -   5.12 CPU spikes with 400 series cards                            |
-|     -   5.13 Laptops: X hangs on login/out, worked around with           |
-|         Ctrl+Alt+Backspace                                               |
-|     -   5.14 Refresh rate not detected properly by XRandR dependant      |
-|         utilities                                                        |
-|     -   5.15 No screens found on a laptop / NVIDIA Optimus               |
-|     -   5.16 Screen(s) found, but none have a usable configuration       |
-|     -   5.17 No brightness control on laptops                            |
-|     -   5.18 Black Bars while watching full screen flash videos with     |
-|         twinview                                                         |
-|     -   5.19 Backlight is not turning off in some occasions              |
-|     -   5.20 Blue tint on videos with Flash                              |
-|     -   5.21 Bleeding overlay with Flash                                 |
-|     -   5.22 Full system freeze using flash                              |
-|     -   5.23 XOrg fails to Load or Red Screen of Death                   |
-|                                                                          |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing
+    -   1.1 Alternate install: custom kernel
+    -   1.2 Automatic re-compilation of the NVIDIA module with every
+        update of any kernel
+-   2 Configuring
+    -   2.1 Minimal configuration
+    -   2.2 Automatic configuration
+    -   2.3 Multiple monitors
+        -   2.3.1 TwinView
+            -   2.3.1.1 Manual CLI configuration with xrandr
+        -   2.3.2 Using NVIDIA Settings
+        -   2.3.3 ConnectedMonitor
+        -   2.3.4 Mosaic mode
+            -   2.3.4.1 Base mosaic
+            -   2.3.4.2 SLI Mosaic
+-   3 Tweaking
+    -   3.1 GUI: nvidia-settings
+    -   3.2 Advanced: 20-nvidia.conf
+        -   3.2.1 Enabling desktop composition
+        -   3.2.2 Disabling the logo on startup
+        -   3.2.3 Enabling hardware acceleration
+        -   3.2.4 Overriding monitor detection
+        -   3.2.5 Enabling triple buffering
+        -   3.2.6 Using OS-level events
+        -   3.2.7 Enabling power saving
+        -   3.2.8 Enabling brightness control
+        -   3.2.9 Enabling SLI
+        -   3.2.10 Forcing Powermizer performance level (for laptops)
+            -   3.2.10.1 Letting the GPU set its own performance level
+                based on temperature
+        -   3.2.11 Disable vblank interrupts (for laptops)
+        -   3.2.12 Enabling overclocking
+            -   3.2.12.1 Setting static 2D/3D clocks
+-   4 Tips and tricks
+    -   4.1 Fixing terminal resolution
+    -   4.2 Enabling Pure Video HD (VDPAU/VAAPI)
+    -   4.3 Avoid screen tearing in KDE (KWin)
+    -   4.4 Hardware accelerated video decoding with XvMC
+    -   4.5 Using TV-out
+    -   4.6 X with a TV (DFP) as the only display
+    -   4.7 Check the power source
+    -   4.8 Displaying GPU temperature in the shell
+        -   4.8.1 Method 1 - nvidia-settings
+        -   4.8.2 Method 2 - nvidia-smi
+        -   4.8.3 Method 3 - nvclock
+    -   4.9 Set fan speed at login
+    -   4.10 Order of install/deinstall for changing drivers
+    -   4.11 Switching between NVIDIA and nouveau drivers
+-   5 Troubleshooting
+    -   5.1 Bad performance, e.g. slow repaints when switching tabs in
+        Chrome
+    -   5.2 Gaming using Twinview
+    -   5.3 Vertical sync using TwinView
+    -   5.4 Old Xorg settings
+    -   5.5 Corrupted screen: "Six screens" Problem
+    -   5.6 '/dev/nvidia0' input/output error
+    -   5.7 '/dev/nvidiactl' errors
+    -   5.8 32 bit applications do not start
+    -   5.9 Errors after updating the kernel
+    -   5.10 Crashing in general
+    -   5.11 Bad performance after installing a new driver version
+    -   5.12 CPU spikes with 400 series cards
+    -   5.13 Laptops: X hangs on login/out, worked around with
+        Ctrl+Alt+Backspace
+    -   5.14 Refresh rate not detected properly by XRandR dependant
+        utilities
+    -   5.15 No screens found on a laptop/NVIDIA Optimus
+        -   5.15.1 Possible Workaround
+    -   5.16 Screen(s) found, but none have a usable configuration
+    -   5.17 No brightness control on laptops
+    -   5.18 Black Bars while watching full screen flash videos with
+        TwinView
+    -   5.19 Backlight is not turning off in some occasions
+    -   5.20 Blue tint on videos with Flash
+    -   5.21 Bleeding overlay with Flash
+    -   5.22 Full system freeze using Flash
+    -   5.23 XOrg fails to load or Red Screen of Death
+    -   5.24 Black screen on systems with Intel integrated GPU
+    -   5.25 Black screen on systems with VIA integrated GPU
+    -   5.26 X fails with "no screens found" with Intel iGPU
+    -   5.27 Xorg fails during boot, but otherwise starts fine
+-   6 See also
 
 Installing
 ----------
@@ -118,49 +109,40 @@ Tip:It is usually beneficial to install the NVIDIA driver through pacman
 rather than through the package provided by the NVIDIA site, this allows
 the driver to be updated when upgrading the system.
 
-1. If you do not know what graphics card your have, find out by issuing:
+1. If you do not know what graphics card you have, find out by issuing:
 
     # lspci -k | grep -A 2 -i "VGA"
 
-2. Install the appropriate driver for your card:
+2. Determine the necessary driver version for your card by visiting
+NVIDIA's driver download site, looking up the name in NVIDIA's legacy
+card list, or finding the code name on nouveau wiki's code names page.
 
--   For GeForce 8 series and newer [NVC0 and newer] cards, install
+3. Install the appropriate driver for your card:
+
+-   For GeForce 8 series and newer [NV50, NV84 and newer] cards, install
     nvidia package, available in the official repositories.
--   For GeForce 6/7 series cards [NV40-NVAF], install nvidia-304xx
-    package, available in the official repositories.
--   For GeForce 5 FX series cards [NV30-NV38], install nvidia-173xx
+-   For GeForce 6/7 series cards [NV40-NV4E, NV63-NV68], install
+    nvidia-304xx package, available in the official repositories.
+-   For GeForce 5 FX series cards [NV30-NV36], install nvidia-173xx
     package, available in the AUR.
--   For GeForce 2/3/4 MX/Ti series cards [NV11 and NV17-NV28], install
+-   For GeForce 2/3/4 MX/Ti series cards [NV11, NV17-NV28], install
     nvidia-96xx package, available in the AUR.
-
-Tip:If you are not sure, visit NVIDIA's driver download site to find out
-the appropriate driver for a given card. You could also check the legacy
-card list and the nouveau wiki's code names page.
 
 For the very latest GPU models, it may be required to install
 nvidia-beta from the Arch User Repository, since the stable drivers may
 not support the newly introduced features.
 
-Note:The nvidia-libgl or nvidia-{304xx,173xx,96xx}-utils package is a
-dependency and will be pulled in automatically. It may conflict with the
-libgl package; this is normal. If pacman asks to remove libgl and fails
-due to unsatisfied dependencies, remove it with pacman -Rdd libgl.
-
-Note:The nvidia-96xx-utils package requires a legacy X.Org server
-release (xorg-server1.12). It conflicts with the xorg-server from the
-official repositories.
-
 If you are on 64-bit and also need 32-bit OpenGL support, you must also
 install the equivalent lib32 package from the multilib repository (e.g.
-lib32-nvidia-libgl or lib32-nvidia-{304xx,173xx}-utils).
+lib32-nvidia-libgl or lib32-nvidia-{304xx,173xx,96xx}-utils).
 
 Tip:The legacy nvidia-96xx and nvidia-173xx drivers can also be
 installed from the unofficial [city] repository.
 
-3. Reboot. The nvidia package contains a file which blacklists the
+4. Reboot. The nvidia package contains a file which blacklists the
 nouveau module, so rebooting is necessary.
 
-Once the driver has been installed, continue to: #Configuring.
+Once the driver has been installed, continue to configure.
 
 > Alternate install: custom kernel
 
@@ -194,8 +176,8 @@ Go into the temporary nvidia build directory:
 
     $ cd ~/abs/nvidia
 
-It is required to edit the files nvidia.install and PKGBUILD file so
-that they contain the right kernel version variables.
+It is required to edit the files nvidia.install and PKGBUILD so that
+they contain the right kernel version variables.
 
 While running the custom kernel, get the appropriate kernel and local
 version names:
@@ -210,15 +192,14 @@ version names:
     for all instances of the version number within this file.
 2.  In PKGBUILD, change the _extramodules=extramodules-3.4-ARCH variable
     to match the appropriate version, as above.
-3.  If there are more than one kernels in the system installed in
-    parallel (such as a custom kernel alongside the default -ARCH
-    kernel), change the pkgname=nvidia variable in the PKGBUILD to a
-    unique identifier, such as nvidia-344 or nvidia-custom. This will
-    allow both kernels to use the nvidia module, since the custom nvidia
-    module has a different package name and will not overwrite the
-    original. You will also need to comment the line in package() that
-    blacklists the nvidia module in /usr/lib/modprobe.d/nvidia.conf (no
-    need to do it again).
+3.  If there are multiple kernels installed in parallel (such as a
+    custom kernel alongside the default -ARCH kernel), change the
+    pkgname=nvidia variable in the PKGBUILD to a unique identifier, such
+    as nvidia-344 or nvidia-custom. This will allow both kernels to use
+    the nvidia module, since the custom nvidia module has a different
+    package name and will not overwrite the original. You will also need
+    to comment the line in package() that blacklists the nouveau module
+    in /usr/lib/modprobe.d/nvidia.conf (no need to do it again).
 
 Then do:
 
@@ -231,25 +212,21 @@ pacman to install the resulting package.
 > Automatic re-compilation of the NVIDIA module with every update of any kernel
 
 This is possible thanks to nvidia-hook from the AUR. You will need to
-install the module sources: either nvidia-source for the stable drivers
-or nvidia-source-beta for the beta drivers. In nvidia-hook, the
-'automatic re-compilation' functionality is done by a nvidia hook on
-mkinitcpio after forcing to update the linux-headers package. You will
-need to add 'nvidia' to the HOOKS array in /etc/mkinitcpio.conf as well
-as 'linux-headers' and your custom kernel(s) headers to the SyncFirst
-array in /etc/pacman.conf for this to work.
+install the module sources: nvidia-dkms. In nvidia-hook, the 'automatic
+re-compilation' functionality is done by a nvidia hook on mkinitcpio
+after forcing to update the linux-headers package. You will need to add
+'nvidia' to the HOOKS array in /etc/mkinitcpio.conf.
 
 The hook will call the dkms command to update the NVIDIA module for the
 version of your new kernel.
 
-Note:If you are using this functionality it's important to look at the
-installation process of the linux (or any other kernel) package. nvidia
-hook will tell you if anything goes wrong.
+> Note:
 
-  
-
-Note:If you would like to do this manually please see this section in
-the dkms arch wiki.
+-   If you are using this functionality it's important to look at the
+    installation process of the linux (or any other kernel) package.
+    nvidia hook will tell you if anything goes wrong.
+-   If you would like to do this manually please see this section in the
+    dkms arch wiki.
 
 Configuring
 -----------
@@ -257,16 +234,38 @@ Configuring
 It is possible that after installing the driver it may not be needed to
 create an Xorg server configuration file. You can run a test to see if
 the Xorg server will function correctly without a configuration file.
-However, it may be required to create a /etc/X11/xorg.conf configuration
-file in order to adjust various settings. This configuration can be
-generated by the NVIDIA Xorg configuration tool, or it can be created
-manually. If created manually, it can be a minimal configuration (in the
-sense that it will only pass the basic options to the Xorg server), or
-it can include a number of settings that can bypass Xorg's
-auto-discovered or pre-configured options.
+However, it may be required to create a configuration file (prefer
+/etc/X11/xorg.conf.d/20-nvidia.conf over /etc/X11/xorg.conf) in order to
+adjust various settings. This configuration can be generated by the
+NVIDIA Xorg configuration tool, or it can be created manually. If
+created manually, it can be a minimal configuration (in the sense that
+it will only pass the basic options to the Xorg server), or it can
+include a number of settings that can bypass Xorg's auto-discovered or
+pre-configured options.
 
 Note:Since 1.8.x Xorg uses separate configuration files in
 /etc/X11/xorg.conf.d/ - check out advanced configuration section.
+
+> Minimal configuration
+
+A basic configuration block in 20-nvidia.conf (or deprecated in
+xorg.conf) would look like this:
+
+    /etc/X11/xorg.conf.d/20-nvidia.conf
+
+    Section "Device"
+            Identifier "Nvidia Card"
+            Driver "nvidia"
+            VendorName "NVIDIA Corporation"
+            Option "NoLogo" "true"
+            #Option "UseEDID" "false"
+            #Option "ConnectedMonitor" "DFP"
+            # ...
+    EndSection
+
+Tip:If upgrading from nouveau make sure to remove "nouveau" from
+/etc/mkinitcpio.conf. See Switching between NVIDIA and nouveau drivers,
+if switching between the open and proprietary drivers often.
 
 > Automatic configuration
 
@@ -282,30 +281,19 @@ If there are instances of DRI, ensure they are commented out:
 
     #    Load        "dri"
 
-Double check your  /etc/X11/xorg.conf to make sure your default depth,
+Double check your /etc/X11/xorg.conf to make sure your default depth,
 horizontal sync, vertical refresh, and resolutions are acceptable.
 
-Warning: That may still not work properly with Xorg-server 1.8
-
-> Minimal configuration
-
-A basic xorg.conf would look like this:
-
-    /etc/X11/xorg.conf
-
-    Section "Device"
-       Identifier     "Device0"
-       Driver         "nvidia"
-       VendorName     "NVIDIA Corporation"
-    EndSection
-
-Tip:If upgrading from nouveau make sure to remove "nouveau" from
-/etc/mkinitcpio.conf. See NVIDIA#Switching between nvidia and nouveau
-drivers, if switching between the open and proprietary drivers often.
+Warning:That may still not work properly with Xorg-server 1.8
 
 > Multiple monitors
 
 See Multihead for more general information
+
+Warning:As of August 2013, Xinerama is broken when using the proprietary
+NVIDIA driver from 319 upwards. Users wishing to use Xinerama with the
+NVIDIA driver should use the NVIDIA 313 driver, which works only with
+Linux kernels earlier than 3.10. See this thread for more information.
 
 To activate dual screen support, you just need to edit the
 /etc/X11/xorg.conf.d/10-monitor.conf file which you made before.
@@ -379,12 +367,11 @@ desire compositing.
 
     Option "TwinView" "1"
 
-TwinView only works on a per card basis: If you have multiple cards (and
-no SLI?), you'll have to use xinerama or zaphod mode (multiple X
-screens). You can combine TwinView with zaphod mode, ending up, for
-example, with two X screens covering two monitors each. Most window
-managers fail miserably in zaphod mode. The shining exception is
-Awesome. KDE almost works.
+TwinView only works on a per card basis: If you have multiple cards,
+you'll have to use xinerama or zaphod mode (multiple X screens). You can
+combine TwinView with zaphod mode, ending up, for example, with two X
+screens covering two monitors each. Most window managers fail miserably
+in zaphod mode. Awesome is the shining exception, and KDE almost works.
 
 Example configuration:
 
@@ -429,16 +416,69 @@ Example configuration:
         EndSubSection
     EndSection
 
-Device Option information
+Device option information.
 
-Automatic configuration
+If you have multiple cards that are SLI capable, it is possible to run
+more than one monitor attached to separate cards (for example: two cards
+in SLI with one monitor attached to each). The "MetaModes" option in
+conjunction with SLI Mosaic mode enables this. Below is a configuration
+which works for the aforementioned example and runs GNOME flawlessly.
 
-The NVIDIA package provides Twinview. This tool will help by
-automatically configuring all the monitors connected to your video card.
-This only works for multiple monitors on a single card. To configure
-Xorg Server with Twinview run:
+    /etc/X11/xorg.conf.d/10-monitor.conf
 
-    # nvidia-xconfig --twinview
+    Section "Device"
+            Identifier      "Card A"
+            Driver          "nvidia"
+            BusID           "PCI:1:00:0"
+    EndSection
+
+    Section "Device"
+            Identifier      "Card B"
+            Driver          "nvidia"
+            BusID           "PCI:2:00:0"
+    EndSection
+
+    Section "Monitor"
+            Identifier      "Right Monitor"
+    EndSection
+
+    Section "Monitor"
+            Identifier      "Left Monitor"
+    EndSection
+
+    Section "Screen"
+            Identifier      "Right Screen"
+            Device          "Card A"
+            Monitor         "Right Monitor"
+            DefaultDepth    24
+            Option          "SLI" "Mosaic"
+            Option          "Stereo" "0"
+            Option          "BaseMosaic" "True"
+            Option          "MetaModes" "GPU-0.DFP-0: 1920x1200+4480+0, GPU-1.DFP-0:1920x1200+0+0"
+            SubSection      "Display"
+                            Depth           24
+            EndSubSection
+    EndSection
+
+    Section "Screen"
+            Identifier      "Left Screen"
+            Device          "Card B"
+            Monitor         "Left Monitor"
+            DefaultDepth    24
+            Option          "SLI" "Mosaic"
+            Option          "Stereo" "0"
+            Option          "BaseMosaic" "True"
+            Option          "MetaModes" "GPU-0.DFP-0: 1920x1200+4480+0, GPU-1.DFP-0:1920x1200+0+0"
+            SubSection      "Display"
+                            Depth           24
+            EndSubSection
+    EndSection
+
+    Section "ServerLayout"
+            Identifier      "Default"
+            Screen 0        "Right Screen" 0 0
+            Option          "Xinerama" "0"
+    EndSection
 
 Manual CLI configuration with xrandr
 
@@ -447,7 +487,7 @@ trick of your window manager to run a xrandr command like this one :
 
     xrandr --output DVI-I-0 --auto --primary --left-of DVI-I-1
 
-or
+or:
 
     xrandr --output DVI-I-1 --pos 1440x0 --mode 1440x900 --rate 75.0
 
@@ -524,13 +564,13 @@ The duplicated device with Screen is how you get X to use two monitors
 on one card without TwinView. Note that nvidia-settings will strip out
 any ConnectedMonitor options you have added.
 
-Mosaic Mode
+Mosaic mode
 
 Mosaic mode is the only way to use more than 2 monitors across multiple
 graphics cards with compositing. Your window manager may or may not
 recognize the distinction between each monitor.
 
-Base Mosaic
+Base mosaic
 
 Base mosaic mode works on any set of Geforce 8000 series or higher GPUs.
 It cannot be enabled from withing the nvidia-setting GUI. You must
@@ -577,24 +617,11 @@ This is documented in nvidia-settings source code. For this setting to
 persist, this command needs to be run on every startup. You can add it
 to ~/.xinitrc file for auto-startup with X.
 
-Tip: On rare occasions the ~/.nvidia-settings-rc may become corrupt. If
+Tip:On rare occasions the ~/.nvidia-settings-rc may become corrupt. If
 this happens, the Xorg server may crash and the file will have to be
-deleted to fix the issue.
+deleted to fix the problem.
 
-> Enabling MSI (Message Signaled Interrupts)
-
-By default, the graphics card uses a shared interrupt system. To give a
-small performance boost, edit /etc/modprobe.d/modprobe.conf and add:
-
-    options nvidia NVreg_EnableMSI=1
-
-Be warned, as this has been known to damage some systems running older
-hardware!
-
-To confirm, run:
-
-    # cat /proc/interrupts | grep nvidia
-      43:          0         49       4199      86318   PCI-MSI-edge      nvidia
+  
 
 > Advanced: 20-nvidia.conf
 
@@ -602,14 +629,14 @@ Edit /etc/X11/xorg.conf.d/20-nvidia.conf, and add the option to the
 correct section. The Xorg server will need to be restarted before any
 changes are applied.
 
--   See NVIDIA Accelerated Linux Graphics Driver README and Installation
-    Guide for additional details and options.
+See NVIDIA Accelerated Linux Graphics Driver README and Installation
+Guide for additional details and options.
 
 Enabling desktop composition
 
 As of NVIDIA driver version 180.44, support for GLX with the Damage and
-Composite X extensions is enabled by default. Refer to Xorg#Composite
-for detailed instructions.
+Composite X extensions is enabled by default. Refer to Xorg page for
+detailed instructions.
 
 Disabling the logo on startup
 
@@ -675,7 +702,7 @@ Add under section Monitor:
 
     Option "DPMS" "1"
 
-Enabling Brightness Control
+Enabling brightness control
 
 Add under section Device:
 
@@ -699,8 +726,6 @@ Find the first GPU's PCI Bus ID using lspci:
 
     $ lspci | grep VGA
 
-This will return something similar to:
-
     03:00.0 VGA compatible controller: nVidia Corporation G92 [GeForce 8800 GTS 512] (rev a2)
     05:00.0 VGA compatible controller: nVidia Corporation G92 [GeForce 8800 GTS 512] (rev a2)
 
@@ -713,7 +738,7 @@ Note:The format is important. The BusID value must be specified as
 
 Add the desired SLI rendering mode value under section Screen:
 
-    Option "SLI" "SLIAA"
+    Option "SLI" "AA"
 
 The following table presents the available rendering modes.
 
@@ -723,26 +748,32 @@ The following table presents the available rendering modes.
   1, yes, on, true, Auto      Enable SLI and allow the driver to automatically select the appropriate rendering mode.
   AFR                         Enable SLI and use the alternate frame rendering mode.
   SFR                         Enable SLI and use the split frame rendering mode.
-  SLIAA                       Enable SLI and use SLI antialiasing. Use this in conjunction with full scene antialiasing to improve visual quality.
+  AA                          Enable SLI and use SLI antialiasing. Use this in conjunction with full scene antialiasing to improve visual quality.
 
 Alternatively, you can use the nvidia-xconfig utility to insert these
 changes into xorg.conf with a single command:
 
-    # nvidia-xconfig --busid=PCI:3:0:0 --sli=SLIAA
+    # nvidia-xconfig --busid=PCI:3:0:0 --sli=AA
 
 To verify that SLI mode is enabled from a shell:
 
     $ nvidia-settings -q all | grep SLIMode
-     Attribute 'SLIMode' (arch:0.0): AA 
-       'SLIMode' is a string attribute.
-       'SLIMode' is a read-only attribute.
-       'SLIMode' can use the following target types: X Screen.
+
+      Attribute 'SLIMode' (arch:0.0): AA 
+        'SLIMode' is a string attribute.
+        'SLIMode' is a read-only attribute.
+        'SLIMode' can use the following target types: X Screen.
+
+Warning: After enabling SLI, your system may become
+frozen/non-responsive upon starting xorg. It is advisable that you
+disable your display manager before restarting.
 
 Forcing Powermizer performance level (for laptops)
 
 Add under section Device:
 
     # Force Powermizer to a certain level at all times
+    # level 0x0=adaptiv (Driver Default)
     # level 0x1=highest
     # level 0x2=med
     # level 0x3=lowest
@@ -751,6 +782,9 @@ Add under section Device:
     Option "RegistryDwords" "PowerMizerLevelAC=0x3"
     # Battery settings:
     Option	"RegistryDwords" "PowerMizerLevel=0x3"
+
+    # (Optional) AC Power adaptiv Mode and Battery Power forced to lowest Mode:
+    Option "RegistryDwords" "PowerMizerLevelAC=0x0; PowerMizerLevel=0x3"
 
 Letting the GPU set its own performance level based on temperature
 
@@ -784,12 +818,13 @@ This will enable on-the-fly overclocking within an X session by running:
 
     $ nvidia-settings
 
-Note:GeForce 400/500/600 series Fermi/Kepler cores cannot currently be
-overclocked using the Coolbits method. The alternative is to edit and
+Note:GeForce 400/500/600/700 series Fermi/Kepler cores cannot currently
+be overclocked using the Coolbits method. The alternative is to edit and
 reflash the GPU BIOS either under DOS (preferred), or within a Win32
-environment by way of nvflash and NiBiTor 6.0. The advantage of BIOS
-flashing is that not only can voltage limits be raised, but stability is
-generally improved over software overclocking methods such as Coolbits.
+environment by way of nvflash[dead link 2013-05-25] and NiBiTor 6.0[dead
+link 2013-05-25]. The advantage of BIOS flashing is that not only can
+voltage limits be raised, but stability is generally improved over
+software overclocking methods such as Coolbits.
 
 Setting static 2D/3D clocks
 
@@ -808,7 +843,7 @@ manual GPU fan control within nvidia-settings:
 Tips and tricks
 ---------------
 
-> Fixing Terminal Resolution
+> Fixing terminal resolution
 
 Transitioning from nouveau may cause your startup terminal to display at
 a lower resolution. A possible solution (if you are using GRUB) is to
@@ -823,7 +858,7 @@ for more information.
 
 Hardware Required:
 
-At least a video card with second generation PureVideo HD [1]
+At least a video card with second generation PureVideo HD [1].
 
 Software Required:
 
@@ -831,9 +866,8 @@ Nvidia video cards with the proprietary driver installed will provide
 video decoding capabilities with the VDPAU interface at different levels
 according to PureVideo generation.
 
-You can also add support for the VA-API interface with:
-
-    # pacman -S libva-vdpau-driver
+You can also add support for the VA-API interface with
+libva-vdpau-driver.
 
 Check VA-API support with:
 
@@ -847,19 +881,23 @@ To enable hardware acceleration in MPlayer edit ~/.mplayer/config
     vo=vdpau
     vc=ffmpeg12vdpau,ffwmv3vdpau,ffvc1vdpau,ffh264vdpau,ffodivxvdpau,
 
+Warning:The ffodivxvdpau codec is only supported by the most recent
+series of NVIDIA hardware. Consider omitting it based on your specific
+hardware.
+
 To enable hardware acceleration in VLC go:
 
-Tools -> Preferences -> Input & Codecs -> check
-Use GPU accelerated decoding
+Tools > Preferences > Input & Codecs, then check Use GPU accelerated
+decoding.
 
 To enable hardware acceleration in smplayer go:
 
-Options -> Preferences -> General -> Video Tab -> select vdpau as
+Options > Preferences > General > Video Tab, then select vdpau as
 output driver
 
 To enable hardware acceleration in gnome-mplayer go:
 
-Edit -> Preferences -> set video output to vdpau
+Edit > Preference, then set video output to vdpau
 
 Playing HD movies on cards with low memory:
 
@@ -869,6 +907,22 @@ that start simple window manager like TWM or MWM.
 
 Additionally increasing the MPlayer's cache size in ~/.mplayer/config
 can help, when your hard drive is spinning down when watching HD movies.
+
+> Avoid screen tearing in KDE (KWin)
+
+    /etc/profile.d/kwin.sh
+
+    export __GL_YIELD="USLEEP"
+
+Also if the above doesn't help, then try this:
+
+    /etc/profile.d/kwin.sh
+
+    export KWIN_TRIPLE_BUFFER=1
+
+Do not have both of the above enabled at the same time. Also if you
+enable Tripple buffering make sure to enable TrippleBuffering for the
+driver itself. Source: https://bugs.kde.org/show_bug.cgi?id=322060
 
 > Hardware accelerated video decoding with XvMC
 
@@ -882,7 +936,7 @@ See how to configure supported software.
 
 > Using TV-out
 
-A good article on the subject can be found here
+A good article on the subject can be found here.
 
 > X with a TV (DFP) as the only display
 
@@ -891,7 +945,7 @@ detected. This can be a problem when using a DVI connected TV as the
 main display, and X is started while the TV is turned off or otherwise
 disconnected.
 
-To force nvidia to use DFP, store a copy of the EDID somewhere in the
+To force NVIDIA to use DFP, store a copy of the EDID somewhere in the
 filesystem so that X can parse the file instead of reading EDID from the
 TV/DFP.
 
@@ -922,8 +976,9 @@ The NVIDIA X.org driver can also be used to detect the GPU's current
 source of power. To see the current power source, check the
 'GPUPowerSource' read-only parameter (0 - AC, 1 - battery):
 
-       $ nvidia-settings -q GPUPowerSource -t
-       1
+    $ nvidia-settings -q GPUPowerSource -t
+
+    1
 
 If you're seeing an error message similiar to the one below, then you
 either need to install acpid or start the systemd service via
@@ -948,7 +1003,7 @@ Method 1 - nvidia-settings
 
 Note:This method requires that you are using X. Use Method 2 or Method 3
 if you are not. Also note that Method 3 currently does not not work with
-newer nvidia cards such as the G210/220 as well as embedded GPUs such as
+newer NVIDIA cards such as the G210/220 as well as embedded GPUs such as
 the Zotac IONITX's 8800GS.
 
 To display the GPU temp in the shell, use nvidia-settings as follows:
@@ -968,6 +1023,7 @@ In order to get just the temperature for use in utils such as rrdtool or
 conky, among others:
 
     $ nvidia-settings -q gpucoretemp -t
+
     41
 
 Method 2 - nvidia-smi
@@ -975,14 +1031,15 @@ Method 2 - nvidia-smi
 Use nvidia-smi which can read temps directly from the GPU without the
 need to use X at all. This is important for a small group of users who
 do not have X running on their boxes, perhaps because the box is
-headless running server apps. To display the GPU temp in the shell, use
-nvidia-smi as follows:
+headless running server apps. To display the GPU temperature in the
+shell, use nvidia-smi as follows:
 
     $ nvidia-smi
 
 This should output something similar to the following:
 
     $ nvidia-smi
+
     Fri Jan  6 18:53:54 2012       
     +------------------------------------------------------+                       
     | NVIDIA-SMI 2.290.10   Driver Version: 290.10         |                       
@@ -999,9 +1056,10 @@ This should output something similar to the following:
     |  0.           ERROR: Not Supported                                          |
     +-----------------------------------------------------------------------------+
 
-Only for Temp:
+Only for temperature:
 
     $ nvidia-smi -q -d TEMPERATURE
+
 
     ==============NVSMI LOG==============
 
@@ -1023,11 +1081,11 @@ conky, among others:
     62
 
 Reference:
-http://www.question-defense.com/2010/03/22/gpu-linux-shell-temp-get-nvidia-gpu-temperatures-via-linux-cli
+http://www.question-defense.com/2010/03/22/gpu-linux-shell-temp-get-nvidia-gpu-temperatures-via-linux-cli.
 
 Method 3 - nvclock
 
-Use nvclock which is available from the [extra] repo.
+Use nvclock which is available from the AUR.
 
 Note:nvclock cannot access thermal sensors on newer NVIDIA cards such as
 the G210/220.
@@ -1037,10 +1095,10 @@ by nvclock and nvidia-settings/nv-control. According to this post by the
 author (thunderbird) of nvclock, the nvclock values should be more
 accurate.
 
-> Set Fan Speed at Login
+> Set fan speed at login
 
 You can adjust the fan speed on your graphics card with
-nvidia-settings's console interface. First ensure that your Xorg
+nvidia-settings&#39s console interface. First ensure that your Xorg
 configuration sets the Coolbits option to 4 or 5 in your Device section
 to enable fan control.
 
@@ -1051,27 +1109,27 @@ using this method. This method only allows for the setting of fan speeds
 within the current X session by way of nvidia-settings.
 
 Place the following line in your ~/.xinitrc file to adjust the fan when
-you launch Xorg. Replace <n> with the fan speed percentage you want to
+you launch Xorg. Replace n with the fan speed percentage you want to
 set.
 
-    nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan:0]/GPUCurrentFanSpeed=<n>"
+    nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan:0]/GPUCurrentFanSpeed=n"
 
 You can also configure a second GPU by incrementing the GPU and fan
 number.
 
     nvidia-settings -a "[gpu:0]/GPUFanControlState=1" \ 
     -a "[gpu:1]/GPUFanControlState=1" \
-    -a "[fan:0]/GPUCurrentFanSpeed=<n>" \
-    -a  [fan:1]/GPUCurrentFanSpeed=<n>" &
+    -a "[fan:0]/GPUCurrentFanSpeed=n" \
+    -a  [fan:1]/GPUCurrentFanSpeed=n" &
 
 If you use a login manager such as GDM or KDM, you can create a desktop
 entry file to process this setting. Create
 ~/.config/autostart/nvidia-fan-speed.desktop and place this text inside
-it. Again, change <n> to the speed percentage you want.
+it. Again, change n to the speed percentage you want.
 
     [Desktop Entry]
     Type=Application
-    Exec=nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan:0]/GPUCurrentFanSpeed=<n>"
+    Exec=nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan:0]/GPUCurrentFanSpeed=n"
     X-GNOME-Autostart-enabled=true
     Name=nvidia-fan-speed
 
@@ -1084,7 +1142,7 @@ Where the old driver is nvidiaO and the new driver is nvidiaN.
     install nvidiaN
     install lib32-nvidia-libgl-N (if required)
 
-> Switching between nvidia and nouveau drivers
+> Switching between NVIDIA and nouveau drivers
 
   ------------------------ ------------------------ ------------------------
   [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
@@ -1098,7 +1156,7 @@ Where the old driver is nvidiaO and the new driver is nvidiaN.
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-If you are switching between the nvidia and nouveau driver often, you
+If you are switching between the NVIDIA and nouveau driver often, you
 can use these two scripts to make it easier (both need to be ran as
 root):
 
@@ -1161,7 +1219,7 @@ Troubleshooting
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-On some machines, recent nvidia drivers introduce a bug(?) that causes
+On some machines, recent NVIDIA drivers introduce a bug(?) that causes
 X11 to redraw pixmaps really slow. Switching tabs in Chrome/Chromium
 (while having more than 2 tabs opened) takes 1-2 seconds, instead of a
 few milliseconds.
@@ -1172,7 +1230,7 @@ InitialPixmapPlacement=2 should actually be the faster method.
 
 The variable can be (temporarily) set with the command
 
-    nvidia-settings -a InitialPixmapPlacement=0
+    $ nvidia-settings -a InitialPixmapPlacement=0
 
 To make this permanent, this call can be placed in a startup script.
 
@@ -1204,25 +1262,22 @@ properly synced, unless you have two identical monitors. Although
 nvidia-settings does offer an option to change which screen is being
 synced (the "Sync to this display device" option), this does not always
 work. A solution is to add the following environment variables at
-startup:
-
-    nano /etc/profile
-
-Add to the end of the file:
+startup, for example append in /etc/profile:
 
     export __GL_SYNC_TO_VBLANK=1
     export __GL_SYNC_DISPLAY_DEVICE=DFP-0
     export __VDPAU_NVIDIA_SYNC_DISPLAY_DEVICE=DFP-0
 
 You can change DFP-0 with your preferred screen (DFP-0 is the DVI port
-and CRT-0 is the VGA port).
+and CRT-0 is the VGA port). You can find the identifier for your display
+from nvidia-settings in the "X Server XVideoSettings" section.
 
-> Old Xorg Settings
+> Old Xorg settings
 
 If upgrading from an old installation, please remove old /usr/X11R6/
 paths as it can cause trouble during installation.
 
-> Corrupted screen: "Six screens" issue
+> Corrupted screen: "Six screens" Problem
 
 For some users using Geforce GT 100M's, the screen turns out corrupted
 after X starts; divided into 6 sections with a resolution limited to
@@ -1238,13 +1293,13 @@ section Device:
      ...
     EndSection
 
-> '/dev/nvidia0' Input/Output error
+> '/dev/nvidia0' input/output error
 
   ------------------------ ------------------------ ------------------------
   [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
   png]                     this article or section  png]
                            is disputed.             
-                           Reason: verify that the  
+                           Reason: Verify that the  
                            BIOS related suggestions 
                            work and are not         
                            coincidentally set while 
@@ -1254,7 +1309,7 @@ section Device:
 
 This error can occur for several different reasons, and the most common
 solution given for this error is to check for group/file permissions,
-which in almost every case is not the issue. The NVIDIA documentation
+which in almost every case is not the problem. The NVIDIA documentation
 does not talk in detail on what you should do to correct this problem
 but there are a few things that have worked for some people. The problem
 can be a IRQ conflict with another device or bad routing by either the
@@ -1273,7 +1328,7 @@ lspci -v) and pass allocation parameters to the kernel, e.g.:
     or
     vmalloc=256M
 
-If running a 64bit kernel, a driver defect can cause the nvidia module
+If running a 64bit kernel, a driver defect can cause the NVIDIA module
 to fail initializing when IOMMU is on. Turning it off in the BIOS has
 been confirmed to work for some users. [2]User:Clickthem#nvidia module
 
@@ -1307,7 +1362,7 @@ Solve by adding the appropiate user to the video group and relogin:
 > 32 bit applications do not start
 
 Under 64 bit systems, installing lib32-nvidia-libgl that corresponds to
-the same version installed for the 64 bit driver fixes the issue.
+the same version installed for the 64 bit driver fixes the problem.
 
 > Errors after updating the kernel
 
@@ -1338,7 +1393,7 @@ NVIDIA forums.
 > Bad performance after installing a new driver version
 
 If FPS have dropped in comparison with older drivers, first check if
-direct rendering is turned on:
+direct rendering is turned on (glxinfo is included in mesa-demos):
 
     $ glxinfo | grep direct
 
@@ -1397,7 +1452,7 @@ In order to support DynamicTwinView, the NVIDIA driver must make each
 MetaMode appear to be unique to XRandR. Presently, the NVIDIA driver
 accomplishes this by using the refresh rate as a unique identifier.
 
-Use nvidia-settings -q RefreshRate to query the actual refresh rate on
+Use $ nvidia-settings -q RefreshRate to query the actual refresh rate on
 each display device.
 
 The XRandR extension is currently being redesigned by the X.Org
@@ -1409,43 +1464,41 @@ configuration option to false, which will disable NV-CONTROL support for
 manipulating MetaModes, but will cause the XRandR and XF86VidMode
 visible refresh rate to be accurate.
 
-> No screens found on a laptop / NVIDIA Optimus
+> No screens found on a laptop/NVIDIA Optimus
 
 On a laptop, if the NVIDIA driver cannot find any screens, you may have
 an NVIDIA Optimus setup : an Intel chipset connected to the screen and
 the video outputs, and a NVIDIA card that does all the hard work and
 writes to the chipset's video memory.
 
-Check if
-
-    lspci | grep VGA
-
-outputs something similar to
+Check if $ lspci | grep VGA outputs something similar to:
 
     00:02.0 VGA compatible controller: Intel Corporation Core Processor Integrated Graphics Controller (rev 02)
     01:00.0 VGA compatible controller: nVidia Corporation Device 0df4 (rev a1)
 
-NVIDIA has announced plans to support Optimus in their Linux drivers at
-some point in the future.
+NVIDIA drivers now offer Optimus support since 319.12 Beta [[3]] with
+kernels above and including 3.9.
 
-You need to install the Intel driver to handle the screens, then if you
-want 3D software you should run them through Bumblebee to tell them to
-use the NVIDIA card.
+Another solution is to install the Intel driver to handle the screens,
+then if you want 3D software you should run them through Bumblebee to
+tell them to use the NVIDIA card.
 
 Possible Workaround
 
-On my Lenovo W520 with a Quadro 1000M and Nvidia Optimus, I entered the
-BIOS and changed my default graphics setting from 'Optimus' to
-'Discrete' and the pacman Nvidia drivers(295.20-1 at time of writing)
-recognized the screens.
+Enter the BIOS and changed the default graphics setting from 'Optimus'
+to 'Discrete' and the install NVIDIA drivers (295.20-1 at time of
+writing) recognized the screens.
 
 Steps:
 
-    -Enter BIOS
-    -Find Graphics Settings(For me it's in the Config Tab, then Display submenu)
-    -Change 'Graphics Device' to 'Discrete Graphics'(Disables Intel integrated graphics)
-    -Change OS Detection for Nvidia Optimus to 'Disabled'
-    -Save and Exit
+1.  Enter BIOS.
+2.  Find Graphics Settings (should be in tab Config > Display).
+3.  Change 'Graphics Device' to 'Discrete Graphics' (Disables Intel
+    integrated graphics).
+4.  Change OS Detection for Nvidia Optimus to "Disabled".
+5.  Save and exit.
+
+Tested on a Lenovo W520 with a Quadro 1000M and Nvidia Optimus
 
 > Screen(s) found, but none have a usable configuration
 
@@ -1463,15 +1516,15 @@ nvidia-xconfig --query-gpu-info could be helpful.
 
 > No brightness control on laptops
 
-Try to add the following line on 20-nvidia.conf
+Try to add the following line on 20-nvidia.conf:
 
     Option "RegistryDwords" "EnableBrightnessControl=1"
 
 If it still not working, you can try install nvidia-bl or nvidiabl.
 
-> Black Bars while watching full screen flash videos with twinview
+> Black Bars while watching full screen flash videos with TwinView
 
-Follow the instructions presented here: link
+Follow the instructions presented here: link.
 
 > Backlight is not turning off in some occasions
 
@@ -1495,57 +1548,144 @@ without requiring root.
 
 > Blue tint on videos with Flash
 
-An issue with flashplugin versions 11.2.202.228-1 and 11.2.202.233-1
+A problem with flashplugin versions 11.2.202.228-1 and 11.2.202.233-1
 causes it to send the U/V panes in the incorrect order resulting in a
 blue tint on certain videos. There are a few potential fixes for this
 bug:
 
--   Install the latest libvdpau.
--   Patch vdpau_trace.so with this makepkg.
--   Right click on a video, select "Settings..." and uncheck "Enable
+1.  Install the latest libvdpau.
+2.  Patch vdpau_trace.so with this makepkg.
+3.  Right click on a video, select "Settings..." and uncheck "Enable
     hardware acceleration". Reload the page for it to take affect. Note
     that this disables GPU acceleration.
--   Downgrade the flashplugin package to version 11.1.102.63-1 at most.
--   Use google-chrome with the new Pepper API.
--   Try one of the few Flash alternatives.
+4.  Downgrade the flashplugin package to version 11.1.102.63-1 at most.
+5.  Use google-chrome with the new Pepper API chromium-pepper-flash.
+6.  Try one of the few Flash alternatives.
 
-The merits of each are discussed in this thread. To summarize: if you
-want all flash sites (YouTube, Vimeo, etc) to work properly in
-non-Chrome browsers, without feature regressions (such as losing
-hardware acceleration), without crashes/instability (enabling hardware
-decoding), without security concerns (multiple CVEs against older flash
-versions) and without breaking the vdpau tracing library from its
-intended purpose, the LEAST objectionable is to install
-libvdpau-git-flashpatch.
+The merits of each are discussed in this thread.
 
 > Bleeding overlay with Flash
 
 This bug is due to the incorrect colour key being used by the
 flashplugin version 11.2.202.228-1 and causes the flash content to
-"leak" into other pages or solid black backgrounds. To avoid this issue
-simply install the latest libvdpau or export VDPAU_NVIDIA_NO_OVERLAY=1
-within either your shell profile (E.g. ~/.bash_profile or ~/.zprofile)
-or ~/.xinitrc
+"leak" into other pages or solid black backgrounds. To avoid this
+problem simply install the latest libvdpau or export
+VDPAU_NVIDIA_NO_OVERLAY=1 within either your shell profile (E.g.
+~/.bash_profile or ~/.zprofile) or ~/.xinitrc
 
-> Full system freeze using flash
+> Full system freeze using Flash
 
 If you experience occasional full system freezes (only the mouse is
-moving) using flashplugin and get
+moving) using flashplugin and get:
 
-     # /var/log/errors.log
-     NVRM: Xid (0000:01:00): 31, Ch 00000007, engmask 00000120, intr 10000000
+    /var/log/errors.log
 
-a possible workaround is to switch off Hardware Acceleration in flash,
+    NVRM: Xid (0000:01:00): 31, Ch 00000007, engmask 00000120, intr 10000000
+
+A possible workaround is to switch off Hardware Acceleration in Flash,
 setting
 
-    # /etc/adobe/mms.cfg
+    /etc/adobe/mms.cfg
+
     EnableLinuxHWVideoDecode=0
 
-> XOrg fails to Load or Red Screen of Death
+Or, if you want to keep Hardware acceleration enabled, you may try to::
 
-If you get a red screen and use grub2 disable the grub2 framebuffer by
+    export VDPAU_NVIDIA_NO_OVERLAY=1
+
+...before starting the browser. Note that this may introduce tearing.
+
+> XOrg fails to load or Red Screen of Death
+
+If you get a red screen and use GRUB disable the GRUB framebuffer by
 editing /etc/defaults/grub and uncomment GRUB_TERMINAL_OUTPUT. For more
-information see Grub#Disable_framebuffer.
+information see GRUB.
+
+> Black screen on systems with Intel integrated GPU
+
+If you have an Intel CPU with an integrated GPU (e.g. Intel HD 4000) and
+get a black screen on boot after installing the nvidia package, this may
+be caused by a conflict between the graphics modules. This is solved by
+blacklisting the Intel GPU modules. Create the file
+/etc/modprobe.d/blacklist.conf and prevent the i915 and intel_agp
+modules from loading on boot:
+
+    /etc/modprobe.d/blacklist.conf
+
+    install i915 /usr/bin/false
+    install intel_agp /usr/bin/false
+
+> Black screen on systems with VIA integrated GPU
+
+As above, blacklisting the viafb module may resolve conflicts with
+NVIDIA drivers:
+
+    /etc/modprobe.d/blacklist.conf
+
+    install viafb /usr/bin/false
+
+> X fails with "no screens found" with Intel iGPU
+
+Like above, if you have an Intel CPU with an integrated GPU and X fails
+to start with
+
+    [ 76.633] (EE) No devices detected.
+    [ 76.633] Fatal server error:
+    [ 76.633] no screens found
+
+then you need to add your discrete card's BusID to your X configuration.
+Find it:
+
+    # lspci | grep VGA
+
+    00:02.0 VGA compatible controller: Intel Corporation Xeon E3-1200 v2/3rd Gen Core processor Graphics Controller (rev 09)
+    01:00.0 VGA compatible controller: NVIDIA Corporation GK107 [GeForce GTX 650] (rev a1)
+
+then you fix it by adding it to the card's Device section in your X
+configuration. In my case:
+
+    /etc/X11/xorg.conf.d/10-nvidia.conf
+
+    Section "Device"
+        Identifier     "Device0"
+        Driver         "nvidia"
+        VendorName     "NVIDIA Corporation"
+        BusID          "PCI:1:0:0"
+    EndSection
+
+Note how 01:00.0 is written as 1:0:0.
+
+> Xorg fails during boot, but otherwise starts fine
+
+On very fast booting systems, systemd may attempt to start the display
+manager before the NVIDIA driver has fully initialized. You will see a
+message like the following in your logs only when Xorg runs during boot.
+
+    /var/log/Xorg.0.log
+
+    [     1.807] (EE) NVIDIA(0): Failed to initialize the NVIDIA kernel module. Please see the
+    [     1.807] (EE) NVIDIA(0):     system's kernel log for additional error messages and
+    [     1.808] (EE) NVIDIA(0):     consult the NVIDIA README for details.
+    [     1.808] (EE) NVIDIA(0):  *** Aborting ***
+
+In this case you will need to establish an ordering dependency from the
+display manager to the DRI device. First create device units for DRI
+devices by creating a new udev rules file.
+
+    /etc/udev/rules.d/99-systemd-dri-devices.rules
+
+    ACTION=="add", KERNEL=="card*", SUBSYSTEM=="drm", TAG+="systemd"
+
+Then create dependencies from the display manager to the device(s).
+
+    /etc/systemd/system/display-manager.service.d/10-wait-for-dri-devices.conf
+
+    [Unit]
+    Wants=dev-dri-card0.device
+    After=dev-dri-card0.device
+
+If you have additional cards needed for the desktop then list them in
+Wants and After seperated by spaces.
 
 See also
 --------
@@ -1554,9 +1694,16 @@ See also
 -   Official readme for NVIDIA drivers
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=NVIDIA&oldid=255349"
+"https://wiki.archlinux.org/index.php?title=NVIDIA&oldid=304846"
 
 Categories:
 
 -   Graphics
 -   X Server
+
+-   This page was last modified on 16 March 2014, at 08:02.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

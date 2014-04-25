@@ -1,22 +1,20 @@
 Getting PKGBUILDS From SVN
 ==========================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 IMPORTANT WARNING                                                  |
-| -   2 Non-recursive checkout                                             |
-| -   3 Checkout a package                                                 |
-| -   4 Updating all packages                                              |
-| -   5 Checkout an older revision of a package                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-> IMPORTANT WARNING
+-   1 Do NOT download the whole repo
+-   2 Non-recursive checkout
+-   3 Checkout a package
+-   4 Updating all packages
+-   5 Checkout an older revision of a package
 
-The entire SVN repo is huge. Not only will it take an obscene amount of
-disk space, but it will also tax the archlinux.org server for you to
-download it. Do not download the whole repo, only follow the
+> Do NOT download the whole repo
+
+Warning:The entire SVN repo is huge. Not only will it take an obscene
+amount of disk space, but it will also tax the archlinux.org server for
+you to download it. Do not download the whole repo, only follow the
 instructions below.
 
 If you abuse this service, your address may be blocked.
@@ -75,8 +73,15 @@ grab the most recent package before that time:
       svn update -r{20090303} package-name
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Getting_PKGBUILDS_From_SVN&oldid=200978"
+"https://wiki.archlinux.org/index.php?title=Getting_PKGBUILDS_From_SVN&oldid=303974"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 11 March 2014, at 07:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

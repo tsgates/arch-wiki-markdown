@@ -16,16 +16,14 @@ finish installing Arch Linux. This means you will require another
 internet-connected computer, or a Windows installation to proceed with
 downloading the necessary files.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 The Files...                                                       |
-| -   2 Installing everything...                                           |
-| -   3 Initial Configuration                                              |
-| -   4 Further Configuration                                              |
-| -   5 Further Information                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 The Files...
+-   2 Installing everything...
+-   3 Initial Configuration
+-   4 Further Configuration
+-   5 Further Information
 
 The Files...
 ------------
@@ -167,13 +165,13 @@ Anyway, create a file called start_internet with the following content:
     # Speedtouch connection script
 
     count=0
-    while  $((count++)) -lt 40 
+    while [[ $((count++)) -lt 40 ]]
     do
       sync=$(dmesg | grep 'ADSL line is up')
-      if [ ! -z "$sync" ]
+      if [ ! -z "$sync" ]
       then
-         pppd call speedtch
-         exit 0
+        pppd call speedtch
+        exit 0
       fi
       sleep 1
     done
@@ -262,8 +260,15 @@ Any comments or questions, try the discussion page.
 Hope you found this helpful and feel free to improve it!
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SpeedTouch_ADSL_Modem&oldid=205975"
+"https://wiki.archlinux.org/index.php?title=SpeedTouch_ADSL_Modem&oldid=302552"
 
 Category:
 
 -   Modems
+
+-   This page was last modified on 28 February 2014, at 23:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

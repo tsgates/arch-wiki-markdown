@@ -11,29 +11,24 @@ Dell Latitude C600 at the Gentoo wiki and the linux-dell-laptops faq
 page which although old is still very good, I suggest you also read both
 of these if you do not find answers here.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Known Hardware                                                     |
-| -   2 PCMCIA Cardbus                                                     |
-| -   3 Audio                                                              |
-| -   4 Video                                                              |
-|     -   4.1 Framebuffer                                                  |
-|     -   4.2 Xorg                                                         |
-|                                                                          |
-| -   5 Network                                                            |
-|     -   5.1 Ethernet                                                     |
-|     -   5.2 Winmodem                                                     |
-|                                                                          |
-| -   6 Touchpad                                                           |
-| -   7 Battery and Power Saving                                           |
-|     -   7.1 APM                                                          |
-|     -   7.2 ACPI                                                         |
-|                                                                          |
-| -   8 Volume Keys and Fans                                               |
-| -   9 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Known Hardware
+-   2 PCMCIA Cardbus
+-   3 Audio
+-   4 Video
+    -   4.1 Framebuffer
+    -   4.2 Xorg
+-   5 Network
+    -   5.1 Ethernet
+    -   5.2 Winmodem
+-   6 Touchpad
+-   7 Battery and Power Saving
+    -   7.1 APM
+    -   7.2 ACPI
+-   8 Volume Keys and Fans
+-   9 External Links
 
 Known Hardware
 ==============
@@ -227,3 +222,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 23 April 2012, at 12:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

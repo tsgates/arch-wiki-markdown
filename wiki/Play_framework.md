@@ -13,23 +13,19 @@ on Arch Linux system.
 For play framework related documentation, see playframework.org
 documentation.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 AUR Play Framework package                                         |
-|     -   1.1 Installation                                                 |
-|                                                                          |
-| -   2 Play framework usage                                               |
-| -   3 Configuring a play application daemon                              |
-|     -   3.1 Instructions                                                 |
-|     -   3.2 Configuration file                                           |
-|     -   3.3 Autorun on boot                                              |
-|     -   3.4 Stop / Start / Restart a play application                    |
-|                                                                          |
-| -   4 References                                                         |
-| -   5 Other links                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 AUR Play Framework package
+    -   1.1 Installation
+-   2 Play framework usage
+-   3 Configuring a play application daemon
+    -   3.1 Instructions
+    -   3.2 Configuration file
+    -   3.3 Autorun on boot
+    -   3.4 Stop / Start / Restart a play application
+-   4 References
+-   5 Other links
 
 AUR Play Framework package
 --------------------------
@@ -176,3 +172,10 @@ Retrieved from
 Category:
 
 -   Web Server
+
+-   This page was last modified on 13 June 2012, at 15:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

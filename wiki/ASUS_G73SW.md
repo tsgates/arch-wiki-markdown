@@ -1,31 +1,27 @@
 ASUS G73SW
 ==========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Model G73SW-XN2:                                                   |
-|     -   1.1 Hardware                                                     |
-|     -   1.2 lspci                                                        |
-|     -   1.3 Graphics                                                     |
-|         -   1.3.1 HDMI port                                              |
-|                                                                          |
-|     -   1.4 Keyboard Backlight                                           |
-|     -   1.5 Hibernate and Suspend                                        |
-|     -   1.6 Touchpad                                                     |
-|     -   1.7 USB 3                                                        |
-|     -   1.8 DVD                                                          |
-|     -   1.9 Sound                                                        |
-|     -   1.10 Webcam                                                      |
-|     -   1.11 SD card reader                                              |
-|     -   1.12 Networking                                                  |
-|         -   1.12.1 LAN                                                   |
-|         -   1.12.2 WLAN                                                  |
-|         -   1.12.3 Bluetooth                                             |
-|                                                                          |
-|     -   1.13 Untested                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Model G73SW-XN2:
+    -   1.1 Hardware
+    -   1.2 lspci
+    -   1.3 Graphics
+        -   1.3.1 HDMI port
+    -   1.4 Keyboard Backlight
+    -   1.5 Hibernate and Suspend
+    -   1.6 Touchpad
+    -   1.7 USB 3
+    -   1.8 DVD
+    -   1.9 Sound
+    -   1.10 Webcam
+    -   1.11 SD card reader
+    -   1.12 Networking
+        -   1.12.1 LAN
+        -   1.12.2 WLAN
+        -   1.12.3 Bluetooth
+    -   1.13 Untested
 
 Model G73SW-XN2:
 ----------------
@@ -63,7 +59,7 @@ Model G73SW-XN2:
 
 > Graphics
 
-Works fine with nvidia from the Official Repositories.
+Works fine with nvidia from the Official repositories.
 
 I haven't tested the nouvueau driver on this machine.
 
@@ -182,7 +178,7 @@ following contents
 > Touchpad
 
 Works fine with no configuration required, but works even better
-(3-finger) with xf86-input-synaptics from the Official Repositories.
+(3-finger) with xf86-input-synaptics from the Official repositories.
 
 > USB 3
 
@@ -235,8 +231,15 @@ Works fine with no configuration required.
 -   VGA output
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_G73SW&oldid=236063"
+"https://wiki.archlinux.org/index.php?title=ASUS_G73SW&oldid=301657"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 24 February 2014, at 12:02.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

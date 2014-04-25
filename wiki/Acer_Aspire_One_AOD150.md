@@ -7,21 +7,17 @@ standard SATA hard drives only, therefore much of the information found
 in the Acer Aspire One article does not apply. This article attempts to
 trim the fat.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware Specifications                                            |
-|     -   1.1 Base Components                                              |
-|                                                                          |
-| -   2 Arch Installation                                                  |
-| -   3 Hardware Configuration                                             |
-|     -   3.1 Kernel Drivers                                               |
-|     -   3.2 Hotkeys                                                      |
-|     -   3.3 Touchpad                                                     |
-|                                                                          |
-| -   4 Kernel Drivers for Aspire One D250                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware Specifications
+    -   1.1 Base Components
+-   2 Arch Installation
+-   3 Hardware Configuration
+    -   3.1 Kernel Drivers
+    -   3.2 Hotkeys
+    -   3.3 Touchpad
+-   4 Kernel Drivers for Aspire One D250
 
 Hardware Specifications
 -----------------------
@@ -33,12 +29,10 @@ configuration:
 
 -   Intel® Atom processor
     -   N270 (1.6GHz/533MHz FSB/512KB L2 Cache)
-
 -   Mobile Intel® 945GSE Express Chipset
 -   1GB 533MHz DDR2 SDRAM Memory
 -   10.1" Widescreen Display
     -   WSVGA 1024x600 with CrystalBrite™
-
 -   Intel® GMA 950 Graphics
 -   160GB 5400RPM SATA Hard Disk
 -   Microdia® Integrated Webcam
@@ -155,8 +149,15 @@ The last step requires being logged in as root. Reboot and the wired
 ethernet card should now be recognized on your D250.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_One_AOD150&oldid=206403"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_One_AOD150&oldid=298295"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 16 February 2014, at 07:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

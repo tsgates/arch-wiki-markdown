@@ -1,51 +1,37 @@
 WarCraft III
 ============
 
-  Summary
-  ----------------------------------
-  Warcraft III installation guide.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installing Wine                                                    |
-| -   3 Configuring Wine                                                   |
-|     -   3.1 Windows version                                              |
-|     -   3.2 Audio                                                        |
-|     -   3.3 Devices                                                      |
-|                                                                          |
-| -   4 Installation                                                       |
-|     -   4.1 Installing WarCraft III: The Reign of Chaos                  |
-|     -   4.2 Installing WarCraft III: The Frozen Throne                   |
-|     -   4.3 Upgrading to the current version                             |
-|                                                                          |
-| -   5 Post installation tricks                                           |
-|     -   5.1 Disabling intro movies                                       |
-|     -   5.2 Widescreen resolution                                        |
-|     -   5.3 Alt key combo                                                |
-|         -   5.3.1 GNOME                                                  |
-|         -   5.3.2 KDE                                                    |
-|                                                                          |
-| -   6 Running WarCraft III                                               |
-|     -   6.1 WarCraft III: The Reign of Chaos                             |
-|     -   6.2 WarCraft III: The Frozen Throne                              |
-|                                                                          |
-| -   7 Troubleshooting                                                    |
-|     -   7.1 Patch 1.23                                                   |
-|                                                                          |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
-
-Introduction
-------------
-
 WarCraft III is a real-time strategy game created by Blizzard
 Entertainment. This article will describe how to install and run it and
 its addon The Frozen Throne on Arch Linux using Wine. WarCraft III can
 be run with full OpenGL support, meaning you do not need the non-free
 Cedega.
+
+Contents
+--------
+
+-   1 Installing Wine
+-   2 Configuring Wine
+    -   2.1 Windows version
+    -   2.2 Audio
+    -   2.3 Devices
+-   3 Installation
+    -   3.1 Installing WarCraft III: The Reign of Chaos
+    -   3.2 Installing WarCraft III: The Frozen Throne
+    -   3.3 Upgrading to the current version
+-   4 Post installation tricks
+    -   4.1 Disabling intro movies
+    -   4.2 Widescreen resolution
+    -   4.3 Alt key combo
+        -   4.3.1 GNOME
+        -   4.3.2 KDE
+    -   4.4 Alt+Tab
+-   5 Running WarCraft III
+    -   5.1 WarCraft III: The Reign of Chaos
+    -   5.2 WarCraft III: The Frozen Throne
+-   6 Troubleshooting
+    -   6.1 Patch 1.23
+-   7 See also
 
 Installing Wine
 ---------------
@@ -187,6 +173,20 @@ click window actions tab. You can turn off the alt combos. If you want
 to make window specific settings, click on window specific settings
 under window behavior on the side.
 
+> Alt+Tab
+
+Normally, using alt+tab key combo, and then coming back to the game,will
+make it unplayable - for example bar(s) will of your desktop will remain
+displayed.
+
+There is an easy workaround: go to winecfg and make a virtual desktop
+with size of your current resolution. This will also allow you to play
+movies. You can make a special wine settings for Warcraft III.exe and
+Frozen Throne.exe only, so you will not need to turn on/off a virtual
+desktop every time.
+
+  
+
 Running WarCraft III
 --------------------
 
@@ -224,9 +224,16 @@ See also
 -   Snoopy
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=WarCraft_III&oldid=240475"
+"https://wiki.archlinux.org/index.php?title=WarCraft_III&oldid=291213"
 
 Categories:
 
 -   Gaming
 -   Wine
+
+-   This page was last modified on 1 January 2014, at 07:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

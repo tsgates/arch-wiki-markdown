@@ -6,22 +6,18 @@ Jinzora
 streaming server as well as a media management platform. This article
 will show you how to install and configure Jinzora.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Setup the webserver                                          |
-|     -   1.2 Configure PHP                                                |
-|     -   1.3 Download and extract Jinzora                                 |
-|                                                                          |
-| -   2 Configuring Jinzora                                                |
-|     -   2.1 Run the installer                                            |
-|     -   2.2 Save the configuration                                       |
-|     -   2.3 Setting up MPD to play your music                            |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Setup the webserver
+    -   1.2 Configure PHP
+    -   1.3 Download and extract Jinzora
+-   2 Configuring Jinzora
+    -   2.1 Run the installer
+    -   2.2 Save the configuration
+    -   2.3 Setting up MPD to play your music
+-   3 Troubleshooting
 
 Installation
 ------------
@@ -159,3 +155,10 @@ Retrieved from
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 23 April 2012, at 16:34.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

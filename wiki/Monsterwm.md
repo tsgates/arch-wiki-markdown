@@ -11,21 +11,18 @@ settings. Finally monsterwm supports multiple monitors setups.
 
 Monsterwm is written with Xlib but there is also an XCB fork available.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Floating Mode                                                      |
-| -   4 Panel                                                              |
-| -   5 Patches                                                            |
-| -   6 Customization                                                      |
-|     -   6.1 Application Rules                                            |
-|     -   6.2 Add custom keybinds                                          |
-|                                                                          |
-| -   7 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Floating Mode
+-   4 Panel
+-   5 Patches
+-   6 Customization
+    -   6.1 Application Rules
+    -   6.2 Add custom keybinds
+-   7 See also
 
 Installation
 ------------
@@ -244,8 +241,8 @@ would be:
 
 -   The first element specifies the first keypress which is either:
     -   MOD1 for the modkey only,
-    -   MOD1 for the modkey and then the shift key,
-    -   MOD1 for the modkey and then the control key,
+    -   MOD1 SHIFT for the modkey and then the shift key,
+    -   MOD1 CONTROL for the modkey and then the control key,
     -   0 for no key at all.
 
 You can also use MOD4 which is the super or windows key instead of MOD1.
@@ -295,8 +292,15 @@ See also
 -   Comparison of tiling window managers
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Monsterwm&oldid=254046"
+"https://wiki.archlinux.org/index.php?title=Monsterwm&oldid=273876"
 
 Category:
 
 -   Dynamic WMs
+
+-   This page was last modified on 1 September 2013, at 11:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

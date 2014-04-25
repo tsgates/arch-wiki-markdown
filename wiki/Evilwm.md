@@ -8,40 +8,31 @@ control with repositioning and maximize toggles, solid window drags,
 snap-to-border support, and virtual desktops. Its installed binary size
 is only 0.07 MB.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Starting evilwm                                              |
-|     -   2.2 Startup options                                              |
-|                                                                          |
-| -   3 Using evilwm                                                       |
-|     -   3.1 Keyboard controls                                            |
-|     -   3.2 Mouse controls                                               |
-|     -   3.3 Virtual desktops                                             |
-|                                                                          |
-| -   4 Tips & Tricks                                                      |
-|     -   4.1 Horizontal window maximize                                   |
-|     -   4.2 Exit evilwm by ending a program                              |
-|     -   4.3 Resize windows using the keyboard                            |
-|     -   4.4 Keybindings                                                  |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Lost focus bug fix                                           |
-|     -   5.2 evilwm doesn't start                                         |
-|                                                                          |
-| -   6 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Starting evilwm
+    -   2.2 Startup options
+-   3 Using evilwm
+    -   3.1 Keyboard controls
+    -   3.2 Mouse controls
+    -   3.3 Virtual desktops
+-   4 Tips & Tricks
+    -   4.1 Horizontal window maximize
+    -   4.2 Exit evilwm by ending a program
+    -   4.3 Resize windows using the keyboard
+    -   4.4 Keybindings
+-   5 Troubleshooting
+    -   5.1 Lost focus bug fix
+    -   5.2 evilwm doesn't start
+-   6 Links
 
 Installation
 ------------
 
-evilwm is part of the extra repository, so installation is as simple as
-running:
-
-    # pacman -S evilwm
+Install the evilwm package from the Arch User Repository.
 
 Configuration
 -------------
@@ -224,8 +215,15 @@ Links
 -   evilwm - the official website of evilwm
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Evilwm&oldid=245271"
+"https://wiki.archlinux.org/index.php?title=Evilwm&oldid=291889"
 
 Category:
 
 -   Stacking WMs
+
+-   This page was last modified on 7 January 2014, at 11:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

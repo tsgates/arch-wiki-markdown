@@ -1,55 +1,27 @@
 pacman
 ======
 
-> Summary
+Related articles
 
-Pacman is the Arch Linux package manager. Package managers are used to
-install, upgrade, and remove software. This article covers basic usage
-and troubleshooting tips.
-
-> Overview
-
-Packages in Arch Linux are built using makepkg and a custom build script
-for each package (known as a PKGBUILD). Once packaged, software can be
-installed and managed with pacman. PKGBUILDs for software in the
-official repositories are available from the ABS tree; thousands more
-are available from the (unsupported) Arch User Repository.
-
-> Related
-
-Downgrading Packages
-
-Improve Pacman Performance
-
-Pacman GUI Frontends
-
-Pacman Rosetta
-
-Pacman Tips
-
-Pacman package signing
-
-FAQ#Package Management
-
-pacman-key
-
-Pacnew and Pacsave Files
-
-> Resources
-
-libalpm(3) Manual Page
-
-pacman(8) Manual Page
-
-pacman.conf(5) Manual Page
-
-repo-add(8) Manual Page
+-   Downgrading Packages
+-   Improve pacman performance
+-   Pacman GUI Frontends
+-   Pacman Rosetta
+-   Pacman Tips
+-   Pacman package signing
+-   FAQ#Package Management
+-   pacman-key
+-   Pacnew and Pacsave Files
+-   List of Applications/Utilities#Package management
+-   Arch Build System
+-   Official repositories
+-   Arch User Repository
 
 The pacman package manager is one of the major distinguishing features
 of Arch Linux. It combines a simple binary package format with an
 easy-to-use build system. The goal of pacman is to make it possible to
-easily manage packages, whether they are from the official Arch
-repositories or the user's own builds.
+easily manage packages, whether they are from the official repositories
+or the user's own builds.
 
 Pacman keeps the system up to date by synchronizing package lists with
 the master server. This server/client model also allows the user to
@@ -63,58 +35,63 @@ Tip:The official pacman package also contains other useful tools, such
 as makepkg, pactree, vercmp and more: run pacman -Ql pacman | grep bin
 to see the full list.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Configuration                                                      |
-|     -   1.1 General options                                              |
-|         -   1.1.1 Skip package from being upgraded                       |
-|         -   1.1.2 Skip package group from being upgraded                 |
-|         -   1.1.3 Skip files from being installed to system              |
-|                                                                          |
-|     -   1.2 Repositories                                                 |
-|     -   1.3 Package security                                             |
-|                                                                          |
-| -   2 Usage                                                              |
-|     -   2.1 Installing packages                                          |
-|         -   2.1.1 Installing specific packages                           |
-|         -   2.1.2 Installing package groups                              |
-|                                                                          |
-|     -   2.2 Removing packages                                            |
-|     -   2.3 Upgrading packages                                           |
-|     -   2.4 Querying package databases                                   |
-|     -   2.5 Additional commands                                          |
-|     -   2.6 Partial upgrades are unsupported                             |
-|                                                                          |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 Q: An update to package XYZ broke my system!                 |
-|     -   3.2 Q: I know an update to package ABC was released, but pacman  |
-|         says my system is up to date!                                    |
-|     -   3.3 Q: I get an error when updating: "file exists in             |
-|         filesystem"!                                                     |
-|     -   3.4 Q: I get an error when installing a package: "not found in   |
-|         sync db"                                                         |
-|     -   3.5 Q: Pacman is repeatedly upgrading the same package!          |
-|     -   3.6 Q: Pacman crashes during an upgrade!                         |
-|     -   3.7 Q: I installed software using "make install"; these files do |
-|         not belong to any package!                                       |
-|     -   3.8 Q: I need a package with a specific file. How do I know what |
-|         provides it?                                                     |
-|     -   3.9 Q: Pacman is completely broken! How do I reinstall it?       |
-|     -   3.10 Q: After updating my system, I get a "unable to find root   |
-|         device" error after rebooting and my system will no longer boot  |
-|     -   3.11 Q: Signature from "User <email@gmail.com>" is unknown       |
-|         trust, installation failed                                       |
-|     -   3.12 Q: I keep getting a "failed to commit transaction (invalid  |
-|         or corrupted package)" error                                     |
-|     -   3.13 Q: I get an error every time I use pacman saying 'warning:  |
-|         current locale is invalid; using default "C" locale'. What do I  |
-|         do?                                                              |
-|     -   3.14 Q: How can I get Pacman to honor my proxy settings?         |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Configuration
+    -   1.1 General options
+        -   1.1.1 Skip package from being upgraded
+        -   1.1.2 Skip package group from being upgraded
+        -   1.1.3 Skip files from being installed to system
+    -   1.2 Repositories
+    -   1.3 Package security
+-   2 Usage
+    -   2.1 Installing packages
+        -   2.1.1 Installing specific packages
+        -   2.1.2 Installing package groups
+    -   2.2 Removing packages
+    -   2.3 Upgrading packages
+    -   2.4 Querying package databases
+    -   2.5 Additional commands
+    -   2.6 Partial upgrades are unsupported
+    -   2.7 General notes
+-   3 Troubleshooting
+    -   3.1 Q: An update to package XYZ broke my system!
+    -   3.2 Q: I know an update to package ABC was released, but pacman
+        says my system is up to date!
+    -   3.3 Q: I get an error when updating: "file exists in
+        filesystem"!
+    -   3.4 Q: I get an error when installing a package: "not found in
+        sync db"
+    -   3.5 Q: I get an error when installing a package: "target not
+        found"
+    -   3.6 Q: Pacman is repeatedly upgrading the same package!
+    -   3.7 Q: Pacman crashes during an upgrade!
+    -   3.8 Q: I installed software using "make install"; these files do
+        not belong to any package!
+    -   3.9 Q: I need a package with a specific file. How do I know what
+        provides it?
+    -   3.10 Q: Pacman is completely broken! How do I reinstall it?
+    -   3.11 Q: After updating my system, I get a "unable to find root
+        device" error after rebooting and my system will no longer boot
+    -   3.12 Q: Signature from "User <email@gmail.com>" is unknown
+        trust, installation failed
+    -   3.13 Q: I keep getting
+        error: PackageName: signature from "User <email@archlinux.org>"
+        is invalid
+        error: failed to commit transaction (invalid or corrupted
+        package (PGP signature))
+        Errors occured, no packages were upgraded.
+    -   3.14 Q: I keep getting a "failed to commit transaction (invalid
+        or corrupted package)" error
+    -   3.15 Q: I get an error every time I use pacman saying 'warning:
+        current locale is invalid; using default "C" locale'. What do I
+        do?
+    -   3.16 Q: How can I get Pacman to honor my proxy settings?
+    -   3.17 Q: How do I reinstall all packages, retaining information
+        on whether something was explicitly installed or as a
+        dependency?
+-   4 See also
 
 Configuration
 -------------
@@ -131,12 +108,19 @@ in the default pacman.conf for information on what can be done here.
 
 Skip package from being upgraded
 
-To skip upgrading a specific package, specify it as such:
+To have a specific package skipped when upgrading the system, specify it
+as such:
 
     IgnorePkg=linux
 
 For multiple packages use a space-separated list, or use additional
-IgnorePkg lines.
+IgnorePkg lines. Also, glob patterns can be used. If you want to skip
+packages just once, you can also use the --ignore option on the
+command-line - this time with a comma-separated list.
+
+It will still be possible to upgrade the ignored packages using
+pacman -S: in this case pacman will remind you that the packages have
+been included in an IgnorePkg statement.
 
 Skip package group from being upgraded
 
@@ -197,10 +181,10 @@ necessary to maintain only one list. See here for mirror configuration.
     #SigLevel = Optional TrustAll
     #Server = file:///home/custompkgs
 
-Warning:Care should be taken when using the [testing] repository. It is
-in active development and updating may cause some packages to stop
-working. People who use the [testing] repository are encouraged to
-subscribe to the arch-dev-public mailing list for current information.
+Warning:Care should be taken when using the testing repository. It is in
+active development and updating may cause some packages to stop working.
+People who use the testing repository are encouraged to subscribe to the
+arch-dev-public mailing list for current information.
 
 > Package security
 
@@ -228,8 +212,8 @@ dependencies), issue the following command:
     # pacman -S package_name1 package_name2 ...
 
 Sometimes there are multiple versions of a package in different
-repositories, e.g. [extra] and [testing]. To install the former version,
-the repository needs to be defined in front:
+repositories, e.g. extra and testing. To install the former version, the
+repository needs to be defined in front:
 
     # pacman -S extra/package_name
 
@@ -339,9 +323,10 @@ removal. See Pacnew and Pacsave Files for more info.
 Tip:Remember that pacman's output is logged in /var/log/pacman.log.
 
 Before upgrading, it is advisable to visit the Arch Linux home page to
-check the latest news (or subscribe to the RSS feed): when updates
-require out-of-the-ordinary user intervention (more than what can be
-handled simply by following the instructions given by pacman), an
+check the latest news (alternatively subscribe to the RSS feed,
+arch-announce mailing list, or follow @archlinux on Twitter), when
+updates require out-of-the-ordinary user intervention (more than what
+can be handled simply by following the instructions given by pacman), an
 appropriate news post will be made.
 
 If one encounters problems that cannot be solved by these instructions,
@@ -385,6 +370,12 @@ To retrieve a list of the files installed by a package:
     $ pacman -Ql package_name
 
 For packages not installed, use pkgfile.
+
+To verify the presence of the files installed by a package:
+
+    $ pacman -Qk package_name
+
+Passing the k flag twice will perform a more thorough check.
 
 One can also query the database to know which package a file in the file
 system belongs to:
@@ -435,7 +426,8 @@ Warning:Only do this if certain that the installed packages are stable
 and that a downgrade will not be necessary, since it will remove all of
 the old versions from the cache folder, leaving behind only the versions
 of the packages that are currently installed. Having older versions of
-packages comes in handy in case a future upgrade causes breakage.
+packages comes in handy in case a future upgrade results in a broken
+system.
 
     # pacman -Sc
 
@@ -474,6 +466,12 @@ because they cannot find the libraries they are linked against, do not
 when they are not backwards compatible. A simple pacman -Syu to a
 properly synced mirror will fix the problem as long as pacman is not
 broken.
+
+> General notes
+
+Warning:Take care when using the --force switch because it can cause
+major problems if used improperly. It is highly recommended to only use
+this option when the Arch news instructs the user to do so.
 
 Troubleshooting
 ---------------
@@ -551,7 +549,18 @@ Q: I get an error when installing a package: "not found in sync db"
 A: Firstly, ensure the package actually exists (and watch out for
 typos!). If certain the package exists, your package list may be
 out-of-date or your repositories may be incorrectly configured. Try
-running pacman -Syy to force a refresh of all package lists.
+running pacman -Syyu to force a refresh of all package lists and
+upgrade.
+
+Q: I get an error when installing a package: "target not found"
+
+A: Firstly, ensure the package actually exists (and watch out for
+typos). If certain the package exists, your package list may be out of
+date or your repositories may be incorrectly configured. Try running
+pacman -Syyu to force a refresh of all package lists and upgrade.   
+ It could also be that the repository containing the package is not
+enabled on your system, e.g. the package could be in the multilib
+repository, but multilib is not enabled in your pacman.conf.
 
 Q: Pacman is repeatedly upgrading the same package!
 
@@ -572,7 +581,7 @@ removing packages, and reinstalling or upgrading packages fails:
 
 1.  Boot using the Arch install media.
 2.  Mount your root filesystem.
-3.  Update the pacman database via pacman -Syy.
+3.  Update the pacman database and upgrade via pacman -Syyu.
 4.  Reinstall the broken package via pacman -r /path/to/root -S package.
 
 Q: I installed software using "make install"; these files do not belong to any package!
@@ -584,7 +593,8 @@ any package for a script that searches the file system for disowned
 files.
 
 Warning:Take care when using the --force switch because it can cause
-major problems if used improperly.
+major problems if used improperly. It is recommended to only use this
+option when it is requested in the Arch news.
 
 Q: I need a package with a specific file. How do I know what provides it?
 
@@ -683,14 +693,31 @@ A: Make sure that the relevant environment variables ($http_proxy,
 $ftp_proxy etc.) are set up. If you use Pacman with sudo, you need to
 configure sudo to pass these environment variables to Pacman.
 
+Q: How do I reinstall all packages, retaining information on whether something was explicitly installed or as a dependency?
+
+A: To reinstall all the native packages: pacman -S $(pacman -Qnq) (the
+-S option preserves the installation reason by default).   
+ You will then need to reinstall all the foreign packages, which can be
+listed with pacman -Qmq.
+
 See also
 --------
 
--   Common Applications/Utilities#Package management
+-   libalpm(3) Manual Page
+-   pacman(8) Manual Page
+-   pacman.conf(5) Manual Page
+-   repo-add(8) Manual Page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pacman&oldid=256031"
+"https://wiki.archlinux.org/index.php?title=Pacman&oldid=306146"
 
 Category:
 
 -   Package management
+
+-   This page was last modified on 20 March 2014, at 18:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -8,17 +8,14 @@ help of a post in the gentoo forum, and doing some trial/error.
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Required Packages                                                  |
-| -   2 Installation                                                       |
-|     -   2.1 Get ISOs and build the SDK                                   |
-|                                                                          |
-| -   3 Running the Simulator                                              |
-|     -   3.1 Other...                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Required Packages
+-   2 Installation
+    -   2.1 Get ISOs and build the SDK
+-   3 Running the Simulator
+    -   3.1 Other...
 
 Required Packages
 =================
@@ -96,3 +93,10 @@ Retrieved from
 Category:
 
 -   Emulators
+
+-   This page was last modified on 28 November 2012, at 22:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

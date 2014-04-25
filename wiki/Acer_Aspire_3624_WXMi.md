@@ -23,20 +23,17 @@ WiFi enabled and about 1:20 while watching h.264 video files.
 
 The modem and PCMCIA slot have never been used.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Specifications                                                     |
-|     -   1.1 Components                                                   |
-|     -   1.2 lspci                                                        |
-|                                                                          |
-| -   2 Installing Arch Linux                                              |
-| -   3 Kernel                                                             |
-| -   4 Power Management                                                   |
-| -   5 Xorg                                                               |
-|     -   5.1 DPMS screen shutdown                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Specifications
+    -   1.1 Components
+    -   1.2 lspci
+-   2 Installing Arch Linux
+-   3 Kernel
+-   4 Power Management
+-   5 Xorg
+    -   5.1 DPMS screen shutdown
 
 Specifications
 ==============
@@ -51,11 +48,9 @@ Components
     configuration
     -   Upgraded to 2x1GB Corsair Value Select 1GB 533Mhz DDR2 SO-DIMM
         (VS1GSDS533D2).
-
 -   Hard Disk Drive: Hitachi 80GB (HTS421280H9AT00) UDMA/100, PATA
     -   It seems that the biggest PATA 2.5" hard disk drive widely
         available is the 250GB Western Digital WD2500BEVE.
-
 -   Optical Drive: Pioneer DVD-RW (DVR-K16RA) UDMA/33, PATA
 -   Wireless NIC: Atheros AR2413 (It is installed as a Mini PCI card,
     supposedly can be upgraded to 802.11n in the future).
@@ -141,3 +136,10 @@ Retrieved from
 Category:
 
 -   Acer
+
+-   This page was last modified on 23 April 2012, at 12:31.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

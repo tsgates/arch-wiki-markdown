@@ -1,142 +1,140 @@
 Wine
 ====
 
-> Summary
+Related articles
+
+-   Steam
+-   CrossOver
 
 Wine is a compatibility layer capable of running Microsoft Windows
 applications on Unix-like operating systems. Programs running in Wine
 act as native programs would, without the performance/memory penalties
-of an emulator.
+of an emulator. See the official project home and wiki pages for longer
+introduction.
 
-> Related
+Contents
+--------
 
-Steam
-
-CrossOver
-
-See the official project home and wiki pages for longer introduction.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Using WINEARCH                                               |
-|     -   2.2 Graphics Drivers                                             |
-|     -   2.3 Sound                                                        |
-|     -   2.4 Other libraries                                              |
-|     -   2.5 Fonts                                                        |
-|     -   2.6 Desktop Launcher Menus                                       |
-|         -   2.6.1 Creating Menu Entries                                  |
-|         -   2.6.2 Remove Wine Launcher Menus in Gnome3                   |
-|         -   2.6.3 KDE 4 Menu Fix[1]                                      |
-|                                                                          |
-| -   3 Running Windows Applications                                       |
-| -   4 Tips and Tricks                                                    |
-|     -   4.1 Installing Microsoft Office                                  |
-|     -   4.2 OpenGL Modes                                                 |
-|     -   4.3 Using Wine as an interpreter for Win16/Win32 binaries        |
-|         -   4.3.1 Systemd                                                |
-|         -   4.3.2 Initscripts                                            |
-|         -   4.3.3 Test the Setup                                         |
-|                                                                          |
-|     -   4.4 Wineconsole                                                  |
-|     -   4.5 Winetricks                                                   |
-|                                                                          |
-| -   5 Third-party interfaces                                             |
-|     -   5.1 CrossOver                                                    |
-|     -   5.2 PlayOnLinux/PlayOnMac                                        |
-|     -   5.3 PyWinery                                                     |
-|     -   5.4 Q4wine                                                       |
-|                                                                          |
-| -   6 External Resources                                                 |
-+--------------------------------------------------------------------------+
+-   1 Installation
+-   2 Configuration
+    -   2.1 WINEPREFIX
+    -   2.2 WINEARCH
+    -   2.3 Graphics drivers
+    -   2.4 Sound
+        -   2.4.1 MIDI support
+    -   2.5 Other libraries
+    -   2.6 Fonts
+    -   2.7 Desktop launcher menus
+        -   2.7.1 Creating menu entries for Wine utilities
+        -   2.7.2 Removing menu entries
+        -   2.7.3 KDE 4 menu fix
+-   3 Running Windows applications
+-   4 Tips and tricks
+    -   4.1 exe-thumbnailer
+    -   4.2 CSMT Patched Wine for Significantly Better Performance
+        -   4.2.1 Further Information
+    -   4.3 Changing the language
+    -   4.4 Installing Microsoft Office 2010
+    -   4.5 Proper mounting of optical media images
+    -   4.6 Burning optical media
+    -   4.7 OpenGL modes
+    -   4.8 Using Wine as an interpreter for Win16/Win32 binaries
+    -   4.9 Wineconsole
+    -   4.10 Winetricks
+    -   4.11 Installing .NET framework 4.0
+-   5 Third-party interfaces
+    -   5.1 CrossOver
+    -   5.2 PlayOnLinux/PlayOnMac
+    -   5.3 PyWinery
+    -   5.4 Q4wine
+-   6 See also
 
 Installation
 ------------
 
-Warning: If you can access a file or resource with your user account,
+Warning:If you can access a file or resource with your user account,
 programs running in Wine can too. Wine prefixes are not sandboxes.
 Consider using virtualization if security is important.
 
-Wine is constantly updated and available in the OfficialRepositories
-repository for i686 and in multilib for x86_64.
+Wine can be installed with the package wine, available in the official
+repositories. If you are running a 64-bit system, you will need to
+enable the Multilib repository first.
 
-You may also require wine_gecko, if your applications make use of
-Internet Explorer or Mono for .NET applications: you can download the
-installer (.msi) from the Wine Sourceforge project and save it in
-/usr/share/wine/mono. Alternatively you can use the package wine-mono
-from the AUR, which should build it from the sources.
+You may also want to install wine_gecko and wine-mono for applications
+that need support for Internet Explorer and .NET, respectively. These
+packages are not strictly required as Wine will download the relevant
+files as needed. However, having the files downloaded in advance allows
+you to work off-line and makes it so Wine does not download the files
+for each WINEPREFIX needing them.
 
 Architectural differences
 
-The default Wine is 32-bit, as is the i686 Arch package. As such, it is
-unable to execute any 64-bit Windows applications (which are still
-fairly rare at this point anyway).
+Wine by default is 32-bit, as is the i686 Arch package. As such, it is
+unable to execute any 64-bit Windows applications.
 
-The Wine package for x86_64, however, is currently built with
- --enable-win64. This activates the Wine version of WoW64.
+The x86_64 Arch package, however, is built with --enable-win64. This
+activates the Wine version of WoW64.
 
 -   In Windows, this complicated subsystem allows the user to use 32-bit
     and 64-bit Windows programs concurrently and even in the same
     directory.
 -   In Wine, the user will have to make separate directories/prefixes.
-    The support for this feature in Wine is currently experimental and
-    users are recommended to use a win32 WINEPREFIX. See Wine64 for
-    specific information on this.
+    See Wine64 for specific information on this.
 
-To summarize, using the Arch 64-bit Wine package with WINEARCH=win32
-should have the same behaviour as using the i686 Wine package.
-
-Note: If you run into problems with winetricks or programs with a 64-bit
-environment, try creating a new 32-bit WINEPREFIX. See below:
-#Using_WINEARCH
+If you run into problems with winetricks or programs with a 64-bit
+environment, try creating a new 32-bit WINEPREFIX. See below: #Using
+WINEARCH. Using the x86_64 Wine package with WINEARCH=win32 should have
+the same behaviour as using the i686 Wine package.
 
 Configuration
 -------------
-
-By default, Wine stores its configuration files and installed Windows
-programs in ~/.wine. This directory is commonly called a "Wine prefix"
-or "Wine bottle" It is created/updated automatically whenever you run a
-Windows program or one of Wine's bundled programs such as winecfg. The
-prefix directory also contains a tree which your Windows programs will
-see as  C:\ (C-drive)
-
-You can override the location Wine uses for a prefix with the WINEPREFIX
-environment variable. This is useful if you want to use separate
-configurations for different Windows programs.
-
-For example, if you run one program with:
-$ env WINEPREFIX=~/.win-a wine program-a.exe, and another with
-$ env WINEPREFIX=~/.win-b wine program-b.exe, the two programs will each
-have separate "C:\" and registries.
-
-To create a default prefix without running a Windows program or other
-GUI tool you can use:
-
-    $ env WINEPREFIX=~/.customprefix wineboot -u
 
 Configuring Wine is typically accomplished using:
 
 -   winecfg is a GUI configuration tool for Wine. You can run it from a
     console window with: $ winecfg, or
     $ WINEPREFIX=~/.some_prefix winecfg.
-
 -   control.exe is Wine's implementation of Windows' Control Panel which
     can be accessed with: $ wine control
-
 -   regedit is Wine's registry editing tool. If winecfg and the Control
     Panel were not enough, see WineHQ's article on Useful Registry Keys
 
-> Using WINEARCH
+> WINEPREFIX
 
-If you are using wine from [multilib], you will notice that winecfg will
-get you a 64-bit wine environment by default. You can change this
-behavior using the WINEARCH environment variable. Rename your ~/.wine
-directory and create a new wine environment by running:
-$ WINEARCH=win32 winecfg This will get you a 32-bit wine environment.
-Not setting WINEARCH will get you a 64-bit one.
+By default, Wine stores its configuration files and installed Windows
+programs in ~/.wine. This directory is commonly called a "Wine prefix"
+or "Wine bottle" It is created/updated automatically whenever you run a
+Windows program or one of Wine's bundled programs such as winecfg. The
+prefix directory also contains a tree which your Windows programs will
+see as C: (the C-drive).
+
+You can override the location Wine uses for a prefix with the WINEPREFIX
+environment variable. This is useful if you want to use separate
+configurations for different Windows programs. The first time a program
+is run with a new Wine prefix, Wine will automatically create a
+directory with a bare C-drive and registry.
+
+For example, if you run one program with
+$ env WINEPREFIX=~/.win-a wine program-a.exe, and another with
+$ env WINEPREFIX=~/.win-b wine program-b.exe, the two programs will each
+have a separate C-drive and separate registries.
+
+Note:Wine prefixes are not sandboxes! Programs running under Wine can
+still access the rest of the system! (for example, Z: is mapped to /,
+regardless of the Wine prefix.)
+
+To create a default prefix without running a Windows program or other
+GUI tool you can use:
+
+    $ env WINEPREFIX=~/.customprefix wineboot -u
+
+> WINEARCH
+
+If you have a 64-bit system, Wine will start an 64-bit environment by
+default. You can change this behavior using the WINEARCH environment
+variable. Rename your ~/.wine directory and create a new wine
+environment by running $ WINEARCH=win32 winecfg. This will get you a
+32-bit wine environment. Not setting WINEARCH will get you a 64-bit one.
 
 You can combine this with WINEPREFIX to make a separate win32 and win64
 environment:
@@ -149,44 +147,32 @@ folders as 64-bit prefixes and will not create a 32-bit in any existing
 folder. To create a 32-bit prefix you have to let wine create the folder
 specified in WINEPREFIX.
 
-You can also use winetricks and WINEARCH in one command for installing
-something from winetricks like this (using Steam as an example):
+You can also use WINEARCH in combination with other Wine programs, such
+as winetricks (using Steam as an example):
 
     env WINEARCH=win32 WINEPREFIX=~/.local/share/wineprefixes/steam winetricks steam
 
-Tip: You can make variables like WINEPREFIX or WINEARCH constant by
+Tip:You can make variables like WINEPREFIX or WINEARCH persistent by
 using ~/.bashrc.
 
-Note:You do not have create the steam subdirectory in the wineprefixes
-directory, it will create for you. See the Bottles section below for
-more information.
-
-> Graphics Drivers
+> Graphics drivers
 
 For most games, Wine requires high performance accelerated graphics
-drivers. This likely means using proprietary binary drivers from Nvidia
-or Amd/ATI. Intel drivers should mostly work as well as they are going
-to out of the box.
+drivers. This likely means using proprietary NVIDIA or AMD Catalyst
+drivers, although the open source ATI driver is increasingly become
+proficient for use with Wine. Intel drivers should mostly work as well
+as they are going to out of the box.
+
+See Gaming On Wine: The Good & Bad Graphics Drivers for more details.
 
 A good sign that your drivers are inadequate or not properly configured
 is when Wine reports the following in your terminal window:
 
     Direct rendering is disabled, most likely your OpenGL drivers have not been installed correctly
 
-For x86-64 systems, additional 32-bit [multilib] or AUR packages are
-required:
-
--   NVIDIA: # pacman -S lib32-nvidia-libgl For older cards search the
-    AUR for lib32-nvidia-utils (e.g. -173xx).
-
--   NVIDIA (using nouveau-dri): # pacman -S lib32-nouveau-dri
-
--   Intel: # pacman -S lib32-intel-dri Run Wine with:
-    LIBGL_DRIVERS_PATH=/usr/lib32/xorg/modules/dri
-
--   AMD/ATI: # pacman -S lib32-ati-dri For ATI's proprietary drivers:
-    # pacman -S lib32-catalyst-utils. install lib32-catalyst-utils from
-    the AUR
+For x86-64 systems, additional multilib packages are required. Please
+install the one that is listed in the Multilib Package column in the
+table in Xorg#Driver installation.
 
 Note:You might need to restart X after having installed the correct
 library.
@@ -210,18 +196,28 @@ If winecfg still fails to detect the audio driver (Selected driver:
 Games that use advanced sound systems may require installations of
 lib32-openal.
 
+MIDI support
+
+MIDI was a quite popular system for video games music in the 90. If you
+are trying out old games, it is not uncommon that the music will not
+play out of the box. Wine has excellent MIDI support. However you first
+need to make it work on your host system. See the wiki page for more
+details. Last but not least you need to make sure Wine will use the
+correct MIDI output. See the Wine Wiki for a detailed setup.
+
 > Other libraries
 
-Some applications (e.g. Office 2003) require ability to parse HTML or
-XML (they use MSXML library), in such case you need to install
-lib32-libxml2.
+-   Some applications (e.g. Office 2003/2007) require the MSXML library
+    to parse HTML or XML, in such cases you need to install
+    lib32-libxml2.
 
-Applications that play music may require lib32-mpg123.
+-   Some applications that play music may require lib32-mpg123.
 
-For application that use native image manipulation libraries
-installation of lib32-giflib and lib32-libpng may be required.
+-   Some applications that use native image manipulation libraries may
+    require lib32-giflib and lib32-libpng.
 
-For encryption support on x86_64 you need to install lib32-gnutls.
+-   Some applications that require encryption support may require
+    lib32-gnutls.
 
 > Fonts
 
@@ -238,66 +234,77 @@ the Wine registry with regedit:
     [HKEY_CURRENT_USER\Software\Wine\X11 Driver]
     "ClientSideWithRender"="N"
 
-> Desktop Launcher Menus
+> Desktop launcher menus
 
-By default, installation of Wine does not create desktop menus/icons for
-the software which comes with Wine (e.g. for winecfg, winebrowser, etc).
-However, installing Windows programs with Wine, in most cases, should
-result in the appropriate menu/desktop icons being created. For example,
-if the installation program (e.g. setup.exe) would normally add an icon
-to your Desktop or "Start Menu" on Windows, then Wine should create
+When installing Windows programs with Wine, should result in the
+appropriate menu/desktop icons being created. For example, if the
+installation program (e.g. setup.exe) would normally add an icon to your
+Desktop or "Start Menu" on Windows, then Wine should create
 corresponding freedesktop.org style .desktop files for launching your
 programs with Wine.
 
 Tip:If menu items were not created while installing software or have
 been lost, winemenubuilder may be of some use.
 
-If you wish to add on to the menu to create an Ubuntu-like Wine
-sub-menu, then follow these instructions:
+Creating menu entries for Wine utilities
 
-Creating Menu Entries
+By default, installation of Wine does not create desktop menus/icons for
+the software which comes with Wine (e.g. for winecfg, winebrowser, etc).
+These instructions will add entries for these applications.
 
 First, install a Windows program using Wine to create the base menu.
-After the base menu is created, you can start to add the menu entries.
-In GNOME, right-click on the desktop and select "Create Launcher...".
-The steps might be different for KDE/Xfce. Make three launchers using
-these settings:
+After the base menu is created, you can create the following files in
+~/.local/share/applications/wine/:
 
-    Type: Application
-    Name: Configuration
-    Command: winecfg
-    Comment: Configure the general settings for Wine
+    wine-browsedrive.desktop
 
-    Type: Application
-    Name: Uninstall Programs
-    Command: wine uninstaller
-    Comment: Uninstall Windows programs under Wine properly
+    [Desktop Entry]
+    Name=Browse C: Drive
+    Comment=Browse your virtual C: drive
+    Exec=wine winebrowser c:
+    Terminal=false
+    Type=Application
+    Icon=folder-wine
+    Categories=Wine;
 
-    Type: Application
-    Name: Browse C:\
-    Command: wine winebrowser c:\\
-    Comment: Browse the files in the virtual Wine C:\ drive
+    wine-uninstaller.desktop
 
-Now that you have these three launchers on your desktop, it is time to
-put them into the menu. But, first you should change the launchers to
-dynamically change icons when a new icon set is installed. To do this,
-open the launchers that you just made in your favorite text editor.
-Change the following settings to these new values:
-
-Configuration launcher:
-
-    Icon[en_US]=wine-winecfg
-    Icon=wine-winecfg
-
-Uninstall Programs launcher:
-
-    Icon[en_US]=wine-uninstaller
+    [Desktop Entry]
+    Name=Uninstall Wine Software
+    Comment=Uninstall Windows applications for Wine
+    Exec=wine uninstaller
+    Terminal=false
+    Type=Application
     Icon=wine-uninstaller
+    Categories=Wine;
 
-Browse C:\ launcher:
+    wine-winecfg.desktop
 
-    Icon[en_US]=wine-winefile
-    Icon=wine-winefile
+    [Desktop Entry]
+    Name=Configure Wine
+    Comment=Change application-specific and general Wine options
+    Exec=winecfg
+    Terminal=false
+    Icon=wine-winecfg
+    Type=Application
+    Categories=Wine;
+
+And create the following file in ~/.config/menus/applications-merged/:
+
+    wine.menu
+
+    <!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+    "http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+    <Menu>
+      <Name>Applications</Name>
+      <Menu>
+        <Name>wine-wine</Name>
+        <Directory>wine-wine.directory</Directory>
+        <Include>
+          <Category>Wine</Category>
+        </Include>
+      </Menu>
+    </Menu>
 
 If these settings produce a ugly/non-existent icon, it means that there
 are no icons for these launchers in the icon set that you have enabled.
@@ -306,49 +313,13 @@ icon that you want. Clicking the icon in the launcher's properties menu
 will have the same effect. A great icon set that supports these
 shortcuts is GNOME-colors.
 
-Now that you have the launchers fully configured, now it is time to put
-them in the menu. Copy them into ~/.local/share/applications/wine/.
+Removing menu entries
 
-Wait a second, they are not in the menu yet! There is one last step.
-Create the following text file:
+Menu entries created by Wine are located in
+~/.local/share/applications/wine/Programs/. Remove the program's
+.desktop entry to remove the application from the menu.
 
-    ~/.config/menus/applications-merged/wine-utilities.menu
-
-     <!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
-     "http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
-     <Menu>
-       <Name>Applications</Name>
-       <Menu>
-         <Name>wine-wine</Name>
-         <Directory>wine-wine.directory</Directory>
-         <Include>
-     	<Filename>wine-Configuration.desktop</Filename>
-         </Include>
-         <Include>
-     	<Filename>wine-Browse C:\.desktop</Filename>
-         </Include>
-         <Include>
-     	<Filename>wine-Uninstall Programs.desktop</Filename>
-         </Include>
-       </Menu>
-     </Menu>
-
-Go check in the menu and there should be the minty fresh options waiting
-to be used!
-
-Remove Wine Launcher Menus in Gnome3
-
-System wide launcher menus are located in /usr/share/applications/.
-Remove the program's ".desktop" entry to remove the launcher system
-wide.
-
-If this does not solve the problem, it is likely the wine launchers are
-located in ~/.local/share/applications/wine/Programs/. In the
-directories corresponding to the program files are the ".desktop"
-launcher files. Remove these files to remove the launchers. Remove the
-entire program's directory to easily remove the launcher files.
-
-KDE 4 Menu Fix[1]
+KDE 4 menu fix
 
 The Wine menu items may appear in "Lost & Found" instead of the Wine
 menu in KDE 4. This is because kde-applications.menu is missing the
@@ -373,12 +344,12 @@ after <DefaultMergeDirs/>, it should look like this:
 
 Alternatively you can create a symlink to a folder that KDE does see:
 
-    ln -s ~/.config/menus/applications-merged ~/.config/menus/kde-applications-merged
+    $ ln -s ~/.config/menus/applications-merged ~/.config/menus/kde-applications-merged
 
 This has the added bonus that an update to KDE won't change it, but is
 per user instead of system wide.
 
-Running Windows Applications
+Running Windows applications
 ----------------------------
 
 Warning:Do not run or install Wine applications as root! See Running
@@ -392,7 +363,7 @@ To install using an MSI installer, use the included msiexec utility:
 
     $ msiexec installername.msi
 
-Tips and Tricks
+Tips and tricks
 ---------------
 
 Tip:In addition to the links provided in the beginning of the article
@@ -404,38 +375,124 @@ the following may be of interest:
 -   The WineHQ Forums - A great place to ask questions after you have
     looked through the FAQ and AppDB
 
-These tools will assist in the installation of typical Windows
-components. In most cases they should be used as a last effort, as it
-may severely alter your wine configuration.
+> exe-thumbnailer
 
-> Installing Microsoft Office
+This is a small piece of UI code meant to be installed with (or even
+before) Wine. It provides thumbnails for executable files that show the
+embedded icons when available, and also gives the user a hint that Wine
+will be used to open it. Details can be found at wine wiki.
+gnome-exe-thumbnailer is available in AUR.
 
-UPDATE: 09-Apr, 2013: With Wine 1.5.27, none of the below "tweaks" are
-necessary. Ensure winbind is installed (the samba package has it). Then
+  
 
-    $ export WINEPREFIX="<path to a writable folder on your home directory>"
+> CSMT Patched Wine for Significantly Better Performance
+
+Currently wine developers experiment with stream/worker thread
+optimizations for Wine. You may experience an enormous performance
+improvement by using this experimental patched Wine versions. Many games
+may run as fast as on Windows or even faster. This Wine patch is is
+known as CSMT patch and works with Nvidia and AMD graphics cards.
+
+Note:This is still experimental code, therefore, it may not work as
+expected. Please, report your experiences to the developers for helping
+with development of those patches.
+
+The easy way is to install playonlinux. Then install your game and
+activate the Wine version 1.7.4-CSMT from the Tools/Manage Wine Versions
+menu in PlayOnLinux. For now it is recommended to use the patched Wine
+version 1.7.4-CSMT.
+
+Open your game's configuration settings and copy the following settings
+to the Miscellaneous/Command to exec before running the program section
+of your game configuration settings:
+
+    export WINEDEBUG=-all
+    export LD_PRELOAD="libpthread.so.0 libGL.so.1"
+    export __GL_THREADED_OPTIMIZATIONS=0
+    export __GL_SYNC_TO_VBLANK=1
+    export __GL_YIELD="NOTHING"
+    export CSMT=enabled
+
+Make sure you have disabled StrictDrawOrdering from Tools/General.
+
+If you want to compile it yourself from Github or you use the AUR
+package instead.
+
+Further Information
+
+Phoronix Forum discussion with the CSMT developer Stefan Dösinger
+
+FOSDEM2014 CSMT presentation of CSMT with benchmarks
+
+Here you find some game videos running with CSMT enabled
+
+> Changing the language
+
+Some programs may not offer a language selection, they will guess the
+desired language upon the sytem locales. Wine will transfer the current
+environment (including the locales) to the application, so it should
+work out of the box. If you want to force a program to run in a specific
+locale (which is fully generated on your system), you can call Wine with
+the following setting:
+
+    LC_ALL=xx_XX.encoding wine /my/program
+
+For instance
+
+    LC_ALL=it_IT.UTF-8 wine /my/program
+
+> Installing Microsoft Office 2010
+
+Note:Microsoft Office 2013 does not run at all.
+
+Microsoft Office 2010 works without any problems (tested with Microsoft
+Office Home and Student 2010, Wine 1.5.27 and 1.7.5). Activation over
+Internet also works.
+
+Start by installing wine-mono, wine_gecko, samba, and lib32-libxml2.
+
+Proceed with launching the installer:
+
+    $ export WINEPREFIX=.wine # any path to a writable folder on your home directory will do
     $ export WINEARCH="win32"
     $ wine /path/to/office_cd/setup.exe
 
-You could also put the above exports into your bashrc. Once installation
-completes, open Word or Excel to activate over the internet. Once done,
-close the application. Then run winecfg, and set riched20 (under
-libraries) to Native (Windows). This will enable Powerpoint to work.
-(tested with Office Home/Student 2010 and wine 1.5.27. Activation over
-internet also works)
+You could also put the above exports into your .bashrc.
 
-A small tweak is needed to install the office suite. Follow these steps
-to accomplish it:
-
-    $ WINEARCH=win32 WINEPREFIX=/path/to/wineprefix winecfg
-    # pacman -S winetricks
-    $ winetricks msxml3 # For MS Office 2007
-    $ winetricks msxml3 msxml6 # For MS Office 2010
-    $ wine /path/to/office_cd/setup.exe
+Once installation completes, open Word or Excel to activate over the
+Internet. Once activated, close the application. Then run winecfg, and
+set riched20 (under libraries) to (native,builtin). This will enable
+Powerpoint to work.
 
 For additional info, see the WineHQ article.
 
-> OpenGL Modes
+Note:If the activation over internet doesn't work and you want to
+activate by phone, be sure riched20 is set to (native,builtin) in order
+to see the drop-down list of countries.
+
+Note:playonlinux provides custom installer scripts that make the
+installation of Office 2003, 2007 and 2010 an ease. You just have to
+provide the setup.exe or ISO and the installer will guide you seamlessly
+through the installation procedure. You do not have to deal with the
+underlying Wine at all.
+
+> Proper mounting of optical media images
+
+Some applications will check for the optical media to be in drive. They
+may check for data only, in which case it might be enough to configure
+the corresponding path as being a CD-ROM drive in winecfg. However,
+other applications will look for a media name and/or a serial number, in
+which case the image has to be mounted with these special properties.
+
+Some virtual drive tools do not handle these metadata, like fuse-based
+virtual drives (Acetoneiso for instance). CDEmu will handle it
+correctly.
+
+> Burning optical media
+
+To burn CDs or DVDs, you will need to load the sg kernel module.
+
+> OpenGL modes
 
 Many games have an OpenGL mode which may perform better than their
 default DirectX mode. While the steps to enable OpenGL rendering is
@@ -449,53 +506,23 @@ Wine's AppDB for such application specific information.
 > Using Wine as an interpreter for Win16/Win32 binaries
 
 It is also possible to tell the kernel to use wine as an interpreter for
-all Win16/Win32 binaries. The process for setting this up depends on
-whether you boot using systemd or initscripts.
-
-Systemd
-
-Tell the kernel how to interpret Win16 and Win32 binaries:
+all Win16/Win32 binaries:
 
     echo ':DOSWin:M::MZ::/usr/bin/wine:' > /proc/sys/fs/binfmt_misc/register
 
-To make the setting permanent, create a configuration file in
-/etc/tmpfiles.d with the following contents:
+To make the setting permanent, create a /etc/binfmt.d/wine.conf file
+with the following content:
 
-    /etc/tmpfiles.d/enable-doswin-exe.conf
+    # Start WINE on Windows executables
+    :DOSWin:M::MZ::/usr/bin/wine:
 
-    w /proc/sys/fs/binfmt_misc/register - - - - :DOSWin:M::MZ::/usr/bin/wine:
+systemd automatically mounts the /proc/sys/fs/binfmt_misc filesystem
+using proc-sys-fs-binfmt_misc.mount (and automount) and runs the
+systemd-binfmt.service to load your settings.
 
-Note that, in contrast to initscripts, systemd will automatically mount
-/proc/sys/fs/binfmt_misc on use by default. Thus adding the tmpfiles
-rule should be sufficient for most users.
+Try it out by running a Windows program:
 
-For more info on tmpfiles, see Systemd#Temporary_files.
-
-Initscripts
-
-First mount the binfmt_misc filesystem:
-
-    # mount -t binfmt_misc none /proc/sys/fs/binfmt_misc
-
-Or you can add this line to your /etc/fstab:
-
-    none /proc/sys/fs/binfmt_misc binfmt_misc defaults 0 0
-
-Then, tell the kernel how to interpret Win16 and Win32 binaries:
-
-    echo ':DOSWin:M::MZ::/usr/bin/wine:' > /proc/sys/fs/binfmt_misc/register
-
-You can add this line to /etc/rc.local to make this setting permanent.
-In this case you may want to ignore stderr to avoid error messages when
-changing runlevels:
-
-    { echo ':DOSWin:M::MZ::/usr/bin/wine:' > /proc/sys/fs/binfmt_misc/register; } 2>/dev/null
-
-Test the Setup
-
-Now try to run a Windows program:
-
-    chmod 755 exefile.exe
+    chmod +x exefile.exe
     ./exefile.exe
 
 If all went well, exefile.exe should run.
@@ -523,10 +550,23 @@ available in the AUR. Then run it with:
 
     $ winetricks
 
+> Installing .NET framework 4.0
+
+First create a new 32bit wine prefix if you are on a 64bit system.
+
+    $ WINEARCH=win32 WINEPREFIX=~/win32 winecfg
+
+Then install the following packages using winetricks
+
+    $ WINEARCH=win32 WINEPREFIX=~/win32 winetricks -q msxml3 dotnet40 corefonts 
+
+  
+
 Third-party interfaces
 ----------------------
 
-These have their own sites, and are not supported in the Wine forums.
+These have their own sites, and are not supported in the official Wine
+forums/bugzilla.
 
 > CrossOver
 
@@ -561,19 +601,27 @@ configuration of prefixes. Notably it allows exporting QT themes into
 the wine configuration so that they can integrate nicely. You can find
 the q4wine package in multilib.
 
-External Resources
-------------------
+See also
+--------
 
--   Official Wine Website
--   Wine Application Database
+-   Official Wine website
+-   Wine application database
 -   Advanced configuring your gfx card and OpenGL settings on wine;
     Speed up wine
 -   FileInfo - Find Win32 PE/COFF headers in EXE/DLL/OCX files under
     linux/unix environment.
+-   Gentoo's Wine Wiki Page
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Wine&oldid=256097"
+"https://wiki.archlinux.org/index.php?title=Wine&oldid=301985"
 
 Category:
 
 -   Wine
+
+-   This page was last modified on 25 February 2014, at 07:13.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

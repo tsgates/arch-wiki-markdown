@@ -10,19 +10,16 @@ IBM ThinkPad 600E
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 To install:                                                        |
-|     -   1.1 Audio                                                        |
-|     -   1.2 USB                                                          |
-|     -   1.3 Graphics                                                     |
-|     -   1.4 Software                                                     |
-|     -   1.5 ACPI and APM                                                 |
-|                                                                          |
-| -   2 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 To install:
+    -   1.1 Audio
+    -   1.2 USB
+    -   1.3 Graphics
+    -   1.4 Software
+    -   1.5 ACPI and APM
+-   2 See also
 
 > To install:
 
@@ -119,3 +116,10 @@ Retrieved from
 Category:
 
 -   IBM
+
+-   This page was last modified on 4 March 2013, at 21:03.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

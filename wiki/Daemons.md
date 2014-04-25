@@ -35,20 +35,6 @@ events.
 From the user's perspective the distinction is typically not significant
 unless the user tries to look for the "daemon" in a process list.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Managing daemons                                                   |
-|     -   1.1 Starting on boot                                             |
-|     -   1.2 Starting manually                                            |
-|     -   1.3 Restarting                                                   |
-|     -   1.4 Status reporting                                             |
-|                                                                          |
-| -   2 List of daemons                                                    |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
-
 Managing daemons
 ----------------
 
@@ -56,27 +42,7 @@ In Arch Linux, daemons are managed by systemd. The systemctl command is
 the user interface used to manage them. It reads <service>.service files
 that contain information about how and when to start the associated
 daemon. Service files are stored in /{etc,usr/lib,run}/systemd/system.
-See systemd#Using units for complete information about using systemctl
-to manage daemons.
-
-> Starting on boot
-
-To add or remove services to be started at boot-time, use
-systemctl enable|disable <service_name>
-
-> Starting manually
-
-To start or stop services at runtime, use
-systemctl start|stop <service_name>.
-
-> Restarting
-
-To restart services, use systemctl restart <service_name>.
-
-> Status reporting
-
-To report the current status of a service, use
-systemctl status <service_name>.
+See systemd#Using units for details.
 
 List of daemons
 ---------------
@@ -91,9 +57,16 @@ See also
 -   Examples for writing Systemd/Services
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Daemons&oldid=253884"
+"https://wiki.archlinux.org/index.php?title=Daemons&oldid=264940"
 
 Categories:
 
 -   Boot process
 -   Daemons and system services
+
+-   This page was last modified on 2 July 2013, at 15:05.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

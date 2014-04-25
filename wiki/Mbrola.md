@@ -12,16 +12,14 @@ Mbrola
 
 mbrola is a non-free phonemes-to-audio program.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Step 1: Installation                                               |
-| -   2 Step 2: Add voices                                                 |
-| -   3 Step 3: Testing                                                    |
-| -   4 Step 4: Install a text-to-phonemes program                         |
-|     -   4.1 lliaphon                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Step 1: Installation
+-   2 Step 2: Add voices
+-   3 Step 3: Testing
+-   4 Step 4: Install a text-to-phonemes program
+    -   4.1 lliaphon
 
 Step 1: Installation
 --------------------
@@ -79,3 +77,10 @@ Retrieved from
 Category:
 
 -   Accessibility
+
+-   This page was last modified on 31 October 2012, at 20:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

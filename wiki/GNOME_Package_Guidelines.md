@@ -11,19 +11,17 @@ Web – Wine
 
 The GNOME packages on Arch Linux follow a certain schema.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 GNOME profile initialization                                       |
-| -   2 GConf schemas                                                      |
-| -   3 GSettings schemas                                                  |
-| -   4 Scrollkeeper documentation                                         |
-| -   5 .desktop files                                                     |
-| -   6 GTK Icon cache                                                     |
-| -   7 .install files                                                     |
-| -   8 Example                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 GNOME profile initialization
+-   2 GConf schemas
+-   3 GSettings schemas
+-   4 Scrollkeeper documentation
+-   5 .desktop files
+-   6 GTK icon cache
+-   7 .install files
+-   8 Example
 
 GNOME profile initialization
 ----------------------------
@@ -87,7 +85,7 @@ register MimeType entries in them. Running update-desktop-database -q in
 post_install and post_remove is recommended (package should depend on
 desktop-file-utils in this case).
 
-GTK Icon cache
+GTK icon cache
 --------------
 
 Quite some packages install icons in the hicolor icon theme. These
@@ -116,8 +114,15 @@ For an example of above rules, take a look at the gedit PKGBUILD and the
 https://projects.archlinux.org/svntogit/packages.git/tree/gedit/repos/extra-x86_64/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GNOME_Package_Guidelines&oldid=256138"
+"https://wiki.archlinux.org/index.php?title=GNOME_Package_Guidelines&oldid=259122"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 27 May 2013, at 15:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -20,21 +20,18 @@ Install on windows by CoLinux
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Arch and coLinux                                                   |
-| -   2 The image build steps (for expert users)                           |
-|     -   2.1 1. Download required files                                   |
-|     -   2.2 2. Get newarch script                                        |
-|     -   2.3 3. Run debian system and mount windows c:\colinux directory  |
-|         as /mnt/win                                                      |
-|     -   2.4 4. Using the new arch.fs to boot                             |
-|     -   2.5 5. Modify fstab                                              |
-|                                                                          |
-| -   3 Building a Minimal Image (optional)                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Arch and coLinux
+-   2 The image build steps (for expert users)
+    -   2.1 1. Download required files
+    -   2.2 2. Get newarch script
+    -   2.3 3. Run debian system and mount windows c:\colinux directory
+        as /mnt/win
+    -   2.4 4. Using the new arch.fs to boot
+    -   2.5 5. Modify fstab
+-   3 Building a Minimal Image (optional)
 
 Arch and coLinux
 ----------------
@@ -77,7 +74,6 @@ Build Arch Linux on Colinux From Debian
 -   On sf.net's colinux download page
     -   colinux 0.8.0
     -   Debian-4.0r0.ext3-etch.ext3.1gb.bz2
-
 -   Install colinux 0.8.0
 -   Download fs_256Mb.bz2 blank ext3 file system:
     http://gniarf.nerim.net/colinux/fs
@@ -184,3 +180,10 @@ Retrieved from
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 13 June 2012, at 08:11.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

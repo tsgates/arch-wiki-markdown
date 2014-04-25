@@ -23,22 +23,19 @@ operating system) is here replaced by Arch.Honey (the extra activities)
 are not currently provided in AUR but can be installed as shown in the
 #Building section.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Getting started: Glucose                                           |
-|     -   1.1 Building from AUR                                            |
-|     -   1.2 Building a Bundle                                            |
-|     -   1.3 Depedency tree                                               |
-|     -   1.4 Building a Modular Group                                     |
-|                                                                          |
-| -   2 Activities                                                         |
-|     -   2.1 Fructose                                                     |
-|     -   2.2 Etoys                                                        |
-|     -   2.3 Building                                                     |
-|     -   2.4 Notes                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Getting started: Glucose
+    -   1.1 Building from AUR
+    -   1.2 Building a Bundle
+    -   1.3 Depedency tree
+    -   1.4 Building a Modular Group
+-   2 Activities
+    -   2.1 Fructose
+    -   2.2 Etoys
+    -   2.3 Building
+    -   2.4 Notes
 
 Getting started: Glucose
 ------------------------
@@ -145,35 +142,25 @@ Activities
 
 > Fructose
 
-All fructose activities are available on the AUR. To install them, you
-may issue
+All fructose activities are available from the AUR as
+sugar-activity-activity:
 
-    yaourt sugar-activity
-
-or equivalent and select the activities you want to install. Currently
-provided activities are
-
-    browse
-    calculate
-    chat
-    imageviewer
-    jukebox
-    log
-    pippy
-    read
-    terminal
-    turtleart
-    write
-    etoys
+-   sugar-activity-browse
+-   sugar-activity-calculate
+-   sugar-activity-chat
+-   sugar-activity-imageviewer
+-   sugar-activity-jukebox
+-   sugar-activity-log
+-   sugar-activity-pippy
+-   sugar-activity-read
+-   sugar-activity-terminal
+-   sugar-activity-turtleart
+-   sugar-activity-write
 
 > Etoys
 
 etoys is provided separately as it is part of glucose but also include
-the fructose activity. You may install it using
-
-    yaourt -S etoys
-
-or an equivalent AUR helper.
+the fructose activity. It is available as etoys in the AUR.
 
 > Building
 
@@ -220,8 +207,15 @@ You may need squeak to run some activities (like etoys).
 -   You may need to install python-pygame if activities do not start up.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sugar&oldid=249159"
+"https://wiki.archlinux.org/index.php?title=Sugar&oldid=260984"
 
 Category:
 
 -   Desktop environments
+
+-   This page was last modified on 3 June 2013, at 20:33.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,7 +1,7 @@
 Lenovo ThinkPad X120e
 =====================
 
-> Summary
+Summary help replacing me
 
 Installation instructions for the Lenovo ThinkPad X120e
 
@@ -11,31 +11,26 @@ Related articles
 
 IBM ThinkPad X100e
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 CPU                                                                |
-| -   2 Video Drivers                                                      |
-| -   3 Wireless                                                           |
-| -   4 Audio                                                              |
-| -   5 Input                                                              |
-|     -   5.1 TrackPoint Scrolling (wheel emulation)                       |
-|     -   5.2 Disabling the TrackPad                                       |
-|     -   5.3 TrackPoint speed & sensitivity                               |
-|                                                                          |
-| -   6 Power saving                                                       |
-|     -   6.1 Disable Bluetooth                                            |
-|     -   6.2 ATI Video card Powersaving                                   |
-|     -   6.3 CPU Undervolting                                             |
-|         -   6.3.1 Using PHC                                              |
-|         -   6.3.2 Using tpc                                              |
-|                                                                          |
-|     -   6.4 Fan Control                                                  |
-|                                                                          |
-| -   7 Suspend and hibernation                                            |
-| -   8 External Resources                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 CPU
+-   2 Video drivers
+-   3 Wireless
+-   4 Audio
+-   5 Input
+    -   5.1 TrackPoint scrolling (wheel emulation)
+    -   5.2 Disabling the TrackPad
+    -   5.3 TrackPoint speed and sensitivity
+-   6 Power saving
+    -   6.1 Disable Bluetooth
+    -   6.2 ATI video card powersaving
+    -   6.3 CPU undervolting
+        -   6.3.1 Using PHC
+        -   6.3.2 Using tpc
+    -   6.4 Fan control
+-   7 Suspend and hibernation
+-   8 See also
 
 CPU
 ---
@@ -44,40 +39,11 @@ The AMD CPU used on the X120e is microcode-upgradeable. To enable this
 functionality install the amd-ucode packages (available on extra) and
 add microcode to the MODULE list on /etc/rc.conf.
 
-Video Drivers
+Video drivers
 -------------
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
-                           is a candidate for       
-                           merging with ATI.        
-                           Notes: Duplicates        
-                           information from ATI     
-                           article (Discuss)        
-  ------------------------ ------------------------ ------------------------
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-emblem-important. The factual accuracy of  [Tango-emblem-important.
-  png]                     this article or section  png]
-                           is disputed.             
-                           Reason: There is no such 
-                           thing as "kernel         
-                           3.2.6.2" (Discuss)       
-  ------------------------ ------------------------ ------------------------
 
 Users have the choice between the open source ATI video driver or the
 closed source Catalyst video driver.
-
-In order to use the open source driver you must have at least kernel
-2.6.38.
-
-The open source ATI driver has flawless performance (including suspend).
-Gnome 3 works well with the open source ATI driver.
-
-The Catalyst drivers do offer better 3D performance but usually have
-various minor issues (such as suspend support). As of kernel 3.2.6.2,
-suspend appears to work fine with this computer while using the catalyst
-drivers.
 
 Wireless
 --------
@@ -125,7 +91,7 @@ By specifying index you should no longer specify the default in
 Input
 -----
 
-> TrackPoint Scrolling (wheel emulation)
+> TrackPoint scrolling (wheel emulation)
 
 To enable scrolling with the TrackPoint while holding down the middle
 mouse button, create a new file /etc/X11/xorg.conf.d/20-thinkpad.conf
@@ -150,9 +116,7 @@ If you try to use your x120e lying down you will notice its very easy to
 hit the TrackPad buttons and invert the functionality of the other
 inputs(fun).
 
-Install the synaptics driver from extra:
-
-    # pacman -S xf86-input-synaptics
+Install xf86-input-synaptics from the official repositories.
 
 You can now toggle the TrackPads functionality using the synclient
 utility:
@@ -168,31 +132,31 @@ If you want this to be permanent add the option to your
 Also, you can use this script for change touchpad status:
 
      #!/bin/sh
-     tstat=`xinput list-props "SynPS/2 Synaptics TouchPad" | awk '/Synaptics Off/ { print $NF }'`
+     tstat=$(xinput list-props "SynPS/2 Synaptics TouchPad" | awk '/Synaptics Off/ { print $NF }')
      if [ $tstat = 0 ]; then
          synclient TouchpadOff=1
      else
          synclient TouchpadOff=0
      fi
 
-> TrackPoint speed & sensitivity
+> TrackPoint speed and sensitivity
 
 You can up your trackpoint speed with next command:
 
-       xinput --set-prop 13 'Device Accel Profile' 6
+    $ xinput --set-prop 13 'Device Accel Profile' 6
 
 If you want this to be permanent speed up add the option to your
 /etc/X11/xorg.conf.d/20-thinkpad.conf (if this is your X11 trackpoint
 config, of course):
 
-       Option		"AccelerationProfile"   "6"
+    Option		"AccelerationProfile"   "6"
 
 To more acceleration profile read man "xorf.conf.d"
 
 Power saving
 ------------
 
-See power saving
+See power saving.
 
 > Disable Bluetooth
 
@@ -202,10 +166,10 @@ See power saving
                            is disputed.             
                            Reason: Using rfkill is  
                            the correct way to do    
-                           this (Discuss)           
+                           this. (Discuss)          
   ------------------------ ------------------------ ------------------------
 
-Note: You must first have the thinkpad_acpi kernel module loaded
+Note:You must first have the thinkpad_acpi kernel module loaded.
 
 To save some power you can disable Bluetooth:
 
@@ -214,7 +178,7 @@ To save some power you can disable Bluetooth:
 If you want to disable Bluetooth at every boot just add that line to
 /etc/rc.local
 
-> ATI Video card Powersaving
+> ATI video card powersaving
 
 Under the opensource ATI video card driver you can control the
 clockspeed of the GPU. The recommended setting is:
@@ -224,7 +188,7 @@ clockspeed of the GPU. The recommended setting is:
 This enables dynamic frequency switching based off of GPU load. Further
 information on this topic can be found in ATI#Powersaving.
 
-> CPU Undervolting
+> CPU undervolting
 
 Warning:Undervolting can lead to instability and consequently data loss,
 only you are responsible if you break something
@@ -233,7 +197,7 @@ Using PHC
 
 The Fusion Processor can be undervolted with the PHC-K8 tool. See PHC
 for usage information. For the AMD Fusion you'll want to download phc-k8
-from AUR.
+from the AUR.
 
 Note:In order to lower CPU power usage you must actually raise the PHC
 values. (somewhat counter-intuitive)
@@ -253,19 +217,19 @@ tool and needs Kernelmodule cpuid and msr.
 
 Information output available cores and current frequencies and voltage:
 
-    sudo tpc -l
+    # tpc -l
 
-Example how to use
+Example how to use:
 
 Warning:DO THIS AT YOUR OWN RISK!!!! DON'T USE THIS VALUES!!! Approach
 yourself to values whitch are working for you! This is just an example
 how to use tpc
 
-    tpc -set core all pstate 2 frequency 825 vcore 0.825   
-    tpc -set core all pstate 1 frequency 1320 vcore 1.2250
-    tpc -set core all pstate 0 frequency 1650 vcore 1.3000
+    # tpc -set core all pstate 2 frequency 825 vcore 0.825   
+    # tpc -set core all pstate 1 frequency 1320 vcore 1.2250
+    # tpc -set core all pstate 0 frequency 1650 vcore 1.3000
 
-> Fan Control
+> Fan control
 
 The X120e's fan spins constantly but luckily can be controlled by the
 user.
@@ -277,11 +241,11 @@ Note:Even with undervolting the APU produces enough heat to have to
 occasionally run the fan even at idle.
 
 To enable manual fan control place the following into
-/etc/modprobe.d/modprobe.conf
+/etc/modprobe.d/modprobe.conf:
 
     options thinkpad_acpi fan_control=1
 
-Now you have to reload thinkpad_acpi module or reboot your Netbook.
+Now you have to reload thinkpad_acpi module or reboot your netbook.
 
     # rmmod thinkpad_acpi && modprobe thinkpad_acpi
 
@@ -299,7 +263,7 @@ Now it should look like that:
  At this point the fan will still be safely under the system's control.
 You can either directly modify the values in /proc/acpi/ibm (NOT
 RECOMMENDED. e.g. 'echo level 1 > /proc/acpi/ibm/fan') or install a fan
-control daemon such as [thinkfan].
+control daemon such as thinkfan from the AUR.
 
 Suspend and hibernation
 -----------------------
@@ -312,16 +276,21 @@ single line:
 
     HIBERNATE_MODE="shutdown"
 
-External Resources
-------------------
+See also
+--------
 
-X120e on ThinkWiki
-
-Undervolting the AMD Fusion with PHC-tool
+X120e on ThinkWiki Undervolting the AMD Fusion with PHC-tool
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_X120e&oldid=236462"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_X120e&oldid=281856"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 7 November 2013, at 13:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

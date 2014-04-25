@@ -3,24 +3,20 @@ Local Mirror
 
 Warning: If you want to create an official mirror see this page.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 STOP                                                               |
-|     -   1.1 Alternatives:                                                |
-|                                                                          |
-| -   2 Local Mirror                                                       |
-|     -   2.1 Things to keep in mind:                                      |
-|     -   2.2 Server Configuration                                         |
-|         -   2.2.1 Building Rsync Command                                 |
-|         -   2.2.2 Example Script                                         |
-|         -   2.2.3 Another mirror script using lftp                       |
-|         -   2.2.4 Partial mirroring                                      |
-|         -   2.2.5 Serving                                                |
-|                                                                          |
-|     -   2.3 Client Configuration                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 STOP
+    -   1.1 Alternatives:
+-   2 Local Mirror
+    -   2.1 Things to keep in mind:
+    -   2.2 Server Configuration
+        -   2.2.1 Building Rsync Command
+        -   2.2.2 Example Script
+        -   2.2.3 Another mirror script using lftp
+        -   2.2.4 Partial mirroring
+        -   2.2.5 Serving
+    -   2.3 Client Configuration
 
 STOP
 ----
@@ -41,7 +37,7 @@ Local Mirror
 -   Bandwidth is not free for the mirrors. They must pay for all the
     data they serve you
     -   This still applies although you pay your ISP
-
+    -   A full mirror (32+64 bit) is over 36GB in size (as of Dec 2013)
 -   There are many packages that will be downloaded that you will likely
     never use
 -   Mirror operators will much prefer you to download only the packages
@@ -77,12 +73,11 @@ Building Rsync Command
     from pool to core/extra/testing/etc..
     -   As of 9/21/2010 this migration is not yet complete.
         -   There may be actual packages, instead of symlinks, in
-            ${repo}/os/${arch}
-
+            {repo}/os/{arch}
 -   Exclude any top-level directories that you do not need
 
 Example:
-rsync $rsync_arguments --exclude="/path/to/exclude.txt" rsync://example.com/ /path/to/destination
+rsync $rsync_arguments --exclude-from="/path/to/exclude.txt" rsync://example.com/ /path/to/destination
 
 Example Script
 
@@ -120,9 +115,11 @@ you REALLY want a mirror.
     RSYNC_OPTS="-rtlHq --delete-after --delay-updates --copy-links --safe-links --max-delete=1000 --bwlimit=${BW_LIMIT} --delete-excluded --exclude=.*"
     LCK_FLE='/var/run/repo-sync.lck'
 
+    PATH='/usr/bin'
+
     # Make sure only 1 instance runs
     if [ -e "$LCK_FLE" ] ; then
-    	OTHER_PID=`/bin/cat $LCK_FLE`
+    	OTHER_PID=$(cat $LCK_FLE)
     	echo "Another instance already running: $OTHER_PID"
     	exit 1
     fi
@@ -130,11 +127,11 @@ you REALLY want a mirror.
 
     for REPO in $REPOS ; do
     	echo "Syncing $REPO"
-    	/usr/bin/rsync $RSYNC_OPTS ${SOURCE}/${REPO} ${DEST}
+    	rsync $RSYNC_OPTS ${SOURCE}/${REPO} ${DEST}
     done
 
     # Cleanup
-    /bin/rm -f "$LCK_FLE"
+    rm -f "$LCK_FLE"
 
     exit 0
 
@@ -148,14 +145,14 @@ $PATH for an easy way to mirror that continues if you log out.
     lcd /local/path/to/your/mirror
     open ftp.archlinux.org (or whatever your favorite mirror is)
     # Use 'cd' to change into the proper directory on the mirror, if necessary.
-    mirror -cve -X *i686* core &
-    mirror -cve -X *i686* extra &
-    mirror -cve -X *i686* community &
-    mirror -cve -X *i686* multilib &
+    mirror -cve -x '.*i686.*' core &
+    mirror -cve -x '.*i686.*' extra &
+    mirror -cve -x '.*i686.*' community &
+    mirror -cve -x '.*i686.*' multilib &
     lcd pool
     cd pool
-    mirror -cve -X *i686* community &
-    mirror -cve -X *i686* packages &
+    mirror -cve -x '.*i686.*' community &
+    mirror -cve -x '.*i686.*' packages &
 
 if you want to see the current status of the mirror. open lftp on
 terminal and type 'attach <PID>'
@@ -171,10 +168,8 @@ Serving
 -   HTTP (LAN)
     -   LAMP
     -   Lighttpd
-
 -   FTP (LAN)
     -   vsftpd
-
 -   Physical Media
     -   Flash Drive
     -   External HD
@@ -183,12 +178,19 @@ Serving
 
 -   Add the proper Server= variable in /etc/pacman.d/mirrorlist
 -   For physical media (such as flash drive) the following can be used:
-    Server = file:///mnt/media/repo/$repo/os/$arch (where
-    /mnt/media/repo is directory where local mirror located)
+    Server = file:///mnt/media/repo/repo/os/arch (where /mnt/media/repo
+    is directory where local mirror located)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Local_Mirror&oldid=238834"
+"https://wiki.archlinux.org/index.php?title=Local_Mirror&oldid=287189"
 
 Category:
 
 -   Package management
+
+-   This page was last modified on 8 December 2013, at 11:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

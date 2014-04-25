@@ -6,30 +6,31 @@ MTP is the "Media Transfer Protocol" and is used by many mp3 players
 part of the "Windows Media" Framework and has close relationship with
 Windows Media Player.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-| -   3 Using media players                                                |
-| -   4 mtpfs                                                              |
-| -   5 go-mtpfs                                                           |
-| -   6 gvfs-mtp                                                           |
-| -   7 simple-mtpfs                                                       |
-| -   8 KDE MTP KIO Slave                                                  |
-|     -   8.1 Usage                                                        |
-|     -   8.2 Workaround if the KDE device actions doesn't work            |
-|                                                                          |
-| -   9 GNOME gMTP                                                         |
-| -   10 Workarounds for Android                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+-   3 Using media players
+-   4 mtpfs
+-   5 jmtpfs
+-   6 go-mtpfs
+-   7 gvfs-mtp
+-   8 simple-mtpfs
+-   9 KDE MTP KIO Slave
+    -   9.1 Usage
+    -   9.2 Workaround if the KDE device actions doesn't work
+-   10 GNOME gMTP
+-   11 Workarounds for Android
+-   12 Security features on android
 
 Installation
 ------------
 
 MTP support is provided by libmtp, installable with the libmtp package
 from the official repositories.
+
+KDE integration is provided by the kio-mtp package.
 
 Usage
 -----
@@ -59,6 +60,19 @@ Warning: Some commands may be harmful to your MTP device!!!
      mtp-delfile         mtp-format          mtp-newplaylist     mtp-thumb
      mtp-detect          mtp-getfile         mtp-playlists       mtp-tracks
 
+If you see a message like:
+
+    Device 0 (VID=XXXX and PID=XXXX) is UNKNOWN.
+    Please report this VID/PID and the device model to the libmtp development team
+
+You should check whether your device has been already in this list:
+[Supported devices list[1]] If it is not, you should report it to the
+development team. If it already is, your libmtp might be slightly
+outdated. To allow it to be properly used by libmtp, you can add your
+device to:
+
+    /usr/lib/udev/rules.d/69-libmtp.rules
+
 Using media players
 -------------------
 
@@ -74,7 +88,7 @@ and look for your device, it will be something like:
 
 in which case the entry would be:
 
-    SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", ATTR{idProduct}=="6860", MODE="0666"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", ATTR{idProduct}=="6860", MODE="0666", OWNER="[username]"
 
 Then, reload udev rules:
 
@@ -85,6 +99,9 @@ recognised
 
 mtpfs
 -----
+
+Warning: The following is likely to not work and you might have to
+resort to gphoto2 or a file manager with gvfs support like PCManFM.
 
 Mtpfs is FUSE filesystem that supports reading and writing from any MTP
 device. Basically it allows you to mount your device as an external
@@ -121,22 +138,41 @@ Or, with sudo
 Note:if you want not be asked for password when using sudo, please refer
 to USB Storage Devices#Mounting USB devices
 
+jmtpfs
+------
+
+jmtpfs is a FUSE and libmtp based filesystem for accessing MTP (Media
+Transfer Protocol) devices. It was specifically designed for exchanging
+files between Linux systems and newer Android devices that support MTP
+but not USB Mass Storage. jmtpfs is available as jmtpfs in the AUR.
+
+Use these commands to mount and unmount your device :
+
+    $ jmtpfs ~/mtp
+
+    $ fusermount -u ~/mtp
+
 go-mtpfs
 --------
 
 Note:Go-mtpfs gives a better performance while writing files to some
 devices than mtpfs/jmtpfs. Try it if you have slow speeds.
 
+Note:Mounting with Go-mtpfs fails if external SD Card is present. If you
+have also external SD Card please remove it and then try mounting again.
+
 If the above instructions don't show any positive results one should try
 go-mtpfs-git from the AUR. The following has been tested on a Samsung
-Galaxy Nexus GSM and Samsung Galaxy S 3 mini.
+Galaxy Nexus GSM, Asus/Google Nexus 7 (2012 1st gen model) and Samsung
+Galaxy S 3 mini. (This is the only mtp software which worked for me on
+nexus 4. Settings are usb debugging enabled, connected as media device.)
 
 If you want do it simpler, install go, libmtp and git from the official
 repositories. After that install go-mtpfs-git from the AUR.
 
   
  As in the section above install android-udev which will provide you
-with "/etc/udev/rules.d/51-android.rules" edit it to apply to your
+with "/usr/lib/udev/rules.d/51-android.rules" edit it to apply to your
 vendorID and productID, which you can see after running mtp-detect. To
 the end of the line add with a comma OWNER="yourusername". Save the
 file.
@@ -173,9 +209,9 @@ Philip Langdale is has implemented native MTP support for gvfs. The
 weaknesses of gphoto2 and mtpfs are listed in his blog post.
 
 -   The native mtp implementation for gvfs has been merged upstream and
-    has been released in gvfs 1.15.2. You can grab the stable gvfs-mtp
-    package from extra, when gvfs 1.16 will be released in the stable
-    Arch repos.
+    has been released in gvfs 1.15.2.
+-   You can grab the stable gvfs-mtp package from extra. You may want to
+    reboot your PC to make it actually working.
 
 -   Devices will have gvfs paths like this
 
@@ -237,6 +273,10 @@ gmtp is currently located in the AUR .
 Workarounds for Android
 -----------------------
 
+-   HTC Phones automatically enter usb debugging mode on usb connect.
+    Manually turn it off once connected to give libmtp access to the
+    device.
+
 MTP is still buggy and may crash despite the best efforts of developers.
 The following are alternatives:
 
@@ -252,16 +292,55 @@ The following are alternatives:
         storage.
         -   Pro: Doesn't require root and just works!
         -   Cons: Doesn't work with tethering network.
-
     -   FTPServer (by Andreas Liebig) - Just work.
+-   SSH server on Android.
+    -   For example, SSHelper, available on the Play Store, just works
+        without requiring root access. Assuming SSHelper is listening on
+        port 20 and the phone's IP address is 192.168.0.20, the
+        following command will synchronise a local directory with the
+        external SD card of the Android device:
+
+     rsync --rsh="ssh -p 20" --modify-window=1  ~/local_files  192.168.0.20:/mnt/extSdCard/remote_files
+
+Note the --modify-window option, which is often used when rsyncing to a
+FAT filesystem (such as the one used by Android devices for their
+internal memory and external SD cards).
 
 -   Samba - an Android app to share your SD card as a windows fileshare.
     Pros: Your desktop apps work as before (since the SD card appears as
     a windows fileshare). Cons: you need to root your phone.
+-   adb - Part of the Android development kit is adb android debug
+    bridge. It can be used to push and pull files from an Android
+    device.
+    -   The device need USB debbuging to be active and later connected
+        to the computer with usb.
+    -   To send a file to the device use
+        adb push /what-to-copy /where-to-place-it
+    -   To receive a file
+        adb pull /what-you-want-to-copy /where-you-want-it
+        -   Pro: Stable, can be used for a lot more then just copy files
+            back and forth.
+        -   Cons: Can be somewhat slow.
+
+Security features on android
+----------------------------
+
+If you use android 4.x please unlock phone (screen unlock) and then
+connect phone to USB.
+
+If you not unlock you have in KDE "No Storages found. Maybe you need to
+unlock your device?" or error 02fe in console.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=MTP&oldid=255879"
+"https://wiki.archlinux.org/index.php?title=MTP&oldid=305980"
 
 Category:
 
 -   Sound
+
+-   This page was last modified on 20 March 2014, at 17:32.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

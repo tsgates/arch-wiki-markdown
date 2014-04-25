@@ -1,20 +1,15 @@
 Install from SSH
 ================
 
-  
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Intro                                                              |
-| -   2 Boot from Media                                                    |
-| -   3 Setup the Live Environment to use SSH                              |
-| -   4 Connect to the Target PC via SSH                                   |
-|     -   4.1 Notes                                                        |
-|                                                                          |
-| -   5 Next Steps                                                         |
-+--------------------------------------------------------------------------+
+-   1 Intro
+-   2 Boot from Media
+-   3 Setup the Live Environment to use SSH
+-   4 Connect to the Target PC via SSH
+    -   4.1 Notes
+-   5 Next Steps
 
 Intro
 -----
@@ -55,18 +50,13 @@ First, setup the network on the target machine.
 Assuming a wired connection, running dhclient or dhcpcd is sufficient to
 get a lease. For more info, visit configuring network.
 
-If on a wireless connection, see Wireless Setup and Wpa_supplicant for
-details on establishing a connection to your access point.
+If on a wireless connection, see Wireless network configuration and
+Wpa_supplicant for details on establishing a connection to your access
+point.
 
 Secondly, start the openssh daemon:
 
-On a live system using systemd: (2012.10.06 or later)
-
     # systemctl start sshd
-
-On a live system using initscripts: (pre-2012.10.06)
-
-    # rc.d start sshd
 
 Finally, setup a root password which is needed for an ssh connection;
 the default arch password for root is empty.
@@ -103,7 +93,7 @@ Next Steps
 ----------
 
 The sky is the limit. If the intent is to simply install Arch from the
-live media, follow the guide at Installation Guide. If the intent is to
+live media, follow the guide at Installation guide. If the intent is to
 edit an existing Linux install that got broken, follow the Install from
 Existing Linux wiki article.
 
@@ -151,9 +141,16 @@ unmount the partitions prior to a reboot of the system.
     umount /mnt
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Install_from_SSH&oldid=252646"
+"https://wiki.archlinux.org/index.php?title=Install_from_SSH&oldid=303416"
 
 Categories:
 
 -   Getting and installing Arch
 -   Secure Shell
+
+-   This page was last modified on 6 March 2014, at 21:22.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

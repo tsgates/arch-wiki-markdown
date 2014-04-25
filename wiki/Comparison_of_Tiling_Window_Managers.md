@@ -4,17 +4,14 @@ Comparison of Tiling Window Managers
 This article provides an unbiased comparison of the most popular tiling
 window managers (as opposed to floating window managers).
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Comparison table                                                   |
-|     -   1.1 Management style                                             |
-|     -   1.2 Layouts                                                      |
-|     -   1.3 Key bindings                                                 |
-|                                                                          |
-| -   2 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Comparison table
+    -   1.1 Management style
+    -   1.2 Layouts
+    -   1.3 Key bindings
+-   2 External links
 
 Comparison table
 ----------------
@@ -108,7 +105,7 @@ bspwm
 
 C
 
-Lua
+Anything
 
 Hybrid
 
@@ -116,13 +113,13 @@ None
 
 Yes
 
-dzen2 fed by ewmhstatus
+Can write internal state to a FIFO
 
-via compton
+External
 
 v-split, h-split
 
-triple borders
+Variable borders
 
 via bspc
 
@@ -182,7 +179,7 @@ C (recompile)
 
 Dynamic
 
-None
+Optional Patch
 
 Optional
 
@@ -278,15 +275,15 @@ Manual
 
 i3bar
 
-Yes
+Yes (Layout is preserved)
 
-text piped to i3bar (i3status/conky can be used)
+text piped to i3bar (i3status/conky and others can be used)
 
 external
 
-tree, v-split, h-split, stacked, tabbed, max
+tree, v-split, h-split, stacked, tabbed, max, can be nested infinitely
 
-none, 1-pix or 2-pix, optional titlebars
+none, 1-pix or 2-pix, optional titlebars, can hide edge borders
 
 commands via ipc (or i3-msg, which uses ipc)
 
@@ -440,7 +437,7 @@ external
 
 max
 
-Abandoned
+Active
 
 Snapwm
 
@@ -742,8 +739,15 @@ External links
     by scripting, like Xmonad and Sawfish.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Comparison_of_Tiling_Window_Managers&oldid=255581"
+"https://wiki.archlinux.org/index.php?title=Comparison_of_Tiling_Window_Managers&oldid=304789"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 16 March 2014, at 07:24.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

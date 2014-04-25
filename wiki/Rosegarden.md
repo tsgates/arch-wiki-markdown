@@ -7,16 +7,13 @@ acts as an audio and MIDI sequencer, scorewriter and musical composition
 and editing tool. It is intended to be a free alternative to such
 applications as Cubase.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Usage                                                              |
-|     -   2.1 With Timidity and Pulseaudio                                 |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Usage
+    -   2.1 With Timidity and Pulseaudio
+-   3 See also
 
 Installation
 ------------
@@ -48,3 +45,10 @@ Categories:
 
 -   Applications
 -   Audio/Video
+
+-   This page was last modified on 11 March 2013, at 18:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

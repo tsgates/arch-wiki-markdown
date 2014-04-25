@@ -5,92 +5,77 @@ rtGui is a web based front end for rTorrent - the Linux command line
 BitTorrent client. It is written in PHP and uses XML-RPC to communicate
 with the rTorrent client.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Apache configuration                                               |
-| -   3 PHP configuration                                                  |
-| -   4 rTorrent configuration                                             |
-| -   5 Restart Apache                                                     |
-| -   6 rtGui installation                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Installing
-----------
+-   1 Set up
+    -   1.1 Apache configuration
+    -   1.2 PHP configuration
+    -   1.3 rTorrent configuration
+    -   1.4 Restart Apache
+    -   1.5 rtGui installation
 
-Installing via pacman
+Set up
+------
 
-     $ pacman -S rtorrent apache php php-apache
+First install dependencies: rtorrent, apache, php, php-apache and
+mod_scgi.
 
-The Apache module mod_scgi is currently only available through the AUR.
-You could build it yourself or install it with a AUR helper such as
-yaourt.
+> Apache configuration
 
-     $ yaourt -S mod_scgi
+Add mod_scgi module to /etc/httpd/conf/httpd.conf in LoadModule section:
 
-Apache configuration
---------------------
+    LoadModule scgi_module modules/mod_scgi.so
 
-Adding the mod_scgi module to httpd.conf
+Append at the end of the file:
 
-     $ sudo nano /etc/httpd/conf/httpd.conf
+    LoadModule php5_module modules/libphp5.so
+    Include conf/extra/php5_module.conf
+    SCGIMount /RPC2 127.0.0.1:5000
 
-Find the LoadModule section and add:
+> PHP configuration
 
-      LoadModule scgi_module modules/mod_scgi.so
+Uncomment these extensions in /etc/php/php.ini:
 
-At the end of the file:
+    extension=sockets.so
+    extension=xmlrpc.so
 
-     LoadModule php5_module modules/libphp5.so
-     Include conf/extra/php5_module.conf
-     SCGIMount /RPC2 127.0.0.1:5000
+Change the value of these settings from off to on:
 
-PHP configuration
------------------
+    allow_url_fopen = On
+    allow_url_include = On
 
-PHP adjust per php.ini
+> rTorrent configuration
 
-     $ sudo nano /etc/php/php.ini
+You need to adjust the .rtorrent.rc and add the following line:
 
-uncomment these extensions
+    scgi_port = localhost:5000
 
-     extension=sockets.so
-     extension=xmlrpc.so
+> Restart Apache
 
-change the value of these settings from off to on
+    # systemctl restart httpd.service
 
-     allow_url_fopen = On
-     allow_url_include = On
+> rtGui installation
 
-rTorrent configuration
-----------------------
+Download and extract rtgui from source:
 
-You need to adjust the .rtorrent.rc and add the following line
+    cd /srv/http/
+    tar xvzf rtgui-x.x.x.tgz
+    cd rtgui/
+    cp config.php.example config.php
 
-     scgi_port = localhost:5000
-
-Restart Apache
---------------
-
-     $ sudo /etc/rc.d/httpd restart
-
-rtGui installation
-------------------
-
-Download and extract rtgui from source, then copy and edit the
-config.php
-
-     cd /srv/http/
-     tar xvzf rtgui-x.x.x.tgz 
-     cd rtgui/
-     cp config.php.example config.php 
-     nano config.php
+Modify config.php to suit your needs
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Rtgui&oldid=206494"
+"https://wiki.archlinux.org/index.php?title=Rtgui&oldid=302654"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

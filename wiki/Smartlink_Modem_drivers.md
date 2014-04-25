@@ -1,23 +1,15 @@
 Smartlink Modem drivers
 =======================
 
-Note: Please do not change the docu without notifying me. These modules
-were built for the latest arch stock kernel. You have to rebuild the
-package for other kernels or have to stay with the old kernel until a
-new package is provided.
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 How to install Smartlink Modem drivers                             |
-|     -   1.1 From README                                                  |
-|     -   1.2 Installation                                                 |
-|         -   1.2.1 Configuration of "normal modem"                        |
-|         -   1.2.2 Configuration of "Alsa Modems" (Alsa Mode)             |
-|                                                                          |
-|     -   1.3 3. NOTE:                                                     |
-+--------------------------------------------------------------------------+
+-   1 How to install Smartlink Modem drivers
+    -   1.1 From README
+    -   1.2 Installation
+        -   1.2.1 Configuration of "normal modem"
+        -   1.2.2 Configuration of "Alsa Modems" (Alsa Mode)
+    -   1.3 3. NOTE:
 
 > How to install Smartlink Modem drivers
 
@@ -60,9 +52,7 @@ From README
 
 Installation
 
-to get the drivers you have to use extra repository:
-
-    pacman -S slmodem
+Install slmodem from the AUR.
 
 Configuration of "normal modem"
 
@@ -109,14 +99,21 @@ noauth in /etc/ppp/options or use the call option (see the pppd
 manpage). wvdial requires option 'Carrier Check = no' in config file
 
 If you do not want to set the permissions of your modem you "can" set
-/usr/sbin/pppd setuid but this may be a security risk, you have been
+/usr/bin/pppd setuid but this may be a security risk, you have been
 warned!!!
 
 If you have comments on the package please post it here
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Smartlink_Modem_drivers&oldid=238665"
+"https://wiki.archlinux.org/index.php?title=Smartlink_Modem_drivers&oldid=283725"
 
 Category:
 
 -   Modems
+
+-   This page was last modified on 20 November 2013, at 00:48.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

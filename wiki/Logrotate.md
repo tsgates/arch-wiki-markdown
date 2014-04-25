@@ -1,17 +1,9 @@
 Logrotate
 =========
 
-> Summary
+Related articles
 
-An introduction to the popular log maintenance utility.
-
-> Related
-
-Cron
-
-> Resources
-
-Logrotate on Gentoo Linux Wiki
+-   Cron
 
 From https://fedorahosted.org/logrotate/:
 
@@ -28,24 +20,21 @@ For example, /var/log/syslog.log is renamed /var/log/syslog.log.1. If
 first renamed /var/log/syslog.log.2. (The number of backlogs to keep can
 be configured.)
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Troubleshooting                                                    |
-|     -   3.1 logs not being rotated                                       |
-|     -   3.2 exim log not rotated                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+-   3 Troubleshooting
+    -   3.1 logs not being rotated
+    -   3.2 exim log not rotated
+-   4 See also
 
 Installation
 ------------
 
-logrotate is available in [core] and is installed as a member of the
-base group.
-
-    # pacman -S logrotate
+logrotate is available in the official repositories and is installed by
+default as a member of the base group.
 
 Typically, logrotate is run via a cron job; /etc/cron.daily/logrotate is
 included in the package.
@@ -82,10 +71,22 @@ error: failed to rename /var/log/exim/mainlog to /var/log/old/mainlog.1: Permiss
 To fix this, add the user exim to the group log. Then change the group
 of the olddir, usually /var/log/old, to log instead of the default root.
 
+See also
+--------
+
+-   Logrotate on Gentoo Linux Wiki
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Logrotate&oldid=235504"
+"https://wiki.archlinux.org/index.php?title=Logrotate&oldid=290260"
 
 Categories:
 
 -   Daemons and system services
 -   Data compression and archiving
+
+-   This page was last modified on 24 December 2013, at 17:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -3,18 +3,15 @@ HP Photosmart 2575
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Choosing connection method                                         |
-| -   2 Setup method with hplip                                            |
-| -   3 Setup method without hplip                                         |
-|     -   3.1 Install foomatic and cups packages                           |
-|     -   3.2 Configure the printer in CUPS                                |
-|                                                                          |
-| -   4 Testing and troubleshooting                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Choosing connection method
+-   2 Setup method with hplip
+-   3 Setup method without hplip
+    -   3.1 Install foomatic and cups packages
+    -   3.2 Configure the printer in CUPS
+-   4 Testing and troubleshooting
 
 Choosing connection method
 --------------------------
@@ -122,3 +119,10 @@ Retrieved from
 Category:
 
 -   Printers
+
+-   This page was last modified on 23 April 2012, at 13:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

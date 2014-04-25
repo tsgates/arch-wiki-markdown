@@ -1,7 +1,7 @@
 Tilda
 =====
 
-  Summary
+  Summary help replacing me
   ----------------------------------------------------------------
   This article describes installation and configuration of Tilda
 
@@ -142,8 +142,15 @@ It is important you enable the pulldown-animation, otherwise Tilda will
 keep jumping down each time you unhide it, must be a dwm issue.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Tilda&oldid=207108"
+"https://wiki.archlinux.org/index.php?title=Tilda&oldid=303114"
 
 Category:
 
 -   Terminal emulators
+
+-   This page was last modified on 4 March 2014, at 02:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

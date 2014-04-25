@@ -17,39 +17,33 @@ fine, although there are some things you should know. Furthermore is is
 advisable to read the article about laptops to get a idea about the
 topic in general.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Hardware                                                           |
-|     -   2.1 Overview                                                     |
-|     -   2.2 CPU                                                          |
-|     -   2.3 Graphics                                                     |
-|         -   2.3.1 NVIDIA® GeForce™ 9300M GS                              |
-|         -   2.3.2 GMA X4500 HD                                           |
-|                                                                          |
-|     -   2.4 Multimedia                                                   |
-|         -   2.4.1 Audio                                                  |
-|         -   2.4.2 Webcam                                                 |
-|         -   2.4.3 Biometric Fingerprint Reader                           |
-|         -   2.4.4 Extra Keyboard Keys                                    |
-|         -   2.4.5 Card Reader                                            |
-|                                                                          |
-|     -   2.5 Wireless Lan                                                 |
-|         -   2.5.1 Dell Wireless 1397 Mini-Card                           |
-|         -   2.5.2 Dell Wireless 1510 Mini-Card                           |
-|         -   2.5.3 Intel Pro Wireless WI-FI 5100                          |
-|         -   2.5.4 Intel WiFi Link 5300 Mini-Card                         |
-|                                                                          |
-|     -   2.6 Bluetooth                                                    |
-|         -   2.6.1 Dell™ Wireless 355 Bluetooth® Module ROW               |
-|                                                                          |
-| -   3 Issues                                                             |
-|     -   3.1 Suspend                                                      |
-|     -   3.2 Framebuffer                                                  |
-|     -   3.3 Card Reader                                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Hardware
+    -   2.1 Overview
+    -   2.2 CPU
+    -   2.3 Graphics
+        -   2.3.1 NVIDIA® GeForce™ 9300M GS
+        -   2.3.2 GMA X4500 HD
+    -   2.4 Multimedia
+        -   2.4.1 Audio
+        -   2.4.2 Webcam
+        -   2.4.3 Biometric Fingerprint Reader
+        -   2.4.4 Extra Keyboard Keys
+        -   2.4.5 Card Reader
+    -   2.5 Wireless LAN
+        -   2.5.1 Dell Wireless 1397 Mini-Card
+        -   2.5.2 Dell Wireless 1510 Mini-Card
+        -   2.5.3 Intel Pro Wireless Wi-Fi 5100
+        -   2.5.4 Intel WiFi Link 5300 Mini-Card
+    -   2.6 Bluetooth
+        -   2.6.1 Dell™ Wireless 355 Bluetooth® Module ROW
+-   3 Issues
+    -   3.1 Suspend
+    -   3.2 Framebuffer
+    -   3.3 Card Reader
 
 Installation
 ============
@@ -95,7 +89,7 @@ Overview
 --------
 
 A quick overview which components do work correctly, and which don't.
-Look at the appropiate section in order to get more details about a
+Look at the appropriate section in order to get more details about a
 component.
 
 Dell Vostro 1320 - Overview of the hardware support
@@ -132,7 +126,7 @@ Card Reader
 
 working
 
-Wireless Lan
+Wireless LAN
 
 Dell Wireless 1397 Mini-Card (802.11 b/g)
 
@@ -142,7 +136,7 @@ Dell Wireless 1510 Mini-Card (802.11n)
 
 reported working
 
-Intel Pro Wireless WI-FI 5100 (802.11a/g/Draft-n)
+Intel Pro Wireless Wi-Fi 5100 (802.11a/g/Draft-n)
 
 > working
 
@@ -207,7 +201,7 @@ Works, using keytouchd. Have a look at Extra Keyboard Keys
 
 Works out of the box, using the modules: mmc_block, mmc_core and sdhci
 
-Wireless Lan
+Wireless LAN
 ------------
 
 In order to find out which chipset you have, you can use hwd, which can
@@ -230,10 +224,10 @@ Reported to work with the nids-wrapper (not self tested).
 
 Reported to work with the nids-wrapper (not self tested).
 
-> Intel Pro Wireless WI-FI 5100
+> Intel Pro Wireless Wi-Fi 5100
 
 Look at the section for the Intel WiFi Link 5300 Mini-Card, as the
-driver is excactly the same.
+driver is exactly the same.
 
 > Intel WiFi Link 5300 Mini-Card
 
@@ -297,8 +291,15 @@ This problem is easy to solve.Just add this line to your modprobe.conf
 This will disable ADMA.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1320&oldid=212755"
+"https://wiki.archlinux.org/index.php?title=Dell_Vostro_1320&oldid=304891"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 16 March 2014, at 08:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

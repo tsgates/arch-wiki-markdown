@@ -81,3 +81,10 @@ Retrieved from
 Category:
 
 -   Kernel
+
+-   This page was last modified on 14 March 2013, at 20:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,20 +1,17 @@
 Lenovo ThinkPad T420s
 =====================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Fans                                                               |
-| -   2 Using multiple monitors with NVIDIA-Optimus                        |
-|     -   2.1 Example X.org-Configuration using Intel and NVIDIA together  |
-|     -   2.2 Switching configurations when the device is docked at boot   |
-|                                                                          |
-| -   3 Sound                                                              |
-| -   4 TrackPoint                                                         |
-|     -   4.1 Setting                                                      |
-|     -   4.2 Configuration Tool                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Fans
+-   2 Using multiple monitors with NVIDIA-Optimus
+    -   2.1 Example X.org-Configuration using Intel and NVIDIA together
+    -   2.2 Switching configurations when the device is docked at boot
+-   3 Sound
+-   4 TrackPoint
+    -   4.1 Setting
+    -   4.2 Configuration Tool
 
 Fans
 ----
@@ -274,3 +271,10 @@ Retrieved from
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 13 June 2012, at 15:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

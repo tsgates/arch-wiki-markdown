@@ -1,20 +1,12 @@
 Uswsusp
 =======
 
-> Summary
+Related articles
 
-Describes installing, configuring and using uswsusp, a set of userspace
-tools used for suspending to disk and/or to RAM.
-
-> Related
-
-Suspending to RAM with hibernate-script
-
-Suspending to Disk with hibernate-script
-
-Pm-utils
-
-Tuxonice
+-   Suspending to RAM with hibernate-script
+-   Suspending to Disk with hibernate-script
+-   Pm-utils
+-   TuxOnIce
 
 uswsusp (userspace software suspend) is a set of user space tools used
 for hibernation (suspend-to-disk) and suspend (suspend-to-RAM or
@@ -51,23 +43,23 @@ driver is in use, s2ram will directly suspend the machine.
     left you can quickly resume from STR, otherwise you can still resume
     from disk without losing your work.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Support for encryption                                       |
-|     -   2.2 Recreate initramfs                                           |
-|     -   2.3 Sample config                                                |
-|                                                                          |
-| -   3 Usage                                                              |
-|     -   3.1 Standalone                                                   |
-|     -   3.2 With pm-utils                                                |
-|     -   3.3 With systemd                                                 |
-|                                                                          |
-| -   4 Further reading                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Support for encryption
+    -   2.2 Recreate initramfs
+    -   2.3 Sample config
+-   3 Usage
+    -   3.1 Standalone
+    -   3.2 With pm-utils
+    -   3.3 With systemd
+-   4 Troubleshooting
+    -   4.1 My machine is not whitelisted
+    -   4.2 s2ram -f doesn't work
+    -   4.3 s2ram does not work with any combination of options
+-   5 See also
 
 Installation
 ------------
@@ -88,12 +80,12 @@ device containing the swap partition.
 
 -   If using a swap file:
 
-    resume device = /dev/sdX  # the partition which contains swapfile 
+    resume device = /dev/sdXN  # the partition which contains swapfile 
     resume offset = 123456
 
 where 123456 is the offset from the beginning of the resume device where
-the swap file's header is located. To obtain the offset, you can check
-Swap file resuming. The resume offset can be obtained by running
+the swap file's header is located. The resume offset can be obtained by
+running
 
     # swap-offset your-swap-file
 
@@ -152,7 +144,7 @@ message with the libgcrypt version.
 Edit your /etc/mkinitcpio.conf file and add "uresume" to the HOOKS
 entry.
 
-    HOOKS="base udev autodetect pata scsi sata uresume filesystems"
+    HOOKS="base udev autodetect block uresume filesystems"
 
 -   rebuild the ramdisk
 
@@ -220,6 +212,16 @@ method as default.
 
 > With pm-utils
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Since February   
+                           2013, the suspend and    
+                           hibernate functions in   
+                           UPower have been         
+                           deprecated. (Discuss)    
+  ------------------------ ------------------------ ------------------------
+
 Pm-utils can utilise several sleep back-ends, including uswsusp. Create
 or edit /etc/pm/config.d/module:
 
@@ -264,16 +266,101 @@ After that, execute systemctl hibernate to put your system into
 hibernation. Do similar changes for systemd-hybrid-sleep.service to
 enable uswsusp-based hybrid sleep too.
 
-Further reading
+Troubleshooting
 ---------------
 
-Most of this page is adapted/copied from the HOWTO file included with
-the source code.   
- The introduction is from http://suspend.sourceforge.net/intro.shtml
+> My machine is not whitelisted
+
+If s2ram doesn't match your machine to an entry in its whitelist, it
+will output some general purpose identification strings for your machine
+(the same as those provided s2ram -i). In this case, you may try to
+force s2ram to suspend your machine by using s2ram -f.
+
+> s2ram -f doesn't work
+
+If s2ram -f doesn't work, try the different workarounds offered by
+s2ram. Run s2ram -h to get a list of the possible options:
+
+    # s2ram -h
+
+    Usage: s2ram [-nhi] [-fspmrav]
+
+    Options:
+        -h, --help:       this text.
+        -n, --test:       test if the machine is in the database.
+                          returns 0 if known and supported
+        -i, --identify:   prints a string that identifies the machine.
+        -f, --force:      force suspending, even on unknown machines.
+
+    The following options are only available with -f/--force:
+        -s, --vbe_save:   save VBE state before suspending and restore after resume.
+        -p, --vbe_post:   VBE POST the graphics card after resume
+        -m, --vbe_mode:   get VBE mode before suspend and set it after resume
+        -r, --radeontool: turn off the backlight on radeons before suspending.
+        -a, --acpi_sleep: set the acpi_sleep parameter before suspend
+                          1=s3_bios, 2=s3_mode, 3=both
+        -v, --pci_save:   save the PCI config space for the VGA card.
+
+Try the following variations:
+
+      s2ram -f -a 1
+      s2ram -f -a 2
+      s2ram -f -a 3
+      s2ram -f -p -m
+      s2ram -f -p -s
+      s2ram -f -m
+      s2ram -f -s
+      s2ram -f -p
+      s2ram -f -a 1 -m
+      s2ram -f -a 1 -s
+
+If none of those combinations work, start again but add the -v switch.
+
+Note that mixing the -a options and the vbetool options (-p, -m, -s) is
+normally only a measure of last resort, it usually does not make much
+sense.
+
+If you find several combinations that work (e.g. s2ram -f -a 3 and
+s2ram -f -p -m both work on your machine), the in-kernel method (-a)
+should be preferred over the userspace methods (-p, -m, -s).
+
+Verify all combinations in both cases when reporting success to the
+s2ram developers:
+
+-   when issuing s2ram from console
+-   when issuing s2ram from X
+
+> s2ram does not work with any combination of options
+
+There is a trick which does not correspond to a command line option,
+because it requires additional operations from you. It is marked with
+NOFB in the whitelist and used for those laptops which suspend and
+resume properly only if no framebuffer is used. If you verify that no
+command line option of s2ram works, you can try disabling the
+framebuffer. To do this, you need to edit your bootloader configuration,
+remove any possible vga=<foo> values from the kernel line and reboot.
+This at least if you use the VESAFB framebufeer (as in the arch default
+kernel). If you use a different framebuffer driver, refer to the
+documentation of the driver to see how to disable it.
+
+See also
+--------
+
+-   Uswsusp Home Page
+-   HOWTO file included with the source code
+-   /usr/share/doc/suspend/README Uswsusp Documentation
+-   /usr/share/doc/suspend/README.s2ram-whitelist s2ram-whitelist README
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Uswsusp&oldid=253817"
+"https://wiki.archlinux.org/index.php?title=Uswsusp&oldid=301326"
 
 Category:
 
 -   Power management
+
+-   This page was last modified on 24 February 2014, at 11:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

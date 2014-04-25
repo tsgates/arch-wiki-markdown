@@ -1,20 +1,17 @@
 DeveloperWiki:Python Todo List
 ==============================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Python3 transition                                                 |
-|     -   2.1 The plan                                                     |
-|     -   2.2 Package naming                                               |
-|                                                                          |
-| -   3 Rebuild List                                                       |
-|     -   3.1 Linking to libpython-2.6.so                                  |
-|     -   3.2 Packages with files in old python paths                      |
-|     -   3.3 Packages pointing at python binary                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Python3 transition
+    -   2.1 The plan
+    -   2.2 Package naming
+-   3 Rebuild List
+    -   3.1 Linking to libpython-2.6.so
+    -   3.2 Packages with files in old python paths
+    -   3.3 Packages pointing at python binary
 
 Introduction
 ============
@@ -218,8 +215,8 @@ Linking to libpython-2.6.so
 
 Packages with files in old python paths
 
-These packages have files in /usr/lib/python${ver}/site-packages/ or in
-/usr/include/python-${ver}
+These packages have files in
+/usr/lib/python{ver}/site-packages/ or in /usr/include/python-{ver}
 
     adesklets
     adns-python
@@ -911,3 +908,10 @@ Retrieved from
 Category:
 
 -   DeveloperWiki
+
+-   This page was last modified on 21 September 2011, at 18:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

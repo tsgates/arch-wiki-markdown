@@ -1,80 +1,113 @@
 Nemo
 ====
 
-Nemo is the file manager of the Cinnamon desktop.
+Related articles
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Make Nemo your default file browser                          |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Show / hide desktop icons                                    |
-|                                                                          |
-| -   3 Extensions                                                         |
-| -   4 Nemo Actions                                                       |
-|     -   4.1 Clam Scan                                                    |
-|     -   4.2 Moving files                                                 |
-+--------------------------------------------------------------------------+
+-   Cinnamon
+-   File manager functionality
+-   Nautilus
+-   Thunar
+-   PCManFM
+
+Nemo is a fork of Nautilus. It is also the default file manager of the
+Cinnamon desktop. Nemo is based on the Nautilus 3.4 code. It was created
+as a response to the changes in Nautilus 3.6 which saw features such as
+type ahead find and split pane view removed.
+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Extensions
+-   2 Configuration
+    -   2.1 Show / hide desktop icons
+    -   2.2 Make Nemo your default file browser
+    -   2.3 Change application for "Open in terminal" context menu entry
+-   3 Tips and tricks
+    -   3.1 Nemo Actions
+        -   3.1.1 Clam Scan
+        -   3.1.2 Moving files
+        -   3.1.3 Meld compare
 
 Installation
 ------------
 
-Install nemo from the Official Repositories.
+Install nemo from the official repositories.
 
-> Make Nemo your default file browser
+> Extensions
 
-Change from Nautilus to Nemo :
+Some programs can add extra functionality to Nemo. Here are a few
+packages that do just that:
 
-    /usr/share/applications/nautilus.desktop
-
-    [...]
-    #Exec=nautilus %U
-    Exec=nemo %U
-    [...]
-
-Configuration
--------------
-
-> Show / hide desktop icons
-
-    # false to hide ; true to show
-    dconf write /org/nemo/desktop/show-desktop-icons false
-
-Extensions
-----------
-
--   Nemo fileroller — Integrate File Roller into Nemo.
+-   Nemo File Roller — File archiver extension for Nemo.
 
 https://github.com/linuxmint/nemo-extensions/tree/master/nemo-fileroller
 || nemo-fileroller
 
+-   Nemo Preview — GtkClutter and Javascript-based quick previewer for
+    Nemo.
+
+https://github.com/linuxmint/nemo-extensions/tree/master/nemo-preview ||
+nemo-preview
+
+-   Nemo Seahorse — PGP encryption and signing extension for Nemo.
+
+https://github.com/linuxmint/nemo-extensions/tree/master/nemo-seahorse
+|| nemo-seahorse
+
+-   Nemo Share — Samba extension for Nemo.
+
+https://github.com/linuxmint/nemo-extensions/tree/master/nemo-share ||
+nemo-share
+
 -   RabbitVCS Nemo — Integrate RabbitVCS into Nemo.
 
-http://www.rabbitvcs.org || rabbitvcs-nemo
+http://www.rabbitvcs.org/ || rabbitvcs-nemo
 
--   Python2 Nemo — Python bindings for the Nemo Extension API.
+See nemo-extensions github repo for all extensions.
 
-https://github.com/linuxmint/nemo-extensions/tree/master/nemo-python ||
-python2-nemo
+Configuration
+-------------
 
-Nemo Actions
-------------
+Nemo is simple to configure graphically but not all options are in the
+preferences screen in Nemo. More options are available in the
+dconf-editor under org.nemo.
 
-It allows the user to add new entries to the Nemo context menu.  
- The file /usr/share/nemo/actions/sample.nemo_action contains an example
-of a Nemo action.  
- Places where to put custom action files :
+> Show / hide desktop icons
 
--   $HOME/.local/share/nemo/actions/
--   /usr/share/nemo/actions/
+To enable/disable desktop icons rendering feature in nemo, change the
+following setting true or false (false to hide, true to show):
+
+    $ gsettings set org.nemo.desktop show-desktop-icons false
+
+> Make Nemo your default file browser
+
+Add the following line to the Default Applications section of the file
+~/.local/share/applications/mimeapps.list
+
+    [Default Applications]
+    inode/directory=nemo.desktop
+
+> Change application for "Open in terminal" context menu entry
+
+    $ gsettings set org.cinnamon.desktop.default-applications.terminal exec terminal-name
+
+Tips and tricks
+---------------
+
+> Nemo Actions
+
+Nemo allows the user to add new entries to the context menu. The file
+/usr/share/nemo/actions/sample.nemo_action contains an example of a Nemo
+action. Directories to place custom action files:
+
+-   /usr/share/nemo/actions/ for system-wide actions
+-   $HOME/.local/share/nemo/actions/ for user actions
 
 Pay attention to the name convention. Your file has to preserve the file
 ending .nemo_action.
 
-> Clam Scan
+Clam Scan
 
     $HOME/.local/share/nemo/actions/clamscan.nemo_action
 
@@ -90,55 +123,21 @@ ending .nemo_action.
 
     Extensions=dir;exe;dll;zip;gz;7z;rar;
 
-> Moving files
+Moving files
 
     $HOME/.local/share/nemo/actions/archive.nemo_action
 
     [Nemo Action]
     Active=true
-
-
-    # The name to show in the menu, locale supported with standard desktop spec.
-    # Use %N as an (optional) token to display the simple filename in the label.
-    # If multiple are selected, then the arbitrary first selected name will be used.
-    # Token is inactive for selection type of Multiple, None and Any (it will be treated literally)
-    # **** REQUIRED ****
-
     Name=Archive %N
-
-
-    # Tool tip, locale supported (Appears in the status bar)
-    # %N can be used as with the Name field, same rules apply
-
     Comment=Archiving %N will add .archive to the object.
-
-
-    # What to run.  Enclose in < > to run an executable that resides in the actions folder.
-    # Use %U as a token where to insert a URL list, use %F as a token to insert a file list
-    # **** REQUIRED ****
-    #Exec=gedit %F
-
     Exec=<archive.py %F>
-
-    # What type selection: [S]ingle, [M]ultiple, Any, or None (background click)
-    # Defaults to Single if this field is missing
-
     Selection=S
-
-
-    # What extensions to display on - this is an array, end with a semicolon
-    # Use "dir" for directory selection and "none" for no extension
-    # Use "any" by itself, semi-colon-terminated, for any file type
-    # Extensions are NOT case sensitive.  jpg will match JPG, jPg, jpg, etc..
-    # **** REQUIRED ****
-
     Extensions=any;
 
     $HOME/.local/share/nemo/actions/archive.py
 
     #! /usr/bin/python2 -OOt
-
-
     import sys
     import os
     import shutil
@@ -154,9 +153,51 @@ ending .nemo_action.
             #os.rename('%s','%s.archive') % (arg,arg)
             shutil.move(arg, arg+".archive")
 
+Meld compare
+
+    $HOME/.local/share/nemo/actions/compare-save-for-later.nemo_action
+
+    [Nemo Action]
+    Active=true
+    Name=Compare later
+    Comment=Save file for comparison later.
+    Exec=<compare.sh save %F>
+    Icon-Name=meld
+    Selection=S
+    Extensions=any
+
+    $HOME/.local/share/nemo/actions/compare-with-saved.nemo_action
+
+    [Nemo Action]
+    Active=true
+    Name=Compare with saved element
+    Comment=Compare %F saved file or directory.
+    Exec=<compare.sh compare %F>
+    Icon-Name=meld
+    Selection=S
+    Extensions=any
+
+    $HOME/.local/share/nemo/actions/compare.sh
+
+    #!/bin/bash
+    savedfile=/var/tmp/compare-save-for-later.$USER
+    comparator=meld
+    if [ "$1" == "save" ]; then
+    	echo "$2" > "$savedfile"
+    else
+    	"$comparator" $(cat "$savedfile") "$2"
+    fi
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Nemo&oldid=254466"
+"https://wiki.archlinux.org/index.php?title=Nemo&oldid=289701"
 
 Category:
 
 -   File managers
+
+-   This page was last modified on 21 December 2013, at 01:47.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

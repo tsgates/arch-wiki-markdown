@@ -13,10 +13,11 @@ having to temporarily deal with another distribution.
 pacapt is a pacman shell script implementation for other linux
 distribution.
 
-Note:Some of the tools described here are specific to a certain version
-of pacman. The -Qk option is new in pacman 4.1
+> Note:
 
-Note:The command pkgfile can be found in the pkgfile package.
+-   Some of the tools described here are specific to a certain version
+    of pacman. The -Qk option is new in pacman 4.1.
+-   The command pkgfile can be found in the pkgfile package.
 
 > Action
 
@@ -26,9 +27,7 @@ Red Hat/Fedora
 
 > Debian/Ubuntu
 
-(Old) SUSE
-
-> openSUSE
+> SUSE/openSUSE
 
 > Gentoo
 
@@ -39,8 +38,6 @@ pacman -S
 yum install
 
 apt-get install
-
-rug install
 
 zypper install zypper in
 
@@ -53,8 +50,6 @@ pacman -Rc
 yum remove/erase
 
 apt-get remove
-
-rug remove/erase
 
 zypper remove zypper rm
 
@@ -70,8 +65,6 @@ yum search
 
 apt-cache search
 
-rug search
-
 zypper search zypper se [-s]
 
 emerge -S
@@ -84,8 +77,6 @@ pacman -Syu
 yum update
 
 apt-get upgrade
-
-rug update
 
 zypper update zypper up
 
@@ -149,9 +140,7 @@ pacman dep level - testdb, shared lib level - findbrokenpkgs or lddd
 
 package-cleanup --problems
 
-apt-get --fix-broken
-
-rug* solvedeps
+apt-get --fix-broken / aptitude install
 
 zypper verify
 
@@ -163,7 +152,7 @@ pacman -Sw
 
 yumdownloader (found in yum-utils package)
 
-apt-get --download-only
+apt-get --download-only / aptitude download
 
 zypper --download-only
 
@@ -174,11 +163,11 @@ which needed the dependencies was removed.
 
 pacman -Qdtq | pacman -Rs -
 
-package-cleanup --leaves
+yum autoremove
 
 apt-get autoremove
 
-n/a
+zypper rm -u
 
 emerge --depclean
 
@@ -189,7 +178,7 @@ Use ABS && makepkg -o
 
 yumdownloader --source
 
-apt-get source
+apt-get source / debcheckout
 
 zypper source-install
 
@@ -221,8 +210,6 @@ yum.conf <--”exclude” option (add/amend)
 
 echo "$PKGNAME hold" | dpkg --set-selections
 
-rug* lock-add
-
 Put package name in /etc/zypp/locks
 
 /etc/portage/package.mask
@@ -234,8 +221,6 @@ remove package from IgnorePkg line in /etc/pacman.conf
 yum.conf <--”exclude” option (remove/amend)
 
 echo "$PKGNAME install" | dpkg --set-selections
-
-rug* lock-delete
 
 Remove package name from /etc/zypp/locks
 
@@ -249,8 +234,6 @@ yum.conf (research needed)
 
 /etc/apt/preferences
 
-rug* lock-list
-
 View /etc/zypp/locks
 
 cat /etc/portage/package.mask
@@ -258,8 +241,6 @@ cat /etc/portage/package.mask
 Add a checkpoint to the package system for later rollback
 
 (unnecessary, done on every transaction)
-
-rug* checkpoint-add
 
 n/a
 
@@ -269,8 +250,6 @@ N/A
 
 N/A
 
-rug* checkpoint-remove
-
 n/a
 
 Provide a list of all system checkpoints
@@ -279,8 +258,6 @@ N/A
 
 yum history list
 
-rug* checkpoints
-
 n/a
 
 Rolls entire packages back to a certain date or checkpoint.
@@ -288,8 +265,6 @@ Rolls entire packages back to a certain date or checkpoint.
 N/A
 
 yum history rollback
-
-rug* rollback
 
 n/a
 
@@ -301,21 +276,34 @@ yum history undo
 
 n/a
 
+Mark a package previously installed as a dependency as explicitly
+required.
+
+pacman -D --asexplicit
+
+aptitude unmarkauto
+
+emerge --select
+
+Install package(s) as dependency / without marking as explicitly
+required.
+
+pacman -S --asdeps
+
+emerge -1
+
 Package information management
 
 Get a dump of the whole system information - Prints, Saves or similar
 the current state of the package management system. Preferred output is
-text or XML. One version of rug dumps information as a sqlite database.
-(Note: Why either-or here? No tool offers the option to choose the
-output format.)
+text or XML. (Note: Why either-or here? No tool offers the option to
+choose the output format.)
 
 (see /var/lib/pacman/local)
 
 (see /var/lib/rpm/Packages)
 
 apt-cache stats
-
-rug dump
 
 n/a
 
@@ -329,9 +317,7 @@ pacman -[S|Q]i
 
 yum list or info
 
-apt-cache showpkg apt-cache show
-
-rug info
+apt-cache show / apt-cache policy
 
 zypper info zypper if
 
@@ -347,8 +333,6 @@ yum search
 
 apt-cache search
 
-rug search
-
 zypper search zypper se [-s]
 
 emerge -S
@@ -362,8 +346,6 @@ pacman -Qu
 yum list updates yum check-update
 
 apt-get upgrade -> n
-
-rug list-updates rug summary
 
 zypper list-updates zypper patch-check (just for patches)
 
@@ -380,8 +362,6 @@ yum list available
 
 apt-cache dumpavail apt-cache dump (Cache only) apt-cache pkgnames
 
-rug packages
-
 zypper packages
 
 emerge -ep world
@@ -396,37 +376,31 @@ yum whatprovides yum provides
 
 apt-file search <filename>
 
-rug what-provides
-
-zypper what-provides    zypper wp
+zypper what-provides zypper wp
 
 equery belongs (only installed packages); pfl
 
 Display packages which require X to be installed, aka show reverse/
-dependencies. rug's what-requires can operate on more than just package
-names.
+dependencies.
 
 pacman -Sii
 
 yum resolvedep
 
-apt-cache rdepends
-
-rug what-requires
+apt-cache rdepends / aptitude search ~Dpattern
 
 IN PROGRESS
 
 equery depends
 
 Display packages which conflict with given expression (often package).
-Search can be used as well to mimic this function. rug's what-conflicts
-function operates on more than just package names
+Search can be used as well to mimic this function.
 
 (none)
 
 repoquery --whatconflicts
 
-rug info-conflicts rug what-conflicts
+aptitude search '~Cpattern'
 
 IN PROGRESS
 
@@ -437,9 +411,7 @@ pacman -[S|Q]i
 
 yum deplist
 
-apt-cache depends
-
-rug info-requirements
+apt-cache depends / apt-cache show
 
 IN PROGRESS
 
@@ -448,8 +420,6 @@ emerge -ep
 List what the current package provides
 
 yum provides
-
-rug info-provides
 
 IN PROGRESS
 
@@ -461,11 +431,9 @@ mimicked by other more complex commands.
 pacman -Ql $pkgname   
 pkgfile -l
 
-yum provides
+repoquery -l $pkgname
 
-apt-file list
-
-rug* file-list
+dpkg -L / apt-file list
 
 IN PROGRESS
 
@@ -486,8 +454,6 @@ yum provides yum whatprovides
 
 apt-file search
 
-rug* package-file rug what-provides
-
 IN PROGRESS
 
 equery belongs
@@ -496,9 +462,7 @@ Display all packages that the specified packages obsoletes.
 
 yum list obsoletes
 
-apt-cache / grep
-
-rug info-obsoletes
+apt-cache show
 
 IN PROGRESS
 
@@ -509,9 +473,7 @@ testdb
 
 yum deplist
 
-apt-get check ? apt-cache unmet
-
-rug verify rug* dangling-requires
+apt-get check
 
 n/a
 
@@ -543,12 +505,13 @@ zypper se -si | grep 'System Packages'
 eix-test-obsolete
 
 List packages that were recently added to one of the installation
-sources, i.e. which are new to it. Note: Synaptic has this
-functionality, however apt doesn't seem to be the provider.
+sources, i.e. which are new to it.
 
 (none)
 
 yum list recent
+
+aptitude search '~N' / aptitude forget-new
 
 n/a
 
@@ -562,8 +525,6 @@ yum history cat /var/log/yum.log
 
 cat /var/log/dpkg.log
 
-rug history
-
 cat /var/log/zypp/history
 
 located in /var/log/portage
@@ -576,7 +537,7 @@ pacman -Scc
 
 yum clean
 
-apt-get clean apt-get autoclean
+apt-get clean / apt-get autoclean / aptitude clean
 
 zypper clean
 
@@ -617,7 +578,7 @@ Modify HoldPkg and/or IgnorePkg arrays
 
 yum-plugin-priorities and yum-plugin-protect-packages
 
-/etc/apt/preferences smart priority –set
+/etc/apt/preferences, apt-cache policy
 
 zypper mr -p
 
@@ -626,7 +587,7 @@ Add a line with =category/package-version
 
 Remove a previously set priority
 
-/etc/apt/preferences smart priority --remove
+/etc/apt/preferences
 
 zypper mr -p
 
@@ -635,7 +596,7 @@ remove offending line
 
 Show a list of set priorities.
 
-apt-cache policy /etc/apt/preferences smart priority --show
+apt-cache policy /etc/apt/preferences
 
 n/a
 
@@ -649,7 +610,7 @@ Installation sources management
 
 ${EDITOR} /etc/pacman.conf
 
-${EDITOR} /etc/yum.repos.d/${REPO}.repo
+{EDITOR} /etc/yum.repos.d/{REPO}.repo
 
 ${EDITOR} /etc/apt/sources.list
 
@@ -663,11 +624,9 @@ design for CDs/DVDs as source.
 
 ${EDITOR} /etc/pacman.conf
 
-${EDITOR} /etc/yum.repos.d/${REPO}.repo
+{EDITOR} /etc/yum.repos.d/{REPO}.repo
 
 apt-cdrom add
-
-rug service-add rug mount /local/dir
 
 zypper service-add
 
@@ -682,8 +641,6 @@ yum clean expire-cache && yum check-update
 
 apt-get update
 
-rug refresh
-
 zypper refresh zypper ref
 
 layman -f
@@ -694,8 +651,6 @@ information like URI, alias etc.
 cat /etc/pacman.d/mirrorlist
 
 cat /etc/yum.repos.d/*
-
-rug service-list
 
 zypper service-list
 
@@ -711,6 +666,9 @@ Download packages from a different version of the distribution than the
 one installed.
 
 yum --releasever=${VERSION}
+
+apt-get install -t release package/ apt-get install package/release
+(deps not covered)
 
 echo "category/package ~amd64" >> /etc/portage/package.keywords &&
 emerge package
@@ -737,8 +695,6 @@ debsums
 
 rpm -V <package>
 
-rpm -V <package>
-
 equery check
 
 All packages
@@ -748,8 +704,6 @@ pacman -Qk[k]
 rpm -Va
 
 debsums
-
-rpm -Va
 
 rpm -Va
 
@@ -763,7 +717,7 @@ pacman -Q
 
 rpm -qa
 
-dpkg-query -l
+dpkg -l
 
 emerge -e world
 
@@ -773,7 +727,7 @@ pacman -Qi
 
 rpm -qi
 
-dpkg-query -p
+dpkg -s
 
 emerge -pv and emerge -S
 
@@ -783,7 +737,7 @@ pacman -Si
 
 yum info
 
-apt-cache show
+apt-cache show / aptitude show
 
 emerge -pv and emerge -S
 
@@ -793,7 +747,7 @@ pacman -Ql
 
 rpm -ql
 
-dpkg-query -L
+dpkg -L
 
 equery files
 
@@ -811,7 +765,7 @@ pacman -Qo
 
 rpm -qf (installed only) or yum whatprovides (everything)
 
-dpkg-query -S
+dpkg -S/dlocate
 
 equery belongs
 
@@ -822,7 +776,7 @@ pacman -Qp
 
 rpm -qp
 
-dpkg-deb -I
+dpkg -I
 
 Show the changelog of a package
 
@@ -830,11 +784,15 @@ pacman -Qc
 
 rpm -q --changelog
 
+apt-get changelog
+
 equery changes -f
 
 Search locally installed package for names or descriptions
 
 pacman -Qs
+
+aptitude search '~i(~nexpr|~dexpr)'
 
 eix -S -I
 
@@ -846,9 +804,7 @@ makepkg -s
 
 rpmbuild -ba (normal) mock (in chroot)
 
-dpkg-buildpkg
-
-rpmbuild -ba
+debuild
 
 rpmbuild -ba
 
@@ -868,7 +824,7 @@ pacman -Qpl <file>
 
 rpmls rpm -qpl
 
-rpm -qpl
+dpkg -L
 
 rpm -qpl
 
@@ -882,8 +838,6 @@ ar vx | tar -zxvf data.tar.gz
 
 rpm2cpio | cpio -vid
 
-rpm2cpio | cpio -vid
-
 tar -jxvf
 
 Query a package supplied on the command line rather than an entry in the
@@ -893,7 +847,7 @@ pacman -Qp
 
 rpm -qp
 
-dpkg-deb -I
+dpkg -I
 
 > Action
 
@@ -903,15 +857,20 @@ Red Hat/Fedora
 
 > Debian/Ubuntu
 
-(Old) SUSE
-
-> openSUSE
+> SUSE/openSUSE
 
 > Gentoo
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Pacman_Rosetta&oldid=252921"
+"https://wiki.archlinux.org/index.php?title=Pacman_Rosetta&oldid=289585"
 
 Category:
 
 -   Package management
+
+-   This page was last modified on 20 December 2013, at 11:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -20,21 +20,17 @@ to attach your personal customizations, and variables to tweak.
 
 Want to see it in action? A StumpWM user created a video.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 With SBCL (recommended, will run faster)                     |
-|         -   1.1.1 With Quicklisp (recommended)                           |
-|         -   1.1.2 With AUR                                               |
-|                                                                          |
-|     -   1.2 With Clisp                                                   |
-|                                                                          |
-| -   2 Documentation and Support                                          |
-| -   3 Tweaking                                                           |
-| -   4 Troubleshooting                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 With SBCL (recommended, will run faster)
+        -   1.1.1 With Quicklisp (recommended)
+        -   1.1.2 With AUR
+    -   1.2 With Clisp
+-   2 Documentation and Support
+-   3 Tweaking
+-   4 Troubleshooting
 
 Installation
 ------------
@@ -43,7 +39,7 @@ Installation
 
 With Quicklisp (recommended)
 
-WARNING:Only use root to install SBCL and, if you want to, run "make
+Warning:Only use root to install SBCL and, if you want to, run "make
 install".
 
 1.  Install SBCL
@@ -79,9 +75,16 @@ install".
 
 11. Get into the stumpwm folder and start compiling
     -   cd stumpwm && ./autogen.sh && ./configure && make
-    -   You can optionally run "make install" as root.
+    -   If you get an error stating "Component STUMPWM not found" try
+        this:
+    -   env CL_SOURCE_REGISTRY=$PWD: sbcl --load make-image.lisp
 
-12. Put the StumpWM binary path into your .xinit and have fun! :)
+12. You can optionally run "make install" as root.
+    -   If you get an error stating "Don't know how to REQUIRE STUMPWM"
+        try this:
+    -   env CL_SOURCE_REGISTRY=$PWD: make install
+
+13. Put the StumpWM binary path into your .xinit and have fun! :)
 
 Optional: Install slime/swank for nonstop real-time hacking:
 
@@ -119,10 +122,10 @@ With AUR
 4.  Install git
     -   pacman -S git
 
-5.  Install stumpwm from AUR.
+5.  Install stumpwm-git from AUR.
     -   Alternately, you can check it out directly from the git repo.,
-        as described on the [ homepage]. Read the directions and check
-        the StumpWM wiki for compilation instructions.
+        as described on the homepage. Read the directions and check the
+        StumpWM wiki for compilation instructions.
 
 > With Clisp
 
@@ -172,7 +175,10 @@ file can also be found in /usr/bin/.
 Troubleshooting
 ---------------
 
-If you cannot start stumpwm and get
+-   If you have problems configuring multiple monitors, maybe you need
+    to install 'xorg-xdpyinfo' package.
+
+-   If you cannot start stumpwm and get
 
                debugger invoked on a SB-INT:SIMPLE-PARSE-ERROR in thread
            #:
@@ -185,8 +191,15 @@ In the REPL,It can be solved by delete the .Xauthority in your home
 diretory. You can refer it atIssue on github
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Stumpwm&oldid=253286"
+"https://wiki.archlinux.org/index.php?title=Stumpwm&oldid=287555"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 10 December 2013, at 21:12.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

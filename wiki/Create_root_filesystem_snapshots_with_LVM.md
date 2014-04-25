@@ -1,7 +1,7 @@
 Create root filesystem snapshots with LVM
 =========================================
 
-> Summary
+Summary help replacing me
 
 Setup root filesystem LVM snapshot creation during system start.
 
@@ -20,18 +20,15 @@ Full System Backup with tar
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites                                                      |
-| -   2 Setup                                                              |
-| -   3 Usage                                                              |
-|     -   3.1 Backup                                                       |
-|     -   3.2 Revert updates                                               |
-|                                                                          |
-| -   4 Known issues                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Prerequisites
+-   2 Setup
+-   3 Usage
+    -   3.1 Backup
+    -   3.2 Revert updates
+-   4 Known issues
 
 Prerequisites
 -------------
@@ -136,7 +133,7 @@ perform updates or changes afterwards.
 
 If you want to permantly stick to the updates just drop the snapshot
 with # lvremove. If you want to revert to the snapshotted state issue a
-# lvchange --merge for the snapshot. During the next restart of the
+# lvconvert --merge for the snapshot. During the next restart of the
 system (use the default target) the snapshot is merged back into your
 regular volume. All changes to the volume happened after the snapshot
 are undone.
@@ -170,8 +167,15 @@ insert JobTimeoutSec=10:
     OOMScoreAdjust=-1000
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Create_root_filesystem_snapshots_with_LVM&oldid=255793"
+"https://wiki.archlinux.org/index.php?title=Create_root_filesystem_snapshots_with_LVM&oldid=262772"
 
 Category:
 
 -   System recovery
+
+-   This page was last modified on 14 June 2013, at 19:40.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

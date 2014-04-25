@@ -52,3 +52,10 @@ Categories:
 
 -   Scripts
 -   Package management
+
+-   This page was last modified on 25 July 2012, at 08:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

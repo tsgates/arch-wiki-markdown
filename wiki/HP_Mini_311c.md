@@ -11,15 +11,13 @@ HP Mini 311c
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Before installation                                                |
-| -   2 Installation                                                       |
-| -   3 FIRST BOOT                                                         |
-| -   4 Another device                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Before installation
+-   2 Installation
+-   3 FIRST BOOT
+-   4 Another device
 
 Before installation
 
@@ -65,3 +63,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 23 April 2012, at 12:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

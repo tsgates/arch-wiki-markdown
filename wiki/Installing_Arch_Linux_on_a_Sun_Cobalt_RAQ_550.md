@@ -14,42 +14,35 @@ Installing Arch Linux on a Sun Cobalt RAQ 550
 This document explains how you can install Arch Linux on a Sun Cobalt
 RAQ 550 machine.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About the RAQ 550                                                  |
-|     -   1.1 About the processor                                          |
-|     -   1.2 Jumpers on the RaQ 550                                       |
-|                                                                          |
-| -   2 Terminology                                                        |
-| -   3 Requirements                                                       |
-| -   4 Setting up your serial port                                        |
-| -   5 How the RAQ 550 boots                                              |
-|     -   5.1 Booting from hard disk                                       |
-|     -   5.2 Booting from network                                         |
-|                                                                          |
-| -   6 Important note about drive assignements                            |
-| -   7 Installing without RAID                                            |
-|     -   7.1 Moving the RAQ 550 hard drive                                |
-|     -   7.2 Installing the base system                                   |
-|         -   7.2.1 Partitioning                                           |
-|         -   7.2.2 Installation, continued                                |
-|         -   7.2.3 System configuration                                   |
-|                                                                          |
-|     -   7.3 Install the linux-raq550 kernel                              |
-|     -   7.4 Configure the serial port for terminal access                |
-|     -   7.5 Put the RAQ 550 harddrive back                               |
-|     -   7.6 Configuring the firmware                                     |
-|                                                                          |
-| -   8 Notes                                                              |
-|     -   8.1 What about the LCD/Front panel?                              |
-|     -   8.2 What about earlier RAQ servers, like the RAQ 4?              |
-|     -   8.3 Post-install cleanup                                         |
-|     -   8.4 Using your own kernel                                        |
-|                                                                          |
-| -   9 Resources                                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 About the RAQ 550
+    -   1.1 About the processor
+    -   1.2 Jumpers on the RaQ 550
+-   2 Terminology
+-   3 Requirements
+-   4 Setting up your serial port
+-   5 How the RAQ 550 boots
+    -   5.1 Booting from hard disk
+    -   5.2 Booting from network
+-   6 Important note about drive assignements
+-   7 Installing without RAID
+    -   7.1 Moving the RAQ 550 hard drive
+    -   7.2 Installing the base system
+        -   7.2.1 Partitioning
+        -   7.2.2 Installation, continued
+        -   7.2.3 System configuration
+    -   7.3 Install the linux-raq550 kernel
+    -   7.4 Configure the serial port for terminal access
+    -   7.5 Put the RAQ 550 harddrive back
+    -   7.6 Configuring the firmware
+-   8 Notes
+    -   8.1 What about the LCD/Front panel?
+    -   8.2 What about earlier RAQ servers, like the RAQ 4?
+    -   8.3 Post-install cleanup
+    -   8.4 Using your own kernel
+-   9 Resources
 
 About the RAQ 550
 -----------------
@@ -323,3 +316,10 @@ Retrieved from
 Category:
 
 -   Getting and installing Arch
+
+-   This page was last modified on 26 September 2012, at 17:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

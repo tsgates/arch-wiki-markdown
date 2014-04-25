@@ -1,18 +1,6 @@
 Smart Common Input Method platform
 ==================================
 
-> Summary
-
-This article discusses the installation, configuration, and
-troubleshooting steps associated with the usage of SCIM, the Smart
-Common Input Method.
-
-> Related
-
-IBus
-
-UIM
-
   ------------------------ ------------------------ ------------------------
   [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
   g]                       is out of date.          g]
@@ -32,6 +20,11 @@ UIM
                            brief explanation.       
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
+
+Related articles
+
+-   IBus
+-   UIM
 
 SCIM is an input method framework developed by Su Zhe (or James Su)
 around 2001, similar to IBus or UIM.
@@ -54,32 +47,25 @@ Nowadays, SCIM is also:
 -   Fully i18n enabled with support for UCS-4/UTF-8 encoding.
 -   Easy to configure through its unified configuration framework.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing SCIM                                                    |
-|     -   1.1 Installing Input Method Engines                              |
-|                                                                          |
-| -   2 Configure SCIM                                                     |
-|     -   2.1 A Simple scenario                                            |
-|     -   2.2 Note for GTK+                                                |
-|         -   2.2.1 Note for aMSN users                                    |
-|         -   2.2.2 Note for GNOME, Xfce, LXDE                             |
-|         -   2.2.3 Note for KDE3                                          |
-|                                                                          |
-|     -   2.3 Locale-related files                                         |
-|         -   2.3.1 Further troubleshooting with locales                   |
-|                                                                          |
-|     -   2.4 Executing SCIM                                               |
-|         -   2.4.1 Note for GNOME                                         |
-|         -   2.4.2 Note for KDE                                           |
-|                                                                          |
-| -   3 Bugs                                                               |
-|     -   3.1 LWJGL (Lightweight Java Game Library) losing keyboard focus  |
-|                                                                          |
-| -   4 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing SCIM
+    -   1.1 Installing Input Method Engines
+-   2 Configure SCIM
+    -   2.1 A Simple scenario
+    -   2.2 Note for GTK+
+        -   2.2.1 Note for aMSN users
+        -   2.2.2 Note for GNOME, Xfce, LXDE
+        -   2.2.3 Note for KDE3
+    -   2.3 Locale-related files
+        -   2.3.1 Further troubleshooting with locales
+    -   2.4 Executing SCIM
+        -   2.4.1 Note for GNOME
+        -   2.4.2 Note for KDE
+-   3 Bugs
+    -   3.1 LWJGL (Lightweight Java Game Library) losing keyboard focus
+-   4 Links
 
 Installing SCIM
 ---------------
@@ -168,6 +154,14 @@ with aMSN.
     export XIM_MODULE="scim -d"
 
 Note for GNOME, Xfce, LXDE
+
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: The package      
+                           scim-bridge does not     
+                           exist anymore. (Discuss) 
+  ------------------------ ------------------------ ------------------------
 
 If you are using GNOME, Xfce or LXDE and Qt applications do not pick up
 the export QT_IM_MODULE="scim" variable, you can use scim-bridge from
@@ -259,8 +253,15 @@ Links
 -   See the official news page for more details.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Smart_Common_Input_Method_platform&oldid=238996"
+"https://wiki.archlinux.org/index.php?title=Smart_Common_Input_Method_platform&oldid=290063"
 
 Category:
 
 -   Internationalization
+
+-   This page was last modified on 23 December 2013, at 08:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

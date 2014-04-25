@@ -1,19 +1,11 @@
 Convert any Movie to DVD Video
 ==============================
 
-> Summary
+Related articles
 
-Video DVD encoding tools provided by MPlayer.
-
-> Related
-
-DVD Ripping
-
-Dvd2Avi
-
-MPlayer
-
-Video2dvdiso
+-   Optical Disc Drive
+-   Dvd2Avi
+-   MPlayer
 
 MEncoder is part of the mplayer package. See MPlayer for details.
 mplayer2 does not include MEncoder.
@@ -24,38 +16,33 @@ DVD Video viewable on any hardware DVD player. However, most of those
 pages focus on one aspect of this process. The point of this article is
 to summarize most of the available knowledge in only one place.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 The parts of a DVD                                                 |
-| -   2 The Audio                                                          |
-| -   3 The Video                                                          |
-|     -   3.1 Removing the black borders                                   |
-|     -   3.2 Obtaining the correct aspect ratio                           |
-|     -   3.3 Reaching a valid resolution                                  |
-|     -   3.4 Encoding the video                                           |
-|                                                                          |
-| -   4 Putting Audio and Video together                                   |
-| -   5 The Subtitles                                                      |
-|     -   5.1 Textual subtitles                                            |
-|     -   5.2 Subtitles from another DVD video                             |
-|         -   5.2.1 Fix subtitle images                                    |
-|                                                                          |
-|     -   5.3 VobSub files                                                 |
-|                                                                          |
-| -   6 Authoring the DVD                                                  |
-|     -   6.1 One file, One movie                                          |
-|     -   6.2 Many files, One movie                                        |
-|     -   6.3 One file, Many movies                                        |
-|     -   6.4 Many files, Many movies                                      |
-|     -   6.5 dvdauthor Command line                                       |
-|                                                                          |
-| -   7 Burning the DVD video                                              |
-| -   8 Appendix A: about changing frame-rate                              |
-| -   9 Appendix B: about menu                                             |
-| -   10 External links                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 The parts of a DVD
+-   2 The Audio
+-   3 The Video
+    -   3.1 Removing the black borders
+    -   3.2 Obtaining the correct aspect ratio
+    -   3.3 Reaching a valid resolution
+    -   3.4 Encoding the video
+-   4 Putting Audio and Video together
+-   5 The Subtitles
+    -   5.1 Textual subtitles
+    -   5.2 Subtitles from another DVD video
+        -   5.2.1 Fix subtitle images
+    -   5.3 VobSub files
+-   6 Authoring the DVD
+    -   6.1 One file, One movie
+    -   6.2 Many files, One movie
+    -   6.3 One file, Many movies
+    -   6.4 Many files, Many movies
+    -   6.5 dvdauthor Command line
+-   7 Burning the DVD video
+    -   7.1 Video2dvdiso
+-   8 Appendix A: about changing frame-rate
+-   9 Appendix B: about menu
+-   10 External links
 
 The parts of a DVD
 ------------------
@@ -718,6 +705,135 @@ If you just want a single command:
 And there it is. You have a standard compliant DVD video that is
 viewable with any hardware DVD player.
 
+> Video2dvdiso
+
+A simple Bash script to convert any movie to DVD video's ISO; which can
+be directly burn't to blank DVD using k3b iso burning.
+
+    #!/bin/bash
+    # AVI or any video 2 DVD iso Script
+    # DvdAuthor 7 and up needs this
+    export VIDEO_FORMAT=PAL
+    # Change to "ntsc" if you'd like to create NTSC disks
+    format="pal"
+
+    # Check we have enough command line arguments
+    if [ $# -lt 1 ]
+    then
+        echo "Usage: $0 <input file 1 ... input file n>"
+        exit
+    fi
+
+    # Check for dependencies
+    missing=0
+    dependencies=( "mencoder" "ffmpeg" "dvdauthor" "mkisofs" )
+    for command in ${dependencies[@]}
+    do
+        if ! command -v $command &>/dev/null
+        then
+            echo "$command not found"
+            missing=1
+        fi
+    done
+
+    if [ $missing = 1 ]
+    then
+        echo "Please install the missing applications and try again"
+        exit
+    fi
+
+    function emphasise() {
+        echo ""
+        echo "********** $1 **********"
+        echo ""
+    }
+
+    # Check the files exists
+    for var in "$@"
+    do
+        if [ ! -e "$var" ]
+        then
+            echo "File $var not found"
+            exit
+        fi
+    done
+
+    emphasise "Converting AVI to MPG"
+
+    for var in "$@"
+    do
+        ffmpeg -i "$var" -y -target ${format}-dvd -aspect 16:9 "$var.mpg"
+        if [ $? != 0 ]
+        then
+            emphasise "Conversion failed"
+            exit
+        fi
+    done
+
+    emphasise "Creating XML file"
+
+    echo "<dvdauthor>
+    <vmgm />
+    <titleset>
+    <titles>
+    <pgc>" > dvd.xml
+
+    for var in "$@"
+    do
+        echo "<vob file=\"$var.mpg\" />" >> dvd.xml
+    done
+
+    echo "</pgc>
+    </titles>
+    </titleset>
+    </dvdauthor>" >> dvd.xml
+
+    emphasise "Creating DVD contents"
+
+    dvdauthor -o dvd -x dvd.xml
+
+    if [ $? != 0 ]
+    then
+        emphasise "DVD Creation failed"
+        exit
+    fi
+
+    emphasise "Creating ISO image"
+
+    mkisofs -dvd-video -o dvd.iso dvd/
+
+    if [ $? != 0 ]
+    then
+        emphasise "ISO Creation failed"
+        exit
+    fi
+
+    # Everything passed. Cleanup
+    for var in "$@"
+    do
+        rm -f "$var.mpg"
+    done
+    rm -rf dvd/
+    rm -f dvd.xml
+
+    emphasise "Success: dvd.iso image created"
+
+To use the script, copy and paste it into an appropriately named file
+(such as video2dvdiso.sh), and then execute chmod +x <file>.
+
+Hopefully the script is quite easy to understand so you can change it as
+needed. See man ffmpeg man mkisofs man dvdauthor for more information.
+
+Example usage
+
+    video2dvd.sh video.avi
+
+will result in dvd.iso
+
+To check the dvd.iso will play as dvd or not:
+
+    mplayer dvd.iso
+
 Appendix A: about changing frame-rate
 -------------------------------------
 
@@ -785,8 +901,15 @@ External links
     happened).
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Convert_any_Movie_to_DVD_Video&oldid=197856"
+"https://wiki.archlinux.org/index.php?title=Convert_any_Movie_to_DVD_Video&oldid=291296"
 
 Category:
 
 -   Audio/Video
+
+-   This page was last modified on 2 January 2014, at 02:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -121,3 +121,10 @@ Categories:
 
 -   Audio/Video
 -   Scripts
+
+-   This page was last modified on 23 April 2012, at 18:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

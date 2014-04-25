@@ -1,26 +1,13 @@
 GRUB Legacy
 ===========
 
-> Summary
+Related articles
 
-Covers various aspects of Arch Linux's default bootloader, the GRand
-Unified Bootloader (GRUB).
-
-> Overview
-
-In order to boot Arch Linux, a Linux-capable boot loader such as
-GRUB(2), Syslinux, LILO or GRUB Legacy must be installed to the Master
-Boot Record or the GUID Partition Table. The boot loader is responsible
-for loading the kernel and initial ramdisk before initiating the boot
-process.
-
-> Related
-
-Boot Debugging
-
-grub-gfx
-
-Kernel parameters
+-   Arch Boot Process
+-   Boot Loaders
+-   Boot Debugging
+-   grub-gfx
+-   Kernel parameters
 
 GRUB Legacy is a multiboot bootloader previously maintained by the GNU
 Project. It was derived from GRUB, the GRand Unified Bootloader, which
@@ -31,73 +18,73 @@ computer starts. It is responsible for loading and transferring control
 to the Linux kernel. The kernel, in turn, initializes the rest of the
 operating system.
 
-Note:GRUB Legacy has been deprecated and replaced by GRUB version 2.x in
-Arch Linux. See the news here. Users are recommended to switch to GRUB2
-or Syslinux instead. See #Upgrading to GRUB2 below.
+Warning:GRUB Legacy is no longer maintained upstream and is not
+officially supported in Arch (see the news here). Users are recommended
+to switch to GRUB(2) or Syslinux instead. See Upgrading to GRUB2.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Upgrading to GRUB2                                                 |
-|     -   2.1 Is upgrading necessary?                                      |
-|     -   2.2 How to upgrade                                               |
-|                                                                          |
-| -   3 Configuration                                                      |
-|     -   3.1 Finding GRUB's root                                          |
-|     -   3.2 Dual booting with Windows                                    |
-|     -   3.3 Dual booting with GNU/Linux                                  |
-|     -   3.4 chainloader and configfile                                   |
-|     -   3.5 Dual booting with GNU/Linux (GRUB2)                          |
-|                                                                          |
-| -   4 Bootloader installation                                            |
-|     -   4.1 Manual recovery of GRUB libs                                 |
-|     -   4.2 General notes about bootloader installation                  |
-|     -   4.3 Installing to the MBR                                        |
-|     -   4.4 Installing to a partition                                    |
-|     -   4.5 Alternate method (grub-install)                              |
-|                                                                          |
-| -   5 Tips and tricks                                                    |
-|     -   5.1 Graphical boot                                               |
-|     -   5.2 Framebuffer resolution                                       |
-|         -   5.2.1 GRUB recognized value                                  |
-|         -   5.2.2 hwinfo                                                 |
-|         -   5.2.3 vbetest                                                |
-|                                                                          |
-|     -   5.3 Naming partitions                                            |
-|         -   5.3.1 By Label                                               |
-|         -   5.3.2 By UUID                                                |
-|                                                                          |
-|     -   5.4 Boot as root (single-user mode)                              |
-|     -   5.5 Password protection                                          |
-|     -   5.6 Restart with named boot choice                               |
-|     -   5.7 LILO and GRUB interaction                                    |
-|     -   5.8 GRUB boot disk                                               |
-|     -   5.9 Hide GRUB menu                                               |
-|                                                                          |
-| -   6 Advanced Debugging                                                 |
-| -   7 Troubleshooting                                                    |
-|     -   7.1 GRUB Error 17                                                |
-|     -   7.2 /boot/grub/stage1 not read correctly                         |
-|     -   7.3 Accidental install to a Windows partition                    |
-|     -   7.4 Edit GRUB entries in the boot menu                           |
-|     -   7.5 device.map error                                             |
-|     -   7.6 KDE reboot pull-down menu fails                              |
-|     -   7.7 GRUB fails to find or install to any virtio /dev/vd* or      |
-|         other non-BIOS devices                                           |
-|                                                                          |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Note:If you have grub-legacy installed as grub-0.97 pkg in your system,
+it will be updated to grub-2.xx pkg (GRUB2) during pkg updates. If you
+want to keep using grub-legacy install the grub-legacy package from AUR
+so that pkgname does not conflict. During this update only the files in
+/usr/lib/grub/ are updated, and grub-legacy files installed to
+/boot/grub and the MBR are not removed. You can boot back into
+grub-legacy by simply renaming /boot/grub/menu.lst.pacsave to
+/boot/grub/menu.lst .
+
+Contents
+--------
+
+-   1 Installation
+-   2 Upgrading to GRUB2
+    -   2.1 Is upgrading necessary?
+    -   2.2 How to upgrade
+-   3 Configuration
+    -   3.1 Finding GRUB's root
+    -   3.2 Dual booting with Windows
+    -   3.3 Dual booting with GNU/Linux
+    -   3.4 chainloader and configfile
+    -   3.5 Dual booting with GNU/Linux (GRUB2)
+-   4 Bootloader installation
+    -   4.1 Manual recovery of GRUB libs
+    -   4.2 General notes about bootloader installation
+    -   4.3 Installing to the MBR
+    -   4.4 Installing to a partition
+    -   4.5 Alternate method (grub-install)
+-   5 Tips and tricks
+    -   5.1 Graphical boot
+    -   5.2 Framebuffer resolution
+        -   5.2.1 GRUB recognized value
+        -   5.2.2 hwinfo
+        -   5.2.3 vbetest
+    -   5.3 Naming partitions
+        -   5.3.1 By Label
+        -   5.3.2 By UUID
+    -   5.4 Boot as root (single-user mode)
+    -   5.5 Password protection
+    -   5.6 Restart with named boot choice
+    -   5.7 LILO and GRUB interaction
+    -   5.8 GRUB boot disk
+    -   5.9 Hide GRUB menu
+-   6 Advanced debugging
+-   7 Troubleshooting
+    -   7.1 GRUB Error 17
+    -   7.2 /boot/grub/stage1 not read correctly
+    -   7.3 Accidental install to a Windows partition
+    -   7.4 Edit GRUB entries in the boot menu
+    -   7.5 device.map error
+    -   7.6 KDE reboot pull-down menu fails
+    -   7.7 GRUB fails to find or install to any virtio /dev/vd* or
+        other non-BIOS devices
+-   8 See also
 
 Installation
 ------------
 
-GRUB Legacy has been droppen from the official repositories in favor of
+GRUB Legacy has been dropped from the official repositories in favor of
 GRUB version 2.x. grub-legacy is still available from the AUR.
 
 Additionally, GRUB must be installed to the boot sector of a drive or
-partition to serve as a bootloader. This is covered in the #Bootloader
+partition to serve as a bootloader. This is covered in the Bootloader
 installation section.
 
 Upgrading to GRUB2
@@ -238,14 +225,15 @@ your Windows partition is on the first partition of the first drive):
      makeactive
      chainloader +1
 
-Note:If you are attempting to dual-boot with Windows 7, you should
-comment out the line makeactive.
+> Note:
 
-Note:Windows 2000 and later versions do NOT need to be on the first
-partition to boot (contrary to popular belief). If the Windows partition
-changes (i.e. if you add a partition before the Windows partition), you
-will need to edit the Windows boot.ini file to reflect the change (see
-this article for details on how to do that).
+-   If you are attempting to dual-boot with Windows 7, you should
+    comment out the line makeactive.
+-   Windows 2000 and later versions do NOT need to be on the first
+    partition to boot (contrary to popular belief). If the Windows
+    partition changes (i.e. if you add a partition before the Windows
+    partition), you will need to edit the Windows boot.ini file to
+    reflect the change (see this article for details on how to do that).
 
 If Windows is located on another hard disk, the map command must be
 used. This will make your Windows install think it is actually on the
@@ -276,9 +264,9 @@ example:
      kernel /path/to/kernel root=/dev/sda3 ro
      initrd /path/to/initrd
 
-Note: There may be other options that are required, and an initial RAM
+Note:There may be other options that are required, and an initial RAM
 disk may not be used. Examine the other distribution's
-/boot/grub/menu.lst to match boot options, or see #chainloader and
+/boot/grub/menu.lst to match boot options, or see chainloader and
 configfile (recommended).
 
 > chainloader and configfile
@@ -389,13 +377,13 @@ Installation is necessary when:
 Before continuing, a few notes:
 
 -   Be sure that your GRUB configuration is correct
-    (/boot/grub/menu.lst) before proceeding. Refer to #Finding GRUB's
+    (/boot/grub/menu.lst) before proceeding. Refer to Finding GRUB's
     root to ensure your devices are defined correctly.
 -   GRUB must be installed on the MBR (first sector of the hard disk),
     or the first partition of the first storage device to be recognized
     by most BIOSes. To allow individual distributions the ability to
     manage their own GRUB menus, multiple instances of GRUB can be used,
-    see #chainloader and configfile.
+    see chainloader and configfile.
 -   Installing the GRUB bootloader may need to be done from within a
     chrooted environment (i.e. from installed environment via a separate
     medium) for cases like RAID configurations or if you forgot/broke
@@ -406,7 +394,7 @@ First, enter the GRUB shell:
 
     # grub
 
-Use the root command with the output from the find command (see #Finding
+Use the root command with the output from the find command (see Finding
 GRUB's root) to instruct GRUB which partition contains stage1 (and
 therefore, /boot):
 
@@ -498,7 +486,7 @@ e.g. the kernel line for [369] 1680x1050x32 would be:
 
 hwinfo
 
-1.  Install hwinfo from [community].
+1.  Install hwinfo from the official repositories.
 2.  Run hwinfo --framebuffer as root.
 3.  Pick up the code corresponding to the desired resolution.
 4.  Use the 6 digit code with 0x prefix in vga= kernel option in
@@ -520,11 +508,11 @@ directly the correct value needed by the kernel.
 vbetest
 
 1.  Install the lrmi package from the AUR that contains the vbetest tool
-    (x86_64 users will need to use #hwinfo above).
+    (x86_64 users will need to use hwinfo).
 2.  Run vbetest as root
 3.  Then note the number in [ ] corresponding to your desired
     resolution.
-4.  Press 'q' to quit vbetest interactive prompt.
+4.  Press q to quit vbetest interactive prompt.
     1.  As an option, in a console as root, you can test the mode you
         just picked up by running vbetest -m <yourcode> and see a
         pattern like this one
@@ -559,7 +547,7 @@ If you alter (or plan to alter) partition sizes from time to time, you
 might want to consider defining your drive/partitions by a label. You
 can label ext2, ext3, ext4 partitions by:
 
-    e2label </dev/drive|partition> label
+    e2label /dev/drive|partition label
 
 The label name can be up to 16 characters long but cannot have spaces
 for GRUB to understand it. Then define it in your menu.lst:
@@ -572,15 +560,15 @@ The UUID (Universally Unique IDentifier) of a partition may be
 discovered with blkid or ls -l /dev/disk/by-uuid. It is defined in
 menu.lst with either:
 
-    kernel /boot/vmlinuz-linux root=/dev/disk/by-uuid/<uuid number>
+    kernel /boot/vmlinuz-linux root=/dev/disk/by-uuid/uuid_number
 
-or
+or:
 
-    kernel /boot/vmlinuz-linux root=UUID=<uuid number>
+    kernel /boot/vmlinuz-linux root=UUID=uuid_number
 
 > Boot as root (single-user mode)
 
-At the boot loader, select an entry and edit it ('e' key). Append the
+At the boot loader, select an entry and edit it (e key). Append the
 following parameters to the kernel options:
 
     [...] single init=/bin/bash
@@ -600,9 +588,10 @@ need the extra security.
 First, choose a password you can remember and then encrypt it:
 
     # grub-md5-crypt
-    Password:
-    Retype password:
-    $1$ZOGor$GABXUQ/hnzns/d5JYqqjw
+
+     Password:
+     Retype password:
+     $1$ZOGor$GABXUQ/hnzns/d5JYqqjw
 
 Then add your password to the beginning of the GRUB configuration file
 at /boot/grub/menu.lst (the password must be at the beginning of the
@@ -677,7 +666,7 @@ Now all that is needed is a way to easily change the default manually.
 This can be accomplished using the command grub-set-default. So, to
 reboot into Windows, enter the following command:
 
-    $ sudo grub-set-default 1 && sudo shutdown -r now
+    # grub-set-default 1 && sudo shutdown -r now
 
 For ease of use, you might to wish to implement the "Allow users to
 shutdown fix" (including /sbin/grub-set-default amongst the commands the
@@ -685,7 +674,7 @@ user is allowed to issue without supplying a password).
 
 > LILO and GRUB interaction
 
-If the LILO package is installed on your system, remove it with
+If the LILO package is installed on your system, remove it with:
 
     # pacman -R lilo
 
@@ -704,31 +693,31 @@ another bootloader) is installed over it.
 
 First, format a floppy disk:
 
-     fdformat /dev/fd0
-     mke2fs /dev/fd0
+    # fdformat /dev/fd0
+    # mke2fs /dev/fd0
 
 Now mount the disk:
 
-     mount -t ext2 /dev/fd0 /mnt/fl
+    # mount -t ext2 /dev/fd0 /mnt/fl
 
 Install GRUB to the disk:
 
-     grub-install --root-directory=/mnt/fl '(fd0)'
+    # grub-install --root-directory=/mnt/fl '(fd0)'
 
 Copy your menu.lst file to the disk:
 
-     cp /boot/grub/menu.lst /mnt/fl/boot/grub/menu.lst
+    # cp /boot/grub/menu.lst /mnt/fl/boot/grub/menu.lst
 
 Now unmount your floppy:
 
-     umount /mnt/fl
+    # umount /mnt/fl
 
 Now you should be able to restart your computer with the disk in the
 drive and it should boot to GRUB. Make sure that your floppy disk is set
 to have higher priority than your hard drive when booting in your BIOS
 first, of course.
 
-See also: Super GRUB Disk
+See also: Super GRUB Disk.
 
 > Hide GRUB menu
 
@@ -740,10 +729,10 @@ press Esc and the menu shows up. To use it, just add to your
 
     hiddenmenu
 
-Advanced Debugging
+Advanced debugging
 ------------------
 
-Content moved to Boot_Debugging
+See dedicated article.
 
 Troubleshooting
 ---------------
@@ -775,8 +764,8 @@ Once in disk, enter e[x]tra/expert mode, [f]ix the partition order, then
 [w]rite the table and exit.
 
 You can verify that the partition table was indeed fixed by issuing an
-fdisk -l. Now you just need to fix GRUB. See the #Bootloader
-installation section above.
+fdisk -l. Now you just need to fix GRUB. See the Bootloader installation
+section.
 
 Basically you need to tell GRUB the correct location of your /boot then
 re-write GRUB to the MBR on the disk.
@@ -807,9 +796,9 @@ you have to change it to "Linux". To do this, go to fdisk,
 
     # fdisk /dev/sda
 
-change a partition's system id with [t], select you partition number and
+change a partition's system id with t, select you partition number and
 type in the new system id (Linux = 83). You can also list all available
-system ids by typing "L" instead of a system id.
+system ids by typing L instead of a system id.
 
 If you have changed a partitions system id, you should [v]erify your
 partition table and then [w]rite it.
@@ -902,20 +891,26 @@ correct device and partition corresponding to your setup.
 
 5. If GRUB reports no error messages, then you probably are done. You
 also need to add appropriate modules to the ramdisk. For more
-information, please refer to the KVM guide on Preparing an (Arch) Linux
-guest
+information, please refer to QEMU#Preparing an (Arch) Linux guest.
 
 See also
 --------
 
 -   GNU GRUB
 -   GRUB Grotto
--   Boot Debugging - Debugging with Grub, set module values
+-   Boot Debugging - Debugging with GRUB, set module values
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GRUB_Legacy&oldid=255288"
+"https://wiki.archlinux.org/index.php?title=GRUB_Legacy&oldid=300357"
 
 Categories:
 
 -   Boot loaders
 -   System recovery
+
+-   This page was last modified on 23 February 2014, at 14:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

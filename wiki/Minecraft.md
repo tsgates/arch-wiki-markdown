@@ -1,78 +1,26 @@
 Minecraft
 =========
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Setting Up Java                                                    |
-|     -   2.1 OpenJDK6                                                     |
-|     -   2.2 OpenJDK7                                                     |
-|     -   2.3 LWJGL                                                        |
-|                                                                          |
-| -   3 Running Minecraft                                                  |
-| -   4 Extras                                                             |
-|     -   4.1 Minutor                                                      |
-|                                                                          |
-| -   5 Minecraft Server                                                   |
-|     -   5.1 Extras                                                       |
-|                                                                          |
-| -   6 Mods                                                               |
-| -   7 Useful links                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Running Minecraft
+-   3 Extras
+    -   3.1 AMIDST
+    -   3.2 mapcrafter
+    -   3.3 Minutor
+-   4 Minecraft Server
+    -   4.1 Extras
+-   5 Useful links
 
 Installation
 ------------
 
 minecraft is available in the AUR. This package includes the official
-game plus a script for launching it.
+game launcher plus a script to launch it.
 
-Setting Up Java
----------------
-
-Minecraft should work out-of-the-box with a couple of the various Java
-JREs.
-
-> OpenJDK6
-
-Minecraft should 'just work' with OpenJDK6. Install it from community:
-
-    # pacman -S openjdk6
-
-> OpenJDK7
-
-OpenJDK7 works with Minecraft too:
-
-    # pacman -S jre7-openjdk
-
-> LWJGL
-
-If Minecraft has issues (sticky keys, stuck on pause menu, etc.), you
-can force it to use the newest version of LWJGL.
-
-Warning:The OpenGL implementation provided by at least some proprietary
-NVIDIA drivers (nvidia-304xx) is incompatible with the version of LWJGL
-that minecraft provides. For these systems, it may be necessary to
-update LWJGL for minecraft to run, or switch to the nouveau driver.
-
--   Download LWJGL 2.8.5 from here
--   Replace the following files in .minecraft/bin/ with the
-    corresponding versions in lwjgl-2.8.5/jar
-
-    jinput.jar
-    lwjgl.jar
-    lwjgl_util.jar 
-
--   Replace the following files in .minecraft/bin/natives/ with
-    lwjgl-2.8.5/natives/linux
-
-    libjinput-linux.so
-    libjinput-linux64.so
-    liblwjgl.so
-    liblwjgl64.so
-    libopenal.so
-    libopenal64.so
+Otherwise, just get the launcher on the official download site.
 
 Running Minecraft
 -----------------
@@ -84,15 +32,7 @@ script:
 
 Otherwise, you will need to manually launch Minecraft:
 
-    $ java -jar $HOME/.minecraft/minecraft.jar
-
-To allocate more RAM to the game, include Xms and Xmx arguments:
-
-    $ java -jar -Xms1024M -Xmx2048M $HOME/.minecraft/minecraft.jar
-
-You can change these depending on the amount of RAM that you have. The
-Xms argument specifies the minimum amount of RAM to allocate to the
-program, and the Xmx argument specifies the maximum amount.
+    $ java -jar Minecraft.jar
 
 Extras
 ------
@@ -102,6 +42,26 @@ experience a little easier to navigate. The most common of these
 programs are map generators. Using one of these programs will allow you
 to load up a Minecraft world file and render it as a 2D image, providing
 you with a top-down map of the world.
+
+> AMIDST
+
+AMIDST (Advanced Minecraft Interface and Data/Structure Tracking) is a
+program that aids in the process of finding structures, biomes, and
+players in Minecraft worlds. It can draw the biomes of a world out and
+show where points of interest are likely to be by either giving it a
+seed, telling it to make a random seed, or having it read the seed from
+an existing world (in which case it can also show where players in that
+world are). amidst is available in the AUR.
+
+> mapcrafter
+
+mapcrafter is a fast Minecraft Map Renderer which renders worlds to maps
+with an 3D-isometric perspective. You can view these maps in any
+webbrowser and you can host them with a webserver for example for the
+players of your server. mapcrafter has a simple configuration file
+format to specify worlds to render, different rendermodes such as
+day/night/cave and can also render worlds from different rotations.
+mapcrafter-git is available in the AUR.
 
 > Minutor
 
@@ -161,22 +121,9 @@ your server to use. A good rule of thumb is one GB per ten users.)
         available.
         -   If installing the Dynmap plugin, you will need to install
             fontconfig and libcups to get it to work.
-
 -   You might even set up a cron job with a mapper to generate periodic
     maps of your world.
 -   ...or you could use rsync to perform routine backups.
-
-Mods
-----
-
--   Terrafirmacraft : http://www.terrafirmacraft.com
--   Technic pack / Tekkit : http://www.technicpack.net
--   Feed The Beast Mod Pack :
-    https://aur.archlinux.org/packages/feedthebeast/
--   List of mods :
-    http://www.minecraftforum.net/topic/1434593-list-of-mods-for-146147-and-from-132-onward/#t
-
-  
 
 Useful links
 ------------
@@ -187,12 +134,17 @@ Useful links
 -   Data values (useful in multiplayer mode) :
     http://www.minecraftwiki.net/wiki/Data_values
 -   Reddit community : http://www.reddit.com/r/minecraft
--   MineTest Tutorial :
-    http://gotux.net/arch-linux/minetest-game-server/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Minecraft&oldid=252222"
+"https://wiki.archlinux.org/index.php?title=Minecraft&oldid=306010"
 
 Category:
 
 -   Gaming
+
+-   This page was last modified on 20 March 2014, at 17:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

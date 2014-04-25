@@ -1,129 +1,68 @@
-Digital Cameras
-===============
+HCL/Digital Cameras
+===================
 
-  Summary
-  -----------------------------------
-  Infos on digital cameras support.
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Hardware Compatibility List (HCL)
+  Full Systems
+  Laptops - Desktops
+  Components
+  Video Cards - Sound Cards - Wired Net Adapters - Modems - Wireless Adapters - Printers - Scanners - TV Cards - Digital Cameras - CD and DVD Writer/Readers - Keyboards - Main Boards
+  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-This article documents the configuration of libgphoto2 to access digital
-cameras. Some digital cameras will mount as normal USB Storage Devices
-and may not require the use of libgphoto2.
+The gPhoto Project has a list of supported cameras, and you are invited
+to take a look at another more detailed list.
 
-Note:As of libgphoto2 version 2.14.13, users do not need to be part of
-the camera group.
+Contents
+--------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Libgphoto2                                                         |
-|     -   1.1 Installation and Configuration                               |
-|     -   1.2 Permission issues                                            |
-|                                                                          |
-| -   2 GPhoto2 Usage                                                      |
-| -   3 Frontend (external) Applications for GPhoto2                       |
-| -   4 Miscellaneous Troubleshooting                                      |
-|     -   4.1 Groups                                                       |
-|                                                                          |
-| -   5 Wiki Articles Relating to Photo/Cameras                            |
-+--------------------------------------------------------------------------+
+-   1 Canon
+-   2 Kodak
+-   3 Sony
+-   4 Nikon
 
-Libgphoto2
-----------
+Canon
+-----
 
-Libgphoto2 is the core library designed to allow access to digital
-cameras by external (front end) programs, such as Digikam and gphoto2.
-The current 'officially' supported cameras are here (though more may
-work).
+Kodak
+-----
 
-> Installation and Configuration
+Sony
+----
 
-Core library:
+Sony DSC-P200 
+    Works normally if used as USB storage.
 
-    # pacman -S libgphoto2
+Sony DSC-W120 
+    Works normaly with USB storage or PTP modes
 
-(Optional) gvfs (for Nautilus integration):
+Nikon
+-----
 
-    # pacman -S gvfs-gphoto2
+Nikon Coolpix S4 
+    Works when in USB mass storage mode under i686 Arch.
+    See Nikon Coolpix S4 specifications.
 
-(Optional) Command line interface:
+Nikon Coolpix L11 
+    Tested on Arch Linux Overlord: work both USB mass storage and PTP
+    mode (using gtkam and libgphoto2).
+    See Nikon Coolpix L11 specifications.
 
-    # pacman -S gphoto2
-
-> Permission issues
-
-Users with a local session have permissions granted for cameras using
-ACLs. See General Troubleshooting#Session permissions if it does not
-work.
-
-If you want these permissions to work for remote (SSH) sessions too, you
-can use the old 'camera' group, by adding the requisite users to the
-deprecated camera group and create a new udev rules file as follows:
-
-    # /usr/lib/libgphoto2/print-camera-list udev-rules version 175 group camera > /etc/udev/rules.d/40-gphoto.rules
-
-These rules will use the group for newly added camera devices.
-
-If the camera is not present in any udev rule, can check vendor and
-product id and add it. To check it just run:
-
-    # lsusb
-    ...
-    Bus 001 Device 005: ID 04a9:318e Canon, Inc.
-    ...
-
-GPhoto2 Usage
--------------
-
-GPhoto2 is a command line client for libgphoto2. GPhoto2 allows access
-to the libgpohoto2 library from a terminal or from a script shell to
-perform any camera operation that can be done. This is the main user
-interface.
-
-GPhoto2 also provides convenient debugging features for camera driver
-developers.
-
-Quick Commands
-
--   gphoto2 --list-ports
--   gphoto2 --auto-detect
--   gphoto2 --summary
--   gphoto2 --list-files
--   gphoto2 --get-all-files
-
-For advanced file manipulation, use
-
--   gphoto2 --shell
-
-Frontend (external) Applications for GPhoto2
---------------------------------------------
-
--   gphotofs - allow using cameras with any tool able to read from a
-    mounted filesystem.
--   RawTherapee
--   darktable
--   Digikam
--   F-Spot
--   Gthumb
--   GTKam
-
-Miscellaneous Troubleshooting
------------------------------
-
-> Groups
-
-Make sure that the user to which access should be granted is part of the
-storage group.
-
-Wiki Articles Relating to Photo/Cameras
----------------------------------------
-
--   Jalbum - Freeware for creating professional albums/galleries.
--   HCL/Digital Cameras - Partial list of supported cameras for gphoto2
+Nikon Coolpix P50 
+    Tested on Arch Linux Overlord: work only PTP mode (using gtkam and
+    libgphoto2, and chosing as camera type: "USB PTP Class Camera"
+    because Nikon Coolpix P50 is missing from the list).
+    See Nikon Coolpix P50 specifications.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Digital_Cameras&oldid=242520"
+"https://wiki.archlinux.org/index.php?title=HCL/Digital_Cameras&oldid=279804"
 
 Category:
 
--   Imaging
+-   Hardware Compatibility List
+
+-   This page was last modified on 26 October 2013, at 04:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

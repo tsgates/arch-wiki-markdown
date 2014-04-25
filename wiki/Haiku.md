@@ -1,25 +1,23 @@
 Haiku
 =====
 
-  Summary
+  Summary help replacing me
   -----------------------------------------------------
   Information about using the Haiku operating system.
 
 Haiku is a free and open source operating system compatible with BeOS.
 It is in active development.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Using Haiku                                                        |
-| -   2 Add Haiku To The GRUB Boot Menu                                    |
-| -   3 Sharing Files Between Operating Systems                            |
-| -   4 Optional Packages                                                  |
-| -   5 Software                                                           |
-| -   6 Haiku Ports                                                        |
-| -   7 Links                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Using Haiku
+-   2 Add Haiku To The GRUB Boot Menu
+-   3 Sharing Files Between Operating Systems
+-   4 Optional Packages
+-   5 Software
+-   6 Haiku Ports
+-   7 Links
 
 Using Haiku
 -----------
@@ -89,24 +87,18 @@ installed with the official installoptionalpackage command.
 -   Web Browser
     -   WebPositive
     -   BeZillaBrowser (an old Mozilla build, very stable)
-
 -   Media Player
     -   MediaPlayer (comes with Haiku, plays music and videos, includes
         playlist support)
-
 -   IRC
     -   Vision (the Haiku developers use #haiku on Freenode)
-
 -   Text Editor
     -   Pe (comes with Haiku, programmer's editor)
     -   Vim
-
 -   Bittorrent
     -   Transmission (CLI)
-
 -   Image Editting
     -   WonderBrush
-
 -   Scripting
     -   The Terminal application uses BASH.
     -   Perl
@@ -145,3 +137,10 @@ Retrieved from
 Category:
 
 -   System administration
+
+-   This page was last modified on 13 June 2012, at 14:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

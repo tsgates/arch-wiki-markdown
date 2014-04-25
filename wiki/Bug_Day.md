@@ -1,18 +1,15 @@
 Bug Day
 =======
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About                                                              |
-|     -   1.1 When?                                                        |
-|     -   1.2 Where?                                                       |
-|     -   1.3 Who?                                                         |
-|                                                                          |
-| -   2 Past and upcoming Bug Days                                         |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 About
+    -   1.1 When?
+    -   1.2 Where?
+    -   1.3 Who?
+-   2 Past and upcoming Bug Days
+-   3 See also
 
 About
 -----
@@ -49,10 +46,17 @@ See also
 -   Arch Linux Event Calendar
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Bug_Day&oldid=238697"
+"https://wiki.archlinux.org/index.php?title=Bug_Day&oldid=290510"
 
 Categories:
 
 -   Arch development
 -   Package development
 -   Events
+
+-   This page was last modified on 26 December 2013, at 22:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

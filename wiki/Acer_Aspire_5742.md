@@ -1,23 +1,19 @@
 Acer Aspire 5742
 ================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Hardware                                                           |
-| -   3 Networking                                                         |
-|     -   3.1 Wired Ethernet                                               |
-|     -   3.2 Wireless                                                     |
-|                                                                          |
-| -   4 Power Management                                                   |
-|     -   4.1 CPU frequency scaling                                        |
-|         -   4.1.1 The laptop-mode-utils way                              |
-|                                                                          |
-| -   5 Xorg                                                               |
-| -   6 Issues                                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Hardware
+-   3 Networking
+    -   3.1 Wired Ethernet
+    -   3.2 Wireless
+-   4 Power Management
+    -   4.1 CPU frequency scaling
+        -   4.1.1 The laptop-mode-utils way
+-   5 Xorg
+-   6 Issues
 
 Introduction
 ============
@@ -69,7 +65,17 @@ Networking
 Wired Ethernet
 --------------
 
-If you have problems with the Ethernet card, you'll have to load the
+If you are running into problems to get ethernet working on install you
+will have to reload tg3 module.
+
+     modprobe -r tg3
+
+     modprobe tg3
+
+     dhcpcd <name of your ethernet interface>
+
+  
+ If you have problems with the Ethernet card, you'll have to load the
 modules broadcom then tg3. Add to the end of
 /etc/modprobe.d/modprobe.conf:
 
@@ -120,8 +126,15 @@ Adding
 to /etc/rc.local will adjust the backlight brightness down during boot.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_5742&oldid=254477"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_5742&oldid=259777"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 31 May 2013, at 11:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

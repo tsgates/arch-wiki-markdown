@@ -1,37 +1,55 @@
 YAGF
 ====
 
+Summary help replacing me
+
+This article explains how to install and configure YAGF.
+
+> Related
+
+ocrGUI
+
+VietOCR
+
+ScanTailor
+
+cuneiform-qt
+
+gImageReader
+
+tesseract-gui
+
+OCRFeeder
+
 YAGF is a graphical interface for the cuneiform OCR program on the Linux
 platform. With YAGF you can scan images via XSane, perform images
 preprocessing and recognize texts using cuneiform from a single command
 centre. YAGF also makes it easy to scan and recognize several images
 sequentially.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Requirements                                                |
-| -   2 Supported languages                                                |
-| -   3 Usage                                                              |
-|     -   3.1 Images acquisition                                           |
-|     -   3.2 Images Preprocessing                                         |
-|     -   3.3 The Text Recognition                                         |
-|                                                                          |
-| -   4 Installation                                                       |
-| -   5 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-System Requirements
-===================
+-   1 Installation
+-   2 Supported languages
+-   3 Usage
+    -   3.1 Images acquisition
+    -   3.2 Images preprocessing
+    -   3.3 The text recognition
+-   4 See also
 
-YAGF requires Qt 4.x and the aspell spellchecking package. If you want
-to acquire images from a scanner into YAGF directly, you should install
+Installation
+------------
+
+YAGF requires Qt 4 and the aspell spellchecking package. If you want to
+acquire images from a scanner into YAGF directly, you should install
 XSane software. And of course you will need cuneiform for the text
 recognition.
 
+Install yagf from the official repositories.
+
 Supported languages
-===================
+-------------------
 
 Next languages are available for recognition: Czech,Danish, Dutch,
 English, Estonian, French, German, Hungarian, Italian, Latvian,
@@ -39,14 +57,13 @@ Lithuanian, Polish, Portuguese, Romanian, Russian Spanish, Swedish,
 Ukrainian
 
 Usage
-=====
+-----
 
 Digitizing text with YAGF consists of several stages: images
 acquisition, images preprocessing (if necessary), the recognition
 itself, and saving the results.
 
-Images acquisition
-------------------
+> Images acquisition
 
 You can recognize text from the images stored on your hard drive, or you
 can scan new images and pass them to YAGF directly. Use File/Open
@@ -60,9 +77,9 @@ MyPage07.jpg. All the opened images will be displayed on the image bar.
 
 You can acquire images direct;y from a scanner using XSane. While in
 YAGF, choose File/Scan command. XSane program will be started. Set up
-the scanning options with XSane and press XSane's "Scan" button. When
-the scanning is done the scanned image is opened in the YAGF image
-viewing window. If you want to scan several pages, you can repeat these
+the scanning options with XSane and press XSane's Scan button. When the
+scanning is done the scanned image is opened in the YAGF image viewing
+window. If you want to scan several pages, you can repeat these
 operation several times. Each time the last scanned image will be shown
 in the YAGF image viewing window. You can move to previous images using
 navigation buttons. You can keep XSane window open while working with
@@ -72,8 +89,7 @@ was described above. All acquired images are shown as thumbnails on the
 image bar on the left. You can save these images into a separate
 directory using Save button on the image bar.
 
-Images Preprocessing
---------------------
+> Images preprocessing
 
 There are several preprocessing options available in YAGF. You can
 rotate loaded images if they are not positioned correctly. Images may be
@@ -85,13 +101,13 @@ the image-viewing window with mouse. The block is resizable, you can
 resize it by dragging mouse pointer on its edge. While usually the
 scanned page doesn't fit into the image-viewing window, you can scale an
 image up or down to make the selection process more convenient. This
-operation doesn't change the resolution of the image passed to cuneiform
-for recognition. You can also scale images using Ctrl++ and Ctrl+- keys
-combinations or with the mouse wheel while holding Ctrl key down. You
-can change the font size in the text editor window the same way.
+operation does not change the resolution of the image passed to
+cuneiform for recognition. You can also scale images using Ctrl++ and
+Ctrl+- keys combinations or with the mouse wheel while holding Ctrl key
+down. You can change the font size in the text editor window the same
+way.
 
-The Text Recognition
---------------------
+> The text recognition
 
 Before recognizing text you should select the recognition language (or a
 language paire if the document to be recognized is written in several
@@ -122,23 +138,23 @@ encoding or copied to the clipboard. The "Copy to Clipboard" btton
 copies either a selected text fragment or the whole text if no fragment
 is selected.
 
-Installation
-============
+See also
+--------
 
-Available from [community] repository.
-
-    # pacman -S yagf
-
-External links
-==============
-
-YAGF home page
-
-Linux port of Cuneiform
+-   http://symmetrica.net/cuneiform-linux/yagf-en.html - YAGF home page
+-   https://launchpad.net/cuneiform-linux - Linux port of Cuneiform
+-   Optical Character Recognition
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=YAGF&oldid=206697"
+"https://wiki.archlinux.org/index.php?title=YAGF&oldid=275599"
 
 Category:
 
 -   Office
+
+-   This page was last modified on 15 September 2013, at 09:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

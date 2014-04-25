@@ -24,7 +24,7 @@ Install the package getmail from the official repositories.
 Configuration
 -------------
 
--   Create a configuration dir and set the right permissions by
+-   Create a configuration directory, and set the right permissions by
     executing: $ mkdir -m 0700 ~/.getmail.
 -   Create a configuration file, the default being:
     ~/.getmail/getmailrc. A separate configuration file is needed for
@@ -33,8 +33,15 @@ Configuration
     getmail command.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Getmail&oldid=253772"
+"https://wiki.archlinux.org/index.php?title=Getmail&oldid=305753"
 
 Category:
 
 -   Mail Server
+
+-   This page was last modified on 20 March 2014, at 01:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

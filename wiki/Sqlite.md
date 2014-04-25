@@ -1,32 +1,26 @@
 Sqlite
 ======
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About                                                              |
-| -   2 Features                                                           |
-| -   3 Installation                                                       |
-|     -   3.1 Related Packages                                             |
-|                                                                          |
-| -   4 Using sqlite3 command line shell                                   |
-|     -   4.1 Create a database                                            |
-|     -   4.2 Create Table                                                 |
-|     -   4.3 Insert Data                                                  |
-|     -   4.4 Search Database                                              |
-|                                                                          |
-| -   5 Using sqlite in shell script                                       |
-| -   6 External Links                                                     |
-+--------------------------------------------------------------------------+
-
-About
------
+  
+ From the project home page:
 
 SQLite is a software library that implements a self-contained,
 serverless, zero-configuration, transactional SQL database engine.
 SQLite is the most widely deployed SQL database engine in the world. The
 source code for SQLite is in the public domain.
+
+Contents
+--------
+
+-   1 Features
+-   2 Installation
+-   3 Using sqlite3 command line shell
+    -   3.1 Create a database
+    -   3.2 Create table
+    -   3.3 Insert data
+    -   3.4 Search database
+-   4 Using sqlite in shell script
+-   5 See also
 
 Features
 --------
@@ -61,19 +55,18 @@ From: SQLite Features
 Installation
 ------------
 
-    $ pacman -S sqlite
+Install sqlite from the official repositories.
 
-> Related Packages
+Related packages are:
 
--   extra/sqlite-doc - most of the static HTML files that comprise this
+-   sqlite-doc - most of the static HTML files that comprise this
     website, including all of the SQL Syntax and the C/C++ interface
     specs and other miscellaneous documentation
--   extra/php-sqlite - sqlite3 module for PHP (don't forget to enable it
-    in /etc/php/php.ini)
--   community/gambas2-gb-db-sqlite3 - Gambas2 Sqlite3 database access
-    component
--   community/sqliteman - The best developer's and/or admin's GUI tool
-    for Sqlite3 in the world
+-   php-sqlite - sqlite3 module for PHP (don't forget to enable it in
+    /etc/php/php.ini)
+-   gambas2-gb-db-sqlite3 - Gambas2 Sqlite3 database access component
+-   sqliteman - The best developer's and/or admin's GUI tool for Sqlite3
+    in the world
 
 Using sqlite3 command line shell
 --------------------------------
@@ -84,18 +77,18 @@ an SQLite database.
 
 Create a database
 
-    sqlite3 archdatabase
+    sqlite3 databasename
 
-Create Table
+Create table
 
     sqlite> create table tblone(one varchar(10), two smallint);
 
-Insert Data
+Insert data
 
     sqlite> insert into tblone values('helloworld',20);
     sqlite> insert into tblone values('archlinux', 30);
 
-Search Database
+Search database
 
     sqlite> select * from tblone;
     helloworld|20
@@ -106,10 +99,10 @@ See the sqlite docs.
 Using sqlite in shell script
 ----------------------------
 
-See forum post
+See forum post.
 
-External Links
---------------
+See also
+--------
 
 -   SQLite homepage
 -   SQLite Hammer
@@ -117,8 +110,15 @@ External Links
 -   SQLite - Apress Book
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Sqlite&oldid=245274"
+"https://wiki.archlinux.org/index.php?title=Sqlite&oldid=304048"
 
 Category:
 
 -   Database management systems
+
+-   This page was last modified on 11 March 2014, at 17:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

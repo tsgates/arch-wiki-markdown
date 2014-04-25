@@ -1,21 +1,18 @@
 Disable PC Speaker Beep
 =======================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Globally                                                           |
-| -   3 Locally                                                            |
-|     -   3.1 In X                                                         |
-|     -   3.2 In console                                                   |
-|     -   3.3 Using ALSA                                                   |
-|     -   3.4 In GNOME/Metacity                                            |
-|     -   3.5 GTK+                                                         |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Globally
+-   3 Locally
+    -   3.1 In X
+    -   3.2 In console
+    -   3.3 Using ALSA
+    -   3.4 In GNOME/Metacity
+    -   3.5 GTK+
+-   4 See also
 
 Introduction
 ------------
@@ -140,3 +137,10 @@ Retrieved from
 Category:
 
 -   Sound
+
+-   This page was last modified on 5 February 2013, at 01:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

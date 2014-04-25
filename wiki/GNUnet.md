@@ -1,41 +1,28 @@
 GNUnet
 ======
 
-> Summary
+Related articles
 
-This article tells about installation, configuration and basic usage of
-GNUnet.
-
-Required software
-
-GNUnet
-
-> Related
-
-Tor
+-   Tor
 
 GNUnet is a framework for secure peer-to-peer networking that does not
 use any centralized or otherwise trusted services. Currently, the
 service implemented on the framework serves to perform
 censorship-resistant file-sharing.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-| -   3 Usage                                                              |
-|     -   3.1 Downloading                                                  |
-|     -   3.2 Uploading                                                    |
-|         -   3.2.1 To index a file/directory                              |
-|         -   3.2.2 To unindex a file/directory                            |
-|         -   3.2.3 Modifying and removing indexed files                   |
-+--------------------------------------------------------------------------+
+See also the Wikipedia article for more information: GNUnet.
 
-  
+Contents
+--------
 
-See the Wikipedia article on this subject for more information: GNUnet
+-   1 Installation
+-   2 Configuration
+-   3 Usage
+    -   3.1 Downloading
+    -   3.2 Uploading
+        -   3.2.1 To index a file/directory
+        -   3.2.2 To unindex a file/directory
+        -   3.2.3 Modifying and removing indexed files
 
 Installation
 ------------
@@ -51,7 +38,7 @@ To configure the gnunet daemon edit /etc/gnunetd.conf.
 
 If you installed gnunet-gtk you can configure the client options with
 
-    # gnunet-setup 
+    # gnunet-setup
 
 Usage
 -----
@@ -116,9 +103,16 @@ Modifying and removing indexed files
     unindex it first.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=GNUnet&oldid=206014"
+"https://wiki.archlinux.org/index.php?title=GNUnet&oldid=302638"
 
 Categories:
 
--   Internet Applications
+-   Internet applications
 -   Proxy servers
+
+-   This page was last modified on 1 March 2014, at 04:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

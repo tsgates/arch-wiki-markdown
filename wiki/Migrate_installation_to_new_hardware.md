@@ -10,6 +10,15 @@ Migrate installation to new hardware
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: Mentions rc.conf 
+                           and uses links to wiki   
+                           articles that don't      
+                           exist anymore. (Discuss) 
+  ------------------------ ------------------------ ------------------------
+
 This page summarizes some hints and ideas (especially handy commands)
 useful when moving an Arch Linux system to new hardware. The goal is to
 achieve the same ArchLinux installation, as far as software and
@@ -31,32 +40,26 @@ Warning:Some of the following instructions can be dangerous: you are
 advised to backup all of your important data on the old system before
 continuing.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Bottom to Top                                                      |
-|     -   1.1 On the old system                                            |
-|         -   1.1.1 What software?                                         |
-|         -   1.1.2 Copy to some backup space.                             |
-|                                                                          |
-|     -   1.2 On the new system                                            |
-|         -   1.2.1 Wiki articles                                          |
-|         -   1.2.2 Copy from backup space                                 |
-|         -   1.2.3 Install software                                       |
-|                                                                          |
-| -   2 Top to Bottom                                                      |
-|     -   2.1 Move the system to the new HDDs                              |
-|         -   2.1.1 Update fstab                                           |
-|                                                                          |
-|     -   2.2 Reconfigure the bootloader                                   |
-|     -   2.3 Regenerate kernel image                                      |
-|     -   2.4 Update the graphic drivers                                   |
-|     -   2.5 Reconfigure audio                                            |
-|     -   2.6 Reconfigure network                                          |
-|                                                                          |
-| -   3 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Bottom to Top
+    -   1.1 On the old system
+        -   1.1.1 What software?
+        -   1.1.2 Copy to some backup space.
+    -   1.2 On the new system
+        -   1.2.1 Wiki articles
+        -   1.2.2 Copy from backup space
+        -   1.2.3 Install software
+-   2 Top to Bottom
+    -   2.1 Move the system to the new HDDs
+        -   2.1.1 Update fstab
+    -   2.2 Reconfigure the bootloader
+    -   2.3 Regenerate kernel image
+    -   2.4 Update the graphic drivers
+    -   2.5 Reconfigure audio
+    -   2.6 Reconfigure network
+-   3 See also
 
 Bottom to Top
 -------------
@@ -84,8 +87,7 @@ Wiki articles
 -   Read some Wiki articles concerning new hardware, for examples your
     new SSD.
 -   Stick to the well-written installation guidelines here in this wiki.
-    Since you are experienced, the Quick_Arch_Linux_Install could be
-    enough.
+    Since you are experienced, the Installation guide could be enough.
 -   Try to configure as much as possible sticking to current wiki
     articles and forum posts.
 
@@ -145,7 +147,6 @@ Update fstab
 -   because of:
     -   new HDD and partitions configuration
     -   new BIOS configuration
-
 -   GRUB allows to edit entries with 'e'
 -   use a live system?
 -   update framebuffer mode (if new gpu)
@@ -169,7 +170,7 @@ Update fstab
 > Reconfigure network
 
 -   if need to change hostname:
-    -   /etc/rc.conf
+    -   hostnamectl
     -   /etc/hosts
     -   other apps using hostname: synergy, nut (network ups tools)
         -   "# grep -Ri 'hostname' /etc" should give some hints on the
@@ -183,9 +184,16 @@ See also
 -   Moving an existing install into (or out of) a virtual machine
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Migrate_installation_to_new_hardware&oldid=240020"
+"https://wiki.archlinux.org/index.php?title=Migrate_installation_to_new_hardware&oldid=298267"
 
 Categories:
 
 -   Getting and installing Arch
 -   System recovery
+
+-   This page was last modified on 16 February 2014, at 07:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

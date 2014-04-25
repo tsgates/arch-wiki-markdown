@@ -6,18 +6,20 @@ virtual desktop window manager for the X Window system. It requires some
 effort to learn to use it well, since it is almost entirely configured
 by editing configuration files with a text editor, but those who persist
 end up with a desktop environment that works exactly the way they want
-it to work. Development is active, and support is excellent. And for
-those who wonder, FVWM means Feeble Virtual Window Manager.
+it to work. Although using FVWM does not require an knowlege of
+programming languages, it is possible to extend the power of FVWM with
+M4, C, and Perl preprocessing. FVWM has a Perl library that makes
+creating FVWM modules in Perl possible and easy. Development is active,
+and support is excellent. And for those who wonder, FVWM means Feeble
+Virtual Window Manager.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing FVWM                                                    |
-| -   2 Starting FVWM                                                      |
-| -   3 Bringing Out its Power                                             |
-| -   4 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing FVWM
+-   2 Starting FVWM
+-   3 Bringing Out its Power
+-   4 References
 
 Installing FVWM
 ---------------
@@ -35,23 +37,18 @@ Starting FVWM
 FVWM will automatically be listed in kdm/gdm in the sessions menu.
 Otherwise, add
 
-    exec fvwm2 
-
-or
-
     exec fvwm
 
 to your user's .xinitrc.
 
-See xinitrc for details, such as preserving the logind (and/or
-consolekit) session.
+See xinitrc for details, such as preserving the logind session.
 
 Bringing Out its Power
 ----------------------
 
 When you start FVWM for the first time, you will get something that
 looks very blank. When you left-click on the desktop, you will be able
-to select a very basic configuration for FVWM. Chose the modules you
+to select a very basic configuration for FVWM. Choose the modules you
 want and you are ready to get started. You will undoubtedly want to do
 more to create your desktop, so here are some tips:
 
@@ -101,10 +98,18 @@ References
 9.  Box-Look.
 10. Thomas Adam on common mistakes in configuration files.
 11. Fvwm Patches in the Internet Archive.
+12. An example of a Fvwm module written in Perl
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=FVWM&oldid=239179"
+"https://wiki.archlinux.org/index.php?title=FVWM&oldid=305766"
 
 Category:
 
 -   Stacking WMs
+
+-   This page was last modified on 20 March 2014, at 02:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

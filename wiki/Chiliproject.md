@@ -1,7 +1,7 @@
 Chiliproject
 ============
 
-> Summary
+Summary help replacing me
 
 How to install and configure Chiliproject
 
@@ -14,15 +14,13 @@ application written using Ruby on Rails. The reason they forked is
 basically a lack of effort from the main developer, see complete
 explanation here: Chiliproject: why fork?
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Setup                                                              |
-|     -   2.1 Short version                                                |
-|     -   2.2 Long Version                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Setup
+    -   2.1 Short version
+    -   2.2 Long Version
 
 Installation
 ------------
@@ -79,8 +77,15 @@ adapters, take a look at the official chiliproject installation guide
 for the full explanation: Official Chiliproject installation guide
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Chiliproject&oldid=255944"
+"https://wiki.archlinux.org/index.php?title=Chiliproject&oldid=306049"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 20 March 2014, at 17:38.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

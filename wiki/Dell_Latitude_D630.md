@@ -5,21 +5,18 @@ The Dell Latitude D630 is a business line laptop made for corporate
 users who have a need for durability. This article will tell you how to
 get the basic components of the laptop running with Arch.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Installation                                                       |
-| -   3 Wireless Networking                                                |
-|     -   3.1 Intel 3945                                                   |
-|     -   3.2 Broadcom BCM4312                                             |
-|                                                                          |
-| -   4 Xorg Configuration                                                 |
-| -   5 Recommendations                                                    |
-|     -   5.1 PC Speaker                                                   |
-|     -   5.2 Other Recommendations                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Installation
+-   3 Wireless Networking
+    -   3.1 Intel 3945
+    -   3.2 Broadcom BCM4312
+-   4 Xorg Configuration
+-   5 Recommendations
+    -   5.1 PC Speaker
+    -   5.2 Other Recommendations
 
 Hardware
 --------
@@ -53,10 +50,10 @@ A late-July 2008 model, output from lspci:
 Installation
 ------------
 
-You can follow the Official Arch Linux Install Guide to get yourself up
-and running. I did a pretty standard install, keeping the XP partition
-that came with the laptop as my company requires all work computers to
-have Windows on them.
+You can follow the Installation guide to get yourself up and running. I
+did a pretty standard install, keeping the XP partition that came with
+the laptop as my company requires all work computers to have Windows on
+them.
 
 Wireless Networking
 -------------------
@@ -98,8 +95,15 @@ Many of the recommendations for the Dell Latitude D620#Recommendations
 apply here too.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Latitude_D630&oldid=196577"
+"https://wiki.archlinux.org/index.php?title=Dell_Latitude_D630&oldid=298284"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 16 February 2014, at 07:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

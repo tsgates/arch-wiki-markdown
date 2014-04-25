@@ -13,134 +13,20 @@ Bluetooth mouse configuration
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-This article describes a manual way to configure the automatic
-connection with a Bluetooth mouse for X.Org, with no desktop assistance
-for bluetooth. For example, a minimalist XFCE installation. Without any
-heavy GTK packages (Blueman may use more memory than Xorg) which in
-addition may require gnome packages to properly work.
+Contents
+--------
 
-The method described is also compatible with heavier desktop
-environments, but usually is not required on them. The procedure is also
-suitable for any Linux distribution.
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Prerequisites and tested hardware                                  |
-| -   2 How bluetooth mouses work                                          |
-| -   3 Step by step                                                       |
-|     -   3.1 Test your bluetooth stack                                    |
-|     -   3.2 Before starting the configuration                            |
-|     -   3.3 Search for your mouse                                        |
-|     -   3.4 Determine your bluez dbus address                            |
-|     -   3.5 Test if your PC already knows your mouse                     |
-|     -   3.6 Create the bluez device for the mouse                        |
-|     -   3.7 Test again if your PC knows your mouse                       |
-|     -   3.8 Verify the permissions                                       |
-|     -   3.9 Give your mouse permission to connect your PC                |
-|     -   3.10 Make your mouse to learn your PC address                    |
-|                                                                          |
-| -   4 Useful tips                                                        |
-| -   5 Troubleshooting                                                    |
-| -   6 More information                                                   |
-| -   7 Related Articles                                                   |
-+--------------------------------------------------------------------------+
-
-Prerequisites and tested hardware
-=================================
-
-It is only required a working standard bluetooth stack (tested in XFCE
-with bluez 4.65 and 4.66 under X.Org 1.7.6 and 1.8.1). The guide has
-been tested with a Logitech M555b.
-
-The method described here is based in three steps, in this order:
-
-1.  Make the PC learn about the bluetooth mouse.
-2.  Grant the mouse permissions to connect.
-3.  Make the mouse learn about the PC.
-
-For the first two steps the utility called dbus-send is used (it is
-provided by dbus-core 1.2.24, a bluez dependency). For the last step
-we'll use the hidd tool (from bluez).
-
-At least in the above reported bluez, dbus and X.Org versions it is not
-necessary to edit any system configuration file (in fact, the hidd
-service can perfectly be disabled in the bluetooth configuration).
-
-How bluetooth mouses work
-=========================
-
-Probably most BT mouses work just the same as the M555b:
-
--   When the mouse is powered, it tries to connect to the last PC known
-    (connection initiated by the mouse). This is the common use case.
--   Alternatively, there is also a CONNECT button in the mouse to
-    manually make it discoverable: once pressed, a light turns on for
-    several seconds, and during this period it is possible to search for
-    the mouse and connect it (this time connection initiated from the
-    PC). This second way is useful to make the mouse forget any previous
-    PC and learn about a new PC (but it is not suitable for automated
-    connections after each system restart, or when it is accidentally
-    lost).
-
-Note that the PC not even needs to be discoverable (once the mouse
-receives the connection, it learns the PC address and doesn't needs to
-perform any search). There is no need to pair the devices. However, the
-permissions settings in the bluetooth stack, and the way to achieve
-them, are a common cause of troubles and misconceptions, in particular
-for users of desktop environments lacking bluetooth support.
-
-Step by step
-============
-
-Note that these steps are valid to manually configure the permissions
-for any bluetooth device (not only a mice).
-
-Test your bluetooth stack
--------------------------
-
-Of course, this guide assumes that you already have the bluetooth
-service started and working. For example, the following command (as
-root) should work, showing your bluetooth adapter:
-
-    root@quark:~# hciconfig 
-    hci0:  Type: BR/EDR  Bus: USB
-           BD Address: 00:22:43:E1:82:E0  ACL MTU: 1021:8  SCO MTU: 64:1
-           UP RUNNING PSCAN 
-           RX bytes:1062273 acl:62061 sco:0 events:778 errors:0
-           TX bytes:1825 acl:11 sco:0 commands:39 errors:0
-
-If this is not the case, make sure that you have bluez installed and the
-bluetooth service in the DAEMONS line of your /etc/rc.conf.
-
-Before starting the configuration
----------------------------------
-
-Note:If you already have connected the mouse from the computer (in a
-previous try or even in another operating system) it would be
-recomendable, before starting this guide, to trigger a connection from
-another different computer, in order to make the mouse to initially
-"forget" the PC being configured. However, this step is not essential
-(it would help to achieve success in a particular step at the first
-try). Note that most tutorials start by making a initial connection, but
-this guide recomends just the contrary to help with bluez design.
-
-Search for your mouse
----------------------
-
-Press the button in your mouse to make it discoverable (my mouse has a
-light on top notifying this state) and wait a couple of seconds. Issue
-the following command as root:
-
-    root@quark:~# hcitool scan
-    Scanning ...
-            00:07:61:F5:5C:3D       Logitech Bluetooth Mouse M555b
-
-Your mouse bluetooth address will be similar to mine
-(00:07:61:F5:5C:3D). Write your own address for later use, but please
-remember not to connect it at this moment with any command or
-application.
+-   1 Determine your bluez dbus address
+-   2 Test if your PC already knows your mouse
+-   3 Create the bluez device for the mouse
+-   4 Test again if your PC knows your mouse
+-   5 Verify the permissions
+-   6 Give your mouse permission to connect your PC
+-   7 Make your mouse learn your PC address
+-   8 Useful tips
+-   9 Troubleshooting
+-   10 More information
+-   11 Related Articles
 
 Determine your bluez dbus address
 ---------------------------------
@@ -272,8 +158,8 @@ name):
 And repeat the previous step to make sure that the Trusted property is
 now set to "true".
 
-Make your mouse to learn your PC address
-----------------------------------------
+Make your mouse learn your PC address
+-------------------------------------
 
 Yes, now you must do the bad thing not recommended at the beginning of
 this article: connect your mouse from the PC. Make sure your mouse is
@@ -394,9 +280,16 @@ Related Articles
 Bluetooth  
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Bluetooth_mouse_configuration&oldid=255648"
+"https://wiki.archlinux.org/index.php?title=Bluetooth_mouse_configuration&oldid=292120"
 
 Categories:
 
 -   Mice
 -   Bluetooth
+
+-   This page was last modified on 9 January 2014, at 08:18.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

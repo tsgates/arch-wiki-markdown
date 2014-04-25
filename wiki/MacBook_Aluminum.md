@@ -1,6 +1,15 @@
 MacBook Aluminum
 ================
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-two-arrows.png]   This article or section  [Tango-two-arrows.png]
+                           is a candidate for       
+                           merging with MacBook 5,2 
+                           (early-mid 2009).        
+                           Notes: same model        
+                           (Discuss)                
+  ------------------------ ------------------------ ------------------------
+
 This article is to provide information on how to get components of
 Apple's MacBook5,1 and 5,2 also know as the MacBook Aluminum, or the
 unibody Macbook, working in Arch. Please first visit the MacBook page
@@ -9,23 +18,20 @@ that should work for these models and provide more detailed information.
 Discussion of this in in this thread
 https://bbs.archlinux.org/viewtopic.php?pid=444664
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Multi-Touch Trackpad                                               |
-| -   3 Sound                                                              |
-|     -   3.1 Gnome Support                                                |
-|                                                                          |
-| -   4 Video                                                              |
-| -   5 Wireless                                                           |
-| -   6 Suspend/Power Management                                           |
-| -   7 iSight                                                             |
-| -   8 Sensors, temperature and fan settings                              |
-| -   9 Pommed                                                             |
-| -   10 Anything else?                                                    |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Multi-Touch Trackpad
+-   3 Sound
+    -   3.1 Gnome Support
+-   4 Video
+-   5 Wireless
+-   6 Suspend/Power Management
+-   7 iSight
+-   8 Sensors, temperature and fan settings
+-   9 Pommed
+-   10 Anything else?
 
 Installation
 ------------
@@ -146,8 +152,15 @@ If your box is freezing on reboot "restarting..." then just add
 The SD card slot works automatically like any other removable device.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=MacBook_Aluminum&oldid=238357"
+"https://wiki.archlinux.org/index.php?title=MacBook_Aluminum&oldid=263564"
 
 Category:
 
 -   Apple
+
+-   This page was last modified on 20 June 2013, at 07:57.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

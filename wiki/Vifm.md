@@ -1,37 +1,38 @@
 Vifm
 ====
 
-Vifm is a ncurses based file manager with vi like keybindings. If you
-use vi, vifm gives you complete keyboard control over your files without
-having to learn a new set of commands. Source: Vifm on sourceforge.
+Related articles
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Help File                                                          |
-| -   3 Customizing Vifm                                                   |
-|     -   3.1 Color schemes                                                |
-|     -   3.2 Key Mapping                                                  |
-|     -   3.3 Opening filetypes in Vifm                                    |
-|         -   3.3.1 Browse images in current directory with Feh            |
-|                                                                          |
-|     -   3.4 User commands                                                |
-|         -   3.4.1 Creating symbolic links                                |
-|         -   3.4.2 Torrent Creation                                       |
-|                                                                          |
-|     -   3.5 Marks                                                        |
-|                                                                          |
-| -   4 Alternative                                                        |
-+--------------------------------------------------------------------------+
+-   ranger
+
+From the Vifm home page:
+
+Vifm is a ncurses based file manager with vi like keybindings, which
+also borrows some useful ideas from mutt. If you use vi, vifm gives you
+complete keyboard control over your files without having to learn a new
+set of commands.
+
+Contents
+--------
+
+-   1 Installation
+-   2 Help file
+-   3 Customizing Vifm
+    -   3.1 Color schemes
+    -   3.2 Key mapping
+    -   3.3 Opening filetypes in vifm
+        -   3.3.1 Browse images in current directory with Feh
+    -   3.4 User commands
+        -   3.4.1 Creating symbolic links
+        -   3.4.2 Torrent creation
+    -   3.5 Marks
+-   4 Tips and tricks
+    -   4.1 Useful key mappings
 
 Installation
 ------------
 
-Vifm is in Community:
-
-    # pacman -S vifm
+Install vifm from the official repositories.
 
 Optional, for file previews:
 
@@ -39,7 +40,7 @@ Optional, for file previews:
 -   mp3info for viewing information about mp3 files
 -   poppler for pdf previews
 
-Help File
+Help file
 ---------
 
 Basic information about vifm is given in the help file. You can view it
@@ -76,7 +77,7 @@ The ~/.vifm/colors directory contains the color schemes. The format is
 outlined in the file and follows vi/vim syntax highlight format. It is
 basically:
 
-    highlight <group> cterm=<attribute> ctermfg=<color> ctermbg=<color>
+    highlight group cterm=attribute ctermfg=color ctermbg=color
 
 An example colorscheme looks like:
 
@@ -98,7 +99,7 @@ An example colorscheme looks like:
     highlight ErrorMsg cterm=none ctermfg=red ctermbg=black
     highlight Border cterm=none ctermfg=black ctermbg=white
 
-> Key Mapping
+> Key mapping
 
 As of 0.6.2 you can customize key bindings in Vifm. These can be set
 from the command mode using the map command, like so:
@@ -109,7 +110,7 @@ However, these mappings will not be saved between sessions. To map a key
 permanently, place them in ~/vifm/vifmrc. More sample mappings can be
 seen at the end of that file.
 
-> Opening filetypes in Vifm
+> Opening filetypes in vifm
 
 You can assign applications to filetypes in vifmrc, eg.
 
@@ -123,7 +124,7 @@ Browse images in current directory with Feh
 
     filextype *.jpg,*.jpeg,*.png,*.gif
            \ {View in feh}
-           \ feh -FZ %d --start-at %d/%c,
+           \ feh -FZ %d --start-at %d/%c 2>/dev/null
 
 It will display your selected image in feh, but it will enable you to
 browse all other images in the directory as well, in their default
@@ -148,7 +149,7 @@ a link of the selected file is made in the other directory (if you are
 in split view). It even works with multiple files selected with visual
 (v) or tag (t).
 
-Torrent Creation
+Torrent creation
 
 make a .torrent of the current file in the other tab's dir
 
@@ -166,14 +167,25 @@ Go to a file set for mark:
 
 Vifm will remember the marks between the sessions.
 
-Alternative
------------
+Tips and tricks
+---------------
 
-Another text-based file manager with vi-like keybinds is ranger.
+> Useful key mappings
+
+Single stroke to access command line
+
+       nmap ; :
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Vifm&oldid=250502"
+"https://wiki.archlinux.org/index.php?title=Vifm&oldid=294834"
 
 Category:
 
 -   File managers
+
+-   This page was last modified on 29 January 2014, at 04:30.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -13,16 +13,15 @@ Multitouch Displays
 Since Linux Kernel 3.2, multitouch devices are handled by the
 hid-multitouch module, see Kernel Modules.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Configuration (USB devices)                                        |
-| -   2 Rotating the touch screen                                          |
-| -   3 Drivers                                                            |
-|     -   3.1 eGalax                                                       |
-|         -   3.1.1 Invert Y-axis                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Configuration (USB devices)
+-   2 Rotating the touch screen
+-   3 Drivers
+    -   3.1 eGalax
+        -   3.1.1 Invert Y-axis
+-   4 Gestures
 
 Configuration (USB devices)
 ---------------------------
@@ -120,7 +119,7 @@ its input options):
           mon="${args[$[i + 1]]}";  ## set the monitor to control
           ;;
         -i|-I|-id)
-          id="$id";  ## set the id of the device
+          id="${args[$[i + 1]]}";  ## set the id of the device
           ;;
         -help|--help|/?)  ## help menu
           help-man;  ## print the help menu
@@ -200,7 +199,7 @@ Drivers
 > eGalax
 
 The driver for eGalax tocushcreens is available from the eGalax website.
-Also, it is availbale as xf86-input-egalax-linux3 from the Arch User
+Also, it is availbale as xf86-input-egalax from the Arch User
 Repository.
 
 Invert Y-axis
@@ -217,9 +216,22 @@ Direction from 0 to 2:
     Orientation 0
     ...
 
+Gestures
+--------
+
+If you want gestures in your window manager, install touchegg from the
+Arch User Repository and read its docs.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Multitouch_Displays&oldid=242895"
+"https://wiki.archlinux.org/index.php?title=Multitouch_Displays&oldid=294413"
 
 Category:
 
 -   Other hardware
+
+-   This page was last modified on 25 January 2014, at 23:35.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

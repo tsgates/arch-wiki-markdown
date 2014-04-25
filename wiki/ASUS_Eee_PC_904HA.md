@@ -1,20 +1,18 @@
 ASUS Eee PC 904HA
 =================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing Arch                                                    |
-| -   2 Custom Kernel                                                      |
-|     -   2.1 Wifi                                                         |
-|     -   2.2 Ethernet                                                     |
-|     -   2.3 Sound/Microphone                                             |
-|     -   2.4 Video/LCD backlight                                          |
-|     -   2.5 Webcam                                                       |
-|     -   2.6 Multimedia Keys/Hotkeys                                      |
-|     -   2.7 Notes                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installing Arch
+-   2 Custom Kernel
+    -   2.1 Wifi
+    -   2.2 Ethernet
+    -   2.3 Sound/Microphone
+    -   2.4 Video/LCD backlight
+    -   2.5 Webcam
+    -   2.6 Multimedia Keys/Hotkeys
+    -   2.7 Notes
 
 Installing Arch
 ===============
@@ -152,8 +150,15 @@ pertain to Eees and will fail to load if built as modules and manually
 attempted.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_904HA&oldid=208423"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_904HA&oldid=298151"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 February 2014, at 07:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

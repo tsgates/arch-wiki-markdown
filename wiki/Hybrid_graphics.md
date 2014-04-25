@@ -1,38 +1,25 @@
 Hybrid graphics
 ===============
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
-                           Notes: please use the    
-                           first argument of the    
-                           template to provide more 
-                           detailed indications.    
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
-
 Hybrid-graphics is a concept involving two graphics cards on same
 computer, it was first designed to control power consumption in laptops
 and is extending to desktop computers as well
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 About Hybrid-graphics Technologies                                 |
-| -   2 The "Old" Hybrid Model (Basic Switching)                           |
-| -   3 The New Dynamic Switching Model                                    |
-|     -   3.1 Nvidia Optimus                                               |
-|         -   3.1.1 Current Problems                                       |
-|         -   3.1.2 Software Solutions So Far                              |
-|                                                                          |
-|     -   3.2 ATI Dynamic Switchable Graphics                              |
-|         -   3.2.1 Current Problems                                       |
-|         -   3.2.2 Solutions So Far                                       |
-|                                                                          |
-|     -   3.3 Fully Power Down Discrete GPU                                |
-|                                                                          |
-| -   4 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 About Hybrid-graphics Technologies
+-   2 The "Old" Hybrid Model (Basic Switching)
+-   3 The New Dynamic Switching Model
+    -   3.1 Nvidia Optimus
+        -   3.1.1 Current Problems
+        -   3.1.2 Software Solutions So Far
+    -   3.2 ATI Dynamic Switchable Graphics
+        -   3.2.1 Current Problems
+        -   3.2.2 Solution for kernels < 3.12 or without radeon dynamic
+            power management enabled
+    -   3.3 Fully Power Down Discrete GPU
+-   4 See Also
 
 About Hybrid-graphics Technologies
 ----------------------------------
@@ -117,25 +104,24 @@ Software Solutions So Far
 
 > ATI Dynamic Switchable Graphics
 
-This is a new technology similar to the one of Nvidia. There is no
-hardware multiplexer and gone into the market a few weeks/months ago.
+This is a new technology similar to the one of Nvidia as it uses no
+hardware multiplexer.
 
 Current Problems
 
 The Dynamic Switch needs Xorg support for the discrete videocard
-assigned to rendering [1].
+assigned for rendering to work [1]. So, rendering on the discrete gpu
+will not work until the Xorg team adds support for it.
 
-So, the method listed here (and the AUR package related) will not work
-until Xorg team add support for the redering on a second card not
-attached to video. See here for more info.
-
-This means that with a muxless intel+ati design, you can't use your
-discrete card simply modprobing the module as listed down here.
+This means that with a muxless intel+ati design, you cannot use your
+discrete card by simply modprobing the radeon module.
 
 As of now, there are 3 choices:
 
-- Disable the discrete card and use only the intel one. In this case you
-can folow the instructions below to disable the radeon card.
+- Disable the discrete card and use only the intel igpu. This is not
+needed for kernels version >= 3.12 with radeon DPM enabled; the open
+source graphics driver manages the card automatically. For kernels older
+than 3.12, see the solution below.
 
 - Test and improve some virtualGL based program to make the switch, like
 the common-amd branch of bumblebee project. Check the project repository
@@ -144,18 +130,41 @@ and this useful post.
 - Use the proprietary driver with powerxpress (a.k.a. pxp) support
 maintained by Vi0l0 (remember to check for xorg compatibility).
 
-Solutions So Far
+Solution for kernels < 3.12 or without radeon dynamic power management enabled
 
 Warning: This method, on a mux-less system, works only to shutdown the
-radeon card. This will not enable rendering on the radeon. See Current
-Problems section above for detail.
+radeon card. This will not enable rendering on the radeon gpu. See
+Current Problems section above for detail.
 
-Right now, the best solution is vga_switcheroo with combination of
-opensource drivers for your ATi and Intel graphics.
+This solution is not needed on kernel version >= 3.12 because the
+opensource driver automatically manages the power of the radeon gpu, so
+there is no need to manage the cards from userspace.
 
--   Manual method
+This means that on kernels >= 3.12, vgaswitcheroo is not needed anymore
+to turn off the discrete gpu, only if you wish to verify the power
+state.
 
-Make sure you have installed drivers. Run in terminal:
+If you have kernel >= 3.12 with vgaswitcheroo enabled, you can verify if
+the driver automatically shut down the discrete gpu
+
+    # cat /sys/kernel/debug/vgaswitcheroo/switch
+
+The output should be similar to this, where DIS is the radeon discrete
+gpu and IGD the intel gpu. DynOff means the radeon driver automatically
+powered off the discrete gpu.
+
+    0:DIS: :DynOff:0000:01:00.0
+    1:IGD:+:Pwr:0000:00:02.0
+
+If you are using kernels older than 3.12 then you can use vga_switcheroo
+with a combination of opensource drivers to disable the radeon card from
+userspace at boot.
+
+To do this, follow the instructions below.
+
+-   Preliminaries
+
+Make sure you have installed the drivers. Run in terminal:
 
     $ pacman -Q | grep -E "xf86-video-ati|xf86-video-intel"
 
@@ -164,39 +173,57 @@ In case you get output similar to this:
     xf86-video-ati 6.14.1-1
     xf86-video-intel 2.15.0-2
 
-you're good to go. In other case install drivers:
+you are good to go. In other case install drivers:
 
     # pacman -S xf86-video-ati xf86-video-intel
-
-DO NOT reboot your computer! In most cases system will not boot with
-both drivers installed. Blacklist radeon module:
-
-    # echo > /etc/modprobe.d/radeon.conf blacklist\ radeon
-
-This will prevent system from hanging during boot. vga_switcheroo works
-only with radeon module loaded. To load radeon automatically on system
-startup open /etc/rc.local and add line:
-
-    modprobe radeon
-
-optionally, you can turn off radeon right after system boot to save some
-battery energy and cool down your laptop. To do this, add following line
-to /etc/rc.local:
-
-    # echo OFF > /sys/kernel/debug/vgaswitcheroo/switch
 
 In order to be able to access vgaswitcheroo add this line to your fstab:
 
     none            /sys/kernel/debug debugfs defaults 0 0
 
-  
-
 Note:KMS must be activated for both cards, otherwise there will be no
 vgaswitcheroo in /sys/kernel/debug/
 
--   AUR method
+-   Automatic radeon shutdown
 
-Get it from: hybrid-video-ati-intel AUR package
+Systemd can use tmpfiles to shutdown the discrete gpu at boot.
+
+Important: Make sure the video drivers are loaded in initramfs before
+systemd calls vga_switcheroo, otherwise a kernel oops/panic may occur.
+
+First add the drivers to MODULES array in /etc/mkinitcpio.conf. Adding
+radeon and i915 yields
+
+    /etc/mkinitcpio.conf
+
+    MODULES="radeon i915"
+
+Next rebuild initramfs (details at initramfs)
+
+    # mkinitcpio -p linux
+
+Then create the systemd tmpfile at /etc/tmpfiles.d/vgaswitcheroo.conf
+
+    /etc/tmpfiles.d/vgaswitcheroo.conf
+
+    w /sys/kernel/debug/vgaswitcheroo/switch - - - - OFF
+
+Reboot and the discrete gpu should be off by default. It can be powered
+back on using the manual method described below.
+
+-   Manual method
+
+To verify the state of the dgpu
+
+    # cat /sys/kernel/debug/vgaswitcheroo/switch
+
+Power off the dgpu
+
+    # echo OFF > /sys/kernel/debug/vgaswitcheroo/switch
+
+Power on
+
+    # echo ON > /sys/kernel/debug/vgaswitcheroo/switch
 
 > Fully Power Down Discrete GPU
 
@@ -285,8 +312,15 @@ See Also
 -   Bumblebee
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Hybrid_graphics&oldid=252739"
+"https://wiki.archlinux.org/index.php?title=Hybrid_graphics&oldid=300210"
 
 Category:
 
 -   Graphics
+
+-   This page was last modified on 23 February 2014, at 12:46.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

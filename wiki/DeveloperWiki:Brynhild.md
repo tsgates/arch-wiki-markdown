@@ -3,17 +3,14 @@ DeveloperWiki:Brynhild
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Specs                                                              |
-| -   2 Partition layout                                                   |
-| -   3 Services                                                           |
-| -   4 Trivia                                                             |
-| -   5 Quirks                                                             |
-| -   6 History                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Specs
+-   2 Partition layout
+-   3 Services
+-   4 Trivia
+-   5 History
 
 Specs
 -----
@@ -22,7 +19,7 @@ Specs
 -   8GB Ram
 -   2x750GB HDD as Raid1
 -   10TB Traffic
--   100Mbit/s Uplink
+-   1000Mbit/s Uplink
 
 Partition layout
 ----------------
@@ -38,11 +35,6 @@ Trivia
 
 -   bootloader is syslinux
 -   network is configured via /etc/rc.d/network_simple
-
-Quirks
-------
-
--   Duplex detection doesn't work so force full duplex
 
 History
 -------
@@ -63,8 +55,15 @@ History
     2012 (UTC)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Brynhild&oldid=225022"
+"https://wiki.archlinux.org/index.php?title=DeveloperWiki:Brynhild&oldid=277784"
 
 Category:
 
 -   DeveloperWiki:Server Configuration
+
+-   This page was last modified on 6 October 2013, at 10:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

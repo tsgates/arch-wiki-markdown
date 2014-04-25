@@ -22,21 +22,19 @@ Add this content
     #!/bin/sh
     ssh-add </dev/null
 
-  
- Make it executable and run
+Make it executable and run
 
     chmod +x ~/.kde4/Autostart/ssh-add.sh
     ~/.kde4/Autostart/ssh-add.sh
+
+Note: You need an SSH agent running.
 
 You may also have to source the script that sets the SSH_ASKPASS
 environment variable:
 
     . /etc/profile.d/ksshaskpass.sh
 
-It will ask for your password and unlock the your ssh keys.
-
-You may need to go to system settings -> advanced -> Autostart -> add
-script in newer version of KDE.
+It will ask for your password and unlock the your SSH keys.
 
 KDE Wallet for firefox
 ----------------------
@@ -59,8 +57,15 @@ author, so it's if it's happening to You, invoke Your browser with:
     chromium --password-store=kwallet
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=KDE_Wallet&oldid=250990"
+"https://wiki.archlinux.org/index.php?title=KDE_Wallet&oldid=292132"
 
 Category:
 
--   Desktop environments
+-   KDE
+
+-   This page was last modified on 9 January 2014, at 12:53.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -62,32 +62,27 @@ Not working
 -   Not tested
 -   Not working
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Settings                                                    |
-| -   2 System Setup                                                       |
-|     -   2.1 Power Management                                             |
-|     -   2.2 Graphics                                                     |
-|         -   2.2.1 Intel only                                             |
-|             -   2.2.1.1 acpi_call usage                                  |
-|                                                                          |
-|         -   2.2.2 Nvidia                                                 |
-|                                                                          |
-|     -   2.3 Screen                                                       |
-|     -   2.4 External Display                                             |
-|     -   2.5 Wlan                                                         |
-|         -   2.5.1 Note                                                   |
-|                                                                          |
-|     -   2.6 Bluetooth                                                    |
-|     -   2.7 Power management                                             |
-|     -   2.8 Special Touch Keys                                           |
-|         -   2.8.1 Alternative method                                     |
-|                                                                          |
-|     -   2.9 Hidden Keyboard Keys                                         |
-|     -   2.10 Notes                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 System Settings
+-   2 System Setup
+    -   2.1 Power Management
+    -   2.2 Graphics
+        -   2.2.1 Intel only
+            -   2.2.1.1 acpi_call usage
+        -   2.2.2 Nvidia
+    -   2.3 Screen
+    -   2.4 External Display
+    -   2.5 WLAN
+        -   2.5.1 Note
+    -   2.6 Bluetooth
+    -   2.7 Webcam
+    -   2.8 Power management
+    -   2.9 Special Touch Keys
+        -   2.9.1 Alternative method
+    -   2.10 Hidden Keyboard Keys
+    -   2.11 Notes
 
 System Settings
 ===============
@@ -260,13 +255,13 @@ card (DGP), while the DisplayPort is connected to the Intel IGP. It is
 reported that as of now, one can use an external monitor connected to
 the DisplayPort.
 
-Wlan
+WLAN
 ----
 
 Some users will need to install the rfkill package in order to switch on
 the wireless adapter with the fn+F2 key. Remember that wireless_tools
 will be needed for using a network manager such as networkmanager, see
-Wireless Setup for more information.
+Wireless network configuration for more information.
 
 > Note
 
@@ -282,6 +277,15 @@ Some users may need to run
     hciconfig hci0 reset
 
 to get blueman working
+
+Webcam
+------
+
+If the camera seems that it does not work (black image), try to
+enable/disable auto-exposure (for example in Skype, the option is in the
+Video Settings and in guc). In reality, the camera tries to record at
+0.5 fps and this is why it seems not to work, even if everything seems
+normal.
 
 Power management
 ----------------
@@ -369,7 +373,7 @@ anyway. Here they are (if you find more add them to the table below):
 Notes
 -----
 
--   Remember to turn on WIFI and Bluetooth by pressing the F2-button.
+-   Remember to turn on Wi-Fi and Bluetooth by pressing the F2 button.
 -   Touchpad can handle multitouch. Read Synaptics to get that working.
 -   Card reader is finnicky. Try booting with a card inserted or
     inserting a card after it is booted and running
@@ -378,8 +382,15 @@ Notes
     workaround not working as well. More info needed.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_XPS_15&oldid=254678"
+"https://wiki.archlinux.org/index.php?title=Dell_XPS_15&oldid=304826"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 16 March 2014, at 07:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

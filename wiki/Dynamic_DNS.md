@@ -1,8 +1,8 @@
 Dynamic DNS
 ===========
 
-  Summary
-  ----------------------
+  Summary help replacing me
+  ---------------------------
   Updating Dynamic DNS
 
 Dynamic DNS or DDNS is a method of updating, in real time, a DNS to
@@ -10,19 +10,20 @@ point to a changing IP address on the Internet. This is used to provide
 a persistent domain name for a resource that may change location on the
 network.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Router                                                             |
-| -   2 Software Dynamic DNS                                               |
-|     -   2.1 Afraid                                                       |
-|         -   2.1.1 afraid-dyndns                                          |
-|         -   2.1.2 ddclient                                               |
-|         -   2.1.3 cron                                                   |
-|                                                                          |
-|     -   2.2 DynDNS                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Router
+-   2 Software Dynamic DNS
+    -   2.1 Afraid
+        -   2.1.1 afraid-dyndns
+        -   2.1.2 ddclient
+        -   2.1.3 cron
+        -   2.1.4 Netctl
+    -   2.2 DynDNS
+    -   2.3 DNSdynamic
+    -   2.4 System-NS
+        -   2.4.1 cron
 
 Router
 ------
@@ -50,9 +51,9 @@ The package afraid-dyndns-uv is available in the AUR.
 
 ddclient
 
-The package ddclient is available in the AUR. It includes systemd
-support. Unfortunately, it seems to generate broken update URLs for
-freedns: http://ddclient.tisnix.be/ticket/58
+The package ddclient is available in the community repository. It
+includes systemd support. Unfortunately, it seems to generate broken
+update URLs for freedns: http://ddclient.tisnix.be/ticket/58
 
 An example config file looks like this:
 
@@ -92,15 +93,65 @@ Another option is to:
 
     */10 * * * * curl -ks http://freedns.afraid.org/dynamic/update.php?ZRRJZ...................bzo4Njc1M4DA > /dev/null
 
+Netctl
+
+To add the record of your IP to freedns.afraid.org along with a network
+connection through the use with Netctl. You can append the following
+line to your netctl profile.
+
+    ExecUpPost='curl -ks http://freedns.afraid.org/dynamic/update.php?ZRRJZ...................bzo4Njc1M4DA'
+
 > DynDNS
 
 DynDNS is another Dynamic DNS service.
 
-DynDNS can be installed with the package dyndns, available in the AUR.
+DynDNS can be updated with ddclient or the dyndns package in the AUR.
+
+> DNSdynamic
+
+DNSdynamic "will always be absolutely free" and works with ddclient
+
+> System-NS
+
+System-NS free DNS service.
+
+cron
+
+Make directory and script file in it.
+
+    $ cd ~
+    $ mkdir systemns
+    $ cd systemns
+    $ vi systemns.sh
+
+Put this text in systemns.sh. You should change domain and token
+parameters.
+
+    #!/bin/bash
+    wget -q -O- --post-data "type=dynamic&domain=mydomain.system-ns.net&command=set&token=880078764367979fe765c0fa3f4efff1" http://system-ns.com/api | grep -v '"code":0' | awk '{print d, $0}' "d=$(date)" >> ~/systemns/systemns.log
+
+Make the systemns.sh file executable.
+
+    $ chmod +x systemns.sh
+
+Open crontab.
+
+    $ crontab -e
+
+Put this text in the crontab (run every 5 minutes)
+
+    */5 * * * * ~/systemns/systemns.sh
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dynamic_DNS&oldid=247559"
+"https://wiki.archlinux.org/index.php?title=Dynamic_DNS&oldid=282631"
 
 Category:
 
 -   Domain Name System
+
+-   This page was last modified on 13 November 2013, at 12:15.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

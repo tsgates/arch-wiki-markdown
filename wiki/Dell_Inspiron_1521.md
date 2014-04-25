@@ -4,25 +4,19 @@ Dell Inspiron 1521
 The following is what I have found while using Arch on my Inspiron 1521.
 User experience may vary.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware Specifications                                            |
-|     -   1.1 lspci Output                                                 |
-|     -   1.2 lsusb Output                                                 |
-|                                                                          |
-| -   2 Installation                                                       |
-| -   3 Kernel                                                             |
-| -   4 Networking                                                         |
-|     -   4.1 Wired                                                        |
-|     -   4.2 Wireless                                                     |
-|         -   4.2.1 Broadcom Corporation BCM4311                           |
-|                                                                          |
-|     -   4.3 Modem                                                        |
-|                                                                          |
-| -   5 Xorg                                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware Specifications
+    -   1.1 lspci Output
+    -   1.2 lsusb Output
+-   2 Installation
+-   3 Kernel
+-   4 Networking
+    -   4.1 Wired
+    -   4.2 Wireless
+        -   4.2.1 Broadcom Corporation BCM4311
+    -   4.3 Modem
 
 Hardware Specifications
 -----------------------
@@ -69,7 +63,7 @@ Hardware Specifications
 Installation
 ------------
 
-I worked through this HowTo: Beginners_Guide
+I worked through this HowTo: Beginners' guide
 
 Kernel
 ------
@@ -111,14 +105,16 @@ And added the following daemon in the /etc/rc.conf:
 
 I have not tried the modem to see if it works.
 
-Xorg
-----
-
-Example Dell_Inspiron_1521/xorg.conf
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Dell_Inspiron_1521&oldid=196562"
+"https://wiki.archlinux.org/index.php?title=Dell_Inspiron_1521&oldid=298149"
 
 Category:
 
 -   Dell
+
+-   This page was last modified on 16 February 2014, at 07:20.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

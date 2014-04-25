@@ -10,15 +10,13 @@ Puppet installation. Dashboard facilitates management and configuration
 tasks, provides a quick visual snapshot of important system information,
 and delivers valuable reports.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Setting up a database for Puppet Dashboard                         |
-|     -   1.1 Create a MySQL database                                      |
-|     -   1.2 Create a MySQL user and grant privileges                     |
-|     -   1.3 Create a database.yml file that matches your database        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Setting up a database for Puppet Dashboard
+    -   1.1 Create a MySQL database
+    -   1.2 Create a MySQL user and grant privileges
+    -   1.3 Create a database.yml file that matches your database
 
 Setting up a database for Puppet Dashboard
 ------------------------------------------
@@ -78,3 +76,10 @@ Retrieved from
 Category:
 
 -   System administration
+
+-   This page was last modified on 2 September 2012, at 00:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

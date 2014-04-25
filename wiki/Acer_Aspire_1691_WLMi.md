@@ -1,34 +1,18 @@
 Acer Aspire 1691 WLMi
 =====================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Hardware                                                           |
-| -   3 Networking                                                         |
-|     -   3.1 Wireless                                                     |
-|                                                                          |
-| -   4 Power Management                                                   |
-|     -   4.1 ACPI                                                         |
-|     -   4.2 CPU frequency scaling                                        |
-|                                                                          |
-| -   5 Xorg                                                               |
-| -   6 Special keys                                                       |
-| -   7 External Resources                                                 |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Introduction
-------------
-
-It's been some time since I started this little HOWTO but now I'm back
-to finish it. In the meantime Acer Aspire 1652 ZWLMi was written based
-on those few lines which had been here, and now I've used few other
-things from that article again here. I'm not a linux expert, this is
-based on my experience and on things I found by googling. I'm still
-learning. If you see any inaccuracy or even a complete nonsense, please
-correct it.
+-   1 Hardware
+-   2 Networking
+    -   2.1 Wireless
+-   3 Power Management
+    -   3.1 ACPI
+    -   3.2 CPU frequency scaling
+-   4 Xorg
+-   5 Special keys
+-   6 External Resources
 
 Hardware
 --------
@@ -269,8 +253,15 @@ External Resources
     Installation Guides Survey: Acer.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Acer_Aspire_1691_WLMi&oldid=254238"
+"https://wiki.archlinux.org/index.php?title=Acer_Aspire_1691_WLMi&oldid=287909"
 
 Category:
 
 -   Acer
+
+-   This page was last modified on 14 December 2013, at 02:55.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

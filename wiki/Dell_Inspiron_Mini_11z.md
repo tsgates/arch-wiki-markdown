@@ -3,17 +3,15 @@ Dell Inspiron Mini 11z
 
 The Dell Inspiron Mini 11z is a netbook from Dell.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-| -   2 Installing                                                         |
-| -   3 Xorg                                                               |
-| -   4 Sound                                                              |
-| -   5 Extras                                                             |
-|     -   5.1 Webcam                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+-   2 Installing
+-   3 Xorg
+-   4 Sound
+-   5 Extras
+    -   5.1 Webcam
 
 Hardware
 --------
@@ -81,3 +79,10 @@ Retrieved from
 Category:
 
 -   Dell
+
+-   This page was last modified on 14 March 2013, at 02:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

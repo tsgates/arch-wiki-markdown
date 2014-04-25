@@ -9,48 +9,45 @@ CLR – Cross – Eclipse – Free Pascal – GNOME – Go – Haskell – Java 
 – Kernel – Lisp – MinGW – Nonfree – OCaml – Perl – Python – Ruby – VCS –
 Web – Wine
 
-Creating PKGBUILDs for software written in Perl.
+This document covers the topic of creating PKGBUILDs for perl modules
+written in Perl and distributed over CPAN, the Central Perl Authors
+Network. The primary audience of this document are packagers of perl
+modules.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Package Naming                                                     |
-| -   2 File Placement                                                     |
-| -   3 Notes                                                              |
-| -   4 Example                                                            |
-| -   5 Automation                                                         |
-| -   6 Module Dependencies                                                |
-|     -   6.1 Implementation                                               |
-|     -   6.2 Dependency Definition                                        |
-|     -   6.3 Meta Information                                             |
-|                                                                          |
-| -   7 Perl and Pacman Versions                                           |
-| -   8 Advanced Topics                                                    |
-|     -   8.1 Glossary                                                     |
-|         -   8.1.1 Module                                                 |
-|         -   8.1.2 Core Module                                            |
-|         -   8.1.3 Distributions                                          |
-|                                                                          |
-|     -   8.2 User-Installed perl                                          |
-|     -   8.3 Installation Modules                                         |
-|         -   8.3.1 ExtUtils::MakeMaker                                    |
-|         -   8.3.2 Module::Build                                          |
-|         -   8.3.3 Module::Install                                        |
-|                                                                          |
-|     -   8.4 Environment Variables                                        |
-|         -   8.4.1 PERL_MM_USE_DEFAULT                                    |
-|         -   8.4.2 PERL_AUTOINSTALL                                       |
-|         -   8.4.3 PERL_MM_OPT                                            |
-|         -   8.4.4 PERL_MB_OPT                                            |
-|         -   8.4.5 MODULEBUILDRC                                          |
-|         -   8.4.6 PERL5LIB                                               |
-|         -   8.4.7 PERL_LOCAL_LIB_ROOT                                    |
-|                                                                          |
-|     -   8.5 Hardened Example                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Package Naming
+-   1 Package naming
+-   2 File placement
+-   3 Notes
+-   4 Example
+-   5 Automation
+-   6 Module dependencies
+    -   6.1 Implementation
+    -   6.2 Dependency definition
+    -   6.3 Meta information
+-   7 Perl and Pacman versions
+-   8 Advanced topics
+    -   8.1 Glossary
+        -   8.1.1 Module
+        -   8.1.2 Core module
+        -   8.1.3 Distributions
+    -   8.2 User-installed perl
+    -   8.3 Installation modules
+        -   8.3.1 ExtUtils::MakeMaker
+        -   8.3.2 Module::Build
+        -   8.3.3 Module::Install
+    -   8.4 Environment variables
+        -   8.4.1 PERL_MM_USE_DEFAULT
+        -   8.4.2 PERL_AUTOINSTALL
+        -   8.4.3 PERL_MM_OPT
+        -   8.4.4 PERL_MB_OPT
+        -   8.4.5 MODULEBUILDRC
+        -   8.4.6 PERL5LIB
+        -   8.4.7 PERL_LOCAL_LIB_ROOT
+    -   8.5 Hardened example
+
+Package naming
 --------------
 
 For modules the package name should begin with perl- and the rest of the
@@ -60,7 +57,7 @@ package name corresponding to HTML::Parser will be perl-html-parser.
 Perl applications should have the same name as that of the application
 but in lowercase.
 
-File Placement
+File placement
 --------------
 
 Perl modules should install module files in /usr/lib/perl5/vendor_perl/
@@ -95,21 +92,7 @@ packages distributions on the fly as they are installed by CPANPLUS.
 Online documentation is available at
 https://metacpan.org/release/CPANPLUS-Dist-Arch
 
-There is also a script called pacpan, which can recursively generate
-PKGBUILDs for a module: http://xyne.archlinux.ca/old_projects/pacpan/
-
-Warning:Pacpan development has been officially discontinued: its latest
-version does not work with pacman>=3.5. See [1].
-
-It is worth mentioning that Bauerbill has similar support for generating
-PKGBUILDs to pacpan. As well as adding the ability to upgrade all
-installed CPAN modules directly from CPAN via a pacman interface. Make
-sure to read the Bauerbill man file for usage instructions.
-
-Warning:Bauerbill development has been officially discontinued: its
-latest version does not work with pacman>=3.5. See [2].
-
-Module Dependencies
+Module dependencies
 -------------------
 
 Perl has a unique way of defining dependencies compared to similar
@@ -170,7 +153,7 @@ fact that our packages offer the most recent version of a perl
 distribution and the modules contained within. Pacman dependency
 checking is much more static and strongly enforced.
 
-> Dependency Definition
+> Dependency definition
 
 Where are dependencies defined in perl distributions? They are defined
 inside of the Makefile.PL or Build.PL script. For example, inside of the
@@ -201,7 +184,7 @@ CPANPLUS's prerequisites. I'm not quite sure why. Luckily for the perl
 packager most dependencies are static like in the above example that
 requires the POSIX module with a minimum version of 0.01.
 
-> Meta Information
+> Meta information
 
 Meta files are included in recent distributions which contain
 meta-information about distributions such as the name, author, abstract
@@ -222,7 +205,7 @@ Elderly distributions on the CPAN have no meta file at all. These old
 releases predate the idea of the META.yml file and only describe their
 prerequisites in their Makefile.PL.
 
-Perl and Pacman Versions
+Perl and Pacman versions
 ------------------------
 
 In perl versions are numbers. In pacman versions are strings.
@@ -267,7 +250,7 @@ One solution to this problem is to pad the pkgver with zeroes.
 Dependencies might also have to be padded with zeroes to make pacman
 happy. Version 6.1 would become 6.10.
 
-Advanced Topics
+Advanced topics
 ---------------
 
 If the packager has become comfortable enough with creating perl
@@ -287,7 +270,7 @@ separated with :: (double colons), like: Archlinux::Module. When loading
 a module, the ::s are replaced with directory separators. For example:
 Archlinux/Module.pm will be loaded for the module Archlinux::Module.
 
-Core Module
+Core module
 
 Core modules are included with an installation of perl. Some core
 modules are only available bundled with perl. Other modules can still be
@@ -311,15 +294,15 @@ names are used interchangeably and they get muddled together. However it
 is sometimes useful to consider them a separate entity (like in
 Template-Toolkit's case).
 
-> User-Installed perl
+> User-installed perl
 
 A subtle problem is that advanced perl programmers may like to have
 multiple versions of perl installed. This is useful for testing
 backwards-compatibility in created programs. There are also speed
 benefits to compiling your own custom perl interpreter (i.e. without
 threads). Another reason for a custom perl is simply because the
-official perl ArchLinux package sometimes lags behind perl releases. The
-user may be trying out the latest perl... who knows?
+official perl Arch Linux package sometimes lags behind perl releases.
+The user may be trying out the latest perl... who knows?
 
 If the user has the custom perl executable in their $PATH, the custom
 perl will be run when the user types the perl command on the shell. In
@@ -338,7 +321,7 @@ error.
 A simple solution is to always use the absolute path of the system-wide
 perl interpreter (/usr/bin/perl) when running perl in the PKGBUILD.
 
-> Installation Modules
+> Installation modules
 
 One of perl's greatest advantages is the sheer number of modules[/dists]
 available on CPAN. Not too surprisingly, there are also several
@@ -409,7 +392,7 @@ can see how a rogue perl program downloading and installing modules
 willy-nilly inside a PKGBUILD can be a problem. See the
 #PERL_AUTOINSTALL environment variable to see how to fix this.
 
-> Environment Variables
+> Environment variables
 
 A number of environment variables can affect the way the modules are
 built or installed. Some have a very dramatic effect and can cause
@@ -466,58 +449,97 @@ PERL_LOCAL_LIB_ROOT
 If the user is using Local::Lib it will set PERL_LOCAL_LIB_ROOT. That
 should be cleared before building.
 
-> Hardened Example
+> Hardened example
 
 Using all of our new accumulated knowledge, we can create a more
 hardened PKGBUILD that will resist any environment variables' attempts
-to sabotage it:
+to sabotage it. First is an example using Makefile.PL, after which is an
+example using Build.PL.
 
     PKGBUILD
 
     # Contributor: Your Name <youremail@domain.com>
     pkgname=perl-foo-bar
-    pkgver=VERSION
+    pkgver=1.0
     pkgrel=1
-    pkgdesc='This is the awesome Foo::Bar module!'
+    pkgdesc='This packages the Foo-Bar distribution, containing the Foo::Bar module!'
+    _dist=Foo-Bar
     arch=('any')
-    url='http://search.cpan.org/dist/Foo-Bar'
+    url="https://metacpan.org/release/$_dist"
     license=('GPL' 'PerlArtistic')
-    depends=('perl>=5.10.0')
-    makedepends=()
-    provides=()
-    conflicts=()
-    replaces=()
-    backup=()
-    options=('!emptydirs')
-    install=
-    source=("http://search.cpan.org/CPAN/authors/id/***/***-$pkgver.tar.gz")
-    md5sums=()
+    depends=(perl)
+    options=('!emptydirs' purge)
+    source=("http://search.cpan.org/CPAN/authors/id/BAZ/$_dist-$pkgver.tar.gz")
+    md5sums=(...)
 
-    build() {
-      cd "$srcdir/***-$pkgver"
-      
-      # Setting these env variables overwrites any command-line-options we don't want...
-      export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps \
-        PERL_MM_OPT="INSTALLDIRS=vendor DESTDIR='$pkgdir'" \
-        PERL_MB_OPT="--installdirs vendor --destdir '$pkgdir'" \
-        MODULEBUILDRC=/dev/null
+    build() (
+      cd "$srcdir/$_dist-$pkgver"
+      unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+      export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps
+      /usr/bin/perl Makefile.PL
+      make
+    )
 
-      # If using Makefile.PL
-      { /usr/bin/perl Makefile.PL &&
-        make &&
-        make test &&
-        make install; } || return 1
+    check() (
+      cd "$srcdir/$_dist-$pkgver"
+      unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+      export PERL_MM_USE_DEFAULT=1
+      make test
+    )
 
-      # If using Build.PL
-      { /usr/bin/perl Build.PL &&
-        ./Build &&
-        ./Build test &&
-        ./Build install; } || return 1
-    }
+    package() (
+      cd "$srcdir/$_dist-$pkgver"
+      unset PERL5LIB PERL_MM_OPT PERL_LOCAL_LIB_ROOT
+      make install INSTALLDIRS=vendor DESTDIR="$pkgdir"
+    )
+
+    PKGBUILD
+
+    # Contributor: Your Name <youremail@domain.com>
+    pkgname=perl-foo-bar
+    pkgver=1.0
+    pkgrel=1
+    pkgdesc='This packages the Foo-Bar distribution, containing the Foo::Bar module!'
+    _dist=Foo-Bar
+    arch=('any')
+    url="https://metacpan.org/release/$_dist"
+    license=('GPL' 'PerlArtistic')
+    depends=(perl)
+    options=('!emptydirs' purge)
+    source=("http://search.cpan.org/CPAN/authors/id/BAZ/$_dist-$pkgver.tar.gz")
+    md5sums=(...)
+
+    build() (
+      cd "$srcdir/$_dist-$pkgver"
+      unset PERL5LIB PERL_MM_OPT PERL_MB_OPT PERL_LOCAL_LIB_ROOT
+      export PERL_MM_USE_DEFAULT=1 MODULEBUILDRC=/dev/null
+      /usr/bin/perl Build.PL
+      ./Build
+    )
+
+    check() (
+      cd "$srcdir/$_dist-$pkgver"
+      unset PERL5LIB PERL_MM_OPT PERL_MB_OPT PERL_LOCAL_LIB_ROOT
+      export PERL_MM_USE_DEFAULT=1
+      ./Build test
+    )
+
+    package() (
+      cd "$srcdir/$_dist-$pkgver"
+      unset PERL5LIB PERL_MM_OPT PERL_MB_OPT PERL_LOCAL_LIB_ROOT
+      ./Build install installdirs=vendor destdir="$pkgdir"
+    )
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Perl_Package_Guidelines&oldid=242965"
+"https://wiki.archlinux.org/index.php?title=Perl_Package_Guidelines&oldid=285403"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 30 November 2013, at 12:00.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

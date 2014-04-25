@@ -16,18 +16,16 @@ one can enjoy the flexibility of Impress in organizing texts and graphs
 while at the same time harness the power of LaTeX in typesetting and
 inserting equations.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 OOoLatex in Arch Linux                                             |
-| -   2 Installation                                                       |
-| -   3 Fonts                                                              |
-| -   4 EMF support                                                        |
-| -   5 Initial setup                                                      |
-| -   6 Usage                                                              |
-| -   7 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 OOoLatex in Arch Linux
+-   2 Installation
+-   3 Fonts
+-   4 EMF support
+-   5 Initial setup
+-   6 Usage
+-   7 References
 
 OOoLatex in Arch Linux
 ----------------------
@@ -123,3 +121,10 @@ Categories:
 
 -   Mathematics and science
 -   TeX
+
+-   This page was last modified on 14 August 2012, at 11:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

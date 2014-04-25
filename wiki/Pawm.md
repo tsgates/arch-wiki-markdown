@@ -6,24 +6,19 @@ manager under Arch Linux.
 
 Note:It's unmaintained. Latest released version is 2.3.0.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 PAWM creation history                                        |
-|                                                                          |
-| -   2 Installation                                                       |
-| -   3 Start PAWM with X as default                                       |
-| -   4 Configuration (making PAWM pretty)                                 |
-|     -   4.1 Icons                                                        |
-|                                                                          |
-| -   5 Application Launcher                                               |
-|     -   5.1 Creating new Launcher files                                  |
-|                                                                          |
-| -   6 Using PAWM                                                         |
-| -   7 PAWM Utilities                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+    -   1.1 PAWM creation history
+-   2 Installation
+-   3 Start PAWM with X as default
+-   4 Configuration (making PAWM pretty)
+    -   4.1 Icons
+-   5 Application Launcher
+    -   5.1 Creating new Launcher files
+-   6 Using PAWM
+-   7 PAWM Utilities
 
 Introduction
 ------------
@@ -172,3 +167,10 @@ Retrieved from
 Category:
 
 -   Stacking WMs
+
+-   This page was last modified on 31 October 2012, at 00:43.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

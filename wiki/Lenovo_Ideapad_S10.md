@@ -1,20 +1,17 @@
 Lenovo Ideapad S10
 ==================
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Specification                                               |
-| -   2 Networking                                                         |
-|     -   2.1 Wired Ethernet                                               |
-|     -   2.2 Wireless                                                     |
-|                                                                          |
-| -   3 Graphics                                                           |
-| -   4 Sound                                                              |
-| -   5 SD Card Reader                                                     |
-| -   6 Webcam                                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 System Specification
+-   2 Networking
+    -   2.1 Wired Ethernet
+    -   2.2 Wireless
+-   3 Graphics
+-   4 Sound
+-   5 SD Card Reader
+-   6 Webcam
 
 System Specification
 ====================
@@ -131,8 +128,15 @@ Works out of the box. Just make sure your user is in the group "video".
     # gpasswd -a username video
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_Ideapad_S10&oldid=196675"
+"https://wiki.archlinux.org/index.php?title=Lenovo_Ideapad_S10&oldid=300058"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 23 February 2014, at 08:36.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

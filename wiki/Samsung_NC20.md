@@ -6,20 +6,17 @@ have 160GB hard drive, 3 USB ports, Memory Card reader (3-in-1
 propably), VGA-output, Webcam and microphone. It have 1GB RAM and the
 computer is delivered with Windows XP license.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Graphics                                                           |
-|     -   2.1 VIA chrome9 driver                                           |
-|     -   2.2 openchrome                                                   |
-|                                                                          |
-| -   3 What works                                                         |
-| -   4 Not have been tested                                               |
-| -   5 lspci output                                                       |
-| -   6 lsusb output                                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Graphics
+    -   2.1 VIA chrome9 driver
+    -   2.2 openchrome
+-   3 What works
+-   4 Not have been tested
+-   5 lspci output
+-   6 lsusb output
 
 Installation
 ============
@@ -32,9 +29,9 @@ machine.
 Installed using USB-stick and downloaded packages from web directly
 using LAN-cable (works out of the box).
 
-If you find that your screen displays a test pattern cycling through
-solid colours on boot, you may need to add modprobe.blacklist=viafb to
-the kernel command line.
+Note:If you find that your screen displays a test pattern cycling
+through solid colours on boot (screen flickering), you need to add
+modprobe.blacklist=viafb to the kernel command line.
 
 Graphics
 ========
@@ -273,8 +270,15 @@ lsusb output
     Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Samsung_NC20&oldid=255640"
+"https://wiki.archlinux.org/index.php?title=Samsung_NC20&oldid=264773"
 
 Category:
 
 -   Samsung
+
+-   This page was last modified on 30 June 2013, at 17:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

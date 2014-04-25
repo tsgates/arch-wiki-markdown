@@ -7,33 +7,28 @@ environment, and is characterized by low memory demands and high
 flexibility. As one of the lighter WMs, it is well suited for machines
 with modest performance specifications.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 Start Window Maker without a display manager                 |
-|     -   1.2 Start Window Maker with a display manager                    |
-|                                                                          |
-| -   2 Configuration                                                      |
-|     -   2.1 Files                                                        |
-|     -   2.2 Styles                                                       |
-|                                                                          |
-| -   3 Dock                                                               |
-| -   4 Clip                                                               |
-| -   5 Dockapps                                                           |
-| -   6 System-tray                                                        |
-| -   7 Troubleshooting                                                    |
-|     -   7.1 Can't disable smooth fonts                                   |
-|                                                                          |
-| -   8 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 Start Window Maker without a display manager
+    -   1.2 Start Window Maker with a display manager
+-   2 Configuration
+    -   2.1 Files
+    -   2.2 Styles
+-   3 Dock
+-   4 Clip
+-   5 Dockapps
+-   6 System-tray
+-   7 Troubleshooting
+    -   7.1 Can't disable smooth fonts
+-   8 See Also
 
 Installation
 ------------
 
 The latest official release can be found in the windowmaker package from
-the Official Repositories.
+the Official repositories.
 
 Before starting Window Maker, take some time to setup GNUstep and the
 default Window Maker settings. Create a directory for your Window Maker
@@ -202,8 +197,7 @@ include:
 -   wmdiskmon - Show disk usage. Usage:
     wmdiskmon -p /dev/sda1 -p /dev/sda2
 
-A collection of nearly all dockapps can be found at official dockapps
-website, you can find the link at Window_Maker#Additional resources
+See the Window Maker website for more information about dockapps.
 
 System-tray
 -----------
@@ -249,11 +243,17 @@ See Also
 
 -   Official website
 -   Window Maker (Wikipedia)
--   Dockapps
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Window_Maker&oldid=255978"
+"https://wiki.archlinux.org/index.php?title=Window_Maker&oldid=301534"
 
 Category:
 
 -   Stacking WMs
+
+-   This page was last modified on 24 February 2014, at 11:51.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

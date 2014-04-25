@@ -7,17 +7,15 @@ Beginners Guide to Package Maintaining
                            article (Discuss)        
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Objectives                                                         |
-| -   2 Prerequisites                                                      |
-| -   3 Materials                                                          |
-| -   4 Complete Resources List                                            |
-| -   5 Suggested Reading                                                  |
-| -   6 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Objectives
+-   2 Prerequisites
+-   3 Materials
+-   4 Complete Resources List
+-   5 Suggested Reading
+-   6 See Also
 
 Objectives
 ----------
@@ -94,3 +92,10 @@ Categories:
 
 -   Classroom
 -   Package development
+
+-   This page was last modified on 6 March 2013, at 00:09.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

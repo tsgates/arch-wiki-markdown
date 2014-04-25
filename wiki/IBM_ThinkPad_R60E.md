@@ -65,3 +65,10 @@ Retrieved from
 Category:
 
 -   IBM
+
+-   This page was last modified on 6 March 2013, at 06:17.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

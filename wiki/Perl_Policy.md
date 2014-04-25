@@ -3,39 +3,33 @@ Perl Policy
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Note                                                               |
-| -   2 Introduction                                                       |
-|     -   2.1 5.10 Caveats                                                 |
-|     -   2.2 Reasoning                                                    |
-|     -   2.3 Pitfalls                                                     |
-|                                                                          |
-| -   3 Perl Versions                                                      |
-| -   4 Module Paths                                                       |
-| -   5 Documents                                                          |
-| -   6 Binaries and Scripts                                               |
-| -   7 Core                                                               |
-|     -   7.1 Core Directories                                             |
-|     -   7.2 Core perl packages                                           |
-|                                                                          |
-| -   8 Site                                                               |
-|     -   8.1 Site Directories                                             |
-|     -   8.2 Site Installation                                            |
-|                                                                          |
-| -   9 Vendor                                                             |
-|     -   9.1 Package Naming                                               |
-|     -   9.2 Vendor Directories                                           |
-|     -   9.3 Vendor Installation                                          |
-|     -   9.4 Sample Vendor PKGBUILD                                       |
-|     -   9.5 Dependencies                                                 |
-|         -   9.5.1 Binary Modules                                         |
-|         -   9.5.2 Architecture-Independent Modules                       |
-|                                                                          |
-| -   10 Perl6                                                             |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Note
+-   2 Introduction
+    -   2.1 5.10 Caveats
+    -   2.2 Reasoning
+    -   2.3 Pitfalls
+-   3 Perl Versions
+-   4 Module Paths
+-   5 Documents
+-   6 Binaries and Scripts
+-   7 Core
+    -   7.1 Core Directories
+    -   7.2 Core perl packages
+-   8 Site
+    -   8.1 Site Directories
+    -   8.2 Site Installation
+-   9 Vendor
+    -   9.1 Package Naming
+    -   9.2 Vendor Directories
+    -   9.3 Vendor Installation
+    -   9.4 Sample Vendor PKGBUILD
+    -   9.5 Dependencies
+        -   9.5.1 Binary Modules
+        -   9.5.2 Architecture-Independent Modules
+-   10 Perl6
 
 Note
 ====
@@ -345,11 +339,11 @@ Vendor Installation
 
 A module should use the following lines in the PKGBUILD build target.
 
-    perl Makefile.PL INSTALLDIRS=vendor || return 1
+    perl Makefile.PL INSTALLDIRS=vendor
 
 and this one to install the results into the temporary tree...
 
-    make install DESTDIR=$startdir/pkg install || return 1
+    make install DESTDIR=$startdir/pkg install
 
 A depends on perl (>= 5.10.0) is required in order ensure that the
 module is correctly installed into the new @INC path.
@@ -445,8 +439,15 @@ package naming may be reversed such that the perl package contains Perl
 6 and the current package becomes perl5.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Perl_Policy&oldid=243151"
+"https://wiki.archlinux.org/index.php?title=Perl_Policy&oldid=278561"
 
 Category:
 
 -   Package development
+
+-   This page was last modified on 13 October 2013, at 11:10.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

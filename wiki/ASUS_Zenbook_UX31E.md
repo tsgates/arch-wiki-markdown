@@ -6,41 +6,33 @@ installing and configuring Arch Linux on the ASUS Zenbook UX31E
 Ultrabook. (There is probably little/no difference with his 11" little
 brother, the UX21E)
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation issues                                                |
-| -   2 Compatibility                                                      |
-|     -   2.1 Touch Pad                                                    |
-|         -   2.1.1 Elantec Touch pads                                     |
-|         -   2.1.2 Sentelic Touchpads                                     |
-|             -   2.1.2.1 ReubenBond                                       |
-|             -   2.1.2.2 Saaros                                           |
-|                                                                          |
-|     -   2.2 Graphics                                                     |
-|         -   2.2.1 HDMI Out                                               |
-|         -   2.2.2 Colour Profiles                                        |
-|                                                                          |
-|     -   2.3 Networking                                                   |
-|         -   2.3.1 Wireless                                               |
-|             -   2.3.1.1 Unstable Wireless when using Network Manager     |
-|                                                                          |
-|         -   2.3.2 Ethernet - Asix AX88772 USB Ethernet                   |
-|                                                                          |
-|     -   2.4 Solid State Drive                                            |
-|                                                                          |
-| -   3 Power Management                                                   |
-|     -   3.1 Suspend to RAM                                               |
-|     -   3.2 PCIe ASPM                                                    |
-|     -   3.3 i915                                                         |
-|     -   3.4 Additional powersavings                                      |
-|                                                                          |
-| -   4 Additional resources                                               |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Installation issues
--------------------
+-   1 Installation problems
+-   2 Compatibility
+    -   2.1 Touch Pad
+        -   2.1.1 Elantec Touch pads
+        -   2.1.2 Sentelic Touchpads
+            -   2.1.2.1 ReubenBond
+            -   2.1.2.2 Saaros
+    -   2.2 Graphics
+        -   2.2.1 HDMI Out
+        -   2.2.2 Colour Profiles
+    -   2.3 Networking
+        -   2.3.1 Wireless
+            -   2.3.1.1 Unstable Wireless when using Network Manager
+        -   2.3.2 Ethernet - Asix AX88772 USB Ethernet
+    -   2.4 Solid State Drive
+-   3 Power Management
+    -   3.1 Suspend to RAM
+    -   3.2 PCIe ASPM
+    -   3.3 i915
+    -   3.4 Additional powersavings
+-   4 Additional resources
+
+Installation problems
+---------------------
 
 If you get an error trying to format partitions when installing Arch try
 adding this line to the kernel parameters
@@ -122,7 +114,7 @@ Works out of the box
 
 HDMI Out
 
-There seems to be an issue whereby having an HDMI device plugged in at
+There seems to be a problem whereby having an HDMI device plugged in at
 boot results in the screens being switched and also the laptop screen
 not coming on. To make this more bearable you can automate switching
 HDMI on with the following udev rule and script:
@@ -239,8 +231,15 @@ Additional resources
 -   http://www.lesswatts.org/
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Zenbook_UX31E&oldid=255786"
+"https://wiki.archlinux.org/index.php?title=ASUS_Zenbook_UX31E&oldid=259709"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 30 May 2013, at 23:04.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -13,25 +13,18 @@ mailbox pair; multiple replicas of a mailbox can be maintained.
 Note:isync is the name of the project, mbsync is the name of the
 executable
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installing                                                         |
-| -   2 Features                                                           |
-| -   3 Configuring                                                        |
-|     -   3.1 Step #1: Get the certificates                                |
-|     -   3.2 Step #2: Rehash the certificates                             |
-|     -   3.3 Step #3: Create mbsync configuration file                    |
-|                                                                          |
-| -   4 Usage                                                              |
-| -   5 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Installing
-----------
-
-isync can be installed from the AUR.
+-   1 Features
+-   2 Installing
+-   3 Configuring
+-   4 Usage
+-   5 Troubleshooting
+    -   5.1 Step #1: Get the certificates
+    -   5.2 Step #2: Rehash the certificates
+    -   5.3 Exchange 2003
+-   6 External Links
 
 Features
 --------
@@ -47,11 +40,112 @@ Features
     -   Pipelining for maximum speed (currently only partially
         implemented)
 
+Installing
+----------
+
+isync can be installed from the AUR. Some problems have been reported
+when using GMail with the 1.0.6 version. In this case, you can try
+isync-git.
+
 Configuring
 -----------
 
-The server certificate must be retrieved manually in order for mbsync to
-correctly verify it.
+First create and customize the main configuration file using this
+example ~/.mbsyncrc:
+
+    ~/.mbsyncrc
+
+    IMAPAccount gmail
+    # Address to connect to
+    Host imap.gmail.com
+    User username@gmail.com
+    Pass ***************
+    # To store the password in an encrypted file use PassCmd instead of Pass
+    # PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
+
+    # Use SSL
+    UseIMAPS yes
+    # The following line should work. If get certificate errors, uncomment the two following lines and read the "Troubleshooting" section.
+    CertificateFile /etc/ssl/certs/ca-certificates.crt
+    #CertificateFile ~/.cert/imap.gmail.com.pem
+    #CertificateFile ~/.cert/Equifax_Secure_CA.pem
+
+    IMAPStore gmail-remote
+    Account gmail
+
+    MaildirStore gmail-local
+    # The trailing "/" is important
+    Path ~/.mail/gmail/
+    Inbox ~/.mail/gmail/Inbox
+
+    Channel gmail
+    Master :gmail-remote:
+    Slave :gmail-local:
+    # Exclude everything under the internal [Gmail] folder, except the interesting folders
+    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+    # Or include everything
+    #Patterns *
+    # Automatically create missing mailboxes, both locally and on the server
+    Create Both
+    # Save the synchronization state files in the relevant directory
+    SyncState *
+
+To get rid of the [Gmail]-Stuff (or [Google Mail] as in my case) in each
+mailbox name, it's possible to use separate Channels for each directory,
+and later merge them to a group:
+
+    ~/.mbsyncrc
+
+    Channel sync-googlemail-default
+    Master :googlemail-remote:
+    Slave :googlemail-local:
+    # Select some mailboxes to sync
+    Patterns "INBOX" "arch"
+
+    Channel sync-googlemail-sent
+    Master :googlemail-remote:"[Google Mail]/Gesendet"
+    Slave :googlemail-local:sent
+
+    Channel sync-googlemail-trash
+    Master :googlemail-remote:"[Google Mail]/Papierkorb"
+    Slave :googlemail-local:trash
+
+    # Get all the channels together into a group.
+    Group googlemail
+    Channel sync-googlemail-default
+    Channel sync-googlemail-sent
+    Channel sync-googlemail-trash
+
+As you can see, name-translations are possible this way, as well. Now
+calling
+
+    mbsync googlemail
+
+will sync all the folders.
+
+Usage
+-----
+
+First make any folders that were specified as Maildirs.
+
+    $ mkdir -p ~/.mail/gmail
+
+Then to retrieve the mail for a specific channel run:
+
+    $ mbsync gmail
+
+or to retrive the mail for all channels:
+
+    $ mbsync -a
+
+  
+
+Troubleshooting
+---------------
+
+If you get certificate related errors, you may need to retrieved
+server's certificates manually in order for mbsync to correctly verify
+it.
 
 > Step #1: Get the certificates
 
@@ -202,56 +296,46 @@ Sample Output:
 This creates a symlink to the certificate file named with a
 cryptographic hash of its contents.
 
-> Step #3: Create mbsync configuration file
+  
 
-example ~/.mbsyncrc:
+> Exchange 2003
 
-    ~/.mbsyncrc
+When connecting to an MS Exchange 2003 server, there could be problems
+when using pipelining (i.e. executing multiple imap commands
+concurrently). Such an issue could look as follows:
 
-    IMAPAccount gmail
-    # Address to connect to
-    Host imap.gmail.com
-    User username@gmail.com
-    Pass ***************
-    # Use SSL
-    UseIMAPS yes
-    CertificateFile ~/.cert/imap.gmail.com.pem
-    CertificateFile ~/.cert/Equifax_Secure_CA.pem
+    sample output of `mbsync -V exchange'
 
-    IMAPStore gmail-remote
-    Account gmail
+    >>> 9 SELECT "arch"^M
+    * 250 EXISTS
+    * 0 RECENT
+    * FLAGS (\Seen \Answered \Flagged \Deleted \Draft $MDNSent)
+    * OK [PERMANENTFLAGS (\Seen \Answered \Flagged \Deleted \Draft $MDNSent)] Permanent flags
+    * OK [UNSEEN 241] Is the first unseen message
+    * OK [UIDVALIDITY 4352] UIDVALIDITY value
+    9 OK [READ-WRITE] SELECT completed.
+    >>> 10 UID FETCH 1:1000000000 (UID FLAGS)^M
+    * 1 FETCH (UID 1 FLAGS (\Seen \Answered))
+    * 2 FETCH (UID 2 FLAGS (\Seen \Answered))
+    ...
+    * 249 FETCH (UID 696 FLAGS ())
+    * 250 FETCH (UID 697 FLAGS (\Seen))
+    10 OK FETCH completed.
+    >>> 11 APPEND "arch" (\Seen) {4878+}^M
+    (1 in progress) >>> 12 UID FETCH 697 (BODY.PEEK[])^M
+    (2 in progress) >>> 13 UID STORE 696 +FLAGS.SILENT (\Deleted)^M
+    12 BAD Command is not valid in this state.
 
-    MaildirStore gmail-local
-    # The trailing "/" is important
-    Path ~/.mail/gmail/
-    Inbox ~/.mail/gmail/Inbox
+So command 9 is to select a new folder, command 10 checks the mail and
+commands 11, 12 and 13 run in parallel, writing/getting/flagging a mail.
+In this case, the Exchange server would terminate the connection after
+the BAD return value and go on to the next channel. (And if all went
+well in this channel, mbsync would return with 0.) After setting
 
-    Channel gmail
-    Master :gmail-remote:
-    Slave :gmail-local:
-    # Exclude everything under the internal [Gmail] folder, except the interesting folders
-    Patterns * ![Gmail]* “[Gmail]/Sent Mail” “[Gmail]/Starred” “[Gmail]/All Mail”
-    # include everything
-    #Patterns *
-    # Automatically create missing mailboxes, both locally and on the server
-    Create Both
-    # Save the synchronization state files in the relevant directory
-    SyncState *
+    PipelineDepth 1
 
-Usage
------
-
-First make any folders that were specified as Maildirs.
-
-    $ mkdir -p ~/.mail/gmail
-
-Then to retrieve the mail for a specific channel run:
-
-    $ mbsync gmail
-
-or to retrive the mail for all channels:
-
-    $ mbsync -a
+in the IMAPStore config part of the Exchange, this problem did not occur
+any more.
 
 External Links
 --------------
@@ -261,8 +345,15 @@ External Links
 -   How To Verify SSL Certificate From A Shell Prompt
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Isync&oldid=253631"
+"https://wiki.archlinux.org/index.php?title=Isync&oldid=305107"
 
 Category:
 
 -   Email Client
+
+-   This page was last modified on 16 March 2014, at 14:19.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

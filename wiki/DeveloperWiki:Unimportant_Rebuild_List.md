@@ -3,16 +3,14 @@ DeveloperWiki:Unimportant Rebuild List
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Packages that can be converted to arch=any                         |
-| -   2 Packages with uncompressed man pages                               |
-| -   3 Packages with leading /'s for paths in their .install files        |
-| -   4 Packages greater than two years old                                |
-| -   5 Done!                                                              |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Packages that can be converted to arch=any
+-   2 Packages with uncompressed man pages
+-   3 Packages with leading /'s for paths in their .install files
+-   4 Packages greater than two years old
+-   5 Done!
 
 Packages that can be converted to arch=any
 ------------------------------------------
@@ -109,3 +107,10 @@ Retrieved from
 Category:
 
 -   Package development
+
+-   This page was last modified on 10 August 2012, at 12:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

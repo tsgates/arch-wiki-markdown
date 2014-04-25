@@ -1,14 +1,6 @@
 Lenovo ThinkPad T400
 ====================
 
-> Summary
-
-Installation instructions for the Lenovo ThinkPad T400
-
-> Related
-
-Lenovo ThinkPad T400s
-
   ------------------------ ------------------------ ------------------------
   [Tango-mail-mark-junk.pn This article or section  [Tango-mail-mark-junk.pn
   g]                       is poorly written.       g]
@@ -17,35 +9,33 @@ Lenovo ThinkPad T400s
                            style issues. (Discuss)  
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Specification                                               |
-| -   2 Network                                                            |
-|     -   2.1 Ethernet                                                     |
-|     -   2.2 Wireless                                                     |
-|         -   2.2.1 Intel chipset                                          |
-|         -   2.2.2 Realtek chipset                                        |
-|                                                                          |
-|     -   2.3 Modem                                                        |
-|     -   2.4 Bluetooth                                                    |
-|                                                                          |
-| -   3 Graphics/Xorg Configuration                                        |
-|     -   3.1 Integrated Graphics                                          |
-|     -   3.2 Discrete Graphics                                            |
-|     -   3.3 Switchable Graphics                                          |
-|     -   3.4 Hotplugging                                                  |
-|     -   3.5 Synaptic, UltraNav                                           |
-|                                                                          |
-| -   4 Audio                                                              |
-| -   5 Multimedia Keys                                                    |
-|     -   5.1 Mute                                                         |
-|                                                                          |
-| -   6 ACPI                                                               |
-| -   7 SUSPEND-RESUME                                                     |
-| -   8 7-1 Media Card Reader                                              |
-+--------------------------------------------------------------------------+
+Related articles
+
+-   Lenovo ThinkPad T400s
+
+Installation instructions for the Lenovo ThinkPad T400.
+
+Contents
+--------
+
+-   1 System Specification
+-   2 Network
+    -   2.1 Ethernet
+    -   2.2 Wireless
+        -   2.2.1 Intel chipset
+        -   2.2.2 Realtek chipset
+    -   2.3 Modem
+    -   2.4 Bluetooth
+-   3 Graphics/Xorg Configuration
+    -   3.1 Integrated Graphics
+    -   3.2 Discrete Graphics
+    -   3.3 Switchable Graphics
+    -   3.4 Synaptic, UltraNav
+-   4 Audio
+-   5 Multimedia Keys
+    -   5.1 Mute
+-   6 ACPI
+-   7 SUSPEND-RESUME
 
 System Specification
 --------------------
@@ -93,6 +83,10 @@ The drivers are included in the 2.6.27 kernel. However, it's important
 to make sure that you have the correct firmware. I installed the
 iwlwifi-5000-ucode. See this section for more details.
 
+Since the 2.6.34 kernel update, the firmware files were moved to the
+linux-firmware package. Manually installing other firmware packages is
+not required.
+
 Realtek chipset
 
 -   Rtl8192SE
@@ -104,7 +98,7 @@ See
 http://www.thinkwiki.org/wiki/ThinkPad_11b/g/n_Wireless_LAN_Mini-PCI_Express_Adapter_II
 for more details.
 
-See Wireless Setup#rtl8192s.
+See Wireless network configuration#rtl8192s.
 
 > Modem
 
@@ -176,35 +170,9 @@ You can also try David Arlile's patch to power off the unused card. See
 http://airlied.livejournal.com/71434.html and
 http://linux-hybrid-graphics.blogspot.com/.
 
-> Hotplugging
-
-If you want to enable hotplugging you probably do not need a xorg.conf.
-But if you are using xf86-video-ati you might temporarely need to
-disable KMS, by adding "nomodeset" to your kernel-line in
-"/boot/grub/menu.lst". If you do not want to disable KMS you can
-probably install some radeon firmware, see the Ati-wiki.
-
-Since all the mouse/keyboard configuration is taken care of by HAL you
-will need some config files in "/etc/hal/fdi/policy/" For instant
-"mouse-wheel.fdi" to enable TrackPoint-scrolling:
-
-     <match key="info.product" string="TPPS/2 IBM TrackPoint">
-       <merge key="input.x11_options.EmulateWheel" type="string">true</merge>
-       <merge key="input.x11_options.EmulateWheelButton" type="string">2</merge>
-       <merge key="input.x11_options.YAxisMapping" type="string">4 5</merge>
-       <merge key="input.x11_options.XAxisMapping" type="string">6 7</merge>
-       <merge key="input.x11_options.Emulate3Buttons" type="string">true</merge>
-       <merge key="input.x11_options.EmulateWheelTimeout" type="string">200</merge>
-     </match>
-
-More information in the TrackPoint can be found here:
-http://www.thinkwiki.org/wiki/How_to_configure_the_TrackPoint. The
-Keyboard layout is controlled by "/etc/hal/fdi/policy/10-keymap.fdi"
-Modify it like this to change your layout. If you have any more
-questions on hotplugging (like how to enable tapping), take a look at
-it's wiki page.
-
 > Synaptic, UltraNav
+
+You may need to install the xf86-input-synaptics package.
 
 If you want to be able to use horizontal and vertical scroll with your
 touchpad add this lines to your xorg.conf
@@ -239,7 +207,7 @@ touchpad add this lines to your xorg.conf
      Option    "SHMConfig"   "on"
     EndSection 
 
-for trakpoint with third button paste & scroll add this few lines to
+for trackpoint with third button paste & scroll add these few lines to
 xorg.conf too
 
     Section "InputDevice"
@@ -431,24 +399,16 @@ extent...
 http://ubuntu-virginia.ubuntuforums.org/showpost.php?p=6105510&postcount=12
 petri4 on the ubuntu forums.
 
-7-1 Media Card Reader
----------------------
-
-  ------------------------ ------------------------ ------------------------
-  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
-  g]                       is out of date.          g]
-                           Reason: rc.conf          
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
-
-Tested for SD cards only. Works after loading modules sdhci and
-ricoh_mmc in /etc/rc.conf. Sometimes there are problems initializing the
-SD card (check dmesg) after inserting it. In such cases, try
-re-inserting it again.
-
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_T400&oldid=250165"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_T400&oldid=305551"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 19 March 2014, at 02:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

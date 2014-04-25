@@ -63,24 +63,22 @@ Weight 3,6 Kg
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Preinstallation configuration                                      |
-| -   2 Video                                                              |
-| -   3 Xorg                                                               |
-| -   4 Audio                                                              |
-| -   5 Wifi                                                               |
-| -   6 Webcam                                                             |
-| -   7 Bluetooth                                                          |
-| -   8 Card Reader                                                        |
-| -   9 Pointer                                                            |
-| -   10 Remote controle                                                   |
-| -   11 Finger print reader                                               |
-| -   12 Quick play function keys                                          |
-| -   13 Function keys for sound                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Preinstallation configuration
+-   2 Video
+-   3 Xorg
+-   4 Audio
+-   5 Wifi
+-   6 Webcam
+-   7 Bluetooth
+-   8 Card Reader
+-   9 Pointer
+-   10 Remote controle
+-   11 Finger print reader
+-   12 Quick play function keys
+-   13 Function keys for sound
 
 Preinstallation configuration
 -----------------------------
@@ -140,20 +138,7 @@ add to modules in /etc/rc.conf
 Webcam
 ------
 
-r5u870 and r5u870-fw modules needed. Get from AUR
-
-     pacman -S linux-uvc-svn 
-
-from community
-
-I added the line:
-
-     modprobe r5u870
-
-in /etc/rc.local in order to be sure the video module is loaded after
-the sound modules After that it worked with kopete, skype, etc.
-
-  
+See Webcam Setup.
 
 Bluetooth
 ---------
@@ -195,9 +180,7 @@ Check with dmesg that the module works!
 Finger print reader
 -------------------
 
-     pacman -S pam_fprint fprint_demo
-
-  
+See fprint.
 
 Quick play function keys
 ------------------------
@@ -210,8 +193,15 @@ Function keys for sound
 Works out of the box
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=HP_Pavilion_DV9757&oldid=196647"
+"https://wiki.archlinux.org/index.php?title=HP_Pavilion_DV9757&oldid=296171"
 
 Category:
 
 -   HP
+
+-   This page was last modified on 4 February 2014, at 13:14.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

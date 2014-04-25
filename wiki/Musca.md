@@ -13,24 +13,20 @@ like openbox.
 herbstluftwm is a tiling window manager similar to musca, and it is
 under active development.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 First start                                                        |
-| -   3 Configuration                                                      |
-|     -   3.1 Sample .musca_start file                                     |
-|     -   3.2 Commands                                                     |
-|     -   3.3 Scripts                                                      |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-|     -   4.1 Java Virtual Machine                                         |
-|     -   4.2 Application loses focus                                      |
-|     -   4.3 Known mistakes in .musca_start                               |
-|                                                                          |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 First start
+-   3 Configuration
+    -   3.1 Sample .musca_start file
+    -   3.2 Commands
+    -   3.3 Scripts
+-   4 Troubleshooting
+    -   4.1 Java Virtual Machine
+    -   4.2 Application loses focus
+    -   4.3 Known mistakes in .musca_start
+-   5 See also
 
 Installation
 ------------
@@ -267,19 +263,17 @@ Known mistakes in .musca_start
 
 -   Commenting after "bind on" command
 
-bind on Mod4+3 raise 2 # raise third window
+    bind on Mod4+3 raise 2 # raise third window
 
 -   Binding commands to same shortcut
 
-bind on Mod4+3 raise 2
-
-...
-
-bind on Mod4+3 use 2
+    bind on Mod4+3 raise 2
+    ...
+    bind on Mod4+3 use 2
 
 -   Misspelling
 
-bind on Mod4+3 rase 2
+    bind on Mod4+3 rase 2
 
 See also
 --------
@@ -288,8 +282,15 @@ See also
 -   #musca - IRC channel located at the irc.freenode.net
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Musca&oldid=250680"
+"https://wiki.archlinux.org/index.php?title=Musca&oldid=286815"
 
 Category:
 
 -   Tiling WMs
+
+-   This page was last modified on 7 December 2013, at 09:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

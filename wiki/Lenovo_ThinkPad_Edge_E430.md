@@ -9,25 +9,21 @@ is still a well built and quite durable machine. If you are reading this
 with the intention of ordering yourself this machine, do yourself a
 favor and opt for the Intel WiFi card for the extra ~$20. The default
 Realtek works, albiet with a bit of coaxing. Ergo, this article is meant
-to suppliment the current Installation Guide or Beginners Guide.
+to suppliment the current Installation guide or Beginners' guide.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 UEFI                                                         |
-|                                                                          |
-| -   2 Hardware                                                           |
-| -   3 Realtek Ethernet Compatibility                                     |
-|     -   3.1 Wireless                                                     |
-|     -   3.2 SD Card Reader                                               |
-|                                                                          |
-| -   4 Fingerprint Reader                                                 |
-| -   5 Trackpoint                                                         |
-| -   6 Fans                                                               |
-| -   7 X Crashes with Dual Monitors                                       |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 UEFI
+-   2 Hardware
+-   3 Realtek Ethernet Compatibility
+    -   3.1 Wireless
+    -   3.2 SD Card Reader
+-   4 Fingerprint Reader
+-   5 Trackpoint
+-   6 Fans
+-   7 X Crashes with Dual Monitors
 
 Installation
 ------------
@@ -43,7 +39,7 @@ HCL/Firmwares/UEFI#Lenovo_Thinkpad_Edge_E430_3254-DAQ.
 Hardware
 --------
 
-As of Kernel 3.4.6-1
+As of kernel 3.4.6-1
 
   Device                                        Works
   --------------------------------------------- --------------------------------
@@ -141,13 +137,13 @@ Wireless-N 2230, and the Lenovo specific FRU is 04W3765.
 As of 3.8 a 3rd party module is not needed, device is accessible @
 /dev/mccX
 
-The card reader will not work out-of-the-box pre 3.8, but thanks to
+The card reader will not work out-of-the-box pre-3.8, but thanks to
 Icetonic, the necessary kernel module, rts5229, can be found from the
 Realtek website or from the Arch User Repository. Download the tarball
 and install with makepkg.
 
 Note:My personal experience with the PKGBUILD was that Realtek uses some
-rediculous "login" for their ftp download link, thereby dynamically
+ridiculous "login" for their ftp download link, thereby dynamically
 changing the address. I was able to navigate to the site and copy the
 download link address and insert it into the PKGBUILD so that I could
 create a pkg.tar.gz and install it with pacman. Thanks to gehidore for
@@ -222,7 +218,7 @@ fan speed just fine. On top of this, these machines typically have
 enough power to run fairly cool during typical operation, depending, of
 course, on what typical is for you, the user.
 
-Warning: Thinkfan has been reported to not work on this model currently.
+Warning:Thinkfan has been reported to not work on this model currently.
 Tread lightly.
 
 The thinkpad_acpi kernel module needs to be configured so user space
@@ -266,8 +262,15 @@ found is to wait until starting X before plugging in one of the
 monitors.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_Edge_E430&oldid=253220"
+"https://wiki.archlinux.org/index.php?title=Lenovo_ThinkPad_Edge_E430&oldid=305752"
 
 Category:
 
 -   Lenovo
+
+-   This page was last modified on 20 March 2014, at 01:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

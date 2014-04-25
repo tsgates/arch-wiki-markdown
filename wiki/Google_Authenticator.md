@@ -8,16 +8,14 @@ S/KEY_Authentication the authentication mechanism integrates into the
 Linux PAM system. This guide shows the installation and configuration of
 this mechanism.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Setting up the PAM                                                 |
-| -   3 Generating a secret key file                                       |
-| -   4 Setting up your OTP-generator                                      |
-| -   5 Testing                                                            |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Setting up the PAM
+-   3 Generating a secret key file
+-   4 Setting up your OTP-generator
+-   5 Testing
 
 Installation
 ------------
@@ -138,9 +136,16 @@ and check if it works.
      $
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Google_Authenticator&oldid=241768"
+"https://wiki.archlinux.org/index.php?title=Google_Authenticator&oldid=306067"
 
 Categories:
 
 -   Secure Shell
 -   Security
+
+-   This page was last modified on 20 March 2014, at 17:39.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

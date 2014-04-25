@@ -17,19 +17,16 @@ of the network to check for double-spending. Bitcoins, usually denoted
 by BTC (i.e. '144 BTC'), can also be exchanged for traditional
 currencies like US dollars.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Installation                                                       |
-| -   3 How to get Bitcoins?                                               |
-|     -   3.1 Mining                                                       |
-|                                                                          |
-| -   4 Sample config file                                                 |
-| -   5 Other Clients                                                      |
-| -   6 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Installation
+-   3 How to get Bitcoins?
+    -   3.1 Mining
+-   4 Sample config file
+-   5 Other clients
+-   6 See also
 
 Introduction
 ------------
@@ -58,8 +55,28 @@ so as to achieve a general speed of about 1 block every 10 minutes.
 Installation
 ------------
 
-The official Bitcoin application can be installed with the bitcoin-qt
-and bitcoin-daemon packages, available in the official repositories.
+The official Bitcoin application can be installed with the bitcoin-qt or
+bitcoin-daemon packages, available in the official repositories. Lighter
+software includes MultiBit and Electrum in the AUR.
+
+  
+ You can use this Systemd service file for bitcoin-daemon
+
+(you'll probably need to change 'User=' or create bitcoin user)
+
+    /etc/systemd/system/bitcoind.service
+
+    [Unit]
+    Description=Bitcoin daemon service
+    After=network.target
+     
+    [Service]
+    Type=simple
+    User=bitcoin
+    ExecStart=/usr/bin/bitcoind
+     
+    [Install]
+    WantedBy=multi-user.target
 
 How to get Bitcoins?
 --------------------
@@ -100,25 +117,30 @@ please read this article.
 
 There are several Bitcoin miners in the AUR:
 
--   Bitcoin CUDA — A version of the official Bitcoin daemon with CUDA
+-   Bitcoin CUDA — Version of the official Bitcoin daemon with CUDA
     support (for Nvidia GPUs).
 
 http://www.bitcoin.org/ || bitcoin-daemon-cuda
 
--   CGMiner — A multi-threaded multi-pool CPU and GPU miner.
+-   CGMiner — Multi-threaded multi-pool CPU miner.
 
-https://github.com/ckolivas/cgminer || cgminer
+https://github.com/ckolivas/cgminer || cgminer (Note: use cgminer-gpu
+for GPU mining as it's version was the last to support it).
 
-Tip: you need corresponding opencl package to enable GPU mining,
+Tip:you need corresponding opencl package to enable GPU mining,
 opencl-nvidia for Nvidia, opencl-catalyst for AMD, and intel-opencl-sdk
 in AUR for Intel.
 
--   cpuminer — A multi-threaded CPU Miner.
+-   cpuminer — Multi-threaded CPU Miner.
 
 http://yyz.us/bitcoin/ || cpuminer-git
 
--   Phoenix Miner — An efficient, fast, modular, python-based, OpenCL
-    GPU miner.
+-   MiningBeast — Multi-platform mining software.
+
+http://miningbeast.com/ || http://miningbeast.com
+
+-   Phoenix Miner — Efficient, fast, modular, python-based, OpenCL GPU
+    miner.
 
 https://github.com/jedi95/Phoenix-Miner || phoenix-miner-svn
 
@@ -221,35 +243,51 @@ Make sure to set the mode of the file to 600 using:
     # Minimize to the system tray
     #minimizetotray=1
 
-Other Clients
+Other clients
 -------------
 
 There are other clients available for BitCoin.
 
--   Armory is a client with features for advanced users. It uses
+-   Armory — Client with features for advanced users. It uses
     information from the satoshi client (bitcoin-qt) for communication
-    with the bitcoin network. armory (AUR) and armory-git (AUR).
--   multibit A light-weight client that focusses on being fast and easy
-    to use. (no packages available)
--   Electrum A light-weight client that relies on cloud servers to scan
-    the blockchain. electrum (aur) and electrum-git (aur).
+    with the bitcoin network.
 
-External Links
---------------
+https://bitcoinarmory.com/ || armory
 
--   Official Bitcoin Website
--   Bitcoin.it Wiki
--   Bitcoin Forum
+-   MultiBit — Lightweight client that focuses on being fast and easy to
+    use.
+
+https://multibit.org || multibit
+
+-   Electrum — Simple, modular and powerful Bitcoin thin client that
+    relies on a federated network of user owned and operated servers to
+    scan the blockchain.
+
+https://electrum.org/ || electrum
+
+See also
+--------
+
+-   Official Bitcoin website
+-   Bitcoin.it wiki
+-   Bitcoin forum
 -   IRC Channels on Freenode :
-    -   #bitcoin (General Bitcoin-related)
-    -   #bitcoin-dev (Development and technical)
-    -   #bitcoin-otc (Over The Counter exchange)
-    -   #bitcoin-market (Live quotes from markets)
-    -   #bitcoin-mining (GPU mining related)
+    -   #bitcoin - (General Bitcoin-related)
+    -   #bitcoin-dev - (Development and technical)
+    -   #bitcoin-otc - (Over The Counter exchange)
+    -   #bitcoin-market - (Live quotes from markets)
+    -   #bitcoin-mining - (GPU mining related)
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Bitcoin&oldid=250319"
+"https://wiki.archlinux.org/index.php?title=Bitcoin&oldid=302626"
 
 Category:
 
--   Internet Applications
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

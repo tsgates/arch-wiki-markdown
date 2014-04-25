@@ -11,22 +11,19 @@ Installation Kit (WAIK). The WAIK can be downloaded at no cost and is
 only needed to extract the boot.wim file that contains the initial copy
 of Windows PE, along with a couple boot files.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Use cases                                                          |
-| -   2 Warnings                                                           |
-| -   3 Creating a bootable Windows PE ISO                                 |
-| -   4 Booting Windows PE                                                 |
-|     -   4.1 In virtual machine                                           |
-|     -   4.2 From CD                                                      |
-|     -   4.3 From Network                                                 |
-|     -   4.4 Network boot performance                                     |
-|                                                                          |
-| -   5 Customizing Windows PE                                             |
-| -   6 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Use cases
+-   2 Warnings
+-   3 Creating a bootable Windows PE ISO
+-   4 Booting Windows PE
+    -   4.1 In virtual machine
+    -   4.2 From CD
+    -   4.3 From Network
+    -   4.4 Network boot performance
+-   5 Customizing Windows PE
+-   6 See also
 
 Use cases
 ---------
@@ -162,3 +159,10 @@ Retrieved from
 Category:
 
 -   System administration
+
+-   This page was last modified on 13 June 2012, at 16:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

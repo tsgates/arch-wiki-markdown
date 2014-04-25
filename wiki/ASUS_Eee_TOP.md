@@ -21,15 +21,22 @@ alternative methods:
 2.  USB pen drive (Recommended)
 3.  Network (PXE)
 
-See the Beginners' Guide for more information.
+See the Beginners' guide for more information.
 
 > touchscreen
 
 Install xf86-input-evtouch from the AUR.
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_TOP&oldid=208433"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_TOP&oldid=298048"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 February 2014, at 07:07.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -15,20 +15,18 @@ the Scintilla text editor library, it has grown to be a general-purpose
 editor with facilities for building and running programs. It is best
 used for jobs with simple configurations.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Example configuration                                        |
-|     -   2.2 Tips                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Example configuration
+    -   2.2 Tips
 
 Installation
 ------------
 
-Install scite, available in the Official Repositories.
+Install scite, available in the Official repositories.
 
 Configuration
 -------------
@@ -174,9 +172,16 @@ instance (window)
     check.if.already.open=1
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=SciTE&oldid=217553"
+"https://wiki.archlinux.org/index.php?title=SciTE&oldid=301378"
 
 Categories:
 
 -   Development
 -   Text editors
+
+-   This page was last modified on 24 February 2014, at 11:42.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

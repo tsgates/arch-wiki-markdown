@@ -1,6 +1,15 @@
 cwm
 ===
 
+  ------------------------ ------------------------ ------------------------
+  [Tango-user-trash-full.p This article or section  [Tango-user-trash-full.p
+  ng]                      is being considered for  ng]
+                           deletion.                
+                           Reason: This page shows  
+                           nothing but cwm          
+                           existance. (Discuss)     
+  ------------------------ ------------------------ ------------------------
+
 cwm is an X11 window manager originally deriving from evilwm. However,
 the code base of evilwm did not accommodate the new features that were
 being added, so the code was re-written from scratch. cwm aims to be
@@ -28,8 +37,15 @@ Documentation
 There is a well-written man page on the official website (here).
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Cwm&oldid=206740"
+"https://wiki.archlinux.org/index.php?title=Cwm&oldid=258462"
 
 Category:
 
 -   Stacking WMs
+
+-   This page was last modified on 23 May 2013, at 21:06.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

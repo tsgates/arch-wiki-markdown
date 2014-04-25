@@ -1,43 +1,40 @@
 Rhythmbox
 =========
 
-  ------------------------ ------------------------ ------------------------
-  [Tango-view-fullscreen.p This article or section  [Tango-view-fullscreen.p
-  ng]                      needs expansion.         ng]
-                           Reason: please use the   
-                           first argument of the    
-                           template to provide a    
-                           brief explanation.       
-                           (Discuss)                
-  ------------------------ ------------------------ ------------------------
+Rhythmbox is an audio player that plays and helps organize digital
+music. It is designed to work well under the GNOME desktop using the
+GStreamer media framework.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Tips                                                               |
-|     -   1.1 Playing remote media from Internet sources (blip.tv,         |
-|         Jamendo, SHOUTcast)                                              |
-|     -   1.2 How to activate the Cover Art plugin                         |
-|     -   1.3 What to do when the little red icon shows when you try to    |
-|         play radio stations                                              |
-|     -   1.4 How to activate the DAAP Music Sharing                       |
-|                                                                          |
-| -   2 Troubleshooting                                                    |
-|     -   2.1 What to do if you see an "Unknown Playback Error" message    |
-|         -   2.1.1 Unknown Playback when streaming from an online radio   |
-|             station                                                      |
-|         -   2.1.2 Unknown Playback when streaming or playing from        |
-|             regular files                                                |
-|                                                                          |
-|     -   2.2 "Error, impossible to activate plugin 'Audio CD Recorder'"   |
-|         shows up every time I start Rhythmbox                            |
-|     -   2.3 Slow start and "Unable to start mDNS browsing: MDNS service  |
-|         is not running" output                                           |
-|     -   2.4 Can't activate "context pane" plugin                         |
-|     -   2.5 Rhythmbox Startup is Slow                                    |
-|     -   2.6 No cover are shown in the dedicated box                      |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Tips
+    -   2.1 Playing remote media from Internet sources (blip.tv,
+        Jamendo, SHOUTcast)
+    -   2.2 How to activate the Cover Art plugin
+    -   2.3 What to do when the little red icon shows when you try to
+        play radio stations
+    -   2.4 How to activate the DAAP Music Sharing
+-   3 Troubleshooting
+    -   3.1 What to do if you see an "Unknown Playback Error" message
+        -   3.1.1 Unknown Playback when streaming from an online radio
+            station
+        -   3.1.2 Unknown Playback when streaming or playing from
+            regular files
+    -   3.2 "Error, impossible to activate plugin 'Audio CD Recorder'"
+        shows up every time I start Rhythmbox
+    -   3.3 Slow start and "Unable to start mDNS browsing: MDNS service
+        is not running" output
+    -   3.4 Can't activate "context pane" plugin
+    -   3.5 Rhythmbox Startup is Slow
+    -   3.6 No cover are shown in the dedicated box
+    -   3.7 Cannot enable MTP device support
+
+Installation
+------------
+
+Install rhythmbox from the official repositories.
 
 Tips
 ----
@@ -54,9 +51,7 @@ to enable the Grilo Media Browser plugin into Rhythmbox ("Edit" >
 > How to activate the Cover Art plugin
 
 If you want to use the cover art plugin, but are unable to do so, you
-need to install gnome-python
-
-    pacman -S gnome-python
+need to install gnome-python.
 
 After you do that, restart Rhythmbox.
 
@@ -72,18 +67,30 @@ was unable to start playing the audio stream.
 
 > How to activate the DAAP Music Sharing
 
-First, install the libdmapsharing dependency for DAAP sharing:
+1) First, install the libdmapsharing package that is required for DAAP
+sharing.
 
-    pacman -S libdmapsharing
+2) You'll need the avahi-daemon running. See Avahi for full details on
+how to install and configure it. Here are some advices:
 
-You'll need the avahi-daemon running. So just add in your /etc/rc.conf
-to the DAEMONS section the avahi-daemon:
+a) install avahi and nss-mdns
 
-    DAEMONS=(... ... ... ... avahi-daemon)
+b) You also need to edit /etc/nsswitch.conf to configure hostname
+resolution. Change the line
 
-Or start manually:
+    hosts: files myhostname dns
 
-    /etc/rc.d/avahi-daemon start
+to:
+
+    hosts: files myhostname mdns_minimal [NOTFOUND=return] dns
+
+c) start it Set avahi-daemon to start at boot:
+
+    systemctl enable avahi-daemon.service
+
+or start it manually
+
+    systemctl start avahi-daemon.service
 
 Troubleshooting
 ---------------
@@ -114,27 +121,25 @@ ask on IRC or just google it.
 
 > "Error, impossible to activate plugin 'Audio CD Recorder'" shows up every time I start Rhythmbox
 
-Option 1, install brasero:
+You have two options:
 
-    pacman -S brasero
-
-Option 2, disable the cd recording plugin: Run dconf-editor, navigate to
-/org/gnome/rhythmbox/plugins/ and remove cd-recorder from
-active-plugins.
+1.  install brasero
+2.  disable the cd recording plugin: Run dconf-editor, navigate to
+    /org/gnome/rhythmbox/plugins/ and remove cd-recorder from
+    active-plugins.
 
 > Slow start and "Unable to start mDNS browsing: MDNS service is not running" output
 
-Option 1, activate the DAAP Music Sharing (see above section)
+You have two options:
 
-Option 2, disable the DAAP plugin: Run dconf-editor, navigate to
-/org/gnome/rhythmbox/plugins/ and remove DAAP from active-plugins.
+1.  activate the DAAP Music Sharing (see #How to activate the DAAP Music
+    Sharing above)
+2.  disable the DAAP plugin: Run dconf-editor, navigate to
+    /org/gnome/rhythmbox/plugins/ and remove DAAP from active-plugins.
 
 > Can't activate "context pane" plugin
 
-You have to install "python-mako", and be sure you have libwebkit
-installed too.
-
-    pacman -S python-mako pywebkitgtk
+You have to install python-mako and pywebkitgtk.
 
 > Rhythmbox Startup is Slow
 
@@ -147,9 +152,20 @@ MRPIS and D-bus plugins enabled.
 Creating a lastFM account and login in with the rhythmbox plugin can
 solve the problem.
 
+> Cannot enable MTP device support
+
+Install gvfs-mtp.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Rhythmbox&oldid=233622"
+"https://wiki.archlinux.org/index.php?title=Rhythmbox&oldid=302381"
 
 Category:
 
 -   Player
+
+-   This page was last modified on 28 February 2014, at 09:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -5,28 +5,26 @@ This article describes how to set up and run Chrony, an alternative NTP
 client and server that is roaming friendly and designed specifically for
 systems that are not online all the time.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Telling chronyd an internet connection has been made         |
-|                                                                          |
-| -   3 Usage                                                              |
-|     -   3.1 Starting chronyd                                             |
-|     -   3.2 Synchronising chrony hardware clock from the system clock    |
-|     -   3.3 Using NetworkManager to let chronyd go online                |
-|                                                                          |
-| -   4 Alternatives                                                       |
-| -   5 See also                                                           |
-| -   6 External links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Telling chronyd an internet connection has been made
+-   3 Usage
+    -   3.1 Starting chronyd
+    -   3.2 Synchronising chrony hardware clock from the system clock
+    -   3.3 Using NetworkManager to let chronyd go online
+-   4 See also
 
 Installation
 ------------
 
 chrony is available from the official repositories.
+
+Alternatives to the Chrony, are NTPd, the reference implementation of
+NTP, and OpenNTPD, part of the OpenBSD project and currently not
+maintained for Linux.
 
 Configuration
 -------------
@@ -54,7 +52,7 @@ The following lines are just an example:
     server 3.pool.ntp.org
 
 If your computer is not connected to the internet on startup, it is
-recommended to use the offline option, to tell chrony not to try and
+recommended to use the offline option, to tell Chrony not to try and
 connect to the servers, until it has been given the go:
 
     server 0.pool.ntp.org offline
@@ -142,7 +140,7 @@ reset the hardware clock.
 You can use chronyc to force the current system time to be synced to
 hardware:
 
-    # chronyc> password zyxxy
+    # chronyc> password xyzzy
     Password:
     200 OK
     chronyc> trimrtc
@@ -159,21 +157,10 @@ chronyd can be go into online/offline mode along with a network
 connection through the use of NetworkManager's dispatcher scripts. You
 can install networkmanager-dispatcher-chrony from the AUR.
 
-Alternatives
-------------
-
-Alternatives to the Chrony, are NTPd, the reference implementation of
-NTP, and OpenNTPD, part of the OpenBSD project and currently not
-maintained for Linux.
-
 See also
 --------
 
 -   Time (for more information on computer timekeeping)
-
-External links
---------------
-
 -   http://chrony.tuxfamily.org/
 -   http://www.ntp.org/
 -   http://support.ntp.org/
@@ -182,8 +169,15 @@ External links
 -   http://www.akadia.com/services/ntp_synchronize.html
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Chrony&oldid=248886"
+"https://wiki.archlinux.org/index.php?title=Chrony&oldid=296137"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 4 February 2014, at 10:50.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -1,268 +1,207 @@
 Xen
 ===
 
-This document explains how to use Xen 4.2 in Arch. It uses the new
-oxenstored / xl toolstack (replaces the xend / xm toolstack which was
-deprecated in Xen 4.1).
+Related articles
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 What is Xen?                                                       |
-| -   2 Types of Virtualization Available with Xen                         |
-|     -   2.1 Paravirtual (PV)                                             |
-|     -   2.2 Hardware Virtual (HVM)                                       |
-|                                                                          |
-| -   3 Obtaining Xen                                                      |
-| -   4 Configuring Xen                                                    |
-|     -   4.1 Bootloader Configuration                                     |
-|     -   4.2 Systemd Services                                             |
-|     -   4.3 Xenfs Mountpoint                                             |
-|     -   4.4 Bridged Networking                                           |
-|     -   4.5 Final Steps                                                  |
-|                                                                          |
-| -   5 Using Xen                                                          |
-|     -   5.1 Creating a Paravirtualized (PV) Arch domU                    |
-|     -   5.2 Useful xl command examples                                   |
-|                                                                          |
-| -   6 Common Errors                                                      |
-| -   7 Resources                                                          |
-+--------------------------------------------------------------------------+
+-   KVM
+-   QEMU
+-   VirtualBox
+-   VMware
+-   Moving an existing install into (or out of) a virtual machine
 
-What is Xen?
+From Xen Overview:
+
+Xen is an open-source type-1 or baremetal hypervisor, which makes it
+possible to run many instances of an operating system or indeed
+different operating systems in parallel on a single machine (or host).
+Xen is the only type-1 hypervisor that is available as open source. Xen
+is used as the basis for a number of different commercial and open
+source applications, such as: server virtualization, Infrastructure as a
+Service (IaaS), desktop virtualization, security applications, embedded
+and hardware appliances.
+
+Contents
+--------
+
+-   1 Introduction
+-   2 System requirements
+-   3 Configuring dom0
+    -   3.1 Installation of the Xen hypervisor
+    -   3.2 Modification of the bootloader
+    -   3.3 Creation of a network bridge
+    -   3.4 Installation of Xen systemd services
+    -   3.5 Confirming successful installation
+-   4 Using Xen
+    -   4.1 Create a domU "hard disk"
+    -   4.2 Create a domU configuration
+    -   4.3 Managing a domU
+-   5 Configuring a hardware virtualized (HVM) Arch domU
+-   6 Configuring a paravirtualized (PV) Arch domU
+-   7 Common Errors
+-   8 Resources
+
+Introduction
 ------------
 
-According to the Xen development team:
-
-"The Xen hypervisor, the powerful open source industry standard for
-virtualization, offers a powerful, efficient, and secure feature set for
-virtualization of x86, x86_64, IA64, PowerPC, and other CPU
-architectures. It supports a wide range of guest operating systems
-including Windows®, Linux®, Solaris®, and various versions of the BSD
-operating systems."
-
 The Xen hypervisor is a thin layer of software which emulates a computer
-architecture. It is started by the boot loader of the computer it is
-installed on, and allows multiple operating systems to run
-simultaneously on top of it. Once the Xen hypervisor is loaded, it
-starts the "Dom0" (short for "domain 0"), or privileged domain, which in
-our case runs a Linux kernel (other possible Dom0 operating systems are
-NetBSD and OpenSolaris). The physical hardware must, of course, be
-supported by this kernel to run Xen. Once the Dom0 has started, one or
-more "DomUs" (short for user domains, sometimes called VMs) can be
-started and controlled from Dom0.
+architecture allowing multiple operating systems to run simultaneously.
+The hypervisor is started by the boot loader of the computer it is
+installed on. Once the hypervisor is loaded, it starts the "dom0" (short
+for "domain 0", sometimes called the host or privileged domain) which in
+our case runs Arch Linux. Once the dom0 has started, one or more "domUs"
+(short for user domains, sometimes called VMs or guests) can be started
+and controlled from the dom0. Xen supports both paravirtualized (PV) and
+hardware virtualized (HVM) domUs. See Xen.org for a full overview.
 
-Xen.org provides a full overview
+System requirements
+-------------------
 
-Types of Virtualization Available with Xen
-------------------------------------------
+The Xen hypervisor requires kernel level support which is included in
+recent Linux kernels and is built into the linux and linux-lts Arch
+kernel packages. To run HVM domUs, the physical hardware must have
+either Intel VT-x or AMD-V (SVM) virtualization support. In order to
+verify this, run the following command when the Xen hypervisor is not
+running:
 
-> Paravirtual (PV)
-
-Paravirtualized guests require a kernel with support for Xen built in.
-This is default for all recent Linux kernels and some other Unix-like
-systems. Paravirtualized domUs usually run faster than HVM domains as
-they do not have to run in emulated hardware.
-
-> Hardware Virtual (HVM)
-
-For OSes that do not natively support Xen (e.g. Windows), HVM offers
-full hardware virtualization. To use HVM in Xen, the host system
-hardware must include either Intel VT-x or AMD-V (SVM) virtualization
-support. In order to verify this, run the following command on the host
-system:
-
-    grep -E "(vmx|svm)" --color=always /proc/cpuinfo
+    $ grep -E "(vmx|svm)" --color=always /proc/cpuinfo
 
 If the above command does not produce output, then hardware
 virtualization support is unavailable and your hardware is unable to run
-Xen HVM guests. It is also possible that the host CPU supports one of
-these features, but that the functionality is disabled by default in the
-system BIOS. To verify this, access the host system's BIOS configuration
-menu during the boot process and look for an option related to
-virtualization support. If such an option exists and is disabled, then
-enable it, boot the system and repeat the above command.
+HVM domUs. If you believe the CPU supports one of these features you
+should access the host system's BIOS configuration menu during the boot
+process and look if options related to virtualization support have been
+disabled. If such an option exists and is disabled, then enable it, boot
+the system and repeat the above command. The Xen hypervisor also
+supports PCI passthrough where PCI devices can be passed directly to the
+domU even in the absence of dom0 support for the device. In order to use
+PCI passthrough, the CPU must support IOMMU/VT-d.
 
-Obtaining Xen
--------------
+Configuring dom0
+----------------
 
-Xen is available from the AUR. The recommended current stable version is
-Xen 4.2, and the bleeding edge unstable package can be found here. Both
-packages provide the Xen hypervisor, current xl interface and all
-configuration and support files, including systemd services.
+The Xen hypervisor relies on a full install of the base operating
+system. Before attempting to install the Xen hypervisor, the host
+machine should have a fully operational and up-to-date install of Arch
+Linux. This installation can be a minimal install with only the base
+package and does not require a Desktop environment or even Xorg. If you
+are building a new host from scratch, see the Installation guide for
+instructions on installing Arch Linux. The following configuration steps
+are required to convert a standard installation into a working dom0
+running on top of the Xen hypervisor:
 
-Xen, unlike certain other virtualization systems, relies on a full
-install of the base operating system. Before attempting to install Xen,
-your host machine should have a fully operational and up-to-date install
-of Arch Linux. If you are building a new host from scratch, see the
-Installation Guide for instructions on installing Arch Linux.
+-   Installation of the Xen hypervisor
+-   Modification of the bootloader to boot the Xen hypervisor
+-   Creation of a network bridge
+-   Installation of Xen systemd services
 
-Like all AUR packages, the Xen binaries are built from source. Note that
-it is possible (but not necessary) to build the package on a separate
-machine and transfer the xz package over, assuming that the machines
-share the same architecture (e.g. x86_64). For Xen, an internet
-connection is needed during its compilation because further source files
-are downloaded during the process. Xen.org recommends a host to be
-64-bit. This requires the 'multilib' repository to be enabled in
-etc/pacman.conf.
+> Installation of the Xen hypervisor
 
-To build the package you will need the following:
+To install the Xen hypervisor install either the current stable xen or
+the bleeding edge unstable xen-hg-unstable packages available in the
+Arch User Repository. Both packages provide the Xen hypervisor, current
+xl interface and all configuration and support files, including systemd
+services. The multilib repository needs to be enabled to install Xen
+(See Pacman#Repositories for details). Install the xen-docs package from
+the Arch User Repository for the man pages and documentation.
 
-    base-devel zlib lzo2 python2 ncurses openssl libx11 yajl 
-    libaio glib2 bridge-utils iproute gettext
-    dev86 bin86 iasl markdown git wget
+> Modification of the bootloader
 
-    optional packages:  ocaml ocaml-findlib
+The boot loader must be modified to load a special Xen kernel (xen.gz)
+which is then used to boot the normal kernel. To do this a new
+bootloader entry is needed.
 
-You will need to enable the 'extra' repository to get bin86. A tool such
-as yaourt or packer can aid in downloading, compiling and installing
-dependencies for AUR packages.
+For GRUB users, the Xen package provides the /etc/grub.d/09_xen
+generator file. The file /etc/xen/grub.conf can be edited to customize
+the Xen boot commands. For example, to allocate 512 MiB of RAM to dom0
+at boot, modify /etc/xen/grub.conf by replacing the line:
 
-Configuring Xen
----------------
+    #XEN_HYPERVISOR_CMDLINE="xsave=1"
 
-The following configuration steps are required once the Xen package is
-installed.
+with
 
-The dom0 host requires
+    XEN_HYPERVISOR_CMDLINE="dom0_mem=512M xsave=1"
 
--   an entry in the bootloader configuration file
--   systemd services to be started at boot time
--   a xenfs filesystem mount point
--   bridged networking configuration
+After customizing the options, update the bootloader configuration with
+the following command:
 
-In addition to these required steps, the current xen.org wiki has a
-section regarding best practices for running Xen. It includes
-information on allocating a fixed amount of memory dom0 and how to
-dedicate (pin) a CPU core for dom0 use.
+    # grub-mkconfig -o /boot/grub/grub.cfg
 
-> Bootloader Configuration
+More information on using the GRUB bootloader is available at GRUB.
 
-Xen requires that you boot a special xen kernel (xen.gz) which in turn
-boots your system's normal kernel. A new bootloader entry is needed. To
-boot into the Xen system, we need a new menuentry in grub.cfg. The Xen
-package provides a grub2 generator file: /etc/grub.d/09_xen. This file
-can be edited to customize the Xen boot commands, and will add a
-menuentry to your grub.cfg when the following command is run:
+For syslinux users, add a stanza like this:
 
-    grub-mkconfig -o /boot/grub/grub.cfg
+    LABEL xen
+           MENU LABEL My Xen
+           KERNEL mboot.c32
+           APPEND ../xen-4.3.0.gz --- ../vmlinuz-linux console=tty0 root=/dev/sda3 ro --- ../initramfs-linux.img
 
-Example non-xen menuentry for LVM with gpt partition table
+Also this requires mboot.c32 to be in the same directory as the config
+file. If you have /boot and /usr in the same partition you can possibly
+link it. I do not know since I have /boot in a separate partition. So,
+for users with /boot in a separate partition from /usr
 
-    menuentry 'Arch ' {
-      insmod part_gpt
-      insmod lvm
-      insmod ext2
-      set root='lvm/vg0-arch'
-      linux /boot/vmlinuz-linux root=/dev/mapper/vg0-arch ro init=/usr/lib/systemd/systemd quiet
-      initrd /boot/initramfs-linux.img
-    }
+    # cp /usr/lib/syslinux/mboot.c32 /boot/syslinux
 
-The menuentry to boot the same arch system after Xen has been installed.
-Get the UUID for lvm/vg0-arch by using blkid.
+> Creation of a network bridge
 
-    menuentry 'Arch Xen 4.2' {
-      insmod lvm
-      insmod part_gpt
-      insmod ext2
-      set root='lvm/vg0-arch'
-      search --no-floppy --fs-uuid --set=root 346de8aa-6150-4d7b-a8c2-1c43f5929f99
-      multiboot /boot/xen.gz placeholder dom0_mem=1024M
-      module /boot/vmlinuz-linux placeholder root=/dev/mapper/vg0-arch ro init=/usr/lib/systemd/systemd quiet
-      module  /boot/initramfs-linux.img
-    }
+Xen requires that network communications between domUs and the dom0 (and
+beyond) be set up manually. The use of both DHCP and static addressing
+is possible, and the choice should be determined by the network
+topology. Complex setups are possible, see the Networking article on the
+Xen wiki for details and /etc/xen/scripts for scripts for various
+networking configurations. A basic bridged network, in which a virtual
+switch is created in dom0 that every domU is attached to, can be setup
+by modifying the example configuration files provided by Netctl in
+etc/netctl/examples. By default, Xen expects a bridge to exist named
+xenbr0. To set this up with netctl, do the following:
 
-Example for a physical partition
-
-    Arch Linux(XEN)
-    menuentry "Arch Linux(XEN)" {
-        set root=(hd0,X)
-      search --no-floppy --fs-uuid --set=root 346de8aa-6150-4d7b-a8c2-1c43f5929f99
-        multiboot /boot/xen.gz dom0_mem=1024M
-        module /boot/vmlinuz-linux-xen-dom0 root=/dev/sda ro
-        module /boot/initramfs-linux-xen-dom0.img
-    }
-
-More at Grub2
-
-> Systemd Services
-
-Issue the following commands as root so that the services are started at
-bootup:
-
-    # systemctl enable xenstored.service
-    # systemctl enable xenconsoled.service
-    # systemctl enable xendomains.service
-
-> Xenfs Mountpoint
-
-Include in your /etc/fstab
-
-     none /proc/xen xenfs defaults 0 0
-
-> Bridged Networking
-
-Previous versions of Xen provided a bridge connection whereas Xen 4.2
-requires that network communications between the guest, the host (and
-beyond) is set up separately. The use of both DHCP and static addressing
-is possible, and the choice should be determined by your network
-topology. With basic bridged networking, a virtual switch is created in
-dom0 that every domu is attached to. More complex setups are possible,
-see the Networking article on the Xen wiki for details.
-
-Netcfg greatly simplifies network configuration and is now included as
-standard in the base package. Example configuration files are provided
-in etc/network.d/examples and Xen 4.2 provides scripts for various
-networking configurations in /etc/xen/scripts.
-
-By default, Xen expects a bridge to exist named xenbr0. To set this up
-with netcfg, do the following:
-
-    # cd /etc/network.d
+    # cd /etc/netctl
     # cp examples/bridge xenbridge-dhcp
 
-make the following changes to xen-bridge:
+Make the following changes to /etc/netctl/xenbridge-dhcp:
 
-    INTERFACE="xenbr0"
-    BRIDGE_INTERFACE="eth0" # Use the name of the external interface found with the 'ip link' command
-    DESCRIPTION="Xen bridge connection"
+    Description="Xen bridge connection"
+    Interface=xenbr0
+    Connection=bridge
+    BindsToInterface=(eth0) # Use the name of the external interface found with the 'ip link' command
+    IP=dhcp
 
-assuming your existing eth0 connection is called eth0-dhcp, edit
-/etc/conf.d/netcfg
+assuming your existing network connection is called eth0.
 
-    NETWORKS=(eth0-dhcp xenbridge-dhcp)
+Start the network bridge with:
 
-restart the network:
+    # netctl start xenbridge-dhcp
 
-    systemctl restart netcfg.service
+when the prompt returns, check all is well:
 
-when the prompt returns, check all is well
-
-    ip addr show
-    brctl show
-
-    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 16436 qdisc noqueue state UNKNOWN 
-       link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-       inet 127.0.0.1/8 scope host lo
-       inet6 ::1/128 scope host 
-          valid_lft forever preferred_lft forever
-    3: xenbr0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP 
-       link/ether 00:1a:92:06:c0:c0 brd ff:ff:ff:ff:ff:ff
-       inet 192.168.1.3/24 brd 192.168.1.255 scope global xenbr0
-       inet6 fe80::21a:92ff:fe06:c0c0/64 scope link 
-          valid_lft forever preferred_lft forever
+    # brctl show
 
     bridge name	bridge id		STP enabled	interfaces
     xenbr0		8000.001a9206c0c0	no		eth0
 
-> Final Steps
+If the bridge is working it can be set to start automatically after
+rebooting with:
+
+    # netctl enable xenbridge-dhcp
+
+> Installation of Xen systemd services
+
+The Xen dom0 requires the xenstored, xenconsoled, and xendomains system
+services (see Systemd for details).
+
+Archlinux uses systemd, but the current xen package has init scripts.
+You can start the daemons mentioned above like so:
+
+     # /etc/rc.d/xencommons start
+
+> Confirming successful installation
 
 Reboot your dom0 host and ensure that the Xen kernel boots correctly and
 that all settings survive a reboot. A properly set up dom0 should report
-show the following when you run xl list (as root):
+the following when you run xl list (as root):
 
     # xl list
+
     Name                                        ID   Mem VCPUs	State	Time(s)
     Domain-0                                     0   511     2     r-----   41652.9
 
@@ -270,86 +209,162 @@ Of course, the Mem, VCPUs and Time columns will be different depending
 on machine configuration and uptime. The important thing is that dom0 is
 listed.
 
+In addition to the required steps above, see best practices for running
+Xen which includes information on allocating a fixed amount of memory
+and how to dedicate (pin) a CPU core for dom0 use. It also may be
+beneficial to create a xenfs filesystem mount point by including in
+/etc/fstab
+
+     none /proc/xen xenfs defaults 0 0
+
 Using Xen
 ---------
 
-Once the dom0 is fully operational, domUs may be created / imported.
-Each OS has a slightly different method of installation, see the Guest
-Install page of the Xen wiki for links to instructions.
+Xen supports both paravirtualized (PV) and hardware virtualized (HVM)
+domUs. In the following sections the steps for creating HVM and PV domUs
+running Arch Linux are described. In general, the steps for creating an
+HVM domU are independent of the domU OS and HVM domUs support a wide
+range of operating systems including microsot Windows. To use HVM domUs
+the dom0 hardware must have virtualization support. Paravirtualized
+domUs do not require virtualization support, but instead require
+modifications to the guest operating system making the installation
+procedure different for each operating system (see the Guest Install
+page of the Xen wiki for links to instructions). Some operating systems
+(e.g., Microsoft Windows) cannot be installed as a PV domU. In general,
+HVM domUs often run slower than PV domUs since HVMs run on emulated
+hardware. While there are some common steps involved in setting up PV
+and HVM domUs, the processes are substantially different. In both cases,
+for each domU, a "hard disk" will need to be created and a configuration
+file needs to be written. Additionally, for installation each domU will
+need access to a copy of the installation ISO stored on the dom0 (see
+the Download Page to obtain the Arch Linux ISO).
 
-> Creating a Paravirtualized (PV) Arch domU
+> Create a domU "hard disk"
 
-This is how to install Arch as a user domain (or VM) on an
-already-running Xen host. To install Arch as the Xen host (dom0), see
-the previous section.
+Xen supports a number of different types of "hard disks" including
+Logical Volumes, raw partitions, and image files. To create a sparse
+file, that will grow to a maximum of 10GiB, called domU.img, use:
 
-To begin, download the latest install ISO from the nearest mirror:
-Dowload page. Place the ISO file on the dom0 host. (it is recommended
-that its checksum be verified, too)
+    truncate -s 10G domU.img
 
-Create the hard disks for the new domU. This can be done with LVM, raw
-hard disk partitions or image files. To create a 10GiB blank hard disk
-file, the following command can be used:
+If file IO speed is of greater importance than domain portability, using
+Logical Volumes or raw partitions may be a better choice.
 
-    truncate -s 10G sda.img
+Xen may present any partition / disk available to the host machine to a
+domain as either a partition or disk. This means that, for example, an
+LVM partition on the host can appear as a hard drive (and hold multiple
+partitions) to a domain. Note that making sub-partitons on a partition
+will make accessing those partitions on the host machine more difficult.
+See the kpartx man page for information on how to map out partitions
+within a partition.
 
-This creates a sparse file, which grows (to a maximum of 10GiB) only
-when data is added to the image. If file IO speed is of greater
-importance than domain portability, using a Logical Volume or raw
-partition may be a better choice.
+> Create a domU configuration
 
-Next, loop-mount the installation ISO. To do this, ensure the directory
-/mnt exists and is empty, then run the following command (being sure to
-fill in the correct ISO path):
+Each domU requires a separate configuration file that is used to create
+the virtual machine. Full details about the configuration files can be
+found at the | Xen Wiki or the xl.cfg man page. Both HVM and PV domUs
+share some components of the configuration file. These include
 
-    # mount -o loop /path/to/iso /mnt
+     name = "domU"
+     memory = 256
+     disk = [ "file:/path/to/ISO,sdb,r", "phy:/path/to/partition,sda1,w" ]
+     vif = [ 'mac=00:16:3e:XX:XX:XX,bridge=xenbr0' ]
+     
 
-Create the bootstrap domU configuration file:
+The name= is the name by which the xl tools manage the domU and needs to
+be unique across all domUs. The disk= includes information about both
+the the installation media (file:) and the partition created for the
+domU phy. If an image file is being used instead of a physical
+partition, the phy: needs to be changed to file:. The vif= defines a
+network controller. The 00:16:3e MAC block is reserved for Xen domains,
+so the last three digits of the mac= must be randomly filled in (hex
+values 0-9 and a-f only).
 
-    /etc/xen/archdomu.cfg
+> Managing a domU
 
-    kernel = "/mnt/arch/boot/x86_64/vmlinuz"
-    ramdisk = "/mnt/arch/boot/x86_64/archiso.img"
-    extra = "archisobasedir=arch archisolabel=ARCH_201301"
-    memory = 256
-    name = "archdomu"
-    disk = [ "phy:/path/to/partition,sda1,w", "file:/path/to/ISO,sdb,r" ]
-    vif = [ 'mac=00:16:3e:__random_three_mac_bytes__,bridge=xenbr0' ]
+If a domU should be started on boot, create a symlink to the
+configuration file in /etc/xen/auto and ensure the xendomains service is
+set up correctly. Some useful commands for managing domUs are:
+
+    # xl top
+    # xl list
+    # xl console domUname
+    # xl shutdown domUname
+    # xl destroy domUname
+
+Configuring a hardware virtualized (HVM) Arch domU
+--------------------------------------------------
+
+In order to use HVM domUs install the mesa-libgl and bluez-libs
+packages.
+
+A minimal configuration file for a HVM Arch domU is:
+
+     name = 'HVM_domU'
+     builder = 'hvm'
+     memory = 256
+     vcpus = 2
+     disk = [ 'phy:/dev/mapper/vg0-hvm_arch,xvda,w', 'file:/path/to/ISO,hdc:cdrom,r' ]
+     vif = [ 'mac=00:16:3e:00:00:00,bridge=xenbr0' ]
+     vnc = 1
+     vnclisten = '0.0.0.0'
+     vncdisplay = 1
+     
+
+Since HVM machines do not have a console, they can only be connected to
+via a vncviewer. The configuration file allows for unauthenticated
+remote access of the domU vncserver and is not suitable for unsecured
+networks. The vncserver will be available on port 590X, where X is the
+value of vncdisplay, of the dom0. The domU can be created with:
+
+    # xl create /path/to/config/file
+
+and its status can be checked with
+
+    # xl list
+
+Once the domU is created, connect to it via the vncserver and install
+Arch Linux as described in the Installation guide.
+
+Configuring a paravirtualized (PV) Arch domU
+--------------------------------------------
+
+A minimal configuration file for a PV Arch domU is:
+
+     name = "PV_domU"
+     kernel = "/mnt/arch/boot/x86_64/vmlinuz"
+     ramdisk = "/mnt/arch/boot/x86_64/archiso.img"
+     extra = "archisobasedir=arch archisolabel=ARCH_201301"
+     memory = 256
+     disk = [ "phy:/path/to/partition,sda1,w", "file:/path/to/ISO,sdb,r" ]
+     vif = [ 'mac=00:16:3e:XX:XX:XX,bridge=xenbr0' ]
+     
 
 This file needs to tweaked for your specific use. Most importantly, the
 archisolabel=ARCH_201301 line must be edited to use the release
 year/month of the ISO being used. If you want to install 32-bit Arch,
-change the kernel and ramdisk paths from /x86_64/ to /i686/. The
-"phy:/path/to/partition,sda1,w" line must be edited to point to the
-partition created for the domU. If an image file is being used, the phy:
-needs to be changed to file:. Finally, a MAC address must be assigned.
-The 00:16:3e MAC block is reserved for Xen domains, do the last three
-digits may be randomly filled in (hex values 0-9 and a-f only). See the
-xl.cfg man page for more information on what the .cfg file lines do. The
-AUR package xen-docs will need to be installed to access the man pages.
+change the kernel and ramdisk paths from /x86_64/ to /i686/.
 
-Create the new domU:
+Before creating the domU, the installation ISO must be loop-mounted. To
+do this, ensure the directory /mnt exists and is empty, then run the
+following command (being sure to fill in the correct ISO path):
 
-    # xl create -c /etc/xen/archdomu.cfg
+    # mount -o loop /path/to/iso /mnt
 
-The -c option will enter the new domain's console when successfully
-created. At this point, Arch should be installed as usual. The
-Installation Guide should be followed. There will be a few deviations,
-however. The block devices listed in the disks line of the cfg file will
-show up as /dev/xvd*. Use these devices when partitioning the domU.
-After installation and before the domU is rebooted, the following
-modules must be added to /etc/mkinitcpio.conf:
+Once the ISO is mounted, the domU can be created with:
 
-    MODULES="xen-blkfront xen-fbfront xen-netfront xen-kbdfront"
+    # xl create -c /path/to/config/file
 
-Without these modules, the domU will not boot correctly. After saving
-the edit, rebuild the initramfs with the following command:
-
-    mkinitcpio -p linux
-
-For booting, it is not necessary to install Grub. Xen has a Python-based
-grub emulator, so all that is needed to boot is a grub.cfg file: (It may
-be necessary to create the /boot/grub directory)
+The -c option will enter the domU's console when successfully created
+and install Arch Linux as described in the Installation guide. There
+will be a few deviations, however. The block devices listed in the disks
+line of the cfg file will show up as /dev/xvd*. Use these devices when
+partitioning the domU. After installation and before the domU is
+rebooted, the xen-blkfront xen-fbfront xen-netfront xen-kbdfront modules
+must be added to Mkinitcpio. Without these modules, the domU will not
+boot correctly. For booting, it is not necessary to install Grub. Xen
+has a Python-based grub emulator, so all that is needed to boot is a
+grub.cfg file: (It may be necessary to create the /boot/grub directory)
 
     /boot/grub/grub.cfg
 
@@ -396,17 +411,6 @@ before:
 
     # xl create -c /etc/xen/archdomu.cfg
 
-If the domU should be started on boot, create a symlink to the cfg file
-in /etc/xen/auto and ensure the xendomains service is set up correctly.
-
-> Useful xl command examples
-
-    # xl top
-    # xl list
-    # xl console domUname
-    # xl shutdown domUname
-    # xl destroy domUname
-
 Common Errors
 -------------
 
@@ -439,9 +443,16 @@ Resources
 -   The wiki at xen.org
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Xen&oldid=255049"
+"https://wiki.archlinux.org/index.php?title=Xen&oldid=306152"
 
 Categories:
 
 -   Virtualization
 -   Kernel
+
+-   This page was last modified on 20 March 2014, at 18:49.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

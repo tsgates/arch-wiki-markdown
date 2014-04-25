@@ -11,32 +11,26 @@ possible.
 NOTE: Per HP's website, this laptop is Novell Linux Desktop 9 certified.
 So getting Linux on this laptop should not be too hard.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Specifications                                              |
-| -   2 What works/What does not                                           |
-| -   3 Xorg                                                               |
-|     -   3.1 Video Driver                                                 |
-|         -   3.1.1 Mouse                                                  |
-|         -   3.1.2 Compiz Fusion                                          |
-|                                                                          |
-| -   4 Audio                                                              |
-| -   5 Network                                                            |
-|     -   5.1 Wired                                                        |
-|     -   5.2 Wireless                                                     |
-|         -   5.2.1 Troubles with wireless                                 |
-|                                                                          |
-|     -   5.3 Modem                                                        |
-|                                                                          |
-| -   6 Card Readers                                                       |
-|     -   6.1 PCMCIA                                                       |
-|     -   6.2 Compact Flash                                                |
-|     -   6.3 Secure Digital                                               |
-|                                                                          |
-| -   7 External Links                                                     |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 System Specifications
+-   2 What works/What does not
+-   3 Xorg
+    -   3.1 Video Driver
+        -   3.1.1 Mouse
+        -   3.1.2 Compiz Fusion
+-   4 Audio
+-   5 Network
+    -   5.1 Wired
+    -   5.2 Wireless
+        -   5.2.1 Troubles with wireless
+    -   5.3 Modem
+-   6 Card Readers
+    -   6.1 PCMCIA
+    -   6.2 Compact Flash
+    -   6.3 Secure Digital
+-   7 External Links
 
 > System Specifications
 
@@ -184,3 +178,10 @@ Retrieved from
 Category:
 
 -   HP
+
+-   This page was last modified on 6 March 2013, at 05:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

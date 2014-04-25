@@ -8,18 +8,15 @@ available.
 Note:hellanzb is no longer under active development, although the last
 release (0.13) is considered stable by the developers and testing team.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Main Features                                                      |
-| -   2 Installing                                                         |
-| -   3 Configuration                                                      |
-|     -   3.1 hellanzb.conf                                                |
-|     -   3.2 /etc/conf.d/hellanzb                                         |
-|                                                                          |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Main Features
+-   2 Installing
+-   3 Configuration
+    -   3.1 hellanzb.conf
+    -   3.2 /etc/conf.d/hellanzb
+-   4 See also
 
 Main Features
 -------------
@@ -66,9 +63,15 @@ See also
 -   Screen Tips
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Hellanzb&oldid=239180"
+"https://wiki.archlinux.org/index.php?title=Hellanzb&oldid=302640"
 
-Categories:
+Category:
 
--   Internet Applications
--   Networking
+-   Internet applications
+
+-   This page was last modified on 1 March 2014, at 04:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

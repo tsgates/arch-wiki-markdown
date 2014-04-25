@@ -1,53 +1,40 @@
 mkinitcpio
 ==========
 
-> Summary
+Related articles
 
-A detailed guide to the Arch initramfs creation utility.
-
-> Overview
-
-In order to boot Arch Linux, a Linux-capable boot loader such as
-GRUB(2), Syslinux, LILO or GRUB Legacy must be installed to the Master
-Boot Record or the GUID Partition Table. The boot loader is responsible
-for loading the kernel and initial ramdisk before initiating the boot
-process.
+-   systemd
+-   Kernel modules
 
 mkinitcpio is the next generation of initramfs creation.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Overview                                                           |
-| -   2 Installation                                                       |
-| -   3 Image creation and activation                                      |
-| -   4 Configuration                                                      |
-|     -   4.1 MODULES                                                      |
-|     -   4.2 BINARIES and FILES                                           |
-|     -   4.3 HOOKS                                                        |
-|         -   4.3.1 Build hooks                                            |
-|         -   4.3.2 Runtime hooks                                          |
-|         -   4.3.3 Common hooks                                           |
-|         -   4.3.4 Deprecated hooks                                       |
-|                                                                          |
-|     -   4.4 COMPRESSION                                                  |
-|     -   4.5 COMPRESSION_OPTIONS                                          |
-|                                                                          |
-| -   5 Runtime customization                                              |
-|     -   5.1 init                                                         |
-|     -   5.2 Using RAID                                                   |
-|     -   5.3 Using net                                                    |
-|     -   5.4 Using LVM                                                    |
-|     -   5.5 Using encrypted root                                         |
-|     -   5.6 /usr as a separate partition                                 |
-|                                                                          |
-| -   6 Troubleshooting                                                    |
-|     -   6.1 Extracting the image                                         |
-|                                                                          |
-| -   7 See also                                                           |
-| -   8 References                                                         |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Overview
+-   2 Installation
+-   3 Image creation and activation
+-   4 Configuration
+    -   4.1 MODULES
+    -   4.2 BINARIES and FILES
+    -   4.3 HOOKS
+        -   4.3.1 Build hooks
+        -   4.3.2 Runtime hooks
+        -   4.3.3 Common hooks
+        -   4.3.4 Deprecated hooks
+    -   4.4 COMPRESSION
+    -   4.5 COMPRESSION_OPTIONS
+-   5 Runtime customization
+    -   5.1 init
+    -   5.2 Using RAID
+    -   5.3 Using net
+    -   5.4 Using LVM
+    -   5.5 Using encrypted root
+    -   5.6 /usr as a separate partition
+-   6 Troubleshooting
+    -   6.1 Extracting the image
+    -   6.2 "/dev must be mounted" when it already is
+-   7 See also
 
 Overview
 --------
@@ -58,18 +45,18 @@ environment. From the mkinitcpio man page:
 The initial ramdisk is in essence a very small environment (early
 userspace) which loads various kernel modules and sets up necessary
 things before handing over control to init. This makes it possible to
-have, for example, encrypted root filesystems and root filesystems on a
-software RAID array. mkinitcpio allows for easy extension with custom
+have, for example, encrypted root file systems and root file systems on
+a software RAID array. mkinitcpio allows for easy extension with custom
 hooks, has autodetection at runtime, and many other features.
 
 Traditionally, the kernel was responsible for all hardware detection and
 initialization tasks early in the boot process before mounting the root
-filesystem and passing control to init. However, as technology advances,
-these tasks have become increasingly complex.
+file system and passing control to init. However, as technology
+advances, these tasks have become increasingly complex.
 
-Nowadays, the root filesystem may be on a wide range of hardware, from
+Nowadays, the root file system may be on a wide range of hardware, from
 SCSI to SATA to USB drives, controlled by a variety of drive controllers
-from different manufacturers. Additionally, the root filesystem may be
+from different manufacturers. Additionally, the root file system may be
 encrypted or compressed; within a software RAID array or a logical
 volume group. The simple way to handle that complexity is to pass
 management into userspace: an initial ramdisk.
@@ -91,8 +78,6 @@ include:
     storage devices.
 -   The ability to allow many features to be configured from the kernel
     command line without needing to rebuild the image.
--   Support for the inclusion of the initial ramdisk image in a kernel,
-    thus making a self-contained kernel image possible.
 
 mkinitcpio has been developed by the Arch Linux developers and from
 community contributions. See the public Git repository.
@@ -101,7 +86,7 @@ Installation
 ------------
 
 The mkinitcpio package is available in the official repositories and is
-installed by default as a member of the base group.
+a dependency of the linux package.
 
 Advanced users may wish to install the latest development version of
 mkinitcpio from Git:
@@ -171,19 +156,29 @@ between boots, resulting in kernel panics. A more elegant alternative is
 to use persistent block device naming to ensure that the right devices
 are mounted.
 
-Users can modify six variables within the configuration file:
+Note:PS/2 keyboard users: In order to get keyboard input during early
+init, if you don't have it already, add the keyboard hook to the HOOKS.
+On some motherboards (mostly ancient ones, but also a few new ones), the
+i8042 controller cannot be automatically detected. It's rare, but some
+people will surely be without keyboard. You can detect this situation in
+advance. If you have a PS/2 port and get
+i8042: PNP: No PS/2 controller found. Probing ports directly message,
+add atkbd to the MODULES.
 
- MODULES
+  
+ Users can modify six variables within the configuration file:
+
+ MODULES 
     Kernel modules to be loaded before any boot hooks are run.
- BINARIES
+ BINARIES 
     Additional binaries to be included in the initramfs image.
- FILES
+ FILES 
     Additional files to be included in the initramfs image.
- HOOKS
+ HOOKS 
     Hooks are scripts that execute in the initial ramdisk.
- COMPRESSION
+ COMPRESSION 
     Used to compress the initramfs image.
- COMPRESSION_OPTIONS
+ COMPRESSION_OPTIONS 
     Command line options to pass to the COMPRESSION program.
 
 > MODULES
@@ -196,11 +191,12 @@ This might be useful for custom kernels that compile in modules which
 are listed explicitly in a hook or config file.
 
 Note:If using reiser4, it must be added to the modules list.
-Additionally, if you'll be needing any filesystem during the boot
-process that isn't live when you run mkinitcpio—for example, if your
-LUKS encryption key file is on an ext2 filesystem but no ext2
-filesystems are mounted when you run mkinitcpio—that filesystem module
-must also be added to the MODULES list. See here for more details.
+Additionally, if you will be needing any file system during the boot
+process that is not live when you run mkinitcpio — for example, if your
+LUKS encryption key file is on an ext2 file system but no ext2 file
+systems are mounted when you run mkinitcpio — that file system module
+must also be added to the MODULES list. See
+Dm-crypt/System_Configuration#cryptkey for more details.
 
 > BINARIES and FILES
 
@@ -228,8 +224,8 @@ order they exist in the HOOKS setting in the config file.
 
 The default HOOKS setting should be sufficient for most simple, single
 disk setups. For root devices which are stacked or multi-block devices
-such as LVM, mdadm, or LUKS, see the respective wiki pages for further
-necessary configuration.
+such as LVM, mdadm, or dm-crypt, see the respective wiki pages for
+further necessary configuration.
 
 Build hooks
 
@@ -259,10 +255,10 @@ sourced by the busybox ash shell during early userspace. With the
 exception of cleanup hooks, they will always be run in the order listed
 in the HOOKS setting. Runtime hooks may contain several functions:
 
-run_earlyhook: Functions of this name will be run once the API
-filesystems have been mounted and the kernel command line has been
-parsed. This is generally where additional daemons, such as udev, which
-are needed for the early boot process are started from.
+run_earlyhook: Functions of this name will be run once the API file
+systems have been mounted and the kernel command line has been parsed.
+This is generally where additional daemons, such as udev, which are
+needed for the early boot process are started from.
 
 run_hook: Functions of this name are run shortly after the early hooks.
 This is the most common hook point, and operations such as assembly of
@@ -270,7 +266,7 @@ stacked block devices should take place here.
 
 run_latehook: Functions of this name are run after the root device has
 been mounted. This should be used, sparingly, for further setup of the
-root device, or for mounting other filesystems, such as /usr.
+root device, or for mounting other file systems, such as /usr.
 
 run_cleanuphook: Functions of this name are run as late as possible, and
 in the reverse order of how they are listed in the HOOKS setting in the
@@ -283,30 +279,240 @@ A table of common hooks and how they affect image creation and runtime
 follows. Note that this table is not complete, as packages can provide
 custom hooks.
 
-  Hook          Installation                                                                                                                                                                                                                                                                                                                              Runtime
-  ------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  base          Sets up all initial directories and installs base utilities and libraries. Always add this hook as the first hook unless you know what you are doing.                                                                                                                                                                                     --
-  udev          Adds udevd, udevadm, and a small subset of udev rules to your image.                                                                                                                                                                                                                                                                      Starts the udev daemon and processes uevents from the kernel; creating device nodes. As it simplifies the boot process by not requiring the user to explicitly specify necessary modules, using the udev hook is recommended.
-  autodetect    Shrinks your initramfs to a smaller size by creating a whitelist of modules from a scan of sysfs. Be sure to verify included modules are correct and none are missing. This hook must be run before other subsystem hooks in order to take advantage of auto-detection. Any hooks placed before 'autodetect' will be installed in full.   --
-  modconf       --                                                                                                                                                                                                                                                                                                                                        Loads modprobe configuration files from /etc/modprobe.d and /usr/lib/modprobe.d
-  block         Adds all block device modules, formerly separately provided by fw, mmc, pata, sata, scsi , usb and virtio hooks.                                                                                                                                                                                                                          --
-  pcmcia        Adds the necessary modules for PCMCIA devices. You need to have pcmciautils installed to use this.                                                                                                                                                                                                                                        --
-  net           Adds the necessary modules for a network device. For PCMCIA net devices please add the pcmcia hook too.                                                                                                                                                                                                                                   Provides handling for an NFS based root filesystem.
-  dmraid        Provides support for fakeRAID root devices. You must have dmraid installed to use this.                                                                                                                                                                                                                                                   Locates and assembles fakeRAID block devices using mdassemble.
-  mdadm         Provides support for assembling RAID arrays from /etc/mdadm.conf, or autodetection during boot. You must have mdadm installed to use this. The mdadm_udev hook is preferred over this hook.                                                                                                                                               Locates and assembles software RAID block devices using mdassemble.
-  mdadm_udev    Provides support for assembling RAID arrays via udev. You must have mdadm installed to use this.                                                                                                                                                                                                                                          Locates and assembles software RAID block devices using udev and mdadm incremental assembly. This is the preferred method of mdadm assembly (rather than using the above mdadm hook).
-  keyboard      Adds the necessary modules for keyboard devices. Use this if you have an USB keyboard and need it in early userspace (either for entering encryption passphrases or for use in an interactive shell). As a side-effect modules for some non-keyboard input devices might be added to, but this should not be relied on.                   --
-  keymap        Adds keymap and consolefonts from /etc/vconsole.conf.                                                                                                                                                                                                                                                                                     Loads the specified keymap and consolefont from /etc/vconsole.conf during early userspace.
-  encrypt       Adds the dm_crypt kernel module and the cryptsetup tool to the image. You must have cryptsetup installed to use this.                                                                                                                                                                                                                     Detects and unlocks an encrypted root partition. See #Runtime customization for further configuration.
-  lvm2          Adds the device mapper kernel module and the lvm tool to the image. You must have lvm2 installed to use this.                                                                                                                                                                                                                             Enables all LVM2 volume groups. This is necessary if you have your root filesystem on LVM.
-  fsck          Adds the fsck binary and filesystem-specific helpers. If added after the autodetect hook, only the helper specific to your root filesystem will be added. Usage of this hook is strongly recommended, and it is required with a separate /usr partition.                                                                                  Runs fsck against your root device (and /usr if separate) prior to mounting.
-  resume        --                                                                                                                                                                                                                                                                                                                                        Tries to resume from the "suspend to disk" state. Works with both swsusp and suspend2. See #Runtime customization for further configuration.
-  filesystems   This includes necessary filesystem modules into your image. This hook is required unless you specify your filesystem modules in MODULES.                                                                                                                                                                                                  --
-  shutdown      Adds shutdown initramfs support. Usage of this hook is strongly recommended if you have a separate /usr partition or encrypted root.                                                                                                                                                                                                      Unmounts and disassembles devices on shutdown.
-  usr           Add supports for /usr on a separate partition.                                                                                                                                                                                                                                                                                            Mounts the /usr partition after the real root has been mounted.
-  timestamp     Add the systemd-timestamp binary to the image. Provides support for RD_TIMESTAMP in early userspace. RD_TIMESTAMP can be read by in example systemd-analyze to determine boot time.                                                                                                                                                       --
++--------------------------+--------------------------+--------------------------+
+| Hook                     | Installation             | Runtime                  |
++==========================+==========================+==========================+
+| base                     | Sets up all initial      | --                       |
+|                          | directories and installs |                          |
+|                          | base utilities and       |                          |
+|                          | libraries. Always add    |                          |
+|                          | this hook as the first   |                          |
+|                          | hook unless you know     |                          |
+|                          | what you are doing.      |                          |
++--------------------------+--------------------------+--------------------------+
+| systemd                  | This will install a      | --                       |
+|                          | basic systemd setup in   |                          |
+|                          | your initramfs, and is   |                          |
+|                          | meant to replace the     |                          |
+|                          | base, usr, udev, and     |                          |
+|                          | timestamp hooks. Other   |                          |
+|                          | hooks (like encryption)  |                          |
+|                          | would need to be ported, |                          |
+|                          | and may not work as      |                          |
+|                          | intended. As of systemd  |                          |
+|                          | 207, this hook does not  |                          |
+|                          | work as intended when    |                          |
+|                          | combined with lvm2 and   |                          |
+|                          | may break your boot. You |                          |
+|                          | also may wish to still   |                          |
+|                          | include the base hook    |                          |
+|                          | (before this hook) to    |                          |
+|                          | ensure that a rescue     |                          |
+|                          | shell exists on your     |                          |
+|                          | initramfs.               |                          |
++--------------------------+--------------------------+--------------------------+
+| btrfs                    | Sets the required        | Runs btrfs device scan   |
+|                          | modules to enable Btrfs  | to assemble a            |
+|                          | for root and the use of  | multi-device Btrfs root  |
+|                          | subvolumes.              | file system when no udev |
+|                          |                          | hook is present..        |
++--------------------------+--------------------------+--------------------------+
+| udev                     | Adds udevd, udevadm, and | Starts the udev daemon   |
+|                          | a small subset of udev   | and processes uevents    |
+|                          | rules to your image.     | from the kernel;         |
+|                          |                          | creating device nodes.   |
+|                          |                          | As it simplifies the     |
+|                          |                          | boot process by not      |
+|                          |                          | requiring the user to    |
+|                          |                          | explicitly specify       |
+|                          |                          | necessary modules, using |
+|                          |                          | the udev hook is         |
+|                          |                          | recommended.             |
++--------------------------+--------------------------+--------------------------+
+| autodetect               | Shrinks your initramfs   | --                       |
+|                          | to a smaller size by     |                          |
+|                          | creating a whitelist of  |                          |
+|                          | modules from a scan of   |                          |
+|                          | sysfs. Be sure to verify |                          |
+|                          | included modules are     |                          |
+|                          | correct and none are     |                          |
+|                          | missing. This hook must  |                          |
+|                          | be run before other      |                          |
+|                          | subsystem hooks in order |                          |
+|                          | to take advantage of     |                          |
+|                          | auto-detection. Any      |                          |
+|                          | hooks placed before      |                          |
+|                          | 'autodetect' will be     |                          |
+|                          | installed in full.       |                          |
++--------------------------+--------------------------+--------------------------+
+| modconf                  | Includes modprobe        | --                       |
+|                          | configuration files from |                          |
+|                          | /etc/modprobe.d and      |                          |
+|                          | /usr/lib/modprobe.d      |                          |
++--------------------------+--------------------------+--------------------------+
+| block                    | Adds all block device    | --                       |
+|                          | modules, formerly        |                          |
+|                          | separately provided by   |                          |
+|                          | the fw, mmc, pata, sata, |                          |
+|                          | scsi, usb, and virtio    |                          |
+|                          | hooks.                   |                          |
++--------------------------+--------------------------+--------------------------+
+| pcmcia                   | Adds the necessary       | --                       |
+|                          | modules for PCMCIA       |                          |
+|                          | devices. You need to     |                          |
+|                          | have pcmciautils         |                          |
+|                          | installed to use this.   |                          |
++--------------------------+--------------------------+--------------------------+
+| net                      | Adds the necessary       | Provides handling for an |
+|                          | modules for a network    | NFS-based root file      |
+|                          | device. For PCMCIA net   | system.                  |
+|                          | devices, please add the  |                          |
+|                          | pcmcia hook too.         |                          |
++--------------------------+--------------------------+--------------------------+
+| dmraid                   | Provides support for     | Locates and assembles    |
+|                          | fakeRAID root devices.   | fakeRAID block devices   |
+|                          | You must have dmraid     | using dmraid.            |
+|                          | installed to use this.   |                          |
+|                          | Note that it is          |                          |
+|                          | preferred to use mdadm   |                          |
+|                          | with the mdadm_udev hook |                          |
+|                          | with fakeRAID if your    |                          |
+|                          | controller supports it.  |                          |
++--------------------------+--------------------------+--------------------------+
+| mdadm                    | Provides support for     | Locates and assembles    |
+|                          | assembling RAID arrays   | software RAID block      |
+|                          | from /etc/mdadm.conf, or | devices using            |
+|                          | autodetection during     | mdassemble.              |
+|                          | boot. You must have      |                          |
+|                          | mdadm installed to use   |                          |
+|                          | this. The mdadm_udev     |                          |
+|                          | hook is preferred over   |                          |
+|                          | this hook.               |                          |
++--------------------------+--------------------------+--------------------------+
+| mdadm_udev               | Provides support for     | Locates and assembles    |
+|                          | assembling RAID arrays   | software RAID block      |
+|                          | via udev. You must have  | devices using udev and   |
+|                          | mdadm installed to use   | mdadm incremental        |
+|                          | this. If you use this    | assembly. This is the    |
+|                          | hook with a FakeRAID     | preferred method of      |
+|                          | array, it is recommended | mdadm assembly (rather   |
+|                          | to include mdmon in the  | than using the above     |
+|                          | binaries section and add | mdadm hook).             |
+|                          | the shutdown hook in     |                          |
+|                          | order to avoid           |                          |
+|                          | unnecessary RAID         |                          |
+|                          | rebuilds on reboot.      |                          |
++--------------------------+--------------------------+--------------------------+
+| keyboard                 | Adds the necessary       | --                       |
+|                          | modules for keyboard     |                          |
+|                          | devices. Use this if you |                          |
+|                          | have an USB keyboard and |                          |
+|                          | need it in early         |                          |
+|                          | userspace (either for    |                          |
+|                          | entering encryption      |                          |
+|                          | passphrases or for use   |                          |
+|                          | in an interactive        |                          |
+|                          | shell). As a side        |                          |
+|                          | effect, modules for some |                          |
+|                          | non-keyboard input       |                          |
+|                          | devices might be added   |                          |
+|                          | to, but this should not  |                          |
+|                          | be relied on.            |                          |
++--------------------------+--------------------------+--------------------------+
+| keymap                   | Adds the specified       | Loads the specified      |
+|                          | keymap(s) from           | keymap(s) from           |
+|                          | /etc/vconsole.conf to    | /etc/vconsole.conf       |
+|                          | the initramfs.           | during early userspace.  |
++--------------------------+--------------------------+--------------------------+
+| consolefont              | Adds the specified       | Loads the specified      |
+|                          | console font from        | console font from        |
+|                          | /etc/vconsole.conf to    | /etc/vconsole.conf       |
+|                          | the initramfs.           | during early userspace.  |
++--------------------------+--------------------------+--------------------------+
+| sd-vconsole              | Adds the keymap(s) and   | Loads the specified      |
+|                          | console font specified   | keymap(s) and console    |
+|                          | in /etc/vconsole.conf to | font during early        |
+|                          | the systemd-based        | userspace.               |
+|                          | initramfs.               |                          |
++--------------------------+--------------------------+--------------------------+
+| encrypt                  | Adds the dm_crypt kernel | Detects and unlocks an   |
+|                          | module and the           | encrypted root           |
+|                          | cryptsetup tool to the   | partition. See #Runtime  |
+|                          | image. You must have     | customization for        |
+|                          | cryptsetup installed to  | further configuration.   |
+|                          | use this.                |                          |
++--------------------------+--------------------------+--------------------------+
+| sd-encrypt               | This hook allows for an  | --                       |
+|                          | encrypted root device    |                          |
+|                          | with systemd initramfs.  |                          |
+|                          | See the man page of      |                          |
+|                          | systemd-cryptsetup-gener |                          |
+|                          | ator(8)                  |                          |
+|                          | for available kernel     |                          |
+|                          | command line options.    |                          |
+|                          | Alternatively, if the    |                          |
+|                          | file                     |                          |
+|                          | /etc/crypttab.initramfs  |                          |
+|                          | exists, it will be added |                          |
+|                          | to the initramfs as      |                          |
+|                          | /etc/crypttab. See the   |                          |
+|                          | crypttab(5) manpage for  |                          |
+|                          | more information on      |                          |
+|                          | crypttab syntax.         |                          |
++--------------------------+--------------------------+--------------------------+
+| lvm2                     | Adds the device mapper   | Enables all LVM2 volume  |
+|                          | kernel module and the    | groups. This is          |
+|                          | lvm tool to the image.   | necessary if you have    |
+|                          | You must have lvm2       | your root file system on |
+|                          | installed to use this.   | LVM.                     |
++--------------------------+--------------------------+--------------------------+
+| fsck                     | Adds the fsck binary and | Runs fsck against your   |
+|                          | file system-specific     | root device (and /usr if |
+|                          | helpers. If added after  | separate) prior to       |
+|                          | the autodetect hook,     | mounting. The default    |
+|                          | only the helper specific | configuration of the     |
+|                          | to your root file system | bootloader is suitable,  |
+|                          | will be added. Usage of  | if in doubt read this    |
+|                          | this hook is strongly    | explanation.             |
+|                          | recommended, and it is   |                          |
+|                          | required with a separate |                          |
+|                          | /usr partition.          |                          |
++--------------------------+--------------------------+--------------------------+
+| resume                   | --                       | Tries to resume from the |
+|                          |                          | "suspend to disk" state. |
+|                          |                          | Works with both swsusp   |
+|                          |                          | and suspend2. See        |
+|                          |                          | #Runtime customization   |
+|                          |                          | for further              |
+|                          |                          | configuration. This hook |
+|                          |                          | does not work with the   |
+|                          |                          | systemd hook according   |
+|                          |                          | to FS#37028.             |
++--------------------------+--------------------------+--------------------------+
+| filesystems              | This includes necessary  | --                       |
+|                          | file system modules into |                          |
+|                          | your image. This hook is |                          |
+|                          | required unless you      |                          |
+|                          | specify your file system |                          |
+|                          | modules in MODULES.      |                          |
++--------------------------+--------------------------+--------------------------+
+| shutdown                 | Adds shutdown initramfs  | Unmounts and             |
+|                          | support. Usage of this   | disassembles devices on  |
+|                          | hook was strongly        | shutdown.                |
+|                          | recommended before       |                          |
+|                          | mkinitcpio 0.16, if you  |                          |
+|                          | have a separate /usr     |                          |
+|                          | partition or encrypted   |                          |
+|                          | root. From mkinitcpio    |                          |
+|                          | 0.16 onwards, it is      |                          |
+|                          | deemed not necessary.    |                          |
++--------------------------+--------------------------+--------------------------+
+| usr                      | Add supports for /usr on | Mounts the /usr          |
+|                          | a separate partition.    | partition after the real |
+|                          |                          | root has been mounted.   |
++--------------------------+--------------------------+--------------------------+
 
-  :  Current hooks
+:  Current hooks
 
 Deprecated hooks
 
@@ -331,17 +537,18 @@ arch-projects mailing list.
 > COMPRESSION
 
 The kernel supports several formats for compression of the initramfs -
-gzip, bzip2, lzma, xz (also known as lzma2), and lzo. For most use
-cases, gzip or lzop provide the best balance of compressed image size
-and decompression speed.
+gzip, bzip2, lzma, xz (also known as lzma2), lzo, and lz4. For most use
+cases, gzip, lzop, and lz4 provide the best balance of compressed image
+size and decompression speed.
 
     COMPRESSION="gzip"
-    COMPRESSION="bzip2"
-    COMPRESSION="lzma"
-    COMPRESSION="lzop"
-    COMPRESSION="xz"
+    COMPRESSION="bzip2"  # since kernel 2.6.30
+    COMPRESSION="lzma"   # since kernel 2.6.30
+    COMPRESSION="lzop"   # since kernel 2.6.34
+    COMPRESSION="xz"     # since kernel 2.6.38
+    COMPRESSION="lz4"    # since kernel 3.11; also requires mkinitcpio>=16-2
 
-Specifying no COMPRESSION will result in a gzip compressed initramfs
+Specifying no COMPRESSION will result in a gzip-compressed initramfs
 file. To create an uncompressed image, specify COMPRESSION=cat in the
 config or use -z cat on the command line.
 
@@ -357,13 +564,15 @@ COMPRESSION, such as:
 
 In general these should never be needed as mkinitcpio will make sure
 that any supported compression method has the necessary flags to produce
-a working image.
+a working image. Furthermore, misusage of this option can lead to an
+unbootable system if the kernel is unable to unpack the resultant
+archive.
 
 Runtime customization
 ---------------------
 
 Runtime configuration options can be passed to init and certain hooks
-via the kernel command line. Kernel command line parameters are often
+via the kernel command line. Kernel command-line parameters are often
 supplied by the bootloader. The options discussed below can be appended
 to the kernel command line to alter default behavior. See Kernel
 parameters and Arch Boot Process for more information.
@@ -373,7 +582,7 @@ parameters and Arch Boot Process for more information.
 Note:The following options alter the default behavior of init in the
 initramfs environment. See /usr/lib/initcpio/init for details.
 
- root
+ root 
     This is the most important parameter specified on the kernel command
     line, as it determines what device will be mounted as your proper
     root device. mkinitcpio is flexible enough to allow a wide variety
@@ -382,30 +591,31 @@ initramfs environment. See /usr/lib/initcpio/init for details.
     root=/dev/sda1                                                # /dev node
     root=LABEL=CorsairF80                                         # label
     root=UUID=ea1c4959-406c-45d0-a144-912f4e86b207                # UUID
+    root=PARTUUID=14420948-2cea-4de7-b042-40f67c618660            # GPT partition UUID
     root=/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0-part1    # udev symlink (requires the udev hook)
     root=801                                                      # hex-encoded major/minor number
 
- break
+ break 
     If break or break=premount is specified, init pauses the boot
-    process (after loading hooks, but before mounting the root
-    filesystem) and launches an interactive shell which can be used for
+    process (after loading hooks, but before mounting the root file
+    system) and launches an interactive shell which can be used for
     troubleshooting purposes. This shell can be launched after the root
     has been mounted by specifying break=postmount. Normal boot
     continues after exiting from the shell.
 
- disablehooks
+ disablehooks 
     Disable hooks at runtime by adding disablehooks=hook1{,hook2,...}.
     For example:
 
         disablehooks=resume
 
- earlymodules
+ earlymodules 
     Alter the order in which modules are loaded by specifying modules to
     load early via earlymodules=mod1{,mod2,...}. (This may be used, for
     example, to ensure the correct ordering of multiple network
     interfaces.)
 
- rootdelay=N
+ rootdelay=N 
     Pause for N seconds before mounting the root file system by
     appending rootdelay. (This may be used, for example, if booting from
     a USB hard drive that takes longer to initialize.)
@@ -414,8 +624,9 @@ See also: Debugging with GRUB and init
 
 > Using RAID
 
-First, add the mdadm hook to the HOOKS array and any required RAID
-modules (raid456, ext4) to the MODULES array in /etc/mkinitcpio.conf.
+First, add the mdadm_udev or mdadm hook to the HOOKS array and any
+required RAID modules (e.g. raid456, ext4) to the MODULES array in
+/etc/mkinitcpio.conf.
 
 Kernel Parameters: Using the mdadm hook, you no longer need to configure
 your RAID array in the GRUB parameters. The mdadm hook will either use
@@ -443,8 +654,6 @@ An interface spec can be either short form, which is just the name of an
 interface (eth0 or whatever), or long form. ( Kernel Documentation )
 
 The long form consists of up to seven elements, separated by colons:
-
-  
 
      ip=<client-ip>:<server-ip>:<gw-ip>:<netmask>:<hostname>:<device>:<autoconf>
      nfsaddrs= is an alias to ip= and can be used too.
@@ -582,17 +791,17 @@ For an encrypted root, use something similar to:
 In this case, /dev/sda5 is the encrypted device, and we give it an
 arbitrary name of root, which means our root device, once unlocked, is
 mounted as /dev/mapper/root. On bootup, you will be prompted for the
-passphrase to unlock it.See LUKS#Configuration_of_initcpio for more
-details about using encrypted root.
+passphrase to unlock it. See Dm-crypt for more details about using
+encrypted root and Dm-crypt/System_Configuration#mkinitcpio in
+particular.
 
 > /usr as a separate partition
 
 If you keep /usr as a separate partition, you must adhere to the
 following requirements:
 
--   Add the shutdown hook. The shutdown process will pivot to a saved
-    copy of the initramfs and allow for /usr (and root) to be properly
-    unmounted from the VFS.
+-   Enable mkinitcpio-generate-shutdown-ramfs.service or add the
+    shutdown hook.
 -   Add the fsck hook, mark /usr with a passno of 0 in /etc/fstab. While
     recommended for everyone, it is mandatory if you want your /usr
     partition to be fsck'ed at boot-up. Without this hook, /usr will
@@ -630,22 +839,36 @@ the image:
 
     $ lsinitcpio -a /boot/initramfs-linux.img
 
+> "/dev must be mounted" when it already is
+
+The test used by mkinitcpio to determine if /dev is mounted is to see if
+/dev/fd/ is there. If everything else looks fine, it can be "created"
+manually by:
+
+    # ln -s /proc/self/fd /dev/
+
+(Obviously, /proc must be mounted as well. mkinitcpio requires that
+anyway, and that is the next thing it will check.)
+
 See also
 --------
 
 -   Boot Debugging - Debugging with GRUB
-
-References
-----------
-
-1.  Linux Kernel documentation on initramfs
-2.  Linux Kernel documentation on initrd
-3.  Wikipedia article on initrd
+-   Linux Kernel documentation on initramfs
+-   Linux Kernel documentation on initrd
+-   Wikipedia article on initrd
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Mkinitcpio&oldid=256012"
+"https://wiki.archlinux.org/index.php?title=Mkinitcpio&oldid=305894"
 
 Categories:
 
 -   Boot process
 -   Kernel
+
+-   This page was last modified on 20 March 2014, at 16:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -25,55 +25,48 @@ In this series of articles we will present a way to configure a Linux
 server to work in a mixed Windows/UNIX environment in a way that will
 scale well.
 
-What not to do: Don't try to configure a system in a fastest way
-possible, migrations between configurations (for example: from flat
-files to LDAP, for both UNIX and Windows authentication) are not easy to
-do, are disruptive and in the end result make those 5 minutes of work
-you do not do now, hours later on.
+Warning:Don't try to configure a system in a fastest way possible,
+migrations between configurations (for example: from flat files to LDAP,
+for both UNIX and Windows authentication) are not easy to do, are
+disruptive and in the end result make those 5 minutes of work you do not
+do now, hours later on.
 
 Note:I'm suggesting here how to pick out and configure a Linux server
 for a small company, with a server that is built from scratch or updated
 with a new install, not all suggestions apply for every possible
 workloads, though they should be a good starting point in most cases
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 Prerequisites                                                      |
-|     -   2.1 Computers                                                    |
-|         -   2.1.1 Hardware                                               |
-|         -   2.1.2 Basic configuration                                    |
-|         -   2.1.3 File systems                                           |
-|         -   2.1.4 Note on overall network architecture                   |
-|                                                                          |
-| -   3 Server Configuration                                               |
-|     -   3.1 Network access and basic services                            |
-|         -   3.1.1 Routing                                                |
-|         -   3.1.2 Firewall                                               |
-|         -   3.1.3 DHCP                                                   |
-|         -   3.1.4 DNS                                                    |
-|         -   3.1.5 NTP                                                    |
-|         -   3.1.6 proxy server                                           |
-|                                                                          |
-|     -   3.2 FreeRadius EAP-TLS                                           |
-|     -   3.3 LDAP                                                         |
-|     -   3.4 Samba                                                        |
-|     -   3.5 mail server                                                  |
-|     -   3.6 web server                                                   |
-|     -   3.7 alternatives to group ware                                   |
-|         -   3.7.1 forum                                                  |
-|         -   3.7.2 wiki                                                   |
-|                                                                          |
-|     -   3.8 Client backup                                                |
-|                                                                          |
-| -   4 Windows workstation                                                |
-|     -   4.1 joining samba domain                                         |
-|                                                                          |
-| -   5 Linux workstation                                                  |
-|     -   5.1 LDAP authentication                                          |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Introduction
+-   2 Prerequisites
+    -   2.1 Computers
+        -   2.1.1 Hardware
+        -   2.1.2 Basic configuration
+        -   2.1.3 File systems
+        -   2.1.4 Note on overall network architecture
+-   3 Server Configuration
+    -   3.1 Network access and basic services
+        -   3.1.1 Routing
+        -   3.1.2 Firewall
+        -   3.1.3 DHCP
+        -   3.1.4 DNS
+        -   3.1.5 NTP
+        -   3.1.6 proxy server
+    -   3.2 FreeRadius EAP-TLS
+    -   3.3 LDAP
+    -   3.4 Samba
+    -   3.5 mail server
+    -   3.6 web server
+    -   3.7 alternatives to group ware
+        -   3.7.1 forum
+        -   3.7.2 wiki
+    -   3.8 Client backup
+-   4 Windows workstation
+    -   4.1 joining samba domain
+-   5 Linux workstation
+    -   5.1 LDAP authentication
 
 Introduction
 ------------
@@ -224,7 +217,6 @@ Configure Freeradius:
     <               default_eap_type = md5
 
     >               default_eap_type = tls
-    <pre>
 
 /etc/raddb/clients.conf > client 192.168.1.1 { > secret = Testing123 >
 shortname = wifi-anna_r > } </pre>
@@ -299,8 +291,15 @@ Linux workstation
 > LDAP authentication
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Small_Business_Server&oldid=219079"
+"https://wiki.archlinux.org/index.php?title=Small_Business_Server&oldid=286667"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 6 December 2013, at 16:28.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

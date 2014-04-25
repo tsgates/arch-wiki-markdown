@@ -2,6 +2,14 @@ PHC
 ===
 
   ------------------------ ------------------------ ------------------------
+  [Tango-dialog-warning.pn This article or section  [Tango-dialog-warning.pn
+  g]                       is out of date.          g]
+                           Reason: mentions rc.d    
+                           scripts, initscripts are 
+                           deprecated (Discuss)     
+  ------------------------ ------------------------ ------------------------
+
+  ------------------------ ------------------------ ------------------------
   [Tango-preferences-deskt This article or section  [Tango-preferences-deskt
   op-locale.png]           needs to be translated.  op-locale.png]
                            Notes: please use the    
@@ -11,45 +19,11 @@ PHC
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-> Summary
-
-Provides a guide to installing, configuring and using a PHC.
-
 Related articles
 
-Laptop
-
-Pm-utils
-
-CPU Frequency Scaling
-
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-|     -   1.1 Alternative to PHC                                           |
-|                                                                          |
-| -   2 Supported CPUs                                                     |
-|     -   2.1 Intel                                                        |
-|     -   2.2 AMD                                                          |
-|                                                                          |
-| -   3 Installing the necessary packages                                  |
-| -   4 Configuring PHC                                                    |
-|     -   4.1 Finding safe low voltages                                    |
-|     -   4.2 Editing the configuration                                    |
-|                                                                          |
-| -   5 Troubleshooting                                                    |
-|     -   5.1 Module loading                                               |
-|     -   5.2 Hardware recognition                                         |
-|     -   5.3 Voltage controlling                                          |
-|     -   5.4 System stability                                             |
-|                                                                          |
-| -   6 Links                                                              |
-+--------------------------------------------------------------------------+
-
-Introduction
-------------
+-   Laptop
+-   Pm-utils
+-   CPU Frequency Scaling
 
 PHC is an acpi-cpufreq patch built with the purpose of enabling
 undervolting on your processor. This can potentially divide the power
@@ -57,10 +31,27 @@ consumption of your processor by two or more, and in turn increase
 battery life and reduce fan noise noticiably. PHC works only if your
 processor's architecture supports undervolting.
 
-For a complete power management suite see Related articles in top-right
-of the page.
+Contents
+--------
 
-> Alternative to PHC
+-   1 Alternative to PHC
+-   2 Supported CPUs
+    -   2.1 Intel
+    -   2.2 AMD
+-   3 Installing the necessary packages
+    -   3.1 Automatic module generation with DKMS
+-   4 Configuring PHC
+    -   4.1 Finding safe low voltages
+    -   4.2 Editing the configuration
+-   5 Troubleshooting
+    -   5.1 Module loading
+    -   5.2 Hardware recognition
+    -   5.3 Voltage controlling
+    -   5.4 System stability
+-   6 Links
+
+Alternative to PHC
+------------------
 
 cpupowerd is a userland solution to replace the in-kernel cpufreq
 governors and also enable undervolting, only on AMD processors. Like
@@ -93,9 +84,11 @@ Install from the AUR either phc-intel if you have an Intel processor, or
 phc-k8 if you have an AMD-K8-series one.
 
 Next you need to compile the module for your kernel; this will also be
-necessary after a kernel update.
+necessary after a kernel update (but see the section below on using DKMS
+to automate this).
 
-You need to have linux-headers and/or linux-lts-headers installed to be
+  
+ You need to have linux-headers and/or linux-lts-headers installed to be
 able to build the module.
 
 Type:
@@ -113,16 +106,28 @@ more information.
 Note:In the case of phc-intel, the acpi-cpufreq module is automatically
 loaded by /usr/lib/modprobe.d/phc-intel.conf.
 
+> Automatic module generation with DKMS
+
+The dkms-phc-intel package uses DKMS to automatically update the module
+after a kernel update. This is done at shutdown time to ensure that the
+kernel and kernel-headers are in sync (which is not necessarily the case
+during a system upgrade, depending on the order at which updates are
+installed).
+
+To enable the systemd service, type:
+
+    # systemctl enable dkms-phc-intel
+
 Configuring PHC
 ---------------
 
 > Finding safe low voltages
 
 To automatically find the best voltages, you can use the
-mprime-phc-setup script. Just copy the code into a text file, chmod +x
-it to make it executable and run it. You need to install mprime first
-(it is used to check that the CPU is stable). This script has not been
-tested on many systems yet, but should be safe.
+mprime-phc-setup script (source-code). Just copy the code into a text
+file, chmod +x it to make it executable and run it. You need to install
+mprime first (it is used to check that the CPU is stable). This script
+has not been tested on many systems yet, but should be safe.
 
 You can also try linux-phc-optimize, although it has produced unsafe
 vids on some setups. The script progressively lowers the values until
@@ -134,8 +139,8 @@ once for each value, then check
 > Editing the configuration
 
 After the phc module is compiled and the lowest voltages are found, they
-need to be added to the configuration file at /etc/phc-intel.conf or
-/etc/phc-k8.conf.
+need to be added to the configuration file at /etc/default/phc-intel or
+/etc/default/phc-k8.
 
 For example:
 
@@ -196,9 +201,16 @@ Links
 -   PHC official wiki
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=PHC&oldid=246795"
+"https://wiki.archlinux.org/index.php?title=PHC&oldid=294685"
 
 Categories:
 
 -   CPU
 -   Power management
+
+-   This page was last modified on 27 January 2014, at 18:58.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

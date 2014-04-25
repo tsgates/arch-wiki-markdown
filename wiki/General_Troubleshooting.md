@@ -1,6 +1,13 @@
 General Troubleshooting
 =======================
 
+Related articles
+
+-   Reporting Bug Guidelines
+-   Step By Step Debugging Guide
+-   Debug - Getting Traces
+-   Boot Debugging
+
   ------------------------ ------------------------ ------------------------
   [Tango-document-new.png] This article is a stub.  [Tango-document-new.png]
                            Notes: please use the    
@@ -14,43 +21,38 @@ This article explains some methods for general troubleshooting. For
 application specific issues, please reference the particular wiki page
 for that program.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Attention To Detail                                                |
-| -   2 Questions / Checklist                                              |
-| -   3 Remember                                                           |
-| -   4 Additional Support                                                 |
-| -   5 Session permissions                                                |
-| -   6 Single user mode                                                   |
-| -   7 file: could not find any magic files!                              |
-|     -   7.1 Solution                                                     |
-|                                                                          |
-| -   8 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Attention To Detail
+-   2 Questions / Checklist
+-   3 Be more specific
+-   4 Additional Support
+-   5 Session permissions
+-   6 Single user mode
+-   7 file: could not find any magic files!
+    -   7.1 Solution
+-   8 See also
 
 Attention To Detail
 -------------------
 
-In order to resolve an issue that you're having with Arch Linux, it is
-absolutely crucial to have a firm understanding of how that specific
-system functions. How it works, and what does it need to run without
-error? If you cannot comfortably answer these question then it is
-strongly advised that you review the Archwiki article for the
-application/service that you are having troubles with.Once you feel like
-you've understood the specific system, it will be easier for you to
-pin-point the problem. Saying, "Program X doesn't work" is unacceptable.
-Precision is key.
-
-The following gives a number of questions for you to ask yourself
-whenever dealing with a malfunctioning system. Under each question there
-are notes explaining how you should be answering each question, followed
-by some light examples on how to easily gather data output and what
-tools can be used to review logs and the journal.
+In order to resolve an issue that you are having, it is absolutely
+crucial to have a firm understanding of how that specific system
+functions. How it works, and what does it need to run without error? If
+you cannot comfortably answer these question then it is strongly advised
+that you review the Archwiki article for the function that you are
+having troubles with. Once you feel like you've understood the specific
+system, it will be easier for you to pin-point the problem.
 
 Questions / Checklist
 ---------------------
+
+The following gives a number of questions for you whenever dealing with
+a malfunctioning system. Under each question there are notes explaining
+how you should be answering each question, followed by some light
+examples on how to easily gather data output and what tools can be used
+to review logs and the journal.
 
 1. What is the issue(s)?
     Be as precise as possible. This will help you not get confused
@@ -80,14 +82,17 @@ Questions / Checklist
 Note:Using >> will ensure any previous text in $HOME/issue.log will not
 be overwritten.
 
-Remember
---------
+Be more specific
+----------------
 
- When attempting to resolve an issue, never approach it as
-    Application X does not work.
- Instead, look at it in its entirety
-    Application X'producesYerror(s) when performingZtasks under
-    conditionsAandB
+When attempting to resolve an issue, never approach it as:
+
+Application X does not work.
+
+Instead, look at it in its entirety:
+
+Application X produces Y error(s) when performing Z tasks under
+conditions A and B.
 
 Additional Support
 ------------------
@@ -96,8 +101,8 @@ With all the information in front of you. You should have a good idea as
 to what is going on with the system. And you can now start working on a
 proper fix.
 
-If you require any additional support, it can be found at
-irc.freenode.net #archlinux
+If you require any additional support, it can be found on the Forums or
+IRC at irc.freenode.net #archlinux
 
 Session permissions
 -------------------
@@ -110,24 +115,18 @@ First, make sure you have a valid local session within X:
 
     $ loginctl show-session $XDG_SESSION_ID
 
-This should contain Remote=no and Active=yes in the output. See
-xinitrc#Preserving the session for troubleshooting if it does not.
+This should contain Remote=no and Active=yes in the output. If it does
+not, make sure that X runs on the same tty where the login occurred.
+This is required in order to preserve the logind session. This is
+handled by the default /etc/X11/xinit/xserverrc.
 
-A dbus session should also be started along with X, in a way that
-exports a single DBUS_SESSION_BUS_ADDRESS for every application in your
-session. If you use a desktop environment this will be handled for you,
-otherwise you can copy the code from /etc/skel/.xinitrc that runs files
-in /etc/X11/xinit/xinitrc.d to your ~/.xinitrc, and avoid using
-dbus-launch or ck-launch-session.
+A D-Bus session should also be started along with X. See D-Bus#Starting
+the user session for more information on this.
 
-Some polkit actions require further authentication, even with a local
-session. A polkit authentication agent needs to be running for this to
-work. There are two alternatives in the repositories:
-
--   polkit-gnome, which provides
-    /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
--   polkit-kde, which provides
-    /usr/lib/kde4/libexec/polkit-kde-authentication-agent-1
+Basic polkit actions do not require further set-up. Some polkit actions
+require further authentication, even with a local session. A polkit
+authentication agent needs to be running for this to work. See
+polkit#Authentication agents for more information on this.
 
 Single user mode
 ----------------
@@ -145,8 +144,14 @@ Xorg, you may be able use the single user runlevel:
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-1.  Boot to single-user mode by appending 1 or s to the kernel line in
-    GRUB.
+1.  Boot to single-user mode. For GRUB 2:
+    1.  In the GRUB2 boot menu, select the Arch Linux entry, and press e
+        to edit it.
+    2.  Find the kernel line; it will start with
+        linux       /boot/vmlinuz-linux...
+    3.  Appending 1 or s to this line
+    4.  Press F2 to start the boot process
+
 2.  Then disable the systemd service that is causing the problem.
 3.  Change to the multi-user mode systemd target.
 4.  Then try to track down the issue by running the service manually.
@@ -217,9 +222,16 @@ See also
 -   Fix the Most Common Problems
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=General_Troubleshooting&oldid=239571"
+"https://wiki.archlinux.org/index.php?title=General_Troubleshooting&oldid=297583"
 
 Categories:
 
 -   System administration
 -   System recovery
+
+-   This page was last modified on 15 February 2014, at 04:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

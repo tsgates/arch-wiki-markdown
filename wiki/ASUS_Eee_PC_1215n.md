@@ -10,49 +10,77 @@ ASUS Eee PC 1215n
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
+Notice: Kernel Panic Issue
+
+Kernels 3.10.6 - 3.10.10 cause kernel panics with the brcmsmac WiFi
+driver.
+
+If you need one of these kernels, see section below for work-around.
+Otherwise, update kernel to 3.11.1+
+
+  --------------- --------- -----------------------
+  Device          Status    Module
+  Ethernet        Working   atl1c [1]
+  Wireless        Working   brcmsmac; broadcom-wl
+  Video           Working   i915; nvidia; noveau
+  Audio           Working   snd-hda-intel
+  Camera          Working   uvcvideo
+  Card Reader     Working   usb-storage
+  Function Keys   Partial   eeepc-wmi [2]
+  --------------- --------- -----------------------
+
 This page includes general information regarding Asus EEE PC 1215n and
 related notes on installing/using Arch Linux on it.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 System Specs                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Wireless and Bluetooth                                       |
-|     -   2.2 Media- and FN-keys                                           |
-|     -   2.3 nVidia ION 2 with Optimus                                    |
-|     -   2.4 Bumblebee Installation                                       |
-|     -   2.5 Relevant links                                               |
-|                                                                          |
-| -   3 Problems                                                           |
-|     -   3.1 Nvidia graphic card                                          |
-|     -   3.2 Bluetooth                                                    |
-|     -   3.3 CPU power consumption                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 System Specs
+-   2 Configuration
+    -   2.1 Wireless and Bluetooth
+    -   2.2 Media- and FN-keys
+    -   2.3 nVidia ION 2 with Optimus
+    -   2.4 Bumblebee Installation
+    -   2.5 Relevant links
+-   3 Problems
+    -   3.1 Nvidia graphic card
+    -   3.2 Bluetooth
+    -   3.3 CPU power consumption
+    -   3.4 brcmsmac WiFi driver kernel panic
 
 System Specs
 ============
 
-CPU: Intel Atom D525 1.83GHz 667 MHz CPU, 1MB L2 Cache
+CPU: Intel Atom D525 (Dual Core; 1.8GHz; Codename Pineview)
 
-RAM: 2GB 1066MHz DDR3
+RAM: 1-2 x 1GB DDR3 SO-DIMM; 800 MHz (Maximum 4 GB)
 
-HDD: 250/320GB 5400RPM
+HDD: 2.5" SATA2 250GB/320GB HDD; 5400 RPM (SATA2)
 
-GPU: nVidia ION2 with Optimus (see below)
+GPU: nVidia ION2 (GT218; 16 CUDA cores; 475 MHz; 256 MB DDR3) [3] /
+Intel Graphics Media Accelerator on CPU die (Intel GMA 3150; 400 MHz;
+256 MB Max Shared Memory [4])
+
+North Bridge: NM10 [5]
+
+South Bridge: Intel ICH7-M [6]
+
+Audio: Intel High Definition Audio Controller
 
 Display: 12.1" 1366x768 LED display
 
-Wireless: Broadcom BCM4313 802.11 b/g
+Wireless: Broadcom BCM4313 802.11b/g/n
 
-Bluetooth: TODO
+Ethernet: Qualcomm Atheros AR8152 v2.0 10/100 Mb
 
-Webcam: TODO
+Bluetooth: BCM4313 Bluetooth v3.0 + HS
 
-Card Reader: TODO
+Webcam: Azurewave 0.3 MP (VGA)
 
-Extras: Two USB 3.0 ports, Bluetooth 3 (optional)
+Expansion / Connectivity: USB (3 x USB 2.0); Video Ports (VGA, HDMI);
+Audio Ports (Out 3.5 mm, In 3.5 mm); Card Reader (SD/ SDHC/ SDXC/ MMC)
+
+Extras: Two USB 3.0 ports (optional)
 
 Configuration
 =============
@@ -60,35 +88,8 @@ Configuration
 Wireless and Bluetooth
 ----------------------
 
-PS : With the new Kernel (3.0+) there is no need for any of the
-procedure below, because Wireless and Bluetooth work out of box ^^
-
-Wireless: In order to use Wireless with the BCM4313 (Linux Kernel 3.0+)
-you need to blacklist bcmia by editing your
-/etc/modprobe.d/modprobe.conf and add this :
-
-    # blacklist bcma
-
-Then restart and you can now use your BCM4313 normally :D
-
-Bluetooth: BCM4313 --> Install packages to manager Bluetooth like
-"bluez", "bluez-firmware".
-
-    # sudo pacman -S bluez bluez-firmware 
-
-And then activate them by adding the bluetooth to the Daemons of the
-"/etc/rc.conf" configuration file.
-
-    # sudo nano /etc/rc.conf
-
-And then add to bluetooth to the Daemons:
-
-    # DAEMONS=(... bluetooth)
-
-Restart the all thing, so you can use the Bluetooth and/or the Wireless
-
-For more information about installing and configuration bluetooth, take
-a look at the "Arch Linux Bluetooth Wiki"[1].
+With the Kernel 3.0 and after, there is no need for any of the procedure
+below, because Wireless and Bluetooth work out of box.
 
 Media- and FN-keys
 ------------------
@@ -147,10 +148,9 @@ Module auto-detection may load the nouveau module, but this sometimes
 seems to cause X to crash after boot-up, so try blacklisting this module
 if you encounter this problem.
 
-Update 1 : There is a new project, called Bumblebee (Transformers
-reference) that allows you to use the Nvidia Optimus ION2, but not
-natively, you have to instale it, and then call each program on the
-terminal with a command... (see more informations here[2] and here[3])
+There is a new project, called Bumblebee (Transformers reference) that
+allows you to use the Nvidia Optimus ION2, but not natively, you have to
+instale it, and then call each program on the terminal with a command.
 
 Bumblebee Installation
 ----------------------
@@ -253,9 +253,25 @@ There is a kernel parameter which must be added in linux 3.0 kernel to
 use energy saving feature of the intel driver:
 pcie_aspm=force i915.i915_enable_rc6=1, see this thread.
 
+brcmsmac WiFi driver kernel panic
+---------------------------------
+
+After connecting to an access point, the system's kernel will panic. To
+stop the connection, press your WiFi toggle button while booting Arch to
+temporarily disable your wireless. Your kernel can be patched to correct
+the issue until the kernel is officially updated. Use 'sudo pacman -U
+/path/to/kernel/patch.pkg.tar.xz' to install. Patch.
+
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1215n&oldid=238823"
+"https://wiki.archlinux.org/index.php?title=ASUS_Eee_PC_1215n&oldid=304967"
 
 Category:
 
 -   ASUS
+
+-   This page was last modified on 16 March 2014, at 09:56.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

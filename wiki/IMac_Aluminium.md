@@ -18,28 +18,24 @@ problem, also my ctrl-alt-Fkeys work now.
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Deleting OS X?                                                     |
-| -   2 Install additional bootloader                                      |
-| -   3 Partitioning & Filesystems                                         |
-|     -   3.1 Accessing the Ext2/3 file system from OS X                   |
-|     -   3.2 The GPT partitioning scheme that Apple uses                  |
-|                                                                          |
-| -   4 rEFIt Re-sync                                                      |
-| -   5 Install Arch                                                       |
-| -   6 Installing & Configuring X                                         |
-| -   7 Controlling the screen backlight and brightness                    |
-|     -   7.1 backlight.c                                                  |
-|     -   7.2 Brightness control on a 2011 27 inch iMac                    |
-|                                                                          |
-| -   8 Getting sound to work right                                        |
-|     -   8.1 The iMac 20" & 24" models                                    |
-|     -   8.2 The imac7,1 model:                                           |
-|     -   8.3 The imac12,2 27" 2011 model                                  |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Deleting OS X?
+-   2 Install additional bootloader
+-   3 Partitioning & Filesystems
+    -   3.1 Accessing the Ext2/3 file system from OS X
+    -   3.2 The GPT partitioning scheme that Apple uses
+-   4 rEFIt Re-sync
+-   5 Install Arch
+-   6 Installing & Configuring X
+-   7 Controlling the screen backlight and brightness
+    -   7.1 backlight.c
+    -   7.2 Brightness control on a 2011 27 inch iMac
+-   8 Getting sound to work right
+    -   8.1 The iMac 20" & 24" models
+    -   8.2 The imac7,1 model:
+    -   8.3 The imac12,2 27" 2011 model
 
 Deleting OS X?
 --------------
@@ -217,10 +213,10 @@ This is not necessary when booting through EFI.
 Install Arch
 ------------
 
-I used both the Arch Beginners Guide Beginners_Guide & the Official
-Install Guide Official_Arch_Linux_Install_Guide. I used the Core install
-from the CD & updated later. (The FTP install is a quicker method as it
-installs the latest packages directly over the internet.)
+I used both the Arch Beginners Guide Beginners' guide & the Official
+Install Guide Installation guide. I used the Core install from the CD &
+updated later. (The FTP install is a quicker method as it installs the
+latest packages directly over the internet.)
 
 The CD install & network setup went perfectly for me. The Beginners
 Guide has all that was necessary for my install, though I used the
@@ -474,8 +470,15 @@ found here:
 https://bbs.archlinux.org/viewtopic.php?id=35355
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=IMac_Aluminium&oldid=238991"
+"https://wiki.archlinux.org/index.php?title=IMac_Aluminium&oldid=298285"
 
 Category:
 
 -   Apple
+
+-   This page was last modified on 16 February 2014, at 07:45.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

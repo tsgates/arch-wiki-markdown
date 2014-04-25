@@ -47,7 +47,7 @@ srcDir = "usr/share/doc/arch-wiki/html/"
 trimWiki :: String -> IO String
 trimWiki file = do
     html <- readFile $ file
-    let path = makeValid $ dstDir ++ (sanitize $ takeFileName file) ++ ".md"
+    let path = makeValid $ dstDir ++ (sanitize $ takeBaseName file) ++ ".md"
     writeFile path (cleanDoc html)
     return file
   where 

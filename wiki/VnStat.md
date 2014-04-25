@@ -5,30 +5,24 @@ vnStat is a lightweight network traffic monitor. It keeps a network
 traffic log on selectable interfaces. Through the command line the
 network traffic statistics can be shown.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-| -   2 Configuration                                                      |
-|     -   2.1 Setting the interfaces                                       |
-|     -   2.2 Updating method                                              |
-|         -   2.2.1 Cron                                                   |
-|         -   2.2.2 Service                                                |
-|         -   2.2.3 Daemon                                                 |
-|                                                                          |
-|     -   2.3 Global settings                                              |
-|                                                                          |
-| -   3 Usage                                                              |
-| -   4 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation
+-   2 Configuration
+    -   2.1 Setting the interfaces
+    -   2.2 Updating method
+        -   2.2.1 Cron
+        -   2.2.2 Service
+    -   2.3 Auto-load during boot
+    -   2.4 Global settings
+-   3 Usage
+-   4 See Also
 
 Installation
 ------------
 
-The vnStat package is available in [community]:
-
-    # pacman -S vnstat
+Install vnstat from the official repositories.
 
 Configuration
 -------------
@@ -67,12 +61,9 @@ The second way is using systemd (and the provided service):
 
     # systemctl start vnstat.service
 
-Daemon
+> Auto-load during boot
 
-The third way of updating is using a daemon provided by vnStat. Add
-vnstat to your daemons in rc.conf#Daemons.
-
-    DAEMONS=(... network vnstat ...)
+    # systemctl enable vnstat.service
 
 > Global settings
 
@@ -104,8 +95,15 @@ See Also
 VnStat Custom WebUI
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=VnStat&oldid=247279"
+"https://wiki.archlinux.org/index.php?title=VnStat&oldid=287463"
 
 Category:
 
 -   Networking
+
+-   This page was last modified on 10 December 2013, at 00:41.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -11,24 +11,16 @@ Apache and FastCGI
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Introduction                                                       |
-| -   2 mod_fastcgi                                                        |
-|     -   2.1 Step 1: Installation                                         |
-|     -   2.2 Step 2: Configuration                                        |
-|                                                                          |
-| -   3 mod_fcgid                                                          |
-|     -   3.1 Step 1: Installation                                         |
-|     -   3.2 Step 2: Configuration                                        |
-|                                                                          |
-| -   4 Troubleshooting                                                    |
-| -   5 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
 
-Introduction
+-   1 Installation
+-   2 mod_fastcgi
+-   3 mod_fcgid
+-   4 Troubleshooting
+-   5 See also
+
+Installation
 ------------
 
 There are two FastCGI modules for Apache:
@@ -37,19 +29,15 @@ There are two FastCGI modules for Apache:
 -   mod_fcgid
 
 They both have permissive licenses (custom for mod_fastcgi and GPL for
-mod_fcgid) and they are both available in Extra repository.
+mod_fcgid) and they are both available in the official repositories.
 
-Apache 2.4 (available as AUR package) now provides an official module,
-mod_proxy_fcgi. See configuration example for php-fpm.
+Apache 2.4 (available in AUR as apache24) now provides an official
+module, mod_proxy_fcgi. See configuration example for php-fpm.
 
 mod_fastcgi
 -----------
 
-> Step 1: Installation
-
-    pacman -S mod_fastcgi
-
-> Step 2: Configuration
+Install mod_fastcgi from the official repositories.
 
 First you need to load the fastcgi module. Make sure that the following
 is present and uncommented in your httpd.conf:
@@ -71,11 +59,7 @@ ExecCGI enabled directory to execute.
 mod_fcgid
 ---------
 
-> Step 1: Installation
-
-    pacman -S mod_fcgid
-
-> Step 2: Configuration
+Install mod_fcgid from the official repositories.
 
 First you need to load the fastcgi module. Make sure that the following
 is present and uncommented in your httpd.conf:
@@ -106,8 +90,15 @@ See also
 -   lighttpd#FastCGI
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Apache_and_FastCGI&oldid=237840"
+"https://wiki.archlinux.org/index.php?title=Apache_and_FastCGI&oldid=299808"
 
 Category:
 
 -   Web Server
+
+-   This page was last modified on 22 February 2014, at 15:29.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

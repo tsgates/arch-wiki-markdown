@@ -11,26 +11,22 @@ Offline Installation of Packages
                            (Discuss)                
   ------------------------ ------------------------ ------------------------
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Normal Method: Pacman                                              |
-|     -   1.1 A slightly contrived example                                 |
-|         -   1.1.1 Generate a list of packages to download                |
-|         -   1.1.2 Download the packages and their dependencies           |
-|         -   1.1.3 Create a repository database just for these packages   |
-|         -   1.1.4 Transfer the packages                                  |
-|         -   1.1.5 Install the packages                                   |
-|         -   1.1.6 Links and sources                                      |
-|                                                                          |
-| -   2 Simpler Method: Powerpill Portable                                 |
-|     -   2.1 Requirements                                                 |
-|         -   2.1.1 Unconnected Computer                                   |
-|         -   2.1.2 Connected Computer                                     |
-|                                                                          |
-|     -   2.2 Steps                                                        |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Normal Method: Pacman
+    -   1.1 A slightly contrived example
+        -   1.1.1 Generate a list of packages to download
+        -   1.1.2 Download the packages and their dependencies
+        -   1.1.3 Create a repository database just for these packages
+        -   1.1.4 Transfer the packages
+        -   1.1.5 Install the packages
+        -   1.1.6 Links and sources
+-   2 Simpler Method: Powerpill Portable
+    -   2.1 Requirements
+        -   2.1.1 Unconnected Computer
+        -   2.1.2 Connected Computer
+    -   2.2 Steps
 
 Normal Method: Pacman
 ---------------------
@@ -227,3 +223,10 @@ Retrieved from
 Category:
 
 -   Package management
+
+-   This page was last modified on 3 April 2013, at 06:54.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

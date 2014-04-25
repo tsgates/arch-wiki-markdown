@@ -8,24 +8,22 @@ amount you learn.
 
 This guide shows you how to install Anki.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation with Japanese Support                                 |
-| -   2 Configuration                                                      |
-| -   3 Tips and tricks                                                    |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Installation with Japanese Support
+-   2 Configuration
+-   3 Tips and tricks
+-   4 See also
 
 Installation with Japanese Support
 ----------------------------------
 
 Install mecab-ipadic from the AUR.
 
-Install kakasi from the Official Repositories.
+Install kakasi from the Official repositories.
 
-Install anki from the Official Repositories.
+Install anki from the Official repositories.
 
 Launch anki, and inside anki use "File->Download->Shared Plugin" to
 download and install the "Japanese Support" plugin, restart.
@@ -55,8 +53,15 @@ See also
     repetition
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Anki&oldid=233014"
+"https://wiki.archlinux.org/index.php?title=Anki&oldid=303837"
 
 Category:
 
 -   Applications
+
+-   This page was last modified on 9 March 2014, at 19:59.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

@@ -9,50 +9,37 @@ send packets with a spoofed source header and get you locked out of the
 server. SSH keys provide an elegant solution to the problem of brute
 forcing without these problems.
 
-Fail2ban scans log files like /var/log/pwdfail or
-/var/log/apache/error_log and bans IP that makes too many password
-failures. It updates firewall rules to reject the IP address.
+Fail2ban scans various textual log files and bans IP that makes too many
+password failures by updating firewall rules to reject the IP address,
+similar to Sshguard.
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Installation                                                       |
-|     -   1.1 systemd                                                      |
-|                                                                          |
-| -   2 Hardening                                                          |
-|     -   2.1 Capabilities                                                 |
-|     -   2.2 Filesystem Access                                            |
-|                                                                          |
-| -   3 SSH jail                                                           |
-| -   4 See also                                                           |
-+--------------------------------------------------------------------------+
+Warning:For correct function it is essential that the tool parses the IP
+addresses in the log correctly. You should always test the log filters
+work as intended per application you want to protect.
+
+Contents
+--------
+
+-   1 Installation
+    -   1.1 systemd
+-   2 Hardening
+    -   2.1 Capabilities
+    -   2.2 Filesystem Access
+-   3 SSH jail
+-   4 See also
 
 Installation
 ------------
 
-First, install python2-pyinotify so that Fail2ban can detect
-modification to the log files:
-
-    # pacman -S python2-pyinotify
-
-Then, install fail2ban:
-
-    # pacman -S fail2ban
+Install fail2ban from the official repositories.
 
 If you want Fail2ban to send an email when someone has been banned, you
-have to configure SSMTP (for example). You will also have to install
-whois to get some information about the attacker.
-
-    # pacman -S whois
+have to configure SSMTP (for example).
 
 > systemd
 
-Use the service unit fail2ban.service, consult systemd for instructions
-
-Please note that this currently requires syslog-ng logging. This is
-because a pure systemd journalctl does not log to /var/log/auth.log
-which is parsed by the service in default.
+Use the service unit fail2ban.service, refer to systemd for
+instructions.
 
 Hardening
 ---------
@@ -63,10 +50,13 @@ Ref:systemd for Administrators, Part XII
 
 > Capabilities
 
-For added security consider limiting fail2ban capabilities by adding
-CapabilityBoundingSet under [Service] section of the systemd service
-file, e.g.:
+For added security consider limiting fail2ban capabilities by specifying
+CapabilityBoundingSet in the drop-in configuration file for the provided
+fail2ban.service:
 
+    /etc/systemd/system/fail2ban.service.d/capabilities.conf
+
+    [Service]
     CapabilityBoundingSet=CAP_DAC_READ_SEARCH CAP_NET_ADMIN CAP_NET_RAW
 
 In the example above, CAP_DAC_READ_SEARCH will allow fail2ban full read
@@ -106,6 +96,9 @@ If your firewall is iptables:
     logpath  = /var/log/auth.log                                                                    
     maxretry = 5
 
+Fail2Ban from version 0.9 can also read directly from the systemd
+journal by setting backend = systemd.
+
 If your firewall is shorewall:
 
     [ssh-shorewall]
@@ -133,8 +126,15 @@ See also
 -   sshguard
 
 Retrieved from
-"https://wiki.archlinux.org/index.php?title=Fail2ban&oldid=244932"
+"https://wiki.archlinux.org/index.php?title=Fail2ban&oldid=305539"
 
 Category:
 
 -   Secure Shell
+
+-   This page was last modified on 18 March 2014, at 23:23.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

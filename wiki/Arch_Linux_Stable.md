@@ -8,23 +8,19 @@ at www.archserver.org
 
   
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Arch-Stable/ArchRock                                               |
-|     -   1.1 Aims                                                         |
-|     -   1.2 Concept                                                      |
-|     -   1.3 Definition                                                   |
-|     -   1.4 Requirements                                                 |
-|         -   1.4.1 Staff                                                  |
-|         -   1.4.2 Communication                                          |
-|         -   1.4.3 Project Volunteers                                     |
-|                                                                          |
-|     -   1.5 Project Status                                               |
-|                                                                          |
-| -   2 See Also                                                           |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Arch-Stable/ArchRock
+    -   1.1 Aims
+    -   1.2 Concept
+    -   1.3 Definition
+    -   1.4 Requirements
+        -   1.4.1 Staff
+        -   1.4.2 Communication
+        -   1.4.3 Project Volunteers
+    -   1.5 Project Status
+-   2 See Also
 
 Arch-Stable/ArchRock
 --------------------
@@ -125,3 +121,10 @@ Retrieved from
 Category:
 
 -   Arch development
+
+-   This page was last modified on 4 December 2012, at 14:52.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers

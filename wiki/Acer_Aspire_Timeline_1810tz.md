@@ -3,34 +3,28 @@ Acer Aspire Timeline 1810tz
 
 Small howto for installing arch on the Acer Aspire Timeline 1810tz
 
-+--------------------------------------------------------------------------+
-| Contents                                                                 |
-| --------                                                                 |
-|                                                                          |
-| -   1 Hardware                                                           |
-|     -   1.1 lspci                                                        |
-|                                                                          |
-| -   2 Wireless                                                           |
-| -   3 Wired                                                              |
-| -   4 xorg                                                               |
-|     -   4.1 Issues                                                       |
-|     -   4.2 Extarkeys                                                    |
-|                                                                          |
-| -   5 KMS                                                                |
-| -   6 Sound                                                              |
-| -   7 Webcam                                                             |
-| -   8 Powersaving                                                        |
-|     -   8.1 powertop                                                     |
-|     -   8.2 tmpfs                                                        |
-|     -   8.3 noatime                                                      |
-|     -   8.4 Fan-Control                                                  |
-|                                                                          |
-| -   9 Misc                                                               |
-|     -   9.1 Keyboard in X                                                |
-|     -   9.2 mplayer 1080p 720p                                           |
-|                                                                          |
-| -   10 External Resources                                                |
-+--------------------------------------------------------------------------+
+Contents
+--------
+
+-   1 Hardware
+    -   1.1 lspci
+-   2 Wireless
+-   3 Wired
+-   4 xorg
+    -   4.1 Issues
+    -   4.2 Extarkeys
+-   5 KMS
+-   6 Sound
+-   7 Webcam
+-   8 Powersaving
+    -   8.1 powertop
+    -   8.2 tmpfs
+    -   8.3 noatime
+    -   8.4 Fan-Control
+-   9 Misc
+    -   9.1 Keyboard in X
+    -   9.2 mplayer 1080p 720p
+-   10 External Resources
 
 Hardware
 ========
@@ -205,7 +199,6 @@ Trying to get it to work:
 -   Multithreaded mplayer aur/mplayer-mt-git does improve the situation
     but not solve the problem.
     -   mplayer -lavdopts threads=4 -vo gl2
-
 -   aur/mplayer-coreavc-svn tries to install wine so I didn't test it
 -   VA-API GPU Acceleration coming for GM45 around Q3 2010 [2].
     -   using aur/mplayer-vaapi mplayer -vo vaapi file should play the
@@ -225,3 +218,10 @@ Retrieved from
 Category:
 
 -   Acer
+
+-   This page was last modified on 14 October 2012, at 20:37.
+-   Content is available under GNU Free Documentation License 1.3 or
+    later unless otherwise noted.
+-   Privacy policy
+-   About ArchWiki
+-   Disclaimers
