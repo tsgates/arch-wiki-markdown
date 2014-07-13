@@ -1,22 +1,22 @@
 # Maintainer: Taesoo Kim <tsgatesv@gmail.com>
-pkgname=arch-wiki-markdown-git
+_pkgname=arch-wiki-markdown
+pkgname=${_pkgname}-git
 pkgver=9031de0
 pkgrel=1
 pkgdesc="Search and read Arch Wiki offline in your terminal"
 arch=('any')
-url="https://github.com/tsgates/arch-wiki-markdown"
+url="https://github.com/tsgates/${_pkgname}"
 license=('MIT')
-source=("git+https://github.com/tsgates/arch-wiki-markdown")
-depends=('bash' 'vim')
-sha1sums=('SKIP')
+depends=('vim')
+source=("git+https://github.com/tsgates/${_pkgname}")
+sha512sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir"
-  git describe --always
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 package() {
-  install -d "$pkgdir/usr/share/doc/${pkgname%-*}"
-  install -m 0644 $srcdir/${pkgname%-*}/wiki/* "$pkgdir/usr/share/doc/${pkgname%-*}"
-  install -Dm 0755 $srcdir/${pkgname%-*}/arch-wiki "$pkgdir/usr/bin/arch-wiki"
+    install -d "${pkgdir}/usr/share/doc/${pkgname%-*}"
+    install -Dm0644 ${_pkgname}/wiki/* "$pkgdir/usr/share/doc/${pkgname%-*}"
+    install -Dm0755 ${_pkgname}/arch-wiki "$pkgdir/usr/bin/arch-wiki"
 }
