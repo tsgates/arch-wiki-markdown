@@ -1,22 +1,41 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 ROOT=/usr/share/doc/arch-wiki-markdown
 LESS="vim -u /usr/share/vim/vim7*/macros/less.vim -n"
+SCRIPT_NAME=$(grep -o -e "[^\/]*$" <<< "$0")
 
 usage()
 {
 cat << EOF
-usage: $0 options
+Usage:
 
-This script run the test1 or test2 over a machine.
+  $SCRIPT_NAME [-#|-n] {string}
+    Search for wiki article names containing "string" and optionally
+    specify the number of the search result to automatically view, or
+    disable interactive selection.
 
-OPTIONS:
-   -h      Show this message
-   -g      Test type, can be ‘test1′ or ‘test2′
-   -#1     -1 for first match, -2 for second ...
-   -p      Plain text mode. No interactive mode.
+    -#
+        View the #th result.
+    -n | --normal
+        Normal mode (no interactive searching)
 
-See $ROOT
+    Examples:
+      $SCRIPT_NAME PKGBUILD
+        Search for wiki articles with names containing "PKGBUILD"
+
+      $SCRIPT_NAME -3 install
+        View the 3rd wiki article with a name containing "install"
+
+  $SCRIPT_NAME [OPTION]
+    OPTIONS:
+      -g {string} | --grep {string}
+        Search the wiki for the given string
+      -v | --version
+        Display the version and exit
+      -h | --help
+        Show this help dialog
+
+Wiki files are located in $ROOT
 EOF
 }
 
@@ -60,7 +79,7 @@ done
 # grep
 if [[ -n $GLOBAL_SEARCH  ]]; then
   echo "Searching for $GLOBAL_SEARCH"
- (cd $ROOT; grep --color=always -rn "$GLOBAL_SEARCH" | less -X -F -R)
+  (cd $ROOT; grep --color=always -rn "$GLOBAL_SEARCH" | less -X -F -R)
   exit
 fi
 
@@ -97,7 +116,7 @@ if [[ ${#DOC[*]} == 1 ]] || [[ $NTH != -1 ]]; then
 else
   # menu
   for ((cnt=0; cnt<${#DOC[*]}; cnt ++)); do
-    if [ $AWESOME_STYLE -eq 1  ] ; then 
+    if [ $AWESOME_STYLE -eq 1  ] ; then
        echo -n "[$((cnt+1))] "
     fi
     echo ${DOC[$cnt]}
@@ -111,13 +130,13 @@ else
       read -p "Please choose a number from the list [1-$upto|q]: " input
       case $input in
         [Qq]*) exit;;
-        [0-9]*) 
+        [0-9]*)
           if ((1<=$input && $input<=$upto)) ; then
-			echo "Opening" ${DOC[$input-1]};
-			open $(($input-1))
+            echo "Opening" ${DOC[$input-1]};
+            open $(($input-1))
           else
-			echo "Invalid number" $input;
-		  fi
+            echo "Invalid number" $input;
+          fi
           ;;
         *) echo "Invalid option. Use q to quit.";;
       esac
