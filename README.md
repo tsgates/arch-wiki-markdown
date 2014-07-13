@@ -2,10 +2,21 @@
 
 Search and read Arch Wiki offline in your terminal.
 
+## Install ##
+
+This package can be installed through the [AUR](https://aur.archlinux.org/packages/arch-wiki-markdown-git), or manually from github by running:
+
 ```
     $ wget https://raw.github.com/tsgates/arch-wiki-markdown/master/PKGBUILD
     $ makepkg -csi
+```
 
+
+## Usage ##
+
+To view the list of valid commands, run the help option:
+
+```
     $ ./arch-wiki -h
     Usage:
 
@@ -38,8 +49,8 @@ Search and read Arch Wiki offline in your terminal.
     Wiki files are located in /usr/share/doc/arch-wiki-markdown
 ```
 
-## Update ##
+## Interactive Search Mode ##
 
-Now we have an interactive search mode. You can jump directly to one of the results.
+You can now interactively select one of the results (use the `-n` option to search the old way).
 
 [See, how it works](http://asciinema.org/a/5872)
