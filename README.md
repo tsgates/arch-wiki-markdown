@@ -1,6 +1,6 @@
 # arch-wiki-markdown #
 
-Search and read Arch Wiki offline in your terminal.
+Search and read the Arch Wiki offline in your terminal.
 
 ## Install ##
 
@@ -54,3 +54,13 @@ To view the list of valid commands, run the help option:
 You can now interactively select one of the results (use the `-n` option to search the old way).
 
 [See, how it works](http://asciinema.org/a/5872)
+
+## Update Wiki ##
+
+Before running `makepkg -csi`, the wiki can be updated by running `./gen-wiki.sh`.
+
+### Requirements ###
+
+* ghc - Glawsgow Haskell Compiler
+* wget - Network utility to retrieve files from the web
+* mtools - A collection of tools to access MS-DOS disks
