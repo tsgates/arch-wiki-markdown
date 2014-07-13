@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source PKGBUILD
 
-makepkg --source
-burp -c multimedia arch-wiki-markdown-git-$pkgver-1.src.tar.gz
+mkaurball
+burp -c multimedia ${pkgname}-${pkgver}-${pkgrel}.src.tar.gz
