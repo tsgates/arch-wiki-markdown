@@ -10,11 +10,11 @@ TMP=${1:-$(mktemp -d)}
 ZIP=${TMP}/arch-wiki-docs.tar.xz
 
 (cd $DIR && {
+    [[ -d "${DIR}/wiki" ]] && rm -rf "${DIR}/wiki" && install -d "${DIR}/wiki"
     [[ ! -d "$TMP" ]] && install -d "$TMP"
     [[ ! -e "$ZIP" ]] && wget $URL -O "$ZIP"
     tar Jxvf "$ZIP" -C "$TMP" >/dev/null 2>&1
 
-    [[ -d "wiki" ]] && rm -rf wiki && install -d wiki
     pacman -Si arch-wiki-docs | grep -e "^Version" | sed 's|^.*: ||' > wiki/version
     while read -r file; do
         MDFILE="${DIR}/wiki/$(sed 's|^.*/||;s|\.html$||' <<< $file).md"
