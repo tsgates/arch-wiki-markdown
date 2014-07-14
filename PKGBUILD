@@ -28,9 +28,9 @@ pkgver() {
 }
 
 prepare() {
-    if [[ ! -d "arch-wiki-docs" ]]; then
+    if [[ ! -d "wiki-docs" ]]; then
         echo "Downloading Wiki"
-        python arch-wiki-docs/arch-wiki-docs.py --output-directory arch-wiki-docs --clean --safe-filenames
+        python arch-wiki-docs/arch-wiki-docs.py --output-directory wiki-docs --clean --safe-filenames
         echo "Done!"
     else
         echo "Download directory already exists, using that!"
@@ -43,7 +43,7 @@ build() {
         install -d wiki
         while read -r file; do
             ./html2md.js "$file" > "wiki/$(sed 's|^.*/||;s|\.html$||' <<< $file).md"
-        done < <(find ${_pkgname}/arch-wiki-docs/${_wiki_lang}/ -type f)
+        done < <(find ${_pkgname}/wiki-docs/${_wiki_lang}/ -type f)
         echo "Done!"
     else
         echo "Wiki directory already exists, using that!"
