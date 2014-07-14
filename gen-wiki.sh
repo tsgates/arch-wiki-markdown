@@ -15,7 +15,7 @@ ZIP=${TMP}/arch-wiki-docs.tar.xz
     tar Jxvf "$ZIP" -C "$TMP" >/dev/null 2>&1
 
     [[ -d "wiki" ]] && rm -rf wiki && install -d wiki
-    date +%Y%m%d > wiki/version
+    pacman -Si arch-wiki-docs | grep -e "^Version" | sed 's|^.*: ||' > wiki/version
     while read -r file; do
         MDFILE="${DIR}/wiki/$(sed 's|^.*/||;s|\.html$||' <<< $file).md"
         echo "Converting: ${file} -> ${MDFILE}"
