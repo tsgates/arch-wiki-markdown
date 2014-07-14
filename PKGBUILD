@@ -51,8 +51,8 @@ build() {
     [[ -d "wiki" ]] && rm -rf wiki
     install -d wiki
     while read -r file; do
-        ./html2md.js "$file" > "wiki/$(sed 's|^.*/||;s|\.html$||' <<< $file).md"
-    done < <(find ${_pkgname}/wiki-docs/${_wiki_lang}/ -type f)
+        ./${_pkgname}/html2md.js "$file" > "wiki/$(sed 's|^.*/||;s|\.html$||' <<< $file).md"
+    done < <(find wiki-docs/${_wiki_lang}/ -type f)
     echo "Done!"
 }
 
