@@ -6,7 +6,7 @@ cd $(dirname "$0")
 
 DIR=$(pwd)
 URL=$(pacman -Sp arch-wiki-docs)
-TMP=${1:-$(mktemp -d)}
+TMP=$(mktemp -d)
 ZIP=${TMP}/arch-wiki-docs.tar.xz
 
 (cd $DIR && {
