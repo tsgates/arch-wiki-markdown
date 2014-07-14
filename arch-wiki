@@ -10,9 +10,10 @@ cat << EOF
 Usage:
 
   $SCRIPT_NAME [-#|-n] {string}
-    Search for wiki article names containing "string" and optionally
-    specify the number of the search result to automatically view, or
-    disable interactive selection.
+    Search for wiki article names containing the given {**string**},
+    and optionally disable interactive search with the `-n` flag,
+    or choose to directly view a given result using the `-#`
+    flag, where # is the search result number you wish to view.
 
     -#
         View the #th result.
