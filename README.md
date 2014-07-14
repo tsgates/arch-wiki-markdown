@@ -4,13 +4,17 @@ Search and read the Arch Wiki offline in your terminal.
 
 ## Install ##
 
-This package can be installed through the [AUR](https://aur.archlinux.org/packages/arch-wiki-markdown-git), or manually from github by running:
+### Download Packag ###
 
-```
-    $ wget https://raw.github.com/tsgates/arch-wiki-markdown/master/PKGBUILD
-    $ makepkg -csi
-```
+The package can be found in the [AUR](https://aur.archlinux.org/packages/arch-wiki-markdown-git) as well as on [Github](https://raw.github.com/tsgates/arch-wiki-markdown).
 
+### Configure Language ###
+
+The wiki is downloaded in English by default, but other languages can be set by changing the `$_wiki_lang` variable in the PKGBUILD. A list of available languages is given below the variable, but it's possible that new ones have become available since writing.
+
+### Build and Install ###
+
+The package can be built and installed by running: `makepkg -csi`. It will download the latest image of the wiki contained in the [arch-wiki-docs](https://www.archlinux.org/packages/community/any/arch-wiki-docs/) package, and convert the pages to a usable markdown format before creating the package.
 
 ## Usage ##
 
@@ -21,9 +25,10 @@ To view the list of valid commands, run the help option:
     Usage:
 
       arch-wiki [-#|-n] {string}
-        Search for wiki article names containing "string" and optionally
-        specify the number of the search result to automatically view, or
-        disable interactive selection.
+        Search for wiki article names containing the given {**string**},
+        and optionally disable interactive search with the `-n` flag,
+        or choose to directly view a given result using the `-#`
+        flag, where # is the search result number you wish to view.
 
         -#
             View the #th result.
@@ -54,28 +59,3 @@ To view the list of valid commands, run the help option:
 You can now interactively select one of the results (use the `-n` option to search the old way).
 
 [See, how it works](http://asciinema.org/a/5872)
-
-## Update Wiki ##
-
-Before running `makepkg -csi`, the wiki can be updated by running `./gen-wiki.sh`.
-
-### Requirements ###
-
-#### Pacman ####
-
-Pacman packages that need to be installed:
-
-* **ghc**: Glawsgow Haskell Compiler
-* **alex**: Lexical analyser generator for Haskell
-* **happy**: Parser generator for Haskell
-* **cabal-install**: CLI tool for Cabal and Hackage to install Haskell packages in $HOME
-* **wget**: Network utility to retrieve files from the web
-
-#### Cabal ####
-
-Haskell libraries that need to be installed with `cabal`:
-
-```
-    $ cabal update
-    $ cabal -j install tagsoup pandoc MissingH filemanip
-```
