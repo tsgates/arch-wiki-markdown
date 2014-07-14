@@ -61,6 +61,21 @@ Before running `makepkg -csi`, the wiki can be updated by running `./gen-wiki.sh
 
 ### Requirements ###
 
-* ghc - Glawsgow Haskell Compiler
-* wget - Network utility to retrieve files from the web
-* mtools - A collection of tools to access MS-DOS disks
+#### Pacman ####
+
+Pacman packages that need to be installed:
+
+* **ghc**: Glawsgow Haskell Compiler
+* **alex**: Lexical analyser generator for Haskell
+* **happy**: Parser generator for Haskell
+* **cabal-install**: CLI tool for Cabal and Hackage to install Haskell packages in $HOME
+* **wget**: Network utility to retrieve files from the web
+
+#### Cabal ####
+
+Haskell libraries that need to be installed with `cabal`:
+
+```
+    $ cabal update
+    $ cabal -j install tagsoup pandoc MissingH filemanip
+```
