@@ -1,5 +1,4 @@
-/pkg/
-/tmp/
-/arch-wiki-markdown*.tar.xz
-/arch-wiki-markdown*.tar.gz
-/filter
+./src*
+./pkg*
+./*.pkg.tar.*
+./*.src.tar.*
