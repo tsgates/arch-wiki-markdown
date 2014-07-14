@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-ROOT=/usr/share/doc/arch-wiki-markdown
+SHARE="/usr/share/arch-wiki-markdown"
+WIKI_ROOT="/usr/share/doc/arch-wiki-markdown"
 LESS="vim -u /usr/share/vim/vim7*/macros/less.vim -n"
 SCRIPT_NAME=$(grep -o -e "[^\/]*$" <<< "$0")
 
@@ -36,7 +37,7 @@ Usage:
       -h | --help
         Show this help dialog
 
-Wiki files are located in $ROOT
+Wiki files are located in $WIKI_ROOT
 EOF
 }
 
@@ -64,11 +65,11 @@ while [[ $# > 0 ]]; do
       shift
     ;;
     -l|--list)
-      find $ROOT
+      find -type f "$WIKI_ROOT"
       exit 0
     ;;
     -v|--version)
-      cat $ROOT/version
+      cat "${SHARE}/version"
       exit 0
     ;;
     *)
@@ -80,7 +81,7 @@ done
 # grep
 if [[ -n $GLOBAL_SEARCH  ]]; then
   echo "Searching for $GLOBAL_SEARCH"
-  (cd $ROOT; grep --color=always -rn "$GLOBAL_SEARCH" | less -X -F -R)
+  (cd "$WIKI_ROOT"; grep --color=always -rn "$GLOBAL_SEARCH" | less -X -F -R)
   exit
 fi
 
@@ -97,11 +98,11 @@ done
 
 # trim/search
 NTH=$((NTH - 1))
-DOC=( $(ls $ROOT | grep -i $KEY) )
+DOC=( $(ls "$WIKI_ROOT" | grep -i $KEY) )
 
 # open a doc
 open() {
-  $LESS -c 'set syntax=markdown' $ROOT/${DOC[$1]}
+  $LESS -c 'let &runtimepath=printf('"'%s,${SHARE}'"',&runtimepath)|colorscheme arch-wiki-markdown|set syntax=markdown' "${WIKI_ROOT}/${DOC[$1]}"
   exit 0
 }
 
