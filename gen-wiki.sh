@@ -1,17 +1,27 @@
 #!/usr/bin/env bash
 
-DIR=$(dirname "$0")
+cd $(dirname "$0")
+
+[[ -n "$1" ]] && LANGUAGE="$1" || LANGUAGE="en"
+
+DIR=$(pwd)
 URL=$(pacman -Sp arch-wiki-docs)
-OUT=${1:-$(mktemp -d)}
-ZIP=${OUT}/arch-wiki-docs.tar.xz
+TMP=${1:-$(mktemp -d)}
+ZIP=${TMP}/arch-wiki-docs.tar.xz
 
 (cd $DIR && {
-    if [[ ! -e $ZIP ]]; then
-        wget $URL -O $ZIP
-        mkdir ${OUT}/pkg
-        uz -X ${OUT}/pkg $ZIP
-    fi
-    ghc filter.hs +RTS -N4
-    ./filter ${OUT}/pkg
-    pacman -Si arch-wiki-docs > wiki/version
+    [[ ! -d "$TMP" ]] && install -d "$TMP"
+    [[ ! -e "$ZIP" ]] && wget $URL -O "$ZIP"
+    tar Jxvf "$ZIP" -C "$TMP" >/dev/null 2>&1
+
+    [[ -d "wiki" ]] && rm -rf wiki && install -d wiki
+    date +%Y%m%d > wiki/version
+    while read -r file; do
+        MDFILE="${DIR}/wiki/$(sed 's|^.*/||;s|\.html$||' <<< $file).md"
+        echo "Converting: ${file} -> ${MDFILE}"
+        ./html2md.js "$file" > "$MDFILE"
+    done < <(find ${TMP}/usr/share/doc/arch-wiki/html/${LANGUAGE}/ -type f)
+    echo "Done!"
+
+    [[ -d "$TMP" ]] && rm -rf "$TMP"
 })
