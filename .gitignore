@@ -1,4 +1,5 @@
-./src*
-./pkg*
-./*.pkg.tar.*
-./*.src.tar.*
+src*
+pkg*
+wiki*
+*.pkg.tar.*
+*.src.tar.*
