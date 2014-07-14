@@ -42,7 +42,7 @@ prepare() {
         echo $_date > wiki-docs/date
         echo "Done!"
     else
-        echo "Download directory exists ($(cat arch-wiki-docs/date)), using that"
+        echo "Download directory exists (${_date}), using that"
     fi
 }
 
@@ -50,9 +50,11 @@ build() {
     echo "Converting Wiki"
     [[ -d "wiki" ]] && rm -rf wiki
     install -d wiki
+    cp ${_pkgname}/html2md.js .
     while read -r file; do
-        ./${_pkgname}/html2md.js "$file" > "wiki/$(sed 's|^.*/||;s|\.html$||' <<< $file).md"
-    done < <(find wiki-docs/${_wiki_lang}/ -type f)
+        ./html2md.js "$file" > "wiki/$(sed 's|^.*/||;s|\.html$||' <<< $file).md"
+    done < <(find wiki-docs/${_wiki_lang} -type f)
+    rm html2md.js
     echo "Done!"
 }
 
