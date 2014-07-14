@@ -18,12 +18,12 @@ license=('MIT')
 depends=('vim')
 makedepends=('nodejs' 'wget')
 
-source=("git+https://github.com/prurigro/${_pkgname}") # When changes are pulled, s|prurigro|tsgates|
+source=("git+https://github.com/prurigro/${_pkgname}#branch=master") # When changes are pulled, s|prurigro|tsgates|
 sha512sums=('SKIP')
 
 pkgver() {
     cd $_pkgname
-    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(pacman -Si arch-wiki-docs | grep -e "^Version" | sed 's|^.*: ||')"
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(pacman -Si arch-wiki-docs | grep -e "^Version" | sed 's|^.*: ||;s|-.*$||')"
 }
 
 build() {
