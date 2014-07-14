@@ -28,30 +28,35 @@ pkgver() {
 }
 
 prepare() {
-    cd arch-wiki-docs
-    echo "Downloading Wiki"
-    [[ -d "${srcdir}/${_pkgname}/arch-wiki-docs" ]] && rm -rf "${srcdir}/${_pkgname}/arch-wiki-docs"
-    python arch-wiki-docs.py --output-directory "${srcdir}/${_pkgname}/arch-wiki-docs" --clean --safe-filenames
+    if [[ ! -d "arch-wiki-docs" ]]; then
+        echo "Downloading Wiki"
+        python arch-wiki-docs/arch-wiki-docs.py --output-directory arch-wiki-docs --clean --safe-filenames
+        echo "Done!"
+    else
+        echo "Download directory already exists, using that!"
+    fi
 }
 
 build() {
-    cd $_pkgname
-    echo "Converting Wiki"
-    [[ -d "wiki" ]] && rm -rf wiki
-    install -d wiki
-    echo $pkgver > wiki/version
-    while read -r file; do
-        MDFILE="wiki/$(sed 's|^.*/||;s|\.html$||' <<< $file).md"
-        echo "Converting: ${file} -> ${MDFILE}"
-        ./html2md.js "$file" > "$MDFILE"
-    done < <(find arch-wiki-docs/${_wiki_lang}/ -type f)
-    echo "Done!"
+    if [[ ! -d "wiki" ]]; then
+        echo "Converting Wiki"
+        install -d wiki
+        while read -r file; do
+            ./html2md.js "$file" > "wiki/$(sed 's|^.*/||;s|\.html$||' <<< $file).md"
+        done < <(find ${_pkgname}/arch-wiki-docs/${_wiki_lang}/ -type f)
+        echo "Done!"
+    else
+        echo "Wiki directory already exists, using that!"
+    fi
 }
 
 package() {
-    cd $_pkgname
     echo "Installing Wiki"
-    install -Dm755 arch-wiki "${pkgdir}/usr/bin/arch-wiki"
-    install -d "${pkgdir}/usr/share/doc/${_pkgname}/"
+    install -d "${pkgdir}/usr/share/doc/${_pkgname}"
     cp --no-preserve=ownership wiki/* "${pkgdir}/usr/share/doc/${_pkgname}/"
+    cd $_pkgname
+    install -Dm755 arch-wiki "${pkgdir}/usr/bin/arch-wiki"
+    install -Dm644 ${_pkgname}.vim "${pkgdir}/usr/share/${_pkgname}/colors/${_pkgname}.vim"
+    echo $pkgver > "${pkgdir}/usr/share/${_pkgname}/version"
+    echo "Done!"
 }
