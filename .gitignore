@@ -1,5 +1,8 @@
 src*
 pkg*
 wiki*
+arch-wiki-markdown*
+arch-wiki-docs*
 *.pkg.tar.*
 *.src.tar.*
+.*sw[op]*
