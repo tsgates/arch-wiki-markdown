@@ -10,11 +10,15 @@ The package can be found in the [AUR](https://aur.archlinux.org/packages/arch-wi
 
 ### Configure Language ###
 
-The wiki is downloaded in English by default, but other languages can be set by changing the `$_wiki_lang` variable in the PKGBUILD. A list of available languages is given below the variable, but it's possible that new ones have become available since writing.
+The wiki is downloaded in English by default, but other languages can be set by changing the `$_wiki_lang` variable in the PKGBUILD. A list of available languages is given above the variable, but it's possible that new ones have become available since writing.
 
 ### Build and Install ###
 
 The package can be built and installed by running: `makepkg -csi`. It will download the latest image of the wiki contained in the [arch-wiki-docs](https://www.archlinux.org/packages/community/any/arch-wiki-docs/) package, and convert the pages to a usable markdown format before creating the package.
+
+### Pre-Ripped Wiki ###
+
+Running `makepkg` will slowly rip the wiki from https://wiki.archlinux.org, and this can take a while to do. To speed up the process, you can use a pre-ripped image of the wiki from the arch-wiki-docs package instead by running `./arch-wiki-docs-setup.sh` first.
 
 ## Usage ##
 
