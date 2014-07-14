@@ -102,7 +102,7 @@ DOC=( $(ls "$WIKI_ROOT" | grep -i $KEY) )
 
 # open a doc
 open() {
-  $LESS -c 'let &runtimepath=printf('"'%s,${SHARE}'"',&runtimepath)|colorscheme arch-wiki-markdown|set syntax=markdown' "${WIKI_ROOT}/${DOC[$1]}"
+  $LESS -c 'let &runtimepath=printf('"'%s,${SHARE}'"',&runtimepath)|runtime arch-wiki-markdown.vimrc' "${WIKI_ROOT}/${DOC[$1]}"
   exit 0
 }
 
