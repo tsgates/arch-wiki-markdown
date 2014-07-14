@@ -28,12 +28,14 @@ pkgver() {
 }
 
 prepare() {
-    if [[ ! -d "wiki-docs" ]]; then
-        echo "Downloading Wiki"
-        python arch-wiki-docs/arch-wiki-docs.py --output-directory wiki-docs --clean --safe-filenames
-        echo "Done!"
-    else
-        echo "Download directory already exists, using that!"
+    if [[ ! -d "wiki" ]]; then
+        if [[ ! -d "wiki-docs" ]]; then
+            echo "Downloading Wiki"
+            python arch-wiki-docs/arch-wiki-docs.py --output-directory wiki-docs --clean --safe-filenames
+            echo "Done!"
+        else
+            echo "Download directory already exists, using that."
+        fi
     fi
 }
 
@@ -46,7 +48,7 @@ build() {
         done < <(find ${_pkgname}/wiki-docs/${_wiki_lang}/ -type f)
         echo "Done!"
     else
-        echo "Wiki directory already exists, using that!"
+        echo "Wiki directory already exists, using that."
     fi
 }
 
