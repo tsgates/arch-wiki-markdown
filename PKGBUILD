@@ -20,12 +20,13 @@ license=('MIT')
 depends=('bash' 'vim')
 makedepends=('nodejs' 'python-cssselect' 'python-lxml' 'python-simplemediawiki')
 
-source=("git+https://github.com/prurigro/${_pkgname}#branch=cleanup-and-update" # When changes are pulled: s|prurigro|tsgates|;s|cleanup-and-update|master|
+# If or when these changes are pulled: s|prurigro|tsgates|;s|cleanup-and-update|master|
+source=("git+https://github.com/prurigro/${_pkgname}#branch=cleanup-and-update"
         "git+https://github.com/lahwaacz/arch-wiki-docs.git#branch=master"
         "git+https://github.com/plasticboy/vim-markdown.git#branch=master")
 sha512sums=('SKIP' 'SKIP' 'SKIP')
 
-[[ -f "${pkgdir}/${_pkgname}/wiki-docs/date" ]] \
+[[ -f "${srcdir}/wiki-docs/date" ]] \
     && _date=$(cat "${pkgdir}/${_pkgname}/wiki-docs/date") \
     || _date=$(date +%Y%m%d)
 
