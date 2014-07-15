@@ -62,6 +62,7 @@ Markdown.Converter.prototype.makeMarkdown = function(string) {
     string = string.replace(/(\<[^\/][^\>]*\>)\ /g, '\ $1'); // Move spaces after open-tags to before
     string = string.replace(/\ (\<\/[^\>]*\>)/g, '$1\ '); // Move spaces before close-tags to after
     string = string.replace(/\n*\<[pP][rR][eE][^\>]*\>\n*/g, '\n\n\<pre\>'); // Reposition the <pre> tag against its content better
+    string = string.replace(/\n*\<\/[pP][rR][eE][^\>]*\>\n*/g, '\<\/pre\>\n\n'); // Reposition the <\pre> tag against its content better
 
     // Elements
     var ELEMENTS = [
@@ -219,6 +220,10 @@ Markdown.Converter.prototype.makeMarkdown = function(string) {
 
     // Strip and cleanup
     function cleanUp(string) {
+        // hack stripping codeblocks from between brackets for vim-markdown to parse correctly
+        string = string.replace(/(\([^\)`]*)`/g, '$1');
+        string = string.replace(/`([^\(`]*\))/g, '$1');
+
         // Tags
         string = string.replace(/\<[pP][rR][eE]\>/g, '```\n'); // <pre> -> ``` then line break
         string = string.replace(/\<\/[pP][rR][eE]\>/g, '\n```'); // </pre> -> line break then ```
@@ -234,10 +239,10 @@ Markdown.Converter.prototype.makeMarkdown = function(string) {
         string = string.replace(/([^\s])\ {2,3}(\ {2,3})*/g, '$1\ '); // 2-3 spaces to 1 space (4=tab)
         string = string.replace(/\*\ Privacy policy[\S\s]*/g, ''); // strip the privacy policy and everything after
 
-        // Whitespace
+        // Line Breaks
         string = string.replace(/\n\s*\n\s*\n*/g, '\n\n'); // more than two line breaks -> two line breaks
-        string = string.replace(/(\n\*.*\n)\n*\*/g, '$1\*'); // remove spaces between unordered list items
-        string = string.replace(/(\n[0-9][0-9]*\..*\n)\n*([0-9][0-9]*\.)/g, '$1$2'); // remove spaces between ordered list items
+        string = string.replace(/\n\n\n*(\ *[0-9]*[2-9]\.)/g, '\n$1'); // remove spaces between ordered list items
+        string = string.replace(/(\n\ *\*[^\*].*)(\n\ *\n)*(\ *\*[^\*])/g, '$1\n$3'); // remove spaces between unordered list items
         string = string.replace(/\ \ *\n/g, '\n'); // trim trailing line whitespace
         string = string.replace(/^[\t\r\n]+|[\t\r\n]+$/g, ''); // trim leading/trailing document whitespace
         return string;
