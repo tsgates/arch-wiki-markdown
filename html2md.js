@@ -52,7 +52,17 @@ var Markdown = exports;
     }
 )();
 
+Markdown.Converter.prototype.makeMarkdown2 = function(string) {
+    return string = string.replace(/\ (\<\/[^\>]*\>)/g, '$1\ '); // Move spaces before close-tags to after
+}
+
 Markdown.Converter.prototype.makeMarkdown = function(string) {
+    // Cleanup HTML
+    string = string.replace(/(\<[^\>]*)\ style="[^"]*"/g, '$1'); // Strip style elements
+    string = string.replace(/(\<[^\/][^\>]*\>)\ /g, '\ $1'); // Move spaces after open-tags to before
+    string = string.replace(/\ (\<\/[^\>]*\>)/g, '$1\ '); // Move spaces before close-tags to after
+    string = string.replace(/\n*\<[pP][rR][eE][^\>]*\>\n*/g, '\n\n\<pre\>'); // Reposition the <pre> tag against its content better
+
     // Elements
     var ELEMENTS = [
         {
@@ -161,7 +171,7 @@ Markdown.Converter.prototype.makeMarkdown = function(string) {
     });
 
     // Lists (converts lists with no child lists (of same type) first, then works up
-    string = string.replace(/(\d+). /g, '$1\\. '); // Escape numbers that could trigger an ol
+    string = string.replace(/(\d+)\. /g, '$1\\\. '); // Escape "[0-9]." (could trigger an ol)
     var noChildrenRegex = /<(ul|ol)\b[^>]*>(?:(?!<ul|<ol)[\s\S])*?<\/\1>/gi;
     while(string.match(noChildrenRegex)) {
         string = string.replace(noChildrenRegex, function(str) {
