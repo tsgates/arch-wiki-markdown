@@ -112,16 +112,22 @@ if [[ ${#DOC[*]} == 0 ]]; then
   exit 1
 fi
 
+if [[ ! "$TERM" = "linux" ]] && [[ $AWESOME_STYLE -eq 1 ]]; then
+    C1="\e[44m"
+    C2="\e[1;31m"
+    CR="\e[0m"
+fi
+
 # single match or nth is specified
 if [[ ${#DOC[*]} == 1 ]] || [[ $NTH != -1 ]]; then
   open $NTH
 else
   # menu
   for ((cnt=0; cnt<${#DOC[*]}; cnt ++)); do
-    if [ $AWESOME_STYLE -eq 1  ] ; then
-       echo -n "[$((cnt+1))] "
+    if [ $AWESOME_STYLE -eq 1 ] ; then
+       echo -e -n "${C1}[$((cnt+1))]${CR} "
     fi
-    echo ${DOC[$cnt]}
+    echo -e ${C2}${DOC[$cnt]}${CR}
   done
 
   # now ask the user for number
