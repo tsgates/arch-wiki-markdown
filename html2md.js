@@ -52,17 +52,19 @@ var Markdown = exports;
     }
 )();
 
-Markdown.Converter.prototype.makeMarkdown2 = function(string) {
-    return string = string.replace(/\ (\<\/[^\>]*\>)/g, '$1\ '); // Move spaces before close-tags to after
+Markdown.Converter.prototype.makeMarkdown = function(string) {
+    return string = string.replace(/\<div\ id="toc"[^\>]*\>\s*\<div[^\>]*\>.*\s*(\<a.*)?\s*\<ul[^\>]*\>.*(\s*|\<a.*|\<li.*)*/g, '');
+    // return string = string.replace(/\<div\ id="toc"[^\>]*\>\s*\<div[^\>]*\>.*\s*\<ul[^\>]*\>(.|\s)*\<\/ul\>/g, '');
 }
 
-Markdown.Converter.prototype.makeMarkdown = function(string) {
+Markdown.Converter.prototype.makeMarkdown2 = function(string) {
     // Cleanup HTML
     string = string.replace(/(\<[^\>]*)\ style="[^"]*"/g, '$1'); // Strip style elements
     string = string.replace(/(\<[^\/][^\>]*\>)\ /g, '\ $1'); // Move spaces after open-tags to before
     string = string.replace(/\ (\<\/[^\>]*\>)/g, '$1\ '); // Move spaces before close-tags to after
     string = string.replace(/\n*\<[pP][rR][eE][^\>]*\>\n*/g, '\n\n\<pre\>'); // Reposition the <pre> tag against its content better
     string = string.replace(/\n*\<\/[pP][rR][eE][^\>]*\>\n*/g, '\<\/pre\>\n\n'); // Reposition the <\pre> tag against its content better
+    string = string.replace(/\<div\ id="toc"[^\>]*\>\s*\<div[^\>]*\>.*\s*\<ul[^\>]*\>(\s|\<li.*)*\<\/ul\>[^(\<\/ul)]*\<\/ul\>/g, '');
 
     // Elements
     var ELEMENTS = [
