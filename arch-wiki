@@ -123,11 +123,11 @@ if [[ ${#DOC[*]} == 1 ]] || [[ $NTH != -1 ]]; then
   open $NTH
 else
   # menu
+  echo
   for ((cnt=0; cnt<${#DOC[*]}; cnt ++)); do
-    if [ $AWESOME_STYLE -eq 1 ] ; then
-       echo -e -n "${C1}[$((cnt+1))]${CR} "
-    fi
-    echo -e ${C2}${DOC[$cnt]}${CR}
+    [[ $AWESOME_STYLE -eq 1 ]] && echo -e -n "${C1}[$((cnt+1))]${CR} ${C2}"
+    echo -e -n $(sed 's|\.md$||' <<< ${DOC[$cnt]})
+    [[ $AWESOME_STYLE -eq 1 ]] && echo -e ${CR} || echo
   done
 
   # now ask the user for number
