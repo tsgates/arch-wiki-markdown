@@ -4,7 +4,7 @@ Search and read the Arch Wiki offline in your terminal.
 
 ## Install ##
 
-### Download Packag ###
+### Download Package ###
 
 The package can be found in the [AUR](https://aur.archlinux.org/packages/arch-wiki-markdown-git) as well as on [Github](https://raw.github.com/tsgates/arch-wiki-markdown).
 

@@ -19,6 +19,7 @@ endif
 "markdown syntax
 filetype plugin indent on
 syntax on
+set conceallevel=2
 runtime ftdetect/mkd.vim
 runtime ftplugin/mkd.vim
 runtime syntax/mkd.vim
