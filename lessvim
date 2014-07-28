@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-vim -u /usr/share/vim/vim7*/macros/less.vim -n -c 'let &runtimepath=printf('"'%s,/usr/share/arch-wiki-pandoc'"',&runtimepath)|runtime arch-wiki-pandoc.vimrc' $1
