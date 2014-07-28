@@ -12,7 +12,7 @@ _wiki_downloadlive=0 # set to 1 and download the optdepends to rip the live wiki
 
 _pkgname=arch-wiki-markdown
 pkgname=${_pkgname}-git
-pkgver=r79.20140728
+pkgver=r80.20140728
 pkgrel=1
 pkgdesc="Search and read the Arch Wiki offline in your terminal"
 arch=('any')
@@ -26,8 +26,9 @@ optdepends=('python-cssselect: required to rip docs directly from the wiki'
 source=("git+https://github.com/prurigro/${_pkgname}#branch=cleanup-and-update"
         "git+https://github.com/lahwaacz/arch-wiki-docs.git#branch=master"
         "git+https://github.com/plasticboy/vim-markdown.git#branch=master"
-        "mkd.vim")
-sha512sums=('SKIP' 'SKIP' 'SKIP' 'da4065be79a39a7151a57744dcdd128b3a9a4fb8717dae3a060e9a665ca44de7c399d404067af221e49224aecff4aa12a3fb887af6f93a33455b0a8aee8ccd2a')
+        "git+https://github.com/drmikehenry/vim-fixkey.git#branch=master"
+        "mkd-syntax-conceal.vim")
+sha512sums=('SKIP' 'SKIP' 'SKIP' '0ce47316a04d09ddc2317a53a2661b8c1980842370cc0b122efcd2c6a788834a773d12acd277a2ecd47448bf92f2fda1ab54d446af838f630dd2a0628f5de0f7')
 
 [[ -f "${srcdir}/wiki-docs/date" ]] \
     && _date=$(cat "${srcdir}/wiki-docs/date") \
@@ -39,6 +40,10 @@ pkgver() {
 }
 
 prepare() {
+    cd vim-markdown
+    patch p1 < ../mkd-syntax-conceal.vim
+    cd ..
+
     if [[ ! -f "wiki-docs/date" ]]; then
         [[ "$_wiki_downloadlive" = 1 ]] \
             && ./${_pkgname}/download-wikidocs.sh --live \
@@ -61,11 +66,12 @@ package() {
     cp --no-preserve=ownership wiki/* "${pkgdir}/usr/share/doc/${_pkgname}/"
 
     # Vim files from vim-markdown
+    install -Dm644 vim-markdown/syntax/mkd.vim "${pkgdir}/usr/share/${_pkgname}/syntax/mkd.vim"
     install -Dm644 vim-markdown/ftdetect/mkd.vim "${pkgdir}/usr/share/${_pkgname}/ftdetect/mkd.vim"
     install -Dm644 vim-markdown/ftplugin/mkd.vim "${pkgdir}/usr/share/${_pkgname}/ftplugin/mkd.vim"
 
-    # Modified mkd.vim with concealing syntax
-    install -Dm644 mkd.vim "${pkgdir}/usr/share/${_pkgname}/syntax/mkd.vim"
+    # Vim files from vim-fixkey
+    install -Dm644 vim-fixkey/plugin/fixkey.vim "${pkgdir}/usr/share/${_pkgname}/plugin/fixkey.vim"
 
     # Package files
     cd $_pkgname
