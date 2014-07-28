@@ -12,7 +12,7 @@ _wiki_downloadlive=0 # set to 1 and download the optdepends to rip the live wiki
 
 _pkgname=arch-wiki-markdown
 pkgname=${_pkgname}-git
-pkgver=r71.20140715
+pkgver=r79.20140728
 pkgrel=1
 pkgdesc="Search and read the Arch Wiki offline in your terminal"
 arch=('any')
