@@ -3,42 +3,40 @@
 SHARE="/usr/share/arch-wiki-markdown"
 WIKI_ROOT="/usr/share/doc/arch-wiki-markdown"
 LESS="vim -u /usr/share/vim/vim7*/macros/less.vim -n"
-SCRIPT_NAME=$(grep -o -e "[^\/]*$" <<< "$0")
+SCRIPT_NAME="$(grep -o -e '[^\/]*$' <<< $0)"
 
-usage()
-{
-cat << EOF
-Usage:
+usage() {
+echo "USAGE:
+    $SCRIPT_NAME [-n|-#] {STRING}
 
-  $SCRIPT_NAME [-#|-n] {string}
-    Search for wiki article names containing the given {**string**},
-    and optionally disable interactive search with the `-n` flag,
-    or choose to directly view a given result using the `-#`
-    flag, where # is the search result number you wish to view.
+        Search for wiki article names containing the given {STRING},
+        and optionally disable interactive search with the -n flag,
+        or choose to directly view a given result using the -#
+        flag, where # is the search result number you wish to view.
 
-    -#
-        View the #th result.
-    -n | --normal
-        Normal mode (no interactive searching)
+        -n | --normal
+            Normal mode (no interactive searching)
+        -#
+            View the #th result
 
-    Examples:
-      $SCRIPT_NAME PKGBUILD
+    $SCRIPT_NAME [OPTION]
+
+        OPTIONS:
+        -g {STRING} | --grep {STRING}
+            Search the wiki for the given string
+        -v | --version
+            Display the version and exit
+        -h | --help
+            Show this help dialog
+
+EXAMPLES:
+    $SCRIPT_NAME PKGBUILD
         Search for wiki articles with names containing "PKGBUILD"
 
-      $SCRIPT_NAME -3 install
+    $SCRIPT_NAME -3 install
         View the 3rd wiki article with a name containing "install"
 
-  $SCRIPT_NAME [OPTION]
-    OPTIONS:
-      -g {string} | --grep {string}
-        Search the wiki for the given string
-      -v | --version
-        Display the version and exit
-      -h | --help
-        Show this help dialog
-
-Wiki files are located in $WIKI_ROOT
-EOF
+Wiki files are located in $WIKI_ROOT"
 }
 
 # we require input
