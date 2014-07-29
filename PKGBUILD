@@ -19,7 +19,7 @@ url="https://github.com/tsgates/${_pkgname}"
 license=('MIT')
 depends=('bash' 'vim')
 if [[ "$_wiki_downloadlive" = 1 ]]; then
-    makedepends+=('pandoc-static' 'python-cssselect' 'python-lxml' 'python-simplemediawiki') \
+    makedepends=('pandoc-static' 'python-cssselect' 'python-lxml' 'python-simplemediawiki') \
     source=("arch-wiki"
             "${_pkgname}.vimrc"
             "${_pkgname}.colors.vim"
@@ -33,7 +33,7 @@ if [[ "$_wiki_downloadlive" = 1 ]]; then
                 'SKIP'
                 'SKIP')
 else
-    makedepends+=('pandoc-static' 'arch-wiki-docs')
+    makedepends=('pandoc-static' 'arch-wiki-docs')
     source=("arch-wiki"
             "${_pkgname}.vimrc"
             "${_pkgname}.colors.vim"
