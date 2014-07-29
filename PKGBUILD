@@ -24,7 +24,7 @@ source=("arch-wiki"
         "${_pkgname}.colors.vim"
         "git+https://github.com/prurigro/vim-markdown-concealed.git#branch=master"
         "git+https://github.com/drmikehenry/vim-fixkey.git#branch=master")
-sha512sums=('1aec792b9d5fcfcb35bdaa44985031c6bcf4ba03406b36c926f53ff0b71db3312eb1d49e68c2ed4eace2b19295d1a469a527a774734a0d6a3f3de6cb6ece9518'
+sha512sums=('477508fa49a7078b8deb6b16b7aff31b43757829fc3cdec0ced504f7a3a99e54be7c377a24019cb896bac8c0fbc1a9b3d67c0b77e04938d95fe12514144e38c1'
             '4e2291e35a2b3640645d30b863ff81a1173d022d0ad6dfcd0caca3f34aa7d6082fd2f5263ba2123a957829e0606eddb7b163de108e93f48173481d4c52c12220'
             'SKIP'
             'SKIP'
