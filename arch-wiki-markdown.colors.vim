@@ -18,7 +18,7 @@ hi Identifier cterm=bold ctermfg=117 gui=bold guifg=#87d7ff
 hi Special ctermfg=None guifg=None
 hi Constant cterm=bold ctermfg=222 gui=bold guifg=#ffd787
 hi Title cterm=bold ctermfg=167 gui=bold,underline guifg=#d75f5f
-hi link htmlH1 Title
+hi! link htmlH1 Title
 hi htmlH2 cterm=bold ctermfg=117 gui=bold guifg=#87d7ff
 hi htmlH3 cterm=bold ctermfg=222 gui=bold guifg=#ffd787
 hi htmlH4 ctermfg=167 guifg=#d75f5f
@@ -28,4 +28,5 @@ hi htmlTag cterm=bold ctermfg=117 gui=bold guifg=#87d7ff
 hi htmlLink cterm=underline ctermfg=167 gui=underline guifg=#d75f5f term=underline
 hi htmlBold cterm=bold ctermfg=231 ctermbg=None gui=bold guifg=#ffffff guibg=None
 hi mkdCode cterm=reverse ctermfg=238 ctermbg=222 gui=reverse guifg=#444444 guibg=#ffd787
-hi mkdURL ctermfg=242 guifg=#6c6c6c
+hi! link mkdIndentCode mkdCode
+hi mkdURL ctermfg=117 guifg=#87d7ff
