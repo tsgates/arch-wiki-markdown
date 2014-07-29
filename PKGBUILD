@@ -11,32 +11,39 @@
 
 _pkgname=arch-wiki-markdown
 pkgname=${_pkgname}-git
-pkgver=r84.20140729
+pkgver=r90.20140729
 pkgrel=1
 pkgdesc="Search and read the Arch Wiki offline in your terminal"
 arch=('any')
 url="https://github.com/tsgates/${_pkgname}"
 license=('MIT')
 depends=('bash' 'vim')
-makedepends=('pandoc-static')
-source=("arch-wiki"
-        "${_pkgname}.vimrc"
-        "${_pkgname}.colors.vim"
-        "git+https://github.com/prurigro/vim-markdown-concealed.git#branch=master"
-        "git+https://github.com/drmikehenry/vim-fixkey.git#branch=master")
-sha512sums=('477508fa49a7078b8deb6b16b7aff31b43757829fc3cdec0ced504f7a3a99e54be7c377a24019cb896bac8c0fbc1a9b3d67c0b77e04938d95fe12514144e38c1'
-            '4e2291e35a2b3640645d30b863ff81a1173d022d0ad6dfcd0caca3f34aa7d6082fd2f5263ba2123a957829e0606eddb7b163de108e93f48173481d4c52c12220'
-            'SKIP'
-            'SKIP'
-            'SKIP')
-
-# Set final dependencies/sources depending on whether live or packaged docs are selected
 if [[ "$_wiki_downloadlive" = 1 ]]; then
-    makedepends+=('python-cssselect' 'python-lxml' 'python-simplemediawiki')
-    source+=("git+https://github.com/lahwaacz/arch-wiki-docs.git#branch=master")
-    sha512sums+=('d093a4c04e7f2beeee836793daaa38fa766f4cd3b5ba74e929bfc70e4855eccf31a0c5c078f60848f5b8c2efa1a3df5e5d639a897272c89e6d4eaebfceb0ebd3')
+    makedepends+=('pandoc-static' 'python-cssselect' 'python-lxml' 'python-simplemediawiki') \
+    source=("arch-wiki"
+            "${_pkgname}.vimrc"
+            "${_pkgname}.colors.vim"
+            "git+https://github.com/prurigro/vim-markdown-concealed.git#branch=master"
+            "git+https://github.com/drmikehenry/vim-fixkey.git#branch=master"
+            "git+https://github.com/lahwaacz/arch-wiki-docs.git#branch=master")
+    sha512sums=('477508fa49a7078b8deb6b16b7aff31b43757829fc3cdec0ced504f7a3a99e54be7c377a24019cb896bac8c0fbc1a9b3d67c0b77e04938d95fe12514144e38c1'
+                '4e2291e35a2b3640645d30b863ff81a1173d022d0ad6dfcd0caca3f34aa7d6082fd2f5263ba2123a957829e0606eddb7b163de108e93f48173481d4c52c12220'
+                '573804f57c0d076149e7ab060e4d33200522d80f8e101382dbf01447c5e6be162eca7becadb4ed7e0e9fe29f0313f4cb3bf424f70d685330d3315f9269700df1'
+                'SKIP'
+                'SKIP'
+                'SKIP')
 else
-    makedepends+=('arch-wiki-docs')
+    makedepends+=('pandoc-static' 'arch-wiki-docs')
+    source=("arch-wiki"
+            "${_pkgname}.vimrc"
+            "${_pkgname}.colors.vim"
+            "git+https://github.com/prurigro/vim-markdown-concealed.git#branch=master"
+            "git+https://github.com/drmikehenry/vim-fixkey.git#branch=master")
+    sha512sums=('477508fa49a7078b8deb6b16b7aff31b43757829fc3cdec0ced504f7a3a99e54be7c377a24019cb896bac8c0fbc1a9b3d67c0b77e04938d95fe12514144e38c1'
+                '4e2291e35a2b3640645d30b863ff81a1173d022d0ad6dfcd0caca3f34aa7d6082fd2f5263ba2123a957829e0606eddb7b163de108e93f48173481d4c52c12220'
+                '573804f57c0d076149e7ab060e4d33200522d80f8e101382dbf01447c5e6be162eca7becadb4ed7e0e9fe29f0313f4cb3bf424f70d685330d3315f9269700df1'
+                'SKIP'
+                'SKIP')
 fi
 
 [[ -f "${srcdir}/wiki-docs/date" ]] \
