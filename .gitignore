@@ -1,8 +1,8 @@
 src
 pkg
-wiki
-arch-wiki-markdown
 arch-wiki-docs
+vim-markdown-concealed
+vim-fixkey
 *.pkg.tar.*
 *.src.tar.*
 .*sw[op]*
