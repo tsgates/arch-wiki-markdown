@@ -12,7 +12,7 @@ _wiki_downloadlive=0 # set to 1 and download the optdepends to rip the live wiki
 
 _pkgname=arch-wiki-markdown
 pkgname=${_pkgname}-git
-pkgver=r.20140728
+pkgver=r82.20140728
 pkgrel=1
 pkgdesc="Search and read the Arch Wiki offline in your terminal"
 arch=('any')
@@ -33,8 +33,8 @@ source=("arch-wiki"
         "git+https://github.com/plasticboy/vim-markdown.git#branch=master"
         "git+https://github.com/drmikehenry/vim-fixkey.git#branch=master")
 sha512sums=('1aec792b9d5fcfcb35bdaa44985031c6bcf4ba03406b36c926f53ff0b71db3312eb1d49e68c2ed4eace2b19295d1a469a527a774734a0d6a3f3de6cb6ece9518'
-            '0ce47316a04d09ddc2317a53a2661b8c1980842370cc0b122efcd2c6a788834a773d12acd277a2ecd47448bf92f2fda1ab54d446af838f630dd2a0628f5de0f7'
-            'bf0c32b45ff35f34f767e6d665bc147d0a8d2186438b62b5a3643e5dda3f2d3bcfdd1aa94006d61ad8ab630250d1951fab4e38d682f0dc7bc628f0737740c9ab'
+            'd1da73b2b33e65682dc4721f83e58675465189cf6d6c1338b5eb982c27466d61951ae18c9141cbdf59b5eceb03ab83cf7683d845ef4414e3edfb004417aee6d0'
+            'b42d3705d73127d60e8e63eec8378a5872d9afe256e660d60febaca760b66347a24f9f8d96497a32076a128240de59f0a8404dd74a22ec49ce062a518dc671d1'
             'd093a4c04e7f2beeee836793daaa38fa766f4cd3b5ba74e929bfc70e4855eccf31a0c5c078f60848f5b8c2efa1a3df5e5d639a897272c89e6d4eaebfceb0ebd3'
             'SKIP'
             'SKIP'
@@ -45,7 +45,6 @@ sha512sums=('1aec792b9d5fcfcb35bdaa44985031c6bcf4ba03406b36c926f53ff0b71db3312eb
     || _date=$(date +%Y%m%d)
 
 pkgver() {
-    cd ${_startdir}
     printf "r%s.%s" "$(git rev-list --count HEAD)" "$_date"
 }
 
@@ -80,7 +79,7 @@ build() {
         # Sanitize the output file a bit
         sed -i -re 's|\[(\s*[^]]*)\]\(\s*mailto:([^\)]*\))|\1 \(\2|g' "$NEWFILE" # convert [mail](mailto:a@b.c) -> mail (a@b.c)
         sed -i -re 's|\[\s*(https?:\|www\.)[^]]*\s*\]\(\s*(https?:\|www\.)([^)]*)\s*\)|\2\3|g' "$NEWFILE" # convert external links with [http://url](http://url)
-        # sed -i -re 's|\[\s*([^]]*)\s*\]\(\s*(https?:\|www\.[^)]*)\s*\)|\1 (\2)|g' "$NEWFILE" # convert the remaining external links
+        sed -i -re 's|\(([^`\(\)]*`[^`\(\)]*\([^`\(\)]*[^`\(\)]*\)[^`\(\)]*`[^`\(\)]*)\)|\1|g' "$NEWFILE" # remove outer brackets from code-quotes surrounding brackets
         sed -i -re 's|\[([^]]*)\]\(\.\.\/[^\)]*\)|\1|g' "$NEWFILE" # strip internal links
     done < <(find wiki-docs/${_wiki_lang} -type f) \
         && echo "Done!" \

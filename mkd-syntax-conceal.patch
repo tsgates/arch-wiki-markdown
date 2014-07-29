@@ -1,5 +1,5 @@
 diff --git a/syntax/mkd.vim b/syntax/mkd.vim
-index e10bbc3..a0faad5 100644
+index e10bbc3..f6cc708 100644
 --- a/syntax/mkd.vim
 +++ b/syntax/mkd.vim
 @@ -1,37 +1,29 @@
@@ -52,7 +52,7 @@ index e10bbc3..a0faad5 100644
  endif
  
  syn spell toplevel
-@@ -39,68 +31,67 @@ syn case ignore
+@@ -39,68 +31,68 @@ syn case ignore
  syn sync linebreaks=1
  
  "additions to HTML groups
@@ -123,10 +123,11 @@ index e10bbc3..a0faad5 100644
 +syn region mkdFootnote         start="\[^"                                    end="\]"
 +syn match  mkdCode             /^\s*\n\(\(\s\{8,}[^ ]\|\t\t\+[^\t]\).*\n\)\+/
 +syn match  mkdIndentCode       /^\s*\n\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/                                          contained
-+syn match  mkdListItem         "^\s*[-*+]\s\+"                                                                       contains=mkdListTab
++syn match  mkdListItem         "^\s*[-*+]\s\+"                                                                       contains=mkdListTab,mkdListBullet2
 +syn match  mkdListItem         "^\s*\d\+\.\s\+"                                                                      contains=mkdListTab
-+syn match  mkdListTab          "^\s*\*"                                                                              contained contains=mkdListBullet
-+syn match  mkdListBullet       "\*"                                                                                  contained conceal cchar=•
++syn match  mkdListTab          "^\s*\*"                                                                              contained contains=mkdListBullet1
++syn match  mkdListBullet1       "\*"                                                                                 contained conceal cchar=•
++syn match  mkdListBullet2       "[-*+]"                                                                              contained conceal cchar=•
  syn region mkdNonListItemBlock start="\n\(\_^\_$\|\s\{4,}[^ ]\|\t+[^\t]\)\@!" end="^\(\s*\([-*+]\|\d\+\.\)\s\+\)\@=" contains=@mkdNonListItem,@Spell
 -syn match  mkdRule         /^\s*\*\s\{0,1}\*\s\{0,1}\*$/
 -syn match  mkdRule         /^\s*-\s\{0,1}-\s\{0,1}-$/
@@ -174,7 +175,7 @@ index e10bbc3..a0faad5 100644
  HtmlHiLink mkdBlockquote    Comment
  HtmlHiLink mkdLineContinue  Comment
  HtmlHiLink mkdListItem      Identifier
-@@ -114,17 +105,10 @@ HtmlHiLink mkdID            Identifier
+@@ -114,17 +106,10 @@ HtmlHiLink mkdID            Identifier
  HtmlHiLink mkdLinkDef       mkdID
  HtmlHiLink mkdLinkDefTarget mkdURL
  HtmlHiLink mkdLinkTitle     htmlString

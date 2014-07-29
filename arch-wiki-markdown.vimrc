@@ -4,7 +4,7 @@ setglobal fileencoding=utf-8
 set encoding=utf-8 "set encoding
 set fileformats=unix,dos,mac "set compatible line endings in order of preference
 set nolist nonumber wrap linebreak breakat&vim breakat-=* "prevent line-breaking mid-word
-set foldmethod=syntax foldcolumn=1 foldlevel=5 "fold layers 5 or more deep
+set foldcolumn=0 "fold layers 5 or more deep
 set lazyredraw "only redraw what needs to be redrawn
 set ttyfast "assume a fast connection to the terminal for better rendering
 set smarttab expandtab autoindent tabstop=4 shiftwidth=4 "configure tabs
@@ -81,3 +81,4 @@ xnoremap <C-a> <Esc>gg0vG$
 nnoremap <Leader>a gg0vG$
 xnoremap <Leader>a <Esc>gg0vG$
 nnoremap <silent><expr> <Leader>/ ':noh<CR>'
+noremap <silent><expr> q ':q<CR>'
