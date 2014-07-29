@@ -9,10 +9,11 @@
 #
 _wiki_lang=en
 _wiki_downloadlive=0 # set to 1 and download the optdepends to rip the live wiki
+_wiki_norebuild=0 # set to 1 to prevent rebuilding if converted wiki docs exist
 
 _pkgname=arch-wiki-markdown
 pkgname=${_pkgname}-git
-pkgver=r82.20140728
+pkgver=r83.20140729
 pkgrel=1
 pkgdesc="Search and read the Arch Wiki offline in your terminal"
 arch=('any')
@@ -20,20 +21,20 @@ url="https://github.com/tsgates/${_pkgname}"
 license=('MIT')
 depends=('bash' 'vim')
 makedepends=('pandoc-static')
+
 if [[ "$_wiki_downloadlive" = 1 ]]; then
     makedepends+=('python-cssselect' 'python-lxml' 'python-simplemediawiki')
 else
     makedepends+=('arch-wiki-docs')
 fi
+
 source=("arch-wiki"
-        "mkd-syntax-conceal.patch"
         "${_pkgname}.vimrc"
         "${_pkgname}.colors.vim"
         "git+https://github.com/lahwaacz/arch-wiki-docs.git#branch=master"
-        "git+https://github.com/plasticboy/vim-markdown.git#branch=master"
+        "git+https://github.com/prurigro/vim-markdown-concealed.git#branch=master"
         "git+https://github.com/drmikehenry/vim-fixkey.git#branch=master")
 sha512sums=('1aec792b9d5fcfcb35bdaa44985031c6bcf4ba03406b36c926f53ff0b71db3312eb1d49e68c2ed4eace2b19295d1a469a527a774734a0d6a3f3de6cb6ece9518'
-            'd1da73b2b33e65682dc4721f83e58675465189cf6d6c1338b5eb982c27466d61951ae18c9141cbdf59b5eceb03ab83cf7683d845ef4414e3edfb004417aee6d0'
             'b42d3705d73127d60e8e63eec8378a5872d9afe256e660d60febaca760b66347a24f9f8d96497a32076a128240de59f0a8404dd74a22ec49ce062a518dc671d1'
             'd093a4c04e7f2beeee836793daaa38fa766f4cd3b5ba74e929bfc70e4855eccf31a0c5c078f60848f5b8c2efa1a3df5e5d639a897272c89e6d4eaebfceb0ebd3'
             'SKIP'
@@ -49,10 +50,6 @@ pkgver() {
 }
 
 prepare() {
-    pushd vim-markdown >/dev/null 2>&1
-    patch -p1 < ../mkd-syntax-conceal.patch
-    popd >/dev/null 2>&1
-
     if [[ ! -f "wiki-docs/date" ]]; then
         if [[ "$_wiki_downloadlive" = 1 ]]; then
             [[ -d "wiki-docs" ]] && rm -rf "wiki-docs"
@@ -70,20 +67,23 @@ prepare() {
 }
 
 build() {
-    echo -n "Converting Wiki... "
-    install -d docs
-    while read -r file; do
-        NEWFILE="docs/$(sed 's|^.*/||;s|\.[^\.]*$||' <<< $file).md"
-        pandoc -f html -t markdown_github --atx-headers -o "$NEWFILE" "$file"
+    if [ ! "$_wiki_norebuild" = 1 ] || [ ! -d "docs" ]; then
+        echo -n "Converting Wiki... "
+        [[ -d "docs" ]] && rm -rf docs
+        install -d docs
+        while read -r file; do
+            NEWFILE="docs/$(sed 's|^.*/||;s|\.[^\.]*$||' <<< $file).md"
+            pandoc -f html -t markdown_github --atx-headers -o "$NEWFILE" "$file"
 
-        # Sanitize the output file a bit
-        sed -i -re 's|\[(\s*[^]]*)\]\(\s*mailto:([^\)]*\))|\1 \(\2|g' "$NEWFILE" # convert [mail](mailto:a@b.c) -> mail (a@b.c)
-        sed -i -re 's|\[\s*(https?:\|www\.)[^]]*\s*\]\(\s*(https?:\|www\.)([^)]*)\s*\)|\2\3|g' "$NEWFILE" # convert external links with [http://url](http://url)
-        sed -i -re 's|\(([^`\(\)]*`[^`\(\)]*\([^`\(\)]*[^`\(\)]*\)[^`\(\)]*`[^`\(\)]*)\)|\1|g' "$NEWFILE" # remove outer brackets from code-quotes surrounding brackets
-        sed -i -re 's|\[([^]]*)\]\(\.\.\/[^\)]*\)|\1|g' "$NEWFILE" # strip internal links
-    done < <(find wiki-docs/${_wiki_lang} -type f) \
-        && echo "Done!" \
-        || echo "Failed!"
+            # Sanitize the output file a bit
+            sed -i -re 's|\[(\s*[^]]*)\]\(\s*mailto:([^\)]*\))|\1 \(\2|g' "$NEWFILE" # convert [mail](mailto:a@b.c) -> mail (a@b.c)
+            sed -i -re 's|\[\s*(https?:\|www\.)[^]]*\s*\]\(\s*(https?:\|www\.)([^)]*)\s*\)|\2\3|g' "$NEWFILE" # convert external links with [http://url](http://url)
+            sed -i -re 's|\(([^`\(\)]*`[^`\(\)]*\([^`\(\)]*[^`\(\)]*\)[^`\(\)]*`[^`\(\)]*)\)|\1|g' "$NEWFILE" # remove outer brackets from code-quotes surrounding brackets
+            sed -i -re 's|\[([^]]*)\]\(\.\.\/[^\)]*\)|\1|g' "$NEWFILE" # strip internal links
+        done < <(find wiki-docs/${_wiki_lang} -type f) \
+            && echo "Done!" \
+            || echo "Failed!"
+    fi
 }
 
 package() {
@@ -94,10 +94,10 @@ package() {
         done
     popd >/dev/null 2>&1
 
-    # Vim files from vim-markdown
-    install -Dm644 vim-markdown/syntax/mkd.vim "${pkgdir}/usr/share/${_pkgname}/syntax/mkd.vim"
-    install -Dm644 vim-markdown/ftdetect/mkd.vim "${pkgdir}/usr/share/${_pkgname}/ftdetect/mkd.vim"
-    install -Dm644 vim-markdown/ftplugin/mkd.vim "${pkgdir}/usr/share/${_pkgname}/ftplugin/mkd.vim"
+    # Vim files from vim-markdown-concealed
+    install -Dm644 vim-markdown-concealed/syntax/mkdc.vim "${pkgdir}/usr/share/${_pkgname}/syntax/mkdc.vim"
+    install -Dm644 vim-markdown-concealed/ftdetect/mkdc.vim "${pkgdir}/usr/share/${_pkgname}/ftdetect/mkdc.vim"
+    install -Dm644 vim-markdown-concealed/ftplugin/mkdc.vim "${pkgdir}/usr/share/${_pkgname}/ftplugin/mkdc.vim"
 
     # Vim files from vim-fixkey
     install -Dm644 vim-fixkey/plugin/fixkey.vim "${pkgdir}/usr/share/${_pkgname}/plugin/fixkey.vim"

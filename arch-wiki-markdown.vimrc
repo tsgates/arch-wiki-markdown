@@ -29,10 +29,10 @@ syntax on
 set conceallevel=2
 
 " Load Syntax:
-runtime ftdetect/mkd.vim
-runtime ftplugin/mkd.vim
-runtime syntax/mkd.vim
-set filetype=mkd
+runtime ftdetect/mkdc.vim
+runtime ftplugin/mkdc.vim
+runtime syntax/mkdc.vim
+set filetype=mkdc
 
 " Load Theme:
 colorscheme arch-wiki-markdown
