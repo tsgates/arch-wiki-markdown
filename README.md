@@ -22,13 +22,13 @@ The wiki can be downloaded in one of two ways:
 1. Pre-compiled in the _arch-wiki-docs_ package, which takes much less time to download, but is also frequently a few weeks out of date.
 2. Directly from the live wiki.
 
-No action needs to be taken if you plan to use the pre-compiled package, and if you would like to download directly from the live wiki, you can do so by changing the `$_wiki_downloadlive` variable to `1` in the _PKGBUILD_ or at runtime (ie: `$_wiki_downloadlive=1 makepkg`).
+No action needs to be taken if you plan to use the pre-compiled package, and if you would like to download directly from the live wiki, you can do so by changing the `$_wiki_downloadlive` variable to `1` in the _PKGBUILD_ or at runtime (ie: `_wiki_downloadlive=1 makepkg`).
 
 **Note**: Due to the size of the download, once the wiki has been downloaded to `src/wiki-docs/`, the PKGBUILD will use that version until you remove the directory.
 
 #### Prevent Rebuild ###
 
-By default, the wiki gets converted from html to markdown each time you build the package. If you would like to prevent this however (maybe you want to tweak the package without waiting for it to rebuild), set the `$_wiki_norebuild` variable to `1` in the _PKGBUILD_ or at runtime (ie: `$_wiki_norebuild=1 makepkg`).
+By default, the wiki gets converted from html to markdown each time you build the package. If you would like to prevent this (maybe you want to tweak the package without waiting for it to rebuild), set the `$_wiki_norebuild` variable to `1` in the _PKGBUILD_ or at runtime (ie: `_wiki_norebuild=1 makepkg`), and pandoc won't be used to convert the wiki if the folder with the converted files already exists.
 
 ## Usage ##
 
