@@ -28,7 +28,7 @@ if [[ "$_wiki_downloadlive" = 1 ]]; then
             "git+https://github.com/drmikehenry/vim-fixkey.git#branch=master"
             "git+https://github.com/lahwaacz/arch-wiki-docs.git#branch=master")
     sha512sums=('477508fa49a7078b8deb6b16b7aff31b43757829fc3cdec0ced504f7a3a99e54be7c377a24019cb896bac8c0fbc1a9b3d67c0b77e04938d95fe12514144e38c1'
-                '4e2291e35a2b3640645d30b863ff81a1173d022d0ad6dfcd0caca3f34aa7d6082fd2f5263ba2123a957829e0606eddb7b163de108e93f48173481d4c52c12220'
+                'd1a661df5fa3f2e0904da21c1ede02db4ce1f22e8f3ccb862ba4d0610a2951b65fc4f60dd75e732f8f4f19d0628004fb85d2c1bbdd38dcc449dcc6eb3f955974'
                 'a4b62321c1d538ac33cbfd742fd8945f5a2118b4561faf19eaed7c5d9d0a6d696f758f339237b2eacde9327c2830b59e584cd60432adae9a89d7b95cb02bc327'
                 'SKIP'
                 'SKIP'
