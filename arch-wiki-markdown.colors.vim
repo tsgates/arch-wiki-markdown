@@ -11,6 +11,7 @@ endif
 hi Normal ctermfg=254 ctermbg=235 guifg=#eaeaea guibg=#262626
 hi clear Visual
 hi Visual ctermbg=234 guibg=#1c1c1c
+hi Search ctermfg=234 ctermbg=254 guifg=#262626 guibg=#eaeaea
 hi Underlined term=underline cterm=underline ctermfg=None gui=underline guifg=None
 hi Conceal ctermfg=117 ctermbg=235 guifg=117 guifg=#262626
 hi Error ctermbg=None guibg=None

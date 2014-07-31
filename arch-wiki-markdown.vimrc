@@ -3,7 +3,7 @@ set nocompatible "disable vi-compatibility settings
 setglobal fileencoding=utf-8
 set encoding=utf-8 "set encoding
 set fileformats=unix,dos,mac "set compatible line endings in order of preference
-set nolist nonumber wrap linebreak breakat&vim breakat-=* "prevent line-breaking mid-word
+set nolist nonumber wrap linebreak breakat&vim breakat-=* breakat-=. "prevent line-breaking mid-word
 set foldcolumn=0 "fold layers 5 or more deep
 set lazyredraw "only redraw what needs to be redrawn
 set ttyfast "assume a fast connection to the terminal for better rendering
