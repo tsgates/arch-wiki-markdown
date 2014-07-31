@@ -28,8 +28,8 @@ if [[ "$_wiki_downloadlive" = 1 ]]; then
             "git+https://github.com/drmikehenry/vim-fixkey.git#branch=master"
             "git+https://github.com/lahwaacz/arch-wiki-docs.git#branch=master")
     sha512sums=('477508fa49a7078b8deb6b16b7aff31b43757829fc3cdec0ced504f7a3a99e54be7c377a24019cb896bac8c0fbc1a9b3d67c0b77e04938d95fe12514144e38c1'
-                'd1a661df5fa3f2e0904da21c1ede02db4ce1f22e8f3ccb862ba4d0610a2951b65fc4f60dd75e732f8f4f19d0628004fb85d2c1bbdd38dcc449dcc6eb3f955974'
-                '6bc8dc46d72b59a41d0c642a96b82badccfbcad93b4eaf0a78030dbd961d9213ca6d769883b35739a4639bb13a5e3a93aca63349a1eaeb7475aaab0b8b92140d'
+                '7a71c5190e9694a1554d364bd0297601db421c0d44e173c74fe269c9ead6d52313f5faecbab5b66fefa50a726ef534a17b9c4d2012924bdb36a4ae4e9cd79bd5'
+                'db1226157bc042c4b84ead57e4f2a4937e1b77ed61a465c8c9f9b17ec37ebe67965c74d4044158c01374718f03aabd8d1bb9e534708562406685565e6be1d9ca'
                 'SKIP'
                 'SKIP'
                 'SKIP')
@@ -41,8 +41,8 @@ else
             "git+https://github.com/prurigro/vim-markdown-concealed.git#branch=master"
             "git+https://github.com/drmikehenry/vim-fixkey.git#branch=master")
     sha512sums=('477508fa49a7078b8deb6b16b7aff31b43757829fc3cdec0ced504f7a3a99e54be7c377a24019cb896bac8c0fbc1a9b3d67c0b77e04938d95fe12514144e38c1'
-                'd1a661df5fa3f2e0904da21c1ede02db4ce1f22e8f3ccb862ba4d0610a2951b65fc4f60dd75e732f8f4f19d0628004fb85d2c1bbdd38dcc449dcc6eb3f955974'
-                '6bc8dc46d72b59a41d0c642a96b82badccfbcad93b4eaf0a78030dbd961d9213ca6d769883b35739a4639bb13a5e3a93aca63349a1eaeb7475aaab0b8b92140d'
+                '7a71c5190e9694a1554d364bd0297601db421c0d44e173c74fe269c9ead6d52313f5faecbab5b66fefa50a726ef534a17b9c4d2012924bdb36a4ae4e9cd79bd5'
+                'db1226157bc042c4b84ead57e4f2a4937e1b77ed61a465c8c9f9b17ec37ebe67965c74d4044158c01374718f03aabd8d1bb9e534708562406685565e6be1d9ca'
                 'SKIP'
                 'SKIP')
 fi
