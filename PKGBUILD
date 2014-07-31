@@ -12,7 +12,7 @@
 
 _pkgname=arch-wiki-markdown
 pkgname=${_pkgname}-git
-pkgver=r93.20140731
+pkgver=r100.20140731
 pkgrel=1
 pkgdesc="Search and read the Arch Wiki offline in your terminal"
 arch=('any')
@@ -96,9 +96,9 @@ build() {
             # Set line width to 78 characters
             if [ ! "$_wiki_nofold" = 1 ]; then
                 # replace spaces in link titles with underscores to prevent them from being folded
-                while [[ $(grep -E "\[[^]]*\ [^]]*\]" "$NEWFILE") ]]; do
-                    sed -i -re 's|([^]]*)\ ([^]]*\]\([^)]*\))|\1_\2|g' "$NEWFILE"
-                done
+                # while [[ $(grep -E "\[[^]]*\ [^]]*\]" "$NEWFILE") ]]; do
+                #     sed -i -re 's|([^]]*)\ ([^]]*\]\([^)]*\))|\1_\2|g' "$NEWFILE"
+                # done
 
                 # fold the text at 78 characters
                 fold -w 78 -s "$NEWFILE" > "${NEWFILE}.tmp"
