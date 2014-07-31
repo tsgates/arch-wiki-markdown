@@ -3,7 +3,7 @@
 #
 [[ -z "$_wiki_downloadlive" ]] && _wiki_downloadlive=0 # set to 1 to rip directly from the live wiki.
 [[ -z "$_wiki_norebuild" ]] && _wiki_norebuild=0 # set to 1 to prevent rebuilding the wiki docs if they already exist.
-[[ -z "$_wiki_nofold" ]] && _wiki_nofold=0 # set to 1 to disable setting the text width to 78 chars.
+[[ -z "$_wiki_foldlines" ]] && _wiki_foldlines=0 # set to 1 to fold each line's to a text width of 78 chars.
 [[ -z "$_wiki_lang" ]] && _wiki_lang=en # change to the language of your choice (list of available languages below).
 #
 # Available language strings for $_wiki_lang (when this was writing) are:
@@ -12,7 +12,7 @@
 
 _pkgname=arch-wiki-markdown
 pkgname=${_pkgname}-git
-pkgver=r100.20140731
+pkgver=r101.20140731
 pkgrel=1
 pkgdesc="Search and read the Arch Wiki offline in your terminal"
 arch=('any')
@@ -94,12 +94,7 @@ build() {
             sed -i 'N;$!P;$!D;$d' "$NEWFILE" # remove the last two lines of the file
 
             # Set line width to 78 characters
-            if [ ! "$_wiki_nofold" = 1 ]; then
-                # replace spaces in link titles with underscores to prevent them from being folded
-                # while [[ $(grep -E "\[[^]]*\ [^]]*\]" "$NEWFILE") ]]; do
-                #     sed -i -re 's|([^]]*)\ ([^]]*\]\([^)]*\))|\1_\2|g' "$NEWFILE"
-                # done
-
+            if [ "$_wiki_foldlines" = 1 ]; then
                 # fold the text at 78 characters
                 fold -w 78 -s "$NEWFILE" > "${NEWFILE}.tmp"
                 mv "${NEWFILE}.tmp" "$NEWFILE"

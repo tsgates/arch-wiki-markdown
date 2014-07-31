@@ -16,7 +16,7 @@ The wiki is downloaded in English by default, but other languages can be set by 
 
 #### Folding ####
 
-The wiki is folded at 78 characters by default. This can be prevented by changing the `$_wiki_nofold` variable to `1` in the _PKGBUILD_, or setting it at run time (ie: `_wiki_nofold=1 makepkg`).
+To configure the wiki to use a textwidth of 78 characters, change the `$_wiki_foldlines` variable to `1` in the _PKGBUILD_, or setting it at run time (ie: `_wiki_foldlines=1 makepkg`).
 
 #### Download Method ####
 
