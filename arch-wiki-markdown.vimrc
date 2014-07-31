@@ -46,6 +46,10 @@ unmap <PageUp>
 unmap <kPageUp>
 
 " Mappings:
+map i <Nop>
+map I <Nop>
+map a <Nop>
+map A <Nop>
 map <C-ScrollWheelUp> <Nop>
 map <C-ScrollWheelDown> <Nop>
 map <A-ScrollWheelUp> <Nop>
