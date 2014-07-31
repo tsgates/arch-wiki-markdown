@@ -29,7 +29,7 @@ if [[ "$_wiki_downloadlive" = 1 ]]; then
             "git+https://github.com/lahwaacz/arch-wiki-docs.git#branch=master")
     sha512sums=('477508fa49a7078b8deb6b16b7aff31b43757829fc3cdec0ced504f7a3a99e54be7c377a24019cb896bac8c0fbc1a9b3d67c0b77e04938d95fe12514144e38c1'
                 'd1a661df5fa3f2e0904da21c1ede02db4ce1f22e8f3ccb862ba4d0610a2951b65fc4f60dd75e732f8f4f19d0628004fb85d2c1bbdd38dcc449dcc6eb3f955974'
-                'a4b62321c1d538ac33cbfd742fd8945f5a2118b4561faf19eaed7c5d9d0a6d696f758f339237b2eacde9327c2830b59e584cd60432adae9a89d7b95cb02bc327'
+                '6bc8dc46d72b59a41d0c642a96b82badccfbcad93b4eaf0a78030dbd961d9213ca6d769883b35739a4639bb13a5e3a93aca63349a1eaeb7475aaab0b8b92140d'
                 'SKIP'
                 'SKIP'
                 'SKIP')
@@ -42,7 +42,7 @@ else
             "git+https://github.com/drmikehenry/vim-fixkey.git#branch=master")
     sha512sums=('477508fa49a7078b8deb6b16b7aff31b43757829fc3cdec0ced504f7a3a99e54be7c377a24019cb896bac8c0fbc1a9b3d67c0b77e04938d95fe12514144e38c1'
                 'd1a661df5fa3f2e0904da21c1ede02db4ce1f22e8f3ccb862ba4d0610a2951b65fc4f60dd75e732f8f4f19d0628004fb85d2c1bbdd38dcc449dcc6eb3f955974'
-                '95380722a4011e3487e048c3a66baeff1c39bc35adff0b9ef9763e57d19df6c97f9eb62ada72d46fab192c21d4260c07b93dcb9142b2ec397e1eb5a3f38b3f84'
+                '6bc8dc46d72b59a41d0c642a96b82badccfbcad93b4eaf0a78030dbd961d9213ca6d769883b35739a4639bb13a5e3a93aca63349a1eaeb7475aaab0b8b92140d'
                 'SKIP'
                 'SKIP')
 fi
