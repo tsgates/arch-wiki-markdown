@@ -12,7 +12,7 @@
 
 _pkgname=arch-wiki-markdown
 pkgname=${_pkgname}-git
-pkgver=r102.20140731
+pkgver=r104.20140731
 pkgrel=1
 pkgdesc="Search and read the Arch Wiki offline in your terminal"
 arch=('any')
@@ -90,6 +90,7 @@ build() {
             sed -i -re 's|(\[[^]]*\]\([^)\ ]*)\ [^)]*\)|\1\)|g' "$NEWFILE" # remove titles from remaining links
             sed -i -re 's|^(\s*[-\*\+]\ )[0-9\.]*\.([0-9]*\ )|\1\2|g;s|^(\s*)[-\*\+]\ ([0-9]*)\ |\1\2\.\ |g' "$NEWFILE" # convert unordered lists with numbers to numbered lists
             sed -i '/<script type="text\/javascript"/,/<\/script>/d' "$NEWFILE" # remove the "article considered for removal" tables
+            sed -i '/^<table>$/,/^<\/table>$/d' "$NEWFILE" # remove leftover 'stub' tables
             sed -i '/^Category:$/q' "$NEWFILE" # remove everything after the line containing 'Category:'
             sed -i 'N;$!P;$!D;$d' "$NEWFILE" # remove the last two lines of the file
 
