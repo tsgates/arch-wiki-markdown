@@ -1,5 +1,8 @@
-/pkg/
-/tmp/
-/arch-wiki-markdown*.tar.xz
-/arch-wiki-markdown*.tar.gz
-/filter
+src
+pkg
+arch-wiki-docs
+vim-markdown-concealed
+vim-fixkey
+*.pkg.tar.*
+*.src.tar.*
+.*sw[op]*
