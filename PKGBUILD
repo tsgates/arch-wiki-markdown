@@ -12,7 +12,7 @@
 
 _pkgname=arch-wiki-markdown
 pkgname=${_pkgname}-git
-pkgver=r104.20140731
+pkgver=r105.20141019
 pkgrel=1
 pkgdesc="Search and read the Arch Wiki offline in your terminal"
 arch=('any')
@@ -20,7 +20,7 @@ url="https://github.com/tsgates/${_pkgname}"
 license=('MIT')
 depends=('bash' 'vim')
 if [[ "$_wiki_downloadlive" = 1 ]]; then
-    makedepends=('pandoc-static' 'python-cssselect' 'python-lxml' 'python-simplemediawiki') \
+    makedepends=('python-lxml' 'python-simplemediawiki') \
     source=("arch-wiki"
             "${_pkgname}.vimrc"
             "${_pkgname}.colors.vim"
@@ -34,7 +34,7 @@ if [[ "$_wiki_downloadlive" = 1 ]]; then
                 'SKIP'
                 'SKIP')
 else
-    makedepends=('pandoc-static' 'arch-wiki-docs')
+    makedepends=('arch-wiki-docs')
     source=("arch-wiki"
             "${_pkgname}.vimrc"
             "${_pkgname}.colors.vim"
@@ -92,7 +92,12 @@ build() {
             sed -i '/<script type="text\/javascript"/,/<\/script>/d' "$NEWFILE" # remove the "article considered for removal" tables
             sed -i '/^<table>$/,/^<\/table>$/d' "$NEWFILE" # remove leftover 'stub' tables
             sed -i '/^Category:$/q' "$NEWFILE" # remove everything after the line containing 'Category:'
-            sed -i 'N;$!P;$!D;$d' "$NEWFILE" # remove the last two lines of the file
+            sed -i 's|<span[^>]*>||g;s|<\/span>||' "$NEWFILE" #remove the sed tag
+            [[ $(grep 'id="See_also"' "$NEWFILE") ]] \
+                && sed -i '/^.*id="See_also".*$/q' "$NEWFILE"  # remove everything after the line with 'See_also'
+
+            # Remove the last two lines of the file
+            sed -i 'N;$!P;$!D;$d' "$NEWFILE"
 
             # Set line width to 78 characters
             if [ "$_wiki_foldlines" = 1 ]; then
