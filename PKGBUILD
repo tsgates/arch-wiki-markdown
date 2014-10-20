@@ -12,7 +12,7 @@
 
 _pkgname=arch-wiki-markdown
 pkgname=${_pkgname}-git
-pkgver=r105.20141019
+pkgver=r106.20141020
 pkgrel=1
 pkgdesc="Search and read the Arch Wiki offline in your terminal"
 arch=('any')
@@ -92,7 +92,7 @@ build() {
             sed -i '/<script type="text\/javascript"/,/<\/script>/d' "$NEWFILE" # remove the "article considered for removal" tables
             sed -i '/^<table>$/,/^<\/table>$/d' "$NEWFILE" # remove leftover 'stub' tables
             sed -i '/^Category:$/q' "$NEWFILE" # remove everything after the line containing 'Category:'
-            sed -i 's|<span[^>]*>||g;s|<\/span>||' "$NEWFILE" #remove the sed tag
+            sed -i 's|</*span[^>]*>||g' "$NEWFILE" #remove the sed open tag
             [[ $(grep 'id="See_also"' "$NEWFILE") ]] \
                 && sed -i '/^.*id="See_also".*$/q' "$NEWFILE"  # remove everything after the line with 'See_also'
 
